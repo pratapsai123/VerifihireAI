@@ -71,7 +71,8 @@ from .ocr_utils import (
     detect_face_in_image, 
     extract_name_from_text,
     register_face_with_deepface,
-    verify_face_with_deepface
+    verify_face_with_deepface,
+    verify_face_against_pan_card
 )
 from .report_utils import generate_candidate_report
 

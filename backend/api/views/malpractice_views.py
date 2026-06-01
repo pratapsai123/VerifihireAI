@@ -106,10 +106,16 @@ def track_events_view(request):
             current_score = min(100, current_score + 15)
 
     # Analysis: Tab Switching
-    tab_switches = BehaviorLog.objects.filter(invitation=invitation, type='tab_switch').count()
+    # Use the official tab switches count tracked in CandidateIntegrity
+    tab_switches = integrity.tab_switches
     if tab_switches > 3:
+        # Remove any existing/stale tab switching reasons first
+        reasons = {r for r in reasons if not r.startswith("Frequent tab switching (")}
         reasons.add(f"Frequent tab switching ({tab_switches} times)")
         current_score = min(100, current_score + 20)
+    else:
+        # If <= 3, also ensure old/stale reasons are removed
+        reasons = {r for r in reasons if not r.startswith("Frequent tab switching (")}
 
 
     # Analysis: Code Evolution

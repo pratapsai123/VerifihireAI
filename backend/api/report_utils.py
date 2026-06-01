@@ -77,7 +77,7 @@ from .models import (
     AssessmentQuestion, AssessmentCodingQuestion, CodingTestCase,
 
     CandidateIntegrity, IntegrityScreenshot, KeystrokeLog, BehaviorLog,
-    CodingSubmission, SecuritySession, IdentityLink
+    CodingSubmission, SecuritySession, IdentityLink, FaceUpdateRequest
 )
 
 from .ocr_utils import pdf_page_to_png_bytes
@@ -513,6 +513,62 @@ def _make_rl_image(source, width, height):
 
 
 
+def _make_rl_image_with_fallbacks(sources, width, height):
+
+    """
+
+    Attempt to build a ReportLab Image using a list of alternative image sources.
+
+    Returns the first one that successfully decodes/converts.
+
+    """
+
+    if not sources:
+
+        return None
+
+    for src in sources:
+
+        if not src:
+
+            continue
+
+        if hasattr(src, 'path'):
+
+            try:
+
+                if not os.path.exists(src.path) or os.path.getsize(src.path) < 1000:
+
+                    continue
+
+            except Exception:
+
+                continue
+
+        elif isinstance(src, str) and len(src) < 500:
+
+            try:
+
+                if not os.path.exists(src) or os.path.getsize(src) < 1000:
+
+                    continue
+
+            except Exception:
+
+                continue
+
+        img = _make_rl_image(src, width, height)
+
+        if img is not None:
+
+            return img
+
+    return None
+
+
+
+
+
 def _kv_table(rows, styles):
 
     tbl = Table(rows, colWidths=[140, 360])
@@ -760,10 +816,64 @@ def generate_candidate_report(submission_id):
     # Pre-calculate mismatch and integrity status early
     integrity = CandidateIntegrity.objects.filter(invitation=inv).first()
     is_mismatch = False
+    photo_approved = False
     if candidate_detail:
         is_mismatch = getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)
+        photo_approved = getattr(candidate_detail, 'photo_update_approved', False)
     if integrity and not getattr(integrity, 'identity_verified', True):
         is_mismatch = True
+
+    # Setup robust face update requests and candidate details lists for fallbacks
+    dedup_reqs = []
+    approved_reqs = []
+    dedup_details = []
+    if candidate_detail:
+        candidate_email = candidate_detail.email.strip() if candidate_detail.email else ""
+        candidate_pan = candidate_detail.pan_number.strip().upper() if candidate_detail.pan_number else ""
+        if not candidate_pan and candidate_email:
+            try:
+                first_link = IdentityLink.objects.filter(email__iexact=candidate_email).first()
+                if first_link:
+                    candidate_pan = first_link.pan_number
+                else:
+                    first_detail = CandidateDetails.objects.filter(email__iexact=candidate_email).exclude(pan_number="").first()
+                    if first_detail:
+                        candidate_pan = first_detail.pan_number
+            except Exception:
+                pass
+
+        # Fetch FaceUpdateRequests
+        try:
+            reqs = []
+            if candidate_pan:
+                reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__pan_number=candidate_pan).order_by('-id')))
+            if candidate_email:
+                reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__email__iexact=candidate_email).order_by('-id')))
+                reqs.extend(list(FaceUpdateRequest.objects.filter(submission__invitation__email__iexact=candidate_email).order_by('-id')))
+            
+            seen_reqs = set()
+            for r in reqs:
+                if r.id not in seen_reqs:
+                    seen_reqs.add(r.id)
+                    dedup_reqs.append(r)
+            approved_reqs = [r for r in dedup_reqs if r.status == 'approved']
+        except Exception as e:
+            print(f"[report] Error fetching FaceUpdateRequests: {e}")
+
+        # Fetch other CandidateDetails records
+        try:
+            details_list = []
+            if candidate_email:
+                details_list.extend(list(CandidateDetails.objects.filter(email__iexact=candidate_email).order_by('-id')))
+            if candidate_pan:
+                details_list.extend(list(CandidateDetails.objects.filter(pan_number=candidate_pan).order_by('-id')))
+            seen_details = set()
+            for d in details_list:
+                if d.id not in seen_details:
+                    seen_details.add(d.id)
+                    dedup_details.append(d)
+        except Exception as e:
+            print(f"[report] Error fetching other CandidateDetails: {e}")
 
     # ── Build PDF ──
 
@@ -799,11 +909,41 @@ def generate_candidate_report(submission_id):
 
     snap_img = None
 
-    if candidate_detail and candidate_detail.snapshot:
+    if candidate_detail:
 
-        print(f"[report] Snapshot data length: {len(candidate_detail.snapshot)}")
+        snap_sources = []
+        
+        # If manual update was approved, approved face is the active face
+        if photo_approved:
+            norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_detail.pan_number.strip().upper())
+            link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+            if not link and candidate_detail.email:
+                link = IdentityLink.objects.filter(email__iexact=candidate_detail.email.strip()).first()
+            if link and link.snapshot_image:
+                snap_sources.append(link.snapshot_image)
+            for r in approved_reqs:
+                if r.captured_face_backup:
+                    snap_sources.append(r.captured_face_backup)
+        
+        if candidate_detail.snapshot:
+            snap_sources.append(candidate_detail.snapshot)
+            
+        # Current or recent request captured face
+        specific_req = next((r for r in dedup_reqs if r.candidate_details_id == candidate_detail.id or r.submission_id == submission.id), None)
+        if specific_req and specific_req.captured_face_backup:
+            snap_sources.append(specific_req.captured_face_backup)
+            
+        for r in approved_reqs:
+            if r.captured_face_backup:
+                snap_sources.append(r.captured_face_backup)
+        for r in dedup_reqs:
+            if r.captured_face_backup:
+                snap_sources.append(r.captured_face_backup)
+        for d in dedup_details:
+            if d.snapshot:
+                snap_sources.append(d.snapshot)
 
-        snap_img = _make_rl_image(candidate_detail.snapshot, PASSPORT_W, PASSPORT_H)
+        snap_img = _make_rl_image_with_fallbacks(snap_sources, PASSPORT_W, PASSPORT_H)
 
         if snap_img:
 
@@ -981,46 +1121,131 @@ def generate_candidate_report(submission_id):
 
     # Add Side-by-side Identity Comparison Table if mismatch is detected
     if is_mismatch and candidate_detail:
-        # Get the first registered details snapshot (oldest in CandidateDetails) for this candidate
+        # Get the first valid registered details snapshot for this candidate
         original_snapshot = None
-        if candidate_detail and candidate_detail.email:
-            first_details = CandidateDetails.objects.filter(email__iexact=candidate_detail.email.strip()).order_by('id').first()
-            if first_details and first_details.snapshot:
-                original_snapshot = first_details.snapshot
-        if not original_snapshot and inv.email:
-            first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
-            if first_details and first_details.snapshot:
-                original_snapshot = first_details.snapshot
+        
+        def _get_first_valid_details_snapshot(email, pan=None):
+            if email:
+                details_qs = CandidateDetails.objects.filter(email__iexact=email.strip()).order_by('id')
+                for d in details_qs:
+                    if d.snapshot:
+                        try:
+                            s = d.snapshot.strip()
+                            if ',' in s and s.startswith('data:'):
+                                s = s.split(',', 1)[1]
+                            s = s.replace('\n', '').replace('\r', '').replace(' ', '')
+                            padding = 4 - len(s) % 4
+                            if padding != 4:
+                                s += '=' * padding
+                            raw = base64.b64decode(s)
+                            img = PILImage.open(io.BytesIO(raw))
+                            img.load()
+                            return d.snapshot
+                        except Exception:
+                            continue
+            if pan:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', pan.strip().upper())
+                if norm_pan:
+                    details_qs = CandidateDetails.objects.filter(pan_number=norm_pan).order_by('id')
+                    for d in details_qs:
+                        if d.snapshot:
+                            try:
+                                s = d.snapshot.strip()
+                                if ',' in s and s.startswith('data:'):
+                                    s = s.split(',', 1)[1]
+                                s = s.replace('\n', '').replace('\r', '').replace(' ', '')
+                                padding = 4 - len(s) % 4
+                                if padding != 4:
+                                    s += '=' * padding
+                                raw = base64.b64decode(s)
+                                img = PILImage.open(io.BytesIO(raw))
+                                img.load()
+                                return d.snapshot
+                            except Exception:
+                                continue
+            return None
 
-        # Fallback to IdentityLink oldest snapshot
+        candidate_email = candidate_detail.email if candidate_detail and candidate_detail.email else inv.email
+        candidate_pan = candidate_detail.pan_number if candidate_detail and candidate_detail.pan_number else None
+        original_snapshot = _get_first_valid_details_snapshot(candidate_email, candidate_pan)
+
+        # Fallback to IdentityLink oldest valid snapshot
         original_link_file = None
         if not original_snapshot:
-            link = None
-            if candidate_detail and candidate_detail.email:
-                link = IdentityLink.objects.filter(email__iexact=candidate_detail.email.strip()).order_by('id').first()
-            if not link and inv.email:
-                link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
-            if not link and candidate_detail and candidate_detail.pan_number:
-                norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_detail.pan_number.strip().upper())
+            links = []
+            if candidate_email:
+                links.extend(list(IdentityLink.objects.filter(email__iexact=candidate_email.strip()).order_by('id')))
+            if candidate_pan:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_pan.strip().upper())
                 if norm_pan:
-                    link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
-            if link and link.snapshot_image:
-                original_link_file = link.snapshot_image
-
-        # Create images using _make_rl_image helper
-        img_original = None
-        if photo_approved and candidate_detail.previous_registered_face_backup:
-            img_original = _make_rl_image(candidate_detail.previous_registered_face_backup, 1.8 * inch, 2.25 * inch)
-        
-        if not img_original:
-            if original_snapshot:
-                img_original = _make_rl_image(original_snapshot, 1.8 * inch, 2.25 * inch)
-            elif original_link_file:
-                img_original = _make_rl_image(original_link_file, 1.8 * inch, 2.25 * inch)
+                    links.extend(list(IdentityLink.objects.filter(pan_number=norm_pan).order_by('id')))
             
-        img_captured = None
+            for link in links:
+                if link.snapshot_image:
+                    try:
+                        path = link.snapshot_image.path
+                        if os.path.exists(path) and os.path.getsize(path) > 1000:
+                            img = PILImage.open(path)
+                            img.load()
+                            original_link_file = link.snapshot_image
+                            break
+                    except Exception:
+                        continue
+
+        # Create images using _make_rl_image_with_fallbacks helper
+        
+        # 1. Original Registered Face sources
+        original_sources = []
+        if photo_approved and candidate_detail.previous_registered_face_backup:
+            original_sources.append(candidate_detail.previous_registered_face_backup)
+        
+        # Prioritize canonical registered face from IdentityLink matching the candidate's PAN
+        if candidate_pan:
+            norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_pan.strip().upper())
+            if norm_pan:
+                link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                if link and link.snapshot_image:
+                    original_sources.append(link.snapshot_image)
+        
+        # Fallback to IdentityLink matching candidate's email
+        if candidate_email:
+            link = IdentityLink.objects.filter(email__iexact=candidate_email.strip()).first()
+            if link and link.snapshot_image:
+                original_sources.append(link.snapshot_image)
+
+        for r in approved_reqs:
+            if r.original_face_backup:
+                original_sources.append(r.original_face_backup)
+        for r in dedup_reqs:
+            if r.original_face_backup:
+                original_sources.append(r.original_face_backup)
+        if original_snapshot:
+            original_sources.append(original_snapshot)
+        if original_link_file:
+            original_sources.append(original_link_file)
+            
+        img_original = _make_rl_image_with_fallbacks(original_sources, 1.8 * inch, 2.25 * inch)
+
+        # 2. Mismatch Captured Face sources
+        captured_sources = []
+        # Prioritize the current webcam snapshot from this attempt
         if candidate_detail.snapshot:
-            img_captured = _make_rl_image(candidate_detail.snapshot, 1.8 * inch, 2.25 * inch)
+            captured_sources.append(candidate_detail.snapshot)
+
+        specific_req = next((r for r in dedup_reqs if r.candidate_details_id == candidate_detail.id or r.submission_id == submission.id), None)
+        if specific_req and specific_req.captured_face_backup:
+            captured_sources.append(specific_req.captured_face_backup)
+        for r in approved_reqs:
+            if r.captured_face_backup:
+                captured_sources.append(r.captured_face_backup)
+        for r in dedup_reqs:
+            if r.captured_face_backup:
+                captured_sources.append(r.captured_face_backup)
+        for d in dedup_details:
+            if d.snapshot:
+                captured_sources.append(d.snapshot)
+                
+        img_captured = _make_rl_image_with_fallbacks(captured_sources, 1.8 * inch, 2.25 * inch)
             
         if img_original or img_captured:
             orig_title = Paragraph('<b>Original Registered Face</b>', styles['Normal'])
@@ -1028,15 +1253,21 @@ def generate_candidate_report(submission_id):
             
             if photo_approved:
                 appr_title = Paragraph('<b>Updated Approved Face</b>', styles['Normal'])
-                img_approved = None
+                
+                approved_sources = []
                 norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_detail.pan_number.strip().upper())
                 link = IdentityLink.objects.filter(pan_number=norm_pan).first()
                 if not link and candidate_detail.email:
                     link = IdentityLink.objects.filter(email__iexact=candidate_detail.email.strip()).first()
                 if link and link.snapshot_image:
-                    img_approved = _make_rl_image(link.snapshot_image, 1.8 * inch, 2.25 * inch)
-                else:
-                    img_approved = _make_rl_image(candidate_detail.snapshot, 1.8 * inch, 2.25 * inch)
+                    approved_sources.append(link.snapshot_image)
+                for r in approved_reqs:
+                    if r.captured_face_backup:
+                        approved_sources.append(r.captured_face_backup)
+                if candidate_detail.snapshot:
+                    approved_sources.append(candidate_detail.snapshot)
+                    
+                img_approved = _make_rl_image_with_fallbacks(approved_sources, 1.8 * inch, 2.25 * inch)
 
                 comparison_data = [
                     [orig_title, capt_title, appr_title],

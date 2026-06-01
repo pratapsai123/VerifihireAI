@@ -638,35 +638,137 @@ def list_face_requests_view(request):
         admin_name = f"{r.admin_user.first_name} {r.admin_user.last_name}" if r.admin_user else "N/A"
         admin_email = r.admin_user.email if r.admin_user else "N/A"
         
+        # Helper to check if image is valid (not truncated or corrupted)
+        def _is_valid_img(src):
+            if not src:
+                return False
+            if hasattr(src, 'storage') and hasattr(src, 'name'):
+                try:
+                    if not src.storage.exists(src.name) or src.size < 1000:
+                        return False
+                    from PIL import Image as PILImage
+                    import io
+                    src.seek(0)
+                    img = PILImage.open(io.BytesIO(src.read()))
+                    img.load()
+                    return True
+                except Exception:
+                    return False
+            elif isinstance(src, str):
+                if len(src) < 500:
+                    try:
+                        if os.path.exists(src) and os.path.getsize(src) > 1000:
+                            from PIL import Image as PILImage
+                            img = PILImage.open(src)
+                            img.load()
+                            return True
+                    except Exception:
+                        return False
+                else:
+                    try:
+                        import base64
+                        import io
+                        from PIL import Image as PILImage
+                        s = src.strip()
+                        if ',' in s and s.startswith('data:'):
+                            s = s.split(',', 1)[1]
+                        s = s.replace('\n', '').replace('\r', '').replace(' ', '')
+                        padding = 4 - len(s) % 4
+                        if padding != 4:
+                            s += '=' * padding
+                        raw = base64.b64decode(s)
+                        img = PILImage.open(io.BytesIO(raw))
+                        img.load()
+                        return True
+                    except Exception:
+                        return False
+            return False
+
+        email = r.candidate_details.email if r.candidate_details else ""
+        pan = r.candidate_details.pan_number if r.candidate_details else ""
+
+        # 1. Original Registered Face URL fallbacks
         original_face_url = None
-        is_backup_valid = False
-        if r.original_face_backup:
-            try:
-                # Ensure the backup file exists and is not a tiny dummy/placeholder image
-                if r.original_face_backup.storage.exists(r.original_face_backup.name) and r.original_face_backup.size > 1000:
-                    original_face_url = r.original_face_backup.url
-                    is_backup_valid = True
-            except Exception as e:
-                print(f"[List] Error validating original_face_backup: {e}")
-
-        if not is_backup_valid and r.candidate_details:
-            # Fallback: get first details snapshot (which was the registration image)
-            first_details = CandidateDetails.objects.filter(email=r.candidate_details.email).order_by('id').first()
-            if first_details and first_details.snapshot:
-                original_face_url = first_details.snapshot
+        
+        # Priority 1: request backup
+        if r.original_face_backup and _is_valid_img(r.original_face_backup):
+            original_face_url = r.original_face_backup.url
+            
+        # Priority 2: details previous backup
+        if not original_face_url and r.candidate_details and r.candidate_details.previous_registered_face_backup:
+            if _is_valid_img(r.candidate_details.previous_registered_face_backup):
+                original_face_url = r.candidate_details.previous_registered_face_backup.url
                 
-        captured_face_url = None
-        is_captured_valid = False
-        if r.captured_face_backup:
-            try:
-                if r.captured_face_backup.storage.exists(r.captured_face_backup.name) and r.captured_face_backup.size > 1000:
-                    captured_face_url = r.captured_face_backup.url
-                    is_captured_valid = True
-            except Exception as e:
-                print(f"[List] Error validating captured_face_backup: {e}")
+        # Priority 3: original face backup from other requests for the same candidate
+        if not original_face_url:
+            other_reqs = []
+            if pan:
+                other_reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__pan_number=pan).order_by('-id')))
+            if email:
+                other_reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__email__iexact=email.strip()).order_by('-id')))
+            for req_obj in other_reqs:
+                if req_obj.original_face_backup and _is_valid_img(req_obj.original_face_backup):
+                    original_face_url = req_obj.original_face_backup.url
+                    break
+                    
+        # Priority 4: details snapshot (check all details records for the same candidate)
+        if not original_face_url:
+            details_qs = []
+            if email:
+                details_qs.extend(list(CandidateDetails.objects.filter(email__iexact=email.strip()).order_by('id')))
+            if pan:
+                details_qs.extend(list(CandidateDetails.objects.filter(pan_number=pan).order_by('id')))
+            for details_obj in details_qs:
+                if details_obj.snapshot and _is_valid_img(details_obj.snapshot):
+                    original_face_url = details_obj.snapshot
+                    break
 
-        if not is_captured_valid and r.candidate_details:
+        # Priority 5: oldest IdentityLink snapshot_image
+        if not original_face_url:
+            links = []
+            if email:
+                links.extend(list(IdentityLink.objects.filter(email__iexact=email.strip()).order_by('id')))
+            if pan:
+                links.extend(list(IdentityLink.objects.filter(pan_number=pan).order_by('id')))
+            for link in links:
+                if link.snapshot_image and _is_valid_img(link.snapshot_image):
+                    original_face_url = link.snapshot_image.url
+                    break
+
+        # 2. Captured Mismatch Face URL fallbacks
+        captured_face_url = None
+        
+        # Priority 1: request backup
+        if r.captured_face_backup and _is_valid_img(r.captured_face_backup):
+            captured_face_url = r.captured_face_backup.url
+            
+        # Priority 2: candidate_details snapshot
+        if not captured_face_url and r.candidate_details and r.candidate_details.snapshot and _is_valid_img(r.candidate_details.snapshot):
             captured_face_url = r.candidate_details.snapshot
+            
+        # Priority 3: captured face backup from other requests for the same candidate
+        if not captured_face_url:
+            other_reqs = []
+            if pan:
+                other_reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__pan_number=pan).order_by('-id')))
+            if email:
+                other_reqs.extend(list(FaceUpdateRequest.objects.filter(candidate_details__email__iexact=email.strip()).order_by('-id')))
+            for req_obj in other_reqs:
+                if req_obj.captured_face_backup and _is_valid_img(req_obj.captured_face_backup):
+                    captured_face_url = req_obj.captured_face_backup.url
+                    break
+                    
+        # Priority 4: snapshots from other details records (check all details records for the same candidate)
+        if not captured_face_url:
+            details_qs = []
+            if email:
+                details_qs.extend(list(CandidateDetails.objects.filter(email__iexact=email.strip()).order_by('-id')))
+            if pan:
+                details_qs.extend(list(CandidateDetails.objects.filter(pan_number=pan).order_by('-id')))
+            for details_obj in details_qs:
+                if details_obj.snapshot and _is_valid_img(details_obj.snapshot):
+                    captured_face_url = details_obj.snapshot
+                    break
         
         integrity_details = None
         integrity_screenshots = []
@@ -675,19 +777,39 @@ def list_face_requests_view(request):
             try:
                 inv_obj = r.submission.invitation
                 if hasattr(inv_obj, 'integrity') and inv_obj.integrity:
+                    # Clean/deduplicate and correct tab switching reasons dynamically
+                    raw_reasons = list(inv_obj.integrity.suspicion_reasons or [])
+                    filtered_reasons = [reason for reason in raw_reasons if not reason.startswith("Frequent tab switching (")]
+                    if inv_obj.integrity.tab_switches > 3:
+                        filtered_reasons.append(f"Frequent tab switching ({inv_obj.integrity.tab_switches} times)")
+
                     integrity_details = {
                         'integrity_score': inv_obj.integrity.integrity_score,
                         'tab_switches': inv_obj.integrity.tab_switches,
                         'phone_detections': inv_obj.integrity.phone_detections,
                         'multiface_detections': inv_obj.integrity.multiface_detections,
-                        'no_face_detections': inv_obj.integrity.no_face_detections,
+                        # Apply the first 3 grace warning filters for no face detections
+                        'no_face_detections': max(0, inv_obj.integrity.no_face_detections - 3),
                         'suspicion_score': inv_obj.integrity.suspicion_score,
-                        'suspicion_reasons': inv_obj.integrity.suspicion_reasons or [],
+                        'suspicion_reasons': filtered_reasons,
                     }
                 
-                # Fetch proctoring screenshots
-                snaps = inv_obj.integrity_screenshots.all().order_by('-timestamp')
+                # Fetch proctoring screenshots ordered by timestamp (oldest first) to apply chronological grace filter
+                snaps = inv_obj.integrity_screenshots.all().order_by('timestamp')
+                filtered_snaps = []
+                no_face_skip_count = 0
                 for snap in snaps:
+                    evt = snap.event_type.lower() if snap.event_type else ""
+                    if evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'no_face']:
+                        no_face_skip_count += 1
+                        if no_face_skip_count <= 3:
+                            continue  # Hide first 3 face warnings
+                    filtered_snaps.append(snap)
+                
+                # Restore newest-first order
+                filtered_snaps.reverse()
+                
+                for snap in filtered_snaps:
                     integrity_screenshots.append({
                         'event_type': snap.event_type,
                         'timestamp': snap.timestamp.isoformat(),
