@@ -19,7 +19,7 @@ def _encode_image_field_to_b64(img_field):
 
 
 def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None):
-    from ai_assessments.views import _get_candidate_photo_url
+    from ai_assessments.views import _get_candidate_photo_url, _get_unified_identity_mismatch_fields
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
         
@@ -175,16 +175,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'pan_photo': _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None),
                 'pan_verified': getattr(s, 'pan_verified', False),
                 'candidate_photo_url': clean_b64(s.original_identity_photo) or _get_candidate_photo_url(request, s),
-                # Identity mismatch fields
-                'identity_mismatch_detected': getattr(s, 'identity_mismatch_detected', False),
-                'original_identity_photo_url': clean_b64(s.original_identity_photo),
-                'intruder_photo_url': pending_photo_b64,
-                'photo_update_pending': bool(s.identity_mismatch_detected and s.intruder_photo),
-                'photo_update_approved': bool(s.identity_mismatch_details.get('photo_update_approved', False)) if isinstance(s.identity_mismatch_details, dict) else False,
-                'pending_identity_photo_url': pending_photo_b64,
-                'master_photo_url': clean_b64(s.original_identity_photo),
-                'is_assessment': True,
-                'ai_candidate_pk': s.id,
+                **_get_unified_identity_mismatch_fields(request, s)
             }
         )
 

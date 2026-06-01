@@ -139,15 +139,24 @@ def _get_candidate_photo_url(request, submission):
     email = submission.candidate_email.lower().strip() if submission.candidate_email else None
     
     # Priority 1: Check unified IdentityLink for registered face snapshot
-    if email:
-        try:
-            from api.models import IdentityLink
-            identities = IdentityLink.objects.filter(email__iexact=email).order_by('-id')
-            for identity in identities:
-                if identity.snapshot_image and identity.snapshot_image.name:
-                    return request.build_absolute_uri(identity.snapshot_image.url) if request else identity.snapshot_image.url
-        except Exception as e:
-            logger.warning(f"Error checking IdentityLink in _get_candidate_photo_url: {e}")
+    try:
+        from api.models import IdentityLink
+        import re
+        pan = getattr(submission, 'pan_number', None)
+        identity = None
+        
+        if pan:
+            norm_pan = re.sub(r'[^A-Z0-9]', '', pan.strip().upper())
+            if norm_pan:
+                identity = IdentityLink.objects.filter(pan_number__iexact=norm_pan).order_by('-updated_at').first()
+                
+        if not identity and email:
+            identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
+            
+        if identity and identity.snapshot_image and identity.snapshot_image.name:
+            return request.build_absolute_uri(identity.snapshot_image.url) if request else identity.snapshot_image.url
+    except Exception as e:
+        logger.warning(f"Error checking IdentityLink in _get_candidate_photo_url: {e}")
 
     from pathlib import Path
     deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
@@ -168,6 +177,13 @@ def _get_candidate_photo_url(request, submission):
         if person_face_dir.exists() and any(person_face_dir.glob('*.jpg')):
             url_path = f"/api/ai/registration/face/{person_id}/"
             return request.build_absolute_uri(url_path) if request else url_path
+            
+        # Priority 3: Check plain email folder (in case registered during interview)
+        if token:
+            email_face_dir = deepface_data_dir / email
+            if email_face_dir.exists() and any(email_face_dir.glob('*.jpg')):
+                url_path = f"/api/ai/registration/face/{email}/"
+                return request.build_absolute_uri(url_path) if request else url_path
 
     # Fallback: first non-empty webcam integrity screenshot (> 10KB = real face frame)
     try:
@@ -221,6 +237,8 @@ def _get_unified_identity_mismatch_fields(request, submission):
 
     detected = getattr(submission, 'identity_mismatch_detected', False)
     orig_url = clean_b64(submission.original_identity_photo)
+    if not orig_url:
+        orig_url = _get_candidate_photo_url(request, submission)
     
     # Try to load registration_snapshot.jpg from assessments folder on disk
     intruder_url = None
@@ -3783,7 +3801,14 @@ class ApproveAssessmentIdentityPhotoView(APIView):
         if user_profile and user_profile.company and submission.assessment.company_id != user_profile.company_id:
             return Response({'error': 'Forbidden'}, status=status.HTTP_403_FORBIDDEN)
 
-        if not submission.intruder_photo:
+        b64_str = getattr(submission, 'intruder_photo', None)
+        if not b64_str:
+            mismatch_data = _get_unified_identity_mismatch_fields(request, submission)
+            intruder_url = mismatch_data.get("intruder_photo_url")
+            if intruder_url and intruder_url.startswith("data:image"):
+                b64_str = intruder_url
+                
+        if not b64_str:
             return Response(
                 {'error': 'No mismatch/intruder photo to approve for this submission.'},
                 status=status.HTTP_400_BAD_REQUEST,
@@ -3792,7 +3817,7 @@ class ApproveAssessmentIdentityPhotoView(APIView):
         # 1. Read intruder_photo and base64 encode it for DeepFace registration.
         try:
             import base64
-            b64_str = submission.intruder_photo.strip()
+            b64_str = b64_str.strip()
             if b64_str.startswith('identity_overrides/'):
                 from django.conf import settings
                 from pathlib import Path
@@ -3829,7 +3854,7 @@ class ApproveAssessmentIdentityPhotoView(APIView):
 
         # 2. Promote intruder_photo to original_identity_photo.
         try:
-            submission.original_identity_photo = submission.intruder_photo
+            submission.original_identity_photo = b64_data
             submission.identity_mismatch_detected = False
             
             details = submission.identity_mismatch_details or {}
@@ -3841,12 +3866,14 @@ class ApproveAssessmentIdentityPhotoView(APIView):
             
             # 3. Also update the unified IdentityLink so it cascades everywhere
             from api.models import IdentityLink
+            from django.core.files.base import ContentFile
             email = submission.candidate_email.lower().strip() if submission.candidate_email else None
             if email:
                 try:
                     identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
                     if identity:
-                        identity.snapshot_image = submission.intruder_photo
+                        image_data = base64.b64decode(b64_data)
+                        identity.snapshot_image.save(f"approved_{submission.id}.jpg", ContentFile(image_data), save=False)
                         identity.save(update_fields=['snapshot_image', 'updated_at'])
                         logger.info(f"[ApproveAssessmentPhoto] Updated IdentityLink for {email}")
                 except Exception as e:

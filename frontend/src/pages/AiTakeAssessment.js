@@ -72,6 +72,7 @@ const AiTakeAssessment = () => {
     const [mcqTimeLeft, setMcqTimeLeft] = useState(null);
     const [codingTimeLeft, setCodingTimeLeft] = useState(null);
     const [isStarted, setIsStarted] = useState(false);
+    const [isStarting, setIsStarting] = useState(false);
 
 
 
@@ -1340,6 +1341,7 @@ const AiTakeAssessment = () => {
 
 
         try {
+            setIsStarting(true);
             // Save details to localStorage so they don't have to re-enter if they drop off
             localStorage.setItem(`ai_candidate_email_${token}`, candidateEmail);
             localStorage.setItem(`ai_candidate_name_${token}`, candidateName);
@@ -1469,7 +1471,11 @@ const AiTakeAssessment = () => {
 
             // Start Proctoring (Replacement for old monitor)
 
-            await startScreenShare();
+            const screenShared = await startScreenShare();
+            if (!screenShared) {
+                setIsStarting(false);
+                return;
+            }
 
 
 
@@ -1492,6 +1498,7 @@ const AiTakeAssessment = () => {
             // after the video element is rendered
 
             setIsStarted(true);
+            setIsStarting(false);
             // Signal SecuritySessionGuard to begin monitoring now that assessment is starting
             window.dispatchEvent(new Event('vh_exam_started'));
             logCandidateActivity(token, 'AI Assessment Started', 'Candidate started the AI-proctored assessment.');
@@ -1499,6 +1506,7 @@ const AiTakeAssessment = () => {
 
 
         } catch (err) {
+            setIsStarting(false);
 
             const msg = err.response?.data?.error || 'Failed to start assessment.';
 
@@ -1853,7 +1861,7 @@ const AiTakeAssessment = () => {
             let personId = getDeepfacePersonId();
 
             if (!personId) return;
-            
+
             // Scope the DeepFace anchor to this specific assessment session
             personId = `${personId}/assessments/${token}`;
 
@@ -2136,7 +2144,7 @@ const AiTakeAssessment = () => {
             const isCopyPaste = (e.ctrlKey || e.metaKey) && ['c', 'C', 'v', 'V', 'x', 'X', 'p', 'P'].includes(e.key);
             const isDevTools = e.key === 'F12' || ((e.ctrlKey || e.metaKey) && e.shiftKey && ['I', 'i', 'J', 'j', 'C', 'c'].includes(e.key));
             const isPrtScn = e.key === 'PrintScreen';
-            
+
             if (isCopyPaste || isDevTools || isPrtScn) {
                 e.preventDefault();
                 showAiEvent('This shortcut is disabled during the assessment', false);
@@ -3129,7 +3137,7 @@ const AiTakeAssessment = () => {
                                 onChange={(e) => {
 
                                     let value = e.target.value.replace(/\D/g, '');
-                                    
+
                                     // Prevent starting with 0-5
                                     value = value.replace(/^[0-5]+/, '');
 
@@ -3369,11 +3377,11 @@ const AiTakeAssessment = () => {
                     </div>
 
                     <button onClick={() => startAssessment(false)}
-                        disabled={isCheckingRegistration}
+                        disabled={isCheckingRegistration || isStarting}
 
-                        style={{ width: '100%', padding: '0.9rem', background: isCheckingRegistration ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: isCheckingRegistration ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
+                        style={{ width: '100%', padding: '0.9rem', background: (isCheckingRegistration || isStarting) ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: (isCheckingRegistration || isStarting) ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
 
-                        {isCheckingRegistration ? 'Checking Registration...' : 'Start Test'}
+                        {isCheckingRegistration ? 'Checking Registration...' : isStarting ? 'Setting up secure environment...' : 'Start Test'}
 
                     </button>
 
@@ -4480,4 +4488,3 @@ const AiTakeAssessment = () => {
 
 
 export default AiTakeAssessment;
-

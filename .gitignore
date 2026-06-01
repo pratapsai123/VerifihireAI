@@ -66,3 +66,7 @@ deepface/data/registered_faces/
 
 #secureAgent
 secureAgent/dist/
+
+# admin-build
+admin-build/assets/
+certbot/conf

@@ -175,6 +175,68 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 candidate.save()
                 continue
 
+            # 1.5 ATS FORMAT VALIDATION — reject resumes missing critical sections
+            resume_lower = candidate.resume_text.lower()
+            ats_sections_found = 0
+            ats_missing = []
+
+            # Check for Contact Info (email or phone pattern)
+            has_contact = bool(
+                re.search(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', candidate.resume_text) or
+                re.search(r'[\+]?[\d\s\-\(\)]{7,15}', candidate.resume_text)
+            )
+            if has_contact:
+                ats_sections_found += 1
+            else:
+                ats_missing.append('Contact Info')
+
+            # Check for Experience section
+            has_experience = bool(re.search(
+                r'\b(experience|work\s*history|employment|professional\s*background|work\s*experience|career\s*history|positions?\s*held)\b',
+                resume_lower
+            ))
+            if has_experience:
+                ats_sections_found += 1
+            else:
+                ats_missing.append('Experience')
+
+            # Check for Education section
+            has_education = bool(re.search(
+                r'\b(education|academic|qualification|degree|university|college|bachelor|master|b\.?tech|m\.?tech|b\.?e\b|m\.?e\b|b\.?sc|m\.?sc|diploma|school)\b',
+                resume_lower
+            ))
+            if has_education:
+                ats_sections_found += 1
+            else:
+                ats_missing.append('Education')
+
+            # Check for Skills section
+            has_skills = bool(re.search(
+                r'\b(skills|technical\s*skills|core\s*competenc|proficienc|technologies|tools|frameworks|languages\s*known|expertise)\b',
+                resume_lower
+            ))
+            if has_skills:
+                ats_sections_found += 1
+            else:
+                ats_missing.append('Skills')
+
+            # Require at least 3 out of 4 ATS sections
+            if ats_sections_found < 3:
+                print(f"   ❌ ATS Validation Failed — Missing: {', '.join(ats_missing)}")
+                candidate.status = 'Invalid Resume Format'
+                candidate.resume_summary = f"Resume rejected: Missing required ATS sections — {', '.join(ats_missing)}. A valid resume must include at least 3 of: Contact Info, Experience, Education, Skills."
+                candidate.save()
+                log_automation_event(
+                    candidate,
+                    'STATUS_CHANGE',
+                    'WARNING',
+                    f"ATS validation failed. Missing sections: {', '.join(ats_missing)}. Found {ats_sections_found}/4 required sections.",
+                    phase='RESUME'
+                )
+                continue
+            else:
+                print(f"   ✅ ATS Validation Passed ({ats_sections_found}/4 sections found)")
+
             # 2. AI ANALYSIS (with rotation)
             # Use 70b as primary again because user needs strict accuracy
             current_model = fallback_model 
@@ -190,18 +252,29 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
             {job_description}
             
             SCORING RULES (Weighted & Professional):
-            1. CORE SKILLS (60% weight): For every MUST-HAVE technology mentioned in the JD that is missing, subtract 10-15 points.
-            2. SECONDARY SKILLS (20% weight): For minor tools or nice-to-have libraries, subtract only 3-5 points.
+            1. CORE SKILLS (50% weight): For every MUST-HAVE technology mentioned in the JD that is missing, subtract 10-15 points.
+            2. SECONDARY SKILLS (15% weight): For minor tools or nice-to-have libraries, subtract only 3-5 points.
             3. EXPERIENCE (20% weight): Evaluate depth of experience and project complexity.
-            4. If the candidate has NO relevant industry experience for the role, cap the total score at 50%.
-            5. BE CONSISTENT: Identical Resume/JD pairs must result in the same logical evaluation.
-            6. OBJECTIVITY: Base the score ONLY on the text in the resume. Do not assume skills.
+            4. CERTIFICATIONS (15% weight): 
+               - Award 10-15 bonus points for certifications that DIRECTLY match the JD role (e.g., Python certification for a Python Developer role).
+               - Award 5-8 points for certifications that PARTIALLY match (e.g., HTML/CSS/JS certification for a Full Stack Developer role — relevant but incomplete coverage).
+               - Award 0 points for certifications completely unrelated to the JD.
+               - If the candidate has NO certifications, do NOT penalize — just award 0 bonus points.
+            5. If the candidate has NO relevant industry experience for the role, cap the total score at 50%.
+            6. BE CONSISTENT: Identical Resume/JD pairs must result in the same logical evaluation.
+            7. OBJECTIVITY: Base the score ONLY on the text in the resume. Do not assume skills.
+            
+            DEEP SKILL ANALYSIS RULES:
+            - Do NOT treat skill keywords at face value. Analyze the DEPTH of each skill based on project descriptions, years of usage, and complexity of work done.
+            - A candidate who lists "React" but has only built a to-do app should score LOWER than one who built production-level dashboards.
+            - If the JD requires "Full Stack Developer" but the candidate only has frontend skills/certifications, recognize this as a PARTIAL match (not full).
+            - Cross-reference certifications against the JD: a "Python PCAP" cert for a "Python Developer" JD is a STRONG match, but a "Google Analytics" cert for the same role is IRRELEVANT.
             
             Please provide:
             1. The candidate's full name. 
             2. The candidate's contact email.
             3. A match percentage (0-100). 
-            4. A 2-3 sentence summary that EXPLICITLY mentions what core skills are MISSING.
+            4. A 2-3 sentence summary that EXPLICITLY mentions what core skills are MISSING and whether certifications are relevant.
             5. A list of 7 interview questions based strictly on the JD requirements and their actual experience.
             
             Format the output strictly as a raw JSON object with these keys: "candidate_name", "candidate_email", "match_percentage", "summary", "interview_questions".
