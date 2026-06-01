@@ -354,12 +354,12 @@ SECURITY_SIGNATURE_RULES = [
     },
     {
         "label": "Chrome Remote Desktop",
-        "signatures": ["remoting_host", "chromoting"],
-        "pathSignatures": ["remoting_host.exe", "/chrome-remote-desktop", "chromoting"],
+        "signatures": ["remoting_host", "chromoting", "remote_assistance_host", "remoting_native_messaging_host"],
+        "pathSignatures": ["remoting_host.exe", "/chrome-remote-desktop", "chromoting", "remote_assistance_host.exe", "remoting_native_messaging_host.exe"],
         "serviceProcesses": [],
         "activeIndicators": {
             "listenPorts": [],
-            "activeConnectionKeywords": ["remoting_host", "chromoting"],
+            "activeConnectionKeywords": ["remoting_host", "chromoting", "remote_assistance_host", "remoting_native_messaging_host"],
             "windowTitles": ["chrome remote desktop"],
         },
     },
@@ -370,6 +370,177 @@ SECURITY_SIGNATURE_RULES = [
         "serviceProcesses": [],
         "activeIndicators": {
             "windowTitles": ["rustdesk"],
+        },
+    },
+    {
+        "label": "Zoom",
+        "signatures": ["zoom", "zoom meetings"],
+        "pathSignatures": ["zoom.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["zoom meeting", "zoom cloud meetings"],
+        },
+    },
+    {
+        "label": "Discord",
+        "signatures": ["discord"],
+        "pathSignatures": ["discord.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["discord"],
+        },
+    },
+    {
+        "label": "Microsoft Teams",
+        "signatures": ["teams", "msteams"],
+        "pathSignatures": ["teams.exe", "msteams.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["microsoft teams", "teams meeting"],
+        },
+    },
+    {
+        "label": "Skype",
+        "signatures": ["skype"],
+        "pathSignatures": ["skype.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["skype"],
+        },
+    },
+    {
+        "label": "Supremo",
+        "signatures": ["supremo"],
+        "pathSignatures": ["supremo.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["supremo"],
+        },
+    },
+    {
+        "label": "Google Meet",
+        "signatures": [],
+        "pathSignatures": [],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["google meet", "meet.google.com"],
+        },
+    },
+    {
+        "label": "Webex",
+        "signatures": ["webex"],
+        "pathSignatures": ["webex.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["webex", "cisco webex"],
+        },
+    },
+    {
+        "label": "Parsec",
+        "signatures": ["parsec", "parsecd", "parsec-windows"],
+        "pathSignatures": ["parsecd.exe", "parsec.exe", "/parsec"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["parsec"],
+        },
+    },
+    {
+        "label": "NoMachine",
+        "signatures": ["nxplayer", "nxclient", "nxservice", "nxserver", "nomachine"],
+        "pathSignatures": ["nxplayer.exe", "nxclient.exe", "nxservice.exe", "/nomachine", "/nxclient"],
+        "serviceProcesses": ["nxservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["nomachine", "nxclient", "nxplayer"],
+        },
+    },
+    {
+        "label": "VNC",
+        "signatures": ["vncserver", "vncviewer", "vncservice", "winvnc", "tvnserver", "tvnviewer", "ultravnc", "tightvnc", "tigervnc", "realvnc", "vncscreensaver"],
+        "pathSignatures": ["vncviewer.exe", "vncserver.exe", "winvnc.exe", "winvnc4.exe", "tvnserver.exe", "tvnviewer.exe", "ultravnc.exe", "uvnc_service.exe", "tightvnc.exe", "tigervnc.exe", "/realvnc", "/tightvnc", "/ultravnc", "/tigervnc"],
+        "serviceProcesses": ["vncservice.exe", "tvnservice.exe", "uvnc_service.exe"],
+        "activeIndicators": {
+            "windowTitles": ["vnc viewer", "vnc server", "realvnc", "tightvnc", "ultravnc", "tigervnc"],
+        },
+    },
+    {
+        "label": "Windows Quick Assist",
+        "signatures": ["quickassist", "remoteassistance", "msra"],
+        "pathSignatures": ["quickassist.exe", "msra.exe", "raserver.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["quick assist", "remote assistance", "windows remote assistance"],
+        },
+    },
+    {
+        "label": "Splashtop",
+        "signatures": ["splashtop", "srmanager", "srfeature", "splash_streamer"],
+        "pathSignatures": ["splashtop.exe", "srmanager.exe", "srfeature.exe", "/splashtop"],
+        "serviceProcesses": ["srmanager.exe"],
+        "activeIndicators": {
+            "windowTitles": ["splashtop"],
+        },
+    },
+    {
+        "label": "LogMeIn",
+        "signatures": ["logmein", "lmi_rescue", "logmeinrescue", "lmiguardiansvc", "lmiignition"],
+        "pathSignatures": ["logmein.exe", "lmi_rescue.exe", "lmiguardiansvc.exe", "/logmein"],
+        "serviceProcesses": ["lmiguardiansvc.exe"],
+        "activeIndicators": {
+            "windowTitles": ["logmein", "logmein rescue"],
+        },
+    },
+    {
+        "label": "ConnectWise Control",
+        "signatures": ["screenconnect", "connectwisecontrol", "screenconnect.clientservice", "screenconnect.windowsclient"],
+        "pathSignatures": ["screenconnect.exe", "screenconnect.clientservice.exe", "screenconnect.windowsclient.exe", "/screenconnect", "/connectwise"],
+        "serviceProcesses": ["screenconnect.clientservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["screenconnect", "connectwise control"],
+        },
+    },
+    {
+        "label": "Iperius Remote",
+        "signatures": ["iperiusremote", "iperius"],
+        "pathSignatures": ["iperiusremote.exe", "/iperiusremote"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["iperius remote"],
+        },
+    },
+    {
+        "label": "DWService",
+        "signatures": ["dwservice", "dwagent"],
+        "pathSignatures": ["dwagent.exe", "dwservice.exe", "/dwagent", "/dwservice"],
+        "serviceProcesses": ["dwagent.exe"],
+        "activeIndicators": {
+            "windowTitles": ["dwservice", "dwagent"],
+        },
+    },
+    {
+        "label": "Zoho Assist",
+        "signatures": ["zohoassist", "zaservice", "zascreenshare"],
+        "pathSignatures": ["zohoassist.exe", "zaservice.exe", "/zohoassist"],
+        "serviceProcesses": ["zaservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["zoho assist"],
+        },
+    },
+    {
+        "label": "Remote Utilities",
+        "signatures": ["rutserv", "rfusclient"],
+        "pathSignatures": ["rutserv.exe", "rfusclient.exe", "/remoteutilities"],
+        "serviceProcesses": ["rutserv.exe"],
+        "activeIndicators": {
+            "windowTitles": ["remote utilities", "rut viewer"],
+        },
+    },
+    {
+        "label": "ISL Online",
+        "signatures": ["islonline", "isllight", "islalwayson"],
+        "pathSignatures": ["isllight.exe", "islalwayson.exe", "islonline.exe", "/islonline", "/isllight"],
+        "serviceProcesses": ["islalwayson.exe"],
+        "activeIndicators": {
+            "windowTitles": ["isl online", "isl light"],
         },
     },
 ]

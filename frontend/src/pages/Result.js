@@ -1023,9 +1023,7 @@ export default function Result() {
                                                             <div className="cell-title">{r.candidate?.name || '-'}</div>
                                                             <div className="cell-sub">{r.candidate?.email || '-'}</div>
                                                         </div>
-                                                        {statusMeta.isTerminated ? (
-                                                            <span title="Exam terminated" style={{ flexShrink: 0, width: 26, height: 26, borderRadius: '50%', background: '#dc2626', color: '#fff', fontWeight: 800, fontSize: '0.8rem', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', border: '2px solid #fecaca' }}>T</span>
-                                                        ) : null}
+
                                                     </div>
                                                 </td>
                                                 <td>{r.assessment?.display_name || r.assessment?.name || '-'}</td>

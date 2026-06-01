@@ -93,11 +93,33 @@ async function detectBlocked(processes, windowTitles = new Map(), options = {}) 
         continue;
       }
 
-      // Mid-exam check: require active window title for tray-capable remote desktop apps
-      // to prevent false positives when they are running idle in the background tray.
-      const isTrayApp = ['AnyDesk', 'TeamViewer', 'UltraViewer', 'RustDesk', 'Supremo'].includes(rule.label);
+      // Apps that require an active window title to confirm they are truly running
+      // (not just a background update agent / notification stub / installer remnant).
+      // Zoom, Teams, and Webex all leave background processes even when the app is closed.
+      const requireWindowTitle = [
+        'AnyDesk', 'TeamViewer', 'UltraViewer', 'RustDesk', 'Supremo',
+        'Zoom', 'Microsoft Teams', 'Webex',
+      ];
+      const isTrayApp = requireWindowTitle.includes(rule.label);
       if (isTrayApp && !hitWindow) {
         continue;
+      }
+
+      // Skip installer / updater / temp paths — these are not the actual app running.
+      // Only applies when the match came from name/desc/company, NOT from the exe path.
+      if (!hitPath && !hitCmd && !hitWindow) {
+        const pathLower = norm(fullPath);
+        const isInstallerPath = (
+          pathLower.includes('\\temp\\') ||
+          pathLower.includes('/temp/') ||
+          pathLower.includes('\\update\\') ||
+          pathLower.includes('\\installer\\') ||
+          pathLower.includes('\\setup') ||
+          pathLower.includes('squirrel') ||
+          pathLower.endsWith('update.exe') ||
+          pathLower.endsWith('installer.exe')
+        );
+        if (isInstallerPath) continue;
       }
 
       // Precheck (strict): flag background/tray helpers — only skip OS daemons like teamviewer_service
