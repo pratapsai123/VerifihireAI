@@ -2790,7 +2790,19 @@ def save_all_candidate_details_view(request):
                 face_mismatch_detected = True
                 mismatch_reasons.append("Identity Face Mismatch: The captured face does not match the registered candidate's face.")
         else:
-            # Linkage: Register the candidate's face for the first time
+            # Linkage: Register the candidate's face for the first time.
+            # Compare the webcam snapshot with the face on the uploaded PAN card image to ensure it's not a mismatch.
+            verify_result = verify_face_against_pan_card(pan_file, snapshot)
+            verify_status = verify_result.get('verified', False)
+            distance = verify_result.get('distance', 1.0)
+            match_score = max(0.0, 1.0 - distance)
+            
+            if verify_status == False:
+                # Capture Violation Screenshot
+                _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
+                face_mismatch_detected = True
+                mismatch_reasons.append("Identity Face Mismatch: The face on the uploaded PAN card does not match the candidate's webcam snapshot.")
+            
             reg_result = register_face_with_deepface(person_id, snapshot)
             if reg_result.get('success'):
                 # Convert base64 snapshot to file for Django model
@@ -2812,8 +2824,7 @@ def save_all_candidate_details_view(request):
                     pan_image=pan_file,
                     snapshot_image=snapshot_file,
                 )
-                verify_status = True
-                match_score = 1.0
+                # Keep verify_status and match_score as determined by the comparison against the PAN card face!
             else:
                 error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
                 # Fallback to saving details even if DeepFace service registration failed to ensure manual review
@@ -3722,9 +3733,15 @@ def request_photo_update_view(request, submission_id):
                 tab_switches = inv.integrity.tab_switches
                 phone_detections = inv.integrity.phone_detections
                 multiface_detections = inv.integrity.multiface_detections
-                no_face_detections = inv.integrity.no_face_detections
+                # Apply the first 3 grace warning filters for no face detections
+                no_face_detections = max(0, inv.integrity.no_face_detections - 3)
                 suspicion_score = inv.integrity.suspicion_score
-                suspicion_reasons = inv.integrity.suspicion_reasons or []
+                
+                # Clean/deduplicate and correct tab switching reasons dynamically
+                raw_reasons = list(inv.integrity.suspicion_reasons or [])
+                suspicion_reasons = [reason for reason in raw_reasons if not reason.startswith("Frequent tab switching (")]
+                if tab_switches > 3:
+                    suspicion_reasons.append(f"Frequent tab switching ({tab_switches} times)")
                 
                 if integrity_score < 70.0:
                     integrity_flagged = True

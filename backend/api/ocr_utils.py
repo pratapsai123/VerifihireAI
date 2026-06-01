@@ -651,3 +651,77 @@ def extract_text_from_docx_ocr(file_content):
         print(f"DOCX OCR Error: {e}")
         return ""
 
+
+def verify_face_against_pan_card(pan_image_file, snapshot_base64):
+    """
+    Compares the face in the webcam snapshot with the face in the uploaded PAN card image.
+    """
+    temp_pan_path = None
+    temp_snap_path = None
+    try:
+        from deepface import DeepFace
+        from django.conf import settings
+        import uuid
+        import os
+        import base64
+        import shutil
+
+        # Setup directory for temp files
+        temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
+        os.makedirs(temp_dir, exist_ok=True)
+        unique_id = uuid.uuid4().hex
+
+        temp_pan_path = os.path.join(temp_dir, f"pan_{unique_id}.jpg")
+        temp_snap_path = os.path.join(temp_dir, f"snap_{unique_id}.jpg")
+
+        # Process PAN card image
+        if hasattr(pan_image_file, 'temporary_file_path'):
+            shutil.copy(pan_image_file.temporary_file_path(), temp_pan_path)
+        elif hasattr(pan_image_file, 'read'):
+            pan_image_file.seek(0)
+            with open(temp_pan_path, "wb") as f:
+                f.write(pan_image_file.read())
+            pan_image_file.seek(0)
+        else:
+            # Assume it is bytes or a file path
+            if isinstance(pan_image_file, (bytes, bytearray)):
+                with open(temp_pan_path, "wb") as f:
+                    f.write(pan_image_file)
+            else:
+                shutil.copy(pan_image_file, temp_pan_path)
+
+        # Process webcam snapshot
+        if ',' in snapshot_base64:
+            snapshot_base64 = snapshot_base64.split(',', 1)[1]
+        snapshot_bytes = base64.b64decode(snapshot_base64)
+        with open(temp_snap_path, "wb") as f:
+            f.write(snapshot_bytes)
+
+        # Compare faces using ArcFace and RetinaFace
+        result = DeepFace.verify(
+            img1_path = temp_pan_path,
+            img2_path = temp_snap_path,
+            model_name = "ArcFace",
+            detector_backend = "retinaface",
+            enforce_detection = True,
+            align = True
+        )
+
+        return {
+            "verified": result.get("verified", False),
+            "distance": result.get("distance", 1.0),
+            "threshold": result.get("threshold", 0.6)
+        }
+    except Exception as e:
+        print(f"Error in verify_face_against_pan_card: {e}")
+        return {"verified": False, "message": str(e)}
+    finally:
+        # Securely cleanup temp files
+        for path in [temp_pan_path, temp_snap_path]:
+            if path and os.path.exists(path):
+                try:
+                    os.remove(path)
+                except Exception as ex:
+                    print(f"Failed to remove temp face file {path}: {ex}")
+
+
