@@ -1326,6 +1326,59 @@ class CreateSubmissionView(APIView):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
+            # Perform cross-table identity validation
+            from api.ocr_utils import perform_cross_table_identity_validation
+            has_cross_mismatch, cross_mismatch_reasons = perform_cross_table_identity_validation(
+                email, pan_number, snapshot
+            )
+            
+            if has_cross_mismatch:
+                mismatch_reason = " | ".join(cross_mismatch_reasons)
+                # If there's a mismatch, we should create a submission record in status 'hold' so that it shows up on the admin panel
+                # or update existing submission to 'hold' if it exists.
+                existing_submission = AIAssessmentSubmission.objects.filter(
+                    assessment=assessment,
+                    candidate_email__iexact=email,
+                ).order_by('-id').first()
+                
+                if existing_submission:
+                    submission = existing_submission
+                    submission.status = 'hold'
+                    submission.identity_mismatch_detected = True
+                    submission.original_identity_photo = snapshot
+                    submission.identity_mismatch_details = {
+                        'mismatch_at': timezone.now().isoformat(),
+                        'reason': mismatch_reason,
+                        'type': 'cross_table_mismatch'
+                    }
+                    submission.save()
+                else:
+                    submission = AIAssessmentSubmission.objects.create(
+                        assessment=assessment,
+                        candidate_name=name,
+                        candidate_email=email,
+                        phone=phone,
+                        pan_number=pan_number,
+                        pan_photo=pan_photo,
+                        pan_verified=pan_verified,
+                        status='hold',
+                        identity_mismatch_detected=True,
+                        original_identity_photo=snapshot,
+                        identity_mismatch_details={
+                            'mismatch_at': timezone.now().isoformat(),
+                            'reason': mismatch_reason,
+                            'type': 'cross_table_mismatch'
+                        },
+                        batch_id=assessment.batch_id,
+                        batch_name=assessment.batch_name
+                    )
+                
+                logger.warning(f"CreateSubmission mismatch blocked: {mismatch_reason}")
+                return Response(
+                    {"error": f"Identity verification failed: {mismatch_reason}"},
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
             # If an ONGOING session exists, reconnect the user instead of spawning a new one
             existing_submission = AIAssessmentSubmission.objects.filter(
                 assessment=assessment,
