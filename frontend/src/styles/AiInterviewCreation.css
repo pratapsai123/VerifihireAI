@@ -100,17 +100,17 @@
 }
 
 .page-header h1 {
-    font-size: 1.8rem;
-    font-weight: 500;
+    font-size: 1.625rem;
+    font-weight: 700;
     letter-spacing: -0.04em;
     line-height: 1.1;
-    color: #1e293b;
+    color: #17233d;
     margin-bottom: 0.5rem;
 }
 
 .page-header p {
     color: #64748b;
-    font-size: 1rem;
+    font-size: 0.875rem;
     max-width: 700px;
     line-height: 1.5;
     margin: 0 auto;
@@ -124,7 +124,7 @@
     color: #6366f1;
     padding: 0.5rem 1rem;
     border-radius: 12px;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     font-weight: 500;
     margin-bottom: 1rem;
     border: 1px solid rgba(99, 102, 241, 0.1);
@@ -137,7 +137,7 @@
 
 .input-label {
     display: block;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 500;
     color: #334155;
     margin-bottom: 0.5rem;
@@ -148,7 +148,7 @@
     border-radius: 20px;
     border: 1.5px solid #e2e8f0;
     padding: 1rem;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     line-height: 1.5;
     transition: all 0.3s;
     background: rgba(255, 255, 255, 0.5);
@@ -230,7 +230,7 @@
     border-radius: 16px;
     padding: 1.25rem;
     color: #065f46;
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -246,7 +246,7 @@
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    font-size: 0.95rem;
+    font-size: 0.875rem;
     font-weight: 500;
 }
 

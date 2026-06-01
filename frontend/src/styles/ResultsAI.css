@@ -22,9 +22,7 @@
 
 .results-page {
     height: 100%;
-    background: linear-gradient(-45deg, #f0f4ff, #f8f0ff, #f0faff, #f5f0ff);
-    background-size: 400% 400%;
-    animation: meshGradient 15s ease infinite alternate;
+    background: #f1f5f9;
     display: flex;
     justify-content: center;
     align-items: flex-start;
@@ -86,22 +84,16 @@
 
 /* Glass Card Component for the main table area */
 .glass-table-card {
-    background: rgba(255, 255, 255, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: 24px;
+    background: white;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow:
-        0 8px 32px 0 rgba(31, 38, 135, 0.04),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    border: none;
     transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .glass-table-card:hover {
-    box-shadow:
-        0 12px 40px 0 rgba(31, 38, 135, 0.06),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 /* Premium Header Styles */
@@ -112,8 +104,8 @@
 }
 
 .results-header h1 {
-    font-size: 1.8rem;
-    font-weight: 900;
+    font-size: 1.625rem;
+    font-weight: 700;
     letter-spacing: -0.04em;
     margin: 0;
     line-height: 1.1;

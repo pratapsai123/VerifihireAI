@@ -336,11 +336,11 @@ const CreateAssessment = () => {
         <div className="create-assessment-page" style={{ paddingTop: 0 }}>
             <div className="assessment-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
                 <header className="assessment-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
-                    <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>Create <span style={{ color: '#6366F1', fontWeight: '400' }}>Smart</span> Assessment</h1>
-                    <p style={{ color: '#6b7280', fontSize: '0.95rem', marginTop: '0.25rem' }}>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
+                    <h1 style={{ fontSize: '1.625rem', fontWeight: '700', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>Create <span style={{ color: '#6366F1', fontWeight: '400' }}>Smart</span> Assessment</h1>
+                    <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
                 </header>
 
-                <div>
+                <div className="section-container">
                     <SectionHeader title="Role Context" />
                     <div className="form-group">
                         <label>Job Requirements</label>
@@ -401,14 +401,14 @@ const CreateAssessment = () => {
                     {/* NEW: Experience Level Section */}
                     {selectedRoleId && (
                         <div className="form-group" style={{ marginTop: '1.5rem' }}>
-                            <label style={{ 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                gap: '0.5rem', 
-                                fontSize: '0.95rem', 
-                                fontWeight: '600', 
-                                color: '#374151', 
-                                marginBottom: '0.75rem' 
+                            <label style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '0.5rem',
+                                fontSize: '0.95rem',
+                                fontWeight: '600',
+                                color: '#374151',
+                                marginBottom: '0.75rem'
                             }}>
                                 <i className="fa-solid fa-user-graduate" style={{ color: '#6366F1', fontSize: '0.9rem' }}></i>
                                 Experience Level
@@ -437,10 +437,10 @@ const CreateAssessment = () => {
                                 <option value="senior">Senior (5-10 years)</option>
                                 <option value="expert">Expert (10+ years)</option>
                             </select>
-                            <p style={{ 
-                                fontSize: '0.8rem', 
-                                color: '#6B7280', 
-                                marginTop: '0.5rem', 
+                            <p style={{
+                                fontSize: '0.8rem',
+                                color: '#6B7280',
+                                marginTop: '0.5rem',
                                 marginBottom: 0,
                                 display: 'flex',
                                 alignItems: 'center',
@@ -478,7 +478,7 @@ const CreateAssessment = () => {
                     )}
                 </div>
 
-                <div>
+                <div className="section-container">
                     <SectionHeader title="Structure & Difficulty" />
 
                     {/* Reverted Parameter Row (from screenshot) */}
@@ -568,7 +568,7 @@ const CreateAssessment = () => {
                                     onChange={(e) => handleChange('same_questions_for_all', e.target.checked)}
                                     style={{ display: 'none' }}
                                 />
-                                <label 
+                                <label
                                     htmlFor="same_questions_for_all"
                                     style={{
                                         position: 'relative',
@@ -618,21 +618,21 @@ const CreateAssessment = () => {
                             <div style={{ flex: 1, position: 'relative', height: '8px' }}>
                                 <div style={{ position: 'absolute', inset: 0, height: '8px', borderRadius: '8px', background: `linear-gradient(to right, #6366F1 ${formData.mcq_weight}%, #8B5CF6 ${formData.mcq_weight}%)` }} />
                                 {/* The "Ball" */}
-                                <div style={{ 
-                                    position: 'absolute', 
-                                    top: '50%', 
-                                    left: `${formData.mcq_weight}%`, 
-                                    transform: 'translate(-50%, -50%)', 
-                                    width: '16px', 
-                                    height: '16px', 
-                                    borderRadius: '50%', 
-                                    background: '#FFFFFF', 
-                                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)', 
+                                <div style={{
+                                    position: 'absolute',
+                                    top: '50%',
+                                    left: `${formData.mcq_weight}%`,
+                                    transform: 'translate(-50%, -50%)',
+                                    width: '16px',
+                                    height: '16px',
+                                    borderRadius: '50%',
+                                    background: '#FFFFFF',
+                                    boxShadow: '0 2px 6px rgba(0,0,0,0.2)',
                                     border: '3px solid #6366F1',
                                     zIndex: 1,
                                     pointerEvents: 'none',
                                     transition: 'left 0.1s ease-out'
-                                 }} />
+                                }} />
                                 <input
                                     type="range" min="0" max="100" step="5"
                                     value={formData.mcq_weight}

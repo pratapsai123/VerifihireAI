@@ -197,10 +197,10 @@ const AiAssessments = () => {
                 <div>
                     <div style={{ marginBottom: '2.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <div>
-                            <h1 style={{ fontSize: '1.8rem', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>
+                            <h1 style={{ fontSize: '1.625rem', fontWeight: '700', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>
                                 Assessments <span style={{ color: '#6366f1', fontWeight: '400' }}>Archive</span>
                             </h1>
-                            <p style={{ color: '#6b7280', fontSize: '0.95rem', marginTop: '0.25rem' }}>Manage and share your AI-generated technical tests.</p>
+                            <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>Manage and share your AI-generated technical tests.</p>
                         </div>
                         <button
                             onClick={() => navigate('/create-assessment')}
