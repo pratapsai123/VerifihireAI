@@ -827,6 +827,8 @@ def generate_candidate_report(submission_id):
     dedup_reqs = []
     approved_reqs = []
     dedup_details = []
+    is_rejected = False
+    rejection_note = None
     if candidate_detail:
         candidate_email = candidate_detail.email.strip() if candidate_detail.email else ""
         candidate_pan = candidate_detail.pan_number.strip().upper() if candidate_detail.pan_number else ""
@@ -874,6 +876,16 @@ def generate_candidate_report(submission_id):
                     dedup_details.append(d)
         except Exception as e:
             print(f"[report] Error fetching other CandidateDetails: {e}")
+
+    # Check if manual review was rejected
+    try:
+        # We only check for the current submission's FaceUpdateRequest to ensure accuracy
+        latest_sub_req = FaceUpdateRequest.objects.filter(submission=submission).order_by('-requested_at').first()
+        if latest_sub_req and latest_sub_req.status == 'rejected':
+            is_rejected = True
+            rejection_note = latest_sub_req.admin_note
+    except Exception as e:
+        print(f"[report] Error checking FaceUpdateRequest status: {e}")
 
     # ── Build PDF ──
 
@@ -970,7 +982,13 @@ def generate_candidate_report(submission_id):
     if snap_img:
 
         # Simple single-row layout: [title + subtitle | photo]
-        mismatch_sub = '<br/><font size="11" color="#dc2626"><b>MANUAL REVIEW REQUIRED</b></font>' if is_mismatch else ''
+        mismatch_sub = ''
+        if is_mismatch:
+            if is_rejected:
+                mismatch_sub = '<br/><font size="11" color="#dc2626"><b>APPROVAL REQUEST REJECTED</b></font>'
+            else:
+                mismatch_sub = '<br/><font size="11" color="#dc2626"><b>MANUAL REVIEW REQUIRED</b></font>'
+        
         left_content = Paragraph(
 
             'Candidate Report<br/><font size="11">' +
@@ -1035,7 +1053,8 @@ def generate_candidate_report(submission_id):
                 fontName='Helvetica-Bold',
                 spaceBefore=4
             )
-            manual_review_para = Paragraph('MANUAL REVIEW REQUIRED', manual_review_style)
+            text_header = 'APPROVAL REQUEST REJECTED' if is_rejected else 'MANUAL REVIEW REQUIRED'
+            manual_review_para = Paragraph(text_header, manual_review_style)
             story.append(manual_review_para)
 
         print("[report] Header WITHOUT snapshot added to story")
@@ -1069,6 +1088,9 @@ def generate_candidate_report(submission_id):
         if photo_approved:
             identity_status = "IDENTITY MISMATCH DETECTED (APPROVED & UPDATED)"
             status_color = "#16a34a" # Green
+        elif is_rejected:
+            identity_status = "IDENTITY MISMATCH DETECTED (REJECTED)"
+            status_color = "#dc2626" # Red
         else:
             identity_status = "IDENTITY MISMATCH DETECTED"
             status_color = "#dc2626" # Red
@@ -1099,6 +1121,12 @@ def generate_candidate_report(submission_id):
         info_data.append([
             Paragraph('Mismatch Reason', styles['InfoLabel']),
             Paragraph(f'<b><font color="#dc2626">{candidate_detail.identity_mismatch_reason}</font></b>', styles['InfoValue']),
+        ])
+
+    if is_rejected:
+        info_data.append([
+            Paragraph('Manual Review Note', styles['InfoLabel']),
+            Paragraph(f'<b><font color="#dc2626">{rejection_note or "Manual review request was rejected by admin."}</font></b>', styles['InfoValue']),
         ])
 
     info_data.extend([

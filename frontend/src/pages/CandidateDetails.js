@@ -274,7 +274,7 @@ const extractPanFromImage = async (file, updateStatus) => {
   return null;
 };
 
-const CandidateDetails = ({ token, onComplete }) => {
+const CandidateDetails = ({ token, onComplete, assessmentType }) => {
   const webcamRef = useRef(null);
   const [snapshot, setSnapshot] = useState(null);
   const [submitted, setSubmitted] = useState(false);
@@ -290,6 +290,10 @@ const CandidateDetails = ({ token, onComplete }) => {
   const [captureStatus, setCaptureStatus] = useState(''); // Status message for capture button
   const detectionIntervalRef = useRef(null);
   const alignmentStatusRef = useRef(null);
+
+  // Identity mismatch popup state
+  const [mismatchPopup, setMismatchPopup] = useState(null); // { reason, candidateId }
+  const [mismatchAcknowledged, setMismatchAcknowledged] = useState(false);
 
   const [data, setData] = useState({
     fullName: "",
@@ -734,9 +738,43 @@ const CandidateDetails = ({ token, onComplete }) => {
         .catch((error) => {
           console.error('Error saving candidate details:', error);
           const errorMessage = error?.response?.data?.error || error?.message || 'Failed to save candidate details';
-          
-          // Display any 403 identity error in the premium "Access Denied" box
-          if (error?.response?.status === 403) {
+          const isMismatch = error?.response?.status === 403 && error?.response?.data?.mismatch === true;
+          const candidateId = error?.response?.data?.id;
+
+          if (isMismatch) {
+            setData(prev => ({ ...prev, isVerifying: false }));
+
+            // For custom assessment type: defer popup to screen-share time
+            if (assessmentType === 'custom') {
+              // Store mismatch in localStorage; the custom assessment screen will read it at share-screen time
+              localStorage.setItem(`identity_mismatch_${token}`, JSON.stringify({
+                reason: errorMessage,
+                candidateId,
+                detectedAt: new Date().toISOString(),
+              }));
+              // Save candidate details as completed so they can proceed
+              const leanData = {
+                fullName: data.fullName,
+                email: data.email,
+                phone: data.phone,
+                pan: data.pan,
+                token: token,
+                saved: true,
+                id: candidateId,
+              };
+              localStorage.setItem(`candidate_details_${token}`, JSON.stringify(leanData));
+              import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+                logCandidateActivity(token, 'Assessment Started (Flagged)', 'Candidate started with identity mismatch flag – deferred to screen-share check.');
+              });
+              if (onComplete) {
+                onComplete({ ...data, snapshot, token, id: candidateId, identityMismatch: true });
+              }
+            } else {
+              // For all other assessment types: show the mismatch popup immediately
+              setMismatchPopup({ reason: errorMessage, candidateId });
+            }
+          } else if (error?.response?.status === 403) {
+            // Non-mismatch 403 (old behaviour)
             setData(prev => ({ ...prev, submissionError: errorMessage, isVerifying: false }));
           } else {
             setData(prev => ({ ...prev, isVerifying: false }));
@@ -746,9 +784,65 @@ const CandidateDetails = ({ token, onComplete }) => {
     }
   };
 
+  // Handle popup acknowledge: proceed to assessment with mismatch flagged
+  const handleMismatchAcknowledge = () => {
+    if (!mismatchPopup) return;
+    setMismatchAcknowledged(true);
+    // Save as completed so session can proceed
+    const leanData = {
+      fullName: data.fullName,
+      email: data.email,
+      phone: data.phone,
+      pan: data.pan,
+      token: token,
+      saved: true,
+      id: mismatchPopup.candidateId,
+    };
+    localStorage.setItem(`candidate_details_${token}`, JSON.stringify(leanData));
+    import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+      logCandidateActivity(token, 'Assessment Started (Flagged)', 'Candidate acknowledged identity mismatch and proceeded.');
+    });
+    setMismatchPopup(null);
+    if (onComplete) {
+      onComplete({ ...data, snapshot, token, id: mismatchPopup.candidateId, identityMismatch: true });
+    }
+  };
+
   return (
     <div className="candidate-page">
       <header className="candidate-header">Candidate Portal</header>
+
+      {/* Identity Mismatch Popup Modal */}
+      {mismatchPopup && (
+        <div className="id-mismatch-overlay">
+          <div className="id-mismatch-modal">
+            <div className="id-mismatch-icon-ring">
+              <span className="id-mismatch-icon">⚠️</span>
+            </div>
+            <h2 className="id-mismatch-title">Identity Verification Alert</h2>
+            <p className="id-mismatch-subtitle">A discrepancy was detected in your identity records.</p>
+            <div className="id-mismatch-reason-box">
+              <div className="id-mismatch-reason-label">Mismatch Details</div>
+              <div className="id-mismatch-reason-text">{mismatchPopup.reason}</div>
+            </div>
+            <div className="id-mismatch-notice">
+              <span className="id-mismatch-notice-icon">ℹ️</span>
+              Your submission has been flagged for <strong>Manual Review</strong>. HR/Admin will review your identity records. You may continue with the assessment, but the result will be held pending review.
+            </div>
+            <div className="id-mismatch-actions">
+              <button
+                className="id-mismatch-btn-primary"
+                onClick={handleMismatchAcknowledge}
+              >
+                I Understand – Proceed to Assessment
+              </button>
+            </div>
+            <div className="id-mismatch-footer">
+              If you believe this is an error, please contact the recruitment team.
+            </div>
+          </div>
+        </div>
+      )}
 
       <main className="candidate-container">
         {data.submissionError ? (

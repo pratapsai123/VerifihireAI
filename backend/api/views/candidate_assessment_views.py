@@ -751,6 +751,7 @@ def get_invitation_public_view(request, token):
                     'min_objective_pass_percentage': assessment.min_objective_pass_percentage,
                     'weightage_objective': assessment.weightage_objective,
                     'weightage_coding': assessment.weightage_coding,
+                    'is_custom': bool(assessment.custom_assessment_id),
                 },
                 'questions': questions,
                 'coding_questions': coding_questions,
@@ -2766,19 +2767,13 @@ def save_all_candidate_details_view(request):
                         print(f"Face recovery failed for {person_id}: {e}")
                 
                 if not recovered:
-                    # Fallback: Re-register current face if reference is lost
-                    reg_result = register_face_with_deepface(person_id, snapshot)
-                    if reg_result.get('success'):
-                        verify_result = {'verified': True, 'distance': 0.0}
-                        # Also update the stored snapshot_image if it was missing
-                        try:
-                            if not identity_link.snapshot_image:
-                                if ',' in snapshot: snapshot_b64 = snapshot.split(',', 1)[1]
-                                else: snapshot_b64 = snapshot
-                                snapshot_data = base64.b64decode(snapshot_b64)
-                                identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
-                                identity_link.save(update_fields=['snapshot_image'])
-                        except: pass
+                    # Do NOT silently re-register a new face for an already registered PAN card!
+                    # This prevents proxy candidates from hijacking the identity when files are missing.
+                    verify_result = {
+                        'verified': False,
+                        'distance': 1.0,
+                        'message': 'No registered identity files found on disk and recovery failed. Manual review required.'
+                    }
 
             verify_status = verify_result.get('verified', False)
             distance = verify_result.get('distance', 1.0)
@@ -2833,9 +2828,19 @@ def save_all_candidate_details_view(request):
                 face_mismatch_detected = True
                 mismatch_reasons.append(f"Identity Verification System Error: {error_msg}")
 
+        # Perform cross-table identity validation
+        from api.ocr_utils import perform_cross_table_identity_validation
+        has_cross_mismatch, cross_mismatch_reasons = perform_cross_table_identity_validation(
+            norm_email, norm_pan, snapshot
+        )
+        
+        if has_cross_mismatch:
+            mismatch_reasons.extend(cross_mismatch_reasons)
+            face_mismatch_detected = True
+
         # Combine all mismatch reasons
         mismatch_reason = " | ".join(mismatch_reasons) if mismatch_reasons else None
-        has_any_mismatch = email_pan_mismatch or face_mismatch_detected or (not verify_status if identity_link else False)
+        has_any_mismatch = email_pan_mismatch or face_mismatch_detected or (not verify_status if identity_link else False) or has_cross_mismatch
 
         # Create or update candidate details
         candidate_details, created = CandidateDetails.objects.update_or_create(
@@ -2855,6 +2860,7 @@ def save_all_candidate_details_view(request):
                 'identity_mismatch': has_any_mismatch,
                 'mismatch_score': match_score,
                 'identity_mismatch_reason': mismatch_reason,
+                'photo_update_status': 'pending' if has_any_mismatch else 'none',
             }
         )
 
@@ -2868,6 +2874,16 @@ def save_all_candidate_details_view(request):
                     details=f"Candidate identity mismatch detected: {mismatch_reason or 'Face/Email/PAN mismatch'}.",
                     category='security'
                 )
+            
+            # Block the candidate by returning 403 Forbidden with the mismatch reason
+            return Response(
+                {
+                    'error': mismatch_reason or 'Identity verification failed. Under manual review.',
+                    'mismatch': True,
+                    'id': candidate_details.id
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
 
         return Response({
             'success': True,
