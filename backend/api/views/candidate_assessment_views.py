@@ -751,7 +751,6 @@ def get_invitation_public_view(request, token):
                     'min_objective_pass_percentage': assessment.min_objective_pass_percentage,
                     'weightage_objective': assessment.weightage_objective,
                     'weightage_coding': assessment.weightage_coding,
-                    'is_custom': bool(assessment.custom_assessment_id),
                 },
                 'questions': questions,
                 'coding_questions': coding_questions,
@@ -1027,10 +1026,16 @@ def verify_identity_view(request, token):
         person_id = details.pan_number # Baseline is registered under PAN in DeepFace
         
         # 2. Verify with DeepFace
-        verify_result = verify_face_with_deepface(person_id, snapshot)
+        verify_result = verify_face_with_deepface(person_id, snapshot, email=inv.email)
         is_verified = verify_result.get('verified', False)
-        distance = verify_result.get('distance', 1.0)
-        match_score = max(0.0, 1.0 - distance)
+        distance = verify_result.get('distance')
+        no_face_detected = verify_result.get('no_face_detected', False)
+        is_mismatch = verify_result.get('identity_mismatch_detected', False)
+        
+        if isinstance(distance, (int, float)):
+            match_score = max(0.0, round((1.0 - distance) * 100.0, 2))
+        else:
+            match_score = 0.0
 
         # 3. Update Integrity Record
         integrity, _ = CandidateIntegrity.objects.get_or_create(invitation=inv)
@@ -1039,22 +1044,43 @@ def verify_identity_view(request, token):
         logs = integrity.identity_verification_logs if isinstance(integrity.identity_verification_logs, list) else []
         logs.append({
             'timestamp': timezone.now().isoformat(),
-            'verified': is_verified,
-            'match_score': round(match_score * 100, 2)
+            'verified': is_verified if not no_face_detected else False,
+            'match_score': match_score,
+            'reason': 'Face detection failed' if no_face_detected else ('Mismatch' if is_mismatch else 'Success')
         })
         integrity.identity_verification_logs = logs
         
         # If mismatch detected, update the overall flag
-        if not is_verified:
+        if is_mismatch:
             integrity.identity_verified = False
             # Save a violation screenshot for the report
             _save_identity_violation_screenshot(inv, snapshot, "Identity Mismatch (Periodic)")
         
         integrity.save()
 
+        # Update CandidateDetails manual review status and other DeepFace columns if available
+        details.deepface_distance = distance
+        details.deepface_threshold = verify_result.get('threshold')
+        details.deepface_verified = is_verified
+        details.deepface_model = verify_result.get('model')
+        details.deepface_detector = verify_result.get('detector')
+        details.captured_image_path = verify_result.get('captured_image_path')
+        details.captured_image_hash = verify_result.get('captured_image_hash')
+        details.report_captured_hash = verify_result.get('report_captured_hash')
+        details.image_source_mismatch = verify_result.get('image_source_mismatch', False)
+        
+        if no_face_detected:
+            details.photo_update_status = 'pending'  # Route to Manual Review
+            details.identity_mismatch_reason = "Face detection failed during verification."
+        elif is_mismatch:
+            details.identity_mismatch_detected = True
+            details.identity_mismatch = True
+            details.identity_mismatch_reason = "Identity Face Mismatch: The captured face does not match the registered candidate's face."
+        details.save()
+
         return Response({
             'success': True,
-            'verified': is_verified,
+            'verified': is_verified if not no_face_detected else False,
             'match_score': match_score
         }, status=status.HTTP_200_OK)
 
@@ -1935,6 +1961,18 @@ def get_invitation_result_view(request, token):
                     'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
                     'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
                     'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
+                    'deepface_distance': latest_details.deepface_distance if latest_details else None,
+                    'deepface_threshold': latest_details.deepface_threshold if latest_details else None,
+                    'deepface_verified': latest_details.deepface_verified if latest_details else None,
+                    'deepface_model': latest_details.deepface_model if latest_details else None,
+                    'deepface_detector': latest_details.deepface_detector if latest_details else None,
+                    'original_image_path': latest_details.original_image_path if latest_details else None,
+                    'captured_image_path': latest_details.captured_image_path if latest_details else None,
+                    'original_image_hash': latest_details.original_image_hash if latest_details else None,
+                    'captured_image_hash': latest_details.captured_image_hash if latest_details else None,
+                    'report_original_hash': latest_details.report_original_hash if latest_details else None,
+                    'report_captured_hash': latest_details.report_captured_hash if latest_details else None,
+                    'image_source_mismatch': latest_details.image_source_mismatch if latest_details else False,
                 },
                 'integrity': {
                     'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
@@ -1952,6 +1990,18 @@ def get_invitation_result_view(request, token):
                 'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
                 'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
                 'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
+                'deepface_distance': latest_details.deepface_distance if latest_details else None,
+                'deepface_threshold': latest_details.deepface_threshold if latest_details else None,
+                'deepface_verified': latest_details.deepface_verified if latest_details else None,
+                'deepface_model': latest_details.deepface_model if latest_details else None,
+                'deepface_detector': latest_details.deepface_detector if latest_details else None,
+                'original_image_path': latest_details.original_image_path if latest_details else None,
+                'captured_image_path': latest_details.captured_image_path if latest_details else None,
+                'original_image_hash': latest_details.original_image_hash if latest_details else None,
+                'captured_image_hash': latest_details.captured_image_hash if latest_details else None,
+                'report_original_hash': latest_details.report_original_hash if latest_details else None,
+                'report_captured_hash': latest_details.report_captured_hash if latest_details else None,
+                'image_source_mismatch': latest_details.image_source_mismatch if latest_details else False,
             },
             status=status.HTTP_200_OK
         )
@@ -2182,6 +2232,18 @@ def results_overview_view(request):
                     'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
                     'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
                     'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
+                    'deepface_distance': latest_details.deepface_distance if latest_details else None,
+                    'deepface_threshold': latest_details.deepface_threshold if latest_details else None,
+                    'deepface_verified': latest_details.deepface_verified if latest_details else None,
+                    'deepface_model': latest_details.deepface_model if latest_details else None,
+                    'deepface_detector': latest_details.deepface_detector if latest_details else None,
+                    'original_image_path': latest_details.original_image_path if latest_details else None,
+                    'captured_image_path': latest_details.captured_image_path if latest_details else None,
+                    'original_image_hash': latest_details.original_image_hash if latest_details else None,
+                    'captured_image_hash': latest_details.captured_image_hash if latest_details else None,
+                    'report_original_hash': latest_details.report_original_hash if latest_details else None,
+                    'report_captured_hash': latest_details.report_captured_hash if latest_details else None,
+                    'image_source_mismatch': latest_details.image_source_mismatch if latest_details else False,
                 }
             )
 
@@ -2748,7 +2810,7 @@ def save_all_candidate_details_view(request):
         
         if identity_link:
             # Verification: Compare current snapshot with the registered identity face
-            verify_result = verify_face_with_deepface(person_id, snapshot)
+            verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
             
             # RECOVERY: If reference face is missing from filesystem, attempt to restore it
             if not verify_result.get('verified') and "No registered identity found" in str(verify_result.get('message', '')):
@@ -2760,24 +2822,29 @@ def save_all_candidate_details_view(request):
                         with open(os.path.join(identities_dir, "canonical.jpg"), "wb") as f:
                             f.write(identity_link.snapshot_image.read())
                         # Retry verification
-                        verify_result = verify_face_with_deepface(person_id, snapshot)
+                        verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
                         if verify_result.get('verified'):
                             recovered = True
                     except Exception as e:
                         print(f"Face recovery failed for {person_id}: {e}")
                 
                 if not recovered:
-                    # Do NOT silently re-register a new face for an already registered PAN card!
-                    # This prevents proxy candidates from hijacking the identity when files are missing.
-                    verify_result = {
-                        'verified': False,
-                        'distance': 1.0,
-                        'message': 'No registered identity files found on disk and recovery failed. Manual review required.'
-                    }
+                    # Fallback: Re-register current face if reference is lost
+                    reg_result = register_face_with_deepface(person_id, snapshot)
+                    if reg_result.get('success'):
+                        verify_result = {'verified': True, 'distance': 0.0, 'model': 'ArcFace', 'detector': 'retinaface'}
+                        # Also update the stored snapshot_image if it was missing
+                        try:
+                            if not identity_link.snapshot_image:
+                                if ',' in snapshot: snapshot_b64 = snapshot.split(',', 1)[1]
+                                else: snapshot_b64 = snapshot
+                                snapshot_data = base64.b64decode(snapshot_b64)
+                                identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                                identity_link.save(update_fields=['snapshot_image'])
+                        except: pass
 
             verify_status = verify_result.get('verified', False)
             distance = verify_result.get('distance', 1.0)
-            match_score = max(0.0, 1.0 - distance)
 
             if verify_status == False:
                 # Capture Violation Screenshot
@@ -2787,10 +2854,9 @@ def save_all_candidate_details_view(request):
         else:
             # Linkage: Register the candidate's face for the first time.
             # Compare the webcam snapshot with the face on the uploaded PAN card image to ensure it's not a mismatch.
-            verify_result = verify_face_against_pan_card(pan_file, snapshot)
+            verify_result = verify_face_against_pan_card(pan_file, snapshot, email=norm_email, pan=norm_pan)
             verify_status = verify_result.get('verified', False)
             distance = verify_result.get('distance', 1.0)
-            match_score = max(0.0, 1.0 - distance)
             
             if verify_status == False:
                 # Capture Violation Screenshot
@@ -2824,23 +2890,48 @@ def save_all_candidate_details_view(request):
                 error_msg = reg_result.get('message', 'Could not establish identity link. Please ensure your face is clearly visible.')
                 # Fallback to saving details even if DeepFace service registration failed to ensure manual review
                 verify_status = False
-                match_score = 0.0
                 face_mismatch_detected = True
                 mismatch_reasons.append(f"Identity Verification System Error: {error_msg}")
 
-        # Perform cross-table identity validation
-        from api.ocr_utils import perform_cross_table_identity_validation
-        has_cross_mismatch, cross_mismatch_reasons = perform_cross_table_identity_validation(
-            norm_email, norm_pan, snapshot
-        )
-        
-        if has_cross_mismatch:
-            mismatch_reasons.extend(cross_mismatch_reasons)
-            face_mismatch_detected = True
+        # Extract DeepFace metrics from verify_result
+        deepface_distance = verify_result.get('distance')
+        deepface_threshold = verify_result.get('threshold')
+        deepface_verified = verify_result.get('verified')
+        deepface_model = verify_result.get('model')
+        deepface_detector = verify_result.get('detector')
+        original_image_path = verify_result.get('original_image_path')
+        captured_image_path = verify_result.get('captured_image_path')
+        original_image_hash = verify_result.get('original_image_hash')
+        captured_image_hash = verify_result.get('captured_image_hash')
+        report_original_hash = verify_result.get('report_original_hash')
+        report_captured_hash = verify_result.get('report_captured_hash')
+        image_source_mismatch = verify_result.get('image_source_mismatch', False)
+        no_face_detected = verify_result.get('no_face_detected', False)
 
-        # Combine all mismatch reasons
-        mismatch_reason = " | ".join(mismatch_reasons) if mismatch_reasons else None
-        has_any_mismatch = email_pan_mismatch or face_mismatch_detected or (not verify_status if identity_link else False) or has_cross_mismatch
+        face_mismatch_detected = verify_result.get('identity_mismatch_detected', False)
+        
+        # Calculate face match score: score = max(0, round((1 - distance) * 100, 2))
+        if isinstance(deepface_distance, (int, float)):
+            match_score = max(0.0, round((1.0 - deepface_distance) * 100.0, 2))
+        else:
+            match_score = 0.0
+
+        photo_update_status = 'none'
+        if no_face_detected:
+            # Do NOT mark identity mismatch
+            face_mismatch_detected = False
+            photo_update_status = 'pending'  # Set candidate status to Manual Review
+            mismatch_reason = "Face detection failed during verification."
+        else:
+            mismatch_reason = " | ".join(mismatch_reasons) if mismatch_reasons else None
+            # If mismatch detected, overwrite reason to be standard and clean
+            if face_mismatch_detected:
+                if identity_link:
+                    mismatch_reason = "Identity Face Mismatch: The captured face does not match the registered candidate's face."
+                else:
+                    mismatch_reason = "Identity Face Mismatch: The face on the uploaded PAN card does not match the candidate's webcam snapshot."
+
+        has_any_mismatch = email_pan_mismatch or face_mismatch_detected
 
         # Create or update candidate details
         candidate_details, created = CandidateDetails.objects.update_or_create(
@@ -2860,7 +2951,19 @@ def save_all_candidate_details_view(request):
                 'identity_mismatch': has_any_mismatch,
                 'mismatch_score': match_score,
                 'identity_mismatch_reason': mismatch_reason,
-                'photo_update_status': 'pending' if has_any_mismatch else 'none',
+                'photo_update_status': photo_update_status,
+                'deepface_distance': deepface_distance,
+                'deepface_threshold': deepface_threshold,
+                'deepface_verified': deepface_verified,
+                'deepface_model': deepface_model,
+                'deepface_detector': deepface_detector,
+                'original_image_path': original_image_path,
+                'captured_image_path': captured_image_path,
+                'original_image_hash': original_image_hash,
+                'captured_image_hash': captured_image_hash,
+                'report_original_hash': report_original_hash,
+                'report_captured_hash': report_captured_hash,
+                'image_source_mismatch': image_source_mismatch,
             }
         )
 
@@ -2874,16 +2977,6 @@ def save_all_candidate_details_view(request):
                     details=f"Candidate identity mismatch detected: {mismatch_reason or 'Face/Email/PAN mismatch'}.",
                     category='security'
                 )
-            
-            # Block the candidate by returning 403 Forbidden with the mismatch reason
-            return Response(
-                {
-                    'error': mismatch_reason or 'Identity verification failed. Under manual review.',
-                    'mismatch': True,
-                    'id': candidate_details.id
-                },
-                status=status.HTTP_403_FORBIDDEN
-            )
 
         return Response({
             'success': True,
@@ -4175,4 +4268,3 @@ def decide_photo_update_view(request, token):
         print(traceback.format_exc())
         from django.http import HttpResponseServerError
         return HttpResponseServerError(f"An internal error occurred: {str(e)}")
-

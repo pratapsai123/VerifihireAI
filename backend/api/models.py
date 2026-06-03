@@ -1486,6 +1486,73 @@ class CandidateDetails(models.Model):
         null=True,
         help_text="Reason for candidate identity verification hold/mismatch"
     )
+    deepface_distance = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Cosine distance from DeepFace ArcFace verification"
+    )
+    deepface_threshold = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Cosine threshold from DeepFace ArcFace verification"
+    )
+    deepface_verified = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="DeepFace verification status"
+    )
+    deepface_model = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Model used for face verification (ArcFace)"
+    )
+    deepface_detector = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Detector backend used for face detection (RetinaFace)"
+    )
+    original_image_path = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        help_text="File path of the original registered face image"
+    )
+    captured_image_path = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        help_text="File path of the captured webcam snapshot"
+    )
+    original_image_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the original registered image"
+    )
+    captured_image_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the captured webcam snapshot"
+    )
+    report_original_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the original image displayed in the report"
+    )
+    report_captured_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the captured image displayed in the report"
+    )
+    image_source_mismatch = models.BooleanField(
+        default=False,
+        help_text="True if any compared image hash differs from report image hash"
+    )
     photo_update_approved = models.BooleanField(
         default=False,
         help_text="True if recruiter manually approved this identity mismatch"
