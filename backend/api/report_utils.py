@@ -3507,6 +3507,11 @@ def generate_candidate_report(submission_id):
     # ════════════════════════════════════════════════════════════════════════
     try:
         integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
+        # Filter out identity verification/mismatch screenshots as they are already displayed in the main Identity section
+        integrity_screenshots = [
+            snap for snap in integrity_screenshots 
+            if 'identity' not in str(snap.event_type).lower() and 'mismatch' not in str(snap.event_type).lower()
+        ]
 
         if integrity_screenshots:
 
