@@ -1263,13 +1263,18 @@ const AiInterviewSession = () => {
 
         // CRITICAL: Mark interview as completed on the server with retry logic
         // This MUST succeed, otherwise the candidate stays stuck in 'Interview' status forever
+        // Also send the full chat transcript so it's always saved on the server
         const statusUrl = `${API_BASE_URL}/ai-candidates/public/${token}/status/`;
+        const completionPayload = {
+            status: 'Completed',
+            chat_history: chatHistoryRef.current  // Full conversation transcript
+        };
         let statusUpdated = false;
         for (let attempt = 0; attempt < 3 && !statusUpdated; attempt++) {
             try {
-                await axios.patch(statusUrl, { status: 'Completed' });
+                await axios.patch(statusUrl, completionPayload);
                 statusUpdated = true;
-                console.log('✅ Interview status updated to Completed on server');
+                console.log('✅ Interview status updated to Completed on server (with full transcript)');
             } catch (err) {
                 console.error(`Status update attempt ${attempt + 1} failed:`, err.message);
                 if (attempt < 2) await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
@@ -1278,9 +1283,9 @@ const AiInterviewSession = () => {
         // Last resort: use sendBeacon which survives page unloads
         if (!statusUpdated && navigator.sendBeacon) {
             try {
-                const blob = new Blob([JSON.stringify({ status: 'Completed' })], { type: 'application/json' });
+                const blob = new Blob([JSON.stringify(completionPayload)], { type: 'application/json' });
                 navigator.sendBeacon(statusUrl, blob);
-                console.log('📡 Sent completion status via sendBeacon fallback');
+                console.log('📡 Sent completion status via sendBeacon fallback (with full transcript)');
             } catch (e) {
                 console.error('sendBeacon also failed:', e);
             }

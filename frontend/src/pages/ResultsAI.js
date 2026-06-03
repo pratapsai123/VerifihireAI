@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
@@ -295,7 +295,7 @@ const ResultsAI = () => {
                     // For aicand_ records, technical assessment data is provided by separate 'ai_' prefixed records.
                     // We only create an assessment entry here if we have explicit MCQ/Coding data that isn't from the interview.
                     const hasAssessment = r.is_fully_automatic && (r.mcq_score > 0 || r.coding_score > 0);
-                    const hasInterview = r.is_ai_interview || r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected'].includes(r.status);
+                    const hasInterview = r.is_ai_interview || r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'].includes(r.status);
 
                     // ALWAYS add resume entry if we have resume data
                     if (hasResume) {
@@ -341,14 +341,14 @@ const ResultsAI = () => {
                             submission_id: `${sid}_interview`,
                             score: r.score || 0,
                             interview_summary: r.interview_summary,
-                            status: ['Completed', 'Hired', 'Interview Passed'].includes(r.status) ? 'Completed' : 'Interviewing'
+                            status: ['Completed', 'Hired', 'Interview Passed', 'Rejected', 'On-Hold'].includes(r.status) ? r.status : 'Interviewing'
                         });
                     }
 
                     // If no stages detected but has a status, put in appropriate bucket
                     if (!hasResume && !hasAssessment && !hasInterview) {
                         const resumeStatuses = ['Resume Passed', 'Resume Failed', 'Extraction Failed'];
-                        const interviewStatuses = ['Interview Passed', 'Interview Failed', 'Completed'];
+                        const interviewStatuses = ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'];
 
                         if (resumeStatuses.includes(r.status)) {
                             resResults.push({ ...r, _type: 'resume', submission_id: `${sid}_resume` });
@@ -1108,19 +1108,53 @@ const ResultsAI = () => {
 
                         <div className="transcript-timeline">
                             {(!data.interview_summary || data.interview_summary.length === 0) ? (
-                                <div style={{ textAlign: 'center', color: '#A3AED0', padding: '3rem' }}>
-                                    <i className="fa-solid fa-microphone-slash" style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}></i>
-                                    <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
-                                </div>
+                                (data.full_conversation && data.full_conversation.length > 0) ? (
+                                    <div className="raw-transcript">
+                                        <div style={{ padding: '1rem', background: '#FEF3C7', color: '#92400E', borderRadius: '8px', marginBottom: '2rem', fontSize: '0.9rem', fontWeight: '600' }}>
+                                            <i className="fa-solid fa-circle-info" style={{ marginRight: '8px' }}></i>
+                                            Candidate exited before completing any scored answers. Showing raw chat history below:
+                                        </div>
+                                        {data.full_conversation.map((msg, i) => (
+                                            <div key={i} className="timeline-turn" style={{ borderLeft: msg.sender === 'ai' ? '3px solid #8B5CF6' : '3px solid #10B981', opacity: 0.9 }}>
+                                                <div className="ai-prompt" style={{ marginBottom: 0 }}>
+                                                    <div className="ai-icon" style={{ background: msg.sender === 'ai' ? '#ede9fe' : '#d1fae5', color: msg.sender === 'ai' ? '#8B5CF6' : '#10B981' }}>
+                                                        <i className={`fa-solid ${msg.sender === 'ai' ? 'fa-robot' : 'fa-user'}`}></i>
+                                                    </div>
+                                                    <div className="ai-text">
+                                                        <span className="ai-label">{msg.sender === 'ai' ? 'Indu (AI Interviewer)' : 'Candidate'}</span>
+                                                        <p className="ai-question" style={{ fontWeight: msg.sender === 'user' ? '400' : '600', color: msg.sender === 'user' ? '#475569' : '#1e293b' }}>
+                                                            {msg.text || msg.content || <span style={{ fontStyle: 'italic', opacity: 0.5 }}>[Silent/Skipped]</span>}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div style={{ textAlign: 'center', color: '#A3AED0', padding: '3rem' }}>
+                                        <i className="fa-solid fa-microphone-slash" style={{ fontSize: '3rem', marginBottom: '1rem', opacity: 0.5 }}></i>
+                                        <p style={{ fontWeight: '700', fontSize: '1.1rem' }}>No conversational data recorded.</p>
+                                    </div>
+                                )
                             ) : (
                                 data.interview_summary.map((turn, i) => (
-                                    <div key={i} className="timeline-turn">
-                                        <div className="marks-badge" style={{
-                                            background: (turn.score || turn.marks) >= 7 ? '#ecfdf5' : (turn.score || turn.marks) >= 4 ? '#fffbeb' : '#fff1f2',
-                                            color: (turn.score || turn.marks) >= 7 ? '#059669' : (turn.score || turn.marks) >= 4 ? '#b45309' : '#e11d48'
-                                        }}>
-                                            {(turn.score || turn.marks)}/10 Points
-                                        </div>
+                                    <div key={i} className="timeline-turn" style={turn.is_clarification ? { opacity: 0.85, borderLeft: '3px solid #60a5fa' } : {}}>
+                                        {turn.is_clarification ? (
+                                            <div className="marks-badge" style={{
+                                                background: '#eff6ff',
+                                                color: '#2563eb'
+                                            }}>
+                                                <i className="fa-solid fa-rotate-right" style={{ marginRight: '4px', fontSize: '0.7rem' }}></i>
+                                                Clarification
+                                            </div>
+                                        ) : (
+                                            <div className="marks-badge" style={{
+                                                background: (turn.score || turn.marks) >= 7 ? '#ecfdf5' : (turn.score || turn.marks) >= 4 ? '#fffbeb' : '#fff1f2',
+                                                color: (turn.score || turn.marks) >= 7 ? '#059669' : (turn.score || turn.marks) >= 4 ? '#b45309' : '#e11d48'
+                                            }}>
+                                                {(turn.score || turn.marks)}/10 Points
+                                            </div>
+                                        )}
 
                                         <div className="ai-prompt">
                                             <div className="ai-icon">
@@ -1133,15 +1167,15 @@ const ResultsAI = () => {
                                         </div>
 
                                         <div className="candidate-block">
-                                            <span className="candidate-label">Candidate Response</span>
+                                            <span className="candidate-label">{turn.is_clarification ? 'Candidate Request' : 'Candidate Response'}</span>
                                             <p className="candidate-answer">
                                                 {turn.answer || <span style={{ fontStyle: 'italic', opacity: 0.5 }}>[Candidate remained silent/skipped]</span>}
                                             </p>
                                         </div>
 
                                         {(turn.reason || turn.justification) && (
-                                            <div style={{ marginTop: '1.5rem', padding: '1rem 1.5rem', background: '#F1F5F9', borderRadius: '12px', borderLeft: '4px solid #4F46E5', fontSize: '0.9rem' }}>
-                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: '#4F46E5', textTransform: 'uppercase', marginBottom: '0.3rem' }}>AI Feedback</div>
+                                            <div style={{ marginTop: '1.5rem', padding: '1rem 1.5rem', background: turn.is_clarification ? '#EFF6FF' : '#F1F5F9', borderRadius: '12px', borderLeft: `4px solid ${turn.is_clarification ? '#3b82f6' : '#4F46E5'}`, fontSize: '0.9rem' }}>
+                                                <div style={{ fontSize: '0.75rem', fontWeight: '800', color: turn.is_clarification ? '#3b82f6' : '#4F46E5', textTransform: 'uppercase', marginBottom: '0.3rem' }}>{turn.is_clarification ? 'Note' : 'AI Feedback'}</div>
                                                 <p style={{ margin: 0, color: '#475569', fontWeight: '600', lineHeight: 1.5 }}>{turn.reason || turn.justification}</p>
                                             </div>
                                         )}

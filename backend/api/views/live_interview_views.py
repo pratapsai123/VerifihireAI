@@ -1018,6 +1018,11 @@ def submit_interview_feedback(request):
         if participant:
             feedback_obj.participant_name = participant.name
             feedback_obj.participant_email = participant.email
+        elif role == 'interviewer':
+            if not feedback_obj.participant_name and invitation.interviewer_name:
+                feedback_obj.participant_name = invitation.interviewer_name
+            if not feedback_obj.participant_email and invitation.interviewer_email:
+                feedback_obj.participant_email = invitation.interviewer_email
 
         feedback_obj.save()
 
