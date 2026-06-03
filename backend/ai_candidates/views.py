@@ -2216,43 +2216,7 @@ class CandidateRegistrationUpdateView(APIView):
         try:
             candidate = Candidate.objects.get(public_token=public_token)
 
-            # Perform cross-table identity validation check
-            req_pan = request.data.get('pan_number')
-            clean_pan = req_pan.upper().strip() if req_pan else (candidate.pan_number or "")
-            snapshot_b64_payload = (
-                request.data.get('snapshot_b64')
-                or request.data.get('new_face_photo_b64')
-                or request.data.get('original_face_photo_b64')
-            )
-            
-            from api.ocr_utils import perform_cross_table_identity_validation
-            has_cross_mismatch, cross_mismatch_reasons = perform_cross_table_identity_validation(
-                candidate.email, clean_pan, snapshot_b64_payload
-            )
-            
-            if has_cross_mismatch:
-                mismatch_reason = " | ".join(cross_mismatch_reasons)
-                candidate.status = 'On-Hold'
-                candidate.identity_mismatch_detected = True
-                
-                clean_b64 = snapshot_b64_payload
-                if clean_b64:
-                    if ',' in clean_b64 and clean_b64.startswith('data:'):
-                        clean_b64 = clean_b64.split(',', 1)[1]
-                    candidate.registered_face_b64 = clean_b64
-                    candidate.pending_face_b64 = clean_b64
-                    
-                candidate.identity_mismatch_details = {
-                    'mismatch_at': timezone.now().isoformat(),
-                    'reason': mismatch_reason,
-                    'type': 'cross_table_mismatch'
-                }
-                candidate.save()
-                logger.warning(f"AI Interview registration mismatch blocked for {candidate.email}: {mismatch_reason}")
-                return Response(
-                    {"error": f"Identity verification failed: {mismatch_reason}"},
-                    status=status.HTTP_403_FORBIDDEN
-                )
+
 
             phone = request.data.get('phone')
             if phone:

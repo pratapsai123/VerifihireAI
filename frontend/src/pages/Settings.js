@@ -87,8 +87,6 @@ const Settings = () => {
     const [faceLoading, setFaceLoading] = useState(false);
     const [faceReviewPopup, setFaceReviewPopup] = useState(null); // { req }
     const [faceAdminNote, setFaceAdminNote] = useState('');
-    const [faceRejectMode, setFaceRejectMode] = useState(false);
-    const [faceRejectReason, setFaceRejectReason] = useState('');
     const [faceApprovedChoice, setFaceApprovedChoice] = useState(true);
     const [integrityApprovedChoice, setIntegrityApprovedChoice] = useState(true);
 
@@ -172,8 +170,6 @@ const Settings = () => {
             });
             setMessage(`Review request submitted successfully.`);
             setFaceReviewPopup(null);
-            setFaceRejectMode(false);
-            setFaceRejectReason('');
             setFaceAdminNote('');
             loadFaceRequests();
             setTimeout(() => setMessage(''), 3000);
@@ -682,12 +678,10 @@ const Settings = () => {
                                                 )}
                                             </td>
                                             <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
-                                                {req.status === 'pending' && isCompanyAdmin ? (
+                                                {req.status === 'pending' && (isCompanyAdmin || user?.role === 'hr' || user?.role === 'hr_manager') ? (
                                                     <button
                                                         onClick={() => { 
                                                             setFaceReviewPopup({ req }); 
-                                                            setFaceRejectMode(false); 
-                                                            setFaceRejectReason(''); 
                                                             setFaceAdminNote('');
                                                             setFaceApprovedChoice(true);
                                                             setIntegrityApprovedChoice(true);
@@ -697,7 +691,7 @@ const Settings = () => {
                                                         🔍 Review & Decide
                                                     </button>
                                                 ) : req.status === 'pending' ? (
-                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting admin</span>
+                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting review</span>
                                                 ) : (
                                                     <span style={{ color: '#9ca3af' }}>—</span>
                                                 )}
@@ -718,7 +712,7 @@ const Settings = () => {
                                 <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827' }}>
                                     🔍 {faceReviewPopup.req.integrity_flagged ? "Review Identity Mismatch & Proctoring Integrity" : "Review Face Mismatch Request"}
                                 </h3>
-                                <button onClick={() => { setFaceReviewPopup(null); setFaceRejectMode(false); setFaceRejectReason(''); setFaceAdminNote(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                                <button onClick={() => { setFaceReviewPopup(null); setFaceAdminNote(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
                             </div>
 
                             <div style={{ background: '#f9fafb', borderRadius: '12px', padding: '16px', marginBottom: '20px', border: '1px solid #e5e7eb' }}>

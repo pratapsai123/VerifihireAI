@@ -178,25 +178,10 @@ class EnhancedPanValidationView(APIView):
         return result
 
     def _detect_face_in_image(self, image_file):
-        """Detect face in image using OpenCV."""
+        """Detect face in image using RetinaFace via api.ocr_utils."""
         try:
-            if isinstance(image_file, bytes):
-                nparr = np.frombuffer(image_file, np.uint8)
-                img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            else:
-                image_file.seek(0)
-                nparr = np.frombuffer(image_file.read(), np.uint8)
-                img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-            
-            if img is None:
-                return False, 0
-            
-            # Use OpenCV face detection
-            face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray, 1.1, 4)
-            
-            return len(faces) > 0, len(faces)
+            from api.ocr_utils import detect_face_in_image
+            return detect_face_in_image(image_file)
         except Exception as e:
             logger.warning(f"Face detection failed: {str(e)}")
             return True, 1  # Allow if detection fails

@@ -137,55 +137,448 @@ def extract_text_from_image(image_file, target_pan=None, rotations=[0, 180, 90, 
         log(f"Image OCR Failed: {e}")
         return f"OCR Failed: {str(e)}", False
 
-def detect_face_in_image(image_file):
+def calculate_sha256(image_input):
     """
-    Detects human face in the given image file.
-    Accepts file path, bytes, or PIL Image.
-    Returns (bool, int) -> (is_face_detected, face_count)
+    Calculates SHA256 hash of an image.
+    Accepts file path, bytes, base64 string, or Django File field.
     """
-    import cv2
-    import numpy as np
+    import hashlib
+    import base64
+    import os
+    
+    if not image_input:
+        return None
+        
+    try:
+        # If it's a Django file field with a path
+        if hasattr(image_input, 'path') and os.path.exists(image_input.path):
+            with open(image_input.path, 'rb') as f:
+                return hashlib.sha256(f.read()).hexdigest()
+                
+        # If it's a file field/bytes-like that we can read
+        if hasattr(image_input, 'read'):
+            try:
+                image_input.seek(0)
+                data = image_input.read()
+                image_input.seek(0)
+                return hashlib.sha256(data).hexdigest()
+            except Exception:
+                pass
+                
+        # If it's a file path
+        if isinstance(image_input, str) and os.path.exists(image_input):
+            with open(image_input, 'rb') as f:
+                return hashlib.sha256(f.read()).hexdigest()
+                
+        # If it's a base64 string
+        if isinstance(image_input, str) and (image_input.startswith("data:image") or len(image_input) > 200):
+            clean_b64 = image_input
+            if ',' in clean_b64:
+                clean_b64 = clean_b64.split(',', 1)[1]
+            # remove formatting
+            clean_b64 = clean_b64.replace('\n', '').replace('\r', '').replace(' ', '')
+            padding = 4 - len(clean_b64) % 4
+            if padding != 4:
+                clean_b64 += '=' * padding
+            try:
+                data = base64.b64decode(clean_b64)
+                return hashlib.sha256(data).hexdigest()
+            except Exception:
+                pass
+                
+        # Fallback to string encoding if it's some other string path that doesn't exist
+        if isinstance(image_input, str):
+            from django.conf import settings
+            full_path = os.path.join(settings.MEDIA_ROOT, image_input.lstrip('/'))
+            if os.path.exists(full_path):
+                with open(full_path, 'rb') as f:
+                    return hashlib.sha256(f.read()).hexdigest()
+                    
+    except Exception as e:
+        print(f"Error calculating SHA256: {e}")
+        
+    return None
+
+
+def write_audit_log(candidate_id, email, pan, img1_path, img2_path, img1_hash, img2_hash, face_details, verify_res, final_decision):
+    """
+    Appends verification details to backend/face_verification_audit.log
+    """
+    import os
+    import json
+    from datetime import datetime
+    from django.conf import settings
+    
+    log_path = os.path.join(settings.BASE_DIR, 'face_verification_audit.log')
+    
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "candidate_id": candidate_id,
+        "email": email,
+        "pan": pan,
+        "original_path": img1_path,
+        "captured_path": img2_path,
+        "original_hash": img1_hash,
+        "captured_hash": img2_hash,
+        "face_detection_details": face_details,
+        "verification_result": {
+            "verified": verify_res.get("verified"),
+            "distance": verify_res.get("distance"),
+            "threshold": verify_res.get("threshold"),
+            "model": verify_res.get("model"),
+            "detector": verify_res.get("detector"),
+            "no_face_detected": verify_res.get("no_face_detected"),
+            "image_source_mismatch": verify_res.get("image_source_mismatch"),
+            "report_original_hash": verify_res.get("report_original_hash"),
+            "report_captured_hash": verify_res.get("report_captured_hash"),
+        },
+        "final_decision": final_decision
+    }
+    
+    try:
+        with open(log_path, 'a') as f:
+            f.write(json.dumps(log_entry) + '\n')
+    except Exception as e:
+        print(f"Error writing face verification audit log: {e}")
+
+
+def run_standard_deepface_verification(
+    img1_path,
+    img2_path,
+    candidate_id=None,
+    email=None,
+    pan=None
+):
+    """
+    Standardized DeepFace verification pipeline using ArcFace and RetinaFace.
+    """
+    import os
+    import time
+    import shutil
+    import hashlib
+    from datetime import datetime
+    from django.conf import settings
+    from deepface import DeepFace
     from PIL import Image
-    import io
+
+    start_time = time.time()
+    
+    # 1. Pre-verification Image Validation
+    img1_exists = os.path.exists(img1_path) if img1_path else False
+    img2_exists = os.path.exists(img2_path) if img2_path else False
+    
+    print(f"[DeepFace Verification] Candidate ID: {candidate_id}, Email: {email}, PAN: {pan}")
+    print(f"[DeepFace Verification] Original Path: {img1_path} (Exists: {img1_exists})")
+    print(f"[DeepFace Verification] Captured Path: {img2_path} (Exists: {img2_exists})")
+
+    # Generate SHA256 hashes
+    original_image_hash = calculate_sha256(img1_path)
+    captured_image_hash = calculate_sha256(img2_path)
+
+    # Resolve report images and calculate report hashes
+    report_original_hash = None
+    report_captured_hash = None
+    image_source_mismatch = False
 
     try:
+        from api.models import CandidateDetails, IdentityLink
+        import re
+        
+        detail = None
+        if candidate_id:
+            detail = CandidateDetails.objects.filter(id=candidate_id).first()
+        if not detail and email:
+            detail = CandidateDetails.objects.filter(email=email).first()
+        if not detail and pan:
+            detail = CandidateDetails.objects.filter(pan_number=pan).first()
+            
+        if detail:
+            # Check photo update approved status
+            photo_approved = getattr(detail, 'photo_update_approved', False)
+            snap_sources = []
+            if photo_approved:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', detail.pan_number.strip().upper())
+                link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                if not link and detail.email:
+                    link = IdentityLink.objects.filter(email__iexact=detail.email.strip()).first()
+                if link and link.snapshot_image:
+                    snap_sources.append(link.snapshot_image)
+            if detail.snapshot:
+                snap_sources.append(detail.snapshot)
+                
+            if snap_sources:
+                report_original_hash = calculate_sha256(snap_sources[0])
+            report_captured_hash = captured_image_hash # Normally reports render the webcam snapshot
+    except Exception as e:
+        print(f"Error resolving report hashes: {e}")
+
+    if report_original_hash is None:
+        report_original_hash = original_image_hash
+    if report_captured_hash is None:
+        report_captured_hash = captured_image_hash
+
+    image_source_mismatch = (original_image_hash != report_original_hash) or (captured_image_hash != report_captured_hash)
+
+    # Get image widths, heights, sizes, and timestamps
+    def get_img_meta(path):
+        if not path or not os.path.exists(path):
+            return 0, 0, 0, None
+        try:
+            with Image.open(path) as img:
+                w, h = img.size
+            size = os.path.getsize(path)
+            mtime = datetime.fromtimestamp(os.path.getmtime(path)).isoformat()
+            return w, h, size, mtime
+        except Exception:
+            return 0, 0, 0, None
+
+    img1_w, img1_h, img1_size, img1_mtime = get_img_meta(img1_path)
+    img2_w, img2_h, img2_size, img2_mtime = get_img_meta(img2_path)
+
+    # Save copies of images being compared to media/debug_face_verification/
+    debug_dir = os.path.join(settings.MEDIA_ROOT, 'debug_face_verification')
+    os.makedirs(debug_dir, exist_ok=True)
+    c_id = candidate_id if candidate_id else "unknown"
+    
+    debug_orig_path = os.path.join(debug_dir, f"candidate_{c_id}_original.jpg")
+    debug_cap_path = os.path.join(debug_dir, f"candidate_{c_id}_captured.jpg")
+    
+    if img1_exists:
+        try:
+            shutil.copy(img1_path, debug_orig_path)
+        except Exception as e:
+            print(f"Error copying original debug image: {e}")
+            
+    if img2_exists:
+        try:
+            shutil.copy(img2_path, debug_cap_path)
+        except Exception as e:
+            print(f"Error copying captured debug image: {e}")
+
+    # Check file exists status
+    if not img1_exists or not img2_exists:
+        print("[DeepFace Verification] File missing. Setting to Manual Review.")
+        result = {
+            "verified": False,
+            "distance": None,
+            "threshold": 0.68, # Default ArcFace cosine threshold is 0.68
+            "model": "ArcFace",
+            "detector": "retinaface",
+            "no_face_detected": True,
+            "identity_mismatch_detected": False,
+            "status": "Manual Review",
+            "reason": "Missing comparison image files.",
+            "original_image_path": img1_path,
+            "captured_image_path": img2_path,
+            "original_image_hash": original_image_hash,
+            "captured_image_hash": captured_image_hash,
+            "report_original_hash": report_original_hash,
+            "report_captured_hash": report_captured_hash,
+            "image_source_mismatch": image_source_mismatch
+        }
+        write_audit_log(candidate_id, email, pan, img1_path, img2_path, original_image_hash, captured_image_hash, "File Missing", result, "Manual Review")
+        return result
+
+    # Phase 2: Face Detection
+    faces_detected = True
+    face_detection_details = []
+    
+    # Check img1 face detection
+    try:
+        objs1 = DeepFace.extract_faces(
+            img_path=img1_path,
+            detector_backend="retinaface",
+            enforce_detection=True
+        )
+        face_detection_details.append({
+            "image": "original",
+            "count": len(objs1),
+            "bbox": objs1[0]["facial_area"],
+            "confidence": objs1[0]["confidence"],
+            "status": "success"
+        })
+    except Exception as e:
+        faces_detected = False
+        face_detection_details.append({
+            "image": "original",
+            "count": 0,
+            "bbox": {},
+            "confidence": 0.0,
+            "status": f"failed: {str(e)}"
+        })
+
+    # Check img2 face detection
+    try:
+        objs2 = DeepFace.extract_faces(
+            img_path=img2_path,
+            detector_backend="retinaface",
+            enforce_detection=True
+        )
+        face_detection_details.append({
+            "image": "captured",
+            "count": len(objs2),
+            "bbox": objs2[0]["facial_area"],
+            "confidence": objs2[0]["confidence"],
+            "status": "success"
+        })
+    except Exception as e:
+        faces_detected = False
+        face_detection_details.append({
+            "image": "captured",
+            "count": 0,
+            "bbox": {},
+            "confidence": 0.0,
+            "status": f"failed: {str(e)}"
+        })
+
+    if not faces_detected:
+        print("[DeepFace Verification] Face extraction failed. Setting to Manual Review.")
+        result = {
+            "verified": False,
+            "distance": None,
+            "threshold": 0.68,
+            "model": "ArcFace",
+            "detector": "retinaface",
+            "no_face_detected": True,
+            "identity_mismatch_detected": False,
+            "status": "Manual Review",
+            "reason": "Face detection failed during verification.",
+            "original_image_path": img1_path,
+            "captured_image_path": img2_path,
+            "original_image_hash": original_image_hash,
+            "captured_image_hash": captured_image_hash,
+            "report_original_hash": report_original_hash,
+            "report_captured_hash": report_captured_hash,
+            "image_source_mismatch": image_source_mismatch
+        }
+        write_audit_log(candidate_id, email, pan, img1_path, img2_path, original_image_hash, captured_image_hash, face_detection_details, result, "Manual Review")
+        return result
+
+    # Phase 3 & 4: DeepFace Verification (ArcFace, RetinaFace)
+    try:
+        verify_res = DeepFace.verify(
+            img1_path=img1_path,
+            img2_path=img2_path,
+            model_name="ArcFace",
+            detector_backend="retinaface",
+            align=True,
+            enforce_detection=True
+        )
+        
+        verified = verify_res.get("verified", False)
+        distance = verify_res.get("distance", 1.0)
+        threshold = verify_res.get("threshold", 0.68)
+        
+        execution_time = time.time() - start_time
+        print(f"[DeepFace Verification] Done in {execution_time:.2f}s. Verified: {verified}, Distance: {distance:.4f}, Threshold: {threshold}")
+        
+        # Phase 5: Decision Logic
+        identity_mismatch_detected = False
+        if distance > threshold and not verified:
+            identity_mismatch_detected = True
+
+        result = {
+            "verified": verified,
+            "distance": distance,
+            "threshold": threshold,
+            "model": "ArcFace",
+            "detector": "retinaface",
+            "no_face_detected": False,
+            "identity_mismatch_detected": identity_mismatch_detected,
+            "status": "Identity Face Mismatch" if identity_mismatch_detected else "Verified",
+            "original_image_path": img1_path,
+            "captured_image_path": img2_path,
+            "original_image_hash": original_image_hash,
+            "captured_image_hash": captured_image_hash,
+            "report_original_hash": report_original_hash,
+            "report_captured_hash": report_captured_hash,
+            "image_source_mismatch": image_source_mismatch,
+            "execution_time": execution_time
+        }
+        write_audit_log(candidate_id, email, pan, img1_path, img2_path, original_image_hash, captured_image_hash, face_detection_details, result, "Identity Mismatch" if identity_mismatch_detected else "Success")
+        return result
+
+    except Exception as e:
+        print(f"[DeepFace Verification] Verification exception: {e}")
+        result = {
+            "verified": False,
+            "distance": None,
+            "threshold": 0.68,
+            "model": "ArcFace",
+            "detector": "retinaface",
+            "no_face_detected": False,
+            "identity_mismatch_detected": False,
+            "status": "Manual Review",
+            "reason": f"Verification system exception: {str(e)}",
+            "original_image_path": img1_path,
+            "captured_image_path": img2_path,
+            "original_image_hash": original_image_hash,
+            "captured_image_hash": captured_image_hash,
+            "report_original_hash": report_original_hash,
+            "report_captured_hash": report_captured_hash,
+            "image_source_mismatch": image_source_mismatch
+        }
+        write_audit_log(candidate_id, email, pan, img1_path, img2_path, original_image_hash, captured_image_hash, "Exception", result, "Manual Review")
+        return result
+
+
+def detect_face_in_image(image_file):
+    """
+    Detects human face in the given image file using RetinaFace.
+    Returns (bool, int) -> (is_face_detected, face_count)
+    """
+    import os
+    import uuid
+    import base64
+    from django.conf import settings
+    from PIL import Image
+    import io
+    from deepface import DeepFace
+
+    temp_path = None
+    try:
+        # Setup temp path
+        temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
+        os.makedirs(temp_dir, exist_ok=True)
+        temp_path = os.path.join(temp_dir, f"detect_{uuid.uuid4().hex}.jpg")
+
+        # Save image_file to temp_path
         if isinstance(image_file, (bytes, bytearray)):
-            image = Image.open(io.BytesIO(image_file))
-        elif isinstance(image_file, Image.Image):
-            image = image_file
+            with open(temp_path, 'wb') as f:
+                f.write(image_file)
+        elif isinstance(image_file, str) and os.path.exists(image_file):
+            temp_path = image_file
         elif hasattr(image_file, 'temporary_file_path'):
-            image = Image.open(image_file.temporary_file_path())
+            import shutil
+            shutil.copy(image_file.temporary_file_path(), temp_path)
         elif hasattr(image_file, 'read'):
             image_file.seek(0)
-            image = Image.open(io.BytesIO(image_file.read()))
+            data = image_file.read()
             image_file.seek(0)
+            with open(temp_path, 'wb') as f:
+                f.write(data)
         else:
-            image = Image.open(image_file)
+            # Assume it's a PIL Image or similar
+            image_file.save(temp_path)
 
-        # Convert to BGR for OpenCV
-        if image.mode != "RGB":
-            image = image.convert("RGB")
-        image_np = np.array(image)
-        image_bgr = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
-        gray = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2GRAY)
-
-        # Load Haar Cascade
-        face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
-        
-        # Detect faces
-        faces = face_cascade.detectMultiScale(
-            gray,
-            scaleFactor=1.1,
-            minNeighbors=5,
-            minSize=(50, 50) # Increased minSize to ensure face is clear
+        # Run DeepFace face extraction
+        objs = DeepFace.extract_faces(
+            img_path=temp_path,
+            detector_backend="retinaface",
+            enforce_detection=True
         )
-
-        if len(faces) > 0:
-            return True, len(faces)
-        return False, 0
+        return len(objs) > 0, len(objs)
     except Exception as e:
-        print(f"Face Detection Error: {e}")
+        # DeepFace raises ValueError when no face is detected
+        print(f"RetinaFace Face Detection: No face detected or error: {e}")
         return False, 0
+    finally:
+        # Cleanup temp file if created
+        if temp_path and temp_path != image_file and os.path.exists(temp_path):
+            try:
+                os.remove(temp_path)
+            except Exception:
+                pass
 
 def register_face_with_deepface(person_id, image_data):
     """
@@ -237,53 +630,52 @@ def register_face_with_deepface(person_id, image_data):
         print(f"Internal DeepFace Registration Error: {e}")
         return {"success": False, "message": str(e)}
 
-def verify_face_with_deepface(person_id, snapshot_base64):
+def verify_face_with_deepface(person_id, snapshot_base64, candidate_id=None, email=None):
     """
     Verifies a snapshot against a registered identity DIRECTLY in the backend.
     """
     try:
-        from deepface import DeepFace
         from django.conf import settings
+        from api.models import CandidateDetails
         
         # Reference image path
         ref_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
-        if not os.path.exists(ref_path):
-            return {"verified": False, "message": "No registered identity found for this person."}
-
-        # Current snapshot
-        if ',' in snapshot_base64:
-            snapshot_base64 = snapshot_base64.split(',', 1)[1]
-        
-        snapshot_bytes = base64.b64decode(snapshot_base64)
         
         # Save temp snapshot for DeepFace
         temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
         os.makedirs(temp_dir, exist_ok=True)
         temp_snap_path = os.path.join(temp_dir, f"snap_{person_id}.jpg")
+        
+        if ',' in snapshot_base64:
+            snapshot_base64 = snapshot_base64.split(',', 1)[1]
+        
+        snapshot_bytes = base64.b64decode(snapshot_base64)
         with open(temp_snap_path, "wb") as f:
             f.write(snapshot_bytes)
-
-        # Verification using ArcFace (High accuracy)
-        result = DeepFace.verify(
-            img1_path = ref_path,
-            img2_path = temp_snap_path,
-            model_name = "ArcFace",
-            detector_backend = "retinaface",
-            enforce_detection = False,
-            align = True
+            
+        # Find candidate details for metadata if not passed
+        if not candidate_id or not email:
+            detail = CandidateDetails.objects.filter(pan_number=person_id).order_by('-id').first()
+            if detail:
+                if not candidate_id: candidate_id = detail.id
+                if not email: email = detail.email
+                
+        result = run_standard_deepface_verification(
+            img1_path=ref_path,
+            img2_path=temp_snap_path,
+            candidate_id=candidate_id,
+            email=email,
+            pan=person_id
         )
         
         # Cleanup temp file
         if os.path.exists(temp_snap_path):
-            os.remove(temp_snap_path)
-
-        return {
-            "verified": result["verified"],
-            "distance": result["distance"],
-            "threshold": result["threshold"],
-            "model": result["model"],
-            "detector": result["detector_backend"]
-        }
+            try:
+                os.remove(temp_snap_path)
+            except Exception:
+                pass
+                
+        return result
     except Exception as e:
         print(f"Internal DeepFace Verification Error: {e}")
         return {"verified": False, "message": str(e)}
@@ -652,30 +1044,29 @@ def extract_text_from_docx_ocr(file_content):
         return ""
 
 
-def verify_face_against_pan_card(pan_image_file, snapshot_base64):
+def verify_face_against_pan_card(pan_image_file, snapshot_base64, candidate_id=None, email=None, pan=None):
     """
     Compares the face in the webcam snapshot with the face in the uploaded PAN card image.
     """
     temp_pan_path = None
     temp_snap_path = None
     try:
-        from deepface import DeepFace
         from django.conf import settings
         import uuid
         import os
         import base64
-        import shutil
-
+        
         # Setup directory for temp files
         temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
         os.makedirs(temp_dir, exist_ok=True)
         unique_id = uuid.uuid4().hex
-
+        
         temp_pan_path = os.path.join(temp_dir, f"pan_{unique_id}.jpg")
         temp_snap_path = os.path.join(temp_dir, f"snap_{unique_id}.jpg")
-
+        
         # Process PAN card image
         if hasattr(pan_image_file, 'temporary_file_path'):
+            import shutil
             shutil.copy(pan_image_file.temporary_file_path(), temp_pan_path)
         elif hasattr(pan_image_file, 'read'):
             pan_image_file.seek(0)
@@ -688,30 +1079,24 @@ def verify_face_against_pan_card(pan_image_file, snapshot_base64):
                 with open(temp_pan_path, "wb") as f:
                     f.write(pan_image_file)
             else:
+                import shutil
                 shutil.copy(pan_image_file, temp_pan_path)
-
+                
         # Process webcam snapshot
         if ',' in snapshot_base64:
             snapshot_base64 = snapshot_base64.split(',', 1)[1]
         snapshot_bytes = base64.b64decode(snapshot_base64)
         with open(temp_snap_path, "wb") as f:
             f.write(snapshot_bytes)
-
-        # Compare faces using ArcFace and RetinaFace
-        result = DeepFace.verify(
-            img1_path = temp_pan_path,
-            img2_path = temp_snap_path,
-            model_name = "ArcFace",
-            detector_backend = "retinaface",
-            enforce_detection = False,
-            align = True
+            
+        result = run_standard_deepface_verification(
+            img1_path=temp_pan_path,
+            img2_path=temp_snap_path,
+            candidate_id=candidate_id,
+            email=email,
+            pan=pan
         )
-
-        return {
-            "verified": result.get("verified", False),
-            "distance": result.get("distance", 1.0),
-            "threshold": result.get("threshold", 0.6)
-        }
+        return result
     except Exception as e:
         print(f"Error in verify_face_against_pan_card: {e}")
         return {"verified": False, "message": str(e)}
@@ -725,14 +1110,13 @@ def verify_face_against_pan_card(pan_image_file, snapshot_base64):
                     print(f"Failed to remove temp face file {path}: {ex}")
 
 
-def verify_two_faces_with_deepface(img1_data, img2_data):
+def verify_two_faces_with_deepface(img1_data, img2_data, candidate_id=None, email=None, pan=None):
     """
     Compares two faces using local DeepFace.
     """
     temp_files = []
     
     def get_local_path(img_input, prefix):
-        from django.core.files.base import File
         from django.conf import settings
         import base64
         import uuid
@@ -781,8 +1165,6 @@ def verify_two_faces_with_deepface(img1_data, img2_data):
                 
         return None
 
-    temp_path1 = None
-    temp_path2 = None
     try:
         temp_path1 = get_local_path(img1_data, "face1")
         temp_path2 = get_local_path(img2_data, "face2")
@@ -790,57 +1172,14 @@ def verify_two_faces_with_deepface(img1_data, img2_data):
         if not temp_path1 or not temp_path2:
             return {"verified": False, "message": "Failed to resolve one or both face images."}
             
-        # Security & Test bypass: check if faces are detected in both
-        has_face1, _ = detect_face_in_image(temp_path1)
-        has_face2, _ = detect_face_in_image(temp_path2)
-        
-        if not has_face1 or not has_face2:
-            # If neither image contains a face, check if the images are identical (for test cases / dummy images)
-            if not has_face1 and not has_face2:
-                import hashlib
-                def get_file_hash(filepath):
-                    hasher = hashlib.md5()
-                    with open(filepath, 'rb') as f:
-                        buf = f.read()
-                        hasher.update(buf)
-                    return hasher.hexdigest()
-                
-                # Check pixel structure or file hashes
-                h1 = get_file_hash(temp_path1)
-                h2 = get_file_hash(temp_path2)
-                if h1 == h2:
-                    return {"verified": True, "distance": 0.0, "threshold": 0.6}
-                else:
-                    # Compare pixel structure to allow for identical layouts
-                    import cv2
-                    im1 = cv2.imread(temp_path1)
-                    im2 = cv2.imread(temp_path2)
-                    if im1 is not None and im2 is not None and im1.shape == im2.shape:
-                        difference = cv2.subtract(im1, im2)
-                        b, g, r = cv2.split(difference)
-                        if cv2.countNonZero(b) == 0 and cv2.countNonZero(g) == 0 and cv2.countNonZero(r) == 0:
-                            return {"verified": True, "distance": 0.0, "threshold": 0.6}
-                    return {"verified": False, "distance": 1.0, "threshold": 0.6, "message": "Neither image contains a face, and they are not identical."}
-            else:
-                # One contains a face and the other does not
-                return {"verified": False, "distance": 1.0, "threshold": 0.6, "message": "Face mismatch: face detected in only one of the images."}
-        
-        # If both contain faces, perform standard DeepFace verification
-        from deepface import DeepFace
-        result = DeepFace.verify(
-            img1_path = temp_path1,
-            img2_path = temp_path2,
-            model_name = "ArcFace",
-            detector_backend = "retinaface",
-            enforce_detection = False,
-            align = True
+        result = run_standard_deepface_verification(
+            img1_path=temp_path1,
+            img2_path=temp_path2,
+            candidate_id=candidate_id,
+            email=email,
+            pan=pan
         )
-        
-        return {
-            "verified": result.get("verified", False),
-            "distance": result.get("distance", 1.0),
-            "threshold": result.get("threshold", 0.6)
-        }
+        return result
     except Exception as e:
         print(f"Error in verify_two_faces_with_deepface: {e}")
         return {"verified": False, "message": str(e)}
@@ -851,97 +1190,3 @@ def verify_two_faces_with_deepface(img1_data, img2_data):
                     os.remove(path)
                 except Exception as ex:
                     print(f"Failed to remove temp file {path}: {ex}")
-
-
-def perform_cross_table_identity_validation(email, submitted_pan, submitted_snapshot):
-    """
-    Two-step identity verification:
-    Step 1 - Cross-Table Validation (Database records check)
-      - Compare PAN and face data stored in CandidateInvitation (Table 1), CandidateDetails (Table 2), and IdentityLink (Table 3).
-      - If they differ, raise mismatch immediately and return.
-    Step 2 - Candidate Submission Validation
-      - If Step 1 passes, verify the submitted PAN and webcam snapshot against the verified DB baseline.
-    """
-    from api.models import CandidateInvitation, CandidateDetails, IdentityLink
-    
-    has_mismatch = False
-    mismatch_reasons = []
-    
-    if not email:
-        return False, []
-        
-    email_clean = email.strip().lower()
-    
-    # Helper to normalize PAN
-    def normalize_pan(pan):
-        if not pan:
-            return ""
-        clean = re.sub(r'[^A-Z0-9]', '', pan.strip().upper())
-        if len(clean) == 10:
-            clean = normalize_pan_format(clean)
-        return clean
-
-    norm_submitted_pan = normalize_pan(submitted_pan)
-    
-    # Fetch records
-    invitation_records = CandidateInvitation.objects.filter(email__iexact=email_clean)
-    details_records = CandidateDetails.objects.filter(email__iexact=email_clean)
-    identity_records = IdentityLink.objects.filter(email__iexact=email_clean)
-    
-    # ── STEP 1: CROSS-TABLE DATABASE VERIFICATION ───────────────────────────
-    # Gather stored PANs
-    invitation_pans = {normalize_pan(r.pan_number) for r in invitation_records if r.pan_number}
-    details_pans = {normalize_pan(r.pan_number) for r in details_records if r.pan_number}
-    identity_pans = {normalize_pan(r.pan_number) for r in identity_records if r.pan_number}
-    
-    all_stored_pans = invitation_pans.union(details_pans).union(identity_pans)
-    
-    # Gather stored faces
-    # Table 2: oldest CandidateDetails snapshot
-    oldest_details = details_records.order_by('id').first()
-    table2_face = oldest_details.snapshot if oldest_details else None
-    
-    # Table 3: IdentityLink snapshot_image
-    identity_link = identity_records.first()
-    table3_face = identity_link.snapshot_image if identity_link else None
-    
-    # Check stored PAN consistency
-    if len(all_stored_pans) > 1:
-        has_mismatch = True
-        mismatch_reasons.append("PAN Number Mismatch Across Verification Sources.")
-        mismatch_reasons.append("Cross-Table Identity Data Conflict Detected.")
-        
-    # Check stored face consistency (Table 2 oldest vs Table 3 canonical)
-    if table2_face and table3_face:
-        res = verify_two_faces_with_deepface(table2_face, table3_face)
-        if not res.get("verified", False):
-            has_mismatch = True
-            mismatch_reasons.append("Candidate Face Mismatch Across Verification Sources.")
-            mismatch_reasons.append("Cross-Table Identity Data Conflict Detected.")
-            
-    # If Step 1 fails, return immediately to prevent Step 2 validation
-    if has_mismatch:
-        return True, mismatch_reasons
-        
-    # ── STEP 2: CANDIDATE SUBMISSION VERIFICATION ───────────────────────────
-    # Determine verified baseline from database
-    verified_pan = next(iter(all_stored_pans)) if all_stored_pans else ""
-    verified_face = table3_face if table3_face else table2_face
-    
-    # Verify submitted PAN
-    if verified_pan and norm_submitted_pan:
-        if verified_pan != norm_submitted_pan:
-            has_mismatch = True
-            mismatch_reasons.append("Submitted PAN Does Not Match Verified Identity.")
-            
-    # Verify submitted face/webcam snapshot
-    if verified_face and submitted_snapshot:
-        res = verify_two_faces_with_deepface(submitted_snapshot, verified_face)
-        if not res.get("verified", False):
-            has_mismatch = True
-            mismatch_reasons.append("Current Face Does Not Match Verified Identity.")
-            
-    return has_mismatch, mismatch_reasons
-
-
-
