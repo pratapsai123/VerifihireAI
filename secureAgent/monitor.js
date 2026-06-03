@@ -28,6 +28,8 @@ const SCAN_INTERVAL_AFTER_VIOLATION_MS = 2500;
 let knownLogOnlyMap = new Map();
 // Map<instanceId, {name, class}> of blocked USB/high-risk devices logged during this exam
 let knownBlockedUsbMap = new Map();
+// Set of blocked app labels already logged this session (prevents duplicate entries per app)
+let knownViolationAppsSet = new Set();
 
 async function refreshSignatures() {
   if (!current?.backendApiBase) return;
@@ -140,6 +142,26 @@ async function _doScan() {
           user_id: current.userId,
         });
         pendingViolation = null; // Success, clear buffer
+
+        // Log the app-open event so recruiters can see which apps were opened and when.
+        // Only log each distinct blocked app once per exam session (de-duplicate).
+        if (current.token) {
+          const newApps = allApps.filter(a => !knownViolationAppsSet.has(a));
+          if (newApps.length > 0) {
+            newApps.forEach(a => knownViolationAppsSet.add(a));
+            try {
+              await logActivity(
+                current.backendApiBase,
+                current.token,
+                'App Opened (Blocked)',
+                `Blocked app detected: ${newApps.join(', ')}${
+                  violationData.process_name ? ` (process: ${violationData.process_name})` : ''
+                }`,
+              );
+            } catch { /* non-fatal */ }
+          }
+        }
+
         if (response?.action === 'STOP') {
           stopMonitor();
           console.log(ts(), '[monitor] STOP action received — agent will self-destruct');
@@ -318,6 +340,7 @@ async function startMonitor({ token, sessionId, userId, backendApiBase }) {
   isScanning = false;
   knownLogOnlyMap = new Map();
   knownBlockedUsbMap = new Map();
+  knownViolationAppsSet = new Set();
   // Baseline at exam start — devices already connected before the exam are not logged.
   await initBaseline();
   await refreshSignatures();
@@ -345,6 +368,7 @@ function stopMonitor() {
   failedHeartbeats = 0;
   knownLogOnlyMap = new Map();
   knownBlockedUsbMap = new Map();
+  knownViolationAppsSet = new Set();
 }
 
 function getMonitorState() {
