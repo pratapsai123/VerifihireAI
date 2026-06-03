@@ -372,7 +372,7 @@ class BulkInviteView(APIView):
 
                 )
 
-                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
 
                 link = f"{frontend_base}/interview-start/{candidate.public_token}"
 
@@ -1749,6 +1749,11 @@ class CandidatePublicStatusUpdateView(APIView):
             # Refresh from DB to get the latest score (in case last ProcessAnswer is still saving)
             candidate.refresh_from_db()
 
+            # Save the full conversation transcript if provided by the frontend
+            chat_history = request.data.get('chat_history')
+            if chat_history and isinstance(chat_history, list):
+                candidate.full_conversation = chat_history
+
 
 
             # Calculate final score percentage — always against full 14 questions (140 points max)
@@ -1762,7 +1767,7 @@ class CandidatePublicStatusUpdateView(APIView):
 
             # Determine pass/fail based on threshold
             # New logic: No penalty on raw score. On-Hold if passed but integrity < 75%
-            threshold = candidate.interview_pass_threshold or 50
+            threshold = candidate.interview_pass_threshold if candidate.interview_pass_threshold is not None else 50
             INTEGRITY_THRESHOLD = 75.0
 
             if score_percentage >= threshold and integrity_score >= INTEGRITY_THRESHOLD:
@@ -2929,7 +2934,8 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             # -----------------------------------------------
 
             # Scoring Update (Silent)
-            if candidate and data.get('score') is not None and not data.get('is_clarification'):
+            is_clarification = data.get('is_clarification', False)
+            if candidate and data.get('score') is not None and not is_clarification:
                  try:
                     # Update score atomically to prevent race conditions
                     q_score = int(data.get('score', 0))
@@ -3012,6 +3018,34 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                  except Exception as save_err:
                     logger.exception(
                         f"[InterviewSummary] FAILED to save turn for candidate "
+                        f"{getattr(candidate, 'id', '?')}: {save_err}"
+                    )
+
+            # Also save clarification turns to interview_summary (score=0, no scoring impact)
+            # so the transcript always shows what happened, even if the candidate only asked
+            # for repeats/clarifications before exiting.
+            elif candidate and is_clarification:
+                try:
+                    candidate.refresh_from_db()
+                    if not isinstance(candidate.interview_summary, list):
+                        candidate.interview_summary = []
+
+                    candidate.interview_summary.append({
+                        "question": current_question,
+                        "answer": answer,
+                        "feedback": data.get('feedback', ''),
+                        "score": 0,
+                        "reason": "Clarification request — not scored.",
+                        "is_clarification": True
+                    })
+                    candidate.save(update_fields=['interview_summary'])
+                    logger.info(
+                        f"[InterviewSummary] Saved clarification turn for candidate {candidate.id}: "
+                        f"q='{current_question[:60]}...' answer='{answer[:60]}...'"
+                    )
+                except Exception as save_err:
+                    logger.exception(
+                        f"[InterviewSummary] FAILED to save clarification turn for candidate "
                         f"{getattr(candidate, 'id', '?')}: {save_err}"
                     )
 
@@ -3944,7 +3978,7 @@ class ResendInviteView(APIView):
 
         try:
             from django.core.mail import send_mail
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
             link = f"{frontend_base}/interview-start/{candidate.public_token}"
             name = candidate.full_name or 'Candidate'
             email = candidate.email

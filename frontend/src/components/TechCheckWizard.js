@@ -206,8 +206,8 @@ const TechCheckWizard = ({ onComplete }) => {
     };
 
     const styles = {
-        overlay: { position: 'fixed', inset: 0, background: 'rgba(255, 255, 255, 0.98)', zIndex: 35000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' },
-        card: { maxWidth: '600px', width: '100%', background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', textAlign: 'center' },
+        overlay: { position: 'fixed', inset: 0, background: 'rgba(255, 255, 255, 0.98)', zIndex: 35000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', overflowY: 'auto' },
+        card: { maxWidth: '600px', width: '100%', background: 'white', padding: '2.5rem', borderRadius: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.1)', textAlign: 'center', margin: 'auto', maxHeight: '100%', overflowY: 'auto' },
         title: { fontSize: '1.8rem', color: '#1a202c', marginBottom: '1rem', fontWeight: '800' },
         button: { background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer', marginTop: '2rem', transition: 'all 0.2s', boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)' },
         buttonDisabled: { background: '#cbd5e1', cursor: 'not-allowed', color: 'white', border: 'none', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.1rem', fontWeight: '700', marginTop: '2rem' },

@@ -165,8 +165,9 @@ function LiveInterviewInterviewer() {
       }, { withCredentials: true }).catch(() => { });
     } catch (e) { console.warn('Failed to persist total time on end:', e); }
 
-    setShowInterviewReport(true);
-  }, [sessionKey, timer, sessionId, stableSendMessage, stopWebRTC]);
+    // Redirect to the new dedicated Feedback Page
+    navigate(`/feedback-page?session=${encodeURIComponent(sessionId)}&candidate=${encodeURIComponent(candidateName)}&interviewer=${encodeURIComponent(interviewerName)}&time=${encodeURIComponent(timer)}`);
+  }, [sessionKey, timer, sessionId, stableSendMessage, stopWebRTC, navigate, candidateName, interviewerName]);
 
   // Message Handler
   const handleMessage = useCallback(async (data) => {
@@ -577,7 +578,10 @@ function LiveInterviewInterviewer() {
           <div className="session-expired-icon">✓</div>
           <h3 className="session-expired-title">Session Completed</h3>
           <p className="session-expired-message">This interview session has already been completed.</p>
-          <button className="btn-close-window" onClick={() => navigate('/live-interview-list')}>Close</button>
+          <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '20px' }}>
+            <button className="btn-close-window" style={{ background: '#3b82f6', color: 'white', border: 'none', padding: '10px 20px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => navigate(`/feedback-page?session=${encodeURIComponent(sessionId)}&candidate=${encodeURIComponent(candidateName)}&interviewer=${encodeURIComponent(interviewerName)}&time=${encodeURIComponent(timer)}`)}>Provide Feedback</button>
+            <button className="btn-close-window" style={{ background: '#e2e8f0', color: '#1e293b', border: 'none', padding: '10px 20px', borderRadius: '4px', cursor: 'pointer' }} onClick={() => navigate('/live-interview-list')}>Back to Dashboard</button>
+          </div>
         </div>
       </div>
     );

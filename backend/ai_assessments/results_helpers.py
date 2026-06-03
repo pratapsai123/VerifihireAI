@@ -348,6 +348,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'is_resume_screening': True,
                 'delete_requested': f"Candidate_{s.id}" in active_deletions,
                 'interview_summary': s.interview_summary,
+                'full_conversation': s.full_conversation,
                 'total_questions': getattr(s, 'total_questions', 0),
                 'resume_score': getattr(s, 'resume_score', 0),
                 'is_fully_automatic': s.automation_settings.get('is_fully_automatic', False) if isinstance(s.automation_settings, dict) else False,

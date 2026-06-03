@@ -86,6 +86,7 @@ class Candidate(models.Model):
     interview_summary = models.JSONField(default=list, blank=True, help_text="Stores per-question AI feedback and scores")
     interview_questions = models.JSONField(default=list, blank=True, help_text="The set of questions generated for this candidate")
     conversation_memory = models.JSONField(default=dict, blank=True, help_text="Structured facts extracted from conversation (skills, projects, intro details) for efficient context")
+    full_conversation = models.JSONField(default=list, blank=True, help_text="Complete chat transcript (all AI and candidate messages, including clarifications and unanswered questions)")
     automation_settings = models.JSONField(default=dict, blank=True, help_text="Stores difficulty, duration, and question counts for the automated pipeline")
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True, help_text="Internal UUID for the bulk session")
     batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True, help_text="Descriptive name (JD_date_time)")
