@@ -70,3 +70,6 @@ secureAgent/dist/
 # admin-build
 admin-build/assets/
 certbot/conf
+
+backend/scratch/
+media/temp/dist_check/
