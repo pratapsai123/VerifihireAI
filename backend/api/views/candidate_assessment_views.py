@@ -1117,7 +1117,7 @@ def update_standard_integrity_view(request, token):
         integrity, _ = CandidateIntegrity.objects.get_or_create(invitation=inv)
 
         penalty = 0
-        if event_type == 'tab_switch':
+        if event_type in ['tab_switch', 'window_switch', 'window_blur']:
             integrity.tab_switches += 1
             # 1st switch = 5% penalty, 2nd switch = +20% penalty (75% total)
             if integrity.tab_switches == 1:
