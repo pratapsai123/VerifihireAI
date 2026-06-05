@@ -1,9 +1,20 @@
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-
+import '../styles/MainHeader.css';
 function MainHeader() {
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
+
+  const [isFeaturesHovered, setIsFeaturesHovered] = useState(false);
+  const [isFeaturesClicked, setIsFeaturesClicked] = useState(false);
+
+  const handleFeaturesMouseEnter = () => setIsFeaturesHovered(true);
+  const handleFeaturesMouseLeave = () => setIsFeaturesHovered(false);
+  const handleFeaturesClick = () => setIsFeaturesClicked(true);
+  const handleFeaturesDoubleClick = () => setIsFeaturesClicked(false);
+
+  const showFeaturesMenu = isFeaturesHovered || isFeaturesClicked;
 
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
@@ -42,7 +53,7 @@ function MainHeader() {
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        padding: '12px 2%',
+        padding: '4px 2%',
         width: '100%',
         margin: '0 auto',
         boxSizing: 'border-box',
@@ -52,7 +63,7 @@ function MainHeader() {
           type="button"
           onClick={goHome}
           style={{
-            fontSize: '1.35rem',
+            fontSize: '1.15rem',
             fontWeight: 800,
             color: '#FFFFFF',
             letterSpacing: '-0.03em',
@@ -66,37 +77,37 @@ function MainHeader() {
           Verifi<span style={{ color: '#3B82F6' }}>HireAI</span>
         </button>
 
-        {/* Center: Navigation Links removed */}
+        {/* Center: Features Dropdown */}
+        <div className="main-header-nav-center">
+          <div 
+            className={`features-dropdown-container ${showFeaturesMenu ? 'active' : ''}`}
+            onMouseEnter={handleFeaturesMouseEnter}
+            onMouseLeave={handleFeaturesMouseLeave}
+            onClick={handleFeaturesClick}
+            onDoubleClick={handleFeaturesDoubleClick}
+          >
+            <span className="features-label-btn">Features</span>
+            <div className={`features-menu ${showFeaturesMenu ? 'show' : ''}`}>
+              <Link to="/features/ai-assessments" className="feature-menu-item feature-ai">
+                AI Assessments & AI Interview
+              </Link>
+              <Link to="/features/live-interview" className="feature-menu-item feature-live">
+                Live Interview
+              </Link>
+              <Link to="/features/customized-assessment" className="feature-menu-item feature-custom">
+                Customized Assessment
+              </Link>
+              <Link to="/features/coding-assessment" className="feature-menu-item feature-coding">
+                Coding Assessment
+              </Link>
+            </div>
+          </div>
+        </div>
 
         {/* Right: Login Button */}
         <Link
           to="/login"
-          style={{
-            background: 'linear-gradient(135deg, #2563EB 0%, #1E40AF 100%)',
-            color: '#ffffff',
-            fontWeight: 600,
-            padding: '12px 32px',
-            borderRadius: '100px',
-            boxShadow: '0 8px 20px rgba(37, 99, 235, 0.2)',
-            transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-            display: 'inline-block',
-            cursor: 'pointer',
-            border: 'none',
-            textDecoration: 'none',
-            fontSize: '0.86rem',
-            textTransform: 'uppercase',
-            letterSpacing: '0.05em',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.transform = 'translateY(-2px)';
-            e.currentTarget.style.boxShadow = '0 12px 25px rgba(37, 99, 235, 0.35)';
-            e.currentTarget.style.filter = 'brightness(1.1)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.transform = 'translateY(0)';
-            e.currentTarget.style.boxShadow = '0 8px 20px rgba(37, 99, 235, 0.2)';
-            e.currentTarget.style.filter = 'brightness(1)';
-          }}
+          className="login-btn-custom"
         >
           Login
         </Link>

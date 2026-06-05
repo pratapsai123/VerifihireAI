@@ -1,0 +1,803 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
+
+  :root {
+    --brand-dark: #0a0f1e;
+    --brand-mid: #111827;
+    --brand-accent: #3b82f6;
+    --brand-glow: #60a5fa;
+    --brand-green: #10b981;
+    --brand-purple: #8b5cf6;
+    --brand-amber: #f59e0b;
+    --text-primary: #f1f5f9;
+    --text-muted: #94a3b8;
+    --text-faint: #475569;
+    --border-subtle: rgba(148,163,184,0.12);
+    --border-mid: rgba(148,163,184,0.22);
+    --card-bg: rgba(255,255,255,0.04);
+    --card-hover: rgba(255,255,255,0.07);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  .li-page {
+    font-family: 'DM Sans', sans-serif;
+    background: #0a0f1e;
+    color: var(--text-primary);
+    overflow-x: hidden;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .li-page h1, .li-page h2, .li-page h3, .li-page .display {
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ── NAV ── */
+  .li-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: rgba(10,15,30,0.9);
+    position: sticky; top: 0; z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+  .li-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800; font-size: 18px;
+    color: var(--text-primary); letter-spacing: -0.5px;
+  }
+  .li-logo span { color: var(--brand-accent); }
+  .li-nav-links {
+    display: flex; gap: 24px; list-style: none;
+  }
+  .li-nav-links a {
+    color: var(--text-muted); text-decoration: none;
+    font-size: 14px; font-weight: 400;
+    transition: color 0.2s;
+  }
+  .li-nav-links a:hover { color: var(--text-primary); }
+  .li-nav-cta {
+    display: flex; gap: 10px; align-items: center;
+  }
+  .btn-ghost {
+    padding: 8px 18px; border-radius: 8px;
+    background: transparent;
+    border: 1px solid var(--border-mid);
+    color: var(--text-primary); font-size: 14px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: var(--card-hover); border-color: var(--brand-accent); }
+  .btn-primary {
+    padding: 8px 18px; border-radius: 8px;
+    background: var(--brand-accent);
+    border: 1px solid var(--brand-accent);
+    color: #fff; font-size: 14px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-weight: 500; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--brand-glow); }
+
+  /* ── HERO ── */
+  .li-hero {
+    position: relative;
+    padding: 80px 32px 60px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+  .li-hero::before {
+    content: '';
+    position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(59,130,246,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid rgba(59,130,246,0.35);
+    background: rgba(59,130,246,0.08);
+    border-radius: 100px;
+    padding: 6px 14px; font-size: 12px;
+    color: var(--brand-glow); letter-spacing: 0.5px;
+    margin-bottom: 28px; font-weight: 500;
+  }
+  .hero-badge-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--brand-green);
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .li-hero h1 {
+    font-size: 54px; font-weight: 800; line-height: 1.08;
+    letter-spacing: -2px; max-width: 720px;
+    margin-bottom: 20px;
+  }
+  .li-hero h1 .grad {
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #34d399 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .li-hero p {
+    color: var(--text-muted); font-size: 17px;
+    max-width: 540px; margin-bottom: 36px; font-weight: 300;
+  }
+  .hero-cta {
+    display: flex; gap: 12px; justify-content: center;
+    flex-wrap: wrap; margin-bottom: 60px;
+  }
+  .btn-hero-primary {
+    padding: 13px 28px; border-radius: 10px;
+    background: var(--brand-accent); border: none;
+    color: #fff; font-size: 15px; font-weight: 500;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-hero-primary:hover { background: var(--brand-glow); transform: translateY(-1px); }
+  .btn-hero-ghost {
+    padding: 13px 28px; border-radius: 10px;
+    background: transparent; border: 1px solid var(--border-mid);
+    color: var(--text-primary); font-size: 15px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-hero-ghost:hover { border-color: var(--brand-accent); color: var(--brand-glow); }
+
+  /* ── MOCKUP ── */
+  .interview-mockup {
+    width: 100%; max-width: 680px;
+    background: #111827;
+    border: 1px solid var(--border-mid);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 auto;
+  }
+  .mockup-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px;
+    background: #0d1320;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .mockup-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot-r { background: #ef4444; }
+  .dot-y { background: #f59e0b; }
+  .dot-g { background: #22c55e; }
+  .mockup-title {
+    font-size: 12px; color: var(--text-muted);
+    font-family: 'Syne', sans-serif; font-weight: 600;
+  }
+  .rec-badge {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 11px; color: #ef4444; font-weight: 500;
+  }
+  .rec-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #ef4444;
+    animation: pulse-dot 1.5s infinite;
+  }
+  .mockup-body {
+    display: grid; grid-template-columns: 1fr 1fr 200px;
+    gap: 10px; padding: 12px;
+  }
+  .vid-feed {
+    border-radius: 10px; overflow: hidden;
+    position: relative; aspect-ratio: 4/3;
+  }
+  .vid-main {
+    background: linear-gradient(145deg, #1e3a5f 0%, #0d2847 100%);
+    border: 1px solid rgba(59,130,246,0.3);
+  }
+  .vid-candidate {
+    background: linear-gradient(145deg, #1a2e1a 0%, #0d200d 100%);
+    border: 1px solid rgba(16,185,129,0.3);
+  }
+  .vid-label {
+    position: absolute; bottom: 8px; left: 10px;
+    font-size: 11px; color: #fff;
+    background: rgba(0,0,0,0.6); border-radius: 5px;
+    padding: 2px 7px; font-weight: 500;
+  }
+  .vid-status {
+    position: absolute; top: 8px; right: 8px;
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .vid-status-live { background: #10b981; animation: pulse-dot 2s infinite; }
+  .vid-avatar {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 42px; height: 42px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 700; font-family: 'Syne', sans-serif;
+  }
+  .av-blue { background: rgba(59,130,246,0.3); color: #93c5fd; border: 1px solid rgba(59,130,246,0.4); }
+  .av-green { background: rgba(16,185,129,0.3); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.4); }
+  .panel-side {
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .score-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border-subtle);
+    border-radius: 10px; padding: 10px 12px;
+    flex: 1;
+  }
+  .score-title {
+    font-size: 11px; color: var(--text-muted); margin-bottom: 8px; font-weight: 500;
+    font-family: 'Syne', sans-serif;
+  }
+  .score-item {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 6px;
+  }
+  .score-label { font-size: 10px; color: var(--text-muted); }
+  .score-bar-wrap {
+    flex: 1; height: 4px; background: rgba(255,255,255,0.08);
+    border-radius: 4px; margin: 0 8px;
+  }
+  .score-bar {
+    height: 4px; border-radius: 4px; background: var(--brand-accent);
+  }
+  .score-num { font-size: 10px; color: var(--text-primary); font-weight: 500; min-width: 16px; text-align: right; }
+  .verdict-card {
+    background: rgba(16,185,129,0.06);
+    border: 1px solid rgba(16,185,129,0.2);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .verdict-label { font-size: 10px; color: var(--brand-green); font-weight: 600; margin-bottom: 4px; }
+  .verdict-val { font-size: 18px; font-weight: 700; color: var(--brand-green); font-family: 'Syne', sans-serif; }
+  .verdict-sub { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+  .mockup-footer {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 16px; background: #0d1320;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .mockup-controls { display: flex; gap: 8px; }
+  .ctrl-btn {
+    width: 32px; height: 32px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border-mid); cursor: pointer;
+    font-size: 14px; transition: all 0.2s; background: transparent;
+    color: var(--text-muted);
+  }
+  .ctrl-btn:hover { background: var(--card-hover); color: var(--text-primary); }
+  .ctrl-btn-danger { border-color: rgba(239,68,68,0.4); color: #f87171; }
+  .ctrl-btn-danger:hover { background: rgba(239,68,68,0.12); }
+  .timer-badge {
+    font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 600;
+    color: var(--text-primary);
+  }
+  .panelists-row { display: flex; align-items: center; gap: 6px; }
+  .p-avatar {
+    width: 24px; height: 24px; border-radius: 50%;
+    font-size: 9px; font-weight: 700; font-family: 'Syne', sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid #0d1320;
+  }
+  .pa1 { background: rgba(139,92,246,0.4); color: #c4b5fd; }
+  .pa2 { background: rgba(245,158,11,0.4); color: #fde68a; }
+  .pa3 { background: rgba(236,72,153,0.4); color: #f9a8d4; }
+  .p-count { font-size: 11px; color: var(--text-muted); }
+
+  /* ── STATS ── */
+  .li-stats {
+    display: flex; justify-content: center; gap: 0;
+    border-top: 1px solid var(--border-subtle);
+    border-bottom: 1px solid var(--border-subtle);
+    margin: 0;
+  }
+  .stat-item {
+    flex: 1; text-align: center; padding: 28px 16px;
+    border-right: 1px solid var(--border-subtle);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 800;
+    letter-spacing: -1px; color: var(--text-primary);
+  }
+  .stat-num .accent { color: var(--brand-accent); }
+  .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  /* ── SECTIONS ── */
+  .li-section {
+    padding: 80px 32px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  .section-tag {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--brand-accent); margin-bottom: 12px;
+  }
+  .section-h2 {
+    font-size: 34px; font-weight: 800; letter-spacing: -1.5px;
+    line-height: 1.12; margin-bottom: 14px; color: var(--text-primary);
+  }
+  .section-sub {
+    color: var(--text-muted); font-size: 16px; max-width: 480px;
+    font-weight: 300; margin-bottom: 48px; line-height: 1.7;
+  }
+
+  /* ── FEATURES ── */
+  .features-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .feat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-subtle);
+    border-radius: 14px; padding: 22px;
+    transition: all 0.25s;
+    cursor: default;
+  }
+  .feat-card:hover {
+    background: var(--card-hover);
+    border-color: var(--border-mid);
+    transform: translateY(-2px);
+  }
+  .feat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 14px;
+  }
+  .feat-card h3 {
+    font-size: 15px; font-weight: 600; margin-bottom: 8px;
+    color: var(--text-primary); letter-spacing: -0.3px;
+  }
+  .feat-card p {
+    font-size: 13px; color: var(--text-muted); line-height: 1.6;
+  }
+  .fi-blue { background: rgba(59,130,246,0.15); }
+  .fi-green { background: rgba(16,185,129,0.15); }
+  .fi-purple { background: rgba(139,92,246,0.15); }
+  .fi-amber { background: rgba(245,158,11,0.15); }
+  .fi-red { background: rgba(239,68,68,0.15); }
+  .fi-teal { background: rgba(20,184,166,0.15); }
+
+  /* ── HOW IT WORKS ── */
+  .how-steps {
+    display: flex; flex-direction: column; gap: 0;
+  }
+  .how-step {
+    display: flex; gap: 20px; padding: 24px 0;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .how-step:last-child { border-bottom: none; }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 1.5px solid var(--border-mid);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 14px; color: var(--brand-accent);
+    flex-shrink: 0; margin-top: 2px;
+  }
+  .step-content h3 {
+    font-size: 15px; font-weight: 600; margin-bottom: 6px;
+    color: var(--text-primary);
+  }
+  .step-content p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+  .step-chips {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;
+  }
+  .chip {
+    font-size: 11px; padding: 3px 10px; border-radius: 100px;
+    border: 1px solid var(--border-mid); color: var(--text-muted);
+    font-weight: 500;
+  }
+  .chip-blue { border-color: rgba(59,130,246,0.3); color: #93c5fd; background: rgba(59,130,246,0.07); }
+  .chip-green { border-color: rgba(16,185,129,0.3); color: #6ee7b7; background: rgba(16,185,129,0.07); }
+  .chip-purple { border-color: rgba(139,92,246,0.3); color: #c4b5fd; background: rgba(139,92,246,0.07); }
+
+  /* ── PANELIST PANEL ── */
+  .panel-visual {
+    background: #111827; border: 1px solid var(--border-mid);
+    border-radius: 16px; overflow: hidden; margin-top: 40px;
+  }
+  .pv-header {
+    padding: 14px 18px; display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid var(--border-subtle); background: #0d1320;
+  }
+  .pv-title { font-size: 13px; font-weight: 600; color: var(--text-primary); font-family: 'Syne', sans-serif; }
+  .pv-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+  .panelist-row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 14px; border-radius: 10px;
+    background: var(--card-bg); border: 1px solid var(--border-subtle);
+    transition: all 0.2s;
+  }
+  .panelist-row:hover { background: var(--card-hover); }
+  .p-info { flex: 1; }
+  .p-name { font-size: 13px; font-weight: 500; color: var(--text-primary); }
+  .p-role { font-size: 11px; color: var(--text-muted); }
+  .p-score-badge {
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 100px; font-family: 'Syne', sans-serif;
+  }
+  .psb-green { background: rgba(16,185,129,0.12); color: #6ee7b7; border: 1px solid rgba(16,185,129,0.25); }
+  .psb-blue { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
+  .psb-amber { background: rgba(245,158,11,0.12); color: #fde68a; border: 1px solid rgba(245,158,11,0.25); }
+  .p-status-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sd-live { background: #10b981; animation: pulse-dot 2s infinite; }
+  .sd-reviewing { background: #f59e0b; }
+
+  /* ── SECURITY ── */
+  .security-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+    margin-top: 40px;
+  }
+  .sec-card {
+    background: var(--card-bg); border: 1px solid var(--border-subtle);
+    border-radius: 12px; padding: 18px; text-align: center;
+  }
+  .sec-icon { font-size: 22px; margin-bottom: 10px; }
+  .sec-label { font-size: 12px; font-weight: 600; color: var(--text-primary); margin-bottom: 5px; font-family: 'Syne', sans-serif; }
+  .sec-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* ── CTA ── */
+  .li-cta {
+    padding: 80px 32px;
+    text-align: center; position: relative; overflow: hidden;
+    border-top: 1px solid var(--border-subtle);
+  }
+  .li-cta::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(139,92,246,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .li-cta h2 {
+    font-size: 40px; font-weight: 800; letter-spacing: -1.5px;
+    margin-bottom: 16px; color: var(--text-primary);
+  }
+  .li-cta p {
+    color: var(--text-muted); font-size: 16px; max-width: 440px;
+    margin: 0 auto 36px; font-weight: 300;
+  }
+  .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-cta-primary {
+    padding: 14px 32px; border-radius: 10px;
+    background: var(--brand-accent); border: none;
+    color: #fff; font-size: 15px; font-weight: 500;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-cta-primary:hover { background: var(--brand-glow); transform: translateY(-1px); }
+  .btn-cta-outline {
+    padding: 14px 32px; border-radius: 10px;
+    background: transparent; border: 1px solid var(--border-mid);
+    color: var(--text-primary); font-size: 15px;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+  .btn-cta-outline:hover { border-color: var(--brand-purple); color: #c4b5fd; }
+  .cta-note { margin-top: 18px; font-size: 12px; color: var(--text-faint); }
+
+  /* ── FOOTER ── */
+  .li-footer {
+    padding: 20px 32px;
+    border-top: 1px solid var(--border-subtle);
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 12px; color: var(--text-faint);
+  }
+</style>
+
+<div class="li-page">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">VerifiHire AI — Live Interview feature promotional page</h2>
+
+  <!-- NAV -->
+  <nav class="li-nav">
+    <div class="li-logo">Verifi<span>Hire</span> AI</div>
+    <ul class="li-nav-links">
+      <li><a href="#">Features</a></li>
+      <li><a href="#">How it works</a></li>
+      <li><a href="#">Security</a></li>
+      <li><a href="#">Pricing</a></li>
+    </ul>
+    <div class="li-nav-cta">
+      <button class="btn-ghost">Sign in</button>
+      <button class="btn-primary">Start free</button>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="li-hero">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      100% In-House — No Third-Party Integrations
+    </div>
+    <h1>
+      Interview smarter.<br>
+      <span class="grad">Hire with confidence.</span>
+    </h1>
+    <p>Run structured, fraud-proof technical interviews — with real-time video, screen sharing, and collaborative panelists — all built from scratch, no external services required.</p>
+    <div class="hero-cta">
+      <button class="btn-hero-primary">Start Free Trial</button>
+      <button class="btn-hero-ghost">Book a Demo →</button>
+    </div>
+
+    <!-- MOCKUP -->
+    <div class="interview-mockup">
+      <div class="mockup-header">
+        <div class="mockup-dots">
+          <div class="dot dot-r"></div>
+          <div class="dot dot-y"></div>
+          <div class="dot dot-g"></div>
+        </div>
+        <div class="mockup-title">Live Interview — Interviewer View</div>
+        <div class="rec-badge"><div class="rec-dot"></div> REC</div>
+      </div>
+      <div class="mockup-body">
+        <div class="vid-feed vid-main">
+          <div class="vid-avatar av-blue">P1</div>
+          <div class="vid-label">Panelist 1 (You)</div>
+          <div class="vid-status vid-status-live"></div>
+        </div>
+        <div class="vid-feed vid-candidate">
+          <div class="vid-avatar av-green">CA</div>
+          <div class="vid-label">Candidate</div>
+          <div class="vid-status vid-status-live"></div>
+        </div>
+        <div class="panel-side">
+          <div class="score-card">
+            <div class="score-title"><i class="ti ti-clipboard-list" aria-hidden="true" style="font-size:12px;margin-right:4px;"></i>Live Scoring</div>
+            <div class="score-item">
+              <div class="score-label">Problem Solving</div>
+              <div class="score-bar-wrap"><div class="score-bar" style="width:75%"></div></div>
+              <div class="score-num">7.5</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">Data Structures</div>
+              <div class="score-bar-wrap"><div class="score-bar" style="width:80%"></div></div>
+              <div class="score-num">8.0</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">Communication</div>
+              <div class="score-bar-wrap"><div class="score-bar" style="width:90%;background:var(--brand-green)"></div></div>
+              <div class="score-num">9.0</div>
+            </div>
+            <div class="score-item">
+              <div class="score-label">System Design</div>
+              <div class="score-bar-wrap"><div class="score-bar" style="width:65%;background:#a78bfa"></div></div>
+              <div class="score-num">6.5</div>
+            </div>
+          </div>
+          <div class="verdict-card">
+            <div class="verdict-label">⭐ Panel Avg</div>
+            <div class="verdict-val">7.8<span style="font-size:13px;color:var(--text-muted)">/10</span></div>
+            <div class="verdict-sub">3 of 3 panelists rated</div>
+          </div>
+        </div>
+      </div>
+      <div class="mockup-footer">
+        <div class="mockup-controls">
+          <div class="ctrl-btn"><i class="ti ti-microphone" aria-hidden="true"></i></div>
+          <div class="ctrl-btn"><i class="ti ti-video" aria-hidden="true"></i></div>
+          <div class="ctrl-btn"><i class="ti ti-screen-share" aria-hidden="true"></i></div>
+          <div class="ctrl-btn ctrl-btn-danger"><i class="ti ti-phone-off" aria-hidden="true"></i></div>
+        </div>
+        <div class="timer-badge">⏱ 42:17</div>
+        <div class="panelists-row">
+          <div class="p-avatar pa1">P1</div>
+          <div class="p-avatar pa2">P2</div>
+          <div class="p-avatar pa3">P3</div>
+          <div class="p-count">+ Candidate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="li-stats">
+    <div class="stat-item">
+      <div class="stat-num"><span class="accent">3</span> + 1</div>
+      <div class="stat-label">Panelists + candidate per session</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">100<span class="accent">%</span></div>
+      <div class="stat-label">In-house, no third-party services</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span class="accent">0</span>ms</div>
+      <div class="stat-label">External API dependency</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num"><span class="accent">∞</span></div>
+      <div class="stat-label">Unique interview links generated</div>
+    </div>
+  </div>
+
+  <!-- FEATURES -->
+  <section class="li-section">
+    <div class="section-tag">Capabilities</div>
+    <h2 class="section-h2">Everything you need,<br>nothing you don't.</h2>
+    <p class="section-sub">Purpose-built for technical hiring — every feature was engineered in-house to give you full control over your interview pipeline.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon fi-blue"><i class="ti ti-video" aria-hidden="true" style="color:#60a5fa"></i></div>
+        <h3>WebRTC Video & Audio</h3>
+        <p>Low-latency, peer-to-peer video built entirely in-house. Crystal-clear communication without routing through external servers.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-green"><i class="ti ti-screen-share" aria-hidden="true" style="color:#34d399"></i></div>
+        <h3>Native Screen Sharing</h3>
+        <p>Candidates can share their screen to present code or slides directly — no plugins, no downloads, no friction.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-purple"><i class="ti ti-users" aria-hidden="true" style="color:#a78bfa"></i></div>
+        <h3>Up to 3 Panelists</h3>
+        <p>Invite multiple interviewers into a single session. Each panelist gets their own independent scoring view without interfering with others.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-amber"><i class="ti ti-link" aria-hidden="true" style="color:#fbbf24"></i></div>
+        <h3>Unique Interview Links</h3>
+        <p>Generate a secure, one-time link for each interview. Share it with panelists and the candidate — access is strictly controlled.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-red"><i class="ti ti-shield-lock" aria-hidden="true" style="color:#f87171"></i></div>
+        <h3>Anti-Fraud Detection</h3>
+        <p>Tab-switch detection, shortcut disabling, and proxy detection built in. Know with confidence the candidate is working independently.</p>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon fi-teal"><i class="ti ti-clipboard-check" aria-hidden="true" style="color:#2dd4bf"></i></div>
+        <h3>In-Session Evaluation</h3>
+        <p>Score on Problem Solving, Data Structures, Communication, and more — inline, without leaving the interview room.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="li-section" style="padding-top:0">
+    <div class="section-tag">How it works</div>
+    <h2 class="section-h2">From invite to decision<br>in one platform.</h2>
+    <p class="section-sub">No scheduling tools, no external video apps, no spreadsheets. The entire interview lifecycle lives here.</p>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Generate a unique interview link</h3>
+          <p>Create a session in seconds. The platform generates a one-time secure link that ties the candidate and panelists to that specific interview slot — no account required for candidates to join.</p>
+          <div class="step-chips">
+            <div class="chip chip-blue">One-click setup</div>
+            <div class="chip chip-blue">Unique per session</div>
+          </div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>Panelists join — up to 3 at once</h3>
+          <p>Send separate panelist links to each interviewer. All three can join simultaneously alongside the candidate, see live video feeds, and collaborate without stepping on each other.</p>
+          <div class="step-chips">
+            <div class="chip chip-purple">3 panelists max</div>
+            <div class="chip chip-purple">Independent sessions</div>
+            <div class="chip chip-purple">Real-time sync</div>
+          </div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Conduct the interview with full tools</h3>
+          <p>Run a live WebRTC session with video, audio, and screen share. Anti-fraud monitoring runs passively in the background — tab switches and suspicious behaviour are flagged automatically.</p>
+          <div class="step-chips">
+            <div class="chip chip-blue">WebRTC video</div>
+            <div class="chip chip-blue">Screen share</div>
+            <div class="chip chip-blue">Fraud detection active</div>
+          </div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3>Each panelist submits independent feedback</h3>
+          <p>After the session, every panelist rates the candidate on defined rubric dimensions. Scores are aggregated into a combined panel average, giving hiring managers a clear, bias-reduced signal.</p>
+          <div class="step-chips">
+            <div class="chip chip-green">Per-panelist scoring</div>
+            <div class="chip chip-green">Averaged verdict</div>
+            <div class="chip chip-green">Select or reject</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANELISTS VISUAL -->
+  <section class="li-section" style="padding-top:0">
+    <div class="section-tag">Collaborative Panels</div>
+    <h2 class="section-h2">Three voices,<br>one decision.</h2>
+    <p class="section-sub">Each panelist scores independently — then the platform surfaces the aggregated verdict so hiring never comes down to a single opinion.</p>
+    <div class="panel-visual">
+      <div class="pv-header">
+        <div class="pv-title"><i class="ti ti-users" aria-hidden="true" style="font-size:13px;margin-right:6px;"></i>Panel Feedback — Frontend Engineer Round</div>
+        <div style="font-size:11px;color:var(--text-muted)">Session #VH-2847</div>
+      </div>
+      <div class="pv-body">
+        <div class="panelist-row">
+          <div class="p-avatar pa1" style="width:34px;height:34px;font-size:11px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(139,92,246,0.3);color:#c4b5fd;border:1.5px solid rgba(139,92,246,0.4);">RK</div>
+          <div class="p-info">
+            <div class="p-name">Ravi Kumar</div>
+            <div class="p-role">Senior Engineer · Technical Round</div>
+          </div>
+          <div class="p-status-dot sd-reviewing"></div>
+          <div class="p-score-badge psb-green">8.2 / 10</div>
+        </div>
+        <div class="panelist-row">
+          <div class="p-avatar pa2" style="width:34px;height:34px;font-size:11px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(245,158,11,0.3);color:#fde68a;border:1.5px solid rgba(245,158,11,0.4);">PS</div>
+          <div class="p-info">
+            <div class="p-name">Priya Sharma</div>
+            <div class="p-role">Engineering Manager · Culture Fit</div>
+          </div>
+          <div class="p-status-dot sd-live"></div>
+          <div class="p-score-badge psb-blue">7.5 / 10</div>
+        </div>
+        <div class="panelist-row">
+          <div class="p-avatar pa3" style="width:34px;height:34px;font-size:11px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(236,72,153,0.3);color:#f9a8d4;border:1.5px solid rgba(236,72,153,0.4);">AT</div>
+          <div class="p-info">
+            <div class="p-name">Arjun Tiwari</div>
+            <div class="p-role">Tech Lead · System Design</div>
+          </div>
+          <div class="p-status-dot sd-live"></div>
+          <div class="p-score-badge psb-amber">8.8 / 10</div>
+        </div>
+        <div style="padding:14px 16px;background:rgba(16,185,129,0.06);border:1px solid rgba(16,185,129,0.2);border-radius:10px;display:flex;align-items:center;justify-content:space-between;margin-top:4px;">
+          <div>
+            <div style="font-size:12px;color:var(--brand-green);font-weight:600;margin-bottom:3px;">Panel verdict</div>
+            <div style="font-size:22px;font-weight:800;color:var(--text-primary);font-family:'Syne',sans-serif;letter-spacing:-0.5px;">8.17 <span style="font-size:13px;color:var(--text-muted);font-weight:400;">/ 10</span></div>
+          </div>
+          <div style="text-align:right;">
+            <div style="display:inline-block;padding:6px 18px;border-radius:8px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:#34d399;font-size:13px;font-weight:600;font-family:'Syne',sans-serif;">✓ SELECTED</div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:5px;">All 3 panelists have submitted</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="li-section" style="padding-top:0">
+    <div class="section-tag">Security</div>
+    <h2 class="section-h2">Built-in integrity,<br>zero compromises.</h2>
+    <p class="section-sub">Anti-cheat runs passively throughout the session so your team can focus on evaluating talent, not policing behaviour.</p>
+    <div class="security-grid">
+      <div class="sec-card">
+        <div class="sec-icon">👁</div>
+        <div class="sec-label">Tab Switch Detection</div>
+        <div class="sec-desc">Every time the candidate leaves the interview tab, it's logged and flagged for reviewers.</div>
+      </div>
+      <div class="sec-card">
+        <div class="sec-icon">⌨</div>
+        <div class="sec-label">Shortcut Disabled</div>
+        <div class="sec-desc">Copy-paste and common keyboard shortcuts are blocked during active coding assessment.</div>
+      </div>
+      <div class="sec-card">
+        <div class="sec-icon">🛡</div>
+        <div class="sec-label">Proxy Detection</div>
+        <div class="sec-desc">Detects VPNs, proxies, and unusual network conditions that may indicate a third-party proxy interview.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="li-cta">
+    <h2>Ready to interview<br>with confidence?</h2>
+    <p>No third-party tools. No integration headaches. Just a complete, secure interview platform you own entirely.</p>
+    <div class="cta-btns">
+      <button class="btn-cta-primary">Start Free Trial</button>
+      <button class="btn-cta-outline">Book a Demo</button>
+    </div>
+    <div class="cta-note">No credit card required · Up to 3 panelists per session · Unlimited interview links</div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="li-footer">
+    <div>© 2025 VerifiHire AI — All rights reserved</div>
+    <div style="display:flex;gap:20px;">
+      <a href="#" style="color:var(--text-faint);text-decoration:none;">Privacy</a>
+      <a href="#" style="color:var(--text-faint);text-decoration:none;">Terms</a>
+      <a href="#" style="color:var(--text-faint);text-decoration:none;">Contact</a>
+    </div>
+  </div>
+</div>
