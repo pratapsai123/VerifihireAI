@@ -2812,21 +2812,82 @@ def save_all_candidate_details_view(request):
             # Verification: Compare current snapshot with the registered identity face
             verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
             
-            # RECOVERY: If reference face is missing from filesystem, attempt to restore it
-            if not verify_result.get('verified') and "No registered identity found" in str(verify_result.get('message', '')):
+            # RECOVERY: If reference face is missing from filesystem or is 0 bytes, attempt to restore it
+            ref_face_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
+            if not verify_result.get('verified') and (not os.path.exists(ref_face_path) or os.path.getsize(ref_face_path) == 0 or "No registered identity found" in str(verify_result.get('message', '')) or "Missing comparison" in str(verify_result.get('reason', ''))):
                 recovered = False
-                if identity_link.snapshot_image:
+                
+                # 1. Try restoring from CandidateDetails base64 snapshot (most reliable as it is stored in DB)
+                # Prioritize: (A) Latest approved update, (B) Earliest verified baseline, (C) Earliest overall
+                detail = CandidateDetails.objects.filter(
+                    pan_number=person_id,
+                    photo_update_status='approved'
+                ).order_by('-id').first()
+                
+                if not detail and norm_email:
+                    detail = CandidateDetails.objects.filter(
+                        email=norm_email,
+                        photo_update_status='approved'
+                    ).order_by('-id').first()
+                
+                if not detail:
+                    detail = CandidateDetails.objects.filter(
+                        pan_number=person_id,
+                        identity_mismatch_detected=False
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail and norm_email:
+                    detail = CandidateDetails.objects.filter(
+                        email=norm_email,
+                        identity_mismatch_detected=False
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail:
+                    detail = CandidateDetails.objects.filter(
+                        pan_number=person_id
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail and norm_email:
+                    detail = CandidateDetails.objects.filter(
+                        email=norm_email
+                    ).exclude(snapshot="").order_by('id').first()
+                
+                if detail and detail.snapshot:
+                    try:
+                        snapshot_data = detail.snapshot
+                        if ',' in snapshot_data:
+                            snapshot_b64 = snapshot_data.split(',', 1)[1]
+                        else:
+                            snapshot_b64 = snapshot_data
+                        img_bytes = base64.b64decode(snapshot_b64)
+                        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
+                        os.makedirs(identities_dir, exist_ok=True)
+                        with open(ref_face_path, "wb") as f:
+                            f.write(img_bytes)
+                        # Retry verification
+                        verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
+                        if verify_result.get('verified'):
+                            recovered = True
+                    except Exception as e:
+                        print(f"Face recovery from CandidateDetails base64 failed for {person_id}: {e}")
+                
+                # 2. Fallback to IdentityLink snapshot_image
+                if not recovered and identity_link.snapshot_image:
                     try:
                         identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
                         os.makedirs(identities_dir, exist_ok=True)
-                        with open(os.path.join(identities_dir, "canonical.jpg"), "wb") as f:
+                        try:
+                            identity_link.snapshot_image.seek(0)
+                        except Exception:
+                            pass
+                        with open(ref_face_path, "wb") as f:
                             f.write(identity_link.snapshot_image.read())
                         # Retry verification
                         verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
                         if verify_result.get('verified'):
                             recovered = True
                     except Exception as e:
-                        print(f"Face recovery failed for {person_id}: {e}")
+                        print(f"Face recovery from IdentityLink failed for {person_id}: {e}")
                 
                 if not recovered:
                     # Fallback: Re-register current face if reference is lost

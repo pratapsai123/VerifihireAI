@@ -92,7 +92,7 @@ EXECUTOR_BASE_URL = os.environ.get("EXECUTOR_BASE_URL", "http://localhost:4000")
 
 
 
-# ─── Styles ──────────────────────────────────────────────────────────────────
+# â”€â”€â”€ Styles â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 
@@ -188,7 +188,7 @@ def _build_styles():
 
 
 
-# ─── Helpers ─────────────────────────────────────────────────────────────────
+# â”€â”€â”€ Helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 
@@ -727,7 +727,7 @@ class PageCounter:
 
 
 
-# ─── Main ────────────────────────────────────────────────────────────────────
+# â”€â”€â”€ Main â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 
@@ -875,7 +875,7 @@ def generate_candidate_report(submission_id):
         except Exception as e:
             print(f"[report] Error fetching other CandidateDetails: {e}")
 
-    # ── Build PDF ──
+    # â”€â”€ Build PDF â”€â”€
 
     buffer = io.BytesIO()
 
@@ -897,11 +897,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # HEADER: Title + Passport-size Photo (top-right)
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     PASSPORT_W = 1.2 * inch
 
@@ -1048,11 +1048,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 1. PERSONAL INFORMATION
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     story.append(Paragraph('Personal Information', styles['SectionHeader']))
 
@@ -1069,6 +1069,9 @@ def generate_candidate_report(submission_id):
         if photo_approved:
             identity_status = "IDENTITY MISMATCH DETECTED (APPROVED & UPDATED)"
             status_color = "#16a34a" # Green
+        elif getattr(candidate_detail, 'photo_update_status', 'none') == 'rejected':
+            identity_status = "IDENTITY MISMATCH DETECTED (APPROVAL REQUEST REJECTED)"
+            status_color = "#dc2626" # Red
         else:
             identity_status = "IDENTITY MISMATCH DETECTED"
             status_color = "#dc2626" # Red
@@ -1297,7 +1300,10 @@ def generate_candidate_report(submission_id):
                 comparison_table = Table(comparison_data, colWidths=[doc.width/2.0, doc.width/2.0])
                 box_color = colors.HexColor('#dc2626')
                 bg_color = colors.HexColor('#fee2e2')
-                section_title = 'Identity Comparison (Manual Review Required)'
+                if getattr(candidate_detail, 'photo_update_status', 'none') == 'rejected':
+                    section_title = 'Identity Comparison (Approval Request Rejected)'
+                else:
+                    section_title = 'Identity Comparison (Manual Review Required)'
 
             comparison_table.setStyle(TableStyle([
                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -1322,24 +1328,39 @@ def generate_candidate_report(submission_id):
                 )
                 approved_at_str = timezone.localtime(candidate_detail.photo_update_approved_at).strftime('%d %b %Y, %I:%M %p') if candidate_detail.photo_update_approved_at else '-'
                 audit_note = (
-                    f"<b>✓ Approved & Updated:</b> HR manually reviewed and approved this identity mismatch. "
+                    f"<b>âœ“ Approved & Updated:</b> HR manually reviewed and approved this identity mismatch. "
                     f"Original mismatch evidence retained for proof and compliance.<br/>"
                     f"<b>Approved By:</b> {candidate_detail.photo_update_approved_by or '-'}<br/>"
                     f"<b>Approved At:</b> {approved_at_str}<br/>"
                     f"<b>Reason:</b> {candidate_detail.photo_update_reason or '-'}"
                 )
                 story.append(Paragraph(audit_note, audit_style))
+            elif getattr(candidate_detail, 'photo_update_status', 'none') == 'rejected':
+                rejected_style = ParagraphStyle(
+                    'RejectedNoteStyle',
+                    parent=styles['Normal'],
+                    fontSize=9,
+                    textColor=colors.HexColor('#dc2626'),
+                    spaceBefore=6,
+                    spaceAfter=12
+                )
+                rejection_note = (
+                    f"<b>✗ Approval Request Rejected:</b> The identity mismatch approval request was rejected by the Admin. "
+                    f"The candidate's registered face baseline remains unchanged.<br/>"
+                    f"<b>Rejection Note/Reason:</b> {candidate_detail.photo_update_admin_note or '-'}"
+                )
+                story.append(Paragraph(rejection_note, rejected_style))
             else:
                 story.append(Spacer(1, 12))
 
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 2. PAN CARD
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     story.append(Paragraph('PAN Card', styles['SectionHeader']))
 
@@ -1401,11 +1422,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 3. EXAM ANSWERS
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     answers = submission.answers or {}
 
@@ -1415,7 +1436,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── 3a. Objective Exam ──
+    # â”€â”€ 3a. Objective Exam â”€â”€
 
     if objective_keys:
 
@@ -1677,7 +1698,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── 3b. Coding Exam ──
+    # â”€â”€ 3b. Coding Exam â”€â”€
 
     if coding_keys:
 
@@ -1881,7 +1902,7 @@ def generate_candidate_report(submission_id):
 
                 if is_sql:
 
-                    # ── SQL formatted layout (Vertical) ──
+                    # â”€â”€ SQL formatted layout (Vertical) â”€â”€
 
                     story.append(Paragraph('<b>Test Case Results (SQL):</b>', styles['Normal']))
 
@@ -1993,7 +2014,7 @@ def generate_candidate_report(submission_id):
 
                 else:
 
-                    # ── Standard table layout for other languages ──
+                    # â”€â”€ Standard table layout for other languages â”€â”€
 
                     story.append(Paragraph('<b>Test Case Results:</b>', styles['Normal']))
 
@@ -2187,17 +2208,17 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 4. RESULTS SUMMARY
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     story.append(Paragraph('Results Summary', styles['SectionHeader']))
 
 
 
-    # ── Fetch Integrity Score ──
+    # â”€â”€ Fetch Integrity Score â”€â”€
 
     integrity_score = 100.0
 
@@ -2265,7 +2286,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── Fetch Integrity Score ──
+    # â”€â”€ Fetch Integrity Score â”€â”€
 
     integrity_score = 100.0
 
@@ -2303,7 +2324,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── Determine Dynamic Result Status ──
+    # â”€â”€ Determine Dynamic Result Status â”€â”€
     # Priority: 1. 100% Score Override (Selected) 2. Failure (Rejected) 3. Suspicion (Hold) 4. Standard Result
     final_result_text = submission.result or '-'
     result_style = styles['InfoValue']
@@ -2373,31 +2394,147 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
-    # Desktop Security Monitoring
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+    # Security Activity Log
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     if inv and inv.token:
-        security_session = SecuritySession.objects.filter(token=str(inv.token)).order_by('-created_at').first()
-        story.append(Paragraph('Desktop Security Monitoring', styles['SectionHeader']))
-        if security_session:
-            sec_data = [
-                _info_row('Agent Session ID', str(security_session.session_id), styles),
-                _info_row('Final Action', security_session.action, styles),
-                _info_row('Last Security Status', security_session.status, styles),
-                _info_row('Detected Remote Tool', security_session.blocked_app or '-', styles),
-                _info_row('Detected Process', security_session.blocked_process_name or '-', styles),
-                _info_row('Detected Path', security_session.blocked_app_path or '-', styles),
-                _info_row('Policy Decision Reason', security_session.reason or '-', styles),
+        story.append(Paragraph('Security Activity Log', styles['SectionHeader']))
+
+        # â”€â”€ Termination reason block (only if exam was terminated) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        if submission.result == 'terminated':
+            # Determine human-readable cause
+            term_meta = {}
+            if isinstance(submission.answers, dict):
+                term_meta = submission.answers.get('_termination') or {}
+            term_reason = term_meta.get('reason', '')
+            term_detail = term_meta.get('detail', '')
+
+            # Check whether session timed out (heartbeat silence) vs terminal-close strikes
+            security_session = SecuritySession.objects.filter(
+                token=str(inv.token), action='STOP'
+            ).order_by('-created_at').first()
+            is_timeout = (
+                security_session and
+                security_session.reason and
+                'timed out' in security_session.reason.lower()
+            )
+            terminal_closes = getattr(inv, 'terminal_close_count', 0) or 0
+
+            if term_reason == 'terminal_close' or terminal_closes >= 3:
+                cause_text = (
+                    f'Exam terminated â€” Secure Agent terminal was closed '
+                    f'{terminal_closes} time(s). After 3 closures the exam is permanently ended.'
+                )
+            elif is_timeout:
+                cause_text = (
+                    'Exam terminated â€” Secure Agent stopped sending heartbeats for more than '
+                    '10 minutes (connection lost or terminal force-quit). Access permanently revoked.'
+                )
+            elif term_detail:
+                cause_text = f'Exam terminated â€” {term_detail}'
+            else:
+                cause_text = 'Exam terminated due to a policy violation.'
+
+            term_box_style = ParagraphStyle(
+                'TermBox',
+                parent=styles['Normal'],
+                fontSize=9,
+                textColor=colors.HexColor('#991b1b'),
+                backColor=colors.HexColor('#fef2f2'),
+                borderPadding=(6, 10, 6, 10),
+                leading=13,
+            )
+            story.append(Paragraph(f'â›”  {cause_text}', term_box_style))
+            story.append(Spacer(1, 8))
+
+        # â”€â”€ Activity log entries â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+        raw_logs = getattr(inv, 'activity_logs', None) or []
+        # Filter to security-relevant events â€” exclude noisy precheck/identity/agent events
+        SECURITY_KEYWORDS = (
+            'app opened', 'blocked', 'violation', 'usb', 'device connected',
+            'device disconnected', 'terminal closed', 'terminated',
+        )
+        security_logs = [
+            log for log in raw_logs
+            if isinstance(log, dict) and
+            any(kw in str(log.get('action', '')).lower() for kw in SECURITY_KEYWORDS)
+        ]
+
+        if security_logs:
+            # Table header
+            act_header = [
+                Paragraph('<b>Time</b>', styles['Normal']),
+                Paragraph('<b>Event</b>', styles['Normal']),
+                Paragraph('<b>Details</b>', styles['Normal']),
             ]
-            story.append(_kv_table(sec_data, styles))
+            act_data = [act_header]
+            for log in security_logs:
+                action_str = str(log.get('action') or '')
+                raw_detail = str(log.get('details') or log.get('detail') or '')
+                ts_raw = log.get('timestamp') or log.get('created_at') or ''
+
+                # Format timestamp
+                try:
+                    from datetime import datetime as _dt
+                    ts_obj = _dt.fromisoformat(str(ts_raw).replace('Z', '+00:00'))
+                    ts_display = ts_obj.strftime('%d %b %Y  %H:%M:%S')
+                except Exception:
+                    ts_display = str(ts_raw)[:19] if ts_raw else '-'
+
+                # For blocked-app events extract just the app name(s), drop the noisy process list
+                action_lower = action_str.lower()
+                if 'blocked' in action_lower or 'app opened' in action_lower:
+                    # raw_detail looks like: "Blocked app detected: AppName (process: p1.exe, p2.exe, ...)"
+                    import re as _re
+                    m = _re.search(r'(?:Blocked app detected:|detected:)\s*([^(\n]+)', raw_detail, _re.IGNORECASE)
+                    if m:
+                        detail_str = m.group(1).strip().rstrip(',')
+                    else:
+                        # Fallback: strip everything from ' (process:' onward
+                        detail_str = _re.sub(r'\s*\(process:.*', '', raw_detail).strip()
+                else:
+                    detail_str = raw_detail[:120]
+
+                # Color-code by severity
+                if any(kw in action_lower for kw in ('blocked', 'violation', 'terminated')):
+                    action_color = '#dc2626'
+                elif any(kw in action_lower for kw in ('usb', 'device connected', 'terminal closed')):
+                    action_color = '#d97706'
+                else:
+                    action_color = '#1e293b'
+
+                act_data.append([
+                    Paragraph(f'<font size="7">{_safe(ts_display)}</font>', styles['Normal']),
+                    Paragraph(f'<font color="{action_color}"><b>{_safe(action_str)}</b></font>', styles['Normal']),
+                    _safe_para(detail_str[:120], styles['Normal']),
+                ])
+
+            act_table = Table(act_data, colWidths=[100, 130, 230])
+            act_table.setStyle(TableStyle([
+                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
+                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                ('FONTSIZE', (0, 0), (-1, -1), 8),
+                ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+                ('GRID', (0, 0), (-1, -1), 0.4, colors.HexColor('#e2e8f0')),
+                ('TOPPADDING', (0, 0), (-1, -1), 4),
+                ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+                ('LEFTPADDING', (0, 0), (-1, -1), 5),
+                ('RIGHTPADDING', (0, 0), (-1, -1), 5),
+                ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#f8fafc')]),
+            ]))
+            story.append(act_table)
         else:
-            story.append(Paragraph('No desktop monitoring session recorded for this submission.', styles['Normal']))
+            story.append(Paragraph(
+                'No security events recorded during this exam session.',
+                styles['Normal']
+            ))
+
         story.append(Spacer(1, 12))
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     # 4. TYPING GAP ANALYSIS
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # Check if the assessment includes coding questions
 
@@ -2641,7 +2778,7 @@ def generate_candidate_report(submission_id):
 
 
 
-                # ───── Consolidated Unified Interpretation Table ─────
+                # â”€â”€â”€â”€â”€ Consolidated Unified Interpretation Table â”€â”€â”€â”€â”€
 
                 unified_rows = []
 
@@ -3407,11 +3544,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 5. CANDIDATE FEEDBACK
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     rating = submission.rating
 
@@ -3445,11 +3582,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     # PERIODIC IDENTITY VERIFICATION
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     if integrity and getattr(integrity, 'identity_verification_logs', []):
         story.append(PageBreak())
         story.append(Paragraph('Periodic Identity Verification', styles['SectionHeader']))
@@ -3502,9 +3639,9 @@ def generate_candidate_report(submission_id):
             
         story.append(Spacer(1, 20))
 
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     # INTEGRITY VIOLATIONS LOG
-    # ════════════════════════════════════════════════════════════════════════
+    # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     try:
         integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
         # Filter out identity verification/mismatch screenshots as they are already displayed in the main Identity section
@@ -3677,7 +3814,7 @@ def generate_candidate_report(submission_id):
 
 
 
-    # ── Build PDF ──
+    # â”€â”€ Build PDF â”€â”€
 
     doc.build(story, onFirstPage=page_counter.on_page, onLaterPages=page_counter.on_page)
 

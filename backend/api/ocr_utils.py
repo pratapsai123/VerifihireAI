@@ -636,11 +636,82 @@ def verify_face_with_deepface(person_id, snapshot_base64, candidate_id=None, ema
     """
     try:
         from django.conf import settings
-        from api.models import CandidateDetails
+        from api.models import CandidateDetails, IdentityLink
         
         # Reference image path
         ref_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
         
+        # Recovery: If reference image is missing from filesystem or is 0 bytes, restore it
+        if not os.path.exists(ref_path) or os.path.getsize(ref_path) == 0:
+            try:
+                restored = False
+                
+                # 1. Try restoring from CandidateDetails base64 snapshot (most reliable)
+                # Prioritize: (A) Latest approved update, (B) Earliest verified baseline, (C) Earliest overall
+                detail = CandidateDetails.objects.filter(
+                    pan_number=person_id,
+                    photo_update_status='approved'
+                ).order_by('-id').first()
+                
+                if not detail and email:
+                    detail = CandidateDetails.objects.filter(
+                        email=email,
+                        photo_update_status='approved'
+                    ).order_by('-id').first()
+                
+                if not detail:
+                    detail = CandidateDetails.objects.filter(
+                        pan_number=person_id,
+                        identity_mismatch_detected=False
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail and email:
+                    detail = CandidateDetails.objects.filter(
+                        email=email,
+                        identity_mismatch_detected=False
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail:
+                    detail = CandidateDetails.objects.filter(
+                        pan_number=person_id
+                    ).exclude(snapshot="").order_by('id').first()
+                    
+                if not detail and email:
+                    detail = CandidateDetails.objects.filter(
+                        email=email
+                    ).exclude(snapshot="").order_by('id').first()
+                
+                if detail and detail.snapshot:
+                    snapshot_data = detail.snapshot
+                    if ',' in snapshot_data:
+                        snapshot_b64 = snapshot_data.split(',', 1)[1]
+                    else:
+                        snapshot_b64 = snapshot_data
+                    img_bytes = base64.b64decode(snapshot_b64)
+                    os.makedirs(os.path.dirname(ref_path), exist_ok=True)
+                    with open(ref_path, "wb") as f:
+                        f.write(img_bytes)
+                    print(f"[DeepFace Recovery] Restored missing canonical face for {person_id} from CandidateDetails base64 snapshot (ID: {detail.id}).")
+                    restored = True
+                
+                # 2. Fallback to IdentityLink snapshot_image
+                if not restored:
+                    identity_link = IdentityLink.objects.filter(pan_number=person_id).first()
+                    if not identity_link and email:
+                        identity_link = IdentityLink.objects.filter(email=email).first()
+                    if identity_link and identity_link.snapshot_image:
+                        os.makedirs(os.path.dirname(ref_path), exist_ok=True)
+                        try:
+                            identity_link.snapshot_image.seek(0)
+                        except Exception:
+                            pass
+                        with open(ref_path, "wb") as f:
+                            f.write(identity_link.snapshot_image.read())
+                        print(f"[DeepFace Recovery] Restored missing canonical face for {person_id} from IdentityLink snapshot.")
+                        restored = True
+            except Exception as e:
+                print(f"[DeepFace Recovery] Failed to restore canonical face for {person_id}: {e}")
+
         # Save temp snapshot for DeepFace
         temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
         os.makedirs(temp_dir, exist_ok=True)
