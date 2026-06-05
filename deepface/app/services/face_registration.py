@@ -155,8 +155,8 @@ def register_face(
         person_dir = _get_person_dir(person_id)
         if overwrite and person_dir.exists():
             for item in person_dir.iterdir():
-                if item.name == 'sessions':
-                    continue  # preserve the audit archive
+                if item.name in ('sessions', 'assessments'):
+                    continue  # preserve the audit archive and per-assessment anchors
                 try:
                     if item.is_file():
                         item.unlink()

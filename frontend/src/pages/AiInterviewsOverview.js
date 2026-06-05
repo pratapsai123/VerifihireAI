@@ -209,6 +209,14 @@ export default function AiInterviewsOverview() {
                                 <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '0.3rem' }}>
                                     Created: {batch.created_at} &nbsp;|&nbsp; Invited: {batch.total} &nbsp;|&nbsp; Completed: {batch.completed} &nbsp;|&nbsp; In Progress: {batch.in_progress}
                                 </div>
+                                {(batch.available_from || batch.available_until) && (
+                                    <div style={{ fontSize: '0.72rem', color: '#8b5cf6', marginTop: '0.2rem', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                        <i className="fa-regular fa-clock" />
+                                        {batch.available_from ? `Start: ${batch.available_from}` : ''}
+                                        {batch.available_from && batch.available_until ? ' — ' : ''}
+                                        {batch.available_until ? `End: ${batch.available_until}` : ''}
+                                    </div>
+                                )}
                             </div>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                 <div style={{ width: '120px', height: '8px', background: '#f1f5f9', borderRadius: '4px', overflow: 'hidden' }}>

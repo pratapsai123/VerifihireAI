@@ -248,7 +248,28 @@ export default function LiveInterviewList() {
               </thead>
               <tbody>
                 {pageItems.map((inv) => {
-                  const { label, cls } = getStatusMeta(inv.status);
+                  let { label, cls } = getStatusMeta(inv.status);
+                  
+                  const hasFeedbacks = inv.feedbacks && inv.feedbacks.length > 0;
+                  if (inv.status === 'completed' && hasFeedbacks) {
+                    const primaryFeedback = inv.feedbacks.find(f => 
+                      !f.participant_email || 
+                      (inv.interviewer_email && f.participant_email.toLowerCase() === inv.interviewer_email.toLowerCase())
+                    ) || inv.feedbacks[0];
+                    
+                    if (primaryFeedback && primaryFeedback.interviewer_feedback) {
+                      const match = primaryFeedback.interviewer_feedback.match(/Recommendation:\s*(.+)/i);
+                      if (match && match[1]) {
+                        label = match[1].trim();
+                        const lowerLabel = label.toLowerCase();
+                        if (lowerLabel.includes('qualified') && !lowerLabel.includes('disqualified')) cls = 'pill-green';
+                        else if (lowerLabel.includes('disqualified')) cls = 'pill-red';
+                        else if (lowerLabel.includes('on hold')) cls = 'pill-orange';
+                        else cls = 'pill-blue';
+                      }
+                    }
+                  }
+
                   const sched = fmtSchedule(inv.start_time, inv.end_time);
                   const isDone = inv.status === 'completed' || inv.status === 'submitted';
                   const isFailed = inv.status === 'failed';
@@ -291,20 +312,16 @@ export default function LiveInterviewList() {
                         <span className={`lil-pill ${cls}`}>{label}</span>
                       </td>
                       <td className="col-rating">
-                        {inv.feedbacks && inv.feedbacks.length > 0 ? (
-                          <div className="lil-rating-cell">
-                            {renderStars(
-                              inv.feedbacks.reduce((sum, f) => sum + (f.interviewer_average_rating || f.interviewer_rating || 0), 0) / 
-                              (inv.feedbacks.filter(f => f.interviewer_average_rating || f.interviewer_rating).length || 1)
-                            )}
-                            <button
-                              className="lil-view-btn"
-                              onClick={() => navigate('/feedback-details', { state: { inv } })}
-                            >
-                              View
-                            </button>
-                          </div>
-                        ) : renderStars(0)}
+                        {hasFeedbacks ? (
+                          <button
+                            className="lil-view-btn"
+                            onClick={() => navigate('/feedback-details', { state: { inv } })}
+                          >
+                            View
+                          </button>
+                        ) : (
+                          <span className="lil-dash">–</span>
+                        )}
                       </td>
                       <td className="col-schedule">
                         {sched ? (

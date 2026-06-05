@@ -102,22 +102,19 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 "screenshot_base64": None, # Omitted from overview for performance; full logs in timeline API
                 "webcam_screenshot_base64": None,
             })
-        # Try to load registration_snapshot.jpg from assessments folder on disk
-        pending_photo_b64 = None
-        try:
-            from pathlib import Path
-            from django.conf import settings
-            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-            p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
-            target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
-            if target_snap_file.exists():
-                with open(target_snap_file, 'rb') as f:
-                    pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
-        except Exception:
-            pass
-
+        pending_photo_b64 = clean_b64(s.intruder_photo)
         if not pending_photo_b64:
-            pending_photo_b64 = clean_b64(s.intruder_photo)
+            try:
+                from pathlib import Path
+                from django.conf import settings
+                deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
+                target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
+                if target_snap_file.exists():
+                    with open(target_snap_file, 'rb') as f:
+                        pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+            except Exception:
+                pass
 
         results.append(
             {
@@ -174,7 +171,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'pan_number': getattr(s, 'pan_number', None),
                 'pan_photo': _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None),
                 'pan_verified': getattr(s, 'pan_verified', False),
-                'candidate_photo_url': clean_b64(s.original_identity_photo) or _get_candidate_photo_url(request, s),
+                'candidate_photo_url': _get_candidate_photo_url(request, s) or clean_b64(s.original_identity_photo),
                 **_get_unified_identity_mismatch_fields(request, s)
             }
         )

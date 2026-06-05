@@ -3376,14 +3376,16 @@ const AiTakeAssessment = () => {
 
                     </div>
 
-                    <button onClick={() => startAssessment(false)}
-                        disabled={isCheckingRegistration || isStarting}
+                    {(panVerified || isRestored) && (
+                        <button onClick={() => startAssessment(false)}
+                            disabled={isCheckingRegistration || isStarting}
 
-                        style={{ width: '100%', padding: '0.9rem', background: (isCheckingRegistration || isStarting) ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: (isCheckingRegistration || isStarting) ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
+                            style={{ width: '100%', padding: '0.9rem', background: (isCheckingRegistration || isStarting) ? '#94a3b8' : '#4318FF', color: 'white', border: 'none', borderRadius: 12, fontSize: '1rem', fontWeight: 700, cursor: (isCheckingRegistration || isStarting) ? 'not-allowed' : 'pointer', fontFamily: 'Poppins', boxShadow: '0 10px 20px rgba(67,24,255,0.2)', transition: 'all 0.2s' }}>
 
-                        {isCheckingRegistration ? 'Checking Registration...' : isStarting ? 'Setting up secure environment...' : 'Start Test'}
+                            {isCheckingRegistration ? 'Checking Registration...' : isStarting ? 'Setting up secure environment...' : 'Start Test'}
 
-                    </button>
+                        </button>
+                    )}
 
                 </div>
 

@@ -1658,16 +1658,70 @@ def _generate_mcq_pool_ai_only(
             - ANSWER FIELD: The answer MUST be the exact text from one of the options
             - Each question gets exactly 4 options and 1 correct answer
             """
-            batch_mcqs = None
+            batch_mcqs = []
 
             for attempt in range(attempts_per_batch):
+                if cancel_token and cache.get(f"abort_{cancel_token}"):
+                    raise Exception("Generation Aborted by User")
+                
+                remaining = count - len(batch_mcqs)
+                if remaining <= 0:
+                    break  # Already have enough from previous attempts
+                
+                # Update prompt to only ask for remaining count
+                current_prompt = f"""
+            JOB DESCRIPTION: {job_description[:800]}
+            REQUIRED SKILLS: {required_skills[:400] if required_skills else 'General Programming'}
+            EXPERIENCE LEVEL: {exp_guidelines['description']}
+
+            EXPERIENCE-LEVEL GUIDELINES:
+            FOCUS ON: {exp_focus}
+            AVOID: {exp_avoid}
+
+            APPROPRIATE TOPICS FOR THIS LEVEL:
+            {exp_topics}
+
+            TASK: Generate {remaining} technical MCQs for {difficulty} difficulty level.
+            {exp_prompt_guidance}
+
+            CHAIN-OF-THOUGHT REQUIREMENT (Layer 1 Accuracy):
+            Before writing each question, mentally:
+            1. Pick a specific concept from the JD/skills
+            2. Solve or reason through the correct answer yourself
+            3. Write the question based on your reasoning
+            4. Write 3 wrong options that are PROVABLY and CLEARLY wrong
+            5. Confirm the correct answer is 100% accurate
+
+            CRITICAL REQUIREMENTS:
+            1. EXPERIENCE-APPROPRIATE: Questions MUST match the {exp_guidelines['description']} level
+            2. JD-RELEVANT: Focus on skills mentioned in the job description
+            3. UNIQUE CONCEPTS: Each question MUST test a DIFFERENT specific concept
+            4. ACCURACY: Every correct answer must be factually correct. Every wrong option must be genuinely wrong.
+            5. WRONG OPTIONS: Must be plausible but clearly incorrect -- never accidentally correct
+
+            QUESTION COMPLEXITY BY DIFFICULTY:
+            - Easy: Basic concepts, syntax, fundamental usage
+            - Medium: Common patterns, best practices, debugging scenarios
+            - Hard: Complex scenarios, optimization, advanced concepts (but still appropriate for experience level)
+
+            JSON FORMAT: {{ "mcqs": [ {{ "question": "In Python, which method is used to add an element to the end of a list?", "options": ["append()", "add()", "insert()", "push()"], "answer": "append()", "difficulty": "{difficulty}" }} ] }}
+
+            STRICT RULES:
+            - Generate valid JSON only (do NOT use escape sequences)
+            - UNIQUE: Every question must cover a DIFFERENT sub-topic. {avoid_txt}
+            - OPTIONS MUST BE DESCRIPTIVE: Each option MUST be actual answer text (NOT just "A", "B", "C", "D")
+            - NO PLACEHOLDERS: NEVER use options like "Option A", "Option B", "Choice 1", etc.
+            - ANSWER FIELD: The answer MUST be the exact text from one of the options
+            - Each question gets exactly 4 options and 1 correct answer
+            """
+
                 try:
                     response = _call_llm_with_backoff(
                         llm_client,
                         model=model,
                         messages=[
                             {"role": "system", "content": "You are a senior technical interviewer. Generate specific, deep questions that test real knowledge -- not surface-level definitions. Output JSON only."},
-                            {"role": "user", "content": prompt},
+                            {"role": "user", "content": current_prompt},
                         ],
                         response_format={"type": "json_object"},
                         max_tokens=4096,
@@ -1683,14 +1737,16 @@ def _generate_mcq_pool_ai_only(
                     same_diff = [q for q in mcqs if _normalize_difficulty_label(q.get('difficulty')) == difficulty]
 
                     # VALIDATE each MCQ structure + WITHIN-SESSION DEDUP before accepting
-                    validated_mcqs = []
-                    session_qs = [q.get('question', '') for q in generated]
+                    new_valid_count = 0
+                    session_qs = [q.get('question', '') for q in generated] + [q.get('question', '') for q in batch_mcqs]
                     for q in same_diff:
+                        if len(batch_mcqs) >= count:
+                            break  # Already accumulated enough
                         is_valid, error_msg = _validate_mcq_structure(q)
                         if not is_valid:
                             logger.debug(f"MCQ VALIDATION FAILED: {error_msg}. Question: {q.get('question', '')[:40]}...")
                             continue
-                        # WITHIN-SESSION DEDUP: Only check against current assessment's questions
+                        # WITHIN-SESSION DEDUP: Check against ALL accepted questions (generated + batch_mcqs)
                         is_dup, matched = _is_duplicate_mcq(q.get('question', ''), session_qs)
                         if is_dup:
                             logger.warning(f"MCQ DUPLICATE REJECTED: '{q.get('question', '')[:50]}...'")
@@ -1700,30 +1756,24 @@ def _generate_mcq_pool_ai_only(
                         if not ai_passed:
                             logger.warning(f"MCQ AI-VERIFY REJECTED: '{q.get('question', '')[:50]}...' Reason: {ai_reason[:60]}")
                             continue
-                        validated_mcqs.append(q)
+                        batch_mcqs.append(q)
                         session_qs.append(q.get('question', ''))
+                        new_valid_count += 1
 
-                    if len(validated_mcqs) >= count:
-                        batch_mcqs = validated_mcqs[:count]
-                        logger.info(f"MCQ Batch attempt {attempt + 1}: Generated {len(validated_mcqs)} valid UNIQUE {difficulty} MCQs")
-                        break
-                    elif len(same_diff) > 0:
-                        logger.warning(f"MCQ Batch attempt {attempt + 1}: Generated {len(same_diff)} MCQs, only {len(validated_mcqs)} valid")
-                        
-                    # Correction for next attempt in same batch
-                    prompt = prompt + f"\nRetry: Ensure exactly {count} {difficulty} MCQs are returned. CRITICAL: Each MCQ MUST have all fields: question, 4 options, answer (matched to option), difficulty."
+                    logger.info(f"MCQ Batch attempt {attempt + 1}: +{new_valid_count} valid {difficulty} MCQs (total accumulated: {len(batch_mcqs)}/{count})")
+                    
+                    if len(batch_mcqs) >= count:
+                        break  # Done! We have enough
 
                 except APIStatusError as e:
                     if e.status_code == 413 and batch_size > 2:
                         logger.warning(f"Batch {batch_size} too large (413). Auto-scaling down to {batch_size-2}...")
                         batch_size -= 2
-                        # Reset this specific batch attempt to start over with smaller size
                         break # Exits "attempts" loop but stays in "while idx" loop
                     raise e
                 except Exception as e:
                     logger.warning(f"MCQ Batch attempt {attempt + 1} failed: {e}")
                     if attempt == attempts_per_batch - 1:
-                        # Final failure for this batch
                         break
 
             if not batch_mcqs:
@@ -1735,6 +1785,7 @@ def _generate_mcq_pool_ai_only(
                 idx += count # Advance so we don't get stuck in a loop, but we accept the shortfall
                 continue
 
+            batch_mcqs = batch_mcqs[:count]  # Trim to exact count needed
             for q in batch_mcqs:
                 q['difficulty'] = difficulty
             generated.extend(batch_mcqs)
