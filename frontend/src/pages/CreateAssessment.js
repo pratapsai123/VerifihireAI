@@ -10,6 +10,7 @@ const STORAGE_KEY = 'ai_assessment_create_form_data';
 const CreateAssessment = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [progressMsg, setProgressMsg] = useState('');
     const [formData, setFormData] = useState({
         job_description: '',
         skills: '',
@@ -317,18 +318,55 @@ const CreateAssessment = () => {
                 headers: { 'Content-Type': 'application/json' }
             });
 
-            if (response.status === 200 || response.status === 201) {
-                alert('Assessment Generated Successfully!');
-                sessionStorage.removeItem(STORAGE_KEY); // Explicitly wipe data upon clean completion
-                navigate('/ai-assessments');
+            if (response.status === 200 || response.status === 201 || response.status === 202) {
+                const taskId = response.data.task_id;
+                
+                if (taskId) {
+                    setProgressMsg('Initializing generation task...');
+                    
+                    const pollInterval = setInterval(async () => {
+                        try {
+                            const statusRes = await axios.get(`${API_BASE_URL}/ai/generation-status/${taskId}/`);
+                            const statusData = statusRes.data;
+                            
+                            if (statusData.status === 'completed') {
+                                clearInterval(pollInterval);
+                                alert('Assessment Generated Successfully!');
+                                sessionStorage.removeItem(STORAGE_KEY);
+                                setLoading(false);
+                                isGeneratingRef.current = false;
+                                navigate('/ai-assessments');
+                            } else if (statusData.status === 'failed') {
+                                clearInterval(pollInterval);
+                                alert(`Generation failed: ${statusData.message || statusData.error}`);
+                                setLoading(false);
+                                isGeneratingRef.current = false;
+                                setProgressMsg('');
+                            } else {
+                                setProgressMsg(statusData.progress || 'Processing...');
+                            }
+                        } catch (err) {
+                            console.error('Error polling status:', err);
+                        }
+                    }, 3000);
+                    
+                    // Keep loading true, handled by polling
+                    return;
+                } else {
+                    alert('Assessment Generated Successfully!');
+                    sessionStorage.removeItem(STORAGE_KEY);
+                    setLoading(false);
+                    isGeneratingRef.current = false;
+                    navigate('/ai-assessments');
+                }
             }
         } catch (error) {
             console.error('Error:', error);
             const errMsg = error?.response?.data?.error || error?.response?.data?.message || error?.message || 'Generation failed. Please try again.';
             alert(`Generation failed: ${errMsg}`);
-        } finally {
             setLoading(false);
             isGeneratingRef.current = false;
+            setProgressMsg('');
         }
     };
 
@@ -756,7 +794,7 @@ const CreateAssessment = () => {
                     {loading ? (
                         <>
                             <span className="spinner"></span>
-                            Generating Assessment...
+                            {progressMsg || 'Generating Assessment...'}
                         </>
                     ) : (
                         <>
