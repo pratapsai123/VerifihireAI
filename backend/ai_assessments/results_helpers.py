@@ -102,7 +102,21 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 "screenshot_base64": None, # Omitted from overview for performance; full logs in timeline API
                 "webcam_screenshot_base64": None,
             })
-        pending_photo_b64 = clean_b64(s.intruder_photo)
+        pending_photo_b64 = None
+        is_automatic = getattr(a, 'creation_type', 'manual') == 'automatic'
+        if is_automatic:
+            try:
+                from api._imports import DEEPFACE_BASE_URL
+                import requests
+                import base64
+                p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
+                df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/assessments/{a.share_token}/photo"
+                resp = requests.get(df_url, timeout=5)
+                if resp.status_code == 200:
+                    pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
+            except Exception:
+                pass
+
         if not pending_photo_b64:
             try:
                 from pathlib import Path
