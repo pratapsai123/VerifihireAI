@@ -4019,17 +4019,40 @@ def request_photo_update_view(request, submission_id):
                 except Exception as e:
                     print(f"[Backup] Failed to read first details snapshot: {e}")
 
+        is_admin = (
+            user_profile
+            and (
+                user_profile.role == UserProfile.ROLE_COMPANY_ADMIN
+                or _is_application_admin_email(user_profile.email)
+            )
+        )
+
         # 7. Create FaceUpdateRequest inside a transaction block
         with transaction.atomic():
-            req = FaceUpdateRequest.objects.create(
-                submission=submission,
-                candidate_details=details,
-                company=user_profile.company,
-                hr_user=user_profile,
-                hr_reason=reason,
-                status='pending',
-                integrity_flagged=integrity_flagged
-            )
+            if is_admin:
+                req = FaceUpdateRequest.objects.create(
+                    submission=submission,
+                    candidate_details=details,
+                    company=user_profile.company,
+                    hr_user=user_profile,
+                    hr_reason=reason,
+                    status='approved',
+                    integrity_flagged=integrity_flagged,
+                    face_approved=True,
+                    integrity_approved=True if integrity_flagged else None,
+                    decided_at=timezone.now(),
+                    admin_user=user_profile
+                )
+            else:
+                req = FaceUpdateRequest.objects.create(
+                    submission=submission,
+                    candidate_details=details,
+                    company=user_profile.company,
+                    hr_user=user_profile,
+                    hr_reason=reason,
+                    status='pending',
+                    integrity_flagged=integrity_flagged
+                )
 
             # Save copies to request backup fields
             if snapshot_data:
@@ -4046,19 +4069,107 @@ def request_photo_update_view(request, submission_id):
                 )
             req.save()
 
-            # Update status on details
-            details.photo_update_status = 'pending'
-            details.save(update_fields=['photo_update_status'])
+            if is_admin:
+                # Direct approval & update
+                norm_email = details.email.lower().strip()
+                norm_pan = re.sub(r'[^A-Z0-9]', '', details.pan_number.strip().upper())
+                person_id = norm_pan
+                
+                # Retrieve baseline identity link
+                link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                if not link:
+                    link = IdentityLink.objects.filter(email=norm_email).first()
+                    
+                # Backup old registered face from IdentityLink
+                old_face_file = None
+                if link and link.snapshot_image:
+                    old_face_file = link.snapshot_image
+                    
+                if old_face_file:
+                    try:
+                        old_face_file.seek(0)
+                        old_file_data = old_face_file.read()
+                        details.previous_registered_face_backup.save(
+                            name=f"backup_{person_id}_{os.path.basename(old_face_file.name)}",
+                            content=ContentFile(old_file_data),
+                            save=False
+                        )
+                    except Exception as e:
+                        print(f"[Backup] Failed to backup old registered face: {e}")
+                else:
+                    if req.original_face_backup:
+                        try:
+                            req.original_face_backup.seek(0)
+                            orig_data = req.original_face_backup.read()
+                            details.previous_registered_face_backup.save(
+                                name=f"backup_first_details_{person_id}.jpg",
+                                content=ContentFile(orig_data),
+                                save=False
+                            )
+                        except Exception as e:
+                            print(f"[Backup] Failed to copy backup from request: {e}")
+                            
+                # Overwrite/Create IdentityLink
+                if not link:
+                    link = IdentityLink(email=norm_email, pan_number=norm_pan)
+                    
+                if req.captured_face_backup:
+                    try:
+                        req.captured_face_backup.seek(0)
+                        cap_data = req.captured_face_backup.read()
+                        snapshot_file = ContentFile(cap_data, name=f"snapshot_{person_id}.jpg")
+                        link.snapshot_image = snapshot_file
+                    except Exception as e:
+                        print(f"[IdentityLink] Error copying captured snapshot to link: {e}")
+                link.save()
+                
+                # Overwrite DeepFace canonical image file
+                from api.ocr_utils import register_face_with_deepface
+                reg_result = register_face_with_deepface(person_id, details.snapshot)
+                if not reg_result.get('success'):
+                    print(f"[DeepFace] Registration failed: {reg_result.get('message')}")
+                    
+                # Save approval metadata on details
+                details.photo_update_approved = True
+                details.photo_update_approved_by = "Company Admin"
+                details.photo_update_approved_at = timezone.now()
+                details.photo_update_reason = reason
+                details.photo_update_status = 'approved'
+                details.save()
 
-            # Log HR manual review approval request submission
-            _append_invitation_activity_log(
-                inv,
-                action='Identity Mismatch Approval Requested by HR',
-                details=f"HR Recruiter {user_profile.first_name} {user_profile.last_name or ''} ({user_profile.email}) submitted a review approval request. Reason: {reason}",
-                category='security'
-            )
+                # Log Admin manual review approval request submission
+                _append_invitation_activity_log(
+                    inv,
+                    action='Identity Mismatch Approved & Updated by Admin',
+                    details=f"Admin {user_profile.first_name} {user_profile.last_name or ''} ({user_profile.email}) directly approved identity mismatch. Reason: {reason}",
+                    category='security'
+                )
+
+                # Recalculate submission scoring and result status immediately!
+                from api.views.candidate_assessment_views import _update_submission_scoring_logic
+                _update_submission_scoring_logic(submission, finalize=True)
+                submission.save()
+            else:
+                # Update status on details to pending
+                details.photo_update_status = 'pending'
+                details.save(update_fields=['photo_update_status'])
+
+                # Log HR manual review approval request submission
+                _append_invitation_activity_log(
+                    inv,
+                    action='Identity Mismatch Approval Requested by HR',
+                    details=f"HR Recruiter {user_profile.first_name} {user_profile.last_name or ''} ({user_profile.email}) submitted a review approval request. Reason: {reason}",
+                    category='security'
+                )
 
         # 8. Send Email notification to Admins
+        if is_admin:
+            return Response({
+                'message': 'Identity mismatch approved and registered face updated successfully.',
+                'email_sent': False,
+                'photo_update_status': 'approved'
+            }, status=status.HTTP_200_OK)
+
         admins = UserProfile.objects.filter(company=user_profile.company, role=UserProfile.ROLE_COMPANY_ADMIN)
         admin_emails = [a.email for a in admins if a.email]
         

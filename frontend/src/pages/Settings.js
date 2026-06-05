@@ -89,6 +89,7 @@ const Settings = () => {
     const [faceAdminNote, setFaceAdminNote] = useState('');
     const [faceApprovedChoice, setFaceApprovedChoice] = useState(true);
     const [integrityApprovedChoice, setIntegrityApprovedChoice] = useState(true);
+    const [faceActionSubmitting, setFaceActionSubmitting] = useState(false);
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
@@ -162,6 +163,7 @@ const Settings = () => {
     };
 
     const handleFaceAction = async (reqId, faceApproved, integrityApproved, adminNote = '') => {
+        setFaceActionSubmitting(true);
         try {
             await axios.post(`${API_BASE_URL}/workflow/face-requests/${reqId}/action/`, {
                 face_approved: faceApproved,
@@ -176,6 +178,8 @@ const Settings = () => {
         } catch (err) {
             setError(err.response?.data?.error || `Failed to submit review request.`);
             setTimeout(() => setError(''), 4000);
+        } finally {
+            setFaceActionSubmitting(false);
         }
     };
 
@@ -678,7 +682,7 @@ const Settings = () => {
                                                 )}
                                             </td>
                                             <td style={{ padding: '12px 16px', verticalAlign: 'top' }}>
-                                                {req.status === 'pending' && (isCompanyAdmin || user?.role === 'hr' || user?.role === 'hr_manager') ? (
+                                                {req.status === 'pending' && isCompanyAdmin ? (
                                                     <button
                                                         onClick={() => { 
                                                             setFaceReviewPopup({ req }); 
@@ -691,7 +695,7 @@ const Settings = () => {
                                                         🔍 Review & Decide
                                                     </button>
                                                 ) : req.status === 'pending' ? (
-                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting review</span>
+                                                    <span style={{ fontSize: '0.75rem', color: '#9ca3af', fontStyle: 'italic' }}>Awaiting admin review</span>
                                                 ) : (
                                                     <span style={{ color: '#9ca3af' }}>—</span>
                                                 )}
@@ -712,7 +716,13 @@ const Settings = () => {
                                 <h3 style={{ margin: 0, fontSize: '1.2rem', fontWeight: '800', color: '#111827' }}>
                                     🔍 {faceReviewPopup.req.integrity_flagged ? "Review Identity Mismatch & Proctoring Integrity" : "Review Face Mismatch Request"}
                                 </h3>
-                                <button onClick={() => { setFaceReviewPopup(null); setFaceAdminNote(''); }} style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}>✕</button>
+                                <button 
+                                    disabled={faceActionSubmitting} 
+                                    onClick={() => { setFaceReviewPopup(null); setFaceAdminNote(''); }} 
+                                    style={{ background: 'none', border: 'none', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontSize: '1.3rem', color: '#9ca3af' }}
+                                >
+                                    ✕
+                                </button>
                             </div>
 
                             <div style={{ background: '#f9fafb', borderRadius: '12px', padding: '16px', marginBottom: '20px', border: '1px solid #e5e7eb' }}>
@@ -844,19 +854,21 @@ const Settings = () => {
                                         1. Face Identity Mismatch Approval:
                                     </span>
                                     <div style={{ display: 'flex', gap: '20px' }}>
-                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.85rem', opacity: faceActionSubmitting ? 0.65 : 1 }}>
                                             <input 
                                                 type="radio" 
                                                 name="face_decision_opt" 
+                                                disabled={faceActionSubmitting}
                                                 checked={faceApprovedChoice === true} 
                                                 onChange={() => setFaceApprovedChoice(true)} 
                                             />
                                             <span style={{ color: '#047857', fontWeight: '700' }}>Approve (Face matches candidate)</span>
                                         </label>
-                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                        <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.85rem', opacity: faceActionSubmitting ? 0.65 : 1 }}>
                                             <input 
                                                 type="radio" 
                                                 name="face_decision_opt" 
+                                                disabled={faceActionSubmitting}
                                                 checked={faceApprovedChoice === false} 
                                                 onChange={() => setFaceApprovedChoice(false)} 
                                             />
@@ -872,19 +884,21 @@ const Settings = () => {
                                             2. Proctoring Integrity Approval:
                                         </span>
                                         <div style={{ display: 'flex', gap: '20px' }}>
-                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.85rem', opacity: faceActionSubmitting ? 0.65 : 1 }}>
                                                 <input 
                                                     type="radio" 
                                                     name="integrity_decision_opt" 
+                                                    disabled={faceActionSubmitting}
                                                     checked={integrityApprovedChoice === true} 
                                                     onChange={() => setIntegrityApprovedChoice(true)} 
                                                 />
                                                 <span style={{ color: '#047857', fontWeight: '700' }}>Approve (Override/accept flags)</span>
                                             </label>
-                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontSize: '0.85rem' }}>
+                                            <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontSize: '0.85rem', opacity: faceActionSubmitting ? 0.65 : 1 }}>
                                                 <input 
                                                     type="radio" 
                                                     name="integrity_decision_opt" 
+                                                    disabled={faceActionSubmitting}
                                                     checked={integrityApprovedChoice === false} 
                                                     onChange={() => setIntegrityApprovedChoice(false)} 
                                                 />
@@ -926,6 +940,7 @@ const Settings = () => {
                                         onChange={e => setFaceAdminNote(e.target.value)}
                                         placeholder="Add notes explaining your decision (e.g., ID verified manually, proctoring snapshots inspected)..."
                                         rows={3}
+                                        disabled={faceActionSubmitting}
                                         style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '0.9rem', fontFamily: 'inherit', outline: 'none', resize: 'vertical', boxSizing: 'border-box' }}
                                     />
                                 </div>
@@ -933,16 +948,31 @@ const Settings = () => {
                                 {/* Actions */}
                                 <div style={{ display: 'flex', gap: '12px' }}>
                                     <button 
+                                        disabled={faceActionSubmitting}
                                         onClick={() => { setFaceReviewPopup(null); setFaceAdminNote(''); }} 
-                                        style={{ flex: 1, padding: '12px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: 'pointer', fontWeight: '600' }}
+                                        style={{ flex: 1, padding: '12px', background: '#fff', border: '1px solid #d1d5db', borderRadius: '10px', cursor: faceActionSubmitting ? 'not-allowed' : 'pointer', fontWeight: '600', opacity: faceActionSubmitting ? 0.6 : 1 }}
                                     >
                                         Cancel
                                     </button>
                                     <button 
+                                        disabled={faceActionSubmitting}
                                         onClick={() => handleFaceAction(faceReviewPopup.req.id, faceApprovedChoice, faceReviewPopup.req.integrity_flagged ? integrityApprovedChoice : null, faceAdminNote)} 
-                                        style={{ flex: 2, padding: '12px', background: '#3b82f6', color: '#fff', border: 'none', borderRadius: '10px', cursor: 'pointer', fontWeight: '700' }}
+                                        style={{
+                                            flex: 2,
+                                            padding: '12px',
+                                            background: faceActionSubmitting ? '#94a3b8' : '#3b82f6',
+                                            color: '#fff',
+                                            border: 'none',
+                                            borderRadius: '10px',
+                                            cursor: faceActionSubmitting ? 'not-allowed' : 'pointer',
+                                            fontWeight: '700',
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '8px'
+                                        }}
                                     >
-                                        Submit Decisions
+                                        {faceActionSubmitting ? '⏳ Submitting...' : 'Submit Decisions'}
                                     </button>
                                 </div>
                             </div>
