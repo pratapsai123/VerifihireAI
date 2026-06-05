@@ -1877,7 +1877,7 @@ class InviteAssessmentCandidatesView(APIView):
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
 
         if invite_type == 'individual':
@@ -2114,7 +2114,7 @@ class ResendAssessmentInviteView(APIView):
             return Response({"error": "Candidate not found in invited list"}, status=status.HTTP_404_NOT_FOUND)
 
         import urllib.parse
-        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000')
+        base_url = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com')
         base_link = f"{base_url}/take-ai-assessment/{assessment.share_token}"
         
         encoded_name = urllib.parse.quote(candidate.name)
