@@ -2377,6 +2377,9 @@ class CandidateRegistrationUpdateView(APIView):
                                 logger.error(f"[IdentityPhoto] Session anchor FAILED: {df_result}")
                         except Exception as df_err:
                             logger.exception(f"[IdentityPhoto] DeepFace session anchor error: {df_err}")
+                            err_msg = str(df_err).lower()
+                            if "quality" in err_msg or "no face detected" in err_msg:
+                                return Response({"error": "Image quality too low or no face detected. Please provide a clearer face image."}, status=status.HTTP_400_BAD_REQUEST)
                     except Exception as e:
                         logger.error(f"[IdentityPhoto] Failed to persist identity photo: {e}")
 
@@ -2406,38 +2409,61 @@ class CandidateRegistrationUpdateView(APIView):
                     candidate.face_embedding_hash = face_embedding_hash
                     candidate.pan_verified = True
                 else:
-                    # Check for mismatch with existing PAN holder
+                    # Check for mismatch against the unified DeepFace microservice
                     if candidate.pan_number:
-                        existing_pan_holder = Candidate.objects.filter(
-                            pan_number=candidate.pan_number
-                        ).exclude(public_token=public_token).first()
-                        if existing_pan_holder and existing_pan_holder.face_embedding_hash:
-                            if existing_pan_holder.face_embedding_hash != face_embedding_hash:
-                                candidate.identity_mismatch_detected = True
-                                candidate.identity_mismatch_details = {
-                                    'mismatch_at': timezone.now().isoformat(),
-                                    'original_holder_token': str(existing_pan_holder.public_token),
-                                    'original_holder_name': existing_pan_holder.full_name,
-                                    'mismatch_type': 'face_mismatch_override'
-                                }
+                        from api.deepface_client import df_is_registered, df_verify
+                        pan_id = str(candidate.pan_number).strip().lower()
+                        try:
+                            if df_is_registered(pan_id):
+                                df_res = df_verify(pan_id, clean_b64)
+                                if not df_res.get('verified', False):
+                                    # Mismatch detected against master DeepFace record
+                                    
+                                    # Try to resolve original holder's name for the admin report
+                                    original_name = 'Registered User'
+                                    original_token = 'Unified Record'
+                                    
+                                    exist_cand = Candidate.objects.filter(pan_number=candidate.pan_number).exclude(public_token=public_token).first()
+                                    if exist_cand:
+                                        original_name = exist_cand.full_name
+                                        original_token = str(exist_cand.public_token)
+                                    else:
+                                        from api.models import CandidateDetails
+                                        detail = CandidateDetails.objects.filter(pan_number=candidate.pan_number).order_by('-id').first()
+                                        if detail:
+                                            original_name = f"{detail.first_name} {detail.last_name}".strip()
 
-                                # Store this session's photo as pending (for admin approval UI)
-                                if snapshot_b64_payload:
-                                    _clean = snapshot_b64_payload
-                                    if ',' in _clean and _clean.startswith('data:'):
-                                        _clean = _clean.split(',', 1)[1]
-                                    candidate.pending_face_b64 = _clean
-                                    candidate.photo_update_approved = False
-                                    logger.info(f"[IdentityPhoto] PAN-collision mismatch: stored pending_face_b64")
+                                    candidate.identity_mismatch_detected = True
+                                    candidate.identity_mismatch_details = {
+                                        'mismatch_at': timezone.now().isoformat(),
+                                        'original_holder_token': original_token,
+                                        'original_holder_name': original_name,
+                                        'mismatch_type': 'face_mismatch_override'
+                                    }
 
-                                # Copy the original holder's registered face as our master
-                                # so the report can show the comparison.
-                                if not candidate.master_face_b64 and getattr(existing_pan_holder, 'registered_face_b64', None):
-                                    candidate.master_face_b64 = existing_pan_holder.registered_face_b64
+                                    # Store this session's photo as pending (for admin approval UI)
+                                    if snapshot_b64_payload:
+                                        candidate.pending_face_b64 = clean_b64
+                                        candidate.photo_update_approved = False
+                                        logger.info(f"[IdentityPhoto] Unified PAN-collision mismatch: stored pending_face_b64")
 
+                                    # Copy the master registered face so the report can show the comparison
+                                    if not candidate.master_face_b64:
+                                        from api.deepface_client import df_get_photo_b64
+                                        master_b64 = df_get_photo_b64(pan_id)
+                                        if master_b64:
+                                            candidate.master_face_b64 = master_b64
+
+                                else:
+                                    candidate.pan_verified = True
+                                    candidate.identity_mismatch_detected = False
                             else:
                                 candidate.pan_verified = True
                                 candidate.identity_mismatch_detected = False
+                        except Exception as e:
+                            logger.error(f"[IdentityPhoto] Error verifying against unified DeepFace: {e}")
+                            candidate.pan_verified = True
+                            candidate.identity_mismatch_detected = False
 
                     # Check if face hash belongs to someone else
                     existing_face_holder = Candidate.objects.filter(

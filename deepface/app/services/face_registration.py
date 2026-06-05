@@ -116,12 +116,10 @@ def register_face(
         img = decode_base64_image(image_base64)
         img = resize_image(img, max_width=640, max_height=480)
 
-        # Assess face quality
+        # Assess face quality. Enforce quality gate for ALL anchors (including session-scoped)
         quality_score = _assess_face_quality(img)
 
-        # Skip quality gate for session-scoped anchors (already validated at PAN-root level)
-        is_session_anchor = '/sessions/' in person_id
-        if quality_score < 10.0 and not is_session_anchor:
+        if quality_score < 10.0:
             return {
                 "success": False,
                 "person_id": person_id,

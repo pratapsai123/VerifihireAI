@@ -26,43 +26,17 @@ def log_automation_event(candidate, event_type, status, message, details=None, p
 
 def _register_face_with_deepface(person_id, image_base64):
     """
-    Push a base64-encoded face image to the DeepFace registration endpoint.
+    Push a base64-encoded face image to the DeepFace microservice.
 
-    This is used by the admin photo-approval flow (and legacy override paths)
-    to overwrite the master face for a given person_id.
+    Delegates to the shared deepface_client.df_register so that all face
+    registration across the backend goes through a single code path.
 
-    Returns the parsed JSON response on success, or None on failure.
+    Raises DeepFaceServiceError if the microservice is unreachable (hard-fail).
+    Returns the parsed JSON response dict on success.
     """
-    import requests
-    from django.conf import settings
+    from api.deepface_client import df_register, DeepFaceServiceError  # noqa: F401
+    return df_register(person_id, image_base64, overwrite=True)
 
-    # DEEPFACE_BASE_URL example: http://127.0.0.1:8500/api/v1
-    base_url = getattr(settings, 'DEEPFACE_BASE_URL', None) or 'http://127.0.0.1:8500/api/v1'
-    url = f"{base_url.rstrip('/')}/registration/register"
-
-    person_id = str(person_id).strip().lower()
-    payload = {
-        'person_id': person_id,
-        'image_base64': image_base64,
-        'overwrite': True,
-    }
-    try:
-        resp = requests.post(url, json=payload, timeout=30)
-        # Log the full response body so we can see exactly why DeepFace rejected.
-        try:
-            body = resp.json()
-        except Exception:
-            body = {'raw': resp.text[:500]}
-        if resp.status_code >= 400:
-            logger.error(
-                f"[DeepFace] register({person_id}) HTTP {resp.status_code}: {body}"
-            )
-            return None
-        logger.info(f"[DeepFace] register({person_id}) -> success={body.get('success')}")
-        return body
-    except Exception as e:
-        logger.error(f"[DeepFace] register({person_id}) network/other error: {e}")
-        return None
 
 
 def _archive_session_photo(pan_number, public_token, image_b64, meta=None):

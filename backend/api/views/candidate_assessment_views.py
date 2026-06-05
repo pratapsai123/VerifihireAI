@@ -2807,102 +2807,35 @@ def save_all_candidate_details_view(request):
         verify_status = False
         match_score = 0.0
         face_mismatch_detected = False
-        
+
         if identity_link:
-            # Verification: Compare current snapshot with the registered identity face
+
+            # Verification: Compare current snapshot with the registered identity face.
+            # Recovery (if person not yet in microservice) is handled inside
+            # verify_face_with_deepface by querying CandidateDetails / IdentityLink
+            # and re-registering to the microservice before verifying.
             verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
-            
-            # RECOVERY: If reference face is missing from filesystem or is 0 bytes, attempt to restore it
-            ref_face_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
-            if not verify_result.get('verified') and (not os.path.exists(ref_face_path) or os.path.getsize(ref_face_path) == 0 or "No registered identity found" in str(verify_result.get('message', '')) or "Missing comparison" in str(verify_result.get('reason', ''))):
-                recovered = False
-                
-                # 1. Try restoring from CandidateDetails base64 snapshot (most reliable as it is stored in DB)
-                # Prioritize: (A) Latest approved update, (B) Earliest verified baseline, (C) Earliest overall
-                detail = CandidateDetails.objects.filter(
-                    pan_number=person_id,
-                    photo_update_status='approved'
-                ).order_by('-id').first()
-                
-                if not detail and norm_email:
-                    detail = CandidateDetails.objects.filter(
-                        email=norm_email,
-                        photo_update_status='approved'
-                    ).order_by('-id').first()
-                
-                if not detail:
-                    detail = CandidateDetails.objects.filter(
-                        pan_number=person_id,
-                        identity_mismatch_detected=False
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail and norm_email:
-                    detail = CandidateDetails.objects.filter(
-                        email=norm_email,
-                        identity_mismatch_detected=False
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail:
-                    detail = CandidateDetails.objects.filter(
-                        pan_number=person_id
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail and norm_email:
-                    detail = CandidateDetails.objects.filter(
-                        email=norm_email
-                    ).exclude(snapshot="").order_by('id').first()
-                
-                if detail and detail.snapshot:
+
+            # If identity is still unregistered after recovery (no DB snapshot found),
+            # fall back to re-registering the current snapshot as the canonical face.
+            if not verify_result.get('verified') and verify_result.get('message', '').startswith('No registered identity'):
+                reg_result = register_face_with_deepface(person_id, snapshot)
+                if not reg_result.get('success'):
+                    err_msg = str(reg_result.get('message', '')).lower()
+                    if "quality" in err_msg or "no face detected" in err_msg:
+                        return Response({'error': f"Image quality too low or no face detected. Please provide a clearer face image."}, status=status.HTTP_400_BAD_REQUEST)
+
+                if reg_result.get('success'):
+                    verify_result = {'verified': True, 'distance': 0.0, 'model': 'ArcFace', 'detector': 'opencv'}
+                    # Also persist snapshot_image on IdentityLink if it was missing
                     try:
-                        snapshot_data = detail.snapshot
-                        if ',' in snapshot_data:
-                            snapshot_b64 = snapshot_data.split(',', 1)[1]
-                        else:
-                            snapshot_b64 = snapshot_data
-                        img_bytes = base64.b64decode(snapshot_b64)
-                        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
-                        os.makedirs(identities_dir, exist_ok=True)
-                        with open(ref_face_path, "wb") as f:
-                            f.write(img_bytes)
-                        # Retry verification
-                        verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
-                        if verify_result.get('verified'):
-                            recovered = True
-                    except Exception as e:
-                        print(f"Face recovery from CandidateDetails base64 failed for {person_id}: {e}")
-                
-                # 2. Fallback to IdentityLink snapshot_image
-                if not recovered and identity_link.snapshot_image:
-                    try:
-                        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
-                        os.makedirs(identities_dir, exist_ok=True)
-                        try:
-                            identity_link.snapshot_image.seek(0)
-                        except Exception:
-                            pass
-                        with open(ref_face_path, "wb") as f:
-                            f.write(identity_link.snapshot_image.read())
-                        # Retry verification
-                        verify_result = verify_face_with_deepface(person_id, snapshot, email=norm_email)
-                        if verify_result.get('verified'):
-                            recovered = True
-                    except Exception as e:
-                        print(f"Face recovery from IdentityLink failed for {person_id}: {e}")
-                
-                if not recovered:
-                    # Fallback: Re-register current face if reference is lost
-                    reg_result = register_face_with_deepface(person_id, snapshot)
-                    if reg_result.get('success'):
-                        verify_result = {'verified': True, 'distance': 0.0, 'model': 'ArcFace', 'detector': 'retinaface'}
-                        # Also update the stored snapshot_image if it was missing
-                        try:
-                            if not identity_link.snapshot_image:
-                                if ',' in snapshot: snapshot_b64 = snapshot.split(',', 1)[1]
-                                else: snapshot_b64 = snapshot
-                                snapshot_data = base64.b64decode(snapshot_b64)
-                                identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
-                                identity_link.save(update_fields=['snapshot_image'])
-                        except: pass
+                        if not identity_link.snapshot_image:
+                            snap_b64 = snapshot.split(',', 1)[1] if ',' in snapshot else snapshot
+                            snapshot_data = base64.b64decode(snap_b64)
+                            identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                            identity_link.save(update_fields=['snapshot_image'])
+                    except Exception:
+                        pass
 
             verify_status = verify_result.get('verified', False)
             distance = verify_result.get('distance', 1.0)
@@ -2926,6 +2859,11 @@ def save_all_candidate_details_view(request):
                 mismatch_reasons.append("Identity Face Mismatch: The face on the uploaded PAN card does not match the candidate's webcam snapshot.")
             
             reg_result = register_face_with_deepface(person_id, snapshot)
+            if not reg_result.get('success'):
+                err_msg = str(reg_result.get('message', '')).lower()
+                if "quality" in err_msg or "no face detected" in err_msg:
+                    return Response({'error': f"Image quality too low or no face detected. Please provide a clearer face image."}, status=status.HTTP_400_BAD_REQUEST)
+
             if reg_result.get('success'):
                 # Convert base64 snapshot to file for Django model
                 snapshot_file = None

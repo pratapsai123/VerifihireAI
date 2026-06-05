@@ -582,174 +582,189 @@ def detect_face_in_image(image_file):
 
 def register_face_with_deepface(person_id, image_data):
     """
-    Registers a face with DeepFace DIRECTLY in the backend (no microservice needed).
+    Register a face via the DeepFace microservice (unified flow).
+
+    Accepts the same argument shapes as the legacy local implementation so that
+    all existing callers (candidate_assessment_views, workflow_views) continue to
+    work without modification.
+
+    Raises DeepFaceServiceError if the microservice is unreachable (hard-fail policy).
     """
+    from api.deepface_client import df_register, DeepFaceServiceError  # noqa: F401
+
+    # Normalise image_data to a base64 string
+    if hasattr(image_data, 'read'):
+        # Django UploadedFile / InMemoryUploadedFile
+        image_data.seek(0)
+        raw = image_data.read()
+        image_data.seek(0)
+        image_b64 = base64.b64encode(raw).decode('ascii')
+    elif isinstance(image_data, (bytes, bytearray)):
+        image_b64 = base64.b64encode(image_data).decode('ascii')
+    elif isinstance(image_data, str):
+        # Already a base64 string or data-URL — pass through; df_register strips the prefix
+        image_b64 = image_data
+    else:
+        return {"success": False, "message": f"Unsupported image_data type: {type(image_data)}"}
+
     try:
-        from deepface import DeepFace
-        from django.conf import settings
-        import shutil
-
-        # Setup directory for identity storage
-        identities_dir = os.path.join(settings.MEDIA_ROOT, 'identities', person_id)
-        if os.path.exists(identities_dir):
-            shutil.rmtree(identities_dir)
-        os.makedirs(identities_dir, exist_ok=True)
-
-        # Process image data
-        if hasattr(image_data, 'read'):
-            image_data.seek(0)
-            img_bytes = image_data.read()
-            image_data.seek(0)
-            img_path = os.path.join(identities_dir, "canonical.jpg")
-            with open(img_path, "wb") as f:
-                f.write(img_bytes)
-        elif isinstance(image_data, str) and image_data.startswith('data:image'):
-            img_b64 = image_data.split(',', 1)[1]
-            img_bytes = base64.b64decode(img_b64)
-            img_path = os.path.join(identities_dir, "canonical.jpg")
-            with open(img_path, "wb") as f:
-                f.write(img_bytes)
-        else:
-            # Assume it's a file path or bytes
-            img_path = image_data
-
-        # We don't actually need to "register" in a DB here, just ensure a face exists
-        # and we can use it as a reference later.
-        objs = DeepFace.extract_faces(
-            img_path = img_path, 
-            detector_backend = 'retinaface',
-            enforce_detection = True,
-            align = True
-        )
-        
-        if not objs:
-            return {"success": False, "message": "No face detected in the image."}
-
-        return {"success": True, "message": "Face identity established internally."}
-    except Exception as e:
-        print(f"Internal DeepFace Registration Error: {e}")
-        return {"success": False, "message": str(e)}
+        result = df_register(person_id, image_b64, overwrite=True)
+        return result
+    except DeepFaceServiceError as exc:
+        print(f"[DeepFace] register_face_with_deepface({person_id}) failed: {exc}")
+        raise
 
 def verify_face_with_deepface(person_id, snapshot_base64, candidate_id=None, email=None):
     """
-    Verifies a snapshot against a registered identity DIRECTLY in the backend.
+    Verify a snapshot against the registered identity for person_id via the
+    DeepFace microservice (unified flow).
+
+    Recovery logic: if the microservice reports that the person is not yet
+    registered (e.g., first-time or after a data wipe), this function attempts
+    to restore the face from CandidateDetails or IdentityLink and re-registers
+    it with the microservice before verifying.
+
+    Returns a dict compatible with the legacy run_standard_deepface_verification
+    shape so all callers continue to work unchanged.
+
+    Raises DeepFaceServiceError if the microservice is unreachable.
     """
+    from api.deepface_client import df_verify, df_is_registered, df_register, DeepFaceServiceError
+    from api.models import CandidateDetails, IdentityLink
+
     try:
-        from django.conf import settings
-        from api.models import CandidateDetails, IdentityLink
-        
-        # Reference image path
-        ref_path = os.path.join(settings.MEDIA_ROOT, 'identities', person_id, "canonical.jpg")
-        
-        # Recovery: If reference image is missing from filesystem or is 0 bytes, restore it
-        if not os.path.exists(ref_path) or os.path.getsize(ref_path) == 0:
-            try:
-                restored = False
-                
-                # 1. Try restoring from CandidateDetails base64 snapshot (most reliable)
-                # Prioritize: (A) Latest approved update, (B) Earliest verified baseline, (C) Earliest overall
+        # ── Recovery: if not yet registered in the microservice, restore from DB ──
+        try:
+            already_registered = df_is_registered(person_id)
+        except DeepFaceServiceError:
+            raise  # Hard-fail immediately if microservice is down
+
+        if not already_registered:
+            print(f"[DeepFace Recovery] {person_id} not in microservice — attempting restore from DB.")
+            restored = False
+
+            # Priority 1: Latest admin-approved CandidateDetails snapshot
+            detail = CandidateDetails.objects.filter(
+                pan_number=person_id,
+                photo_update_status='approved'
+            ).order_by('-id').first()
+
+            if not detail and email:
                 detail = CandidateDetails.objects.filter(
-                    pan_number=person_id,
+                    email=email,
                     photo_update_status='approved'
                 ).order_by('-id').first()
-                
-                if not detail and email:
-                    detail = CandidateDetails.objects.filter(
-                        email=email,
-                        photo_update_status='approved'
-                    ).order_by('-id').first()
-                
-                if not detail:
-                    detail = CandidateDetails.objects.filter(
-                        pan_number=person_id,
-                        identity_mismatch_detected=False
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail and email:
-                    detail = CandidateDetails.objects.filter(
-                        email=email,
-                        identity_mismatch_detected=False
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail:
-                    detail = CandidateDetails.objects.filter(
-                        pan_number=person_id
-                    ).exclude(snapshot="").order_by('id').first()
-                    
-                if not detail and email:
-                    detail = CandidateDetails.objects.filter(
-                        email=email
-                    ).exclude(snapshot="").order_by('id').first()
-                
-                if detail and detail.snapshot:
-                    snapshot_data = detail.snapshot
-                    if ',' in snapshot_data:
-                        snapshot_b64 = snapshot_data.split(',', 1)[1]
-                    else:
-                        snapshot_b64 = snapshot_data
-                    img_bytes = base64.b64decode(snapshot_b64)
-                    os.makedirs(os.path.dirname(ref_path), exist_ok=True)
-                    with open(ref_path, "wb") as f:
-                        f.write(img_bytes)
-                    print(f"[DeepFace Recovery] Restored missing canonical face for {person_id} from CandidateDetails base64 snapshot (ID: {detail.id}).")
-                    restored = True
-                
-                # 2. Fallback to IdentityLink snapshot_image
-                if not restored:
-                    identity_link = IdentityLink.objects.filter(pan_number=person_id).first()
-                    if not identity_link and email:
-                        identity_link = IdentityLink.objects.filter(email=email).first()
-                    if identity_link and identity_link.snapshot_image:
-                        os.makedirs(os.path.dirname(ref_path), exist_ok=True)
-                        try:
-                            identity_link.snapshot_image.seek(0)
-                        except Exception:
-                            pass
-                        with open(ref_path, "wb") as f:
-                            f.write(identity_link.snapshot_image.read())
-                        print(f"[DeepFace Recovery] Restored missing canonical face for {person_id} from IdentityLink snapshot.")
-                        restored = True
-            except Exception as e:
-                print(f"[DeepFace Recovery] Failed to restore canonical face for {person_id}: {e}")
 
-        # Save temp snapshot for DeepFace
-        temp_dir = os.path.join(settings.MEDIA_ROOT, 'temp')
-        os.makedirs(temp_dir, exist_ok=True)
-        temp_snap_path = os.path.join(temp_dir, f"snap_{person_id}.jpg")
-        
-        if ',' in snapshot_base64:
-            snapshot_base64 = snapshot_base64.split(',', 1)[1]
-        
-        snapshot_bytes = base64.b64decode(snapshot_base64)
-        with open(temp_snap_path, "wb") as f:
-            f.write(snapshot_bytes)
-            
-        # Find candidate details for metadata if not passed
-        if not candidate_id or not email:
-            detail = CandidateDetails.objects.filter(pan_number=person_id).order_by('-id').first()
-            if detail:
-                if not candidate_id: candidate_id = detail.id
-                if not email: email = detail.email
-                
-        result = run_standard_deepface_verification(
-            img1_path=ref_path,
-            img2_path=temp_snap_path,
-            candidate_id=candidate_id,
-            email=email,
-            pan=person_id
+            # Priority 2: Earliest verified (no mismatch) baseline
+            if not detail:
+                detail = CandidateDetails.objects.filter(
+                    pan_number=person_id,
+                    identity_mismatch_detected=False
+                ).exclude(snapshot='').order_by('id').first()
+
+            if not detail and email:
+                detail = CandidateDetails.objects.filter(
+                    email=email,
+                    identity_mismatch_detected=False
+                ).exclude(snapshot='').order_by('id').first()
+
+            # Priority 3: Any snapshot for this PAN
+            if not detail:
+                detail = CandidateDetails.objects.filter(
+                    pan_number=person_id
+                ).exclude(snapshot='').order_by('id').first()
+
+            if not detail and email:
+                detail = CandidateDetails.objects.filter(
+                    email=email
+                ).exclude(snapshot='').order_by('id').first()
+
+            if detail and detail.snapshot:
+                snap_b64 = detail.snapshot
+                try:
+                    df_register(person_id, snap_b64, overwrite=False)
+                    print(f"[DeepFace Recovery] Re-registered {person_id} from CandidateDetails (ID: {detail.id}).")
+                    restored = True
+                except DeepFaceServiceError:
+                    raise
+                except Exception as reg_err:
+                    print(f"[DeepFace Recovery] Re-register from CandidateDetails failed: {reg_err}")
+
+            # Priority 4: IdentityLink snapshot_image
+            if not restored:
+                identity_link = IdentityLink.objects.filter(pan_number=person_id).first()
+                if not identity_link and email:
+                    identity_link = IdentityLink.objects.filter(email=email).first()
+                if identity_link and identity_link.snapshot_image:
+                    try:
+                        identity_link.snapshot_image.seek(0)
+                        raw = identity_link.snapshot_image.read()
+                        link_b64 = base64.b64encode(raw).decode('ascii')
+                        df_register(person_id, link_b64, overwrite=False)
+                        print(f"[DeepFace Recovery] Re-registered {person_id} from IdentityLink snapshot.")
+                        restored = True
+                    except DeepFaceServiceError:
+                        raise
+                    except Exception as reg_err:
+                        print(f"[DeepFace Recovery] Re-register from IdentityLink failed: {reg_err}")
+
+            if not restored:
+                # No source found — return a 'not registered' result so caller
+                # can fall through to first-time registration.
+                return {
+                    "verified": False,
+                    "distance": None,
+                    "threshold": 0.75,
+                    "model": "ArcFace",
+                    "detector": "opencv",
+                    "no_face_detected": False,
+                    "identity_mismatch_detected": False,
+                    "message": "No registered identity found for this person_id.",
+                }
+
+        # ── Actual verification via microservice ──
+        result = df_verify(person_id, snapshot_base64)
+
+        # Normalise to the shape that all callers expect (same keys as
+        # run_standard_deepface_verification output).
+        verified   = result.get('verified', False)
+        distance   = result.get('distance')
+        threshold  = result.get('threshold')
+        model      = result.get('model', 'ArcFace')
+        detector   = result.get('detector', 'opencv')
+
+        identity_mismatch_detected = (
+            not verified
+            and distance is not None
+            and threshold is not None
+            and distance > threshold
         )
-        
-        # Cleanup temp file
-        if os.path.exists(temp_snap_path):
-            try:
-                os.remove(temp_snap_path)
-            except Exception:
-                pass
-                
-        return result
-    except Exception as e:
-        print(f"Internal DeepFace Verification Error: {e}")
-        return {"verified": False, "message": str(e)}
+
+        return {
+            'verified': verified,
+            'distance': distance,
+            'threshold': threshold,
+            'model': model,
+            'detector': detector,
+            'no_face_detected': result.get('no_face_detected', False),
+            'identity_mismatch_detected': identity_mismatch_detected,
+            'status': 'Verified' if verified else 'Identity Face Mismatch',
+            # Paths/hashes are not applicable for microservice verification;
+            # keep keys present with None so callers don't KeyError.
+            'original_image_path': None,
+            'captured_image_path': None,
+            'original_image_hash': None,
+            'captured_image_hash': None,
+            'report_original_hash': None,
+            'report_captured_hash': None,
+            'image_source_mismatch': False,
+        }
+
+    except DeepFaceServiceError:
+        raise  # Propagate hard-fail to caller
+    except Exception as exc:
+        print(f"[DeepFace] verify_face_with_deepface({person_id}) unexpected error: {exc}")
+        return {"verified": False, "message": str(exc)}
 
 def extract_name_from_text(text):
     """

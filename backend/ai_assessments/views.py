@@ -1241,50 +1241,30 @@ class GenerateAssessmentView(APIView):
 
 def _register_face_with_deepface(person_id, snapshot_b64, overwrite=False):
     """
-    Calls the DeepFace microservice to register/update the candidate's face.
-    Ensures biometric data is persisted so that the proctoring session can start.
-    Set overwrite=True when HR approves a new identity photo to replace the old one.
+    Register/update a candidate's face in the DeepFace microservice.
+
+    Delegates to the shared deepface_client.df_register so all face
+    registration in the backend flows through a single code path.
+
+    Raises DeepFaceServiceError if the microservice is unreachable (hard-fail).
     """
-    try:
-        url = f"{DEEPFACE_BASE_URL}/registration/register"
-        payload = {
-            "person_id": person_id,
-            "image_base64": snapshot_b64,
-            "label": "registration_snapshot",
-            "overwrite": overwrite
-        }
-        resp = requests.post(url, json=payload, timeout=15)
-        if resp.status_code == 200:
-            print(f"DeepFace registration successful for {person_id}")
-            return True
-        else:
-            print(f"DeepFace registration failed for {person_id}: {resp.text}")
-            return False
-    except Exception as e:
-        print(f"DeepFace registration error for {person_id}: {str(e)}")
-        return False
+    from api.deepface_client import df_register
+    return df_register(person_id, snapshot_b64, overwrite=overwrite)
+
 
 def _verify_face_with_deepface_microservice(person_id, snapshot_b64):
     """
-    Calls the DeepFace microservice to verify the candidate's face during re-entry.
+    Verify the candidate's face during re-entry via the DeepFace microservice.
+
+    Delegates to the shared deepface_client.df_verify so all face verification
+    in the backend flows through a single code path.
+
+    Raises DeepFaceServiceError if the microservice is unreachable (hard-fail).
     """
-    try:
-        url = f"{DEEPFACE_BASE_URL}/registration/verify"
-        payload = {
-            "person_id": person_id,
-            "image_base64": snapshot_b64,
-            "model": "ArcFace"
-        }
-        resp = requests.post(url, json=payload, timeout=15)
-        if resp.status_code == 200:
-            result = resp.json()
-            return result.get('verified', False)
-        else:
-            print(f"DeepFace verification failed for {person_id}: {resp.text}")
-            return False
-    except Exception as e:
-        print(f"DeepFace verification error for {person_id}: {str(e)}")
-        return False
+    from api.deepface_client import df_verify
+    result = df_verify(person_id, snapshot_b64)
+    return result.get('verified', False)
+
 
 class CreateSubmissionView(APIView):
     permission_classes = [AllowAny]

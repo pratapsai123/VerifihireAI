@@ -91,7 +91,7 @@ API_PREFIX = "/api/v1"
 REGISTRATION_MODEL = "ArcFace"
 REGISTRATION_DETECTOR = "opencv"
 REGISTRATION_DISTANCE_METRIC = "cosine"
-REGISTRATION_THRESHOLD = 0.75  # Cosine distance threshold for ArcFace (relaxed for webcam angle/lighting variance)
+REGISTRATION_THRESHOLD = 0.68  # Cosine distance threshold for ArcFace
 
 # SFace: High speed — used for continuous real-time monitoring
 MONITORING_MODEL = "SFace"
