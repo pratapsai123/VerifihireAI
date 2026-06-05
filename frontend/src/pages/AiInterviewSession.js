@@ -156,6 +156,7 @@ const AiInterviewSession = () => {
     const isStartingMicRef = useRef(false);
     const manualMuteRef = useRef(false); // Track if user manually muted mic to prevent auto-resume
     const isNoticePlayingRef = useRef(false);
+    const latestSpeakIdRef = useRef(0);
     const faceEmbeddingHashRef = useRef(null); // Store face embedding hash for duplicate detection
     // DeepFace refs
     const dfWsRef = useRef(null);
@@ -901,6 +902,11 @@ const AiInterviewSession = () => {
 
     // speakWithBlob: plays a pre-fetched TTS audio blob (skips the network fetch)
     const speakWithBlob = useCallback((blob) => {
+        // GUARD: Do not play any audio if interview is completed
+        if (isCompletedRef.current) return Promise.resolve();
+
+        const speakId = ++latestSpeakIdRef.current;
+
         if (currentAudioRef.current) {
             try { currentAudioRef.current.pause(); currentAudioRef.current.currentTime = 0; } catch (e) { }
             currentAudioRef.current = null;
@@ -925,6 +931,9 @@ const AiInterviewSession = () => {
             audio.onended = () => {
                 currentAudioRef.current = null;
                 URL.revokeObjectURL(audioUrl);
+                if (speakId !== latestSpeakIdRef.current) {
+                    return resolve();
+                }
                 setIsSpeaking(false);
                 isSpeakingRef.current = false;
                 if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
@@ -933,12 +942,18 @@ const AiInterviewSession = () => {
             audio.onerror = () => {
                 currentAudioRef.current = null;
                 URL.revokeObjectURL(audioUrl);
+                if (speakId !== latestSpeakIdRef.current) {
+                    return resolve();
+                }
                 setIsSpeaking(false);
                 isSpeakingRef.current = false;
                 if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
                 resolve();
             };
             audio.play().catch(() => {
+                if (speakId !== latestSpeakIdRef.current) {
+                    return resolve();
+                }
                 setIsSpeaking(false);
                 isSpeakingRef.current = false;
                 if (micStreamRef.current) micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = true; });
@@ -947,8 +962,89 @@ const AiInterviewSession = () => {
         });
     }, [isPermissionsGranted]);
 
+    // Fallback: Browser SpeechSynthesis (used if Coqui TTS endpoint is unavailable)
+    const fallbackBrowserSpeak = useCallback((text, watchdog, resolve, speakId) => {
+        if (speakId !== latestSpeakIdRef.current) {
+            console.log("Browser Speak aborted: newer speak request made.");
+            if (watchdog) clearTimeout(watchdog);
+            return resolve();
+        }
+
+        synthRef.current.cancel();
+        if (synthRef.current.paused) synthRef.current.resume();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+        const voice =
+            voicesRef.current.find(v => (v.name.includes('Siri') || v.name.includes('Samantha')) && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.includes('Google US English') && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => (v.name.includes('Jenny') || v.name.includes('Aria')) && v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.toLowerCase().includes('female')) ||
+            voicesRef.current.find(v => v.name.includes('Siri') || v.name.includes('Samantha')) ||
+            voicesRef.current.find(v => v.lang.startsWith('en')) ||
+            voicesRef.current[0];
+
+        if (voice) utterance.voice = voice;
+
+        // SECONDARY GUARD: Prevent browser TTS if fullscreen was exited during setup
+        if (!isFullscreenRef.current && isPermissionsGranted) {
+            console.log("Browser Speak aborted: Not in full screen.");
+            if (watchdog) clearTimeout(watchdog);
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+            return resolve();
+        }
+
+        utterance.onend = () => {
+            if (watchdog) clearTimeout(watchdog);
+            if (speakId !== latestSpeakIdRef.current) {
+                return resolve();
+            }
+            setTimeout(() => {
+                if (speakId !== latestSpeakIdRef.current) {
+                    return resolve();
+                }
+                setIsSpeaking(false);
+                isSpeakingRef.current = false;
+                if (micStreamRef.current) {
+                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+                }
+                if (isProcessingRef.current) {
+                    setAiStatus("Processing answer...");
+                } else {
+                    setAiStatus("Indu is Online");
+                }
+                resolve();
+            }, 500);
+        };
+
+        utterance.onerror = (event) => {
+            console.error("SpeechSynthesis error:", event);
+            if (watchdog) clearTimeout(watchdog);
+            if (speakId !== latestSpeakIdRef.current) {
+                return resolve();
+            }
+            setIsSpeaking(false);
+            isSpeakingRef.current = false;
+            setAiStatus("Indu is Online");
+            if (micStreamRef.current) {
+                micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
+            }
+            resolve();
+        };
+
+        synthRef.current.speak(utterance);
+    }, []);
+
     const speak = useCallback((content) => {
         const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
+
+        // GUARD: Do not speak if interview is already completed
+        if (isCompletedRef.current) {
+            console.log("Speak blocked: Interview is completed.");
+            return Promise.resolve();
+        }
+
+        const speakId = ++latestSpeakIdRef.current;
 
         // 0. STOP PREVIOUS AUDIO IMMEDIATELY to prevent overlaps
         if (currentAudioRef.current) {
@@ -1005,6 +1101,12 @@ const AiInterviewSession = () => {
                     timeout: 30000 // 30s timeout for synthesis
                 });
 
+                if (speakId !== latestSpeakIdRef.current) {
+                    console.log("Speak aborted: a newer speak request was made during synthesis.");
+                    clearTimeout(watchdog);
+                    return resolve();
+                }
+
                 const audioBlob = new Blob([res.data], { type: 'audio/mpeg' });
                 const audioUrl = URL.createObjectURL(audioBlob);
 
@@ -1014,6 +1116,7 @@ const AiInterviewSession = () => {
                     URL.revokeObjectURL(audioUrl);
                     setIsSpeaking(false);
                     isSpeakingRef.current = false;
+                    clearTimeout(watchdog);
                     return resolve();
                 }
 
@@ -1026,6 +1129,9 @@ const AiInterviewSession = () => {
                     URL.revokeObjectURL(audioUrl);
                     // Delay unlock to allow speaker echo to fade
                     setTimeout(() => {
+                        if (speakId !== latestSpeakIdRef.current) {
+                            return resolve();
+                        }
                         setIsSpeaking(false);
                         isSpeakingRef.current = false;
                         if (micStreamRef.current) {
@@ -1045,7 +1151,11 @@ const AiInterviewSession = () => {
                     clearTimeout(watchdog);
                     URL.revokeObjectURL(audioUrl);
                     // Fallback to browser speech
-                    fallbackBrowserSpeak(text, watchdog, resolve);
+                    if (speakId === latestSpeakIdRef.current) {
+                        fallbackBrowserSpeak(text, watchdog, resolve, speakId);
+                    } else {
+                        resolve();
+                    }
                 };
 
                 audio.play().catch((err) => {
@@ -1057,72 +1167,24 @@ const AiInterviewSession = () => {
                     // Autoplay blocked — fallback to browser TTS
                     currentAudioRef.current = null;
                     URL.revokeObjectURL(audioUrl);
-                    fallbackBrowserSpeak(text, watchdog, resolve);
+                    if (speakId === latestSpeakIdRef.current) {
+                        fallbackBrowserSpeak(text, watchdog, resolve, speakId);
+                    } else {
+                        clearTimeout(watchdog);
+                        resolve();
+                    }
                 });
 
             } catch (err) {
                 console.error("Backend TTS Endpoint Error:", err.response?.data || err.message);
-                fallbackBrowserSpeak(text, watchdog, resolve);
+                if (speakId === latestSpeakIdRef.current) {
+                    fallbackBrowserSpeak(text, watchdog, resolve, speakId);
+                } else {
+                    clearTimeout(watchdog);
+                    resolve();
+                }
             }
         });
-    }, []);
-
-    // Fallback: Browser SpeechSynthesis (used if Coqui TTS endpoint is unavailable)
-    const fallbackBrowserSpeak = useCallback((text, watchdog, resolve) => {
-        synthRef.current.cancel();
-        if (synthRef.current.paused) synthRef.current.resume();
-
-        const utterance = new SpeechSynthesisUtterance(text);
-        const voice =
-            voicesRef.current.find(v => (v.name.includes('Siri') || v.name.includes('Samantha')) && v.name.toLowerCase().includes('female')) ||
-            voicesRef.current.find(v => v.name.includes('Google US English') && v.name.toLowerCase().includes('female')) ||
-            voicesRef.current.find(v => (v.name.includes('Jenny') || v.name.includes('Aria')) && v.name.toLowerCase().includes('female')) ||
-            voicesRef.current.find(v => v.name.toLowerCase().includes('female')) ||
-            voicesRef.current.find(v => v.name.includes('Siri') || v.name.includes('Samantha')) ||
-            voicesRef.current.find(v => v.lang.startsWith('en')) ||
-            voicesRef.current[0];
-
-        if (voice) utterance.voice = voice;
-
-        // SECONDARY GUARD: Prevent browser TTS if fullscreen was exited during setup
-        if (!isFullscreenRef.current && isPermissionsGranted) {
-            console.log("Browser Speak aborted: Not in full screen.");
-            if (watchdog) clearTimeout(watchdog);
-            setIsSpeaking(false);
-            isSpeakingRef.current = false;
-            return resolve();
-        }
-
-        utterance.onend = () => {
-            if (watchdog) clearTimeout(watchdog);
-            setTimeout(() => {
-                setIsSpeaking(false);
-                isSpeakingRef.current = false;
-                if (micStreamRef.current) {
-                    micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
-                }
-                if (isProcessingRef.current) {
-                    setAiStatus("Processing answer...");
-                } else {
-                    setAiStatus("Indu is Online");
-                }
-                resolve();
-            }, 500);
-        };
-
-        utterance.onerror = (event) => {
-            console.error("SpeechSynthesis error:", event);
-            if (watchdog) clearTimeout(watchdog);
-            setIsSpeaking(false);
-            isSpeakingRef.current = false;
-            setAiStatus("Indu is Online");
-            if (micStreamRef.current) {
-                micStreamRef.current.getAudioTracks().forEach(track => { track.enabled = true; });
-            }
-            resolve();
-        };
-
-        synthRef.current.speak(utterance);
     }, []);
 
     // Helper: Record ANY candidate activity to prevent false silence detection
@@ -1256,10 +1318,23 @@ const AiInterviewSession = () => {
             currentAudioRef.current = null;
         }
         if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
+        if (silenceTimerRef.current) {
+            clearInterval(silenceTimerRef.current);
+            silenceTimerRef.current = null;
+        }
+        if (recognitionRef.current) {
+            try { recognitionRef.current.stop(); } catch (e) { }
+            recognitionRef.current = null;
+        }
+        setIsRecording(false);
+        isRecordingRef.current = false;
 
         const finishMessage = customMessage || "The interview is now complete. Thank you for your time and we will get back to you soon. Goodbye!";
         addMessage('ai', finishMessage);
+        // Temporarily allow speaking the goodbye message even though isCompletedRef is true
+        isCompletedRef.current = false;
         const speakPromise = speak(finishMessage).catch(e => console.error(e));
+        isCompletedRef.current = true;
 
         // CRITICAL: Mark interview as completed on the server with retry logic
         // This MUST succeed, otherwise the candidate stays stuck in 'Interview' status forever
@@ -1305,7 +1380,7 @@ const AiInterviewSession = () => {
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(async () => {
-        if (userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
+        if (isCompletedRef.current || userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
         if (!isFullscreenRef.current) {
             console.log("Mic blocked: Not in full screen.");
             return;
@@ -1316,7 +1391,7 @@ const AiInterviewSession = () => {
         const maxAttempts = 10;
 
         const tryStart = async () => {
-            if (!isFullscreenRef.current) return;
+            if (isCompletedRef.current || !isFullscreenRef.current) return;
 
             if (isProcessingRef.current || isSpeakingRef.current) {
                 if (attempts < maxAttempts) {
@@ -1726,6 +1801,14 @@ const AiInterviewSession = () => {
         console.log("Submitting answer turn...");
 
         try {
+            // GUARD: If interview was completed while we were preparing, stop immediately
+            if (isCompletedRef.current) {
+                console.log("[handleAnswerSubmission] Aborted: interview already completed.");
+                setIsProcessing(false);
+                isProcessingRef.current = false;
+                return;
+            }
+
             const currentQ = lastAiQuestionRef.current || "Introduction and Background";
             const payload = {
                 candidate_token: token,
@@ -1737,6 +1820,15 @@ const AiInterviewSession = () => {
             };
             // NEW: Use retry logic instead of single attempt
             const result = await submitAnswerWithRetry(payload, 3);
+
+            // GUARD: If interview was completed while waiting for API response, stop
+            if (isCompletedRef.current) {
+                console.log("[handleAnswerSubmission] Aborted after API return: interview completed during submission.");
+                setIsProcessing(false);
+                isProcessingRef.current = false;
+                return;
+            }
+
             const data = result.data;
             const isClarification = data.is_clarification === true;
             const isExit = data.is_exit === true;
@@ -3145,7 +3237,7 @@ const AiInterviewSession = () => {
                             <p style={{ color: '#4a5568', fontSize: '1.1rem', marginBottom: '2rem', lineHeight: '1.6' }}>
                                 To ensure a fair and secure interview process, we require access to your <b>Camera</b> and <b>Entire Screen Share</b>.
                             </p>
-                            <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '1rem', textAlign: 'left' }}>
+                            <div style={{ background: '#f8fafc', padding: '1.5rem', borderRadius: '15px', marginBottom: '1rem', textAlign: 'left', color: '#1e293b' }}>
                                 <div style={{ display: 'flex', gap: '12px', marginBottom: '12px' }}>
                                     <i className="fa-solid fa-circle-check" style={{ color: '#22c55e', marginTop: '4px' }}></i>
                                     <span><b>System Check:</b> Network, Mic & Camera verified ✓</span>
