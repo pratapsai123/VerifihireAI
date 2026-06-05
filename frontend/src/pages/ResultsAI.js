@@ -433,6 +433,14 @@ const ResultsAI = () => {
             });
 
             setGroupedData(groups);
+
+            setSelectedRole(prev => {
+                if (prev && !groups[prev]) {
+                    setTimeout(() => setViewMode('overview'), 0);
+                    return null;
+                }
+                return prev;
+            });
         } catch (err) {
             console.error('Error fetching AI results:', err);
             showToast('error', 'Failed to load results. Please ensure the backend is running.');
@@ -875,22 +883,37 @@ const ResultsAI = () => {
     const performDelete = async (items, reason) => {
         const ids = new Set(items.map(i => i._deleteKey));
 
-        let successCount = 0;
+        let actuallyDeletedCount = 0;
+        let pendingRequestCount = 0;
         let failCount = 0;
         let requestMessage = '';
 
         await Promise.all(items.map(async (item) => {
             try {
                 let resp;
-                if (item._type === 'candidate') {
-                    const realId = item.submission_id.replace('aicand_', '').replace('resume-', '').replace('interview-', '');
+                if (item.submission_id && item.submission_id.startsWith('aicand_')) {
+                    const realId = item.submission_id.replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '');
                     resp = await axios.delete(`${API_BASE_URL}/ai-candidates/${realId}/`, { data: { reason } });
-                    successCount++;
+                } else if (item._type === 'candidate') {
+                    const realId = String(item.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '');
+                    resp = await axios.delete(`${API_BASE_URL}/ai-candidates/${realId}/`, { data: { reason } });
                 } else if (item._type === 'ai_assessment') {
-                    const subId = item.submission_id.replace('ai_', '');
+                    const subId = String(item.submission_id).replace('ai_', '').replace(/_(resume|interview|assessment)$/, '');
                     resp = await axios.delete(`${API_BASE_URL}/ai/submission/${subId}/`, { data: { reason } });
-                    successCount++;
+                } else if (item._type === 'fully_automatic_candidate') {
+                    const realId = item.ai_candidate_pk || (item.interview?.submission_id || item.resume?.submission_id || item.assessment?.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '');
+                    if (realId) {
+                        resp = await axios.delete(`${API_BASE_URL}/ai-candidates/${realId}/`, { data: { reason } });
+                    }
                 }
+                
+                // Status 201 means it was just a pending request created, 200 means actually deleted
+                if (resp && resp.status === 201) {
+                    pendingRequestCount++;
+                } else if (resp && resp.status === 200) {
+                    actuallyDeletedCount++;
+                }
+                
                 if (resp?.data?.message && !requestMessage) requestMessage = resp.data.message;
             } catch (err) {
                 console.error('Delete failed for', item._deleteKey, err);
@@ -898,22 +921,21 @@ const ResultsAI = () => {
             }
         }));
 
-
-
-        // Only remove from UI if it was actually deleted (not just requested)
-        // Cleanup selection state
-        if (successCount > 0) {
+        if (actuallyDeletedCount > 0 || pendingRequestCount > 0) {
             setSelected(prev => { const s = new Set(prev); ids.forEach(k => s.delete(k)); return s; });
         }
 
-        if (requestMessage) {
-            showToast('info', requestMessage);
-        } else if (successCount > 0 && failCount === 0) {
+        if (actuallyDeletedCount > 0) {
             setAiAssessments(prev => prev.filter(r => !ids.has(r.submission_id)));
-            // data is kept in groupedData which is re-fetched on action or filtered locally
-            // We'll re-fetch to ensure consistency with backend hierarchical state
             fetchData();
-            showToast('success', `${successCount} result${successCount > 1 ? 's' : ''} deleted.`);
+        }
+
+        if (requestMessage) {
+            showToast(actuallyDeletedCount > 0 ? 'success' : 'info', requestMessage);
+        } else if (actuallyDeletedCount > 0 && failCount === 0) {
+            showToast('success', `${actuallyDeletedCount} result${actuallyDeletedCount > 1 ? 's' : ''} deleted.`);
+        } else if (pendingRequestCount > 0 && failCount === 0) {
+            showToast('info', `${pendingRequestCount} deletion request(s) submitted.`);
         } else if (failCount > 0) {
             showToast('error', `${failCount} deletion(s) failed.`);
         }
@@ -1958,7 +1980,7 @@ const ResultsAI = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
                                 <div>
                                     <h1 style={{ fontSize: '1.8rem', fontWeight: '900', color: '#111827', margin: 0 }}>
-                                        {selectedRole.replace('AUTO_', '').replace('MANUAL_', '').split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
+                                        {(selectedRole || '').replace('AUTO_', '').replace('MANUAL_', '').split('_')[0]} <span style={{ color: '#94A3B8', fontWeight: '400', fontSize: '1rem' }}>Batch Results</span>
                                     </h1>
                                     <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
                                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.8rem', fontWeight: '700', color: '#4F46E5' }}>

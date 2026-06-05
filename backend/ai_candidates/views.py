@@ -1380,8 +1380,6 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     permission_classes = [AllowAny]
 
-    authentication_classes = []
-
 
 
     def get_queryset(self):
@@ -3831,7 +3829,8 @@ class InterviewsOverviewView(APIView):
         fields_to_fetch = [
             'id', 'batch_id', 'batch_name', 'job_title', 'created_at',
             'score', 'completed_at', 'status', 'link_opened_at',
-            'public_token', 'full_name', 'email'
+            'public_token', 'full_name', 'email', 'automation_settings', 'interview_summary',
+            'available_from', 'available_until'
         ]
         
         if company:
@@ -3859,6 +3858,8 @@ class InterviewsOverviewView(APIView):
         for batch_id, cands in batch_map.items():
             batch_name = cands[0].batch_name or cands[0].job_title or 'Unnamed Batch'
             created_at = cands[0].created_at
+            available_from = cands[0].available_from
+            available_until = cands[0].available_until
 
             batch_completed = 0
             batch_in_progress = 0
@@ -3866,6 +3867,20 @@ class InterviewsOverviewView(APIView):
             candidate_list = []
 
             for c in cands:
+                # Filter out candidates that are purely for resume screening
+                is_ai = False
+                if c.status in {'Interview', 'Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'}:
+                    is_ai = True
+                elif getattr(c, 'automation_settings', {}).get('is_fully_automatic', False):
+                    is_ai = True
+                elif getattr(c, 'automation_settings', {}).get('interview_duration_minutes'):
+                    is_ai = True
+                elif bool(getattr(c, 'interview_summary', None)):
+                    is_ai = True
+                
+                if not is_ai:
+                    continue
+
                 total_all += 1
                 total_possible = 13 * 10
                 score_pct = round((c.score / total_possible) * 100) if c.score is not None and total_possible > 0 and (c.completed_at or c.status in completed_statuses) else None
@@ -3895,17 +3910,20 @@ class InterviewsOverviewView(APIView):
                     'score_pct': score_pct,
                 })
 
-            batches.append({
-                'batch_id': batch_id,
-                'batch_name': batch_name,
-                'created_at': timezone.localtime(created_at).strftime('%B %d, %Y %I:%M %p') if created_at else '',
-                'created_at_iso': timezone.localtime(created_at).isoformat() if created_at else '',
-                'total': len(cands),
-                'completed': batch_completed,
-                'in_progress': batch_in_progress,
-                'pending': batch_pending,
-                'candidates': candidate_list,
-            })
+            if candidate_list:
+                batches.append({
+                    'batch_id': batch_id,
+                    'batch_name': batch_name,
+                    'created_at': timezone.localtime(created_at).strftime('%B %d, %Y %I:%M %p') if created_at else '',
+                    'created_at_iso': timezone.localtime(created_at).isoformat() if created_at else '',
+                    'available_from': timezone.localtime(available_from).strftime('%B %d, %Y %I:%M %p') if available_from else None,
+                    'available_until': timezone.localtime(available_until).strftime('%B %d, %Y %I:%M %p') if available_until else None,
+                    'total': len(candidate_list),
+                    'completed': batch_completed,
+                    'in_progress': batch_in_progress,
+                    'pending': batch_pending,
+                    'candidates': candidate_list,
+                })
 
         # Sort batches by most recent first (use ISO timestamp for accurate ordering)
         batches.sort(key=lambda b: b.get('created_at_iso', ''), reverse=True)
