@@ -176,6 +176,43 @@ def _get_candidate_photo_url(request, submission):
     email = submission.candidate_email.lower().strip() if submission.candidate_email else None
     is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic' if getattr(submission, 'assessment', None) else False
 
+    # Priority 0: DB-stored registered face (always the most recent verified photo for this specific assessment).
+    db_photo = getattr(submission, 'original_identity_photo', None)
+    if db_photo and len(db_photo) > 1000:
+        if not db_photo.startswith('data:image'):
+            return f"data:image/jpeg;base64,{db_photo}"
+        return db_photo
+
+    from pathlib import Path
+    deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+
+    # Priority 0.5: Historically accurate assessment-specific snapshot (Prevents later candidates with same PAN from overriding past exam photos)
+    try:
+        import base64
+        token_str = str(submission.assessment.share_token) if getattr(submission, 'assessment', None) else None
+        if token_str:
+            p_id = getattr(submission, 'pan_number', '').lower().strip() or email or token_str
+            for subfolder in ['assessments', 'sessions']:
+                session_dir = deepface_data_dir / p_id / subfolder / token_str
+                for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
+                    target_snap_file = session_dir / filename
+                    if target_snap_file.exists():
+                        with open(target_snap_file, 'rb') as f:
+                            return f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                            
+            # VM / Docker Deployment Fallback: Fetch from microservice over HTTP if not found on local disk
+            try:
+                from api._imports import DEEPFACE_BASE_URL
+                import requests
+                for subfolder in ['assessments', 'sessions']:
+                    resp = requests.get(f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/{subfolder}/{token_str}/photo", timeout=5)
+                    if resp.status_code == 200:
+                        return f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
+            except Exception:
+                pass
+    except Exception:
+        pass
+
     # Check via DeepFace API for fully automated assessments
     if is_automatic:
         try:
@@ -215,7 +252,7 @@ def _get_candidate_photo_url(request, submission):
     if getattr(submission, 'pan_number', None):
         pan_id = submission.pan_number.lower().strip()
         pan_face_dir = deepface_data_dir / pan_id
-        if pan_face_dir.exists() and any(pan_face_dir.glob('*.jpg')):
+        if pan_face_dir.exists() and any(pan_face_dir.rglob('*.jpg')):
             url_path = f"/api/ai/registration/face/{pan_id}/"
             return request.build_absolute_uri(url_path) if request else url_path
 
@@ -224,14 +261,14 @@ def _get_candidate_photo_url(request, submission):
         token = str(submission.assessment.share_token) if submission.assessment else None
         person_id = f"{email}_{token}" if token else email
         person_face_dir = deepface_data_dir / person_id
-        if person_face_dir.exists() and any(person_face_dir.glob('*.jpg')):
+        if person_face_dir.exists() and any(person_face_dir.rglob('*.jpg')):
             url_path = f"/api/ai/registration/face/{person_id}/"
             return request.build_absolute_uri(url_path) if request else url_path
             
         # Priority 3: Check plain email folder on disk (Manual / Fallback)
         if token:
             email_face_dir = deepface_data_dir / email
-            if email_face_dir.exists() and any(email_face_dir.glob('*.jpg')):
+            if email_face_dir.exists() and any(email_face_dir.rglob('*.jpg')):
                 url_path = f"/api/ai/registration/face/{email}/"
                 return request.build_absolute_uri(url_path) if request else url_path
 
@@ -306,7 +343,41 @@ def _get_unified_identity_mismatch_fields(request, submission):
         return b64_str
 
     detected = getattr(submission, 'identity_mismatch_detected', False)
-    orig_url = _get_candidate_photo_url(request, submission) or clean_b64(submission.original_identity_photo)
+    
+    # Box 1 ("Registered Face" / "Original Candidate") must show the ROOT master face,
+    # NOT the assessment-specific subfolder (which contains the intruder's face).
+    orig_url = None
+    pan_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else None
+    
+    try:
+        from pathlib import Path
+        import base64 as b64_mod
+        deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+        if pan_id:
+            master_dir = deepface_data_dir / pan_id
+            for fname in ['face_0.jpg', 'registration_snapshot.jpg']:
+                master_file = master_dir / fname
+                if master_file.exists():
+                    with open(master_file, 'rb') as f:
+                        orig_url = f"data:image/jpeg;base64,{b64_mod.b64encode(f.read()).decode('utf-8')}"
+                    break
+    except Exception:
+        pass
+        
+    # VM / Docker Deployment Fallback: Fetch from microservice over HTTP if not found on local disk
+    if not orig_url and pan_id:
+        try:
+            from api._imports import DEEPFACE_BASE_URL
+            import requests
+            import base64 as b64_mod
+            resp = requests.get(f"{DEEPFACE_BASE_URL}/registration/registered/{pan_id}/photo", timeout=5)
+            if resp.status_code == 200:
+                orig_url = f"data:image/jpeg;base64,{b64_mod.b64encode(resp.content).decode('utf-8')}"
+        except Exception:
+            pass
+
+    if not orig_url:
+        orig_url = clean_b64(submission.original_identity_photo)
     
     intruder_url = None
     is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic' if getattr(submission, 'assessment', None) else False
@@ -330,8 +401,22 @@ def _get_unified_identity_mismatch_fields(request, submission):
             import base64
             deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
             p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
-            target_snap_file = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token) / 'registration_snapshot.jpg'
-            if target_snap_file.exists():
+            session_dir = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token)
+            
+            # Try multiple possible filenames — DeepFace saves as either name depending on registration method
+            target_snap_file = None
+            for candidate_name in ['registration_snapshot.jpg', 'face_0.jpg']:
+                possible = session_dir / candidate_name
+                if possible.exists():
+                    target_snap_file = possible
+                    break
+            # Fallback: any jpg in the session directory
+            if not target_snap_file and session_dir.exists():
+                for jpg_file in session_dir.glob('*.jpg'):
+                    target_snap_file = jpg_file
+                    break
+            
+            if target_snap_file and target_snap_file.exists():
                 with open(target_snap_file, 'rb') as f:
                     intruder_url = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
         except Exception:
@@ -1196,8 +1281,8 @@ class CreateSubmissionView(APIView):
                                         target_file = person_face_dir / orig_name
                                         break
                                 if not target_file:
-                                    # Fallback: any jpg in the directory
-                                    for jpg_file in person_face_dir.glob('*.jpg'):
+                                    # Fallback: search recursively for any jpg
+                                    for jpg_file in person_face_dir.rglob('*.jpg'):
                                         target_file = jpg_file
                                         break
                                 
@@ -1244,7 +1329,7 @@ class CreateSubmissionView(APIView):
                 # Save the registration snapshot to submission.original_identity_photo
                 # so Box 2 on the report always shows the face captured at THIS exam start,
                 # even if they are a returning candidate who passed verification.
-                if not submission.original_identity_photo:
+                if not submission.original_identity_photo and not getattr(submission, 'identity_mismatch_detected', False):
                     try:
                         submission.original_identity_photo = snapshot
                         submission.save()
@@ -3376,6 +3461,131 @@ class AIAssessmentReportDownloadView(APIView):
                 except Exception as cleanup_err:
                     logger.warning(f"Failed to delete temp file {temp_file}: {cleanup_err}")
 
+class AIAssessmentTimelineView(APIView):
+    """
+    Fetches the assessment activity logs for a specific submission.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        try:
+            submission = AIAssessmentSubmission.objects.get(pk=pk)
+            # Permission check: ensure user belongs to same company
+            user_profile = getattr(request.user, 'profile', None)
+            if not self.request.user.is_superuser and (not user_profile or user_profile.company != submission.assessment.company):
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+            logs = []
+            from django.utils import timezone as tz
+
+            # 1. Guaranteed Assessment Registration/Creation log
+            # For legacy assessments that might have no other logs
+            created_time = getattr(submission.assessment, 'created_at', None) or submission.started_at or tz.now()
+            logs.append({
+                'id': 'ts_created_at',
+                'event_type': 'ASSESSMENT_REGISTERED',
+                'status': 'INFO',
+                'phase': 'ASSESSMENT',
+                'batch_id': getattr(submission, 'batch_id', None),
+                'message': 'Candidate was registered for the AI Assessment.',
+                'details': {},
+                'timestamp': created_time.isoformat(),
+                'timestamp_formatted': tz.localtime(created_time).strftime('%B %d, %Y at %I:%M %p'),
+            })
+
+            # 2. Key assessment timestamps
+            if submission.started_at:
+                local_opened = tz.localtime(submission.started_at)
+                logs.append({
+                    'id': 'ts_started_at',
+                    'event_type': 'STARTED_ASSESSMENT',
+                    'status': 'INFO',
+                    'phase': 'ASSESSMENT',
+                    'batch_id': getattr(submission, 'batch_id', None),
+                    'message': 'Candidate started the assessment.',
+                    'details': {},
+                    'timestamp': submission.started_at.isoformat(),
+                    'timestamp_formatted': local_opened.strftime('%B %d, %Y at %I:%M %p'),
+                })
+
+            if submission.submitted_at:
+                local_submitted = tz.localtime(submission.submitted_at)
+                logs.append({
+                    'id': 'ts_submitted_at',
+                    'event_type': 'SUBMITTED_ASSESSMENT',
+                    'status': 'SUCCESS',
+                    'phase': 'ASSESSMENT',
+                    'batch_id': getattr(submission, 'batch_id', None),
+                    'message': 'Candidate submitted the assessment.',
+                    'details': {},
+                    'timestamp': submission.submitted_at.isoformat(),
+                    'timestamp_formatted': local_submitted.strftime('%B %d, %Y at %I:%M %p'),
+                })
+
+            # 2. Warning logs
+            if isinstance(submission.warning_logs, list):
+                for i, w_log in enumerate(submission.warning_logs):
+                    if isinstance(w_log, dict):
+                        try:
+                            import dateutil.parser
+                            dt = dateutil.parser.isoparse(w_log.get('time'))
+                            local_dt = tz.localtime(dt)
+                        except:
+                            dt = submission.started_at
+                            local_dt = tz.localtime(dt)
+                        
+                        logs.append({
+                            'id': f'warning_{i}',
+                            'event_type': w_log.get('type', 'WARNING'),
+                            'status': 'FAILURE',
+                            'phase': 'ASSESSMENT',
+                            'batch_id': getattr(submission, 'batch_id', None),
+                            'message': w_log.get('message', 'Warning triggered'),
+                            'details': {},
+                            'timestamp': dt.isoformat(),
+                            'timestamp_formatted': local_dt.strftime('%B %d, %Y at %I:%M %p'),
+                        })
+                    else:
+                        dt = submission.started_at
+                        local_dt = tz.localtime(dt)
+                        logs.append({
+                            'id': f'warning_{i}',
+                            'event_type': 'WARNING',
+                            'status': 'FAILURE',
+                            'phase': 'ASSESSMENT',
+                            'batch_id': getattr(submission, 'batch_id', None),
+                            'message': str(w_log),
+                            'details': {},
+                            'timestamp': dt.isoformat(),
+                            'timestamp_formatted': local_dt.strftime('%B %d, %Y at %I:%M %p'),
+                        })
+
+            # 3. Integrity Screenshots
+            snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission)
+            for i, snap in enumerate(snapshots):
+                local_dt = tz.localtime(snap.timestamp) if snap.timestamp else tz.localtime(submission.started_at)
+                dt_iso = snap.timestamp.isoformat() if snap.timestamp else submission.started_at.isoformat()
+                logs.append({
+                    'id': f'integrity_{i}',
+                    'event_type': snap.event_type,
+                    'status': 'FAILURE' if 'failed' in snap.event_type or 'mismatch' in snap.event_type else 'INFO',
+                    'phase': 'ASSESSMENT',
+                    'batch_id': getattr(submission, 'batch_id', None),
+                    'message': f"Integrity Event: {snap.event_type.replace('_', ' ').title()}",
+                    'details': {
+                        'screenshot': request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else (request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else 'N/A')
+                    },
+                    'timestamp': dt_iso,
+                    'timestamp_formatted': local_dt.strftime('%B %d, %Y at %I:%M %p'),
+                })
+
+            # Sort logs by timestamp
+            logs.sort(key=lambda x: x['timestamp'])
+
+            return Response(logs)
+        except AIAssessmentSubmission.DoesNotExist:
+            return Response({'error': 'Submission not found'}, status=status.HTTP_404_NOT_FOUND)
+
 class AIAssessmentSubmissionListView(APIView):
     def get(self, request):
         candidate_email = request.query_params.get('candidate_email')
@@ -3673,12 +3883,16 @@ class ApproveAssessmentIdentityPhotoView(APIView):
         if user_profile and user_profile.company and submission.assessment.company_id != user_profile.company_id:
             return Response({'error': 'Forbidden'}, status=status.HTTP_403_FORBIDDEN)
 
-        b64_str = getattr(submission, 'intruder_photo', None)
+        mismatch_data = _get_unified_identity_mismatch_fields(request, submission)
+        intruder_url = mismatch_data.get("intruder_photo_url")
+        
+        b64_str = None
+        if intruder_url and intruder_url.startswith("data:image"):
+            b64_str = intruder_url
+            
         if not b64_str:
-            mismatch_data = _get_unified_identity_mismatch_fields(request, submission)
-            intruder_url = mismatch_data.get("intruder_photo_url")
-            if intruder_url and intruder_url.startswith("data:image"):
-                b64_str = intruder_url
+            # Fallback to the database webcam frame
+            b64_str = getattr(submission, 'intruder_photo', None)
                 
         if not b64_str:
             return Response(
@@ -3686,7 +3900,10 @@ class ApproveAssessmentIdentityPhotoView(APIView):
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
+        is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic' if getattr(submission, 'assessment', None) else False
+
         # 1. Read intruder_photo and base64 encode it for DeepFace registration.
+        # This will update the master face in DeepFace for BOTH manual and automated assessments.
         try:
             import base64
             b64_str = b64_str.strip()
@@ -3716,7 +3933,16 @@ class ApproveAssessmentIdentityPhotoView(APIView):
             
             # Register with deepface — overwrite=True to replace the old face
             _register_face_with_deepface(person_id, b64_data, overwrite=True)
-            logger.info(f"[ApproveAssessmentPhoto] DeepFace re-registered {person_id}")
+            logger.info(f"[ApproveAssessmentPhoto] DeepFace re-registered master profile for {person_id}")
+            
+            # Also update the assessment-specific snapshot so the UI immediately reflects the approved photo
+            if getattr(submission, 'assessment', None) and getattr(submission.assessment, 'share_token', None):
+                assessment_person_id = f"{person_id}/assessments/{submission.assessment.share_token}"
+                try:
+                    _register_face_with_deepface(assessment_person_id, b64_data, overwrite=True)
+                    logger.info(f"[ApproveAssessmentPhoto] DeepFace re-registered assessment profile for {assessment_person_id}")
+                except Exception as e:
+                    logger.warning(f"[ApproveAssessmentPhoto] Failed to update assessment-specific DeepFace profile: {e}")
         except Exception as e:
             logger.exception(f"[ApproveAssessmentPhoto] Failed to push to DeepFace: {e}")
             return Response(
@@ -3724,9 +3950,10 @@ class ApproveAssessmentIdentityPhotoView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        # 2. Promote intruder_photo to original_identity_photo.
+        # 2. Clear identity mismatch flags and optionally promote intruder_photo to original_identity_photo.
         try:
             submission.original_identity_photo = b64_data
+            
             submission.identity_mismatch_detected = False
             
             details = submission.identity_mismatch_details or {}

@@ -185,7 +185,8 @@ const ResultsAI = () => {
                     identity_mismatch_detected: false,
                     photo_update_approved: true,
                     photo_update_pending: false,
-                    candidate_photo_url: prev.intruder_photo_url || prev.pending_identity_photo_url || prev.candidate_photo_url,
+                    // Snap the UI to the newly approved photo so they see the change immediately
+                    candidate_photo_url: prev.intruder_photo_url || prev.pending_identity_photo_url || prev.candidate_photo_url
                 }));
             }
         } catch (err) {
@@ -542,8 +543,18 @@ const ResultsAI = () => {
         }
 
         try {
-            const realId = candidate.ai_candidate_pk || String(candidate.submission_id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
-            const resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
+            const isAssessment = !candidate.is_ai_candidate && (candidate.is_assessment || !!candidate.assessment_name || !!candidate.assessment || String(candidate.submission_id || '').startsWith('ai_'));
+            let resp;
+
+            if (isAssessment) {
+                // Fetch AI Assessment timeline
+                const realId = String(candidate.submission_id || candidate.id || '').replace('ai_', '');
+                resp = await axios.get(`${API_BASE_URL}/ai/submission/${realId}/timeline/`);
+            } else {
+                // Fetch AI Interview timeline
+                const realId = candidate.ai_candidate_pk || String(candidate.submission_id || candidate.id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
+                resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
+            }
 
             // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
             let filteredLogs = resp.data;
@@ -2561,7 +2572,7 @@ const ResultsAI = () => {
                                                                             })()}
                                                                             <button
                                                                                 onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
-                                                                                title="View Interview Logs"
+                                                                                title={activeTab === 'manual_ai' || (activeTab === 'fully_automatic' && r.assessment) ? "View Assessment Logs" : "View Interview Logs"}
                                                                                 style={{
                                                                                     background: 'none', border: 'none', cursor: 'pointer',
                                                                                     color: '#A3AED0', fontSize: '0.85rem', padding: '0.2rem',
@@ -2767,7 +2778,9 @@ const ResultsAI = () => {
                         <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                                 <div>
-                                    <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>Interview Logs</h3>
+                                    <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>
+                                        {timelineCandidate.is_assessment || String(timelineCandidate.submission_id || '').startsWith('ai_') ? 'AI Assessment Logs' : 'Interview Logs'}
+                                    </h3>
                                     <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
                                 </div>
                                 <div style={{ display: 'flex', gap: '0.5rem' }}>

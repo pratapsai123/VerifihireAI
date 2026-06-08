@@ -203,9 +203,52 @@ def _get_candidate_photo_url_for_candidate(request, candidate):
     """
     email = candidate.email.lower().strip() if candidate.email else None
 
-    # Priority 0: DB-stored registered face (always the most recent verified photo).
+    # Priority 0: DB-stored registered face (always the most recent verified photo for this specific assessment).
     if getattr(candidate, 'registered_face_b64', None):
         return f"data:image/jpeg;base64,{candidate.registered_face_b64}"
+        
+    db_photo = getattr(candidate, 'original_identity_photo', None)
+    if db_photo and len(db_photo) > 1000:
+        if not db_photo.startswith('data:image'):
+            return f"data:image/jpeg;base64,{db_photo}"
+        return db_photo
+
+    # Priority 0.5: Historically accurate assessment-specific snapshot (Prevents later candidates with same PAN from overriding past exam photos)
+    try:
+        from pathlib import Path
+        import base64
+        deepface_data_dir = Path(__file__).resolve().parent.parent.parent / 'deepface' / 'data' / 'registered_faces'
+        
+        # Determine the token depending on if it's an AIAssessmentSubmission or AI Candidate
+        token_str = None
+        if hasattr(candidate, 'assessment') and getattr(candidate.assessment, 'share_token', None):
+            token_str = str(candidate.assessment.share_token)
+        elif getattr(candidate, 'public_token', None):
+            token_str = str(candidate.public_token)
+            
+        if token_str:
+            p_id = getattr(candidate, 'pan_number', '').lower().strip() or email or token_str
+            # Support both manual assessments (assessments/<token>) and fully automated sessions (sessions/<token>)
+            for subfolder in ['assessments', 'sessions']:
+                session_dir = deepface_data_dir / p_id / subfolder / token_str
+                for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
+                    target_snap_file = session_dir / filename
+                    if target_snap_file.exists():
+                        with open(target_snap_file, 'rb') as f:
+                            return f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                            
+            # VM / Docker Deployment Fallback: Fetch from microservice over HTTP if not found on local disk
+            try:
+                from api._imports import DEEPFACE_BASE_URL
+                import requests
+                for subfolder in ['assessments', 'sessions']:
+                    resp = requests.get(f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/{subfolder}/{token_str}/photo", timeout=5)
+                    if resp.status_code == 200:
+                        return f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
+            except Exception:
+                pass
+    except Exception:
+        pass
 
     # Priority 1: Check unified IdentityLink
     if email:
