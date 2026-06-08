@@ -11,6 +11,17 @@ import '../styles/ResultsAI.css';
  * Lazy-loading integrity screenshot component.
  * Fetches the image only when it scrolls into view using IntersectionObserver.
  */
+
+const normalizeImageUrl = (url) => {
+    if (!url) return null;
+    if (url.startsWith('http') || url.startsWith('data:')) return url;
+    if (url.startsWith('/')) {
+        const baseUrl = API_BASE_URL.replace(/\/api\/?$/, '');
+        return `${baseUrl}${url}`;
+    }
+    return `data:image/jpeg;base64,${url}`;
+};
+
 const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, alt, style }) => {
     const [src, setSrc] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -20,16 +31,13 @@ const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, a
     useEffect(() => {
         // If we already have a URL (from assessment screenshots), use it directly
         if (fallbackUrl) {
-            setSrc(fallbackUrl);
+            setSrc(normalizeImageUrl(fallbackUrl));
             setLoading(false);
             return;
         }
         // If we have inline base64 already, use it
         if (fallbackBase64) {
-            const imgSrc = fallbackBase64.startsWith('data:') || fallbackBase64.startsWith('http') || fallbackBase64.startsWith('/')
-                ? fallbackBase64
-                : `data:image/jpeg;base64,${fallbackBase64}`;
-            setSrc(imgSrc);
+            setSrc(normalizeImageUrl(fallbackBase64));
             setLoading(false);
             return;
         }
@@ -654,13 +662,13 @@ const ResultsAI = () => {
 
     const unifyAutomaticResults = (roleData) => {
         const candidateMap = {};
-        
+
         // Gather all stage items
         const allItems = [];
         if (roleData.resume) roleData.resume.forEach(item => allItems.push({ ...item, _stageType: 'resume' }));
         if (roleData.assessment) roleData.assessment.forEach(item => allItems.push({ ...item, _stageType: 'assessment' }));
         if (roleData.interview) roleData.interview.forEach(item => allItems.push({ ...item, _stageType: 'interview' }));
-        
+
         // Sort by date descending so the newest item sets the mapping fields first
         allItems.sort((a, b) => {
             const dateA = new Date(a.created_at || a.submitted_at || a.completed_at || 0).getTime();
@@ -906,14 +914,14 @@ const ResultsAI = () => {
                         resp = await axios.delete(`${API_BASE_URL}/ai-candidates/${realId}/`, { data: { reason } });
                     }
                 }
-                
+
                 // Status 201 means it was just a pending request created, 200 means actually deleted
                 if (resp && resp.status === 201) {
                     pendingRequestCount++;
                 } else if (resp && resp.status === 200) {
                     actuallyDeletedCount++;
                 }
-                
+
                 if (resp?.data?.message && !requestMessage) requestMessage = resp.data.message;
             } catch (err) {
                 console.error('Delete failed for', item._deleteKey, err);
@@ -1473,10 +1481,8 @@ const ResultsAI = () => {
                                                         candidatePhoto = firstWebcam.webcam_screenshot_url || firstWebcam.webcam_screenshot_base64 || null;
                                                     }
                                                 }
-                                                // Add data URI prefix for raw base64 strings
-                                                if (candidatePhoto && !candidatePhoto.startsWith('http') && !candidatePhoto.startsWith('data:') && !candidatePhoto.startsWith('/')) {
-                                                    candidatePhoto = `data:image/jpeg;base64,${candidatePhoto}`;
-                                                }
+                                                // Normalize the URL
+                                                candidatePhoto = normalizeImageUrl(candidatePhoto);
 
                                                 // Find the screenshot_id for lazy loading if no direct image available
                                                 const candidatePhotoScreenshotId = !candidatePhoto ? (() => {
@@ -1843,7 +1849,7 @@ const ResultsAI = () => {
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
                                                     <img
-                                                        src={viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
+                                                        src={normalizeImageUrl(viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
                                                             const snaps = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
                                                             const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes((s.event_type || '').toLowerCase()));
                                                             let srcVal = null;
@@ -1853,11 +1859,8 @@ const ResultsAI = () => {
                                                                 const lastSnap = snaps[snaps.length - 1];
                                                                 srcVal = lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
                                                             }
-                                                            if (srcVal && !srcVal.startsWith('http') && !srcVal.startsWith('data:') && !srcVal.startsWith('/')) {
-                                                                return `data:image/jpeg;base64,${srcVal}`;
-                                                            }
                                                             return srcVal;
-                                                        })()}
+                                                        })())}
                                                         alt="Intruder Face"
                                                         style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                         onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}

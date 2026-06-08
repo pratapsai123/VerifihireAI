@@ -66,17 +66,7 @@ async def verify_face_endpoint(request: FaceVerifyRequest):
     return FaceVerifyResponse(**result)
 
 
-@router.get("/registered/{person_id}")
-async def check_registration(person_id: str):
-    """Check if a person has registered face data."""
-    registered = is_registered(person_id)
-    return {
-        "person_id": person_id,
-        "registered": registered,
-    }
-
-
-@router.get("/registered/{person_id}/photo")
+@router.get("/registered/{person_id:path}/photo")
 async def get_registered_photo(person_id: str):
     """Serve the registered face photo as a JPEG image."""
     from fastapi.responses import FileResponse
@@ -95,7 +85,17 @@ async def get_registered_photo(person_id: str):
     raise HTTPException(status_code=404, detail="No photo found for this person")
 
 
-@router.delete("/registered/{person_id}")
+@router.get("/registered/{person_id:path}")
+async def check_registration(person_id: str):
+    """Check if a person has registered face data."""
+    registered = is_registered(person_id)
+    return {
+        "person_id": person_id,
+        "registered": registered,
+    }
+
+
+@router.delete("/registered/{person_id:path}")
 async def remove_registration(person_id: str):
     """Delete all registered face data for a person."""
     deleted = delete_registration(person_id)
