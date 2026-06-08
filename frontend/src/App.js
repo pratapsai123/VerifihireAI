@@ -52,6 +52,11 @@ import SecurePrecheck from './pages/SecurePrecheck';
 import InviteRedirect from './pages/InviteRedirect';
 import SessionTerminated from './pages/SessionTerminated';
 import SecuritySessionGuard from './components/SecuritySessionGuard';
+
+import FeatureAiAssessments from './pages/FeatureAiAssessments';
+import FeatureLiveInterview from './pages/FeatureLiveInterview';
+import FeatureCustomizedAssessment from './pages/FeatureCustomizedAssessment';
+import FeatureCodingAssessment from './pages/FeatureCodingAssessment';
 import './styles/App.css';
 
 import Header from './components/Header';
@@ -299,6 +304,10 @@ function AppContent() {
     '/feedback-page',
     '/contact',
     '/session-terminated',
+    '/features/ai-assessments',
+    '/features/live-interview',
+    '/features/customized-assessment',
+    '/features/coding-assessment',
   ];
 
   const isFullScreenPage =
@@ -437,6 +446,12 @@ function AppContent() {
           <Route path="/book-interview/:token" element={<BookInterview />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />
+
+          {/* Features Dropdown Pages */}
+          <Route path="/features/ai-assessments" element={<FeatureAiAssessments />} />
+          <Route path="/features/live-interview" element={<FeatureLiveInterview />} />
+          <Route path="/features/customized-assessment" element={<FeatureCustomizedAssessment />} />
+          <Route path="/features/coding-assessment" element={<FeatureCodingAssessment />} />
         </Routes>
 
 
