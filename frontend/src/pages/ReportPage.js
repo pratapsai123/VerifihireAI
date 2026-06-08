@@ -9,6 +9,11 @@ export default function ReportPage() {
     const { submissionId } = useParams();
     const navigate = useNavigate();
     
+    // Derive user role from localStorage
+    const currentUser = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
+    const currentRole = (currentUser?.role || '').toLowerCase();
+    const isAdmin = currentRole === 'company_admin' || currentRole === 'application_admin';
+    
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [pdfUrl, setPdfUrl] = useState(null);
@@ -133,10 +138,13 @@ export default function ReportPage() {
 
             alert(resp.data.message || 'Identity manual review request submitted to Admin successfully.');
 
+            const newStatus = resp.data?.photo_update_status || (isAdmin ? 'approved' : 'pending');
             setCandidateRow(prev => prev ? {
                 ...prev,
-                photo_update_status: 'pending',
+                photo_update_status: newStatus,
                 photo_update_reason: approvalReason.trim(),
+                photo_update_approved: newStatus === 'approved',
+                photo_update_approved_by: newStatus === 'approved' ? 'Company Admin' : prev.photo_update_approved_by
             } : prev);
 
             setApproveModalOpen(false);
@@ -295,7 +303,7 @@ export default function ReportPage() {
 
                         {/* Critical warning */}
                         <div className="report-modal-warning">
-                            ⚠️ <strong>CRITICAL NOTE:</strong> This action marks the identity mismatch as HR-approved and updates the registered baseline face.
+                            ⚠️ <strong>CRITICAL NOTE:</strong> {isAdmin ? "This action marks the identity mismatch as approved and updates the registered baseline face." : "This action submits a photo update approval request to the Admin. The registered baseline face will NOT be updated until the Admin reviews and approves this request."}
                             It does <strong>NOT</strong> remove mismatch history, flags, or evidence from reports, logs, or dashboards.
                             All mismatch proof is permanently retained for compliance and audit.
                         </div>
@@ -361,7 +369,7 @@ export default function ReportPage() {
                                 ) : (
                                     <>
                                         <ShieldCheck size={15} />
-                                        Confirm Approval
+                                        {isAdmin ? 'Confirm Update' : 'Confirm Approval'}
                                     </>
                                 )}
                             </button>

@@ -1635,7 +1635,7 @@ export default function Result() {
                                 lineHeight: 1.45,
                                 fontWeight: '500'
                             }}>
-                                ⚠️ <strong>CRITICAL WARNING:</strong> This action will update the registered baseline face with the candidate's current captured face, but will <strong>NOT</strong> remove mismatch history, flags, or audit proof records. All comparison evidence will remain permanently visible in reports and logs.
+                                ⚠️ <strong>CRITICAL WARNING:</strong> {isAdmin ? "This action will update the registered baseline face with the candidate's current captured face, but will NOT remove mismatch history, flags, or audit proof records." : "This action will submit a photo update approval request to the Admin. It will NOT update the registered baseline face until approved by the Admin."} All comparison evidence will remain permanently visible in reports and logs.
                             </div>
                         </div>
 
@@ -1705,7 +1705,7 @@ export default function Result() {
                                     fontWeight: '700', fontSize: '13px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px'
                                 }}
                             >
-                                {photoSubmitting ? 'Approving...' : 'Confirm Approval'}
+                                {photoSubmitting ? 'Approving...' : (isAdmin ? 'Confirm Update' : 'Confirm Approval')}
                             </button>
                         </div>
                     </div>
