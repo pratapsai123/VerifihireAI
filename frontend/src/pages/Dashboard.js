@@ -132,8 +132,8 @@ const Dashboard = () => {
     const fetchPendingCount = async () => {
       try {
         const [delRes, qualRes] = await Promise.all([
-            axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }),
-            axios.get(`${API_BASE_URL}/workflow/qualification-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
+          axios.get(`${API_BASE_URL}/workflow/deletion-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }),
+          axios.get(`${API_BASE_URL}/workflow/qualification-requests/count/`, { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
         ]);
         const delCount = delRes.data.count || 0;
         const qualCount = qualRes.data.count || 0;
@@ -582,7 +582,7 @@ const Dashboard = () => {
                   </div>
                   <div className="card-stat-row">
                     <div className="stat-item">
-                      <span className="stat-label">Upcoming Live Calls</span>
+                      <span className="stat-label">Live Interviews</span>
                       <span className="stat-value">{data.stats.scheduledInterviews}</span>
                     </div>
                   </div>

@@ -492,6 +492,25 @@ class InterviewConsumer(AsyncWebsocketConsumer):
                     }
                 )
             
+            # Handle live interview malpractice violations
+            elif message_type == 'violation':
+                await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'forward_message',
+                        'message': {
+                            'type': 'violation',
+                            'violation_type': data.get('violation_type'),
+                            'severity': data.get('severity'),
+                            'timestamp': data.get('timestamp'),
+                            'details': data.get('details'),
+                            'duration': data.get('duration'),
+                            'screenshot_url': data.get('screenshot_url'),
+                        },
+                        'sender_id': self.user_id,
+                    }
+                )
+            
             else:
                 logger.warning(f"Unknown message type: {message_type}")
         

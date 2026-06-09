@@ -6,7 +6,7 @@ import { API_BASE_URL } from '../apiConfig';
 import { useWebSocket } from '../hooks/useWebSocket';
 import { useWebRTC } from '../hooks/useWebRTC';
 import { useScreenShare } from '../hooks/useScreenShare';
-import { useProxyDetection } from '../hooks/useProxyDetection';
+import MalpracticeMonitor from '../components/LiveInterview/MalpracticeMonitor';
 
 import VideoPanel from '../components/LiveInterview/VideoPanel';
 import ChatPanel from '../components/LiveInterview/ChatPanel';
@@ -410,7 +410,7 @@ function LiveInterview() {
     }
   }, [connectionStatus, stopWebRTC]);
 
-  const { thumbnailVideoRef, startDetection, stopDetection, pauseDetection } = useProxyDetection(sessionId, cameraReady, isCameraOn, sendMessage);
+  const thumbnailVideoRef = useRef(null);
 
 
 
@@ -456,16 +456,6 @@ function LiveInterview() {
         thumbnailVideoRef.current.srcObject = stream;
       }
 
-      // If camera starts on, start detection
-      if (initialCameraOn) {
-        startDetection(showSessionPopup, () => {
-          setShowThankYou(true);
-          stopWebRTC();
-        });
-      } else {
-        stopDetection();
-      }
-
       console.log('🗣️ Broadcasting ready_for_webrtc');
       sendMessage({ type: 'ready_for_webrtc', user: candidateName, role: MY_ROLE });
 
@@ -474,7 +464,7 @@ function LiveInterview() {
       setMediaError(true);
       showSessionPopup('Could not access camera/mic. Please check permissions.', 'error');
     });
-  }, [initLocalStream, sendMessage, showSessionPopup, startDetection, stopWebRTC, candidateName, lobbyConfig]);
+  }, [initLocalStream, sendMessage, showSessionPopup, stopWebRTC, candidateName, lobbyConfig]);
 
   // Initialize WebRTC
   useEffect(() => {
@@ -513,11 +503,8 @@ function LiveInterview() {
       track.enabled = newCameraOn;
     });
 
-    if (newCameraOn) startDetection(showSessionPopup);
-    else stopDetection();
-
     sendMessage({ type: 'media_state', media: 'camera', enabled: newCameraOn });
-  }, [isCameraOn, localStreamRef, startDetection, stopDetection, sendMessage, showSessionPopup]);
+  }, [isCameraOn, localStreamRef, sendMessage]);
 
 
 
@@ -747,6 +734,16 @@ function LiveInterview() {
           toggleScreenShare={toggleScreenShare}
           setChatPanelVisible={setChatPanelVisible}
           handleEndInterview={handleEndInterview}
+        />
+
+        <MalpracticeMonitor
+          sessionId={sessionId}
+          participantToken={participantToken}
+          videoRef={thumbnailVideoRef}
+          cameraReady={cameraReady}
+          isCameraOn={isCameraOn}
+          sendMessage={sendMessage}
+          showNotification={showSessionPopup}
         />
       </div>
     </ErrorBoundary>

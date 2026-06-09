@@ -13,6 +13,7 @@ import ChatPanel from '../components/LiveInterview/ChatPanel';
 import ControlBar from '../components/LiveInterview/ControlBar';
 import ConnectionOverlay from '../components/LiveInterview/ConnectionOverlay';
 import ErrorBoundary from '../components/LiveInterview/ErrorBoundary';
+import MalpracticePanel from '../components/LiveInterview/MalpracticePanel';
 
 function LiveInterviewInterviewer() {
   const navigate = useNavigate();
@@ -44,6 +45,10 @@ function LiveInterviewInterviewer() {
   const [chatPanelVisible, setChatPanelVisible] = useState(false);
   const [chatMessages, setChatMessages] = useState([]);
   const [chatUnreadCount, setChatUnreadCount] = useState(0);
+
+  const [violations, setViolations] = useState([]);
+  const [malpracticePanelVisible, setMalpracticePanelVisible] = useState(false);
+  const [selectedViolationScreenshot, setSelectedViolationScreenshot] = useState(null);
 
   const [showInterviewReport, setShowInterviewReport] = useState(false);
   const [showFeedbackSuccess, setShowFeedbackSuccess] = useState(false);
@@ -99,6 +104,21 @@ function LiveInterviewInterviewer() {
     };
     loadInterviewDetails();
   }, [sessionId, participantToken]);
+
+  // Load existing malpractice violations
+  useEffect(() => {
+    const loadViolations = async () => {
+      if (sessionId && sessionId !== 'default-session') {
+        try {
+          const resp = await axios.get(`${API_BASE_URL}/interviews/${sessionId}/violations/`);
+          setViolations(resp.data || []);
+        } catch (error) {
+          console.warn('Could not load interview violations:', error);
+        }
+      }
+    };
+    loadViolations();
+  }, [sessionId]);
 
   // Check if session is expired
   useEffect(() => {
@@ -350,6 +370,13 @@ function LiveInterviewInterviewer() {
         break;
       case 'end_interview':
         handleEndInterview(false);
+        break;
+      case 'violation':
+        setViolations(prev => [data, ...prev]);
+        const alertLabel = data.violation_type === 'NO_FACE' ? 'No Face Detected' :
+                           data.violation_type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
+                           data.violation_type === 'TAB_SWITCH' ? 'Candidate Switched Tabs' : 'Candidate Left Fullscreen';
+        showNotification(`🔴 Malpractice Alert: ${alertLabel}`, 'error');
         break;
       case 'session_expired':
         if (data.reason === 'not_started') {
@@ -684,7 +711,7 @@ function LiveInterviewInterviewer() {
 
   return (
     <ErrorBoundary>
-      <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''}`}>
+      <div className={`live-interview-interviewer ${chatPanelVisible ? 'chat-active' : ''} ${malpracticePanelVisible ? 'malpractice-active' : ''}`}>
         <div className="li-notifications-container">
           {notifications.map(n => (
             <div key={n.id} className={`li-notification ${n.severity}`}>
@@ -698,6 +725,9 @@ function LiveInterviewInterviewer() {
           <div className="header-controls">
             <button className="btn-invite-panelist" onClick={() => setShowInviteModal(true)}>
               <i className="fas fa-user-plus"></i> Invite Panelist
+            </button>
+            <button className={`btn-malpractice-log ${violations.length > 0 ? 'pulse' : ''}`} onClick={() => setMalpracticePanelVisible(!malpracticePanelVisible)}>
+              <i className="fas fa-shield-alt"></i> Malpractice Log {violations.length > 0 && <span className="violation-badge">{violations.length}</span>}
             </button>
             <div className="timer">{timer}</div>
           </div>
@@ -758,6 +788,13 @@ function LiveInterviewInterviewer() {
             sessionId={sessionId}
             localName={interviewerName}
           />
+
+          <MalpracticePanel
+            violations={violations}
+            visible={malpracticePanelVisible}
+            onClose={() => setMalpracticePanelVisible(false)}
+            onViewScreenshot={(url) => setSelectedViolationScreenshot(url)}
+          />
         </div>
 
         <ControlBar
@@ -775,6 +812,17 @@ function LiveInterviewInterviewer() {
           setChatPanelVisible={setChatPanelVisible}
           handleEndInterview={handleEndInterview}
         />
+
+        {selectedViolationScreenshot && (
+          <div className="screenshot-zoom-overlay" onClick={() => setSelectedViolationScreenshot(null)}>
+            <div className="screenshot-zoom-modal" onClick={(e) => e.stopPropagation()}>
+              <button className="close-screenshot-zoom" onClick={() => setSelectedViolationScreenshot(null)}>
+                <i className="fas fa-times"></i>
+              </button>
+              <img src={selectedViolationScreenshot} alt="Violation Zoom" />
+            </div>
+          </div>
+        )}
 
       </div>
     </ErrorBoundary>
