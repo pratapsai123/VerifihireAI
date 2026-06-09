@@ -1206,6 +1206,26 @@ def generate_candidate_report(submission_id):
         original_sources = []
         if photo_approved and candidate_detail.previous_registered_face_backup:
             original_sources.append(candidate_detail.previous_registered_face_backup)
+            
+        # Priority 1: DeepFace master folder (ensures consistency with popup)
+        if candidate_pan:
+            try:
+                from pathlib import Path
+                from django.conf import settings
+                norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_pan.strip().upper())
+                deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                master_dir = deepface_data_dir / norm_pan
+                
+                master_file = None
+                for fname in ['face_0.jpg', 'registration_snapshot.jpg']:
+                    possible = master_dir / fname
+                    if possible.exists():
+                        master_file = possible
+                        break
+                if master_file:
+                    original_sources.append(master_file)
+            except Exception as e:
+                pass
         
         # Prioritize canonical registered face from IdentityLink matching the candidate's PAN
         if candidate_pan:
@@ -1236,6 +1256,37 @@ def generate_candidate_report(submission_id):
 
         # 2. Mismatch Captured Face sources
         captured_sources = []
+        
+        # Priority 1: Fetch from standard_assessment or assessments deepface folder (ensures consistency with popup)
+        try:
+            from pathlib import Path
+            from django.conf import settings
+            token_str = str(inv.token)
+            norm_pan = re.sub(r'[^A-Z0-9]', '', candidate_pan.strip().upper()) if candidate_pan else ''
+            p_id = norm_pan or candidate_email or token_str
+            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+            
+            # Check standard_assessment then fallback to assessments
+            session_dir = deepface_data_dir / p_id / 'standard_assessment' / token_str
+            if not session_dir.exists():
+                session_dir = deepface_data_dir / p_id / 'assessments' / token_str
+                
+            anchor_file = None
+            if session_dir.exists():
+                for fname in ['registration_snapshot.jpg', 'face_0.jpg']:
+                    possible = session_dir / fname
+                    if possible.exists():
+                        anchor_file = possible
+                        break
+                if not anchor_file:
+                    for jpg_file in session_dir.glob('*.jpg'):
+                        anchor_file = jpg_file
+                        break
+            if anchor_file:
+                captured_sources.append(anchor_file)
+        except Exception as e:
+            pass
+
         # Prioritize the current webcam snapshot from this attempt
         if candidate_detail.snapshot:
             captured_sources.append(candidate_detail.snapshot)
@@ -3612,7 +3663,8 @@ def generate_candidate_report(submission_id):
                 ts_str = '-'
             
             is_v = log.get('verified', False)
-            status_text = "Verified" if is_v else "Mismatch"
+            reason = log.get('reason', '')
+            status_text = "Verified" if is_v else ("Face Missing" if reason == 'Face detection failed' else "Mismatch")
             status_color = "#16a34a" if is_v else "#dc2626"
             
             score = f"{log.get('match_score', 0)}%"
@@ -3644,11 +3696,6 @@ def generate_candidate_report(submission_id):
     # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     try:
         integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
-        # Filter out identity verification/mismatch screenshots as they are already displayed in the main Identity section
-        integrity_screenshots = [
-            snap for snap in integrity_screenshots 
-            if 'identity' not in str(snap.event_type).lower() and 'mismatch' not in str(snap.event_type).lower()
-        ]
 
         if integrity_screenshots:
 
@@ -3678,7 +3725,11 @@ def generate_candidate_report(submission_id):
 
                 
 
-                if evt in ['window_switch', 'window_blur', 'blur', 'focus_lost']:
+                if 'mismatch' in evt or 'identity' in evt:
+                
+                    group_name = 'Periodic Identity Mismatches'
+
+                elif evt in ['window_switch', 'window_blur', 'blur', 'focus_lost']:
 
                     group_name = 'Window Switch'
 
@@ -3716,7 +3767,26 @@ def generate_candidate_report(submission_id):
 
 
 
-            for group_name, snaps in groups.items():
+            # Enforce the specific order requested by the user
+            ordered_group_names = [
+                'Periodic Identity Mismatches',
+                'Tab Switch',
+                'Window Switch',
+                'No Face Detection',
+                'Multipeople Detection',
+                'Phone Detection'
+            ]
+            
+            ordered_groups = []
+            for gname in ordered_group_names:
+                if gname in groups:
+                    ordered_groups.append((gname, groups.pop(gname)))
+            
+            # Append any remaining groups that weren't in the explicit list
+            for gname, snaps in groups.items():
+                ordered_groups.append((gname, snaps))
+
+            for group_name, snaps in ordered_groups:
 
                 story.append(Paragraph(f"<b>Warning: {group_name}</b>", styles['InfoValue']))
 

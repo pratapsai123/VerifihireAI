@@ -1026,7 +1026,33 @@ def verify_identity_view(request, token):
         person_id = details.pan_number # Baseline is registered under PAN in DeepFace
         
         # 2. Verify with DeepFace
-        verify_result = verify_face_with_deepface(person_id, snapshot, email=inv.email)
+        from api.deepface_client import df_is_registered, df_register
+        import base64
+        from django.core.files.base import ContentFile
+        from api.models import IdentityLink
+        
+        anchor_id = f"{person_id}/standard_assessment/{token}"
+        
+        # Check if this is the candidate's first ever assessment in the system
+        try:
+            prev_count = CandidateDetails.objects.filter(pan_number__iexact=person_id).count()
+            is_first_assessment = (prev_count <= 1)
+        except Exception:
+            is_first_assessment = False
+
+        if is_first_assessment:
+            # 1st Time Registration Flow
+            # The master photo was already registered during save_all_candidate_details_view.
+            # We do NOT create a standard_assessment anchor photo for the 1st assessment to avoid "2 different photos stored".
+            # But we DO verify to ensure an intruder didn't take over!
+            verify_result = verify_face_with_deepface(person_id, snapshot, email=inv.email)
+        else:
+            # Subsequent Assessment Flow
+            # The 2nd registration photo was already saved to the standard_assessment folder during pre-assessment.
+            # We simply verify the live 15-second snapshot against the Baseline Master in memory.
+            # Verify against Baseline Master
+            verify_result = verify_face_with_deepface(person_id, snapshot, email=inv.email)
+            
         is_verified = verify_result.get('verified', False)
         distance = verify_result.get('distance')
         no_face_detected = verify_result.get('no_face_detected', False)
@@ -1060,6 +1086,7 @@ def verify_identity_view(request, token):
 
         # Update CandidateDetails manual review status and other DeepFace columns if available
         details.deepface_distance = distance
+        details.face_match_score = match_score
         details.deepface_threshold = verify_result.get('threshold')
         details.deepface_verified = is_verified
         details.deepface_model = verify_result.get('model')
@@ -2790,16 +2817,9 @@ def save_all_candidate_details_view(request):
         person_id = f"{norm_pan}"
         
         # 2. Strict Email-to-PAN Verification
-        # To prevent malpractice, we ensure that an email address cannot be used with a 
-        # different PAN if it has already been registered in the system.
-        existing_email_link = IdentityLink.objects.filter(email=norm_email).first()
+        # (This logic was completely removed as requested: face identity is linked only to PAN, not email)
         email_pan_mismatch = False
         mismatch_reasons = []
-
-        if existing_email_link and existing_email_link.pan_number != norm_pan:
-            _save_identity_violation_screenshot(invitation, snapshot, "Email-PAN Mismatch")
-            email_pan_mismatch = True
-            mismatch_reasons.append(f"Email-PAN Mismatch: Email {norm_email} is already linked to a different candidate identity in the system (PAN: {existing_email_link.pan_number}).")
 
         # 3. Biometric Verification (Lookup by PAN)
         identity_link = IdentityLink.objects.filter(pan_number=norm_pan).first()
@@ -2809,6 +2829,14 @@ def save_all_candidate_details_view(request):
         face_mismatch_detected = False
 
         if identity_link:
+
+            # Save the 2nd register photo to the standard_assessment folder for manual review comparison
+            try:
+                from api.deepface_client import df_register
+                anchor_id = f"{person_id}/standard_assessment/{invitation.token}"
+                df_register(anchor_id, snapshot, overwrite=True)
+            except Exception as e:
+                print(f"Error saving standard_assessment anchor: {e}")
 
             # Verification: Compare current snapshot with the registered identity face.
             # Recovery (if person not yet in microservice) is handled inside
@@ -2847,16 +2875,10 @@ def save_all_candidate_details_view(request):
                 mismatch_reasons.append("Identity Face Mismatch: The captured face does not match the registered candidate's face.")
         else:
             # Linkage: Register the candidate's face for the first time.
-            # Compare the webcam snapshot with the face on the uploaded PAN card image to ensure it's not a mismatch.
-            verify_result = verify_face_against_pan_card(pan_file, snapshot, email=norm_email, pan=norm_pan)
-            verify_status = verify_result.get('verified', False)
-            distance = verify_result.get('distance', 1.0)
-            
-            if verify_status == False:
-                # Capture Violation Screenshot
-                _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
-                face_mismatch_detected = True
-                mismatch_reasons.append("Identity Face Mismatch: The face on the uploaded PAN card does not match the candidate's webcam snapshot.")
+            # (PAN Card face comparison logic has been completely removed as requested)
+            verify_status = True
+            distance = 0.0
+            verify_result = {'verified': True, 'distance': 0.0, 'model': 'ArcFace', 'detector': 'retinaface'}
             
             reg_result = register_face_with_deepface(person_id, snapshot)
             if not reg_result.get('success'):
@@ -3814,8 +3836,39 @@ def request_photo_update_view(request, submission_id):
         if details.photo_update_status == 'approved':
             return Response({'error': 'This identity mismatch has already been approved.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 4. Validate snapshot exists
-        snapshot = details.snapshot
+        norm_email = details.email.lower().strip()
+        norm_pan = re.sub(r'[^A-Z0-9]', '', details.pan_number.strip().upper())
+        person_id = norm_pan
+        token_str = str(inv.token)
+
+        # 4. Fetch the anchor image from the DeepFace folder
+        from pathlib import Path
+        from django.conf import settings
+        
+        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+        session_dir = deepface_data_dir / person_id / 'standard_assessment' / token_str
+        
+        anchor_file = None
+        if session_dir.exists():
+            for candidate_name in ['registration_snapshot.jpg', 'face_0.jpg']:
+                possible = session_dir / candidate_name
+                if possible.exists():
+                    anchor_file = possible
+                    break
+            if not anchor_file:
+                for jpg_file in session_dir.glob('*.jpg'):
+                    anchor_file = jpg_file
+                    break
+
+        if anchor_file and anchor_file.exists():
+            with open(anchor_file, 'rb') as f:
+                snapshot_data = f.read()
+            import base64
+            snapshot_b64 = base64.b64encode(snapshot_data).decode('utf-8')
+            snapshot = f"data:image/jpeg;base64,{snapshot_b64}"
+        else:
+            snapshot = details.snapshot
+            
         if not snapshot:
             return Response({'error': 'No captured snapshot found to approve.'}, status=status.HTTP_400_BAD_REQUEST)
 

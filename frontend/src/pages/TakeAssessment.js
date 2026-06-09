@@ -1468,7 +1468,7 @@ export default function TakeAssessment() {
     return () => clearInterval(bgInterval);
   }, [showAiEvent, submitted, assessmentStage, error, windowError]);
 
-  // Periodic Identity Verification (every 2 minutes)
+  // Periodic Identity Verification (every 15 seconds)
   useEffect(() => {
     if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition' || !candidateDetailsCompleted) return;
 
@@ -1497,7 +1497,7 @@ export default function TakeAssessment() {
           console.error('Failed to perform periodic identity verification', e);
         }
       }
-    }, 120000); // 120,000ms = 2 minutes
+    }, 15000); // 15,000ms = 15 seconds
 
     return () => clearInterval(identityInterval);
   }, [token, submitted, assessmentStage, error, windowError, candidateDetailsCompleted]);

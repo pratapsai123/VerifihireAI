@@ -192,7 +192,7 @@ def _get_candidate_photo_url(request, submission):
         token_str = str(submission.assessment.share_token) if getattr(submission, 'assessment', None) else None
         if token_str:
             p_id = getattr(submission, 'pan_number', '').lower().strip() or email or token_str
-            for subfolder in ['assessments', 'sessions']:
+            for subfolder in ['standard_assessment', 'assessments', 'sessions']:
                 session_dir = deepface_data_dir / p_id / subfolder / token_str
                 for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
                     target_snap_file = session_dir / filename
@@ -204,7 +204,7 @@ def _get_candidate_photo_url(request, submission):
             try:
                 from api._imports import DEEPFACE_BASE_URL
                 import requests
-                for subfolder in ['assessments', 'sessions']:
+                for subfolder in ['standard_assessment', 'assessments', 'sessions']:
                     resp = requests.get(f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/{subfolder}/{token_str}/photo", timeout=5)
                     if resp.status_code == 200:
                         return f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
@@ -387,7 +387,7 @@ def _get_unified_identity_mismatch_fields(request, submission):
             import requests
             import base64
             p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
-            df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/assessments/{submission.assessment.share_token}/photo"
+            df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/standard_assessment/{submission.assessment.share_token}/photo"
             resp = requests.get(df_url, timeout=5)
             if resp.status_code == 200:
                 intruder_url = f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
@@ -401,7 +401,11 @@ def _get_unified_identity_mismatch_fields(request, submission):
             import base64
             deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
             p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
-            session_dir = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token)
+            
+            # Check both standard_assessment and assessments
+            session_dir = deepface_data_dir / p_id / 'standard_assessment' / str(submission.assessment.share_token)
+            if not session_dir.exists():
+                session_dir = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token)
             
             # Try multiple possible filenames — DeepFace saves as either name depending on registration method
             target_snap_file = None

@@ -474,7 +474,12 @@ def run_standard_deepface_verification(
         
         # Phase 5: Decision Logic
         identity_mismatch_detected = False
-        if distance > threshold and not verified:
+        
+        # Relax the strict threshold slightly to reduce false positives for the same person
+        # ArcFace default is 0.68. We relax it to 0.80 to account for lighting/webcam quality changes.
+        relaxed_threshold = threshold if threshold > 0.75 else 0.80
+        
+        if distance > relaxed_threshold:
             identity_mismatch_detected = True
 
         result = {
@@ -733,11 +738,15 @@ def verify_face_with_deepface(person_id, snapshot_base64, candidate_id=None, ema
         model      = result.get('model', 'ArcFace')
         detector   = result.get('detector', 'opencv')
 
+        # Relax the strict threshold slightly to reduce false positives for the same person
+        # ArcFace default is 0.68. We relax it to 0.80.
+        relaxed_threshold = threshold if threshold and threshold > 0.75 else 0.80
+
         identity_mismatch_detected = (
             not verified
             and distance is not None
             and threshold is not None
-            and distance > threshold
+            and distance > relaxed_threshold
         )
 
         return {

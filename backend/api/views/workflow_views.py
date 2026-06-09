@@ -998,7 +998,19 @@ def action_face_request_view(request, request_id):
             
             # Overwrite DeepFace canonical image file
             from api.ocr_utils import register_face_with_deepface
-            reg_result = register_face_with_deepface(person_id, details.snapshot)
+            
+            deepface_snapshot = details.snapshot
+            if req.captured_face_backup:
+                try:
+                    req.captured_face_backup.seek(0)
+                    import base64
+                    cap_data = req.captured_face_backup.read()
+                    cap_b64 = base64.b64encode(cap_data).decode('utf-8')
+                    deepface_snapshot = f"data:image/jpeg;base64,{cap_b64}"
+                except Exception as e:
+                    print(f"[DeepFace] Failed to read captured_face_backup: {e}")
+                    
+            reg_result = register_face_with_deepface(person_id, deepface_snapshot)
             if not reg_result.get('success'):
                 print(f"[DeepFace] Registration failed: {reg_result.get('message')}")
                 

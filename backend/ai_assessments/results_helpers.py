@@ -123,7 +123,10 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 from django.conf import settings
                 deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
                 p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
-                target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
+                # Check standard_assessment then fallback to assessments
+                target_snap_file = deepface_data_dir / p_id / 'standard_assessment' / str(a.share_token) / 'registration_snapshot.jpg'
+                if not target_snap_file.exists():
+                    target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
                 if target_snap_file.exists():
                     with open(target_snap_file, 'rb') as f:
                         pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
@@ -229,7 +232,7 @@ def _get_candidate_photo_url_for_candidate(request, candidate):
         if token_str:
             p_id = getattr(candidate, 'pan_number', '').lower().strip() or email or token_str
             # Support both manual assessments (assessments/<token>) and fully automated sessions (sessions/<token>)
-            for subfolder in ['assessments', 'sessions']:
+            for subfolder in ['standard_assessment', 'assessments', 'sessions']:
                 session_dir = deepface_data_dir / p_id / subfolder / token_str
                 for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
                     target_snap_file = session_dir / filename
@@ -241,7 +244,7 @@ def _get_candidate_photo_url_for_candidate(request, candidate):
             try:
                 from api._imports import DEEPFACE_BASE_URL
                 import requests
-                for subfolder in ['assessments', 'sessions']:
+                for subfolder in ['standard_assessment', 'assessments', 'sessions']:
                     resp = requests.get(f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/{subfolder}/{token_str}/photo", timeout=5)
                     if resp.status_code == 200:
                         return f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
