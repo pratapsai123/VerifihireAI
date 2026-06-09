@@ -141,11 +141,19 @@ const CreateAssessment = () => {
                     newWeight = 0;
                 }
 
+                let newCodingTime = prev.coding_time;
+                if (limitedCount === 0) {
+                    newCodingTime = 0;
+                } else if (prev.coding_time === 0 && limitedCount > 0) {
+                    newCodingTime = 30; // Default when re-enabled
+                }
+
                 return {
                     ...prev,
                     num_coding: limitedCount,
                     coding_challenges: newChallenges,
-                    mcq_weight: newWeight
+                    mcq_weight: newWeight,
+                    coding_time: newCodingTime
                 };
             });
             return;
@@ -173,7 +181,13 @@ const CreateAssessment = () => {
                     newWeight = 100;
                 }
                 // Auto-calculate MCQ time (1 min per question) unless manually overridden
-                const autoMcqTime = prev.mcqTimeManual ? prev.mcq_time : (numVal || 0);
+                let autoMcqTime = prev.mcqTimeManual ? prev.mcq_time : (numVal || 0);
+                if (numVal === 0) {
+                    autoMcqTime = 0;
+                } else if (prev.mcq_time === 0 && numVal > 0) {
+                    autoMcqTime = numVal;
+                }
+
                 return {
                     ...prev,
                     num_mcqs: numVal,
@@ -552,9 +566,10 @@ const CreateAssessment = () => {
                                     <label>MCQ</label>
                                     <input
                                         type="number" min="1" max="120"
-                                        value={formData.mcq_time}
+                                        value={formData.mcq_time === '' ? '' : formData.mcq_time}
                                         onChange={(e) => {
-                                            const val = parseInt(e.target.value) || 0;
+                                            const valStr = e.target.value;
+                                            const val = valStr === '' ? '' : parseInt(valStr, 10);
                                             setFormData(prev => ({ ...prev, mcq_time: val, mcqTimeManual: true }));
                                         }}
                                     />
@@ -566,8 +581,11 @@ const CreateAssessment = () => {
                                     <label>Coding</label>
                                     <input
                                         type="number" min="5" max="180"
-                                        value={formData.coding_time}
-                                        onChange={(e) => handleChange('coding_time', parseInt(e.target.value) || 0)}
+                                        value={formData.coding_time === '' ? '' : formData.coding_time}
+                                        onChange={(e) => {
+                                            const valStr = e.target.value;
+                                            handleChange('coding_time', valStr === '' ? '' : parseInt(valStr, 10));
+                                        }}
                                     />
                                     <span className="mini-marker">MIN</span>
                                 </div>
@@ -737,7 +755,7 @@ const CreateAssessment = () => {
                             </div>
                             <input
                                 type="range"
-                                min="0"
+                                min="10"
                                 max="100"
                                 value={formData.pass_threshold}
                                 onChange={(e) => handleChange('pass_threshold', parseInt(e.target.value))}

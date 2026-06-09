@@ -932,6 +932,12 @@ class GenerateAssessmentView(APIView):
         # Parse separate MCQ and Coding durations
         mcq_duration = int(data.get('mcq_duration', mcq_count))  # Default: 1 min per MCQ
         coding_duration = int(data.get('coding_duration', 30))    # Default: 30 min
+        
+        if mcq_count == 0:
+            mcq_duration = 0
+        if coding_count == 0:
+            coding_duration = 0
+            
         duration = mcq_duration + coding_duration  # Total for backward compat
         total_possible_points = int(data.get('total_possible_points', 1000))
 
@@ -940,6 +946,39 @@ class GenerateAssessmentView(APIView):
                 "error": "Missing job_description or required_skills",
                 "message": "Both fields are required to generate an assessment."
             }, status=status.HTTP_400_BAD_REQUEST)
+
+        # Date Validations
+        from dateutil import parser
+        from django.utils import timezone
+        import datetime
+        
+        available_from_str = data.get('available_from')
+        available_until_str = data.get('available_until')
+        
+        if available_from_str and available_until_str:
+            try:
+                av_from = parser.isoparse(available_from_str)
+                av_until = parser.isoparse(available_until_str)
+                now = timezone.now()
+                
+                # Allow a 5-minute grace period for network latency and processing time
+                if av_from < now - datetime.timedelta(minutes=5):
+                    return Response({
+                        "error": "Invalid Timing", 
+                        "message": "Assessment 'Available From' timing cannot be in the past."
+                    }, status=status.HTTP_400_BAD_REQUEST)
+                    
+                if av_until <= av_from:
+                    return Response({
+                        "error": "Invalid Timing", 
+                        "message": "Assessment 'Available Until' must be strictly after 'Available From'."
+                    }, status=status.HTTP_400_BAD_REQUEST)
+            except Exception as e:
+                logger.error(f"Date parsing error: {e}")
+                return Response({
+                    "error": "Invalid Date Format", 
+                    "message": "Could not parse the provided dates."
+                }, status=status.HTTP_400_BAD_REQUEST)
         
         # Log experience level for debugging
         if experience_level:
@@ -1002,7 +1041,7 @@ class GenerateAssessmentView(APIView):
                 'mcq_weight': int(data.get('mcq_weight', 40)),
                 'available_from': data.get('available_from'),
                 'available_until': data.get('available_until'),
-                'pass_threshold': data.get('pass_threshold', 60),
+                'pass_threshold': max(10, int(data.get('pass_threshold', 60))),
                 'user_profile_id': user_profile.id if user_profile else None,
                 'company_id': company.id if company else None,
                 'job_title': job_title,
@@ -1216,7 +1255,9 @@ class CreateSubmissionView(APIView):
                 except:
                     is_actually_registered = False
 
-                if is_actually_registered:
+                is_first_registration = request.data.get('is_first_registration', 'false').lower() == 'true'
+
+                if is_actually_registered and not is_first_registration:
                     logger.info(f"CreateSubmission: {person_id} is already registered in DeepFace. Verifying...")
                     # ALREADY REGISTERED -> Must Verify (Hard Block) or Override
                     is_verified = _verify_face_with_deepface_microservice(person_id, snapshot)

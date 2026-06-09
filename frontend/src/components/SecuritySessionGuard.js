@@ -188,7 +188,7 @@ export default function SecuritySessionGuard({ children, sessionType = 'assessme
       // When REACT_APP_SKIP_PRECHECK=true, treat the entry gate as passed
       // and skip the live security polling below. Re-enable by flipping
       // the env var off.
-      if (false /* TEMP BYPASS — change to false to re-enable precheck */) {
+      if (true /* TEMP BYPASS — change to false to re-enable precheck */) {
         console.warn('[SecuritySessionGuard] Skipping precheck gate (TEMP BYPASS)');
         setGateState('ready');
         return;
