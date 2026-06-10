@@ -1916,27 +1916,29 @@ def get_invitation_result_view(request, token):
         # Get details
         latest_details = CandidateDetails.objects.filter(invitation=inv).order_by('id').last()
         original_identity_photo_url = None
-        first_details = None
-        if latest_details and latest_details.email:
-            first_details = CandidateDetails.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
-        if not first_details and inv.email:
-            first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
         
-        if first_details and first_details.snapshot:
-            original_identity_photo_url = first_details.snapshot
-        else:
-            link = None
-            if latest_details and latest_details.email:
-                link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
-            if not link and inv.email:
-                link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
-            if not link and latest_details and latest_details.pan_number:
-                norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
-                if norm_pan:
-                    link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
+        # Prioritize IdentityLink (canonical registered face) over first details snapshot
+        link = None
+        if latest_details and latest_details.email:
+            link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+        if not link and inv.email:
+            link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+        if not link and latest_details and latest_details.pan_number:
+            norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+            if norm_pan:
+                link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
 
-            if link and link.snapshot_image:
-                original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+        if link and link.snapshot_image:
+            original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+        else:
+            first_details = None
+            if latest_details and latest_details.email:
+                first_details = CandidateDetails.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+            if not first_details and inv.email:
+                first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+            
+            if first_details and first_details.snapshot:
+                original_identity_photo_url = first_details.snapshot
 
         return Response(
             {
@@ -2178,27 +2180,29 @@ def results_overview_view(request):
 
             # Check CandidateDetails for original image first, then fallback to identity link
             original_identity_photo_url = None
-            first_details = None
+            
+            # Prioritize IdentityLink (canonical registered face) over first details snapshot
+            link = None
             if latest_details and latest_details.email:
-                first_details = first_details_by_email.get(latest_details.email.lower().strip())
-            if not first_details and inv.email:
-                first_details = first_details_by_email.get(inv.email.lower().strip())
+                link = identity_links_by_email.get(latest_details.email.lower().strip())
+            if not link and inv.email:
+                link = identity_links_by_email.get(inv.email.lower().strip())
+            if not link and latest_details and latest_details.pan_number:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+                if norm_pan:
+                    link = identity_links_by_pan.get(norm_pan)
 
-            if first_details and first_details.snapshot:
-                original_identity_photo_url = first_details.snapshot
+            if link and link.snapshot_image:
+                original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
             else:
-                link = None
+                first_details = None
                 if latest_details and latest_details.email:
-                    link = identity_links_by_email.get(latest_details.email.lower().strip())
-                if not link and inv.email:
-                    link = identity_links_by_email.get(inv.email.lower().strip())
-                if not link and latest_details and latest_details.pan_number:
-                    norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
-                    if norm_pan:
-                        link = identity_links_by_pan.get(norm_pan)
+                    first_details = first_details_by_email.get(latest_details.email.lower().strip())
+                if not first_details and inv.email:
+                    first_details = first_details_by_email.get(inv.email.lower().strip())
 
-                if link and link.snapshot_image:
-                    original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+                if first_details and first_details.snapshot:
+                    original_identity_photo_url = first_details.snapshot
 
             results.append(
                 {
@@ -3803,12 +3807,22 @@ def request_photo_update_view(request, submission_id):
     """
     try:
         import uuid
+        # pyrefly: ignore [missing-import]
         from PIL import Image
         import io
+        # pyrefly: ignore [missing-import]
         from django.core.mail import send_mail
+        # pyrefly: ignore [missing-import]
         from django.conf import settings
 
         user_profile = getattr(request.user, 'profile', None)
+        is_admin = (
+            user_profile
+            and (
+                user_profile.role == UserProfile.ROLE_COMPANY_ADMIN
+                or _is_application_admin_email(user_profile.email)
+            )
+        )
         company_id = user_profile.company_id if user_profile and user_profile.company else None
         
         # 1. Fetch submission
@@ -3874,7 +3888,10 @@ def request_photo_update_view(request, submission_id):
 
         reason = (request.data.get('reason') or '').strip()
         if not reason:
-            return Response({'error': 'Reason is required for manual review approval request.'}, status=status.HTTP_400_BAD_REQUEST)
+            if is_admin:
+                reason = "Identity mismatch approved by Company Admin."
+            else:
+                return Response({'error': 'Reason is required for manual review approval request.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Retrieve proctoring integrity details
         integrity_flagged = False
@@ -4461,21 +4478,29 @@ def results_detail_heavy_view(request, submission_type, submission_id):
                 first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
 
             original_identity_photo_url = None
-            if first_details and first_details.snapshot:
-                original_identity_photo_url = first_details.snapshot
-            else:
-                link = None
-                if latest_details and latest_details.email:
-                    link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
-                if not link and inv.email:
-                    link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
-                if not link and latest_details and latest_details.pan_number:
-                    norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
-                    if norm_pan:
-                        link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
+            
+            # Prioritize IdentityLink (canonical registered face) over first details snapshot
+            link = None
+            if latest_details and latest_details.email:
+                link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+            if not link and inv.email:
+                link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+            if not link and latest_details and latest_details.pan_number:
+                norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+                if norm_pan:
+                    link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
 
-                if link and link.snapshot_image:
-                    original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+            if link and link.snapshot_image:
+                original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+            else:
+                first_details = None
+                if latest_details and latest_details.email:
+                    first_details = CandidateDetails.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+                if not first_details and inv.email:
+                    first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+
+                if first_details and first_details.snapshot:
+                    original_identity_photo_url = first_details.snapshot
 
             return Response({
                 'answers': s.answers or {},

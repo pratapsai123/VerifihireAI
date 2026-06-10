@@ -385,6 +385,7 @@ export default function TakeAssessment() {
   const screenCanvasRef = useRef(null);
   const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
   const wasFsRef = useRef(false);
+  const isInitiatingScreenShareRef = useRef(false);
 
   // Split Assessment State
   const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
@@ -612,7 +613,10 @@ export default function TakeAssessment() {
   const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
     token,
     activeCoding ? codingState.codeById[String(activeCoding.id)] : '',
-    { allowCopyPaste: ALLOW_COPY_PASTE }
+    {
+      allowCopyPaste: ALLOW_COPY_PASTE,
+      activeQuestionId: activeCoding ? String(activeCoding.id) : null
+    }
   );
 
 
@@ -1220,6 +1224,7 @@ export default function TakeAssessment() {
   const startScreenShare = useCallback(async () => {
     try {
       setFsError('');
+      isInitiatingScreenShareRef.current = true;
       const stream = await navigator.mediaDevices.getDisplayMedia({
         video: { displaySurface: 'monitor' },
         audio: false
@@ -1250,6 +1255,10 @@ export default function TakeAssessment() {
       console.error('Screen share error:', err);
       setFsError('Screen sharing permission (Entire Screen) is mandatory to take this assessment.');
       return false;
+    } finally {
+      setTimeout(() => {
+        isInitiatingScreenShareRef.current = false;
+      }, 2500);
     }
   }, [showAiEvent]);
 
@@ -1409,10 +1418,28 @@ export default function TakeAssessment() {
     };
 
     const handleBlur = () => {
+      if (document.hidden) {
+        console.log('Skipping window blur because page is hidden (tab switch handled by visibilitychange).');
+        return;
+      }
+      if (isInitiatingScreenShareRef.current) {
+        console.log('Skipping window blur during screen share initiation.');
+        return;
+      }
+      const isCurrentlyFullscreen = !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
+      if (isCurrentlyFullscreen) {
+        console.log('Skipping window blur while in fullscreen (likely browser overlay interaction).');
+        return;
+      }
       // Small timeout to filter out momentary focus shifts (like clicking radio buttons/checkboxes)
       // and verify if the window is truly blurred via document.hasFocus()
       setTimeout(() => {
-        if (!document.hasFocus()) {
+        if (!document.hasFocus() && !document.hidden) {
           showAiEvent('WINDOW BLURRED', true, 'window_switch');
         }
       }, 250);

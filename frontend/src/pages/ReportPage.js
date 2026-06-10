@@ -122,7 +122,7 @@ export default function ReportPage() {
     };
 
     const handleApprove = async () => {
-        if (!approvalReason.trim()) {
+        if (!isAdmin && !approvalReason.trim()) {
             alert('Please provide an approval reason for the audit trail.');
             return;
         }
@@ -335,7 +335,7 @@ export default function ReportPage() {
                         {/* Reason field */}
                         <div className="report-modal-reason-wrap">
                             <label className="report-modal-reason-label">
-                                Approval Reason (Audit Trail) <span style={{ color: '#ef4444' }}>*</span>
+                                Approval Reason (Audit Trail) {!isAdmin && <span style={{ color: '#ef4444' }}>*</span>}
                             </label>
                             <textarea
                                 className="report-modal-reason-input"
@@ -359,7 +359,7 @@ export default function ReportPage() {
                             <button
                                 className="report-modal-btn-confirm"
                                 onClick={handleApprove}
-                                disabled={approving || !approvalReason.trim()}
+                                disabled={approving || (!isAdmin && !approvalReason.trim())}
                             >
                                 {approving ? (
                                     <>
