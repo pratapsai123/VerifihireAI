@@ -1580,3 +1580,105 @@
     line-height: 1.6;
     margin-bottom: 2rem;
 }
+
+/* ===========================
+   MALPRACTICE / FULLSCREEN WARNING OVERLAY
+   =========================== */
+.fullscreen-warning-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.fullscreen-warning-modal {
+    background: #1e293b;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(239, 68, 68, 0.1);
+    animation: modalScaleUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.warning-icon-wrapper {
+    width: 70px;
+    height: 70px;
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.warning-pulse-icon {
+    font-size: 30px;
+    color: #ef4444;
+    animation: warningPulseIcon 2s infinite;
+}
+
+.fullscreen-warning-modal h2 {
+    color: #f8fafc;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.fullscreen-warning-modal p {
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.btn-return-fullscreen {
+    width: 100%;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 10px 20px -5px rgba(239, 68, 68, 0.4);
+    transition: all 0.2s ease;
+}
+
+.btn-return-fullscreen:hover {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -5px rgba(239, 68, 68, 0.6);
+}
+
+.btn-return-fullscreen:active {
+    transform: translateY(0);
+}
+
+@keyframes warningPulseIcon {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.15); text-shadow: 0 0 15px rgba(239, 68, 68, 0.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes modalScaleUp {
+    from { opacity: 0; transform: scale(0.9) translateY(20px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+

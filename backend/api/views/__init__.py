@@ -91,6 +91,8 @@ from .live_interview_views import (
     get_interview_chat_view,
     add_interview_participant_view,
     validate_participant_token_view,
+    create_interview_violation_view,
+    get_interview_violations_view,
 )
 from .job_role_views import (
     job_role_list_create_view,

@@ -2185,3 +2185,115 @@ def get_interview_chat_view(request, session_id):
             {'error': 'Failed to fetch chat messages'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_interview_violation_view(request):
+    """
+    Log an interview proctoring violation.
+    Expects POST request with multipart/form-data.
+    """
+    try:
+        import uuid
+        import json
+        data = request.data
+        session_id = data.get('session_id')
+        violation_type = data.get('violation_type')
+        severity = data.get('severity', 'MEDIUM')
+        details_raw = data.get('details', '{}')
+        
+        try:
+            duration = int(data.get('duration', 0))
+        except Exception:
+            duration = 0
+            
+        screenshot_file = request.FILES.get('screenshot')
+
+        if not session_id or not violation_type:
+            return Response({'error': 'session_id and violation_type are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            uuid_session_id = uuid.UUID(str(session_id))
+            invitation = InterviewInvitation.objects.select_related('interview').get(token=uuid_session_id)
+        except (ValueError, InterviewInvitation.DoesNotExist):
+            return Response({'error': 'Invalid interview session token.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Parse details
+        details = {}
+        if details_raw:
+            if isinstance(details_raw, str):
+                try:
+                    details = json.loads(details_raw)
+                except Exception:
+                    details = {'raw': details_raw}
+            elif isinstance(details_raw, dict):
+                details = details_raw
+
+        # Create violation record
+        from ..models import InterviewViolation
+        violation = InterviewViolation.objects.create(
+            interview=invitation.interview,
+            candidate=invitation,
+            violation_type=violation_type,
+            severity=severity,
+            details=details,
+            duration=duration,
+            screenshot_path=screenshot_file
+        )
+
+        # Broadcast via WebSocket group in real-time
+        from channels.layers import get_channel_layer
+        from asgiref.sync import async_to_sync
+
+        channel_layer = get_channel_layer()
+        if channel_layer:
+            async_to_sync(channel_layer.group_send)(
+                f"interview_{uuid_session_id}",
+                {
+                    "type": "forward_message",
+                    "message": {
+                        "type": "violation",
+                        "violation_type": violation.violation_type,
+                        "severity": violation.severity,
+                        "details": violation.details,
+                        "timestamp": violation.timestamp.isoformat(),
+                        "duration": violation.duration,
+                        "screenshot_url": violation.screenshot_path.url if violation.screenshot_path else None
+                    }
+                }
+            )
+
+        from ..serializers import InterviewViolationSerializer
+        serializer = InterviewViolationSerializer(violation)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in create_interview_violation_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f"Internal server error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_interview_violations_view(request, session_id):
+    """
+    Retrieve all logged proctoring violations for a specific interview session.
+    """
+    try:
+        from ..models import InterviewViolation
+        from ..serializers import InterviewViolationSerializer
+        violations = InterviewViolation.objects.filter(
+            candidate__token=session_id
+        ).order_by('timestamp')
+        
+        serializer = InterviewViolationSerializer(violations, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in get_interview_violations_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f"Failed to retrieve violations: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+

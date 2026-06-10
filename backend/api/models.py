@@ -2118,3 +2118,23 @@ class FaceUpdateRequest(models.Model):
         ]
 
 
+class InterviewViolation(models.Model):
+    interview = models.ForeignKey(Interview, on_delete=models.CASCADE, related_name='violations', null=True, blank=True)
+    candidate = models.ForeignKey(InterviewInvitation, on_delete=models.CASCADE, related_name='violations', null=True, blank=True)
+    violation_type = models.CharField(max_length=50)  # e.g., NO_FACE, MULTIPLE_FACES, TAB_SWITCH, FULLSCREEN_EXIT
+    severity = models.CharField(max_length=20)  # e.g., HIGH, MEDIUM, LOW
+    details = models.JSONField(default=dict, blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+    screenshot_path = models.ImageField(upload_to='interview_violations/%Y/%m/%d/', blank=True, null=True)
+    duration = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = "Interview Violation"
+        verbose_name_plural = "Interview Violations"
+
+    def __str__(self):
+        return f"Violation {self.violation_type} ({self.severity}) - Candidate {self.candidate_id}"
+
+
+
