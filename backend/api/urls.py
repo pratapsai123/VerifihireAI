@@ -51,6 +51,8 @@ urlpatterns = [
     path('interviews/chat/<uuid:session_id>/', views.get_interview_chat_view, name='get_interview_chat'),
     path('interviews/violations/', views.create_interview_violation_view, name='create_interview_violation'),
     path('interviews/<uuid:session_id>/violations/', views.get_interview_violations_view, name='get_interview_violations'),
+    path('interviews/<int:interview_id>/violations/', views.get_interview_violations_by_id_view, name='get_interview_violations_by_id'),
+
 
     # HR Offboarding: transfer / deactivate / reactivate
     path('users/<int:user_id>/transfer-preview/', views.transfer_preview_view, name='transfer_preview'),

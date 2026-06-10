@@ -2297,3 +2297,68 @@ def get_interview_violations_view(request, session_id):
         print(traceback.format_exc())
         return Response({'error': f"Failed to retrieve violations: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_interview_violations_by_id_view(request, interview_id):
+    """
+    Retrieve all logged proctoring violations and calculated malpractice metrics
+    for a specific interview candidate invitation by its integer database ID.
+    """
+    try:
+        from ..models import InterviewViolation, InterviewInvitation
+        from ..serializers import InterviewViolationSerializer
+        
+        try:
+            invitation = InterviewInvitation.objects.get(id=interview_id)
+        except (ValueError, InterviewInvitation.DoesNotExist):
+            return Response({'error': 'Interview invitation not found.'}, status=status.HTTP_404_NOT_FOUND)
+            
+        violations = InterviewViolation.objects.filter(candidate=invitation).order_by('timestamp')
+        
+        high_count = 0
+        medium_count = 0
+        low_count = 0
+        
+        for v in violations:
+            sev = str(v.severity).upper()
+            if sev == 'HIGH':
+                high_count += 1
+            elif sev == 'MEDIUM':
+                medium_count += 1
+            elif sev == 'LOW':
+                low_count += 1
+                
+        risk_score = (high_count * 20) + (medium_count * 10) + (low_count * 5)
+        
+        if risk_score <= 20:
+            integrity_status = "Clean"
+        elif risk_score <= 50:
+            integrity_status = "Suspicious"
+        else:
+            integrity_status = "High Risk"
+            
+        from django.db.models import Count
+        summary_qs = InterviewViolation.objects.filter(candidate=invitation).values('violation_type').annotate(count=Count('id'))
+        violation_summary = {item['violation_type']: item['count'] for item in summary_qs}
+            
+        serializer = InterviewViolationSerializer(violations, many=True, context={'request': request})
+        
+        response_data = {
+            "total_violations": len(violations),
+            "high_count": high_count,
+            "medium_count": medium_count,
+            "low_count": low_count,
+            "risk_score": risk_score,
+            "integrity_status": integrity_status,
+            "violation_summary": violation_summary,
+            "violations": serializer.data
+        }
+        return Response(response_data, status=status.HTTP_200_OK)
+    except Exception as e:
+        import traceback
+        print(f"Error in get_interview_violations_by_id_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f"Failed to retrieve violations: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+

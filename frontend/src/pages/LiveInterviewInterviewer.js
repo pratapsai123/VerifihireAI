@@ -374,8 +374,8 @@ function LiveInterviewInterviewer() {
       case 'violation':
         setViolations(prev => [data, ...prev]);
         const alertLabel = data.violation_type === 'NO_FACE' ? 'No Face Detected' :
-                           data.violation_type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
-                           data.violation_type === 'TAB_SWITCH' ? 'Candidate Switched Tabs' : 'Candidate Left Fullscreen';
+          data.violation_type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
+            data.violation_type === 'TAB_SWITCH' ? 'Candidate Switched Tabs' : 'Candidate Left Fullscreen';
         showNotification(`🔴 Malpractice Alert: ${alertLabel}`, 'error');
         break;
       case 'session_expired':
@@ -723,9 +723,6 @@ function LiveInterviewInterviewer() {
         <header className="live-interview-header">
           <div className="header-left"><h1>Live Interview (Interviewer View)</h1></div>
           <div className="header-controls">
-            <button className="btn-invite-panelist" onClick={() => setShowInviteModal(true)}>
-              <i className="fas fa-user-plus"></i> Invite Panelist
-            </button>
             <button className={`btn-malpractice-log ${violations.length > 0 ? 'pulse' : ''}`} onClick={() => setMalpracticePanelVisible(!malpracticePanelVisible)}>
               <i className="fas fa-shield-alt"></i> Malpractice Log {violations.length > 0 && <span className="violation-badge">{violations.length}</span>}
             </button>
