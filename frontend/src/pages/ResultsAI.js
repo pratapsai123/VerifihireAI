@@ -167,7 +167,7 @@ const ResultsAI = () => {
         setPhotoApprovalSubmitting(true);
         try {
             // Determine correct endpoint based on candidate type
-            const isAiCandidate = !!photoApprovalCandidate.is_ai_candidate;
+            const isAiCandidate = !!photoApprovalCandidate.is_ai_candidate || String(photoApprovalCandidate.submission_id || '').startsWith('aicand_');
             const url = isAiCandidate
                 ? `${API_BASE_URL}/ai-candidates/${pk}/approve-photo/`
                 : `${API_BASE_URL}/ai/submission/${pk}/approve-photo/`;
@@ -516,6 +516,40 @@ const ResultsAI = () => {
             setViewedSubmission(null);
         }
     }, [searchParams, aiAssessments]);
+
+    // Automatically fetch detail photos when photoApprovalCandidate modal is opened without photos (list view fallback)
+    useEffect(() => {
+        if (photoApprovalCandidate && !photoApprovalCandidate.pending_identity_photo_url) {
+            const pk = photoApprovalCandidate.ai_candidate_pk || photoApprovalCandidate.id;
+            const subId = photoApprovalCandidate.submission_id || 
+                          (photoApprovalCandidate.is_ai_candidate || String(photoApprovalCandidate.submission_id || '').startsWith('aicand_')
+                              ? `aicand_${pk}`
+                              : `ai_${pk}`);
+            const fetchApprovalDetail = async () => {
+                try {
+                    const token = getToken();
+                    const resp = await axios.get(`${API_BASE_URL}/results/${subId}/detail/`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (resp.data) {
+                        setPhotoApprovalCandidate(prev => {
+                            if (!prev || String(prev.ai_candidate_pk || prev.id) !== String(pk)) return prev;
+                            return {
+                                ...prev,
+                                master_photo_url: resp.data.master_photo_url || resp.data.original_identity_photo_url,
+                                original_identity_photo_url: resp.data.original_identity_photo_url,
+                                candidate_photo_url: resp.data.candidate_photo_url,
+                                pending_identity_photo_url: resp.data.pending_identity_photo_url || resp.data.intruder_photo_url,
+                            };
+                        });
+                    }
+                } catch (err) {
+                    console.error("Error fetching approval photo details:", err);
+                }
+            };
+            fetchApprovalDetail();
+        }
+    }, [photoApprovalCandidate]);
 
 
 
