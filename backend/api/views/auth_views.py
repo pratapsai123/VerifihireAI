@@ -1142,9 +1142,20 @@ def refresh_token_view(request):
             
             access_token['db_name'] = current_db_id
             
+            # Fetch user email to prevent cross-port session hijacking
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            user_id = access_token.get('user_id')
+            email = None
+            if user_id:
+                user = User.objects.filter(id=user_id).first()
+                if user:
+                    email = user.email or user.username
+            
             response = Response(
                 {
-                    'token': str(access_token)
+                    'token': str(access_token),
+                    'user_email': email
                 },
                 status=status.HTTP_200_OK
             )

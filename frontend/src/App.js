@@ -206,6 +206,25 @@ axios.interceptors.response.use(
         });
 
         if (refreshResponse.data && refreshResponse.data.token) {
+          // Cross-origin session check: Ensure the refreshed token belongs to the current app's user
+          const currentUserStr = localStorage.getItem('user');
+          if (currentUserStr && refreshResponse.data.user_email) {
+            try {
+              const currentUser = JSON.parse(currentUserStr);
+              if (currentUser.email && currentUser.email.toLowerCase() !== refreshResponse.data.user_email.toLowerCase()) {
+                console.error("Refreshed token belongs to a different user (cross-app login detected). Logging out.");
+                clearToken();
+                localStorage.removeItem('user');
+                if (window.location.pathname !== '/login') {
+                  window.location.href = '/login';
+                }
+                return Promise.reject(new Error("Cross-app session hijacking prevented."));
+              }
+            } catch (e) {
+              // ignore parse errors
+            }
+          }
+
           const newToken = refreshResponse.data.token;
           setToken(newToken);
 
@@ -275,20 +294,60 @@ function AppContent() {
           const response = await axios.post(`${API_BASE_URL}/token/refresh/`, {}, {
             withCredentials: true
           });
-          
+
           if (response.data && response.data.token) {
+            // Cross-origin session check: Ensure the refreshed token belongs to the current app's user
+            const currentUserStr = localStorage.getItem('user');
+            if (currentUserStr && response.data.user_email) {
+              try {
+                const currentUser = JSON.parse(currentUserStr);
+                if (currentUser.email && currentUser.email.toLowerCase() !== response.data.user_email.toLowerCase()) {
+                  console.error("Refreshed token belongs to a different user (cross-app login detected). Clearing state.");
+                  clearToken();
+                  localStorage.removeItem('user');
+                  setIsInitializing(false);
+                  return;
+                }
+              } catch (e) {
+                // ignore parse errors
+              }
+            }
+
             setToken(response.data.token);
             console.log("Session recovered successfully.");
           }
         } catch (err) {
           console.warn("Session recovery failed or expired:", err.response?.status);
-          // If 401, the user is likely logged out, but we let ProtectedRoute handle redirection
+          // If 401, the refresh token is invalid/expired. We should clear the stale user data.
+          if (err.response && err.response.status === 401) {
+            clearToken();
+            localStorage.removeItem('user');
+          }
         }
       }
       setIsInitializing(false);
     };
 
     initializeAuth();
+
+    // Cross-tab synchronization: if another tab logs in/out, reload this tab
+    // so it doesn't use stale memory tokens or mismatched state.
+    const handleStorageChange = (e) => {
+      if (e.key === 'user') {
+        // If user was removed (logged out), or changed to a different user (logged in)
+        if (!e.newValue) {
+          clearToken();
+          if (window.location.pathname !== '/login') {
+            window.location.href = '/login';
+          }
+        } else if (e.oldValue !== e.newValue) {
+          console.log("User session changed in another tab. Reloading...");
+          window.location.reload();
+        }
+      }
+    };
+    window.addEventListener('storage', handleStorageChange);
+    return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
 

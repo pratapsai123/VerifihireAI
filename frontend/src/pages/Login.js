@@ -9,6 +9,13 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // If the user is already logged in, redirect them to the dashboard (Instagram style)
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      navigate('/dashboard', { replace: true });
+      return;
+    }
+
     // Scroll to top when component mounts
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -20,7 +27,7 @@ function Login() {
         offset: 50,
       });
     }
-  }, []);
+  }, [navigate]);
 
   // Login form state
   const [loginEmail, setLoginEmail] = useState('');
