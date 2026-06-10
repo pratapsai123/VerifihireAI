@@ -799,7 +799,19 @@ def list_face_requests_view(request):
                 filtered_snaps = []
                 no_face_skip_count = 0
                 for snap in snaps:
+                    # Filter out snapshots that do not have an actual file on disk
+                    has_file = False
+                    if snap.screenshot and snap.screenshot.name and os.path.exists(snap.screenshot.path):
+                        has_file = True
+                    elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
+                        has_file = True
+                    
+                    if not has_file:
+                        continue
+                        
                     evt = snap.event_type.lower() if snap.event_type else ""
+                    if 'mismatch' in evt or 'identity' in evt:
+                        continue
                     if evt in ['no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked', 'no_face']:
                         no_face_skip_count += 1
                         if no_face_skip_count <= 3:

@@ -816,9 +816,18 @@ def generate_candidate_report(submission_id):
     # Pre-calculate mismatch and integrity status early
     integrity = CandidateIntegrity.objects.filter(invitation=inv).first()
     is_mismatch = False
+    is_registration_mismatch = False
     photo_approved = False
     if candidate_detail:
-        is_mismatch = getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)
+        has_reg_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Face Mismatch").exists()
+        has_reg_log = any(log.get('action') == 'Identity Mismatch Detected' for log in getattr(inv, 'activity_logs', []) or [])
+        is_registration_mismatch = has_reg_screenshot or has_reg_log
+        if not is_registration_mismatch and (getattr(candidate_detail, 'identity_mismatch_detected', False) or getattr(candidate_detail, 'identity_mismatch', False)):
+            has_periodic_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Mismatch (Periodic)").exists()
+            if not has_periodic_screenshot:
+                is_registration_mismatch = True
+
+        is_mismatch = is_registration_mismatch
         photo_approved = getattr(candidate_detail, 'photo_update_approved', False)
     if integrity and not getattr(integrity, 'identity_verified', True):
         is_mismatch = True
@@ -1127,8 +1136,8 @@ def generate_candidate_report(submission_id):
 
     story.append(Spacer(1, 12))
 
-    # Add Side-by-side Identity Comparison Table if mismatch is detected
-    if is_mismatch and candidate_detail:
+    # Add Side-by-side Identity Comparison Table if mismatch is detected during registration
+    if is_registration_mismatch and candidate_detail:
         # Get the first valid registered details snapshot for this candidate
         original_snapshot = None
         
@@ -3644,50 +3653,59 @@ def generate_candidate_report(submission_id):
         story.append(Paragraph('The following identity checks were performed automatically every 2 minutes during the assessment to ensure the candidate remained the same throughout the exam.', styles['Normal']))
         story.append(Spacer(1, 12))
         
-        table_data = [[
-            Paragraph('<b>Time</b>', styles['Normal']), 
-            Paragraph('<b>Status</b>', styles['Normal']), 
-            Paragraph('<b>Match Score</b>', styles['Normal'])
-        ]]
-        
-        for log in integrity.identity_verification_logs:
-            ts = log.get('timestamp', '')
-            if ts:
-                try:
-                    from datetime import datetime
-                    dt = datetime.fromisoformat(ts.replace('Z', '+00:00'))
-                    ts_str = timezone.localtime(dt).strftime('%I:%M %p')
-                except Exception:
-                    ts_str = ts
-            else:
-                ts_str = '-'
-            
-            is_v = log.get('verified', False)
-            reason = log.get('reason', '')
-            status_text = "Verified" if is_v else ("Face Missing" if reason == 'Face detection failed' else "Mismatch")
-            status_color = "#16a34a" if is_v else "#dc2626"
-            
-            score = f"{log.get('match_score', 0)}%"
-            
-            table_data.append([
-                Paragraph(ts_str, styles['Normal']),
-                Paragraph(f'<b><font color="{status_color}">{status_text}</font></b>', styles['Normal']),
-                Paragraph(score, styles['Normal'])
-            ])
-        
-        if len(table_data) > 1:
-            t = Table(table_data, colWidths=[1.5*inch, 2*inch, 1.5*inch])
-            t.setStyle(TableStyle([
-                ('BACKGROUND', (0, 0), (-1, 0), colors.HexColor('#f1f5f9')),
-                ('TEXTCOLOR', (0, 0), (-1, 0), colors.HexColor('#475569')),
-                ('ALIGN', (0, 0), (-1, -1), 'LEFT'),
-                ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
-                ('GRID', (0, 0), (-1, -1), 1, colors.HexColor('#e2e8f0')),
-                ('TOPPADDING', (0, 0), (-1, -1), 8),
-                ('BOTTOMPADDING', (0, 0), (-1, -1), 8),
-                ('LEFTPADDING', (0, 0), (-1, -1), 12),
-            ]))
-            story.append(t)
+        # Get all identity/mismatch screenshots for this invitation that exist on disk
+        identity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
+        valid_id_screenshots = []
+        for snap in identity_screenshots:
+            evt = str(snap.event_type).lower().strip()
+            if ('mismatch' in evt or 'identity' in evt) and 'periodic' in evt:
+                has_image = False
+                if snap.screenshot and snap.screenshot.name and os.path.exists(snap.screenshot.path):
+                    has_image = True
+                elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
+                    has_image = True
+                if has_image:
+                    valid_id_screenshots.append(snap)
+
+        if valid_id_screenshots:
+            # Print screenshots in chunks of 3 side-by-side using table
+            for i in range(0, len(valid_id_screenshots), 3):
+                chunk = valid_id_screenshots[i:i+3]
+                img_row = []
+                text_row = []
+                for snap in chunk:
+                    img = None
+                    if snap.screenshot and snap.screenshot.name and os.path.exists(snap.screenshot.path):
+                        img = _make_rl_image(snap.screenshot.path, 2.2 * inch, 1.6 * inch)
+                    elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
+                        img = _make_rl_image(snap.webcam_screenshot.path, 2.2 * inch, 1.6 * inch)
+                    
+                    ts_str = timezone.localtime(snap.timestamp).strftime('%I:%M:%S %p')
+                    center_style = ParagraphStyle('MismatchCenterStyle', parent=styles['Normal'], alignment=1, fontSize=8, textColor=colors.HexColor('#64748b'))
+                    text_row.append(Paragraph(f"{ts_str}", center_style))
+                    
+                    if img:
+                        img_row.append(img)
+                    else:
+                        img_row.append(Paragraph('<i>No image</i>', center_style))
+                
+                while len(img_row) < 3:
+                    img_row.append("")
+                    text_row.append("")
+                
+                tbl_data = [img_row, text_row]
+                col_widths = [2.4 * inch, 2.4 * inch, 2.4 * inch]
+                snap_tbl = Table(tbl_data, colWidths=col_widths)
+                snap_tbl.setStyle(TableStyle([
+                    ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+                    ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 2),
+                    ('TOPPADDING', (0, 0), (-1, -1), 2),
+                ]))
+                story.append(snap_tbl)
+                story.append(Spacer(1, 8))
+        else:
+            story.append(Paragraph('<b>Status:</b> <font color="#16a34a">Verified (No identity mismatches detected)</font>', styles['Normal']))
             
         story.append(Spacer(1, 20))
 
@@ -3696,6 +3714,24 @@ def generate_candidate_report(submission_id):
     # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     try:
         integrity_screenshots = list(IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp'))
+        
+        # Filter out screenshots that do not have a valid image file on disk
+        valid_screenshots = []
+        for snap in integrity_screenshots:
+            has_image = False
+            if snap.screenshot and snap.screenshot.name and os.path.exists(snap.screenshot.path):
+                has_image = True
+            elif snap.webcam_screenshot and snap.webcam_screenshot.name and os.path.exists(snap.webcam_screenshot.path):
+                has_image = True
+            
+            # Also exclude periodic identity mismatch/verification screenshots from general log
+            evt = str(snap.event_type).lower().strip()
+            if 'mismatch' in evt or 'identity' in evt:
+                continue
+
+            if has_image:
+                valid_screenshots.append(snap)
+        integrity_screenshots = valid_screenshots
 
         if integrity_screenshots:
 
