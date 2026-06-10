@@ -379,7 +379,7 @@ def _get_unified_identity_mismatch_fields(request, submission):
     if not orig_url:
         orig_url = clean_b64(submission.original_identity_photo)
     
-    intruder_url = None
+    intruder_url = clean_b64(getattr(submission, 'intruder_photo', None))
     is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic' if getattr(submission, 'assessment', None) else False
     if is_automatic:
         try:
@@ -3399,47 +3399,79 @@ class AIAssessmentReportDownloadView(APIView):
                         logger.error(f"PDF Gen: Failed to write original_identity_photo mismatch temp file: {e}")
                         
                 intr_path = None
-                is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
-                photo_bytes = None
-                
-                if is_automatic:
-                    from api._imports import DEEPFACE_BASE_URL
-                    import requests
-                    token = str(assessment.share_token)
-                    email = submission.candidate_email.lower().strip() if submission.candidate_email else None
-                    pan = getattr(submission, 'pan_number', None)
-                    person_id = pan.lower().strip() if pan else f"{email}_{token}"
-                    
-                    df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}/assessments/{token}/photo"
+                # Priority 0: Use database stored intruder_photo if present
+                if getattr(submission, 'intruder_photo', None):
                     try:
-                        resp = requests.get(df_url, timeout=5)
-                        if resp.status_code == 200:
-                            photo_bytes = resp.content
-                    except Exception as e:
-                        logger.warning(f"PDF Gen: Failed to fetch intruder photo from DeepFace API: {e}")
-                        
-                if photo_bytes:
-                    try:
-                        temp_intr = _save_to_temp_file(photo_bytes, is_b64=False)
+                        temp_intr = _save_to_temp_file(submission.intruder_photo, is_b64=True)
                         temp_files_to_cleanup.append(temp_intr)
                         intr_path = temp_intr
                     except Exception as e:
-                        logger.error(f"PDF Gen: Failed to write intruder photo from API bytes to temp file: {e}")
-                else:
-                    # Try local folder on disk
-                    try:
-                        from pathlib import Path
-                        from django.conf import settings
-                        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                        p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{assessment.share_token}"
-                        target_snap_file = deepface_data_dir / p_id / 'assessments' / str(assessment.share_token) / 'registration_snapshot.jpg'
-                        if target_snap_file.exists():
-                            with open(target_snap_file, 'rb') as f:
-                                temp_intr = _save_to_temp_file(f.read(), is_b64=False)
-                                temp_files_to_cleanup.append(temp_intr)
-                                intr_path = temp_intr
-                    except Exception as e:
-                        logger.warning(f"PDF Gen: Failed to find local intruder photo: {e}")
+                        logger.error(f"PDF Gen: Failed to write database intruder_photo: {e}")
+
+                if not intr_path:
+                    is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
+                    photo_bytes = None
+                    
+                    if is_automatic:
+                        from api._imports import DEEPFACE_BASE_URL
+                        import requests
+                        token = str(assessment.share_token)
+                        email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+                        pan = getattr(submission, 'pan_number', None)
+                        person_id = pan.lower().strip() if pan else f"{email}_{token}"
+                        
+                        df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}/assessments/{token}/photo"
+                        try:
+                            resp = requests.get(df_url, timeout=5)
+                            if resp.status_code == 200:
+                                photo_bytes = resp.content
+                        except Exception as e:
+                            logger.warning(f"PDF Gen: Failed to fetch intruder photo from DeepFace API: {e}")
+                            
+                    if photo_bytes:
+                        try:
+                            temp_intr = _save_to_temp_file(photo_bytes, is_b64=False)
+                            temp_files_to_cleanup.append(temp_intr)
+                            intr_path = temp_intr
+                        except Exception as e:
+                            logger.error(f"PDF Gen: Failed to write intruder photo from API bytes to temp file: {e}")
+                    else:
+                        # Try local folder on disk with robust fallbacks
+                        try:
+                            from pathlib import Path
+                            from django.conf import settings
+                            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                            p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{assessment.share_token}"
+                            
+                            target_snap_file = None
+                            for folder in ['standard_assessment', 'assessments', 'sessions']:
+                                session_dir = deepface_data_dir / p_id / folder / str(assessment.share_token)
+                                for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
+                                    possible = session_dir / filename
+                                    if possible.exists():
+                                        target_snap_file = possible
+                                        break
+                                if target_snap_file:
+                                    break
+                                    
+                            if not target_snap_file:
+                                # Fallback: check if session directory exists and grab first jpg
+                                for folder in ['standard_assessment', 'assessments', 'sessions']:
+                                    session_dir = deepface_data_dir / p_id / folder / str(assessment.share_token)
+                                    if session_dir.exists():
+                                        for jpg_file in session_dir.glob('*.jpg'):
+                                            target_snap_file = jpg_file
+                                            break
+                                    if target_snap_file:
+                                        break
+                                        
+                            if target_snap_file and target_snap_file.exists():
+                                with open(target_snap_file, 'rb') as f:
+                                    temp_intr = _save_to_temp_file(f.read(), is_b64=False)
+                                    temp_files_to_cleanup.append(temp_intr)
+                                    intr_path = temp_intr
+                        except Exception as e:
+                            logger.warning(f"PDF Gen: Failed to find local intruder photo: {e}")
                 
                 # Fall back to target_file if original_identity_photo not set on submission
                 if not orig_path and target_file:

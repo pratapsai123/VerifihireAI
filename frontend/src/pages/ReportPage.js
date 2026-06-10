@@ -35,11 +35,10 @@ export default function ReportPage() {
         }
 
         try {
-            // 1. Fetch overview to find candidate name, assessment & mismatch info
+            // 1. Fetch detailed result metadata directly for this submission
             try {
-                const overviewResp = await axios.get(`${API_BASE_URL}/results/`);
-                const allResults = overviewResp.data?.results || [];
-                const match = allResults.find(r => String(r.submission_id) === String(submissionId));
+                const detailResp = await axios.get(`${API_BASE_URL}/results/${submissionId}/detail/`);
+                const match = detailResp.data;
                 if (match) {
                     setCandidateName(match.candidate?.name || '');
                     setAssessmentName(match.assessment?.display_name || match.assessment?.name || 'Assessment');

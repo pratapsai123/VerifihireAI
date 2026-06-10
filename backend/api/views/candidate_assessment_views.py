@@ -2042,6 +2042,182 @@ def get_invitation_result_view(request, token):
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
+def results_detail_view(request, submission_id):
+    """
+    Get detailed result metrics for a single candidate submission.
+    This resolves the slow loading overview list by keeping it lean,
+    while fully populating the photos/screenshots/mismatch elements on-demand.
+    """
+    try:
+        user_profile = getattr(request.user, 'profile', None)
+        company_id = user_profile.company_id if user_profile and user_profile.company else None
+        
+        # Determine the source
+        sub_str = str(submission_id)
+        if sub_str.startswith('ai_'):
+            ai_id = int(sub_str.replace('ai_', ''))
+            from ai_assessments.results_helpers import get_ai_assessment_results
+            # We pass is_list=False to populate everything
+            results = get_ai_assessment_results(
+                scoped_ids=None,
+                company_id=company_id,
+                start_date=None,
+                end_date=None,
+                request=request,
+                active_deletions=set(),
+                pending_qual_ai_ids=set(),
+                is_list=False,
+                submission_id=ai_id
+            )
+            if results:
+                return Response(results[0])
+            return Response({'error': 'AI Assessment Submission not found'}, status=404)
+            
+        elif sub_str.startswith('aicand_'):
+            cand_id = int(sub_str.replace('aicand_', ''))
+            from ai_assessments.results_helpers import get_ai_candidate_results
+            # We pass is_list=False to populate everything
+            results = get_ai_candidate_results(
+                scoped_ids=None,
+                company_id=company_id,
+                start_date=None,
+                end_date=None,
+                active_deletions=set(),
+                pending_qual_ai_ids=set(),
+                request=request,
+                is_list=False,
+                candidate_id=cand_id
+            )
+            if results:
+                return Response(results[0])
+            return Response({'error': 'AI Candidate not found'}, status=404)
+            
+        else:
+            # Standard Assessment
+            from api.models import CandidateSubmission, CandidateDetails, IdentityLink
+            from api.utils.warning_logs import _get_filtered_warning_logs
+            import re
+            
+            try:
+                sub_id = int(sub_str)
+                s = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment', 'invitation__integrity').get(id=sub_id)
+            except (ValueError, CandidateSubmission.DoesNotExist):
+                return Response({'error': 'Standard Candidate Submission not found'}, status=404)
+                
+            inv = s.invitation
+            a = inv.assessment
+            pan = inv.pan_number or getattr(inv, 'pan_number', None)
+            phone = inv.phone or getattr(inv, 'phone', None)
+            
+            # Fetch latest candidate details
+            latest_details = CandidateDetails.objects.filter(token=inv.token).first()
+            if not latest_details and inv.email:
+                latest_details = CandidateDetails.objects.filter(email=inv.email).first()
+                
+            original_identity_photo_url = None
+            if latest_details:
+                pan = latest_details.pan_number or pan
+                phone = latest_details.phone or phone
+                norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper()) if latest_details.pan_number else ""
+                link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+                if not link and latest_details.email:
+                    link = IdentityLink.objects.filter(email=latest_details.email.strip().lower()).first()
+                if link and link.snapshot_image:
+                    original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+                    
+            # Gather active deletions
+            active_deletions = set()
+            try:
+                from ..models import DeletionRequest
+                for dr in DeletionRequest.objects.filter(status='pending'):
+                    active_deletions.add(f"CandidateSubmission_{dr.object_id}")
+                    active_deletions.add(f"{dr.content_type}_{dr.object_id}")
+            except Exception:
+                pass
+
+            data = {
+                'submission_id': s.id,
+                'invitation_id': inv.id,
+                'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                'candidate': {
+                    'name': inv.name,
+                    'email': inv.email,
+                    'pan_number': pan,
+                    'phone': phone,
+                },
+                'assessment': {
+                    'id': a.id,
+                    'display_name': a.display_name,
+                    'name': a.name,
+                    'weightage_objective': a.weightage_objective,
+                    'weightage_coding': a.weightage_coding,
+                    'min_pass_percentage': a.min_pass_percentage,
+                },
+                'score': s.score,
+                'total': s.total,
+                'percentage': s.final_percentage if s.final_percentage is not None else s.percentage,
+                
+                'objective_score': s.objective_score,
+                'objective_total': s.objective_total,
+                'objective_percentage': s.objective_percentage,
+                
+                'coding_score': s.coding_score,
+                'coding_total': s.coding_total,
+                'coding_percentage': s.coding_percentage,
+                'batch_id': inv.batch_id,
+                'batch_name': inv.batch_name,
+
+                'status': s.result,
+                'termination_reason': (s.answers or {}).get('_termination', {}).get('reason') if isinstance(s.answers, dict) else None,
+                'termination_detail': (s.answers or {}).get('_termination', {}).get('detail') if isinstance(s.answers, dict) else None,
+                'qual_pending': False,
+                'delete_requested': f"CandidateSubmission_{s.id}" in active_deletions,
+                'answers': getattr(s, 'answers', {}),
+                'integrity': {
+                    'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
+                    'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
+                },
+                'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
+                'regret_email_sent': s.regret_email_sent,
+                'created_at': inv.created_at.isoformat() if inv.created_at else None,
+
+                # Identity mismatch fields
+                'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
+                'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
+                'original_identity_photo_url': original_identity_photo_url,
+                'candidate_photo_url': latest_details.snapshot if latest_details else None,
+                'photo_update_approved': latest_details.photo_update_approved if latest_details else False,
+                'photo_update_approved_by': latest_details.photo_update_approved_by if latest_details else None,
+                'photo_update_approved_at': latest_details.photo_update_approved_at.isoformat() if (latest_details and latest_details.photo_update_approved_at) else None,
+                'photo_update_reason': latest_details.photo_update_reason if latest_details else None,
+                'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
+                'photo_update_status': latest_details.photo_update_status if latest_details else 'none',
+                'photo_update_admin_note': latest_details.photo_update_admin_note if latest_details else None,
+                'deepface_distance': latest_details.deepface_distance if latest_details else None,
+                'deepface_threshold': latest_details.deepface_threshold if latest_details else None,
+                'deepface_verified': latest_details.deepface_verified if latest_details else None,
+                'deepface_model': latest_details.deepface_model if latest_details else None,
+                'deepface_detector': latest_details.deepface_detector if latest_details else None,
+                'original_image_path': latest_details.original_image_path if latest_details else None,
+                'captured_image_path': latest_details.captured_image_path if latest_details else None,
+                'original_image_hash': latest_details.original_image_hash if latest_details else None,
+                'captured_image_hash': latest_details.captured_image_hash if latest_details else None,
+                'report_original_hash': latest_details.report_original_hash if latest_details else None,
+                'report_captured_hash': latest_details.report_captured_hash if latest_details else None,
+                'image_source_mismatch': latest_details.image_source_mismatch if latest_details else False,
+            }
+            return Response(data)
+            
+    except Exception as e:
+        import traceback
+        print(f"Error in results_detail_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=500)
+
+
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def results_overview_view(request):
     """
     Recruiter overview: list recent results (submissions).

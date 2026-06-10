@@ -18,7 +18,7 @@ def _encode_image_field_to_b64(img_field):
     return None
 
 
-def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None):
+def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, request, active_deletions, pending_qual_ai_ids=None, is_list=True, submission_id=None):
     from ai_assessments.views import _get_candidate_photo_url, _get_unified_identity_mismatch_fields
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
@@ -49,7 +49,9 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     Query and format AIAssessmentSubmission results for the results overview.
     Returns a list of dicts matching the unified results schema.
     """
-    if scoped_ids is None:
+    if submission_id:
+        ai_qs = AIAssessmentSubmission.objects.filter(id=submission_id).select_related('assessment')
+    elif scoped_ids is None:
         if company_id:
             ai_qs = AIAssessmentSubmission.objects.filter(
                 assessment__company_id=company_id,
@@ -67,10 +69,11 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     else:
         ai_qs = AIAssessmentSubmission.objects.none()
 
-    if start_date:
-        ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
-    if end_date:
-        ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
+    if not submission_id:
+        if start_date:
+            ai_qs = ai_qs.filter(submitted_at__date__gte=start_date)
+        if end_date:
+            ai_qs = ai_qs.filter(submitted_at__date__lte=end_date)
 
     # Pre-fetch approved qualification requests for these submissions
     # so we know which ones were explicitly reviewed by admin/HR
@@ -91,47 +94,40 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     for s in ai_qs[:5000]:
         a = s.assessment
 
-        integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=s).order_by('timestamp')
-        screenshots_data = []
-        for snap in integrity_snapshots:
-            screenshots_data.append({
-                "event_type": snap.event_type,
-                "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
-                "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
-                "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
-                "screenshot_base64": None, # Omitted from overview for performance; full logs in timeline API
-                "webcam_screenshot_base64": None,
-            })
-        pending_photo_b64 = None
-        is_automatic = getattr(a, 'creation_type', 'manual') == 'automatic'
-        if is_automatic:
-            try:
-                from api._imports import DEEPFACE_BASE_URL
-                import requests
-                import base64
-                p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
-                df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/assessments/{a.share_token}/photo"
-                resp = requests.get(df_url, timeout=5)
-                if resp.status_code == 200:
-                    pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
-            except Exception:
-                pass
-
-        if not pending_photo_b64:
-            try:
-                from pathlib import Path
-                from django.conf import settings
-                deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
-                # Check standard_assessment then fallback to assessments
-                target_snap_file = deepface_data_dir / p_id / 'standard_assessment' / str(a.share_token) / 'registration_snapshot.jpg'
-                if not target_snap_file.exists():
-                    target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
-                if target_snap_file.exists():
-                    with open(target_snap_file, 'rb') as f:
-                        pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
-            except Exception:
-                pass
+        if is_list:
+            screenshots_data = []
+            pan_photo_url = None
+            candidate_photo_url = None
+            detected = getattr(s, 'identity_mismatch_detected', False)
+            details = getattr(s, 'identity_mismatch_details', {})
+            photo_approved = bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False
+            photo_update_pending = bool(detected and not photo_approved)
+            mismatch_fields = {
+                "identity_mismatch_detected": detected,
+                "original_identity_photo_url": None,
+                "intruder_photo_url": None,
+                "identity_mismatch_details": details,
+                "photo_update_pending": photo_update_pending,
+                "photo_update_approved": photo_approved,
+                "pending_identity_photo_url": None,
+                "master_photo_url": None,
+                "is_assessment": True,
+                "ai_candidate_pk": s.id,
+            }
+        else:
+            from ai_assessments.models import AIAssessmentIntegrityScreenshot
+            integrity_snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=s).order_by('timestamp')
+            screenshots_data = []
+            for snap in integrity_snapshots:
+                screenshots_data.append({
+                    "event_type": snap.event_type,
+                    "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
+                    "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                    "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                })
+            pan_photo_url = _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None)
+            candidate_photo_url = _get_candidate_photo_url(request, s) or clean_b64(s.original_identity_photo)
+            mismatch_fields = _get_unified_identity_mismatch_fields(request, s)
 
         results.append(
             {
@@ -186,10 +182,10 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 'delete_requested': f"AIAssessmentSubmission_{s.id}" in active_deletions,
                 'phone': getattr(s, 'phone', None),
                 'pan_number': getattr(s, 'pan_number', None),
-                'pan_photo': _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None),
+                'pan_photo': pan_photo_url,
                 'pan_verified': getattr(s, 'pan_verified', False),
-                'candidate_photo_url': _get_candidate_photo_url(request, s) or clean_b64(s.original_identity_photo),
-                **_get_unified_identity_mismatch_fields(request, s)
+                'candidate_photo_url': candidate_photo_url,
+                **mismatch_fields
             }
         )
 
@@ -343,14 +339,16 @@ def _get_candidate_intruder_photo_url(candidate):
     return None
 
 
-def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids=None, request=None):
+def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids=None, request=None, is_list=True, candidate_id=None):
     if pending_qual_ai_ids is None:
         pending_qual_ai_ids = set()
     """
     Query and format AI Candidate (voice interview) results for the results overview.
     Returns a list of dicts matching the unified results schema.
     """
-    if scoped_ids is None:
+    if candidate_id:
+        ai_cand_qs = Candidate.objects.filter(id=candidate_id).defer('resume_text', 'conversation_memory').prefetch_related('integrity', 'integrity_logs')
+    elif scoped_ids is None:
         if company_id:
             ai_cand_qs = Candidate.objects.filter(
                 company_id=company_id,
@@ -369,14 +367,57 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
     else:
         ai_cand_qs = Candidate.objects.none()
 
-    if start_date:
-        ai_cand_qs = ai_cand_qs.filter(submission_date__gte=start_date)
-    if end_date:
-        ai_cand_qs = ai_cand_qs.filter(submission_date__lte=end_date)
+    if not candidate_id:
+        if start_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__gte=start_date)
+        if end_date:
+            ai_cand_qs = ai_cand_qs.filter(submission_date__lte=end_date)
 
     results = []
     for s in ai_cand_qs[:5000]:
         submitted_date_iso = s.completed_at.isoformat() if getattr(s, 'completed_at', None) else (s.created_at.isoformat() if getattr(s, 'created_at', None) else None)
+        
+        if is_list:
+            integrity_logs = []
+            pan_photo_url = None
+            candidate_photo_url = None
+            orig_identity_photo_url = None
+            master_photo_url = None
+            pending_identity_photo_url = None
+            photo_update_pending = bool(s.identity_mismatch_detected and not getattr(s, 'photo_update_approved', False))
+            intruder_photo_url = None
+        else:
+            integrity_logs = [
+                {
+                    'event_type': log.event_type,
+                    'screenshot_base64': None,
+                    'webcam_screenshot_base64': None,
+                    'has_screenshot': bool(log.screenshot_base64),
+                    'has_webcam_screenshot': bool(log.webcam_screenshot_base64),
+                    'screenshot_id': log.id,
+                    'timestamp': log.timestamp.isoformat() if log.timestamp else None
+                } for log in s.integrity_logs.all()
+            ]
+            pan_photo_url = request.build_absolute_uri(s.pan_photo.url) if request and getattr(s, 'pan_photo', None) and getattr(s.pan_photo, 'url', None) else None
+            candidate_photo_url = _get_candidate_photo_url_for_candidate(request, s)
+            orig_identity_photo_url = (
+                f"data:image/jpeg;base64,{s.registered_face_b64}"
+                if getattr(s, 'registered_face_b64', None)
+                else None
+            )
+            master_photo_url = (
+                f"data:image/jpeg;base64,{s.master_face_b64}"
+                if getattr(s, 'master_face_b64', None)
+                else None
+            )
+            pending_identity_photo_url = (
+                f"data:image/jpeg;base64,{s.pending_face_b64}"
+                if getattr(s, 'pending_face_b64', None)
+                else None
+            )
+            photo_update_pending = bool(getattr(s, 'pending_face_b64', None))
+            intruder_photo_url = _get_candidate_intruder_photo_url(s)
+
         results.append(
             {
                 'submission_id': f"aicand_{s.id}",
@@ -415,43 +456,21 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                     'integrity_score': getattr(s.integrity, 'integrity_score', 100.0) if hasattr(s, 'integrity') else 100.0,
                     'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
                 },
-                'integrity_logs': [
-                    {
-                        'event_type': log.event_type,
-                        'screenshot_base64': None,
-                        'webcam_screenshot_base64': None,
-                        'has_screenshot': bool(log.screenshot_base64),
-                        'has_webcam_screenshot': bool(log.webcam_screenshot_base64),
-                        'screenshot_id': log.id,
-                        'timestamp': log.timestamp.isoformat() if log.timestamp else None
-                    } for log in s.integrity_logs.all()
-                ],
+                'integrity_logs': integrity_logs,
                 'phone': getattr(s, 'phone', None),
                 'pan_number': getattr(s, 'pan_number', None),
-                'pan_photo': request.build_absolute_uri(s.pan_photo.url) if request and getattr(s, 'pan_photo', None) and getattr(s.pan_photo, 'url', None) else None,
+                'pan_photo': pan_photo_url,
                 'pan_verified': getattr(s, 'pan_verified', False),
                 'identity_mismatch_detected': s.identity_mismatch_detected,
                 'identity_mismatch_details': s.identity_mismatch_details,
-                'candidate_photo_url': _get_candidate_photo_url_for_candidate(request, s),
-                'original_identity_photo_url': (
-                    f"data:image/jpeg;base64,{s.registered_face_b64}"
-                    if getattr(s, 'registered_face_b64', None)
-                    else None
-                ),
-                'master_photo_url': (
-                    f"data:image/jpeg;base64,{s.master_face_b64}"
-                    if getattr(s, 'master_face_b64', None)
-                    else None
-                ),
-                'pending_identity_photo_url': (
-                    f"data:image/jpeg;base64,{s.pending_face_b64}"
-                    if getattr(s, 'pending_face_b64', None)
-                    else None
-                ),
-                'photo_update_pending': bool(getattr(s, 'pending_face_b64', None)),
+                'candidate_photo_url': candidate_photo_url,
+                'original_identity_photo_url': orig_identity_photo_url,
+                'master_photo_url': master_photo_url,
+                'pending_identity_photo_url': pending_identity_photo_url,
+                'photo_update_pending': photo_update_pending,
                 'photo_update_approved': getattr(s, 'photo_update_approved', False),
                 'ai_candidate_pk': s.id,
-                'intruder_photo_url': _get_candidate_intruder_photo_url(s),
+                'intruder_photo_url': intruder_photo_url,
             }
         )
 

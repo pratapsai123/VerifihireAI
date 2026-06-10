@@ -487,20 +487,31 @@ const ResultsAI = () => {
     useEffect(() => {
         const subId = searchParams.get('subId');
         if (subId) {
-            // Find in current loaded assessments
-            const found = aiAssessments.find(a =>
-                String(a.submission_id) === String(subId) ||
-                String(a.id) === String(subId) ||
-                String(a.submission_id) === `ai_${subId}`
-            );
-
-            if (found) {
-                setViewedSubmission(found);
-            } else {
-                // If not found in aiAssessments, it might be a standard assessment in another state
-                // or a deep link that hasn't loaded yet.
-                // However, most buttons in this UI fetch/load data before setting subId.
-            }
+            let active = true;
+            const fetchDetail = async () => {
+                try {
+                    const token = getToken();
+                    const resp = await axios.get(`${API_BASE_URL}/results/${subId}/detail/`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (active && resp.data) {
+                        setViewedSubmission(resp.data);
+                    }
+                } catch (err) {
+                    console.error("Error fetching submission details:", err);
+                    // Fallback to list search if detail endpoint fails
+                    const found = aiAssessments.find(a =>
+                        String(a.submission_id) === String(subId) ||
+                        String(a.id) === String(subId) ||
+                        String(a.submission_id) === `ai_${subId}`
+                    );
+                    if (active && found) {
+                        setViewedSubmission(found);
+                    }
+                }
+            };
+            fetchDetail();
+            return () => { active = false; };
         } else {
             setViewedSubmission(null);
         }
@@ -1832,19 +1843,21 @@ const ResultsAI = () => {
                                             <i className="fa-solid fa-triangle-exclamation" style={{ color: '#DC2626' }}></i> Identity Evidence — Face Comparison
                                         </h4>
                                         <div style={{ background: '#FEF2F2', border: '1px solid #F87171', borderRadius: '30px', padding: '2rem', display: 'flex', gap: '2rem', alignItems: 'flex-start', flexWrap: 'wrap', boxShadow: '0 10px 30px rgba(220, 38, 38, 0.05)' }}>
-                                            {/* BOX 1: First registered face (from deepface face_0.jpg) */}
+                                            {/* BOX 1: Registered Face (original_identity_photo) */}
                                             <div style={{ textAlign: 'center' }}>
-                                                <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '1px solid #E0E5F2', position: 'relative', marginBottom: '0.5rem' }}>
+                                                <div style={{ width: '160px', height: '160px', background: '#F4F7FE', borderRadius: '12px', overflow: 'hidden', border: '2px solid #05CD99', position: 'relative', marginBottom: '0.5rem' }}>
                                                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
                                                         ✓ REGISTERED FACE
                                                     </div>
-                                                    <img
-                                                        src={viewedSubmission.candidate_photo_url}
-                                                        alt="Registered Face"
-                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                    />
-                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                    {normalizeImageUrl(viewedSubmission.candidate_photo_url) ? (
+                                                        <img
+                                                            src={normalizeImageUrl(viewedSubmission.candidate_photo_url)}
+                                                            alt="Registered Face"
+                                                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                            onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                        />
+                                                    ) : null}
+                                                    <div style={{ display: normalizeImageUrl(viewedSubmission.candidate_photo_url) ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                                                         <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
                                                     </div>
                                                 </div>
@@ -1859,8 +1872,8 @@ const ResultsAI = () => {
                                                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#DC2626', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
-                                                    <img
-                                                        src={normalizeImageUrl(viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
+                                                    {(() => {
+                                                        const intruderPhoto = normalizeImageUrl(viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
                                                             const snaps = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
                                                             const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes((s.event_type || '').toLowerCase()));
                                                             let srcVal = null;
@@ -1871,14 +1884,28 @@ const ResultsAI = () => {
                                                                 srcVal = lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
                                                             }
                                                             return srcVal;
-                                                        })())}
-                                                        alt="Intruder Face"
-                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
-                                                    />
-                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-                                                        <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
-                                                    </div>
+                                                        })());
+                                                        if (intruderPhoto) {
+                                                            return (
+                                                                <>
+                                                                    <img
+                                                                        src={intruderPhoto}
+                                                                        alt="Intruder Face"
+                                                                        style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                                                                        onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
+                                                                    />
+                                                                    <div style={{ display: 'none', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                        <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
+                                                                    </div>
+                                                                </>
+                                                            );
+                                                        }
+                                                        return (
+                                                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                                <i className="fa-solid fa-user-secret" style={{ fontSize: '3rem', color: '#DC2626' }}></i>
+                                                            </div>
+                                                        );
+                                                    })()}
                                                 </div>
                                                 <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#991B1B' }}>Person During Assessment</div>
                                             </div>
