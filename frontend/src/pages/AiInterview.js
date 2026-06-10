@@ -10,6 +10,7 @@ const AiInterview = () => {
     const [isUploading, setIsUploading] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
+    const [highlightField, setHighlightField] = useState(null); // Field to highlight with orange border
     const [fromDate, setFromDate] = useState('');
     const [fromTime, setFromTime] = useState('');
     const [untilDate, setUntilDate] = useState('');
@@ -92,40 +93,55 @@ const AiInterview = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setHighlightField(null);
 
         if (!file) {
             setError('Please upload a Candidate List (CSV/Excel).');
+            setHighlightField('field-candidate-list');
+            document.getElementById('field-candidate-list')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
         if (!jobDescription || jobDescription.trim().length < 50) {
             setError('Please provide a detailed Job Description (at least 50 characters) for the AI to generate meaningful interview questions.');
+            setHighlightField('field-job-description');
+            document.getElementById('field-job-description')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
         if (selectedRoleId === 'custom') {
             if (!customRoleTitle || !customRoleTitle.trim()) {
                 setError('Please enter a custom role title.');
+                setHighlightField('field-role-title');
+                document.getElementById('field-role-title')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
             if (customRoleTitle.trim().length < 3) {
                 setError('Custom role title must be at least 3 characters long.');
+                setHighlightField('field-role-title');
+                document.getElementById('field-role-title')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
         }
 
         if (!experienceLevel) {
             setError('Please select an Experience Level.');
+            setHighlightField('field-experience-level');
+            document.getElementById('field-experience-level')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
         // Mandatory Scheduling Validation
         if (!fromDate || !fromTime) {
             setError('Please provide a complete starting Date and Time for the interviews.');
+            setHighlightField('field-availability');
+            document.getElementById('field-availability')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
         if (!untilDate || !untilTime) {
             setError('Please provide a complete ending Date and Time for the interviews.');
+            setHighlightField('field-availability');
+            document.getElementById('field-availability')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
             return;
         }
 
@@ -241,7 +257,7 @@ const AiInterview = () => {
                         <form onSubmit={handleSubmit} className="form-stack">
 
                             {/* Card 1: JD Section with Rich Visuals */}
-                            <div className="module-card" style={{ padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
+                            <div id="field-job-description" className="module-card" style={{ padding: '2.5rem 2rem', background: 'transparent', borderRadius: '0', border: 'none', borderTop: '1px solid #E5E7EB' }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
@@ -281,16 +297,16 @@ const AiInterview = () => {
                                     </select>
 
                                     {selectedRoleId && (
-                                        <div className="input-group" style={{ marginTop: '1rem' }}>
+                                        <div id="field-role-title" className="input-group" style={{ marginTop: '1rem' }}>
                                             <label className="input-label">Role Title</label>
                                             <input
                                                 type="text"
                                                 value={selectedRoleId === 'custom' ? customRoleTitle : (jobRoles.find(r => r.id.toString() === selectedRoleId)?.title || '')}
-                                                onChange={(e) => selectedRoleId === 'custom' && setCustomRoleTitle(e.target.value)}
+                                                onChange={(e) => { if (selectedRoleId === 'custom') { setCustomRoleTitle(e.target.value); if (highlightField === 'field-role-title') setHighlightField(null); } }}
                                                 readOnly={selectedRoleId !== 'custom'}
                                                 placeholder="e.g. Senior Frontend Developer"
                                                 className="modern-input"
-                                                style={selectedRoleId !== 'custom' ? { background: '#f8fafc', cursor: 'default' } : {}}
+                                                style={selectedRoleId !== 'custom' ? { background: '#f8fafc', cursor: 'default' } : (highlightField === 'field-role-title' ? { border: '2px solid #f97316', boxShadow: '0 0 0 3px rgba(249,115,22,0.15)' } : {})}
                                             />
                                         </div>
                                     )}
@@ -298,25 +314,25 @@ const AiInterview = () => {
                                     {selectedRoleId && (
                                         <textarea
                                             value={jobDescription}
-                                            onChange={(e) => setJobDescription(e.target.value)}
+                                            onChange={(e) => { setJobDescription(e.target.value); if (highlightField === 'field-job-description') setHighlightField(null); }}
                                             placeholder="Detailed Job Description. AI will use this to dynamically generate probing questions."
                                             className="modern-textarea"
-                                            style={{ marginTop: '1rem', minHeight: '150px' }}
+                                            style={{ marginTop: '1rem', minHeight: '150px', ...(highlightField === 'field-job-description' ? { border: '2px solid #f97316', boxShadow: '0 0 0 3px rgba(249,115,22,0.15)' } : {}) }}
                                             required
                                         />
                                     )}
 
                                     {selectedRoleId && (
-                                        <div className="input-group" style={{ marginTop: '1rem' }}>
+                                        <div id="field-experience-level" className="input-group" style={{ marginTop: '1rem' }}>
                                             <label className="input-label">
                                                 <i className="fa-solid fa-layer-group" style={{ marginRight: '0.4rem', color: '#6366F1' }}></i>
                                                 Experience Level
                                             </label>
                                             <select
                                                 className="modern-input"
-                                                style={{ width: '100%', padding: '0.85rem', borderRadius: '12px', border: '1px solid #E2E8F0', outline: 'none', background: 'white' }}
+                                                style={{ width: '100%', padding: '0.85rem', borderRadius: '12px', border: highlightField === 'field-experience-level' ? '2px solid #f97316' : '1px solid #E2E8F0', outline: 'none', background: 'white', boxShadow: highlightField === 'field-experience-level' ? '0 0 0 3px rgba(249,115,22,0.15)' : 'none' }}
                                                 value={experienceLevel}
-                                                onChange={(e) => setExperienceLevel(e.target.value)}
+                                                onChange={(e) => { setExperienceLevel(e.target.value); if (highlightField === 'field-experience-level') setHighlightField(null); }}
                                             >
                                                 <option value="">-- Select Experience Level --</option>
                                                 <option value="fresher">Fresher (0 Years)</option>
@@ -338,7 +354,7 @@ const AiInterview = () => {
                                 </div>
                             </div>
 
-                            <div className="glass-card">
+                            <div id="field-candidate-list" className="glass-card">
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2rem' }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                                         <div className="module-icon-wrapper indigo-glow" style={{ width: '45px', height: '45px', borderRadius: '14px' }}>
@@ -353,12 +369,13 @@ const AiInterview = () => {
 
                                 <div className="grid-2">
                                     <div
-                                        onDrop={handleDrop}
+                                        onDrop={(e) => { handleDrop(e); if (highlightField === 'field-candidate-list') setHighlightField(null); }}
                                         onDragOver={handleDragOver}
                                         onClick={() => document.getElementById('candidateList').click()}
                                         className="upload-zone"
+                                        style={highlightField === 'field-candidate-list' ? { border: '2px solid #f97316', boxShadow: '0 0 0 3px rgba(249,115,22,0.15)' } : {}}
                                     >
-                                        <input type="file" id="candidateList" onChange={handleFileChange} accept=".csv,.xls,.xlsx" style={{ display: 'none' }} />
+                                        <input type="file" id="candidateList" onChange={(e) => { handleFileChange(e); if (highlightField === 'field-candidate-list') setHighlightField(null); }} accept=".csv,.xls,.xlsx" style={{ display: 'none' }} />
 
                                         {!file ? (
                                             <>
@@ -408,7 +425,7 @@ const AiInterview = () => {
                                 </div>
                             </div>
 
-                            <div className="glass-card">
+                            <div id="field-availability" className="glass-card">
                                 <div className="grid-2">
                                     <div className="input-group">
                                         <label className="input-label">
@@ -420,16 +437,42 @@ const AiInterview = () => {
                                                 type="date"
                                                 min={new Date().toISOString().split('T')[0]}
                                                 value={fromDate}
-                                                onChange={(e) => setFromDate(e.target.value)}
+                                                onChange={(e) => {
+                                                    setFromDate(e.target.value);
+                                                    if (highlightField === 'field-availability') setHighlightField(null);
+                                                    // Clear untilDate if it's now before the new fromDate
+                                                    if (untilDate && e.target.value && untilDate < e.target.value) {
+                                                        setUntilDate('');
+                                                        setUntilTime('');
+                                                    }
+                                                }}
                                                 onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
+                                                style={{ flex: 1.5, padding: '0.85rem', border: highlightField === 'field-availability' && !fromDate ? '2px solid #f97316' : '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer', boxShadow: highlightField === 'field-availability' && !fromDate ? '0 0 0 3px rgba(249,115,22,0.15)' : 'none' }}
                                             />
                                             <input
                                                 type="time"
                                                 value={fromTime}
-                                                onChange={(e) => setFromTime(e.target.value)}
+                                                onChange={(e) => {
+                                                    const newTime = e.target.value;
+                                                    // If from date is today, don't allow past time
+                                                    const today = new Date().toISOString().split('T')[0];
+                                                    if (fromDate === today && newTime) {
+                                                        const now = new Date();
+                                                        const [h, m] = newTime.split(':').map(Number);
+                                                        if (h < now.getHours() || (h === now.getHours() && m < now.getMinutes())) {
+                                                            alert('Cannot select a time in the past.');
+                                                            return;
+                                                        }
+                                                    }
+                                                    setFromTime(newTime);
+                                                    if (highlightField === 'field-availability') setHighlightField(null);
+                                                    // Clear until time if it's now invalid (same date, until < from)
+                                                    if (untilDate && fromDate && untilDate === fromDate && untilTime && newTime && untilTime <= newTime) {
+                                                        setUntilTime('');
+                                                    }
+                                                }}
                                                 onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
+                                                style={{ flex: 1, padding: '0.85rem', border: highlightField === 'field-availability' && !fromTime ? '2px solid #f97316' : '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer', boxShadow: highlightField === 'field-availability' && !fromTime ? '0 0 0 3px rgba(249,115,22,0.15)' : 'none' }}
                                             />
                                         </div>
                                     </div>
@@ -441,18 +484,29 @@ const AiInterview = () => {
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                                             <input
                                                 type="date"
-                                                min={new Date().toISOString().split('T')[0]}
+                                                min={fromDate || new Date().toISOString().split('T')[0]}
                                                 value={untilDate}
-                                                onChange={(e) => setUntilDate(e.target.value)}
+                                                onChange={(e) => { setUntilDate(e.target.value); if (highlightField === 'field-availability') setHighlightField(null); }}
                                                 onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                                                style={{ flex: 1.5, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
+                                                style={{ flex: 1.5, padding: '0.85rem', border: highlightField === 'field-availability' && !untilDate ? '2px solid #f97316' : '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer', boxShadow: highlightField === 'field-availability' && !untilDate ? '0 0 0 3px rgba(249,115,22,0.15)' : 'none' }}
                                             />
                                             <input
                                                 type="time"
                                                 value={untilTime}
-                                                onChange={(e) => setUntilTime(e.target.value)}
+                                                onChange={(e) => {
+                                                    const newTime = e.target.value;
+                                                    // If same date, ensure until time is after from time
+                                                    if (untilDate && fromDate && untilDate === fromDate && fromTime && newTime) {
+                                                        if (newTime <= fromTime) {
+                                                            alert('Until time must be after From time when dates are the same.');
+                                                            return;
+                                                        }
+                                                    }
+                                                    setUntilTime(newTime);
+                                                    if (highlightField === 'field-availability') setHighlightField(null);
+                                                }}
                                                 onClick={(e) => e.target.showPicker && e.target.showPicker()}
-                                                style={{ flex: 1, padding: '0.85rem', border: '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer' }}
+                                                style={{ flex: 1, padding: '0.85rem', border: highlightField === 'field-availability' && !untilTime ? '2px solid #f97316' : '1px solid #E2E8F0', borderRadius: '12px', outline: 'none', background: 'white', fontSize: '0.9rem', cursor: 'pointer', boxShadow: highlightField === 'field-availability' && !untilTime ? '0 0 0 3px rgba(249,115,22,0.15)' : 'none' }}
                                             />
                                         </div>
                                     </div>

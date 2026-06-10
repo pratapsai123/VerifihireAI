@@ -61,6 +61,9 @@ const AiInterviewSession = () => {
     const [capturedImage, setCapturedImage] = useState(null);
     const regVideoRef = useRef(null);
     const [faceInOval, setFaceInOval] = useState(false);
+    const [regFaceCount, setRegFaceCount] = useState(0); // Track face count during registration
+    const [imageQualityIssue, setImageQualityIssue] = useState(null); // Quality check result after capture
+    const [faceDetectionReady, setFaceDetectionReady] = useState(false); // Track if MediaPipe has loaded
 
     // Load MediaPipe on mount
     useEffect(() => {
@@ -69,7 +72,18 @@ const AiInterviewSession = () => {
             script.id = 'mediapipe-face-script';
             script.src = 'https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/face_detection.js';
             script.crossOrigin = 'anonymous';
+            script.onload = () => {
+                console.log('[Face Reg] MediaPipe script loaded');
+                // Give a moment for the FaceDetection class to become available
+                setTimeout(() => {
+                    if (window.FaceDetection) {
+                        setFaceDetectionReady(true);
+                    }
+                }, 500);
+            };
             document.head.appendChild(script);
+        } else if (window.FaceDetection) {
+            setFaceDetectionReady(true);
         }
     }, []);
     const [blinkDetected, setBlinkDetected] = useState(false);
@@ -2246,7 +2260,8 @@ const AiInterviewSession = () => {
                 regVideoRef.current.srcObject = streamRef.current;
                 regVideoRef.current.play().catch(e => console.warn("regVideo auto-play prevented:", e));
             }
-            // Manual capture mode — no blink detection needed
+            // Start face detection loop for face-in-oval validation
+            startRegDetection();
         }, 500);
     };
 
@@ -2316,6 +2331,7 @@ const AiInterviewSession = () => {
                     });
                     window.mpFaceDetector.setOptions({ model: 'short', minDetectionConfidence: 0.5 });
                     window.mpFaceDetector.onResults((results) => { window.mpFaceResults = results; });
+                    setFaceDetectionReady(true);
                 } catch (e) { console.warn("MediaPipe init failed:", e); }
             }
 
@@ -2324,6 +2340,22 @@ const AiInterviewSession = () => {
                     window.mpFaceResults = null; // Clear previous frame results to prevent instant false captures
                     await window.mpFaceDetector.send({ image: videoElement });
                     if (window.mpFaceResults?.detections?.length > 0) {
+                        // Track total face count for multi-face detection
+                        const totalFaces = window.mpFaceResults.detections.length;
+                        setRegFaceCount(totalFaces);
+
+                        if (totalFaces > 1) {
+                            // Multiple faces detected — don't proceed
+                            faceInOvalRef.current = false;
+                            setFaceInOval(false);
+                            eyeHistoryRef.current = [];
+                            setRegInstruction('Multiple faces detected — only one person should be visible');
+                            regDetectionRef.current = setTimeout(() => {
+                                requestAnimationFrame(detectLoop);
+                            }, 66);
+                            return;
+                        }
+
                         const detection = window.mpFaceResults.detections[0];
                         const bb = detection.boundingBox;
                         faceBox = {
@@ -2339,6 +2371,8 @@ const AiInterviewSession = () => {
                             ];
                         }
                         faceDetected = true;
+                    } else {
+                        setRegFaceCount(0);
                     }
                 } catch (e) { }
             }
@@ -2405,15 +2439,10 @@ const AiInterviewSession = () => {
                             // 2. Current must recover back to near baseline (at least 90%)
                             if (dropAmount > Math.max(15, baseline * 0.18) && current > baseline * 0.90) {
                                 if (!blinkCapturedRef.current) {
-                                    console.log('[Face Reg] Blink detected! Auto-capturing...');
+                                    console.log('[Face Reg] Blink detected! (Manual capture mode — not auto-capturing)');
                                     setBlinkDetected(true);
-                                    blinkCapturedRef.current = true;
-                                    setRegInstruction('✓ Blink detected! Capturing photo...');
-                                    // Auto-trigger face capture after brief delay
-                                    setTimeout(() => {
-                                        handleRegisterFace();
-                                    }, 300);
-                                    return; // Stop detection loop
+                                    // In manual capture mode, blink is just a visual confirmation that we detected a real face
+                                    // The user must click the Capture button themselves
                                 }
                             }
                         }
@@ -2431,6 +2460,7 @@ const AiInterviewSession = () => {
                 eyeHistoryRef.current = []; // Clear history if no face
                 faceInOvalRef.current = false;
                 setFaceInOval(false);
+                setRegFaceCount(0);
                 setRegInstruction('No face detected — look directly at the camera');
             }
 
@@ -2727,6 +2757,7 @@ const AiInterviewSession = () => {
     const handleRetryCapture = () => {
         setWizardStep(0);
         setCapturedImage(null);
+        setImageQualityIssue(null);
 
         // Re-enable camera tracks (may have been disabled by privacy hammer during alert)
         if (streamRef.current) {
@@ -2867,13 +2898,19 @@ const AiInterviewSession = () => {
             lastAiQuestionRef.current = "Please introduce yourself and your professional background.";
 
             addMessage('ai', welcome);
+            const speakStartTime = Date.now();
             await speak(welcome);
+            const speakDuration = Date.now() - speakStartTime;
+
             if (userInputMode === 'audio') {
+                // Only start mic after TTS actually played (at least 2 seconds of audio expected for intro)
+                // If speak resolved too fast (< 2s), it means TTS was blocked/failed — wait longer
+                const delay = speakDuration < 2000 ? 5000 : 3000;
                 setTimeout(() => {
                     if (!isCompletedRef.current && !isProcessingRef.current) {
                         startListening();
                     }
-                }, 3000);
+                }, delay);
             }
         }
     };
@@ -2939,9 +2976,14 @@ const AiInterviewSession = () => {
 
             const timeSinceActivity = Date.now() - lastSpokenTimeRef.current;
 
-            // If the user has spoken or transcript has updated within the last 2 seconds, 
+            // For the first question (self-intro), give extra grace time (10s instead of 7s)
+            // since the candidate needs time to hear the full greeting and prepare
+            const isFirstQuestion = currentQuestionIndex === 0 && chatMessages.length <= 2;
+            const gracePeriod = isFirstQuestion ? 5000 : 2000;
+
+            // If the user has spoken or transcript has updated within the grace period, 
             // keep the timer at 5. This prevents cutouts during natural speech pauses.
-            if (timeSinceActivity < 2000) {
+            if (timeSinceActivity < gracePeriod) {
                 secondsRemaining = 5;
                 setSilenceCountdown("Listening...");
                 setSilenceWarningVisible(false);
@@ -2956,7 +2998,7 @@ const AiInterviewSession = () => {
             }
 
             // Otherwise, proceed with the visible countdown (5-4-3-2-1)
-            secondsRemaining = 5 - Math.floor((timeSinceActivity - 2000) / 1000);
+            secondsRemaining = 5 - Math.floor((timeSinceActivity - gracePeriod) / 1000);
 
             if (secondsRemaining > 3) {
                 setSilenceCountdown(secondsRemaining + "s");
@@ -3427,9 +3469,15 @@ const AiInterviewSession = () => {
                                             <video ref={regVideoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
                                         )}
 
-                                        {/* Oval guide */}
+                                        {/* Oval guide with color feedback */}
                                         {!capturedImage && (
-                                            <div style={{ position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%', border: '3px dashed rgba(255,255,255,0.7)', borderRadius: '50%' }}></div>
+                                            <div style={{
+                                                position: 'absolute', top: '10%', bottom: '15%', left: '25%', right: '25%',
+                                                border: `3px ${faceDetectionReady && faceInOval && regFaceCount === 1 ? 'solid' : 'dashed'} ${faceDetectionReady ? (faceInOval && regFaceCount === 1 ? 'rgba(34,197,94,0.9)' : regFaceCount > 1 ? 'rgba(239,68,68,0.9)' : 'rgba(255,255,255,0.7)') : 'rgba(255,255,255,0.7)'}`,
+                                                borderRadius: '50%',
+                                                transition: 'border-color 0.3s ease, border-style 0.3s ease',
+                                                boxShadow: faceDetectionReady && faceInOval && regFaceCount === 1 ? '0 0 20px rgba(34,197,94,0.3), inset 0 0 20px rgba(34,197,94,0.1)' : 'none'
+                                            }}></div>
                                         )}
 
                                         {/* Instruction */}
@@ -3468,60 +3516,187 @@ const AiInterviewSession = () => {
 
                                     {/* Buttons based on state */}
                                     {wizardStep === 0 && !capturedImage && (
-                                        <button
-                                            onClick={() => {
-                                                // Manual capture: take a snapshot from the video
-                                                const videoElement = regVideoRef.current;
-                                                if (!videoElement || videoElement.readyState < 2) return;
-                                                const canvas = document.createElement('canvas');
-                                                canvas.width = 640;
-                                                canvas.height = 480;
-                                                const ctx = canvas.getContext('2d');
-                                                ctx.drawImage(videoElement, 0, 0, 640, 480);
-                                                const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
-                                                setCapturedImage(dataUrl);
-                                            }}
-                                            style={{
-                                                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                                                color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
-                                                fontSize: '1.1rem', fontWeight: '700', cursor: 'pointer',
-                                                boxShadow: '0 10px 20px rgba(102, 126, 234, 0.3)'
-                                            }}
-                                        >
-                                            <i className="fa-solid fa-camera" style={{ marginRight: '8px' }} />
-                                            Capture Photo
-                                        </button>
-                                    )}
-
-                                    {/* Preview state: show Proceed and Recapture buttons */}
-                                    {wizardStep === 0 && capturedImage && (
-                                        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.8rem' }}>
                                             <button
                                                 onClick={() => {
-                                                    // Recapture: clear the photo and show live video again
-                                                    setCapturedImage(null);
+                                                    // Manual capture: take a snapshot from the video
+                                                    const videoElement = regVideoRef.current;
+                                                    if (!videoElement || videoElement.readyState < 2) return;
+                                                    const canvas = document.createElement('canvas');
+                                                    canvas.width = 640;
+                                                    canvas.height = 480;
+                                                    const ctx = canvas.getContext('2d');
+                                                    ctx.drawImage(videoElement, 0, 0, 640, 480);
+                                                    const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+                                                    setCapturedImage(dataUrl);
+                                                    setImageQualityIssue(null); // Reset quality issue on new capture
+
+                                                    // Perform image quality check
+                                                    const img = new Image();
+                                                    img.onload = () => {
+                                                        const qCanvas = document.createElement('canvas');
+                                                        qCanvas.width = img.width;
+                                                        qCanvas.height = img.height;
+                                                        const qCtx = qCanvas.getContext('2d');
+                                                        qCtx.drawImage(img, 0, 0);
+                                                        const imageData = qCtx.getImageData(0, 0, qCanvas.width, qCanvas.height);
+                                                        const data = imageData.data;
+
+                                                        // 1. Check brightness (too dark or too bright)
+                                                        let totalBrightness = 0;
+                                                        for (let i = 0; i < data.length; i += 4) {
+                                                            totalBrightness += (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+                                                        }
+                                                        const avgBrightness = totalBrightness / (data.length / 4);
+
+                                                        if (avgBrightness < 40) {
+                                                            setImageQualityIssue('Image is too dark. Please ensure you have adequate lighting.');
+                                                            return;
+                                                        }
+                                                        if (avgBrightness > 220) {
+                                                            setImageQualityIssue('Image is too bright or overexposed. Please reduce lighting glare.');
+                                                            return;
+                                                        }
+
+                                                        // 2. Check sharpness (Laplacian variance)
+                                                        const grayData = [];
+                                                        for (let i = 0; i < data.length; i += 4) {
+                                                            grayData.push(data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+                                                        }
+                                                        let laplacianVar = 0;
+                                                        const w = qCanvas.width;
+                                                        const h = qCanvas.height;
+                                                        for (let y = 1; y < h - 1; y++) {
+                                                            for (let x = 1; x < w - 1; x++) {
+                                                                const idx = y * w + x;
+                                                                const lap = grayData[idx - 1] + grayData[idx + 1] + grayData[idx - w] + grayData[idx + w] - 4 * grayData[idx];
+                                                                laplacianVar += lap * lap;
+                                                            }
+                                                        }
+                                                        laplacianVar /= ((w - 2) * (h - 2));
+
+                                                        if (laplacianVar < 100) {
+                                                            setImageQualityIssue('Image is too blurry. Please hold steady and ensure the camera is focused.');
+                                                            return;
+                                                        }
+
+                                                        // 3. Check contrast
+                                                        let minVal = 255, maxVal = 0;
+                                                        for (let i = 0; i < grayData.length; i++) {
+                                                            if (grayData[i] < minVal) minVal = grayData[i];
+                                                            if (grayData[i] > maxVal) maxVal = grayData[i];
+                                                        }
+                                                        if ((maxVal - minVal) < 50) {
+                                                            setImageQualityIssue('Image has very low contrast. Please improve lighting conditions.');
+                                                            return;
+                                                        }
+
+                                                        // All checks passed
+                                                        setImageQualityIssue(null);
+                                                    };
+                                                    img.src = dataUrl;
                                                 }}
+                                                disabled={!faceInOval || regFaceCount !== 1}
                                                 style={{
-                                                    background: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1',
-                                                    padding: '0.9rem 2rem', borderRadius: '50px',
-                                                    fontSize: '1rem', fontWeight: '700', cursor: 'pointer'
+                                                    background: (!faceInOval || regFaceCount !== 1)
+                                                        ? '#94a3b8'
+                                                        : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                                                    color: 'white', border: 'none', padding: '1rem 3rem', borderRadius: '50px',
+                                                    fontSize: '1.1rem', fontWeight: '700',
+                                                    cursor: (!faceInOval || regFaceCount !== 1) ? 'not-allowed' : 'pointer',
+                                                    boxShadow: (!faceInOval || regFaceCount !== 1) ? 'none' : '0 10px 20px rgba(102, 126, 234, 0.3)',
+                                                    opacity: (!faceInOval || regFaceCount !== 1) ? 0.6 : 1,
+                                                    transition: 'all 0.3s ease'
                                                 }}
                                             >
-                                                <i className="fa-solid fa-rotate-right" style={{ marginRight: '8px' }} />
-                                                Recapture
+                                                <i className="fa-solid fa-camera" style={{ marginRight: '8px' }} />
+                                                Capture Photo
                                             </button>
-                                            <button
-                                                onClick={handleRegisterFace}
-                                                style={{
-                                                    background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
-                                                    color: 'white', border: 'none', padding: '0.9rem 2rem', borderRadius: '50px',
-                                                    fontSize: '1rem', fontWeight: '700', cursor: 'pointer',
-                                                    boxShadow: '0 10px 20px rgba(34, 197, 94, 0.3)'
-                                                }}
-                                            >
-                                                <i className="fa-solid fa-check" style={{ marginRight: '8px' }} />
-                                                Proceed
-                                            </button>
+                                            {!faceDetectionReady && (
+                                                <span style={{ color: '#6366f1', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    <i className="fa-solid fa-spinner fa-spin" style={{ marginRight: '6px' }}></i>
+                                                    Initializing face detection, please wait...
+                                                </span>
+                                            )}
+                                            {faceDetectionReady && !faceInOval && regFaceCount === 0 && (
+                                                <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    No face detected — position your face in the oval
+                                                </span>
+                                            )}
+                                            {faceDetectionReady && regFaceCount > 1 && (
+                                                <span style={{ color: '#ef4444', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    Multiple faces detected — only one person should be visible
+                                                </span>
+                                            )}
+                                            {faceDetectionReady && faceInOval && regFaceCount === 1 && (
+                                                <span style={{ color: '#22c55e', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    ✓ Face detected — ready to capture
+                                                </span>
+                                            )}
+                                            {faceDetectionReady && !faceInOval && regFaceCount === 1 && (
+                                                <span style={{ color: '#f59e0b', fontSize: '0.85rem', fontWeight: '600' }}>
+                                                    Move your face into the oval guide
+                                                </span>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Preview state: show quality check result, Proceed and Recapture buttons */}
+                                    {wizardStep === 0 && capturedImage && (
+                                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+                                            {imageQualityIssue && (
+                                                <div style={{
+                                                    background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '12px',
+                                                    padding: '0.8rem 1.2rem', maxWidth: '380px', textAlign: 'center'
+                                                }}>
+                                                    <span style={{ color: '#dc2626', fontSize: '0.9rem', fontWeight: '600' }}>
+                                                        ⚠️ {imageQualityIssue}
+                                                    </span>
+                                                </div>
+                                            )}
+                                            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+                                                <button
+                                                    onClick={() => {
+                                                        // Recapture: clear the photo and show live video again
+                                                        setCapturedImage(null);
+                                                        setImageQualityIssue(null);
+                                                        // Re-attach camera stream to video element
+                                                        setTimeout(() => {
+                                                            if (regVideoRef.current && streamRef.current) {
+                                                                // Re-enable video tracks in case they were paused
+                                                                streamRef.current.getVideoTracks().forEach(track => { track.enabled = true; });
+                                                                regVideoRef.current.srcObject = streamRef.current;
+                                                                regVideoRef.current.play().catch(e => console.warn("regVideo play error:", e));
+                                                            }
+                                                            // Restart face detection loop
+                                                            blinkCapturedRef.current = false;
+                                                            startRegDetection();
+                                                        }, 100);
+                                                    }}
+                                                    style={{
+                                                        background: '#f1f5f9', color: '#475569', border: '1px solid #cbd5e1',
+                                                        padding: '0.9rem 2rem', borderRadius: '50px',
+                                                        fontSize: '1rem', fontWeight: '700', cursor: 'pointer'
+                                                    }}
+                                                >
+                                                    <i className="fa-solid fa-rotate-right" style={{ marginRight: '8px' }} />
+                                                    Recapture
+                                                </button>
+                                                {!imageQualityIssue && (
+                                                    <button
+                                                        onClick={handleRegisterFace}
+                                                        style={{
+                                                            background: 'linear-gradient(135deg, #22c55e 0%, #16a34a 100%)',
+                                                            color: 'white', border: 'none', padding: '0.9rem 2rem', borderRadius: '50px',
+                                                            fontSize: '1rem', fontWeight: '700', cursor: 'pointer',
+                                                            boxShadow: '0 10px 20px rgba(34, 197, 94, 0.3)'
+                                                        }}
+                                                    >
+                                                        <i className="fa-solid fa-check" style={{ marginRight: '8px' }} />
+                                                        Proceed
+                                                    </button>
+                                                )}
+                                            </div>
                                         </div>
                                     )}
 

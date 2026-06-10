@@ -2451,8 +2451,45 @@ class CandidateRegistrationUpdateView(APIView):
                     candidate.face_embedding_hash = face_embedding_hash
                     candidate.pan_verified = True
                 else:
-                    # Check for mismatch against the unified DeepFace microservice
-                    if candidate.pan_number:
+                    # ── INDEPENDENT IDENTITY MISMATCH CHECK ──────────────────────────
+                    # Compare this candidate's face_embedding_hash against ALL other
+                    # candidates who share the same PAN. If different hashes exist,
+                    # that means different faces used the same PAN → flag mismatch.
+                    # This check is INDEPENDENT of DeepFace's live state (which may
+                    # have been overwritten by the frontend's register-with-overwrite).
+                    mismatch_flagged = False
+                    if candidate.pan_number and face_embedding_hash:
+                        other_candidates_with_same_pan = Candidate.objects.filter(
+                            pan_number=candidate.pan_number,
+                            face_embedding_hash__isnull=False,
+                        ).exclude(public_token=public_token).exclude(face_embedding_hash=face_embedding_hash)
+
+                        if other_candidates_with_same_pan.exists():
+                            original_holder = other_candidates_with_same_pan.first()
+                            logger.warning(
+                                f"[IdentityPhoto] DB-level face hash mismatch detected! "
+                                f"PAN={candidate.pan_number}, current_hash={face_embedding_hash[:16]}..., "
+                                f"original_holder={original_holder.full_name} (hash={original_holder.face_embedding_hash[:16]}...)"
+                            )
+                            candidate.identity_mismatch_detected = True
+                            candidate.identity_mismatch_details = {
+                                'mismatch_at': timezone.now().isoformat(),
+                                'original_holder_token': str(original_holder.public_token),
+                                'original_holder_name': original_holder.full_name,
+                                'mismatch_type': 'different_face_same_pan',
+                                'note': f'Different face hash detected for same PAN. Original: {original_holder.full_name}.'
+                            }
+                            # Store pending face for admin approval
+                            if snapshot_b64_payload:
+                                candidate.pending_face_b64 = clean_b64
+                                candidate.photo_update_approved = False
+                            # Copy original holder's registered face as master for comparison
+                            if not candidate.master_face_b64 and original_holder.registered_face_b64:
+                                candidate.master_face_b64 = original_holder.registered_face_b64
+                            mismatch_flagged = True
+
+                    # Also try DeepFace verification (if available and not already flagged)
+                    if not mismatch_flagged and candidate.pan_number:
                         from api.deepface_client import df_is_registered, df_verify
                         pan_id = str(candidate.pan_number).strip().lower()
                         try:
@@ -2507,7 +2544,15 @@ class CandidateRegistrationUpdateView(APIView):
                             candidate.pan_verified = True
                             candidate.identity_mismatch_detected = False
 
-                    # Check if face hash belongs to someone else
+                    if not mismatch_flagged and not candidate.identity_mismatch_detected:
+                        candidate.face_embedding_hash = face_embedding_hash
+                    elif not mismatch_flagged:
+                        candidate.face_embedding_hash = face_embedding_hash
+                    else:
+                        # Still persist the hash so refreshes work, but mismatch is flagged
+                        candidate.face_embedding_hash = face_embedding_hash
+
+                    # Check if face hash belongs to someone else (different PAN)
                     existing_face_holder = Candidate.objects.filter(
                         face_embedding_hash=face_embedding_hash
                     ).exclude(public_token=public_token).exclude(email=candidate.email).first()
@@ -2519,8 +2564,6 @@ class CandidateRegistrationUpdateView(APIView):
                                 'duplicate_face': True,
                                 'registered_to': existing_face_holder.full_name
                             }, status=status.HTTP_400_BAD_REQUEST)
-
-                    candidate.face_embedding_hash = face_embedding_hash
             
             try:
                 candidate.save()
