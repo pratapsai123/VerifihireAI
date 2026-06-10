@@ -62,6 +62,9 @@ const ResumeMatcher = () => {
                         setResults(data.results);
                         setBatchId(null);
                         setIsAnalyzing(false);
+                        if (matchMode === 'automatic') {
+                            // Backend has finished generating assessments
+                        }
                         sessionStorage.removeItem(STORAGE_KEY); // Full clear once complete
                         clearInterval(interval);
                     }
@@ -99,6 +102,17 @@ const ResumeMatcher = () => {
         }
     }, [mcqCount, mcqDurationManual]);
 
+    // Auto-adjust coding duration based on tasks
+    React.useEffect(() => {
+        if (codingCount === 0) {
+            setCodingDuration(0);
+        } else if (codingDuration === 0 && codingCount > 0) {
+            setCodingDuration(30); // reset to a default if they add tasks again
+        }
+    }, [codingCount]);
+
+
+
     const [assessmentStartDate, setAssessmentStartDate] = useState('');
     const [assessmentStartTime, setAssessmentStartTime] = useState('');
     const [assessmentEndDate, setAssessmentEndDate] = useState('');
@@ -108,6 +122,20 @@ const ResumeMatcher = () => {
     const [interviewStartTime, setInterviewStartTime] = useState('');
     const [interviewEndDate, setInterviewEndDate] = useState('');
     const [interviewEndTime, setInterviewEndTime] = useState('');
+
+    // Ensure interview dates are strictly after assessment dates
+    React.useEffect(() => {
+        if (assessmentEndDate && interviewStartDate) {
+            const minDate = new Date(assessmentEndDate);
+            minDate.setDate(minDate.getDate() + 1);
+            const minDateString = minDate.toISOString().split('T')[0];
+
+            if (interviewStartDate < minDateString) {
+                setInterviewStartDate('');
+                setInterviewEndDate('');
+            }
+        }
+    }, [assessmentEndDate, interviewStartDate]);
 
     // --- Persistence Logic ---
     const isDirty = React.useRef(false);
@@ -209,7 +237,7 @@ const ResumeMatcher = () => {
         e.preventDefault();
         e.stopPropagation();
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-             setFiles(prevFiles => {
+            setFiles(prevFiles => {
                 const newFiles = Array.from(e.dataTransfer.files);
                 const existingNames = new Set(prevFiles.map(f => f.name));
                 const uniqueNewFiles = newFiles.filter(f => !existingNames.has(f.name));
@@ -240,12 +268,41 @@ const ResumeMatcher = () => {
         }
 
         if (matchMode === 'automatic') {
+            if (Number(mcqCount) === 0 && Number(codingCount) === 0) {
+                alert('Please provide at least one MCQ question or one Coding task for the assessment. They cannot both be 0.');
+                return;
+            }
             if (!assessmentStartDate || !assessmentStartTime || !assessmentEndDate || !assessmentEndTime) {
                 alert('Please fill in ALL Assessment scheduling details (Start Date/Time and End Date/Time).');
                 return;
             }
             if (!interviewStartDate || !interviewStartTime || !interviewEndDate || !interviewEndTime) {
                 alert('Please fill in ALL Interview scheduling details (Start Date/Time and End Date/Time).');
+                return;
+            }
+
+            const assessStartDt = new Date(`${assessmentStartDate}T${assessmentStartTime}`);
+            const assessEndDt = new Date(`${assessmentEndDate}T${assessmentEndTime}`);
+            const interStartDt = new Date(`${interviewStartDate}T${interviewStartTime}`);
+            const interEndDt = new Date(`${interviewEndDate}T${interviewEndTime}`);
+
+            const now = new Date();
+            now.setSeconds(0, 0); // Ignore exact seconds for 'now' comparison
+
+            if (assessStartDt < now) {
+                alert('Assessment "Available From" timing cannot be in the past.');
+                return;
+            }
+            if (assessStartDt >= assessEndDt) {
+                alert('Assessment "Available Until" must be strictly after "Available From". Please select a different timing.');
+                return;
+            }
+            if (interStartDt < now) {
+                alert('Interview "Available From" timing cannot be in the past.');
+                return;
+            }
+            if (interStartDt >= interEndDt) {
+                alert('Interview "Available Until" must be strictly after "Available From". Please select a different timing.');
                 return;
             }
         }
@@ -550,7 +607,7 @@ const ResumeMatcher = () => {
                         <div className="threshold-container">
                             <div style={{ flex: 1 }}>
                                 <input
-                                    type="range" min="0" max="100" value={threshold}
+                                    type="range" min="10" max="100" value={threshold}
                                     onChange={(e) => setThreshold(e.target.value)}
                                     style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
                                 />
@@ -600,17 +657,17 @@ const ResumeMatcher = () => {
                                 </div>
                             </div>
 
-                            <div style={{ 
-                                display: 'grid', 
-                                gridTemplateColumns: 'repeat(3, 1fr)', 
-                                gap: '1.25rem', 
-                                marginBottom: '1.5rem' 
+                            <div style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(3, 1fr)',
+                                gap: '1.25rem',
+                                marginBottom: '1.5rem'
                             }}>
                                 <div className="setting-item">
                                     <label>MCQ Questions</label>
-                                    <input 
-                                        type="number" 
-                                        value={mcqCount} 
+                                    <input
+                                        type="number"
+                                        value={mcqCount}
                                         onChange={(e) => {
                                             const val = e.target.value;
                                             if (val === '') {
@@ -621,10 +678,10 @@ const ResumeMatcher = () => {
                                             if (!isNaN(num)) {
                                                 setMcqCount(Math.min(num, 999));
                                             }
-                                        }} 
-                                        className="modern-input" 
-                                        min="0" 
-                                        max="999" 
+                                        }}
+                                        className="modern-input"
+                                        min="0"
+                                        max="999"
                                     />
                                 </div>
                                 <div className="setting-item">
@@ -670,10 +727,10 @@ const ResumeMatcher = () => {
                                 </div>
                             )}
 
-                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
+                            <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>Assessment Pass Threshold ({passThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <input type="range" min="0" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
+                                    <input type="range" min="10" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
@@ -682,7 +739,7 @@ const ResumeMatcher = () => {
                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>AI Interview Pass Threshold ({interviewPassThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <input type="range" min="0" max="100" value={interviewPassThreshold} onChange={(e) => setInterviewPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
+                                    <input type="range" min="10" max="100" value={interviewPassThreshold} onChange={(e) => setInterviewPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{interviewPassThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this in the AI interview will be automatically rejected.</p>
@@ -690,15 +747,15 @@ const ResumeMatcher = () => {
 
                             {/* Same questions for all toggle */}
                             {files.length > 1 && (
-                                <div style={{ 
-                                    marginBottom: '1.5rem', 
-                                    display: 'flex', 
-                                    alignItems: 'center', 
-                                    gap: '0.75rem', 
-                                    background: 'rgba(99, 102, 241, 0.03)', 
-                                    padding: '1rem', 
-                                    borderRadius: '12px', 
-                                    border: '1px solid #E0E7FF' 
+                                <div style={{
+                                    marginBottom: '1.5rem',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.75rem',
+                                    background: 'rgba(99, 102, 241, 0.03)',
+                                    padding: '1rem',
+                                    borderRadius: '12px',
+                                    border: '1px solid #E0E7FF'
                                 }}>
                                     <div className="modern-toggle">
                                         <input
@@ -738,16 +795,16 @@ const ResumeMatcher = () => {
                                     <div style={{ flex: 1, position: 'relative', height: '6px' }}>
                                         <div style={{ position: 'absolute', inset: 0, height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #8B5CF6 ${mcqWeight}%)` }} />
                                         {/* The "Ball" */}
-                                        <div style={{ 
-                                            position: 'absolute', 
-                                            top: '50%', 
-                                            left: `${mcqWeight}%`, 
-                                            transform: 'translate(-50%, -50%)', 
-                                            width: '14px', 
-                                            height: '14px', 
-                                            borderRadius: '50%', 
-                                            background: '#FFFFFF', 
-                                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)', 
+                                        <div style={{
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: `${mcqWeight}%`,
+                                            transform: 'translate(-50%, -50%)',
+                                            width: '14px',
+                                            height: '14px',
+                                            borderRadius: '50%',
+                                            background: '#FFFFFF',
+                                            boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
                                             border: '2px solid #6366F1',
                                             zIndex: 1,
                                             pointerEvents: 'none',
@@ -807,7 +864,7 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -817,7 +874,7 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                             <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
@@ -826,18 +883,20 @@ const ResumeMatcher = () => {
                         </div>
                     )}
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
-                        <button onClick={handleMatch} disabled={isAnalyzing} className="generate-btn">
-                            {isAnalyzing ? (
-                                <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Candidate Profiles...</>
-                            ) : (
-                                <>
-                                    <i className="fa-solid fa-wand-magic-sparkles"></i>
-                                    {matchMode === 'automatic' ? ' Start' : ' Check Resume'}
-                                </>
-                            )}
-                        </button>
-                    </div>
+                    {!results && (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
+                            <button onClick={handleMatch} disabled={isAnalyzing} className="generate-btn">
+                                {isAnalyzing ? (
+                                    <><i className="fa-solid fa-atom fa-spin"></i> {matchMode === 'automatic' ? 'Analyzing & Generating Assessments...' : 'Analyzing Candidate Profiles...'}</>
+                                ) : (
+                                    <>
+                                        <i className="fa-solid fa-wand-magic-sparkles"></i>
+                                        {matchMode === 'automatic' ? ' Start' : ' Check Resume'}
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {isAnalyzing && (

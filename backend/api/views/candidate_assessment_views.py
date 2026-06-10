@@ -4431,3 +4431,144 @@ def decide_photo_update_view(request, token):
         print(traceback.format_exc())
         from django.http import HttpResponseServerError
         return HttpResponseServerError(f"An internal error occurred: {str(e)}")
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def results_detail_heavy_view(request, submission_type, submission_id):
+    try:
+        from ai_assessments.views import _get_candidate_photo_url
+        from ai_assessments.results_helpers import _get_candidate_intruder_photo_url, _get_candidate_photo_url_for_candidate
+        from django.conf import settings
+        from pathlib import Path
+        import base64
+        import requests
+        import re
+        from ..models import CandidateSubmission, CandidateDetails, IdentityLink
+
+        if submission_type == 'standard':
+            try:
+                s = CandidateSubmission.objects.select_related('invitation', 'invitation__assessment').get(id=submission_id)
+            except CandidateSubmission.DoesNotExist:
+                return Response({'error': 'Not found'}, status=404)
+
+            inv = s.invitation
+            latest_details = CandidateDetails.objects.filter(invitation=inv).order_by('id').last()
+
+            first_details = None
+            if latest_details and latest_details.email:
+                first_details = CandidateDetails.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+            if not first_details and inv.email:
+                first_details = CandidateDetails.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+
+            original_identity_photo_url = None
+            if first_details and first_details.snapshot:
+                original_identity_photo_url = first_details.snapshot
+            else:
+                link = None
+                if latest_details and latest_details.email:
+                    link = IdentityLink.objects.filter(email__iexact=latest_details.email.strip()).order_by('id').first()
+                if not link and inv.email:
+                    link = IdentityLink.objects.filter(email__iexact=inv.email.strip()).order_by('id').first()
+                if not link and latest_details and latest_details.pan_number:
+                    norm_pan = re.sub(r'[^A-Z0-9]', '', latest_details.pan_number.strip().upper())
+                    if norm_pan:
+                        link = IdentityLink.objects.filter(pan_number=norm_pan).order_by('id').first()
+
+                if link and link.snapshot_image:
+                    original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
+
+            return Response({
+                'answers': s.answers or {},
+                'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
+                'original_identity_photo_url': original_identity_photo_url,
+                'candidate_photo_url': latest_details.snapshot if latest_details else None,
+                'previous_registered_face_url': request.build_absolute_uri(latest_details.previous_registered_face_backup.url) if (latest_details and latest_details.previous_registered_face_backup) else None,
+                'warning_logs': getattr(inv.integrity, 'warning_logs', []) if hasattr(inv, 'integrity') else []
+            })
+
+        elif submission_type == 'ai_assessment':
+            from ai_assessments.models import AIAssessmentSubmission
+            try:
+                s = AIAssessmentSubmission.objects.get(id=str(submission_id).replace('ai_', ''))
+            except AIAssessmentSubmission.DoesNotExist:
+                return Response({'error': 'Not found'}, status=404)
+
+            pending_photo_b64 = None
+            a = s.assessment
+            is_automatic = getattr(a, 'creation_type', 'manual') == 'automatic'
+            if is_automatic:
+                try:
+                    from api._imports import DEEPFACE_BASE_URL
+                    p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
+                    df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{p_id}/assessments/{a.share_token}/photo"
+                    resp = requests.get(df_url, timeout=5)
+                    if resp.status_code == 200:
+                        pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(resp.content).decode('utf-8')}"
+                except Exception:
+                    pass
+
+            if not pending_photo_b64:
+                try:
+                    deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+                    p_id = s.pan_number.lower().strip() if getattr(s, 'pan_number', None) else f"{s.candidate_email.lower().strip()}_{a.share_token}"
+                    target_snap_file = deepface_data_dir / p_id / 'assessments' / str(a.share_token) / 'registration_snapshot.jpg'
+                    if target_snap_file.exists():
+                        with open(target_snap_file, 'rb') as f:
+                            pending_photo_b64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                except Exception:
+                    pass
+
+            return Response({
+                'answers': s.answers or {},
+                'activity_logs': s.activity_logs if isinstance(s.activity_logs, list) else [],
+                'original_identity_photo_url': (
+                    f"data:image/jpeg;base64,{s.registered_face_b64}" if getattr(s, 'registered_face_b64', None) else None
+                ),
+                'candidate_photo_url': _get_candidate_photo_url(request, s),
+                'master_photo_url': (
+                    f"data:image/jpeg;base64,{s.master_face_b64}" if getattr(s, 'master_face_b64', None) else None
+                ),
+                'pending_identity_photo_url': pending_photo_b64,
+                'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else []
+            })
+
+        elif submission_type == 'ai_candidate':
+            from ai_assessments.models import Candidate
+            try:
+                s = Candidate.objects.get(id=str(submission_id).replace('aicand_', ''))
+            except Candidate.DoesNotExist:
+                return Response({'error': 'Not found'}, status=404)
+
+            return Response({
+                'original_identity_photo_url': (
+                    f"data:image/jpeg;base64,{s.registered_face_b64}" if getattr(s, 'registered_face_b64', None) else None
+                ),
+                'candidate_photo_url': _get_candidate_photo_url_for_candidate(request, s),
+                'master_photo_url': (
+                    f"data:image/jpeg;base64,{s.master_face_b64}" if getattr(s, 'master_face_b64', None) else None
+                ),
+                'pending_identity_photo_url': (
+                    f"data:image/jpeg;base64,{s.pending_face_b64}" if getattr(s, 'pending_face_b64', None) else None
+                ),
+                'intruder_photo_url': _get_candidate_intruder_photo_url(s),
+                'warning_logs': getattr(s.integrity, 'warning_logs', []) if hasattr(s, 'integrity') else [],
+                'full_conversation': getattr(s, 'full_conversation', []),
+                'integrity_logs': [
+                    {
+                        'event_type': log.event_type,
+                        'screenshot_base64': log.screenshot_base64,
+                        'webcam_screenshot_base64': log.webcam_screenshot_base64,
+                        'has_screenshot': bool(log.screenshot_base64),
+                        'has_webcam_screenshot': bool(log.webcam_screenshot_base64),
+                        'screenshot_id': log.id,
+                        'timestamp': log.timestamp.isoformat() if log.timestamp else None
+                    } for log in s.integrity_logs.all()
+                ],
+            })
+
+        return Response({'error': 'Invalid type'}, status=400)
+    except Exception as e:
+        import traceback
+        print(f"Error in results_detail_heavy_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': str(e)}, status=500)

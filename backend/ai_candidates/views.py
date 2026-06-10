@@ -585,6 +585,48 @@ class ResumeMatchView(APIView):
         experience_level = request.data.get('experience_level', '').strip() or None
         threshold = request.data.get('threshold', 70)
 
+        # Date Validations for Fully Automated Page
+        from dateutil import parser
+        from django.utils import timezone
+        import datetime
+        
+        now = timezone.now()
+        def validate_date_pair(from_str, until_str, prefix):
+            if from_str and until_str:
+                try:
+                    av_from = parser.isoparse(from_str)
+                    av_until = parser.isoparse(until_str)
+                    if av_from < now - datetime.timedelta(minutes=5):
+                        return f"{prefix} 'Available From' timing cannot be in the past."
+                    if av_until <= av_from:
+                        return f"{prefix} 'Available Until' must be strictly after 'Available From'."
+                except Exception:
+                    return f"Invalid Date Format for {prefix}."
+            return None
+
+        # Validate both sets of dates
+        err = validate_date_pair(request.data.get('assessment_available_from'), request.data.get('assessment_available_until'), "Assessment")
+        if err:
+            return Response({"error": "Invalid Timing", "message": err}, status=status.HTTP_400_BAD_REQUEST)
+            
+        err = validate_date_pair(request.data.get('interview_available_from'), request.data.get('interview_available_until'), "Interview")
+        if err:
+            return Response({"error": "Invalid Timing", "message": err}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Validate MCQ / Coding Counts
+        try:
+            mcq_count = int(request.data.get('mcq_count', 10))
+            coding_count = int(request.data.get('coding_count', 1))
+        except (ValueError, TypeError):
+            mcq_count = 10
+            coding_count = 1
+            
+        if mcq_count == 0 and coding_count == 0:
+            return Response({
+                "error": "Assessment cannot be empty",
+                "message": "Please provide at least one MCQ question or one Coding task for the assessment. They cannot both be 0."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
         try:
 
             threshold = int(threshold)

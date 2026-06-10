@@ -1288,7 +1288,7 @@ const AiTakeAssessment = () => {
 
 
 
-    const startAssessment = async (bypassReg = false, isOverride = false, currentSnapshot = null) => {
+    const startAssessment = async (bypassReg = false, isOverride = false, currentSnapshot = null, isFirstReg = false) => {
 
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
 
@@ -1364,6 +1364,10 @@ const AiTakeAssessment = () => {
             }
             if (isOverride || identityMismatchOverride) {
                 formPayload.append('identity_mismatch_override', 'true');
+            }
+            // Pass the first registration flag
+            if (isFirstReg === true) {
+                formPayload.append('is_first_registration', 'true');
             }
 
             const res = await axios.post(`${API_BASE_URL}/ai/submit/create/`, formPayload, {
@@ -2689,6 +2693,8 @@ const AiTakeAssessment = () => {
 
                     if (regRes.data && regRes.data.success === true) {
                         success = true;
+                        // Mark this as a brand new registration so backend doesn't try to verify the exact same photo
+                        window._isFirstRegistration = true;
                     } else {
                         success = false;
                         errorMsg = regRes.data.message || "Face registration failed. Please ensure you are in a well-lit area.";
@@ -2718,7 +2724,8 @@ const AiTakeAssessment = () => {
                     setIsRegistered(true);
                     // Pass isMismatch=true if mismatchSnapshot was set during silent failure
                     const isMismatch = !!mismatchSnapshot;
-                    onComplete(finalImage.split(',')[1], isMismatch);
+                    onComplete(finalImage.split(',')[1], isMismatch, window._isFirstRegistration);
+                    window._isFirstRegistration = false; // Reset
                 }, 1500);
 
             } catch (e) {
@@ -2966,22 +2973,15 @@ const AiTakeAssessment = () => {
 
 
     if (isRegistering) {
-
-        return <RegistrationWizard onComplete={(img, isOverride = false) => {
-
+        return <RegistrationWizard onComplete={(img, isOverride = false, isFirstReg = false) => {
             setRegistrationSnapshot(img);
             if (isOverride) {
                 setIdentityMismatchOverride(true);
             }
-
             setIsRegistering(false);
-
             setIsRegistered(true);
-
-            startAssessment(true, isOverride, img);
-
+            startAssessment(true, isOverride, img, isFirstReg);
         }} onCancel={() => setIsRegistering(false)} />;
-
     }
 
 
