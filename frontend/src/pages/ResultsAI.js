@@ -2724,7 +2724,7 @@ const ResultsAI = () => {
                                                                                     ) : activeTab === 'assessment' || activeTab === 'standard' ? (
                                                                                         <div style={{ display: 'flex', gap: '0.4rem' }}>
                                                                                             <button
-                                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
+                                                                                                onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.submission_id || r.id || r.candidate_id }); }}
                                                                                                 style={{
                                                                                                     padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
                                                                                                     background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
@@ -2750,7 +2750,7 @@ const ResultsAI = () => {
                                                                                         </div>
                                                                                     ) : activeTab === 'resume' ? (
                                                                                         <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.id || r.candidate_id || r.submission_id }); }}
+                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.submission_id || r.id || r.candidate_id }); }}
                                                                                             style={{
                                                                                                 padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
                                                                                                 background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
