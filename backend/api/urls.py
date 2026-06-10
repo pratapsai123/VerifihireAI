@@ -88,6 +88,7 @@ urlpatterns = [
     path('invitations/public/<uuid:token>/coding/submit/', views.invitation_coding_submit_view, name='invitation_coding_submit'),
     path('invitations/public/<uuid:token>/coding/finalize/', views.invitation_coding_finalize_view, name='invitation_coding_finalize'),
     path('results/', views.results_overview_view, name='results_overview'),
+    path('results/<str:submission_id>/detail/', views.results_detail_view, name='results_detail'),
     path('submissions/<int:pk>/', views.CandidateSubmissionDeleteView.as_view(), name='delete_submission'),
     path('results/<int:submission_id>/report/', views.download_candidate_report_view, name='download_candidate_report'),
     path('results/<int:submission_id>/update-result/', views.update_submission_result_view, name='update_submission_result'),

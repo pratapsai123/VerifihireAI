@@ -55,6 +55,7 @@ from .candidate_assessment_views import (
     invitation_coding_finalize_view,
     get_invitation_result_view,
     results_overview_view,
+    results_detail_view,
     CandidateSubmissionDeleteView,
     submit_rating_view,
     backfill_assessment_questions_view,

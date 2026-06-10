@@ -487,20 +487,31 @@ const ResultsAI = () => {
     useEffect(() => {
         const subId = searchParams.get('subId');
         if (subId) {
-            // Find in current loaded assessments
-            const found = aiAssessments.find(a =>
-                String(a.submission_id) === String(subId) ||
-                String(a.id) === String(subId) ||
-                String(a.submission_id) === `ai_${subId}`
-            );
-
-            if (found) {
-                setViewedSubmission(found);
-            } else {
-                // If not found in aiAssessments, it might be a standard assessment in another state
-                // or a deep link that hasn't loaded yet.
-                // However, most buttons in this UI fetch/load data before setting subId.
-            }
+            let active = true;
+            const fetchDetail = async () => {
+                try {
+                    const token = getToken();
+                    const resp = await axios.get(`${API_BASE_URL}/results/${subId}/detail/`, {
+                        headers: { Authorization: `Bearer ${token}` }
+                    });
+                    if (active && resp.data) {
+                        setViewedSubmission(resp.data);
+                    }
+                } catch (err) {
+                    console.error("Error fetching submission details:", err);
+                    // Fallback to list search if detail endpoint fails
+                    const found = aiAssessments.find(a =>
+                        String(a.submission_id) === String(subId) ||
+                        String(a.id) === String(subId) ||
+                        String(a.submission_id) === `ai_${subId}`
+                    );
+                    if (active && found) {
+                        setViewedSubmission(found);
+                    }
+                }
+            };
+            fetchDetail();
+            return () => { active = false; };
         } else {
             setViewedSubmission(null);
         }
