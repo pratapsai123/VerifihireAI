@@ -512,11 +512,11 @@ function LiveInterview() {
     fetch(`${API_BASE_URL}/submit-interview-feedback/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ 
-        token: sessionId, 
+      body: JSON.stringify({
+        token: sessionId,
         participant_token: participantToken,
-        feedback, 
-        role: 'candidate' 
+        feedback,
+        role: 'candidate'
       })
     }).then(() => {
       setShowThankYou(false);

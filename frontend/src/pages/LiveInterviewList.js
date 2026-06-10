@@ -284,6 +284,9 @@ export default function LiveInterviewList() {
                     }
                   }
                   
+                  const now = new Date();
+                  const isPast = inv.end_time ? new Date(inv.end_time) < now : (inv.start_time ? new Date(inv.start_time) < now : false);
+                  
                   return (
                     <tr key={inv.id} className="lil-row">
                       <td className="col-candidate">
@@ -338,6 +341,10 @@ export default function LiveInterviewList() {
                               <polyline points="20 6 9 17 4 12" />
                             </svg>
                             Done
+                          </span>
+                        ) : isPast ? (
+                          <span className="lil-done-badge" style={{ backgroundColor: '#f1f5f9', border: '1px solid #cbd5e1', color: '#64748b' }}>
+                            Expired
                           </span>
                         ) : (
                           <button

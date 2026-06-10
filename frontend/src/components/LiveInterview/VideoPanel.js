@@ -27,36 +27,36 @@ export const VideoPanel = ({
     // unless they are the ONLY person and sharing, but even then, camera is usually what they want to check.
     // However, VideoPanel renders a list of participants. 
     // For the LOCAL participant, we will have two entries if sharing.
-    
+
     if (localStreamRef.current && videoEl.srcObject !== localStreamRef.current) {
-        videoEl.srcObject = localStreamRef.current;
+      videoEl.srcObject = localStreamRef.current;
     }
   }, [localStreamRef, localVideoRef]);
 
   // 1. Build the participant list for rendering
   // We want to treat camera streams and screen streams as separate "tiles" in the UI logic.
-  
+
   const cameraTiles = [
-    { 
-        id: 'local-camera', 
-        name: localName, 
-        role: localRole?.toLowerCase(), 
-        isLocal: true, 
-        isCameraOn, 
-        isScreenSharing: false, 
-        stream: localStreamRef?.current 
+    {
+      id: 'local-camera',
+      name: localName,
+      role: localRole?.toLowerCase(),
+      isLocal: true,
+      isCameraOn,
+      isScreenSharing: false,
+      stream: localStreamRef?.current
     },
     ...Object.keys(remoteParticipants)
-        .map(uid => ({ 
-            id: `${uid}-camera`, 
-            realId: uid,
-            name: remoteParticipants[uid].name, 
-            role: remoteParticipants[uid].role,
-            isCameraOn: remoteParticipants[uid].isCameraOn,
-            isMuted: remoteParticipants[uid].isMuted,
-            stream: remoteParticipants[uid].stream,
-            joinedAt: remoteParticipants[uid].joinedAt
-        }))
+      .map(uid => ({
+        id: `${uid}-camera`,
+        realId: uid,
+        name: remoteParticipants[uid].name,
+        role: remoteParticipants[uid].role,
+        isCameraOn: remoteParticipants[uid].isCameraOn,
+        isMuted: remoteParticipants[uid].isMuted,
+        stream: remoteParticipants[uid].stream,
+        joinedAt: remoteParticipants[uid].joinedAt
+      }))
   ];
 
   // Identify if anyone is sharing a screen (Global State)
@@ -66,31 +66,31 @@ export const VideoPanel = ({
   let screenShareTile = null;
 
   if (isLocalScreenSharing) {
-      screenShareTile = {
-          id: 'local-screen',
-          name: `${localName}'s Screen`,
-          isLocal: true,
-          isScreenSharing: true,
-          stream: localScreenStream
-      };
+    screenShareTile = {
+      id: 'local-screen',
+      name: `${localName}'s Screen`,
+      isLocal: true,
+      isScreenSharing: true,
+      stream: localScreenStream
+    };
   } else if (isAnyRemoteSharing) {
-      const sharerId = Object.keys(remoteParticipants).find(uid => remoteParticipants[uid].isScreenSharing);
-      const p = remoteParticipants[sharerId];
-      screenShareTile = {
-          id: `${sharerId}-screen`,
-          name: `${p.name}'s Screen`,
-          isLocal: false,
-          isScreenSharing: true,
-          stream: p.screenStream // Might be null initially
-      };
+    const sharerId = Object.keys(remoteParticipants).find(uid => remoteParticipants[uid].isScreenSharing);
+    const p = remoteParticipants[sharerId];
+    screenShareTile = {
+      id: `${sharerId}-screen`,
+      name: `${p.name}'s Screen`,
+      isLocal: false,
+      isScreenSharing: true,
+      stream: p.screenStream // Might be null initially
+    };
   }
 
   // Stable Sort for sidebar/grid
   const sortedCameraTiles = cameraTiles.sort((a, b) => {
     const getRolePriority = (role) => {
-        if (role === 'candidate') return 1;
-        if (role === 'interviewer') return 2;
-        return 3;
+      if (role === 'candidate') return 1;
+      if (role === 'interviewer') return 2;
+      return 3;
     };
     const prioA = getRolePriority(a.role);
     const prioB = getRolePriority(b.role);
@@ -106,7 +106,7 @@ export const VideoPanel = ({
     const isSelf = p.isLocal && !p.isScreenSharing;
     const isScreenLoading = p.isScreenSharing && !p.stream;
     const showVideo = !isScreenLoading && (p.isScreenSharing || (isSelf ? isCameraOn : p.isCameraOn !== false));
-    
+
     return (
       <div key={p.id} className={`video-tile ${isSelf ? 'local-tile' : 'remote-tile'} ${isSidebar ? 'sidebar-tile' : ''}`}>
         {isScreenLoading ? (
@@ -132,14 +132,14 @@ export const VideoPanel = ({
             autoPlay
             muted={isSelf || p.isScreenSharing}
             playsInline
-            style={{ 
-              objectFit: p.isScreenSharing ? 'contain' : 'cover', 
+            style={{
+              objectFit: p.isScreenSharing ? 'contain' : 'cover',
               display: showVideo ? 'block' : 'none',
               transform: isSelf ? 'scaleX(-1)' : 'none'
             }}
           />
         )}
-        
+
         {!showVideo && !isScreenLoading && (
           <div className="video-placeholder-overlay" style={{ position: 'absolute', inset: 0, zIndex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <VideoPlaceholder name={p.name || 'Participant'} />
@@ -324,7 +324,7 @@ export const VideoPanel = ({
           }
         }
       `}</style>
-      
+
       {screenShareTile ? (
         <div className="split-layout-container">
           <div className="main-stage">
