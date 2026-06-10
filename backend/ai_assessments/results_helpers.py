@@ -98,7 +98,6 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
             screenshots_data = []
             pan_photo_url = None
             candidate_photo_url = None
-<<<<<<< HEAD
             detected = getattr(s, 'identity_mismatch_detected', False)
             details = getattr(s, 'identity_mismatch_details', {})
             photo_approved = bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False
@@ -110,15 +109,6 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 "identity_mismatch_details": details,
                 "photo_update_pending": photo_update_pending,
                 "photo_update_approved": photo_approved,
-=======
-            mismatch_fields = {
-                "identity_mismatch_detected": getattr(s, 'identity_mismatch_detected', False),
-                "original_identity_photo_url": None,
-                "intruder_photo_url": None,
-                "identity_mismatch_details": getattr(s, 'identity_mismatch_details', {}),
-                "photo_update_pending": False,
-                "photo_update_approved": False,
->>>>>>> ef74e872f66399dc58090880a3a1045976b2ea0d
                 "pending_identity_photo_url": None,
                 "master_photo_url": None,
                 "is_assessment": True,
@@ -394,11 +384,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
             orig_identity_photo_url = None
             master_photo_url = None
             pending_identity_photo_url = None
-<<<<<<< HEAD
             photo_update_pending = bool(s.identity_mismatch_detected and not getattr(s, 'photo_update_approved', False))
-=======
-            photo_update_pending = False
->>>>>>> ef74e872f66399dc58090880a3a1045976b2ea0d
             intruder_photo_url = None
         else:
             integrity_logs = [
