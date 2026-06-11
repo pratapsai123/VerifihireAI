@@ -63,7 +63,7 @@ function MainHeader() {
           type="button"
           onClick={goHome}
           style={{
-            fontSize: '1.15rem',
+            fontSize: '1.95rem',
             fontWeight: 800,
             color: '#FFFFFF',
             letterSpacing: '-0.03em',
@@ -79,7 +79,7 @@ function MainHeader() {
 
         {/* Center: Features Dropdown */}
         <div className="main-header-nav-center">
-          <div 
+          <div
             className={`features-dropdown-container ${showFeaturesMenu ? 'active' : ''}`}
             onMouseEnter={handleFeaturesMouseEnter}
             onMouseLeave={handleFeaturesMouseLeave}

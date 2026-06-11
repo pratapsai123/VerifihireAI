@@ -17,8 +17,9 @@ function FeatureCustomizedAssessment() {
   }, []);
 
   return (
-    <div className="fca-container">
+    <>
       <MainHeader />
+      <div className="fca-container">
       
       {/* Background Gradients */}
       <div className="fca-bg-glow fca-glow-1"></div>
@@ -511,8 +512,9 @@ function FeatureCustomizedAssessment() {
         </div>
       </section>
 
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

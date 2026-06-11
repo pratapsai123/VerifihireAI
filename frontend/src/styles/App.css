@@ -728,14 +728,20 @@ body {
     overflow-x: hidden !important;
     position: relative;
     box-sizing: border-box;
-    background-color: #f0f8ff;
+    /* background-color: #f0f8ff; */
     /* Solid AliceBlue background */
+}
+
+.auth-split-page,
+.auth-left-side,
+.auth-right-side {
+    background-color: #f1f7ff;
 }
 
 .auth-left-side {
     width: 58% !important;
     flex: 0 0 58% !important;
-    background-color: #f1f7ff;
+    /* background-color: #f1f7ff; */
     /* Consistent light blue */
     display: flex;
     flex-direction: column;
@@ -752,7 +758,7 @@ body {
 .auth-right-side {
     width: 42% !important;
     flex: 0 0 42% !important;
-    background-color: #f1f7ff;
+    /* background-color: #f1f7ff; */
     /* Consistent light blue */
     display: flex;
     flex-direction: column;
@@ -1109,60 +1115,72 @@ body {
 }
 
 @keyframes slideUp {
-    from { opacity: 0; transform: translateY(24px) scale(0.97); }
-    to   { opacity: 1; transform: translateY(0)    scale(1); }
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* Initial Loading Screen */
 .initial-loading-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #f8fafc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
 }
 
 .loader-content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .loader-logo {
-  font-size: 2rem;
-  font-weight: 800;
-  color: #1e293b;
-  letter-spacing: -0.025em;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1e293b;
+    letter-spacing: -0.025em;
 }
 
 .loader-logo span {
-  color: #6366f1;
+    color: #6366f1;
 }
 
 .loader-spinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid #e2e8f0;
-  border-top-color: #6366f1;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e2e8f0;
+    border-top-color: #6366f1;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
 }
 
 .loader-content p {
-  color: #64748b;
-  font-size: 0.95rem;
-  font-weight: 500;
-  margin: 0;
-}
+    color: #64748b;
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 0;
+}
