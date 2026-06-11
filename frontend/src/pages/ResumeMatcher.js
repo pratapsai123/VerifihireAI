@@ -18,6 +18,7 @@ const ResumeMatcher = () => {
     const [batchId, setBatchId] = useState(null);
     const [progress, setProgress] = useState({ processed: 0, total: 0 });
     const [matchMode, setMatchMode] = useState('automatic');
+    const [showPopup, setShowPopup] = useState(false);
     const [customRoleTitle, setCustomRoleTitle] = useState('');
     const [sameQuestionsForAll, setSameQuestionsForAll] = useState(false);
 
@@ -59,11 +60,16 @@ const ResumeMatcher = () => {
 
                     if (data.is_complete) {
                         console.log("✨ BATCH COMPLETE! Rendering results...");
-                        setResults(data.results);
                         setBatchId(null);
                         setIsAnalyzing(false);
                         if (matchMode === 'automatic') {
-                            // Backend has finished generating assessments
+                            setShowPopup(true);
+                            setResults(data.results);
+                            setTimeout(() => {
+                                setShowPopup(false);
+                            }, 4000);
+                        } else {
+                            setResults(data.results);
                         }
                         sessionStorage.removeItem(STORAGE_KEY); // Full clear once complete
                         clearInterval(interval);
@@ -393,8 +399,16 @@ const ResumeMatcher = () => {
                 setProgress({ processed: 0, total: data.total });
                 console.log(`🚀 Batch started: ${data.batch_id} (${data.total} candidates)`);
             } else {
-                setResults(Array.isArray(data) ? data : [data]);
                 setIsAnalyzing(false);
+                if (matchMode === 'automatic') {
+                    setShowPopup(true);
+                    setResults(Array.isArray(data) ? data : [data]);
+                    setTimeout(() => {
+                        setShowPopup(false);
+                    }, 4000);
+                } else {
+                    setResults(Array.isArray(data) ? data : [data]);
+                }
             }
         } catch (error) {
             const errorMsg = error.response?.data?.error || error.response?.data?.detail || error.message || 'Analysis failed';
@@ -919,7 +933,7 @@ const ResumeMatcher = () => {
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', alignItems: 'center' }}>
                             <button onClick={handleMatch} disabled={isAnalyzing} className="generate-btn">
                                 {isAnalyzing ? (
-                                    <><i className="fa-solid fa-atom fa-spin"></i> {matchMode === 'automatic' ? 'Analyzing & Generating Assessments...' : 'Analyzing Candidate Profiles...'}</>
+                                    <><i className="fa-solid fa-atom fa-spin"></i> Analyzing Resumes...</>
                                 ) : (
                                     <>
                                         <i className="fa-solid fa-wand-magic-sparkles"></i>
@@ -935,7 +949,7 @@ const ResumeMatcher = () => {
                     <div className="section-container" style={{ marginTop: '2rem', textAlign: 'center' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                             <span style={{ fontSize: '0.9rem', fontWeight: '600', color: '#4B5563' }}>
-                                {progress.total > 0 ? 'Processing Resumes...' : 'Initializing Analysis...'}
+                                {progress.total > 0 ? 'Analyzing Resumes...' : 'Initializing Analysis...'}
                             </span>
                             <span style={{ fontSize: '0.9rem', fontWeight: '700', color: '#6366F1' }}>
                                 {progress.total > 0 ? `${progress.processed} of ${progress.total}` : 'Please wait'}
@@ -1045,6 +1059,36 @@ const ResumeMatcher = () => {
                                     </div>
                                 );
                             })}
+                        </div>
+                    </div>
+                )}
+
+                {showPopup && (
+                    <div style={{
+                        position: 'fixed',
+                        top: '80px',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        background: 'white',
+                        padding: '1rem 1.5rem',
+                        borderRadius: '12px',
+                        boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                        zIndex: 9999,
+                        animation: 'fadeIn 0.3s ease-out'
+                    }}>
+                        <div className="module-icon-wrapper indigo-glow" style={{ width: '40px', height: '40px', borderRadius: '10px', fontSize: '1.2rem', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <i className="fa-solid fa-wand-magic-sparkles fa-bounce"></i>
+                        </div>
+                        <div>
+                            <h3 style={{ margin: 0, color: '#1E293B', fontSize: '1rem', fontWeight: '600' }}>
+                                Generation Started
+                            </h3>
+                            <p style={{ margin: 0, color: '#64748B', fontSize: '0.85rem' }}>
+                                Assessment and Interview is generating...
+                            </p>
                         </div>
                     </div>
                 )}

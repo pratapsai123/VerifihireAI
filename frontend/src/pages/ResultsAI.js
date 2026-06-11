@@ -106,6 +106,7 @@ const ResultsAI = () => {
     const [activeTab, setActiveTab] = useState(searchParams.get('tab') || 'assessment');
     const [statusFilter, setStatusFilter] = useState('all'); // 'all' | 'pass' | 'fail' | 'on-hold'
     const [currentPage, setCurrentPage] = useState(1);
+    const [batchPage, setBatchPage] = useState(1);
     const [sortField, setSortField] = useState('score'); // Default: sort by score
     const [sortDirection, setSortDirection] = useState('desc'); // 'asc' | 'desc' (highest first)
 
@@ -683,6 +684,7 @@ const ResultsAI = () => {
         setSelected(new Set());
         setStatusFilter('all');
         setCurrentPage(1);
+        setBatchPage(1);
         setSortField('score');
         setSortDirection('desc');
     };
@@ -917,7 +919,7 @@ const ResultsAI = () => {
         return rows;
     })();
 
-    const itemsPerPage = 10;
+    const itemsPerPage = 20;
     const indexOfLastRow = currentPage * itemsPerPage;
     const indexOfFirstRow = indexOfLastRow - itemsPerPage;
     const paginatedRows = currentRows.slice(indexOfFirstRow, indexOfLastRow);
@@ -2105,62 +2107,133 @@ const ResultsAI = () => {
                                         </span>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                                        {Object.entries(groupedData)
-                                            .filter(([_, data]) => {
-                                                if (activeTab === 'resume') return data.resume.length > 0 && !data.is_fully_automatic;
-                                                if (activeTab === 'assessment') return data.assessment.length > 0 && !data.is_fully_automatic;
-                                                if (activeTab === 'interview') return data.interview.length > 0 && !data.is_fully_automatic;
-                                                if (activeTab === 'fully_automatic') return data.is_fully_automatic;
-                                                return true;
-                                            })
-                                            .sort(([, a], [, b]) => {
-                                                // Sort by most recent submission/creation date (newest first)
-                                                const getLatest = (d) => {
-                                                    const all = [...(d.resume || []), ...(d.assessment || []), ...(d.interview || [])];
-                                                    const dates = all.map(r => r.submitted_at || r.created_at).filter(Boolean);
-                                                    return dates.length > 0 ? new Date(Math.max(...dates.map(d => new Date(d)))) : new Date(0);
-                                                };
-                                                return getLatest(b) - getLatest(a);
-                                            })
-                                            .map(([roleName, data]) => (
-                                                <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
-                                                    padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-                                                    transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
-                                                }}>
-                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
-                                                        <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4318FF, #9333ea)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', boxShadow: '0 8px 15px rgba(67, 24, 255, 0.2)' }}>
-                                                            <i className="fa-solid fa-layer-group" />
-                                                        </div>
-                                                        <div>
-                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                                                <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{data.batch_name}</h3>
-                                                                <span style={{
-                                                                    padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
-                                                                    background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
-                                                                    color: data.is_fully_automatic ? '#4F46E5' : '#707EAE',
-                                                                    border: `1px solid ${data.is_fully_automatic ? '#4F46E533' : '#707EAE33'}`,
-                                                                    textTransform: 'uppercase', letterSpacing: '0.05em'
-                                                                }}>
-                                                                    {data.is_fully_automatic ? 'Automatic' : 'Manual'}
-                                                                </span>
+                                        {(() => {
+                                            const filteredBatches = Object.entries(groupedData)
+                                                .filter(([_, data]) => {
+                                                    if (activeTab === 'resume') return data.resume.length > 0 && !data.is_fully_automatic;
+                                                    if (activeTab === 'assessment') return data.assessment.length > 0 && !data.is_fully_automatic;
+                                                    if (activeTab === 'interview') return data.interview.length > 0 && !data.is_fully_automatic;
+                                                    if (activeTab === 'fully_automatic') return data.is_fully_automatic;
+                                                    return true;
+                                                })
+                                                .sort(([, a], [, b]) => {
+                                                    // Helper to extract DD-MM-YYYY_HH:MM from batch name
+                                                    const extractBatchTime = (bName) => {
+                                                        const match = bName?.match(/_(\d{2})-(\d{2})-(\d{4})_(\d{2}):(\d{2})/);
+                                                        if (match) {
+                                                            const [_, day, month, year, hour, minute] = match;
+                                                            return new Date(`${year}-${month}-${day}T${hour}:${minute}:00`).getTime();
+                                                        }
+                                                        return null;
+                                                    };
+
+                                                    const timeA = extractBatchTime(a.batch_name);
+                                                    const timeB = extractBatchTime(b.batch_name);
+
+                                                    // If both have timestamps in their names, sort by that
+                                                    if (timeA && timeB) {
+                                                        return timeB - timeA;
+                                                    }
+
+                                                    // Fallback: Sort by most recent submission/creation date (newest first)
+                                                    const getLatest = (d) => {
+                                                        const all = [...(d.resume || []), ...(d.assessment || []), ...(d.interview || [])];
+                                                        const dates = all.map(r => r.submitted_at || r.created_at).filter(Boolean);
+                                                        return dates.length > 0 ? new Date(Math.max(...dates.map(date => new Date(date)))) : new Date(0);
+                                                    };
+                                                    return getLatest(b) - getLatest(a);
+                                                });
+
+                                            const batchesPerPage = 20;
+                                            const indexOfLastBatch = batchPage * batchesPerPage;
+                                            const indexOfFirstBatch = indexOfLastBatch - batchesPerPage;
+                                            const currentBatches = filteredBatches.slice(indexOfFirstBatch, indexOfLastBatch);
+
+                                            return (
+                                                <>
+                                                    {currentBatches.map(([roleName, data]) => (
+                                                        <div key={roleName} onClick={() => handleRoleClick(roleName)} className="glass-table-card role-card" style={{
+                                                            padding: '1.2rem 1.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+                                                            transition: 'all 0.2s', borderLeft: '4px solid #4318FF'
+                                                        }}>
+                                                            <div style={{ display: 'flex', alignItems: 'center', gap: '1.2rem' }}>
+                                                                <div style={{ width: '42px', height: '42px', borderRadius: '12px', background: 'linear-gradient(135deg, #4318FF, #9333ea)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', boxShadow: '0 8px 15px rgba(67, 24, 255, 0.2)' }}>
+                                                                    <i className="fa-solid fa-layer-group" />
+                                                                </div>
+                                                                <div>
+                                                                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                                                        <h3 style={{ fontSize: '1.05rem', fontWeight: '800', margin: 0, color: '#1B254B' }}>{data.batch_name}</h3>
+                                                                        <span style={{
+                                                                            padding: '0.15rem 0.6rem', borderRadius: '6px', fontSize: '0.65rem', fontWeight: '900',
+                                                                            background: data.is_fully_automatic ? '#EEF2FF' : '#F4F7FE',
+                                                                            color: data.is_fully_automatic ? '#4F46E5' : '#707EAE',
+                                                                            border: `1px solid ${data.is_fully_automatic ? '#4F46E533' : '#707EAE33'}`,
+                                                                            textTransform: 'uppercase', letterSpacing: '0.05em'
+                                                                        }}>
+                                                                            {data.is_fully_automatic ? 'Automatic' : 'Manual'}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
+                                                                        <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                            <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
+                                                                            {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total))} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total)) !== 1 ? 's' : ''}
+                                                                        </span>
+                                                                        <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                                                                            <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
+                                                                            {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : (data.assessment.length + data.resume.length + data.interview.length)))} Total Results
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div style={{ display: 'flex', gap: '1rem', marginTop: '0.3rem' }}>
-                                                                <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                                    <i className="fa-solid fa-users-viewfinder" style={{ fontSize: '0.7rem' }} />
-                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total))} Candidate{(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : data.total)) !== 1 ? 's' : ''}
-                                                                </span>
-                                                                <span style={{ fontSize: '0.75rem', color: '#707EAE', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                                                    <i className="fa-solid fa-circle-check" style={{ fontSize: '0.7rem', color: '#05CD99' }} />
-                                                                    {(activeTab === 'resume' ? data.resume.length : activeTab === 'assessment' ? data.assessment.length : activeTab === 'interview' ? data.interview.length : (data.is_fully_automatic ? data.unique_candidates : (data.assessment.length + data.resume.length + data.interview.length)))} Total Results
-                                                                </span>
+                                                            <div style={{ color: '#4318FF', fontSize: '1.2rem' }} className="arrow-icon">
+                                                                <i className="fa-solid fa-circle-chevron-right" />
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <div style={{ color: '#4318FF', fontSize: '1.2rem' }} className="arrow-icon">
-                                                        <i className="fa-solid fa-circle-chevron-right" />
-                                                    </div>
-                                                </div>
-                                            ))}
+                                                    ))}
+
+                                                    {filteredBatches.length > batchesPerPage && (
+                                                        <div style={{
+                                                            padding: '1rem 1.5rem', borderTop: '1px solid #F1F5F9',
+                                                            display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1rem', background: 'white', borderRadius: '12px',
+                                                            boxShadow: '0 4px 15px rgba(0,0,0,0.03)'
+                                                        }}>
+                                                            <div style={{ fontSize: '0.8rem', color: '#94A3B8', fontWeight: '700' }}>
+                                                                Showing <span style={{ color: '#1B254B' }}>{indexOfFirstBatch + 1}</span> to <span style={{ color: '#1B254B' }}>{Math.min(indexOfLastBatch, filteredBatches.length)}</span> of <span style={{ color: '#1B254B' }}>{filteredBatches.length}</span> batches
+                                                            </div>
+                                                            <div style={{ display: 'flex', gap: '0.5rem' }}>
+                                                                <button
+                                                                    disabled={batchPage === 1}
+                                                                    onClick={() => setBatchPage(p => Math.max(1, p - 1))}
+                                                                    style={{
+                                                                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                                        background: 'white', cursor: batchPage === 1 ? 'not-allowed' : 'pointer',
+                                                                        fontSize: '0.8rem', fontWeight: '700', color: batchPage === 1 ? '#CBD5E1' : '#4F46E5',
+                                                                        display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                                    }}
+                                                                >
+                                                                    <i className="fa-solid fa-chevron-left" /> Prev
+                                                                </button>
+                                                                <div style={{ display: 'flex', alignItems: 'center', padding: '0 0.5rem', fontSize: '0.85rem', fontWeight: '800', color: '#1B254B' }}>
+                                                                    {batchPage}
+                                                                </div>
+                                                                <button
+                                                                    disabled={indexOfLastBatch >= filteredBatches.length}
+                                                                    onClick={() => setBatchPage(p => p + 1)}
+                                                                    style={{
+                                                                        padding: '0.4rem 0.8rem', borderRadius: '8px', border: '1px solid #E2E8F0',
+                                                                        background: 'white', cursor: indexOfLastBatch >= filteredBatches.length ? 'not-allowed' : 'pointer',
+                                                                        fontSize: '0.8rem', fontWeight: '700', color: indexOfLastBatch >= filteredBatches.length ? '#CBD5E1' : '#4F46E5',
+                                                                        display: 'flex', alignItems: 'center', gap: '0.4rem'
+                                                                    }}
+                                                                >
+                                                                    Next <i className="fa-solid fa-chevron-right" />
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </>
+                                            );
+                                        })()}
                                     </div>
                                 </div>
                             )}
