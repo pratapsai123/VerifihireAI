@@ -9,6 +9,10 @@ function FeatureCustomizedAssessment() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const appScrollEl = document.querySelector('.app-scroll');
+    if (appScrollEl) {
+      appScrollEl.scrollTop = 0;
+    }
     // Loop the hero animation every 24 seconds to fit the extended phase 2 flow
     const interval = setInterval(() => {
       setAnimationKey(prev => prev + 1);
