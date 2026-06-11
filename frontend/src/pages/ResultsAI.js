@@ -1647,7 +1647,7 @@ const ResultsAI = () => {
                                                                     </tr>
                                                                     <tr style={{ borderBottom: '1px solid #E0E5F2' }}>
                                                                         <td style={{ padding: '0.75rem 1rem', background: '#F8F9FF', fontWeight: '600', color: '#1B254B' }}>Overall Result</td>
-                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified') ? '#05CD99' : viewedSubmission.status === 'hold' ? '#F59E0B' : '#EE5D50', fontWeight: '800' }}>
+                                                                        <td style={{ padding: '0.75rem 1rem', color: (viewedSubmission.status === 'selected' || viewedSubmission.status === 'Qualified') ? '#05CD99' : (viewedSubmission.status === 'hold' || viewedSubmission.status === 'On-Hold') ? '#F59E0B' : '#EE5D50', fontWeight: '800' }}>
                                                                             {viewedSubmission.percentage}%
                                                                         </td>
                                                                     </tr>
@@ -1657,7 +1657,7 @@ const ResultsAI = () => {
                                                                             {(() => {
                                                                                 const st = viewedSubmission.status;
                                                                                 if (st === 'selected' || st === 'Qualified') return <span style={{ color: '#05CD99' }}>✓ Assessment Passed</span>;
-                                                                                if (st === 'hold') return <span style={{ color: '#F59E0B' }}>⚠ HOLD — Manual Review Required</span>;
+                                                                                if (st === 'hold' || st === 'On-Hold') return <span style={{ color: '#F59E0B' }}>⚠ HOLD — Manual Review Required</span>;
                                                                                 return <span style={{ color: '#EE5D50' }}>✗ Not Qualified</span>;
                                                                             })()}
                                                                         </td>
@@ -2593,7 +2593,7 @@ const ResultsAI = () => {
                                                                             {(() => {
                                                                                 const currentStatus = activeTab === 'fully_automatic' ? (r.interview?.status || r.assessment?.status || r.resume?.status) : r.status;
                                                                                 const currentSubmissionId = activeTab === 'fully_automatic' ? (r.assessment?.submission_id || r.interview?.submission_id || r.resume?.submission_id) : r.submission_id;
-                                                                                if (!r.qual_pending && currentStatus === 'hold' && currentSubmissionId) {
+                                                                                if (!r.qual_pending && (currentStatus === 'hold' || currentStatus === 'On-Hold') && currentSubmissionId) {
                                                                                     const sid = String(currentSubmissionId || '');
                                                                                     const aiId = sid.replace('ai_', '').replace('aicand_', '').replace('_assessment', '').replace('_interview', '');
                                                                                     return (

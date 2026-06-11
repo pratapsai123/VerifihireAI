@@ -395,25 +395,47 @@ def action_qualification_request_view(request, request_id):
 
             elif qual_req.content_type == QualificationRequest.CONTENT_AI:
                 from ai_assessments.models import AIAssessmentSubmission
-                ai_sub = AIAssessmentSubmission.objects.get(id=qual_req.ai_submission_id)
-                ai_sub.status = qual_req.requested_result
-                ai_sub.save(update_fields=['status'])
-
-                # CROSS-UPDATE: Synchronize with the Candidate record
+                
+                ai_sub = None
+                candidate_obj = None
                 try:
-                    from ai_candidates.models import Candidate
-                    email = ai_sub.candidate_email
-                    batch_id = ai_sub.batch_id
-                    candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
-                    candidate = candidates.filter(batch_id=batch_id).first() if batch_id else candidates.first()
-                    if candidate:
-                        if qual_req.requested_result == 'selected':
-                            candidate.status = 'Assessment Passed'
-                        else:
-                            candidate.status = 'Assessment Failed'
-                        candidate.save(update_fields=['status'])
-                except Exception as sync_err:
-                    logger.warning(f"Failed to cross-update candidate after qualification approval: {sync_err}")
+                    ai_sub = AIAssessmentSubmission.objects.get(id=qual_req.ai_submission_id)
+                except (AIAssessmentSubmission.DoesNotExist, ValueError):
+                    pass
+                
+                if not ai_sub:
+                    try:
+                        from ai_candidates.models import Candidate
+                        candidate_obj = Candidate.objects.get(id=qual_req.ai_submission_id)
+                    except (Candidate.DoesNotExist, ValueError):
+                        raise Exception("AIAssessmentSubmission or Candidate matching query does not exist.")
+                
+                if ai_sub:
+                    ai_sub.status = qual_req.requested_result
+                    ai_sub.save(update_fields=['status'])
+
+                    # CROSS-UPDATE: Synchronize with the Candidate record
+                    try:
+                        from ai_candidates.models import Candidate
+                        email = ai_sub.candidate_email
+                        batch_id = ai_sub.batch_id
+                        candidates = Candidate.objects.filter(email__iexact=email).order_by('-id')
+                        candidate = candidates.filter(batch_id=batch_id).first() if batch_id else candidates.first()
+                        if candidate:
+                            if qual_req.requested_result == 'selected':
+                                candidate.status = 'Assessment Passed'
+                            else:
+                                candidate.status = 'Assessment Failed'
+                            candidate.save(update_fields=['status'])
+                    except Exception as sync_err:
+                        logger.warning(f"Failed to cross-update candidate after qualification approval: {sync_err}")
+                
+                elif candidate_obj:
+                    if qual_req.requested_result == 'selected':
+                        candidate_obj.status = 'Hired'
+                    else:
+                        candidate_obj.status = 'Rejected'
+                    candidate_obj.save(update_fields=['status'])
 
         except Exception as e:
             return Response({'error': f'Failed to update submission: {str(e)}'}, status=status.HTTP_400_BAD_REQUEST)
