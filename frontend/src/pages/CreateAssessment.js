@@ -17,7 +17,7 @@ const CreateAssessment = () => {
         experience_level: '',  // NEW: Add experience level to form data
         num_mcqs: 10,
         num_coding: 1,
-        coding_challenges: [{ id: 1, difficulty: 'Medium' }],
+        coding_challenges: [{ id: 1, difficulty: '' }],
         mcq_time: 10,       // Auto-calculated: 1 min per MCQ, overridable
         coding_time: 30,    // Manually entered by recruiter
         mcqTimeManual: false, // Track if recruiter manually overrode MCQ time
@@ -125,7 +125,7 @@ const CreateAssessment = () => {
                 if (limitedCount > newChallenges.length) {
                     // Add new challenges
                     for (let i = newChallenges.length; i < limitedCount; i++) {
-                        newChallenges.push({ id: Date.now() + i, difficulty: 'Medium' });
+                        newChallenges.push({ id: Date.now() + i, difficulty: '' });
                     }
                 } else if (limitedCount < newChallenges.length) {
                     // Remove excess challenges
@@ -224,7 +224,7 @@ const CreateAssessment = () => {
     const calculateTotalPoints = () => {
         const mcqPoints = formData.num_mcqs * 1; // 1 pt per MCQ
         const codingPoints = formData.coding_challenges.reduce((sum, c) => {
-            const weight = c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300;
+            const weight = c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : c.difficulty === 'Hard' ? 300 : 0;
             return sum + weight;
         }, 0);
         return mcqPoints + codingPoints;
@@ -257,16 +257,24 @@ const CreateAssessment = () => {
             alert('Cannot generate an empty assessment! Please add at least one MCQ or Coding task.');
             return;
         }
-        if (!formData.mcq_time && formData.num_mcqs > 0) {
-            alert('Please enter a valid MCQ Time.');
+        if (formData.num_coding > 0 && formData.coding_challenges.some(c => !c.difficulty)) {
+            alert('Please select a Coding Level (Difficulty) for all coding tasks.');
             return;
         }
-        if (!formData.coding_time && formData.num_coding > 0) {
-            alert('Please enter a valid Coding Time.');
+        if (formData.num_mcqs > 0 && (!formData.mcq_time || Number(formData.mcq_time) <= 0)) {
+            alert('MCQ Assessment Duration must be greater than 0 minutes.');
+            return;
+        }
+        if (formData.num_coding > 0 && (!formData.coding_time || Number(formData.coding_time) <= 0)) {
+            alert('Coding Assessment Duration must be greater than 0 minutes.');
             return;
         }
         if (!formData.num_applicants) {
             alert('Please enter the number of applicants.');
+            return;
+        }
+        if (Number(formData.pass_threshold) <= 0) {
+            alert('Assessment Pass Threshold must be greater than 0%.');
             return;
         }
 
@@ -667,12 +675,12 @@ const CreateAssessment = () => {
                             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                                 <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#6366F1', background: '#EEF2FF', padding: '3px 10px', borderRadius: '20px' }}>MCQ {formData.mcq_weight}%</span>
                                 <span style={{ fontSize: '0.8rem', color: '#94A3B8' }}>+</span>
-                                <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#8B5CF6', background: '#F5F3FF', padding: '3px 10px', borderRadius: '20px' }}>Coding {100 - formData.mcq_weight}%</span>
+                                <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#10B981', background: '#ECFDF5', padding: '3px 10px', borderRadius: '20px' }}>Coding {100 - formData.mcq_weight}%</span>
                             </div>
                         </div>
                         <div style={{ position: 'relative', marginBottom: '0.5rem', display: 'flex', alignItems: 'center' }}>
                             <div style={{ flex: 1, position: 'relative', height: '8px' }}>
-                                <div style={{ position: 'absolute', inset: 0, height: '8px', borderRadius: '8px', background: `linear-gradient(to right, #6366F1 ${formData.mcq_weight}%, #8B5CF6 ${formData.mcq_weight}%)` }} />
+                                <div style={{ position: 'absolute', inset: 0, height: '8px', borderRadius: '8px', background: `linear-gradient(to right, #6366F1 ${formData.mcq_weight}%, #10B981 ${formData.mcq_weight}%)` }} />
                                 {/* The "Ball" */}
                                 <div style={{
                                     position: 'absolute',
@@ -723,6 +731,7 @@ const CreateAssessment = () => {
                                             onChange={(e) => updateCodingDifficulty(challenge.id, e.target.value)}
                                             style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '600', color: '#1B254B', cursor: 'pointer' }}
                                         >
+                                            <option value="" disabled>Select Level</option>
                                             <option value="Easy">Easy</option>
                                             <option value="Medium">Medium</option>
                                             <option value="Hard">Hard</option>

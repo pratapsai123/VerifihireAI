@@ -11,7 +11,7 @@ const ResumeMatcher = () => {
     const [files, setFiles] = useState([]);
     const [jobDescription, setJobDescription] = useState('');
     const [threshold, setThreshold] = useState(70);
-    const [experienceLevel, setExperienceLevel] = useState('mid');
+    const [experienceLevel, setExperienceLevel] = useState('');
     const [isAnalyzing, setIsAnalyzing] = useState(false);
     const [isRetrying, setIsRetrying] = useState(false);
     const [results, setResults] = useState(null);
@@ -84,7 +84,7 @@ const ResumeMatcher = () => {
     const [passThreshold, setPassThreshold] = useState(60);
     const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
     const [mcqWeight, setMcqWeight] = useState(40);
-    const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: 'Medium' }]);
+    const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: '' }]);
 
     // Auto-adjust scoring weights when counts are 0
     React.useEffect(() => {
@@ -201,7 +201,7 @@ const ResumeMatcher = () => {
         let updated = [...codingChallenges];
         if (count > updated.length) {
             for (let i = updated.length; i < count; i++) {
-                updated.push({ id: Date.now() + i, difficulty: 'Medium' });
+                updated.push({ id: Date.now() + i, difficulty: '' });
             }
         } else {
             updated = updated.slice(0, count);
@@ -217,19 +217,21 @@ const ResumeMatcher = () => {
     const calculateTotalPoints = () => {
         const mcqPts = mcqCount * 1; // 1 pt per MCQ
         const codingPts = codingChallenges.reduce((sum, c) => {
-            return sum + (c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : 300);
+            return sum + (c.difficulty === 'Easy' ? 100 : c.difficulty === 'Medium' ? 200 : c.difficulty === 'Hard' ? 300 : 0);
         }, 0);
         return mcqPts + codingPts;
     };
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files.length > 0) {
+            const incomingFiles = Array.from(e.target.files);
             setFiles(prevFiles => {
-                const newFiles = Array.from(e.target.files);
                 const existingNames = new Set(prevFiles.map(f => f.name));
-                const uniqueNewFiles = newFiles.filter(f => !existingNames.has(f.name));
+                const uniqueNewFiles = incomingFiles.filter(f => !existingNames.has(f.name));
                 return [...prevFiles, ...uniqueNewFiles];
             });
+            // Clear the input value so the same file can be uploaded again if removed
+            e.target.value = '';
         }
     };
 
@@ -266,10 +268,38 @@ const ResumeMatcher = () => {
             alert('Please provide a job description.');
             return;
         }
+        if (!experienceLevel) {
+            alert('Please select an experience level.');
+            return;
+        }
+        if (Number(threshold) <= 0) {
+            alert('Sensitivity Threshold must be greater than 0%.');
+            return;
+        }
 
         if (matchMode === 'automatic') {
             if (Number(mcqCount) === 0 && Number(codingCount) === 0) {
                 alert('Please provide at least one MCQ question or one Coding task for the assessment. They cannot both be 0.');
+                return;
+            }
+            if (Number(codingCount) > 0 && codingChallenges.some(c => !c.difficulty)) {
+                alert('Please select a Coding Level (Difficulty) for all coding tasks.');
+                return;
+            }
+            if (Number(passThreshold) <= 0) {
+                alert('Assessment Pass Threshold must be greater than 0%.');
+                return;
+            }
+            if (Number(interviewPassThreshold) <= 0) {
+                alert('Interview Pass Threshold must be greater than 0%.');
+                return;
+            }
+            if (Number(codingCount) > 0 && (!codingDuration || Number(codingDuration) <= 0)) {
+                alert('Coding Assessment Duration must be greater than 0 minutes.');
+                return;
+            }
+            if (Number(mcqCount) > 0 && (!mcqDuration || Number(mcqDuration) <= 0)) {
+                alert('MCQ Assessment Duration must be greater than 0 minutes.');
                 return;
             }
             if (!assessmentStartDate || !assessmentStartTime || !assessmentEndDate || !assessmentEndTime) {
@@ -586,6 +616,7 @@ const ResumeMatcher = () => {
                             onChange={(e) => setExperienceLevel(e.target.value)}
                             style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC', color: '#1B254B', fontWeight: '500' }}
                         >
+                            <option value="" disabled>Select Experience Level</option>
                             <option value="fresher">Fresher (0 Years)</option>
                             <option value="entry">Entry Level (0-2 Years)</option>
                             <option value="mid">Mid Level (2-5 Years)</option>
@@ -717,6 +748,7 @@ const ResumeMatcher = () => {
                                                 <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
                                                 <select value={c.difficulty} onChange={(e) => updateCodingDiff(c.id, e.target.value)}
                                                     style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}>
+                                                    <option value="" disabled>Select Level</option>
                                                     <option value="Easy">Easy</option>
                                                     <option value="Medium">Medium</option>
                                                     <option value="Hard">Hard</option>
@@ -788,12 +820,12 @@ const ResumeMatcher = () => {
                                     <div style={{ display: 'flex', gap: '0.4rem', alignItems: 'center' }}>
                                         <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#6366F1', background: '#EEF2FF', padding: '2px 8px', borderRadius: '20px' }}>MCQ {mcqWeight}%</span>
                                         <span style={{ fontSize: '0.7rem', color: '#94A3B8' }}>+</span>
-                                        <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#8B5CF6', background: '#F5F3FF', padding: '2px 8px', borderRadius: '20px' }}>Coding {100 - mcqWeight}%</span>
+                                        <span style={{ fontSize: '0.75rem', fontWeight: '700', color: '#10B981', background: '#ECFDF5', padding: '2px 8px', borderRadius: '20px' }}>Coding {100 - mcqWeight}%</span>
                                     </div>
                                 </div>
                                 <div style={{ position: 'relative', height: '6px', marginBottom: '0.4rem', display: 'flex', alignItems: 'center' }}>
                                     <div style={{ flex: 1, position: 'relative', height: '6px' }}>
-                                        <div style={{ position: 'absolute', inset: 0, height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #8B5CF6 ${mcqWeight}%)` }} />
+                                        <div style={{ position: 'absolute', inset: 0, height: '6px', borderRadius: '6px', background: `linear-gradient(to right, #6366F1 ${mcqWeight}%, #10B981 ${mcqWeight}%)` }} />
                                         {/* The "Ball" */}
                                         <div style={{
                                             position: 'absolute',

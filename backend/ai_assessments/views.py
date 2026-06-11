@@ -942,6 +942,18 @@ class GenerateAssessmentView(APIView):
         if coding_count == 0:
             coding_duration = 0
             
+        if coding_count > 0 and coding_duration <= 0:
+            return Response({
+                "error": "Invalid Duration",
+                "message": "Coding Assessment Duration must be greater than 0 minutes."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        if mcq_count > 0 and mcq_duration <= 0:
+            return Response({
+                "error": "Invalid Duration",
+                "message": "MCQ Assessment Duration must be greater than 0 minutes."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
         duration = mcq_duration + coding_duration  # Total for backward compat
         total_possible_points = int(data.get('total_possible_points', 1000))
 

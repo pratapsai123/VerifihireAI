@@ -263,8 +263,10 @@ class BulkInviteView(APIView):
         
 
         if not file or not job_description:
-
             return Response({"error": "File and Job Description are required"}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not experience_level:
+            return Response({"error": "Experience level is required"}, status=status.HTTP_400_BAD_REQUEST)
 
             
 
@@ -583,6 +585,10 @@ class ResumeMatchView(APIView):
 
         job_description = request.data.get('job_description')
         experience_level = request.data.get('experience_level', '').strip() or None
+        
+        if not experience_level:
+            return Response({"error": "Experience level is required."}, status=status.HTTP_400_BAD_REQUEST)
+
         threshold = request.data.get('threshold', 70)
 
         # Date Validations for Fully Automated Page
@@ -627,12 +633,31 @@ class ResumeMatchView(APIView):
                 "message": "Please provide at least one MCQ question or one Coding task for the assessment. They cannot both be 0."
             }, status=status.HTTP_400_BAD_REQUEST)
 
+        # Validate MCQ / Coding Durations
         try:
+            mcq_duration = int(request.data.get('mcq_duration', 10))
+            coding_duration = int(request.data.get('coding_duration', 30))
+        except (ValueError, TypeError):
+            mcq_duration = 10
+            coding_duration = 30
 
+        if coding_count > 0 and coding_duration <= 0:
+            return Response({
+                "error": "Invalid Duration",
+                "message": "Coding Assessment Duration must be greater than 0 minutes."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        if mcq_count > 0 and mcq_duration <= 0:
+            return Response({
+                "error": "Invalid Duration",
+                "message": "MCQ Assessment Duration must be greater than 0 minutes."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
             threshold = int(threshold)
-
-        except:
-
+            if threshold <= 0:
+                return Response({"error": "Invalid Threshold", "message": "Sensitivity Threshold must be greater than 0%."}, status=status.HTTP_400_BAD_REQUEST)
+        except (ValueError, TypeError):
             threshold = 70
 
 
@@ -868,6 +893,15 @@ class ResumeMatchView(APIView):
 
 
 
+            try:
+                pass_threshold = int(request.data.get('pass_threshold', 60))
+                interview_pass_threshold = int(request.data.get('interview_pass_threshold', 50))
+                if pass_threshold <= 0 or interview_pass_threshold <= 0:
+                    return Response({"error": "Invalid Threshold", "message": "Pass thresholds must be greater than 0%."}, status=status.HTTP_400_BAD_REQUEST)
+            except (ValueError, TypeError):
+                pass_threshold = 60
+                interview_pass_threshold = 50
+
             automation_settings = {
 
                 'difficulty': request.data.get('difficulty', 'Medium'),
@@ -878,9 +912,9 @@ class ResumeMatchView(APIView):
                 'coding_count': int(request.data.get('coding_count', 1)),
                 'mcq_duration': request.data.get('mcq_duration'),
                 'coding_duration': request.data.get('coding_duration'),
-                'pass_threshold': int(request.data.get('pass_threshold', 60)),
+                'pass_threshold': pass_threshold,
 
-                'interview_pass_threshold': int(request.data.get('interview_pass_threshold', 50)),
+                'interview_pass_threshold': interview_pass_threshold,
 
                 'mcq_weight': int(request.data.get('mcq_weight', 40)),
 

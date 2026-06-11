@@ -78,7 +78,7 @@ const AiAssessments = () => {
         }
 
         // 4. Capacity-based (Max candidates reached)
-        if (invited >= (assessment.max_candidates_allowed || 1)) {
+        if (invited > 0 && invited >= (assessment.max_candidates_allowed || 1)) {
             // It is Full, but not completed yet. It should stay in SCHEDULED tab
             return { type: 'SCHEDULED', label: 'Full', isExpired: true, color: '#10b981', bg: '#E6FBF5', icon: 'fa-user-check' };
         }

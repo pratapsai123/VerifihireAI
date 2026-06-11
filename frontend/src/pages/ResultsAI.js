@@ -775,6 +775,12 @@ const ResultsAI = () => {
     };
 
     const isPass = (r, type) => {
+        if (type === 'fully_automatic') {
+            if (r.interview) return isPass(r.interview, 'interview');
+            if (r.assessment) return isPass(r.assessment, 'assessment');
+            if (r.resume) return isPass(r.resume, 'resume');
+            return false;
+        }
         if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
         if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
         if (type === 'interview') {
@@ -877,12 +883,16 @@ const ResultsAI = () => {
         let rows = statusFilter === 'all'
             ? allRows
             : allRows.filter(r => {
+                const currentStatus = activeTab === 'fully_automatic' 
+                    ? (r.interview?.status || r.assessment?.status || r.resume?.status) 
+                    : r.status;
+                
                 if (statusFilter === 'on-hold') {
-                    return r.status === 'On-Hold' || r.status === 'hold';
+                    return currentStatus === 'On-Hold' || currentStatus === 'hold';
                 }
                 const pass = isPass(r, activeTab);
-                if (statusFilter === 'pass') return pass && r.status !== 'On-Hold' && r.status !== 'hold';
-                return !pass && r.status !== 'On-Hold' && r.status !== 'hold';
+                if (statusFilter === 'pass') return pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold';
+                return !pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold';
             });
 
         // Apply sorting (works for all tabs)
@@ -2748,15 +2758,6 @@ const ResultsAI = () => {
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>
                                                                                         </div>
-                                                                                    ) : activeTab === 'resume' ? (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setSearchParams({ ...Object.fromEntries(searchParams), subId: r.submission_id || r.id || r.candidate_id }); }}
-                                                                                            style={{
-                                                                                                padding: '0.5rem 1rem', borderRadius: '10px', border: 'none',
-                                                                                                background: 'linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)',
-                                                                                                color: 'white', fontWeight: '700', fontSize: '0.8rem', cursor: 'pointer'
-                                                                                            }}
-                                                                                        >Details</button>
                                                                                     ) : null}
                                                                                 </>
                                                                             )}
