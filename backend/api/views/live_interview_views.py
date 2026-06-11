@@ -100,7 +100,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -1126,7 +1126,7 @@ def add_interview_participant_view(request):
         )
         print(f"DEBUG: Participant created: {participant.id} with token {participant.token}")
         
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
         
         # Link changes based on role
         if role == 'interviewer':
@@ -2242,6 +2242,15 @@ def create_interview_violation_view(request):
             duration=duration,
             screenshot_path=screenshot_file
         )
+
+        if violation.screenshot_path:
+            import os
+            print("=== SCREENSHOT DEBUG ===")
+            print("Name:", violation.screenshot_path.name)
+            print("Path:", violation.screenshot_path.path)
+            print("URL:", violation.screenshot_path.url)
+            print("Exists:", os.path.exists(violation.screenshot_path.path))
+            print("========================")
 
         # Broadcast via WebSocket group in real-time
         from channels.layers import get_channel_layer

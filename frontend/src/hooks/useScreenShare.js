@@ -36,10 +36,15 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
       }
 
       try {
+        window.isScreenShareSelectionActive = true;
         const screenShareStream = await navigator.mediaDevices.getDisplayMedia({
           video: { displaySurface: 'monitor', cursor: 'always' },
           audio: false
         });
+
+        setTimeout(() => {
+          window.isScreenShareSelectionActive = false;
+        }, 5000);
 
         screenShareStreamRef.current = screenShareStream;
         setIsScreenSharing(true);
@@ -75,9 +80,29 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
           videoTrack.onended = () => stopScreenSharing();
         }
       } catch (error) {
+        window.isScreenShareSelectionActive = false;
         console.error('Error starting screen share:', error);
         if (showNotification) showNotification('Failed to access screen share', 'error');
         sendMessage({ type: 'screen_share_release' });
+
+        setTimeout(async () => {
+          if (!document.fullscreenElement) {
+            try {
+              const element = document.documentElement;
+              const requestMethod = element.requestFullscreen ||
+                                    element.webkitRequestFullscreen ||
+                                    element.mozRequestFullScreen ||
+                                    element.msRequestFullscreen;
+              if (requestMethod) {
+                await requestMethod.call(element);
+              } else {
+                window.dispatchEvent(new Event('vh_exam_started'));
+              }
+            } catch (err) {
+              window.dispatchEvent(new Event('vh_exam_started'));
+            }
+          }
+        }, 500);
       }
     } else {
       stopScreenSharing();
@@ -96,6 +121,25 @@ export const useScreenShare = (peerConnectionsRef, localStreamRef, sendMessage, 
     
     sendMessage({ type: 'screen_share_state', active: false });
     sendMessage({ type: 'screen_share_release' });
+
+    setTimeout(async () => {
+      if (!document.fullscreenElement) {
+        try {
+          const element = document.documentElement;
+          const requestMethod = element.requestFullscreen ||
+                                element.webkitRequestFullscreen ||
+                                element.mozRequestFullScreen ||
+                                element.msRequestFullscreen;
+          if (requestMethod) {
+            await requestMethod.call(element);
+          } else {
+            window.dispatchEvent(new Event('vh_exam_started'));
+          }
+        } catch (e) {
+          window.dispatchEvent(new Event('vh_exam_started'));
+        }
+      }
+    }, 500);
 
     // Remove screen track from ALL peers and re-negotiate
     const pcs = peerConnectionsRef.current || {};
