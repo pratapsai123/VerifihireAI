@@ -2097,7 +2097,6 @@ def results_detail_view(request, submission_id):
         else:
             # Standard Assessment
             from api.models import CandidateSubmission, CandidateDetails, IdentityLink
-            from api.utils.warning_logs import _get_filtered_warning_logs
             import re
             
             try:

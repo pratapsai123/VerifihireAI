@@ -804,7 +804,18 @@ function CustomAssessment() {
     // Load saved form data from localStorage
     loadFormDataFromLocalStorage();
     // Ensure page starts from top when opened from dashboard/navigation.
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    // Since window body is overflow: hidden, we scroll the custom .app-scroll element.
+    const scrollContainer = document.querySelector('.app-scroll');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+    const scrollTimer = setTimeout(() => {
+      const scrollContainer = document.querySelector('.app-scroll');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
+      }
+    }, 100);
+    return () => clearTimeout(scrollTimer);
   }, []);
 
 
@@ -1782,17 +1793,30 @@ function CustomAssessment() {
                   : 'Create a custom assessment for multiple candidates using role and sub-role based skills.'}
               </p>
             </div>
-            <button
-              type="button"
-              className="custom-skip-btn header-skip-btn"
-              onClick={handleSkipToManual}
-              aria-label="Skip to creating custom questions"
-            >
-              Skip
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
+            <div className="header-actions-container">
+              <button
+                type="button"
+                className="custom-skip-btn header-back-btn"
+                onClick={() => handleCancel('/dashboard')}
+                aria-label="Back to dashboard"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Back
+              </button>
+              <button
+                type="button"
+                className="custom-skip-btn header-skip-btn"
+                onClick={handleSkipToManual}
+                aria-label="Skip to creating custom questions"
+              >
+                Skip
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           <form className="assessment-form">

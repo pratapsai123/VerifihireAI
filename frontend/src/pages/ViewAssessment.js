@@ -61,7 +61,7 @@ export default function ViewAssessment() {
       <div className="page-container">
         <div className="review-wrapper">
           <div className="view-assessment-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
-            <button className="back-button" onClick={() => navigate('/assessments')} style={{ position: 'absolute', left: 0, background: 'none', border: 'none', color: '#2563eb', cursor: 'pointer', fontSize: '1rem', fontWeight: '600' }}>
+            <button className="view-assessment-back-btn" onClick={() => navigate('/assessments')}>
               ← Back
             </button>
             <h3 className="page-title-centered" style={{ margin: 0 }}>View Assessment</h3>

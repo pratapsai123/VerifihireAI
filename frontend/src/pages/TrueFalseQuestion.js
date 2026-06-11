@@ -33,14 +33,15 @@ function TrueFalseQuestion() {
 
   const getTimeError = (value) => {
     const text = (value || '').trim();
-    if (!text) return 'Time to answer is required.';
+    if (!text) return null; // don't show inline error for empty — checked on Save;
     const match = text.match(/^(\d{1,2}):(\d{2})$/);
-    if (!match) return 'Time must be in mm:ss format (example: 05:30).';
+    if (!match) return 'Time must be in mm:ss format (example: 01:30).';
     const minutes = Number(match[1]);
     const seconds = Number(match[2]);
     if (Number.isNaN(minutes) || Number.isNaN(seconds)) return 'Invalid time value.';
     if (minutes > 59) return 'Minutes cannot exceed 59.';
     if (seconds > 59) return 'Seconds cannot exceed 59.';
+    if (minutes === 0) return 'Minimum time is 1 minute. Please enter at least 01:00.';
     return null;
   };
 
@@ -113,6 +114,11 @@ function TrueFalseQuestion() {
     if (!experienceLevel) {
       // eslint-disable-next-line no-alert
       alert('Please select Experience Level.');
+      return;
+    }
+    if (!timeToAnswer || !timeToAnswer.trim()) {
+      // eslint-disable-next-line no-alert
+      alert('Please enter Time to answer.');
       return;
     }
     const currentTimeError = getTimeError(timeToAnswer);
@@ -325,7 +331,7 @@ function TrueFalseQuestion() {
                     {timeError}
                   </p>
                 ) : (
-                  <p className="tfq-hint">Example: 01:30. Max allowed: 59:59.</p>
+                  <p className="tfq-hint">Min: 01:00. Max allowed: 59:59.</p>
                 )}
               </div>
             </div>

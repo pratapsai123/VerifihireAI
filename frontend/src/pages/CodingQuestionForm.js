@@ -196,7 +196,7 @@ const getEmptyForm = () => {
     description: '',
     language: '',
     languages: [],
-    difficulty: 'easy',
+    difficulty: '',
     mode: 'full_program',
     starter_code: '',
     schema_sql: '',
@@ -289,6 +289,21 @@ export default function CodingQuestionForm() {
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  // Ensure page starts from top when page is opened.
+  useEffect(() => {
+    const scrollContainer = document.querySelector('.app-scroll');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+    const scrollTimer = setTimeout(() => {
+      const scrollContainer = document.querySelector('.app-scroll');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
+      }
+    }, 100);
+    return () => clearTimeout(scrollTimer);
   }, []);
 
   const normalizeLanguages = useCallback((value) => {
@@ -450,6 +465,7 @@ export default function CodingQuestionForm() {
       const errors = {};
       if (!form.title?.trim()) errors.title = 'Title is required';
       if (!form.languages?.length) errors.languages = 'Select at least one language';
+      if (!form.difficulty) errors.difficulty = 'Difficulty level is required';
       
       if (!timeInput) {
         errors.time_limit_ms = 'Time limit is required';
@@ -675,18 +691,20 @@ export default function CodingQuestionForm() {
                 <label className="coding-field coding-field-short">
                   <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level <span className="required-star">*</span></div>
                   <select
-                    value={form.difficulty || 'easy'}
+                    value={form.difficulty}
                     onChange={(e) => update('difficulty', e.target.value)}
                     className="coding-input"
                     style={{ height: '48px' }}
                     required
                   >
+                    <option value="" disabled>Select level</option>
                     {DIFFICULTY_OPTIONS.map((opt) => (
                       <option key={opt.value} value={opt.value}>
                         {opt.label}
                       </option>
                     ))}
                   </select>
+                  {fieldErrors.difficulty && <span className="field-error-message">{fieldErrors.difficulty}</span>}
                   <div className="coding-help-text" style={{ fontSize: '0.8rem', color: '#666', marginTop: '4px' }}>
                     Weights: Easy=1x, Medium=2x, Hard=3x
                   </div>

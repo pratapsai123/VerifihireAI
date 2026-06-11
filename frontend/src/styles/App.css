@@ -1165,4 +1165,9 @@ body {
   font-size: 0.95rem;
   font-weight: 500;
   margin: 0;
-}
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
