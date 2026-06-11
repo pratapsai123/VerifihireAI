@@ -1,5 +1,6 @@
 from .models import PipelineLog
 import logging
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -96,3 +97,90 @@ def _archive_session_photo(pan_number, public_token, image_b64, meta=None):
     except Exception as e:
         logger.error(f"[ArchivePhoto] Failed to archive session photo: {e}")
         return None
+
+
+def is_likely_code(text: str) -> bool:
+    if not text:
+        return False
+    code_indicators = [
+        r'\bdef\s+\w+\s*\(',      # Python def
+        r'\bclass\s+\w+',          # Python/Java/JS class
+        r'\bimport\s+\w+',         # Python/JS import
+        r'^\s*return\b',           # Return statement
+        r'#\s*include',            # C/C++ include
+        r'std::',                  # C++ std
+        r'public\s+static\s+void\s+main', # Java main
+        r'System\.out\.print',     # Java print
+        r'console\.log\s*\(',      # JS log
+        r'const\s+\w+\s*=',        # JS const
+        r'let\s+\w+\s*=',          # JS let
+        r'function\s+\w+\s*\(',    # JS function
+    ]
+    # Check if any line has curly braces or semicolon or indicator pattern
+    if '{' in text or '}' in text or ';' in text:
+        return True
+        
+    lines = text.split('\n')
+    indented_lines = sum(1 for line in lines if line.startswith('    ') or line.startswith('\t'))
+    if len(lines) > 2 and indented_lines > 0:
+        return True
+        
+    for pattern in code_indicators:
+        if re.search(pattern, text, re.MULTILINE):
+            return True
+    return False
+
+
+def clean_repetitive_text(text: str) -> str:
+    """
+    Clean up mechanical transcript repetitions where cumulative speech-to-text
+    sends progressive overlapping segments.
+    """
+    if not text:
+        return text
+        
+    if "[Candidate remained silent/skipped]" in text:
+        return text
+        
+    if is_likely_code(text):
+        return text
+
+    # Normalise whitespace
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    # Split by potential sentence/clause/phrase boundaries
+    pattern = r'(?<=[,.!?])\s+|(?=\b(?:and|since|because|but|hello|my name is)\b)'
+    segments = re.split(pattern, text, flags=re.IGNORECASE)
+    
+    cleaned_segments = []
+    for s in segments:
+        s_clean = s.strip()
+        if s_clean:
+            cleaned_segments.append(s_clean)
+            
+    def normalize_str(s):
+        return re.sub(r'[^a-z0-9]', '', s.lower())
+        
+    final_segments = []
+    for i, seg in enumerate(cleaned_segments):
+        norm_seg = normalize_str(seg)
+        # Skip very short segments to avoid discarding actual single letters/words
+        if len(norm_seg) <= 2:
+            final_segments.append(seg)
+            continue
+            
+        subsumed = False
+        for j in range(i + 1, len(cleaned_segments)):
+            later_seg = cleaned_segments[j]
+            norm_later = normalize_str(later_seg)
+            if norm_seg in norm_later:
+                subsumed = True
+                break
+        if not subsumed:
+            final_segments.append(seg)
+            
+    # Reconstruct the cleaned text
+    cleaned_text = " ".join(final_segments)
+    cleaned_text = re.sub(r'\s+([,.!?])', r'\1', cleaned_text)
+    cleaned_text = re.sub(r'\s+', ' ', cleaned_text).strip()
+    return cleaned_text

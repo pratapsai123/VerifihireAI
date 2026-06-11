@@ -22,7 +22,7 @@ from ai_assessments.llm_client import (
     get_groq_model
 )
 from .models import Candidate
-from .utils import log_automation_event
+from .utils import log_automation_event, clean_repetitive_text
 from api.ocr_utils import _get_reader
 
 # Backward-compatible aliases
@@ -342,9 +342,6 @@ def process_resume_batch_task(self, batch_id, job_description, threshold=70, is_
                 if is_bulk_ai_interview or is_interview_start_flow:
                     # AI Interview: just store questions, do NOT overwrite their existing resume_score
                     candidate.resume_summary = match_result.get('summary', '')
-                    # If they are starting the interview, transition status to Interviewing
-                    if candidate.status in ['Invited', 'New', 'Resume Passed']:
-                        candidate.status = 'Interviewing'
                 else:
                     # Resume Screening OR Fully-Automatic: score and set pass/fail
                     candidate.resume_score = percentage
@@ -516,6 +513,9 @@ def process_ai_interview_answer_task(self, candidate_id, answer_text, current_qu
         logger.error(f"Candidate {candidate_id} not found in async task")
         return {'error': 'Candidate not found'}
     
+    # Clean speech repetition artifacts from candidate's answer
+    answer_text = clean_repetitive_text(answer_text)
+    
     # Get least-used API key for load balancing
     api_key = LLMKeyManager.get_least_used_key()
     local_llm_client = create_llm_client(api_key=api_key)
@@ -550,6 +550,8 @@ Current Question: "{current_question}"
 Turn Number: {current_turn_number}
 
 {candidate._get_difficulty_instructions(candidate.experience_level) if hasattr(candidate, '_get_difficulty_instructions') else ''}
+
+Note: The candidate answer might contain transcription artifacts or mechanical speech repetitions. Ignore them semantically and evaluate the underlying answer without giving any score penalty for repetition.
 
 You must respond with a JSON object containing:
 {{
@@ -587,8 +589,45 @@ You must respond with a JSON object containing:
             if data.get(field):
                 data[field] = _label_pattern.sub('', data[field]).strip()
         
+        # Track whether this is a silent/skipped answer
+        SILENCE_MARKER = "[Candidate remained silent/skipped]"
+        is_silent_answer = answer_text and answer_text.strip() == SILENCE_MARKER
+
+        # FIX: If answer was silent, NEVER allow AI to set is_exit=True.
+        # Only the frontend 3-consecutive-silence rule should end the interview.
+        # Also, do not count silent turns toward total_questions.
+        if is_silent_answer:
+            data['is_exit'] = False
+            # Track consecutive silences in DB
+            consecutive_silence_count = (candidate.conversation_memory or {}).get('_consecutive_silences', 0) + 1
+            mem = candidate.conversation_memory or {}
+            mem['_consecutive_silences'] = consecutive_silence_count
+            candidate.conversation_memory = mem
+            try:
+                candidate.save(update_fields=['conversation_memory'])
+            except Exception:
+                pass
+            logger.info(f"[Silence Async] Candidate {candidate_id} silent answer #{consecutive_silence_count}/3 — is_exit suppressed.")
+
+            # Backend safety: end after 3 consecutive silences (mirrors frontend rule)
+            if consecutive_silence_count >= 3:
+                data['is_exit'] = True
+                data['refined_next_question'] = None
+                data['feedback'] = "We haven't been able to hear you for a while. The interview will now be concluded. Thank you for your time."
+                logger.warning(f"[Silence Async] 3 consecutive silences for candidate {candidate_id}. Forcing is_exit=True.")
+        else:
+            # Non-silent answer — reset consecutive silence counter
+            mem = candidate.conversation_memory or {}
+            if mem.get('_consecutive_silences', 0) > 0:
+                mem['_consecutive_silences'] = 0
+                try:
+                    candidate.save(update_fields=['conversation_memory'])
+                except Exception:
+                    pass
+
         # Update candidate score silently
-        if data.get('score') is not None and not data.get('is_clarification'):
+        # FIX: Silent answers do NOT increment total_questions (turn counter).
+        if data.get('score') is not None and not data.get('is_clarification') and not is_silent_answer:
             q_score = int(data.get('score', 0))
             
             # Use F() expressions to prevent race conditions with concurrent requests
@@ -606,7 +645,7 @@ You must respond with a JSON object containing:
             
             candidate.interview_summary.append({
                 'question': current_question,
-                'answer': answer_text[:500],  # Truncate for storage
+                'answer': answer_text[:10000],  # Truncate to a higher limit (10k) for long code snippets
                 'feedback': data.get('feedback', ''),
                 'score': q_score,
                 'score_reason': data.get('score_reason', ''),
@@ -642,8 +681,8 @@ You must respond with a JSON object containing:
                     memory['projects_discussed'] = list(set(memory['projects_discussed']))[:3]
                 
                 if q_score <= 4:
-                    memory['weak_areas'].append(current_question[:50].strip())
-                    memory['weak_areas'] = list(set(memory['weak_areas']))[:3]
+                     memory['weak_areas'].append(current_question[:50].strip())
+                     memory['weak_areas'] = list(set(memory['weak_areas']))[:3]
             
             candidate.conversation_memory = memory
             candidate.save(update_fields=['interview_summary', 'conversation_memory'])

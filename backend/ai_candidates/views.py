@@ -28,7 +28,7 @@ from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .models import Candidate, InterviewIntegrity, InterviewIntegrityLog, PipelineLog
-
+from .utils import clean_repetitive_text
 from .serializers import CandidateSerializer, PipelineLogSerializer
 
 from django.utils.dateparse import parse_datetime
@@ -586,8 +586,8 @@ class ResumeMatchView(APIView):
         job_description = request.data.get('job_description')
         experience_level = request.data.get('experience_level', '').strip() or None
         
-        if not experience_level:
-            return Response({"error": "Experience level is required."}, status=status.HTTP_400_BAD_REQUEST)
+        # NOTE: experience_level is only required for the bulk upload flow.
+        # For single-candidate start (candidate_id provided) it is optional.
 
         threshold = request.data.get('threshold', 70)
 
@@ -784,6 +784,10 @@ class ResumeMatchView(APIView):
 
 
         # Bulk Upload Flow (100% Asynchronous)
+
+        # experience_level is required for bulk upload
+        if not experience_level:
+            return Response({"error": "Experience level is required."}, status=status.HTTP_400_BAD_REQUEST)
 
         if not job_description:
 
@@ -1592,13 +1596,7 @@ class CandidateDetailView(generics.RetrieveUpdateDestroyAPIView):
             if not candidate.link_opened_at:
 
                 candidate.link_opened_at = now
-
-                # Update status to Interview if still in a pre-interview state
-                if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
-                    candidate.status = 'Interview'
-                    candidate.save(update_fields=['link_opened_at', 'status'])
-                else:
-                    candidate.save(update_fields=['link_opened_at'])
+                candidate.save(update_fields=['link_opened_at'])
 
             else:
 
@@ -1807,6 +1805,11 @@ class CandidatePublicStatusUpdateView(APIView):
             candidate = _resolve_public_candidate(public_token)
 
             new_status = request.data.get('status')
+
+            if new_status in ('Interview', 'Interviewing'):
+                candidate.status = new_status
+                candidate.save(update_fields=['status'])
+                return Response({'message': f'Interview status updated to {new_status}.'}, status=status.HTTP_200_OK)
 
             if new_status not in dict(Candidate.STATUS_CHOICES):
 
@@ -2614,11 +2617,7 @@ class CandidateRegistrationUpdateView(APIView):
                 now = timezone.now()
                 if not candidate.link_opened_at:
                     candidate.link_opened_at = now
-                    if candidate.status in ('Invited', 'New', 'Resume Passed', 'Resume Failed'):
-                        candidate.status = 'Interview'
-                        candidate.save(update_fields=['pan_locked', 'link_opened_at', 'status'])
-                    else:
-                        candidate.save(update_fields=['pan_locked', 'link_opened_at'])
+                    candidate.save(update_fields=['pan_locked', 'link_opened_at'])
                     
                     from .utils import log_automation_event
                     log_automation_event(
@@ -2713,9 +2712,12 @@ class ProcessAnswerView(APIView):
         current_question = request.data.get('question')
         answer = request.data.get('answer')
         remaining_questions = request.data.get('remaining_questions', [])
-        chat_history = request.data.get('chat_history', []) 
-        
-        logger.debug("ProcessAnswer request received for candidate_id=%s", candidate_id)
+        chat_history = request.data.get('chat_history', [])
+        # Track whether this is a silent/skipped answer
+        SILENCE_MARKER = "[Candidate remained silent/skipped]"
+        is_silent_answer = answer and answer.strip() == SILENCE_MARKER
+
+        logger.debug("ProcessAnswer request received for candidate_id=%s silent=%s", candidate_id, is_silent_answer)
         
         # Fallback if question is missing due to frontend race condition
         if not current_question and chat_history:
@@ -2730,6 +2732,9 @@ class ProcessAnswerView(APIView):
 
         if not answer:
              return Response({'error': 'Missing answer'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Clean speech repetition artifacts from candidate's answer
+        answer = clean_repetitive_text(answer)
 
         # Public caller security: require unguessable token for unauthenticated requests.
         if not request.user.is_authenticated and not candidate_token:
@@ -2908,6 +2913,7 @@ Candidate Answer: "{answer}"
 
 ===== PERSONALITY & TONE RULES =====
 - You are a REAL HUMAN interviewer, NOT a robot. Speak naturally.
+- Note: The candidate answer might contain transcription artifacts or mechanical speech repetitions. Ignore them semantically and evaluate the underlying answer without giving any score penalty for repetition.
 - NEVER use these banned phrases: "Your explanation was clear and concise", "Great answer", "That's a good point", "Well said". These sound robotic.
 - Instead, react SPECIFICALLY to what the candidate actually said. Reference their exact words.
 - Keep feedback to 1-2 SHORT sentences max. Don't lecture or summarize their answer back to them.
@@ -3032,7 +3038,42 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                 data['requires_code_input'] = True
                 # Ensure the AI didn't accidentally set is_exit=True too early
                 data['is_exit'] = False
-            
+
+            # FIX: If answer was silent, NEVER allow AI to set is_exit=True.
+            # Only the frontend 3-consecutive-silence rule should end the interview.
+            # Also, do not count silent turns toward total_questions.
+            if is_silent_answer:
+                data['is_exit'] = False
+                # Track consecutive silences in DB
+                consecutive_silence_count = (getattr(candidate, 'conversation_memory', {}) or {}).get('_consecutive_silences', 0) + 1
+                if candidate:
+                    mem = candidate.conversation_memory or {}
+                    mem['_consecutive_silences'] = consecutive_silence_count
+                    candidate.conversation_memory = mem
+                    # Save only conversation_memory (do NOT increment total_questions)
+                    try:
+                        candidate.save(update_fields=['conversation_memory'])
+                    except Exception:
+                        pass
+                logger.info(f"[Silence] Candidate {getattr(candidate, 'id', '?')} silent answer #{consecutive_silence_count}/3 — is_exit suppressed.")
+
+                # Backend safety: end after 3 consecutive silences (mirrors frontend rule)
+                if consecutive_silence_count >= 3:
+                    data['is_exit'] = True
+                    data['refined_next_question'] = None
+                    data['feedback'] = "We haven't been able to hear you for a while. The interview will now be concluded. Thank you for your time."
+                    logger.warning(f"[Silence] 3 consecutive silences for candidate {getattr(candidate, 'id', '?')}. Forcing is_exit=True.")
+            else:
+                # Non-silent answer — reset consecutive silence counter
+                if candidate:
+                    mem = candidate.conversation_memory or {}
+                    if mem.get('_consecutive_silences', 0) > 0:
+                        mem['_consecutive_silences'] = 0
+                        try:
+                            candidate.save(update_fields=['conversation_memory'])
+                        except Exception:
+                            pass
+
             # If turn >= 15, force exit
             if current_turn_number >= 15:
                 data['is_exit'] = True
@@ -3040,9 +3081,12 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             # ------------------------------------
             # -----------------------------------------------
 
-            # Scoring Update (Silent)
+            # Scoring Update
+            # FIX: Silent answers do NOT increment total_questions (turn counter).
+            # This prevents the turn number from advancing on silence, which was
+            # causing the interview to reach turn 15 prematurely and force-exit.
             is_clarification = data.get('is_clarification', False)
-            if candidate and data.get('score') is not None and not is_clarification:
+            if candidate and data.get('score') is not None and not is_clarification and not is_silent_answer:
                  try:
                     # Update score atomically to prevent race conditions
                     q_score = int(data.get('score', 0))
@@ -3689,19 +3733,25 @@ class CandidateReportDownloadView(APIView):
                     )
                     elements.append(Paragraph(f"Question #{i}", q_header_style))
                     
+                    import html
+                    q_escaped = html.escape(turn.get('question', 'N/A')).replace('\n', '<br/>')
+                    ans_escaped = html.escape(turn.get('answer', 'N/A')).replace('\n', '<br/>')
+                    fb_escaped = html.escape(turn.get('feedback', 'No feedback provided.')).replace('\n', '<br/>')
+                    reason_escaped = html.escape(turn.get('reason', '')).replace('\n', '<br/>')
+
                     # Question text
-                    elements.append(Paragraph(f"<b>Question:</b>", styles['Normal']))
-                    elements.append(Paragraph(turn.get('question', 'N/A'), styles['Normal']))
+                    elements.append(Paragraph("<b>Question:</b>", styles['Normal']))
+                    elements.append(Paragraph(q_escaped, styles['Normal']))
                     elements.append(Spacer(1, 8))
                     
                     # Answer
-                    elements.append(Paragraph(f"<b>Candidate Answer:</b>", styles['Normal']))
-                    elements.append(Paragraph(turn.get('answer', 'N/A'), styles['Normal']))
+                    elements.append(Paragraph("<b>Candidate Answer:</b>", styles['Normal']))
+                    elements.append(Paragraph(ans_escaped, styles['Normal']))
                     elements.append(Spacer(1, 8))
                     
                     # AI Analysis
-                    elements.append(Paragraph(f"<b>AI Analysis:</b>", styles['Normal']))
-                    elements.append(Paragraph(f"<i>{turn.get('feedback', 'No feedback provided.')}</i>", styles['Normal']))
+                    elements.append(Paragraph("<b>AI Analysis:</b>", styles['Normal']))
+                    elements.append(Paragraph(f"<i>{fb_escaped}</i>", styles['Normal']))
                     elements.append(Spacer(1, 8))
                     
                     # Score with color coding
@@ -3715,7 +3765,7 @@ class CandidateReportDownloadView(APIView):
                         spaceBefore=5,
                         spaceAfter=15
                     )
-                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {turn.get('reason', '')}", score_style))
+                    elements.append(Paragraph(f"<b>Score: {score}/10</b> — {reason_escaped}", score_style))
                     
                     elements.append(Paragraph('<hr color="#e2e8f0" thickness="1"/>', styles['Normal']))
                     elements.append(Spacer(1, 12))

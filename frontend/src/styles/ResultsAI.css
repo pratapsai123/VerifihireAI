@@ -449,6 +449,7 @@
     line-height: 1.7;
     color: #334155;
     margin: 0;
+    white-space: pre-wrap;
 }
 
 .marks-badge {

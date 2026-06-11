@@ -1417,6 +1417,7 @@ const AiInterviewSession = () => {
 
             try {
                 // Initialize AssemblyAI
+                setSttReady(false);
                 setIsRecording(true);
                 isRecordingRef.current = true;
                 setAiStatus("Connecting to AssemblyAI...");
@@ -1481,11 +1482,9 @@ const AiInterviewSession = () => {
                     const text = data.transcript;
                     if (!text) return;
 
-                    // Compute the exact total text currently understood
-                    const currentFullText = (transcriptRef.current + " " + text).trim();
                     // ONLY reset our strict timer if we actually hear NEW words!
-                    if (currentFullText !== lastTranscriptStrRef.current) {
-                        lastTranscriptStrRef.current = currentFullText;
+                    if (text.trim() !== lastTranscriptStrRef.current) {
+                        lastTranscriptStrRef.current = text.trim();
                         lastSpokenTimeRef.current = Date.now(); // Activity Reset!
                     }
 
@@ -1493,19 +1492,18 @@ const AiInterviewSession = () => {
                         interimTranscriptRef.current = text;
                     } else {
                         // AssemblyAI v3 Turn events with turn_is_formatted=true contain
-                        // the COMPLETE text for THAT turn (not a delta within the turn).
-                        // However, multiple turns can occur in a single recording session
-                        // (e.g., candidate pauses mid-sentence). We must APPEND each
-                        // finalized turn to preserve all spoken words.
-                        // Guard: if AssemblyAI re-sends the same formatted turn (same text
-                        // as the tail of our transcript), skip to avoid duplication.
-                        if (!transcriptRef.current.trimEnd().endsWith(text.trim())) {
-                            transcriptRef.current = (transcriptRef.current + " " + text).trim();
-                        }
+                        // the COMPLETE text of the session so far. Overwrite instead of appending
+                        // to prevent cumulative repetition duplication bugs.
+                        transcriptRef.current = text.trim();
                         interimTranscriptRef.current = "";
                     }
 
-                    const currentTotal = (transcriptRef.current + interimTranscriptRef.current).trim();
+                    const trimTranscript = transcriptRef.current.trim();
+                    const trimInterim = interimTranscriptRef.current.trim();
+                    const currentTotal = trimInterim.startsWith(trimTranscript)
+                        ? trimInterim
+                        : (trimTranscript + " " + trimInterim).trim();
+
                     if (currentTotal) {
                         const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
                         setAiStatus(`Heard: "${display}"`);
@@ -1727,6 +1725,7 @@ const AiInterviewSession = () => {
                 if (e instanceof TypeError) {
                     console.error("TypeError caught in startListening:", e.message, e.stack);
                 }
+                setSttReady(false);
                 setIsRecording(false);
                 isRecordingRef.current = false;
             }
@@ -2898,6 +2897,13 @@ const AiInterviewSession = () => {
             lastAiQuestionRef.current = "Please introduce yourself and your professional background.";
 
             addMessage('ai', welcome);
+
+            // Mark the interview as started on the server (status -> Interview)
+            const startUrl = `${API_BASE_URL}/ai-candidates/public/${token}/status/`;
+            axios.patch(startUrl, { status: 'Interview' })
+                .then(() => console.log('Interview status updated to Interview on server.'))
+                .catch(err => console.error('Failed to mark interview as started:', err));
+
             const speakStartTime = Date.now();
             await speak(welcome);
             const speakDuration = Date.now() - speakStartTime;
@@ -2974,6 +2980,15 @@ const AiInterviewSession = () => {
             }
             if (isSpeakingRef.current || isProcessingRef.current) return;
 
+            // Wait until AssemblyAI STT is fully connected and ready
+            if (!sttReady) {
+                lastSpokenTimeRef.current = Date.now();
+                secondsRemaining = 5;
+                setSilenceCountdown("Connecting...");
+                setSilenceWarningVisible(false);
+                return;
+            }
+
             const timeSinceActivity = Date.now() - lastSpokenTimeRef.current;
 
             // For the first question (self-intro), give extra grace time (10s instead of 7s)
@@ -3029,7 +3044,11 @@ const AiInterviewSession = () => {
                     try { assemblyAIRef.current.stop(); } catch (e) { }
                 }
 
-                const finalTranscript = (transcriptRef.current + interimTranscriptRef.current).trim();
+                const trimTranscript = transcriptRef.current.trim();
+                const trimInterim = interimTranscriptRef.current.trim();
+                const finalTranscript = trimInterim.startsWith(trimTranscript)
+                    ? trimInterim
+                    : (trimTranscript + " " + trimInterim).trim();
                 const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
 
                 if (submitHandlerRef.current) {
@@ -3039,7 +3058,7 @@ const AiInterviewSession = () => {
         }, 1000);
 
         return () => { clearInterval(watchdog); setSilenceWarningVisible(false); };
-    }, [isRecording]);
+    }, [isRecording, sttReady]);
 
 
 
@@ -3053,8 +3072,11 @@ const AiInterviewSession = () => {
         unlockSpeech();
 
         if (isRecording) {
-            // Capture any final speech before stopping
-            const finalSubmission = (transcriptRef.current + interimTranscriptRef.current).trim();
+            const trimTranscript = transcriptRef.current.trim();
+            const trimInterim = interimTranscriptRef.current.trim();
+            const finalSubmission = trimInterim.startsWith(trimTranscript)
+                ? trimInterim
+                : (trimTranscript + " " + trimInterim).trim();
 
             // FIX: Mark as manually muted so auto-resume doesn't override user's choice
             manualMuteRef.current = true;
@@ -3549,15 +3571,6 @@ const AiInterviewSession = () => {
                                                         }
                                                         const avgBrightness = totalBrightness / (data.length / 4);
 
-                                                        if (avgBrightness < 40) {
-                                                            setImageQualityIssue('Image is too dark. Please ensure you have adequate lighting.');
-                                                            return;
-                                                        }
-                                                        if (avgBrightness > 220) {
-                                                            setImageQualityIssue('Image is too bright or overexposed. Please reduce lighting glare.');
-                                                            return;
-                                                        }
-
                                                         // 2. Check sharpness (Laplacian variance)
                                                         const grayData = [];
                                                         for (let i = 0; i < data.length; i += 4) {
@@ -3575,18 +3588,31 @@ const AiInterviewSession = () => {
                                                         }
                                                         laplacianVar /= ((w - 2) * (h - 2));
 
-                                                        if (laplacianVar < 100) {
-                                                            setImageQualityIssue('Image is too blurry. Please hold steady and ensure the camera is focused.');
-                                                            return;
-                                                        }
-
                                                         // 3. Check contrast
                                                         let minVal = 255, maxVal = 0;
                                                         for (let i = 0; i < grayData.length; i++) {
                                                             if (grayData[i] < minVal) minVal = grayData[i];
                                                             if (grayData[i] > maxVal) maxVal = grayData[i];
                                                         }
-                                                        if ((maxVal - minVal) < 50) {
+                                                        const contrast = maxVal - minVal;
+
+                                                        console.log(`[Face Quality Check] Brightness: ${avgBrightness.toFixed(1)}, LaplacianVar (Sharpness): ${laplacianVar.toFixed(1)} (threshold: 25.0), Contrast: ${contrast}`);
+
+                                                        if (avgBrightness < 40) {
+                                                            setImageQualityIssue('Image is too dark. Please ensure you have adequate lighting.');
+                                                            return;
+                                                        }
+                                                        if (avgBrightness > 220) {
+                                                            setImageQualityIssue('Image is too bright or overexposed. Please reduce lighting glare.');
+                                                            return;
+                                                        }
+
+                                                        if (laplacianVar < 25.0) {
+                                                            setImageQualityIssue('Image is too blurry. Please hold steady and ensure the camera is focused.');
+                                                            return;
+                                                        }
+
+                                                        if (contrast < 50) {
                                                             setImageQualityIssue('Image has very low contrast. Please improve lighting conditions.');
                                                             return;
                                                         }

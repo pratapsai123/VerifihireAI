@@ -118,10 +118,19 @@ def register_face(
 
         # Assess face quality. Enforce quality gate for ALL anchors (including session-scoped)
         quality_score = _assess_face_quality(img)
+        raw_variance = compute_laplacian_variance(img)
+        logger.info(
+            f"[Face Registration] person_id={person_id}: computed quality_score={quality_score} "
+            f"(raw laplacian variance={raw_variance:.2f}), threshold=5.0"
+        )
 
         # Skip quality gate for session-scoped anchors (already validated at PAN-root level)
         is_session_anchor = '/sessions/' in person_id or '/assessments/' in person_id
-        if quality_score < 10.0 and not is_session_anchor:
+        if quality_score < 5.0 and not is_session_anchor:
+            logger.warning(
+                f"[Face Registration] person_id={person_id} failed quality gate. "
+                f"Score {quality_score} < 5.0"
+            )
             return {
                 "success": False,
                 "person_id": person_id,
