@@ -2243,6 +2243,15 @@ def create_interview_violation_view(request):
             screenshot_path=screenshot_file
         )
 
+        if violation.screenshot_path:
+            import os
+            print("=== SCREENSHOT DEBUG ===")
+            print("Name:", violation.screenshot_path.name)
+            print("Path:", violation.screenshot_path.path)
+            print("URL:", violation.screenshot_path.url)
+            print("Exists:", os.path.exists(violation.screenshot_path.path))
+            print("========================")
+
         # Broadcast via WebSocket group in real-time
         from channels.layers import get_channel_layer
         from asgiref.sync import async_to_sync

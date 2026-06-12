@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import * as faceapi from 'face-api.js';
+import { FaceDetection } from '@mediapipe/face_detection';
 import axios from 'axios';
 import { API_BASE_URL } from '../../apiConfig';
 
@@ -12,12 +12,13 @@ export const MalpracticeMonitor = ({
   sendMessage,
   showNotification
 }) => {
-  const [modelsLoaded, setModelsLoaded] = useState(false);
+  const [mediaPipeLoaded, setMediaPipeLoaded] = useState(false);
+  const faceDetectionRef = useRef(null);
+  const handleFaceResultsRef = useRef(null);
   const [showFullscreenModal, setShowFullscreenModal] = useState(false);
   const [fullscreenExitCount, setFullscreenExitCount] = useState(0);
 
-  const lastFaceTimeRef = useRef(Date.now());
-  const noFaceViolationLoggedRef = useRef(false);
+  const noFaceStartTimeRef = useRef(null);
   const tabSwitchStartTimeRef = useRef(null);
   const lastViolationTimeRef = useRef({}); // Cooldown tracker
 
@@ -28,19 +29,33 @@ export const MalpracticeMonitor = ({
     return (Date.now() - last) < (seconds * 1000);
   };
 
-  // Load face-api.js models from local public folder
+  // Load MediaPipe FaceDetection
   useEffect(() => {
-    const loadModels = async () => {
-      try {
-        // Load Tiny Face Detector from /models (public directory)
-        await faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-        setModelsLoaded(true);
-        console.log("✅ face-api.js models loaded successfully from local public folder");
-      } catch (err) {
-        console.error("❌ Failed to load face-api.js models:", err);
-      }
+    let fd = null;
+    try {
+      fd = new FaceDetection({ locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`;
+      }});
+      fd.setOptions({
+        model: 'short',
+        minDetectionConfidence: 0.5,
+      });
+      fd.onResults((results) => {
+        const detections = results.detections || [];
+        if (handleFaceResultsRef.current) {
+           handleFaceResultsRef.current(detections);
+        }
+      });
+      faceDetectionRef.current = fd;
+      setMediaPipeLoaded(true);
+      console.log("✅ MediaPipe FaceDetection initialized");
+    } catch (err) {
+      console.error("❌ Failed to initialize MediaPipe:", err);
+    }
+
+    return () => {
+      if (fd) fd.close();
     };
-    loadModels();
   }, []);
 
   // Enter Fullscreen on Start
@@ -65,7 +80,7 @@ export const MalpracticeMonitor = ({
   useEffect(() => {
     const handleFullscreenChange = () => {
       const isFullscreen = document.fullscreenElement !== null;
-      if (!isFullscreen) {
+      if (!isFullscreen && !window.isScreenShareSelectionActive) {
         setShowFullscreenModal(true);
 
         if (!isCooldown('FULLSCREEN_EXIT', 8)) {
@@ -90,6 +105,7 @@ export const MalpracticeMonitor = ({
   // Tab Switching & Window Blur Detection
   useEffect(() => {
     const handleVisibilityChange = () => {
+      if (window.isScreenShareSelectionActive) return;
       if (document.hidden) {
         if (!tabSwitchStartTimeRef.current) {
           tabSwitchStartTimeRef.current = Date.now();
@@ -100,12 +116,14 @@ export const MalpracticeMonitor = ({
     };
 
     const handleBlur = () => {
+      if (window.isScreenShareSelectionActive) return;
       if (!tabSwitchStartTimeRef.current) {
         tabSwitchStartTimeRef.current = Date.now();
       }
     };
 
     const handleFocus = () => {
+      if (window.isScreenShareSelectionActive) return;
       handleFocusReturn();
     };
 
@@ -138,50 +156,70 @@ export const MalpracticeMonitor = ({
     };
   }, []);
 
+  useEffect(() => {
+    handleFaceResultsRef.current = handleFaceResults;
+  });
+
   // Run Face Detection Every 2 Seconds
   useEffect(() => {
-    if (!modelsLoaded || !cameraReady || !isCameraOn || !videoRef || !videoRef.current) return;
+    if (!mediaPipeLoaded || !cameraReady || !isCameraOn) return;
 
     const interval = setInterval(async () => {
-      if (videoRef.current && videoRef.current.readyState === 4) {
-        try {
-          const options = new faceapi.TinyFaceDetectorOptions({ inputSize: 160, scoreThreshold: 0.5 });
-          const detections = await faceapi.detectAllFaces(videoRef.current, options);
-          handleFaceResults(detections);
-        } catch (e) {
-          console.error("Face detection error:", e);
+      if (!videoRef.current || videoRef.current.readyState !== 4 || videoRef.current.videoWidth === 0) {
+        return;
+      }
+      
+      try {
+        if (faceDetectionRef.current) {
+          await faceDetectionRef.current.send({ image: videoRef.current });
         }
+      } catch (err) {
+        console.error("FACE DETECTOR FAILURE", err);
+        console.error(err.stack);
       }
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [modelsLoaded, cameraReady, isCameraOn, videoRef]);
+  }, [mediaPipeLoaded, cameraReady, isCameraOn, videoRef]);
 
   const handleFaceResults = (detections) => {
     const faceCount = detections.length;
     const now = Date.now();
 
-    if (faceCount > 0) {
-      lastFaceTimeRef.current = now;
-      noFaceViolationLoggedRef.current = false;
-    }
+    console.log(
+      "Faces detected:",
+      faceCount,
+      "NoFaceTimer:",
+      noFaceStartTimeRef.current
+    );
 
     if (faceCount === 0) {
-      const timeSinceLastFace = now - lastFaceTimeRef.current;
-      if (timeSinceLastFace >= 5000 && !noFaceViolationLoggedRef.current && !isCooldown('NO_FACE', 10)) {
-        lastViolationTimeRef.current['NO_FACE'] = now;
-        noFaceViolationLoggedRef.current = true;
-        triggerViolation('NO_FACE', 'HIGH', {
-          message: 'No candidate face detected in frame for over 5 seconds.'
-        });
+      if (!noFaceStartTimeRef.current) {
+        noFaceStartTimeRef.current = now;
       }
-    } else if (faceCount > 1) {
-      if (!isCooldown('MULTIPLE_FACES', 10)) {
-        lastViolationTimeRef.current['MULTIPLE_FACES'] = now;
-        triggerViolation('MULTIPLE_FACES', 'HIGH', {
-          message: `Multiple faces detected in frame. Count: ${faceCount}`,
-          face_count: faceCount
-        });
+      const elapsed = now - noFaceStartTimeRef.current;
+      console.log(`🚨 No face for ${elapsed} ms`);
+      if (elapsed >= 4000) {
+        if (!isCooldown('NO_FACE', 10)) {
+          lastViolationTimeRef.current['NO_FACE'] = now;
+          triggerViolation('NO_FACE', 'HIGH', {
+            message: 'No candidate face detected in frame for over 5 seconds.'
+          });
+        }
+        noFaceStartTimeRef.current = null;
+      }
+    } else {
+      console.log("✅ Face detected");
+      noFaceStartTimeRef.current = null;
+
+      if (faceCount > 1) {
+        if (!isCooldown('MULTIPLE_FACES', 10)) {
+          lastViolationTimeRef.current['MULTIPLE_FACES'] = now;
+          triggerViolation('MULTIPLE_FACES', 'HIGH', {
+            message: `Multiple faces detected in frame. Count: ${faceCount}`,
+            face_count: faceCount
+          });
+        }
       }
     }
   };

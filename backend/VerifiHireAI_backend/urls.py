@@ -15,11 +15,11 @@ urlpatterns = [
     path('api/ai-candidates/', include('ai_candidates.urls')),
 ]
 
-# Serve media files in development (or locally when DEBUG=False)
-from django.urls import re_path
-from django.views.static import serve
+# Serve media files in development
+from django.conf.urls.static import static
 
-urlpatterns += [
-    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-]
+urlpatterns += static(
+    settings.MEDIA_URL,
+    document_root=settings.MEDIA_ROOT
+)
 
