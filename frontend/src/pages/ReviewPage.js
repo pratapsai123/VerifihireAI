@@ -97,7 +97,8 @@ function ReviewPage() {
     hasObjectiveCutoff,
     objWeight,
     codingWeight,
-    removedQuestionIds
+    removedQuestionIds,
+    objPassPercentage
   ]);
 
   // Automatic Weight Balancing

@@ -1727,15 +1727,19 @@ class CandidateStatusUpdateView(APIView):
 
             
 
-            # If recruiter, filter by company. If candidate (not auth), AllowAny might be needed?
+            # If recruiter, filter by company and hierarchy scope. If candidate (not auth), AllowAny might be needed?
 
             # Existing code didn't have permission_classes, so it was public.
 
             # We'll allow status updates if either recruiter from same company or AllowAny (for backward compat)
 
             if request.user.is_authenticated and company:
-
-                candidate = Candidate.objects.get(pk=pk, company=company)
+                from api._imports import get_scoped_user_ids
+                scoped_ids = get_scoped_user_ids(user_profile)
+                if scoped_ids is not None:
+                    candidate = Candidate.objects.get(pk=pk, company=company, user_profile_id__in=scoped_ids)
+                else:
+                    candidate = Candidate.objects.get(pk=pk, company=company)
 
             else:
 
@@ -3290,10 +3294,24 @@ class CandidateTimelineView(APIView):
     def get(self, request, pk):
         try:
             candidate = Candidate.objects.get(pk=pk)
-            # Permission check: ensure user belongs to same company
+            
             user_profile = getattr(request.user, 'profile', None)
-            if not request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
+            if not user_profile:
+                return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+            user_role = (user_profile.role or '').strip().lower()
+            if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+                return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Permission check: ensure user belongs to same company
+            if not request.user.is_superuser and user_profile.company and candidate.company_id != user_profile.company_id:
                 return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Check hierarchy scope
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if not request.user.is_superuser and scoped_ids is not None and candidate.user_profile_id not in scoped_ids:
+                return Response({'error': 'Unauthorized: candidate is outside your reporting scope.'}, status=status.HTTP_403_FORBIDDEN)
 
             logs = []
 
@@ -3389,10 +3407,24 @@ class IntegrityScreenshotView(APIView):
     def get(self, request, log_id):
         try:
             ilog = InterviewIntegrityLog.objects.select_related('candidate').get(pk=log_id)
-            # Permission check
+            
             user_profile = getattr(request.user, 'profile', None)
-            if not request.user.is_superuser and (not user_profile or user_profile.company != ilog.candidate.company):
+            if not user_profile:
+                return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+            user_role = (user_profile.role or '').strip().lower()
+            if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+                return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Permission check
+            if not request.user.is_superuser and user_profile.company and ilog.candidate.company_id != user_profile.company_id:
                 return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Check hierarchy scope
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if not request.user.is_superuser and scoped_ids is not None and ilog.candidate.user_profile_id not in scoped_ids:
+                return Response({'error': 'Unauthorized: candidate is outside your reporting scope.'}, status=status.HTTP_403_FORBIDDEN)
 
             img_type = request.query_params.get('type', 'webcam')
             if img_type == 'screen':
@@ -3453,9 +3485,21 @@ class CandidateReportDownloadView(APIView):
         try:
             candidate = Candidate.objects.get(pk=pk)
             
-            # RBAC: Ensure user belongs to the same company or is a superuser
             user_profile = getattr(request.user, 'profile', None)
-            if not request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
+            if not user_profile:
+                return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+            user_role = (user_profile.role or '').strip().lower()
+            if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+                return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Ensure user belongs to the same company or is a superuser
+            if not request.user.is_superuser and user_profile.company and candidate.company_id != user_profile.company_id:
+                return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
+
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if not request.user.is_superuser and scoped_ids is not None and candidate.user_profile_id not in scoped_ids:
                 return Response({'error': 'Unauthorized access to this candidate report.'}, status=status.HTTP_403_FORBIDDEN)
 
             # Generate PDF in memory
@@ -3932,10 +3976,22 @@ class ApprovePendingIdentityPhotoView(APIView):
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        # Authorization: must belong to the same company as the requesting user.
         user_profile = getattr(request.user, 'profile', None)
-        if user_profile and user_profile.company and candidate.company_id != user_profile.company_id:
+        if not user_profile:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+        user_role = (user_profile.role or '').strip().lower()
+        if user_role not in ['company_admin', 'hr_manager', 'application_admin', 'admin']:
+            return Response({'error': 'Unauthorized role access. Admin or HR Manager only.'}, status=status.HTTP_403_FORBIDDEN)
+
+        # Authorization: must belong to the same company as the requesting user.
+        if user_profile.company and candidate.company_id != user_profile.company_id:
             return Response({'error': 'Forbidden'}, status=status.HTTP_403_FORBIDDEN)
+
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+        if scoped_ids is not None and candidate.user_profile_id not in scoped_ids:
+            return Response({'error': 'Unauthorized access: Candidate falls outside your reporting hierarchy.'}, status=status.HTTP_403_FORBIDDEN)
 
         if not candidate.pending_face_b64:
             return Response(
@@ -4018,7 +4074,14 @@ class InterviewsOverviewView(APIView):
 
     def get(self, request):
         user_profile = getattr(request.user, 'profile', None)
-        company = user_profile.company if user_profile else None
+        if not user_profile:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+        user_role = (user_profile.role or '').strip().lower()
+        if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+            return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+        company = user_profile.company
 
         fields_to_fetch = [
             'id', 'batch_id', 'batch_name', 'job_title', 'created_at',
@@ -4027,10 +4090,19 @@ class InterviewsOverviewView(APIView):
             'available_from', 'available_until'
         ]
         
-        if company:
-            candidates = Candidate.objects.filter(company=company, is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+
+        if scoped_ids is None:
+            if company:
+                candidates = Candidate.objects.filter(company=company, is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
+            else:
+                candidates = Candidate.objects.filter(is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
         else:
-            candidates = Candidate.objects.filter(is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
+            if company:
+                candidates = Candidate.objects.filter(company=company, user_profile_id__in=scoped_ids, is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
+            else:
+                candidates = Candidate.objects.filter(user_profile_id__in=scoped_ids, is_deleted=False).only(*fields_to_fetch).order_by('-created_at')
 
         # Group by batch
         from collections import defaultdict
@@ -4148,6 +4220,22 @@ class ResendInviteView(APIView):
             candidate = Candidate.objects.get(pk=pk)
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+        user_role = (user_profile.role or '').strip().lower()
+        if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+            return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+        if user_profile.company and candidate.company_id != user_profile.company_id:
+            return Response({'error': 'Unauthorized access: Candidate belongs to another company.'}, status=status.HTTP_403_FORBIDDEN)
+
+        from api._imports import get_scoped_user_ids
+        scoped_ids = get_scoped_user_ids(user_profile)
+        if scoped_ids is not None and candidate.user_profile_id not in scoped_ids:
+            return Response({'error': 'Unauthorized access: Candidate falls outside your reporting hierarchy.'}, status=status.HTTP_403_FORBIDDEN)
 
         if candidate.completed_at or candidate.status in ['Completed', 'Hired', 'Rejected']:
             return Response({'error': 'Cannot resend invite for a completed interview.'}, status=status.HTTP_400_BAD_REQUEST)

@@ -15,21 +15,23 @@ export default function AiInterviewsOverview() {
     const [search, setSearch] = useState('');
     const [resendingId, setResendingId] = useState(null);
 
-    const handleResendInvite = async (candidateId, email) => {
-        setResendingId(candidateId);
+    const currentUser = (() => {
         try {
-            await axios.post(`${API_BASE_URL}/ai-candidates/${candidateId}/resend-invite/`, {}, {
-                headers: { Authorization: `Bearer ${getToken()}` }
-            });
-            alert(`Invite resent to ${email}`);
-        } catch (err) {
-            alert(err.response?.data?.error || 'Failed to resend invite.');
-        } finally {
-            setResendingId(null);
+            return JSON.parse(localStorage.getItem('user') || '{}');
+        } catch {
+            return {};
         }
-    };
+    })();
+
+    const isAuthorized = ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin'].includes(
+        (currentUser.role || '').toLowerCase().trim()
+    );
 
     useEffect(() => {
+        if (!isAuthorized) {
+            setLoading(false);
+            return;
+        }
         const fetch = async () => {
             try {
                 const resp = await axios.get(`${API_BASE_URL}/ai-candidates/interviews-overview/`, {
@@ -43,7 +45,117 @@ export default function AiInterviewsOverview() {
             }
         };
         fetch();
-    }, []);
+    }, [isAuthorized]);
+
+    if (!isAuthorized) {
+        return (
+            <div style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
+                fontFamily: 'Poppins, sans-serif',
+                background: 'linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%)',
+                color: 'white',
+                textAlign: 'center',
+                padding: '2rem',
+                position: 'relative',
+                overflow: 'hidden'
+            }}>
+                {/* Decorative background shapes */}
+                <div style={{ position: 'absolute', top: '-10%', right: '-10%', width: '300px', height: '300px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(239, 68, 68, 0.15) 0%, transparent 70%)', pointerEvents: 'none' }} />
+                <div style={{ position: 'absolute', bottom: '-10%', left: '-10%', width: '400px', height: '400px', borderRadius: '50%', background: 'radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, transparent 70%)', pointerEvents: 'none' }} />
+
+                <div style={{
+                    background: 'rgba(255, 255, 255, 0.05)',
+                    backdropFilter: 'blur(16px)',
+                    borderRadius: '24px',
+                    padding: '3rem 4rem',
+                    border: '1px solid rgba(255, 255, 255, 0.1)',
+                    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.3)',
+                    maxWidth: '500px',
+                    width: '100%',
+                    zIndex: 1,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    {/* Lock Shield Icon */}
+                    <div style={{
+                        width: '80px',
+                        height: '80px',
+                        borderRadius: '50%',
+                        background: 'rgba(239, 68, 68, 0.15)',
+                        border: '2px solid rgba(239, 68, 68, 0.3)',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginBottom: '1.5rem',
+                        color: '#ef4444',
+                        fontSize: '2.5rem',
+                        animation: 'pulse 2s infinite'
+                    }}>
+                        <i className="fa-solid fa-shield-halved" />
+                    </div>
+
+                    <h2 style={{ fontSize: '1.8rem', fontWeight: '800', margin: '0 0 1rem 0', background: 'linear-gradient(to right, #ffffff, #94a3b8)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Access Denied</h2>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.95rem', lineHeight: '1.6', margin: '0 0 2rem 0' }}>
+                        You do not have the required permissions to view the AI Interviews Dashboard. If you believe this is an error, please contact your administrator.
+                    </p>
+
+                    <button
+                        onClick={() => navigate('/dashboard')}
+                        style={{
+                            padding: '0.8rem 2rem',
+                            borderRadius: '12px',
+                            border: 'none',
+                            background: 'linear-gradient(135deg, #6366f1 0%, #4f46e5 100%)',
+                            color: 'white',
+                            fontWeight: '700',
+                            fontSize: '0.9rem',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 15px rgba(99, 102, 241, 0.4)',
+                            transition: 'all 0.3s ease',
+                        }}
+                        onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.boxShadow = '0 6px 20px rgba(99, 102, 241, 0.6)';
+                        }}
+                        onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(99, 102, 241, 0.4)';
+                        }}
+                    >
+                        Go to Dashboard
+                    </button>
+                </div>
+
+                {/* Dynamic CSS for pulsing animation */}
+                <style>{`
+                    @keyframes pulse {
+                        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+                        70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(239, 68, 68, 0); }
+                        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+                    }
+                `}</style>
+            </div>
+        );
+    }
+
+    const handleResendInvite = async (candidateId, email) => {
+        setResendingId(candidateId);
+        try {
+            await axios.post(`${API_BASE_URL}/ai-candidates/${candidateId}/resend-invite/`, {}, {
+                headers: { Authorization: `Bearer ${getToken()}` }
+            });
+            alert(`Invite resent to ${email}`);
+        } catch (err) {
+            alert(err.response?.data?.error || 'Failed to resend invite.');
+        } finally {
+            setResendingId(null);
+        }
+    };
 
     if (loading) return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
