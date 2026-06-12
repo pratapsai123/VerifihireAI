@@ -374,7 +374,7 @@ class BulkInviteView(APIView):
 
                 )
 
-                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
+                frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
 
                 link = f"{frontend_base}/interview-start/{candidate.public_token}"
 
@@ -4105,7 +4105,7 @@ class ResendInviteView(APIView):
 
         try:
             from django.core.mail import send_mail
-            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'https://verifihireai.com').rstrip('/')
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
             link = f"{frontend_base}/interview-start/{candidate.public_token}"
             name = candidate.full_name or 'Candidate'
             email = candidate.email
