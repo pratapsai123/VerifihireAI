@@ -1049,9 +1049,8 @@ def verify_identity_view(request, token):
         else:
             # Subsequent Assessment Flow
             # The 2nd registration photo was already saved to the standard_assessment folder during pre-assessment.
-            # We simply verify the live 15-second snapshot against the Baseline Master in memory.
-            # Verify against Baseline Master
-            verify_result = verify_face_with_deepface(person_id, snapshot, email=inv.email)
+            # We verify the live 15-second snapshot against the specific standard assessment photo.
+            verify_result = verify_face_with_deepface(anchor_id, snapshot, email=inv.email)
             
         is_verified = verify_result.get('verified', False)
         distance = verify_result.get('distance')
@@ -3001,14 +3000,35 @@ def save_all_candidate_details_view(request):
         email_pan_mismatch = False
         mismatch_reasons = []
 
+        # -----------------------------------------------------------------------------------------
         # 3. Biometric Verification (Lookup by PAN)
+        # FLOW & CROSS-ASSESSMENT COMPATIBILITY:
+        # A candidate might take ANY assessment first (Standard, AI Assessment, AI Interview).
+        # - 1st Assessment (e.g., AI Assessment): 
+        #     - No record exists in DeepFace yet. 
+        #     - DeepFace creates the "Master Profile" (e.g. deepface/data/registered_faces/abcde1234e/face_0.jpg)
+        #     - The backend creates an IdentityLink in the database.
+        # - 2nd Assessment (e.g., Standard Assessment):
+        #     - deepface_registered is True (Master Profile exists).
+        #     - The system skips the "else" block (preventing master profile overwrite).
+        #     - It saves the 2nd photo into the subfolder: registered_faces/abcde1234e/standard_assessment/<token>/face_0.jpg
+        #     - It verifies the 2nd photo against the Master Profile.
+        #     - If IdentityLink was somehow lost, it recovers it using the DeepFace Master Profile.
+        # -----------------------------------------------------------------------------------------
         identity_link = IdentityLink.objects.filter(pan_number=norm_pan).first()
+        
+        from api.deepface_client import df_is_registered
+        deepface_registered = False
+        try:
+            deepface_registered = df_is_registered(person_id)
+        except Exception as e:
+            print(f"Failed to check deepface registration: {e}")
         
         verify_status = False
         match_score = 0.0
         face_mismatch_detected = False
 
-        if identity_link:
+        if identity_link or deepface_registered:
 
             # Save the 2nd register photo to the standard_assessment folder for manual review comparison
             try:
@@ -3037,11 +3057,32 @@ def save_all_candidate_details_view(request):
                     verify_result = {'verified': True, 'distance': 0.0, 'model': 'ArcFace', 'detector': 'opencv'}
                     # Also persist snapshot_image on IdentityLink if it was missing
                     try:
-                        if not identity_link.snapshot_image:
-                            snap_b64 = snapshot.split(',', 1)[1] if ',' in snapshot else snapshot
-                            snapshot_data = base64.b64decode(snap_b64)
-                            identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
-                            identity_link.save(update_fields=['snapshot_image'])
+                        if identity_link:
+                            if not identity_link.snapshot_image:
+                                snap_b64 = snapshot.split(',', 1)[1] if ',' in snapshot else snapshot
+                                snapshot_data = base64.b64decode(snap_b64)
+                                identity_link.snapshot_image = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                                identity_link.save(update_fields=['snapshot_image'])
+                        else:
+                            # Recover IdentityLink
+                            from api.deepface_client import df_get_photo_b64
+                            original_photo_b64 = df_get_photo_b64(person_id)
+                            snapshot_file = None
+                            if original_photo_b64:
+                                snap_b64 = original_photo_b64.split(',', 1)[1] if ',' in original_photo_b64 else original_photo_b64
+                                snapshot_data = base64.b64decode(snap_b64)
+                                snapshot_file = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                            else:
+                                snap_b64 = snapshot.split(',', 1)[1] if ',' in snapshot else snapshot
+                                snapshot_data = base64.b64decode(snap_b64)
+                                snapshot_file = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                                
+                            identity_link = IdentityLink.objects.create(
+                                email=norm_email,
+                                pan_number=norm_pan,
+                                pan_image=pan_file,
+                                snapshot_image=snapshot_file,
+                            )
                     except Exception:
                         pass
 
@@ -3053,6 +3094,30 @@ def save_all_candidate_details_view(request):
                 _save_identity_violation_screenshot(invitation, snapshot, "Identity Face Mismatch")
                 face_mismatch_detected = True
                 mismatch_reasons.append("Identity Face Mismatch: The captured face does not match the registered candidate's face.")
+            
+            # If identity_link is STILL missing (e.g. we didn't go into reg_result success above), recover it here
+            if not identity_link:
+                try:
+                    from api.deepface_client import df_get_photo_b64
+                    original_photo_b64 = df_get_photo_b64(person_id)
+                    snapshot_file = None
+                    if original_photo_b64:
+                        snap_b64 = original_photo_b64.split(',', 1)[1] if ',' in original_photo_b64 else original_photo_b64
+                        snapshot_data = base64.b64decode(snap_b64)
+                        snapshot_file = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                    else:
+                        snap_b64 = snapshot.split(',', 1)[1] if ',' in snapshot else snapshot
+                        snapshot_data = base64.b64decode(snap_b64)
+                        snapshot_file = ContentFile(snapshot_data, name=f"snapshot_{person_id}.jpg")
+                        
+                    identity_link = IdentityLink.objects.create(
+                        email=norm_email,
+                        pan_number=norm_pan,
+                        pan_image=pan_file,
+                        snapshot_image=snapshot_file,
+                    )
+                except Exception:
+                    pass
         else:
             # Linkage: Register the candidate's face for the first time.
             # (PAN Card face comparison logic has been completely removed as requested)
