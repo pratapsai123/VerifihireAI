@@ -203,6 +203,7 @@ const ResultsAI = () => {
     const [showTranscriptDetail, setShowTranscriptDetail] = useState(null);
     const [viewedSubmission, setViewedSubmission] = useState(null); // Submission object for assessment
     const [timelineCandidate, setTimelineCandidate] = useState(null);
+    const [showLogsModal, setShowLogsModal] = useState(false);
     const [timelineLogs, setTimelineLogs] = useState([]);
     const [loadingTimeline, setLoadingTimeline] = useState(false);
     const [downloadingId, setDownloadingId] = useState(null);
@@ -577,9 +578,10 @@ const ResultsAI = () => {
         }
     }, [showTranscriptDetail, viewMode]);
 
-    const fetchTimeline = async (candidate) => {
+    const fetchTimeline = async (candidate, openModal = false) => {
         if (!candidate) return;
         setTimelineCandidate(candidate);
+        if (openModal) setShowLogsModal(true);
         setLoadingTimeline(true);
         // Don't clear logs immediately to allow 'refresh' feel, 
         // but for a NEW candidate selection, we should.
@@ -594,11 +596,15 @@ const ResultsAI = () => {
             if (isAssessment) {
                 // Fetch AI Assessment timeline
                 const realId = String(candidate.submission_id || candidate.id || '').replace('ai_', '');
-                resp = await axios.get(`${API_BASE_URL}/ai/submission/${realId}/timeline/`);
+                resp = await axios.get(`${API_BASE_URL}/ai/submission/${realId}/timeline/`, {
+                    headers: { Authorization: `Bearer ${getToken()}` }
+                });
             } else {
                 // Fetch AI Interview timeline
                 const realId = candidate.ai_candidate_pk || String(candidate.submission_id || candidate.id || '').replace('aicand_', '').replace(/_(resume|interview|assessment)$/, '').replace('resume-', '').replace('interview-', '');
-                resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`);
+                resp = await axios.get(`${API_BASE_URL}/ai-candidates/${realId}/timeline/`, {
+                    headers: { Authorization: `Bearer ${getToken()}` }
+                });
             }
 
             // Scoping: Filter logs by current batch_id if it exists to avoid history pollution from other applications
@@ -1147,14 +1153,13 @@ const ResultsAI = () => {
                                             const eventLower = (log.event_type || '').toLowerCase();
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(eventLower);
 
+                                            const hasScreen = log.has_screenshot || log.screenshot_base64 || log.screenshot_url;
+                                            const hasWebcam = log.has_webcam_screenshot || log.webcam_screenshot_base64 || log.webcam_screenshot_url;
+
                                             // Determine which image type to show and what source to use
-                                            const imgType = isScreenEvent ? 'screen' : 'webcam';
-                                            const fallbackUrl = isScreenEvent
-                                                ? (log.screenshot_url || log.webcam_screenshot_url)
-                                                : (log.webcam_screenshot_url || log.screenshot_url);
-                                            const fallbackBase64 = isScreenEvent
-                                                ? (log.screenshot_base64 || log.webcam_screenshot_base64)
-                                                : (log.webcam_screenshot_base64 || log.screenshot_base64);
+                                            const imgType = (isScreenEvent && hasScreen) ? 'screen' : (hasWebcam ? 'webcam' : 'screen');
+                                            const fallbackUrl = imgType === 'screen' ? log.screenshot_url : log.webcam_screenshot_url;
+                                            const fallbackBase64 = imgType === 'screen' ? log.screenshot_base64 : log.webcam_screenshot_base64;
 
                                             return (
                                                 <div key={lIdx} style={{
@@ -1162,14 +1167,20 @@ const ResultsAI = () => {
                                                     border: '1px solid #E2E8F0', boxShadow: '0 2px 4px rgba(0,0,0,0.05)',
                                                     cursor: 'pointer', aspectRatio: '1/1'
                                                 }}>
-                                                    <LazyIntegrityImage
-                                                        screenshotId={log.screenshot_id}
-                                                        type={imgType}
-                                                        fallbackBase64={fallbackBase64}
-                                                        fallbackUrl={fallbackUrl}
-                                                        alt={log.event_type}
-                                                        style={{ width: '100%', height: '100%' }}
-                                                    />
+                                                    {(!hasScreen && !hasWebcam) ? (
+                                                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8F9FA' }}>
+                                                            <i className="fa-solid fa-clock-rotate-left" style={{ fontSize: '1.5rem', color: '#CBD5E1' }}></i>
+                                                        </div>
+                                                    ) : (
+                                                        <LazyIntegrityImage
+                                                            screenshotId={log.screenshot_id}
+                                                            type={imgType}
+                                                            fallbackBase64={fallbackBase64}
+                                                            fallbackUrl={fallbackUrl}
+                                                            alt={log.event_type}
+                                                            style={{ width: '100%', height: '100%' }}
+                                                        />
+                                                    )}
                                                     <div style={{
                                                         position: 'absolute', bottom: 0, left: 0, right: 0,
                                                         background: 'rgba(27, 37, 75, 0.85)', color: 'white',
@@ -1859,14 +1870,20 @@ const ResultsAI = () => {
                                                         borderRadius: '15px', overflow: 'hidden', marginBottom: '10px',
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
-                                                        <LazyIntegrityImage
-                                                            screenshotId={snap.screenshot_id}
-                                                            type="webcam"
-                                                            fallbackBase64={snap.screenshot_base64 || snap.webcam_screenshot_base64}
-                                                            fallbackUrl={snap.screenshot_url || snap.webcam_screenshot_url}
-                                                            alt={snap.event_type}
-                                                            style={{ width: '100%', height: '100%' }}
-                                                        />
+                                                        {(!snap.has_screenshot && !snap.has_webcam_screenshot && !snap.screenshot_base64 && !snap.webcam_screenshot_base64 && !snap.screenshot_url && !snap.webcam_screenshot_url) ? (
+                                                            <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8F9FA' }}>
+                                                                <i className="fa-solid fa-clock-rotate-left" style={{ fontSize: '2.5rem', color: '#CBD5E1' }}></i>
+                                                            </div>
+                                                        ) : (
+                                                            <LazyIntegrityImage
+                                                                screenshotId={snap.screenshot_id}
+                                                                type={snap.has_screenshot ? "screen" : "webcam"}
+                                                                fallbackBase64={snap.has_screenshot ? snap.screenshot_base64 : snap.webcam_screenshot_base64}
+                                                                fallbackUrl={snap.has_screenshot ? snap.screenshot_url : snap.webcam_screenshot_url}
+                                                                alt={snap.event_type}
+                                                                style={{ width: '100%', height: '100%' }}
+                                                            />
+                                                        )}
                                                         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.8)', color: 'white', fontSize: '0.65rem', padding: '6px', fontWeight: '700' }}>
                                                             {(snap.event_type || '').replace(/_/g, ' ').toUpperCase()}
                                                         </div>
@@ -2642,7 +2659,7 @@ const ResultsAI = () => {
                                                                                 return null;
                                                                             })()}
                                                                             <button
-                                                                                onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r); }}
+                                                                                onClick={(e) => { e.stopPropagation(); fetchTimeline(activeTab === 'fully_automatic' ? (r.resume || r.assessment || r.interview) : r, true); }}
                                                                                 title={activeTab === 'manual_ai' || (activeTab === 'fully_automatic' && r.assessment) ? "View Assessment Logs" : "View Interview Logs"}
                                                                                 style={{
                                                                                     background: 'none', border: 'none', cursor: 'pointer',
@@ -2835,7 +2852,7 @@ const ResultsAI = () => {
             </div >
             {/* Timeline Modal */}
             {
-                timelineCandidate && (
+                showLogsModal && timelineCandidate && (
                     <div className="glass-modal-overlay" style={{ zIndex: 11000 }}>
                         <div className="glass-modal-content" style={{ maxWidth: '500px', width: '90%', padding: '2rem', borderRadius: '24px' }}>
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
@@ -2854,7 +2871,7 @@ const ResultsAI = () => {
                                     >
                                         <i className={`fa-solid fa-arrows-rotate ${loadingTimeline ? 'fa-spin' : ''}`}></i>
                                     </button>
-                                    <button onClick={() => { setTimelineCandidate(null); setTimelineLogs([]); }} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
+                                    <button onClick={() => setShowLogsModal(false)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#A3AED0', fontSize: '1.2rem' }}>
                                         <i className="fa-solid fa-xmark"></i>
                                     </button>
                                 </div>
@@ -2920,7 +2937,7 @@ const ResultsAI = () => {
                             )}
 
                             <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
-                                <button onClick={() => setTimelineCandidate(null)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
+                                <button onClick={() => setShowLogsModal(false)} style={{ padding: '0.6rem 1.5rem', borderRadius: '12px', border: 'none', background: '#F4F7FE', color: '#1B254B', fontWeight: '700', cursor: 'pointer' }}>
                                     Close
                                 </button>
                             </div>

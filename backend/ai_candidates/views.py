@@ -1808,8 +1808,27 @@ class CandidatePublicStatusUpdateView(APIView):
 
             if new_status in ('Interview', 'Interviewing'):
                 candidate.status = new_status
-                candidate.save(update_fields=['status'])
-                return Response({'message': f'Interview status updated to {new_status}.'}, status=status.HTTP_200_OK)
+                # Stamp link_opened_at here — this is the true interview start moment.
+                # The 1-hour timer is calculated from this timestamp on the frontend.
+                # Only set it if not already set (handles resume/refresh cases).
+                now = timezone.now()
+                update_fields = ['status']
+                if not candidate.link_opened_at:
+                    candidate.link_opened_at = now
+                    update_fields.append('link_opened_at')
+                    from .utils import log_automation_event
+                    log_automation_event(
+                        candidate,
+                        'STATUS_CHANGE',
+                        'SUCCESS',
+                        f"AI Interview timer started. Candidate began the interview session.",
+                        phase='INTERVIEW'
+                    )
+                candidate.save(update_fields=update_fields)
+                return Response({
+                    'message': f'Interview status updated to {new_status}.',
+                    'link_opened_at': candidate.link_opened_at.isoformat() if candidate.link_opened_at else None,
+                }, status=status.HTTP_200_OK)
 
             if new_status not in dict(Candidate.STATUS_CHOICES):
 
@@ -2612,23 +2631,11 @@ class CandidateRegistrationUpdateView(APIView):
                 
                 # Lock PAN now that registration is complete
                 candidate.pan_locked = True
-                
-                # Start the interview timer and update status
-                now = timezone.now()
-                if not candidate.link_opened_at:
-                    candidate.link_opened_at = now
-                    candidate.save(update_fields=['pan_locked', 'link_opened_at'])
-                    
-                    from .utils import log_automation_event
-                    log_automation_event(
-                        candidate,
-                        'STATUS_CHANGE',
-                        'SUCCESS',
-                        f"AI Interview session started. Candidate completed registration.",
-                        phase='INTERVIEW'
-                    )
-                else:
-                    candidate.save(update_fields=['pan_locked'])
+                # NOTE: link_opened_at is intentionally NOT set here.
+                # The 1-hour interview timer only starts when the candidate
+                # clicks "Begin Interview" (status -> 'Interview'), which is
+                # when the countdown timer appears in the UI.
+                candidate.save(update_fields=['pan_locked'])
                     
             except IntegrityError as e:
                 error_msg = str(e)
@@ -3285,7 +3292,7 @@ class CandidateTimelineView(APIView):
             candidate = Candidate.objects.get(pk=pk)
             # Permission check: ensure user belongs to same company
             user_profile = getattr(request.user, 'profile', None)
-            if not self.request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
+            if not request.user.is_superuser and (not user_profile or user_profile.company != candidate.company):
                 return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
 
             logs = []
@@ -3325,12 +3332,8 @@ class CandidateTimelineView(APIView):
                     'timestamp_formatted': local_completed.strftime('%B %d, %Y at %I:%M %p'),
                 })
 
-            # 2. Integrity events — only from this session window
+            # 2. Integrity events
             integrity_qs = candidate.integrity_logs.all().order_by('timestamp')
-            if session_start:
-                integrity_qs = integrity_qs.filter(timestamp__gte=session_start)
-            if session_end:
-                integrity_qs = integrity_qs.filter(timestamp__lte=session_end)
             
             # Send first 8 with full base64 for immediate display, rest with just metadata for lazy loading
             INLINE_LIMIT = 8
@@ -3361,12 +3364,8 @@ class CandidateTimelineView(APIView):
                     log_entry['webcam_screenshot_base64'] = None
                 logs.append(log_entry)
 
-            # 3. PipelineLog entries — only from this session window
+            # 3. PipelineLog entries
             pipeline_qs = candidate.pipeline_logs.all().order_by('timestamp')
-            if session_start:
-                pipeline_qs = pipeline_qs.filter(timestamp__gte=session_start)
-            if session_end:
-                pipeline_qs = pipeline_qs.filter(timestamp__lte=session_end)
             serializer = PipelineLogSerializer(pipeline_qs, many=True)
             logs.extend(serializer.data)
 

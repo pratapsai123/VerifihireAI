@@ -137,6 +137,8 @@ const AiInterviewSession = () => {
     const chatHistoryRef = useRef([]);
     const isInitializedRef = useRef(false);
     const isProcessingRef = useRef(false);
+    const userInputModeRef = useRef('audio');
+    const screenVideoRef = useRef(null); // Off-screen video for sync capture
     const isSpeakingRef = useRef(false);
     const isRecordingRef = useRef(false);
     const isCompletedRef = useRef(false);
@@ -236,6 +238,9 @@ const AiInterviewSession = () => {
             }
 
             screenStreamRef.current = stream;
+            if (screenVideoRef.current) {
+                screenVideoRef.current.srcObject = stream;
+            }
             setIsScreenSharing(true);
             track.onended = () => {
                 setIsScreenSharing(false);
@@ -324,11 +329,33 @@ const AiInterviewSession = () => {
             // Capture Screen (if screen or environmental event)
             if (['tab_switch', 'window_blur', 'screen_stop', 'face_mismatch', 'looking_away', 'multi_person', 'no_face', 'no_face_detection', 'multiface_detection'].includes(eventType) && screenStreamRef.current) {
                 try {
-                    const videoTrack = screenStreamRef.current.getVideoTracks()[0];
                     let captured = false;
 
+                    // 0. Synchronous capture from hidden video element (Best for tab_switch)
+                    // We must capture *synchronously* before any await, because if the tab is hidden,
+                    // the browser will suspend the video pipeline during the await!
+                    if (screenVideoRef.current && screenVideoRef.current.videoWidth > 0) {
+                        try {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = screenVideoRef.current.videoWidth;
+                            canvas.height = screenVideoRef.current.videoHeight;
+                            const ctx = canvas.getContext('2d');
+                            ctx.drawImage(screenVideoRef.current, 0, 0, canvas.width, canvas.height);
+                            const syncScreenshot = canvas.toDataURL('image/jpeg', 0.6);
+                            // Avoid setting empty black/transparent frames
+                            if (syncScreenshot.length > 500) {
+                                screenshot = syncScreenshot;
+                                captured = true;
+                            }
+                        } catch (e) {
+                            console.warn("Sync screen capture failed:", e);
+                        }
+                    }
+
+                    const videoTrack = screenStreamRef.current.getVideoTracks()[0];
+
                     // 1. Native ImageCapture API (Works in Chrome/Edge even if tab is hidden/backgrounded)
-                    if (window.ImageCapture && videoTrack) {
+                    if (!captured && window.ImageCapture && videoTrack) {
                         try {
                             const imageCapture = new window.ImageCapture(videoTrack);
                             const bitmap = await imageCapture.grabFrame();
@@ -344,7 +371,7 @@ const AiInterviewSession = () => {
                         }
                     }
 
-                    // 2. Fallback to video element (Works in Firefox, or if ImageCapture is unavailable)
+                    // 2. Fallback to dynamically created video element
                     if (!captured) {
                         const video = document.createElement('video');
                         video.muted = true;
@@ -1394,7 +1421,7 @@ const AiInterviewSession = () => {
     }, [token, speak, addMessage]);
 
     const startListening = useCallback(async () => {
-        if (isCompletedRef.current || userInputMode !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
+        if (isCompletedRef.current || userInputModeRef.current !== 'audio' || isRecordingRef.current || isStartingMicRef.current) return;
         if (!isFullscreenRef.current) {
             console.log("Mic blocked: Not in full screen.");
             return;
@@ -1740,7 +1767,7 @@ const AiInterviewSession = () => {
                 try { assemblyAIRef.current.stop(); } catch (e) { }
             }
         };
-    }, [userInputMode]);
+    }, []);
 
     const handleAnswerSubmission = useCallback(async (answer, retryCount = 0) => {
         if (!isFullscreenRef.current) {
@@ -1940,6 +1967,7 @@ const AiInterviewSession = () => {
                 if (data.requires_code_input) {
                     effectiveMode = 'text';
                     setUserInputMode('text');
+                    userInputModeRef.current = 'text';
                     setAiStatus("Coding Mode (Keyboard)");
                     try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
                     setIsRecording(false);
@@ -1947,6 +1975,7 @@ const AiInterviewSession = () => {
                 } else {
                     effectiveMode = 'audio';
                     setUserInputMode('audio');
+                    userInputModeRef.current = 'audio';
                     setAiStatus("Indu is Online");
                 }
 
@@ -2008,6 +2037,7 @@ const AiInterviewSession = () => {
                 if (data.requires_code_input) {
                     effectiveMode = 'text';
                     setUserInputMode('text');
+                    userInputModeRef.current = 'text';
                     setAiStatus("Coding Mode (Keyboard)");
                     // Force Mic Stop
                     try { if (assemblyAIRef.current) assemblyAIRef.current.stop(); } catch (e) { }
@@ -2016,6 +2046,7 @@ const AiInterviewSession = () => {
                 } else {
                     effectiveMode = 'audio';
                     setUserInputMode('audio');
+                    userInputModeRef.current = 'audio';
                     setAiStatus("Indu is Online");
                 }
 
@@ -2898,10 +2929,31 @@ const AiInterviewSession = () => {
 
             addMessage('ai', welcome);
 
-            // Mark the interview as started on the server (status -> Interview)
+            // Mark the interview as started on the server (status -> Interview).
+            // The backend stamps link_opened_at at this exact moment and returns it,
+            // so the 1-hour timer starts precisely when the candidate enters the Q&A.
             const startUrl = `${API_BASE_URL}/ai-candidates/public/${token}/status/`;
             axios.patch(startUrl, { status: 'Interview' })
-                .then(() => console.log('Interview status updated to Interview on server.'))
+                .then(res => {
+                    console.log('Interview status updated to Interview on server.');
+                    // Initialize the countdown timer from the server-stamped start time.
+                    // Falls back to full duration if link_opened_at is missing (shouldn't happen).
+                    const serverLinkOpenedAt = res.data?.link_opened_at;
+                    const durationMinutes = candidate.automation_settings?.interview_duration_minutes || 60;
+                    const INTERVIEW_DURATION_SECONDS = durationMinutes * 60;
+                    if (serverLinkOpenedAt) {
+                        const startTime = new Date(serverLinkOpenedAt).getTime();
+                        const serverNow = Date.now();
+                        const secondsElapsed = Math.floor((serverNow - startTime) / 1000);
+                        const remaining = Math.max(0, INTERVIEW_DURATION_SECONDS - secondsElapsed);
+                        setTimeLeft(remaining);
+                        console.log(`[Timer] Started. link_opened_at=${serverLinkOpenedAt}, remaining=${remaining}s`);
+                    } else {
+                        // Fallback: start full duration timer
+                        setTimeLeft(INTERVIEW_DURATION_SECONDS);
+                        console.log(`[Timer] Started (fallback). Duration=${INTERVIEW_DURATION_SECONDS}s`);
+                    }
+                })
                 .catch(err => console.error('Failed to mark interview as started:', err));
 
             const speakStartTime = Date.now();
@@ -3768,6 +3820,7 @@ const AiInterviewSession = () => {
                 <div className="ai-sidebar">
                     <div className="camera-container" style={{ position: 'relative' }}>
                         <video ref={videoRef} autoPlay playsInline muted id="candidateVideo" style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+                        <video ref={screenVideoRef} autoPlay playsInline muted style={{ display: 'none' }} />
                         <canvas ref={dfCanvasRef} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }} />
                         <div className="ai-scan-bar"></div>
                         {integrityBreach.active && <div className="integrity-overlay"><span>{integrityBreach.text}</span></div>}
@@ -4005,7 +4058,18 @@ const AiInterviewSession = () => {
                             </div>
                         )}
                         <button
-                            onClick={() => setUserInputMode(userInputMode === 'audio' ? 'text' : 'audio')}
+                            onClick={() => {
+                                const newMode = userInputMode === 'audio' ? 'text' : 'audio';
+                                setUserInputMode(newMode);
+                                userInputModeRef.current = newMode;
+                                if (newMode === 'text') {
+                                    try { if (recognitionRef.current) recognitionRef.current.stop(); } catch(e){}
+                                    setIsRecording(false);
+                                    if (isRecordingRef) isRecordingRef.current = false;
+                                } else {
+                                    setTimeout(() => startListening(), 100);
+                                }
+                            }}
                             style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)', color: '#94a3b8', padding: '6px 10px', borderRadius: '8px', fontWeight: 600, cursor: 'pointer', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '4px' }}
                         >
                             <i className={userInputMode === 'audio' ? "fa-solid fa-keyboard" : "fa-solid fa-microphone"}></i>

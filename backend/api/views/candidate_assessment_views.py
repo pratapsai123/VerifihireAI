@@ -2076,7 +2076,8 @@ def results_detail_view(request, submission_id):
             return Response({'error': 'AI Assessment Submission not found'}, status=404)
             
         elif sub_str.startswith('aicand_'):
-            cand_id = int(sub_str.replace('aicand_', ''))
+            clean_str = sub_str.replace('aicand_', '').replace('_resume', '').replace('_interview', '').replace('_assessment', '')
+            cand_id = int(clean_str)
             from ai_assessments.results_helpers import get_ai_candidate_results
             # We pass is_list=False to populate everything
             results = get_ai_candidate_results(
