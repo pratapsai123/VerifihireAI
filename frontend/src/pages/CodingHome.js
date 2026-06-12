@@ -70,6 +70,19 @@ export default function CodingHome() {
 
     useEffect(() => {
         load();
+        
+        // Ensure scroll container starts from top when page is opened.
+        const scrollContainer = document.querySelector('.app-scroll');
+        if (scrollContainer) {
+            scrollContainer.scrollTop = 0;
+        }
+        const scrollTimer = setTimeout(() => {
+            const scrollContainer = document.querySelector('.app-scroll');
+            if (scrollContainer) {
+                scrollContainer.scrollTop = 0;
+            }
+        }, 100);
+        return () => clearTimeout(scrollTimer);
     }, []);
 
     useEffect(() => {
@@ -123,8 +136,17 @@ export default function CodingHome() {
                         <div className="coding-muted">Manage and Create coding questions for your assessments.</div>
                     </div>
                     <div className="coding-header-actions">
-                        <button type="button" className="btn btn-secondary" onClick={load} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <RefreshCw size={18} className={loading ? 'animate-spin' : ''} />
+                        <button type="button" className="btn coding-btn-refresh" onClick={load} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <svg 
+                                width="14" 
+                                height="14" 
+                                viewBox="0 0 24 24" 
+                                fill="none" 
+                                xmlns="http://www.w3.org/2000/svg" 
+                                className={loading ? 'animate-spin' : ''}
+                            >
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
                             Refresh
                         </button>
                         <button type="button" className="btn btn-primary" onClick={() => navigate('/coding/questions/new')} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>

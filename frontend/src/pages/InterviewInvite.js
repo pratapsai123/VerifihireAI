@@ -143,6 +143,17 @@ export default function InterviewInvite() {
 
   // ── Restore schedule on mount ──
   useEffect(() => {
+    const scrollContainer = document.querySelector('.app-scroll');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+    const scrollTimer = setTimeout(() => {
+      const scrollContainer = document.querySelector('.app-scroll');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
+      }
+    }, 100);
+
     try {
       const raw = localStorage.getItem(DRAFT_KEY);
       if (raw) {
@@ -175,6 +186,8 @@ export default function InterviewInvite() {
       }
     };
     init();
+
+    return () => clearTimeout(scrollTimer);
   }, []);
 
   const handlePanChange = (e) => {
