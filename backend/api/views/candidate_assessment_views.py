@@ -1100,8 +1100,8 @@ def verify_identity_view(request, token):
             details.photo_update_status = 'pending'  # Route to Manual Review
             details.identity_mismatch_reason = "Face detection failed during verification."
         elif is_mismatch:
-            details.identity_mismatch_detected = True
-            details.identity_mismatch = True
+            # Removed identity_mismatch_detected = True per user request:
+            # We don't want live proctoring mismatches to trigger the photo approval workflow.
             details.identity_mismatch_reason = "Identity Face Mismatch: The captured face does not match the registered candidate's face."
         details.save()
 

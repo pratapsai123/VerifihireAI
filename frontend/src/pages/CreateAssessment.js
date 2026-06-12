@@ -395,10 +395,21 @@ const CreateAssessment = () => {
     return (
         <div className="create-assessment-page" style={{ paddingTop: 0 }}>
             <div className="assessment-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
-                <header className="assessment-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
-                    <h1 style={{ fontSize: '1.625rem', fontWeight: '700', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>Create <span style={{ color: '#6366F1', fontWeight: '400' }}>Smart</span> Assessment</h1>
-                    <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
-                </header>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', marginTop: 0 }}>
+                    <header className="assessment-header" style={{ margin: 0, textAlign: 'left' }}>
+                        <h1 style={{ fontSize: '1.625rem', fontWeight: '700', color: '#111827', margin: 0, letterSpacing: '-0.025em' }}>Create <span style={{ color: '#6366F1', fontWeight: '400' }}>Smart</span> Assessment</h1>
+                        <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>Our intelligent AI transforms your requirements into a precision-engineered technical evaluation.</p>
+                    </header>
+                    <button 
+                        className="global-btn-back" 
+                        type="button" 
+                        onClick={() => navigate(-1)}
+                        style={{ flexShrink: 0 }}
+                    >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                        Back
+                    </button>
+                </div>
 
                 <div className="section-container">
                     <SectionHeader title="Role Context" />

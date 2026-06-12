@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
 import { API_BASE_URL } from '../apiConfig';
 
 const AiInterview = () => {
+    const navigate = useNavigate();
     const [jobDescription, setJobDescription] = useState('');
     const [file, setFile] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
@@ -196,12 +198,23 @@ const AiInterview = () => {
             <div className="bg-shape" style={{ width: '500px', height: '500px', background: 'rgba(168, 85, 247, 0.15)', bottom: '-10%', left: '-5%', animationDelay: '-5s' }}></div>
 
             <div className="creation-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
-                <header className="page-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
-                    <h1>AI <span style={{ color: '#6366F1' }}>Interview</span> Creation</h1>
-                    <p>
-                        Design high-fidelity AI interview experiences by providing job context and candidate lists for automated deployment.
-                    </p>
-                </header>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', marginTop: 0 }}>
+                    <header className="page-header" style={{ margin: 0, textAlign: 'left' }}>
+                        <h1>AI <span style={{ color: '#6366F1' }}>Interview</span> Creation</h1>
+                        <p>
+                            Design high-fidelity AI interview experiences by providing job context and candidate lists for automated deployment.
+                        </p>
+                    </header>
+                    <button 
+                        className="global-btn-back" 
+                        type="button" 
+                        onClick={() => navigate(-1)}
+                        style={{ flexShrink: 0 }}
+                    >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                        Back
+                    </button>
+                </div>
 
                 <div className="form-stack">
                     {result ? (

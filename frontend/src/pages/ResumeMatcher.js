@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/Dashboard.css';
@@ -8,6 +9,7 @@ const MAX_CODING_TASKS = 50;
 const STORAGE_KEY = 'resume_screening_form_data';
 
 const ResumeMatcher = () => {
+    const navigate = useNavigate();
     const [files, setFiles] = useState([]);
     const [jobDescription, setJobDescription] = useState('');
     const [threshold, setThreshold] = useState(70);
@@ -486,10 +488,21 @@ const ResumeMatcher = () => {
     return (
         <div className="resume-matcher-page">
             <div className="matcher-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
-                <header className="page-header" style={{ marginBottom: '1.5rem', marginTop: 0 }}>
-                    <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
-                    <p>AI-powered side-by-side analysis of candidate fit against specific role requirements.</p>
-                </header>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', marginTop: 0 }}>
+                    <header className="page-header" style={{ margin: 0, textAlign: 'left' }}>
+                        <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
+                        <p>AI-powered side-by-side analysis of candidate fit against specific role requirements.</p>
+                    </header>
+                    <button 
+                        className="global-btn-back" 
+                        type="button" 
+                        onClick={() => navigate(-1)}
+                        style={{ flexShrink: 0 }}
+                    >
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                        Back
+                    </button>
+                </div>
 
                 <div className="form-stack">
                     <div className="section-container">

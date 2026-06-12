@@ -1597,15 +1597,9 @@ class UpdateAssessmentIntegrityView(APIView):
 
                     integrity_snap.save()
 
-                    # If face_mismatch detected during session, flag identity_mismatch
-                    # and save webcam as intruder_photo if not already captured
+                    # If face_mismatch detected during session, save webcam as intruder_photo if not already captured
+                    # (We no longer flag identity_mismatch_detected here per user request, to restrict approval workflow to registration only)
                     if event_type in ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry']:
-                        if not submission.identity_mismatch_detected:
-                            submission.identity_mismatch_detected = True
-                            submission.identity_mismatch_details = {
-                                'mismatch_at': timezone.now().isoformat(),
-                                'mismatch_type': f'{event_type}_during_session',
-                            }
                         if not submission.intruder_photo and webcam_b64:
                             submission.intruder_photo = webcam_b64
 

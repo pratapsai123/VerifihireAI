@@ -81,3 +81,9 @@ input::-webkit-credentials-auto-fill-button {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+/* -- Global Back Button -- */
+.global-btn-back { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem 0.55rem 0.85rem; background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 9px; color: #334155; font-size: 0.8125rem; font-weight: 700; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; }
+.global-btn-back svg { color: #64748b; transition: transform 0.18s ease; }
+.global-btn-back:hover { background: #e2e8f0; border-color: #94a3b8; color: #0f172a; }
+.global-btn-back:hover svg { transform: translateX(-2px); color: #1e40af; }
+.global-btn-back:active { background: #cbd5e1; transform: scale(0.97); }
