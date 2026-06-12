@@ -100,7 +100,7 @@ def create_interview_invitations_and_send_email_view(request):
             created_by=req_user_profile,
         )
 
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
 
         results = []
         sent_count = 0
@@ -1126,7 +1126,7 @@ def add_interview_participant_view(request):
         )
         print(f"DEBUG: Participant created: {participant.id} with token {participant.token}")
         
-        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
+        frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'https://verifihireai.com'
         
         # Link changes based on role
         if role == 'interviewer':
@@ -2233,6 +2233,20 @@ def create_interview_violation_view(request):
 
         # Create violation record
         from ..models import InterviewViolation
+        from django.utils import timezone
+        import datetime
+        
+        five_seconds_ago = timezone.now() - datetime.timedelta(seconds=5)
+        duplicate_exists = InterviewViolation.objects.filter(
+            interview=invitation.interview,
+            candidate=invitation,
+            violation_type=violation_type,
+            timestamp__gte=five_seconds_ago
+        ).exists()
+        
+        if duplicate_exists:
+            return Response({"message": "Duplicate violation ignored"}, status=status.HTTP_200_OK)
+
         violation = InterviewViolation.objects.create(
             interview=invitation.interview,
             candidate=invitation,

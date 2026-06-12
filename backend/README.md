@@ -95,8 +95,8 @@ The API will be available at: `http://127.0.0.1:8000`
 ## CORS Configuration
 
 The backend is configured to allow requests from:
-- `http://localhost:3000`
-- `http://localhost:3000`
+- `https://verifihireai.com`
+- `https://verifihireai.com`
 
 This is configured in `VerifiHireAI_backend/settings.py`.
 

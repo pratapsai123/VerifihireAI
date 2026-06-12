@@ -21,6 +21,7 @@ export const MalpracticeMonitor = ({
   const noFaceStartTimeRef = useRef(null);
   const tabSwitchStartTimeRef = useRef(null);
   const lastViolationTimeRef = useRef({}); // Cooldown tracker
+  const recentViolationsRef = useRef({});
 
   // Check cooldown per violation type
   const isCooldown = (type, seconds = 10) => {
@@ -102,7 +103,7 @@ export const MalpracticeMonitor = ({
     };
   }, []);
 
-  // Tab Switching & Window Blur Detection
+  // Tab Switching Detection
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (window.isScreenShareSelectionActive) return;
@@ -113,18 +114,6 @@ export const MalpracticeMonitor = ({
       } else {
         handleFocusReturn();
       }
-    };
-
-    const handleBlur = () => {
-      if (window.isScreenShareSelectionActive) return;
-      if (!tabSwitchStartTimeRef.current) {
-        tabSwitchStartTimeRef.current = Date.now();
-      }
-    };
-
-    const handleFocus = () => {
-      if (window.isScreenShareSelectionActive) return;
-      handleFocusReturn();
     };
 
     const handleFocusReturn = () => {
@@ -146,13 +135,9 @@ export const MalpracticeMonitor = ({
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
     };
   }, []);
 
@@ -226,6 +211,16 @@ export const MalpracticeMonitor = ({
 
   // Capture canvas image, upload to server, and broadcast to socket
   const triggerViolation = (type, severity, details = {}, duration = 0) => {
+    const now = Date.now();
+    if (
+      recentViolationsRef.current[type] &&
+      now - recentViolationsRef.current[type] < 5000
+    ) {
+      console.log(`Duplicate ${type} prevented`);
+      return;
+    }
+    recentViolationsRef.current[type] = now;
+
     if (showNotification) {
       const label = type === 'NO_FACE' ? 'No Face Detected' :
                     type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
