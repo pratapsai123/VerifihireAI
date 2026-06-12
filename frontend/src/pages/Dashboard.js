@@ -50,13 +50,10 @@ const CustomTooltip = ({ active, payload, label }) => {
           </div>
           <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <span>Interviews Scheduled:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsScheduled || 0}</span>
+            <span>AI Interview:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.aiInterviews || 0}</span>
           </div>
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <span>Interviews Ongoing:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsOngoing || 0}</span>
-          </div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
-            <span>Interviews Completed:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.interviewsCompleted || 0}</span>
+            <span>Live interview:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.liveInterviews || 0}</span>
           </div>
         </div>
       </div>
@@ -126,6 +123,7 @@ const Dashboard = () => {
   });
 
 
+  const [selectedYear, setSelectedYear] = useState('');
   const [pendingCount, setPendingCount] = useState(0);
 
   useEffect(() => {
@@ -143,10 +141,13 @@ const Dashboard = () => {
       }
     };
     fetchPendingCount();
+  }, []);
 
+  useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/dashboard/summary/`);
+        const url = selectedYear ? `${API_BASE_URL}/dashboard/summary/?year=${selectedYear}` : `${API_BASE_URL}/dashboard/summary/`;
+        const res = await axios.get(url);
         setData(res.data);
         setLoading(false);
       } catch (error) {
@@ -156,7 +157,7 @@ const Dashboard = () => {
     };
 
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   const handleCreateRole = async (e) => {
     e.preventDefault();
@@ -652,8 +653,17 @@ const Dashboard = () => {
                   <div className="chart-header">
                     <h3>Results</h3>
                     <div className="chart-filters">
-                      <select className="filter-select"><option>Month</option></select>
-                      <select className="filter-select"><option>Analytics</option></select>
+                      <select 
+                        className="filter-select"
+                        value={selectedYear}
+                        onChange={(e) => setSelectedYear(e.target.value)}
+                      >
+                        <option value="">Year</option>
+                        {Array.from({ length: 5 }, (_, i) => {
+                          const year = new Date().getFullYear() - i;
+                          return <option key={year} value={year}>{year}</option>;
+                        })}
+                      </select>
                     </div>
                   </div>
                   <div className="chart-container" style={{ height: '300px', minHeight: '300px' }}>
@@ -674,7 +684,7 @@ const Dashboard = () => {
                     </ResponsiveContainer>
                   </div>
 
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem', marginTop: '2rem' }}>
                     <div className="glass-card" style={{ padding: '1rem', background: 'white' }}>
                       <h4 style={{ fontSize: '0.8rem', margin: '0 0 1rem' }}>Candidate Success Rate</h4>
                       <div style={{ height: '100px', width: '100%', minHeight: '100px' }}>
@@ -685,20 +695,6 @@ const Dashboard = () => {
                             <Bar dataKey="value" fill="#6366f1" radius={[4, 4, 0, 0]} barSize={20} />
                           </BarChart>
                         </ResponsiveContainer>
-                      </div>
-                    </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Selection Today</span>
-                        <span style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 700 }}>{data.stats.hired}</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>Live Interviews</span>
-                        <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.scheduledInterviews}</span>
-                      </div>
-                      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <span style={{ fontSize: '0.8rem', color: '#64748b' }}>AI Interviews</span>
-                        <span style={{ fontSize: '0.8rem', color: '#6366f1', fontWeight: 700 }}>{data.stats.aiInterviewsCount}</span>
                       </div>
                     </div>
                   </div>

@@ -11,7 +11,8 @@ import {
     ChevronDown,
     ChevronUp,
     AlertCircle,
-    Play
+    Play,
+    ArrowLeft
 } from 'lucide-react';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
@@ -136,6 +137,10 @@ export default function CodingHome() {
                         <div className="coding-muted">Manage and Create coding questions for your assessments.</div>
                     </div>
                     <div className="coding-header-actions">
+                        <button type="button" className="btn btn-secondary" style={{ display: 'flex', alignItems: 'center', gap: '8px' }} onClick={() => navigate('/dashboard')}>
+                            <ArrowLeft size={18} />
+                            Back
+                        </button>
                         <button type="button" className="btn coding-btn-refresh" onClick={load} disabled={loading} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                             <svg 
                                 width="14" 
