@@ -476,7 +476,8 @@ const ResultsAI = () => {
         if (total === 0) return { total: 0, passed: 0, failed: 0, onHold: 0, avgScore: 'N/A', completionRate: 'N/A' };
         const onHold = rows.filter(r => r.status === 'On-Hold').length;
         const passed = rows.filter(r => isPass(r, 'interview') && r.status !== 'On-Hold').length;
-        const failed = total - passed - onHold;
+        const ongoing = rows.filter(r => r.status && ['ongoing', 'started', 'in-progress'].includes(r.status.toLowerCase())).length;
+        const failed = total - passed - onHold - ongoing;
         const scores = rows.map(r => getScoreValue(r));
         const avgScore = Math.round(scores.reduce((sum, s) => sum + s, 0) / total);
         const completed = rows.filter(r => r.completed_at || r.submitted_at).length;
@@ -895,12 +896,14 @@ const ResultsAI = () => {
                     ? (r.interview?.status || r.assessment?.status || r.resume?.status) 
                     : r.status;
                 
+                const isOngoing = typeof currentStatus === 'string' && ['ongoing', 'started', 'in-progress'].includes(currentStatus.toLowerCase());
+
                 if (statusFilter === 'on-hold') {
                     return currentStatus === 'On-Hold' || currentStatus === 'hold';
                 }
                 const pass = isPass(r, activeTab);
-                if (statusFilter === 'pass') return pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold';
-                return !pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold';
+                if (statusFilter === 'pass') return pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold' && !isOngoing;
+                return !pass && currentStatus !== 'On-Hold' && currentStatus !== 'hold' && !isOngoing;
             });
 
         // Apply sorting (works for all tabs)
@@ -1872,7 +1875,7 @@ const ResultsAI = () => {
                                                         borderRadius: '15px', overflow: 'hidden', marginBottom: '10px',
                                                         position: 'relative', border: '1px solid #E0E5F2'
                                                     }}>
-                                                        {(!snap.has_screenshot && !snap.has_webcam_screenshot && !snap.screenshot_base64 && !snap.webcam_screenshot_base64 && !snap.screenshot_url && !snap.webcam_screenshot_url) ? (
+                                                        {(!snap.has_screenshot && !snap.has_webcam_screenshot && !snap.screenshot_base64 && !snap.webcam_screenshot_base64 && !snap.screenshot_url && !snap.webcam_screenshot_url && !snap.details?.screenshot) ? (
                                                             <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F8F9FA' }}>
                                                                 <i className="fa-solid fa-clock-rotate-left" style={{ fontSize: '2.5rem', color: '#CBD5E1' }}></i>
                                                             </div>
@@ -1881,7 +1884,7 @@ const ResultsAI = () => {
                                                                 screenshotId={snap.screenshot_id}
                                                                 type={snap.has_screenshot ? "screen" : "webcam"}
                                                                 fallbackBase64={snap.has_screenshot ? snap.screenshot_base64 : snap.webcam_screenshot_base64}
-                                                                fallbackUrl={snap.has_screenshot ? snap.screenshot_url : snap.webcam_screenshot_url}
+                                                                fallbackUrl={snap.has_screenshot ? snap.screenshot_url : (snap.webcam_screenshot_url || snap.details?.screenshot)}
                                                                 alt={snap.event_type}
                                                                 style={{ width: '100%', height: '100%' }}
                                                             />
@@ -1912,15 +1915,15 @@ const ResultsAI = () => {
                                                     <div style={{ position: 'absolute', top: 0, left: 0, right: 0, background: '#05CD99', color: 'white', fontSize: '0.65rem', padding: '2px', textAlign: 'center', fontWeight: 'bold', zIndex: 2 }}>
                                                         ✓ REGISTERED FACE
                                                     </div>
-                                                    {normalizeImageUrl(viewedSubmission.candidate_photo_url) ? (
+                                                    {normalizeImageUrl(viewedSubmission.master_photo_url || viewedSubmission.original_identity_photo_url || viewedSubmission.candidate_photo_url) ? (
                                                         <img
-                                                            src={normalizeImageUrl(viewedSubmission.candidate_photo_url)}
+                                                            src={normalizeImageUrl(viewedSubmission.master_photo_url || viewedSubmission.original_identity_photo_url || viewedSubmission.candidate_photo_url)}
                                                             alt="Registered Face"
                                                             style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                                                             onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'flex'; }}
                                                         />
                                                     ) : null}
-                                                    <div style={{ display: normalizeImageUrl(viewedSubmission.candidate_photo_url) ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
+                                                    <div style={{ display: normalizeImageUrl(viewedSubmission.master_photo_url || viewedSubmission.original_identity_photo_url || viewedSubmission.candidate_photo_url) ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
                                                         <i className="fa-solid fa-user" style={{ fontSize: '3rem', color: '#A3AED0' }}></i>
                                                     </div>
                                                 </div>
@@ -1936,15 +1939,19 @@ const ResultsAI = () => {
                                                         ⚠ DIFFERENT PERSON DETECTED
                                                     </div>
                                                     {(() => {
-                                                        const intruderPhoto = normalizeImageUrl(viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
+                                                        const pan = viewedSubmission.pan_number ? viewedSubmission.pan_number.toLowerCase().trim() : '';
+                                                        const token = viewedSubmission.assessment?.share_token || viewedSubmission.share_token || '';
+                                                        const assessmentFaceUrl = (pan && token) ? `${API_BASE_URL || ''}/ai/registration/face/${pan}/assessments/${token}/` : null;
+                                                        
+                                                        const intruderPhoto = assessmentFaceUrl || normalizeImageUrl(viewedSubmission.pending_identity_photo_url || viewedSubmission.intruder_photo_url || viewedSubmission.original_identity_photo_url || (() => {
                                                             const snaps = timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (viewedSubmission.integrity_screenshots || viewedSubmission.integrity_logs || []);
                                                             const mismatchSnap = snaps.find(s => s && ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry'].includes((s.event_type || '').toLowerCase()));
                                                             let srcVal = null;
                                                             if (mismatchSnap) {
-                                                                srcVal = mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64;
+                                                                srcVal = mismatchSnap.screenshot_url || mismatchSnap.webcam_screenshot_url || mismatchSnap.screenshot_base64 || mismatchSnap.webcam_screenshot_base64 || mismatchSnap.details?.screenshot;
                                                             } else if (snaps.length > 0) {
                                                                 const lastSnap = snaps[snaps.length - 1];
-                                                                srcVal = lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64;
+                                                                srcVal = lastSnap.screenshot_url || lastSnap.webcam_screenshot_url || lastSnap.screenshot_base64 || lastSnap.webcam_screenshot_base64 || lastSnap.details?.screenshot;
                                                             }
                                                             return srcVal;
                                                         })());

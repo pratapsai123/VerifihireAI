@@ -2978,15 +2978,30 @@ class AIAssessmentReportDownloadView(APIView):
                 # --- STEP 0: MIRROR UI LOGIC ---
                 # If there's an identity mismatch, the main candidate profile photo should be the intruder/assessment face (Box 2)
                 if getattr(submission, 'identity_mismatch_detected', False):
-                    mismatch_data = _get_unified_identity_mismatch_fields(request, submission)
-                    intruder_b64 = mismatch_data.get('intruder_photo_url')
-                    if intruder_b64:
+                    if getattr(submission, 'intruder_photo', None):
                         try:
-                            temp_intr = _save_to_temp_file(intruder_b64, is_b64=True)
+                            temp_intr = _save_to_temp_file(submission.intruder_photo, is_b64=True)
                             temp_files_to_cleanup.append(temp_intr)
                             target_file = Path(temp_intr)
                         except Exception as e:
-                            logger.error(f"PDF Gen: Failed to save intruder_photo_url for Candidate Profile: {e}")
+                            logger.error(f"PDF Gen: Failed to save intruder_photo for Candidate Profile: {e}")
+                            
+                    if not target_file and is_automatic:
+                        from api._imports import DEEPFACE_BASE_URL
+                        import requests
+                        token = str(assessment.share_token)
+                        pan = getattr(submission, 'pan_number', None)
+                        email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+                        person_id = pan.lower().strip() if pan else f"{email}_{token}"
+                        df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}/assessments/{token}/photo"
+                        try:
+                            resp = requests.get(df_url, timeout=5)
+                            if resp.status_code == 200:
+                                temp_path = _save_to_temp_file(resp.content, is_b64=False)
+                                temp_files_to_cleanup.append(temp_path)
+                                target_file = Path(temp_path)
+                        except Exception as e:
+                            logger.warning(f"PDF Gen: Failed to fetch Box 2 photo for Candidate Profile: {e}")
 
                 # Step 1: Decode original_identity_photo if present on the submission (Box 1 fallback)
                 if not target_file and getattr(submission, 'original_identity_photo', None):
@@ -3100,23 +3115,6 @@ class AIAssessmentReportDownloadView(APIView):
                 except Exception as e:
                     logger.error(f"Error loading PAN photo for PDF: {e}")
                     pass
-
-            if not pan_img:
-                try:
-                    from api.models import IdentityLink
-                    pan_number = getattr(submission, 'pan_number', '').lower().strip()
-                    email = getattr(submission, 'candidate_email', '').lower().strip()
-                    identity = None
-                    if pan_number:
-                        identity = IdentityLink.objects.filter(pan_number__iexact=pan_number).order_by('-updated_at').first()
-                    if not identity and email:
-                        identity = IdentityLink.objects.filter(email__iexact=email).order_by('-updated_at').first()
-                    
-                    if identity and getattr(identity, 'pan_image', None) and identity.pan_image.name:
-                        if os.path.exists(identity.pan_image.path):
-                            pan_img = RLImage(identity.pan_image.path, width=1.4*inch, height=1.0*inch)
-                except Exception as e:
-                    logger.error(f"Error loading PAN photo from IdentityLink for PDF: {e}")
 
             # Info table data
             # Handle old submissions without PAN data
