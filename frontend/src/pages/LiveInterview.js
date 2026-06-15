@@ -744,6 +744,7 @@ function LiveInterview() {
           isCameraOn={isCameraOn}
           sendMessage={sendMessage}
           showNotification={showSessionPopup}
+          isScreenSharing={isScreenSharing}
         />
       </div>
     </ErrorBoundary>

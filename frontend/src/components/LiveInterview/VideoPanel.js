@@ -105,7 +105,8 @@ export const VideoPanel = ({
   const renderParticipantTile = (p, isSidebar = false) => {
     const isSelf = p.isLocal && !p.isScreenSharing;
     const isScreenLoading = p.isScreenSharing && !p.stream;
-    const showVideo = !isScreenLoading && (p.isScreenSharing || (isSelf ? isCameraOn : p.isCameraOn !== false));
+    const isLocalScreenShare = p.isLocal && p.isScreenSharing;
+    const showVideo = !isScreenLoading && !isLocalScreenShare && (p.isScreenSharing || (isSelf ? isCameraOn : p.isCameraOn !== false));
 
     return (
       <div key={p.id} className={`video-tile ${isSelf ? 'local-tile' : 'remote-tile'} ${isSidebar ? 'sidebar-tile' : ''}`}>
@@ -113,6 +114,15 @@ export const VideoPanel = ({
           <div className="screen-loading">
             <div className="spinner"></div>
             <span>Connecting to presentation...</span>
+          </div>
+        ) : isLocalScreenShare ? (
+          <div className="local-screen-share-placeholder" style={{
+            position: 'absolute', inset: 0, zIndex: 1, width: '100%', height: '100%', 
+            display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+            backgroundColor: '#1e293b', color: 'white', gap: '15px'
+          }}>
+            <i className="fas fa-desktop" style={{ fontSize: '48px', color: '#3b82f6' }}></i>
+            <span style={{ fontSize: '18px', fontWeight: '500' }}>You are sharing your screen</span>
           </div>
         ) : (
           <video
@@ -140,7 +150,7 @@ export const VideoPanel = ({
           />
         )}
 
-        {!showVideo && !isScreenLoading && (
+        {!showVideo && !isScreenLoading && !isLocalScreenShare && (
           <div className="video-placeholder-overlay" style={{ position: 'absolute', inset: 0, zIndex: 1, width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <VideoPlaceholder name={p.name || 'Participant'} />
           </div>

@@ -2233,6 +2233,20 @@ def create_interview_violation_view(request):
 
         # Create violation record
         from ..models import InterviewViolation
+        from django.utils import timezone
+        import datetime
+        
+        five_seconds_ago = timezone.now() - datetime.timedelta(seconds=5)
+        duplicate_exists = InterviewViolation.objects.filter(
+            interview=invitation.interview,
+            candidate=invitation,
+            violation_type=violation_type,
+            timestamp__gte=five_seconds_ago
+        ).exists()
+        
+        if duplicate_exists:
+            return Response({"message": "Duplicate violation ignored"}, status=status.HTTP_200_OK)
+
         violation = InterviewViolation.objects.create(
             interview=invitation.interview,
             candidate=invitation,

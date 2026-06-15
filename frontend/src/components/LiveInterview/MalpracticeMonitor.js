@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaceDetection } from '@mediapipe/face_detection';
+import * as tf from '@tensorflow/tfjs';
+import * as cocoSsd from '@tensorflow-models/coco-ssd';
 import axios from 'axios';
 import { API_BASE_URL } from '../../apiConfig';
 
@@ -10,7 +12,8 @@ export const MalpracticeMonitor = ({
   cameraReady,
   isCameraOn,
   sendMessage,
-  showNotification
+  showNotification,
+  isScreenSharing // New prop to track screen sharing
 }) => {
   const [mediaPipeLoaded, setMediaPipeLoaded] = useState(false);
   const faceDetectionRef = useRef(null);
@@ -18,9 +21,16 @@ export const MalpracticeMonitor = ({
   const [showFullscreenModal, setShowFullscreenModal] = useState(false);
   const [fullscreenExitCount, setFullscreenExitCount] = useState(0);
 
+  const [cocoSsdModel, setCocoSsdModel] = useState(null);
+
   const noFaceStartTimeRef = useRef(null);
   const tabSwitchStartTimeRef = useRef(null);
+  const extraPersonStartTimeRef = useRef(null);
+  const mobilePhoneStartTimeRef = useRef(null);
+  const isScreenSharingRef = useRef(isScreenSharing);
+
   const lastViolationTimeRef = useRef({}); // Cooldown tracker
+  const recentViolationsRef = useRef({});
 
   // Check cooldown per violation type
   const isCooldown = (type, seconds = 10) => {
@@ -29,7 +39,7 @@ export const MalpracticeMonitor = ({
     return (Date.now() - last) < (seconds * 1000);
   };
 
-  // Load MediaPipe FaceDetection
+  // Load Models
   useEffect(() => {
     let fd = null;
     try {
@@ -53,10 +63,35 @@ export const MalpracticeMonitor = ({
       console.error("❌ Failed to initialize MediaPipe:", err);
     }
 
+    // Load COCO-SSD
+    cocoSsd.load().then(model => {
+      setCocoSsdModel(model);
+      console.log("✅ COCO-SSD initialized");
+    }).catch(err => {
+      console.error("❌ Failed to load COCO-SSD:", err);
+    });
+
     return () => {
       if (fd) fd.close();
     };
   }, []);
+
+  // Screen Share Stopped Detection
+  useEffect(() => {
+    if (isScreenSharingRef.current && !isScreenSharing) {
+      // Candidate stopped sharing
+      if (!isCooldown('SCREEN_SHARE_STOPPED', 10)) {
+        lastViolationTimeRef.current['SCREEN_SHARE_STOPPED'] = Date.now();
+        triggerViolation('SCREEN_SHARE_STOPPED', 'HIGH', {
+          message: 'Candidate stopped screen sharing'
+        });
+        if (showNotification) {
+          showNotification("⚠️ You stopped screen sharing. Please resume sharing your screen immediately to avoid penalties.", "error");
+        }
+      }
+    }
+    isScreenSharingRef.current = isScreenSharing;
+  }, [isScreenSharing]);
 
   // Enter Fullscreen on Start
   useEffect(() => {
@@ -102,7 +137,7 @@ export const MalpracticeMonitor = ({
     };
   }, []);
 
-  // Tab Switching & Window Blur Detection
+  // Tab Switching Detection
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (window.isScreenShareSelectionActive) return;
@@ -113,18 +148,6 @@ export const MalpracticeMonitor = ({
       } else {
         handleFocusReturn();
       }
-    };
-
-    const handleBlur = () => {
-      if (window.isScreenShareSelectionActive) return;
-      if (!tabSwitchStartTimeRef.current) {
-        tabSwitchStartTimeRef.current = Date.now();
-      }
-    };
-
-    const handleFocus = () => {
-      if (window.isScreenShareSelectionActive) return;
-      handleFocusReturn();
     };
 
     const handleFocusReturn = () => {
@@ -146,13 +169,9 @@ export const MalpracticeMonitor = ({
     };
 
     document.addEventListener('visibilitychange', handleVisibilityChange);
-    window.addEventListener('blur', handleBlur);
-    window.addEventListener('focus', handleFocus);
 
     return () => {
       document.removeEventListener('visibilitychange', handleVisibilityChange);
-      window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('focus', handleFocus);
     };
   }, []);
 
@@ -160,7 +179,7 @@ export const MalpracticeMonitor = ({
     handleFaceResultsRef.current = handleFaceResults;
   });
 
-  // Run Face Detection Every 2 Seconds
+  // Run Models Every 2 Seconds
   useEffect(() => {
     if (!mediaPipeLoaded || !cameraReady || !isCameraOn) return;
 
@@ -169,36 +188,53 @@ export const MalpracticeMonitor = ({
         return;
       }
       
+      const now = Date.now();
+
+      // MediaPipe Face Detection
       try {
         if (faceDetectionRef.current) {
           await faceDetectionRef.current.send({ image: videoRef.current });
         }
       } catch (err) {
         console.error("FACE DETECTOR FAILURE", err);
-        console.error(err.stack);
       }
+
+      // COCO-SSD Object Detection
+      try {
+        if (cocoSsdModel) {
+          const predictions = await cocoSsdModel.detect(videoRef.current);
+          const hasPhone = predictions.some(p => p.class === 'cell phone');
+
+          if (hasPhone) {
+            if (!mobilePhoneStartTimeRef.current) mobilePhoneStartTimeRef.current = now;
+            if (now - mobilePhoneStartTimeRef.current >= 3000) {
+              if (!isCooldown('MOBILE_PHONE_DETECTED', 10)) {
+                lastViolationTimeRef.current['MOBILE_PHONE_DETECTED'] = now;
+                triggerViolation('MOBILE_PHONE_DETECTED', 'HIGH', { message: 'Mobile phone detected in frame' });
+              }
+            }
+          } else {
+            mobilePhoneStartTimeRef.current = null;
+          }
+        }
+      } catch (err) {
+        console.error("COCO-SSD FAILURE", err);
+      }
+
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [mediaPipeLoaded, cameraReady, isCameraOn, videoRef]);
+  }, [mediaPipeLoaded, cameraReady, isCameraOn, videoRef, cocoSsdModel]);
 
   const handleFaceResults = (detections) => {
     const faceCount = detections.length;
     const now = Date.now();
-
-    console.log(
-      "Faces detected:",
-      faceCount,
-      "NoFaceTimer:",
-      noFaceStartTimeRef.current
-    );
 
     if (faceCount === 0) {
       if (!noFaceStartTimeRef.current) {
         noFaceStartTimeRef.current = now;
       }
       const elapsed = now - noFaceStartTimeRef.current;
-      console.log(`🚨 No face for ${elapsed} ms`);
       if (elapsed >= 4000) {
         if (!isCooldown('NO_FACE', 10)) {
           lastViolationTimeRef.current['NO_FACE'] = now;
@@ -208,34 +244,50 @@ export const MalpracticeMonitor = ({
         }
         noFaceStartTimeRef.current = null;
       }
+      extraPersonStartTimeRef.current = null;
     } else {
-      console.log("✅ Face detected");
       noFaceStartTimeRef.current = null;
 
       if (faceCount > 1) {
-        if (!isCooldown('MULTIPLE_FACES', 10)) {
-          lastViolationTimeRef.current['MULTIPLE_FACES'] = now;
-          triggerViolation('MULTIPLE_FACES', 'HIGH', {
-            message: `Multiple faces detected in frame. Count: ${faceCount}`,
-            face_count: faceCount
-          });
+        if (!extraPersonStartTimeRef.current) extraPersonStartTimeRef.current = now;
+        if (now - extraPersonStartTimeRef.current >= 3000) {
+          if (!isCooldown('EXTRA_PERSON_DETECTED', 10)) {
+            lastViolationTimeRef.current['EXTRA_PERSON_DETECTED'] = now;
+            triggerViolation('EXTRA_PERSON_DETECTED', 'HIGH', {
+              message: `Multiple persons detected in frame. Count: ${faceCount}`,
+              face_count: faceCount
+            });
+          }
         }
+      } else {
+        extraPersonStartTimeRef.current = null;
       }
     }
   };
 
   // Capture canvas image, upload to server, and broadcast to socket
   const triggerViolation = (type, severity, details = {}, duration = 0) => {
-    if (showNotification) {
+    const now = Date.now();
+    if (
+      recentViolationsRef.current[type] &&
+      now - recentViolationsRef.current[type] < 5000
+    ) {
+      console.log(`Duplicate ${type} prevented`);
+      return;
+    }
+    recentViolationsRef.current[type] = now;
+
+    if (showNotification && type !== 'SCREEN_SHARE_STOPPED') { // We already handled screen share stopped notification
       const label = type === 'NO_FACE' ? 'No Face Detected' :
-                    type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
+                    type === 'EXTRA_PERSON_DETECTED' ? 'Multiple Faces Detected' :
+                    type === 'MOBILE_PHONE_DETECTED' ? 'Mobile Phone Detected' :
                     type === 'TAB_SWITCH' ? 'Tab Switch Detected' : 'Fullscreen Exit Detected';
-      showNotification(`⚠️ proctoring Alert: ${label}`, severity === 'HIGH' ? 'error' : 'warning');
+      showNotification(`⚠️ Proctoring Alert: ${label}`, severity === 'HIGH' ? 'error' : 'warning');
     }
 
-    // Capture screenshot if required (Multiple Faces, No Face, Fullscreen Exit)
+    // Capture screenshot if required
     let screenshotBlobPromise = Promise.resolve(null);
-    if (['MULTIPLE_FACES', 'NO_FACE', 'FULLSCREEN_EXIT'].includes(type) && videoRef && videoRef.current) {
+    if (['EXTRA_PERSON_DETECTED', 'MOBILE_PHONE_DETECTED', 'NO_FACE', 'FULLSCREEN_EXIT', 'SCREEN_SHARE_STOPPED'].includes(type) && videoRef && videoRef.current) {
       screenshotBlobPromise = new Promise((resolve) => {
         try {
           const video = videoRef.current;

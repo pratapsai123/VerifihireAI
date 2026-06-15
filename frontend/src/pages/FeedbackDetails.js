@@ -108,6 +108,9 @@ export default function FeedbackDetails() {
         if (!name) return 'Unknown';
         const mapping = {
             'MULTIPLE_FACES': 'Multiple Faces Detected',
+            'EXTRA_PERSON_DETECTED': 'Extra Person Detected',
+            'MOBILE_PHONE_DETECTED': 'Mobile Phone Detected',
+            'SCREEN_SHARE_STOPPED': 'Screen Share Stopped',
             'NO_FACE': 'No Face Detected',
             'TAB_SWITCH': 'Tab Switching',
             'FULLSCREEN_EXIT': 'Fullscreen Exit'

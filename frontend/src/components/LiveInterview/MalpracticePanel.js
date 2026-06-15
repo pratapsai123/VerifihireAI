@@ -29,6 +29,12 @@ export const MalpracticePanel = ({
     switch (type) {
       case 'NO_FACE':
         return 'No Face Detected';
+      case 'EXTRA_PERSON_DETECTED':
+        return 'Extra Person Detected';
+      case 'MOBILE_PHONE_DETECTED':
+        return 'Mobile Phone Detected';
+      case 'SCREEN_SHARE_STOPPED':
+        return 'Screen Share Stopped';
       case 'MULTIPLE_FACES':
         return 'Multiple Faces Detected';
       case 'TAB_SWITCH':
@@ -44,6 +50,12 @@ export const MalpracticePanel = ({
     switch (type) {
       case 'NO_FACE':
         return 'fa-user-slash';
+      case 'EXTRA_PERSON_DETECTED':
+        return 'fa-user-friends';
+      case 'MOBILE_PHONE_DETECTED':
+        return 'fa-mobile-alt';
+      case 'SCREEN_SHARE_STOPPED':
+        return 'fa-desktop';
       case 'MULTIPLE_FACES':
         return 'fa-users';
       case 'TAB_SWITCH':
@@ -74,8 +86,16 @@ export const MalpracticePanel = ({
           <span className="stat-lbl">No Face</span>
         </div>
         <div className="stat-card high-risk">
-          <span className="stat-val">{counts['MULTIPLE_FACES'] || 0}</span>
+          <span className="stat-val">{(counts['MULTIPLE_FACES'] || 0) + (counts['EXTRA_PERSON_DETECTED'] || 0)}</span>
           <span className="stat-lbl">Multi Face</span>
+        </div>
+        <div className="stat-card high-risk">
+          <span className="stat-val">{counts['MOBILE_PHONE_DETECTED'] || 0}</span>
+          <span className="stat-lbl">Mobile Phone</span>
+        </div>
+        <div className="stat-card high-risk">
+          <span className="stat-val">{counts['SCREEN_SHARE_STOPPED'] || 0}</span>
+          <span className="stat-lbl">No Screen</span>
         </div>
         <div className="stat-card med-risk">
           <span className="stat-val">{counts['TAB_SWITCH'] || 0}</span>
