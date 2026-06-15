@@ -340,6 +340,7 @@ export default function TakeAssessment() {
 
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fsError, setFsError] = useState('');
+  const [fsLoading, setFsLoading] = useState(false);
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [leftWidth, setLeftWidth] = useState(44);
   const [lastExpandedWidth, setLastExpandedWidth] = useState(44);
@@ -927,7 +928,7 @@ export default function TakeAssessment() {
 
     const runPrecheck = (isRetry = false) => {
       if (!isRetry) setPrecheckLoading(true);
-      
+
       axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
         .then(() => {
           // Window is open and lock acquired — clear any prior error
@@ -938,13 +939,13 @@ export default function TakeAssessment() {
         .catch((err) => {
           const status = err?.response?.status;
           setWindowStatus(status);
-          
+
           if (status === 403 || status === 410 || status === 404) {
             setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
             setWindowSchedule(err?.response?.data?.schedule || null);
             setPrecheckLoading(false);
           }
-          
+
           // 409 = already submitted or session locked
           if (status === 409) {
             const errMsg = err?.response?.data?.error;
@@ -1264,6 +1265,7 @@ export default function TakeAssessment() {
 
   const requestFullscreen = async () => {
     const elem = document.documentElement;
+    setFsLoading(true);
     try {
       setFsError('');
 
@@ -1320,6 +1322,8 @@ export default function TakeAssessment() {
     } catch (err) {
       console.error('Fullscreen error:', err);
       setFsError('Fullscreen mode is required. Please ensure browser permissions are allowed and try again.');
+    } finally {
+      setFsLoading(false);
     }
   };
 
@@ -1951,8 +1955,20 @@ export default function TakeAssessment() {
                   className="fs-primary"
                   type="button"
                   onClick={requestFullscreen}
+                  disabled={fsLoading}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minWidth: '160px' }}
                 >
-                  Enter Full Screen
+                  {fsLoading ? (
+                    <>
+                      <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" style={{ opacity: 0.25 }} />
+                        <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor" />
+                      </svg>
+                      Loading...
+                    </>
+                  ) : (
+                    "Enter Full Screen"
+                  )}
                 </button>
               </div>
             </div>
