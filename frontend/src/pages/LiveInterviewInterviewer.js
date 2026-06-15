@@ -374,6 +374,9 @@ function LiveInterviewInterviewer() {
       case 'violation':
         setViolations(prev => [data, ...prev]);
         const alertLabel = data.violation_type === 'NO_FACE' ? 'No Face Detected' :
+          data.violation_type === 'EXTRA_PERSON_DETECTED' ? 'Multiple Faces Detected' :
+          data.violation_type === 'MOBILE_PHONE_DETECTED' ? 'Mobile Phone Detected' :
+          data.violation_type === 'SCREEN_SHARE_STOPPED' ? 'Candidate Stopped Screen Share' :
           data.violation_type === 'MULTIPLE_FACES' ? 'Multiple Faces Detected' :
             data.violation_type === 'TAB_SWITCH' ? 'Candidate Switched Tabs' : 'Candidate Left Fullscreen';
         showNotification(`🔴 Malpractice Alert: ${alertLabel}`, 'error');
