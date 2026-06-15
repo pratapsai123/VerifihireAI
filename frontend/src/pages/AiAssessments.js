@@ -29,20 +29,22 @@ const AiAssessments = () => {
 
 
 
-    useEffect(() => {
-        const fetchAssessments = async () => {
-            try {
-                // Using API_BASE_URL from config
-                const response = await axios.get(`${API_BASE_URL}/ai/`);
-                setAssessments(response.data);
-                setLoading(false);
-            } catch (err) {
-                console.error('Error fetching assessments:', err);
-                setError('Error loading assessments. Is the backend running?');
-                setLoading(false);
-            }
-        };
+    const fetchAssessments = async () => {
+        setLoading(true);
+        try {
+            // Using API_BASE_URL from config
+            const response = await axios.get(`${API_BASE_URL}/ai/`);
+            setAssessments(response.data);
+            setError(null);
+            setLoading(false);
+        } catch (err) {
+            console.error('Error fetching assessments:', err);
+            setError('Error loading assessments. Is the backend running?');
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchAssessments();
     }, []);
 
@@ -202,18 +204,40 @@ const AiAssessments = () => {
                             </h1>
                             <p style={{ color: '#6b7280', fontSize: '0.875rem', marginTop: '0.25rem' }}>Manage and share your AI-generated technical tests.</p>
                         </div>
-                        <button
-                            onClick={() => navigate('/create-assessment')}
-                            style={{
-                                padding: '0.6rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
-                                background: '#4318FF', color: 'white', border: 'none', borderRadius: '10px',
-                                fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s',
-                                boxShadow: '0 4px 12px rgba(67, 24, 255, 0.2)', width: 'fit-content'
-                            }}
-                        >
-                            <i className="fa-solid fa-plus" style={{ fontSize: '0.8rem' }}></i>
-                            <span>Create New</span>
-                        </button>
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+                            <button
+                                className="global-btn-back"
+                                type="button"
+                                onClick={() => navigate(-1)}
+                            >
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
+                                Back
+                            </button>
+                            <button
+                                onClick={fetchAssessments}
+                                style={{
+                                    padding: '0.6rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                    background: '#F1F5F9', color: '#475569', border: '1px solid #CBD5E1', borderRadius: '10px',
+                                    fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s',
+                                    width: 'fit-content'
+                                }}
+                            >
+                                <i className="fa-solid fa-arrows-rotate" style={{ fontSize: '0.8rem' }}></i>
+                                <span>Refresh</span>
+                            </button>
+                            <button
+                                onClick={() => navigate('/create-assessment')}
+                                style={{
+                                    padding: '0.6rem 1.2rem', display: 'flex', alignItems: 'center', gap: '0.5rem',
+                                    background: '#4318FF', color: 'white', border: 'none', borderRadius: '10px',
+                                    fontWeight: '700', fontSize: '0.85rem', cursor: 'pointer', transition: 'all 0.2s',
+                                    boxShadow: '0 4px 12px rgba(67, 24, 255, 0.2)', width: 'fit-content'
+                                }}
+                            >
+                                <i className="fa-solid fa-plus" style={{ fontSize: '0.8rem' }}></i>
+                                <span>Create New</span>
+                            </button>
+                        </div>
                     </div>
 
                     {/* Filter Tabs */}
