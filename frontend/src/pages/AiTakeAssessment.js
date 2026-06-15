@@ -870,16 +870,10 @@ const AiTakeAssessment = () => {
 
     const startDeepfaceMonitoring = useCallback(async (candidateId) => {
 
-        const normalizedEmail = String(candidateId).trim().toLowerCase();
-
         try {
-
             const res = await axios.post(`${DEEPFACE_BASE_URL}/session/start`, {
-
-                person_id: normalizedEmail
-
+                person_id: candidateId
             });
-
             const sessionId = res.data.session_id;
 
             setDfSessionId(sessionId);
@@ -1396,7 +1390,13 @@ const AiTakeAssessment = () => {
             }
 
             // Phase and timer initialization
-            if (current_phase) setPhase(current_phase);
+            let resolvedPhase = current_phase;
+            const mcqsArrForPhase = candidate_questions?.mcqs || assessment?.generated_content?.mcqs || [];
+            if ((!resolvedPhase || resolvedPhase === 'mcq') && mcqsArrForPhase.length === 0) {
+                resolvedPhase = 'coding';
+            }
+            if (resolvedPhase) setPhase(resolvedPhase);
+
             if (mcq_time_left !== undefined) setMcqTimeLeft(mcq_time_left);
             if (coding_time_left !== undefined) setCodingTimeLeft(coding_time_left);
 
@@ -2747,7 +2747,6 @@ const AiTakeAssessment = () => {
             setRegError('');
 
             try {
-                const normalizedEmail = (candidateEmail || '').trim().toLowerCase();
                 const imageB64 = mismatchSnapshot.includes(',') ? mismatchSnapshot.split(',')[1] : mismatchSnapshot;
 
                 // DO NOT re-register in DeepFace here — the backend (CreateSubmissionView) will:
