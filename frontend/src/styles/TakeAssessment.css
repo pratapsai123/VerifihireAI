@@ -151,6 +151,11 @@
   color: #fff;
 }
 
+.fs-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 .fs-secondary {
   background: #fff;
   border-color: #e2e8f0;
