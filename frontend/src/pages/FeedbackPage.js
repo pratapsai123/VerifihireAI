@@ -33,7 +33,7 @@ const FeedbackPage = () => {
 
   const [recommendToHire, setRecommendToHire] = useState('');
   const [comments, setComments] = useState('');
-  
+
   const [skills, setSkills] = useState([
     { name: 'Problem Solving', score: 0, max: 5 },
     { name: 'Data Structures', score: 0, max: 5 },
@@ -287,7 +287,7 @@ ${comments || 'No additional comments provided.'}
           <button onClick={handleBackToInterview} className="feedback-back-btn">
             <i className="fas fa-arrow-left"></i> Back to Interview
           </button>
-          
+
           <div className="feedback-participants-row">
             <div className="feedback-participant-item">
               <span className="label">Candidate:</span>
@@ -335,7 +335,7 @@ ${comments || 'No additional comments provided.'}
                   return (
                     <div key={item.key} className="star-row">
                       <label className="star-label">{item.label}</label>
-                      <div 
+                      <div
                         className="stars-wrapper"
                         onMouseLeave={() => handleStarMouseLeave(item.key)}
                       >
@@ -357,7 +357,7 @@ ${comments || 'No additional comments provided.'}
               <div className="comments-column">
                 <div className="star-row">
                   <label className="star-label">Overall rating <span className="required">*</span></label>
-                  <div 
+                  <div
                     className="stars-wrapper"
                     onMouseLeave={() => handleStarMouseLeave('overallRating')}
                   >
@@ -471,7 +471,7 @@ ${comments || 'No additional comments provided.'}
                         ) : (
                           <span className="skill-name-static">{skill.name}</span>
                         )}
-                        
+
                         <div className="score-input-wrapper">
                           <input
                             type="number"

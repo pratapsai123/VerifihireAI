@@ -34,6 +34,10 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage, partici
 
     // 🔥 Close previous socket (safety)
     if (socketRef.current) {
+      socketRef.current.onopen = null;
+      socketRef.current.onmessage = null;
+      socketRef.current.onclose = null;
+      socketRef.current.onerror = null;
       socketRef.current.close();
     }
 
@@ -146,6 +150,10 @@ export const useWebSocket = (sessionId, role, sessionExpired, onMessage, partici
         clearInterval(heartbeatIntervalRef.current);
 
       if (socketRef.current) {
+        socketRef.current.onopen = null;
+        socketRef.current.onmessage = null;
+        socketRef.current.onclose = null;
+        socketRef.current.onerror = null;
         socketRef.current.close();
       }
     };

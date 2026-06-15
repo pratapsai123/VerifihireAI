@@ -276,6 +276,7 @@ export const MalpracticeMonitor = ({
       return;
     }
     recentViolationsRef.current[type] = now;
+    console.log("Creating violation:", type);
 
     if (showNotification && type !== 'SCREEN_SHARE_STOPPED') { // We already handled screen share stopped notification
       const label = type === 'NO_FACE' ? 'No Face Detected' :

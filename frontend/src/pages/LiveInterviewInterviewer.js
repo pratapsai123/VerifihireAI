@@ -106,19 +106,27 @@ function LiveInterviewInterviewer() {
   }, [sessionId, participantToken]);
 
   // Load existing malpractice violations
-  useEffect(() => {
-    const loadViolations = async () => {
-      if (sessionId && sessionId !== 'default-session') {
-        try {
-          const resp = await axios.get(`${API_BASE_URL}/interviews/${sessionId}/violations/`);
-          setViolations(resp.data || []);
-        } catch (error) {
-          console.warn('Could not load interview violations:', error);
-        }
+  const fetchLatestViolationSummary = useCallback(async () => {
+    if (sessionId && sessionId !== 'default-session') {
+      try {
+        const resp = await axios.get(`${API_BASE_URL}/interviews/${sessionId}/violations/`);
+        console.log("Violation summary API response:", resp.data);
+        const data = resp.data || [];
+        setViolations(data);
+        const newCounts = data.reduce((acc, v) => {
+          acc[v.violation_type] = (acc[v.violation_type] || 0) + 1;
+          return acc;
+        }, {});
+        console.log("Updating violation counts:", newCounts);
+      } catch (error) {
+        console.warn('Could not load interview violations:', error);
       }
-    };
-    loadViolations();
+    }
   }, [sessionId]);
+
+  useEffect(() => {
+    fetchLatestViolationSummary();
+  }, [sessionId, fetchLatestViolationSummary]);
 
   // Check if session is expired
   useEffect(() => {
@@ -372,7 +380,8 @@ function LiveInterviewInterviewer() {
         handleEndInterview(false);
         break;
       case 'violation':
-        setViolations(prev => [data, ...prev]);
+        console.log("Violation WS received:", data.violation_type, data);
+        fetchLatestViolationSummary();
         const alertLabel = data.violation_type === 'NO_FACE' ? 'No Face Detected' :
           data.violation_type === 'EXTRA_PERSON_DETECTED' ? 'Multiple Faces Detected' :
           data.violation_type === 'MOBILE_PHONE_DETECTED' ? 'Mobile Phone Detected' :
@@ -392,7 +401,7 @@ function LiveInterviewInterviewer() {
         break;
       default: break;
     }
-  }, [myUserId, chatPanelVisible, sessionId, sessionKey, navigate, showNotification, createPeerConnection, createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC, handleScreenShareGranted]);
+  }, [myUserId, chatPanelVisible, sessionId, sessionKey, navigate, showNotification, createPeerConnection, createVideoOffer, handleVideoOffer, handleVideoAnswer, handleIceCandidate, stopWebRTC, handleScreenShareGranted, fetchLatestViolationSummary]);
 
   // 🔥 Centralized Stream Router
   const handleRemoteStream = useCallback((userId, stream) => {

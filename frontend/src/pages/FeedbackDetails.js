@@ -2,6 +2,52 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import { jsPDF } from 'jspdf';
+
+const parseDetailedRatings = (feedbackText, f) => {
+    const ratings = {
+        solutionApproach: null,
+        codingLanguage: null,
+        codeCompleteness: null,
+        useCaseCoverage: null,
+        overallRating: null
+    };
+
+    if (feedbackText) {
+        // Attempt to parse out the ratings
+        const solMatch = feedbackText.match(/-\s*Solution\s*Approach:\s*(\d+)\/5/i);
+        const langMatch = feedbackText.match(/-\s*Coding\s*Language:\s*(\d+)\/5/i);
+        const compMatch = feedbackText.match(/-\s*Code\s*Completeness:\s*(\d+)\/5/i);
+        const useCaseMatch = feedbackText.match(/-\s*Use\s*Case\s*Coverage:\s*(\d+)\/5/i);
+        const overallMatch = feedbackText.match(/-\s*Overall\s*Rating:\s*(\d+)\/5/i);
+
+        if (solMatch) ratings.solutionApproach = parseInt(solMatch[1], 10);
+        if (langMatch) ratings.codingLanguage = parseInt(langMatch[1], 10);
+        if (compMatch) ratings.codeCompleteness = parseInt(compMatch[1], 10);
+        if (useCaseMatch) ratings.useCaseCoverage = parseInt(useCaseMatch[1], 10);
+        if (overallMatch) ratings.overallRating = parseInt(overallMatch[1], 10);
+    }
+
+    // Fallbacks for older data if not found in text
+    if (ratings.solutionApproach === null) {
+        ratings.solutionApproach = f.interviewer_technical_rating || null;
+    }
+    if (ratings.overallRating === null) {
+        ratings.overallRating = f.interviewer_average_rating || f.interviewer_rating || null;
+    }
+
+    return ratings;
+};
+
+const renderRatingValue = (val) => {
+    if (val === null || val === undefined) return 'N/A';
+    return `${val}/5`;
+};
+
+const cleanFeedbackNotes = (text) => {
+    if (!text) return '';
+    return text.replace(/--- Detailed Ratings ---[\s\S]*?(?=---|$)/i, '').replace(/\n{3,}/g, '\n\n').trim();
+};
 
 export default function FeedbackDetails() {
     const location = useLocation();
@@ -121,78 +167,205 @@ export default function FeedbackDetails() {
     const handleExport = () => {
         if (!inv) return;
 
-        let content = `==================================================\n`;
-        content += `          VERIFIHIRE INTERVIEW FEEDBACK REPORT     \n`;
-        content += `==================================================\n\n`;
+        const doc = new jsPDF();
+        let y = 20;
+        const pageHeight = doc.internal.pageSize.height;
+        const pageWidth = doc.internal.pageSize.width;
+        const margin = 15;
+        const contentWidth = pageWidth - 2 * margin;
 
-        content += `CANDIDATE DETAILS\n`;
-        content += `-----------------\n`;
-        content += `Candidate Name: ${inv.name || 'N/A'}\n`;
-        content += `Candidate Email: ${inv.email || 'N/A'}\n`;
-        content += `Interview: ${inv.interview?.name || 'N/A'}\n`;
-        content += `Scheduled Time: ${inv.start_time ? new Date(inv.start_time).toLocaleString() : 'N/A'}\n\n`;
-
-        if (violationsData) {
-            content += `MALPRACTICE & INTEGRITY SUMMARY\n`;
-            content += `--------------------------------\n`;
-            if (violationsData.violation_summary && Object.keys(violationsData.violation_summary).length > 0) {
-                content += `Violation Breakdown:\n`;
-                Object.entries(violationsData.violation_summary).forEach(([type, count]) => {
-                    content += `  - ${convertViolationName(type)}: ${count}\n`;
-                });
-                content += `\n`;
+        const checkPageOverflow = (lineHeight) => {
+            if (y + lineHeight > pageHeight - margin) {
+                doc.addPage();
+                y = 20;
             }
-            content += `Total Violations: ${violationsData.total_violations || 0}\n`;
-            content += `High Severity: ${violationsData.high_count || 0}\n`;
-            content += `Medium Severity: ${violationsData.medium_count || 0}\n`;
-            content += `Low Severity: ${violationsData.low_count || 0}\n`;
-            content += `Overall Risk Score: ${violationsData.risk_score || 0}\n`;
-            content += `Integrity Status: ${violationsData.integrity_status || 'Clean'}\n\n`;
+        };
+
+        // Title Header
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(18);
+        doc.setTextColor(37, 99, 235); // #2563eb
+        doc.text("VERIFIHIRE INTERVIEW FEEDBACK REPORT", margin, y);
+        y += 10;
+
+        doc.setDrawColor(226, 232, 240); // #e2e8f0
+        doc.setLineWidth(0.5);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 10;
+
+        // Candidate Details Section
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42); // #0f172a
+        doc.text("CANDIDATE DETAILS", margin, y);
+        y += 7;
+
+        doc.setFont("helvetica", "normal");
+        doc.setFontSize(10);
+        doc.setTextColor(51, 65, 85); // #334155
+
+        const details = [
+            `Candidate Name: ${inv.name || 'N/A'}`,
+            `Candidate Email: ${inv.email || 'N/A'}`,
+            `Interview: ${inv.interview?.name || 'N/A'}`,
+            `Scheduled Time: ${inv.start_time ? new Date(inv.start_time).toLocaleString() : 'N/A'}`
+        ];
+
+        details.forEach(detail => {
+            checkPageOverflow(6);
+            doc.text(detail, margin, y);
+            y += 6;
+        });
+        y += 6;
+
+        // Malpractice & Integrity Summary Section
+        if (violationsData) {
+            checkPageOverflow(15);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(12);
+            doc.setTextColor(15, 23, 42);
+            doc.text("MALPRACTICE & INTEGRITY SUMMARY", margin, y);
+            y += 7;
+
+            doc.setFont("helvetica", "normal");
+            doc.setFontSize(10);
+            doc.setTextColor(51, 65, 85);
+
+            if (violationsData.violation_summary && Object.keys(violationsData.violation_summary).length > 0) {
+                checkPageOverflow(6);
+                doc.text("Violation Breakdown:", margin, y);
+                y += 6;
+                Object.entries(violationsData.violation_summary).forEach(([type, count]) => {
+                    checkPageOverflow(6);
+                    doc.text(`  - ${convertViolationName(type)}: ${count}`, margin, y);
+                    y += 6;
+                });
+            }
+
+            const stats = [
+                `Total Violations: ${violationsData.total_violations || 0}`,
+                `High Severity: ${violationsData.high_count || 0}`,
+                `Medium Severity: ${violationsData.medium_count || 0}`,
+                `Low Severity: ${violationsData.low_count || 0}`,
+                `Overall Risk Score: ${violationsData.risk_score || 0}`,
+                `Integrity Status: ${violationsData.integrity_status || 'Clean'}`
+            ];
+
+            y += 2;
+            stats.forEach(stat => {
+                checkPageOverflow(6);
+                doc.text(stat, margin, y);
+                y += 6;
+            });
+            y += 6;
 
             if (violationsData.violations && violationsData.violations.length > 0) {
-                content += `VIOLATION TIMELINE\n`;
-                content += `------------------\n`;
-                content += `Time     | Violation Type       | Severity | Duration\n`;
-                content += `---------|----------------------|----------|----------\n`;
+                checkPageOverflow(15);
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(11);
+                doc.setTextColor(15, 23, 42);
+                doc.text("Violation Timeline:", margin, y);
+                y += 7;
+
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(9);
+                doc.setTextColor(100, 116, 139);
+                doc.text("Time", margin, y);
+                doc.text("Violation Type", margin + 25, y);
+                doc.text("Severity", margin + 85, y);
+                doc.text("Duration", margin + 125, y);
+                y += 5;
+
+                doc.setDrawColor(241, 245, 249);
+                doc.line(margin, y, pageWidth - margin, y);
+                y += 5;
+
+                doc.setFont("helvetica", "normal");
+                doc.setTextColor(51, 65, 85);
                 violationsData.violations.forEach(v => {
-                    const timeStr = formatTime(v.timestamp).padEnd(8);
-                    const typeStr = convertViolationName(v.violation_type).padEnd(20);
-                    const sevStr = String(v.severity).padEnd(8);
-                    const durStr = (v.duration > 0 ? `${v.duration} sec` : '-').padEnd(8);
-                    content += `${timeStr} | ${typeStr} | ${sevStr} | ${durStr}\n`;
+                    checkPageOverflow(6);
+                    const timeStr = formatTime(v.timestamp);
+                    const typeStr = convertViolationName(v.violation_type);
+                    const sevStr = String(v.severity);
+                    const durStr = v.duration > 0 ? `${v.duration} sec` : '-';
+
+                    doc.text(timeStr, margin, y);
+                    doc.text(typeStr, margin + 25, y);
+                    doc.text(sevStr, margin + 85, y);
+                    doc.text(durStr, margin + 125, y);
+                    y += 6;
                 });
-                content += `\n`;
+                y += 6;
             }
         }
 
-        content += `INTERVIEWER FEEDBACK DETAILS\n`;
-        content += `----------------------------\n`;
+        // Interviewer Feedback Details Section
+        checkPageOverflow(15);
+        doc.setFont("helvetica", "bold");
+        doc.setFontSize(12);
+        doc.setTextColor(15, 23, 42);
+        doc.text("INTERVIEWER FEEDBACK DETAILS", margin, y);
+        y += 7;
+
         if (inv.feedbacks && inv.feedbacks.length > 0) {
             inv.feedbacks.forEach((f, idx) => {
                 const isInterviewer = !f.participant_email ||
                     (inv.interviewer_email && f.participant_email.toLowerCase() === inv.interviewer_email.toLowerCase());
                 const role = isInterviewer ? 'Interviewer' : 'Panel Member';
 
-                content += `[${role}] ${f.participant_name || f.participant_email || 'Panelist'}\n`;
-                content += `- Overall Rating: ${f.interviewer_average_rating || f.interviewer_rating || 'N/A'}/5\n`;
-                if (f.interviewer_technical_rating) content += `- Technical Rating: ${f.interviewer_technical_rating}/5\n`;
-                if (f.interviewer_communication_rating) content += `- Communication Rating: ${f.interviewer_communication_rating}/5\n`;
-                if (f.interviewer_team_fit_rating) content += `- Team Fit Rating: ${f.interviewer_team_fit_rating}/5\n`;
-                content += `- Feedback Notes:\n${f.interviewer_feedback || 'No written feedback provided.'}\n`;
-                content += `--------------------------------------------------\n`;
+                checkPageOverflow(12);
+                doc.setFont("helvetica", "bold");
+                doc.setFontSize(10);
+                doc.setTextColor(15, 23, 42);
+                doc.text(`[${role}] ${f.participant_name || f.participant_email || 'Panelist'}`, margin, y);
+                y += 6;
+
+                doc.setFont("helvetica", "normal");
+                doc.setFontSize(10);
+                doc.setTextColor(51, 65, 85);
+
+                const detailedRatings = parseDetailedRatings(f.interviewer_feedback, f);
+                const ratingsList = [
+                    `Solution Approach: ${renderRatingValue(detailedRatings.solutionApproach)}`,
+                    `Coding Language: ${renderRatingValue(detailedRatings.codingLanguage)}`,
+                    `Code Completeness: ${renderRatingValue(detailedRatings.codeCompleteness)}`,
+                    `Use Case Coverage: ${renderRatingValue(detailedRatings.useCaseCoverage)}`,
+                    `Overall Rating: ${renderRatingValue(detailedRatings.overallRating)}`
+                ];
+
+                ratingsList.forEach(ratingStr => {
+                    checkPageOverflow(6);
+                    doc.text(`- ${ratingStr}`, margin, y);
+                    y += 6;
+                });
+
+                // Feedback Notes
+                checkPageOverflow(8);
+                doc.setFont("helvetica", "bold");
+                doc.text("Feedback Notes:", margin, y);
+                y += 5;
+
+                doc.setFont("helvetica", "normal");
+                const notes = cleanFeedbackNotes(f.interviewer_feedback) || 'No written feedback provided.';
+                const splitNotes = doc.splitTextToSize(notes, contentWidth);
+                splitNotes.forEach(line => {
+                    checkPageOverflow(5);
+                    doc.text(line, margin, y);
+                    y += 5;
+                });
+                
+                y += 6;
+                doc.setDrawColor(226, 232, 240);
+                doc.line(margin, y, pageWidth - margin, y);
+                y += 10;
             });
         } else {
-            content += `No interviewer feedback recorded.\n`;
+            checkPageOverflow(8);
+            doc.setFont("helvetica", "normal");
+            doc.text("No interviewer feedback recorded.", margin, y);
         }
 
-        // Download the file
-        const element = document.createElement("a");
-        const file = new Blob([content], { type: 'text/plain' });
-        element.href = URL.createObjectURL(file);
-        element.download = `Feedback_Report_${inv.name || 'Candidate'}.txt`;
-        document.body.appendChild(element);
-        element.click();
-        document.body.removeChild(element);
+        doc.save(`Feedback_Report_${inv.name || 'Candidate'}.pdf`);
     };
 
     const renderStars = (rating) => {
@@ -308,34 +481,47 @@ export default function FeedbackDetails() {
                                             )}
                                         </div>
 
-                                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.25rem', margin: '1rem 0', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                                            <div>
-                                                <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Overall Rating</div>
-                                                {renderStars(f.interviewer_average_rating || f.interviewer_rating)}
-                                            </div>
-                                            {f.interviewer_technical_rating && (
-                                                <div>
-                                                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Technical Rating</div>
-                                                    {renderStars(f.interviewer_technical_rating)}
+                                        {(() => {
+                                            const detailedRatings = parseDetailedRatings(f.interviewer_feedback, f);
+                                            return (
+                                                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: '1.25rem', margin: '1rem 0', padding: '1rem', background: '#fff', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Solution Approach</div>
+                                                        <div style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1e293b' }}>
+                                                            {renderRatingValue(detailedRatings.solutionApproach)}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Coding Language</div>
+                                                        <div style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1e293b' }}>
+                                                            {renderRatingValue(detailedRatings.codingLanguage)}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Code Completeness</div>
+                                                        <div style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1e293b' }}>
+                                                            {renderRatingValue(detailedRatings.codeCompleteness)}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Use Case Coverage</div>
+                                                        <div style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1e293b' }}>
+                                                            {renderRatingValue(detailedRatings.useCaseCoverage)}
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Overall Rating</div>
+                                                        <div style={{ fontSize: '1.125rem', fontWeight: '700', color: '#1e293b' }}>
+                                                            {renderRatingValue(detailedRatings.overallRating)}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            )}
-                                            {f.interviewer_communication_rating && (
-                                                <div>
-                                                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Communication Rating</div>
-                                                    {renderStars(f.interviewer_communication_rating)}
-                                                </div>
-                                            )}
-                                            {f.interviewer_team_fit_rating && (
-                                                <div>
-                                                    <div style={{ fontSize: '0.875rem', color: '#64748b', marginBottom: '0.25rem', fontWeight: '500' }}>Team Fit Rating</div>
-                                                    {renderStars(f.interviewer_team_fit_rating)}
-                                                </div>
-                                            )}
-                                        </div>
+                                            );
+                                        })()}
                                         <div style={{ marginTop: '1.25rem' }}>
                                             <strong style={{ display: 'block', marginBottom: '0.5rem', color: '#334155', fontSize: '0.9rem' }}>Feedback Notes:</strong>
                                             <div style={{ whiteSpace: 'pre-wrap', color: '#334155', fontSize: '0.925rem', lineHeight: '1.6', background: '#fff', padding: '1.25rem', borderRadius: '8px', border: '1px solid #e2e8f0' }}>
-                                                {f.interviewer_feedback || 'No written feedback provided.'}
+                                                {cleanFeedbackNotes(f.interviewer_feedback) || 'No written feedback provided.'}
                                             </div>
                                         </div>
                                         {f.updated_at && (

@@ -2245,7 +2245,13 @@ def create_interview_violation_view(request):
         ).exists()
         
         if duplicate_exists:
-            return Response({"message": "Duplicate violation ignored"}, status=status.HTTP_200_OK)
+            print(f"Duplicate violation ignored: {violation_type}")
+            return Response({
+                "success": True,
+                "message": "Duplicate violation ignored"
+            }, status=status.HTTP_200_OK)
+
+        print(f"Creating violation: {violation_type}")
 
         violation = InterviewViolation.objects.create(
             interview=invitation.interview,

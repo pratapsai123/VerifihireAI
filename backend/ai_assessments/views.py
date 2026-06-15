@@ -379,9 +379,45 @@ def _get_unified_identity_mismatch_fields(request, submission):
     if not orig_url:
         orig_url = clean_b64(submission.original_identity_photo)
     
-    intruder_url = clean_b64(getattr(submission, 'intruder_photo', None))
+    # Fetch Box 2 ("Intruder Photo" / "Person During Assessment")
+    # Priority 1: The assessment-specific folder in DeepFace
+    # Priority 2: DeepFace microservice HTTP API
+    # Priority 3: The database intruder_photo field
+    df_intruder_url = None
+    try:
+        from pathlib import Path
+        from django.conf import settings
+        import base64
+        deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
+        p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
+        
+        # Check both standard_assessment and assessments
+        session_dir = deepface_data_dir / p_id / 'standard_assessment' / str(submission.assessment.share_token)
+        if not session_dir.exists():
+            session_dir = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token)
+        
+        target_snap_file = None
+        for candidate_name in ['registration_snapshot.jpg', 'face_0.jpg']:
+            possible = session_dir / candidate_name
+            if possible.exists():
+                target_snap_file = possible
+                break
+                
+        if not target_snap_file and session_dir.exists():
+            for jpg_file in session_dir.glob('*.jpg'):
+                target_snap_file = jpg_file
+                break
+        
+        if target_snap_file and target_snap_file.exists():
+            with open(target_snap_file, 'rb') as f:
+                df_intruder_url = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+    except Exception:
+        pass
+
+    intruder_url = df_intruder_url
+    
     is_automatic = getattr(submission.assessment, 'creation_type', 'manual') == 'automatic' if getattr(submission, 'assessment', None) else False
-    if is_automatic:
+    if not intruder_url and is_automatic:
         try:
             from api._imports import DEEPFACE_BASE_URL
             import requests
@@ -395,36 +431,7 @@ def _get_unified_identity_mismatch_fields(request, submission):
             logger.warning(f"Failed to fetch assessment photo from DeepFace API: {e}")
 
     if not intruder_url:
-        try:
-            from pathlib import Path
-            from django.conf import settings
-            import base64
-            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-            p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{submission.assessment.share_token}"
-            
-            # Check both standard_assessment and assessments
-            session_dir = deepface_data_dir / p_id / 'standard_assessment' / str(submission.assessment.share_token)
-            if not session_dir.exists():
-                session_dir = deepface_data_dir / p_id / 'assessments' / str(submission.assessment.share_token)
-            
-            # Try multiple possible filenames — DeepFace saves as either name depending on registration method
-            target_snap_file = None
-            for candidate_name in ['registration_snapshot.jpg', 'face_0.jpg']:
-                possible = session_dir / candidate_name
-                if possible.exists():
-                    target_snap_file = possible
-                    break
-            # Fallback: any jpg in the session directory
-            if not target_snap_file and session_dir.exists():
-                for jpg_file in session_dir.glob('*.jpg'):
-                    target_snap_file = jpg_file
-                    break
-            
-            if target_snap_file and target_snap_file.exists():
-                with open(target_snap_file, 'rb') as f:
-                    intruder_url = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
-        except Exception:
-            pass
+        intruder_url = clean_b64(getattr(submission, 'intruder_photo', None))
         
     details = getattr(submission, 'identity_mismatch_details', {})
 
@@ -1597,11 +1604,20 @@ class UpdateAssessmentIntegrityView(APIView):
 
                     integrity_snap.save()
 
-                    # If face_mismatch detected during session, save webcam as intruder_photo if not already captured
-                    # (We no longer flag identity_mismatch_detected here per user request, to restrict approval workflow to registration only)
-                    if event_type in ['face_mismatch', 'verification_failed', 'face_mismatch_on_reentry']:
+                    # If face_mismatch_on_reentry detected (explicit re-entry verification),
+                    # flag identity mismatch. Regular face_mismatch/verification_failed from
+                    # WebSocket monitoring are soft proctoring warnings (lighting, angle, threshold)
+                    # and should NOT trigger the identity mismatch flag — that is handled by
+                    # CreateSubmissionView when a genuinely different person uses someone's PAN.
+                    if event_type == 'face_mismatch_on_reentry':
                         if not submission.intruder_photo and webcam_b64:
                             submission.intruder_photo = webcam_b64
+                        
+                        submission.identity_mismatch_detected = True
+                        if not submission.identity_mismatch_details:
+                            submission.identity_mismatch_details = {}
+                        submission.identity_mismatch_details['mismatch_at'] = timezone.now().isoformat()
+                        submission.identity_mismatch_details['mismatch_type'] = event_type
 
                 except Exception as se:
                     logger.error(f"Failed to save AI integrity screenshot: {str(se)}")
@@ -1796,6 +1812,8 @@ class AssessmentDetailView(APIView):
                         "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                         "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                         "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                        "has_screenshot": bool(snap.screenshot),
+                        "has_webcam_screenshot": bool(snap.webcam_screenshot),
                     })
 
                 photo_url = _get_candidate_photo_url(request, sub)
@@ -2586,6 +2604,8 @@ class AIAssessmentSubmissionDetailView(generics.RetrieveDestroyAPIView):
                 "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                 "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                 "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                "has_screenshot": bool(snap.screenshot),
+                "has_webcam_screenshot": bool(snap.webcam_screenshot),
             })
 
         # Get candidate photo using unified helper
@@ -2955,8 +2975,36 @@ class AIAssessmentReportDownloadView(APIView):
                 target_file = None
                 is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
 
-                # Step 1: Decode original_identity_photo if present on the submission
-                if submission.original_identity_photo:
+                # --- STEP 0: MIRROR UI LOGIC ---
+                # If there's an identity mismatch, the main candidate profile photo should be the intruder/assessment face (Box 2)
+                if getattr(submission, 'identity_mismatch_detected', False):
+                    if getattr(submission, 'intruder_photo', None):
+                        try:
+                            temp_intr = _save_to_temp_file(submission.intruder_photo, is_b64=True)
+                            temp_files_to_cleanup.append(temp_intr)
+                            target_file = Path(temp_intr)
+                        except Exception as e:
+                            logger.error(f"PDF Gen: Failed to save intruder_photo for Candidate Profile: {e}")
+                            
+                    if not target_file and is_automatic:
+                        from api._imports import DEEPFACE_BASE_URL
+                        import requests
+                        token = str(assessment.share_token)
+                        pan = getattr(submission, 'pan_number', None)
+                        email = submission.candidate_email.lower().strip() if submission.candidate_email else None
+                        person_id = pan.lower().strip() if pan else f"{email}_{token}"
+                        df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}/assessments/{token}/photo"
+                        try:
+                            resp = requests.get(df_url, timeout=5)
+                            if resp.status_code == 200:
+                                temp_path = _save_to_temp_file(resp.content, is_b64=False)
+                                temp_files_to_cleanup.append(temp_path)
+                                target_file = Path(temp_path)
+                        except Exception as e:
+                            logger.warning(f"PDF Gen: Failed to fetch Box 2 photo for Candidate Profile: {e}")
+
+                # Step 1: Decode original_identity_photo if present on the submission (Box 1 fallback)
+                if not target_file and getattr(submission, 'original_identity_photo', None):
                     try:
                         temp_orig = _save_to_temp_file(submission.original_identity_photo, is_b64=True)
                         temp_files_to_cleanup.append(temp_orig)
@@ -3702,6 +3750,8 @@ class AIAssessmentSubmissionListView(APIView):
                     "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                     "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                    "has_screenshot": bool(snap.screenshot),
+                    "has_webcam_screenshot": bool(snap.webcam_screenshot),
                 })
 
             photo_url = _get_candidate_photo_url(request, sub)
@@ -3807,6 +3857,8 @@ class AIAssessmentResultsView(APIView):
                     "timestamp": snap.timestamp.isoformat() if snap.timestamp else None,
                     "screenshot_url": request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                    "has_screenshot": bool(snap.screenshot),
+                    "has_webcam_screenshot": bool(snap.webcam_screenshot),
                 })
             
             results.append({
