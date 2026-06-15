@@ -985,7 +985,12 @@ function ReviewPage() {
       {/* Main Content */}
       <div className="page-container">
         <div className="review-wrapper">
-          <h3 className="page-title-centered">Review Assessment</h3>
+          <div className="view-assessment-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
+            <button type="button" className="view-assessment-back-btn" onClick={handleBack}>
+              ← Back
+            </button>
+            <h3 className="page-title-centered" style={{ margin: 0 }}>Review Assessment</h3>
+          </div>
 
           {/* Assessment Summary & Configuration */}
           <div className="summary-section">
@@ -1560,9 +1565,6 @@ function ReviewPage() {
           </div>
 
           <div className="form-actions" style={{ marginTop: '2.5rem', borderTop: '2px solid #f1f5f9', paddingTop: '2rem' }}>
-            <button type="button" onClick={handleBack} className="btn btn-secondary">
-              Back
-            </button>
             <button type="button" onClick={handleCreateAssessment} className="btn btn-primary">
               Create Assessment
             </button>

@@ -697,6 +697,7 @@
   overflow: hidden;
   backdrop-filter: blur(20px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  height: 100%;
 }
 
 .faa-matrix-card:hover {
@@ -1045,6 +1046,9 @@
   gap: 20px;
   position: relative;
   z-index: 1;
+  opacity: 0;
+  transform: translateY(20px);
+  will-change: transform, opacity;
 }
 
 .funnel-node-wrapper {
@@ -1177,6 +1181,9 @@
 .faa-funnel-console-wrapper {
   flex: 0.9;
   width: 100%;
+  opacity: 0;
+  transform: translateX(30px);
+  will-change: transform, opacity;
 }
 
 @media (min-width: 1024px) {
@@ -1364,6 +1371,7 @@
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .faa-feature-card:hover {
@@ -1497,6 +1505,9 @@
   transition: all 0.4s;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .faa-compare-card:hover {
@@ -1612,6 +1623,376 @@
 }
 
 /* ═══════════════════════════════
+   MANUAL MODE — 3-STEP WIZARD MOCKUP
+   ═══════════════════════════════ */
+
+/* Stepper Navigation */
+.mock-stepper-nav {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  padding: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.mock-stepper-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #475569;
+  padding: 8px 6px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  white-space: nowrap;
+}
+
+.mock-stepper-tab .stepper-num {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.58rem;
+  font-weight: 800;
+  transition: all 0.35s;
+}
+
+.mock-stepper-tab:hover {
+  color: #94A3B8;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mock-stepper-tab.active-step {
+  color: #E2E8F0;
+  background: rgba(59, 130, 246, 0.12);
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.1);
+}
+
+.mock-stepper-tab.active-step .stepper-num {
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+/* Step Content Panels */
+.mock-step-panel {
+  animation: faaStepPanelIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes faaStepPanelIn {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Screening Chips — Pass / Fail */
+.mock-screening-results {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.mock-screen-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0;
+  animation: faaChipSlideIn 0.4s ease-out forwards;
+}
+
+.mock-screen-chip:nth-child(1) { animation-delay: 0.3s; }
+.mock-screen-chip:nth-child(2) { animation-delay: 0.6s; }
+.mock-screen-chip:nth-child(3) { animation-delay: 0.9s; }
+.mock-screen-chip:nth-child(4) { animation-delay: 1.2s; }
+
+@keyframes faaChipSlideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.mock-screen-chip.pass {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  color: #34D399;
+}
+
+.mock-screen-chip.fail {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.18);
+  color: #F87171;
+}
+
+.chip-badge {
+  font-size: 0.6rem;
+  font-weight: 800;
+  padding: 1px 6px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.chip-badge.pass-badge {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10B981;
+}
+
+.chip-badge.fail-badge {
+  background: rgba(239, 68, 68, 0.15);
+  color: #EF4444;
+}
+
+/* CSV Download Button */
+.mock-csv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 7px 14px;
+  border-radius: 7px;
+  color: #34D399;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: default;
+  margin-top: 8px;
+  opacity: 0;
+  animation: faaStepIn 0.4s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+/* Step 2: Assessment — Role Selector & Date Picker */
+.mock-role-selector {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: #A78BFA;
+  font-weight: 600;
+}
+
+.mock-role-selector .role-dropdown-icon {
+  color: #64748B;
+  font-size: 0.6rem;
+}
+
+.mock-validity-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mock-validity-field {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 7px;
+  padding: 7px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mock-validity-field .vf-label {
+  font-size: 0.56rem;
+  color: #475569;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mock-validity-field .vf-value {
+  font-size: 0.72rem;
+  color: #F59E0B;
+  font-weight: 700;
+}
+
+/* Assessment Feature Tags */
+.mock-feature-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.mock-feature-tag {
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.mock-feature-tag.tag-purple {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  color: #A78BFA;
+}
+
+.mock-feature-tag.tag-blue {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+}
+
+.mock-invite-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+  padding: 8px 14px;
+  border-radius: 7px;
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  margin-top: 8px;
+  cursor: default;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+/* Step 3: AI Interview Chat Bubble */
+.mock-interview-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mock-candidate-action {
+  background: rgba(245, 158, 11, 0.06);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+  color: #FBBF24;
+  font-weight: 600;
+}
+
+.mock-candidate-action .action-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #F59E0B;
+  animation: faaConveyorPulse 1.5s ease-in-out infinite;
+}
+
+.mock-chat-bubble {
+  background: rgba(59, 130, 246, 0.06);
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 10px 10px 10px 2px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  opacity: 0;
+  animation: faaStepIn 0.5s ease-out forwards;
+  animation-delay: 0.6s;
+}
+
+.mock-chat-sender {
+  font-size: 0.6rem;
+  color: #60A5FA;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.mock-chat-sender .sender-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #3B82F6;
+  animation: faaPing 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.mock-chat-msg {
+  font-size: 0.72rem;
+  color: #CBD5E1;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.mock-question-sources {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.mock-q-source {
+  font-size: 0.55rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.mock-q-source.src-jd {
+  background: rgba(59, 130, 246, 0.1);
+  color: #60A5FA;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.mock-q-source.src-resume {
+  background: rgba(139, 92, 246, 0.1);
+  color: #A78BFA;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.mock-q-source.src-market {
+  background: rgba(16, 185, 129, 0.1);
+  color: #34D399;
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Stepper Progress Bar below tabs */
+.mock-stepper-progress {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 3px;
+  margin-bottom: 14px;
+  overflow: hidden;
+}
+
+.mock-stepper-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3B82F6, #8B5CF6);
+  border-radius: 3px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ═══════════════════════════════
    ANIMATIONS
    ═══════════════════════════════ */
 @keyframes faaPing {
@@ -1692,6 +2073,9 @@
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .faa-ba-card::before {
@@ -2092,4 +2476,152 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Comparison Card animations */
+.faa-compare-card-wrapper {
+  opacity: 0;
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.manual-wrapper {
+  transform: translateX(-150px);
+}
+
+.auto-wrapper {
+  transform: translateX(150px);
+}
+
+.faa-scroll-reveal.visible .manual-wrapper {
+  animation: slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.faa-scroll-reveal.visible .auto-wrapper {
+  animation: slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Word Reveal Animations */
+.faa-word {
+  opacity: 0;
+  transform: translateY(6px);
+  will-change: transform, opacity;
+}
+
+.faa-scroll-reveal.visible .faa-word {
+  animation: revealWord 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealWord {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Funnel stage reveal animations */
+.faa-scroll-reveal.visible .funnel-stage {
+  animation: revealFunnelStage 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealFunnelStage {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Funnel console reveal animations */
+.faa-scroll-reveal.visible .faa-funnel-console-wrapper {
+  animation: revealFunnelConsole 1.0s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealFunnelConsole {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Matrix card staggered entrance */
+.faa-matrix-card-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.faa-scroll-reveal.visible .faa-matrix-card-wrapper {
+  animation: revealMatrixCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealMatrixCard {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Feature card staggered entrance */
+.faa-feature-card-wrapper {
+  opacity: 0;
+  transform: translateY(30px);
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.faa-scroll-reveal.visible .faa-feature-card-wrapper {
+  animation: revealFeatureCard 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes revealFeatureCard {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Before-After card staggered slide-in entrance */
+.faa-ba-card-wrapper {
+  opacity: 0;
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.before-wrapper {
+  transform: translateX(-120px);
+}
+
+.after-wrapper {
+  transform: translateX(120px);
+}
+
+.faa-scroll-reveal.visible .before-wrapper {
+  animation: slideInLeft 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.faa-scroll-reveal.visible .after-wrapper {
+  animation: slideInRight 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

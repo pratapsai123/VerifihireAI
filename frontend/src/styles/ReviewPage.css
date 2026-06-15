@@ -609,3 +609,26 @@
   }
 }
 
+.view-assessment-back-btn {
+  position: absolute;
+  left: 0;
+  background-color: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #1d4ed8;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem 0.95rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s;
+}
+
+.view-assessment-back-btn:hover {
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+  text-decoration: none;
+}
+

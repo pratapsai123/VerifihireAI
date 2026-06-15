@@ -350,6 +350,14 @@ function AppContent() {
     return () => window.removeEventListener('storage', handleStorageChange);
   }, []);
 
+  // Global scroll-to-top on route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const appScrollEl = document.querySelector('.app-scroll');
+    if (appScrollEl) {
+      appScrollEl.scrollTop = 0;
+    }
+  }, [location.pathname]);
 
   // List of routes that should have the global header hidden for a full-screen experience
   const fullScreenRoutes = [

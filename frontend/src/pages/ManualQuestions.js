@@ -65,7 +65,7 @@ function ManualQuestions() {
         >
           ← Back
         </button>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <h2 className="page-title">Create Custom Questions</h2>
           <p className="page-subtitle">Select a question type to get started</p>
         </div>

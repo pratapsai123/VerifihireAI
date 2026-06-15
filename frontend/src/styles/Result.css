@@ -42,41 +42,42 @@
 
 .btn-top-primary,
 .btn-top-secondary {
-  border-radius: 9px;
-  padding: 0.52rem 0.95rem;
-  font-size: 0.8rem;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 0.85rem;
   cursor: pointer;
-  border: 1.5px solid transparent;
-  font-weight: 700;
+  border: 1px solid transparent;
+  font-weight: 600;
   transition: all 0.18s ease;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   white-space: nowrap;
+  height: 34px;
+  box-sizing: border-box;
+  line-height: 1;
 }
 
 .btn-top-primary {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #fff;
-  border-color: #1d4ed8;
-  box-shadow: 0 3px 10px rgba(37, 99, 235, 0.25);
+  border-color: #c7d2fe;
+  background: #eef2ff;
+  color: #1d4ed8;
 }
 
 .btn-top-primary:hover {
-  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
-  box-shadow: 0 5px 16px rgba(37, 99, 235, 0.35);
-  transform: translateY(-1px);
+  background: #e0e7ff;
+  border-color: #a5b4fc;
 }
 
 .btn-top-secondary {
-  background: #fff;
-  border-color: #d1d5db;
-  color: #374151;
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+  color: #334155;
 }
 
 .btn-top-secondary:hover {
-  background: #f8fafc;
+  background: #e2e8f0;
   border-color: #94a3b8;
-  color: #1f2937;
 }
 
 .title {

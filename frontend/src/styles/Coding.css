@@ -562,3 +562,19 @@
     margin-top: 12px;
   }
 }
+
+.coding-btn-refresh {
+  border: 1px solid #c7d2fe !important;
+  border-radius: 8px !important;
+  background: #eef2ff !important;
+  color: #1d4ed8 !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  box-shadow: none !important;
+}
+
+.coding-btn-refresh:hover:not(:disabled) {
+  background: #e0e7ff !important;
+  border-color: #a5b4fc !important;
+  color: #1d4ed8 !important;
+}

@@ -14,7 +14,7 @@ services:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
       - ./frontend/build:/usr/share/nginx/html
-      - verifihireai_media:/app/media
+      - ./backend/media:/app/media
     depends_on:
       - redis
     restart: unless-stopped

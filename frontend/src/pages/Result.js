@@ -782,8 +782,18 @@ export default function Result() {
                         <div className="sub">Latest submitted assessments (auto-checked).</div>
                     </div>
                     <div className="top-actions">
-                        <button className="btn-top-primary" type="button" onClick={() => load()}>Refresh</button>
-                        <button className="btn-top-secondary" type="button" onClick={() => navigate('/dashboard')}>Back to Dashboard</button>
+                        <button className="btn-top-primary" type="button" onClick={() => load()}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '6px' }}>
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                            Refresh
+                        </button>
+                        <button className="btn-top-secondary" type="button" onClick={() => navigate('/dashboard')}>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginRight: '6px' }}>
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                            Back to Dashboard
+                        </button>
                     </div>
                 </div>
 

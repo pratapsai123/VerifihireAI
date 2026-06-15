@@ -368,8 +368,7 @@ export default function TeamMembers() {
   const [memberRoleFilter, setMemberRoleFilter] = useState('');
 
   const [inviteEmail, setInviteEmail] = useState('');
-  const defaultInviteRole = myRole === 'hr' ? 'interviewer' : 'hr';
-  const [inviteRole, setInviteRole] = useState(defaultInviteRole);
+  const [inviteRole, setInviteRole] = useState('');
   const [inviting, setInviting] = useState(false);
 
   const availableRoles = useMemo(() => {
@@ -425,11 +424,26 @@ export default function TeamMembers() {
     e.preventDefault();
     setInviteResult(null); setFieldErrors({}); setError('');
     if (!canInvite) { setError('You are not allowed to send invitations.'); return; }
-    if (!inviteEmail.trim()) { setFieldErrors(prev => ({ ...prev, email: 'Email is required.' })); return; }
+    
+    let hasError = false;
+    const errors = {};
+    if (!inviteEmail.trim()) {
+      errors.email = 'Email is required.';
+      hasError = true;
+    }
+    if (!inviteRole) {
+      errors.role = 'Role is required.';
+      hasError = true;
+    }
+    if (hasError) {
+      setFieldErrors(errors);
+      return;
+    }
+    
     setInviting(true);
     try {
       const res = await axios.post(`${API_BASE_URL}/users/invite/`, { inviter_email: myEmail, email: inviteEmail.trim(), role: inviteRole });
-      setInviteResult(res.data); setInviteEmail('');
+      setInviteResult(res.data); setInviteEmail(''); setInviteRole('');
       await load(); setTab('overview');
     } catch (e2) {
       if (e2.response) {
@@ -706,6 +720,7 @@ export default function TeamMembers() {
                         <select value={inviteRole} onChange={e => setInviteRole(e.target.value)} disabled={inviting}
                           style={{ width: '100%', padding: '10px 12px', borderRadius: 10, border: `1.5px solid ${fieldErrors.role ? '#fca5a5' : '#e5e7eb'}`, fontSize: 13, outline: 'none', background: inviting ? '#f9fafb' : '#fff', cursor: 'pointer' }}
                         >
+                          <option value="" disabled>Select the role</option>
                           {availableRoles.map(role => <option key={role.value} value={role.value}>{role.label}</option>)}
                         </select>
                         {fieldErrors.role && <div style={{ fontSize: 12, color: '#dc2626', marginTop: 4 }}>{fieldErrors.role}</div>}
@@ -875,7 +890,6 @@ export default function TeamMembers() {
                         <option value="hr_manager">HR Manager</option>
                         <option value="hr">HR</option>
                         <option value="interviewer">Interviewer</option>
-                        <option value="candidate">Candidate</option>
                         {data.scope === 'all' && <option value="application_admin">App Admin</option>}
                       </select>
                     </div>

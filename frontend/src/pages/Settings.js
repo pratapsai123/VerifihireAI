@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
@@ -63,6 +64,7 @@ const parseHistory = (req) => {
 };
 
 const Settings = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [settings, setSettings] = useState({ require_delete_permission: true });
     const [requests, setRequests] = useState([]);
@@ -161,6 +163,17 @@ const Settings = () => {
             setFaceLoading(false);
         }
     };
+
+    const handleGlobalRefresh = useCallback(async () => {
+        if (tab === 'requests') {
+            await loadRequests();
+        } else if (tab === 'qualification') {
+            await loadQualRequests();
+        } else if (tab === 'face_approvals') {
+            await loadFaceRequests();
+        }
+    }, [tab]);
+
 
     const handleFaceAction = async (reqId, faceApproved, integrityApproved, adminNote = '') => {
         setFaceActionSubmitting(true);
@@ -305,7 +318,41 @@ const Settings = () => {
         <div className="dashboard-container">
             <Header />
             <div className="page-container" style={{ maxWidth: '1100px', margin: '5rem auto', padding: '0 1rem' }}>
-                <h1 style={{ marginBottom: '1.5rem', color: '#1d2686' }}>Settings & Workflows</h1>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexWrap: 'wrap', gap: '1rem' }}>
+                    <h1 style={{ margin: 0, color: '#1d2686' }}>Settings & Workflows</h1>
+                    <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                        <button 
+                            onClick={() => navigate('/dashboard')} 
+                            type="button"
+                            style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '6px 14px', background: '#f1f5f9', border: '1px solid #cbd5e1', borderRadius: '8px', color: '#334155', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem', transition: 'all 0.2s', height: '34px', boxSizing: 'border-box', lineHeight: '1' }}
+                        >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <polyline points="15 18 9 12 15 6" />
+                            </svg>
+                            Back
+                        </button>
+                        {tab !== 'config' && (
+                            <button 
+                                onClick={handleGlobalRefresh} 
+                                type="button"
+                                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px', padding: '6px 14px', border: '1px solid #c7d2fe', borderRadius: '8px', background: '#eef2ff', color: '#1d4ed8', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem', transition: 'all 0.2s', height: '34px', boxSizing: 'border-box', lineHeight: '1' }}
+                                disabled={loading || qualLoading || faceLoading}
+                            >
+                                <svg 
+                                    width="14" 
+                                    height="14" 
+                                    viewBox="0 0 24 24" 
+                                    fill="none" 
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className={(loading || qualLoading || faceLoading) ? 'animate-spin' : ''}
+                                >
+                                    <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                                Refresh
+                            </button>
+                        )}
+                    </div>
+                </div>
 
                 {message && <div style={{ padding: '12px', backgroundColor: '#d1fae5', color: '#065f46', borderRadius: '8px', marginBottom: '1rem', fontWeight: '600' }}>{message}</div>}
                 {error && <div style={{ padding: '12px', backgroundColor: '#fee2e2', color: '#991b1b', borderRadius: '8px', marginBottom: '1rem', fontWeight: '600' }}>{error}</div>}
@@ -322,7 +369,7 @@ const Settings = () => {
                         🗑️ Deletion Requests
                     </button>
                     <button
-                        onClick={() => { setTab('qualification'); loadQualRequests(); }}
+                        onClick={() => setTab('qualification')}
                         style={{
                             padding: '10px 20px', border: 'none', background: 'none',
                             borderBottom: tab === 'qualification' ? '3px solid #059669' : 'none',
@@ -337,7 +384,7 @@ const Settings = () => {
                         )}
                     </button>
                     <button
-                        onClick={() => { setTab('face_approvals'); loadFaceRequests(); }}
+                        onClick={() => setTab('face_approvals')}
                         style={{
                             padding: '10px 20px', border: 'none', background: 'none',
                             borderBottom: tab === 'face_approvals' ? '3px solid #3b82f6' : 'none',
@@ -385,6 +432,9 @@ const Settings = () => {
 
                 {tab === 'requests' && (
                     <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
+                        <div style={{ padding: '1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
+                            <h3 style={{ margin: 0, color: '#1d2686', fontWeight: '800' }}>🗑️ Deletion Requests</h3>
+                        </div>
                         <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
                                 <span style={{ fontWeight: '600', color: '#374151' }}>Filter:</span>
@@ -515,7 +565,6 @@ const Settings = () => {
                     <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
                         <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                             <h3 style={{ margin: 0, color: '#059669', fontWeight: '800' }}>🏅 Qualification Requests</h3>
-                            <button onClick={loadQualRequests} style={{ padding: '6px 14px', border: '1px solid #d1d5db', borderRadius: '8px', background: '#f9fafb', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>🔄 Refresh</button>
                         </div>
                         <div style={{ overflowX: 'auto' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.88rem', textAlign: 'left' }}>
@@ -594,7 +643,6 @@ const Settings = () => {
                     <div style={{ background: '#fff', borderRadius: '12px', boxShadow: '0 4px 6px rgba(0,0,0,0.05)', overflow: 'hidden' }}>
                         <div style={{ padding: '1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' }}>
                             <h3 style={{ margin: 0, color: '#3b82f6', fontWeight: '800' }}>👤 Face Mismatch Approvals</h3>
-                            <button onClick={loadFaceRequests} style={{ padding: '6px 14px', border: '1px solid #d1d5db', borderRadius: '8px', background: '#f9fafb', cursor: 'pointer', fontWeight: '600', fontSize: '0.85rem' }}>🔄 Refresh</button>
                         </div>
                         <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid #e5e7eb', display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>

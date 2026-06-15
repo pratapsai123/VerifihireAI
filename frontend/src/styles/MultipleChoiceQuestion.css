@@ -7,12 +7,16 @@
 .mcq-page {
   min-height: 100vh;
   background-color: #f3f4f6;
+  display: flex;
+  flex-direction: column;
 }
 
 .mcq-container {
   max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0 1rem 2rem;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  flex: 1;
 }
 
 .mcq-card {
@@ -33,17 +37,24 @@
 
 .mcq-back-btn {
   justify-self: start;
-  background: none;
-  border: none;
-  color: #2563eb;
+  background-color: #eef2ff;
+  border: 1px solid #c7d2fe;
+  color: #1d4ed8;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 0.875rem;
   cursor: pointer;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0.95rem;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s;
 }
 
 .mcq-back-btn:hover {
-  text-decoration: underline;
+  background-color: #dbeafe;
+  border-color: #93c5fd;
+  text-decoration: none;
 }
 
 .mcq-title {

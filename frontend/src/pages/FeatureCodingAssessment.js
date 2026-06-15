@@ -576,6 +576,14 @@ const AdvancedSplitScreenMockup = () => {
 };
 
 export default function FeatureCodingAssessment() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const appScrollEl = document.querySelector('.app-scroll');
+    if (appScrollEl) {
+      appScrollEl.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <>
       <MainHeader />

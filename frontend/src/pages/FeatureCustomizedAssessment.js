@@ -9,6 +9,10 @@ function FeatureCustomizedAssessment() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    const appScrollEl = document.querySelector('.app-scroll');
+    if (appScrollEl) {
+      appScrollEl.scrollTop = 0;
+    }
     // Loop the hero animation every 24 seconds to fit the extended phase 2 flow
     const interval = setInterval(() => {
       setAnimationKey(prev => prev + 1);
@@ -17,8 +21,9 @@ function FeatureCustomizedAssessment() {
   }, []);
 
   return (
-    <div className="fca-container">
+    <>
       <MainHeader />
+      <div className="fca-container">
       
       {/* Background Gradients */}
       <div className="fca-bg-glow fca-glow-1"></div>
@@ -511,8 +516,9 @@ function FeatureCustomizedAssessment() {
         </div>
       </section>
 
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

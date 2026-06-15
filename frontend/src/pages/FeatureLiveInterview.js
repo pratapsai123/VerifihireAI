@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import MainHeader from '../components/MainHeader';
 import Footer from '../components/Footer';
 import '../styles/FeatureLiveInterview.css';
 
 function FeatureLiveInterview() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    const appScrollEl = document.querySelector('.app-scroll');
+    if (appScrollEl) {
+      appScrollEl.scrollTop = 0;
+    }
+  }, []);
+
   return (
     <>
       <MainHeader />
