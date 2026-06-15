@@ -3405,6 +3405,48 @@ class IntegrityScreenshotView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, log_id):
+        model_type = request.query_params.get('model', 'interview')
+
+        if model_type == 'assessment':
+            try:
+                from ai_assessments.models import AIAssessmentIntegrityScreenshot
+                snap = AIAssessmentIntegrityScreenshot.objects.select_related('submission__assessment').get(pk=log_id)
+                
+                user_profile = getattr(request.user, 'profile', None)
+                if not user_profile:
+                    return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+                user_role = (user_profile.role or '').strip().lower()
+                if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+                    return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+                # Permission check: ensure user belongs to same company
+                if not request.user.is_superuser and user_profile.company and snap.submission.assessment.company_id != user_profile.company_id:
+                    return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+                img_type = request.query_params.get('type', 'webcam')
+                img_field = snap.screenshot if img_type == 'screen' else snap.webcam_screenshot
+
+                if not img_field:
+                    return Response({'image': None}, status=status.HTTP_200_OK)
+
+                # Read from disk and base64 encode
+                try:
+                    import base64
+                    with img_field.open('rb') as f:
+                        data = base64.b64encode(f.read()).decode('utf-8')
+                        data = f'data:image/jpeg;base64,{data}'
+                    return Response({'image': data}, status=status.HTTP_200_OK)
+                except Exception as file_err:
+                    import logging
+                    logger = logging.getLogger(__name__)
+                    logger.error(f"Error reading and encoding AIAssessmentIntegrityScreenshot {snap.id}: {file_err}")
+                    return Response({'error': f'Failed to read screenshot file: {str(file_err)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            except AIAssessmentIntegrityScreenshot.DoesNotExist:
+                return Response({'error': 'Screenshot not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Default fallback to interview log / interview candidate flow
         try:
             ilog = InterviewIntegrityLog.objects.select_related('candidate').get(pk=log_id)
             
@@ -3441,7 +3483,43 @@ class IntegrityScreenshotView(APIView):
 
             return Response({'image': data}, status=status.HTTP_200_OK)
         except InterviewIntegrityLog.DoesNotExist:
-            return Response({'error': 'Screenshot not found'}, status=status.HTTP_404_NOT_FOUND)
+            try:
+                from ai_assessments.models import AIAssessmentIntegrityScreenshot
+                snap = AIAssessmentIntegrityScreenshot.objects.select_related('submission__assessment').get(pk=log_id)
+                
+                user_profile = getattr(request.user, 'profile', None)
+                if not user_profile:
+                    return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+                user_role = (user_profile.role or '').strip().lower()
+                if user_role not in ['company_admin', 'hr_manager', 'hr', 'application_admin', 'recruiter', 'hiring_manager', 'admin']:
+                    return Response({'error': 'Unauthorized role access.'}, status=status.HTTP_403_FORBIDDEN)
+
+                # Permission check: ensure user belongs to same company
+                if not request.user.is_superuser and user_profile.company and snap.submission.assessment.company_id != user_profile.company_id:
+                    return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+                img_type = request.query_params.get('type', 'webcam')
+                img_field = snap.screenshot if img_type == 'screen' else snap.webcam_screenshot
+
+                if not img_field:
+                    return Response({'image': None}, status=status.HTTP_200_OK)
+
+                # Read from disk and base64 encode
+                try:
+                    import base64
+                    with img_field.open('rb') as f:
+                        data = base64.b64encode(f.read()).decode('utf-8')
+                        data = f'data:image/jpeg;base64,{data}'
+                    return Response({'image': data}, status=status.HTTP_200_OK)
+                except Exception as file_err:
+                    import logging
+                    logger = logging.getLogger(__name__)
+                    logger.error(f"Error reading and encoding AIAssessmentIntegrityScreenshot {snap.id}: {file_err}")
+                    return Response({'error': f'Failed to read screenshot file: {str(file_err)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+            except AIAssessmentIntegrityScreenshot.DoesNotExist:
+                return Response({'error': 'Screenshot not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class LatestActiveBatchView(APIView):

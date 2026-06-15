@@ -3692,15 +3692,38 @@ class AIAssessmentTimelineView(APIView):
                         })
 
             # 3. Integrity Screenshots
-            snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission)
+            logger = logging.getLogger(__name__)
+            snapshots = AIAssessmentIntegrityScreenshot.objects.filter(submission=submission).order_by('timestamp')
+            INLINE_LIMIT = 8
             for i, snap in enumerate(snapshots):
                 local_dt = tz.localtime(snap.timestamp) if snap.timestamp else tz.localtime(submission.started_at)
                 dt_iso = snap.timestamp.isoformat() if snap.timestamp else submission.started_at.isoformat()
+                
+                screenshot_base64 = None
+                webcam_screenshot_base64 = None
+                
+                if i < INLINE_LIMIT:
+                    if snap.screenshot:
+                        try:
+                            import base64
+                            with snap.screenshot.open('rb') as f:
+                                screenshot_base64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                        except Exception as e:
+                            logger.error(f"Error encoding screenshot to base64 for snap {snap.id}: {e}")
+                    
+                    if snap.webcam_screenshot:
+                        try:
+                            import base64
+                            with snap.webcam_screenshot.open('rb') as f:
+                                webcam_screenshot_base64 = f"data:image/jpeg;base64,{base64.b64encode(f.read()).decode('utf-8')}"
+                        except Exception as e:
+                            logger.error(f"Error encoding webcam_screenshot to base64 for snap {snap.id}: {e}")
+
                 logs.append({
-                    'id': f'integrity_{i}',
-                    'event_type': snap.event_type,
-                    'status': 'FAILURE' if 'failed' in snap.event_type or 'mismatch' in snap.event_type else 'INFO',
-                    'phase': 'ASSESSMENT',
+                    'id': f'integrity_{snap.id}',
+                    'event_type': snap.event_type.upper(),
+                    'status': 'FAILURE' if 'failed' in snap.event_type or 'mismatch' in snap.event_type or 'warning' in snap.event_type or 'switches' in snap.event_type else 'INFO',
+                    'phase': 'INTEGRITY',
                     'batch_id': getattr(submission, 'batch_id', None),
                     'message': f"Integrity Event: {snap.event_type.replace('_', ' ').title()}",
                     'details': {
@@ -3708,6 +3731,11 @@ class AIAssessmentTimelineView(APIView):
                     },
                     'timestamp': dt_iso,
                     'timestamp_formatted': local_dt.strftime('%B %d, %Y at %I:%M %p'),
+                    'has_screenshot': bool(snap.screenshot),
+                    'has_webcam_screenshot': bool(snap.webcam_screenshot),
+                    'screenshot_id': snap.id,
+                    'screenshot_base64': screenshot_base64,
+                    'webcam_screenshot_base64': webcam_screenshot_base64,
                 })
 
             # Sort logs by timestamp
@@ -3752,6 +3780,7 @@ class AIAssessmentSubmissionListView(APIView):
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
                     "has_screenshot": bool(snap.screenshot),
                     "has_webcam_screenshot": bool(snap.webcam_screenshot),
+                    "screenshot_id": snap.id,
                 })
 
             photo_url = _get_candidate_photo_url(request, sub)
@@ -3859,6 +3888,7 @@ class AIAssessmentResultsView(APIView):
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
                     "has_screenshot": bool(snap.screenshot),
                     "has_webcam_screenshot": bool(snap.webcam_screenshot),
+                    "screenshot_id": snap.id,
                 })
             
             results.append({

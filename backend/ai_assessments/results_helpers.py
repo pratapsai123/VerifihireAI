@@ -126,6 +126,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                     "webcam_screenshot_url": request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
                     "has_screenshot": bool(snap.screenshot),
                     "has_webcam_screenshot": bool(snap.webcam_screenshot),
+                    "screenshot_id": snap.id,
                 })
             pan_photo_url = _encode_image_field_to_b64(s.pan_photo) or (request.build_absolute_uri(s.pan_photo.url) if getattr(s, 'pan_photo', None) else None)
             candidate_photo_url = _get_candidate_photo_url(request, s) or clean_b64(s.original_identity_photo)

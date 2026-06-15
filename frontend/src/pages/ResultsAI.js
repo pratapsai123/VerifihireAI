@@ -22,7 +22,7 @@ const normalizeImageUrl = (url) => {
     return `data:image/jpeg;base64,${url}`;
 };
 
-const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, alt, style }) => {
+const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, alt, style, isAssessment }) => {
     const [src, setSrc] = useState(null);
     const [loading, setLoading] = useState(true);
     const imgRef = useRef(null);
@@ -54,7 +54,10 @@ const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, a
                     observer.disconnect();
                     // Fetch the image lazily
                     const token = getToken();
-                    axios.get(`${API_BASE_URL}/ai-candidates/integrity-screenshot/${screenshotId}/?type=${type || 'webcam'}`, {
+                    const url = isAssessment
+                        ? `${API_BASE_URL}/ai-candidates/integrity-screenshot/${screenshotId}/?type=${type || 'webcam'}&model=assessment`
+                        : `${API_BASE_URL}/ai-candidates/integrity-screenshot/${screenshotId}/?type=${type || 'webcam'}`;
+                    axios.get(url, {
                         headers: { Authorization: `Bearer ${token}` }
                     }).then(resp => {
                         if (resp.data?.image) {
@@ -1154,6 +1157,7 @@ const ResultsAI = () => {
                                         {(timelineLogs?.length > 0 ? timelineLogs.filter(l => l.phase === 'INTEGRITY' || String(l.id || '').startsWith('integrity_') || l.has_screenshot || l.has_webcam_screenshot || l.screenshot_base64 || l.webcam_screenshot_base64 || l.screenshot_url || l.webcam_screenshot_url) : (data.integrity_screenshots || data.integrity_logs || [])).map((log, lIdx) => {
                                             const eventLower = (log.event_type || '').toLowerCase();
                                             const isScreenEvent = ['tab_switch', 'window_blur', 'screen_stop'].includes(eventLower);
+                                            const isAssessment = !data.is_ai_candidate && (data.is_assessment || !!data.assessment_name || !!data.assessment || String(data.submission_id || '').startsWith('ai_'));
 
                                             const hasScreen = log.has_screenshot || log.screenshot_base64 || log.screenshot_url;
                                             const hasWebcam = log.has_webcam_screenshot || log.webcam_screenshot_base64 || log.webcam_screenshot_url;
@@ -1181,6 +1185,7 @@ const ResultsAI = () => {
                                                             fallbackUrl={fallbackUrl}
                                                             alt={log.event_type}
                                                             style={{ width: '100%', height: '100%' }}
+                                                            isAssessment={isAssessment}
                                                         />
                                                     )}
                                                     <div style={{
@@ -1597,6 +1602,7 @@ const ResultsAI = () => {
                                                                         type="webcam"
                                                                         alt="Candidate"
                                                                         style={{ width: '100%', height: '100%' }}
+                                                                        isAssessment={true}
                                                                     />
                                                                 ) : null}
                                                                 <div style={{ display: (candidatePhoto || candidatePhotoScreenshotId) ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
@@ -1884,6 +1890,7 @@ const ResultsAI = () => {
                                                                 fallbackUrl={snap.has_screenshot ? snap.screenshot_url : (snap.webcam_screenshot_url || snap.details?.screenshot)}
                                                                 alt={snap.event_type}
                                                                 style={{ width: '100%', height: '100%' }}
+                                                                isAssessment={true}
                                                             />
                                                         )}
                                                         <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, background: 'rgba(27, 37, 75, 0.8)', color: 'white', fontSize: '0.65rem', padding: '6px', fontWeight: '700' }}>
