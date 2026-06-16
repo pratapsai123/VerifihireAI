@@ -90,6 +90,19 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     except Exception:
         approved_ai_ids = set()
 
+    # Bulk fetch mismatch submissions to avoid N+1 queries
+    mismatch_submission_ids = set()
+    try:
+        from ai_assessments.models import AIAssessmentIntegrityScreenshot
+        slice_ids = [sub.id for sub in ai_qs[:5000]]
+        if slice_ids:
+            mismatch_submission_ids = set(AIAssessmentIntegrityScreenshot.objects.filter(
+                submission_id__in=slice_ids,
+                event_type__icontains="mismatch"
+            ).values_list('submission_id', flat=True))
+    except Exception:
+        pass
+
     results = []
     for s in ai_qs[:5000]:
         a = s.assessment
@@ -98,7 +111,7 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
             screenshots_data = []
             pan_photo_url = None
             candidate_photo_url = None
-            detected = getattr(s, 'identity_mismatch_detected', False)
+            detected = getattr(s, 'identity_mismatch_detected', False) or (s.id in mismatch_submission_ids)
             details = getattr(s, 'identity_mismatch_details', {})
             photo_approved = bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False
             photo_update_pending = bool(detected and not photo_approved)

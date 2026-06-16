@@ -343,6 +343,12 @@ def _get_unified_identity_mismatch_fields(request, submission):
         return b64_str
 
     detected = getattr(submission, 'identity_mismatch_detected', False)
+    if not detected:
+        from ai_assessments.models import AIAssessmentIntegrityScreenshot
+        detected = AIAssessmentIntegrityScreenshot.objects.filter(
+            submission=submission,
+            event_type__icontains="mismatch"
+        ).exists()
     
     # Box 1 ("Registered Face" / "Original Candidate") must show the ROOT master face,
     # NOT the assessment-specific subfolder (which contains the intruder's face).
@@ -432,6 +438,25 @@ def _get_unified_identity_mismatch_fields(request, submission):
 
     if not intruder_url:
         intruder_url = clean_b64(getattr(submission, 'intruder_photo', None))
+
+    if not intruder_url and detected:
+        try:
+            from ai_assessments.models import AIAssessmentIntegrityScreenshot
+            snap = AIAssessmentIntegrityScreenshot.objects.filter(
+                submission=submission,
+                event_type__icontains="mismatch"
+            ).order_by('id').first()
+            if snap:
+                photo_field = snap.webcam_screenshot or snap.screenshot
+                if photo_field:
+                    try:
+                        import base64 as b64_mod
+                        with open(photo_field.path, 'rb') as f:
+                            intruder_url = f"data:image/jpeg;base64,{b64_mod.b64encode(f.read()).decode('utf-8')}"
+                    except Exception:
+                        intruder_url = request.build_absolute_uri(photo_field.url) if request else photo_field.url
+        except Exception:
+            pass
         
     details = getattr(submission, 'identity_mismatch_details', {})
 
