@@ -1939,6 +1939,21 @@ def get_invitation_result_view(request, token):
             if first_details and first_details.snapshot:
                 original_identity_photo_url = first_details.snapshot
 
+        # Calculate mismatch aligning with report_utils.py
+        from api.models import IntegrityScreenshot
+        has_reg_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Face Mismatch").exists()
+        has_reg_log = any(log.get('action') == 'Identity Mismatch Detected' for log in getattr(inv, 'activity_logs', []) or [])
+        is_registration_mismatch = has_reg_screenshot or has_reg_log
+        if latest_details and not is_registration_mismatch and (latest_details.identity_mismatch_detected or latest_details.identity_mismatch):
+            has_periodic_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Mismatch (Periodic)").exists()
+            if not has_periodic_screenshot:
+                is_registration_mismatch = True
+
+        is_mismatch = is_registration_mismatch
+        integrity_obj = getattr(inv, 'integrity', None)
+        if integrity_obj and not getattr(integrity_obj, 'identity_verified', True):
+            is_mismatch = True
+
         return Response(
             {
                 'invitation': {
@@ -1978,7 +1993,7 @@ def get_invitation_result_view(request, token):
                     'feedback': getattr(submission, 'feedback', None),
 
                     # Mismatch fields inside result
-                    'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
+                    'identity_mismatch_detected': is_mismatch,
                     'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                     'original_identity_photo_url': original_identity_photo_url,
                     'candidate_photo_url': latest_details.snapshot if latest_details else None,
@@ -2007,7 +2022,7 @@ def get_invitation_result_view(request, token):
                     'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                 },
                 # Mismatch fields at top-level
-                'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
+                'identity_mismatch_detected': is_mismatch,
                 'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                 'original_identity_photo_url': original_identity_photo_url,
                 'candidate_photo_url': latest_details.snapshot if latest_details else None,
@@ -2126,6 +2141,21 @@ def results_detail_view(request, submission_id):
                 if link and link.snapshot_image:
                     original_identity_photo_url = request.build_absolute_uri(link.snapshot_image.url) if request else link.snapshot_image.url
                     
+            # Calculate mismatch aligning with report_utils.py
+            from api.models import IntegrityScreenshot
+            has_reg_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Face Mismatch").exists()
+            has_reg_log = any(log.get('action') == 'Identity Mismatch Detected' for log in getattr(inv, 'activity_logs', []) or [])
+            is_registration_mismatch = has_reg_screenshot or has_reg_log
+            if latest_details and not is_registration_mismatch and (latest_details.identity_mismatch_detected or latest_details.identity_mismatch):
+                has_periodic_screenshot = IntegrityScreenshot.objects.filter(invitation=inv, event_type="Identity Mismatch (Periodic)").exists()
+                if not has_periodic_screenshot:
+                    is_registration_mismatch = True
+
+            is_mismatch = is_registration_mismatch
+            integrity_obj = getattr(inv, 'integrity', None)
+            if integrity_obj and not getattr(integrity_obj, 'identity_verified', True):
+                is_mismatch = True
+
             # Gather active deletions
             active_deletions = set()
             try:
@@ -2183,7 +2213,7 @@ def results_detail_view(request, submission_id):
                 'created_at': inv.created_at.isoformat() if inv.created_at else None,
 
                 # Identity mismatch fields
-                'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
+                'identity_mismatch_detected': is_mismatch,
                 'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                 'original_identity_photo_url': original_identity_photo_url,
                 'candidate_photo_url': latest_details.snapshot if latest_details else None,
@@ -2291,6 +2321,24 @@ def results_overview_view(request):
         # Optimization: Fetch results into a list and pre-build a map for candidate details
         results_slice = list(qs[:5000])
         inv_ids = [s.invitation_id for s in results_slice]
+
+        mismatch_inv_ids = set()
+        if inv_ids:
+            # 1. Invitations with CandidateIntegrity identity_verified=False
+            from api.models import CandidateIntegrity
+            ci_mismatch_ids = set(CandidateIntegrity.objects.filter(
+                invitation_id__in=inv_ids,
+                identity_verified=False
+            ).values_list('invitation_id', flat=True))
+            mismatch_inv_ids.update(ci_mismatch_ids)
+            
+            # 2. Invitations with IntegrityScreenshot with mismatch event types
+            from api.models import IntegrityScreenshot
+            sc_mismatch_ids = set(IntegrityScreenshot.objects.filter(
+                invitation_id__in=inv_ids,
+                event_type__in=["Identity Face Mismatch", "Identity Mismatch (Periodic)"]
+            ).values_list('invitation_id', flat=True))
+            mismatch_inv_ids.update(sc_mismatch_ids)
         
         details_map = {}
         identity_links_by_email = {}
@@ -2346,6 +2394,15 @@ def results_overview_view(request):
             # Fetch PAN and Phone from mapped CandidateDetails, fallback to invitation
             latest_details = details_map.get(inv.id)
             
+            # Calculate mismatch status
+            is_mismatch = (inv.id in mismatch_inv_ids)
+            if not is_mismatch and latest_details:
+                is_mismatch = bool(latest_details.identity_mismatch_detected or latest_details.identity_mismatch)
+            if not is_mismatch:
+                has_reg_log = any(log.get('action') == 'Identity Mismatch Detected' for log in getattr(inv, 'activity_logs', []) or [])
+                if has_reg_log:
+                    is_mismatch = True
+
             pan = latest_details.pan_number if latest_details else inv.pan_number
             phone = latest_details.phone if latest_details else inv.phone
 
@@ -2427,7 +2484,7 @@ def results_overview_view(request):
                     'created_at': inv.created_at.isoformat() if inv.created_at else None,
 
                     # Identity mismatch fields
-                    'identity_mismatch_detected': (latest_details.identity_mismatch_detected or latest_details.identity_mismatch) if latest_details else False,
+                    'identity_mismatch_detected': is_mismatch,
                     'identity_mismatch_reason': latest_details.identity_mismatch_reason if latest_details else None,
                     'original_identity_photo_url': original_identity_photo_url,
                     'candidate_photo_url': latest_details.snapshot if latest_details else None,
