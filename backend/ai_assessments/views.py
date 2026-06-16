@@ -343,9 +343,17 @@ def _get_unified_identity_mismatch_fields(request, submission):
         return b64_str
 
     detected = getattr(submission, 'identity_mismatch_detected', False)
+    has_severe = detected
+    has_soft = False
+    
     if not detected:
         from ai_assessments.models import AIAssessmentIntegrityScreenshot
-        detected = AIAssessmentIntegrityScreenshot.objects.filter(
+        has_severe = AIAssessmentIntegrityScreenshot.objects.filter(
+            submission=submission,
+            event_type__in=["face_mismatch_on_reentry", "face_mismatch_override"]
+        ).exists()
+        
+        has_soft = AIAssessmentIntegrityScreenshot.objects.filter(
             submission=submission,
             event_type__icontains="mismatch"
         ).exists()
@@ -483,12 +491,33 @@ def _get_unified_identity_mismatch_fields(request, submission):
         except Exception as e:
             pass
 
+    # For fresh PAN cards (first-ever submission with that PAN), skip photo_update_pending
+    # because there is no prior registered face to "update" from.
+    is_fresh_pan = False
+    try:
+        pan = (getattr(submission, 'pan_number', '') or '').strip()
+        if pan:
+            from django.db.models import Min
+            earliest_id = AIAssessmentSubmission.objects.filter(
+                pan_number__iexact=pan
+            ).aggregate(first_id=Min('id'))['first_id']
+            is_fresh_pan = (earliest_id == submission.id)
+    except Exception:
+        pass
+
+    # Hide the red alert triangle for fresh PAN cards ONLY if it's a soft mismatch.
+    # If they actually swapped faces during their first exam, still flag it!
+    if is_fresh_pan:
+        detected = has_severe
+    else:
+        detected = has_severe or has_soft
+
     return {
         "identity_mismatch_detected": detected,
         "original_identity_photo_url": orig_url,
         "intruder_photo_url": intruder_url,
         "identity_mismatch_details": details,
-        "photo_update_pending": bool(detected and intruder_url),
+        "photo_update_pending": bool(detected and intruder_url and not is_fresh_pan),
         "photo_update_approved": bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False,
         "pending_identity_photo_url": intruder_url,
         "master_photo_url": orig_url,

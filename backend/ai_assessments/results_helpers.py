@@ -100,6 +100,27 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
                 submission_id__in=slice_ids,
                 event_type__icontains="mismatch"
             ).values_list('submission_id', flat=True))
+            
+            severe_mismatch_submission_ids = set(AIAssessmentIntegrityScreenshot.objects.filter(
+                submission_id__in=slice_ids,
+                event_type__in=["face_mismatch_on_reentry", "face_mismatch_override"]
+            ).values_list('submission_id', flat=True))
+    except Exception:
+        pass
+
+    # Identify "fresh" PAN submissions (first-ever assessment for a given PAN number).
+    # For fresh PANs there is no prior registered face, so photo_update_pending must be False.
+    fresh_pan_submission_ids = set()
+    try:
+        from django.db.models import Min
+        pan_first = AIAssessmentSubmission.objects.exclude(
+            pan_number__isnull=True
+        ).exclude(
+            pan_number=''
+        ).values('pan_number').annotate(
+            first_id=Min('id')
+        )
+        fresh_pan_submission_ids = {item['first_id'] for item in pan_first}
     except Exception:
         pass
 
@@ -111,10 +132,22 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
             screenshots_data = []
             pan_photo_url = None
             candidate_photo_url = None
-            detected = getattr(s, 'identity_mismatch_detected', False) or (s.id in mismatch_submission_ids)
+            has_severe = getattr(s, 'identity_mismatch_detected', False) or (s.id in severe_mismatch_submission_ids)
+            has_soft = s.id in mismatch_submission_ids
+            
             details = getattr(s, 'identity_mismatch_details', {})
             photo_approved = bool(details.get('photo_update_approved', False)) if isinstance(details, dict) else False
-            photo_update_pending = bool(detected and not photo_approved)
+            is_fresh_pan = s.id in fresh_pan_submission_ids
+            
+            # Smart Red Triangle Logic:
+            # If fresh PAN: Only show red triangle for severe cheating (face swap during the exam)
+            # If old PAN: Show red triangle for both severe cheating and soft mismatches (doesn't match old photo)
+            if is_fresh_pan:
+                detected = has_severe
+            else:
+                detected = has_severe or has_soft
+                
+            photo_update_pending = bool(detected and not photo_approved and not is_fresh_pan)
             mismatch_fields = {
                 "identity_mismatch_detected": detected,
                 "original_identity_photo_url": None,
@@ -341,7 +374,7 @@ def _get_candidate_intruder_photo_url(candidate):
         
         # Second fallback: any webcam snapshot containing mismatch
         logs = candidate.integrity_logs.filter(
-            event_type__icontains='mismatch',
+            event_type__in=["face_mismatch_on_reentry", "face_mismatch_override"],
             webcam_screenshot_base64__isnull=False
         ).order_by('id')
         for log in logs:

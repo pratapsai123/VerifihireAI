@@ -746,10 +746,12 @@ const ResultsAI = () => {
         allItems.forEach(item => {
             const sid = String(item.submission_id || '');
             const email = (item.email || item.candidate?.email || `anon_${item.submission_id || item.id}`).toLowerCase();
+            const groupKey = email;
             const type = item._stageType;
-            if (!candidateMap[email]) {
-                candidateMap[email] = {
+            if (!candidateMap[groupKey]) {
+                candidateMap[groupKey] = {
                     email,
+                    pan_number: item.pan_number || item.candidate?.pan_number || null,
                     full_name: item.full_name || item.candidate?.name || 'Candidate',
                     resume: null, assessment: null, interview: null,
                     batch_id: item.batch_id,
@@ -764,17 +766,21 @@ const ResultsAI = () => {
                 };
             } else {
                 // Merge photo fields from later items if current entry has nulls
-                const c = candidateMap[email];
+                const c = candidateMap[groupKey];
                 if (!c.master_photo_url && item.master_photo_url) c.master_photo_url = item.master_photo_url;
                 if (!c.original_identity_photo_url && item.original_identity_photo_url) c.original_identity_photo_url = item.original_identity_photo_url;
                 if (!c.pending_identity_photo_url && item.pending_identity_photo_url) c.pending_identity_photo_url = item.pending_identity_photo_url;
                 if (!c.candidate_photo_url && item.candidate_photo_url) c.candidate_photo_url = item.candidate_photo_url;
                 if (!c.ai_candidate_pk && item.ai_candidate_pk) c.ai_candidate_pk = item.ai_candidate_pk;
-                if (item.identity_mismatch_detected) c.identity_mismatch_detected = true;
-                if (item.photo_update_pending) c.photo_update_pending = true;
+                if (!c.pan_number && item.pan_number) c.pan_number = item.pan_number;
             }
-            if (!candidateMap[email][type]) {
-                candidateMap[email][type] = item;
+            if (!candidateMap[groupKey][type]) {
+                candidateMap[groupKey][type] = item;
+                // Ensure mismatch warning ONLY reflects the LATEST assessment
+                if (type === 'assessment') {
+                    candidateMap[groupKey].identity_mismatch_detected = !!item.identity_mismatch_detected;
+                    candidateMap[groupKey].photo_update_pending = !!item.photo_update_pending;
+                }
             }
         });
 
