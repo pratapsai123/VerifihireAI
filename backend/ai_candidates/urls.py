@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView, StandaloneResumeScreeningListCreateView, StandaloneResumeScreeningDetailView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -32,5 +32,7 @@ urlpatterns = [
     path('<int:pk>/resend-invite/', ResendInviteView.as_view(), name='resend-invite'),
     path('integrity-screenshot/<int:log_id>/', IntegrityScreenshotView.as_view(), name='integrity-screenshot'),
     path('health/', HealthCheckView.as_view(), name='health-check'),
+    path('standalone-screening/', StandaloneResumeScreeningListCreateView.as_view(), name='standalone-screening-list-create'),
+    path('standalone-screening/<int:pk>/', StandaloneResumeScreeningDetailView.as_view(), name='standalone-screening-detail'),
 ]
 

@@ -161,3 +161,29 @@ class PipelineLog(models.Model):
 
     def __str__(self):
         return f"{self.candidate.full_name} - {self.event_type} ({self.status})"
+
+class StandaloneResumeScreening(models.Model):
+    # Candidate Details
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=50, blank=True, null=True)
+
+    # The 5 Resume Columns (copied exactly like you wanted)
+    resume = models.FileField(upload_to='automated_resumes/', blank=True, null=True)
+    resume_text = models.TextField(blank=True, null=True)
+    resume_hash = models.CharField(max_length=64, blank=True, null=True)
+    resume_score = models.IntegerField(default=0)
+    resume_summary = models.TextField(blank=True, null=True)
+
+    # Context & Status
+    job_description = models.TextField(blank=True, null=True)
+    status = models.CharField(max_length=50, default='New')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Optional: Link to the Company/User who ran the screening
+    company = models.ForeignKey('api.Company', on_delete=models.CASCADE, null=True, blank=True)
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
+    batch_name = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.full_name} - {self.email}"

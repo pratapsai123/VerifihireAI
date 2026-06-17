@@ -3160,31 +3160,54 @@ class AIAssessmentReportDownloadView(APIView):
             except Exception as e:
                 logger.error(f"PDF Photo error for candidate {submission.candidate_email}: {e}")
 
-            # Get PAN Card image
-            pan_img = None
-            if submission.pan_photo:
-                try:
-                    # Verify path exists before trying to create RLImage
-                    if os.path.exists(submission.pan_photo.path):
-                        pan_img = RLImage(submission.pan_photo.path, width=1.4*inch, height=1.0*inch)
-                    else:
-                        logger.warning(f"PAN photo path does not exist: {submission.pan_photo.path}")
-                except Exception as e:
-                    logger.error(f"Error loading PAN photo for PDF: {e}")
-                    pass
-
             # Info table data
             # Handle old submissions without PAN data
             if submission.pan_number:
                 pan_verified_text = "Yes ✓" if submission.pan_verified else "No ✗"
             else:
                 pan_verified_text = "N/A"
+            # Identify mismatch details
+            mismatch_data = _get_unified_identity_mismatch_fields(request, submission)
+            identity_status = "Verified \u2713"
+            ident_status_color = colors.HexColor("#16a34a") # Green
+            
+            if mismatch_data.get('identity_mismatch_detected', False):
+                if mismatch_data.get('photo_update_approved', False):
+                    identity_status = "MISMATCH (APPROVED & UPDATED) \u2713"
+                    ident_status_color = colors.HexColor("#16a34a") # Green
+                # Check rejection state by looking at the details dict directly
+                elif isinstance(mismatch_data.get('identity_mismatch_details'), dict) and mismatch_data['identity_mismatch_details'].get('photo_update_status') == 'rejected':
+                    identity_status = "MISMATCH (APPROVAL REJECTED) \u2717"
+                    ident_status_color = colors.HexColor("#dc2626") # Red
+                else:
+                    identity_status = "MISMATCH DETECTED \u2717"
+                    ident_status_color = colors.HexColor("#dc2626") # Red
+
+            match_score_str = "100%"
+            score_val = getattr(submission, 'face_match_score', None)
+            if score_val is not None:
+                if score_val <= 1.0:
+                    match_score_str = f"{min(100.0, round(score_val * 100.0, 2))}%"
+                else:
+                    match_score_str = f"{min(100.0, round(score_val, 2))}%"
+            elif mismatch_data.get('identity_mismatch_detected', False):
+                match_score_str = "Mismatch \u2717"
+
             info_data = [
                 ['Full Name', submission.candidate_name],
                 ['Email', submission.candidate_email or 'N/A'],
                 ['Phone', submission.phone or 'N/A'],
                 ['PAN Number', submission.pan_number or 'N/A'],
                 ['PAN Verified', pan_verified_text],
+                ['Identity Status', identity_status],
+                ['Face Match Score', match_score_str],
+            ]
+            
+            mismatch_reason = getattr(submission, 'identity_mismatch_reason', None)
+            if mismatch_data.get('identity_mismatch_detected', False) and mismatch_reason:
+                info_data.append(['Mismatch Reason', mismatch_reason])
+
+            info_data.extend([
                 ['Job Title', assessment.required_skills or 'N/A'],
                 ['MCQ Score', f"{mcq_pct}% ({mcq_scored} / {mcq_total} Correct)"],
                 ['Coding Score', f"{coding_pct}% ({coding_scored} / {coding_total} pts)"],
@@ -3192,11 +3215,26 @@ class AIAssessmentReportDownloadView(APIView):
                 ['Overall Result', f"{submission.percentage}%"],
                 ['Status', status_display],
                 ['Submission Date', submission.submitted_at.strftime('%B %d, %Y %I:%M %p') if submission.submitted_at else 'N/A'],
-            ]
+            ])
 
             # Style the info table
             info_table = Table(info_data, colWidths=[1.4*inch, 3.0*inch])
-            info_table.setStyle(TableStyle([
+            
+            # Find indices for dynamic styling
+            integrity_idx = -1
+            status_idx = -1
+            overall_idx = -1
+            identity_status_idx = -1
+            mismatch_reason_idx = -1
+            
+            for i, row in enumerate(info_data):
+                if row[0] == 'Integrity Score': integrity_idx = i
+                elif row[0] == 'Status': status_idx = i
+                elif row[0] == 'Overall Result': overall_idx = i
+                elif row[0] == 'Identity Status': identity_status_idx = i
+                elif row[0] == 'Mismatch Reason': mismatch_reason_idx = i
+
+            base_styles = [
                 ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#F8F9FF")),
                 ('FONTNAME', (0,0), (0,-1), 'Helvetica'),
                 ('FONTSIZE', (0,0), (0,-1), 9),
@@ -3211,14 +3249,35 @@ class AIAssessmentReportDownloadView(APIView):
                 ('TOPPADDING', (0,0), (-1,-1), 7),
                 ('BOTTOMPADDING', (0,0), (-1,-1), 7),
                 ('LINEBELOW', (0,0), (-1,-2), 0.5, colors.HexColor("#E0E5F2")),
-                # Color coding for specific rows (Indices updated for PAN fields)
-                ('TEXTCOLOR', (1,8), (1,8), integrity_color),
-                ('FONTNAME', (1,8), (1,8), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,9), (1,9), status_color),
-                ('FONTNAME', (1,9), (1,9), 'Helvetica-Bold'),
-                ('TEXTCOLOR', (1,10), (1,10), status_color),
-                ('FONTNAME', (1,10), (1,10), 'Helvetica-Bold'),
-            ]))
+            ]
+            
+            if integrity_idx != -1:
+                base_styles.extend([
+                    ('TEXTCOLOR', (1,integrity_idx), (1,integrity_idx), integrity_color),
+                    ('FONTNAME', (1,integrity_idx), (1,integrity_idx), 'Helvetica-Bold')
+                ])
+            if status_idx != -1:
+                base_styles.extend([
+                    ('TEXTCOLOR', (1,status_idx), (1,status_idx), status_color),
+                    ('FONTNAME', (1,status_idx), (1,status_idx), 'Helvetica-Bold')
+                ])
+            if overall_idx != -1:
+                base_styles.extend([
+                    ('TEXTCOLOR', (1,overall_idx), (1,overall_idx), status_color),
+                    ('FONTNAME', (1,overall_idx), (1,overall_idx), 'Helvetica-Bold')
+                ])
+            if identity_status_idx != -1:
+                base_styles.extend([
+                    ('TEXTCOLOR', (1,identity_status_idx), (1,identity_status_idx), ident_status_color),
+                    ('FONTNAME', (1,identity_status_idx), (1,identity_status_idx), 'Helvetica-Bold')
+                ])
+            if mismatch_reason_idx != -1:
+                base_styles.extend([
+                    ('TEXTCOLOR', (1,mismatch_reason_idx), (1,mismatch_reason_idx), colors.HexColor("#dc2626")),
+                    ('FONTNAME', (1,mismatch_reason_idx), (1,mismatch_reason_idx), 'Helvetica-Bold')
+                ])
+                
+            info_table.setStyle(TableStyle(base_styles))
 
             # Photo section - Stacking Candidate Photo and PAN Card
             photo_style = ParagraphStyle('PhotoLabel', parent=styles['Normal'], fontSize=8, alignment=1, textColor=colors.HexColor("#707EAE"))
@@ -3227,13 +3286,6 @@ class AIAssessmentReportDownloadView(APIView):
             if candidate_img:
                 photo_elements.append([candidate_img])
                 photo_elements.append([Paragraph("Candidate Photo", photo_style)])
-            
-            if pan_img:
-                if photo_elements:
-                    photo_elements.append([Spacer(1, 10)])
-                photo_elements.append([pan_img])
-                photo_elements.append([Paragraph("PAN Card Photo", photo_style)])
-                
             if not photo_elements:
                 no_photo_text = Paragraph("No photos<br/>available", ParagraphStyle('NoPhoto', parent=styles['Normal'], fontSize=9, alignment=1, textColor=colors.grey))
                 photo_table = Table([[no_photo_text]], colWidths=[1.5*inch], rowHeights=[1.5*inch])
@@ -3283,6 +3335,33 @@ class AIAssessmentReportDownloadView(APIView):
             elements.append(combined_table)
 
             elements.append(Spacer(1, 30))
+
+            # 3.5 Identity Documents Section - PAN Card
+            if submission.pan_photo:
+                elements.append(Paragraph("Identity Documents", styles['Heading3']))
+                elements.append(Spacer(1, 10))
+                
+                try:
+                    pan_img_path = submission.pan_photo.path
+                    if _os.path.exists(pan_img_path):
+                        pan_img_elem = RLImage(pan_img_path, width=3.0*inch, height=2.0*inch)
+                        pan_caption = f"PAN Card: {submission.pan_number or 'N/A'} (Verified: {'Yes' if submission.pan_verified else 'No'})"
+                        
+                        pan_table = Table([
+                            [pan_img_elem],
+                            [Paragraph(pan_caption, ParagraphStyle('SmallStyle', parent=styles['Normal'], fontSize=9))]
+                        ], colWidths=[3.0*inch])
+                        pan_table.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ]))
+                        elements.append(pan_table)
+                    else:
+                        elements.append(Paragraph("<i>PAN card image file not found on server.</i>", styles['Normal']))
+                except Exception as pan_error:
+                    elements.append(Paragraph(f"<i>Error loading PAN card image: {str(pan_error)}</i>", styles['Italic']))
+                
+                elements.append(Spacer(1, 25))
 
             # 4. MCQ Section
             generated_content = submission.candidate_questions or assessment.generated_content or {}
@@ -3467,7 +3546,11 @@ class AIAssessmentReportDownloadView(APIView):
                 elements.append(Paragraph("No violations recorded. Candidate maintained full integrity.", styles['Italic']))
 
             # Identity Mismatch Section in PDF (placed below integrity screenshots)
-            if getattr(submission, 'identity_mismatch_detected', False):
+            mismatch_fields = _get_unified_identity_mismatch_fields(request, submission) or {}
+            is_mismatch_detected = mismatch_fields.get('identity_mismatch_detected', False)
+            is_photo_approved = mismatch_fields.get('photo_update_approved', False)
+            
+            if is_mismatch_detected or is_photo_approved:
                 elements.append(Spacer(1, 15))
                 # Red alert box title
                 mismatch_title_style = ParagraphStyle(
@@ -3501,88 +3584,24 @@ class AIAssessmentReportDownloadView(APIView):
                 
                 import os as _os_local
                 orig_path = None
-                if submission.original_identity_photo:
+                master_url = mismatch_fields.get('master_photo_url')
+                if master_url:
                     try:
-                        temp_orig = _save_to_temp_file(submission.original_identity_photo, is_b64=True)
+                        temp_orig = _save_to_temp_file(master_url, is_b64=True)
                         temp_files_to_cleanup.append(temp_orig)
                         orig_path = temp_orig
                     except Exception as e:
-                        logger.error(f"PDF Gen: Failed to write original_identity_photo mismatch temp file: {e}")
+                        logger.error(f"PDF Gen: Failed to write master mismatch temp file: {e}")
                         
                 intr_path = None
-                # Priority 0: Use database stored intruder_photo if present
-                if getattr(submission, 'intruder_photo', None):
+                pending_url = mismatch_fields.get('pending_identity_photo_url')
+                if pending_url:
                     try:
-                        temp_intr = _save_to_temp_file(submission.intruder_photo, is_b64=True)
+                        temp_intr = _save_to_temp_file(pending_url, is_b64=True)
                         temp_files_to_cleanup.append(temp_intr)
                         intr_path = temp_intr
                     except Exception as e:
-                        logger.error(f"PDF Gen: Failed to write database intruder_photo: {e}")
-
-                if not intr_path:
-                    is_automatic = getattr(assessment, 'creation_type', 'manual') == 'automatic'
-                    photo_bytes = None
-                    
-                    if is_automatic:
-                        from api._imports import DEEPFACE_BASE_URL
-                        import requests
-                        token = str(assessment.share_token)
-                        email = submission.candidate_email.lower().strip() if submission.candidate_email else None
-                        pan = getattr(submission, 'pan_number', None)
-                        person_id = pan.lower().strip() if pan else f"{email}_{token}"
-                        
-                        df_url = f"{DEEPFACE_BASE_URL}/registration/registered/{person_id}/assessments/{token}/photo"
-                        try:
-                            resp = requests.get(df_url, timeout=5)
-                            if resp.status_code == 200:
-                                photo_bytes = resp.content
-                        except Exception as e:
-                            logger.warning(f"PDF Gen: Failed to fetch intruder photo from DeepFace API: {e}")
-                            
-                    if photo_bytes:
-                        try:
-                            temp_intr = _save_to_temp_file(photo_bytes, is_b64=False)
-                            temp_files_to_cleanup.append(temp_intr)
-                            intr_path = temp_intr
-                        except Exception as e:
-                            logger.error(f"PDF Gen: Failed to write intruder photo from API bytes to temp file: {e}")
-                    else:
-                        # Try local folder on disk with robust fallbacks
-                        try:
-                            from pathlib import Path
-                            from django.conf import settings
-                            deepface_data_dir = Path(settings.BASE_DIR).parent / 'deepface' / 'data' / 'registered_faces'
-                            p_id = submission.pan_number.lower().strip() if getattr(submission, 'pan_number', None) else f"{submission.candidate_email.lower().strip()}_{assessment.share_token}"
-                            
-                            target_snap_file = None
-                            for folder in ['standard_assessment', 'assessments', 'sessions']:
-                                session_dir = deepface_data_dir / p_id / folder / str(assessment.share_token)
-                                for filename in ['registration_snapshot.jpg', 'face_0.jpg']:
-                                    possible = session_dir / filename
-                                    if possible.exists():
-                                        target_snap_file = possible
-                                        break
-                                if target_snap_file:
-                                    break
-                                    
-                            if not target_snap_file:
-                                # Fallback: check if session directory exists and grab first jpg
-                                for folder in ['standard_assessment', 'assessments', 'sessions']:
-                                    session_dir = deepface_data_dir / p_id / folder / str(assessment.share_token)
-                                    if session_dir.exists():
-                                        for jpg_file in session_dir.glob('*.jpg'):
-                                            target_snap_file = jpg_file
-                                            break
-                                    if target_snap_file:
-                                        break
-                                        
-                            if target_snap_file and target_snap_file.exists():
-                                with open(target_snap_file, 'rb') as f:
-                                    temp_intr = _save_to_temp_file(f.read(), is_b64=False)
-                                    temp_files_to_cleanup.append(temp_intr)
-                                    intr_path = temp_intr
-                        except Exception as e:
-                            logger.warning(f"PDF Gen: Failed to find local intruder photo: {e}")
+                        logger.error(f"PDF Gen: Failed to write pending intruder temp file: {e}")
                 
                 # Fall back to target_file if original_identity_photo not set on submission
                 if not orig_path and target_file:

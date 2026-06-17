@@ -733,3 +733,221 @@ You must respond with a JSON object containing:
                 countdown = 2 ** self.request.retries
                 raise self.retry(countdown=countdown, exc=e)
             return {'error': 'Task failed after retries'}
+
+@shared_task(bind=True)
+def process_standalone_resume_screening_task(self, record_id):
+    from .models import StandaloneResumeScreening
+    try:
+        record = StandaloneResumeScreening.objects.get(pk=record_id)
+    except StandaloneResumeScreening.DoesNotExist:
+        logger.error(f"process_standalone_resume_screening_task: Record {record_id} not found")
+        return
+
+    # 1. TEXT EXTRACTION (Same logic as original Candidate task)
+    try:
+        if record.resume and not record.resume_text:
+            print(f"   Reading file...", end="", flush=True)
+            file_bytes = record.resume.read()
+            file_name = record.resume.name.lower()
+            file_hash = hashlib.md5(file_bytes).hexdigest()
+
+            if record.resume_hash == file_hash and record.resume_text:
+                print(f" Skipped (cached text reused)")
+            else:
+                text = ""
+
+                if file_name.endswith('.pdf'):
+                    # Try standard PDF extraction
+                    try:
+                        doc = fitz.open(stream=file_bytes, filetype="pdf")
+                        for page in doc: text += page.get_text()
+                        doc.close()
+                    except Exception as e:
+                        logger.warning(f"PyMuPDF failed for standalone {record.id}: {e}")
+
+                    if len(text.strip()) < 250:
+                        try:
+                            pdf_reader = PyPDF2.PdfReader(io.BytesIO(file_bytes))
+                            for page in pdf_reader.pages:
+                                text += (page.extract_text() or "")
+                        except Exception as e:
+                            logger.warning(f"PyPDF2 failed for standalone {record.id}: {e}")
+
+                    # Fallback to OCR if still no/little text
+                    if len(text.strip()) < 250:
+                        print(" (OCR Fallback)...", end="", flush=True)
+                        from api.ocr_utils import extract_text_from_pdf_ocr
+                        text = extract_text_from_pdf_ocr(file_bytes)
+
+                elif file_name.endswith('.docx'):
+                    # Try standard DOCX extraction
+                    try:
+                        from docx import Document
+                        doc = Document(io.BytesIO(file_bytes))
+                        for paragraph in doc.paragraphs:
+                            text += paragraph.text + " "
+                        for table in doc.tables:
+                            for row in table.rows:
+                                for cell in row.cells:
+                                    text += cell.text + " "
+                    except Exception as e:
+                        logger.warning(f"python-docx failed for standalone {record.id}: {e}")
+
+                    # Fallback to OCR for image-based DOCX
+                    if len(text.strip()) < 250:
+                        print(" (OCR Fallback)...", end="", flush=True)
+                        from api.ocr_utils import extract_text_from_docx_ocr
+                        text = extract_text_from_docx_ocr(file_bytes)
+
+                record.resume_text = text
+                record.resume_hash = file_hash
+                record.save()
+                print(f" Done ({len(text)} chars)")
+
+    except Exception as e:
+        print(f" Extraction failed: {e}")
+        logger.error(f"Extraction failed for standalone {record.id}: {e}")
+        record.status = 'Extraction Failed'
+        record.save()
+        return
+
+    if not record.resume_text:
+        print("   No text found in resume. Skipping.")
+        record.status = 'Extraction Failed'
+        record.save()
+        return
+
+    # 1.5 ATS FORMAT VALIDATION — reject resumes missing critical sections (Same as original)
+    resume_lower = record.resume_text.lower()
+    ats_sections_found = 0
+    ats_missing = []
+
+    # Check for Contact Info (email or phone pattern)
+    has_contact = bool(
+        re.search(r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}', record.resume_text) or
+        re.search(r'[\+]?[\d\s\-\(\)]{7,15}', record.resume_text)
+    )
+    if has_contact:
+        ats_sections_found += 1
+    else:
+        ats_missing.append('Contact Info')
+
+    # Check for Experience section
+    has_experience = bool(re.search(
+        r'\b(experience|work\s*history|employment|professional\s*background|work\s*experience|career\s*history|positions?\s*held)\b',
+        resume_lower
+    ))
+    if has_experience:
+        ats_sections_found += 1
+    else:
+        ats_missing.append('Experience')
+
+    # Check for Education section
+    has_education = bool(re.search(
+        r'\b(education|academic|qualification|degree|university|college|bachelor|master|b\.?tech|m\.?tech|b\.?e\b|m\.?e\b|b\.?sc|m\.?sc|diploma|school)\b',
+        resume_lower
+    ))
+    if has_education:
+        ats_sections_found += 1
+    else:
+        ats_missing.append('Education')
+
+    # Check for Skills section
+    has_skills = bool(re.search(
+        r'\b(skills|technical\s*skills|core\s*competenc|proficienc|technologies|tools|frameworks|languages\s*known|expertise)\b',
+        resume_lower
+    ))
+    if has_skills:
+        ats_sections_found += 1
+    else:
+        ats_missing.append('Skills')
+
+    # Require at least 3 out of 4 ATS sections
+    if ats_sections_found < 3:
+        print(f"   ❌ ATS Validation Failed — Missing: {', '.join(ats_missing)}")
+        record.status = 'Invalid Resume Format'
+        record.resume_summary = f"Resume rejected: Missing required ATS sections — {', '.join(ats_missing)}. A valid resume must include at least 3 of: Contact Info, Experience, Education, Skills."
+        record.save()
+        return
+    else:
+        print(f"   ✅ ATS Validation Passed ({ats_sections_found}/4 sections found)")
+
+    # 2. AI ANALYSIS (Same prompt and scoring as original Candidate task)
+    job_description = record.job_description or "General requirements"
+    prompt = f"""
+    Act as an expert technical recruiter and interviewer. Analyze the match between the following resume and job description.
+    
+    RESUME:
+    {record.resume_text[:10000]}
+    
+    JOB DESCRIPTION:
+    {job_description}
+    
+    SCORING RULES (Weighted & Professional):
+    1. CORE SKILLS (50% weight): For every MUST-HAVE technology mentioned in the JD that is missing, subtract 10-15 points.
+    2. SECONDARY SKILLS (15% weight): For minor tools or nice-to-have libraries, subtract only 3-5 points.
+    3. EXPERIENCE (20% weight): Evaluate depth of experience and project complexity.
+    4. CERTIFICATIONS (15% weight): 
+       - Award 10-15 bonus points for certifications that DIRECTLY match the JD role (e.g., Python certification for a Python Developer role).
+       - Award 5-8 points for certifications that PARTIALLY match (e.g., HTML/CSS/JS certification for a Full Stack Developer role — relevant but incomplete coverage).
+       - Award 0 points for certifications completely unrelated to the JD.
+       - If the candidate has NO certifications, do NOT penalize — just award 0 bonus points.
+    5. If the candidate has NO relevant industry experience for the role, cap the total score at 50%.
+    6. BE CONSISTENT: Identical Resume/JD pairs must result in the same logical evaluation.
+    7. OBJECTIVITY: Base the score ONLY on the text in the resume. Do not assume skills.
+    
+    DEEP SKILL ANALYSIS RULES:
+    - Do NOT treat skill keywords at face value. Analyze the DEPTH of each skill based on project descriptions, years of usage, and complexity of work done.
+    - A candidate who lists "React" but has only built a to-do app should score LOWER than one who built production-level dashboards.
+    - If the JD requires "Full Stack Developer" but the candidate only has frontend skills/certifications, recognize this as a PARTIAL match (not full).
+    - Cross-reference certifications against the JD: a "Python PCAP" cert for a "Python Developer" JD is a STRONG match, but a "Google Analytics" cert for the same role is IRRELEVANT.
+    
+    Please provide:
+    1. The candidate's full name (extracted from the resume).
+    2. The candidate's contact email (extracted from the resume).
+    3. The candidate's phone number (extracted from the resume, or null if not found).
+    4. A match percentage (0-100).
+    5. A 2-3 sentence summary that EXPLICITLY mentions what core skills are MISSING and whether certifications are relevant.
+    
+    Format the output strictly as a raw JSON object with keys: "candidate_name", "candidate_email", "candidate_phone", "match_percentage", "summary".
+    CRITICAL: You MUST properly escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure the JSON is perfectly valid and parsable.
+    """
+
+    # 3. SAVE RESULTS (Same logic as original Candidate task)
+    try:
+        match_result = call_groq_with_backoff(prompt=prompt, is_json=True, max_tokens=4096, temperature=0.0)
+        if match_result:
+            try:
+                percentage = int(float(match_result.get('match_percentage', 0)))
+            except:
+                percentage = 0
+
+            # Extract name, email, phone from resume via AI
+            ext_name = match_result.get('candidate_name')
+            ext_email = match_result.get('candidate_email')
+            ext_phone = match_result.get('candidate_phone')
+
+            is_placeholder_name = not record.full_name or any(p in record.full_name.lower() for p in ['extraction', 'unknown', 'pending'])
+            is_placeholder_email = not record.email or any(p in record.email.lower() for p in ['pending', 'extraction', 'unknown'])
+
+            if is_placeholder_name and ext_name and ext_name not in ['null', 'None', 'Extraction Failed']:
+                record.full_name = ext_name
+            if is_placeholder_email and ext_email and ext_email not in ['null', 'None', 'Extraction Failed', 'pending@example.com']:
+                record.email = ext_email
+            if ext_phone and ext_phone not in ['null', 'None']:
+                record.phone = ext_phone
+
+            record.resume_score = percentage
+            record.resume_summary = match_result.get('summary', 'No summary provided by AI.')
+            record.status = 'Resume Passed' if percentage >= 50 else 'Resume Failed'
+            record.save()
+            status_icon = "PASS" if percentage >= 50 else "FAIL"
+            print(f"\n   Done! Score: {percentage}% {status_icon}")
+        else:
+            record.status = 'AI Analysis Failed'
+            record.save()
+    except Exception as e:
+        logger.error(f"AI error for standalone {record.id}: {e}")
+        record.status = 'AI Analysis Failed'
+        record.save()
+

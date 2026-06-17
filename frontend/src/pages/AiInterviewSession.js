@@ -151,6 +151,7 @@ const AiInterviewSession = () => {
     const interimTranscriptRef = useRef("");
     const submitHandlerRef = useRef(null);
     const assemblyAIRef = useRef(null);
+    const sttLiveWsRef = useRef(null); // Track live WebSocket so startListening can do fast "soft resume"
     const startListeningRef = useRef(null);
     const canvasRef = useRef(null);
     const animationRef = useRef(null);
@@ -1442,6 +1443,34 @@ const AiInterviewSession = () => {
                 return;
             }
 
+            // ── FAST SOFT-RESUME PATH ──────────────────────────────────────
+            // If we still have a live WebSocket + mic stream from the previous
+            // turn, just unmute the mic tracks and clear transcript buffers.
+            // This eliminates the 1.5-3s dead zone that was dropping the first
+            // few words of the candidate's answer.
+            const liveWs = sttLiveWsRef.current;
+            if (liveWs && liveWs.readyState === WebSocket.OPEN && micStreamRef.current) {
+                const tracks = micStreamRef.current.getAudioTracks();
+                const allAlive = tracks.length > 0 && tracks.every(t => t.readyState === 'live');
+                if (allAlive) {
+                    console.log("[STT] Fast soft-resume: reusing live WebSocket + mic stream");
+                    tracks.forEach(t => { t.enabled = true; });
+                    transcriptRef.current = "";
+                    interimTranscriptRef.current = "";
+                    lastTranscriptStrRef.current = "";
+                    lastSpokenTimeRef.current = Date.now();
+                    isRecordingRef.current = true;
+                    setIsRecording(true);
+                    setSttReady(true);
+                    setAiStatus("Listening...");
+                    return;
+                } else {
+                    console.log("[STT] Mic tracks ended, falling through to full rebuild");
+                    sttLiveWsRef.current = null;
+                }
+            }
+            // ── END FAST SOFT-RESUME ───────────────────────────────────────
+
             try {
                 // Initialize AssemblyAI
                 setSttReady(false);
@@ -1473,6 +1502,7 @@ const AiInterviewSession = () => {
 
                 const wsUrl = `wss://streaming.assemblyai.com/v3/ws?sample_rate=16000&speech_model=u3-rt-pro&token=${assemblyToken}`;
                 const ws = new WebSocket(wsUrl);
+                sttLiveWsRef.current = ws; // Track the live WS for soft-resume
 
                 // Buffer to hold audio chunks while WebSocket is connecting
                 const audioBufferQueue = [];
@@ -1539,6 +1569,7 @@ const AiInterviewSession = () => {
 
                 ws.onerror = (error) => {
                     console.error("AssemblyAI Native WebSocket error:", error);
+                    sttLiveWsRef.current = null;
                     setSttReady(false);
                     setIsRecording(false);
                     isRecordingRef.current = false;
@@ -1547,6 +1578,7 @@ const AiInterviewSession = () => {
 
                 ws.onclose = (event) => {
                     console.log("AssemblyAI Native WebSocket closed:", event.code, event.reason);
+                    sttLiveWsRef.current = null;
                     setSttReady(false);
                     setIsRecording(false);
                     isRecordingRef.current = false;
@@ -1697,8 +1729,22 @@ const AiInterviewSession = () => {
                 lastSpokenTimeRef.current = Date.now();
 
                 assemblyAIRef.current = {
+                    // softStop: Mute mic tracks but keep WS + recorder alive for fast resume
+                    softStop: () => {
+                        try {
+                            if (micStreamRef.current) {
+                                micStreamRef.current.getAudioTracks().forEach(t => { t.enabled = false; });
+                            }
+                            isRecordingRef.current = false;
+                            setIsRecording(false);
+                            setSttReady(false);
+                            console.log("[STT] Soft stop: mic muted, WS + recorder kept alive");
+                        } catch (e) { console.error("softStop error:", e); }
+                    },
+                    // stop (hard): Full teardown — only use for interview end, coding mode, fullscreen exit
                     stop: () => {
                         try {
+                            sttLiveWsRef.current = null; // Prevent soft-resume from using dead WS
                             if (animationRef.current) cancelAnimationFrame(animationRef.current);
                             if (visualizerCtxRef.current) {
                                 visualizerCtxRef.current.close().catch(e => { });
@@ -1752,6 +1798,7 @@ const AiInterviewSession = () => {
                 if (e instanceof TypeError) {
                     console.error("TypeError caught in startListening:", e.message, e.stack);
                 }
+                sttLiveWsRef.current = null;
                 setSttReady(false);
                 setIsRecording(false);
                 isRecordingRef.current = false;
@@ -1799,8 +1846,10 @@ const AiInterviewSession = () => {
         nudgeCountRef.current = 0; // Reset nudge for the new question turn
         if (globalSilenceTimerRef.current) clearInterval(globalSilenceTimerRef.current);
 
-        // 2. Force Microphone Stop
-        if (recognitionRef.current) {
+        // 2. Soft-stop Microphone (mute tracks, keep WS alive for fast resume)
+        if (assemblyAIRef.current && assemblyAIRef.current.softStop) {
+            try { assemblyAIRef.current.softStop(); } catch (e) { }
+        } else if (recognitionRef.current) {
             try { recognitionRef.current.stop(); } catch (e) { }
         }
         if (silenceTimerRef.current) clearInterval(silenceTimerRef.current);
@@ -2065,11 +2114,12 @@ const AiInterviewSession = () => {
                 if (effectiveMode === 'audio' && !showQuotaWarning) {
                     // Reset manual mute for new turn
                     manualMuteRef.current = false;
+                    // FIX: Reduced from 600ms to 100ms since soft-resume just unmutes tracks
                     setTimeout(() => {
                         if (!isCompletedRef.current && !isProcessingRef.current) {
                             startListening();
                         }
-                    }, 600);
+                    }, 100);
                 }
             }
         } catch (err) {

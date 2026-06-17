@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.utils import timezone
-from .models import Candidate, InterviewIntegrityLog, PipelineLog
+from .models import Candidate, InterviewIntegrityLog, PipelineLog, StandaloneResumeScreening
 
 class PipelineLogSerializer(serializers.ModelSerializer):
     timestamp_formatted = serializers.SerializerMethodField()
@@ -29,3 +29,8 @@ class CandidateSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'interview_questions': {'write_only': True},
         }
+
+class StandaloneResumeScreeningSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StandaloneResumeScreening
+        fields = '__all__'

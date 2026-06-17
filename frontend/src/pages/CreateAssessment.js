@@ -723,8 +723,8 @@ const CreateAssessment = () => {
                                     type="range" min="0" max="100" step="5"
                                     value={formData.mcq_weight}
                                     onChange={(e) => handleChange('mcq_weight', parseInt(e.target.value))}
-                                    disabled={formData.num_mcqs === 0 || formData.num_coding === 0}
-                                    style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (formData.num_mcqs === 0 || formData.num_coding === 0) ? 'not-allowed' : 'pointer', height: '100%', margin: 0, zIndex: 2 }}
+                                    disabled={loading || formData.num_mcqs === 0 || formData.num_coding === 0}
+                                    style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (loading || formData.num_mcqs === 0 || formData.num_coding === 0) ? 'not-allowed' : 'pointer', height: '100%', margin: 0, zIndex: 2 }}
                                 />
                             </div>
                         </div>

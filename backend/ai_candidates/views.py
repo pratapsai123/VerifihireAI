@@ -817,8 +817,41 @@ class ResumeMatchView(APIView):
 
         try:
 
-            # INSTANT SAVE: Create Candidate records without waiting for OCR
+            is_auto = False
+            raw_is_auto = request.data.get('is_fully_automatic')
+            if raw_is_auto:
+                if isinstance(raw_is_auto, str): is_auto = raw_is_auto.lower() == 'true'
+                else: is_auto = bool(raw_is_auto)
 
+            if not is_auto:
+                from .models import StandaloneResumeScreening
+                from .tasks import process_standalone_resume_screening_task
+                for resume_file in resume_files:
+                    user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
+                    company = user_profile.company if user_profile else None
+                    candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
+                    
+                    new_standalone = StandaloneResumeScreening.objects.create(
+                        full_name=candidate_name,
+                        email="pending@example.com",
+                        resume=resume_file,
+                        job_description=job_description,
+                        status='New',
+                        company=company,
+                        batch_id=batch_id,
+                        batch_name=batch_name
+                    )
+                    results.append({"id": new_standalone.id, "name": candidate_name, "status": "Queued"})
+                    process_standalone_resume_screening_task.delay(new_standalone.id)
+                    
+                return Response({
+                    "message": "Files successfully uploaded for manual screening.",
+                    "results": results,
+                    "batch_id": batch_id,
+                    "total": len(resume_files)
+                }, status=status.HTTP_201_CREATED)
+
+            # INSTANT SAVE: Create Candidate records without waiting for OCR (Automatic Mode)
             for resume_file in resume_files:
 
                 job_title = request.data.get('job_title') or request.data.get('role_title')
@@ -827,15 +860,11 @@ class ResumeMatchView(APIView):
 
                     ensure_role_exists(job_title, job_description, user=request.user)
 
-
-
                 user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
 
                 company = user_profile.company if user_profile else None
 
                 candidate_name = getattr(resume_file, 'name', 'Candidate').replace('.pdf', '')
-
-                
 
                 # Create the candidate record
 
@@ -869,21 +898,7 @@ class ResumeMatchView(APIView):
 
                 results.append({"id": new_candidate.id, "name": candidate_name, "status": "Queued"})
 
-
-
             # 2. Trigger processing as a background task
-
-            is_auto = False
-
-            raw_is_auto = request.data.get('is_fully_automatic')
-
-            if raw_is_auto:
-
-                if isinstance(raw_is_auto, str): is_auto = raw_is_auto.lower() == 'true'
-
-                else: is_auto = bool(raw_is_auto)
-
-
 
             same_q = False
 
@@ -991,10 +1006,36 @@ class BatchProgressView(APIView):
         candidates = Candidate.objects.filter(batch_id=batch_id)
 
         if not candidates.exists():
+            standalone = StandaloneResumeScreening.objects.filter(batch_id=batch_id)
+            if not standalone.exists():
+                return Response({"error": "Batch not found"}, status=status.HTTP_404_NOT_FOUND)
+            
+            processed_qs = standalone.exclude(status='New')
+            processed = processed_qs.count()
+            total = standalone.count()
 
-            return Response({"error": "Batch not found"}, status=status.HTTP_404_NOT_FOUND)
+            results = []
+            for c in processed_qs:
+                results.append({
+                    "candidate_id": c.id,
+                    "candidate_name": c.full_name,
+                    "candidate_email": c.email,
+                    "match_percentage": c.resume_score,
+                    "is_eligible": (c.status == 'Resume Passed'),
+                    "status": c.status,
+                    "file_name": c.full_name if not c.resume else os.path.basename(c.resume.name),
+                    "extraction_failed": (c.status == 'Extraction Failed'),
+                    "summary": c.resume_summary or "Match calculated in background." if c.status != 'Extraction Failed' else f"Extraction failed for {c.full_name}."
+                })
 
-        
+            return Response({
+                "batch_id": batch_id,
+                "total": total,
+                "processed": processed,
+                "is_complete": (processed == total),
+                "results": results
+            }, status=status.HTTP_200_OK)
+
 
         processed_qs = candidates.exclude(status='New')
 
@@ -2628,6 +2669,20 @@ class CandidateRegistrationUpdateView(APIView):
             try:
                 candidate.save()
                 
+                # If a mismatch was flagged, log it as an integrity violation so it appears in the screenshots grid
+                if getattr(candidate, 'identity_mismatch_detected', False) and snapshot_b64_payload:
+                    from .models import InterviewIntegrityLog
+                    # Extract raw b64
+                    clean_b64_log = snapshot_b64_payload.split(',')[-1] if ',' in snapshot_b64_payload else snapshot_b64_payload
+                    # Ensure we don't create duplicate logs
+                    if not InterviewIntegrityLog.objects.filter(candidate=candidate, event_type="face_mismatch").exists():
+                        b64_data = f"data:image/jpeg;base64,{clean_b64_log}"
+                        InterviewIntegrityLog.objects.create(
+                            candidate=candidate,
+                            event_type="face_mismatch",
+                            webcam_screenshot_base64=b64_data
+                        )
+                
                 if resume:
                     from .tasks import extract_resume_text_task
                     extract_resume_text_task.delay(candidate.id)
@@ -3043,9 +3098,11 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 
             # -----------------------------------------------
 
-            # --- HARD-CODED CATEGORY TRIGGERS ---
-            # Force code input UI for turns 13-14 to ensure the editor appears
-            if current_turn_number in [13, 14]:
+            # Force code input UI for turns 13-14 to ensure the editor appears.
+            # NOTE: current_turn_number is the turn that was JUST ANSWERED.
+            # So when current_turn_number is 12, we are generating Question 13.
+            # When current_turn_number is 13, we are generating Question 14.
+            if current_turn_number in [12, 13]:
                 data['requires_code_input'] = True
                 # Ensure the AI didn't accidentally set is_exit=True too early
                 data['is_exit'] = False
@@ -3698,13 +3755,38 @@ class CandidateReportDownloadView(APIView):
             # No penalty applied to raw score — integrity only affects status (On-Hold if < 75%)
             final_performance_pct = round(base_score_pct, 1)
 
+            # Identity Status Logic
+            identity_status = "Verified \u2713"
+            ident_status_color = colors.HexColor("#16a34a") # Green
+            
+            mismatch_info = getattr(candidate, 'identity_mismatch_details', {}) or {}
+            
+            if getattr(candidate, 'photo_update_approved', False):
+                identity_status = "MISMATCH (APPROVED & UPDATED) \u2713"
+                ident_status_color = colors.HexColor("#16a34a")
+            elif getattr(candidate, 'identity_mismatch_detected', False):
+                identity_status = "MISMATCH DETECTED \u2717"
+                ident_status_color = colors.HexColor("#dc2626")
+
+            match_score_str = "100%"
+            score_val = mismatch_info.get('face_match_score')
+            if score_val is not None:
+                if score_val <= 1.0:
+                    match_score_str = f"{min(100.0, round(score_val * 100.0, 2))}%"
+                else:
+                    match_score_str = f"{min(100.0, round(score_val, 2))}%"
+            elif getattr(candidate, 'identity_mismatch_detected', False):
+                match_score_str = "Mismatch \u2717"
+
             # Right side: Summary Table
             info_data = [
                 ["Full Name", candidate.full_name],
                 ["Email", candidate.email],
                 ["Phone", candidate.phone or "N/A"],
                 ["PAN Number", candidate.pan_number or "N/A"],
-                ["PAN Verified", "Yes ✓" if candidate.pan_verified else "No ✗"],
+                ["PAN Verified", "Yes \u2713" if candidate.pan_verified else "No \u2717"],
+                ["Identity Status", identity_status],
+                ["Face Match Score", match_score_str],
                 ["Job Title", candidate.job_title or "N/A"],
                 ["Interview Score", f"{candidate.score} / {total_possible_marks}"],
                 ["Integrity Score", f"{integrity_score:.1f}%"],
@@ -3714,14 +3796,21 @@ class CandidateReportDownloadView(APIView):
             ]
             
             summary_table = Table(info_data, colWidths=[1.2*inch, 3.0*inch])
-            summary_table.setStyle(TableStyle([
+            
+            base_styles = [
                 ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
                 ('TEXTCOLOR', (0,0), (0,-1), colors.HexColor("#475569")),
                 ('FONTNAME', (0,0), (0,-1), 'Helvetica-Bold'),
                 ('ALIGN', (0,0), (-1,-1), 'LEFT'),
                 ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor("#e2e8f0")),
                 ('PADDING', (0,0), (-1,-1), 6),
-            ]))
+            ]
+            
+            for i, row in enumerate(info_data):
+                if row[0] == 'Identity Status':
+                    base_styles.append(('TEXTCOLOR', (1,i), (1,i), ident_status_color))
+
+            summary_table.setStyle(TableStyle(base_styles))
 
             # Combine in a layout table
             layout_table = Table([[img_elem, summary_table]], colWidths=[2.2*inch, 4.3*inch])
@@ -3732,77 +3821,6 @@ class CandidateReportDownloadView(APIView):
             ]))
             elements.append(layout_table)
             elements.append(Spacer(1, 20))
-
-            # 2.2 Identity Warning Section (Mismatch detected but overridden)
-            if getattr(candidate, 'identity_mismatch_detected', False):
-                elements.append(Paragraph("⚠️ IDENTITY WARNING: Face Mismatch Detected", 
-                                          ParagraphStyle('WarnStyle', parent=styles['Heading3'], textColor=colors.red)))
-                
-                mismatch_info = candidate.identity_mismatch_details or {}
-                original_name = mismatch_info.get('original_holder_name', 'another person')
-                
-                elements.append(Paragraph(f"This candidate's face did not match the photo previously registered with this PAN card (originally used by {original_name}). The interview was allowed to proceed via manual override.", 
-                                          ParagraphStyle('WarnText', parent=styles['Normal'], textColor=colors.red, fontSize=9)))
-                elements.append(Spacer(1, 10))
-                
-                # Side-by-side comparison
-                # NEW FACE = the pending photo awaiting admin approval.
-                new_photo_elem = None
-                if getattr(candidate, 'pending_face_b64', None):
-                    try:
-                        new_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.pending_face_b64)), width=2.0*inch, height=1.5*inch)
-                    except Exception:
-                        pass
-
-                if not new_photo_elem:
-                    try:
-                        deepface_data_dir_report = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
-                        new_face_candidates = []
-                        if candidate.pan_number:
-                            new_face_candidates.append(
-                                os.path.join(deepface_data_dir_report, str(candidate.pan_number).strip().lower(), "face_0.jpg")
-                            )
-                        if candidate.public_token:
-                            new_face_candidates.append(
-                                os.path.join(deepface_data_dir_report, str(candidate.public_token).lower(), "face_0.jpg")
-                            )
-                        new_face_path = next((p for p in new_face_candidates if os.path.exists(p)), None)
-                        if new_face_path:
-                            new_photo_elem = RLImage(new_face_path, width=2.0*inch, height=1.5*inch)
-                    except Exception:
-                        pass
-                if not new_photo_elem:
-                    new_photo_elem = Paragraph("<i>Current photo not available.</i>", styles['Normal'])
-
-                # ORIGINAL REGISTERED FACE = the PAN master (trusted face)
-                old_photo_elem = None
-                if getattr(candidate, 'master_face_b64', None):
-                    try:
-                        old_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.master_face_b64)), width=2.0*inch, height=1.5*inch)
-                    except Exception:
-                        pass
-
-                if not old_photo_elem:
-                    old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
-                
-                comparison_table = Table([
-                    [old_photo_elem, new_photo_elem],
-                    [Paragraph("<b>Original Registered Face</b>", styles['Small']), 
-                     Paragraph("<b>Current Interview Face</b>", styles['Small'])]
-                ], colWidths=[3.25*inch, 3.25*inch])
-                
-                comparison_table.setStyle(TableStyle([
-                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                    ('BOX', (0,0), (-1,-1), 1, colors.red),
-                    ('BACKGROUND', (0,1), (-1,1), colors.HexColor("#fee2e2")),
-                ]))
-                
-                elements.append(comparison_table)
-                elements.append(Spacer(1, 25))
-
-            else:
-                elements.append(Spacer(1, 10))
 
             # 2.5 Identity Documents Section - PAN Card
             if candidate.pan_photo:
@@ -3899,67 +3917,165 @@ class CandidateReportDownloadView(APIView):
             elements.append(Spacer(1, 10))
             
             logs = candidate.integrity_logs.all().order_by('timestamp')
-            if logs.exists():
-                elements.append(Paragraph(f"Total violations flagged: {logs.count()}", styles['Normal']))
+            all_images = []
+            
+            for log in logs:
+                # Process Webcam Snapshot
+                if log.webcam_screenshot_base64:
+                    try:
+                        b64 = log.webcam_screenshot_base64.split(',')[-1]
+                        img_data = base64.b64decode(b64)
+                        img_io = io.BytesIO(img_data)
+                        rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                        all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                    except Exception as webcam_err:
+                        logger.warning(f"[PDFReport] Failed to load webcam screenshot for log {log.id}: {webcam_err}")
+                
+                # Process Desktop Snapshot
+                if log.screenshot_base64:
+                    try:
+                        b64 = log.screenshot_base64.split(',')[-1]
+                        img_data = base64.b64decode(b64)
+                        img_io = io.BytesIO(img_data)
+                        rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                        all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                    except Exception as desktop_err:
+                        logger.warning(f"[PDFReport] Failed to load desktop screenshot for log {log.id}: {desktop_err}")
+
+            # Synthetically inject Face Mismatch photo into the grid if it was flagged but missing from DB logs
+            if getattr(candidate, 'identity_mismatch_detected', False) or getattr(candidate, 'photo_update_approved', False):
+                has_mismatch = any('Face Mismatch' in caption for _, caption in all_images)
+                if not has_mismatch and getattr(candidate, 'pending_face_b64', None):
+                    try:
+                        b64 = candidate.pending_face_b64.split(',')[-1]
+                        img_data = base64.b64decode(b64)
+                        img_io = io.BytesIO(img_data)
+                        rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
+                        # We don't have the exact timestamp, use creation time or a generic one
+                        mismatch_time = candidate.created_at.strftime('%H:%M:%S') if candidate.created_at else "Initial"
+                        all_images.insert(0, (rl_img, f"Face Mismatch ({mismatch_time})"))
+                    except Exception as e:
+                        logger.warning(f"[PDFReport] Failed to inject synthetic face mismatch image: {e}")
+
+            if all_images:
+                elements.append(Paragraph(f"Total violations flagged: {len(all_images)}", styles['Normal']))
                 elements.append(Spacer(1, 15))
                 
-                # Collect all images across all logs for 4-per-row layout
-                all_images = []
-                for log in logs:
-                    # Process Webcam Snapshot
-                    if log.webcam_screenshot_base64:
-                        try:
-                            b64 = log.webcam_screenshot_base64.split(',')[-1]
-                            img_data = base64.b64decode(b64)
-                            img_io = io.BytesIO(img_data)
-                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-                            all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-                        except Exception as webcam_err:
-                            logger.warning(f"[PDFReport] Failed to load webcam screenshot for log {log.id}: {webcam_err}")
-                    
-                    # Process Desktop Snapshot
-                    if log.screenshot_base64:
-                        try:
-                            b64 = log.screenshot_base64.split(',')[-1]
-                            img_data = base64.b64decode(b64)
-                            img_io = io.BytesIO(img_data)
-                            rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-                            all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
-                        except Exception as desktop_err:
-                            logger.warning(f"[PDFReport] Failed to load desktop screenshot for log {log.id}: {desktop_err}")
-                
-                if all_images:
-                    # Display images in 4-per-row grid
-                    img_grid = []
-                    row = []
-                    for img, caption in all_images:
-                        # Each cell will contain both the image and the caption text
-                        row.append([img, Paragraph(caption, styles['Small'])])
-                        if len(row) == 4:
-                            img_grid.append(row)
-                            row = []
-                    if row:  # Add remaining images
-                        while len(row) < 4:
-                            row.append("")
+                # Display images in 4-per-row grid
+                img_grid = []
+                row = []
+                for img, caption in all_images:
+                    # Each cell will contain both the image and the caption text
+                    row.append([img, Paragraph(caption, styles['Small'])])
+                    if len(row) == 4:
                         img_grid.append(row)
-                    
-                    for grid_row in img_grid:
-                        # Passing [grid_row] creates a single table row with 4 columns
-                        t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
-                        t_img.setStyle(TableStyle([
-                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                            ('LEFTPADDING', (0,0), (-1,-1), 2),
-                            ('RIGHTPADDING', (0,0), (-1,-1), 2),
-                            ('TOPPADDING', (0,0), (-1,-1), 5),
-                            ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-                        ]))
-                        elements.append(t_img)
-                        elements.append(Spacer(1, 10))
-                else:
-                    elements.append(Paragraph("[No visual evidence captured for violations]", styles['Small']))
+                        row = []
+                if row:  # Add remaining images
+                    while len(row) < 4:
+                        row.append("")
+                    img_grid.append(row)
+                
+                for grid_row in img_grid:
+                    # Passing [grid_row] creates a single table row with 4 columns
+                    t_img = Table([grid_row], colWidths=[1.5*inch, 1.5*inch, 1.5*inch, 1.5*inch])
+                    t_img.setStyle(TableStyle([
+                        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                        ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                        ('LEFTPADDING', (0,0), (-1,-1), 2),
+                        ('RIGHTPADDING', (0,0), (-1,-1), 2),
+                        ('TOPPADDING', (0,0), (-1,-1), 5),
+                        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                    ]))
+                    elements.append(t_img)
+                    elements.append(Spacer(1, 10))
             else:
                 elements.append(Paragraph("High Integrity Session: No proctoring violations were recorded.", styles['Normal']))
+
+            # Identity Mismatch Section in PDF (placed below integrity screenshots)
+            if getattr(candidate, 'identity_mismatch_detected', False) or getattr(candidate, 'photo_update_approved', False):
+                elements.append(Spacer(1, 15))
+                mismatch_title_style = ParagraphStyle(
+                    'MismatchTitle',
+                    parent=styles['Heading3'],
+                    fontSize=11,
+                    textColor=colors.HexColor("#EE5D50"),
+                    fontName='Helvetica-Bold',
+                    spaceAfter=6
+                )
+                elements.append(Paragraph("⚠ IDENTITY EVIDENCE — FACE COMPARISON MISMATCH", mismatch_title_style))
+                
+                mismatch_info = candidate.identity_mismatch_details or {}
+                original_name = mismatch_info.get('original_holder_name', 'another person')
+                
+                desc_style = ParagraphStyle(
+                    'MismatchDesc',
+                    parent=styles['Normal'],
+                    fontSize=9,
+                    textColor=colors.HexColor("#EE5D50"),
+                    leading=13
+                )
+                elements.append(Paragraph(
+                    f"The candidate's face did not match the photo previously registered with this PAN card (originally used by {original_name}). "
+                    "The interview was allowed to proceed via manual override.", 
+                    desc_style
+                ))
+                elements.append(Spacer(1, 10))
+                
+                # Side-by-side comparison
+                # NEW FACE = the pending photo awaiting admin approval.
+                new_photo_elem = None
+                if getattr(candidate, 'pending_face_b64', None):
+                    try:
+                        new_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.pending_face_b64)), width=2.0*inch, height=1.5*inch)
+                    except Exception:
+                        pass
+
+                if not new_photo_elem:
+                    try:
+                        deepface_data_dir_report = os.path.abspath(os.path.join(settings.BASE_DIR, '..', 'deepface', 'data', 'registered_faces'))
+                        new_face_candidates = []
+                        if candidate.pan_number:
+                            new_face_candidates.append(
+                                os.path.join(deepface_data_dir_report, str(candidate.pan_number).strip().lower(), "face_0.jpg")
+                            )
+                        if candidate.public_token:
+                            new_face_candidates.append(
+                                os.path.join(deepface_data_dir_report, str(candidate.public_token).lower(), "face_0.jpg")
+                            )
+                        new_face_path = next((p for p in new_face_candidates if os.path.exists(p)), None)
+                        if new_face_path:
+                            new_photo_elem = RLImage(new_face_path, width=2.0*inch, height=1.5*inch)
+                    except Exception:
+                        pass
+                if not new_photo_elem:
+                    new_photo_elem = Paragraph("<i>Current photo not available.</i>", styles['Normal'])
+
+                # ORIGINAL REGISTERED FACE = the PAN master (trusted face)
+                old_photo_elem = None
+                if getattr(candidate, 'master_face_b64', None):
+                    try:
+                        old_photo_elem = RLImage(io.BytesIO(base64.b64decode(candidate.master_face_b64)), width=2.0*inch, height=1.5*inch)
+                    except Exception:
+                        pass
+
+                if not old_photo_elem:
+                    old_photo_elem = Paragraph("<i>Original photo not available.</i>", styles['Normal'])
+                
+                comparison_table = Table([
+                    [old_photo_elem, new_photo_elem],
+                    [Paragraph("<b>Original Registered Face</b>", styles['Small']), 
+                     Paragraph("<b>Current Interview Face</b>", styles['Small'])]
+                ], colWidths=[3.25*inch, 3.25*inch])
+                
+                comparison_table.setStyle(TableStyle([
+                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                    ('BOX', (0,0), (-1,-1), 1, colors.red),
+                    ('BACKGROUND', (0,1), (-1,1), colors.HexColor("#fee2e2")),
+                ]))
+                
+                elements.append(comparison_table)
+                elements.append(Spacer(1, 25))
 
             # Build PDF
             doc.build(elements)
@@ -4355,3 +4471,19 @@ class ResendInviteView(APIView):
         except Exception as e:
             logger.error(f"[ResendInvite] Failed to resend invite: {e}")
             return Response({'error': f'Failed to send email: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+from .models import StandaloneResumeScreening
+from .serializers import StandaloneResumeScreeningSerializer
+from .tasks import process_standalone_resume_screening_task
+
+class StandaloneResumeScreeningListCreateView(generics.ListCreateAPIView):
+    queryset = StandaloneResumeScreening.objects.all().order_by('-created_at')
+    serializer_class = StandaloneResumeScreeningSerializer
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        process_standalone_resume_screening_task.delay(instance.id)
+
+class StandaloneResumeScreeningDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = StandaloneResumeScreening.objects.all()
+    serializer_class = StandaloneResumeScreeningSerializer

@@ -90,11 +90,14 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     except Exception:
         approved_ai_ids = set()
 
+    # Evaluate the queryset once to avoid multiple DB hits
+    ai_list = list(ai_qs[:5000])
+
     # Bulk fetch mismatch submissions to avoid N+1 queries
     mismatch_submission_ids = set()
     try:
         from ai_assessments.models import AIAssessmentIntegrityScreenshot
-        slice_ids = [sub.id for sub in ai_qs[:5000]]
+        slice_ids = [sub.id for sub in ai_list]
         if slice_ids:
             mismatch_submission_ids = set(AIAssessmentIntegrityScreenshot.objects.filter(
                 submission_id__in=slice_ids,
@@ -112,20 +115,21 @@ def get_ai_assessment_results(scoped_ids, company_id, start_date, end_date, requ
     # For fresh PANs there is no prior registered face, so photo_update_pending must be False.
     fresh_pan_submission_ids = set()
     try:
-        from django.db.models import Min
-        pan_first = AIAssessmentSubmission.objects.exclude(
-            pan_number__isnull=True
-        ).exclude(
-            pan_number=''
-        ).values('pan_number').annotate(
-            first_id=Min('id')
-        )
-        fresh_pan_submission_ids = {item['first_id'] for item in pan_first}
+        current_pans = {s.pan_number for s in ai_list if getattr(s, 'pan_number', None) and s.pan_number.strip()}
+        if current_pans:
+            from django.db.models import Min
+            pan_first = AIAssessmentSubmission.objects.filter(
+                is_deleted=False,
+                pan_number__in=current_pans
+            ).values('pan_number').annotate(
+                first_id=Min('id')
+            )
+            fresh_pan_submission_ids = {item['first_id'] for item in pan_first}
     except Exception:
         pass
 
     results = []
-    for s in ai_qs[:5000]:
+    for s in ai_list:
         a = s.assessment
 
         if is_list:
