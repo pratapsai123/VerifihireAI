@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
@@ -38,6 +38,56 @@ function Login() {
   const [loginPasswordFocused, setLoginPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [fieldErrors, setFieldErrors] = useState({});
+
+  // Refs for tracking autofilled values
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  const [isEmailAutofilled, setIsEmailAutofilled] = useState(false);
+  const [isPasswordAutofilled, setIsPasswordAutofilled] = useState(false);
+
+  // Sync autofill values when browser fills the inputs without triggering onChange
+  useEffect(() => {
+    const checkAutofill = () => {
+      let emailAuto = false;
+      let passwordAuto = false;
+
+      if (emailInputRef.current) {
+        const value = emailInputRef.current.value;
+        emailAuto = emailInputRef.current.matches(':-webkit-autofill') || emailInputRef.current.matches(':autofill');
+        if (value && value !== loginEmail) {
+          setLoginEmail(value);
+        }
+      }
+      if (passwordInputRef.current) {
+        const value = passwordInputRef.current.value;
+        passwordAuto = passwordInputRef.current.matches(':-webkit-autofill') || passwordInputRef.current.matches(':autofill');
+        if (value && value !== loginPassword) {
+          setLoginPassword(value);
+        }
+      }
+
+      if (emailAuto !== isEmailAutofilled) {
+        setIsEmailAutofilled(emailAuto);
+      }
+      if (passwordAuto !== isPasswordAutofilled) {
+        setIsPasswordAutofilled(passwordAuto);
+      }
+    };
+
+    // Listen to standard interaction/events on the document to check for autofilled values
+    const events = ['click', 'focus', 'input', 'change'];
+    events.forEach(event => document.addEventListener(event, checkAutofill, true));
+
+    // Run a quick check on mount and with short delays to catch initial page load autofills
+    checkAutofill();
+    const timeouts = [100, 500, 1000, 2000].map(delay => setTimeout(checkAutofill, delay));
+
+    return () => {
+      events.forEach(event => document.removeEventListener(event, checkAutofill, true));
+      timeouts.forEach(clearTimeout);
+    };
+  }, [loginEmail, loginPassword, isEmailAutofilled, isPasswordAutofilled]);
 
   // OTP verification state
   const [showOtpStep, setShowOtpStep] = useState(false);
@@ -349,10 +399,13 @@ function Login() {
           <form className="auth-form" onSubmit={handleLogin} data-aos="fade-up" data-aos-delay="100">
 
 
-            <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail ? 'focused has-value' : ''}`}>
+            <div className={`auth-input-icon-wrapper ${loginEmailFocused || loginEmail || isEmailAutofilled ? 'focused has-value' : ''}`}>
               <i className="fas fa-user auth-input-icon"></i>
               <input
+                ref={emailInputRef}
                 type="email"
+                name="email"
+                autoComplete="username email"
                 className="auth-input-with-icon"
                 placeholder="Email *"
                 value={loginEmail}
@@ -369,11 +422,14 @@ function Login() {
               <div className="field-error-text">{fieldErrors.email}</div>
             )}
 
-            <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword ? 'focused has-value' : ''}`}>
+            <div className={`auth-input-icon-wrapper ${loginPasswordFocused || loginPassword || isPasswordAutofilled ? 'focused has-value' : ''}`}>
               <i className="fas fa-lock auth-input-icon"></i>
               <div style={{ position: 'relative' }}>
                 <input
+                  ref={passwordInputRef}
                   type={showPassword ? "text" : "password"}
+                  name="password"
+                  autoComplete="current-password"
                   className="auth-input-with-icon"
                   placeholder="Password *"
                   value={loginPassword}
@@ -415,7 +471,7 @@ function Login() {
             <button
               type="submit"
               className="auth-primary-btn"
-              disabled={loginLoading || !loginEmail || !loginPassword || loginCooldownSeconds > 0}
+              disabled={loginLoading || (!(loginEmail || isEmailAutofilled) || !(loginPassword || isPasswordAutofilled)) || loginCooldownSeconds > 0}
               style={{ width: '100%', padding: '0.875rem', fontSize: '1rem', fontWeight: '600' }}
             >
               {loginLoading ? 'Verifying...' : 'Login'}

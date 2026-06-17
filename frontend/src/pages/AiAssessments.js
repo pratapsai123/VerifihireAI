@@ -70,7 +70,7 @@ const AiAssessments = () => {
 
         // 2. Time-based Expiry (Absolute deadline - only triggers if NOT fully completed)
         if (until && now > until) {
-            return { type: 'COMPLETED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
+            return { type: 'EXPIRED', label: 'Expired', isExpired: true, color: '#EE5D50', bg: '#FFF5F5', icon: 'fa-clock-rotate-left' };
         }
 
         // 3. Activity-based (Someone has started)
@@ -208,7 +208,7 @@ const AiAssessments = () => {
                             <button
                                 className="global-btn-back"
                                 type="button"
-                                onClick={() => navigate(-1)}
+                                onClick={() => navigate('/dashboard')}
                             >
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
                                 Back
@@ -242,7 +242,7 @@ const AiAssessments = () => {
 
                     {/* Filter Tabs */}
                     <div className="tabs" style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', background: '#F4F7FE', padding: '0.4rem', borderRadius: '12px', width: 'fit-content' }}>
-                        {['ALL', 'SCHEDULED', 'ONGOING', 'COMPLETED'].map(status => (
+                        {['ALL', 'SCHEDULED', 'ONGOING', 'COMPLETED', 'EXPIRED'].map(status => (
                             <button
                                 key={status}
                                 onClick={() => { setFilter(status); setCurrentPage(1); }}
@@ -256,7 +256,8 @@ const AiAssessments = () => {
                             >
                                 <i className={`fa-solid ${status === 'ALL' ? 'fa-list' :
                                     status === 'SCHEDULED' ? 'fa-calendar' :
-                                        status === 'ONGOING' ? 'fa-spinner' : 'fa-check-circle'
+                                        status === 'ONGOING' ? 'fa-spinner' :
+                                            status === 'COMPLETED' ? 'fa-check-circle' : 'fa-clock-rotate-left'
                                     }`} style={{ fontSize: '0.9rem' }}></i>
                                 {status.charAt(0) + status.slice(1).toLowerCase()}
                             </button>

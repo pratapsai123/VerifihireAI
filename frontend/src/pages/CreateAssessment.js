@@ -420,6 +420,7 @@ const CreateAssessment = () => {
                                 className="modern-input"
                                 style={{ width: '100%', padding: '0.85rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: 'white' }}
                                 value={selectedRoleId}
+                                disabled={loading}
                                 onChange={(e) => {
                                     const roleId = e.target.value;
                                     setSelectedRoleId(roleId);
@@ -451,6 +452,7 @@ const CreateAssessment = () => {
                                         onChange={(e) => handleChange('customRoleTitle', e.target.value)}
                                         placeholder="e.g. Senior Frontend Developer"
                                         className="modern-input"
+                                        disabled={loading}
                                     />
                                 </div>
                             )}
@@ -465,6 +467,7 @@ const CreateAssessment = () => {
                                 value={formData.skills}
                                 onChange={(e) => handleChange('skills', e.target.value)}
                                 className="modern-input"
+                                disabled={loading}
                             />
                         </div>
                     )}
@@ -488,6 +491,7 @@ const CreateAssessment = () => {
                                 value={formData.experience_level}
                                 onChange={(e) => handleChange('experience_level', e.target.value)}
                                 className="modern-input"
+                                disabled={loading}
                                 style={{
                                     width: '100%',
                                     padding: '0.85rem 1rem',
@@ -530,6 +534,7 @@ const CreateAssessment = () => {
                                 placeholder="Paste the full job description here. The AI will use this to generate precise questions."
                                 value={formData.job_description}
                                 onChange={(e) => handleChange('job_description', e.target.value)}
+                                disabled={loading}
                                 style={{
                                     width: '100%',
                                     minHeight: '150px',
@@ -562,6 +567,7 @@ const CreateAssessment = () => {
                                     value={formData.num_mcqs}
                                     onChange={(e) => handleChange('num_mcqs', e.target.value)}
                                     onBlur={() => { if (formData.num_mcqs === '') handleChange('num_mcqs', 10); }}
+                                    disabled={loading}
                                 />
                                 <span className="marker">{formData.num_mcqs}</span>
                             </div>
@@ -574,6 +580,7 @@ const CreateAssessment = () => {
                                     value={formData.num_coding}
                                     onChange={(e) => handleChange('num_coding', e.target.value)}
                                     onBlur={() => { if (formData.num_coding === '') handleChange('num_coding', 1); }}
+                                    disabled={loading}
                                 />
                                 <span className="marker">{formData.num_coding}</span>
                             </div>
@@ -591,6 +598,7 @@ const CreateAssessment = () => {
                                             const val = valStr === '' ? '' : parseInt(valStr, 10);
                                             setFormData(prev => ({ ...prev, mcq_time: val, mcqTimeManual: true }));
                                         }}
+                                        disabled={loading}
                                     />
                                     <span className="mini-marker" style={!formData.mcqTimeManual ? { background: '#22c55e', color: 'white' } : {}}>
                                         {!formData.mcqTimeManual ? 'AUTO' : 'MIN'}
@@ -605,6 +613,7 @@ const CreateAssessment = () => {
                                             const valStr = e.target.value;
                                             handleChange('coding_time', valStr === '' ? '' : parseInt(valStr, 10));
                                         }}
+                                        disabled={loading}
                                     />
                                     <span className="mini-marker">MIN</span>
                                 </div>
@@ -626,6 +635,7 @@ const CreateAssessment = () => {
                                             if (n <= 1) handleChange('same_questions_for_all', false);
                                         }
                                     }}
+                                    disabled={loading}
                                 />
                                 <span className="marker">👥</span>
                             </div>
@@ -641,6 +651,7 @@ const CreateAssessment = () => {
                                     id="same_questions_for_all"
                                     checked={formData.same_questions_for_all}
                                     onChange={(e) => handleChange('same_questions_for_all', e.target.checked)}
+                                    disabled={loading}
                                     style={{ display: 'none' }}
                                 />
                                 <label
@@ -741,6 +752,7 @@ const CreateAssessment = () => {
                                             value={challenge.difficulty}
                                             onChange={(e) => updateCodingDifficulty(challenge.id, e.target.value)}
                                             style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '600', color: '#1B254B', cursor: 'pointer' }}
+                                            disabled={loading}
                                         >
                                             <option value="" disabled>Select Level</option>
                                             <option value="Easy">Easy</option>
@@ -779,6 +791,7 @@ const CreateAssessment = () => {
                                 max="100"
                                 value={formData.pass_threshold}
                                 onChange={(e) => handleChange('pass_threshold', parseInt(e.target.value))}
+                                disabled={loading}
                             />
                             <p className="hint">Minimum score required for candidate success</p>
                         </div>
@@ -793,12 +806,14 @@ const CreateAssessment = () => {
                                         value={formData.start_date}
                                         onChange={(e) => handleChange('start_date', e.target.value)}
                                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                        disabled={loading}
                                     />
                                     <input
                                         type="time"
                                         value={formData.start_time}
                                         onChange={(e) => handleChange('start_time', e.target.value)}
                                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                        disabled={loading}
                                     />
                                 </div>
                             </div>
@@ -811,12 +826,14 @@ const CreateAssessment = () => {
                                         value={formData.end_date}
                                         onChange={(e) => handleChange('end_date', e.target.value)}
                                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                        disabled={loading}
                                     />
                                     <input
                                         type="time"
                                         value={formData.end_time}
                                         onChange={(e) => handleChange('end_time', e.target.value)}
                                         onClick={(e) => e.target.showPicker && e.target.showPicker()}
+                                        disabled={loading}
                                     />
                                 </div>
                             </div>

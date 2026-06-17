@@ -1288,7 +1288,8 @@ class CreateSubmissionView(APIView):
                     pan_verified=pan_verified,
                     status='ONGOING',
                     batch_id=assessment.batch_id,
-                    batch_name=assessment.batch_name
+                    batch_name=assessment.batch_name,
+                    current_phase='coding' if assessment.mcq_count == 0 else 'mcq'
                 )
                 
 
@@ -1526,8 +1527,10 @@ class CreateSubmissionView(APIView):
 
             # Calculate individual phase time left
             # Use actual saved duration; fall back to 1 min per MCQ question if not set
-            mcq_total = (assessment.mcq_duration_minutes or assessment.mcq_count or 10) * 60
-            coding_total = (assessment.coding_duration_minutes or 30) * 60
+            mcq_dur = assessment.mcq_duration_minutes if assessment.mcq_duration_minutes is not None else (assessment.mcq_count or 10)
+            mcq_total = mcq_dur * 60
+            coding_dur = assessment.coding_duration_minutes if assessment.coding_duration_minutes is not None else 30
+            coding_total = coding_dur * 60
             
             mcq_left = max(0, mcq_total - submission.mcq_time_spent)
             coding_left = max(0, coding_total - submission.coding_time_spent)

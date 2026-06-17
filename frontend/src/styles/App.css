@@ -697,7 +697,9 @@ body::-webkit-scrollbar {
 
 .auth-input-icon-wrapper:focus-within .auth-floating-label,
 .auth-input-with-icon:not(:placeholder-shown)+.auth-floating-label,
-.auth-input-icon-wrapper.has-value .auth-floating-label {
+.auth-input-icon-wrapper.has-value .auth-floating-label,
+.auth-input-with-icon:-webkit-autofill+.auth-floating-label,
+.auth-input-with-icon:autofill+.auth-floating-label {
     top: 0;
     left: 0.85rem;
     transform: translateY(-50%) scale(0.85);

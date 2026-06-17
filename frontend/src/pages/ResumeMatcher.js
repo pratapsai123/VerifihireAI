@@ -519,6 +519,7 @@ const ResumeMatcher = () => {
                             <select
                                 className="modern-input"
                                 value={selectedRoleId}
+                                disabled={isAnalyzing}
                                 onChange={(e) => {
                                     const roleId = e.target.value;
                                     setSelectedRoleId(roleId);
@@ -543,6 +544,7 @@ const ResumeMatcher = () => {
                                     type="text"
                                     value={customRoleTitle}
                                     onChange={(e) => setCustomRoleTitle(e.target.value)}
+                                    disabled={isAnalyzing}
                                     placeholder="Enter Role Title (e.g. Senior Frontend Developer)"
                                     className="modern-input"
                                     style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none' }}
@@ -553,6 +555,7 @@ const ResumeMatcher = () => {
                                 <textarea
                                     value={jobDescription}
                                     onChange={(e) => setJobDescription(e.target.value)}
+                                    disabled={isAnalyzing}
                                     placeholder="Paste the job requirements, responsibilities, and qualifications..."
                                     className="modern-textarea"
                                 />
@@ -572,12 +575,13 @@ const ResumeMatcher = () => {
                         </div>
 
                         <div
-                            onDrop={handleDrop}
-                            onDragOver={handleDragOver}
-                            onClick={() => document.getElementById('resumeFile').click()}
-                            className="upload-zone"
+                            onDrop={!isAnalyzing ? handleDrop : undefined}
+                            onDragOver={!isAnalyzing ? handleDragOver : undefined}
+                            onClick={!isAnalyzing ? () => document.getElementById('resumeFile').click() : undefined}
+                            className={`upload-zone ${isAnalyzing ? 'disabled' : ''}`}
+                            style={isAnalyzing ? { opacity: 0.6, cursor: 'not-allowed', pointerEvents: 'none' } : {}}
                         >
-                            <input type="file" id="resumeFile" accept=".pdf" multiple style={{ display: 'none' }} onChange={handleFileChange} />
+                            <input type="file" id="resumeFile" accept=".pdf" multiple style={{ display: 'none' }} disabled={isAnalyzing} onChange={handleFileChange} />
 
                             {files.length === 0 ? (
                                 <>
@@ -640,6 +644,7 @@ const ResumeMatcher = () => {
                         <select
                             className="modern-input"
                             value={experienceLevel}
+                            disabled={isAnalyzing}
                             onChange={(e) => setExperienceLevel(e.target.value)}
                             style={{ width: '100%', padding: '0.75rem', borderRadius: '10px', border: '1px solid #E2E8F0', outline: 'none', background: '#F8FAFC', color: '#1B254B', fontWeight: '500' }}
                         >
@@ -667,7 +672,8 @@ const ResumeMatcher = () => {
                                 <input
                                     type="range" min="10" max="100" value={threshold}
                                     onChange={(e) => setThreshold(e.target.value)}
-                                    style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: 'pointer' }}
+                                    disabled={isAnalyzing}
+                                    style={{ width: '100%', accentColor: '#6366F1', height: '6px', cursor: isAnalyzing ? 'not-allowed' : 'pointer' }}
                                 />
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '1rem', color: '#94A3B8', fontSize: '0.75rem', fontWeight: '700', textTransform: 'uppercase' }}>
                                     <span>LENIENT</span>
@@ -691,12 +697,12 @@ const ResumeMatcher = () => {
                                 <p style={{ color: '#6B7280', fontSize: '0.85rem' }}>Choose between AI automation or manual review.</p>
                             </div>
                         </div>
-                        <div className="toggle-container">
-                            <button type="button" className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`} onClick={() => setMatchMode('automatic')}>
+                        <div className="toggle-container" style={isAnalyzing ? { opacity: 0.6, pointerEvents: 'none' } : {}}>
+                            <button type="button" className={`toggle-option ${matchMode === 'automatic' ? 'active' : ''}`} onClick={() => setMatchMode('automatic')} disabled={isAnalyzing}>
                                 <i className="fa-solid fa-bolt"></i>
                                 <span>Fully-Automatic</span>
                             </button>
-                            <button type="button" className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`} onClick={() => setMatchMode('manual')}>
+                            <button type="button" className={`toggle-option ${matchMode === 'manual' ? 'active' : ''}`} onClick={() => setMatchMode('manual')} disabled={isAnalyzing}>
                                 <i className="fa-solid fa-hand"></i>
                                 <span>Manual Review</span>
                             </button>
@@ -738,25 +744,26 @@ const ResumeMatcher = () => {
                                             }
                                         }}
                                         className="modern-input"
+                                        disabled={isAnalyzing}
                                         min="0"
                                         max="999"
                                     />
                                 </div>
                                 <div className="setting-item">
                                     <label>Coding Tasks</label>
-                                    <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max={MAX_CODING_TASKS} />
+                                    <input type="number" value={codingCount} onChange={(e) => handleCodingCountChange(e.target.value)} className="modern-input" min="0" max={MAX_CODING_TASKS} disabled={isAnalyzing} />
                                 </div>
                                 <div className="setting-item">
                                     <label>Assessment Duration (Mins)</label>
                                     <div className="duration-split-box">
                                         <div className="duration-col" style={!mcqDurationManual ? { background: '#F0FDF4' } : {}}>
                                             <label>MCQ</label>
-                                            <input type="number" value={mcqDuration} onChange={(e) => { setMcqDuration(e.target.value === '' ? '' : parseInt(e.target.value)); setMcqDurationManual(true); }} min="1" max="120" />
+                                            <input type="number" value={mcqDuration} onChange={(e) => { setMcqDuration(e.target.value === '' ? '' : parseInt(e.target.value)); setMcqDurationManual(true); }} min="1" max="120" disabled={isAnalyzing} />
                                             {!mcqDurationManual && <span className="mini-marker" style={{ background: '#22c55e', color: 'white' }}>AUTO</span>}
                                         </div>
                                         <div className="duration-col">
                                             <label>Coding</label>
-                                            <input type="number" value={codingDuration} onChange={(e) => setCodingDuration(e.target.value === '' ? '' : parseInt(e.target.value))} min="5" max="180" />
+                                            <input type="number" value={codingDuration} onChange={(e) => setCodingDuration(e.target.value === '' ? '' : parseInt(e.target.value))} min="5" max="180" disabled={isAnalyzing} />
                                             <span className="mini-marker">MIN</span>
                                         </div>
                                     </div>
@@ -773,8 +780,8 @@ const ResumeMatcher = () => {
                                         {codingChallenges.map((c, idx) => (
                                             <div key={c.id} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', background: '#F8F9FF', padding: '0.6rem 1rem', borderRadius: '12px', border: '1px solid #e0e7ff' }}>
                                                 <span style={{ color: '#4318FF', fontWeight: '500', fontSize: '0.85rem' }}>Q{idx + 1}</span>
-                                                <select value={c.difficulty} onChange={(e) => updateCodingDiff(c.id, e.target.value)}
-                                                    style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: 'pointer' }}>
+                                                <select value={c.difficulty} onChange={(e) => updateCodingDiff(c.id, e.target.value)} disabled={isAnalyzing}
+                                                    style={{ flex: 1, border: 'none', background: 'transparent', fontWeight: '500', color: '#1B254B', cursor: isAnalyzing ? 'not-allowed' : 'pointer' }}>
                                                     <option value="" disabled>Select Level</option>
                                                     <option value="Easy">Easy</option>
                                                     <option value="Medium">Medium</option>
@@ -789,7 +796,7 @@ const ResumeMatcher = () => {
                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>Assessment Pass Threshold ({passThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <input type="range" min="10" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
+                                    <input type="range" min="10" max="100" value={passThreshold} onChange={(e) => setPassThreshold(e.target.value)} disabled={isAnalyzing} style={{ flex: 1, accentColor: '#6366F1', cursor: isAnalyzing ? 'not-allowed' : 'pointer' }} />
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{passThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this will be automatically rejected.</p>
@@ -798,7 +805,7 @@ const ResumeMatcher = () => {
                             <div className="setting-item" style={{ marginBottom: '1.5rem' }}>
                                 <label>AI Interview Pass Threshold ({interviewPassThreshold}%)</label>
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                                    <input type="range" min="10" max="100" value={interviewPassThreshold} onChange={(e) => setInterviewPassThreshold(e.target.value)} style={{ flex: 1, accentColor: '#6366F1' }} />
+                                    <input type="range" min="10" max="100" value={interviewPassThreshold} onChange={(e) => setInterviewPassThreshold(e.target.value)} disabled={isAnalyzing} style={{ flex: 1, accentColor: '#6366F1', cursor: isAnalyzing ? 'not-allowed' : 'pointer' }} />
                                     <span style={{ minWidth: '40px', fontWeight: '500', color: '#1E293B' }}>{interviewPassThreshold}%</span>
                                 </div>
                                 <p style={{ margin: 0, fontSize: '0.75rem', color: '#6B7280' }}>Candidates scoring below this in the AI interview will be automatically rejected.</p>
@@ -822,7 +829,8 @@ const ResumeMatcher = () => {
                                             id="same_questions_for_all"
                                             checked={sameQuestionsForAll}
                                             onChange={(e) => setSameQuestionsForAll(e.target.checked)}
-                                            style={{ cursor: 'pointer' }}
+                                            disabled={isAnalyzing}
+                                            style={{ cursor: isAnalyzing ? 'not-allowed' : 'pointer' }}
                                         />
                                         <label htmlFor="same_questions_for_all"></label>
                                     </div>
@@ -873,8 +881,8 @@ const ResumeMatcher = () => {
                                             type="range" min="0" max="100" step="5"
                                             value={mcqWeight}
                                             onChange={(e) => setMcqWeight(parseInt(e.target.value))}
-                                            disabled={mcqCount === 0 || codingCount === 0}
-                                            style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (mcqCount === 0 || codingCount === 0) ? 'not-allowed' : 'pointer', height: '100%', zIndex: 2 }}
+                                            disabled={isAnalyzing || mcqCount === 0 || codingCount === 0}
+                                            style={{ position: 'absolute', inset: 0, opacity: 0, width: '100%', cursor: (isAnalyzing || mcqCount === 0 || codingCount === 0) ? 'not-allowed' : 'pointer', height: '100%', zIndex: 2 }}
                                         />
                                     </div>
                                 </div>
@@ -899,8 +907,8 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentStartDate} onChange={(e) => setAssessmentStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentStartTime} onChange={(e) => setAssessmentStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -909,8 +917,8 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={new Date().toISOString().split('T')[0]} value={assessmentEndDate} onChange={(e) => setAssessmentEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={assessmentEndTime} onChange={(e) => setAssessmentEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                 </div>
@@ -923,8 +931,8 @@ const ResumeMatcher = () => {
                                             Available From
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewStartDate} onChange={(e) => setInterviewStartDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewStartTime} onChange={(e) => setInterviewStartTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.7rem' }}>
@@ -933,8 +941,8 @@ const ResumeMatcher = () => {
                                             Available Until
                                         </label>
                                         <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
-                                            <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="date" min={assessmentEndDate ? new Date(new Date(assessmentEndDate).getTime() + 86400000).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]} value={interviewEndDate} onChange={(e) => setInterviewEndDate(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1.5, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
+                                            <input type="time" value={interviewEndTime} onChange={(e) => setInterviewEndTime(e.target.value)} onClick={(e) => e.target.showPicker && e.target.showPicker()} disabled={isAnalyzing} style={{ flex: 1, padding: '0.75rem', border: '1px solid #E2E8F0', borderRadius: '10px', outline: 'none', background: '#F8FAFC', fontSize: '0.85rem' }} />
                                         </div>
                                     </div>
                                 </div>
