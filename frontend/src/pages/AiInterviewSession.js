@@ -1077,8 +1077,23 @@ const AiInterviewSession = () => {
         synthRef.current.speak(utterance);
     }, []);
 
+    const sanitizeForTTS = (str) => {
+        if (!str) return "";
+        return str
+            .replace(/```[\s\S]*?```/g, ' [code snippet omitted for audio] ') // Code blocks
+            .replace(/[*_~`]/g, '')                                           // Markdown formatting (bold, italic, code)
+            .replace(/#/g, '')                                                // Headers
+            .replace(/-/g, ' ')                                               // Bullet points
+            .replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1')                         // Markdown links -> just text
+            .replace(/[^\x00-\x7F]/g, "")                                     // Remove non-ASCII (emojis)
+            .replace(/\n/g, ' ')                                              // Newlines to spaces
+            .replace(/\s{2,}/g, ' ')                                          // Collapse multiple spaces
+            .trim();
+    };
+
     const speak = useCallback((content) => {
-        const text = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
+        const rawText = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
+        const text = sanitizeForTTS(rawText);
 
         // GUARD: Do not speak if interview is already completed
         if (isCompletedRef.current) {
@@ -1244,6 +1259,7 @@ const AiInterviewSession = () => {
             // Check if browser TTS is still speaking
             const checkSpeaking = () => {
                 if (!window.speechSynthesis.speaking && !currentAudioRef.current) {
+                    lastSpokenTimeRef.current = Date.now(); // RESET TIMER HERE so grace period starts exactly when AI finishes speaking
                     resolve();
                 } else {
                     setTimeout(checkSpeaking, 100);
@@ -2050,12 +2066,12 @@ const AiInterviewSession = () => {
                         }
                     }, 300);
                 }
-            } else if (refinedNextQ === null && nextIdx >= questions.length) {
-                if (fullTurnText) addMessage('ai', fullTurnText);
-                if (fullTurnText) await speak(fullTurnText);
-                completeInterview();
             } else {
-                const nextQ = refinedNextQ || "Could you tell me more about your experience?";
+                let fallbackQ = "Could you tell me more about your experience?";
+                if (data.requires_code_input) {
+                    fallbackQ = "Please write a Python function or code snippet to implement the solution we just discussed.";
+                }
+                const nextQ = refinedNextQ || fallbackQ;
                 lastAiQuestionRef.current = nextQ; // Track for next submission
                 setCurrentQuestionIndex(nextIdx);
                 // FIX (Progress Bar Jump): Progress = questions COMPLETED (nextIdx = how many done).
@@ -3008,17 +3024,13 @@ const AiInterviewSession = () => {
 
             const speakStartTime = Date.now();
             await speak(welcome);
-            const speakDuration = Date.now() - speakStartTime;
-
+            await waitForSpeechToFinish();
+            
             if (userInputMode === 'audio') {
-                // Only start mic after TTS actually played (at least 2 seconds of audio expected for intro)
-                // If speak resolved too fast (< 2s), it means TTS was blocked/failed — wait longer
-                const delay = speakDuration < 2000 ? 5000 : 3000;
-                setTimeout(() => {
-                    if (!isCompletedRef.current && !isProcessingRef.current) {
-                        startListening();
-                    }
-                }, delay);
+                // Ensure manual mute isn't active before starting
+                if (!isCompletedRef.current && !isProcessingRef.current && !manualMuteRef.current) {
+                    startListening();
+                }
             }
         }
     };
@@ -3041,7 +3053,8 @@ const AiInterviewSession = () => {
                 return;
             }
             const timer = setTimeout(() => {
-                if (!isRecordingRef.current && !manualMuteRef.current && !isPaused && !document.hidden) {
+                // Do not auto-resume if mic is off, paused, or IF THE AI IS CURRENTLY SPEAKING!
+                if (!isRecordingRef.current && !manualMuteRef.current && !isPaused && !document.hidden && !isSpeakingRef.current) {
                     console.log("Auto-resuming mic via Effect...");
                     startListening();
                 }
@@ -3072,7 +3085,7 @@ const AiInterviewSession = () => {
             return;
         }
 
-        let secondsRemaining = 5;
+        let secondsRemaining = 3;
         const watchdog = setInterval(() => {
             // Safety Guard: If mic is physically off, this interval MUST not proceed
             if (!isRecordingRef.current || isCompletedRef.current) {
@@ -3085,7 +3098,7 @@ const AiInterviewSession = () => {
             // Wait until AssemblyAI STT is fully connected and ready
             if (!sttReady) {
                 lastSpokenTimeRef.current = Date.now();
-                secondsRemaining = 5;
+                secondsRemaining = 3;
                 setSilenceCountdown("Connecting...");
                 setSilenceWarningVisible(false);
                 return;
@@ -3101,7 +3114,7 @@ const AiInterviewSession = () => {
             // If the user has spoken or transcript has updated within the grace period, 
             // keep the timer at 5. This prevents cutouts during natural speech pauses.
             if (timeSinceActivity < gracePeriod) {
-                secondsRemaining = 5;
+                secondsRemaining = 3;
                 setSilenceCountdown("Listening...");
                 setSilenceWarningVisible(false);
                 // FIX: Reset consecutive silence counter if candidate speaks during countdown
@@ -3114,8 +3127,8 @@ const AiInterviewSession = () => {
                 return;
             }
 
-            // Otherwise, proceed with the visible countdown (5-4-3-2-1)
-            secondsRemaining = 5 - Math.floor((timeSinceActivity - gracePeriod) / 1000);
+            // Otherwise, proceed with the visible countdown (3-2-1)
+            secondsRemaining = 3 - Math.floor((timeSinceActivity - gracePeriod) / 1000);
 
             if (secondsRemaining > 3) {
                 setSilenceCountdown(secondsRemaining + "s");

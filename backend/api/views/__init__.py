@@ -98,7 +98,7 @@ from .live_interview_views import (
 )
 from .job_role_views import (
     job_role_list_create_view,
-    job_role_delete_view,
+    job_role_detail_view,
     ensure_role_exists,
 )
 
