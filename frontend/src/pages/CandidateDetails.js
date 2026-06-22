@@ -851,6 +851,9 @@ const CandidateDetails = ({ token, onComplete, assessmentType }) => {
                   accept=".png,.jpg,.jpeg,.pdf"
                   disabled={!data.pan || data.pan.trim().length !== 10 || data.isVerifying}
                   className={`candidate-input ${submitted && !data.panFile ? 'candidate-input-error' : ''}`}
+                  onClick={(e) => {
+                    e.target.value = null;
+                  }}
                   onChange={(e) => {
                     const file = e.target.files?.[0] || null;
                     if (file) {

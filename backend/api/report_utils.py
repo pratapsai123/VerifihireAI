@@ -3648,7 +3648,7 @@ def generate_candidate_report(submission_id):
     # PERIODIC IDENTITY VERIFICATION
     # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
     if integrity and getattr(integrity, 'identity_verification_logs', []):
-        story.append(PageBreak())
+        story.append(Spacer(1, 20))
         story.append(Paragraph('Periodic Identity Verification', styles['SectionHeader']))
         story.append(Paragraph('The following identity checks were performed automatically every 2 minutes during the assessment to ensure the candidate remained the same throughout the exam.', styles['Normal']))
         story.append(Spacer(1, 12))
