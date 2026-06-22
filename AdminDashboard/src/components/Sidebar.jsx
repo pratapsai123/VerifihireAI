@@ -6,6 +6,7 @@ const MENU_ITEMS = [
         title: 'OVERVIEW',
         items: [
             { icon: '🏠', label: 'Dashboard', path: '/dashboard' },
+            { icon: '📡', label: 'Activity Feed', path: '/activity' },
         ]
     },
     {

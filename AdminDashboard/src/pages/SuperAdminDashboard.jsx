@@ -2,6 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import FilterBar from '../components/FilterBar';
+import Pagination from '../components/Pagination';
+import CompanyDetailPanel from '../components/CompanyDetailPanel';
 
 const STATUS_TABS = [
     { key: 'pending_companies', label: 'Organization Requests', icon: '🏢' },
@@ -23,15 +26,9 @@ function StatusBadge({ status }) {
     
     return (
         <span style={{
-            padding: '4px 12px',
-            borderRadius: '999px',
-            fontSize: '0.7rem',
-            fontWeight: 700,
-            letterSpacing: '0.03em',
-            background: c.bg,
-            color: c.text,
-            border: `1px solid ${c.border}`,
-            textTransform: 'uppercase',
+            padding: '4px 12px', borderRadius: '999px', fontSize: '0.7rem',
+            fontWeight: 700, letterSpacing: '0.03em', background: c.bg,
+            color: c.text, border: `1px solid ${c.border}`, textTransform: 'uppercase',
         }}>{label}</span>
     );
 }
@@ -57,15 +54,28 @@ function Toast({ message, type, onClose }) {
     );
 }
 
-function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
+function CompanyRequestCard({ company, onApprove, onReject, actionLoading, selected, onToggleSelect, onClick }) {
     const isLoading = actionLoading === `comp-${company.id}`;
     return (
-        <div style={{
-            background: '#fff', borderRadius: 20, padding: '20px',
-            display: 'flex', alignItems: 'center', gap: '20px',
-            boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
-            animation: 'slideIn 0.4s ease-out'
-        }}>
+        <div 
+            onClick={(e) => {
+                if(e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+                    onClick();
+                }
+            }}
+            style={{
+                background: selected ? '#F8FAFC' : '#fff', borderRadius: 20, padding: '20px',
+                display: 'flex', alignItems: 'center', gap: '20px',
+                boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
+                border: selected ? '2px solid #4F46E5' : '1px solid transparent',
+                cursor: 'pointer', transition: 'all 0.2s ease',
+            }}
+        >
+            <input 
+                type="checkbox" checked={selected} 
+                onChange={() => onToggleSelect(company.id)}
+                style={{ width: 18, height: 18, cursor: 'pointer' }}
+            />
             <div style={{
                 width: 48, height: 48, borderRadius: 12,
                 background: 'linear-gradient(135deg, #05CD99, #00BFA6)',
@@ -88,7 +98,7 @@ function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
                 <div style={{ display: 'flex', gap: 10 }}>
                     <button
                         disabled={isLoading}
-                        onClick={() => onApprove(company.id)}
+                        onClick={(e) => { e.stopPropagation(); onApprove(company.id); }}
                         style={{
                             padding: '10px 20px', borderRadius: 12, border: 'none',
                             background: '#05CD99', color: '#fff', fontWeight: 700,
@@ -97,7 +107,8 @@ function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
                     >Approve</button>
                     <button
                         disabled={isLoading}
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             const reason = prompt('Reject reason?');
                             if (reason) onReject(company.id, reason);
                         }}
@@ -113,15 +124,21 @@ function CompanyRequestCard({ company, onApprove, onReject, actionLoading }) {
     );
 }
 
-function UserRequestCard({ user, onApprove, actionLoading }) {
+function UserRequestCard({ user, onApprove, actionLoading, selected, onToggleSelect }) {
     const isLoading = actionLoading === `user-${user.id}`;
     return (
         <div style={{
-            background: '#fff', borderRadius: 20, padding: '20px',
+            background: selected ? '#F8FAFC' : '#fff', borderRadius: 20, padding: '20px',
             display: 'flex', alignItems: 'center', gap: '20px',
             boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
-            animation: 'slideIn 0.4s ease-out'
+            border: selected ? '2px solid #4F46E5' : '1px solid transparent',
+            transition: 'all 0.2s ease',
         }}>
+            <input 
+                type="checkbox" checked={selected} 
+                onChange={() => onToggleSelect(user.id)}
+                style={{ width: 18, height: 18, cursor: 'pointer' }}
+            />
             <div style={{
                 width: 48, height: 48, borderRadius: 12,
                 background: 'linear-gradient(135deg, #4318FF, #707EAE)',
@@ -165,7 +182,6 @@ function RestrictedDomainCard({ domain, onDelete, actionLoading }) {
             background: '#fff', borderRadius: 20, padding: '20px',
             display: 'flex', alignItems: 'center', gap: '20px',
             boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
-            animation: 'slideIn 0.4s ease-out'
         }}>
             <div style={{
                 width: 48, height: 48, borderRadius: 12,
@@ -215,6 +231,17 @@ function SuperAdminDashboard() {
     const [search, setSearch] = useState('');
     const [newDomain, setNewDomain] = useState('');
 
+    // New State for features
+    const [selectedIds, setSelectedIds] = useState(new Set());
+    const [selectedCompany, setSelectedCompany] = useState(null);
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
+    const [roleFilter, setRoleFilter] = useState('');
+    const [sortBy, setSortBy] = useState('date');
+    const [sortDir, setSortDir] = useState('desc');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
+
     const fetchData = useCallback(async (silent = false) => {
         if (!silent) setLoading(true);
         try {
@@ -226,24 +253,38 @@ function SuperAdminDashboard() {
             setCompanies(compRes.data.companies || []);
             setUsers(userRes.data.users || []);
             setRestrictedDomains(domainRes.data.domains || []);
+
+            // Update selected company if open
+            if (selectedCompany && !silent) {
+                const updated = (compRes.data.companies || []).find(c => c.id === selectedCompany.id);
+                if (updated) setSelectedCompany(updated);
+            }
         } catch (err) {
             setToast({ type: 'error', message: 'Failed to sync data.' });
         } finally {
             if (!silent) setLoading(false);
         }
-    }, []);
+    }, [selectedCompany]);
 
     useEffect(() => {
         if (location.state?.activeTab) {
             setActiveTab(location.state.activeTab);
+            setCurrentPage(1);
+            setSelectedIds(new Set());
         }
     }, [location.state]);
 
     useEffect(() => { 
         fetchData(); 
-        const interval = setInterval(() => fetchData(true), 30000); // Auto-update every 30s
+        const interval = setInterval(() => fetchData(true), 30000); 
         return () => clearInterval(interval);
     }, [fetchData]);
+
+    // Clear selection when tab changes
+    useEffect(() => {
+        setSelectedIds(new Set());
+        setCurrentPage(1);
+    }, [activeTab]);
 
     const handleApproveCompany = async (id) => {
         setActionLoading(`comp-${id}`);
@@ -251,6 +292,9 @@ function SuperAdminDashboard() {
             await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/approve/`);
             setToast({ type: 'success', message: 'Company approved.' });
             fetchData(true);
+            if (selectedCompany?.id === id) {
+                setSelectedCompany({ ...selectedCompany, approval_status: 'approved' });
+            }
         } catch (err) { 
             setToast({ type: 'error', message: 'Company approval failed.' }); 
         } finally { setActionLoading(null); }
@@ -262,6 +306,9 @@ function SuperAdminDashboard() {
             await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/reject/`, { reason });
             setToast({ type: 'success', message: 'Company rejected.' });
             fetchData(true);
+            if (selectedCompany?.id === id) {
+                setSelectedCompany({ ...selectedCompany, approval_status: 'rejected', rejected_reason: reason });
+            }
         } catch (err) { 
             setToast({ type: 'error', message: 'Rejection failed.' }); 
         } finally { setActionLoading(null); }
@@ -276,6 +323,46 @@ function SuperAdminDashboard() {
         } catch (err) {
             setToast({ type: 'error', message: 'User approval failed.' });
         } finally { setActionLoading(null); }
+    };
+
+    // Bulk Actions
+    const handleBulkApprove = async () => {
+        const ids = Array.from(selectedIds);
+        if (ids.length === 0) return;
+        
+        if (activeTab.includes('companies')) {
+            setActionLoading('bulk-approve');
+            for (const id of ids) {
+                try { await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/approve/`); } catch(e){}
+            }
+            setToast({ type: 'success', message: `Approved ${ids.length} companies.` });
+        } else if (activeTab.includes('users')) {
+            setActionLoading('bulk-approve');
+            for (const id of ids) {
+                try { await axios.post(`${API_BASE_URL}/superadmin/users/${id}/approve/`); } catch(e){}
+            }
+            setToast({ type: 'success', message: `Approved ${ids.length} users.` });
+        }
+        setActionLoading(null);
+        setSelectedIds(new Set());
+        fetchData(true);
+    };
+
+    const handleBulkReject = async () => {
+        if (!activeTab.includes('companies')) return;
+        const ids = Array.from(selectedIds);
+        if (ids.length === 0) return;
+        const reason = prompt('Reject reason for all selected companies?');
+        if (!reason) return;
+
+        setActionLoading('bulk-reject');
+        for (const id of ids) {
+            try { await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/reject/`, { reason }); } catch(e){}
+        }
+        setToast({ type: 'success', message: `Rejected ${ids.length} companies.` });
+        setActionLoading(null);
+        setSelectedIds(new Set());
+        fetchData(true);
     };
 
     const handleAddDomain = async (e) => {
@@ -309,27 +396,100 @@ function SuperAdminDashboard() {
     
     const displayItems = isCompanyTab ? companies : (isUserTab ? users : restrictedDomains);
 
-    const filteredItems = displayItems.filter(item => {
-        if (isDomainTab) {
-            return item.domain.toLowerCase().includes(search.toLowerCase());
+    // Filter, Sort, Paginate
+    const getFilteredItems = () => {
+        let result = displayItems;
+
+        // Search
+        if (search) {
+            const s = search.toLowerCase();
+            result = result.filter(item => {
+                if (isDomainTab) return item.domain.toLowerCase().includes(s);
+                const name = isCompanyTab ? item.name : `${item.first_name} ${item.last_name}`;
+                return name.toLowerCase().includes(s) || (item.email && item.email.toLowerCase().includes(s));
+            });
         }
-        const name = isCompanyTab ? item.name : `${item.first_name} ${item.last_name}`;
-        const matchesSearch = name.toLowerCase().includes(search.toLowerCase()) || 
-                            (item.email && item.email.toLowerCase().includes(search.toLowerCase()));
-        
-        let matchesTab = false;
-        if (activeTab === 'pending_companies') matchesTab = item.approval_status === 'pending';
-        else if (activeTab === 'all_companies') matchesTab = true;
-        else if (activeTab === 'pending_users') matchesTab = !item.is_approved;
-        else if (activeTab === 'all_users') matchesTab = true;
-        
-        return matchesSearch && matchesTab;
-    });
+
+        // Tab constraints
+        result = result.filter(item => {
+            if (activeTab === 'pending_companies') return item.approval_status === 'pending';
+            if (activeTab === 'all_companies') return true;
+            if (activeTab === 'pending_users') return !item.is_approved;
+            if (activeTab === 'all_users') return true;
+            return true; // domains
+        });
+
+        // Advanced filters
+        if (dateFrom) {
+            const fd = new Date(dateFrom);
+            result = result.filter(item => new Date(item.created_at || item.registered_at) >= fd);
+        }
+        if (dateTo) {
+            const td = new Date(dateTo);
+            td.setHours(23,59,59,999);
+            result = result.filter(item => new Date(item.created_at || item.registered_at) <= td);
+        }
+        if (isUserTab && roleFilter) {
+            result = result.filter(item => item.role === roleFilter);
+        }
+
+        // Sort
+        result.sort((a, b) => {
+            let cmp = 0;
+            if (sortBy === 'name') {
+                const nameA = isCompanyTab ? a.name : (isDomainTab ? a.domain : `${a.first_name} ${a.last_name}`);
+                const nameB = isCompanyTab ? b.name : (isDomainTab ? b.domain : `${b.first_name} ${b.last_name}`);
+                cmp = nameA.localeCompare(nameB);
+            } else {
+                const dateA = new Date(a.created_at || a.registered_at);
+                const dateB = new Date(b.created_at || b.registered_at);
+                cmp = dateA - dateB;
+            }
+            return sortDir === 'asc' ? cmp : -cmp;
+        });
+
+        return result;
+    };
+
+    const filteredItems = getFilteredItems();
+    const paginatedItems = filteredItems.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    const toggleSelection = (id) => {
+        const newSet = new Set(selectedIds);
+        if (newSet.has(id)) newSet.delete(id);
+        else newSet.add(id);
+        setSelectedIds(newSet);
+    };
+
+    const handleExportCSV = () => {
+        if (filteredItems.length === 0) return;
+        let headers, rows;
+        if (isCompanyTab) {
+            headers = ['ID', 'Name', 'Domain', 'Status', 'Admin Email', 'Created At'];
+            rows = filteredItems.map(c => [c.id, `"${c.name}"`, `"${c.domain||''}"`, c.approval_status, `"${c.primary_admin?.email||''}"`, c.created_at]);
+        } else if (isUserTab) {
+            headers = ['ID', 'Name', 'Email', 'Role', 'Organization', 'Approved', 'Registered At'];
+            rows = filteredItems.map(u => [u.id, `"${u.first_name} ${u.last_name}"`, `"${u.email}"`, u.role, `"${u.organization_name}"`, u.is_approved, u.registered_at]);
+        } else {
+            headers = ['ID', 'Domain', 'Created By', 'Created At'];
+            rows = filteredItems.map(d => [d.id, `"${d.domain}"`, `"${d.created_by||''}"`, d.created_at]);
+        }
+
+        const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `verifihire-export-${activeTab}-${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const roleOptions = isUserTab ? [...new Set(users.map(u => u.role))].filter(Boolean).map(r => ({label: r, value: r})) : [];
 
     return (
         <>
-            <style>{`@keyframes slideIn { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }`}</style>
-            
             <div style={{ marginBottom: '2rem' }}>
                 <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#2B3674' }}>Platform Approvals</h1>
                 <p style={{ margin: '4px 0 0', color: '#707EAE', fontSize: '0.9rem', fontWeight: 500 }}>
@@ -337,7 +497,7 @@ function SuperAdminDashboard() {
                 </p>
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem', background: '#fff', padding: 10, borderRadius: 16 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', background: '#fff', padding: 10, borderRadius: 16 }}>
                 <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap' }}>
                     {STATUS_TABS.map(tab => (
                         <button key={tab.key} onClick={() => setActiveTab(tab.key)} style={{
@@ -349,32 +509,40 @@ function SuperAdminDashboard() {
                     ))}
                 </div>
                 <input
-                    type="text" placeholder={isDomainTab ? "Search domains..." : "Search requests..."} value={search} onChange={e => setSearch(e.target.value)}
+                    type="text" placeholder={isDomainTab ? "Search domains..." : "Search requests..."} 
+                    value={search} onChange={e => { setSearch(e.target.value); setCurrentPage(1); }}
                     style={{ padding: '12px 18px', borderRadius: 12, border: '1px solid #f0f3f8', fontSize: '0.85rem', width: 260, background: '#F4F7FE', outline: 'none' }}
                 />
             </div>
 
+            {!isDomainTab && (
+                <FilterBar
+                    showDateRange={true}
+                    dateFrom={dateFrom} dateTo={dateTo}
+                    onDateFromChange={v => { setDateFrom(v); setCurrentPage(1); }}
+                    onDateToChange={v => { setDateTo(v); setCurrentPage(1); }}
+                    roleOptions={roleOptions} roleValue={roleFilter} onRoleChange={v => { setRoleFilter(v); setCurrentPage(1); }}
+                    sortOptions={[{label:'Name',value:'name'},{label:'Date',value:'date'}]}
+                    sortValue={sortBy} onSortChange={v => { setSortBy(v); setCurrentPage(1); }}
+                    sortDirection={sortDir} onSortDirectionChange={setSortDir}
+                    onExportCSV={handleExportCSV}
+                    onReset={() => { setDateFrom(''); setDateTo(''); setRoleFilter(''); setSortBy('date'); setSortDir('desc'); setSearch(''); setCurrentPage(1); }}
+                    selectedCount={selectedIds.size}
+                    onBulkApprove={(!isDomainTab && activeTab.includes('pending')) ? handleBulkApprove : null}
+                    onBulkReject={(isCompanyTab && activeTab.includes('pending')) ? handleBulkReject : null}
+                />
+            )}
+
             {isDomainTab && (
-                <div style={{ marginBottom: '2rem', padding: '20px', background: '#fff', borderRadius: 20, boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)' }}>
+                <div style={{ marginBottom: '1.5rem', padding: '20px', background: '#fff', borderRadius: 20, boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)' }}>
                     <form onSubmit={handleAddDomain} style={{ display: 'flex', gap: '12px' }}>
                         <input
-                            type="text"
-                            placeholder="Add new restricted domain (e.g. example.com)"
-                            value={newDomain}
-                            onChange={(e) => setNewDomain(e.target.value)}
-                            style={{ 
-                                flex: 1, padding: '12px 18px', borderRadius: 12, 
-                                border: '1px solid #E0E5F2', outline: 'none', background: '#F4F7FE'
-                            }}
+                            type="text" placeholder="Add new restricted domain (e.g. example.com)"
+                            value={newDomain} onChange={(e) => setNewDomain(e.target.value)}
+                            style={{ flex: 1, padding: '12px 18px', borderRadius: 12, border: '1px solid #E0E5F2', outline: 'none', background: '#F4F7FE' }}
                         />
-                        <button
-                            type="submit"
-                            disabled={actionLoading === 'add-domain' || !newDomain.trim()}
-                            style={{
-                                padding: '12px 24px', borderRadius: 12, border: 'none',
-                                background: '#4318FF', color: '#fff', fontWeight: 700,
-                                cursor: 'pointer', opacity: (actionLoading === 'add-domain' || !newDomain.trim()) ? 0.6 : 1
-                            }}
+                        <button type="submit" disabled={actionLoading === 'add-domain' || !newDomain.trim()}
+                            style={{ padding: '12px 24px', borderRadius: 12, border: 'none', background: '#4318FF', color: '#fff', fontWeight: 700, cursor: 'pointer', opacity: (actionLoading === 'add-domain' || !newDomain.trim()) ? 0.6 : 1 }}
                         >
                             {actionLoading === 'add-domain' ? 'Adding...' : 'Add Domain'}
                         </button>
@@ -385,19 +553,46 @@ function SuperAdminDashboard() {
             {loading ? (
                 <div style={{ textAlign: 'center', padding: '4rem' }}>Synchronizing Directory...</div>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
-                    {filteredItems.length === 0 ? (
-                        <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No {activeTab.includes('companies') ? 'companies' : (isUserTab ? 'users' : 'restricted domains')} found.</p>
-                    ) : filteredItems.map(item => (
-                        isCompanyTab ? (
-                            <CompanyRequestCard key={item.id} company={item} onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} />
-                        ) : (isUserTab ? (
-                            <UserRequestCard key={item.id} user={item} onApprove={handleApproveUser} actionLoading={actionLoading} />
-                        ) : (
-                            <RestrictedDomainCard key={item.id} domain={item} onDelete={handleDeleteDomain} actionLoading={actionLoading} />
-                        ))
-                    ))}
-                </div>
+                <>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+                        {paginatedItems.length === 0 ? (
+                            <p style={{ textAlign: 'center', padding: '4rem', color: '#A3AED0' }}>No items found.</p>
+                        ) : paginatedItems.map(item => (
+                            isCompanyTab ? (
+                                <CompanyRequestCard 
+                                    key={item.id} company={item} 
+                                    onApprove={handleApproveCompany} onReject={handleRejectCompany} actionLoading={actionLoading} 
+                                    selected={selectedIds.has(item.id)} onToggleSelect={toggleSelection}
+                                    onClick={() => setSelectedCompany(item)}
+                                />
+                            ) : (isUserTab ? (
+                                <UserRequestCard 
+                                    key={item.id} user={item} 
+                                    onApprove={handleApproveUser} actionLoading={actionLoading} 
+                                    selected={selectedIds.has(item.id)} onToggleSelect={toggleSelection}
+                                />
+                            ) : (
+                                <RestrictedDomainCard key={item.id} domain={item} onDelete={handleDeleteDomain} actionLoading={actionLoading} />
+                            ))
+                        ))}
+                    </div>
+                    
+                    {!isDomainTab && (
+                        <Pagination
+                            currentPage={currentPage} totalItems={filteredItems.length} pageSize={pageSize}
+                            onPageChange={setCurrentPage} onPageSizeChange={setPageSize}
+                        />
+                    )}
+                </>
+            )}
+
+            {selectedCompany && (
+                <CompanyDetailPanel
+                    company={selectedCompany}
+                    onClose={() => setSelectedCompany(null)}
+                    onApprove={handleApproveCompany}
+                    onReject={handleRejectCompany}
+                />
             )}
 
             {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}

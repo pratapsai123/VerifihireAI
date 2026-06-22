@@ -1,6 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
+import FilterBar from '../components/FilterBar';
+import Pagination from '../components/Pagination';
+import CompanyDetailPanel from '../components/CompanyDetailPanel';
 
 const STATUS_COLORS = {
     pending: { bg: 'rgba(255, 181, 71, 0.1)', text: '#FFB547', border: 'rgba(255, 181, 71, 0.2)' },
@@ -12,15 +15,9 @@ function StatusBadge({ status }) {
     const c = STATUS_COLORS[status] || { bg: '#f3f4f6', text: '#374151', border: '#d1d5db' };
     return (
         <span style={{
-            padding: '4px 12px',
-            borderRadius: '999px',
-            fontSize: '0.65rem',
-            fontWeight: 800,
-            letterSpacing: '0.05em',
-            background: c.bg,
-            color: c.text,
-            border: `1px solid ${c.border}`,
-            textTransform: 'uppercase',
+            padding: '4px 12px', borderRadius: '999px', fontSize: '0.65rem',
+            fontWeight: 800, letterSpacing: '0.05em', background: c.bg,
+            color: c.text, border: `1px solid ${c.border}`, textTransform: 'uppercase',
         }}>
             {status}
         </span>
@@ -48,21 +45,18 @@ function Toast({ message, type, onClose }) {
     );
 }
 
-function CompanyRow({ company }) {
+function CompanyRow({ company, onClick }) {
     const admin = company.primary_admin;
 
     return (
         <div style={{
-            background: '#fff',
-            borderRadius: 20,
-            padding: '24px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '24px',
+            background: '#fff', borderRadius: 20, padding: '24px',
+            display: 'flex', alignItems: 'center', gap: '24px',
             transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
             boxShadow: '0 4px 15px rgba(112, 144, 176, 0.08)',
-            border: '1px solid #f0f3f8'
+            border: '1px solid #f0f3f8', cursor: 'pointer'
         }}
+            onClick={onClick}
             onMouseEnter={e => {
                 e.currentTarget.style.transform = 'translateY(-2px)';
                 e.currentTarget.style.boxShadow = '0 10px 20px rgba(112, 144, 176, 0.12)';
@@ -109,18 +103,36 @@ function CompaniesPage() {
     const [companies, setCompanies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
+    const [toast, setToast] = useState(null);
+
+    // Selected company for drill-down
+    const [selectedCompany, setSelectedCompany] = useState(null);
+
+    // Filters & Pagination state
+    const [statusFilter, setStatusFilter] = useState('');
+    const [dateFrom, setDateFrom] = useState('');
+    const [dateTo, setDateTo] = useState('');
+    const [sortBy, setSortBy] = useState('date');
+    const [sortDir, setSortDir] = useState('desc');
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(25);
 
     const fetchCompanies = useCallback(async (silent = false) => {
         if (!silent) setLoading(true);
         try {
             const res = await axios.get(`${API_BASE_URL}/superadmin/companies/`);
             setCompanies(res.data.companies || []);
+            // Update selected company if it was open
+            if (selectedCompany && !silent) {
+                const updated = (res.data.companies || []).find(c => c.id === selectedCompany.id);
+                if (updated) setSelectedCompany(updated);
+            }
         } catch (err) {
             console.error('Failed to load companies:', err);
         } finally {
             if (!silent) setLoading(false);
         }
-    }, []);
+    }, [selectedCompany]);
 
     useEffect(() => {
         fetchCompanies();
@@ -128,15 +140,98 @@ function CompaniesPage() {
         return () => clearInterval(interval);
     }, [fetchCompanies]);
 
-    const filtered = companies.filter(c =>
-        c.name.toLowerCase().includes(search.toLowerCase()) ||
-        (c.primary_admin?.email || '').toLowerCase().includes(search.toLowerCase()) ||
-        (c.domain || '').toLowerCase().includes(search.toLowerCase())
-    );
+    // Derived filtered data
+    const getFilteredAndSorted = () => {
+        let result = [...companies];
+
+        if (search) {
+            const s = search.toLowerCase();
+            result = result.filter(c =>
+                c.name.toLowerCase().includes(s) ||
+                (c.primary_admin?.email || '').toLowerCase().includes(s) ||
+                (c.domain || '').toLowerCase().includes(s)
+            );
+        }
+        if (statusFilter) {
+            result = result.filter(c => c.approval_status === statusFilter);
+        }
+        if (dateFrom) {
+            const fd = new Date(dateFrom);
+            result = result.filter(c => new Date(c.created_at) >= fd);
+        }
+        if (dateTo) {
+            const td = new Date(dateTo);
+            td.setHours(23, 59, 59, 999);
+            result = result.filter(c => new Date(c.created_at) <= td);
+        }
+
+        result.sort((a, b) => {
+            let cmp = 0;
+            if (sortBy === 'name') cmp = a.name.localeCompare(b.name);
+            else if (sortBy === 'users') cmp = (a.user_count || 0) - (b.user_count || 0);
+            else cmp = new Date(a.created_at) - new Date(b.created_at); // default date
+            
+            return sortDir === 'asc' ? cmp : -cmp;
+        });
+
+        return result;
+    };
+
+    const filtered = getFilteredAndSorted();
+    const paginated = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
+
+    // CSV Export
+    const handleExportCSV = () => {
+        if (filtered.length === 0) return;
+        const headers = ['ID', 'Name', 'Domain', 'Status', 'Users', 'Admin Email', 'Created At'];
+        const csvContent = [
+            headers.join(','),
+            ...filtered.map(c => [
+                c.id,
+                `"${c.name}"`,
+                `"${c.domain || ''}"`,
+                c.approval_status,
+                c.user_count || 0,
+                `"${c.primary_admin?.email || ''}"`,
+                new Date(c.created_at).toISOString()
+            ].join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `verifihire-companies-${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
+
+    const handleApproveCompany = async (id) => {
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/approve/`);
+            setToast({ type: 'success', message: 'Company approved.' });
+            fetchCompanies(true);
+            if (selectedCompany?.id === id) {
+                setSelectedCompany({ ...selectedCompany, approval_status: 'approved' });
+            }
+        } catch (err) { setToast({ type: 'error', message: 'Company approval failed.' }); }
+    };
+
+    const handleRejectCompany = async (id, reason) => {
+        try {
+            await axios.post(`${API_BASE_URL}/superadmin/companies/${id}/reject/`, { reason });
+            setToast({ type: 'success', message: 'Company rejected.' });
+            fetchCompanies(true);
+            if (selectedCompany?.id === id) {
+                setSelectedCompany({ ...selectedCompany, approval_status: 'rejected', rejected_reason: reason });
+            }
+        } catch (err) { setToast({ type: 'error', message: 'Rejection failed.' }); }
+    };
 
     return (
         <div style={{ animation: 'slideIn 0.4s ease-out' }}>
-            <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <div style={{ marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                 <div>
                     <h1 style={{ margin: 0, fontSize: '1.6rem', fontWeight: 800, color: '#2B3674', letterSpacing: '-0.5px' }}>
                         Enterprise Directory
@@ -152,25 +247,30 @@ function CompaniesPage() {
                         fontSize: '1rem', color: '#A3AED0',
                     }}>🔍</span>
                     <input
-                        type="text"
-                        placeholder="Search workspaces..."
-                        value={search}
-                        onChange={e => setSearch(e.target.value)}
+                        type="text" placeholder="Search workspaces..."
+                        value={search} onChange={e => { setSearch(e.target.value); setCurrentPage(1); }}
                         style={{
-                            padding: '14px 20px 14px 48px',
-                            borderRadius: '16px',
-                            border: '1px solid #f0f3f8',
-                            fontSize: '0.9rem',
-                            outline: 'none',
-                            width: 380,
-                            background: '#fff',
-                            boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
-                            color: '#2B3674',
-                            fontWeight: 600
+                            padding: '14px 20px 14px 48px', borderRadius: '16px',
+                            border: '1px solid #f0f3f8', fontSize: '0.9rem', outline: 'none',
+                            width: 340, background: '#fff', boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+                            color: '#2B3674', fontWeight: 600
                         }}
                     />
                 </div>
             </div>
+
+            <FilterBar
+                statusOptions={[{label:'Pending',value:'pending'},{label:'Approved',value:'approved'},{label:'Rejected',value:'rejected'}]}
+                statusValue={statusFilter} onStatusChange={v => { setStatusFilter(v); setCurrentPage(1); }}
+                dateFrom={dateFrom} dateTo={dateTo}
+                onDateFromChange={v => { setDateFrom(v); setCurrentPage(1); }}
+                onDateToChange={v => { setDateTo(v); setCurrentPage(1); }}
+                sortOptions={[{label:'Name',value:'name'},{label:'User Count',value:'users'}]}
+                sortValue={sortBy} onSortChange={v => { setSortBy(v); setCurrentPage(1); }}
+                sortDirection={sortDir} onSortDirectionChange={setSortDir}
+                onReset={() => { setStatusFilter(''); setDateFrom(''); setDateTo(''); setSortBy('date'); setSortDir('desc'); setSearch(''); setCurrentPage(1); }}
+                onExportCSV={handleExportCSV}
+            />
 
             {loading ? (
                 <div style={{ textAlign: 'center', padding: '6rem' }}>
@@ -190,15 +290,37 @@ function CompaniesPage() {
                     <div style={{ fontWeight: 800, fontSize: '1.4rem', color: '#2B3674' }}>No Organizations Found</div>
                 </div>
             ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 20 }}>
-                    {filtered.map(company => (
-                        <CompanyRow 
-                            key={company.id} 
-                            company={company} 
-                        />
-                    ))}
-                </div>
+                <>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 16 }}>
+                        {paginated.map(company => (
+                            <CompanyRow 
+                                key={company.id} 
+                                company={company} 
+                                onClick={() => setSelectedCompany(company)}
+                            />
+                        ))}
+                    </div>
+                    
+                    <Pagination
+                        currentPage={currentPage}
+                        totalItems={filtered.length}
+                        pageSize={pageSize}
+                        onPageChange={setCurrentPage}
+                        onPageSizeChange={setPageSize}
+                    />
+                </>
             )}
+
+            {selectedCompany && (
+                <CompanyDetailPanel
+                    company={selectedCompany}
+                    onClose={() => setSelectedCompany(null)}
+                    onApprove={handleApproveCompany}
+                    onReject={handleRejectCompany}
+                />
+            )}
+
+            {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
             <style>{`
                 @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }

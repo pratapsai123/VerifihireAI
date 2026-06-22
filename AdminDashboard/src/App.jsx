@@ -35,6 +35,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 import CompaniesPage from './pages/CompaniesPage';
 import DashboardHome from './pages/DashboardHome';
+import ActivityFeed from './pages/ActivityFeed';
 
 function App() {
   return (
@@ -60,6 +61,13 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <CompaniesPage />
+            </Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/activity" element={
+          <ProtectedRoute>
+            <Layout>
+              <ActivityFeed />
             </Layout>
           </ProtectedRoute>
         } />
