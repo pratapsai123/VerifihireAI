@@ -212,6 +212,7 @@ function DashboardHome() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [orgFilter, setOrgFilter] = useState('');
+    const [chartOrgFilter, setChartOrgFilter] = useState('');
 
     const fetchData = useCallback(async (silent = false) => {
         if (!silent) setLoading(true);
@@ -262,6 +263,7 @@ function DashboardHome() {
     const trendData = buildTrendData(filteredCompanies, filteredUsers);
     const approvalData = buildApprovalData(filteredCompanies);
     const roleData = buildRoleData(filteredUsers);
+    const chartRoleData = buildRoleData(chartOrgFilter ? users.filter(u => u.organization_name === chartOrgFilter) : users);
     const topOrgs = buildTopOrgs(companies);
     const recentSignups = filteredUsers.slice(0, 5);
 
@@ -368,16 +370,42 @@ function DashboardHome() {
 
             {/* Row 2: Role Distribution + Top Orgs */}
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px', marginBottom: '24px' }}>
-                <ChartCard title="User Role Distribution" subtitle="Breakdown across all organizations">
-                    {roleData.length > 0 ? (
+                <div style={{
+                    background: '#fff', borderRadius: '24px', padding: '24px',
+                    boxShadow: '0 10px 20px rgba(112, 144, 176, 0.05)',
+                    border: '1px solid #f0f3f8'
+                }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+                        <div>
+                            <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', margin: 0 }}>User Role Distribution</h3>
+                            <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '4px 0 0', fontWeight: 500 }}>
+                                {chartOrgFilter ? `Breakdown for ${chartOrgFilter}` : 'Breakdown across all organizations'}
+                            </p>
+                        </div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#F4F7FE', padding: '6px 12px', borderRadius: 10, border: '1px solid #e9edf7' }}>
+                            <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--text-secondary)', textTransform: 'uppercase' }}>Company:</span>
+                            <select
+                                value={chartOrgFilter}
+                                onChange={(e) => setChartOrgFilter(e.target.value)}
+                                style={{ border: 'none', outline: 'none', background: 'transparent', fontWeight: 700, color: 'var(--blue-accent)', fontSize: '0.75rem', cursor: 'pointer' }}
+                            >
+                                <option value="">All Organizations</option>
+                                {companies.map(c => (
+                                    <option key={c.id} value={c.name}>{c.name}</option>
+                                ))}
+                            </select>
+                        </div>
+                    </div>
+
+                    {chartRoleData.length > 0 ? (
                         <ResponsiveContainer width="100%" height={240}>
-                            <BarChart data={roleData} layout="vertical" margin={{ top: 0, right: 20, left: 10, bottom: 0 }}>
+                            <BarChart data={chartRoleData} layout="vertical" margin={{ top: 0, right: 20, left: 10, bottom: 0 }}>
                                 <CartesianGrid strokeDasharray="3 3" stroke="#f0f3f8" horizontal={false} />
                                 <XAxis type="number" tick={{ fontSize: 11, fill: '#A3AED0', fontWeight: 600 }} tickLine={false} axisLine={false} allowDecimals={false} />
                                 <YAxis dataKey="name" type="category" tick={{ fontSize: 11, fill: '#2B3674', fontWeight: 600 }} tickLine={false} axisLine={false} width={120} />
                                 <Tooltip content={<CustomTooltip />} />
                                 <Bar dataKey="count" name="Users" radius={[0, 6, 6, 0]} barSize={20}>
-                                    {roleData.map((_, i) => (
+                                    {chartRoleData.map((_, i) => (
                                         <Cell key={i} fill={ROLE_COLORS[i % ROLE_COLORS.length]} />
                                     ))}
                                 </Bar>
@@ -385,10 +413,10 @@ function DashboardHome() {
                         </ResponsiveContainer>
                     ) : (
                         <div style={{ height: 240, display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-                            No user data yet
+                            No user data found for this company
                         </div>
                     )}
-                </ChartCard>
+                </div>
 
                 <ChartCard title="Top Organizations" subtitle="By number of employees">
                     {topOrgs.length > 0 ? (
