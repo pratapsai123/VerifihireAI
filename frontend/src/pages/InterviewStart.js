@@ -253,41 +253,15 @@ const InterviewStart = () => {
         }
     };
 
-    const handleResumeInterview = async () => {
+    const handleResumeInterview = () => {
         setIsResuming(true);
-        setFormError('');
-
-        try {
-            // Re-fetch resume match to get questions (sessionStorage was cleared when tab closed)
-            const formData = new FormData();
-            formData.append('candidate_id', candidate.id);
-            // Note: resume is already on server, we just need to trigger match
-
-            const response = await axios.post(`${API_BASE_URL}/ai-candidates/match/`, formData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
-
-            if (!response.data.interview_questions) {
-                throw new Error('No questions generated');
-            }
-
-            const sessionData = {
-                candidateId: candidate.id,
-                candidateName: candidate.full_name,
-                questions: response.data.interview_questions,
-                status: 'interview_started'
-            };
-            sessionStorage.setItem('interviewData', JSON.stringify(sessionData));
-
-            import('../utils/activityLogger').then(({ logCandidateActivity }) => {
-                logCandidateActivity(token, 'Interview Resumed', 'Candidate resumed the AI interview after closing/reopening the link.');
-            });
-
-            navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
-        } catch (err) {
-            setFormError(err.response?.data?.error || err.message || 'Failed to resume interview. Please try again.');
-            setIsResuming(false);
-        }
+        // AiInterviewSession.js handles resume automatically by reading
+        // candidate.interview_summary from the backend. Just navigate there.
+        import('../utils/activityLogger').then(({ logCandidateActivity }) => {
+            logCandidateActivity(token, 'Interview Resumed', 'Candidate resumed the AI interview after closing/reopening the link.');
+        });
+        window.dispatchEvent(new Event('vh_exam_started'));
+        navigate(generatePath(ROUTES.AI_INTERVIEW_SESSION, { token }));
     };
 
     const handleStartInterview = async () => {

@@ -308,7 +308,25 @@ class BulkInviteView(APIView):
 
                 return Response({"error": f"File must contain columns: {', '.join(required_cols)}. Found: {', '.join(df.columns)}"}, status=status.HTTP_400_BAD_REQUEST)
 
-                
+            # Validate date ordering: available_until must be after available_from
+            if available_from and available_until and available_until <= available_from:
+                return Response({"error": "Available Until must be after Available From."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Deduplicate emails within the uploaded file
+            df['email'] = df['email'].str.strip().str.lower()
+            df = df.drop_duplicates(subset='email', keep='first')
+
+            # Check for candidates already invited with the same email and an active interview
+            active_statuses = ['Invited', 'Interview', 'New']
+            existing_emails = set(
+                Candidate.objects.filter(
+                    email__in=df['email'].tolist(),
+                    status__in=active_statuses,
+                    is_deleted=False,
+                ).values_list('email', flat=True)
+            )
+
+            skipped_duplicates = []
 
             invited_candidates = []
 
@@ -318,9 +336,12 @@ class BulkInviteView(APIView):
 
                 name = str(row['name']).strip()
 
-                email = str(row['email']).strip()
+                email = str(row['email']).strip().lower()
 
-                
+                # Skip if this email already has an active interview
+                if email in existing_emails:
+                    skipped_duplicates.append(email)
+                    continue
 
                 # Auto-persist role if title is provided
 
@@ -541,12 +562,14 @@ class BulkInviteView(APIView):
                         f.write(f"{timezone.now()} - Traceback: {traceback.format_exc()}\n\n")
                 
 
+            msg = f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}."
+            if skipped_duplicates:
+                msg += f" Skipped {len(skipped_duplicates)} duplicate(s) already having active interviews."
+
             return Response({
-
-                "message": f"Successfully invited {len(invited_candidates)} {'candidate' if len(invited_candidates) == 1 else 'candidates'}.",
-
-                "candidates": invited_candidates
-
+                "message": msg,
+                "candidates": invited_candidates,
+                "skipped_duplicates": skipped_duplicates,
             }, status=status.HTTP_201_CREATED)
 
         except Exception as e:
@@ -2982,6 +3005,9 @@ ADAPTIVE RULES:
             
             prompt = f"""You are "Indu", a warm, sharp, and experienced technical interviewer conducting a live interview for the position of {job_title}.
 Candidate Name: {candidate_name}
+
+===== EXPERIENCE LEVEL & DIFFICULTY =====
+{ProcessAnswerView._get_difficulty_instructions(experience_level)}
 
 ===== JOB DESCRIPTION =====
 {jd_condensed}

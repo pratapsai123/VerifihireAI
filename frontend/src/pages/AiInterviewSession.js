@@ -2981,12 +2981,11 @@ const AiInterviewSession = () => {
             const resumeQ = "Let's continue. Please share more about your experience.";
             addMessage('ai', resumeQ);
             await speak(resumeQ);
+            await waitForSpeechToFinish();
             if (userInputMode === 'audio') {
-                setTimeout(() => {
-                    if (!isCompletedRef.current && !isProcessingRef.current) {
-                        startListening();
-                    }
-                }, 2000);
+                if (!isCompletedRef.current && !isProcessingRef.current && !manualMuteRef.current) {
+                    startListening();
+                }
             }
         } else {
             const firstName = candidate.full_name.split(' ')[0];
