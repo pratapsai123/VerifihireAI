@@ -39,7 +39,7 @@ function FeatureCustomizedAssessment() {
             <span className="text-gradient-primary">Hiring Excellence</span>
           </h1>
           <p>
-            Design role-specific tests in seconds with AI, add your own custom questions, and automatically schedule interviews for candidates who pass.
+            Design role-specific tests in seconds, add your own custom questions, and automatically schedule interviews for candidates who pass.
           </p>
           <div className="fca-hero-cta">
             <Link to="/contact" className="fca-btn-gradient" style={{textDecoration: 'none', display: 'inline-block'}}>
@@ -67,7 +67,7 @@ function FeatureCustomizedAssessment() {
 
               <div className="builder-step step-ai-load">
                 <div className="ai-spinner"></div>
-                <span className="ai-text">AI generating skill map...</span>
+                <span className="ai-text">Generating skill map...</span>
               </div>
 
               <div className="builder-step step-skills">
@@ -121,8 +121,8 @@ function FeatureCustomizedAssessment() {
               <div className="builder-step step-pass">
                 <i className="fas fa-trophy" style={{fontSize: '1.5rem', color: '#F59E0B'}}></i>
                 <div>
-                  <div style={{color: '#fff', fontSize: '1.1rem'}}>Passed Assessment!</div>
-                  <div style={{fontSize: '0.85rem', color: '#10B981', marginTop: '4px'}}>Exceeded 60% Threshold</div>
+                  <div style={{color: '#92400E', fontSize: '1.1rem', fontWeight: 700}}>Passed Assessment!</div>
+                  <div style={{fontSize: '0.85rem', color: '#B45309', marginTop: '4px'}}>Exceeded 60% Threshold</div>
                 </div>
               </div>
               
@@ -184,7 +184,7 @@ function FeatureCustomizedAssessment() {
             <h2>Intelligent Role-Based Generation</h2>
             <p>Simply select the role and sub-role you are hiring for. Our system instantly populates relevant skills and distributes questions perfectly aligned with the experience level you need.</p>
             <ul className="fca-step-features">
-              <li><i className="fas fa-check-circle"></i> AI-curated skills library</li>
+              <li><i className="fas fa-check-circle"></i> Curated skills library</li>
               <li><i className="fas fa-check-circle"></i> Dynamic question allocation</li>
               <li><i className="fas fa-check-circle"></i> Adjustable difficulty weighting</li>
             </ul>
@@ -404,7 +404,7 @@ function FeatureCustomizedAssessment() {
           
           <div className="fca-fg-card wide-card">
             <div className="wide-card-left">
-              <div className="fca-fg-icon" style={{background: 'rgba(255, 255, 255, 0.1)', color: '#fff'}}>
+              <div className="fca-fg-icon" style={{background: 'rgba(59, 130, 246, 0.1)', color: '#3B82F6'}}>
                 <i className="fas fa-link"></i>
               </div>
               <h3>Google Calendar sync</h3>
@@ -442,14 +442,14 @@ function FeatureCustomizedAssessment() {
       <section className="fca-workflow-section">
         <div className="fca-workflow-container">
           <div className="fca-workflow-header">
-            <div className="fca-process-badge" style={{borderColor: 'rgba(59, 130, 246, 0.4)', color: '#60A5FA'}}>&bull; AUTOMATION</div>
+            <div className="fca-process-badge" style={{borderColor: '#DBEAFE', color: '#2563EB'}}>&bull; AUTOMATION</div>
             <h2>How auto-scheduling works</h2>
             <p>Once you publish an assessment, the entire post-assessment workflow runs on autopilot.</p>
           </div>
           
           <div className="fca-timeline">
             <div className="fca-timeline-item">
-              <div className="timeline-icon" style={{background: 'rgba(15, 23, 42, 1)', border: '1px solid rgba(255,255,255,0.1)', color: '#F97316'}}>
+              <div className="timeline-icon" style={{background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#F97316'}}>
                 <i className="fas fa-file-alt"></i>
               </div>
               <div className="timeline-content">
@@ -459,7 +459,7 @@ function FeatureCustomizedAssessment() {
             </div>
             
             <div className="fca-timeline-item">
-              <div className="timeline-icon" style={{background: 'rgba(15, 23, 42, 1)', border: '1px solid rgba(255,255,255,0.1)', color: '#F97316'}}>
+              <div className="timeline-icon" style={{background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#F97316'}}>
                 <i className="fas fa-bolt"></i>
               </div>
               <div className="timeline-content">
@@ -470,7 +470,7 @@ function FeatureCustomizedAssessment() {
             </div>
             
             <div className="fca-timeline-item">
-              <div className="timeline-icon" style={{background: 'rgba(15, 23, 42, 1)', border: '1px solid rgba(255,255,255,0.1)', color: '#60A5FA'}}>
+              <div className="timeline-icon" style={{background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#2563EB'}}>
                 <i className="fas fa-envelope-open-text"></i>
               </div>
               <div className="timeline-content">
@@ -481,7 +481,7 @@ function FeatureCustomizedAssessment() {
             </div>
             
             <div className="fca-timeline-item">
-              <div className="timeline-icon" style={{background: 'rgba(15, 23, 42, 1)', border: '1px solid rgba(255,255,255,0.1)', color: '#FBBF24'}}>
+              <div className="timeline-icon" style={{background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#D97706'}}>
                 <i className="fas fa-calendar-alt"></i>
               </div>
               <div className="timeline-content">
@@ -491,7 +491,7 @@ function FeatureCustomizedAssessment() {
             </div>
             
             <div className="fca-timeline-item">
-              <div className="timeline-icon" style={{background: 'rgba(15, 23, 42, 1)', border: '1px solid rgba(255,255,255,0.1)', color: '#10B981'}}>
+              <div className="timeline-icon" style={{background: '#FFFFFF', border: '1px solid #E2E8F0', color: '#16A34A'}}>
                 <i className="fas fa-check-square"></i>
               </div>
               <div className="timeline-content">
@@ -506,11 +506,14 @@ function FeatureCustomizedAssessment() {
 
 
       {/* CTA Section */}
-      <section className="fca-cta">
-        <div className="fca-cta-card">
-          <h2>Ready to transform your technical hiring?</h2>
-          <p>Create your first Custom Assessment today and let the platform handle the heavy lifting of scheduling and grading.</p>
-          <Link to="/contact" className="fca-btn-gradient" style={{textDecoration: 'none', display: 'inline-block'}}>
+      <section className="shared-cta-section">
+        <div className="shared-cta-card">
+          <div className="shared-cta-badge">
+            <span>Zero manual coordination</span>
+          </div>
+          <h2 className="shared-cta-title">Ready to transform your technical hiring?</h2>
+          <p className="shared-cta-text">Create your first Custom Assessment today and let the platform handle the heavy lifting of scheduling and grading.</p>
+          <Link to="/contact" className="shared-cta-btn">
             Get Started For Free
           </Link>
         </div>

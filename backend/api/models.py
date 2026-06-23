@@ -2136,5 +2136,28 @@ class InterviewViolation(models.Model):
     def __str__(self):
         return f"Violation {self.violation_type} ({self.severity}) - Candidate {self.candidate_id}"
 
+class SubscriptionPlan(models.Model):
+    name = models.CharField(max_length=100)
+    base_price_monthly = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, help_text="Base price in INR per month")
+    discount_6_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 6 months (e.g., 10.00 for 10%)")
+    discount_12_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 12 months (e.g., 20.00 for 20%)")
+    features = models.JSONField(default=list, blank=True, help_text="List of included features")
+    missing_features = models.JSONField(default=list, blank=True, help_text="List of excluded features")
+    is_popular = models.BooleanField(default=False)
+    color_theme = models.CharField(max_length=20, default="#007bff", help_text="Hex color code for the plan")
+    is_active = models.BooleanField(default=True)
+    sort_order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order']
+        verbose_name = "Subscription Plan"
+        verbose_name_plural = "Subscription Plans"
+
+    def __str__(self):
+        return self.name
+
+
 
 

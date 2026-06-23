@@ -157,3 +157,9 @@ from .security_views import (
     check_violation_status_view,
     terminate_terminal_close_view,
 )
+
+from .pricing_views import (
+    get_public_plans_view,
+    manage_plans_list_view,
+    manage_plan_detail_view,
+)

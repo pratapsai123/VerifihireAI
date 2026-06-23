@@ -4,7 +4,7 @@
   align-items: center;
   min-height: calc(100vh - 100px);
   padding: 2rem;
-  background-color: #0B1F3A;
+  background-color: #FFFFFF;
   font-family: inherit;
 }
 
@@ -20,7 +20,7 @@
 .contact-form-title {
   font-size: 1.8rem;
   font-weight: 700;
-  color: #F8FAFC;
+  color: #0F172A;
   margin-bottom: 2rem;
 }
 
@@ -49,7 +49,7 @@
 
 .contact-page-container .form-group label {
   font-size: 0.9rem;
-  color: #94A3B8;
+  color: #475569;
   margin-bottom: 1rem;
 }
 
@@ -58,9 +58,9 @@
   width: 100%;
   padding: 0.5rem 0;
   font-size: 1rem;
-  color: #E2E8F0;
+  color: #0F172A;
   border: none !important;
-  border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+  border-bottom: 1px solid #CBD5E1 !important;
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
@@ -70,7 +70,7 @@
 
 .contact-page-container .form-group input::placeholder,
 .contact-page-container .form-group textarea::placeholder {
-  color: #64748B;
+  color: #94A3B8;
 }
 
 .contact-page-container .form-group input:focus,

@@ -11,7 +11,7 @@
 }
 
 .features-label {
-  color: #CCD6F6;
+  color: #475569;
   font-weight: 600;
   font-size: 0.9rem;
   letter-spacing: 0.05em;
@@ -22,7 +22,7 @@
 
 .features-dropdown-container:hover .features-label,
 .features-dropdown-container.active .features-label {
-  color: #3B82F6;
+  color: #2563EB;
 }
 
 .features-menu {
@@ -30,16 +30,16 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(10, 25, 47, 0.95);
+  background: #FFFFFF;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid #E2E8F0;
   border-radius: 12px;
   padding: 16px;
   width: max-content;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -54,11 +54,11 @@
 
 .feature-menu-item {
   position: relative;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.02);
   border-radius: 8px;
   padding: 12px 20px;
   text-decoration: none;
-  color: #E2E8F0;
+  color: #334155;
   font-size: 0.9rem;
   font-weight: 500;
   display: block;
@@ -85,7 +85,7 @@
   content: '';
   position: absolute;
   inset: 2px;
-  background: #0d1b2a; /* matching dark theme roughly */
+  background: #FFFFFF;
   border-radius: 6px;
   z-index: -1;
   transition: background 0.3s ease;
@@ -97,7 +97,7 @@
 }
 
 .feature-menu-item:hover::after {
-  background: #112240;
+  background: #F8FAFC;
 }
 
 @keyframes rotateBorder {
@@ -110,7 +110,7 @@
   background: conic-gradient(transparent, transparent, transparent, #2563EB);
 }
 .feature-ai:hover {
-  color: #3B82F6;
+  color: #2563EB;
   text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
 }
 
@@ -140,9 +140,9 @@
 
 /* Features button */
 .features-label-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #CCD6F6;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #475569;
   font-weight: 600;
   padding: 10px 24px;
   border-radius: 100px;
@@ -160,10 +160,10 @@
 
 .features-label-btn:hover,
 .features-dropdown-container.active .features-label-btn {
-  background: rgba(37, 99, 235, 0.15);
-  border-color: rgba(37, 99, 235, 0.5);
-  color: #ffffff;
-  box-shadow: 0 0 15px rgba(37, 99, 235, 0.4);
+  background: #EFF6FF;
+  border-color: rgba(37, 99, 235, 0.3);
+  color: #2563EB;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.1);
   animation: border-breathe-features 2s infinite alternate;
 }
 
@@ -222,4 +222,33 @@
 @keyframes shine-login {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
+}
+
+/* Pricing button styled identically to Features button */
+.pricing-label-btn {
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  color: #475569;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 100px;
+  display: inline-block;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-family: inherit;
+}
+
+.pricing-label-btn:hover {
+  background: #EFF6FF;
+  border-color: rgba(37, 99, 235, 0.3);
+  color: #2563EB;
+  box-shadow: 0 0 15px rgba(37, 99, 235, 0.1);
+  animation: border-breathe-features 2s infinite alternate;
 }

@@ -275,22 +275,22 @@ function FeatureLiveInterview() {
         <div className="cp-flowchart">
           <div className="cp-panelists">
             <div className="cp-card">
-              <div className="cp-avatar" style={{ background: 'rgba(139,92,246,0.25)', color: '#c4b5fd', border: '1px solid rgba(139,92,246,0.35)' }}>RK</div>
+              <div className="cp-avatar" style={{ background: '#F5F3FF', color: '#7C3AED', border: '1px solid #C084FC' }}>RK</div>
               <div className="cp-name">Ravi Kumar</div>
               <div className="cp-role">Senior Engineer<br/>Technical Round</div>
-              <div className="cp-score" style={{ color: '#c4b5fd' }}>8.2</div>
+              <div className="cp-score" style={{ color: '#7C3AED' }}>8.2</div>
             </div>
             <div className="cp-card">
-              <div className="cp-avatar" style={{ background: 'rgba(245,158,11,0.25)', color: '#fde68a', border: '1px solid rgba(245,158,11,0.35)' }}>PS</div>
+              <div className="cp-avatar" style={{ background: '#FEF3C7', color: '#D97706', border: '1px solid #FBBF24' }}>PS</div>
               <div className="cp-name">Priya Sharma</div>
               <div className="cp-role">Engineering Manager<br/>Culture Fit</div>
-              <div className="cp-score" style={{ color: '#fde68a' }}>7.5</div>
+              <div className="cp-score" style={{ color: '#D97706' }}>7.5</div>
             </div>
             <div className="cp-card">
-              <div className="cp-avatar" style={{ background: 'rgba(236,72,153,0.25)', color: '#f9a8d4', border: '1px solid rgba(236,72,153,0.35)' }}>AT</div>
+              <div className="cp-avatar" style={{ background: '#FDF2F8', color: '#DB2777', border: '1px solid #F472B6' }}>AT</div>
               <div className="cp-name">Arjun Tiwari</div>
               <div className="cp-role">Tech Lead<br/>System Design</div>
-              <div className="cp-score" style={{ color: '#f9a8d4' }}>8.8</div>
+              <div className="cp-score" style={{ color: '#DB2777' }}>8.8</div>
             </div>
           </div>
 
@@ -354,20 +354,21 @@ function FeatureLiveInterview() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="li-cta">
-        <h2>
-          Ready to interview<br />with confidence?
-        </h2>
-        <p>
-          No third-party tools. No integration headaches. Just a complete, secure interview
-          platform you own entirely.
-        </p>
-        <div className="cta-btns">
-          <Link to="/signup" className="btn-cta-primary">Start Free Trial</Link>
-          <Link to="/contact" className="btn-cta-outline">Book a Demo</Link>
-        </div>
-        <div className="cta-note">
-          No credit card required · Up to 3 panelists per session · Unlimited interview links
+      <section className="shared-cta-section">
+        <div className="shared-cta-card">
+          <div className="shared-cta-badge">
+            <span>Secure Live Code</span>
+          </div>
+          <h2 className="shared-cta-title">Ready to interview with confidence?</h2>
+          <p className="shared-cta-text">
+            No third-party tools. No integration headaches. Just a complete, secure interview platform you own entirely.
+          </p>
+          <Link to="/signup" className="shared-cta-btn">
+            Get Started For Free
+          </Link>
+          <p className="shared-cta-note">
+            Up to 3 panelists per session · Unlimited interview links
+          </p>
         </div>
       </section>
       </div>

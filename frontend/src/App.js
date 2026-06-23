@@ -49,6 +49,7 @@ import ThankYou from './pages/ThankYou';
 import MyAccount from './pages/MyAccount';
 import Contact from './pages/Contact';
 import SecurePrecheck from './pages/SecurePrecheck';
+import Pricing from './pages/Pricing';
 import InviteRedirect from './pages/InviteRedirect';
 import SessionTerminated from './pages/SessionTerminated';
 import SecuritySessionGuard from './components/SecuritySessionGuard';
@@ -375,6 +376,7 @@ function AppContent() {
     '/features/live-interview',
     '/features/customized-assessment',
     '/features/coding-assessment',
+    '/pricing',
   ];
 
   const isFullScreenPage =
@@ -513,6 +515,7 @@ function AppContent() {
           <Route path="/book-interview/:token" element={<BookInterview />} />
           <Route path="/thank-you" element={<ThankYou />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/pricing" element={<Pricing />} />
 
           {/* Features Dropdown Pages */}
           <Route path="/features/ai-assessments" element={<FeatureAiAssessments />} />

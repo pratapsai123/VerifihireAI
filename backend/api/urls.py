@@ -153,4 +153,9 @@ urlpatterns = [
     path('security-session/<uuid:token>/violation-status', views.check_violation_status_view, name='check_violation_status'),
     path('security-signatures', views.security_signatures_view, name='security_signatures'),
 
+    # Pricing Plans
+    path('plans/', views.get_public_plans_view, name='public_plans'),
+    path('admin/plans/', views.manage_plans_list_view, name='manage_plans_list'),
+    path('admin/plans/<int:plan_id>/', views.manage_plan_detail_view, name='manage_plan_detail'),
 ]
+
