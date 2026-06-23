@@ -1,4 +1,5 @@
 import React from 'react';
+import NotificationCenter from './NotificationCenter';
 
 function Header() {
     const user = (() => { try { return JSON.parse(localStorage.getItem('user') || '{}'); } catch { return {}; } })();
@@ -50,7 +51,8 @@ function Header() {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                <NotificationCenter />
                 <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
                     <div style={{ textAlign: 'right' }}>
                         <div style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--text-main)' }}>
