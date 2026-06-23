@@ -253,18 +253,13 @@ function SuperAdminDashboard() {
             setCompanies(compRes.data.companies || []);
             setUsers(userRes.data.users || []);
             setRestrictedDomains(domainRes.data.domains || []);
-
-            // Update selected company if open
-            if (selectedCompany && !silent) {
-                const updated = (compRes.data.companies || []).find(c => c.id === selectedCompany.id);
-                if (updated) setSelectedCompany(updated);
-            }
         } catch (err) {
+            console.error('Failed to sync data:', err);
             setToast({ type: 'error', message: 'Failed to sync data.' });
         } finally {
             if (!silent) setLoading(false);
         }
-    }, [selectedCompany]);
+    }, []);
 
     useEffect(() => {
         if (location.state?.activeTab) {

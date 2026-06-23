@@ -189,7 +189,7 @@ def superadmin_users_view(request):
 
     status_filter = request.query_params.get('status', '').strip().lower()
     
-    users_qs = UserProfile.objects.all().order_by('-registration_timestamp')
+    users_qs = UserProfile.objects.all().select_related('manager', 'company').order_by('-registration_timestamp')
     if status_filter == 'pending':
         users_qs = users_qs.filter(is_approved=False)
     elif status_filter == 'approved':
@@ -197,6 +197,12 @@ def superadmin_users_view(request):
 
     result = []
     for profile in users_qs:
+        manager_name = None
+        if profile.manager:
+            m_first = profile.manager.first_name or ''
+            m_last = profile.manager.last_name or ''
+            manager_name = f"{m_first} {m_last}".strip() or profile.manager.email
+
         result.append({
             'id': profile.id,
             'first_name': profile.first_name,
@@ -207,6 +213,8 @@ def superadmin_users_view(request):
             'company_id': profile.company.id if profile.company else None,
             'is_approved': profile.is_approved,
             'registered_at': profile.registration_timestamp.isoformat(),
+            'manager_id': profile.manager.id if profile.manager else None,
+            'manager_name': manager_name,
         })
 
     return Response({'users': result, 'total': len(result)}, status=status.HTTP_200_OK)

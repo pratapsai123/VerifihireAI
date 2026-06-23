@@ -122,17 +122,12 @@ function CompaniesPage() {
         try {
             const res = await axios.get(`${API_BASE_URL}/superadmin/companies/`);
             setCompanies(res.data.companies || []);
-            // Update selected company if it was open
-            if (selectedCompany && !silent) {
-                const updated = (res.data.companies || []).find(c => c.id === selectedCompany.id);
-                if (updated) setSelectedCompany(updated);
-            }
         } catch (err) {
             console.error('Failed to load companies:', err);
         } finally {
             if (!silent) setLoading(false);
         }
-    }, [selectedCompany]);
+    }, []);
 
     useEffect(() => {
         fetchCompanies();
@@ -215,7 +210,10 @@ function CompaniesPage() {
             if (selectedCompany?.id === id) {
                 setSelectedCompany({ ...selectedCompany, approval_status: 'approved' });
             }
-        } catch (err) { setToast({ type: 'error', message: 'Company approval failed.' }); }
+        } catch (err) {
+            console.error('Company approval failed:', err);
+            setToast({ type: 'error', message: 'Company approval failed.' });
+        }
     };
 
     const handleRejectCompany = async (id, reason) => {
@@ -226,7 +224,10 @@ function CompaniesPage() {
             if (selectedCompany?.id === id) {
                 setSelectedCompany({ ...selectedCompany, approval_status: 'rejected', rejected_reason: reason });
             }
-        } catch (err) { setToast({ type: 'error', message: 'Rejection failed.' }); }
+        } catch (err) {
+            console.error('Rejection failed:', err);
+            setToast({ type: 'error', message: 'Rejection failed.' });
+        }
     };
 
     return (

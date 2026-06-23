@@ -64,6 +64,12 @@ function CompanyDetailPanel({ company, onClose, onApprove, onReject, actionLoadi
     const isLoading = actionLoading === `comp-${company.id}`;
     const admin = company.primary_admin;
 
+    // Count user roles
+    const companyAdminsCount = loadingUsers ? '...' : companyUsers.filter(u => u.role === 'company_admin').length;
+    const hrManagersCount = loadingUsers ? '...' : companyUsers.filter(u => u.role === 'hr_manager').length;
+    const hrsCount = loadingUsers ? '...' : companyUsers.filter(u => u.role === 'hr').length;
+    const interviewersCount = loadingUsers ? '...' : companyUsers.filter(u => u.role === 'interviewer').length;
+
     // Build timeline
     const timeline = [];
     timeline.push({
@@ -175,6 +181,50 @@ function CompanyDetailPanel({ company, onClose, onApprove, onReject, actionLoadi
                         </div>
                     </div>
 
+                    {/* Team Composition / Role Breakdown */}
+                    <div style={{
+                        background: '#fff',
+                        borderRadius: 16,
+                        padding: '20px',
+                        border: '1px solid #f0f3f8',
+                        boxShadow: '0 4px 20px rgba(112, 144, 176, 0.05)',
+                        marginBottom: 28
+                    }}>
+                        <div style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: 14
+                        }}>
+                            <span style={{ fontSize: '0.82rem', fontWeight: 800, color: '#4F46E5', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                                Team Composition
+                            </span>
+                            {!loadingUsers && (
+                                <span style={{ fontSize: '0.72rem', color: 'var(--text-secondary)', fontWeight: 600 }}>
+                                    Total: {companyUsers.length}
+                                </span>
+                            )}
+                        </div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12 }}>
+                            <div style={{ textAlign: 'center', background: '#F4F7FE', padding: '12px 6px', borderRadius: 12, border: '1px solid rgba(0,0,0,0.01)' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#2B3674' }}>{companyAdminsCount}</div>
+                                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#707EAE', marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.2px' }}>Admins</div>
+                            </div>
+                            <div style={{ textAlign: 'center', background: '#F4F7FE', padding: '12px 6px', borderRadius: 12, border: '1px solid rgba(0,0,0,0.01)' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#2B3674' }}>{hrManagersCount}</div>
+                                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#707EAE', marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.2px' }}>HR Managers</div>
+                            </div>
+                            <div style={{ textAlign: 'center', background: '#F4F7FE', padding: '12px 6px', borderRadius: 12, border: '1px solid rgba(0,0,0,0.01)' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#2B3674' }}>{hrsCount}</div>
+                                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#707EAE', marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.2px' }}>HRs</div>
+                            </div>
+                            <div style={{ textAlign: 'center', background: '#F4F7FE', padding: '12px 6px', borderRadius: 12, border: '1px solid rgba(0,0,0,0.01)' }}>
+                                <div style={{ fontSize: '1.2rem', fontWeight: 800, color: '#2B3674' }}>{interviewersCount}</div>
+                                <div style={{ fontSize: '0.62rem', fontWeight: 700, color: '#707EAE', marginTop: 4, textTransform: 'uppercase', letterSpacing: '0.2px' }}>Interviewers</div>
+                            </div>
+                        </div>
+                    </div>
+
                     {/* Approval Timeline */}
                     <div style={{ marginBottom: 28 }}>
                         <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginBottom: 16, color: 'var(--text-main)' }}>Approval Timeline</h3>
@@ -214,6 +264,11 @@ function CompanyDetailPanel({ company, onClose, onApprove, onReject, actionLoadi
                                         <div style={{ flex: 1, minWidth: 0 }}>
                                             <div style={{ fontWeight: 700, fontSize: '0.82rem', color: 'var(--text-main)' }}>{user.first_name} {user.last_name}</div>
                                             <div style={{ fontSize: '0.7rem', color: 'var(--text-secondary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{user.email}</div>
+                                            {user.manager_name && (
+                                                <div style={{ fontSize: '0.68rem', color: '#4F46E5', fontWeight: 600, marginTop: 2, display: 'flex', alignItems: 'center', gap: 4 }}>
+                                                    <span>↳</span> Reports to: {user.manager_name}
+                                                </div>
+                                            )}
                                         </div>
                                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4, flexShrink: 0 }}>
                                             <span style={{
