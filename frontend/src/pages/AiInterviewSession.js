@@ -1977,7 +1977,11 @@ const AiInterviewSession = () => {
             const totalAnswered = nextIdx; // questions answered so far
 
             // --- HARD STOP: end after MAX_INTERVIEW_QUESTIONS ---
-            if (totalAnswered >= MAX_INTERVIEW_QUESTIONS) {
+            // Use the backend's server_turn (based on candidate.total_questions) as the
+            // authoritative count. This ensures clarifications and silent answers that
+            // don't increment the DB counter also don't count toward the limit.
+            const serverTurn = data.server_turn || nextIdx;
+            if (serverTurn >= MAX_INTERVIEW_QUESTIONS) {
                 let finalWords = "That concludes our interview questions today. Thank you for your time, we will be in touch soon. Goodbye!";
                 if (fullFeedback.trim()) {
                     finalWords = fullFeedback.trim() + ". " + finalWords;

@@ -3317,7 +3317,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                         f"{getattr(candidate, 'id', '?')}: {save_err}"
                     )
 
-            return Response(data, status=status.HTTP_200_OK)
+            return Response({**data, 'server_turn': current_turn_number}, status=status.HTTP_200_OK)
 
         except Exception as e:
             error_msg = str(e)
