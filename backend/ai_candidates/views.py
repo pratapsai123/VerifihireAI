@@ -725,6 +725,10 @@ class ResumeMatchView(APIView):
 
                     candidate.company = candidate.user_profile.company
 
+            # Auto-persist role to global JobRole if title is provided
+            if candidate.job_title and job_description and request.user.is_authenticated:
+                ensure_role_exists(candidate.job_title, job_description, user=request.user)
+
 
 
             batch_id = generate_batch_id()
@@ -826,6 +830,10 @@ class ResumeMatchView(APIView):
             if not is_auto:
                 from .models import StandaloneResumeScreening
                 from .tasks import process_standalone_resume_screening_task
+
+                # Auto-persist role if custom title/JD is provided
+                if first_job_title and request.user.is_authenticated:
+                    ensure_role_exists(first_job_title, job_description, user=request.user)
                 for resume_file in resume_files:
                     user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
                     company = user_profile.company if user_profile else None
@@ -1447,7 +1455,11 @@ class CandidateListCreateView(generics.ListCreateAPIView):
 
         company = user_profile.company if user_profile else None
 
-        serializer.save(company=company, user_profile=user_profile)
+        candidate = serializer.save(company=company, user_profile=user_profile)
+
+        # Auto-persist role to global JobRole if title and description are provided
+        if candidate.job_title and candidate.job_description and self.request.user.is_authenticated:
+            ensure_role_exists(candidate.job_title, candidate.job_description, user=self.request.user)
 
 
 
@@ -2925,8 +2937,25 @@ class ProcessAnswerView(APIView):
                 phase_guidance = "DEEP DIVE PHASE: Probe deeper based on what the candidate has revealed. If they mentioned a project, ask architecture details. If they claimed a skill, test it with a scenario. Focus on WEAK AREAS if any were identified."
             elif current_turn_number <= 12:
                 phase_guidance = "SCENARIO & PROBLEM-SOLVING PHASE: Present hypothetical workplace scenarios or system design problems relevant to the role."
-            else:
+            elif current_turn_number == 13:
                 phase_guidance = "MANDATORY CODING PHASE: You MUST ask a coding/programming question. The candidate will type their answer. You MUST set requires_code_input to true. Do NOT ask a conversational or theoretical question — it MUST be a 'write a function' or 'write code to solve' type question."
+            else:
+                phase_guidance = "FINAL EVALUATION PHASE: The candidate has just answered the final question. The interview is now complete. Do NOT ask any further questions. Set 'refined_next_question' to null or an empty string. Focus your feedback purely on evaluating their last answer, without proposing any next steps or saying 'let's try something else/easier'."
+
+            # Build adaptive rules based on turn number
+            if current_turn_number >= 14:
+                adaptive_rules = """1. Since the interview is complete, do NOT ask any next question or suggest any follow-up topics.
+2. Set 'refined_next_question' to null or an empty string.
+3. Focus your 'feedback' purely on a 1-sentence polite, human-like reaction evaluating their last answer (e.g., "I understand, coding under time pressure can be challenging." or "Thanks for walking me through that logic.").
+4. Do NOT say "let's try something else", "let's move on", "let's try something easier", or make any comments about future questions."""
+            else:
+                adaptive_rules = f"""1. NEVER repeat a topic already covered above.
+2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
+3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
+4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
+5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
+6. For turns 1-12: ORAL ONLY — never ask them to write code or type anything.
+7. For turns 13-14: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns 13-14."""
 
             # Adaptive intelligence prompt section
             adaptive_section = f"""===== ADAPTIVE QUESTIONING INTELLIGENCE =====
@@ -2943,13 +2972,7 @@ CANDIDATE STRENGTHS (scored ≥ 8/10):
 {chr(10).join(f'  ✓ {t}' for t in strong_topics) if strong_topics else '  None identified yet'}
 
 ADAPTIVE RULES:
-1. NEVER repeat a topic already covered above.
-2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
-3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
-4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
-5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
-6. For turns 1-12: ORAL ONLY — never ask them to write code or type anything.
-7. For turns 13-14: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns 13-14.
+{adaptive_rules}
 """
 
             # --- OPTIMIZED PROMPT (reliable JSON output) ---
@@ -3927,7 +3950,7 @@ class CandidateReportDownloadView(APIView):
                         img_data = base64.b64decode(b64)
                         img_io = io.BytesIO(img_data)
                         rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-                        all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        all_images.append((rl_img, f"Webcam - {log.event_type.replace('_', ' ').title()} ({timezone.localtime(log.timestamp).strftime('%H:%M:%S')})"))
                     except Exception as webcam_err:
                         logger.warning(f"[PDFReport] Failed to load webcam screenshot for log {log.id}: {webcam_err}")
                 
@@ -3938,7 +3961,7 @@ class CandidateReportDownloadView(APIView):
                         img_data = base64.b64decode(b64)
                         img_io = io.BytesIO(img_data)
                         rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
-                        all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({log.timestamp.strftime('%H:%M:%S')})"))
+                        all_images.append((rl_img, f"Desktop - {log.event_type.replace('_', ' ').title()} ({timezone.localtime(log.timestamp).strftime('%H:%M:%S')})"))
                     except Exception as desktop_err:
                         logger.warning(f"[PDFReport] Failed to load desktop screenshot for log {log.id}: {desktop_err}")
 
@@ -3952,7 +3975,7 @@ class CandidateReportDownloadView(APIView):
                         img_io = io.BytesIO(img_data)
                         rl_img = RLImage(img_io, width=1.5*inch, height=1.1*inch)
                         # We don't have the exact timestamp, use creation time or a generic one
-                        mismatch_time = candidate.created_at.strftime('%H:%M:%S') if candidate.created_at else "Initial"
+                        mismatch_time = timezone.localtime(candidate.created_at).strftime('%H:%M:%S') if candidate.created_at else "Initial"
                         all_images.insert(0, (rl_img, f"Face Mismatch ({mismatch_time})"))
                     except Exception as e:
                         logger.warning(f"[PDFReport] Failed to inject synthetic face mismatch image: {e}")

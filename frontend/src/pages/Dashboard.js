@@ -13,6 +13,7 @@ import {
   BarChart3,
   Clock,
   PlusCircle,
+  Briefcase,
   ChevronRight,
   ChevronDown,
   ChevronUp,
@@ -73,6 +74,75 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
+  const [hoveredItem, setHoveredItem] = useState(null);
+  
+  // Manage Job Roles Modal state
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [rolesList, setRolesList] = useState([]);
+  const [editingRoleId, setEditingRoleId] = useState(null);
+  const [editFormData, setEditFormData] = useState({ title: '', description: '' });
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
+  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
+
+  const fetchRolesList = async () => {
+    setIsLoadingRoles(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/job-roles/`);
+      setRolesList(res.data);
+    } catch (err) {
+      console.error("Error fetching job roles:", err);
+    } finally {
+      setIsLoadingRoles(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isManageModalOpen) {
+      fetchRolesList();
+    }
+  }, [isManageModalOpen]);
+
+  const handleEditRole = (role) => {
+    setEditingRoleId(role.id);
+    setEditFormData({ title: role.title, description: role.description });
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+    setIsSavingEdit(true);
+    try {
+      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData);
+      setEditingRoleId(null);
+      fetchRolesList();
+      alert('Job Role updated successfully!');
+    } catch (error) {
+      console.error("Error updating job role:", error);
+      alert('Failed to update job role. Please try again.');
+    } finally {
+      setIsSavingEdit(false);
+    }
+  };
+
+  const handleDeleteRole = async (roleId) => {
+    const reason = window.prompt("Please enter a reason for deleting this job role:");
+    if (reason === null) return;
+    if (!reason.trim()) {
+      alert("A reason is required to request deletion.");
+      return;
+    }
+    try {
+      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, { data: { reason } });
+      fetchRolesList();
+      if (res.status === 202 || res.data?.message?.includes('requested')) {
+        alert(res.data.message || 'Deletion request submitted for approval.');
+      } else {
+        alert('Job Role deleted successfully!');
+      }
+    } catch (error) {
+      console.error("Error deleting job role:", error);
+      alert(error.response?.data?.error || 'Failed to delete job role. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -223,7 +293,16 @@ const Dashboard = () => {
       role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
       badge: pendingCount > 0 ? pendingCount : null
     },
-    { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 }, role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
+    {
+      icon: Briefcase,
+      label: 'Job Roles',
+      path: '#',
+      role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
+      subItems: [
+        { label: 'Create Job Role', onClick: () => setIsRoleModalOpen(true) },
+        { label: 'Manage Job Roles', onClick: () => setIsManageModalOpen(true) }
+      ]
+    },
   ];
 
   const navItems = allNavItems.filter(item => {
@@ -265,7 +344,13 @@ const Dashboard = () => {
         </div>
         <nav className="sidebar-nav">
           {navItems.map((item, i) => (
-            <div key={i} className="nav-group" style={{ position: 'relative' }}>
+            <div 
+              key={i} 
+              className="nav-group" 
+              style={{ position: 'relative' }}
+              onMouseEnter={() => !isSidebarCollapsed && setHoveredItem(item.label)}
+              onMouseLeave={() => setHoveredItem(null)}
+            >
               <div
                 className={`nav-item ${item.active ? 'active' : ''} ${expandedItem === item.label ? 'expanded' : ''}`}
                 onClick={(e) => {
@@ -340,7 +425,11 @@ const Dashboard = () => {
                         key={j}
                         className="floating-menu-item"
                         onClick={() => {
-                          navigate(sub.path);
+                          if (sub.onClick) {
+                            sub.onClick();
+                          } else {
+                            navigate(sub.path);
+                          }
                           setActiveFloatingMenu(null);
                         }}
                       >
@@ -351,7 +440,7 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {item.subItems && expandedItem === item.label && (
+              {item.subItems && (expandedItem === item.label || hoveredItem === item.label) && (
                 <div className="sub-nav">
                   {item.subItems.map((sub, j) => (
                     <div key={j} className="sub-nav-group">
@@ -359,7 +448,9 @@ const Dashboard = () => {
                         className={`sub-nav-item ${expandedSubItem === sub.label ? 'expanded' : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (sub.nestedItems) {
+                          if (sub.onClick) {
+                            sub.onClick();
+                          } else if (sub.nestedItems) {
                             setExpandedSubItem(expandedSubItem === sub.label ? null : sub.label);
                           } else {
                             navigate(sub.path);
@@ -769,6 +860,137 @@ const Dashboard = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Manage Job Roles Modal */}
+      {isManageModalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={() => setIsManageModalOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            className="glass-card modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '700px',
+              width: '90%',
+              maxHeight: '85vh',
+              padding: '2rem',
+              background: 'white',
+              borderRadius: '2rem',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <div className="modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexShrink: 0 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Manage Job Roles</h3>
+              <button className="icon-btn" onClick={() => setIsManageModalOpen(false)}><ChevronDown size={20} /></button>
+            </div>
+            
+            <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', paddingRight: '0.5rem', marginBottom: '1.5rem' }}>
+              {isLoadingRoles ? (
+                <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
+                  <div className="loader" style={{ fontSize: '1rem' }}>Loading Job Roles...</div>
+                </div>
+              ) : rolesList.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b', fontSize: '0.95rem' }}>
+                  No job roles found. Create one to get started!
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
+                  {rolesList.map((role) => (
+                    <div 
+                      key={role.id} 
+                      style={{ 
+                        background: '#f8fafc', 
+                        border: '1px solid #e2e8f0', 
+                        borderRadius: '16px', 
+                        padding: '1.25rem',
+                        transition: 'all 0.2s',
+                        width: '100%',
+                        minWidth: 0
+                      }}
+                    >
+                      {editingRoleId === role.id ? (
+                        <form onSubmit={handleSaveEdit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#64748b', marginBottom: '0.25rem' }}>Role Title</label>
+                            <input
+                              type="text"
+                              className="filter-select"
+                              style={{ width: '100%', height: '38px', padding: '0 0.75rem', borderRadius: '8px' }}
+                              value={editFormData.title}
+                              onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#64748b', marginBottom: '0.25rem' }}>Description</label>
+                            <textarea
+                              className="filter-select"
+                              style={{ width: '100%', minHeight: '80px', padding: '0.5rem 0.75rem', borderRadius: '8px', resize: 'vertical' }}
+                              value={editFormData.description}
+                              onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                              required
+                            />
+                          </div>
+                          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
+                            <button type="button" className="btn-premium btn-outline" style={{ padding: '0.4rem 1rem', fontSize: '0.75rem' }} onClick={() => setEditingRoleId(null)}>Cancel</button>
+                            <button type="submit" className="btn-premium btn-fill" style={{ padding: '0.4rem 1rem', fontSize: '0.75rem' }} disabled={isSavingEdit}>
+                              {isSavingEdit ? 'Saving...' : 'Save Changes'}
+                            </button>
+                          </div>
+                        </form>
+                      ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%', minWidth: 0 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', width: '100%', minWidth: 0 }}>
+                            <h4 style={{ margin: 0, fontWeight: 700, color: '#1e293b', fontSize: '1rem', wordBreak: 'break-all', overflowWrap: 'break-word', flex: 1, minWidth: 0 }}>{role.title}</h4>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                              <button 
+                                className="btn-premium btn-outline" 
+                                style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#cbd5e1' }}
+                                onClick={() => handleEditRole(role)}
+                              >
+                                Edit
+                              </button>
+                              <button 
+                                className="btn-premium btn-outline" 
+                                style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#fca5a5', color: '#ef4444' }}
+                                onClick={() => handleDeleteRole(role.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', whiteSpace: 'pre-wrap', lineHeight: '1.5', wordBreak: 'break-all', overflowWrap: 'break-word', width: '100%', minWidth: 0 }}>
+                            {role.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid #e2e8f0', paddingTop: '1rem', flexShrink: 0 }}>
+              <button className="btn-premium btn-fill" style={{ padding: '0.6rem 1.5rem' }} onClick={() => setIsManageModalOpen(false)}>Close</button>
+            </div>
           </div>
         </div>
       )}

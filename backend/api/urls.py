@@ -113,7 +113,7 @@ urlpatterns = [
     path('coding/invites/<uuid:token>/submit/', coding_views.coding_invite_submit_view, name='coding_invite_submit'),
     path('submit-interview-feedback/', views.submit_interview_feedback, name='submit_interview_feedback'),
     path('job-roles/', views.job_role_list_create_view, name='job_role_list_create'),
-    path('job-roles/<int:pk>/', views.job_role_delete_view, name='job_role_delete'),
+    path('job-roles/<int:pk>/', views.job_role_detail_view, name='job_role_detail'),
 
     # Superadmin (Platform ApplicationAdmin) endpoints
     path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
