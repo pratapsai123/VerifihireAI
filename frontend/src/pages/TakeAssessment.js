@@ -439,7 +439,28 @@ export default function TakeAssessment() {
   const [showSubmitModal, setShowSubmitModal] = useState(false);
   const [modalSubmitType, setModalSubmitType] = useState(''); // 'objective' or 'final'
 
-  const initiateSubmit = (type) => {
+  const initiateSubmit = async (type) => {
+    if (type === 'objective') {
+      const answeredCount = questions.filter(q => isAnswered(q)).length;
+      if (answeredCount === questions.length && questions.length > 0) {
+        await submitObjective(false);
+        return;
+      }
+    } else if (type === 'final') {
+      if (codingQuestionsOrdered.length > 0) {
+        const submittedCount = Object.keys(codingState.submittedIds).length;
+        if (submittedCount === codingQuestionsOrdered.length) {
+          await submit(false);
+          return;
+        }
+      } else {
+        const answeredCount = questions.filter(q => isAnswered(q)).length;
+        if (answeredCount === questions.length && questions.length > 0) {
+          await submit(false);
+          return;
+        }
+      }
+    }
     setModalSubmitType(type);
     setShowSubmitModal(true);
   };
@@ -813,7 +834,7 @@ export default function TakeAssessment() {
         });
       }
 
-      logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
+      await logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
 
       setSubmitted(true);
       localStorage.removeItem(`take_assessment_progress_${token}`);
@@ -1700,8 +1721,11 @@ export default function TakeAssessment() {
       });
       setObjResult(resp.data);
       if (resp.data.passed === false || resp.data.next_stage === 'finish') {
+        await logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
+        setSubmitted(true);
+        localStorage.removeItem(`take_assessment_progress_${token}`);
         // Redirect to feedback on fail OR if no coding section (Case 1 Fix)
-        navigate(`/result/${token}`, { replace: true });
+        navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
       } else {
         setAssessmentStage('transition');
         // Record coding start time when transitioning (will be used once stage becomes 'coding')
