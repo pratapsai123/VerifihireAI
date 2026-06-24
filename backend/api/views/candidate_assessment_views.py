@@ -2208,6 +2208,16 @@ def results_detail_view(request, submission_id):
                     'integrity_score': getattr(inv.integrity, 'integrity_score', 100.0) if hasattr(inv, 'integrity') else 100.0,
                     'warning_logs': _get_filtered_warning_logs(getattr(inv.integrity, 'warning_logs', [])) if hasattr(inv, 'integrity') else []
                 },
+                'integrity_screenshots': [
+                    {
+                        'id': snap.id,
+                        'event_type': snap.event_type,
+                        'timestamp': snap.timestamp.isoformat() if snap.timestamp else None,
+                        'screenshot_url': request.build_absolute_uri(snap.screenshot.url) if snap.screenshot else None,
+                        'webcam_screenshot_url': request.build_absolute_uri(snap.webcam_screenshot.url) if snap.webcam_screenshot else None,
+                    }
+                    for snap in IntegrityScreenshot.objects.filter(invitation=inv).order_by('timestamp')
+                ],
                 'activity_logs': list(inv.activity_logs) if isinstance(inv.activity_logs, list) else [],
                 'regret_email_sent': s.regret_email_sent,
                 'created_at': inv.created_at.isoformat() if inv.created_at else None,
