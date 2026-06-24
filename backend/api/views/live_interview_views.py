@@ -115,6 +115,9 @@ def create_interview_invitations_and_send_email_view(request):
             final_end = parse_datetime(global_end_time_raw) if global_end_time_raw else invitation.end_time
             i_email = invitation.interviewer_email
             
+            if final_start and final_end and final_start >= final_end:
+                return Response({'error': 'Interview end time must be after the start time.'}, status=status.HTTP_400_BAD_REQUEST)
+            
             if i_email and final_start and final_end:
                 overlap_in_batch = any(
                     e == i_email.lower() and s < final_end and e_time > final_start
@@ -1287,6 +1290,28 @@ def draft_interview_invitations_view(request, draft_id=None):
                 interviewer_name = (payload.get('interviewer_name') or '').strip()
                 interviewer_email = (payload.get('interviewer_email') or '').strip().lower()
                 
+                if not name:
+                    return Response({'error': 'Candidate name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+                if not email:
+                    return Response({'error': 'Candidate email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+                from django.core.validators import validate_email
+                from django.core.exceptions import ValidationError
+
+                try:
+                    validate_email(email)
+                except ValidationError:
+                    return Response({'error': f'Invalid candidate email format: {email}'}, status=status.HTTP_400_BAD_REQUEST)
+
+                if interviewer_email:
+                    try:
+                        validate_email(interviewer_email)
+                    except ValidationError:
+                        return Response({'error': f'Invalid interviewer email format: {interviewer_email}'}, status=status.HTTP_400_BAD_REQUEST)
+
+                if email == interviewer_email:
+                    return Response({'error': 'Candidate and interviewer emails cannot be the same.'}, status=status.HTTP_400_BAD_REQUEST)
+                
                 if interviewer_email:
                     if interviewer_email.endswith('@gmail.com'):
                         return Response({'error': 'Gmail addresses are not allowed for panel members.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -1313,6 +1338,9 @@ def draft_interview_invitations_view(request, draft_id=None):
 
                 start_time = parse_datetime(start_time_raw) if start_time_raw else None
                 end_time = parse_datetime(end_time_raw) if end_time_raw else None
+
+                if start_time and end_time and start_time >= end_time:
+                    return Response({'error': 'Interview end time must be after the start time.'}, status=status.HTTP_400_BAD_REQUEST)
 
                 if interviewer_email and start_time and end_time:
                     overlap_in_batch = any(
