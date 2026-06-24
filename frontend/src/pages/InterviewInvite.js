@@ -213,6 +213,10 @@ export default function InterviewInvite() {
     const intN = interviewerName.trim(), intE = interviewerEmail.trim().toLowerCase();
     const p = pan.trim().toUpperCase(), ph = phone.trim();
     if (!n || !isValidEmail(e) || !intN || !isValidEmail(intE) || !isValidPAN(p) || (ph && !isValidPhone(ph))) return;
+    if (e === intE) {
+      alert('Candidate and interviewer emails cannot be the same.');
+      return;
+    }
     if (intE.endsWith('@gmail.com')) {
       alert('Gmail addresses are not allowed for panel members.'); return;
     }
@@ -288,6 +292,11 @@ export default function InterviewInvite() {
       const d = new Date(`${scheduleDate}T${resolvedEndTime}:00`);
       return Number.isNaN(d.getTime()) ? new Date(new Date(startIso).getTime() + INTERVIEW_DURATION_SEC * 1000).toISOString() : d.toISOString();
     })();
+    if (new Date(endIso).getTime() <= new Date(startIso).getTime()) {
+      setScheduleError('End time must be after the start time.');
+      alert('End time must be after the start time.');
+      return;
+    }
     setScheduleError('');
     setSending(true);
     try {
@@ -670,6 +679,10 @@ export default function InterviewInvite() {
                   }
                   if (currentPanelMembers.some(p => p.email.toLowerCase() === panelistEmail.toLowerCase())) {
                     alert('This panelist has already been added to the list.');
+                    return;
+                  }
+                  if (panelistEmail.toLowerCase() === email.toLowerCase()) {
+                    alert('Cannot add the candidate as a panel member.');
                     return;
                   }
                   if (panelistEmail.toLowerCase() === interviewerEmail.toLowerCase()) {
