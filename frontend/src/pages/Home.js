@@ -7,11 +7,11 @@ import '../styles/Home.css';
 import featuresBg from '../assets/features-neural-bg.png'; // kept for future use — not rendered
 import {
   ShieldCheck, Activity, Users, MousePointer2,
-  Zap, Cpu, BarChart3, ChevronRight, CheckCircle2,
-  XCircle, Clock, TrendingUp, Brain, Lock, Globe,
-  Star, Award, Target, Layers, ArrowRight, Sparkles,
+  Zap, BarChart3, ChevronRight, CheckCircle2,
+  XCircle, Clock, TrendingUp, Lock, Globe,
+  Star, Award, Target, Layers, ArrowRight,
   UserCheck, FileText, AlertTriangle, RefreshCw,
-  Code2, Video, ClipboardList, MessageSquare, ScanFace, Trophy,
+  Code2, Video, ClipboardList, MessageSquare, Trophy,
   Plus, Minus, Building2, GraduationCap, Briefcase, Monitor,
   CheckSquare, Zap as ZapIcon, CreditCard, Infinity, ChevronDown
 } from 'lucide-react';
@@ -84,7 +84,7 @@ const perspectiveData = {
       { icon: <FileText size={16} />, title: 'One-Click Reports', desc: 'Auto-generated PDF reports for every candidate, ready to share with stakeholders.' },
       { icon: <Globe size={16} />, title: 'ATS-Ready Exports', desc: 'Export candidate data directly to Greenhouse, Lever, Workday and more.' },
     ],
-    cta: { label: 'Start Hiring Free', to: '/signup' },
+    cta: null,
     mockStats: [{ label: 'Avg. time-to-shortlist', value: '4 hrs' }, { label: 'Cost saved per hire', value: '60%' }, { label: 'Fraud attempts blocked', value: '100%' }],
   },
   candidate: {
@@ -96,12 +96,12 @@ const perspectiveData = {
     points: [
       { icon: <Clock size={16} />, title: 'Interview Anytime', desc: 'Take your AI interview 24/7 from any device — no waiting for a recruiter\'s calendar.' },
       { icon: <CheckCircle2 size={16} />, title: 'Structured & Fair', desc: 'Every candidate gets the same questions in the same order. Zero human bias.' },
-      { icon: <Brain size={16} />, title: 'Adaptive Questions', desc: 'The AI adapts based on your answers — letting you show depth and nuance.' },
+      { icon: <ClipboardList size={16} />, title: 'Adaptive Questions', desc: 'The AI adapts based on your answers — letting you show depth and nuance.' },
       { icon: <Monitor size={16} />, title: 'Instant Feedback', desc: 'Receive a detailed score breakdown and feedback immediately after completing.' },
       { icon: <Lock size={16} />, title: 'Privacy First', desc: 'Your session data is GDPR-compliant and never shared without your consent.' },
       { icon: <Star size={16} />, title: 'One-Round Process', desc: 'Assessment, coding, and interview — all in a single seamless session.' },
     ],
-    cta: { label: 'Take a Practice Interview', to: '/signup' },
+    cta: null,
     mockStats: [{ label: 'Avg. completion time', value: '28 min' }, { label: 'Candidate satisfaction', value: '97%' }, { label: 'Rounds replaced', value: '3 → 1' }],
   },
 };
@@ -156,9 +156,11 @@ function PerspectiveSection() {
                 </div>
               ))}
             </div>
-            <Link to={data.cta.to} className="btn-primary-premium persp-cta" style={{ '--cta-color': data.color }}>
-              {data.cta.label} <ArrowRight size={16} />
-            </Link>
+            {data.cta && (
+              <Link to={data.cta.to} className="btn-primary-premium persp-cta" style={{ '--cta-color': data.color }}>
+                {data.cta.label} <ArrowRight size={16} />
+              </Link>
+            )}
           </div>
 
           {/* Right: Mock Panel */}
@@ -198,11 +200,11 @@ function PerspectiveSection() {
    LIVE DEMO / DASHBOARD PREVIEW
 ───────────────────────────────────────────── */
 const mockCandidates = [
-  { name: 'Arjun Mehta',    role: 'Frontend Engineer',    score: 92, flag: false, status: 'Shortlisted' },
-  { name: 'Priya Reddy',    role: 'Data Scientist',       score: 88, flag: false, status: 'Shortlisted' },
-  { name: 'Rohan Singh',    role: 'Frontend Engineer',    score: 74, flag: true,  status: 'Flagged' },
-  { name: 'Anjali Nair',    role: 'Backend Engineer',     score: 95, flag: false, status: 'Shortlisted' },
-  { name: 'Vikram Patel',   role: 'DevOps',               score: 61, flag: true,  status: 'Review' },
+  { name: 'Arjun Mehta', role: 'Frontend Engineer', score: 92, flag: false, status: 'Shortlisted' },
+  { name: 'Priya Reddy', role: 'Data Scientist', score: 88, flag: false, status: 'Shortlisted' },
+  { name: 'Rohan Singh', role: 'Frontend Engineer', score: 74, flag: true, status: 'Flagged' },
+  { name: 'Anjali Nair', role: 'Backend Engineer', score: 95, flag: false, status: 'Shortlisted' },
+  { name: 'Vikram Patel', role: 'DevOps', score: 61, flag: true, status: 'Review' },
 ];
 
 function DemoSection() {
@@ -251,7 +253,7 @@ function DemoSection() {
                     <div className="demo-stat-val" style={{ color: s.color }}>{s.val}</div>
                     <div className="demo-stat-lbl">{s.label}</div>
                     <div className="demo-stat-bar" style={{ background: `${s.color}20` }}>
-                      <div className="demo-stat-fill" style={{ width: `${[70,28,8,81][i]}%`, background: s.color }} />
+                      <div className="demo-stat-fill" style={{ width: `${[70, 28, 8, 81][i]}%`, background: s.color }} />
                     </div>
                   </div>
                 ))}
@@ -270,7 +272,7 @@ function DemoSection() {
                     onMouseLeave={() => setHovered(null)}
                   >
                     <div className="demo-candidate">
-                      <div className="demo-avatar" style={{ background: ['#3B82F620','#10B98120','#EF444420','#8B5CF620','#F59E0B20'][i], color: ['#3B82F6','#10B981','#EF4444','#8B5CF6','#F59E0B'][i] }}>
+                      <div className="demo-avatar" style={{ background: ['#3B82F620', '#10B98120', '#EF444420', '#8B5CF620', '#F59E0B20'][i], color: ['#3B82F6', '#10B981', '#EF4444', '#8B5CF6', '#F59E0B'][i] }}>
                         {c.name.split(' ').map(n => n[0]).join('')}
                       </div>
                       <span>{c.name}</span>
@@ -282,7 +284,7 @@ function DemoSection() {
                       </div>
                       <span className="demo-score-num" style={{ color: c.score > 85 ? '#10B981' : c.score > 70 ? '#F59E0B' : '#EF4444' }}>{c.score}%</span>
                     </div>
-                    <span className={`demo-status demo-status-${c.status.toLowerCase().replace(' ','-')}`}>{c.flag ? '🚩 ' : ''}{c.status}</span>
+                    <span className={`demo-status demo-status-${c.status.toLowerCase().replace(' ', '-')}`}>{c.flag ? '🚩 ' : ''}{c.status}</span>
                   </div>
                 ))}
               </div>
@@ -290,145 +292,13 @@ function DemoSection() {
           </div>
         </div>
 
-        <div className="demo-cta-row">
-          <Link to="/signup" className="btn-primary-premium">Get Your Dashboard <ArrowRight size={16} /></Link>
-          <p className="demo-cta-note">No setup required · Live in under 5 minutes</p>
-        </div>
+
       </div>
     </section>
   );
 }
 
-/* ─────────────────────────────────────────────
-   PRICING SECTION
-───────────────────────────────────────────── */
-const pricingPlans = [
-  {
-    name: 'Starter',
-    price: 'Free',
-    period: 'Forever',
-    color: '#10B981',
-    desc: 'Perfect for small teams and early-stage startups exploring AI hiring.',
-    features: [
-      '5 AI Interviews / month',
-      'Basic fraud detection',
-      'Candidate score report',
-      'Email support',
-      '1 job role active',
-      'Standard question bank',
-    ],
-    missing: ['Custom branding', 'ATS integrations', 'Advanced analytics'],
-    cta: 'Get Started Free',
-    ctaLink: '/signup',
-    popular: false,
-  },
-  {
-    name: 'Professional',
-    price: '₹4,999',
-    period: 'per month',
-    color: '#3B82F6',
-    desc: 'For growing teams that need powerful AI screening with full fraud protection.',
-    features: [
-      '100 AI Interviews / month',
-      'Full fraud detection suite',
-      'Behavioural sentiment analysis',
-      'Detailed PDF reports',
-      'Unlimited job roles',
-      'Custom question sets',
-      'Priority support',
-      'Basic ATS export (CSV)',
-    ],
-    missing: ['White-label branding', 'API access'],
-    cta: 'Start 14-Day Trial',
-    ctaLink: '/signup',
-    popular: true,
-  },
-  {
-    name: 'Enterprise',
-    price: 'Custom',
-    period: 'Contact us',
-    color: '#8B5CF6',
-    desc: 'For large organizations needing unlimited scale, integrations and SLA guarantees.',
-    features: [
-      'Unlimited AI Interviews',
-      'Advanced fraud & proctoring',
-      'Full behavioural analytics',
-      'White-label branding',
-      'ATS integrations (Greenhouse, Lever…)',
-      'Dedicated account manager',
-      'SSO & SAML support',
-      'SLA guarantee & 99.9% uptime',
-      'Custom API access',
-    ],
-    missing: [],
-    cta: 'Talk to Sales',
-    ctaLink: '/contact',
-    popular: false,
-  },
-];
 
-function PricingSection() {
-  const [billing, setBilling] = useState('monthly');
-  return (
-    <section className="pricing-section">
-      <div className="pricing-container">
-        <div className="pricing-header">
-          <span className="badge-dark">Simple Pricing</span>
-          <h2>Transparent Plans. No Hidden Fees.</h2>
-          <p>Start free, scale as you grow. All plans include our core AI interviewing engine.</p>
-          <div className="pricing-toggle">
-            <button className={`ptoggle ${billing === 'monthly' ? 'ptoggle-active' : ''}`} onClick={() => setBilling('monthly')}>Monthly</button>
-            <button className={`ptoggle ${billing === 'annual' ? 'ptoggle-active' : ''}`} onClick={() => setBilling('annual')}>
-              Annual <span className="ptoggle-save">Save 20%</span>
-            </button>
-          </div>
-        </div>
-
-        <ScrollReveal>
-        <div className="pricing-grid">
-          {pricingPlans.map((plan, i) => (
-            <div key={i} className={`pricing-card ${plan.popular ? "pricing-popular" : ""}`} style={{ "--pc": plan.color }}>
-              {plan.popular && <div className="pricing-popular-badge">⭐ Most Popular</div>}
-              <div className="pricing-card-top">
-                <div className="pricing-plan-name" style={{ color: plan.color }}>{plan.name}</div>
-                <div className="pricing-price">
-                  <span className="pricing-amount">{billing === 'annual' && plan.price !== 'Free' && plan.price !== 'Custom' ? '₹3,999' : plan.price}</span>
-                  <span className="pricing-period">{plan.period}</span>
-                </div>
-                <p className="pricing-desc">{plan.desc}</p>
-              </div>
-              <ul className="pricing-features">
-                {plan.features.map((f, j) => (
-                  <li key={j} className="pricing-feature">
-                    <CheckCircle2 size={14} color={plan.color} />
-                    {f}
-                  </li>
-                ))}
-                {plan.missing.map((f, j) => (
-                  <li key={`m${j}`} className="pricing-feature pricing-feature-missing">
-                    <XCircle size={14} color="rgba(255,255,255,0.2)" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <Link to={plan.ctaLink}
-                className={plan.popular ? 'btn-primary-premium pricing-cta' : 'btn-secondary-premium pricing-cta'}
-                style={plan.popular ? {} : { borderColor: `${plan.color}40`, color: plan.color }}
-              >
-                {plan.cta}
-              </Link>
-            </div>
-          ))}
-        </div>
-        </ScrollReveal>
-
-        <p className="pricing-note">
-          All plans include: 🔒 GDPR compliance · 🛡 Fraud detection · 📊 Score reports · 🌐 Multi-device support
-        </p>
-      </div>
-    </section>
-  );
-}
 
 /* ─────────────────────────────────────────────
    FAQ SECTION
@@ -452,7 +322,7 @@ function FAQSection() {
         <div className="faq-header">
           <span className="badge-dark">FAQ</span>
           <h2>Frequently Asked Questions</h2>
-          <p>Everything you need to know before you start. Can\'t find your answer? <Link to="/contact" className="faq-link">Talk to us →</Link></p>
+          <p>Everything you need to know before you start. Can't find your answer? <Link to="/contact" className="faq-link">Talk to us →</Link></p>
         </div>
         <div className="faq-list">
           {faqs.map((faq, i) => (
@@ -478,14 +348,14 @@ function FAQSection() {
 
 // Platforms arranged in a 360° orbit around the VerifiHireAI center hub
 const orbitFeatures = [
-  { icon: <ClipboardList size={22} />,  label: 'Assessments',       sub: 'Role-based tests',        color: '#3B82F6',  prev: 'TestGorilla' },
-  { icon: <Code2 size={22} />,          label: 'Coding Rounds',     sub: 'Live code execution',     color: '#10B981',  prev: 'HackerRank' },
-  { icon: <Video size={22} />,          label: 'AI Interviews',     sub: 'Adaptive questioning',    color: '#8B5CF6',  prev: 'HireVue' },
-  { icon: <ScanFace size={22} />,       label: 'Fraud Detection',   sub: 'Live identity check',     color: '#F59E0B',  prev: 'Manual review' },
-  { icon: <MessageSquare size={22} />,  label: 'Communication',     sub: 'Candidate messaging',     color: '#EC4899',  prev: 'Email / Slack' },
-  { icon: <BarChart3 size={22} />,      label: 'Analytics',         sub: 'Insight dashboards',      color: '#06B6D4',  prev: 'Excel / BI tools' },
-  { icon: <Trophy size={22} />,         label: 'Ranking & Reports', sub: 'Auto-generated PDFs',     color: '#F97316',  prev: 'Manual scoring' },
-  { icon: <ShieldCheck size={22} />,    label: 'Compliance',        sub: 'GDPR & audit trails',     color: '#6366F1',  prev: 'Legal teams' },
+  { icon: <ClipboardList size={22} />, label: 'Assessments', sub: 'Role-based tests', color: '#3B82F6', prev: 'TestGorilla' },
+  { icon: <Code2 size={22} />, label: 'Coding Rounds', sub: 'Live code execution', color: '#10B981', prev: 'HackerRank' },
+  { icon: <Video size={22} />, label: 'AI Interviews', sub: 'Adaptive questioning', color: '#8B5CF6', prev: 'HireVue' },
+  { icon: <ShieldCheck size={22} />, label: 'Fraud Detection', sub: 'Live identity check', color: '#F59E0B', prev: 'Manual review' },
+  { icon: <MessageSquare size={22} />, label: 'Communication', sub: 'Candidate messaging', color: '#EC4899', prev: 'Email / Slack' },
+  { icon: <BarChart3 size={22} />, label: 'Analytics', sub: 'Insight dashboards', color: '#06B6D4', prev: 'Excel / BI tools' },
+  { icon: <Trophy size={22} />, label: 'Ranking & Reports', sub: 'Auto-generated PDFs', color: '#F97316', prev: 'Manual scoring' },
+  { icon: <ShieldCheck size={22} />, label: 'Compliance', sub: 'GDPR & audit trails', color: '#6366F1', prev: 'Legal teams' },
 ];
 
 function AllInOneSection() {
@@ -539,8 +409,8 @@ function AllInOneSection() {
         <svg className="aio-svg-lines" viewBox="0 0 600 600">
           {orbitFeatures.map((f, i) => {
             const angle = (i / total) * 2 * Math.PI - Math.PI / 2;
-            const cx = 300 + RADIUS * Math.cos(angle);
-            const cy = 300 + RADIUS * Math.sin(angle);
+            const cx = 300 + (RADIUS - 40) * Math.cos(angle);
+            const cy = 300 + (RADIUS - 40) * Math.sin(angle);
             return (
               <line
                 key={i}
@@ -582,7 +452,7 @@ function AllInOneSection() {
               className={`aio-node ${visible ? 'aio-node-visible' : ''} ${activeIdx === i ? 'aio-node-active' : ''}`}
               style={{
                 left: `calc(50% + ${RADIUS * Math.cos(angle)}px)`,
-                top:  `calc(50% + ${RADIUS * Math.sin(angle)}px)`,
+                top: `calc(50% + ${RADIUS * Math.sin(angle)}px)`,
                 '--color': f.color,
                 '--delay': `${0.3 + i * 0.1}s`,
               }}
@@ -639,17 +509,14 @@ function StatsSection() {
           <span className="stat-number">{s1}%</span>
           <span className="stat-label">Fraud Detection Accuracy</span>
         </div>
-        <div className="stat-divider" />
         <div className="stat-item">
           <span className="stat-number">{s2}x</span>
           <span className="stat-label">Faster Screening Process</span>
         </div>
-        <div className="stat-divider" />
         <div className="stat-item">
           <span className="stat-number">{s3.toLocaleString()}+</span>
           <span className="stat-label">Interviews Conducted</span>
         </div>
-        <div className="stat-divider" />
         <div className="stat-item">
           <span className="stat-number">{s4}%</span>
           <span className="stat-label">Employer Satisfaction Rate</span>
@@ -694,50 +561,50 @@ function ComparisonSection() {
           <p>See exactly what you gain — and what you leave behind.</p>
         </div>
         <ScrollReveal>
-        <div className="comparison-grid">
-          {/* Traditional Card */}
-          <div className="compare-card compare-old">
-            <div className="compare-card-top old-top">
-              <XCircle size={28} color="#EF4444" />
-              <div>
-                <h3>Traditional Hiring</h3>
-                <span className="compare-badge old-badge">Outdated</span>
+          <div className="comparison-grid">
+            {/* Traditional Card */}
+            <div className="compare-card compare-old">
+              <div className="compare-card-top old-top">
+                <XCircle size={28} color="#EF4444" />
+                <div>
+                  <h3>Traditional Hiring</h3>
+                  <span className="compare-badge old-badge">Outdated</span>
+                </div>
               </div>
+              <ul className="compare-list">
+                {traditionalProblems.map((item, i) => (
+                  <li key={i} className="compare-item old-item">
+                    <span className="compare-icon old-icon">{item.icon}</span>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="compare-list">
-              {traditionalProblems.map((item, i) => (
-                <li key={i} className="compare-item old-item">
-                  <span className="compare-icon old-icon">{item.icon}</span>
-                  {item.text}
-                </li>
-              ))}
-            </ul>
-          </div>
 
-          {/* VS Divider */}
-          <div className="vs-divider">
-            <div className="vs-pill">VS</div>
-          </div>
+            {/* VS Divider */}
+            <div className="vs-divider">
+              <div className="vs-pill">VS</div>
+            </div>
 
-          {/* VerifiHireAI Card */}
-          <div className="compare-card compare-new">
-            <div className="compare-card-top new-top">
-              <Sparkles size={28} color="#3B82F6" />
-              <div>
-                <h3>VerifiHireAI</h3>
-                <span className="compare-badge new-badge">AI-Powered</span>
+            {/* VerifiHireAI Card */}
+            <div className="compare-card compare-new">
+              <div className="compare-card-top new-top">
+                <Award size={28} color="#3B82F6" />
+                <div>
+                  <h3>VerifiHireAI</h3>
+                  <span className="compare-badge new-badge">AI-Powered</span>
+                </div>
               </div>
+              <ul className="compare-list">
+                {verifiHireBenefits.map((item, i) => (
+                  <li key={i} className="compare-item new-item">
+                    <span className="compare-icon new-icon">{item.icon}</span>
+                    {item.text}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul className="compare-list">
-              {verifiHireBenefits.map((item, i) => (
-                <li key={i} className="compare-item new-item">
-                  <span className="compare-icon new-icon">{item.icon}</span>
-                  {item.text}
-                </li>
-              ))}
-            </ul>
           </div>
-        </div>
         </ScrollReveal>
       </div>
     </section>
@@ -749,7 +616,7 @@ function ComparisonSection() {
 ───────────────────────────────────────────── */
 const benefitsList = [
   {
-    icon: <Brain size={26} />,
+    icon: <UserCheck size={26} />,
     color: '#3B82F6',
     bg: 'rgba(59,130,246,0.10)',
     title: 'Intelligent AI Interviewer',
@@ -818,20 +685,20 @@ function BenefitsSection() {
           <p>VerifiHireAI combines cutting-edge AI, behavioural science, and enterprise security into one seamless hiring platform.</p>
         </div>
         <ScrollReveal>
-        <div className="benefits-grid">
-          {benefitsList.map((b, i) => (
-            <div className="benefit-card" key={i} style={{ "--accent": b.color }}>
-              <div className="benefit-icon-wrap" style={{ background: b.bg }}>
-                <span style={{ color: b.color }}>{b.icon}</span>
+          <div className="benefits-grid">
+            {benefitsList.map((b, i) => (
+              <div className="benefit-card" key={i} style={{ "--accent": b.color }}>
+                <div className="benefit-icon-wrap" style={{ background: b.bg }}>
+                  <span style={{ color: b.color }}>{b.icon}</span>
+                </div>
+                <h3 className="benefit-title">{b.title}</h3>
+                <p className="benefit-desc">{b.desc}</p>
+                <div className="benefit-learn-more">
+                  Learn more <ArrowRight size={14} />
+                </div>
               </div>
-              <h3 className="benefit-title">{b.title}</h3>
-              <p className="benefit-desc">{b.desc}</p>
-              <div className="benefit-learn-more">
-                Learn more <ArrowRight size={14} />
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -844,7 +711,7 @@ function BenefitsSection() {
 const steps = [
   { num: '01', icon: <Layers size={22} />, color: '#3B82F6', title: 'Create a Job Role', desc: 'Define the role, required skills, and evaluation criteria. VerifiHireAI auto-generates tailored interview questions.' },
   { num: '02', icon: <UserCheck size={22} />, color: '#10B981', title: 'Invite Candidates', desc: 'Send a unique, secure interview link via email. Candidates access the AI interview from any device, anytime.' },
-  { num: '03', icon: <Brain size={22} />, color: '#8B5CF6', title: 'AI Conducts the Interview', desc: 'Our AI interviewer conducts a structured session, monitoring identity, behaviour, and responses in real time.' },
+  { num: '03', icon: <Monitor size={22} />, color: '#8B5CF6', title: 'AI Conducts the Interview', desc: 'Our AI interviewer conducts a structured session, monitoring identity, behaviour, and responses in real time.' },
   { num: '04', icon: <BarChart3 size={22} />, color: '#F59E0B', title: 'Review & Decide', desc: 'Receive instant scores, fraud flags, sentiment analysis, and ranked candidates — ready for your final decision.' },
 ];
 
@@ -858,19 +725,19 @@ function HowItWorksSection() {
           <p>VerifiHireAI makes the entire screening process effortless, fast, and fraud-proof.</p>
         </div>
         <ScrollReveal>
-        <div className="hiw-steps">
-          {steps.map((s, i) => (
-            <React.Fragment key={i}>
-              <div className="hiw-step">
-                <div className="hiw-step-num" style={{ color: s.color, border: `2px solid ${s.color}22`, background: `${s.color}11` }}>{s.num}</div>
-                <div className="hiw-icon-wrap" style={{ background: `${s.color}15`, color: s.color }}>{s.icon}</div>
-                <h3 className="hiw-step-title">{s.title}</h3>
-                <p className="hiw-step-desc">{s.desc}</p>
-              </div>
-              {i < steps.length - 1 && <div className="hiw-connector"><ChevronRight size={20} color="rgba(255,255,255,0.2)" /></div>}
-            </React.Fragment>
-          ))}
-        </div>
+          <div className="hiw-steps">
+            {steps.map((s, i) => (
+              <React.Fragment key={i}>
+                <div className="hiw-step">
+                  <div className="hiw-step-num" style={{ color: s.color, border: `2px solid ${s.color}22`, background: `${s.color}11` }}>{s.num}</div>
+                  <div className="hiw-icon-wrap" style={{ background: `${s.color}15`, color: s.color }}>{s.icon}</div>
+                  <h3 className="hiw-step-title">{s.title}</h3>
+                  <p className="hiw-step-desc">{s.desc}</p>
+                </div>
+                {i < steps.length - 1 && <div className="hiw-connector"><ChevronRight size={20} color="rgba(255,255,255,0.2)" /></div>}
+              </React.Fragment>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -916,23 +783,23 @@ function TestimonialsSection() {
           <h2>Trusted by Forward-Thinking Teams</h2>
         </div>
         <ScrollReveal>
-        <div className="testimonials-grid">
-          {testimonials.map((t, i) => (
-            <div className="testimonial-card" key={i}>
-              <div className="t-stars">
-                {Array(t.rating).fill(0).map((_, j) => <Star key={j} size={14} fill="#F59E0B" color="#F59E0B" />)}
-              </div>
-              <p className="t-quote">"{t.quote}"</p>
-              <div className="t-author">
-                <div className="t-avatar" style={{ background: `${t.color}22`, color: t.color }}>{t.avatar}</div>
-                <div>
-                  <div className="t-name">{t.name}</div>
-                  <div className="t-role">{t.role}</div>
+          <div className="testimonials-grid">
+            {testimonials.map((t, i) => (
+              <div className="testimonial-card" key={i}>
+                <div className="t-stars">
+                  {Array(t.rating).fill(0).map((_, j) => <Star key={j} size={14} fill="#F59E0B" color="#F59E0B" />)}
+                </div>
+                <p className="t-quote">"{t.quote}"</p>
+                <div className="t-author">
+                  <div className="t-avatar" style={{ background: `${t.color}22`, color: t.color }}>{t.avatar}</div>
+                  <div>
+                    <div className="t-name">{t.name}</div>
+                    <div className="t-role">{t.role}</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </ScrollReveal>
       </div>
     </section>
@@ -944,24 +811,18 @@ function TestimonialsSection() {
 ───────────────────────────────────────────── */
 function CTASection() {
   return (
-    <section className="cta-section">
-      <div className="cta-glow" />
-      <div className="cta-container">
-        <Award size={40} color="#3B82F6" className="cta-icon-top" />
-        <h2 className="cta-title">Ready to Transform Your Hiring?</h2>
-        <p className="cta-subtitle">
-          Join thousands of companies already using VerifiHireAI to hire faster, fairer, and fraud-free.
-          Start your free trial — no credit card required.
-        </p>
-        <div className="cta-buttons">
-          <Link to="/signup" className="btn-primary-premium cta-btn-primary">
-            Start Free Trial <ArrowRight size={18} />
-          </Link>
-          <Link to="/contact" className="btn-secondary-premium cta-btn-secondary">
-            Schedule a Demo
-          </Link>
+    <section className="shared-cta-section">
+      <div className="shared-cta-card">
+        <div className="shared-cta-badge">
+          <span>AI-Powered Hiring</span>
         </div>
-        <p className="cta-trust">✓ Free 14-day trial &nbsp;&nbsp;✓ No credit card needed &nbsp;&nbsp;✓ Cancel anytime</p>
+        <h2 className="shared-cta-title">Ready to Transform Your Hiring?</h2>
+        <p className="shared-cta-text">
+          Join thousands of companies already using VerifiHireAI to hire faster, fairer, and fraud-free.
+        </p>
+        <Link to="/signup" className="shared-cta-btn">
+          Get Started For Free
+        </Link>
       </div>
     </section>
   );
@@ -986,7 +847,7 @@ function Home() {
         <section className={`hero-classic-section ${mounted ? 'fade-in' : ''}`}>
           <div className="hero-classic-content">
             <div className="hero-classic-text">
-              <span className="hero-pill">🚀 AI-Powered Hiring Platform</span>
+              <span className="hero-pill">AI-Powered Hiring Platform</span>
               <h1 className="hero-classic-title">
                 AI Intelligence That <br />
                 <span className="accent-blue">Transforms Hiring</span>
@@ -1002,11 +863,6 @@ function Home() {
                   Book a Demo
                 </Link>
               </div>
-              <div className="hero-trust-row">
-                <span className="hero-trust-item"><CheckCircle2 size={14} color="#10B981" /> No credit card required</span>
-                <span className="hero-trust-item"><CheckCircle2 size={14} color="#10B981" /> Setup in minutes</span>
-                <span className="hero-trust-item"><CheckCircle2 size={14} color="#10B981" /> Cancel anytime</span>
-              </div>
             </div>
             <div className="hero-classic-visual">
               <DetectionDemo />
@@ -1020,7 +876,7 @@ function Home() {
         {/* ── All-in-One Platform (360° Circle) ── */}
         <AllInOneSection />
 
-        <hr className="section-divider" />
+
 
         {/* ── Key Features ── */}
         <section className="features-classic">
@@ -1030,56 +886,44 @@ function Home() {
             <p>Why VerifiHireAI — four pillars of intelligent, secure, and scalable hiring</p>
           </div>
           <ScrollReveal>
-          <div className="features-grid-classic">
-            <div className="feature-card-classic card-blue">
-              <div className="feature-card-header">
-                <div className="feature-icon-classic b-blue">
-                  <ShieldCheck className="feature-icon" color="#2563EB" size={20} />
+            <div className="features-grid-classic">
+              <div className="feature-card-classic card-blue">
+                <div className="feature-card-header">
+                  <h3 className="feature-card-title">Real-Time Fraud Detection</h3>
                 </div>
-                <h3 className="feature-card-title">Real-Time Fraud Detection</h3>
+                <p className="feature-card-text">
+                  Continuous identity verification, multi-face detection, and browser lockdown ensure complete integrity throughout the assessment.
+                </p>
               </div>
-              <p className="feature-card-text">
-                Continuous identity verification, multi-face detection, and browser lockdown ensure complete integrity throughout the assessment.
-              </p>
-            </div>
 
-            <div className="feature-card-classic card-green">
-              <div className="feature-card-header">
-                <div className="feature-icon-classic b-green">
-                  <Activity className="feature-icon" color="#10B981" size={20} />
+              <div className="feature-card-classic card-green">
+                <div className="feature-card-header">
+                  <h3 className="feature-card-title">Behavioural Analysis</h3>
                 </div>
-                <h3 className="feature-card-title">Behavioural Analysis</h3>
+                <p className="feature-card-text">
+                  Advanced sentiment tracking and confidence analysis over the course of the candidate's interview responses.
+                </p>
               </div>
-              <p className="feature-card-text">
-                Advanced sentiment tracking and confidence analysis over the course of the candidate's interview responses.
-              </p>
-            </div>
 
-            <div className="feature-card-classic card-purple">
-              <div className="feature-card-header">
-                <div className="feature-icon-classic b-purple">
-                  <Users className="feature-icon" color="#8B5CF6" size={20} />
+              <div className="feature-card-classic card-purple">
+                <div className="feature-card-header">
+                  <h3 className="feature-card-title">Unbiased Scoring & Grading</h3>
                 </div>
-                <h3 className="feature-card-title">Unbiased Scoring & Grading</h3>
+                <p className="feature-card-text">
+                  Standardized rubrics and completely objective AI evaluation eliminates human bias from preliminary screening rounds.
+                </p>
               </div>
-              <p className="feature-card-text">
-                Standardized rubrics and completely objective AI evaluation eliminates human bias from preliminary screening rounds.
-              </p>
-            </div>
 
-            <div className="feature-card-classic card-orange">
-              <div className="feature-card-header">
-                <div className="feature-icon-classic b-orange">
-                  <MousePointer2 className="feature-icon" color="#F59E0B" size={20} />
+              <div className="feature-card-classic card-orange">
+                <div className="feature-card-header">
+                  <h3 className="feature-card-title">Seamless Dashboard Experience</h3>
                 </div>
-                <h3 className="feature-card-title">Seamless Dashboard Experience</h3>
+                <p className="feature-card-text">
+                  View detailed analytics, session integrity reports, and candidate progression in a premium, highly actionable unified dashboard.
+                </p>
               </div>
-              <p className="feature-card-text">
-                View detailed analytics, session integrity reports, and candidate progression in a premium, highly actionable unified dashboard.
-              </p>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
         </section>
 
         {/* ── Comparison ── */}
@@ -1097,8 +941,7 @@ function Home() {
         {/* ── How It Works ── */}
         <HowItWorksSection />
 
-        {/* ── Pricing ── */}
-        <PricingSection />
+
 
         {/* ── Testimonials ── */}
         <TestimonialsSection />

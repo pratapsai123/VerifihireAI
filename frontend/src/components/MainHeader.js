@@ -24,6 +24,7 @@ function MainHeader() {
     }
   };
 
+
   const goHome = () => {
     navigate('/');
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -40,10 +41,10 @@ function MainHeader() {
 
   return (
     <header style={{
-      background: 'rgba(10, 25, 47, 0.85)',
+      background: 'rgba(255, 255, 255, 0.85)',
       backdropFilter: 'blur(15px)',
       WebkitBackdropFilter: 'blur(15px)',
-      borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+      borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
       position: 'sticky',
       top: 0,
       zIndex: 100,
@@ -62,19 +63,20 @@ function MainHeader() {
         <button
           type="button"
           onClick={goHome}
+          className="brand-logo-group"
           style={{
-            fontSize: '1.95rem',
-            fontWeight: 800,
-            color: '#FFFFFF',
-            letterSpacing: '-0.03em',
             background: 'none',
             border: 'none',
             padding: 0,
             cursor: 'pointer',
-            fontFamily: "'Poppins', sans-serif",
+            textAlign: 'left'
           }}
         >
-          Verifi<span style={{ color: '#3B82F6' }}>HireAI</span>
+          <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" style={{ height: '48px' }} />
+          <div className="brand-text-container" style={{ alignItems: 'center' }}>
+            <span className="brand-name-text" style={{ fontSize: '1.4rem' }}>VerifiHireAI</span>
+            <p className="brand-tagline" style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>Trust in Every Hire</p>
+          </div>
         </button>
 
         {/* Center: Features Dropdown */}
@@ -102,6 +104,13 @@ function MainHeader() {
               </Link>
             </div>
           </div>
+
+          <Link
+            to="/pricing"
+            className="pricing-label-btn"
+          >
+            Pricing
+          </Link>
         </div>
 
         {/* Right: Login Button */}

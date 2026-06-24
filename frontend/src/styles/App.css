@@ -1190,3 +1190,89 @@ body {
 .animate-spin {
     animation: spin 1s linear infinite;
 }
+
+/* --- Shared CTA Section (Stripe/Linear Clean Light Theme) --- */
+.shared-cta-section {
+  padding: 60px 4%;
+  background: #F8FAFC;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.shared-cta-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 40px;
+  background: #EFF6FF; /* Very light blue background */
+  border: 1px solid #BFDBFE; /* Light blue border */
+  border-radius: 28px;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.02);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+.shared-cta-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1); /* Mint green background */
+  color: #10B981; /* Green text */
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.shared-cta-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #1E3A8A; /* Deep blue header color */
+  margin: 0;
+  line-height: 1.25;
+}
+
+.shared-cta-text {
+  font-size: 1.05rem;
+  color: #475569; /* Slate gray subtext */
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+.shared-cta-btn {
+  background: linear-gradient(90deg, #2563EB 0%, #10B981 100%); /* Blue to Green gradient */
+  color: #FFFFFF !important;
+  border: none;
+  padding: 14px 36px;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.3);
+  text-decoration: none;
+  display: inline-block;
+  font-family: inherit;
+}
+
+.shared-cta-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(37, 99, 235, 0.45);
+  filter: brightness(1.05);
+}
+
+.shared-cta-note {
+  font-size: 0.85rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 10px;
+}

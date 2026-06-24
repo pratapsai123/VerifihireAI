@@ -93,13 +93,13 @@ function ScrollReveal({ children, delay = 0 }) {
 // Helper component for word-by-word reveal animation
 const WordByWord = ({ text, boldText, startIndexRef }) => {
   const words = [];
-  
+
   if (boldText) {
     boldText.split(/\s+/).forEach(w => {
       if (w) words.push({ word: w, isBold: true });
     });
   }
-  
+
   if (text) {
     text.split(/\s+/).forEach(w => {
       if (w) words.push({ word: w, isBold: false });
@@ -120,7 +120,7 @@ const WordByWord = ({ text, boldText, startIndexRef }) => {
             style={{
               animationDelay: `${0.6 + wordIndex * 0.025}s`,
               fontWeight: item.isBold ? '700' : 'normal',
-              color: item.isBold ? '#FFFFFF' : 'inherit',
+              color: item.isBold ? '#0F172A' : 'inherit',
               display: 'inline-block',
               marginRight: '4px'
             }}
@@ -269,313 +269,312 @@ export default function FeatureAiAssessments() {
       <MainHeader />
       <div className="faa-container">
 
-      {/* Ambient Background */}
-      <div className="faa-ambient-bg">
-        <div className="faa-glow-1"></div>
-        <div className="faa-glow-2"></div>
-        <div className="faa-glow-3"></div>
-        <div className="faa-grid-pattern"></div>
-      </div>
-
-      {/* ═══════ HERO SECTION ═══════ */}
-      <section className="faa-hero">
-        <div className="faa-hero-left">
-          <div className="faa-hero-badge">
-            <span className="faa-badge-dot-wrap">
-              <span className="faa-badge-dot-ping"></span>
-              <span className="faa-badge-dot"></span>
-            </span>
-            <span>AI-Powered Hiring</span>
-          </div>
-
-          <h1>
-            Two modes.<br />
-            <span className="faa-grad-text">One intelligent pipeline.</span>
-          </h1>
-
-          <p className="faa-hero-desc">
-            Choose Manual mode for step-by-step control, or let Fully Automatic mode run the entire screening — from resume matching to AI interviews — hands-free.
-          </p>
-
-          <div className="faa-hero-cta">
-            <Link to="/signup" className="faa-btn-primary">Start Free Trial</Link>
-            <Link to="/contact" className="faa-btn-secondary">Book a Demo</Link>
-          </div>
+        {/* Ambient Background */}
+        <div className="faa-ambient-bg">
+          <div className="faa-glow-1"></div>
+          <div className="faa-glow-2"></div>
+          <div className="faa-glow-3"></div>
+          <div className="faa-grid-pattern"></div>
         </div>
 
-        {/* Hero Right — Mode Mockup */}
-        <div className="faa-hero-right">
-          <div className="faa-mode-tabs">
-            <button
-              className={`faa-mode-tab ${activeMode === 0 ? 'active' : ''}`}
-              onClick={() => handleModeChange(0)}
-            >
-              🔧 Manual Mode
-            </button>
-            <button
-              className={`faa-mode-tab ${activeMode === 1 ? 'active' : ''}`}
-              onClick={() => handleModeChange(1)}
-            >
-              ⚡ Fully Automatic
-            </button>
-          </div>
-
-          <div className="faa-mockup-body">
-            <div className="faa-dots-header">
-              <div className="dot red"></div>
-              <div className="dot yellow"></div>
-              <div className="dot green"></div>
+        {/* ═══════ HERO SECTION ═══════ */}
+        <section className="faa-hero">
+          <div className="faa-hero-left">
+            <div className="faa-hero-badge">
+              <span className="faa-badge-dot-wrap">
+                <span className="faa-badge-dot-ping"></span>
+                <span className="faa-badge-dot"></span>
+              </span>
+              <span>AI-Powered Hiring</span>
             </div>
 
-            {/* ── MANUAL MODE MOCKUP — 3-STEP WIZARD ── */}
-            {activeMode === 0 && (
-              <div className="mockup-content" key={`manual-${mockupKey}`}>
-                {/* Stepper Navigation */}
-                <div className="mock-stepper-nav">
-                  <button className={`mock-stepper-tab ${manualStep === 1 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(1)}>
-                    <span className="stepper-num">1</span> Screening
-                  </button>
-                  <button className={`mock-stepper-tab ${manualStep === 2 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(2)}>
-                    <span className="stepper-num">2</span> Assessment
-                  </button>
-                  <button className={`mock-stepper-tab ${manualStep === 3 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(3)}>
-                    <span className="stepper-num">3</span> AI Interview
-                  </button>
-                </div>
+            <h1>
+              Two modes.<br />
+              <span className="faa-grad-text">One intelligent pipeline.</span>
+            </h1>
 
-                {/* Stepper Progress Bar */}
-                <div className="mock-stepper-progress">
-                  <div className="mock-stepper-progress-fill" style={{ width: `${(manualStep / 3) * 100}%` }}></div>
-                </div>
+            <p className="fca-hero-desc" style={{ fontSize: '15px', color: '#475569', lineHeight: '1.75', margin: '0', textAlign: 'left', maxWidth: '460px' }}>Choose Manual mode for step-by-step control, or let Fully Automatic mode run the entire screening — from resume matching to AI interviews — hands-free.
+            </p>
 
-                {/* ── STEP 1: Resume Screening ── */}
-                {manualStep === 1 && (
-                  <div className="mock-step-panel" key="step1">
-                    <div className="mock-step" style={{ animationDelay: '0.05s' }}>
-                      <div className="mock-label">Create Role & Upload Resumes</div>
-                      <div className="mock-input">
-                        <span>{typewriterText}</span>
-                        <span className="mock-typing-cursor"></span>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.4s' }}>
-                      <div className="mock-success">
-                        <Icons.Upload style={{ width: '14px', height: '14px' }} />
-                        <span>48 resumes uploaded (PDF/CSV)</span>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.8s' }}>
-                      <div className="mock-label">AI Screening Results</div>
-                      <div className="mock-screening-results">
-                        <div className="mock-screen-chip pass">
-                          <span>Rahul_CV.pdf</span>
-                          <span style={{ marginLeft: 'auto' }}>88%</span>
-                          <span className="chip-badge pass-badge">PASS</span>
-                        </div>
-                        <div className="mock-screen-chip pass">
-                          <span>Priya_Resume.pdf</span>
-                          <span style={{ marginLeft: 'auto' }}>76%</span>
-                          <span className="chip-badge pass-badge">PASS</span>
-                        </div>
-                        <div className="mock-screen-chip fail">
-                          <span>Arjun_CV.pdf</span>
-                          <span style={{ marginLeft: 'auto' }}>42%</span>
-                          <span className="chip-badge fail-badge">FAIL</span>
-                        </div>
-                        <div className="mock-screen-chip pass">
-                          <span>Neha_R.pdf</span>
-                          <span style={{ marginLeft: 'auto' }}>81%</span>
-                          <span className="chip-badge pass-badge">PASS</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mock-csv-btn">
-                      <Icons.Download style={{ width: '13px', height: '13px' }} />
-                      Download Qualified Candidates (CSV)
-                    </div>
-                  </div>
-                )}
-
-                {/* ── STEP 2: AI Assessment ── */}
-                {manualStep === 2 && (
-                  <div className="mock-step-panel" key="step2">
-                    <div className="mock-step" style={{ animationDelay: '0.05s' }}>
-                      <div className="mock-label">Select Role</div>
-                      <div className="mock-role-selector">
-                        <span>Senior Frontend Developer</span>
-                        <span className="role-dropdown-icon">▼</span>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.4s' }}>
-                      <div className="mock-label">Set Link Validity</div>
-                      <div className="mock-validity-row">
-                        <div className="mock-validity-field">
-                          <span className="vf-label">Valid From</span>
-                          <span className="vf-value">Jun 15, 2026 9:00 AM</span>
-                        </div>
-                        <div className="mock-validity-field">
-                          <span className="vf-label">Expires At</span>
-                          <span className="vf-value">Jun 18, 2026 11:59 PM</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.8s' }}>
-                      <div className="mock-feature-tags">
-                        <span className="mock-feature-tag tag-purple">
-                          <Icons.Shield style={{ width: '10px', height: '10px' }} /> Questions Never Repeat
-                        </span>
-                        <span className="mock-feature-tag tag-blue">
-                          <Icons.Shield style={{ width: '10px', height: '10px' }} /> Tab-Proctored
-                        </span>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '1.2s' }}>
-                      <div className="mock-invite-btn">
-                        <Icons.Send style={{ width: '12px', height: '12px' }} />
-                        Invite & Send Assessment Links
-                      </div>
-                    </div>
-                    <div className="mock-csv-btn">
-                      <Icons.Download style={{ width: '13px', height: '13px' }} />
-                      Download Assessment Results (CSV)
-                    </div>
-                  </div>
-                )}
-
-                {/* ── STEP 3: AI Interview ── */}
-                {manualStep === 3 && (
-                  <div className="mock-step-panel" key="step3">
-                    <div className="mock-step" style={{ animationDelay: '0.05s' }}>
-                      <div className="mock-label">Select Role & Interview Schedule</div>
-                      <div className="mock-role-selector">
-                        <span>Senior Frontend Developer</span>
-                        <span className="role-dropdown-icon">▼</span>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.35s' }}>
-                      <div className="mock-validity-row">
-                        <div className="mock-validity-field">
-                          <span className="vf-label">Interview Opens</span>
-                          <span className="vf-value">Jun 22, 2026 10:00 AM</span>
-                        </div>
-                        <div className="mock-validity-field">
-                          <span className="vf-label">Closes At</span>
-                          <span className="vf-value">Jun 28, 2026 6:00 PM</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mock-step" style={{ animationDelay: '0.7s' }}>
-                      <div className="mock-interview-preview">
-                        <div className="mock-candidate-action">
-                          <span className="action-dot"></span>
-                          Candidate opens link → Uploads Resume → Interview starts
-                        </div>
-                        <div className="mock-chat-bubble">
-                          <div className="mock-chat-sender">
-                            <span className="sender-dot"></span>
-                            Indu — AI Interviewer
-                          </div>
-                          <div className="mock-chat-msg">
-                            "I see you have experience with React on your resume. Based on current industry standards, how do you handle state optimization at scale?"
-                          </div>
-                          <div className="mock-question-sources">
-                            <span className="mock-q-source src-resume">Resume</span>
-                            <span className="mock-q-source src-jd">JD</span>
-                            <span className="mock-q-source src-market">Industry</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mock-csv-btn">
-                      <Icons.Download style={{ width: '13px', height: '13px' }} />
-                      Download AI Interview Results (CSV)
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* ── FULLY AUTOMATIC MODE MOCKUP ── */}
-            {activeMode === 1 && (
-              <div className="mockup-content" key={`auto-${mockupKey}`}>
-                {/* Step 1: Create JD */}
-                <div className="mock-step">
-                  <div className="mock-label">Step 1 — Create JD with Role Name</div>
-                  <div className="mock-input">
-                    <span>{typewriterText}</span>
-                    <span className="mock-typing-cursor"></span>
-                  </div>
-                </div>
-
-                {/* Step 2: Upload Resumes */}
-                <div className="mock-step">
-                  <div className="mock-label">Step 2 — Upload Bulk Resumes</div>
-                  <div className="mock-success">
-                    <Icons.Upload style={{ width: '14px', height: '14px' }} />
-                    <span>120 resumes uploaded</span>
-                  </div>
-                </div>
-
-                {/* Step 3: Set Date Ranges */}
-                <div className="mock-step">
-                  <div className="mock-label">Step 3 — Set Date Ranges</div>
-                  <div className="mock-date-row">
-                    <div className="mock-date-pick">
-                      <span className="date-label">AI Assessment Window</span>
-                      <span className="date-value">Jun 15 – Jun 20, 2026</span>
-                    </div>
-                    <div className="mock-date-pick">
-                      <span className="date-label">AI Interview Window</span>
-                      <span className="date-value">Jun 22 – Jun 28, 2026</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Step 4: Generate */}
-                <div className="mock-step">
-                  <div className="mock-label">Step 4 — Activate Pipeline</div>
-                  <div className="mock-generate-btn">
-                    <Icons.Zap style={{ width: '15px', height: '15px' }} />
-                    Generate — One Click to Automate
-                  </div>
-                </div>
-
-                {/* Step 5: Pipeline Active */}
-                <div className="mock-step">
-                  <div className="mock-label">Step 5 — AI Pipeline Running</div>
-                  <div className="mock-pipeline-active">
-                    <div className="pipeline-title">
-                      <Icons.CheckCircle style={{ width: '14px', height: '14px' }} />
-                      Pipeline Active — AI is handling everything
-                    </div>
-                    <div className="pipeline-steps">
-                      <span className="pipeline-node active-node">Resume Match</span>
-                      <span className="pipeline-arrow">→</span>
-                      <span className="pipeline-node active-node">AI Assessment</span>
-                      <span className="pipeline-arrow">→</span>
-                      <span className="pipeline-node active-node">AI Interview</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Resume Matching Preview */}
-                <div className="mock-step">
-                  <div className="mock-label">Live Status</div>
-                  <div className="mock-resume-chips">
-                    <span className="resume-chip"><span className="chip-status pass"></span> Rahul_CV.pdf — 88%</span>
-                    <span className="resume-chip"><span className="chip-status pass"></span> Priya_Resume.pdf — 76%</span>
-                    <span className="resume-chip"><span className="chip-status fail"></span> Arjun_CV.pdf — 42%</span>
-                    <span className="resume-chip"><span className="chip-status pass"></span> Neha_R.pdf — 81%</span>
-                  </div>
-                </div>
-              </div>
-            )}
+            <div className="faa-hero-cta">
+              <Link to="/signup" className="faa-btn-primary">Start Free Trial</Link>
+              <Link to="/contact" className="faa-btn-secondary">Book a Demo</Link>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* ═══════ MODE COMPARISON SECTION ═══════ */}
-      <section className="faa-section">
+          {/* Hero Right — Mode Mockup */}
+          <div className="faa-hero-right">
+            <div className="faa-mode-tabs">
+              <button
+                className={`faa-mode-tab ${activeMode === 0 ? 'active' : ''}`}
+                onClick={() => handleModeChange(0)}
+              >
+                🔧 Manual Mode
+              </button>
+              <button
+                className={`faa-mode-tab ${activeMode === 1 ? 'active' : ''}`}
+                onClick={() => handleModeChange(1)}
+              >
+                ⚡ Fully Automatic
+              </button>
+            </div>
+
+            <div className="faa-mockup-body">
+              <div className="faa-dots-header">
+                <div className="dot red"></div>
+                <div className="dot yellow"></div>
+                <div className="dot green"></div>
+              </div>
+
+              {/* ── MANUAL MODE MOCKUP — 3-STEP WIZARD ── */}
+              {activeMode === 0 && (
+                <div className="mockup-content" key={`manual-${mockupKey}`}>
+                  {/* Stepper Navigation */}
+                  <div className="mock-stepper-nav">
+                    <button className={`mock-stepper-tab ${manualStep === 1 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(1)}>
+                      <span className="stepper-num">1</span> Screening
+                    </button>
+                    <button className={`mock-stepper-tab ${manualStep === 2 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(2)}>
+                      <span className="stepper-num">2</span> Assessment
+                    </button>
+                    <button className={`mock-stepper-tab ${manualStep === 3 ? 'active-step' : ''}`} onClick={() => handleManualStepChange(3)}>
+                      <span className="stepper-num">3</span> AI Interview
+                    </button>
+                  </div>
+
+                  {/* Stepper Progress Bar */}
+                  <div className="mock-stepper-progress">
+                    <div className="mock-stepper-progress-fill" style={{ width: `${(manualStep / 3) * 100}%` }}></div>
+                  </div>
+
+                  {/* ── STEP 1: Resume Screening ── */}
+                  {manualStep === 1 && (
+                    <div className="mock-step-panel" key="step1">
+                      <div className="mock-step" style={{ animationDelay: '0.05s' }}>
+                        <div className="mock-label">Create Role & Upload Resumes</div>
+                        <div className="mock-input">
+                          <span>{typewriterText}</span>
+                          <span className="mock-typing-cursor"></span>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.4s' }}>
+                        <div className="mock-success">
+                          <Icons.Upload style={{ width: '14px', height: '14px' }} />
+                          <span>48 resumes uploaded (PDF/CSV)</span>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.8s' }}>
+                        <div className="mock-label">AI Screening Results</div>
+                        <div className="mock-screening-results">
+                          <div className="mock-screen-chip pass">
+                            <span>Rahul_CV.pdf</span>
+                            <span style={{ marginLeft: 'auto' }}>88%</span>
+                            <span className="chip-badge pass-badge">PASS</span>
+                          </div>
+                          <div className="mock-screen-chip pass">
+                            <span>Priya_Resume.pdf</span>
+                            <span style={{ marginLeft: 'auto' }}>76%</span>
+                            <span className="chip-badge pass-badge">PASS</span>
+                          </div>
+                          <div className="mock-screen-chip fail">
+                            <span>Arjun_CV.pdf</span>
+                            <span style={{ marginLeft: 'auto' }}>42%</span>
+                            <span className="chip-badge fail-badge">FAIL</span>
+                          </div>
+                          <div className="mock-screen-chip pass">
+                            <span>Neha_R.pdf</span>
+                            <span style={{ marginLeft: 'auto' }}>81%</span>
+                            <span className="chip-badge pass-badge">PASS</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mock-csv-btn">
+                        <Icons.Download style={{ width: '13px', height: '13px' }} />
+                        Download Qualified Candidates (CSV)
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── STEP 2: AI Assessment ── */}
+                  {manualStep === 2 && (
+                    <div className="mock-step-panel" key="step2">
+                      <div className="mock-step" style={{ animationDelay: '0.05s' }}>
+                        <div className="mock-label">Select Role</div>
+                        <div className="mock-role-selector">
+                          <span>Senior Frontend Developer</span>
+                          <span className="role-dropdown-icon">▼</span>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.4s' }}>
+                        <div className="mock-label">Set Link Validity</div>
+                        <div className="mock-validity-row">
+                          <div className="mock-validity-field">
+                            <span className="vf-label">Valid From</span>
+                            <span className="vf-value">Jun 15, 2026 9:00 AM</span>
+                          </div>
+                          <div className="mock-validity-field">
+                            <span className="vf-label">Expires At</span>
+                            <span className="vf-value">Jun 18, 2026 11:59 PM</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.8s' }}>
+                        <div className="mock-feature-tags">
+                          <span className="mock-feature-tag tag-purple">
+                            <Icons.Shield style={{ width: '10px', height: '10px' }} /> Questions Never Repeat
+                          </span>
+                          <span className="mock-feature-tag tag-blue">
+                            <Icons.Shield style={{ width: '10px', height: '10px' }} /> Tab-Proctored
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '1.2s' }}>
+                        <div className="mock-invite-btn">
+                          <Icons.Send style={{ width: '12px', height: '12px' }} />
+                          Invite & Send Assessment Links
+                        </div>
+                      </div>
+                      <div className="mock-csv-btn">
+                        <Icons.Download style={{ width: '13px', height: '13px' }} />
+                        Download Assessment Results (CSV)
+                      </div>
+                    </div>
+                  )}
+
+                  {/* ── STEP 3: AI Interview ── */}
+                  {manualStep === 3 && (
+                    <div className="mock-step-panel" key="step3">
+                      <div className="mock-step" style={{ animationDelay: '0.05s' }}>
+                        <div className="mock-label">Select Role & Interview Schedule</div>
+                        <div className="mock-role-selector">
+                          <span>Senior Frontend Developer</span>
+                          <span className="role-dropdown-icon">▼</span>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.35s' }}>
+                        <div className="mock-validity-row">
+                          <div className="mock-validity-field">
+                            <span className="vf-label">Interview Opens</span>
+                            <span className="vf-value">Jun 22, 2026 10:00 AM</span>
+                          </div>
+                          <div className="mock-validity-field">
+                            <span className="vf-label">Closes At</span>
+                            <span className="vf-value">Jun 28, 2026 6:00 PM</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mock-step" style={{ animationDelay: '0.7s' }}>
+                        <div className="mock-interview-preview">
+                          <div className="mock-candidate-action">
+                            <span className="action-dot"></span>
+                            Candidate opens link → Uploads Resume → Interview starts
+                          </div>
+                          <div className="mock-chat-bubble">
+                            <div className="mock-chat-sender">
+                              <span className="sender-dot"></span>
+                              Indu — AI Interviewer
+                            </div>
+                            <div className="mock-chat-msg">
+                              "I see you have experience with React on your resume. Based on current industry standards, how do you handle state optimization at scale?"
+                            </div>
+                            <div className="mock-question-sources">
+                              <span className="mock-q-source src-resume">Resume</span>
+                              <span className="mock-q-source src-jd">JD</span>
+                              <span className="mock-q-source src-market">Industry</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mock-csv-btn">
+                        <Icons.Download style={{ width: '13px', height: '13px' }} />
+                        Download AI Interview Results (CSV)
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* ── FULLY AUTOMATIC MODE MOCKUP ── */}
+              {activeMode === 1 && (
+                <div className="mockup-content" key={`auto-${mockupKey}`}>
+                  {/* Step 1: Create JD */}
+                  <div className="mock-step">
+                    <div className="mock-label">Step 1 — Create JD with Role Name</div>
+                    <div className="mock-input">
+                      <span>{typewriterText}</span>
+                      <span className="mock-typing-cursor"></span>
+                    </div>
+                  </div>
+
+                  {/* Step 2: Upload Resumes */}
+                  <div className="mock-step">
+                    <div className="mock-label">Step 2 — Upload Bulk Resumes</div>
+                    <div className="mock-success">
+                      <Icons.Upload style={{ width: '14px', height: '14px' }} />
+                      <span>120 resumes uploaded</span>
+                    </div>
+                  </div>
+
+                  {/* Step 3: Set Date Ranges */}
+                  <div className="mock-step">
+                    <div className="mock-label">Step 3 — Set Date Ranges</div>
+                    <div className="mock-date-row">
+                      <div className="mock-date-pick">
+                        <span className="date-label">AI Assessment Window</span>
+                        <span className="date-value">Jun 15 – Jun 20, 2026</span>
+                      </div>
+                      <div className="mock-date-pick">
+                        <span className="date-label">AI Interview Window</span>
+                        <span className="date-value">Jun 22 – Jun 28, 2026</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Step 4: Generate */}
+                  <div className="mock-step">
+                    <div className="mock-label">Step 4 — Activate Pipeline</div>
+                    <div className="mock-generate-btn">
+                      <Icons.Zap style={{ width: '15px', height: '15px' }} />
+                      Generate — One Click to Automate
+                    </div>
+                  </div>
+
+                  {/* Step 5: Pipeline Active */}
+                  <div className="mock-step">
+                    <div className="mock-label">Step 5 — AI Pipeline Running</div>
+                    <div className="mock-pipeline-active">
+                      <div className="pipeline-title">
+                        <Icons.CheckCircle style={{ width: '14px', height: '14px' }} />
+                        Pipeline Active — AI is handling everything
+                      </div>
+                      <div className="pipeline-steps">
+                        <span className="pipeline-node active-node">Resume Match</span>
+                        <span className="pipeline-arrow">→</span>
+                        <span className="pipeline-node active-node">AI Assessment</span>
+                        <span className="pipeline-arrow">→</span>
+                        <span className="pipeline-node active-node">AI Interview</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Resume Matching Preview */}
+                  <div className="mock-step">
+                    <div className="mock-label">Live Status</div>
+                    <div className="mock-resume-chips">
+                      <span className="resume-chip"><span className="chip-status pass"></span> Rahul_CV.pdf — 88%</span>
+                      <span className="resume-chip"><span className="chip-status pass"></span> Priya_Resume.pdf — 76%</span>
+                      <span className="resume-chip"><span className="chip-status fail"></span> Arjun_CV.pdf — 42%</span>
+                      <span className="resume-chip"><span className="chip-status pass"></span> Neha_R.pdf — 81%</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════ MODE COMPARISON SECTION ═══════ */}
+        <section className="faa-section">
           <div className="faa-section-header">
             <span className="faa-section-tag faa-tag-blue">Choose Your Workflow</span>
             <h2>Manual Control or Full Automation</h2>
@@ -586,513 +585,517 @@ export default function FeatureAiAssessments() {
 
           <ScrollReveal>
             <div className="faa-comparison-grid">
-            {/* Manual Mode Card */}
-            <div className="faa-compare-card-wrapper manual-wrapper">
-              <div className="faa-compare-card manual-card" onClick={() => handleModeChange(0)}>
-                <div className="compare-card-header">
-                  <div className="compare-icon manual-icon">🔧</div>
-                  <div>
-                    <h3>
-                      <WordByWord text="Manual Mode" startIndexRef={manualIndex} />
-                    </h3>
-                    <div className="compare-subtitle">
-                      <WordByWord text="Step-by-step recruiter control" startIndexRef={manualIndex} />
+              {/* Manual Mode Card */}
+              <div className="faa-compare-card-wrapper manual-wrapper">
+                <div className="faa-compare-card manual-card" onClick={() => handleModeChange(0)}>
+                  <div className="compare-card-header">
+                    <div className="compare-icon manual-icon">🔧</div>
+                    <div>
+                      <h3>
+                        <WordByWord text="Manual Mode" startIndexRef={manualIndex} />
+                      </h3>
+                      <div className="compare-subtitle">
+                        <WordByWord text="Step-by-step recruiter control" startIndexRef={manualIndex} />
+                      </div>
                     </div>
                   </div>
+                  <ul className="compare-steps-list">
+                    <li>
+                      <span className="step-num blue">1</span>
+                      <span>
+                        <WordByWord boldText="Resume Screening" text=" — Create role, upload resumes, AI matches against JD. Pass/fail results downloadable as CSV." startIndexRef={manualIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num blue">2</span>
+                      <span>
+                        <WordByWord boldText="AI Assessment" text=" — Select role, invite candidates with link validity date/time. Adaptive questions that never repeat. Results in CSV." startIndexRef={manualIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num blue">3</span>
+                      <span>
+                        <WordByWord boldText="AI Interview" text=" — Candidate uploads resume via link. Indu asks JD, resume & market-based questions. Interview results in CSV." startIndexRef={manualIndex} />
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="compare-steps-list">
-                  <li>
-                    <span className="step-num blue">1</span>
-                    <span>
-                      <WordByWord boldText="Resume Screening" text=" — Create role, upload resumes, AI matches against JD. Pass/fail results downloadable as CSV." startIndexRef={manualIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num blue">2</span>
-                    <span>
-                      <WordByWord boldText="AI Assessment" text=" — Select role, invite candidates with link validity date/time. Adaptive questions that never repeat. Results in CSV." startIndexRef={manualIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num blue">3</span>
-                    <span>
-                      <WordByWord boldText="AI Interview" text=" — Candidate uploads resume via link. Indu asks JD, resume & market-based questions. Interview results in CSV." startIndexRef={manualIndex} />
-                    </span>
-                  </li>
-                </ul>
               </div>
-            </div>
 
-            {/* Automatic Mode Card */}
-            <div className="faa-compare-card-wrapper auto-wrapper">
-              <div className="faa-compare-card auto-card" onClick={() => handleModeChange(1)}>
-                <div className="compare-card-header">
-                  <div className="compare-icon auto-icon">⚡</div>
-                  <div>
-                    <h3>
-                      <WordByWord text="Fully Automatic Mode" startIndexRef={autoIndex} />
-                    </h3>
-                    <div className="compare-subtitle">
-                      <WordByWord text="One click, end-to-end AI pipeline" startIndexRef={autoIndex} />
+              {/* Automatic Mode Card */}
+              <div className="faa-compare-card-wrapper auto-wrapper">
+                <div className="faa-compare-card auto-card" onClick={() => handleModeChange(1)}>
+                  <div className="compare-card-header">
+                    <div className="compare-icon auto-icon">⚡</div>
+                    <div>
+                      <h3>
+                        <WordByWord text="Fully Automatic Mode" startIndexRef={autoIndex} />
+                      </h3>
+                      <div className="compare-subtitle">
+                        <WordByWord text="One click, end-to-end AI pipeline" startIndexRef={autoIndex} />
+                      </div>
                     </div>
                   </div>
+                  <ul className="compare-steps-list">
+                    <li>
+                      <span className="step-num green">1</span>
+                      <span>
+                        <WordByWord text="Create JD with role name and paste job description" startIndexRef={autoIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num green">2</span>
+                      <span>
+                        <WordByWord text="Upload all candidate resumes at once" startIndexRef={autoIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num green">3</span>
+                      <span>
+                        <WordByWord text="Set date ranges for AI Assessment and AI Interview windows" startIndexRef={autoIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num green">4</span>
+                      <span>
+                        <WordByWord text="Click Generate — validates the link and activates the full AI pipeline" startIndexRef={autoIndex} />
+                      </span>
+                    </li>
+                    <li>
+                      <span className="step-num green">5</span>
+                      <span>
+                        <WordByWord text="AI auto-matches resumes → auto-sends assessments → auto-schedules interviews" startIndexRef={autoIndex} />
+                      </span>
+                    </li>
+                  </ul>
                 </div>
-                <ul className="compare-steps-list">
-                  <li>
-                    <span className="step-num green">1</span>
-                    <span>
-                      <WordByWord text="Create JD with role name and paste job description" startIndexRef={autoIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num green">2</span>
-                    <span>
-                      <WordByWord text="Upload all candidate resumes at once" startIndexRef={autoIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num green">3</span>
-                    <span>
-                      <WordByWord text="Set date ranges for AI Assessment and AI Interview windows" startIndexRef={autoIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num green">4</span>
-                    <span>
-                      <WordByWord text="Click Generate — validates the link and activates the full AI pipeline" startIndexRef={autoIndex} />
-                    </span>
-                  </li>
-                  <li>
-                    <span className="step-num green">5</span>
-                    <span>
-                      <WordByWord text="AI auto-matches resumes → auto-sends assessments → auto-schedules interviews" startIndexRef={autoIndex} />
-                    </span>
-                  </li>
-                </ul>
               </div>
             </div>
+          </ScrollReveal>
+        </section>
+
+        {/* ═══════ MANUAL MODE MATRIX ═══════ */}
+        <section className="faa-section faa-section-divider">
+          <div className="faa-section-header">
+            <span className="faa-section-tag faa-tag-purple">Manual Mode</span>
+            <h2>Recruiter Command Matrix</h2>
+            <p>
+              Full control at every stage. Manage resume screening, assessment distribution, and interview scheduling manually.
+            </p>
           </div>
-        </ScrollReveal>
-      </section>
 
-      {/* ═══════ MANUAL MODE MATRIX ═══════ */}
-      <section className="faa-section faa-section-divider">
-        <div className="faa-section-header">
-          <span className="faa-section-tag faa-tag-purple">Manual Mode</span>
-          <h2>Recruiter Command Matrix</h2>
-          <p>
-            Full control at every stage. Manage resume screening, assessment distribution, and interview scheduling manually.
-          </p>
-        </div>
-
-        <ScrollReveal lazy={true}>
-          <div className="faa-matrix-grid">
-            {/* Card 1: Resume Screening */}
-            <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.1s' }}>
-              <div className="faa-matrix-card">
-                <div className="matrix-card-header">
-                  <span className="matrix-step">Phase 01</span>
-                  <div className="matrix-icon-wrap purple-glow">
-                    <Icons.Brain style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
+          <ScrollReveal lazy={true}>
+            <div className="faa-matrix-grid">
+              {/* Card 1: Resume Screening */}
+              <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.1s' }}>
+                <div className="faa-matrix-card">
+                  <div className="matrix-card-header">
+                    <span className="matrix-step">Phase 01</span>
+                    <div className="matrix-icon-wrap purple-glow">
+                      <Icons.FileText style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
+                    </div>
+                  </div>
+                  <h3>Resume Screening</h3>
+                  <p>Create a job role, upload candidate resumes in bulk, and let AI screen them against the JD. Candidates who pass the threshold are exported as a CSV file.</p>
+                  <div className="matrix-widget excel-widget">
+                    <div className="excel-row-preview">
+                      <span className="excel-preview-name">31 of 48 Qualified</span>
+                      <span className="excel-preview-badge">CSV Ready</span>
+                    </div>
+                    <button className="matrix-excel-btn">
+                      <Icons.Download style={{ width: '13px', height: '13px' }} />
+                      <span>Download CSV</span>
+                    </button>
                   </div>
                 </div>
-                <h3>Resume Screening</h3>
-                <p>Create a job role, upload candidate resumes in bulk, and let AI screen them against the JD. Candidates who pass the threshold are exported as a CSV file.</p>
-                <div className="matrix-widget excel-widget">
-                  <div className="excel-row-preview">
-                    <span className="excel-preview-name">31 of 48 Qualified</span>
-                    <span className="excel-preview-badge">CSV Ready</span>
+              </div>
+
+              {/* Card 2: AI Assessment */}
+              <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.3s' }}>
+                <div className="faa-matrix-card">
+                  <div className="matrix-card-header">
+                    <span className="matrix-step">Phase 02</span>
+                    <div className="matrix-icon-wrap purple-glow">
+                      <Icons.Code style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
+                    </div>
                   </div>
-                  <button className="matrix-excel-btn">
-                    <Icons.Download style={{ width: '13px', height: '13px' }} />
-                    <span>Download CSV</span>
-                  </button>
+                  <h3>AI Assessment</h3>
+                  <p>Select role, invite candidates by setting date & time for link validity. Adaptive question pool ensures questions never repeat. Results exported as CSV.</p>
+                  <div className="matrix-widget send-widget">
+                    <span className="send-status">No-Repeat Questions</span>
+                    <button className="matrix-send-btn">
+                      <Icons.Send style={{ width: '12px', height: '12px' }} />
+                      <span>Send Invites</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: AI Interview */}
+              <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.5s' }}>
+                <div className="faa-matrix-card">
+                  <div className="matrix-card-header">
+                    <span className="matrix-step">Phase 03</span>
+                    <div className="matrix-icon-wrap purple-glow">
+                      <Icons.Mic style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
+                    </div>
+                  </div>
+                  <h3>AI Voice Interview</h3>
+                  <p>Select role, set interview window. Candidate opens link, uploads resume, and Indu interviews them using JD, resume, and current industry market questions.</p>
+                  <div className="matrix-widget interview-widget">
+                    <span className="interview-status">JD + Resume </span>
+                    <button className="matrix-interview-btn">
+                      <Icons.Mic style={{ width: '12px', height: '12px' }} />
+                      <span>Schedule Interview</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
+          </ScrollReveal>
+        </section>
 
-            {/* Card 2: AI Assessment */}
-            <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.3s' }}>
-              <div className="faa-matrix-card">
-                <div className="matrix-card-header">
-                  <span className="matrix-step">Phase 02</span>
-                  <div className="matrix-icon-wrap purple-glow">
-                    <Icons.Code style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
-                  </div>
-                </div>
-                <h3>AI Assessment</h3>
-                <p>Select role, invite candidates by setting date & time for link validity. Adaptive question pool ensures questions never repeat. Results exported as CSV.</p>
-                <div className="matrix-widget send-widget">
-                  <span className="send-status">No-Repeat Questions</span>
-                  <button className="matrix-send-btn">
-                    <Icons.Send style={{ width: '12px', height: '12px' }} />
-                    <span>Send Invites</span>
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Card 3: AI Interview */}
-            <div className="faa-matrix-card-wrapper" style={{ animationDelay: '0.5s' }}>
-              <div className="faa-matrix-card">
-                <div className="matrix-card-header">
-                  <span className="matrix-step">Phase 03</span>
-                  <div className="matrix-icon-wrap purple-glow">
-                    <Icons.Mic style={{ width: '20px', height: '20px', color: '#A78BFA' }} />
-                  </div>
-                </div>
-                <h3>AI Voice Interview</h3>
-                <p>Select role, set interview window. Candidate opens link, uploads resume, and Indu interviews them using JD, resume, and current industry market questions.</p>
-                <div className="matrix-widget interview-widget">
-                  <span className="interview-status">JD + Resume + Market</span>
-                  <button className="matrix-interview-btn">
-                    <Icons.Mic style={{ width: '12px', height: '12px' }} />
-                    <span>Schedule Interview</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+        {/* ═══════ AUTOMATIC MODE FUNNEL ═══════ */}
+        <section className="faa-section faa-section-divider">
+          <div className="faa-section-header">
+            <span className="faa-section-tag faa-tag-emerald">Fully Automatic Mode</span>
+            <h2>Autonomous AI Pipeline Funnel</h2>
+            <p>
+              Configure once, click generate, and let AI execute the complete hiring sequence end-to-end without manual intervention.
+            </p>
           </div>
-        </ScrollReveal>
-      </section>
 
-      {/* ═══════ AUTOMATIC MODE FUNNEL ═══════ */}
-      <section className="faa-section faa-section-divider">
-        <div className="faa-section-header">
-          <span className="faa-section-tag faa-tag-emerald">Fully Automatic Mode</span>
-          <h2>Autonomous AI Pipeline Funnel</h2>
-          <p>
-            Configure once, click generate, and let AI execute the complete hiring sequence end-to-end without manual intervention.
-          </p>
-        </div>
-
-        <ScrollReveal>
-          <div className="faa-funnel-layout">
-            {/* Left: Pipeline Funnel */}
-            <div className="faa-funnel-pipeline">
-              {/* SVG Connecting Flow Lines */}
-              <div className="funnel-svg-container">
-                <svg className="funnel-connector-svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M 50 0 L 50 800" className="funnel-svg-line-bg" />
-                  <path d="M 50 0 L 50 800" className="funnel-svg-line-pulse" />
-                </svg>
-              </div>
-
-              {/* Funnel Step 1 */}
-              <div className="funnel-stage" style={{ animationDelay: '0.2s' }}>
-                <div className="funnel-node-wrapper">
-                  <div className="funnel-node-glow"></div>
-                  <div className="funnel-node text-emerald">01</div>
+          <ScrollReveal>
+            <div className="faa-funnel-layout">
+              {/* Left: Pipeline Funnel */}
+              <div className="faa-funnel-pipeline">
+                {/* SVG Connecting Flow Lines */}
+                <div className="funnel-svg-container">
+                  <svg className="funnel-connector-svg" width="100%" height="100%" viewBox="0 0 100 800" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 50 0 L 50 800" className="funnel-svg-line-bg" />
+                    <path d="M 50 0 L 50 800" className="funnel-svg-line-pulse" />
+                  </svg>
                 </div>
-                <div className="funnel-stage-details">
-                  <h3>Role & JD Configuration</h3>
-                  <p>Recruiter defines job details and pastes the job description. The AI extracts core criteria automatically.</p>
-                  <div className="funnel-tag-row">
-                    <span className="f-tag f-tag-emerald">AI Configured</span>
+
+                {/* Funnel Step 1 */}
+                <div className="funnel-stage" style={{ animationDelay: '0.2s' }}>
+                  <div className="funnel-node-wrapper">
+                    <div className="funnel-node-glow"></div>
+                    <div className="funnel-node text-emerald">01</div>
                   </div>
-                </div>
-              </div>
-
-              {/* Funnel Step 2 */}
-              <div className="funnel-stage" style={{ animationDelay: '0.5s' }}>
-                <div className="funnel-node-wrapper">
-                  <div className="funnel-node-glow"></div>
-                  <div className="funnel-node text-emerald">02</div>
-                </div>
-                <div className="funnel-stage-details">
-                  <h3>Bulk Resume Ingest</h3>
-                  <p>Upload resumes in bulk. AI matches each CV against the JD and filters matching candidates instantly.</p>
-                  <div className="funnel-tag-row">
-                    <span className="f-tag f-tag-emerald">Bulk Processing</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Funnel Step 3 */}
-              <div className="funnel-stage" style={{ animationDelay: '0.8s' }}>
-                <div className="funnel-node-wrapper">
-                  <div className="funnel-node-glow"></div>
-                  <div className="funnel-node text-emerald">03</div>
-                </div>
-                <div className="funnel-stage-details">
-                  <h3>Set Link Validity & Dates</h3>
-                  <p>Pick date windows for the AI Assessment and AI Interview. Date ranges serve to validate the link.</p>
-                  <div className="funnel-stage-date-picker">
-                    <div className="funnel-date-item">
-                      <span className="date-hdr">AI Assessment Window</span>
-                      <span className="date-val">Jun 15 – Jun 20</span>
-                    </div>
-                    <div className="funnel-date-item">
-                      <span className="date-hdr">AI Interview Window</span>
-                      <span className="date-val">Jun 22 – Jun 28</span>
+                  <div className="funnel-stage-details">
+                    <h3>Role & JD Configuration</h3>
+                    <p>Recruiter defines job details and pastes the job description. The AI extracts core criteria automatically.</p>
+                    <div className="funnel-tag-row">
+                      <span className="f-tag f-tag-emerald">AI Configured</span>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Funnel Step 4 */}
-              <div className="funnel-stage" style={{ animationDelay: '1.1s' }}>
-                <div className="funnel-node-wrapper">
-                  <div className="funnel-node-glow"></div>
-                  <div className="funnel-node text-emerald">04</div>
-                </div>
-                <div className="funnel-stage-details">
-                  <h3>Generate AI Pipeline</h3>
-                  <p>One click validates configurations and activates the end-to-end hands-free recruiter pipeline.</p>
-                  <div className="funnel-tag-row">
-                    <span className="f-tag f-tag-cyan">Ready to Generate</span>
+                {/* Funnel Step 2 */}
+                <div className="funnel-stage" style={{ animationDelay: '0.5s' }}>
+                  <div className="funnel-node-wrapper">
+                    <div className="funnel-node-glow"></div>
+                    <div className="funnel-node text-emerald">02</div>
                   </div>
-                </div>
-              </div>
-
-              {/* Funnel Step 5 */}
-              <div className="funnel-stage" style={{ animationDelay: '1.4s' }}>
-                <div className="funnel-node-wrapper">
-                  <div className="funnel-node-glow"></div>
-                  <div className="funnel-node text-emerald">05</div>
-                </div>
-                <div className="funnel-stage-details">
-                  <h3>AI Runs Entire Loop</h3>
-                  <p>AI automatically triggers tests for qualifiers, grades submissions, and auto-schedules voice interviews.</p>
-                  <div className="funnel-tag-row">
-                    <span className="f-tag f-tag-pulse">Autonomous Loop Active</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right: Engine Dashboard Console */}
-            <div className="faa-funnel-console-wrapper" style={{ animationDelay: '1.7s' }}>
-              <div className="faa-funnel-console">
-                <div className="console-bar">
-                  <div className="console-status-dot-wrap">
-                    <span className="console-status-dot-pulse"></span>
-                    <span className="console-status-dot"></span>
-                  </div>
-                  <span className="console-title">PIPELINE CORE CONSOLE</span>
-                  <span className="console-pill">ACTIVE</span>
-                </div>
-                
-                <div className="console-display">
-                  <div className="console-param-row">
-                    <span className="param-label">Role Target:</span>
-                    <span className="param-val">AI Engineer (ML/NLP)</span>
-                  </div>
-                  <div className="console-param-row">
-                    <span className="param-label">Date Validation:</span>
-                    <span className="param-val text-cyan">VALID (15 - 28 JUN)</span>
-                  </div>
-                  <div className="console-param-row">
-                    <span className="param-label">Resume Stream:</span>
-                    <span className="param-val text-emerald">CONNECTED (120 Files)</span>
-                  </div>
-
-                  <div className="console-screen-divider"></div>
-
-                  <div className="console-logs-screen">
-                    <div className="console-logs-header">// LIVE AUTONOMOUS SYSTEM STREAMS</div>
-                    <div className="console-logs-list">
-                      <div className="console-log green">[09:00:01] Ingested 120 resumes. Ready for evaluation.</div>
-                      <div className="console-log green">[09:00:03] Matching CVs against JD...</div>
-                      <div className="console-log">[09:00:08] Rahul_CV.pdf (88% Match) - QUALIFIED</div>
-                      <div className="console-log">[09:00:11] Priya_Resume.pdf (76% Match) - QUALIFIED</div>
-                      <div className="console-log red">[09:00:14] Arjun_CV.pdf (42% Match) - REJECTED (Under threshold)</div>
-                      <div className="console-log green">[09:00:18] AI Matching complete. 84 candidates pass.</div>
-                      <div className="console-log cyan">[09:00:20] AI Assessment links dispatched automatically.</div>
-                      <div className="console-log">[09:00:25] Awaiting candidates test submissions...</div>
-                      <div className="console-log purple">[09:00:40] Auto-scheduled voice interview for Priya_Resume (92% Score)</div>
-                      <div className="console-log purple">[09:00:52] Auto-scheduled voice interview for Rahul_CV (89% Score)</div>
+                  <div className="funnel-stage-details">
+                    <h3>Bulk Resume Ingest</h3>
+                    <p>Upload resumes in bulk. AI matches each CV against the JD and filters matching candidates instantly.</p>
+                    <div className="funnel-tag-row">
+                      <span className="f-tag f-tag-emerald">Bulk Processing</span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="console-bottom-action">
-                    <div className="console-sync-btn">
-                      <Icons.Zap style={{ width: '13px', height: '13px', color: '#10B981' }} />
-                      <span>Synchronized Pipeline</span>
+                {/* Funnel Step 3 */}
+                <div className="funnel-stage" style={{ animationDelay: '0.8s' }}>
+                  <div className="funnel-node-wrapper">
+                    <div className="funnel-node-glow"></div>
+                    <div className="funnel-node text-emerald">03</div>
+                  </div>
+                  <div className="funnel-stage-details">
+                    <h3>Set Link Validity & Dates</h3>
+                    <p>Pick date windows for the AI Assessment and AI Interview. Date ranges serve to validate the link.</p>
+                    <div className="funnel-stage-date-picker">
+                      <div className="funnel-date-item">
+                        <span className="date-hdr">AI Assessment Window</span>
+                        <span className="date-val">Jun 15 – Jun 20</span>
+                      </div>
+                      <div className="funnel-date-item">
+                        <span className="date-hdr">AI Interview Window</span>
+                        <span className="date-val">Jun 22 – Jun 28</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Funnel Step 4 */}
+                <div className="funnel-stage" style={{ animationDelay: '1.1s' }}>
+                  <div className="funnel-node-wrapper">
+                    <div className="funnel-node-glow"></div>
+                    <div className="funnel-node text-emerald">04</div>
+                  </div>
+                  <div className="funnel-stage-details">
+                    <h3>Generate AI Pipeline</h3>
+                    <p>One click validates configurations and activates the end-to-end hands-free recruiter pipeline.</p>
+                    <div className="funnel-tag-row">
+                      <span className="f-tag f-tag-cyan">Ready to Generate</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Funnel Step 5 */}
+                <div className="funnel-stage" style={{ animationDelay: '1.4s' }}>
+                  <div className="funnel-node-wrapper">
+                    <div className="funnel-node-glow"></div>
+                    <div className="funnel-node text-emerald">05</div>
+                  </div>
+                  <div className="funnel-stage-details">
+                    <h3>AI Runs Entire Loop</h3>
+                    <p>AI automatically triggers tests for qualifiers, grades submissions, and auto-schedules voice interviews.</p>
+                    <div className="funnel-tag-row">
+                      <span className="f-tag f-tag-pulse">Autonomous Loop Active</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
 
-      {/* ═══════ FEATURE CARDS ═══════ */}
-      <section className="faa-section">
-        <div className="faa-section-header">
-          <span className="faa-section-tag faa-tag-green">Core Capabilities</span>
-          <h2>What Powers the Pipeline</h2>
-          <p>
-            Three AI-driven pillars that work together across both manual and automatic workflows.
-          </p>
-        </div>
+              {/* Right: Engine Dashboard Console */}
+              <div className="faa-funnel-console-wrapper" style={{ animationDelay: '1.7s' }}>
+                <div className="faa-funnel-console">
+                  <div className="console-bar">
+                    <div className="console-status-dot-wrap">
+                      <span className="console-status-dot-pulse"></span>
+                      <span className="console-status-dot"></span>
+                    </div>
+                    <span className="console-title">PIPELINE CORE CONSOLE</span>
+                    <span className="console-pill">ACTIVE</span>
+                  </div>
 
-        <ScrollReveal>
-          <div className="faa-cards-grid">
-            {/* Card 1: AI Resume Screening */}
-            <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.1s' }}>
-              <div className="faa-feature-card">
-                <div className="faa-card-icon blue">
-                  <Icons.Brain style={{ width: '24px', height: '24px' }} />
-                </div>
-                <h3>AI Resume Screening</h3>
-                <p>
-                  NLP-powered matching compares each resume against the job description. Configurable threshold scoring ensures only qualified candidates advance — results downloadable as Excel.
-                </p>
-              </div>
-            </div>
+                  <div className="console-display">
+                    <div className="console-param-row">
+                      <span className="param-label">Role Target:</span>
+                      <span className="param-val">AI Engineer (ML/NLP)</span>
+                    </div>
+                    <div className="console-param-row">
+                      <span className="param-label">Date Validation:</span>
+                      <span className="param-val text-cyan">VALID (15 - 28 JUN)</span>
+                    </div>
+                    <div className="console-param-row">
+                      <span className="param-label">Resume Stream:</span>
+                      <span className="param-val text-emerald">CONNECTED (120 Files)</span>
+                    </div>
 
-            {/* Card 2: AI Assessment */}
-            <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.3s' }}>
-              <div className="faa-feature-card">
-                <div className="faa-card-icon purple">
-                  <Icons.Code style={{ width: '24px', height: '24px' }} />
-                </div>
-                <h3>AI Assessment</h3>
-                <p>
-                  AI-generated MCQ question pools and coding challenges tailored to the role. Proctored environment with identity verification, tab-switch detection, and automated grading.
-                </p>
-              </div>
-            </div>
+                    <div className="console-screen-divider"></div>
 
-            {/* Card 3: AI Interview with Indu */}
-            <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.5s' }}>
-              <div className="faa-feature-card">
-                <div className="faa-card-icon green">
-                  <Icons.Mic style={{ width: '24px', height: '24px' }} />
-                </div>
-                <h3>AI Interview with Indu</h3>
-                <p>
-                  Voice-based AI interviewer conducts structured conversational interviews. Real-time speech-to-text, silence watchdog monitoring, and AI-powered evaluation of responses.
-                </p>
-              </div>
-            </div>
-          </div>
-        </ScrollReveal>
-      </section>
+                    <div className="console-logs-screen">
+                      <div className="console-logs-header">// LIVE AUTONOMOUS SYSTEM STREAMS</div>
+                      <div className="console-logs-list">
+                        <div className="console-log green">[09:00:01] Ingested 120 resumes. Ready for evaluation.</div>
+                        <div className="console-log green">[09:00:03] Matching CVs against JD...</div>
+                        <div className="console-log">[09:00:08] Rahul_CV.pdf (88% Match) - QUALIFIED</div>
+                        <div className="console-log">[09:00:11] Priya_Resume.pdf (76% Match) - QUALIFIED</div>
+                        <div className="console-log red">[09:00:14] Arjun_CV.pdf (42% Match) - REJECTED (Under threshold)</div>
+                        <div className="console-log green">[09:00:18] AI Matching complete. 84 candidates pass.</div>
+                        <div className="console-log cyan">[09:00:20] AI Assessment links dispatched automatically.</div>
+                        <div className="console-log">[09:00:25] Awaiting candidates test submissions...</div>
+                        <div className="console-log purple">[09:00:40] Auto-scheduled voice interview for Priya_Resume (92% Score)</div>
+                        <div className="console-log purple">[09:00:52] Auto-scheduled voice interview for Rahul_CV (89% Score)</div>
+                      </div>
+                    </div>
 
-      {/* ═══════ WHY CHOOSE US ═══════ */}
-      <section className="faa-section faa-section-divider">
-        <div className="faa-section-header">
-          <span className="faa-section-tag faa-tag-blue">Why VerifiHireAI</span>
-          <h2>Built to Eliminate the Hiring Bottleneck</h2>
-          <p>
-            Traditional hiring drains HR teams with weeks of manual screening, scheduling, and follow-ups. We built VerifiHireAI to replace that entire burden with an AI-first pipeline.
-          </p>
-        </div>
-
-        <ScrollReveal>
-          <div className="faa-before-after-grid">
-            {/* BEFORE Card */}
-            <div className="faa-ba-card-wrapper before-wrapper">
-              <div className="faa-ba-card faa-ba-before">
-                <div className="ba-card-header">
-                  <div className="ba-icon ba-icon-before">⏳</div>
-                  <div>
-                    <h3>Before — Traditional Hiring</h3>
-                    <span className="ba-subtitle">Slow, manual, error-prone</span>
+                    <div className="console-bottom-action">
+                      <div className="console-sync-btn">
+                        <Icons.Zap style={{ width: '13px', height: '13px', color: '#10B981' }} />
+                        <span>Synchronized Pipeline</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <ul className="ba-list">
-                  <li>
-                    <span className="ba-x">✗</span>
-                    <span>HR manually screens 100s of resumes one-by-one — takes <strong>days to weeks</strong></span>
-                  </li>
-                  <li>
-                    <span className="ba-x">✗</span>
-                    <span>Scheduling assessments and interviews via email chains — <strong>constant back-and-forth</strong></span>
-                  </li>
-                  <li>
-                    <span className="ba-x">✗</span>
-                    <span>No standardized evaluation — <strong>bias creeps in</strong>, quality varies by reviewer</span>
-                  </li>
-                  <li>
-                    <span className="ba-x">✗</span>
-                    <span>Qualified candidates drop off due to <strong>slow response times</strong></span>
-                  </li>
-                  <li>
-                    <span className="ba-x">✗</span>
-                    <span>HR spends <strong>70%+ time</strong> on repetitive screening tasks instead of strategic work</span>
-                  </li>
-                </ul>
               </div>
             </div>
+          </ScrollReveal>
+        </section>
 
-            {/* AFTER Card */}
-            <div className="faa-ba-card-wrapper after-wrapper">
-              <div className="faa-ba-card faa-ba-after">
-                <div className="ba-card-header">
-                  <div className="ba-icon ba-icon-after">⚡</div>
-                  <div>
-                    <h3>After — With VerifiHireAI</h3>
-                    <span className="ba-subtitle">Automated, intelligent, instant</span>
+        {/* ═══════ FEATURE CARDS ═══════ */}
+        <section className="faa-section">
+          <div className="faa-section-header">
+            <span className="faa-section-tag faa-tag-green">Core Capabilities</span>
+            <h2>What Powers the Pipeline</h2>
+            <p>
+              Three AI-driven pillars that work together across both manual and automatic workflows.
+            </p>
+          </div>
+
+          <ScrollReveal>
+            <div className="faa-cards-grid">
+              {/* Card 1: AI Resume Screening */}
+              <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.1s' }}>
+                <div className="faa-feature-card">
+                  <div className="faa-card-icon blue">
+                    <Icons.FileText style={{ width: '24px', height: '24px' }} />
                   </div>
+                  <h3>AI Resume Screening</h3>
+                  <p>
+                    NLP-powered matching compares each resume against the job description. Configurable threshold scoring ensures only qualified candidates advance — results downloadable as Excel.
+                  </p>
                 </div>
-                <ul className="ba-list">
-                  <li>
-                    <span className="ba-check">✓</span>
-                    <span>AI screens all resumes against JD in <strong>seconds</strong> — not days</span>
-                  </li>
-                  <li>
-                    <span className="ba-check">✓</span>
-                    <span>Assessments and interviews are <strong>auto-sent and auto-scheduled</strong> — zero email chains</span>
-                  </li>
-                  <li>
-                    <span className="ba-check">✓</span>
-                    <span>Standardized AI evaluation ensures <strong>fair, consistent scoring</strong> for every candidate</span>
-                  </li>
-                  <li>
-                    <span className="ba-check">✓</span>
-                    <span>Candidates experience <strong>instant engagement</strong> — no waiting, no ghosting</span>
-                  </li>
-                  <li>
-                    <span className="ba-check">✓</span>
-                    <span>HR burden reduced by <strong>90%</strong> — focus on final decisions, not logistics</span>
-                  </li>
-                </ul>
+              </div>
+
+              {/* Card 2: AI Assessment */}
+              <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.3s' }}>
+                <div className="faa-feature-card">
+                  <div className="faa-card-icon purple">
+                    <Icons.Code style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <h3>AI Assessment</h3>
+                  <p>
+                    AI-generated MCQ question pools and coding challenges tailored to the role. Proctored environment with identity verification, tab-switch detection, and automated grading.
+                  </p>
+                </div>
+              </div>
+
+              {/* Card 3: AI Interview with Indu */}
+              <div className="faa-feature-card-wrapper" style={{ animationDelay: '0.5s' }}>
+                <div className="faa-feature-card">
+                  <div className="faa-card-icon green">
+                    <Icons.Mic style={{ width: '24px', height: '24px' }} />
+                  </div>
+                  <h3>AI Interview with Indu</h3>
+                  <p>
+                    Voice-based AI interviewer conducts structured conversational interviews. Real-time speech-to-text, silence watchdog monitoring, and AI-powered evaluation of responses.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </ScrollReveal>
+          </ScrollReveal>
+        </section>
 
-        {/* Impact Stats */}
-        <div className="faa-impact-stats">
-          <div className="faa-impact-item">
-            <div className="impact-num"><span className="impact-accent">90</span>%</div>
-            <div className="impact-label">Reduction in HR screening time</div>
+        {/* ═══════ WHY CHOOSE US ═══════ */}
+        <section className="faa-section faa-section-divider">
+          <div className="faa-section-header">
+            <span className="faa-section-tag faa-tag-blue">Why VerifiHireAI</span>
+            <h2>Built to Eliminate the Hiring Bottleneck</h2>
+            <p>
+              Traditional hiring drains HR teams with weeks of manual screening, scheduling, and follow-ups. We built VerifiHireAI to replace that entire burden with an AI-first pipeline.
+            </p>
           </div>
-          <div className="faa-impact-item">
-            <div className="impact-num"><span className="impact-accent">10</span>x</div>
-            <div className="impact-label">Faster candidate processing</div>
-          </div>
-          <div className="faa-impact-item">
-            <div className="impact-num"><span className="impact-accent">0</span></div>
-            <div className="impact-label">Manual scheduling needed</div>
-          </div>
-          <div className="faa-impact-item">
-            <div className="impact-num"><span className="impact-accent">100</span>%</div>
-            <div className="impact-label">AI-powered, unbiased evaluation</div>
-          </div>
-        </div>
-      </section>
 
-      {/* ═══════ CTA SECTION ═══════ */}
-      <ScrollReveal>
-        <section className="faa-cta">
-          <h2>Ready to automate your hiring pipeline?</h2>
-          <p>
-            Choose manual for precision control or fully automatic for zero-touch screening. Either way, AI handles the heavy lifting.
-          </p>
-          <div className="faa-cta-btns">
-            <Link to="/signup" className="faa-btn-primary">Start Free Trial</Link>
-            <Link to="/contact" className="faa-btn-secondary">Book a Demo</Link>
-          </div>
-          <div className="faa-cta-note">
-            No credit card required &bull; Manual + Automatic modes included &bull; Unlimited AI interviews
+          <ScrollReveal>
+            <div className="faa-before-after-grid">
+              {/* BEFORE Card */}
+              <div className="faa-ba-card-wrapper before-wrapper">
+                <div className="faa-ba-card faa-ba-before">
+                  <div className="ba-card-header">
+                    <div className="ba-icon ba-icon-before">⏳</div>
+                    <div>
+                      <h3>Before — Traditional Hiring</h3>
+                      <span className="ba-subtitle">Slow, manual, error-prone</span>
+                    </div>
+                  </div>
+                  <ul className="ba-list">
+                    <li>
+                      <span className="ba-x">✗</span>
+                      <span>HR manually screens 100s of resumes one-by-one — takes <strong>days to weeks</strong></span>
+                    </li>
+                    <li>
+                      <span className="ba-x">✗</span>
+                      <span>Scheduling assessments and interviews via email chains — <strong>constant back-and-forth</strong></span>
+                    </li>
+                    <li>
+                      <span className="ba-x">✗</span>
+                      <span>No standardized evaluation — <strong>bias creeps in</strong>, quality varies by reviewer</span>
+                    </li>
+                    <li>
+                      <span className="ba-x">✗</span>
+                      <span>Qualified candidates drop off due to <strong>slow response times</strong></span>
+                    </li>
+                    <li>
+                      <span className="ba-x">✗</span>
+                      <span>HR spends <strong>70%+ time</strong> on repetitive screening tasks instead of strategic work</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* AFTER Card */}
+              <div className="faa-ba-card-wrapper after-wrapper">
+                <div className="faa-ba-card faa-ba-after">
+                  <div className="ba-card-header">
+                    <div className="ba-icon ba-icon-after">⚡</div>
+                    <div>
+                      <h3>After — With VerifiHireAI</h3>
+                      <span className="ba-subtitle">Automated, intelligent, instant</span>
+                    </div>
+                  </div>
+                  <ul className="ba-list">
+                    <li>
+                      <span className="ba-check">✓</span>
+                      <span>AI screens all resumes against JD in <strong>seconds</strong> — not days</span>
+                    </li>
+                    <li>
+                      <span className="ba-check">✓</span>
+                      <span>Assessments and interviews are <strong>auto-sent and auto-scheduled</strong> — zero email chains</span>
+                    </li>
+                    <li>
+                      <span className="ba-check">✓</span>
+                      <span>Standardized AI evaluation ensures <strong>fair, consistent scoring</strong> for every candidate</span>
+                    </li>
+                    <li>
+                      <span className="ba-check">✓</span>
+                      <span>Candidates experience <strong>instant engagement</strong> — no waiting, no ghosting</span>
+                    </li>
+                    <li>
+                      <span className="ba-check">✓</span>
+                      <span>HR burden reduced by <strong>90%</strong> — focus on final decisions, not logistics</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </ScrollReveal>
+
+          {/* Impact Stats */}
+          <div className="faa-impact-stats">
+            <div className="faa-impact-item">
+              <div className="impact-num"><span className="impact-accent">90</span>%</div>
+              <div className="impact-label">Reduction in HR screening time</div>
+            </div>
+            <div className="faa-impact-item">
+              <div className="impact-num"><span className="impact-accent">10</span>x</div>
+              <div className="impact-label">Faster candidate processing</div>
+            </div>
+            <div className="faa-impact-item">
+              <div className="impact-num"><span className="impact-accent">0</span></div>
+              <div className="impact-label">Manual scheduling needed</div>
+            </div>
+            <div className="faa-impact-item">
+              <div className="impact-num"><span className="impact-accent">100</span>%</div>
+              <div className="impact-label">AI-powered, unbiased evaluation</div>
+            </div>
           </div>
         </section>
-      </ScrollReveal>
+
+        {/* ═══════ CTA SECTION ═══════ */}
+        <ScrollReveal>
+          <section className="shared-cta-section">
+            <div className="shared-cta-card">
+              <div className="shared-cta-badge">
+                <span>Automated Screening</span>
+              </div>
+              <h2 className="shared-cta-title">Ready to automate your hiring pipeline?</h2>
+              <p className="shared-cta-text">
+                Choose manual for precision control or fully automatic for zero-touch screening. Either way, AI handles the heavy lifting.
+              </p>
+              <Link to="/signup" className="shared-cta-btn">
+                Get Started For Free
+              </Link>
+              <p className="shared-cta-note">
+                Manual + Automatic modes included &bull; Unlimited AI interviews
+              </p>
+            </div>
+          </section>
+        </ScrollReveal>
 
       </div>
       <Footer />

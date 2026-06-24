@@ -131,7 +131,7 @@ const IDEMockup = () => {
 
                 {codeLines >= 2 && (
                   <div className="animate-fade-in-up" style={{ paddingLeft: '1rem', color: '#64748b', fontStyle: 'italic', borderLeft: '2px solid #334155', marginLeft: '0.25rem', marginTop: '0.25rem', marginBottom: '0.25rem' }}>
-                    """ AI-assisted: Implementing A* search algorithm for optimal routing """
+                    """ Hint: Implementing A* search algorithm for optimal routing """
                   </div>
                 )}
 
@@ -157,7 +157,7 @@ const IDEMockup = () => {
                   <div className="animate-fade-in-up" style={{ marginTop: '0.5rem', backgroundColor: 'rgba(30, 58, 138, 0.2)', padding: '0.125rem 1rem', borderLeft: '2px solid #3b82f6', position: 'relative' }}>
                     <span style={{ color: '#c084fc' }}>while</span> open_set:
                     <div style={{ position: 'absolute', right: '1rem', top: '0.125rem', fontSize: '10px', color: '#93c5fd', backgroundColor: 'rgba(30, 58, 138, 0.6)', padding: '0.125rem 0.5rem', borderRadius: '9999px', display: 'flex', alignItems: 'center', border: '1px solid rgba(59, 130, 246, 0.3)' }}>
-                      <Icons.Brain style={{ width: '12px', height: '12px', marginRight: '4px' }} /> AI: Suggests PriorityQueue
+                      <Icons.Shield style={{ width: '12px', height: '12px', marginRight: '4px' }} /> Hint: Suggests PriorityQueue
                     </div>
                   </div>
                 )}
@@ -400,7 +400,7 @@ const AdvancedSplitScreenMockup = () => {
             With Precision.
           </h1>
 
-          <p className="fca-hero-desc" style={{ fontSize: '15px', color: 'rgba(255,255,255,0.72)', lineHeight: '1.75', margin: '0', textAlign: 'left', maxWidth: '460px' }}>
+          <p className="fca-hero-desc" style={{ fontSize: '15px', color: '#475569', lineHeight: '1.75', margin: '0', textAlign: 'left', maxWidth: '460px' }}>
             Move beyond whiteboarding. Assess developers in a secure, browser-based coding environment with automated test cases, AI-driven code analysis, and robust plagiarism detection.
           </p>
         </div>
@@ -562,7 +562,7 @@ const AdvancedSplitScreenMockup = () => {
                   <div className="test-col-time">28ms</div>
                 </div>
                 <div className="test-case-row" style={{ opacity: 0.7, padding: '0.5rem', marginBottom: '0.25rem' }}>
-                  <div className="test-col-status status-hidden"><Icons.Brain style={{ width: '14px', height: '14px' }} /> HIDDEN</div>
+                  <div className="test-col-status status-hidden"><Icons.Shield style={{ width: '14px', height: '14px' }} /> HIDDEN</div>
                   <div className="test-col-name">Test 3: V=10000 Edge Cases</div>
                   <div className="test-col-time">--</div>
                 </div>
@@ -640,7 +640,7 @@ export default function FeatureCodingAssessment() {
         {/* How it Works (Alternating Layout) */}
         <section className="fca-section" style={{ paddingTop: '6rem', paddingBottom: '6rem' }}>
           <div style={{ textAlign: 'center', maxWidth: '48rem', margin: '0 auto 4rem' }}>
-            <h2 style={{ fontSize: '2.25rem', fontWeight: '800', color: '#ffffff', marginBottom: '1.5rem' }}>How It Works</h2>
+            <h2 style={{ fontSize: '2.25rem', fontWeight: '800', color: '#0F172A', marginBottom: '1.5rem' }}>How It Works</h2>
             <p className="fca-hero-desc" style={{ margin: '0 auto' }}>A seamless, advanced workflow designed to evaluate real-world coding proficiency while ensuring a fantastic candidate experience.</p>
           </div>
 
@@ -661,16 +661,16 @@ export default function FeatureCodingAssessment() {
               </ul>
             </div>
             <div className="fca-step-visual">
-              <div className="glass-card" style={{ padding: '0', borderRadius: '1rem', overflow: 'hidden' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
                 {/* Mockup Header */}
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.6)', padding: '1rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontWeight: '600', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Icons.Settings style={{ width: '16px', height: '16px', color: '#60a5fa' }} /> Challenge Setup
+                <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontWeight: '600', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Icons.Settings style={{ width: '16px', height: '16px', color: '#3B82F6' }} /> Challenge Setup
                   </span>
                   <div style={{ display: 'flex', gap: '0.25rem' }}>
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
-                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.1)' }}></div>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ef4444' }}></div>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#f59e0b' }}></div>
+                    <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#22c55e' }}></div>
                   </div>
                 </div>
 
@@ -678,8 +678,8 @@ export default function FeatureCodingAssessment() {
                 <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   {/* Title Input */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Challenge Name</label>
-                    <div style={{ padding: '0.75rem 1rem', backgroundColor: 'rgba(15, 23, 42, 0.5)', border: '1px solid rgba(51, 65, 85, 0.8)', borderRadius: '0.5rem', color: '#e2e8f0', fontSize: '0.875rem' }}>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Challenge Name</label>
+                    <div style={{ padding: '0.75rem 1rem', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '0.5rem', color: '#0F172A', fontSize: '0.875rem' }}>
                       Find the Optimal Path (Graph Traversal)
                     </div>
                   </div>
@@ -687,15 +687,15 @@ export default function FeatureCodingAssessment() {
                   {/* Settings Row */}
                   <div style={{ display: 'flex', gap: '1rem' }}>
                     <div style={{ flex: 1 }}>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Difficulty</label>
-                      <div style={{ padding: '0.5rem 1rem', backgroundColor: 'rgba(15, 23, 42, 0.5)', border: '1px solid rgba(51, 65, 85, 0.8)', borderRadius: '0.5rem', color: '#f59e0b', fontSize: '0.875rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: '500' }}>
+                      <label style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Difficulty</label>
+                      <div style={{ padding: '0.5rem 1rem', backgroundColor: '#FEF3C7', border: '1px solid #FBBF24', borderRadius: '0.5rem', color: '#D97706', fontSize: '0.875rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: '600' }}>
                         Medium
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                       </div>
                     </div>
                     <div style={{ flex: 1 }}>
-                      <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Time Limit</label>
-                      <div style={{ padding: '0.5rem 1rem', backgroundColor: 'rgba(15, 23, 42, 0.5)', border: '1px solid rgba(51, 65, 85, 0.8)', borderRadius: '0.5rem', color: '#e2e8f0', fontSize: '0.875rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: '500' }}>
+                      <label style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Time Limit</label>
+                      <div style={{ padding: '0.5rem 1rem', backgroundColor: '#F8FAFC', border: '1px solid #E2E8F0', borderRadius: '0.5rem', color: '#0F172A', fontSize: '0.875rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontWeight: '500' }}>
                         45 Mins
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
                       </div>
@@ -704,18 +704,18 @@ export default function FeatureCodingAssessment() {
 
                   {/* Languages */}
                   <div>
-                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Allowed Languages</label>
+                    <label style={{ display: 'block', fontSize: '0.75rem', color: '#64748B', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: '600' }}>Allowed Languages</label>
                     <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-                      <span className="fca-tag" style={{ backgroundColor: 'rgba(96, 165, 250, 0.2)', color: '#60a5fa', border: '1px solid rgba(96, 165, 250, 0.3)', display: 'flex', alignItems: 'center' }}>
+                      <span className="fca-tag" style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: '#2563EB', border: '1px solid rgba(59, 130, 246, 0.3)', display: 'flex', alignItems: 'center' }}>
                         <Icons.CheckCircle style={{ width: '14px', height: '14px', marginRight: '6px' }} /> React
                       </span>
-                      <span className="fca-tag" style={{ backgroundColor: 'rgba(234, 179, 8, 0.2)', color: '#fde047', border: '1px solid rgba(234, 179, 8, 0.3)', display: 'flex', alignItems: 'center' }}>
+                      <span className="fca-tag" style={{ backgroundColor: 'rgba(234, 179, 8, 0.1)', color: '#D97706', border: '1px solid rgba(234, 179, 8, 0.3)', display: 'flex', alignItems: 'center' }}>
                         <Icons.CheckCircle style={{ width: '14px', height: '14px', marginRight: '6px' }} /> Python
                       </span>
-                      <span className="fca-tag" style={{ backgroundColor: 'rgba(16, 185, 129, 0.2)', color: '#34d399', border: '1px solid rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center' }}>
+                      <span className="fca-tag" style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', color: '#059669', border: '1px solid rgba(16, 185, 129, 0.3)', display: 'flex', alignItems: 'center' }}>
                         <Icons.CheckCircle style={{ width: '14px', height: '14px', marginRight: '6px' }} /> Go
                       </span>
-                      <span className="fca-tag" style={{ backgroundColor: 'rgba(51, 65, 85, 0.3)', color: '#94a3b8', border: '1px dashed rgba(148, 163, 184, 0.4)', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                      <span className="fca-tag" style={{ backgroundColor: '#F1F5F9', color: '#64748B', border: '1px dashed #CBD5E1', display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
                         + Add Language
                       </span>
                     </div>
@@ -735,24 +735,24 @@ export default function FeatureCodingAssessment() {
               </p>
             </div>
             <div className="fca-step-visual">
-              <div className="glass-card" style={{ padding: '0', borderRadius: '1rem', overflow: 'hidden' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
                 {/* Header mimicking actual candidate view */}
-                <div style={{ backgroundColor: 'rgba(13, 17, 23, 0.9)', padding: '0.75rem 1rem', borderBottom: '1px solid rgba(51, 65, 85, 0.5)', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ backgroundColor: '#F8FAFC', padding: '0.75rem 1rem', borderBottom: '1px solid #E2E8F0', display: 'flex', alignItems: 'center', gap: '1rem' }}>
                   <div style={{ display: 'flex', gap: '0.4rem' }}>
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#ef4444' }}></div>
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#f59e0b' }}></div>
                     <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: '#22c55e' }}></div>
                   </div>
-                  <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#60a5fa', borderBottom: '2px solid #60a5fa', paddingBottom: '0.5rem', marginBottom: '-0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#3B82F6', borderBottom: '2px solid #3B82F6', paddingBottom: '0.5rem', marginBottom: '-0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Icons.Code style={{width: '14px', height: '14px'}} /> Code Editor
                   </div>
                 </div>
                 {/* Action Bar */}
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.8)', padding: '0.5rem 1rem', borderBottom: '1px solid rgba(51, 65, 85, 0.5)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div style={{ backgroundColor: 'rgba(30, 41, 59, 0.5)', border: '1px solid rgba(71, 85, 105, 0.5)', padding: '0.25rem 0.75rem', borderRadius: '0.375rem', color: '#e2e8f0', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <div style={{ backgroundColor: '#F1F5F9', padding: '0.5rem 1rem', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '0.25rem 0.75rem', borderRadius: '0.375rem', color: '#475569', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     Python <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
                   </div>
-                  <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: '#60a5fa', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '0.25rem 0.75rem', borderRadius: '0.375rem', fontSize: '0.75rem', fontWeight: '600' }}>
+                  <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', color: '#2563EB', border: '1px solid rgba(59, 130, 246, 0.3)', padding: '0.25rem 0.75rem', borderRadius: '0.375rem', fontSize: '0.75rem', fontWeight: '600' }}>
                     Run Tests
                   </div>
                 </div>
@@ -786,22 +786,22 @@ export default function FeatureCodingAssessment() {
               </p>
             </div>
             <div className="fca-step-visual">
-              <div className="glass-card" style={{ padding: '1.5rem', borderRadius: '1rem' }}>
+              <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '1rem', padding: '1.5rem', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.1)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}><Icons.CheckCircle style={{ width: '20px', height: '20px', color: '#34d399', marginRight: '0.75rem' }} /> <span style={{ color: '#d1fae5', fontWeight: '500', fontSize: '0.875rem' }}>Test 1: Boundary Conditions</span></div>
-                    <span style={{ color: 'rgba(52, 211, 153, 0.7)', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }}>24ms</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}><Icons.CheckCircle style={{ width: '20px', height: '20px', color: '#16A34A', marginRight: '0.75rem' }} /> <span style={{ color: '#15803D', fontWeight: '500', fontSize: '0.875rem' }}>Test 1: Boundary Conditions</span></div>
+                    <span style={{ color: '#16A34A', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }}>24ms</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: 'rgba(16, 185, 129, 0.1)', border: '1px solid rgba(16, 185, 129, 0.3)', boxShadow: '0 4px 15px rgba(16, 185, 129, 0.1)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}><Icons.CheckCircle style={{ width: '20px', height: '20px', color: '#34d399', marginRight: '0.75rem' }} /> <span style={{ color: '#d1fae5', fontWeight: '500', fontSize: '0.875rem' }}>Test 2: Large Dataset (O(n log n))</span></div>
-                    <span style={{ color: 'rgba(52, 211, 153, 0.7)', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }}>112ms</span>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: '#F0FDF4', border: '1px solid #BBF7D0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center' }}><Icons.CheckCircle style={{ width: '20px', height: '20px', color: '#16A34A', marginRight: '0.75rem' }} /> <span style={{ color: '#15803D', fontWeight: '500', fontSize: '0.875rem' }}>Test 2: Large Dataset (O(n log n))</span></div>
+                    <span style={{ color: '#16A34A', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }}>112ms</span>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: 'rgba(30, 41, 59, 0.8)', border: '1px solid #475569', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.1)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', borderRadius: '0.75rem', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE' }}>
                     <div style={{ display: 'flex', alignItems: 'center' }}>
-                      <span style={{ width: '20px', height: '20px', marginRight: '0.75rem', borderRadius: '50%', border: '2px solid #475569', borderTopColor: '#60a5fa' }} className="animate-spin"></span>
-                      <span style={{ color: '#cbd5e1', fontWeight: '500', fontSize: '0.875rem' }}>Test 3: Hidden Edge Cases</span>
+                      <span style={{ width: '20px', height: '20px', marginRight: '0.75rem', borderRadius: '50%', border: '2px solid #BFDBFE', borderTopColor: '#3B82F6' }} className="animate-spin"></span>
+                      <span style={{ color: '#1E40AF', fontWeight: '500', fontSize: '0.875rem' }}>Test 3: Hidden Edge Cases</span>
                     </div>
-                    <span style={{ color: '#60a5fa', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }} className="animate-pulse">Running...</span>
+                    <span style={{ color: '#3B82F6', fontFamily: 'monospace', fontSize: '0.75rem', fontWeight: '700' }} className="animate-pulse">Running...</span>
                   </div>
                 </div>
               </div>
@@ -818,45 +818,45 @@ export default function FeatureCodingAssessment() {
               </p>
             </div>
             <div className="fca-step-visual">
-              <div className="glass-card" style={{ padding: '0', borderRadius: '1rem', overflow: 'hidden' }}>
-                <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.6)', padding: '1rem 1.5rem', borderBottom: '1px solid rgba(255,255,255,0.05)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span style={{ fontWeight: '600', color: '#e2e8f0', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <Icons.Shield style={{ width: '16px', height: '16px', color: '#a855f7' }} /> Behavioral Report
+              <div style={{ background: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '1rem', overflow: 'hidden', boxShadow: '0 4px 20px rgba(0,0,0,0.04)' }}>
+                <div style={{ backgroundColor: '#F8FAFC', padding: '1rem 1.5rem', borderBottom: '1px solid #E2E8F0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ fontWeight: '600', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <Icons.Shield style={{ width: '16px', height: '16px', color: '#8B5CF6' }} /> Behavioral Report
                   </span>
-                  <div style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', border: '1px solid rgba(239, 68, 68, 0.2)' }}>
+                  <div style={{ fontSize: '0.75rem', fontWeight: '700', backgroundColor: '#FEF2F2', color: '#DC2626', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', border: '1px solid #FECACA' }}>
                     High Risk Flagged
                   </div>
                 </div>
                 
                 <div style={{ padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-                    <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)', padding: '1rem', borderRadius: '0.5rem', border: '1px solid rgba(51, 65, 85, 0.8)' }}>
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Avg. Keystroke Latency</div>
-                      <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#e2e8f0' }}>240<span style={{ fontSize: '0.875rem', color: '#64748b', marginLeft: '0.25rem' }}>ms</span></div>
-                      <div style={{ fontSize: '0.75rem', color: '#10b981', marginTop: '0.25rem' }}>Natural typing speed</div>
+                    <div style={{ backgroundColor: '#F0FDF4', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #BBF7D0' }}>
+                      <div style={{ fontSize: '0.75rem', color: '#64748B', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Avg. Keystroke Latency</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#0F172A' }}>240<span style={{ fontSize: '0.875rem', color: '#64748B', marginLeft: '0.25rem' }}>ms</span></div>
+                      <div style={{ fontSize: '0.75rem', color: '#16A34A', marginTop: '0.25rem' }}>Natural typing speed</div>
                     </div>
-                    <div style={{ backgroundColor: 'rgba(15, 23, 42, 0.5)', padding: '1rem', borderRadius: '0.5rem', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pasted Blocks</div>
-                      <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#ef4444' }}>3</div>
-                      <div style={{ fontSize: '0.75rem', color: '#ef4444', marginTop: '0.25rem' }}>Suspicious activity</div>
+                    <div style={{ backgroundColor: '#FEF2F2', padding: '1rem', borderRadius: '0.5rem', border: '1px solid #FECACA' }}>
+                      <div style={{ fontSize: '0.75rem', color: '#64748B', marginBottom: '0.25rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Pasted Blocks</div>
+                      <div style={{ fontSize: '1.5rem', fontWeight: '700', color: '#DC2626' }}>3</div>
+                      <div style={{ fontSize: '0.75rem', color: '#DC2626', marginTop: '0.25rem' }}>Suspicious activity</div>
                     </div>
                   </div>
 
                   <div>
-                    <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#e2e8f0', marginBottom: '0.75rem' }}>Detected Anomalies</div>
+                    <div style={{ fontSize: '0.875rem', fontWeight: '600', color: '#0F172A', marginBottom: '0.75rem' }}>Detected Anomalies</div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', backgroundColor: 'rgba(239, 68, 68, 0.05)', padding: '0.75rem', borderRadius: '0.5rem', borderLeft: '2px solid #ef4444' }}>
-                        <div style={{ marginTop: '0.125rem', color: '#ef4444', fontSize: '1.25rem', lineHeight: '1' }}>⚠</div>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', backgroundColor: '#FEF2F2', padding: '0.75rem', borderRadius: '0.5rem', borderLeft: '2px solid #EF4444' }}>
+                        <div style={{ marginTop: '0.125rem', color: '#EF4444', fontSize: '1.25rem', lineHeight: '1' }}>⚠</div>
                         <div>
-                          <div style={{ fontSize: '0.875rem', color: '#e2e8f0', fontWeight: '500' }}>Massive Code Insertion</div>
-                          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>42 lines pasted simultaneously at 12:04 PM.</div>
+                          <div style={{ fontSize: '0.875rem', color: '#0F172A', fontWeight: '500' }}>Massive Code Insertion</div>
+                          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>42 lines pasted simultaneously at 12:04 PM.</div>
                         </div>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', backgroundColor: 'rgba(245, 158, 11, 0.05)', padding: '0.75rem', borderRadius: '0.5rem', borderLeft: '2px solid #f59e0b' }}>
-                        <div style={{ marginTop: '0.125rem', color: '#f59e0b', fontSize: '1.25rem', lineHeight: '1' }}>⚡</div>
+                      <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', backgroundColor: '#FFFBEB', padding: '0.75rem', borderRadius: '0.5rem', borderLeft: '2px solid #F59E0B' }}>
+                        <div style={{ marginTop: '0.125rem', color: '#F59E0B', fontSize: '1.25rem', lineHeight: '1' }}>⚡</div>
                         <div>
-                          <div style={{ fontSize: '0.875rem', color: '#e2e8f0', fontWeight: '500' }}>Erratic Typing Patterns</div>
-                          <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>Keystroke latency dropped from 240ms to 40ms.</div>
+                          <div style={{ fontSize: '0.875rem', color: '#0F172A', fontWeight: '500' }}>Erratic Typing Patterns</div>
+                          <div style={{ fontSize: '0.75rem', color: '#64748B' }}>Keystroke latency dropped from 240ms to 40ms.</div>
                         </div>
                       </div>
                     </div>
@@ -899,19 +899,18 @@ export default function FeatureCodingAssessment() {
         </section>
 
         {/* Final CTA */}
-        <section className="fca-cta-container">
-          <div className="glass-panel fca-cta-box">
-            <div className="fca-cta-bg"></div>
-            <div style={{ position: 'relative', zIndex: '10' }}>
-              <h2 className="fca-hero-title" style={{ fontSize: '2.25rem', marginBottom: '1.5rem' }}>Ready to build a world-class engineering team?</h2>
-              <p className="fca-hero-desc" style={{ margin: '0 auto 2.5rem', color: '#cbd5e1' }}>
-                Join leading tech companies who trust VerifiHireAI to identify and hire top developer talent faster and more accurately.
-              </p>
-              <Link to="/contact" className="fca-btn-gradient" style={{textDecoration: 'none', display: 'inline-block'}}>
-                Sign Up for Free
-              </Link>
-              <p style={{ marginTop: '1.5rem', fontSize: '0.875rem', color: '#64748b', fontWeight: '600' }}>No credit card required. 14-day free trial.</p>
+        <section className="shared-cta-section">
+          <div className="shared-cta-card">
+            <div className="shared-cta-badge">
+              <span>Real-time Execution</span>
             </div>
+            <h2 className="shared-cta-title">Ready to build a world-class engineering team?</h2>
+            <p className="shared-cta-text">
+              Join leading tech companies who trust VerifiHireAI to identify and hire top developer talent faster and more accurately.
+            </p>
+            <Link to="/contact" className="shared-cta-btn">
+              Get Started For Free
+            </Link>
           </div>
         </section>
       </div>

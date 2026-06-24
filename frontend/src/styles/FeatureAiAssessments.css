@@ -1,13 +1,13 @@
-/* FeatureAiAssessments.css — Redesigned: Manual + Fully Automatic Modes */
+/* FeatureAiAssessments.css â€” Redesigned: Manual + Fully Automatic Modes */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap');
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    BASE CONTAINER
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-container {
   min-height: 100vh;
-  background-color: #0B1120;
-  color: #e2e8f0;
+  background-color: #F8FAFC;
+  color: #0F172A;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
   position: relative;
@@ -18,9 +18,9 @@
   margin: 0;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    AMBIENT BACKGROUND
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-ambient-bg {
   position: absolute;
   inset: 0;
@@ -36,7 +36,7 @@
   width: 60%;
   height: 60%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(37, 99, 235, 0.25) 0%, rgba(37, 99, 235, 0) 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, rgba(37, 99, 235, 0) 70%);
   filter: blur(130px);
   animation: faaGlowPulse 8s ease-in-out infinite alternate;
 }
@@ -48,7 +48,7 @@
   width: 60%;
   height: 60%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0) 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, rgba(139, 92, 246, 0) 70%);
   filter: blur(140px);
   animation: faaGlowPulse 10s ease-in-out infinite alternate-reverse;
 }
@@ -60,23 +60,17 @@
   width: 40%;
   height: 40%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.03) 0%, rgba(16, 185, 129, 0) 70%);
   filter: blur(120px);
 }
 
 .faa-grid-pattern {
-  position: absolute;
-  inset: 0;
-  background-size: 50px 50px;
-  background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  opacity: 0.6;
+  display: none;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    HERO SECTION
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-hero {
   display: flex;
   flex-direction: column;
@@ -108,9 +102,9 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px;
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #60A5FA;
+  background: #EFF6FF;
+  border: 1px solid #DBEAFE;
+  color: #2563EB;
   border-radius: 50px;
   font-size: 0.8rem;
   font-weight: 700;
@@ -153,7 +147,7 @@
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin-bottom: 24px;
-  color: #ffffff;
+  color: #0F172A;
 }
 
 @media (min-width: 640px) {
@@ -178,7 +172,7 @@
 
 .faa-hero-desc {
   font-size: 1.05rem;
-  color: #94A3B8;
+  color: #475569;
   line-height: 1.7;
   margin-bottom: 36px;
   max-width: 560px;
@@ -200,7 +194,7 @@
   padding: 14px 28px;
   border-radius: 10px;
   background-color: #2563EB;
-  color: #ffffff;
+  color: #0F172A;
   font-weight: 700;
   font-size: 0.95rem;
   transition: all 0.3s;
@@ -222,9 +216,9 @@
 .faa-btn-secondary {
   padding: 14px 28px;
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.03);
-  color: #ffffff;
+  border: 1px solid #D1D5DB;
+  background: #FFFFFF;
+  color: #0F172A;
   font-weight: 700;
   font-size: 0.95rem;
   transition: all 0.3s;
@@ -237,14 +231,14 @@
 }
 
 .faa-btn-secondary:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.08);
+  border-color: #9CA3AF;
+  background: #F9FAFB;
   transform: translateY(-3px);
 }
 
-/* ═══════════════════════════════
-   HERO RIGHT — MODE MOCKUP
-   ═══════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   HERO RIGHT â€” MODE MOCKUP
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-hero-right {
   flex: 0.95;
   width: 100%;
@@ -254,8 +248,8 @@
 
 .faa-mode-tabs {
   display: flex;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
   border-bottom: none;
   padding: 6px 10px 0;
   border-radius: 16px 16px 0 0;
@@ -267,7 +261,7 @@
   flex: 1;
   background: none;
   border: none;
-  color: #64748B;
+  color: #475569;
   padding: 10px 12px;
   font-size: 0.78rem;
   font-weight: 700;
@@ -282,9 +276,9 @@
 }
 
 .faa-mode-tab.active {
-  background: rgba(30, 41, 59, 0.85);
-  color: #60A5FA;
-  border-color: rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  color: #2563EB;
+  border-color: #E2E8F0;
 }
 
 .faa-mode-tab.active::after {
@@ -298,13 +292,13 @@
 }
 
 .faa-mockup-body {
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 0 0 16px 16px;
   padding: 20px;
   min-height: 420px;
   position: relative;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(20px);
   overflow: hidden;
 }
@@ -325,9 +319,9 @@
 .dot.yellow { background: #FFBD2E; }
 .dot.green { background: #27C93F; }
 
-/* ═══════════════════════════════
-   MOCKUP — SHARED STEP STYLES
-   ═══════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   MOCKUP â€” SHARED STEP STYLES
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .mockup-content {
   animation: faaFadeSlideIn 0.4s ease-out forwards;
 }
@@ -357,8 +351,8 @@
 }
 
 .mock-input {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   padding: 10px 14px;
   border-radius: 8px;
   font-family: 'Inter', monospace;
@@ -396,8 +390,8 @@
 }
 
 .mock-success {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
   padding: 10px 14px;
   border-radius: 8px;
   display: flex;
@@ -446,7 +440,7 @@
   background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
   padding: 9px 16px;
   border-radius: 8px;
-  color: #ffffff;
+  color: #0F172A;
   font-size: 0.78rem;
   font-weight: 700;
   box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
@@ -460,7 +454,7 @@
   background: linear-gradient(135deg, #059669 0%, #2563EB 100%);
   padding: 10px 20px;
   border-radius: 8px;
-  color: #ffffff;
+  color: #0F172A;
   font-size: 0.82rem;
   font-weight: 700;
   box-shadow: 0 4px 20px rgba(5, 150, 105, 0.35);
@@ -470,7 +464,7 @@
 
 .mock-threshold-bar {
   height: 6px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
   border-radius: 10px;
   overflow: hidden;
   margin-top: 6px;
@@ -492,12 +486,12 @@
 
 .mock-date-pick {
   flex: 1;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   padding: 8px 12px;
   border-radius: 8px;
   font-size: 0.72rem;
-  color: #94A3B8;
+  color: #475569;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -512,7 +506,7 @@
 }
 
 .mock-date-pick .date-value {
-  color: #E2E8F0;
+  color: #0F172A;
   font-weight: 600;
 }
 
@@ -544,12 +538,12 @@
 }
 
 .pipeline-node {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   padding: 4px 10px;
   border-radius: 6px;
   font-size: 0.65rem;
-  color: #94A3B8;
+  color: #475569;
   font-weight: 600;
 }
 
@@ -571,12 +565,12 @@
 }
 
 .resume-chip {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   padding: 4px 10px;
   border-radius: 5px;
   font-size: 0.68rem;
-  color: #94A3B8;
+  color: #475569;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -591,9 +585,9 @@
 .chip-status.pass { background: #10B981; }
 .chip-status.fail { background: #EF4444; }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SECTION SHARED STYLES
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-section {
   position: relative;
   z-index: 10;
@@ -620,33 +614,33 @@
 }
 
 .faa-tag-blue {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  color: #60A5FA;
+  background: #EFF6FF;
+  border: 1px solid #DBEAFE;
+  color: #2563EB;
 }
 
 .faa-tag-purple {
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  color: #A78BFA;
+  background: #F5F3FF;
+  border: 1px solid #E9D5FF;
+  color: #7C3AED;
 }
 
 .faa-tag-green {
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
-  color: #34D399;
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #059669;
 }
 
 .faa-tag-emerald {
-  background: rgba(5, 150, 105, 0.1);
-  border: 1px solid rgba(5, 150, 105, 0.3);
-  color: #10B981;
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #047857;
 }
 
 .faa-section-header h2 {
   font-size: 32px;
   font-weight: 800;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 16px;
   line-height: 1.25;
 }
@@ -658,14 +652,14 @@
 }
 
 .faa-section-header p {
-  color: #94A3B8;
+  color: #475569;
   font-size: 1.05rem;
   line-height: 1.6;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    RECRUITER COMMAND MATRIX (MANUAL MODE)
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-matrix-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -687,23 +681,17 @@
 }
 
 .faa-matrix-card {
-  background: rgba(30, 41, 59, 0.3);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
   padding: 24px;
   display: flex;
   flex-direction: column;
   position: relative;
   overflow: hidden;
-  backdrop-filter: blur(20px);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   height: 100%;
 }
 
 .faa-matrix-card:hover {
-  border-color: rgba(139, 92, 246, 0.25);
   transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 20px rgba(139, 92, 246, 0.05);
 }
 
 .matrix-card-header {
@@ -742,13 +730,13 @@
 .faa-matrix-card h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 8px;
 }
 
 .faa-matrix-card p {
   font-size: 0.8rem;
-  color: #94A3B8;
+  color: #475569;
   line-height: 1.55;
   margin-bottom: 18px;
   flex-grow: 1;
@@ -756,8 +744,8 @@
 
 /* WIDGETS */
 .matrix-widget {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 10px;
   padding: 12px;
   display: flex;
@@ -797,13 +785,13 @@
 
 .upload-txt {
   font-size: 0.7rem;
-  color: #e2e8f0;
+  color: #0F172A;
   font-weight: 600;
 }
 
 .upload-bar {
   height: 4px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
   border-radius: 2px;
   overflow: hidden;
 }
@@ -845,7 +833,7 @@
 
 .threshold-slider {
   height: 4px;
-  background: rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
   border-radius: 2px;
   position: relative;
 }
@@ -878,7 +866,7 @@
 .excel-preview-name {
   font-size: 0.7rem;
   font-weight: 600;
-  color: #94A3B8;
+  color: #475569;
   max-width: 90px;
   white-space: nowrap;
   overflow: hidden;
@@ -920,14 +908,14 @@
 
 .send-status {
   font-size: 0.68rem;
-  color: #94A3B8;
+  color: #475569;
   font-weight: 600;
 }
 
 .matrix-send-btn {
   background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
   border: none;
-  color: #ffffff;
+  color: #0F172A;
   padding: 7px 12px;
   border-radius: 6px;
   font-size: 0.68rem;
@@ -954,7 +942,7 @@
 
 .interview-status {
   font-size: 0.68rem;
-  color: #94A3B8;
+  color: #475569;
   font-weight: 600;
 }
 
@@ -978,9 +966,9 @@
   border-color: rgba(59, 130, 246, 0.4);
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    AUTONOMOUS PIPELINE FUNNEL (FULLY AUTOMATIC)
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-funnel-layout {
   display: flex;
   flex-direction: column;
@@ -1069,7 +1057,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #0B1120;
+  background: #FFFFFF;
   border: 2px solid #10B981;
   display: flex;
   align-items: center;
@@ -1084,8 +1072,8 @@
 }
 
 .funnel-stage-details {
-  background: rgba(30, 41, 59, 0.25);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 14px;
   padding: 20px;
   flex-grow: 1;
@@ -1095,20 +1083,20 @@
 
 .funnel-stage-details:hover {
   border-color: rgba(16, 185, 129, 0.2);
-  background: rgba(30, 41, 59, 0.35);
+  background: #FFFFFF;
   transform: translateX(4px);
 }
 
 .funnel-stage-details h3 {
   font-size: 1.05rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 6px;
 }
 
 .funnel-stage-details p {
   font-size: 0.8rem;
-  color: #94A3B8;
+  color: #475569;
   line-height: 1.5;
   margin-bottom: 12px;
 }
@@ -1155,8 +1143,8 @@
 
 .funnel-date-item {
   flex: 1;
-  background: rgba(15, 23, 42, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   padding: 8px 12px;
   border-radius: 8px;
   display: flex;
@@ -1194,8 +1182,8 @@
 }
 
 .faa-funnel-console {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(16, 185, 129, 0.03);
@@ -1203,8 +1191,8 @@
 }
 
 .console-bar {
-  background: rgba(30, 41, 59, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
   padding: 12px 16px;
   display: flex;
   align-items: center;
@@ -1237,7 +1225,7 @@
 .console-title {
   font-size: 0.7rem;
   font-weight: 800;
-  color: #E2E8F0;
+  color: #0F172A;
   letter-spacing: 1.5px;
   flex-grow: 1;
 }
@@ -1263,7 +1251,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.78rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid #E2E8F0;
   padding-bottom: 8px;
 }
 
@@ -1273,7 +1261,7 @@
 }
 
 .param-val {
-  color: #ffffff;
+  color: #0F172A;
   font-weight: 700;
 }
 
@@ -1287,13 +1275,13 @@
 
 .console-screen-divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
   margin: 4px 0;
 }
 
 .console-logs-screen {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
   border-radius: 8px;
   padding: 14px;
   font-family: 'Fira Code', 'Courier New', Courier, monospace;
@@ -1317,7 +1305,7 @@
 .console-log {
   font-size: 0.68rem;
   line-height: 1.4;
-  color: #94A3B8;
+  color: #475569;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1347,9 +1335,9 @@
   box-shadow: inset 0 0 10px rgba(16, 185, 129, 0.05);
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FEATURE CARDS
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-cards-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1363,8 +1351,8 @@
 }
 
 .faa-feature-card {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
   padding: 32px;
   backdrop-filter: blur(20px);
@@ -1408,22 +1396,22 @@
 .faa-feature-card h3 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 12px;
 }
 
 .faa-feature-card p {
-  color: #94A3B8;
+  color: #475569;
   font-size: 0.88rem;
   line-height: 1.65;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    CTA SECTION
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-cta {
-  background: linear-gradient(145deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 24px;
   padding: 48px 24px;
   text-align: center;
@@ -1443,7 +1431,7 @@
 .faa-cta h2 {
   font-size: 32px;
   font-weight: 800;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 16px;
   line-height: 1.2;
 }
@@ -1455,7 +1443,7 @@
 }
 
 .faa-cta p {
-  color: #94A3B8;
+  color: #475569;
   font-size: 1.05rem;
   line-height: 1.6;
   max-width: 640px;
@@ -1481,9 +1469,9 @@
   color: #64748B;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    MODE COMPARISON SECTION
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-comparison-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1497,8 +1485,8 @@
 }
 
 .faa-compare-card {
-  background: rgba(30, 41, 59, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
   padding: 36px;
   backdrop-filter: blur(20px);
@@ -1570,7 +1558,7 @@
 .compare-card-header h3 {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
 }
 
 .compare-card-header .compare-subtitle {
@@ -1590,9 +1578,9 @@
   align-items: flex-start;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid #E2E8F0;
   font-size: 0.85rem;
-  color: #CBD5E1;
+  color: #475569;
   line-height: 1.5;
 }
 
@@ -1622,19 +1610,19 @@
   color: #34D399;
 }
 
-/* ═══════════════════════════════
-   MANUAL MODE — 3-STEP WIZARD MOCKUP
-   ═══════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   MANUAL MODE â€” 3-STEP WIZARD MOCKUP
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
 /* Stepper Navigation */
 .mock-stepper-nav {
   display: flex;
   gap: 2px;
   margin-bottom: 16px;
-  background: rgba(0, 0, 0, 0.25);
+  background: #F1F5F9;
   border-radius: 10px;
   padding: 3px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid #E2E8F0;
 }
 
 .mock-stepper-tab {
@@ -1662,7 +1650,7 @@
   width: 16px;
   height: 16px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1672,19 +1660,19 @@
 }
 
 .mock-stepper-tab:hover {
-  color: #94A3B8;
-  background: rgba(255, 255, 255, 0.03);
+  color: #475569;
+  background: #FFFFFF;
 }
 
 .mock-stepper-tab.active-step {
-  color: #E2E8F0;
+  color: #0F172A;
   background: rgba(59, 130, 246, 0.12);
   box-shadow: 0 0 12px rgba(59, 130, 246, 0.1);
 }
 
 .mock-stepper-tab.active-step .stepper-num {
   background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-  color: #ffffff;
+  color: #0F172A;
   box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
 }
 
@@ -1698,7 +1686,7 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* Screening Chips — Pass / Fail */
+/* Screening Chips â€” Pass / Fail */
 .mock-screening-results {
   display: flex;
   flex-direction: column;
@@ -1777,10 +1765,10 @@
   animation-delay: 1.5s;
 }
 
-/* Step 2: Assessment — Role Selector & Date Picker */
+/* Step 2: Assessment â€” Role Selector & Date Picker */
 .mock-role-selector {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   padding: 8px 12px;
   border-radius: 8px;
   display: flex;
@@ -1804,8 +1792,8 @@
 
 .mock-validity-field {
   flex: 1;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 7px;
   padding: 7px 10px;
   display: flex;
@@ -1866,7 +1854,7 @@
   background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
   padding: 8px 14px;
   border-radius: 7px;
-  color: #ffffff;
+  color: #0F172A;
   font-size: 0.72rem;
   font-weight: 700;
   margin-top: 8px;
@@ -1937,7 +1925,7 @@
 
 .mock-chat-msg {
   font-size: 0.72rem;
-  color: #CBD5E1;
+  color: #475569;
   line-height: 1.5;
   font-style: italic;
 }
@@ -1979,7 +1967,7 @@
 /* Stepper Progress Bar below tabs */
 .mock-stepper-progress {
   height: 3px;
-  background: rgba(255, 255, 255, 0.04);
+  background: #FFFFFF;
   border-radius: 3px;
   margin-bottom: 14px;
   overflow: hidden;
@@ -1992,9 +1980,9 @@
   transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    ANIMATIONS
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 @keyframes faaPing {
   75%, 100% {
     transform: scale(2);
@@ -2044,13 +2032,11 @@
 
 /* Section divider */
 .faa-section-divider {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(15, 23, 42, 0.2);
 }
 
-/* ═══════════════════════════════
-   WHY CHOOSE US — BEFORE / AFTER
-   ═══════════════════════════════ */
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   WHY CHOOSE US â€” BEFORE / AFTER
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-before-after-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -2065,8 +2051,8 @@
 }
 
 .faa-ba-card {
-  background: rgba(30, 41, 59, 0.35);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 20px;
   padding: 32px;
   backdrop-filter: blur(20px);
@@ -2139,7 +2125,7 @@
 .ba-card-header h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
   font-family: 'Poppins', sans-serif;
   margin: 0;
 }
@@ -2161,9 +2147,9 @@
   align-items: flex-start;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid #E2E8F0;
   font-size: 0.86rem;
-  color: #CBD5E1;
+  color: #475569;
   line-height: 1.55;
 }
 
@@ -2172,7 +2158,7 @@
 }
 
 .ba-list li strong {
-  color: #ffffff;
+  color: #0F172A;
 }
 
 .ba-x {
@@ -2219,8 +2205,8 @@
 }
 
 .faa-impact-item {
-  background: rgba(30, 41, 59, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   padding: 28px 20px;
   text-align: center;
@@ -2237,7 +2223,7 @@
 .impact-num {
   font-size: 2.5rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 8px;
   font-family: 'Poppins', sans-serif;
   line-height: 1;
@@ -2252,15 +2238,15 @@
 
 .impact-label {
   font-size: 0.8rem;
-  color: #94A3B8;
+  color: #475569;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SCROLL REVEAL ANIMATIONS
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-scroll-reveal {
   opacity: 0;
   transform: translateY(40px) scale(0.98);
@@ -2273,9 +2259,9 @@
   transform: translateY(0) scale(1);
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    FUTURISTIC SYSTEM LOADER SCREEN
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-loader-screen {
   position: fixed;
   inset: 0;
@@ -2318,8 +2304,8 @@
   align-items: center;
   padding: 40px 30px;
   border-radius: 20px;
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   backdrop-filter: blur(20px);
 }
 
@@ -2344,7 +2330,7 @@
   font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   font-weight: 800;
-  color: #ffffff;
+  color: #0F172A;
   margin-bottom: 24px;
   letter-spacing: -1.5px;
 }
@@ -2399,11 +2385,11 @@
 .loader-progress-bar {
   width: 100%;
   height: 6px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #FFFFFF;
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.02);
+  border: 1px solid #E2E8F0;
 }
 
 .loader-progress-fill {
@@ -2417,12 +2403,12 @@
 .loader-percent {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #ffffff;
+  color: #0F172A;
 }
 
-/* ═══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    WORKFLOW HUB & SANDBOX SELECTOR
-   ═══════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .faa-hub-tabs {
   display: flex;
   justify-content: center;
@@ -2432,9 +2418,9 @@
 }
 
 .faa-hub-tab {
-  background: rgba(30, 41, 59, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #94A3B8;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  color: #475569;
   padding: 12px 24px;
   border-radius: 12px;
   font-size: 0.82rem;
@@ -2446,14 +2432,14 @@
 
 .faa-hub-tab:hover {
   border-color: rgba(96, 165, 250, 0.3);
-  color: #ffffff;
+  color: #0F172A;
   transform: translateY(-2px);
 }
 
 .faa-hub-tab.active {
   background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
+  border-color: #E2E8F0;
+  color: #0F172A;
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
 }
 

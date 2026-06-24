@@ -36,6 +36,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import CompaniesPage from './pages/CompaniesPage';
 import DashboardHome from './pages/DashboardHome';
 import ActivityFeed from './pages/ActivityFeed';
+import PricingManagement from './pages/PricingManagement';
 
 function App() {
   return (
@@ -54,6 +55,13 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <DashboardHome />
+            </Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/pricing" element={
+          <ProtectedRoute>
+            <Layout>
+              <PricingManagement />
             </Layout>
           </ProtectedRoute>
         } />
