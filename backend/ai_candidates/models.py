@@ -182,6 +182,22 @@ class StandaloneResumeScreening(models.Model):
 
     # Optional: Link to the Company/User who ran the screening
     company = models.ForeignKey('api.Company', on_delete=models.CASCADE, null=True, blank=True)
+    user_profile = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='standalone_resume_screenings',
+        help_text="The user who currently owns this candidate record",
+    )
+    created_by = models.ForeignKey(
+        'api.UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_standalone_resumes',
+        help_text="Original creator — immutable audit field",
+    )
     batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
     batch_name = models.CharField(max_length=255, blank=True, null=True)
 

@@ -27,6 +27,9 @@ def dashboard_summary_view(request):
         ai_assessments_qs = AIAssessmentSubmission.objects.filter(is_deleted=False).exclude(status='ONGOING')
         custom_assessments_qs = Assessment.objects.filter(is_deleted=False)
         ai_candidates_qs = Candidate.objects.filter(is_deleted=False)
+        
+        from ai_candidates.models import StandaloneResumeScreening
+        standalone_qs = StandaloneResumeScreening.objects.all()
 
         if scoped_ids is not None:
             # Fixed RBAC: inclusion by either recruiter or assessment owner
@@ -39,7 +42,15 @@ def dashboard_summary_view(request):
             interviews_qs = interviews_qs.filter(interview__created_by_id__in=scoped_ids)
             custom_assessments_qs = custom_assessments_qs.filter(user_profile_id__in=scoped_ids)
             ai_candidates_qs = ai_candidates_qs.filter(user_profile_id__in=scoped_ids)
-            # AIAssessmentSubmission link is via assessment
+            # StandaloneResumeScreening link is via user_profile
+            if user_profile.company:
+                standalone_qs = standalone_qs.filter(
+                    Q(company=user_profile.company) & (Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True))
+                )
+            else:
+                standalone_qs = standalone_qs.filter(
+                    Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True)
+                )
             ai_assessments_qs = ai_assessments_qs.filter(assessment__user_profile_id__in=scoped_ids)
 
         # Parse completed Live Interview feedbacks for "Hired" (Qualified) and "On Hold" outcomes
@@ -84,6 +95,7 @@ def dashboard_summary_view(request):
             results_qs.count() + 
             ai_assessments_qs.count() + 
             ai_candidates_qs.count() + 
+            standalone_qs.count() +
             interviews_qs.exclude(status='draft').count()
         )
         
@@ -138,6 +150,9 @@ def dashboard_summary_view(request):
         # Resumes Analyzed
         resumes_analyzed = ai_candidates_qs.exclude(
             models.Q(status__in=['Invited', 'Extraction Failed']) | models.Q(email='pending@example.com')
+        ).count()
+        resumes_analyzed += standalone_qs.exclude(
+            models.Q(status__in=['New', 'Extraction Failed'])
         ).count()
 
         # Active/Total Assessments counts

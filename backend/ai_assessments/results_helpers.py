@@ -494,7 +494,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'total': 100,
                 'status': s.status,
                 'qual_pending': s.id in pending_qual_ai_ids,
-                'is_ai_interview': bool(s.interview_summary or s.status in ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected']),
+                'is_ai_interview': bool(s.interview_summary or s.status in ['Interview Passed', 'Interview Failed', 'Completed', 'Hired']),
                 'is_ai_candidate': True,
                 'is_resume_screening': True,
                 'delete_requested': f"Candidate_{s.id}" in active_deletions,

@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView, StandaloneResumeScreeningListCreateView, StandaloneResumeScreeningDetailView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, StandaloneTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView, StandaloneResumeScreeningListCreateView, StandaloneResumeScreeningDetailView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -8,6 +8,7 @@ urlpatterns = [
     path('<int:pk>/', CandidateDetailView.as_view(), name='candidate-detail'),
     path('<int:pk>/status/', CandidateStatusUpdateView.as_view(), name='candidate-status-update'),
     path('<int:pk>/timeline/', CandidateTimelineView.as_view(), name='candidate-timeline'),
+    path('standalone-resume/<int:pk>/timeline/', StandaloneTimelineView.as_view(), name='standalone-resume-timeline'),
     path('<int:pk>/integrity/', UpdateIntegrityView.as_view(), name='candidate-integrity-update'),
     path('public/<str:public_token>/', CandidatePublicDetailView.as_view(), name='candidate-public-detail'),
     path('public/<str:public_token>/status/', CandidatePublicStatusUpdateView.as_view(), name='candidate-public-status-update'),

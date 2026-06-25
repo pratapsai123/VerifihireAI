@@ -305,20 +305,28 @@ const ResultsAI = () => {
                     // For aicand_ records, the SINGLE record contains data for ALL stages
                     // We need to create separate stage entries that will be grouped by email
 
-                    const hasResume = r.resume_score > 0 || ['Resume Passed', 'Resume Failed', 'Extraction Failed'].includes(r.status);
+                    const hasResume = r.is_resume_screening || r.resume_score > 0 || ['Resume Passed', 'Resume Failed', 'Extraction Failed', 'New'].includes(r.status);
                     // For aicand_ records, technical assessment data is provided by separate 'ai_' prefixed records.
                     // We only create an assessment entry here if we have explicit MCQ/Coding data that isn't from the interview.
-                    const hasAssessment = r.is_fully_automatic && (r.mcq_score > 0 || r.coding_score > 0);
-                    const hasInterview = r.is_ai_interview || r.interview_summary?.length > 0 || ['Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'].includes(r.status);
+                    const hasAssessment = r.is_fully_automatic && (r.mcq_score != null || r.coding_score != null || r.total_questions > 0);
+                    const hasInterview = r.is_ai_interview || r.interview_summary?.length > 0 || ['Interview', 'Interview Passed', 'Interview Failed', 'Completed', 'Hired'].includes(r.status);
 
-                    // ALWAYS add resume entry if we have resume data
                     if (hasResume) {
+                        let finalResumeStatus = r.status;
+                        if (!r.is_resume_screening) {
+                            // For fully automatic flows, if they progressed past the resume stage, their status might be 'Completed' or 'Interview Passed'
+                            // We should show 'Resume Passed' in the Resume tab for those cases.
+                            if (!['Resume Failed', 'Extraction Failed', 'New'].includes(r.status)) {
+                                finalResumeStatus = 'Resume Passed';
+                            }
+                        }
+
                         resResults.push({
                             ...r,
                             _type: 'resume',
                             submission_id: `${sid}_resume`,
                             resume_score: r.resume_score || 0,
-                            status: r.status === 'Resume Passed' || r.resume_score >= 70 ? 'Resume Passed' : 'Resume Failed'
+                            status: finalResumeStatus
                         });
                     }
 
@@ -335,7 +343,7 @@ const ResultsAI = () => {
                             submitted_at: r.submitted_at || r.completed_at || r.created_at,
                             percentage: r.percentage || r.score || 0,
                             total_questions: r.total_questions,
-                            status: r.status === 'Completed' || r.status === 'Hired' ? 'selected' : (r.percentage >= 50 ? 'selected' : 'rejected'),
+                            status: ['Completed', 'Hired', 'Interview Passed', 'Interview', 'Assessment Passed'].includes(r.status) || r.status === 'selected' || r.status === 'Qualified' ? 'selected' : 'rejected',
                             assessment: r.assessment || {
                                 display_name: r.job_title || 'AI Assessment',
                                 name: r.job_title || 'AI Assessment',
@@ -597,7 +605,13 @@ const ResultsAI = () => {
             const isAssessment = !candidate.is_ai_candidate && (candidate.is_assessment || !!candidate.assessment_name || !!candidate.assessment || String(candidate.submission_id || '').startsWith('ai_'));
             let resp;
 
-            if (isAssessment) {
+            if (candidate.is_resume_screening) {
+                // Fetch Standalone Resume timeline
+                const realId = String(candidate.submission_id || candidate.id || '').replace('aicand_standalone_', '').replace(/_(resume)$/, '');
+                resp = await axios.get(`${API_BASE_URL}/ai-candidates/standalone-resume/${realId}/timeline/`, {
+                    headers: { Authorization: `Bearer ${getToken()}` }
+                });
+            } else if (isAssessment) {
                 // Fetch AI Assessment timeline
                 const realId = String(candidate.submission_id || candidate.id || '').replace('ai_', '');
                 resp = await axios.get(`${API_BASE_URL}/ai/submission/${realId}/timeline/`, {
@@ -798,11 +812,11 @@ const ResultsAI = () => {
             if (r.resume) return isPass(r.resume, 'resume');
             return false;
         }
-        if (type === 'resume') return r.status === 'Resume Passed' || (r.status !== 'Resume Failed' && r.resume_score > 0 && r.resume_score >= 70);
-        if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || (r.percentage != null && r.percentage >= 50);
+        if (type === 'resume') return r.status === 'Resume Passed';
+        if (type === 'assessment') return r.status === 'selected' || r.status === 'Qualified' || r.status === 'Interview' || r.status === 'Completed' || r.status === 'Hired';
         if (type === 'interview') {
             const possible = 140; // Always 14 questions * 10 points max
-            return r.status === 'Completed' || (r.score != null && (r.score / possible) >= 0.5);
+            return r.status === 'Completed' || r.status === 'Hired' || r.status === 'Interview Passed';
         }
         return false;
     };
@@ -1048,6 +1062,7 @@ const ResultsAI = () => {
         setViewMode('detail');
         setSearchParams({ tab: activeTab });
         setCurrentPage(1);
+        setStatusFilter('all');
     };
 
     const handleBackToOverview = () => {
@@ -1477,7 +1492,7 @@ const ResultsAI = () => {
                                                 </div>
                                                 <div style={{ background: 'white', padding: '1.5rem', borderRadius: '16px', border: '1px solid #E2E8F0', textAlign: 'center' }}>
                                                     <div style={{ color: '#64748B', fontSize: '0.9rem', fontWeight: '700', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Status</div>
-                                                    <div style={{ color: viewedSubmission.resume_score >= 70 ? '#05CD99' : '#EE5D50', fontSize: '1.5rem', fontWeight: '800', marginTop: '0.5rem' }}>{viewedSubmission.status}</div>
+                                                    <div style={{ color: viewedSubmission.status === 'Resume Passed' ? '#05CD99' : '#EE5D50', fontSize: '1.5rem', fontWeight: '800', marginTop: '0.5rem' }}>{viewedSubmission.status}</div>
                                                 </div>
                                             </div>
                                             {viewedSubmission.interview_questions?.length > 0 && (
@@ -2948,7 +2963,7 @@ const ResultsAI = () => {
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1.5rem' }}>
                                 <div>
                                     <h3 style={{ margin: 0, color: '#1B254B', fontSize: '1.2rem', fontWeight: '800' }}>
-                                        {timelineCandidate.is_assessment || String(timelineCandidate.submission_id || '').startsWith('ai_') ? 'AI Assessment Logs' : 'Interview Logs'}
+                                        {timelineCandidate.is_fully_automatic ? 'Pipeline Logs' : timelineCandidate.is_resume_screening ? 'Resume Logs' : timelineCandidate.is_assessment || String(timelineCandidate.submission_id || '').startsWith('ai_') ? 'AI Assessment Logs' : 'Interview Logs'}
                                     </h3>
                                     <p style={{ margin: '0.25rem 0 0', color: '#707EAE', fontSize: '0.85rem' }}>{timelineCandidate.full_name || timelineCandidate.candidate?.name}</p>
                                 </div>

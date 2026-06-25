@@ -735,7 +735,7 @@ You must respond with a JSON object containing:
             return {'error': 'Task failed after retries'}
 
 @shared_task(bind=True)
-def process_standalone_resume_screening_task(self, record_id):
+def process_standalone_resume_screening_task(self, record_id, threshold=50):
     from .models import StandaloneResumeScreening
     try:
         record = StandaloneResumeScreening.objects.get(pk=record_id)
@@ -883,6 +883,8 @@ def process_standalone_resume_screening_task(self, record_id):
     JOB DESCRIPTION:
     {job_description}
     
+    Sensitivity threshold: {threshold}%
+    
     SCORING RULES (Weighted & Professional):
     1. CORE SKILLS (50% weight): For every MUST-HAVE technology mentioned in the JD that is missing, subtract 10-15 points.
     2. SECONDARY SKILLS (15% weight): For minor tools or nice-to-have libraries, subtract only 3-5 points.
@@ -939,9 +941,9 @@ def process_standalone_resume_screening_task(self, record_id):
 
             record.resume_score = percentage
             record.resume_summary = match_result.get('summary', 'No summary provided by AI.')
-            record.status = 'Resume Passed' if percentage >= 50 else 'Resume Failed'
+            record.status = 'Resume Passed' if percentage >= threshold else 'Resume Failed'
             record.save()
-            status_icon = "PASS" if percentage >= 50 else "FAIL"
+            status_icon = "PASS" if percentage >= threshold else "FAIL"
             print(f"\n   Done! Score: {percentage}% {status_icon}")
         else:
             record.status = 'AI Analysis Failed'

@@ -65,11 +65,17 @@ const ResumeMatcher = () => {
                         setBatchId(null);
                         setIsAnalyzing(false);
                         if (matchMode === 'automatic') {
-                            setShowPopup(true);
+                            const hasEligible = Array.isArray(data.results) 
+                                ? data.results.some(r => r.is_eligible) 
+                                : data.results.is_eligible;
+                            
+                            if (hasEligible) {
+                                setShowPopup(true);
+                                setTimeout(() => {
+                                    setShowPopup(false);
+                                }, 4000);
+                            }
                             setResults(data.results);
-                            setTimeout(() => {
-                                setShowPopup(false);
-                            }, 4000);
                         } else {
                             setResults(data.results);
                         }
@@ -403,11 +409,17 @@ const ResumeMatcher = () => {
             } else {
                 setIsAnalyzing(false);
                 if (matchMode === 'automatic') {
-                    setShowPopup(true);
+                    const hasEligible = Array.isArray(data) 
+                        ? data.some(r => r.is_eligible) 
+                        : data.is_eligible;
+
+                    if (hasEligible) {
+                        setShowPopup(true);
+                        setTimeout(() => {
+                            setShowPopup(false);
+                        }, 4000);
+                    }
                     setResults(Array.isArray(data) ? data : [data]);
-                    setTimeout(() => {
-                        setShowPopup(false);
-                    }, 4000);
                 } else {
                     setResults(Array.isArray(data) ? data : [data]);
                 }

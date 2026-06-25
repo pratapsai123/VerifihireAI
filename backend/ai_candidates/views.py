@@ -869,11 +869,13 @@ class ResumeMatchView(APIView):
                         job_description=job_description,
                         status='New',
                         company=company,
+                        user_profile=user_profile,
+                        created_by=user_profile,
                         batch_id=batch_id,
                         batch_name=batch_name
                     )
                     results.append({"id": new_standalone.id, "name": candidate_name, "status": "Queued"})
-                    process_standalone_resume_screening_task.delay(new_standalone.id)
+                    process_standalone_resume_screening_task.delay(new_standalone.id, threshold=threshold)
                     
                 return Response({
                     "message": "Files successfully uploaded for manual screening.",
@@ -3497,8 +3499,72 @@ class CandidateTimelineView(APIView):
             logs.sort(key=lambda x: x.get('timestamp') or '')
 
             return Response(logs, status=status.HTTP_200_OK)
+
         except Candidate.DoesNotExist:
             return Response({'error': 'Candidate not found'}, status=status.HTTP_404_NOT_FOUND)
+
+class StandaloneTimelineView(APIView):
+    """
+    Dynamically generates pipeline logs for a manual StandaloneResumeScreening.
+    """
+    from rest_framework.permissions import IsAuthenticated
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, pk):
+        from .models import StandaloneResumeScreening
+        from django.utils import timezone as tz
+        try:
+            standalone = StandaloneResumeScreening.objects.get(pk=pk)
+            
+            user_profile = getattr(request.user, 'profile', None)
+            if not user_profile:
+                return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Permission check: ensure user belongs to same company
+            if not request.user.is_superuser and user_profile.company and standalone.company_id != user_profile.company_id:
+                return Response({'error': 'Unauthorized'}, status=status.HTTP_403_FORBIDDEN)
+
+            # Check hierarchy scope
+            from api._imports import get_scoped_user_ids
+            scoped_ids = get_scoped_user_ids(user_profile)
+            if not request.user.is_superuser and scoped_ids is not None and standalone.user_profile_id not in scoped_ids:
+                return Response({'error': 'Unauthorized: candidate is outside your reporting scope.'}, status=status.HTTP_403_FORBIDDEN)
+
+            logs = []
+            
+            # 1. Upload Log
+            if standalone.created_at:
+                local_created = tz.localtime(standalone.created_at)
+                logs.append({
+                    'id': f'ts_upload_{standalone.id}',
+                    'event_type': 'RESUME_UPLOADED',
+                    'status': 'INFO',
+                    'phase': 'RESUME',
+                    'batch_id': standalone.batch_id,
+                    'message': 'Manual resume successfully uploaded for processing.',
+                    'details': {},
+                    'timestamp': standalone.created_at.isoformat(),
+                    'timestamp_formatted': local_created.strftime('%B %d, %Y at %I:%M %p'),
+                })
+            
+            # 2. Status Log
+            if standalone.status != 'New':
+                logs.append({
+                    'id': f'ts_status_{standalone.id}',
+                    'event_type': 'SCREENING_COMPLETE',
+                    'status': 'SUCCESS' if standalone.status == 'Resume Passed' else ('ERROR' if standalone.status == 'Extraction Failed' else 'WARNING'),
+                    'phase': 'RESUME',
+                    'batch_id': standalone.batch_id,
+                    'message': f"Resume screening complete. Score: {standalone.resume_score}%. Status: {standalone.status}",
+                    'details': {'summary': standalone.resume_summary},
+                    'timestamp': standalone.created_at.isoformat(), # approximation since we don't track update_at
+                    'timestamp_formatted': local_created.strftime('%B %d, %Y at %I:%M %p'),
+                })
+
+            return Response(logs, status=status.HTTP_200_OK)
+            
+        except StandaloneResumeScreening.DoesNotExist:
+            return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
 
 
 class IntegrityScreenshotView(APIView):
@@ -4378,14 +4444,17 @@ class InterviewsOverviewView(APIView):
             for c in cands:
                 # Filter out candidates that are purely for resume screening
                 is_ai = False
-                if c.status in {'Interview', 'Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'}:
-                    is_ai = True
-                elif getattr(c, 'automation_settings', {}).get('is_fully_automatic', False):
-                    is_ai = True
-                elif getattr(c, 'automation_settings', {}).get('interview_duration_minutes'):
-                    is_ai = True
-                elif bool(getattr(c, 'interview_summary', None)):
-                    is_ai = True
+                if getattr(c, 'automation_settings', {}).get('is_fully_automatic', False):
+                    # For fully automatic flows, they only count as an AI Interview if they reach the interview stage
+                    if c.status in {'Interview', 'Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'} or bool(getattr(c, 'interview_summary', None)):
+                        is_ai = True
+                else:
+                    if c.status in {'Interview', 'Interview Passed', 'Interview Failed', 'Completed', 'Hired', 'Rejected', 'On-Hold'}:
+                        is_ai = True
+                    elif getattr(c, 'automation_settings', {}).get('interview_duration_minutes'):
+                        is_ai = True
+                    elif bool(getattr(c, 'interview_summary', None)):
+                        is_ai = True
                 
                 if not is_ai:
                     continue

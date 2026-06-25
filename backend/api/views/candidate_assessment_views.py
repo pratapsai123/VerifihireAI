@@ -2527,6 +2527,60 @@ def results_overview_view(request):
         results.extend(get_ai_candidate_results(
             scoped_ids, company_id, start_date, end_date, active_deletions, pending_qual_ai_ids, request=request
         ))
+        
+        # Include StandaloneResumeScreening
+        from ai_candidates.models import StandaloneResumeScreening
+        if scoped_ids is None:
+            if company_id:
+                standalone_qs = StandaloneResumeScreening.objects.filter(company_id=company_id).order_by('-created_at')
+            else:
+                standalone_qs = StandaloneResumeScreening.objects.all().order_by('-created_at')
+        else:
+            from django.db.models import Q
+            if company_id:
+                standalone_qs = StandaloneResumeScreening.objects.filter(
+                    Q(company_id=company_id) & (Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True))
+                ).order_by('-created_at')
+            else:
+                standalone_qs = StandaloneResumeScreening.objects.filter(
+                    Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True)
+                ).order_by('-created_at')
+            
+        if start_date:
+            standalone_qs = standalone_qs.filter(created_at__date__gte=start_date)
+        if end_date:
+            standalone_qs = standalone_qs.filter(created_at__date__lte=end_date)
+            
+        for sa in standalone_qs[:1000]:
+            results.append({
+                'id': sa.id,
+                'submission_id': f"aicand_standalone_{sa.id}",
+                'submitted_at': sa.created_at.isoformat() if sa.created_at else None,
+                'candidate_name': sa.full_name,
+                'candidate_email': sa.email,
+                'full_name': sa.full_name,
+                'email': sa.email,
+                'candidate': {
+                    'name': sa.full_name,
+                    'email': sa.email,
+                },
+                'assessment': {
+                    'id': f"standalone_resume",
+                    'display_name': getattr(sa, 'job_description', 'Manual Resume Screening')[:50] or 'Manual Resume Screening',
+                    'name': 'Manual Resume Screening',
+                },
+                'score': sa.resume_score,
+                'resume_score': sa.resume_score,
+                'percentage': sa.resume_score,
+                'status': sa.status,
+                'is_resume_screening': True,
+                'is_ai_candidate': True,
+                'batch_id': sa.batch_id,
+                'batch_name': sa.batch_name or 'Manual Uploads',
+                'is_fully_automatic': False,
+                'phone': sa.phone,
+            })
+
 
         # Also include non-submitted invitations (Standard Assessments)
         if company_id:
