@@ -704,15 +704,15 @@ const Dashboard = () => {
                     <h3>Candidates</h3>
                   </div>
                   <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
-                    <div className="stat-item">
+                    <div className="stat-item" style={{ borderRight: 'none' }}>
                       <span className="stat-label">Total Candidates</span>
                       <span className="stat-value">{data.stats.totalCandidates}</span>
                     </div>
-                    <div className="stat-item">
+                    <div className="stat-item" style={{ borderRight: 'none' }}>
                       <span className="stat-label">In Pipeline</span>
                       <span className="stat-value">{data.stats.inPipeline}</span>
                     </div>
-                    <div className="stat-item">
+                    <div className="stat-item" style={{ borderRight: 'none' }}>
                       <span className="stat-label">Hired</span>
                       <span className="stat-value">{data.stats.hired}</span>
                     </div>
