@@ -56,6 +56,16 @@ const CustomTooltip = ({ active, payload, label }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
             <span>Live interview:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.liveInterviews || 0}</span>
           </div>
+          <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Resume Screening:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.resumeScreening || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#64748b' }}>
+            <span>- Fully Automated:</span> <span style={{ fontWeight: 500 }}>{data.fullyAutomatedResumes || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#64748b' }}>
+            <span>- Standalone/Manual:</span> <span style={{ fontWeight: 500 }}>{data.manualResumes || 0}</span>
+          </div>
         </div>
       </div>
     );
