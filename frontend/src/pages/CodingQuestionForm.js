@@ -1,33 +1,33 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { 
-    Save, 
-    ArrowLeft, 
-    ExternalLink, 
-    Plus, 
-    Trash2, 
-    Clock, 
-    Cpu, 
-    Globe, 
-    Layout, 
-    Code, 
-    CheckCircle,
-    BarChart,
-    ChevronUp,
-    ChevronDown,
-    Search,
-    Database,
-    AlertCircle,
-    FileText,
-    Languages,
-    TrendingUp,
-    AlignLeft,
-    Timer,
-    ShieldCheck,
-    Hash,
-    Eye,
-    EyeOff
+import {
+  Save,
+  ArrowLeft,
+  ExternalLink,
+  Plus,
+  Trash2,
+  Clock,
+  Cpu,
+  Globe,
+  Layout,
+  Code,
+  CheckCircle,
+  BarChart,
+  ChevronUp,
+  ChevronDown,
+  Search,
+  Database,
+  AlertCircle,
+  FileText,
+  Languages,
+  TrendingUp,
+  AlignLeft,
+  Timer,
+  ShieldCheck,
+  Hash,
+  Eye,
+  EyeOff
 } from 'lucide-react';
 import Header from '../components/Header';
 import { API_BASE_URL } from '../apiConfig';
@@ -466,7 +466,7 @@ export default function CodingQuestionForm() {
       if (!form.title?.trim()) errors.title = 'Title is required';
       if (!form.languages?.length) errors.languages = 'Select at least one language';
       if (!form.difficulty) errors.difficulty = 'Difficulty level is required';
-      
+
       if (!timeInput) {
         errors.time_limit_ms = 'Time limit is required';
       } else if (timeError) {
@@ -634,16 +634,16 @@ export default function CodingQuestionForm() {
           <>
             {error && <div className="coding-card coding-error">{error}</div>}
 
-            <div className="coding-card">
+            <div className="coding-card" style={{ position: 'relative', zIndex: showLangs ? 10 : 1 }}>
               <div className="coding-form-grid">
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><FileText size={16} style={{marginRight: '6px'}}/> Title <span className="required-star">*</span></div>
+                  <div className="coding-label"><FileText size={16} style={{ marginRight: '6px' }} /> Title <span className="required-star">*</span></div>
                   <input value={form.title} onChange={(e) => update('title', e.target.value)} className="coding-input" style={{ height: '48px' }} placeholder="Question title" />
                   {fieldErrors.title && <span className="field-error-message">{fieldErrors.title}</span>}
                 </label>
 
                 <div className="coding-field coding-field-short">
-                  <div className="coding-label"><Languages size={16} style={{marginRight: '6px'}}/> Languages <span className="required-star">*</span></div>
+                  <div className="coding-label"><Languages size={16} style={{ marginRight: '6px' }} /> Languages <span className="required-star">*</span></div>
                   <div className="coding-multiselect" ref={langsRef}>
                     <div
                       className="coding-multiselect-trigger"
@@ -689,7 +689,7 @@ export default function CodingQuestionForm() {
                 </div>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><TrendingUp size={16} style={{marginRight: '6px'}}/> Difficulty Level <span className="required-star">*</span></div>
+                  <div className="coding-label"><TrendingUp size={16} style={{ marginRight: '6px' }} /> Difficulty Level <span className="required-star">*</span></div>
                   <select
                     value={form.difficulty}
                     onChange={(e) => update('difficulty', e.target.value)}
@@ -711,12 +711,12 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-wide">
-                  <div className="coding-label"><AlignLeft size={16} style={{marginRight: '6px'}}/> Description</div>
+                  <div className="coding-label"><AlignLeft size={16} style={{ marginRight: '6px' }} /> Description</div>
                   <textarea value={form.description || ''} onChange={(e) => update('description', e.target.value)} className="coding-textarea" rows={4} />
                 </label>
 
                 <label className="coding-field coding-field-wide">
-                  <div className="coding-label"><Code size={16} style={{marginRight: '6px'}}/> Starter code (editor default)</div>
+                  <div className="coding-label"><Code size={16} style={{ marginRight: '6px' }} /> Starter code (editor default)</div>
                   <textarea value={form.starter_code || ''} onChange={(e) => update('starter_code', e.target.value)} className="coding-textarea" rows={8} />
                 </label>
 
@@ -724,7 +724,7 @@ export default function CodingQuestionForm() {
                 {(form.languages || []).includes('sql') && (
                   <>
                     <label className="coding-field coding-field-short">
-                      <div className="coding-label"><Database size={16} style={{marginRight: '6px'}}/> Database Engine</div>
+                      <div className="coding-label"><Database size={16} style={{ marginRight: '6px' }} /> Database Engine</div>
                       <select
                         value={form.database_engine || 'postgres'}
                         onChange={(e) => update('database_engine', e.target.value)}
@@ -738,7 +738,7 @@ export default function CodingQuestionForm() {
                     </label>
 
                     <label className="coding-field coding-field-wide">
-                      <div className="coding-label"><Database size={16} style={{marginRight: '6px'}}/> Schema SQL (Setup command)</div>
+                      <div className="coding-label"><Database size={16} style={{ marginRight: '6px' }} /> Schema SQL (Setup command)</div>
                       <div className="coding-help-text" style={{ fontSize: '0.85rem', color: '#64748b', marginBottom: '8px' }}>
                         Define tables and insert initial data. Runs before each test case.
                       </div>
@@ -760,7 +760,7 @@ export default function CodingQuestionForm() {
             <div className="coding-card">
               <div className="coding-form-grid">
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Timer size={16} style={{marginRight: '6px'}}/> Time limit (HH:MM:SS) <span className="required-star">*</span></div>
+                  <div className="coding-label"><Timer size={16} style={{ marginRight: '6px' }} /> Time limit (HH:MM:SS) <span className="required-star">*</span></div>
                   <input
                     type="text"
                     value={timeInput}
@@ -779,7 +779,7 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><Cpu size={16} style={{marginRight: '6px'}}/> Execution RAM Limit (MB) <span className="required-star">*</span></div>
+                  <div className="coding-label"><Cpu size={16} style={{ marginRight: '6px' }} /> Execution RAM Limit (MB) <span className="required-star">*</span></div>
                   <input
                     type="number"
                     value={form.memory_limit_mb}
@@ -793,11 +793,11 @@ export default function CodingQuestionForm() {
                 </label>
 
                 <label className="coding-field coding-field-short">
-                  <div className="coding-label"><ShieldCheck size={16} style={{marginRight: '6px'}}/> Ready for Use <span className="required-star">*</span></div>
-                  <select 
-                    value={form.is_active ? 'yes' : 'no'} 
-                    onChange={(e) => update('is_active', e.target.value === 'yes')} 
-                    className="coding-input" 
+                  <div className="coding-label"><ShieldCheck size={16} style={{ marginRight: '6px' }} /> Ready for Use <span className="required-star">*</span></div>
+                  <select
+                    value={form.is_active ? 'yes' : 'no'}
+                    onChange={(e) => update('is_active', e.target.value === 'yes')}
+                    className="coding-input"
                     style={{ height: '48px' }}
                     required
                   >
@@ -831,10 +831,10 @@ export default function CodingQuestionForm() {
                       )}
                     </label>
                     <label className="coding-field coding-field-short">
-                      <div className="coding-label"><Eye size={16} style={{marginRight: '6px'}}/> Test Case Visibility</div>
-                      <select 
-                        value={tcHidden === null ? "" : (tcHidden ? 'yes' : 'no')} 
-                        onChange={(e) => { setTcHidden(e.target.value === 'yes'); setError(''); }} 
+                      <div className="coding-label"><Eye size={16} style={{ marginRight: '6px' }} /> Test Case Visibility</div>
+                      <select
+                        value={tcHidden === null ? "" : (tcHidden ? 'yes' : 'no')}
+                        onChange={(e) => { setTcHidden(e.target.value === 'yes'); setError(''); }}
                         className="coding-input"
                         style={{ height: '48px' }}
                         required
@@ -849,11 +849,11 @@ export default function CodingQuestionForm() {
                     </label>
                     <div className="coding-field">
                       <div className="coding-label">&nbsp;</div>
-                      <button 
-                        type="button" 
-                        className="btn btn-primary" 
-                        style={{ display: 'flex', alignItems: 'center', gap: '8px', height: '48px' }} 
-                        onClick={addTestcase} 
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        style={{ display: 'flex', alignItems: 'center', gap: '8px', height: '48px' }}
+                        onClick={addTestcase}
                         disabled={tcSaving}
                       >
                         <Plus size={18} />
