@@ -2469,6 +2469,13 @@ class CandidateRegistrationUpdateView(APIView):
 
             resume = request.FILES.get('resume')
             if resume:
+                allowed_extensions = ['.pdf', '.doc', '.docx']
+                file_name = resume.name.lower()
+                if not any(file_name.endswith(ext) for ext in allowed_extensions):
+                    return Response(
+                        {'error': 'Invalid resume format. Please upload a PDF, DOC, or DOCX file.'},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
                 candidate.resume = resume
 
             full_name = request.data.get('full_name')

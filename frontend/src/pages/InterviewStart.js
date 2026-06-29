@@ -195,7 +195,20 @@ const InterviewStart = () => {
     }, [candidate, checkWindow]);
 
     const handleFileChange = (e) => {
-        if (e.target.files && e.target.files[0]) setResumeFile(e.target.files[0]);
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const allowedExtensions = ['.pdf', '.doc', '.docx'];
+            const fileName = file.name.toLowerCase();
+            const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+            if (!hasValidExtension) {
+                setFormError('Please upload a valid resume file (PDF, DOC, or DOCX only). Image files are not accepted.');
+                e.target.value = '';
+                return;
+            }
+            setFormError('');
+            setResumeFile(file);
+        }
     };
 
     const handlePanPhotoChange = (e) => {
