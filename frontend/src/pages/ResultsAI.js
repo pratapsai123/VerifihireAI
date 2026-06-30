@@ -94,11 +94,10 @@ const LazyIntegrityImage = ({ screenshotId, type, fallbackBase64, fallbackUrl, a
                     onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=Error'; }}
                 />
             ) : (
-                <img
-                    src="https://placehold.co/100x100?text=No+Data"
-                    alt={alt}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
+                <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f1f5f9', flexDirection: 'column', gap: '4px' }}>
+                    <i className="fa-solid fa-image" style={{ fontSize: '1.2rem', color: '#94a3b8' }}></i>
+                    <span style={{ fontSize: '0.6rem', color: '#94a3b8', fontWeight: 600 }}>No capture</span>
+                </div>
             )}
         </div>
     );
@@ -605,8 +604,8 @@ const ResultsAI = () => {
             const isAssessment = !candidate.is_ai_candidate && (candidate.is_assessment || !!candidate.assessment_name || !!candidate.assessment || String(candidate.submission_id || '').startsWith('ai_'));
             let resp;
 
-            if (candidate.is_resume_screening) {
-                // Fetch Standalone Resume timeline
+            if (candidate.is_resume_screening && !candidate.is_ai_candidate) {
+                // Fetch Standalone Resume timeline (only for pure standalone screenings, not AI interview candidates)
                 const realId = String(candidate.submission_id || candidate.id || '').replace('aicand_standalone_', '').replace(/_(resume)$/, '');
                 resp = await axios.get(`${API_BASE_URL}/ai-candidates/standalone-resume/${realId}/timeline/`, {
                     headers: { Authorization: `Bearer ${getToken()}` }

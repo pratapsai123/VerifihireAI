@@ -72,10 +72,10 @@ function MainHeader() {
             textAlign: 'left'
           }}
         >
-          <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" style={{ height: '48px' }} />
-          <div className="brand-text-container" style={{ alignItems: 'center' }}>
-            <span className="brand-name-text" style={{ fontSize: '1.4rem' }}>VerifiHireAI</span>
-            <p className="brand-tagline" style={{ margin: 0, fontSize: '0.75rem', color: '#64748b' }}>Trust in Every Hire</p>
+          <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+          <div className="brand-text-container">
+            <span className="brand-name-text">VerifiHireAI</span>
+            <p className="brand-tagline">Trust in Every Hire</p>
           </div>
         </button>
 
