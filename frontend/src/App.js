@@ -39,6 +39,7 @@ import InterviewStart from './pages/InterviewStart';
 import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
+import StudentAiInterview from './pages/StudentAiInterview';
 import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
@@ -486,6 +487,7 @@ function AppContent() {
             {/* Interviewer View */}
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
             <Route path="/ai-interview" element={<AiInterview />} />
+            <Route path="/student/ai-interview" element={<StudentAiInterview />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />

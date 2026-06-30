@@ -13,6 +13,7 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/ai/', include('ai_assessments.urls')),
     path('api/ai-candidates/', include('ai_candidates.urls')),
+    path('api/students/', include('students.urls')),
 ]
 
 # Serve media files directly from backend (used as fallback for Nginx proxy)

@@ -560,7 +560,7 @@ const Dashboard = () => {
                   <button
                     className="btn-premium btn-fill"
                     style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
-                    onClick={() => navigate('/ai-interview')}
+                    onClick={() => navigate('/student/ai-interview')}
                   >
                     Start Mock Interview
                   </button>
