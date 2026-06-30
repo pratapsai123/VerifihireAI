@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Model Deployment", 
+  "questions": [
+    {
+    "question": "What does 'Model Deployment' mean in the context of Machine Learning?",
+    "options": {
+      "A": "The process of deleting a model after it becomes outdated.",
+      "B": "Integrating a trained model into a production environment to make predictions on new data.",
+      "C": "Writing the initial Python code to train a linear regression.",
+      "D": "Visualizing the training loss using Matplotlib."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A model must be 'Serialized' (saved to a file) before it can be deployed to a production server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common file formats for saving a trained model? (Select all that apply)",
+    "options": {
+      "A": "Pickle (.pkl)",
+      "B": "ONNX",
+      "C": "Joblib",
+      "D": "MP3"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is an 'API' in the context of model deployment?",
+    "options": {
+      "A": "A physical cable connecting the server to the internet.",
+      "B": "An interface that allows different software applications to communicate with the deployed model.",
+      "C": "A specialized type of neural network layer.",
+      "D": "The percentage of accuracy the model achieved during training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular Python framework used to create web APIs for model deployment?",
+    "options": {
+      "A": "Pandas",
+      "B": "FastAPI",
+      "C": "Scikit-Learn",
+      "D": "Seaborn"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Inference' refers to the process of a deployed model making predictions on input data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of model deployment? (Select all that apply)",
+    "options": {
+      "A": "Real-time (Request-Response)",
+      "B": "Batch (Asynchronous)",
+      "C": "Edge Deployment (On-device)",
+      "D": "Manual Spreadsheet Calculation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Containerization' (e.g., using Docker) useful for in deployment?",
+    "options": {
+      "A": "To make the model file size smaller.",
+      "B": "To package the model and its dependencies so it runs consistently across different environments.",
+      "C": "To automatically retrain the model every hour.",
+      "D": "To encrypt the model's weights and biases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cloud provider offers specialized services for machine learning deployment? (Select all that apply)",
+    "options": {
+      "A": "Amazon Web Services (SageMaker)",
+      "B": "Google Cloud Platform (Vertex AI)",
+      "C": "Microsoft Azure (Azure ML)",
+      "D": "Adobe Creative Cloud"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In a 'Batch' deployment, predictions are made immediately as soon as a single user requests them.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Scalability' mean for a deployed model?",
+    "options": {
+      "A": "The ability to handle an increasing number of prediction requests by adding resources.",
+      "B": "The ability to measure the model on a physical scale.",
+      "C": "The number of layers in a deep learning model.",
+      "D": "The accuracy of the model on a scale of 1 to 100."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in the context of model inference?",
+    "options": {
+      "A": "The total weight of the model file.",
+      "B": "The time it takes for a model to receive an input and return a prediction.",
+      "C": "The number of parameters in the model.",
+      "D": "The amount of data used for training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to manage containerized applications in production?",
+    "options": {
+      "A": "PyTorch",
+      "B": "Kubernetes",
+      "C": "Jupyter Notebook",
+      "D": "Excel"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model Monitoring' is the process of tracking a deployed model's performance over time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Model Drift'?",
+    "options": {
+      "A": "The server physically moving to a different location.",
+      "B": "The decline in a model's predictive performance due to changes in the underlying data patterns.",
+      "C": "A new type of activation function for CNNs.",
+      "D": "The speed at which a model is trained."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Web Server' (like Gunicorn or Uvicorn) in deployment?",
+    "options": {
+      "A": "To train the model on GPU.",
+      "B": "To handle incoming HTTP requests and pass them to the application code.",
+      "C": "To store the training dataset in a SQL database.",
+      "D": "To visualize the decision tree structure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are metrics monitored after deployment? (Select all that apply)",
+    "options": {
+      "A": "Request latency",
+      "B": "Prediction accuracy/error rate",
+      "C": "CPU and Memory usage",
+      "D": "The color of the server rack"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'REST API' typically uses JSON as the data format for sending and receiving model inputs/outputs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Edge Computing' in machine learning?",
+    "options": {
+      "A": "Training models at the edge of the galaxy.",
+      "B": "Running model inference locally on devices like smartphones or IoT sensors instead of the cloud.",
+      "C": "Calculating the edges of objects in image recognition.",
+      "D": "A way to speed up SQL queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CI/CD' stand for in a machine learning pipeline?",
+    "options": {
+      "A": "Categorical Input / Continuous Data",
+      "B": "Continuous Integration / Continuous Deployment",
+      "C": "Cloud Integration / Computing Device",
+      "D": "Calculation Index / Cost Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format is specifically designed for interoperability between different ML frameworks (like PyTorch and TensorFlow)?",
+    "options": {
+      "A": "CSV",
+      "B": "ONNX",
+      "C": "EXE",
+      "D": "TXT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should always deploy a model using a Jupyter Notebook directly in production.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput' in a model deployment context?",
+    "options": {
+      "A": "The number of prediction requests the system can handle in a given timeframe.",
+      "B": "The total number of neurons in a model.",
+      "C": "The file size of the training logs.",
+      "D": "The speed of the network cable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid HTTP methods for a model prediction API? (Select all that apply)",
+    "options": {
+      "A": "POST",
+      "B": "GET",
+      "C": "DELETE",
+      "D": "RUN"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'A/B Testing' for models?",
+    "options": {
+      "A": "Testing two models simultaneously to see which one performs better on real traffic.",
+      "B": "Testing if the model knows the alphabet.",
+      "C": "Using only letters A and B in the feature names.",
+      "D": "Training a model on two different computers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Heroku' and 'AWS Lambda' are examples of platforms where you can deploy lightweight ML models.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Dependency' for an ML model?",
+    "options": {
+      "A": "The specific versions of libraries (like NumPy or scikit-learn) required to run the model code.",
+      "B": "The location of the office where the developer works.",
+      "C": "The names of the project managers.",
+      "D": "The background color of the IDE."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Load Balancer'?",
+    "options": {
+      "A": "A tool that distributes incoming prediction requests across multiple server instances.",
+      "B": "A device that balances the physical weight of the server.",
+      "C": "A script that balances the training dataset classes.",
+      "D": "A specialized software for drawing graphs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Serverless' deployment?",
+    "options": {
+      "A": "Deploying a model without using any computers.",
+      "B": "A cloud computing model where the provider manages the server infrastructure automatically (e.g., AWS Lambda).",
+      "C": "Hiring a person to manually calculate predictions.",
+      "D": "Running a model exclusively on a local hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Flask is generally considered more modern and faster than FastAPI for asynchronous model deployment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common challenges in model deployment? (Select all that apply)",
+    "options": {
+      "A": "Version control of models",
+      "B": "High latency",
+      "C": "Hardware compatibility",
+      "D": "Choosing a font for the code"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Blue-Green Deployment' refer to?",
+    "options": {
+      "A": "A technique to reduce the environment's carbon footprint.",
+      "B": "A deployment strategy that uses two identical production environments to minimize downtime during updates.",
+      "C": "Color-coding the different layers of a neural network.",
+      "D": "Hiring a new team for model maintenance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'requirements.txt' file in an ML project?",
+    "options": {
+      "A": "To list the required computer hardware.",
+      "B": "To list the Python packages and their versions needed to run the application.",
+      "C": "To store the model's hyperparameters.",
+      "D": "To write the project documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: TensorFlow Serving is a flexible, high-performance serving system for machine learning models, designed for production environments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool allows you to version and track ML experiments and models?",
+    "options": {
+      "A": "Git",
+      "B": "MLflow",
+      "C": "Slack",
+      "D": "Photoshop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pickling' in Python?",
+    "options": {
+      "A": "Preserving data in vinegar.",
+      "B": "Converting a Python object (like a model) into a byte stream for storage or transmission.",
+      "C": "Increasing the speed of a for-loop.",
+      "D": "A security scan of the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In deployment, what is a 'Health Check'?",
+    "options": {
+      "A": "A medical exam for the software developer.",
+      "B": "An automated check to see if the model server is running and responding correctly.",
+      "C": "A way to count the number of neurons in a model.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Pre-trained' model for deployment is usually faster than training one from scratch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Endpoint' URL formats for a prediction API? (Select all that apply)",
+    "options": {
+      "A": "https://api.myapp.com/v1/predict",
+      "B": "https://api.myapp.com/get-results",
+      "C": "C:\\Users\\Desktop\\Model",
+      "D": "predict://my_model_now"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Auto-scaling'?",
+    "options": {
+      "A": "Automatically resizing images for a CNN.",
+      "B": "Automatically increasing or decreasing the number of server instances based on traffic volume.",
+      "C": "A security bridge for data transfers.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model Quantization'?",
+    "options": {
+      "A": "Increasing the number of bits used to store weights.",
+      "B": "Reducing the precision of model weights (e.g., from 32-bit to 8-bit) to make the model smaller and faster.",
+      "C": "Measuring the quantity of data in the training set.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Docker Hub' is a registry where you can store and share container images.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Online Learning' in deployment? (Select all that apply)",
+    "options": {
+      "A": "The model is updated continuously as new data arrives",
+      "B": "The model is trained once and never changed",
+      "C": "Useful for fast-changing data like stock prices",
+      "D": "Requires taking the entire system offline for weeks"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is a 'Feature Store'?",
+    "options": {
+      "A": "A physical shop that sells computer parts.",
+      "B": "A central repository for storing and managing curated features to be used in both training and deployment.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is a 'Pod'?",
+    "options": {
+      "A": "A physical storage container in a warehouse.",
+      "B": "The smallest deployable unit that can contain one or more containers.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard error handling (like try-except blocks) is important in production code to prevent the API from crashing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Model Serving' tools? (Select all that apply)",
+    "options": {
+      "A": "Seldon Core",
+      "B": "BentoML",
+      "C": "TorchServe",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment Variables' used for in deployment?",
+    "options": {
+      "A": "To save the physical temperature of the server room.",
+      "B": "To store configuration settings (like API keys or database URLs) securely outside of the code.",
+      "C": "A way to backup the SQL code.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Downtime' refer to?",
+    "options": {
+      "A": "The time spent sleeping by the developer.",
+      "B": "The period when a deployed system is unavailable to users.",
+      "C": "The time it takes to download a model.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Model Deployment is usually the final step of the Machine Learning lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Deployment' strategies? (Select all that apply)",
+    "options": {
+      "A": "Canary Deployment",
+      "B": "Rolling Update",
+      "C": "Recreate",
+      "D": "Deleting the database"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow Deployment'?",
+    "options": {
+      "A": "Deploying a model in a dark room.",
+      "B": "Sending production traffic to a new model version without using its outputs for actual decisions, to see how it performs.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Docker', what is an 'Image'?",
+    "options": {
+      "A": "A physical photo of a computer.",
+      "B": "A read-only template that contains the instructions for creating a Docker container.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deploying a model as a 'Microservice' allows it to be scaled and updated independently of the rest of the application.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are components of an 'MLOps' workflow? (Select all that apply)",
+    "options": {
+      "A": "Automated training",
+      "B": "Model versioning",
+      "C": "Performance monitoring",
+      "D": "Writing a novel about AI"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Model Pruning'?",
+    "options": {
+      "A": "Cutting branches off a physical tree.",
+      "B": "Removing unnecessary weights or neurons from a model to reduce its size and speed up inference.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Start' in serverless computing?",
+    "options": {
+      "A": "When the server physically feels cold.",
+      "B": "The delay that occurs when a serverless function is invoked for the first time or after a period of inactivity.",
+      "C": "A security scan of the database.",
+      "D": "A specialized tool for measuring light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'YAML' files are commonly used for configuration in Kubernetes and Docker Compose.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Batch' inference? (Select all that apply)",
+    "options": {
+      "A": "Predictions are made on a large group of records at once",
+      "B": "Predictions are usually stored in a database for later use",
+      "C": "High latency is generally acceptable",
+      "D": "Predictions must be returned within 10 milliseconds"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Encapsulation' in deployment?",
+    "options": {
+      "A": "Putting the model in a physical capsule.",
+      "B": "Hiding the internal logic of the model and providing a clean API for users.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'API' design, what is 'JSON'?",
+    "options": {
+      "A": "A person named Jason.",
+      "B": "JavaScript Object Notation: a lightweight data-interchange format.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Versioning' for your models allows you to roll back to a previous version if a new deployment fails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Canary Deployment'? (Select all that apply)",
+    "options": {
+      "A": "The new model is initially released to a small percentage of users",
+      "B": "It involves using a physical bird in the data center",
+      "C": "Performance is monitored before a full rollout",
+      "D": "The model is updated for everyone at once"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Infrastructure as Code' (IaC)?",
+    "options": {
+      "A": "Building a house using only code.",
+      "B": "Managing and provisioning server resources through machine-readable definition files (e.g., Terraform).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MLOps', what is 'Metadata'?",
+    "options": {
+      "A": "Information about a model run, such as hyperparameters, training time, and dataset version.",
+      "B": "A way to backup the storage layer.",
+      "C": "A specialized software for historians.",
+      "D": "A security scan for database viruses."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Model Deployment is purely a software engineering task and requires no input from Data Scientists.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of using 'Asynchronous' processing in a model deployment API?",
+    "options": {
+      "A": "To ensure the model is trained faster on the GPU.",
+      "B": "To allow the web server to handle other requests while waiting for a long-running inference task to complete.",
+      "C": "To automatically convert Python code into C++ for better speed.",
+      "D": "To encrypt the incoming JSON payload for enhanced security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Canary Deployment' involves routing all production traffic to the new model version immediately to check for server crashes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of using 'gRPC' instead of 'REST' for model serving? (Select all that apply)",
+    "options": {
+      "A": "Lower latency due to binary serialization with Protocol Buffers.",
+      "B": "Support for bidirectional streaming.",
+      "C": "Easier debugging because the payloads are human-readable text.",
+      "D": "Stronger typing through the use of .proto files."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'Horizontal Scaling' involve in a production ML environment?",
+    "options": {
+      "A": "Increasing the CPU and RAM of a single existing server instance.",
+      "B": "Adding more server instances or containers to distribute the load.",
+      "C": "Moving the model from a cloud server to a local hard drive.",
+      "D": "Changing the neural network architecture to have more layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Docker, what is the purpose of the '.dockerignore' file?",
+    "options": {
+      "A": "To tell the operating system to ignore the Docker installation.",
+      "B": "To prevent large or sensitive files (like local datasets or .git folders) from being included in the container image.",
+      "C": "To automatically delete containers that have finished running.",
+      "D": "To ignore errors that occur during the model training phase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model Latency' specifically refers to the time taken for the model to load from disk into memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metrics are essential for tracking 'Concept Drift' after a model is deployed? (Select all that apply)",
+    "options": {
+      "A": "Changes in the statistical distribution of the model's predictions over time.",
+      "B": "Degradation in the model's accuracy on new ground-truth data.",
+      "C": "The frequency of HTTP 500 errors from the API.",
+      "D": "The number of stars the project has on GitHub."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the function of a 'Circuit Breaker' in a microservices-based model deployment?",
+    "options": {
+      "A": "To physically cut the power if the server room gets too hot.",
+      "B": "To prevent a failing model service from causing a cascade of failures across the entire system.",
+      "C": "To accelerate the mathematical calculations of a model.",
+      "D": "To randomly shut down 50% of the servers to test system resilience."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is best suited for automating the deployment pipeline (CI/CD) for machine learning models?",
+    "options": {
+      "A": "Matplotlib",
+      "B": "Jenkins",
+      "C": "Scikit-learn",
+      "D": "Tableau"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sticky Sessions' in a load balancer ensure that a specific user's requests are always sent to the same server instance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Model Distillation'?",
+    "options": {
+      "A": "Removing water-damaged components from a server.",
+      "B": "Training a smaller, faster 'student' model to mimic the behavior of a larger, complex 'teacher' model.",
+      "C": "Converting a model's weights into a secret code.",
+      "D": "The process of filtering out outlier data before training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'Ingress Controller' in a Kubernetes-based deployment?",
+    "options": {
+      "A": "To manage the memory allocation of individual pods.",
+      "B": "To manage external access to the services in a cluster, typically via HTTP/HTTPS.",
+      "C": "To train the model on multi-node clusters.",
+      "D": "To delete old logs that occupy too much disk space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which strategy helps in handling 'Sudden Traffic Spikes' in a real-time inference API?",
+    "options": {
+      "A": "Deleting the model cache every 10 seconds.",
+      "B": "Implementing Auto-scaling policies for the underlying infrastructure.",
+      "C": "Using only GET requests instead of POST.",
+      "D": "Manual intervention by the developer to restart the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Green-Blue' deployment, the 'Green' environment represents the current production version that is live.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prometheus' primarily used for in MLOps?",
+    "options": {
+      "A": "Storing large image datasets.",
+      "B": "An open-source monitoring and alerting toolkit for tracking system and model metrics.",
+      "C": "Training deep learning models in the cloud.",
+      "D": "Encrypting the communication between microservices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following can lead to 'Environment Mismatch' during deployment? (Select all that apply)",
+    "options": {
+      "A": "Different versions of Python between development and production.",
+      "B": "Different hardware architectures (e.g., ARM vs x86).",
+      "C": "Missing system-level libraries in the production OS.",
+      "D": "Using different colors for the UI of the monitoring dashboard."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Model Versioning' intended to solve?",
+    "options": {
+      "A": "Making the model code look like a book.",
+      "B": "The ability to track, audit, and roll back to specific iterations of a trained model.",
+      "C": "Counting the number of neurons in each layer.",
+      "D": "Increasing the speed of the training process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Health Check' endpoint should ideally return a 200 OK status only if the model is fully loaded and ready to serve.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to build a Docker image from a 'Dockerfile' in the current directory?",
+    "options": {
+      "A": "docker run .",
+      "B": "docker build -t my_model .",
+      "C": "docker create -i .",
+      "D": "docker start image ."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cold Start' latency most common in?",
+    "options": {
+      "A": "High-performance GPU clusters.",
+      "B": "Serverless functions (like AWS Lambda) when they are invoked after a long period of inactivity.",
+      "C": "Batch processing on local hard drives.",
+      "D": "Linear regression models with only one feature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an API context, what does 'Payload' refer to?",
+    "options": {
+      "A": "The cost of running the server for one hour.",
+      "B": "The actual data sent in an HTTP request or response (e.g., the input features).",
+      "C": "The weight of the physical server rack.",
+      "D": "The number of parameters in the model architecture."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pickle' is the most secure way to share models because it cannot execute arbitrary code during unpickling.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical 'Logging' levels for a production model service? (Select all that apply)",
+    "options": {
+      "A": "INFO",
+      "B": "WARNING",
+      "C": "ERROR",
+      "D": "SARCASM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary advantage of 'Batch Inference' for non-real-time tasks?",
+    "options": {
+      "A": "It provides the lowest possible latency for individual users.",
+      "B": "It is more cost-efficient and can process large volumes of data using high-throughput resources.",
+      "C": "It eliminates the need for any model serialization.",
+      "D": "It allows the user to see the prediction results in 1 millisecond."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Triton Inference Server' provide?",
+    "options": {
+      "A": "A way to train models on mobile phones.",
+      "B": "An open-source inference serving software that supports multiple frameworks (TensorFlow, PyTorch, ONNX) on both GPUs and CPUs.",
+      "C": "A specialized software for drawing neural network diagrams.",
+      "D": "A way to backup data in the deep ocean."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Pre-built Containers' from cloud providers (like SageMaker Deep Learning Containers) can speed up the deployment process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Model Retraining' triggers? (Select all that apply)",
+    "options": {
+      "A": "Performance drop below a specific threshold.",
+      "B": "Appearance of significant data drift.",
+      "C": "Scheduled intervals (e.g., every week).",
+      "D": "The developer feeling lucky."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Feature Transformation' persistence in deployment?",
+    "options": {
+      "A": "The ability to transform features while the server is powered off.",
+      "B": "Saving the exact preprocessing parameters (like Mean and Variance for scaling) to apply them to incoming production data.",
+      "C": "Changing the names of the features in the SQL database.",
+      "D": "Hiring a professional to manually clean data in real-time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is a 'Deployment' object used for?",
+    "options": {
+      "A": "To store the model's training dataset.",
+      "B": "To describe the desired state for a group of pods, including how many replicas should be running.",
+      "C": "A security scan for database viruses.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stateless' model API does not store any information about previous requests in its memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Model Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into small pieces.",
+      "B": "Splitting a very large model into smaller parts and distributing them across multiple GPUs or servers for inference.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Post-deployment' validation techniques? (Select all that apply)",
+    "options": {
+      "A": "Smoke testing",
+      "B": "A/B testing",
+      "C": "Shadow testing",
+      "D": "Retrospective training"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inference Graph' optimization?",
+    "options": {
+      "A": "Drawing a prettier graph for the report.",
+      "B": "Simplifying and fusing the operations of a neural network to make it run faster on specific hardware.",
+      "C": "A security bridge for data transfers.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ONNX Runtime' is an engine used to accelerate the execution of ONNX models across different platforms.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which dimension of 'Auto-scaling' refers to changing the size (VCPUs/RAM) of the existing nodes?",
+    "options": {
+      "A": "Horizontal Scaling",
+      "B": "Vertical Scaling",
+      "C": "Diagonal Scaling",
+      "D": "Circular Scaling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Model Proxy'?",
+    "options": {
+      "A": "A person who votes on behalf of the model.",
+      "B": "An intermediary service that forwards requests to the appropriate model version based on routing rules.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MLOps', what is 'Data Validation' at the inference stage?",
+    "options": {
+      "A": "Checking the user's password.",
+      "B": "Ensuring that the incoming data for prediction matches the expected schema and data types used during training.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch size' during inference should always be set to 1 for maximum throughput.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Model Registry' functions? (Select all that apply)",
+    "options": {
+      "A": "Storing model artifacts.",
+      "B": "Tracking model metadata (author, date, metrics).",
+      "C": "Enforcing model approval workflows.",
+      "D": "Deleting user accounts."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Hardware Acceleration' for inference?",
+    "options": {
+      "A": "Driving a car faster with a computer.",
+      "B": "Using specialized chips like GPUs, TPUs, or FPGAs to speed up model calculations.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'FastAPI', what is 'Pydantic' used for?",
+    "options": {
+      "A": "Training neural networks.",
+      "B": "Data validation and settings management using Python type annotations.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'API Throttling' is a technique used to limit the number of requests a user can make to an API in a given period.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Event-driven' deployment? (Select all that apply)",
+    "options": {
+      "A": "Inference is triggered by an event (e.g., a file upload to S3).",
+      "B": "Commonly uses message queues like Kafka or RabbitMQ.",
+      "C": "Requires a persistent connection between client and server.",
+      "D": "The model runs only when a specific condition is met."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Model Explainability' (LIME/SHAP) in production?",
+    "options": {
+      "A": "Writing a long manual for the user.",
+      "B": "Providing an explanation for individual predictions to the end-user or for auditing purposes.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is a 'ConfigMap'?",
+    "options": {
+      "A": "A map showing where the servers are physically located.",
+      "B": "An object used to store non-confidential configuration data in key-value pairs.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Distributed Inference' involves running parts of a single model on multiple physical servers simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Model Deployment' patterns? (Select all that apply)",
+    "options": {
+      "A": "Model as a Service",
+      "B": "Model as a Library (embedded)",
+      "C": "Model as a SQL stored procedure",
+      "D": "Model as a physical book"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Quantization Aware Training' (QAT)?",
+    "options": {
+      "A": "Training a model while it's inside a physical container.",
+      "B": "Simulating quantization errors during training so the model becomes more robust to lower precision later.",
+      "C": "A way to speed up SQL queries.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deployment', what is 'Payload Redaction'?",
+    "options": {
+      "A": "Highlighting the most important data in red.",
+      "B": "The process of removing sensitive information (PII) from logs to maintain user privacy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Kubeflow' is a platform specifically designed for managing machine learning workflows on Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Request-Response' protocols? (Select all that apply)",
+    "options": {
+      "A": "HTTP/HTTPS",
+      "B": "WebSocket",
+      "C": "gRPC",
+      "D": "SMTP"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Sidecar Container' in Kubernetes?",
+    "options": {
+      "A": "A container that runs on a physical motorcycle.",
+      "B": "A helper container that runs alongside the main application container in the same pod to handle logging or monitoring.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Monitoring', what is 'Data Integrity' check?",
+    "options": {
+      "A": "Checking the moral integrity of the data scientist.",
+      "B": "Ensuring that the data flowing into the production model has not been corrupted or altered unexpectedly.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'A/B testing' requires a larger sample size than 'Shadow Deployment' to reach statistical significance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Serverless' advantages? (Select all that apply)",
+    "options": {
+      "A": "No infrastructure management required.",
+      "B": "Automatic scaling based on demand.",
+      "C": "Pay-as-you-go pricing model.",
+      "D": "Guaranteed 100% availability during cold starts."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Service Mesh' (e.g., Istio)?",
+    "options": {
+      "A": "A mesh used to filter water for the servers.",
+      "B": "An infrastructure layer that handles service-to-service communication, security, and traffic management.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MLOps', what is 'Pipeline' 'Orchestration'?",
+    "options": {
+      "A": "Hiring a band to play during training.",
+      "B": "Managing the automated execution of the various steps in the machine learning lifecycle.",
+      "C": "A security scan of the database.",
+      "D": "The total number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Container Orchestration' allows for automated deployment, scaling, and management of containerized models.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Model' 'Deployment' 'Environments'? (Select all that apply)",
+    "options": {
+      "A": "Development",
+      "B": "Staging",
+      "C": "Production",
+      "D": "Vacation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Graceful' 'Shutdown' in a production API?",
+    "options": {
+      "A": "Shutting down the server with a polite message.",
+      "B": "Allowing the server to finish processing current requests before stopping entirely.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Dashboard' 'Alerting'?",
+    "options": {
+      "A": "A siren that goes off in the office.",
+      "B": "Automated notifications triggered when a monitored metric (e.g., latency) crosses a threshold.",
+      "C": "A specialized software for poets.",
+      "D": "A security scan for database viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Docker Compose' is used to define and run multi-container Docker applications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Monitoring' 'Dashboards'? (Select all that apply)",
+    "options": {
+      "A": "Grafana",
+      "B": "Kibana",
+      "C": "Datadog",
+      "D": "Instagram"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Cold' 'Path' vs 'Hot' 'Path' in data architecture?",
+    "options": {
+      "A": "The temperature of the network cables.",
+      "B": "Hot Path is for real-time processing; Cold Path is for high-volume batch processing.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deployment', what is 'Load' 'Testing'?",
+    "options": {
+      "A": "Testing the physical load a server can carry.",
+      "B": "Simulating high traffic to determine the system's stability and performance limits.",
+      "C": "A specialized software for poets.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blue-Green' deployment allows for near-zero downtime by switching traffic between two identical environments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Kubernetes object is best suited for deploying a stateful model that requires a unique identity and stable storage across restarts?",
+    "options": {
+      "A": "Deployment",
+      "B": "StatefulSet",
+      "C": "ReplicaSet",
+      "D": "DaemonSet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model Distillation' typically involves using the 'soft targets' (probability distributions) from a teacher model to provide more information to the student model than raw labels alone.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are advanced 'Data Drift' detection algorithms? (Select all that apply)",
+    "options": {
+      "A": "Kolmogorov-Smirnov (K-S) test",
+      "B": "Population Stability Index (PSI)",
+      "C": "Jensen-Shannon Divergence",
+      "D": "Standard Euclidean Distance"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary function of a 'Service Mesh' (like Istio or Linkerd) in a high-scale model deployment environment?",
+    "options": {
+      "A": "To compress neural network weights for mobile devices.",
+      "B": "To handle service-to-service communication, including mutual TLS, traffic splitting, and retries.",
+      "C": "To act as a primary database for training logs.",
+      "D": "To automatically convert Python code into optimized C++ binaries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'TensorRT', what does 'Layer Fusion' achieve?",
+    "options": {
+      "A": "It merges two different models into one single file.",
+      "B": "It combines multiple nodes in the inference graph into a single kernel to reduce memory bandwidth and overhead.",
+      "C": "It adds more layers to the neural network to increase accuracy.",
+      "D": "It deletes the input layer to save processing time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Pod Autoscaler' (HPA) in Kubernetes can scale model replicas based on custom metrics like 'Inference Latency' rather than just CPU/Memory usage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these strategies is most effective for ensuring 'High Availability' of a model API across different geographical regions?",
+    "options": {
+      "A": "Increasing the batch size of the model.",
+      "B": "Multi-region deployment with a Global Load Balancer.",
+      "C": "Using a single large GPU in one data center.",
+      "D": "Renaming the API endpoints to match the local language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization Aware Training' (QAT) compared to 'Post-Training Quantization' (PTQ)?",
+    "options": {
+      "A": "QAT is only for linear models; PTQ is for deep learning.",
+      "B": "QAT models the effects of low-precision arithmetic during training to minimize the accuracy drop after deployment.",
+      "C": "PTQ requires a much larger training dataset than QAT.",
+      "D": "QAT is 100x slower during inference than PTQ."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Zero-Trust' security principle is applied when securing an ML microservice?",
+    "options": {
+      "A": "Trusting every internal request by default.",
+      "B": "Verifying every request's identity and permissions regardless of whether it originates inside or outside the network.",
+      "C": "Using the same password for all developers.",
+      "D": "Disabling the firewall during the deployment window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Sidecar' deployment pattern, the model server and the monitoring agent share the same network namespace and storage volumes within the same pod.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which components are required for 'Lineage Tracking' in an MLOps pipeline? (Select all that apply)",
+    "options": {
+      "A": "Git commit hashes for code",
+      "B": "Data versioning (e.g., DVC, LakeFS)",
+      "C": "Model artifacts in a registry",
+      "D": "The number of hours the GPU was active"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Cold Start' problem in Serverless ML, and how can 'Provisioned Concurrency' solve it?",
+    "options": {
+      "A": "It keeps the server room at 0 degrees Celsius.",
+      "B": "It pre-initializes a set number of execution environments to ensure the model is always 'warm' and ready for immediate requests.",
+      "C": "It increases the cost of the server by 500%.",
+      "D": "It deletes the model if it hasn't been used for 10 minutes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubeflow', what is the role of 'Katib'?",
+    "options": {
+      "A": "Automating the deployment of Docker containers.",
+      "B": "Hyperparameter tuning and neural architecture search within Kubernetes.",
+      "C": "Monitoring the power consumption of the data center.",
+      "D": "Storing the training datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Binary Serialization' (e.g., Protobuf) is generally faster for high-throughput ML APIs than text-based formats like JSON.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these tools are used for 'Model Explanation' at inference time in production? (Select all that apply)",
+    "options": {
+      "A": "SHAP (KernelExplainer)",
+      "B": "LIME",
+      "C": "Alibi Explain",
+      "D": "SQL EXPLAIN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inference Pipelining' in distributed model serving?",
+    "options": {
+      "A": "Hiring multiple people to run a model manually.",
+      "B": "Breaking model layers into different stages and running them in parallel across multiple devices to improve throughput.",
+      "C": "Moving the model from Python to a SQL server.",
+      "D": "A security scan of the network cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'NVIDIA Triton', what does 'Dynamic Batching' do?",
+    "options": {
+      "A": "It randomly changes the batch size every 5 seconds.",
+      "B": "It combines multiple individual inference requests into a single batch at the server level to increase throughput.",
+      "C": "It deletes requests that arrive too slowly.",
+      "D": "It increases the precision of the model weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Graph Compilers' (like Apache TVM) optimize models for specific hardware backends by generating efficient low-level code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are risks of 'Shadow Deployment'? (Select all that apply)",
+    "options": {
+      "A": "Increased resource consumption (running two models simultaneously)",
+      "B": "Potential impact on downstream systems if the shadow model's side effects are not contained",
+      "C": "Users receiving incorrect predictions from the shadow model",
+      "D": "Increased monitoring complexity"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Model Serialization' security risk known as 'Insecure Deserialization'?",
+    "options": {
+      "A": "When the model file is too large to download.",
+      "B": "When loading a model (e.g., from a Pickle file) allows for the execution of malicious code hidden in the file.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is an 'Operator' pattern in the context of ML?",
+    "options": {
+      "A": "A human operator who restarts servers.",
+      "B": "Custom controllers that extend the Kubernetes API to automate complex ML tasks like model training or distributed serving.",
+      "C": "A security scan for database viruses.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Canary' releases are better suited for detecting logical bugs in the model than 'Shadow' deployments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are metrics for 'Service Level Objectives' (SLOs) in model serving? (Select all that apply)",
+    "options": {
+      "A": "99th Percentile Latency (P99)",
+      "B": "Error Rate (HTTP 5xx)",
+      "C": "Availability (Uptime)",
+      "D": "Training loss after 100 epochs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Inter-process Communication' (IPC) overhead in model deployment?",
+    "options": {
+      "A": "The time developers spend talking to each other.",
+      "B": "The latency introduced when data is moved between the web server and the model inference engine.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MLOps', what is 'Concept Drift' vs 'Data Drift'?",
+    "options": {
+      "A": "They are exactly the same term.",
+      "B": "Data drift is a change in input distribution; Concept drift is a change in the relationship between input and target.",
+      "C": "Concept drift is only for linear regression.",
+      "D": "Data drift is 100x harder to detect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch' prediction pipelines should use 'Idempotent' logic to ensure that running the same job twice doesn't result in duplicate records.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Model compression' techniques? (Select all that apply)",
+    "options": {
+      "A": "Pruning",
+      "B": "Weight Sharing",
+      "C": "Knowledge Distillation",
+      "D": "Increasing the number of features"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Distributed' 'Request' 'Tracing' (e.g., Jaeger/Zipkin)?",
+    "options": {
+      "A": "Tracing a physical request through the mail.",
+      "B": "Monitoring a single request as it travels through multiple microservices to identify bottlenecks and failures.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kubernetes', what is 'Node' 'Affinity'?",
+    "options": {
+      "A": "How much a node likes the developer.",
+      "B": "A set of rules used by the scheduler to determine which nodes a pod can be placed on, based on labels.",
+      "C": "A security bridge for data transfers.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'gRPC' requires the use of 'Protocol Buffers' for defining the service interface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Blue-Green' 'Traffic' 'Switching'? (Select all that apply)",
+    "options": {
+      "A": "All users are moved from old to new version simultaneously",
+      "B": "Uses a load balancer to reroute traffic",
+      "C": "Allows for near-instant rollback",
+      "D": "Slowly moves 1% of users per day"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Model' 'Serving' 'Warm-up'?",
+    "options": {
+      "A": "Turning on the heater in the server room.",
+      "B": "Sending 'dummy' requests to a newly deployed model to ensure caches and JIT compilers are ready before production traffic arrives.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Monitoring', what is 'Liveness' vs 'Readiness' probe?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Liveness check if the container is running; Readiness checks if it's actually able to serve requests.",
+      "C": "Readiness is for beginners; Liveness for experts.",
+      "D": "Liveness is 100x faster to compute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ONNX' allows you to export a model from PyTorch and run it on a TensorFlow-based inference engine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' 'Machine' 'Learning' 'Services'? (Select all that apply)",
+    "options": {
+      "A": "AWS SageMaker",
+      "B": "GCP Vertex AI",
+      "C": "Azure Machine Learning",
+      "D": "Instagram Feed"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'REST' 'vs' 'Webhooks' in deployment?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "REST is for pulling data (request-response); Webhooks are for pushing data based on events.",
+      "C": "Webhooks are only for email.",
+      "D": "REST is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Security', what is 'Model' 'Inversion' 'Attack'?",
+    "options": {
+      "A": "Turning the model file upside down.",
+      "B": "An attempt to reconstruct the training data from the model's predictions or internal weights.",
+      "C": "A specialized software for historians.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Docker' 'Layers' are cached during build, meaning changes at the bottom of a Dockerfile take longer to build than changes at the top.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Data' 'Validation' 'Rules' for inference? (Select all that apply)",
+    "options": {
+      "A": "Range checks (e.g., Age must be 0-120)",
+      "B": "Null value checks",
+      "C": "Schema type checks",
+      "D": "The color of the JSON text"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Auto-scaling' 'Cooldown' 'Period'?",
+    "options": {
+      "A": "The time the server takes to freeze.",
+      "B": "A pause after a scaling event to allow the system to stabilize before scaling again.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'API' 'Design', what is 'Semantic' 'Versioning' (SemVer)?",
+    "options": {
+      "A": "Giving the version a meaningful name like 'Bob'.",
+      "B": "A convention using three numbers (Major.Minor.Patch) to indicate the level of changes in a release.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model' 'Stitch' involves combining a pre-processing pipeline and a trained model into a single deployable artifact.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Kubernetes' 'Namespace' benefits? (Select all that apply)",
+    "options": {
+      "A": "Isolating different project environments",
+      "B": "Resource quota management per team",
+      "C": "Reducing the number of characters in a query",
+      "D": "Improving cluster security and organization"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'In-memory' 'Model' 'Caching'?",
+    "options": {
+      "A": "Storing a physical model in a box.",
+      "B": "Keeping frequently accessed model weights or intermediate results in RAM to reduce inference time.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Log' 'Aggregation' 'Stack' (e.g., ELK)?",
+    "options": {
+      "A": "Hiring a person to stack physical logs.",
+      "B": "A suite of tools (Elasticsearch, Logstash, Kibana) used to collect, search, and visualize production logs.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'A/B' 'Testing' for models is inherently riskier than 'Shadow' deployment because it affects real user experience.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'GitOps' for ML? (Select all that apply)",
+    "options": {
+      "A": "Using Git as the single source of truth for infrastructure and model deployment",
+      "B": "Automated synchronization between Git repo and cluster state",
+      "C": "Manually pushing buttons in a web UI",
+      "D": "Using pull requests to trigger deployments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Model' 'Decay' 'Signature'?",
+    "options": {
+      "A": "A physical signature on a document.",
+      "B": "The specific pattern of performance loss over time that helps identify the cause of model drift.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Inference' 'Cost' 'Optimization'?",
+    "options": {
+      "A": "Hiring a cheaper developer.",
+      "B": "Strategies like request batching, model quantization, and spot instance usage to reduce cloud bills.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Model' 'Packaging' includes bundling the model file, dependencies, and inference script into a standardized container or library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Load' 'Balancing' algorithms? (Select all that apply)",
+    "options": {
+      "A": "Least Connections",
+      "B": "Weighted Round Robin",
+      "C": "IP Hash",
+      "D": "Random Deletion"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Serverless' 'Cold' 'Start' 'Impact'?",
+    "options": {
+      "A": "The speed of the server cooling fan.",
+      "B": "The extra latency added to the first request when a new instance is spun up from scratch.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deployment', what is 'Rate' 'Limiting' 'Algorithm' 'Token' 'Bucket'?",
+    "options": {
+      "A": "Filling a physical bucket with tokens.",
+      "B": "A mechanism that allows for bursts of traffic but maintains an average rate over time by consuming tokens from a 'bucket'.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stateless' microservices are generally easier to scale horizontally than 'Stateful' ones.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Model' 'Artifact' 'Types'? (Select all that apply)",
+    "options": {
+      "A": "Weights (.h5, .pt)",
+      "B": "Configuration files (JSON/YAML)",
+      "C": "Vocabulary files (for NLP)",
+      "D": "Physical office furniture"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Model' 'Serving' 'Graph' 'Rewrite'?",
+    "options": {
+      "A": "Rewriting the model on a piece of paper.",
+      "B": "Optimizing the computation graph by merging or removing operations to improve inference performance.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Real-time' 'Inference' 'Latency' 'SLA'?",
+    "options": {
+      "A": "A physical law about speed.",
+      "B": "A contractual agreement defining the maximum time allowed for a model to return a prediction.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data' 'Parity' ensures that the feature engineering code used during training is identical to the code used during production inference.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Container' 'Security' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Scanning images for vulnerabilities",
+      "B": "Running containers as non-root users",
+      "C": "Using minimal base images (e.g., Alpine)",
+      "D": "Sharing the root password in the Dockerfile"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Traffic' 'Replay'?",
+    "options": {
+      "A": "Replaying a video in a dark room.",
+      "B": "Taking logged production traffic and sending it to a test environment to validate a new model version.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a person name Shadow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'MLOps', what is 'Automated' 'Rollback'?",
+    "options": {
+      "A": "Rolling a physical ball back to the start.",
+      "B": "A system that automatically reverts to a previous model version if production metrics fall below a safety threshold.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Edge' 'Inference' reduces privacy risks by keeping sensitive user data on the device rather than sending it to the cloud.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Deployment' 'Configuration' 'Tools'? (Select all that apply)",
+    "options": {
+      "A": "Helm (for Kubernetes)",
+      "B": "Kustomize",
+      "C": "Docker Compose",
+      "D": "The company's social media strategy"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Throughput' 'vs' 'Latency'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Latency is the time for one request; Throughput is the total requests per second.",
+      "C": "Throughput is for beginners; Latency for experts.",
+      "D": "Latency is 100x faster to compute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Model' 'Agnostic' 'Serving'?",
+    "options": {
+      "A": "Serving a model that doesn't believe in anything.",
+      "B": "An inference server that can host models from any framework (e.g., PyTorch, Sklearn, XGBoost) using a standard API.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service' 'Discovery' allows microservices to find and communicate with each other dynamically without hardcoded IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Hardware' 'Specific' 'Compilers'? (Select all that apply)",
+    "options": {
+      "A": "NVIDIA TensorRT",
+      "B": "OpenVINO (Intel)",
+      "C": "XLA (Google)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Canary' 'Deployment' 'Error' 'Budget'?",
+    "options": {
+      "A": "The price of buying a canary bird.",
+      "B": "The acceptable amount of failure or error allowed during a gradual rollout before it is automatically stopped.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  }
+  ]
+}

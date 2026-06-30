@@ -1,0 +1,2105 @@
+{
+  "skill": "JavaScript",
+  "questions": [
+    {
+      "question": "Which keyword is used to declare a variable that cannot be reassigned?",
+      "options": {
+        "A": "var",
+        "B": "let",
+        "C": "const",
+        "D": "static"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the output of 'typeof null' in JavaScript?",
+      "options": {
+        "A": "null",
+        "B": "undefined",
+        "C": "object",
+        "//D": "boolean"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which data type is used for values that can only be true or false?",
+      "options": {
+        "A": "String",
+        "B": "Boolean",
+        "C": "Number",
+        "D": "Symbol"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of '2' + 2 in JavaScript?",
+      "options": {
+        "A": "4",
+        "B": "22",
+        "C": "NaN",
+        "D": "undefined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used for strict equality (checks both value and type)?",
+      "options": {
+        "A": "=",
+        "B": "==",
+        "C": "===",
+        "D": "!="
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of the expression: true + false?",
+      "options": {
+        "A": "true",
+        "B": "1",
+        "C": "NaN",
+        "D": "false"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'falsy' value in JavaScript?",
+      "options": {
+        "A": "'false'",
+        "B": "[]",
+        "C": "0",
+        "D": "{}"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which symbol is used for multi-line comments in JavaScript?",
+      "options": {
+        "A": "//",
+        "B": "",
+        "C": "/* */",
+        "D": "?? ??"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the output of: console.log(typeof NaN)?",
+      "options": {
+        "A": "'number'",
+        "B": "'NaN'",
+        "C": "'undefined'",
+        "D": "'object'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you create a Template Literal in JavaScript?",
+      "options": {
+        "A": "Using double quotes",
+        "B": "Using single quotes",
+        "C": "Using backticks (`)",
+        "D": "Using brackets"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the '===' operator check for?",
+      "options": {
+        "A": "Value only",
+        "B": "Type only",
+        "C": "Both value and type",
+        "D": "Memory address"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following is a way to declare a constant in ES6?",
+      "options": {
+        "A": "constant",
+        "B": "const",
+        "C": "let",
+        "D": "var"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of '5' - 2?",
+      "options": {
+        "A": "3",
+        "B": "52",
+        "C": "NaN",
+        "D": "undefined"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which data type is used to represent a property key that is unique and hidden?",
+      "options": {
+        "A": "String",
+        "B": "Symbol",
+        "C": "BigInt",
+        "D": "Object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What will be the output of: Boolean('false')?",
+      "options": {
+        "A": "false",
+        "B": "true",
+        "C": "undefined",
+        "D": "NaN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator returns the remainder of a division?",
+      "options": {
+        "A": "/",
+        "B": "%",
+        "C": "&",
+        "D": "^"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the data type of the variable 'arr' in: let arr = [1, 2, 3]?",
+      "options": {
+        "A": "Array",
+        "B": "Object",
+        "C": "List",
+        "D": "Collection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method converts a string to a floating-point number?",
+      "options": {
+        "A": "parseInt()",
+        "B": "parseFloat()",
+        "C": "toNumber()",
+        "D": "Math.float()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the output of: console.log(10 == '10')?",
+      "options": {
+        "A": "true",
+        "B": "false",
+        "C": "undefined",
+        "D": "Error"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a variable that can be updated but not re-declared in the same scope?",
+      "options": {
+        "A": "var",
+        "B": "const",
+        "C": "let",
+        "D": "static"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'break' statement?",
+      "options": {
+        "A": "To skip an iteration",
+        "B": "To exit a loop or switch",
+        "C": "To pause the script",
+        "D": "To throw an error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which logical operator represents 'AND'?",
+      "options": {
+        "A": "||",
+        "B": "!",
+        "C": "&&",
+        "D": "=="
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What will 'typeof undefined' return?",
+      "options": {
+        "A": "'object'",
+        "B": "'null'",
+        "C": "'undefined'",
+        "D": "'boolean'"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of these is used to declare a variable in the global scope regardless of block?",
+      "options": {
+        "A": "let",
+        "B": "const",
+        "C": "var",
+        "D": "None of these"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of: console.log(2 ** 3)?",
+      "options": {
+        "A": "6",
+        "B": "8",
+        "C": "5",
+        "D": "9"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which value represents 'intentional absence of any object value'?",
+      "options": {
+        "A": "undefined",
+        "B": "NaN",
+        "C": "null",
+        "D": "false"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you write 'Hello World' in an alert box?",
+      "options": {
+        "A": "msg('Hello World')",
+        "B": "alertBox('Hello World')",
+        "C": "alert('Hello World')",
+        "D": "console.log('Hello World')"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following is a valid variable name?",
+      "options": {
+        "A": "2names",
+        "B": "_name",
+        "C": "first-name",
+        "D": "let"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the output of: console.log(typeof [1,2])?",
+      "options": {
+        "A": "'array'",
+        "B": "'object'",
+        "C": "'list'",
+        "D": "'string'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which statement is used to execute different actions based on different conditions?",
+      "options": {
+        "A": "for",
+        "B": "while",
+        "C": "switch",
+        "D": "function"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which data type is immutable and represents unique identifiers?",
+      "options": {
+        "A": "String",
+        "B": "Object",
+        "C": "Symbol",
+        "D": "Number"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of 10 > 9 > 8?",
+      "options": {
+        "A": "true",
+        "B": "false",
+        "C": "NaN",
+        "D": "undefined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used to assign a value to a variable?",
+      "options": {
+        "A": "*",
+        "B": "x",
+        "C": "=",
+        "D": "-"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What will be the output of: console.log(1 + '2' + 3)?",
+      "options": {
+        "A": "6",
+        "B": "123",
+        "C": "33",
+        "D": "NaN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which built-in object contains mathematical constants and functions?",
+      "options": {
+        "A": "Arithmetic",
+        "B": "Math",
+        "C": "Number",
+        "D": "Calculation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to define a function in JavaScript?",
+      "options": {
+        "A": "def",
+        "B": "function",
+        "C": "func",
+        "D": "method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Anonymous Function'?",
+      "options": {
+        "A": "A function with no name",
+        "B": "A function that is never called",
+        "C": "A function that returns null",
+        "D": "A function inside a loop"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the output of calling a function before it is declared if it's a function declaration?",
+      "options": {
+        "A": "ReferenceError",
+        "B": "Undefined",
+        "C": "The function executes normally due to hoisting",
+        "D": "TypeError"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following is a function expression?",
+      "options": {
+        "A": "function myFunc() {}",
+        "B": "let myFunc = function() {};",
+        "C": "myFunc() = function {};",
+        "D": "function = myFunc() {}"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are the values passed into a function when it is invoked called?",
+      "options": {
+        "A": "Parameters",
+        "B": "Arguments",
+        "C": "Variables",
+        "D": "Inputs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Scope' of a variable declared with 'var' inside a function?",
+      "options": {
+        "A": "Global scope",
+        "B": "Block scope",
+        "C": "Function scope",
+        "D": "Local scope only"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of declaring a variable without 'let', 'var', or 'const' inside a function?",
+      "options": {
+        "A": "It becomes a global variable",
+        "B": "It throws an error",
+        "C": "It is scoped to the block",
+        "D": "It is deleted after the function runs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to execute a task after a specific number of milliseconds?",
+      "options": {
+        "A": "wait()",
+        "B": "sleep()",
+        "C": "setTimeout()",
+        "D": "setInterval()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does an Arrow Function return by default if there are no curly braces?",
+      "options": {
+        "A": "undefined",
+        "B": "The result of the expression (Implicit Return)",
+        "C": "null",
+        "D": "The function itself"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Can Arrow Functions be used as constructors (with 'new')?",
+      "options": {
+        "A": "Yes",
+        "B": "No",
+        "C": "Only in strict mode",
+        "D": "Only if they have a name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Closure' in JavaScript?",
+      "options": {
+        "A": "A way to close the browser",
+        "B": "A function that has access to its outer function's scope",
+        "C": "A method to end a loop",
+        "D": "Private variables in a class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a benefit of using Closures?",
+      "options": {
+        "A": "Faster execution",
+        "B": "Data privacy and encapsulation",
+        "C": "Global access to variables",
+        "D": "Automatic garbage collection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lexical Scope'?",
+      "options": {
+        "A": "Scope determined at runtime",
+        "B": "Scope determined by the position of variables in the source code",
+        "C": "The global scope only",
+        "D": "Scope that changes inside a loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an IIFE?",
+      "options": {
+        "A": "Internal Iteration Function Element",
+        "B": "Immediately Invoked Function Expression",
+        "C": "Instant Internal Function Execution",
+        "D": "Inherited Internal Function Entity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary reason to use an IIFE?",
+      "options": {
+        "A": "To create a loop",
+        "B": "To avoid polluting the global namespace",
+        "C": "To speed up the function",
+        "D": "To declare constants"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'this' refer to in a method inside an object?",
+      "options": {
+        "A": "The global window object",
+        "B": "The object itself",
+        "C": "The function",
+        "D": "undefined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method creates a new function with a fixed 'this' context?",
+      "options": {
+        "A": "call()",
+        "B": "apply()",
+        "C": "bind()",
+        "D": "fix()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the difference between call() and apply()?",
+      "options": {
+        "A": "call() takes an array; apply() takes individual arguments",
+        "B": "apply() takes an array; call() takes individual arguments",
+        "C": "There is no difference",
+        "D": "call() is for objects; apply() is for strings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do Arrow Functions handle the 'this' keyword?",
+      "options": {
+        "A": "They have their own 'this'",
+        "B": "They inherit 'this' from the surrounding lexical scope",
+        "C": "They always refer to the window object",
+        "D": "They cannot use 'this'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'strict mode', what is 'this' inside a regular function call?",
+      "options": {
+        "A": "window",
+        "B": "undefined",
+        "C": "null",
+        "D": "The function name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Higher-Order Function'?",
+      "options": {
+        "A": "A function that is very long",
+        "B": "A function that takes another function as an argument or returns one",
+        "C": "A function with many parameters",
+        "D": "The first function in a file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Currying' in JavaScript?",
+      "options": {
+        "A": "Converting a multi-argument function into a series of nested functions",
+        "B": "A way to delete a function",
+        "C": "Executing a function in the background",
+        "D": "Checking the type of a function"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Arguments' object?",
+      "options": {
+        "A": "An array of all parameters",
+        "B": "An array-like object available inside non-arrow functions containing all passed arguments",
+        "C": "A list of global variables",
+        "D": "An error log"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Callback' function?",
+      "options": {
+        "A": "A function that calls itself",
+        "B": "A function passed as an argument to be executed later",
+        "C": "A function that returns a Promise",
+        "D": "A function used for styling"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which ES6 feature allows representing an indefinite number of arguments as an array?",
+      "options": {
+        "A": "Spread operator",
+        "B": "Rest parameters (...args)",
+        "C": "Array.from()",
+        "D": "Split operator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of a Promise in JavaScript?",
+      "options": {
+        "A": "To speed up function execution",
+        "B": "To represent the eventual completion or failure of an asynchronous operation",
+        "C": "To create a private variable",
+        "D": "To loop through an object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is called when a Promise is successfully resolved?",
+      "options": {
+        "A": ".catch()",
+        "B": ".finally()",
+        "C": ".then()",
+        "D": ".done()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which method is used to handle errors in a Promise chain?",
+      "options": {
+        "A": ".then()",
+        "B": ".error()",
+        "C": ".catch()",
+        "D": ".reject()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'await' do when placed before a Promise?",
+      "options": {
+        "A": "It rejects the Promise",
+        "B": "It pauses function execution until the Promise settles",
+        "C": "It runs the Promise in a separate thread",
+        "D": "It cancels the Promise"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used to execute multiple Promises in parallel and wait for all to resolve?",
+      "options": {
+        "A": "Promise.race()",
+        "B": "Promise.all()",
+        "C": "Promise.sync()",
+        "D": "Promise.parallel()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Event Loop'?",
+      "options": {
+        "A": "A loop that counts events",
+        "B": "A mechanism that monitors the Call Stack and the Callback Queue",
+        "C": "A database for events",
+        "D": "The HTML rendering engine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following has higher priority in the event loop?",
+      "options": {
+        "A": "Macrotasks (setTimeout)",
+        "B": "Microtasks (Promises)",
+        "C": "UI Rendering",
+        "D": "Console logs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Callback Queue' also known as?",
+      "options": {
+        "A": "The Stack",
+        "B": "The Heap",
+        "C": "The Task Queue",
+        "D": "The Event List"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which state is a Promise in after it is created but before it is resolved or rejected?",
+      "options": {
+        "A": "Fulfilled",
+        "B": "Rejected",
+        "C": "Pending",
+        "D": "Settled"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does Promise.race() return?",
+      "options": {
+        "A": "An array of all results",
+        "B": "The result of the first Promise to settle",
+        "C": "Only the first rejected Promise",
+        "D": "Nothing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Web API is used to fetch resources across the network asynchronously?",
+      "options": {
+        "A": "XMLHttpRequest",
+        "B": "Fetch API",
+        "C": "Axios API",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the return type of the fetch() function?",
+      "options": {
+        "A": "A JSON object",
+        "B": "A Promise",
+        "C": "A String",
+        "D": "A Blob"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you parse a JSON response from a fetch call?",
+      "options": {
+        "A": "JSON.parse(response)",
+        "B": "response.json()",
+        "C": "response.parse()",
+        "D": "JSON.stringify(response)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Callback Hell'?",
+      "options": {
+        "A": "A slow server response",
+        "B": "Pyramid-shaped code caused by deeply nested asynchronous callbacks",
+        "C": "An error that cannot be fixed",
+        "D": "A loop that never ends"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to stop a timer created by setInterval()?",
+      "options": {
+        "A": "stopInterval()",
+        "B": "clearTimeout()",
+        "C": "clearInterval()",
+        "D": "endInterval()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of these is NOT a valid Promise method?",
+      "options": {
+        "A": "Promise.allSettled()",
+        "B": "Promise.any()",
+        "C": "Promise.wait()",
+        "D": "Promise.resolve()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'finally()' method in a Promise?",
+      "options": {
+        "A": "To handle errors",
+        "B": "To execute code regardless of whether the Promise was resolved or rejected",
+        "C": "To end the script",
+        "D": "To resolve the Promise manually"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the Event Loop, when are Microtasks executed?",
+      "options": {
+        "A": "Every 10ms",
+        "B": "After every Macrotask and before the next one",
+        "C": "Only when the browser is idle",
+        "D": "Before the Call Stack is empty"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Generator' function in JavaScript?",
+      "options": {
+        "A": "A function that generates random numbers",
+        "B": "A function that can be paused and resumed using the 'yield' keyword",
+        "C": "A function that creates HTML elements",
+        "D": "A recursive function"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which symbol is used to define a Generator function?",
+      "options": {
+        "A": "function!",
+        "B": "function*",
+        "C": "function&",
+        "D": "function#"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a Generator function return when called?",
+      "options": {
+        "A": "A value",
+        "B": "An Iterator object",
+        "C": "A Promise",
+        "D": "An Array"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'yield' keyword?",
+      "options": {
+        "A": "To stop the function forever",
+        "B": "To pause function execution and return a value to the caller",
+        "C": "To wait for a Promise",
+        "D": "To throw an error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Debouncing' in JavaScript?",
+      "options": {
+        "A": "Removing bugs from code",
+        "B": "Ensuring a function is only called once after a certain amount of idle time",
+        "C": "Limiting the number of times a function can be called over time",
+        "D": "Speeding up network requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Throttling'?",
+      "options": {
+        "A": "Increasing the speed of a function",
+        "B": "Ensuring a function is called at most once in a specified time interval",
+        "C": "Stopping a function from executing",
+        "D": "Handling multiple events at once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which object is used to perform asynchronous operations in older JS (pre-ES6)?",
+      "options": {
+        "A": "Promise",
+        "B": "XMLHttpRequest",
+        "C": "Fetch",
+        "D": "Async"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to turn a regular function into an asynchronous one?",
+      "options": {
+        "A": "wait",
+        "B": "async",
+        "C": "promise",
+        "D": "defer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Object.observe()' (now deprecated)?",
+      "options": {
+        "A": "To watch for file changes",
+        "B": "To asynchronously observe changes to an object",
+        "C": "To see the console logs",
+        "D": "To monitor network traffic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API allows you to run scripts in background threads?",
+      "options": {
+        "A": "Service Workers",
+        "B": "Web Workers",
+        "C": "Thread API",
+        "D": "Task API"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main limitation of a Web Worker?",
+      "options": {
+        "A": "It cannot run JavaScript",
+        "B": "It has no access to the DOM",
+        "C": "It cannot use timers",
+        "D": "It makes the website slow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mechanism is used for communication between the main thread and a Web Worker?",
+      "options": {
+        "A": "Global variables",
+        "B": "PostMessage API",
+        "C": "Shared memory only",
+        "D": "Direct function calls"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Service Worker'?",
+      "options": {
+        "A": "A script that runs in the browser background for features like offline support",
+        "B": "A person who fixes servers",
+        "C": "A method to style web pages",
+        "D": "A database tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following is required for a Service Worker to function?",
+      "options": {
+        "A": "HTTP",
+        "B": "HTTPS",
+        "C": "PHP",
+        "D": "FTP"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'LocalStorage'?",
+      "options": {
+        "A": "Temporary memory that clears on refresh",
+        "B": "Persistent key-value storage in the browser with no expiration date",
+        "C": "A database on the server",
+        "D": "A way to hide code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the size limit of LocalStorage in most browsers?",
+      "options": {
+        "A": "1KB",
+        "B": "5MB",
+        "C": "1GB",
+        "D": "Unlimited"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you remove an item from LocalStorage?",
+      "options": {
+        "A": "localStorage.deleteItem()",
+        "B": "localStorage.removeItem()",
+        "C": "localStorage.clear()",
+        "D": "localStorage.kill()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SessionStorage'?",
+      "options": {
+        "A": "Storage that lasts forever",
+        "B": "Storage that is cleared when the page session ends (tab is closed)",
+        "C": "Storage for server sessions only",
+        "D": "Storage for images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API is used to store large amounts of structured data in the browser?",
+      "options": {
+        "A": "LocalStorage",
+        "B": "IndexedDB",
+        "C": "SessionStorage",
+        "D": "Cookies"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Cookies' primarily used for?",
+      "options": {
+        "A": "Storing images",
+        "B": "Session management, personalization, and tracking",
+        "C": "Compiling JavaScript",
+        "D": "Improving CPU speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to stop the execution of a Generator and return a value?",
+      "options": {
+        "A": "stop",
+        "B": "break",
+        "C": "yield",
+        "D": "return"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'navigator.onLine' property return?",
+      "options": {
+        "A": "The browser name",
+        "B": "A boolean indicating if the browser has network connectivity",
+        "C": "The user's IP address",
+        "D": "The current URL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which event is triggered when the browser loses network connection?",
+      "options": {
+        "A": "offline",
+        "B": "disconnect",
+        "C": "lost",
+        "D": "stop"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to encode a URI component?",
+      "options": {
+        "A": "encodeURI()",
+        "B": "encodeURIComponent()",
+        "C": "escape()",
+        "D": "json.encode()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'JSONP'?",
+      "options": {
+        "A": "JSON with Padding, used to bypass CORS issues in older browsers",
+        "B": "A faster version of JSON",
+        "C": "JSON for Python",
+        "D": "A way to encrypt JSON"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Strict Mode' in JavaScript?",
+      "options": {
+        "A": "To make the code run faster",
+        "B": "To opt into a restricted variant of JavaScript that catches common coding bloopers",
+        "C": "To prevent using any variables",
+        "D": "To hide errors from the console"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you enable Strict Mode?",
+      "options": {
+        "A": "using strict;",
+        "B": "'use strict';",
+        "C": "strict mode = true;",
+        "D": "mode: strict;"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Intersection Observer API'?",
+      "options": {
+        "A": "To observe changes in an object",
+        "B": "To asynchronously observe changes in the intersection of a target element with an ancestor or viewport",
+        "C": "To check for network intersections",
+        "D": "To merge two arrays"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API provides a way to interact with the system's battery status?",
+      "options": {
+        "A": "Power API",
+        "B": "Battery Status API",
+        "C": "System API",
+        "D": "Charge API"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'History.pushState()'?",
+      "options": {
+        "A": "To refresh the page",
+        "B": "To add an entry to the browser's session history stack without a full page reload",
+        "C": "To go back to the previous page",
+        "D": "To clear the cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which object is used to capture audio or video from the user's device?",
+      "options": {
+        "A": "MediaRecorder",
+        "B": "GetUserMedia (via Navigator.mediaDevices)",
+        "C": "Camera API",
+        "D": "VideoRecord"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'CustomEvent' interface allow you to do?",
+      "options": {
+        "A": "Change built-in events",
+        "B": "Create and initialize custom events with optional data",
+        "C": "Delete events",
+        "D": "Stop all events"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to copy values from one or more source objects to a target object?",
+      "options": {
+        "A": "Object.copy()",
+        "B": "Object.assign()",
+        "C": "Object.clone()",
+        "D": "Object.merge()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you create an object that does not have any prototype?",
+      "options": {
+        "A": "Object.create(null)",
+        "B": "new Object(null)",
+        "C": "{}",
+        "D": "Object.none()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to access the parent class's constructor or methods?",
+      "options": {
+        "A": "this",
+        "B": "parent",
+        "C": "super",
+        "D": "base"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of 'typeof []' in JavaScript?",
+      "options": {
+        "A": "array",
+        "B": "list",
+        "C": "object",
+        "D": "undefined"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which method is used to lock an object so that no new properties can be added, but existing ones can be modified?",
+      "options": {
+        "A": "Object.freeze()",
+        "B": "Object.seal()",
+        "C": "Object.lock()",
+        "D": "Object.prevent()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a class, which method is automatically called when a new instance is created?",
+      "options": {
+        "A": "init()",
+        "B": "main()",
+        "C": "constructor()",
+        "D": "build()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Prototypal Inheritance'?",
+      "options": {
+        "A": "Copying all methods from one object to another",
+        "B": "Objects linking to other objects to share properties and methods",
+        "C": "A way to secure private data",
+        "D": "A method to delete objects"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method returns an array of an object's own enumerable property names?",
+      "options": {
+        "A": "Object.keys()",
+        "B": "Object.values()",
+        "C": "Object.entries()",
+        "D": "Object.names()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you check if an object 'obj' is an instance of a class 'Car'?",
+      "options": {
+        "A": "obj.is(Car)",
+        "B": "obj instanceOf Car",
+        "C": "obj instanceof Car",
+        "D": "typeOf obj == Car"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which ES6 feature allows for a shorter syntax when assigning object properties with names that match variable names?",
+      "options": {
+        "A": "Property Shorthand",
+        "B": "Destructuring",
+        "C": "Template Literals",
+        "D": "Spread Operator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Object.freeze()'?",
+      "options": {
+        "A": "To make an object invisible",
+        "B": "To prevent any modifications (adding, deleting, or changing) to an object",
+        "C": "To slow down object access",
+        "D": "To convert an object to a string"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used to check the constructor function that created an object instance?",
+      "options": {
+        "A": ".prototype",
+        "B": ".__proto__",
+        "C": ".constructor",
+        "D": ".origin"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which keyword defines a method that belongs to the class itself rather than instances of the class?",
+      "options": {
+        "A": "const",
+        "B": "private",
+        "C": "static",
+        "D": "final"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What happens when you try to change a property of a frozen object in strict mode?",
+      "options": {
+        "A": "It changes anyway",
+        "B": "It fails silently",
+        "C": "It throws a TypeError",
+        "D": "It deletes the property"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which method returns an array containing [key, value] pairs of an object?",
+      "options": {
+        "A": "Object.pairs()",
+        "B": "Object.entries()",
+        "C": "Object.toFullArray()",
+        "D": "Object.items()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Prototype Chain'?",
+      "options": {
+        "A": "A list of all objects in a file",
+        "B": "A sequence of links between objects used to look up properties",
+        "C": "A security feature",
+        "D": "A way to loop through an array"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you create a deep clone of a simple object without using external libraries?",
+      "options": {
+        "A": "Object.assign({}, obj)",
+        "B": "JSON.parse(JSON.stringify(obj))",
+        "C": "{...obj}",
+        "D": "Object.clone(obj)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method returns the prototype of a specified object?",
+      "options": {
+        "A": "Object.getProto()",
+        "B": "Object.getPrototypeOf()",
+        "C": "obj.prototype",
+        "D": "obj.getInheritance()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default value of the __proto__ property of a plain object created with '{}'?",
+      "options": {
+        "A": "null",
+        "B": "undefined",
+        "C": "Object.prototype",
+        "D": "Function.prototype"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following is true about 'getters' in JavaScript objects?",
+      "options": {
+        "A": "They are functions that take two arguments",
+        "B": "They allow a property to be accessed like a function",
+        "C": "They allow a property to be accessed like a regular data property but execute a function",
+        "D": "They are only available in classes"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you define a setter in a class?",
+      "options": {
+        "A": "set propertyName(value) {}",
+        "B": "setter propertyName(value) {}",
+        "C": "function set(value) {}",
+        "D": "property: set(value) {}"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method allows you to define a new property directly on an object with detailed configuration (like writable or enumerable)?",
+      "options": {
+        "A": "Object.add()",
+        "B": "Object.defineProperty()",
+        "C": "Object.config()",
+        "D": "Object.create()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Computed Property Name' in ES6?",
+      "options": {
+        "A": "A property that calculates a value",
+        "B": "Using an expression in brackets [] as a property name in an object literal",
+        "C": "A read-only property",
+        "D": "A property that is shared across all instances"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'new' keyword?",
+      "options": {
+        "A": "To create a new variable",
+        "B": "To create an instance of an object from a constructor function or class",
+        "C": "To refresh the browser",
+        "D": "To start a new loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a class, how do you call a method from the parent class inside an overridden method?",
+      "options": {
+        "A": "this.methodName()",
+        "B": "super.methodName()",
+        "C": "parent.methodName()",
+        "D": "Car.methodName()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is NOT a characteristic of JavaScript classes?",
+      "options": {
+        "A": "They are just syntactical sugar over prototypes",
+        "B": "They support multiple inheritance",
+        "C": "They are not hoisted",
+        "D": "They use strict mode by default"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Own Property'?",
+      "options": {
+        "A": "A property defined directly on the object, not inherited via the prototype chain",
+        "B": "A property that is private",
+        "C": "A property that belongs to the window object",
+        "D": "A property that has a value of true"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to check if one object exists in another object's prototype chain?",
+      "options": {
+        "A": "isPrototypeOf()",
+        "B": "instanceOf()",
+        "C": "inPrototype()",
+        "D": "checkInherit()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Constructor Function'?",
+      "options": {
+        "A": "A function that builds HTML",
+        "B": "A function used with the 'new' keyword to create objects",
+        "C": "A built-in Math function",
+        "D": "A function that deletes objects"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'extends' keyword do?",
+      "options": {
+        "A": "Increases the size of an array",
+        "B": "Creates a class that is a child of another class",
+        "C": "Adds a property to an object",
+        "D": "Converts a function to a class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method can convert an object into a JSON string?",
+      "options": {
+        "A": "JSON.parse()",
+        "B": "JSON.stringify()",
+        "C": "JSON.toText()",
+        "D": "Object.toJSON()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of 'Object.is(NaN, NaN)'?",
+      "options": {
+        "A": "true",
+        "B": "false",
+        "C": "undefined",
+        "D": "TypeError"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property descriptor makes a property invisible during a 'for...in' loop?",
+      "options": {
+        "A": "writable: false",
+        "B": "enumerable: false",
+        "C": "configurable: false",
+        "D": "hidden: true"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Shallow Copy'?",
+      "options": {
+        "A": "A copy that only copies the top-level properties",
+        "B": "A copy that deletes the original",
+        "C": "A copy that uses no memory",
+        "D": "A copy that converts data to strings"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which symbol is used for Private Class Fields (ES2020)?",
+      "options": {
+        "A": "_",
+        "B": "#",
+        "C": "$",
+        "D": "@"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Object.preventExtensions()'?",
+      "options": {
+        "A": "To prevent adding new properties to an object",
+        "B": "To stop a function from running",
+        "C": "To prevent an object from being deleted",
+        "D": "To stop inheritance"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method would you use to find out if an object is 'extensible'?",
+      "options": {
+        "A": "Object.canExtend()",
+        "B": "Object.isExtensible()",
+        "C": "Object.isFree()",
+        "D": "Object.check()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Method Overriding' in classes?",
+      "options": {
+        "A": "Deleting a method",
+        "B": "Providing a new implementation for a method that is already defined in the parent class",
+        "C": "Calling a method multiple times",
+        "D": "Renaming a method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Top-level' object in the prototype chain?",
+      "options": {
+        "A": "Object.prototype",
+        "B": "null",
+        "C": "Function.prototype",
+        "D": "window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method returns an array of an object's own enumerable property values?",
+      "options": {
+        "A": "Object.keys()",
+        "B": "Object.values()",
+        "C": "Object.entries()",
+        "D": "Object.list()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Mix-in'?",
+      "options": {
+        "A": "A type of array",
+        "B": "A way to add functionality to a class from multiple sources",
+        "C": "A built-in JavaScript error",
+        "D": "A way to combine two strings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method of Object can check if two values are the same value?",
+      "options": {
+        "A": "Object.compare()",
+        "B": "Object.is()",
+        "C": "Object.equals()",
+        "D": "Object.match()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'in' operator check for?",
+      "options": {
+        "A": "If a value is inside an array",
+        "B": "If a property exists in an object or its prototype chain",
+        "C": "If a variable is global",
+        "D": "If a function is a constructor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used to define a property that cannot be deleted or its configuration changed?",
+      "options": {
+        "A": "writable: false",
+        "B": "configurable: false",
+        "C": "enumerable: false",
+        "D": "static: true"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you call a static method 'sayHello' on a class 'User'?",
+      "options": {
+        "A": "let u = new User(); u.sayHello();",
+        "B": "User.sayHello();",
+        "C": "User.prototype.sayHello();",
+        "D": "sayHello();"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object.create()' used for?",
+      "options": {
+        "A": "To create a new class",
+        "B": "To create a new object with a specified prototype object and properties",
+        "C": "To create an array",
+        "D": "To create a function"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property on a function points to the object that will be used as the prototype for instances created with 'new'?",
+      "options": {
+        "A": ".__proto__",
+        "B": ".prototype",
+        "C": ".constructor",
+        "D": ".super"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if you define a property on an object that already exists in its prototype?",
+      "options": {
+        "A": "An error is thrown",
+        "B": "The own property 'shadows' or hides the prototype property",
+        "C": "The prototype property is deleted",
+        "D": "Both properties are combined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the return value of 'Object.seal(obj)'?",
+      "options": {
+        "A": "true",
+        "B": "The object being sealed",
+        "C": "undefined",
+        "D": "null"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes 'Abstract' classes in standard JavaScript?",
+      "options": {
+        "A": "Classes that cannot be instantiated but can be extended",
+        "B": "JavaScript has a built-in 'abstract' keyword",
+        "C": "They are implemented by throwing an error in the constructor if 'new.target' is the class itself",
+        "D": "Both A and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which new array method (ES2023) allows you to sort an array without mutating the original?",
+      "options": {
+        "A": "sort()",
+        "B": "toSorted()",
+        "C": "asSorted()",
+        "D": "sorted()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'toReversed()' method return?",
+      "options": {
+        "A": "A boolean",
+        "B": "The original array reversed",
+        "C": "A new array with the elements in reverse order",
+        "D": "The length of the array"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which operator is used for 'Nullish Coalescing Assignment'?",
+      "options": {
+        "A": "??",
+        "B": "??=",
+        "C": "||=",
+        "D": "&&="
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'WeakRef' object in JavaScript?",
+      "options": {
+        "A": "To create a deep copy of an object",
+        "B": "To hold a weak reference to another object, allowing it to be garbage collected",
+        "C": "To speed up variable access",
+        "D": "To prevent an object from being modified"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to create a deep clone of an object using a native browser API?",
+      "options": {
+        "A": "Object.clone()",
+        "B": "structuredClone()",
+        "C": "JSON.parse(JSON.stringify())",
+        "D": "cloneNode()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Temporal' in the context of modern JavaScript proposals?",
+      "options": {
+        "A": "A new way to handle loops",
+        "B": "A new global API for dates and times to fix issues with the Date object",
+        "C": "A method for temporary variable storage",
+        "D": "A styling engine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method allows you to change a single element in an array and return a new array without mutation?",
+      "options": {
+        "A": "splice()",
+        "B": "with()",
+        "C": "set()",
+        "D": "update()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between a Map and a WeakMap?",
+      "options": {
+        "A": "WeakMap can only take objects as keys and is not enumerable",
+        "B": "Map is faster than WeakMap",
+        "C": "WeakMap is for numbers only",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which API provides a way to detect when an element enters or exits the browser viewport?",
+      "options": {
+        "A": "ViewportObserver",
+        "B": "IntersectionObserver",
+        "C": "ScrollObserver",
+        "D": "DisplayObserver"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Tree Shaking' specifically target in JavaScript bundling?",
+      "options": {
+        "A": "Removing comments",
+        "B": "Eliminating dead or unused ES6 module exports",
+        "C": "Compressing images",
+        "D": "Renaming long variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Feature Policy' used to control browser features?",
+      "options": {
+        "A": "CORS",
+        "B": "Permissions-Policy",
+        "C": "Content-Security-Policy",
+        "D": "Strict-Mode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'FinalizationRegistry' object used for?",
+      "options": {
+        "A": "To stop a program from finishing",
+        "B": "To request a callback when an object is garbage collected",
+        "C": "To finalize CSS styles",
+        "D": "To clear the LocalStorage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CSS-in-JS term refers to styles that are extracted into static files?",
+      "options": {
+        "A": "Runtime CSS",
+        "B": "Zero-runtime CSS",
+        "C": "Inline CSS",
+        "D": "Dynamic CSS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Top-level await'?",
+      "options": {
+        "A": "Using await at the start of every function",
+        "B": "Using await outside of an async function at the top level of a module",
+        "C": "A way to speed up network requests",
+        "D": "Waiting for the CSS to load"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to get the internal metadata of a Proxy object?",
+      "options": {
+        "A": "Proxy.getMetadata()",
+        "B": "There is no direct way to access the original object once proxied without a reference",
+        "C": "Reflect.get()",
+        "D": "Object.getProxy()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'RegExp' /v flag (ES2024) enable?",
+      "options": {
+        "A": "Verbose mode",
+        "B": "Unicode property escapes and set operations",
+        "C": "Variable matching",
+        "D": "Validation mode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API allows web applications to maintain a persistent connection to a server?",
+      "options": {
+        "A": "Fetch API",
+        "B": "WebSockets API",
+        "C": "LocalStorage API",
+        "D": "History API"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Pure Function'?",
+      "options": {
+        "A": "A function that uses only global variables",
+        "B": "A function that returns the same output for the same input and has no side effects",
+        "C": "A function written in TypeScript",
+        "D": "A function with no parameters"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which performance method is used to measure the time between two points in a script?",
+      "options": {
+        "A": "Date.now()",
+        "B": "performance.mark() and performance.measure()",
+        "C": "console.time()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of the 'Intl' object?",
+      "options": {
+        "A": "To manage internal variables",
+        "B": "To provide language-sensitive string comparison, number formatting, and date/time formatting",
+        "C": "To connect to international servers",
+        "D": "To translate code to other languages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to find an element in an array starting from the end?",
+      "options": {
+        "A": "find()",
+        "B": "findLast()",
+        "C": "getLast()",
+        "D": "searchLast()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Memoization'?",
+      "options": {
+        "A": "Creating a backup of a function",
+        "B": "Caching the results of expensive function calls",
+        "C": "Writing code from memory",
+        "D": "Deleting old variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which statement is used to import modules dynamically?",
+      "options": {
+        "A": "require()",
+        "B": "import()",
+        "C": "fetchModule()",
+        "D": "load()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'CSRF' stand for in web security?",
+      "options": {
+        "A": "Cross-Site Request Forgery",
+        "B": "Client-Side Response Failure",
+        "C": "Core System Resource File",
+        "D": "Cross-Site Resource Fetch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which attribute should be added to a script tag to load it asynchronously without blocking DOM parsing?",
+      "options": {
+        "A": "defer",
+        "B": "async",
+        "C": "Both A and B",
+        "D": "wait"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the difference between 'defer' and 'async'?",
+      "options": {
+        "A": "defer maintains execution order; async does not",
+        "B": "async is for CSS; defer is for JS",
+        "C": "There is no difference",
+        "D": "defer only works in Safari"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which API allows you to send a small amount of data to a server just before a page is unloaded?",
+      "options": {
+        "A": "fetch()",
+        "B": "navigator.sendBeacon()",
+        "C": "XMLHttpRequest",
+        "D": "WebSockets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Shadow DOM'?",
+      "options": {
+        "A": "A backup of the DOM",
+        "B": "A way to encapsulate part of the DOM so styles don't leak out or in",
+        "C": "A DOM for dark mode",
+        "D": "A hidden database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to stop an event from bubbling up the DOM tree?",
+      "options": {
+        "A": "event.stop()",
+        "B": "event.stopPropagation()",
+        "C": "event.preventDefault()",
+        "D": "event.cancel()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Event Delegation'?",
+      "options": {
+        "A": "Assigning one event listener to a parent to handle events on its children",
+        "B": "Deleting an event",
+        "C": "Sending an event to a server",
+        "D": "Changing the event type"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to fire a custom event on an element?",
+      "options": {
+        "A": "element.fire()",
+        "B": "element.dispatchEvent()",
+        "C": "element.trigger()",
+        "D": "element.call()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Same-Origin Policy'?",
+      "options": {
+        "A": "A rule that all files must have the same name",
+        "B": "A security measure that restricts how a document loaded from one origin can interact with a resource from another origin",
+        "C": "A way to speed up the browser",
+        "D": "A styling rule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Critical Rendering Path'?",
+      "options": {
+        "A": "The path to the server",
+        "B": "The sequence of steps the browser takes to convert HTML, CSS, and JS into pixels on the screen",
+        "C": "The most important function in a script",
+        "D": "The directory where the index file is located"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used for 'Lazy Loading' images in modern browsers?",
+      "options": {
+        "A": "loading='lazy' attribute",
+        "B": "Intersection Observer",
+        "C": "Both A and B",
+        "D": "setTimeout()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'Hydration' mean in modern JS frameworks?",
+      "options": {
+        "A": "Cleaning the code",
+        "B": "Adding interactivity to server-rendered HTML on the client side",
+        "C": "Updating the database",
+        "D": "Adding more RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API is used to detect if a device is in 'Dark Mode' via JavaScript?",
+      "options": {
+        "A": "window.matchMedia('(prefers-color-scheme: dark)')",
+        "B": "navigator.theme",
+        "C": "document.isDark()",
+        "D": "screen.colorMode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Polyfills'?",
+      "options": {
+        "A": "To make the code shorter",
+        "B": "To provide modern functionality on older browsers that do not natively support it",
+        "C": "To encrypt the code",
+        "D": "To handle CSS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which JS feature allows for clean handling of potentially null or undefined deep object properties?",
+      "options": {
+        "A": "Optional Chaining (?.)",
+        "B": "Nullish Coalescing (??)",
+        "C": "Try/Catch",
+        "D": "If/Else"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 0.1 + 0.2 === 0.3?",
+      "options": {
+        "A": "true",
+        "B": "false",
+        "C": "undefined",
+        "D": "NaN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which built-in object is used to create a Proxy?",
+      "options": {
+        "A": "new Proxy(target, handler)",
+        "B": "Object.createProxy()",
+        "C": "Proxy.create()",
+        "D": "new Reflect.Proxy()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Side Effect' in a function?",
+      "options": {
+        "A": "A secondary return value",
+        "B": "Any change that is observable outside the called function other than its return value",
+        "C": "A bug in the function",
+        "D": "The time it takes to run"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which array method checks if at least one element in the array passes a test?",
+      "options": {
+        "A": "every()",
+        "B": "some()",
+        "C": "includes()",
+        "D": "contains()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'navigator.userAgent' property provide?",
+      "options": {
+        "A": "The user's name",
+        "B": "A string identifying the browser and operating system",
+        "C": "The user's IP address",
+        "D": "The current time"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which API is used to capture a screenshot of a specific DOM element?",
+      "options": {
+        "A": "Canvas API",
+        "B": "MediaDevices API",
+        "C": "No direct core JS API; libraries like html2canvas or the Screen Capture API are used",
+        "D": "DOM.capture()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is a 'Race Condition'?",
+      "options": {
+        "A": "When code runs too fast",
+        "B": "When the timing or order of events affects the correctness of the program",
+        "C": "A feature of Promise.race()",
+        "D": "A loop that runs out of control"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to get the number of milliseconds since the Unix Epoch?",
+      "options": {
+        "A": "Date.now()",
+        "B": "Date.getTime()",
+        "C": "Both A and B",
+        "D": "performance.now()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Content Security Policy' (CSP)?",
+      "options": {
+        "A": "A policy for content writers",
+        "B": "An added layer of security that helps detect and mitigate certain types of attacks, including XSS",
+        "C": "A way to hide website content",
+        "D": "A database rule"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to declare a variable that is only available within the current module?",
+      "options": {
+        "A": "export",
+        "B": "import",
+        "C": "let/const (inside the module scope)",
+        "D": "private"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of 'Error.stack'?",
+      "options": {
+        "A": "To delete an error",
+        "B": "To provide a trace of which functions were called and in what order when an error occurred",
+        "C": "To count the number of errors",
+        "D": "To show the code on the screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'JSON.stringify' do to an object with a circular reference?",
+      "options": {
+        "A": "It ignores the reference",
+        "B": "It throws a TypeError",
+        "C": "It creates an infinite loop",
+        "D": "It simplifies the object"
+      },
+      "answer": "B"
+    }
+  ]
+}

@@ -1,0 +1,2006 @@
+{ 
+  "skill": "Composer", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of Composer in the PHP ecosystem?",
+    "options": {
+      "A": "To design the graphical user interface for web applications.",
+      "B": "To manage project dependencies and libraries.",
+      "C": "To compile PHP code into binary executable files.",
+      "D": "To act as a built-in web server for production environments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer is a system-level package manager like 'apt' or 'yum'.",
+    "options": {
+      "A": "True, but only for Windows users.",
+      "B": "True, it installs PHP extensions globally.",
+      "C": "False (It is a project-level dependency manager).",
+      "D": "False, it is a hardware diagnostic tool."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which file is used to list the dependencies required by your project?",
+    "options": {
+      "A": "composer.json",
+      "B": "composer.lock",
+      "C": "packages.php",
+      "D": "config.yaml"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to install the dependencies listed in an existing composer.json file?",
+    "options": {
+      "A": "composer add",
+      "B": "composer build",
+      "C": "composer install",
+      "D": "composer run"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the name of the main public repository for Composer packages?",
+    "options": {
+      "A": "PHP-Repo",
+      "B": "ComposerHub",
+      "C": "NPM for PHP",
+      "D": "Packagist"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: The 'vendor' directory should generally be committed to your Git repository.",
+    "options": {
+      "A": "True, to ensure the code is always there.",
+      "B": "False, it should be ignored via .gitignore.",
+      "C": "Only if using SVN.",
+      "D": "True, but only the index.php file inside it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to add a new package (e.g., monolog) to your project?",
+    "options": {
+      "A": "composer require monolog",
+      "B": "composer get monolog",
+      "C": "composer include monolog",
+      "D": "composer download monolog"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'composer.lock' file ensure?",
+    "options": {
+      "A": "That the composer.json file is encrypted.",
+      "B": "That everyone on the team installs the exact same versions of dependencies.",
+      "C": "That the source code cannot be edited by other users.",
+      "D": "That the database is locked during installation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer requires PHP to be installed on the machine to run.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only if installing C++ libraries"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to update all packages to the latest versions allowed by your composer.json?",
+    "options": {
+      "A": "composer refresh",
+      "B": "composer upgrade",
+      "C": "composer latest",
+      "D": "composer update"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Where are the downloaded libraries stored by default in a Composer project?",
+    "options": {
+      "A": "lib/",
+      "B": "bin/",
+      "C": "vendor/",
+      "D": "packages/"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use Composer to manage dependencies for a non-PHP project.",
+    "options": {
+      "A": "True, but only for CSS.",
+      "B": "False (It is specifically for PHP).",
+      "C": "True, but only for JavaScript.",
+      "D": "True, it works for any language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file should you include in your PHP script to enable automatic loading of Composer packages?",
+    "options": {
+      "A": "vendor/autoload.php",
+      "B": "composer/load.php",
+      "C": "src/autoload.php",
+      "D": "public/index.php"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What character is used in composer.json to allow updates to the next significant release (e.g., ^1.2.3)?",
+    "options": {
+      "A": "*",
+      "B": "^",
+      "C": "~",
+      "D": ">"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'composer init' command?",
+    "options": {
+      "A": "To delete all current dependencies.",
+      "B": "To restart the computer.",
+      "C": "To interactively create a new composer.json file for a project.",
+      "D": "To install the Composer software globally."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Running 'composer update' will modify your composer.lock file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if there are errors",
+      "D": "Only in the production environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to see a list of all installed packages and their versions?",
+    "options": {
+      "A": "composer inventory",
+      "B": "composer show",
+      "C": "composer list-packages",
+      "D": "composer info"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'dev' requirement section in composer.json represent?",
+    "options": {
+      "A": "Packages that are currently under development and unstable.",
+      "B": "Packages required only for the developer's personal computer.",
+      "C": "Packages needed for testing and development, but not for production.",
+      "D": "A list of developers working on the project."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Composer can be installed globally so it can be accessed from any directory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on macOS",
+      "D": "Only with an administrator account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the file extension for the Composer executable on Windows?",
+    "options": {
+      "A": ".php",
+      "B": ".bat",
+      "C": ".exe",
+      "D": ".phar"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command removes a package from your project and updates composer.json?",
+    "options": {
+      "A": "composer uninstall [package]",
+      "B": "composer remove [package]",
+      "C": "composer delete [package]",
+      "D": "composer drop [package]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autoloading' in Composer?",
+    "options": {
+      "A": "Automatically uploading your code to a server.",
+      "B": "Automatically downloading updates every morning.",
+      "C": "A way to automatically fix syntax errors.",
+      "D": "A mechanism to load PHP classes without manual 'require' statements."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer supports PSR-4 autoloading standards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1",
+      "D": "Only if manually configured in PHP.ini"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command should you run if you manually edit the 'autoload' section in composer.json?",
+    "options": {
+      "A": "composer dump-autoload",
+      "B": "composer install",
+      "C": "composer refresh",
+      "D": "composer clean"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Self-Update' command used for?",
+    "options": {
+      "A": "To update the project's packages.",
+      "B": "To update the machine's operating system.",
+      "C": "To update the Composer executable itself to the latest version.",
+      "D": "To update the user's profile on Packagist."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can specify a specific version of a package, like '1.0.2', in your composer.json.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the package is in the vendor folder",
+      "D": "Only if the version is currently available offline"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'scripts' section in composer.json?",
+    "options": {
+      "A": "To define custom commands or callbacks to run during the Composer process.",
+      "B": "To write the actual PHP code for the website.",
+      "C": "To link JavaScript files to the HTML.",
+      "D": "To store a history of all terminal commands."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command checks if your composer.json file is syntactically correct?",
+    "options": {
+      "A": "composer check",
+      "B": "composer verify",
+      "C": "composer test",
+      "D": "composer validate"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'composer.phar' is a PHP Archive file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only if encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if you run 'composer install' and a composer.lock file is present?",
+    "options": {
+      "A": "Composer ignores the lock file and updates everything.",
+      "B": "Composer installs the specific versions defined in the lock file.",
+      "C": "Composer deletes the lock file and creates a new one.",
+      "D": "Composer throws an error and stops."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which flag is used to install packages without the development dependencies (require-dev)?",
+    "options": {
+      "A": "--no-dev",
+      "B": "--prod",
+      "C": "--only-main",
+      "D": "--ignore-testing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Composer can handle dependencies that require a specific version of PHP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the --ignore-platform-reqs flag",
+      "D": "Only if the server has multiple PHP versions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Metapackage' in Composer?",
+    "options": {
+      "A": "A package used for storing meta-tags for SEO.",
+      "B": "A package that contains no code but defines a set of other dependencies.",
+      "C": "A package that is over 1GB in size.",
+      "D": "A package owned by the Meta (Facebook) company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which environment variable can be used to set the Composer home directory?",
+    "options": {
+      "A": "COMPOSER_PATH",
+      "B": "PHP_COMPOSER",
+      "C": "BIN_HOME",
+      "D": "COMPOSER_HOME"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer 2.0 is significantly faster than Composer 1.0.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for single package installs",
+      "D": "Only on Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'minimum-stability' setting?",
+    "options": {
+      "A": "To define the lowest stability level allowed for dependencies.",
+      "B": "To check if the server hardware is stable.",
+      "C": "To set the frequency of package updates.",
+      "D": "To monitor the uptime of the Packagist website."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command tells you why a specific package cannot be installed or updated?",
+    "options": {
+      "A": "composer debug",
+      "B": "composer why-not",
+      "C": "composer prohibits",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer allows you to define your own custom package repositories.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for private GitHub repos",
+      "D": "Only for local folders"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'composer clear-cache' do?",
+    "options": {
+      "A": "Deletes the vendor folder.",
+      "B": "Clears the browser's cache.",
+      "C": "Deletes all downloaded package files stored in the internal Composer cache.",
+      "D": "Resets the composer.json file."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the effect of the tilde operator (~1.2)?",
+    "options": {
+      "A": "Allows any version starting with 1.",
+      "B": "Equivalent to >=1.2 and <1.3.0.",
+      "C": "Equivalent to >=1.2 and <2.0.0.",
+      "D": "Allows only version 1.2 exactly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer can automatically update itself if you enable the 'auto-update' setting.",
+    "options": {
+      "A": "False (You must run self-update manually).",
+      "B": "True, it happens during every install.",
+      "C": "True, but only in the Enterprise version.",
+      "D": "Only on Linux servers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command shows the dependency graph for your project?",
+    "options": {
+      "A": "composer graph",
+      "B": "composer show --tree",
+      "C": "composer depends",
+      "D": "composer visualize"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'bin' directory within the vendor folder?",
+    "options": {
+      "A": "To store executable files provided by packages (like PHPUnit).",
+      "B": "To store binary images for the website.",
+      "C": "To store deleted packages (like a recycle bin).",
+      "D": "To store system configuration files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Composer requires Git to be installed to download packages from GitHub.",
+    "options": {
+      "A": "True, always.",
+      "B": "False, it uses its own built-in Git client.",
+      "C": "True (Required for 'source' installs, but 'dist' can use zip).",
+      "D": "False, it only supports SVN."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which section in composer.json is used to map namespaces to directories?",
+    "options": {
+      "A": "namespaces",
+      "B": "mapping",
+      "C": "autoload",
+      "D": "paths"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Packagist'?",
+    "options": {
+      "A": "A person who works at the Post Office.",
+      "B": "A specialized software for packing ZIP files.",
+      "C": "A database of PHP developers.",
+      "D": "The main package repository for Composer."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can run Composer commands without having a composer.json file in the directory.",
+    "options": {
+      "A": "False (Most commands require a project context).",
+      "B": "True (Commands like 'init' or 'help' work anywhere).",
+      "C": "Only if you are the root user.",
+      "D": "Only on Windows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the '--optimize-autoloader' flag do?",
+    "options": {
+      "A": "Deletes unused classes to save space.",
+      "B": "Converts PSR-0/4 autoloading into a class map for faster lookups.",
+      "C": "Increases the speed of the 'composer install' command.",
+      "D": "Minifies all the PHP files in the vendor folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to search for a package on Packagist from the terminal?",
+    "options": {
+      "A": "composer search",
+      "B": "composer find",
+      "C": "composer lookup",
+      "D": "composer query"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Composer is written in the PHP programming language.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only the installer is PHP; the core is C++",
+      "D": "It is written in JavaScript"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'config' section in composer.json?",
+    "options": {
+      "A": "To store the database credentials.",
+      "B": "To set project-specific options like 'vendor-dir'.",
+      "C": "To configure the server's PHP version.",
+      "D": "To list the team members' contact info."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to check for security vulnerabilities in your installed packages?",
+    "options": {
+      "A": "composer scan",
+      "B": "composer verify-safety",
+      "C": "composer security-check",
+      "D": "composer audit"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use Composer to manage dependencies for a WordPress site.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the core files, not plugins",
+      "D": "Only if hosted on Azure"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the '@' symbol indicate in a script definition in composer.json?",
+    "options": {
+      "A": "An email address.",
+      "B": "A reference to another script defined in the same file.",
+      "C": "A link to an external website.",
+      "D": "A hidden command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default behavior if two packages require different versions of the same dependency?",
+    "options": {
+      "A": "Composer installs both versions.",
+      "B": "Composer asks the user to choose manually.",
+      "C": "Composer tries to find a version that satisfies both requirements or fails.",
+      "D": "Composer installs the latest version and ignores the other."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'composer global require' installs a package to a shared directory accessible by all projects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for development packages",
+      "D": "Only on Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command displays the current version of Composer?",
+    "options": {
+      "A": "composer --version",
+      "B": "composer -V",
+      "C": "Both A and B",
+      "D": "composer about"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'prefer-dist' option used for?",
+    "options": {
+      "A": "To prefer downloading zip archives instead of cloning Git repositories.",
+      "B": "To prefer the stable version over the dev version.",
+      "C": "To prefer packages located in the user's home country.",
+      "D": "To install packages only from the official distribution folder."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'composer.json' should always be at the root of your project.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "It can be in the vendor folder",
+      "D": "It can be renamed to packages.json"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'composer browse' command used for?",
+    "options": {
+      "A": "To browse the local vendor folder.",
+      "B": "To open the homepage of a package in your web browser.",
+      "C": "To search for packages on the internet.",
+      "D": "To view the project's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which flag allows you to ignore platform requirements (like PHP version) during install?",
+    "options": {
+      "A": "--force",
+      "B": "--skip-checks",
+      "C": "--no-php-check",
+      "D": "--ignore-platform-reqs"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer creates an 'autoload_real.php' file internally to handle the loading logic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1",
+      "D": "Only if using classmaps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'extra' section in composer.json?",
+    "options": {
+      "A": "To provide arbitrary data for use by third-party plugins or scripts.",
+      "B": "To list the developer's extra hobbies.",
+      "C": "To store backup configuration settings.",
+      "D": "To list the paid features of a package."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command displays the licenses of all your installed dependencies?",
+    "options": {
+      "A": "composer license",
+      "B": "composer show-licenses",
+      "C": "composer audit",
+      "D": "composer list-licenses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'composer status' command do?",
+    "options": {
+      "A": "Checks if the server is online.",
+      "B": "Shows the progress of the current download.",
+      "C": "Checks for local modifications in the vendor folder.",
+      "D": "Shows the CPU usage of the Composer process."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A package can be both a 'requirement' and a 'dev-requirement' at the same time.",
+    "options": {
+      "A": "True, but it's redundant.",
+      "B": "False, it can only be in one section.",
+      "C": "Only if it has different versions.",
+      "D": "Only in the Enterprise version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'SAT Solver' within the Composer internal architecture?",
+    "options": {
+      "A": "To verify the SSL certificates of the Packagist server.",
+      "B": "To resolve complex dependency graphs and version constraints to find a valid combination of packages.",
+      "C": "To automatically translate PHP code into more efficient C extension code.",
+      "D": "To monitor the satellite connection speed for remote developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Composer 'Plugin' can define its own custom commands that become available via the 'composer' CLI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the plugin is installed globally",
+      "D": "Only if the command name starts with 'plugin:'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property in composer.json is used to provide an inline version of a dependency that isn't available as a separate package?",
+    "options": {
+      "A": "provide",
+      "B": "replace",
+      "C": "embedded",
+      "D": "inline-requirement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when you use the 'target-dir' property in a package's composer.json?",
+    "options": {
+      "A": "It deletes the package after a successful build.",
+      "B": "It specifies a sub-directory within the vendor folder where the package files should be placed.",
+      "C": "It changes the global installation path for all PHP libraries.",
+      "D": "It identifies the directory used for storing backup ZIP files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer 'Scripts' can be written as static PHP methods within a class, rather than just shell commands.",
+    "options": {
+      "A": "False (Only bash/batch scripts are supported)",
+      "B": "True (This allows for more complex logic using the Composer API)",
+      "C": "True, but only if the class is in the vendor/bin folder",
+      "D": "Only if using the 'php-script' tag in the config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'abandoned' property in a package metadata file?",
+    "options": {
+      "A": "To mark a package as no longer maintained and optionally point to a successor.",
+      "B": "To automatically delete the package from all user computers.",
+      "C": "To hide the package from the search results on Packagist.",
+      "D": "To signify that the developer has lost their private key."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal Composer class is responsible for calculating the hash of the composer.json file stored in the lock file?",
+    "options": {
+      "A": "Composer\\Hasher",
+      "B": "Composer\\Package\\Locker",
+      "C": "Composer\\Json\\JsonFile",
+      "D": "Composer\\Util\\Config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'non-feature-branches' config setting to prevent Composer from trying to parse every Git branch as a version.",
+    "options": {
+      "A": "True (This significantly improves performance for large repos with many branches)",
+      "B": "False (Composer always parses every branch by design)",
+      "C": "Only for SVN repositories",
+      "D": "Only in Composer 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Root Package' in the context of dependency resolution?",
+    "options": {
+      "A": "The package owned by the system administrator.",
+      "B": "The main project defined by the composer.json in the current working directory.",
+      "C": "The very first package ever uploaded to Packagist.",
+      "D": "A package that has no dependencies of its own."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a custom 'Installer' plugin, which method is responsible for physically moving the files to the disk?",
+    "options": {
+      "A": "move()",
+      "B": "install()",
+      "C": "persist()",
+      "D": "deploy()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'composer.lock' file contains a 'content-hash' which is a hash of the composer.json file at the time of the last update.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the --hash flag was used",
+      "D": "False, it is a hash of the vendor folder contents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the significance of the 'Composer\\EventDispatcher\\EventSubscriberInterface'?",
+    "options": {
+      "A": "It allows a plugin to subscribe to multiple events using a single class.",
+      "B": "It is used to send emails when a build fails.",
+      "C": "It is required for every package to be valid.",
+      "D": "It manages the network events for the Packagist API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command would you use to find the specific version of a dependency that is causing a conflict in your project?",
+    "options": {
+      "A": "composer why-not",
+      "B": "composer prohibits",
+      "C": "composer debug-graph",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer allows for 'Recursive Repositories', where one repository points to another repository definition.",
+    "options": {
+      "A": "False (Repositories must be explicitly defined in the root composer.json)",
+      "B": "True (This is a core feature of the 'artifact' repository type)",
+      "C": "Only for Enterprise Satis installations",
+      "D": "True, but only for GitHub organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Composer\\IO\\IOInterface' used for in plugin development?",
+    "options": {
+      "A": "To perform direct disk I/O operations without PHP.",
+      "B": "To handle all interaction with the user (outputting text, asking questions).",
+      "C": "To connect to the internet via sockets.",
+      "D": "To encrypt the input/output stream of the autoloader."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Branch Aliasing' in a library's composer.json help its consumers?",
+    "options": {
+      "A": "It allows a development branch like 'dev-main' to satisfy a constraint for a stable version like '2.0.x-dev'.",
+      "B": "It renames the folder in the vendor directory to something shorter.",
+      "C": "It allows the library to have multiple names in the same project.",
+      "D": "It prevents the library from being updated by the 'update' command."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can enforce that all packages must be installed from a specific private repository by setting 'packagist.org': false.",
+    "options": {
+      "A": "True (This is a common security practice for enterprise environments)",
+      "B": "False (Packagist is a hardcoded requirement)",
+      "C": "Only if you are using a proxy server",
+      "D": "False, it only works for 'require-dev' packages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'pre-pool-create' event in the Composer event system?",
+    "options": {
+      "A": "To clear the cache before creating a new download pool.",
+      "B": "To allow plugins to modify the list of packages and versions before the solver starts its work.",
+      "C": "To notify the user that the computer is about to get hot.",
+      "D": "To restart the PHP-FPM service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which flag during 'composer archive' ensures that all dependencies of the package are also included in the archive?",
+    "options": {
+      "A": "--recursive",
+      "B": "--all",
+      "C": "--with-dependencies",
+      "D": "Composer archive does not support including dependencies automatically."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Using the 'preferred-install: source' config will force Composer to use Git clone even if a zip is available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'dev' versions",
+      "D": "Only if the Git version is newer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stability Flag' in a version constraint (e.g., 1.0.0@beta)?",
+    "options": {
+      "A": "A way to tell the server the package is broken.",
+      "B": "A way to lower the minimum-stability requirement for a single specific package.",
+      "C": "A flag that forces the package to be installed in the 'var' folder.",
+      "D": "A color-coded icon in the terminal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal class handles the downloading of files from GitHub or Bitbucket?",
+    "options": {
+      "A": "Composer\\Downloader\\GitDownloader",
+      "B": "Composer\\Util\\RemoteContents",
+      "C": "Composer\\Downloader\\DownloadManager",
+      "D": "Composer\\Util\\GitHub"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In Composer 2, the 'Pool' class is used to store all available packages that the solver will consider.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local path repositories",
+      "D": "Only for 'require-dev' packages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Composer\\Plugin\\Capable' interface?",
+    "options": {
+      "A": "To prove that the developer is capable of writing PHP code.",
+      "B": "To allow a plugin to provide 'Capabilities' like custom commands or installer types.",
+      "C": "To enable the plugin to access the computer's webcam.",
+      "D": "To manage the plugin's memory usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Repository' that points to a specific ZIP file on your hard drive?",
+    "options": {
+      "A": "Use the 'file' repository type.",
+      "B": "Use the 'artifact' repository type and point to the directory containing the zip.",
+      "C": "Use the 'zip' repository type.",
+      "D": "Point a 'vcs' repository type to the file path."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'use-github-api' config setting can be disabled to force Composer to use standard Git commands instead of API calls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the API is down",
+      "D": "Only for public repositories"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'Composer\\Script\\Event' object passed to script callbacks?",
+    "options": {
+      "A": "To provide access to the Composer instance, the IO object, and event arguments.",
+      "B": "To log the time the script started.",
+      "C": "To encrypt the script's output.",
+      "D": "To send a notification to the user's phone."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command would you use to verify that your autoloader is optimized for a production environment without actually running it?",
+    "options": {
+      "A": "composer dump-autoload --dry-run",
+      "B": "composer validate --autoload",
+      "C": "There is no command for this; you must check the vendor/composer/autoload_classmap.php file.",
+      "D": "composer audit --autoloader"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Composer 'Lock' files include the exact commit hashes of all dependencies if they were installed from source.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'dev' packages",
+      "D": "Only if using the --commit-hash flag"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the internal 'RuleSet' in the SAT solver?",
+    "options": {
+      "A": "A list of rules for developers to follow.",
+      "B": "A set of logical constraints (boolean expressions) derived from version requirements.",
+      "C": "A database of all known PHP bugs.",
+      "D": "The configuration for the server's firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration option in composer.json allows you to run Composer behind a corporate proxy requiring NTLM authentication?",
+    "options": {
+      "A": "proxy-ntlm",
+      "B": "Composer does not natively support NTLM; you must use an environment variable like HTTP_PROXY.",
+      "C": "auth: { ntlm: true }",
+      "D": "config: { secure-proxy: true }"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'discard-changes' config can be set to 'true' to automatically revert any manual changes in the vendor folder during an update.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'source' installs",
+      "D": "Only in non-interactive mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Composer\\Package\\AliasPackage' class?",
+    "options": {
+      "A": "To create a fake package name for security.",
+      "B": "To represent a package that is just an alias for another version of the same package.",
+      "C": "To store the developer's nickname.",
+      "D": "To link a package to a second repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you specify that a package should be downloaded from a specific URL regardless of what Packagist says?",
+    "options": {
+      "A": "Use the 'url' property in the 'require' section.",
+      "B": "Define a 'package' type repository with the custom URL and metadata in composer.json.",
+      "C": "Use the --source-url flag.",
+      "D": "Modify the vendor/composer/installed.json file manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer supports 'Multi-factor Authentication' for private repositories via the 'auth.json' file.",
+    "options": {
+      "A": "False (Composer cannot handle the interactive MFA prompt; use tokens instead).",
+      "B": "True (It opens a browser window for the code).",
+      "C": "True, but only for GitHub.",
+      "D": "Only if using the 'mfa-plugin'."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Partial Repository' in Satis?",
+    "options": {
+      "A": "A repository that is only half finished.",
+      "B": "A repository that only contains metadata for a subset of the packages available in the source.",
+      "C": "A repository that is shared between two projects.",
+      "D": "An error where the JSON file is cut off."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in a Plugin class is called when the plugin is first activated?",
+    "options": {
+      "A": "run()",
+      "B": "activate()",
+      "C": "start()",
+      "D": "init()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Insecure' (HTTP) repositories in Composer 2 if you explicitly enable the 'secure-http': false setting.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local network IPs",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Composer\\Package\\Link' object?",
+    "options": {
+      "A": "To create a symbolic link on the disk.",
+      "B": "To represent a relationship between packages (require, conflict, provide, etc.).",
+      "C": "To store a URL to the project homepage.",
+      "D": "To link a class to a namespace."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you implement 'Parallel Downloads' in Composer 1.x (before it was built into 2.x)?",
+    "options": {
+      "A": "By running multiple terminals at once.",
+      "B": "By installing the 'hirak/prestissimo' plugin.",
+      "C": "By setting the 'threads' config to 4.",
+      "D": "It was not possible in version 1.x."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'optimize-autoloader' setting can cause issues if your code relies on files existing in the vendor folder that aren't classes.",
+    "options": {
+      "A": "False (It only affects class lookups)",
+      "B": "True (It can skip certain 'files' autoloading logic in rare cases)",
+      "C": "True, but only on Windows",
+      "D": "False, it is always safe to use"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Package Shadowing'?",
+    "options": {
+      "A": "When a package is deleted but remains in the cache.",
+      "B": "When two repositories provide the same package, and one 'hides' the other based on definition order.",
+      "C": "When a developer copies code from a package into their project.",
+      "D": "A security attack using fake package names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the detailed logs of the SAT solver to debug an 'unsolvable' dependency set?",
+    "options": {
+      "A": "composer update -vvv",
+      "B": "composer solve --debug",
+      "C": "composer why-not --all",
+      "D": "composer validate --solver"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can define 'Custom Version Constraints' by writing your own PHP logic inside the composer.json file.",
+    "options": {
+      "A": "False (Only the standard SemVer strings are supported)",
+      "B": "True (Using the 'eval' tag)",
+      "C": "True, but only in the 'scripts' section",
+      "D": "Only if using the 'logic-constraints' extension"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dry Run' in the context of 'composer update'?",
+    "options": {
+      "A": "Updating the project without using any electricity.",
+      "B": "Simulating the update process to see what would change without modifying files.",
+      "C": "Updating only the documentation.",
+      "D": "Updating the project while the internet is disconnected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in the 'config' section defines the level of detail for the Composer output?",
+    "options": {
+      "A": "output-level",
+      "B": "verbosity",
+      "C": "log-detail",
+      "D": "There is no config for this; it is set via CLI flags like -v or -vvv."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Composer 'Artifact' repositories allow you to install packages from a directory of tarballs without a metadata server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'stable' versions",
+      "D": "Only if they contain a composer.json file"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Composer\\Package\\RootPackageInterface'?",
+    "options": {
+      "A": "To identify the user's primary email address.",
+      "B": "To provide methods specifically for interacting with the main project package.",
+      "C": "To grant 'root' access to the server.",
+      "D": "To manage the root-level database connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you prevent a 'Post-Update' script from running during a specific update execution?",
+    "options": {
+      "A": "By deleting the script from composer.json temporarily.",
+      "B": "By using the '--no-scripts' flag in the CLI command.",
+      "C": "By setting the 'script-timeout' to 0.",
+      "D": "By disconnecting from the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'github-protocols' config to prioritize HTTPS over SSH for GitHub downloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for private repositories",
+      "D": "Only in Composer 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Composer\\Util\\ProcessExecutor' class?",
+    "options": {
+      "A": "To kill all running PHP processes on the server.",
+      "B": "To safely execute external shell commands and handle their input/output buffers.",
+      "C": "To speed up the computer's CPU.",
+      "D": "To manage the sequence of database migrations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SemVer, what does a version string like '1.2.3-alpha.1' indicate regarding precedence?",
+    "options": {
+      "A": "It is higher than '1.2.3'.",
+      "B": "It is lower than '1.2.3'.",
+      "C": "It is equal to '1.2.3'.",
+      "D": "It has no precedence and is ignored by the solver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer 2.x supports 'Runtime Check' for platform requirements, ensuring the app won't start if the PHP environment changed since install.",
+    "options": {
+      "A": "True (Enabled via the --runtime-check flag during autoloader dump)",
+      "B": "False (This must be handled by the application logic)",
+      "C": "Only for Laravel projects",
+      "D": "Only if using the 'platform-check' plugin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit' in Composer 2.4+?",
+    "options": {
+      "A": "A tax review of the project budget.",
+      "B": "A built-in command to check installed packages for known security vulnerabilities.",
+      "C": "A tool to count the total lines of code in the project.",
+      "D": "A way to see who downloaded each package."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which environment variable disables all interactive prompts in Composer?",
+    "options": {
+      "A": "COMPOSER_SILENT",
+      "B": "COMPOSER_NO_INTERACTION",
+      "C": "NON_INTERACTIVE",
+      "D": "COMPOSER_FORCE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer 'Lock' files are portable across different operating systems as long as the PHP version matches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for purely PHP packages",
+      "D": "False, they contain absolute OS paths"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Composer\\Package\\Version\\VersionParser' class?",
+    "options": {
+      "A": "To convert a version string into a standardized internal representation for comparison.",
+      "B": "To fix typos in version numbers automatically.",
+      "C": "To search for newer versions on the internet.",
+      "D": "To encrypt the version strings in the JSON file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you specify a custom 'Vendor Directory' name other than 'vendor'?",
+    "options": {
+      "A": "By renaming the folder in Windows Explorer.",
+      "B": "By setting the 'vendor-dir' property in the 'config' section of composer.json.",
+      "C": "By using the --path flag during install.",
+      "D": "You cannot; 'vendor' is a hardcoded directory name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer 'Metapackages' can contain custom scripts that run on the consumer's machine.",
+    "options": {
+      "A": "False (Metapackages contain no code and cannot run scripts)",
+      "B": "True (This is used for framework bootstrapping)",
+      "C": "Only if the metapackage is signed",
+      "D": "True, but only 'pre-install' scripts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Class Map Authoritative' mode?",
+    "options": {
+      "A": "A mode where the class map is the only source used, and the file system is never scanned for missing classes.",
+      "B": "A mode where only the administrator can edit the classes.",
+      "C": "A mode where all classes are encrypted.",
+      "D": "A way to automatically generate class maps from code comments."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal class is responsible for resolving the '@' script references in composer.json?",
+    "options": {
+      "A": "Composer\\Script\\ScriptExecutor",
+      "B": "Composer\\EventDispatcher\\EventDispatcher",
+      "C": "Composer\\Util\\ScriptParser",
+      "D": "Composer\\Command\\RunScriptCommand"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Exclude-from-Classmap' to prevent specific files from being indexed during an optimized autoloader dump.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for files in the 'tests' folder",
+      "D": "Only in Composer 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Satis' used for in large organizations?",
+    "options": {
+      "A": "To generate a static version of Packagist for private, local package hosting.",
+      "B": "To monitor the happiness of the development team.",
+      "C": "To automatically translate PHP into multiple languages.",
+      "D": "To scan for hardware vulnerabilities on the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which flag during 'composer require' prevents the command from updating any other existing packages in the project?",
+    "options": {
+      "A": "--no-update",
+      "B": "--fixed",
+      "C": "--isolate",
+      "D": "--only-target"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Composer 2, the 'InstalledRepository' class provides a real-time view of what is currently on the disk in the vendor folder.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'source' installs",
+      "D": "Only if the locker is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Composer\\Util\\HttpDownloader' responsible for?",
+    "options": {
+      "A": "Downloading the entire internet.",
+      "B": "Managing all HTTP requests, including support for parallel downloads and retry logic.",
+      "C": "Encrypting the server's HTTP headers.",
+      "D": "Downloading the user's profile picture from Packagist."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Path' repository, what does the 'symlink' option do?",
+    "options": {
+      "A": "It creates a link to the user's social media profile.",
+      "B": "It determines whether to create a symbolic link or physically copy the files from the local path.",
+      "C": "It links two different databases together.",
+      "D": "It identifies the symbolic name of the repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'github-expose-hostname' config can be used to hide the local machine name from GitHub during API calls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise version",
+      "D": "Only on Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between '^1.2.3' and '~1.2.3' in a composer.json file?",
+    "options": {
+      "A": "There is no functional difference; they are interchangeable symbols.",
+      "B": "^ allows updates up to the next major version; ~ allows updates to the next minor version.",
+      "C": "~ allows updates to the next major version; ^ is for patch versions only.",
+      "D": "^ is for development packages; ~ is for production packages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'composer.lock' file should be updated manually by the developer to change specific package versions.",
+    "options": {
+      "A": "True, this is the recommended way to pin versions.",
+      "B": "False, the lock file is only for metadata and does not store versions.",
+      "C": "True, but only if the 'composer.json' file is missing.",
+      "D": "False, it is automatically generated and should only be modified by Composer commands."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command allows you to see the actual path of the installed files for a specific package?",
+    "options": {
+      "A": "composer show -p [package]",
+      "B": "composer locate [package]",
+      "C": "composer path [package]",
+      "D": "composer show [package] --path"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'platform' config setting in composer.json allow you to do?",
+    "options": {
+      "A": "It allows you to fake the PHP version or extensions to satisfy dependencies regardless of the local environment.",
+      "B": "It specifies if the app should run on Windows or Linux.",
+      "C": "It downloads the PHP binary automatically from the official mirror.",
+      "D": "It identifies the cloud provider (AWS/Azure) for automated deployment."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Composer can install packages directly from a local folder on your computer instead of Packagist.",
+    "options": {
+      "A": "False, all packages must be registered on a public repository.",
+      "B": "True, by adding a 'path' type repository to the 'repositories' section.",
+      "C": "True, but only if the folder is named 'vendor_local'.",
+      "D": "False, local folders are only supported in Composer 1.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which flag should be used during 'composer install' in a CI/CD pipeline to ensure maximum speed and stability?",
+    "options": {
+      "A": "--optimize-autoloader --no-dev --no-interaction",
+      "B": "--force --update --refresh",
+      "C": "--with-all-dependencies --dev",
+      "D": "--ignore-lock --clean"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'conflict' property in composer.json?",
+    "options": {
+      "A": "To list team members who are not allowed to edit the file.",
+      "B": "To handle Git merge conflicts automatically.",
+      "C": "To explicitly list packages and versions that are incompatible with your project.",
+      "D": "To show errors when two packages have the same name."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Running 'composer dump-autoload -o' converts PSR-4/PSR-0 rules into a classmap.",
+    "options": {
+      "A": "True, this is recommended for production for faster class loading.",
+      "B": "False, it only deletes the old autoloader.",
+      "C": "True, but it makes the application significantly slower.",
+      "D": "False, classmaps are only supported for legacy PSR-0 code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the command 'composer check-platform-reqs' do?",
+    "options": {
+      "A": "It installs the missing PHP extensions on your system.",
+      "B": "It verifies that your current PHP version and extensions meet the project's requirements.",
+      "C": "It checks if the server is connected to the internet.",
+      "D": "It restarts the local web server to apply new PHP settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Composer, what is a 'Virtual Package' (e.g., php-64bit)?",
+    "options": {
+      "A": "A package that only exists in the cloud.",
+      "B": "A package that is currently being downloaded in a background thread.",
+      "C": "An AI-generated code library that does not have a physical maintainer.",
+      "D": "A package provided by the environment (PHP, extensions, OS traits) rather than a file."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: The 'replace' property can be used to tell Composer that your project provides a package that others might require.",
+    "options": {
+      "A": "True, this is common when forking a library or creating a framework bundle.",
+      "B": "False, 'replace' is used exclusively for deleting temporary files.",
+      "C": "True, but only for development tools.",
+      "D": "False, 'replace' only works in global mode."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'composer.json' property 'prefer-stable'?",
+    "options": {
+      "A": "It forces the server to use more RAM to stabilize large downloads.",
+      "B": "It prevents the computer from crashing during the installation phase.",
+      "C": "It tells Composer to prefer stable packages over development ones when both are available.",
+      "D": "It limits the number of beta testers allowed for a specific package."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to see the license information of all dependencies in a readable format?",
+    "options": {
+      "A": "composer show-licenses",
+      "B": "composer license",
+      "C": "composer audit --licenses",
+      "D": "composer show --all-legal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: By default, Composer will look for and download 'dev' versions of packages if no stable version is found.",
+    "options": {
+      "A": "True, it always prefers the most recent code regardless of stability.",
+      "B": "True, but only if you use the --dev flag.",
+      "C": "False, it will only install 'stable' unless minimum-stability is changed.",
+      "D": "False, it only installs packages from the local system cache."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you define a custom script that runs only *after* the 'composer install' command completes?",
+    "options": {
+      "A": "Add it under the 'post-install-cmd' key in the 'scripts' section.",
+      "B": "Add it under the 'after-install' key in the 'config' section.",
+      "C": "Create a file named 'install.sh' in the root folder.",
+      "D": "Use the command 'composer script --after install'."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when you run 'composer update monolog/monolog'?",
+    "options": {
+      "A": "All packages in the project are updated to the latest version.",
+      "B": "The command fails because you cannot update a single package.",
+      "C": "Only the Monolog package is updated, and the lock file is refreshed for that package.",
+      "D": "The Monolog package is deleted and reinstalled from the local cache."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Composer 'Plugins' can be used to modify the behavior of the Composer process itself during runtime.",
+    "options": {
+      "A": "True, they can hook into various events to extend functionality.",
+      "B": "False, plugins are only for adding new PHP functions.",
+      "C": "True, but they must be written in C++ for performance.",
+      "D": "False, Composer does not support internal plugins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'autoload-dev' section in composer.json?",
+    "options": {
+      "A": "To automatically update the developer's computer settings.",
+      "B": "To load classes that are only needed for testing and development (like Mock objects).",
+      "C": "To load classes from the cloud instead of the local disk.",
+      "D": "To speed up the autoloader by exactly 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command would you use to verify if the dependencies in your 'composer.lock' match the 'composer.json'?",
+    "options": {
+      "A": "composer verify",
+      "B": "composer install --dry-run",
+      "C": "composer diff",
+      "D": "composer validate"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can specify an alias for a package version (e.g., 'as 1.0') in the require section.",
+    "options": {
+      "A": "False, aliases are only for nicknames of team members.",
+      "B": "True, this is useful when a package requires a version you want to override.",
+      "C": "True, but only for the PHP version requirement.",
+      "D": "False, aliases were removed in Composer 2.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Partial Update' in Composer?",
+    "options": {
+      "A": "Updating the project while the server is offline.",
+      "B": "Updating only specific packages named in the command instead of the whole project.",
+      "C": "Updating only 50% of the code in a specific package.",
+      "D": "An error where a download is interrupted midway."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'repositories' section, what does the 'vcs' type do?",
+    "options": {
+      "A": "It creates a Virtual Cloud Server for the library.",
+      "B": "It validates the CSS styles of the package.",
+      "C": "It identifies the package as a Virus Control System.",
+      "D": "It allows Composer to fetch a package directly from Git, SVN, or Mercurial."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'composer global' commands use a different 'composer.json' file located in the user's home directory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only if manually created"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property in composer.json is used to specify the minimum PHP version required for the project?",
+    "options": {
+      "A": "config: { php: '8.2' }",
+      "B": "platform: { php: '8.2' }",
+      "C": "php-version: '8.2'",
+      "D": "require: { php: '>=8.2' }"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'composer outdated' command used for?",
+    "options": {
+      "A": "To delete old versions of the Composer software.",
+      "B": "To find code that was written more than a year ago in your project.",
+      "C": "To check if the server hardware is too old to run PHP.",
+      "D": "To see a list of installed packages that have newer versions available on Packagist."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can disable the execution of custom scripts using the '--no-scripts' flag.",
+    "options": {
+      "A": "True, this is a useful security measure when installing untrusted packages.",
+      "B": "False, scripts are mandatory for the installation to work.",
+      "C": "True, but only for 'pre-install' scripts.",
+      "D": "False, this flag only applies to JavaScript builds."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'classmap' autoloading method do?",
+    "options": {
+      "A": "It maps every class to a specific database table.",
+      "B": "It draws a map of the class inheritance on the screen.",
+      "C": "It identifies classes that are used for mapping GPS data.",
+      "D": "It creates a static list of all classes and their file paths for fast loading."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How do you restrict the 'minimum-stability' to only apply to a specific package while keeping the rest of the project stable?",
+    "options": {
+      "A": "You cannot; minimum-stability is a global setting.",
+      "B": "By moving that package to the 'require-dev' section.",
+      "C": "By appending '@dev' or '@beta' to the version constraint of that specific package.",
+      "D": "By creating a second composer.json file for dev packages."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Composer 2.x requires the 'ext-curl' extension to be enabled in PHP to download packages.",
+    "options": {
+      "A": "False, it can use PHP's native streams if curl is missing.",
+      "B": "True, installation will fail without it.",
+      "C": "Only for private repositories.",
+      "D": "Only on Windows servers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to interactively search for a package and choose a version to install?",
+    "options": {
+      "A": "composer search --install",
+      "B": "composer find --choose",
+      "C": "composer require",
+      "D": "composer init"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'archive' command?",
+    "options": {
+      "A": "To delete old versions of your project.",
+      "B": "To create a zip or tar archive of a specific package at a specific version.",
+      "C": "To move the project to a secondary hard drive.",
+      "D": "To backup the database into a JSON format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'dev-master' as a version constraint is generally considered a best practice for production.",
+    "options": {
+      "A": "False, it can lead to breaking changes; use tagged versions instead.",
+      "B": "True, it ensures you always have the latest bug fixes.",
+      "C": "True, master branches are always stable.",
+      "D": "False, dev-master only works in the 'test' environment."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'bin-dir' configuration in composer.json do?",
+    "options": {
+      "A": "It specifies where the server's binary files are located.",
+      "B": "It creates a backup of all ZIP files downloaded.",
+      "C": "It identifies the directory for storing binary data like images.",
+      "D": "It changes the location where symlinks to package executables are created."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command provides a detailed audit of security vulnerabilities in your dependency tree?",
+    "options": {
+      "A": "composer secure",
+      "B": "composer audit",
+      "C": "composer scan",
+      "D": "composer check-safety"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer can automatically detect the correct version of a package based on the project's current PHP version.",
+    "options": {
+      "A": "True, it filters out versions that do not match the environment.",
+      "B": "False, it only looks at the version string you typed.",
+      "C": "Only if the --auto flag is used during install.",
+      "D": "Only for official PHP extensions, not for user libraries."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you run a script named 'test' defined in the 'scripts' section of composer.json?",
+    "options": {
+      "A": "composer test",
+      "B": "composer run-script test",
+      "C": "Both A and B",
+      "D": "php bin/composer test"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'files' autoloading method?",
+    "options": {
+      "A": "To load every file in the project into memory.",
+      "B": "To backup the source code to a remote file server.",
+      "C": "To scan files for viruses during every request.",
+      "D": "To explicitly load specific files (like helper functions) on every request."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'composer.lock' should always be excluded from .gitignore in application projects.",
+    "options": {
+      "A": "True, it is vital for ensuring consistent environments across the team.",
+      "B": "False, it changes too often and creates Git noise.",
+      "C": "Only for open-source libraries.",
+      "D": "Only if the team uses different operating systems."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'suggest' section in composer.json used for?",
+    "options": {
+      "A": "To give feedback to the Composer developers.",
+      "B": "To list packages that could enhance functionality but are not strictly required.",
+      "C": "To suggest new PHP features to the user.",
+      "D": "To recommend a better IDE for coding PHP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the configuration settings for the current project?",
+    "options": {
+      "A": "composer config --list",
+      "B": "composer settings",
+      "C": "composer show-config",
+      "D": "composer info --env"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Metapackage' can require other metapackages.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Composer 2.0",
+      "D": "Only for framework bundles"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'github-oauth' config setting store?",
+    "options": {
+      "A": "The user's GitHub password in plain text.",
+      "B": "A link to the user's GitHub profile picture.",
+      "C": "A list of all the user's private repositories.",
+      "D": "Access tokens to bypass GitHub API rate limits."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command checks if a package can be installed without actually installing it?",
+    "options": {
+      "A": "composer test [package]",
+      "B": "composer check [package]",
+      "C": "composer require [package] --dry-run",
+      "D": "composer verify [package]"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use 'Wildcards' (e.g., 1.0.*) in version constraints.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 'dev' versions",
+      "D": "Only in the 'scripts' section"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Package Aliasing' primarily used for?",
+    "options": {
+      "A": "To give packages funny nicknames in the terminal.",
+      "B": "To satisfy a version constraint by pointing a branch to a specific version.",
+      "C": "To hide the name of a package from competitors.",
+      "D": "To rename the vendor folder to something custom."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'provide' property in composer.json do?",
+    "options": {
+      "A": "It provides money to the package authors.",
+      "B": "It indicates that the package fulfills the requirements of another package.",
+      "C": "It provides the documentation for the project.",
+      "D": "It provides a list of team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Composer 2.2+ includes a 'bump' command to update version constraints in composer.json based on the lock file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for development packages",
+      "D": "Only on Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'composer diagnose' command used for?",
+    "options": {
+      "A": "To find bugs in the user's PHP source code.",
+      "B": "To check for common system issues that might prevent Composer from working.",
+      "C": "To scan the computer for hardware failure.",
+      "D": "To analyze the speed of the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property allows you to define the directory for your project's binaries?",
+    "options": {
+      "A": "binary-path",
+      "B": "executable-dir",
+      "C": "bin",
+      "D": "bin-dir"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: PSR-0 is the modern and recommended autoloading standard over PSR-4.",
+    "options": {
+      "A": "False (PSR-4 is the modern standard; PSR-0 is deprecated).",
+      "B": "True (PSR-0 is faster and more flexible).",
+      "C": "True, but only for Symfony projects.",
+      "D": "False, both are legacy and replaced by PSR-12."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'composer.json' field 'funding'?",
+    "options": {
+      "A": "To set the budget for the project.",
+      "B": "To track the total money spent on dependencies.",
+      "C": "To hide the developer's bank account details.",
+      "D": "To provide links to ways users can financially support package maintainers."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which flag during 'composer update' allows you to see what would happen without making any changes?",
+    "options": {
+      "A": "--test-only",
+      "B": "--preview",
+      "C": "--no-commit",
+      "D": "--dry-run"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: The 'vendor/autoload.php' file is static and never changes once created.",
+    "options": {
+      "A": "False, it is regenerated every time the autoloader is dumped or packages are modified.",
+      "B": "True, it is a core part of PHP.",
+      "C": "True, but only for C# projects.",
+      "D": "False, it is updated by the server at midnight automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Package Abandonment' on Packagist?",
+    "options": {
+      "A": "When a package is deleted from the server.",
+      "B": "When a maintainer marks a package as no longer supported and suggests an alternative.",
+      "C": "When a developer forgets their password.",
+      "D": "When a package has zero downloads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command lists all available Composer commands for the current version?",
+    "options": {
+      "A": "composer list",
+      "B": "composer help",
+      "C": "composer --all",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use a specific commit hash (e.g., #abcd123) as a version constraint in composer.json.",
+    "options": {
+      "A": "True, this pins the dependency to a specific point in time.",
+      "B": "False, only tags are supported.",
+      "C": "True, but only for the 'dev' environment.",
+      "D": "False, commit hashes are only for Git internals."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'preferred-install' config setting do?",
+    "options": {
+      "A": "It sets the order of packages in the composer.json file.",
+      "B": "It identifies the user's preferred PHP IDE.",
+      "C": "It determines whether packages should be installed from 'source' or 'dist'.",
+      "D": "It chooses the fastest mirror for downloading."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Composer 2, what is 'Canonical Repository' behavior?",
+    "options": {
+      "A": "It only installs packages that are approved by the government.",
+      "B": "It forces all packages to be in the same folder.",
+      "C": "It identifies the repository as the 'Holy Grail' of code.",
+      "D": "Composer only looks for a package in the first repository that lists it."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'composer global' installs packages into the system's global PHP library path.",
+    "options": {
+      "A": "False, it installs them into a managed directory in the user's home folder.",
+      "B": "True, it works like a Windows DLL.",
+      "C": "Only if you run it as the 'root' or 'Administrator' user.",
+      "D": "True, it makes the code available to all users on the machine."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'composer.json' property 'type' (e.g., 'library' or 'project') used for?",
+    "options": {
+      "A": "To tell Composer how to handle the installation logic for that package.",
+      "B": "To set the file extension of the project.",
+      "C": "To choose between Light and Dark mode in the terminal.",
+      "D": "To specify the font type of the documentation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which flag ensures that Composer only uses information from the local cache and does not connect to the internet?",
+    "options": {
+      "A": "--offline",
+      "B": "--cache-only",
+      "C": "--no-network",
+      "D": "--local-only"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Composer can manage 'Patch' files and apply them to dependencies automatically via specific plugins.",
+    "options": {
+      "A": "True, often used in Drupal or Magento development with the 'composer-patches' plugin.",
+      "B": "False, you must manually edit the vendor folder to apply patches.",
+      "C": "True, but only for security patches from Microsoft.",
+      "D": "False, patches are only for the OS kernel."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'process-timeout' configuration?",
+    "options": {
+      "A": "To set the total time the user is allowed to use the computer.",
+      "B": "To set the expiration time of the access tokens.",
+      "C": "To monitor how long a developer stays in the office.",
+      "D": "To set the maximum time (seconds) a Composer process is allowed to run."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command is used to remove the 'vendor' folder and 'composer.lock' to start fresh?",
+    "options": {
+      "A": "composer clean",
+      "B": "composer reset",
+      "C": "There is no built-in command; you must delete them manually.",
+      "D": "composer refresh --all"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Composer will automatically convert a 'require-dev' dependency into a regular 'require' if it is needed by a production package.",
+    "options": {
+      "A": "False, you will get a dependency resolution error.",
+      "B": "True, it prioritizes project stability.",
+      "C": "Only if the --auto-dev flag is used.",
+      "D": "True, but only in Composer 1.x."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Fixed Versioning' (e.g., '1.0.0' without symbols) mean in Composer?",
+    "options": {
+      "A": "Composer will automatically update to the latest patch.",
+      "B": "It means the version is broken and needs a fix.",
+      "C": "Composer will only ever install that exact version.",
+      "D": "Composer will install any version starting with 1."
+    },
+    "answer": "C"
+  }
+
+  ]
+}

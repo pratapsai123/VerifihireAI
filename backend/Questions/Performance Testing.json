@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Performance Testing", 
+  "questions": [
+    {
+    "question": "Which metric specifically measures the time a system takes to react to a given input?",
+    "options": {
+      "A": "Throughput",
+      "B": "Scalability",
+      "C": "Response Time",
+      "D": "Resource Utilization"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary goal of an 'Endurance Test' (Soak Test)?",
+    "options": {
+      "A": "To find the maximum number of concurrent users the system supports.",
+      "B": "To verify system stability and identify resource leaks over a long period.",
+      "C": "To test the system's reaction to a sudden burst of traffic.",
+      "D": "To check the physical temperature of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In performance terminology, what does 'IOPS' stand for?",
+    "options": {
+      "A": "Internet Output Per Second",
+      "B": "Internal Operating Protocol System",
+      "C": "Integrated Options for Processing Speed",
+      "D": "Input/Output Operations Per Second"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which of these represents a 'Scalability' bottleneck?",
+    "options": {
+      "A": "A system that maintains constant response times as load increases.",
+      "B": "A system where adding hardware does not result in a performance gain.",
+      "C": "A system that uses exactly 10% of CPU during a load test.",
+      "D": "A system that has been backed up to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Throughput' is typically measured in Transactions Per Second (TPS) or Hits Per Second.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database queries",
+      "D": "Only for static content"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Think Time' used to simulate in a performance script?",
+    "options": {
+      "A": "The time the database takes to index a record.",
+      "B": "The delay while the CPU is idle.",
+      "C": "The real-world pauses a human makes between actions on a page.",
+      "D": "The time it takes for a developer to write a test case."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which type of test is performed to determine if the system meets its pre-defined Performance Requirements?",
+    "options": {
+      "A": "Smoke Test",
+      "B": "Unit Test",
+      "C": "Benchmark Test",
+      "D": "Static Analysis"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a '90th Percentile' response time of 2 seconds mean?",
+    "options": {
+      "A": "90% of all requests were completed in 2 seconds or less.",
+      "B": "The average response time for all users was exactly 2 seconds.",
+      "C": "The system failed 90% of the requests sent.",
+      "D": "Only 10% of the users experienced a 2-second delay."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a load test, what is 'Ramp-up'?",
+    "options": {
+      "A": "The process of shutting down servers one by one.",
+      "B": "The time it takes for a system to recover after a crash.",
+      "C": "The interval during which virtual users are gradually added to the test.",
+      "D": "The maximum speed of the network bandwidth."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which component is responsible for distributing incoming traffic across multiple backend servers?",
+    "options": {
+      "A": "Web Browser",
+      "B": "Load Balancer",
+      "C": "Database Index",
+      "D": "Firewall Rule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Baseline' is a set of performance results that serves as a point of reference for future tests.",
+    "options": {
+      "A": "False",
+      "B": "Only for production environments",
+      "C": "True",
+      "D": "Only if the CPU is under 50% load"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary concern when a system experiences 'High Disk I/O Wait'?",
+    "options": {
+      "A": "The CPU is processing data too quickly for the RAM.",
+      "B": "The disk subsystem is a bottleneck, causing the CPU to sit idle while waiting for data.",
+      "C": "The network cable is physically loose.",
+      "D": "The monitor resolution is set too high."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific test focuses on the system's ability to handle massive data volumes in the database?",
+    "options": {
+      "A": "Spike Testing",
+      "B": "Load Testing",
+      "C": "Volume Testing",
+      "D": "Unit Testing"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Latency' in a network request?",
+    "options": {
+      "A": "The time spent waiting for a transfer to start.",
+      "B": "The total number of packets sent per minute.",
+      "C": "The physical length of the fiber optic cable.",
+      "D": "The number of users currently logged out."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP status code usually indicates that the server is currently overwhelmed and unable to handle the request?",
+    "options": {
+      "A": "200 OK",
+      "B": "404 Not Found",
+      "C": "503 Service Unavailable",
+      "D": "301 Moved Permanently"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Vertical Scaling'?",
+    "options": {
+      "A": "Adding more servers to a cluster.",
+      "B": "Increasing the height of the server rack.",
+      "C": "Adding more resources (CPU/RAM) to a single existing server.",
+      "D": "Moving the data center to a higher floor."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Utilization' is the ratio of the time a resource was busy to the total elapsed time.",
+    "options": {
+      "A": "Only for memory",
+      "B": "True",
+      "C": "False",
+      "D": "Only for network bandwidth"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Jitter' in a network performance context?",
+    "options": {
+      "A": "The physical vibration of the server.",
+      "B": "The variation in the delay of received packets.",
+      "C": "The number of bits lost during transmission.",
+      "D": "The speed of the cooling fans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is most helpful in detecting a 'Memory Leak'?",
+    "options": {
+      "A": "Steady increase in RAM usage over time under constant load.",
+      "B": "Sudden spikes in CPU utilization.",
+      "C": "Number of database connections opened.",
+      "D": "The time taken to boot the operating system."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Pacing' in a performance test script?",
+    "options": {
+      "A": "To speed up the internet connection.",
+      "B": "To control the time between iterations of a script for a single virtual user.",
+      "C": "To encrypt the test results.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Concurrent User'?",
+    "options": {
+      "A": "A user who is using the system at the same time as others.",
+      "B": "A user who has been banned from the system.",
+      "C": "A user who only uses the system at night.",
+      "D": "A specialized way to name VM folders."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Client-side' performance metric?",
+    "options": {
+      "A": "Database Query Execution Time",
+      "B": "Server CPU Temperature",
+      "C": "Time to First Byte (TTFB)",
+      "D": "Total Disk Space Available"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Throughput' decreases when a system reaches its saturation point and response times spike.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Availability'?",
+    "options": {
+      "A": "The percentage of time a system is functional and accessible.",
+      "B": "The number of users who are currently logged in.",
+      "C": "The speed of the network bandwidth.",
+      "D": "A specialized tool for drawing networks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of scaling involves adding more machines to a cluster?",
+    "options": {
+      "A": "Vertical Scaling",
+      "B": "Horizontal Scaling",
+      "C": "Circular Scaling",
+      "D": "Static Scaling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In performance testing, what is an 'Assertion'?",
+    "options": {
+      "A": "A physical check of the server hardware.",
+      "B": "A validation step to verify the server's response matches expected criteria.",
+      "C": "The process of deleting duplicate data.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Response Time' components breakdown?",
+    "options": {
+      "A": "Network time + Server time + Database time.",
+      "B": "The physical parts of the hard drive.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The number of users currently active."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scalability' is the ability of a system to handle more load by increasing resources.",
+    "options": {
+      "A": "False",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resource Contention'?",
+    "options": {
+      "A": "When multiple processes compete for the same limited hardware resource.",
+      "B": "When the server room is too hot.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' idle time?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "CPU Idle",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Performance tests should be automated and part of the CI/CD pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing'?",
+    "options": {
+      "A": "Testing a system under a specific expected load.",
+      "B": "Testing a system until it breaks.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Threads' in a load generator?",
+    "options": {
+      "A": "User Count / VUs",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Spike Testing' involves sudden bursts of traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking apps",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Degradation'?",
+    "options": {
+      "A": "A decrease in performance quality as load increases.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Memory' in use?",
+    "options": {
+      "A": "RAM Utilization",
+      "B": "CPU Load",
+      "C": "Disk Space",
+      "D": "Throughput"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Reliability' and 'Performance' are the same thing.",
+    "options": {
+      "A": "False (Performance is about speed/load; Reliability is about consistency over time).",
+      "B": "True",
+      "C": "Only for cloud-native apps",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput' 'Aggregation'?",
+    "options": {
+      "A": "Combining results from multiple load generators.",
+      "B": "Deleting the oldest test results.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' response time?",
+    "options": {
+      "A": "Mean Response Time",
+      "B": "90th Percentile",
+      "C": "Total Throughput",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Endurance Testing' is usually performed for a few minutes.",
+    "options": {
+      "A": "False (It is performed over hours or days).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Baseline' comparison?",
+    "options": {
+      "A": "Comparing results against a previous stable run.",
+      "B": "Hiring a new visualization team.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'HTTP 4xx' errors?",
+    "options": {
+      "A": "Client Error Rate",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Network Bandwidth' can be a bottleneck.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalability' 'Testing'?",
+    "options": {
+      "A": "Determining how a system scales with added resources.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of hours a server has been on."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Packet Loss' rate?",
+    "options": {
+      "A": "Drop Rate",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Load Balancing' improves performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Time' 'Percentile'?",
+    "options": {
+      "A": "A value below which a percentage of requests fall.",
+      "B": "The fastest time recorded.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a server?",
+    "options": {
+      "A": "Uptime %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Resource Utilization' includes CPU and RAM usage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stress Testing'?",
+    "options": {
+      "A": "Pushing a system beyond its limits.",
+      "B": "Naming the servers after famous people.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for automated scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Baseline Testing' 'Scenario'?",
+    "options": {
+      "A": "A standard workload used for comparison.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate'?",
+    "options": {
+      "A": "Pass / Fail %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Performance engineering is a lifecycle process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of bringing data into a system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' processing time?",
+    "options": {
+      "A": "Mean Processing Time",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' helps determine future needs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Time' 'Latency'?",
+    "options": {
+      "A": "The delay before a request is processed.",
+      "B": "The speed of the network.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is a critical KPI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Lifecycle'?",
+    "options": {
+      "A": "The stages of performance engineering from design to production.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a test run?",
+    "options": {
+      "A": "Records Succeeded %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' performance means starting tests early.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Balance'?",
+    "options": {
+      "A": "Distributing workload across multiple resources.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Failed Requests'?",
+    "options": {
+      "A": "Error Rate",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When modeling a 'Workload Profile', what is the purpose of distinguishing between 'Steady State' and 'Peak Load'?",
+    "options": {
+      "A": "To choose the right color for the dashboard graphs.",
+      "B": "To understand system behavior under normal day-to-day conditions vs. maximum expected stress periods.",
+      "C": "To decide which developer should be on-call during the test.",
+      "D": "To calculate the physical weight of the servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific JVM Garbage Collection (GC) metric is most indicative of a 'Stop-the-World' event that impacts application response time?",
+    "options": {
+      "A": "Total number of Minor GC cycles.",
+      "B": "Total duration of Full GC pauses.",
+      "C": "The size of the Metaspace.",
+      "D": "The number of threads in the BLOCKED state."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Queuing Theory', what happens to the wait time when resource utilization exceeds 80-90%?",
+    "options": {
+      "A": "Wait time increases linearly.",
+      "B": "Wait time increases exponentially.",
+      "C": "Wait time decreases as the system works faster.",
+      "D": "Wait time stays constant until 100% utilization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Little’s Law' used for in performance engineering?",
+    "options": {
+      "A": "To calculate the electrical power usage of a rack.",
+      "B": "To determine the relationship between throughput, response time, and the number of concurrent requests.",
+      "C": "To encrypt the connection between the load generator and server.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which database phenomenon occurs when two transactions wait for each other to release locks, effectively halting both?",
+    "options": {
+      "A": "Data Skew",
+      "B": "Deadlock",
+      "C": "Index Fragmentation",
+      "D": "Buffer Overflow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does increasing the 'TCP Window Size' affect high-latency, high-bandwidth network links?",
+    "options": {
+      "A": "It decreases the throughput by adding overhead.",
+      "B": "It allows more data to be in flight before requiring an acknowledgment, increasing effective throughput.",
+      "C": "It physically shortens the fiber optic cable.",
+      "D": "It encrypts the packet headers automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hockey Stick' curve in a response time vs. load graph indicates that the system has reached a saturation point.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CPU-bound applications",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In performance statistics, why is the 'Median' (p50) often preferred over the 'Average' (Mean)?",
+    "options": {
+      "A": "The average is harder to calculate.",
+      "B": "The median is less sensitive to extreme outliers that can skew the mean.",
+      "C": "The average only works for network metrics.",
+      "D": "The median represents the absolute worst-case scenario."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Connection Pooling' exhaustion, and how does it manifest in a load test?",
+    "options": {
+      "A": "When the server room runs out of physical space.",
+      "B": "When all available database connections are in use, causing new requests to wait or time out.",
+      "C": "When the network switch is turned off.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the best indicator of 'Thread Contention' in a multi-threaded application?",
+    "options": {
+      "A": "High CPU idle time.",
+      "B": "High system CPU (kernel time) relative to user CPU, and many threads in 'WAITING' or 'MONITOR' states.",
+      "C": "Low memory utilization.",
+      "D": "High disk read throughput."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the impact of a low 'Cache Hit Ratio' on application performance?",
+    "options": {
+      "A": "It increases the CPU clock speed.",
+      "B": "It increases latency as the system must fetch more data from slower storage (disk/DB) rather than memory.",
+      "C": "It decreases the number of concurrent users.",
+      "D": "It makes the source code easier to read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Coordinated Omission' is a common flaw in load testing tools where the tool fails to account for wait time in its own internal queues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for JMeter",
+      "D": "Only if the network is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to measure the 'Context Switching' rate on a Linux server?",
+    "options": {
+      "A": "IOPS",
+      "B": "cs (context switches) via vmstat or sar.",
+      "C": "Throughput",
+      "D": "Temperature"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Flat' scalability curve (horizontal line) represent when adding more hardware resources?",
+    "options": {
+      "A": "Infinite scalability.",
+      "B": "Zero scalability gain (the system is likely bottlenecked by a non-scalable component like a single database).",
+      "C": "Perfect performance optimization.",
+      "D": "The system is currently turned off."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a performance test report, what does 'p99.9' latency capture?",
+    "options": {
+      "A": "The average experience of 99.9% of users.",
+      "B": "The 'Tail Latency'—the worst-case experience for the slowest 0.1% of requests.",
+      "C": "The percentage of requests that failed.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Serialization Overhead' in distributed performance?",
+    "options": {
+      "A": "The time spent printing serial numbers on servers.",
+      "B": "The CPU time required to convert data objects into a format for network transmission.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The cost of monthly cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a typical symptom of 'Application Server' thread pool saturation?",
+    "options": {
+      "A": "Immediate '404 Not Found' errors.",
+      "B": "Increased queuing time and '504 Gateway Timeout' errors.",
+      "C": "The server's physical fans spinning faster.",
+      "D": "A decrease in the total number of database records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Warm-up' periods are unnecessary for systems built with Go or C++, unlike Java or .NET.",
+    "options": {
+      "A": "False (All systems benefit from pre-loading caches and establishing connection pools before measurement).",
+      "B": "True",
+      "C": "Only for small datasets",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Write Amplification' in the context of SSD performance?",
+    "options": {
+      "A": "Using a microphone to hear the disk spinning.",
+      "B": "The phenomenon where the actual amount of data written to the flash memory is a multiple of the data requested by the host.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific tool is commonly used to profile 'Java' applications to identify hot methods and memory allocation issues?",
+    "options": {
+      "A": "Wireshark",
+      "B": "JProfiler / YourKit",
+      "C": "Postman",
+      "D": "Nmap"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-bursting' in network performance?",
+    "options": {
+      "A": "A physical explosion in the server room.",
+      "B": "Very short, high-intensity spikes in traffic that can saturate network buffers and cause packet loss even if average utilization is low.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Doc Values' in Elasticsearch are an on-disk data structure used to improve the performance of sorting and aggregations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for text fields",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Synthetic' user in performance monitoring?",
+    "options": {
+      "A": "To replace a real human employee.",
+      "B": "To run scripted transactions at regular intervals to provide baseline availability and performance data from production.",
+      "C": "To encrypt the database passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Database Row Locks' currently held?",
+    "options": {
+      "A": "Throughput",
+      "B": "Lock Count / Wait Time",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pacing' in a performance test script?",
+    "options": {
+      "A": "To control the time between iterations of a script for a single virtual user.",
+      "B": "To speed up the internet connection.",
+      "C": "To encrypt the test results.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is typically measured in Transactions Per Second (TPS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database queries",
+      "D": "Only for static content"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Average Response Time'?",
+    "options": {
+      "A": "The sum of all response times divided by the number of requests.",
+      "B": "The fastest response time recorded.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The time spent cleaning the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Endurance Testing' is usually performed for a few minutes.",
+    "options": {
+      "A": "False (It is performed over hours or days).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Think Time' used to simulate in a performance script?",
+    "options": {
+      "A": "The real-world pauses a human makes between actions on a page.",
+      "B": "The delay while the CPU is idle.",
+      "C": "The time the database takes to index a record.",
+      "D": "The time it takes for a developer to write a test case."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a test?",
+    "options": {
+      "A": "Pass / Fail %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Spike Testing' helps evaluate system stability during sudden traffic bursts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing' 'Target'?",
+    "options": {
+      "A": "The specific application, server, or API being tested.",
+      "B": "The person who is blamed for a failure.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Reliability' and 'Performance' are the same thing.",
+    "options": {
+      "A": "False (Performance is about speed/load; Reliability is about consistency over time).",
+      "B": "True",
+      "C": "Only for cloud-native apps",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput' 'Aggregation'?",
+    "options": {
+      "A": "Combining results from multiple load generators.",
+      "B": "Deleting the oldest test results.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' response time?",
+    "options": {
+      "A": "Mean Response Time",
+      "B": "90th Percentile",
+      "C": "Total Throughput",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Baseline' comparison involves comparing results against a previous stable run.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Baseline' comparison?",
+    "options": {
+      "A": "Comparing results against a previous stable run.",
+      "B": "Hiring a new visualization team.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'HTTP 4xx' errors?",
+    "options": {
+      "A": "Client Error Rate",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Network Bandwidth' can be a bottleneck.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalability' 'Testing'?",
+    "options": {
+      "A": "Determining how a system scales with added resources.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of hours a server has been on."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Packet Loss' rate?",
+    "options": {
+      "A": "Drop Rate",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Load Balancing' improves performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Time' 'Percentile'?",
+    "options": {
+      "A": "A value below which a percentage of requests fall.",
+      "B": "The fastest time recorded.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of 'Network' traffic?",
+    "options": {
+      "A": "Bandwidth Usage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Latency' is critical for real-time applications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stability'?",
+    "options": {
+      "A": "The ability of a system to maintain performance under load without crashing.",
+      "B": "The speed of the processor.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Performance Engineering' involves improving performance throughout the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing' 'Scenario'?",
+    "options": {
+      "A": "A defined set of user steps and load conditions to be executed.",
+      "B": "The physical location of the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a test?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' helps determine future hardware needs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Time' 'Components'?",
+    "options": {
+      "A": "The different parts that make up total response time (Network, App Server, DB).",
+      "B": "The physical parts of the computer.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a service?",
+    "options": {
+      "A": "Uptime percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is measured in transactions per second.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Degradation'?",
+    "options": {
+      "A": "A decrease in performance quality over time or under load.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Concurrent Users'?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Utilization'?",
+    "options": {
+      "A": "The amount of RAM being used by the system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a service?",
+    "options": {
+      "A": "Uptime percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is measured in transactions per second.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Degradation'?",
+    "options": {
+      "A": "A decrease in performance quality over time or under load.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Concurrent Users'?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Average Response Time'?",
+    "options": {
+      "A": "The sum of all response times divided by the number of requests.",
+      "B": "The fastest response time recorded.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The time spent cleaning the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' percentage of a system?",
+    "options": {
+      "A": "(Uptime / Total Time) * 100",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Spike Testing' helps evaluate system stability during sudden traffic bursts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing' 'Target'?",
+    "options": {
+      "A": "The specific application, server, or API being tested.",
+      "B": "The person who is blamed for a failure.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which phenomenon describes a distributed system state where a temporary overload triggers a self-sustaining failure loop that continues even after the load is removed (e.g., due to aggressive retries or cache invalidation storms)?",
+    "options": {
+      "A": "Linear Saturation",
+      "B": "Metastability Failure",
+      "C": "Thermal Throttling",
+      "D": "Static Hysteresis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When analyzing a Java Heap Dump after an OutOfMemoryError (OOME), which specific artifact is most useful for identifying the 'Dominator' objects that are preventing memory from being reclaimed?",
+    "options": {
+      "A": "Thread Stack Trace",
+      "B": "Shallow Heap vs. Retained Heap analysis",
+      "C": "CPU Flame Graph",
+      "D": "Network Packet Capture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Nagle's Algorithm' should typically be disabled (TCP_NODELAY) for low-latency applications to prevent the small-packet delay intended to reduce network overhead.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for throughput-heavy batch jobs",
+      "D": "Only if using UDP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-concurrency database environment, how does 'Page Latch' contention differ from 'Row Lock' contention?",
+    "options": {
+      "A": "Row locks are physical; Latches are logical.",
+      "B": "Latches are internal memory structures used to protect physical pages in the buffer pool, while Locks protect the logical data consistency of rows.",
+      "C": "Latches only occur on SSDs.",
+      "D": "Row locks are managed by the OS kernel, not the DB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Linux kernel parameter would you tune to increase the maximum number of 'In-flight' connection requests (half-open) that the system can handle during a SYN flood or massive traffic spike?",
+    "options": {
+      "A": "net.core.somaxconn",
+      "B": "net.ipv4.tcp_max_syn_backlog",
+      "C": "fs.file-max",
+      "8": "vm.swappiness"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical reason why 'p99.99' latency is significantly harder to optimize than 'p95' latency in a microservices architecture?",
+    "options": {
+      "A": "p99.99 is mathematically impossible to calculate.",
+      "B": "It is dominated by rare, non-deterministic events like OS jitter, hardware interrupts, and deep GC pauses rather than application logic.",
+      "C": "p95 only accounts for database queries.",
+      "D": "The network bandwidth is always the bottleneck for p99.99."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'False Sharing' in high-performance multi-threaded applications occurs when multiple threads modify different variables that happen to reside on the same CPU cache line.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on ARM processors",
+      "D": "Only if using 128-bit pointers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which statistical distribution is most commonly used to model the 'Inter-arrival time' of requests in a stable, random performance test scenario?",
+    "options": {
+      "A": "Normal Distribution",
+      "B": "Exponential Distribution (Poisson Process)",
+      "C": "Binomial Distribution",
+      "D": "Uniform Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'High System CPU' (Kernel time) value typically indicate during a load test on a machine with very high network I/O?",
+    "options": {
+      "A": "The application code is inefficient.",
+      "B": "The CPU is spending excessive time handling hardware interrupts or context switching between processes.",
+      "C": "The RAM is physically failing.",
+      "D": "The database index is missing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a performance context, 'In-place Updates' in a database always perform better than 'Append-only' logs due to reduced disk space usage.",
+    "options": {
+      "A": "False (Append-only logs often provide higher write throughput by eliminating random I/O and latching contention).",
+      "B": "True",
+      "C": "Only for spinning HDDs",
+      "D": "Only if using the EXT4 file system"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Adaptive LIFO' (Last-In, First-Out) queuing in high-load scenarios compared to traditional FIFO?",
+    "options": {
+      "A": "To make sure the oldest user gets served first.",
+      "B": "To prioritize the most recent requests (which are likely still within client timeout windows) during an overload, rather than wasting resources on requests that have already likely timed out.",
+      "C": "To encrypt the queue metadata.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific JVM flag is used to enable 'Large Pages' support, which can reduce the overhead of TLB (Translation Lookaside Buffer) misses for high-memory applications?",
+    "options": {
+      "A": "-XX:+UseLargePages",
+      "B": "-Xms",
+      "C": "-XX:+UseG1GC",
+      "D": "-Xmx"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Universal Scalability Law' (USL), what does the 'Crosstalk' (beta) parameter represent?",
+    "options": {
+      "A": "The amount of memory leaked per second.",
+      "B": "The negative scalability impact caused by inter-node communication and contention for shared resources.",
+      "C": "The physical distance between servers.",
+      "D": "The number of concurrent users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lock-free' data structures are always faster than 'Lock-based' structures in every performance scenario.",
+    "options": {
+      "A": "False (Under low contention, simple locks can be faster; lock-free structures excel under high contention but are complex to implement).",
+      "B": "True",
+      "C": "Only for 32-bit systems",
+      "D": "Only if using the Rust language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Ballooning' in a virtualized performance environment?",
+    "options": {
+      "A": "The RAM physically expanding inside the chip.",
+      "B": "A mechanism used by the hypervisor to reclaim memory from a guest OS by forcing it to swap data to its own virtual disk.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric would you monitor to identify 'Database Transaction Log' (WAL) contention?",
+    "options": {
+      "A": "Buffer Cache Hit Ratio",
+      "B": "Log Write Wait Time / IOPS on the Log Device",
+      "C": "Number of users connected",
+      "D": "CPU Idle percentage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an expert-level performance profiler that identifies line-by-line bottlenecks in C# code.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for Prometheus metrics).",
+      "B": "True",
+      "C": "Only for Windows servers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation overhead at the virtual switch level?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "The minimal CPU cycle consumption required for frame tagging (802.1Q) and processing at the vSwitch layer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management heartbeats from ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Zero-copy' I/O avoids the overhead of copying data between kernel and user space buffers, which is critical for high-performance networking and file serving.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) latency-based balancing?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "Automatically migrating VM disks to different datastores when the observed storage latency exceeds a specific threshold (e.g., 15ms).",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' (encrypted web management)?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' uses a three-node cluster to protect the performance of the management layer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID that enables Virtual Guest Tagging (VGT), allowing a VM to see and manage its own 802.1Q tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides near-native performance but typically disables features like Live Migration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' management in a hypervisor?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "The ability to dynamically adjust the memory allocation of a VM based on real-time internal OS demand and host availability.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' architecture feature is required for 'Hardware-Assisted Virtualization' of the MMU?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX-512",
+      "D": "SSE4.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Thin Provisioning' of storage can lead to a 'Catastrophic Pause' of all VMs if the underlying physical volume reaches 100% capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The layer of software in a hypervisor that manages the physical resource allocation for a specific virtual machine.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' generally provides higher performance than full emulation because the Guest OS is 'Hypervisor-aware'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A mechanism that mirrors write operations to both source and destination storage during a live migration to ensure data consistency.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface configuration that places the port into an error-disabled state if an unauthorized MAC address is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is the node with the lowest Bridge ID (Priority + MAC).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Providing traffic filtering within a VLAN based on Layer 2, 3, or 4 information to increase internal security.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' effectively disables STP on a per-port basis, potentially allowing for loops if configured incorrectly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing?",
+    "options": {
+      "A": "A physical tool for cables.",
+      "B": "The algorithm used to determine which physical link in a bundle is used for a specific traffic flow to ensure load distribution.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent unauthorized VLAN access (VLAN hopping).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A feature that prevents the VTP password from being stored in plain text in the device configuration.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that completely saturates a network segment within seconds.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' restrict action?",
+    "options": {
+      "A": "Turning off the switch.",
+      "B": "An interface policy that drops unauthorized traffic and increments a security counter without disabling the port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' significantly reduces STP convergence time from 50 seconds to under 6 seconds.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in performance automation?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property of a system where applying a configuration change multiple times results in the same final state as a single application.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a load test?",
+    "options": {
+      "A": "(Total Passed / Total Sent) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' performance engineering aims to detect performance regressions during the coding phase rather than in a final pre-prod cycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for performance systems?",
+    "options": {
+      "A": "Identifying scenarios where an attacker could trigger a DoS by exhausting specific system resources (e.g., CPU, RAM, Disk).",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a performance tool repository?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' for performance includes patching tools to prevent them from becoming an attack vector.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's performance standards, tools, and compliance policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a performance toolchain?",
+    "options": {
+      "A": "The time from code commit to deployment.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for ensuring that performance optimizations do not introduce security vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' impact on performance scripts?",
+    "options": {
+      "A": "The resource overhead required to fork a child process to execute a block of commands.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a performance CI job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can store historical performance data for years to analyze long-term system degradation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' performance impact?",
+    "options": {
+      "A": "Potential latency increase due to the processing requirement of encapsulation and decapsulation at Layer 3 gateways.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a fundamental requirement for reliable performance testing scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' for performance metrics?",
+    "options": {
+      "A": "Tracing the origin of a performance metric from the raw system counter to the final dashboard representation.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' response time in a performance test?",
+    "options": {
+      "A": "Arithmetic Mean",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps identify performance bottlenecks during the initial design phase.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+  ]
+}

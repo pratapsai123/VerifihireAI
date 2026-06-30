@@ -1,0 +1,1985 @@
+{ 
+  "skill": "AWS Security", 
+  "questions": [
+  {
+    "question": "According to the AWS Shared Responsibility Model, which of the following is a responsibility of AWS?",
+    "options": {
+      "A": "Security of the physical data center hardware.",
+      "B": "Configuring security groups for EC2 instances.",
+      "C": "Managing guest operating system patches.",
+      "D": "Encrypting data within an S3 bucket."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In the Shared Responsibility Model, the customer is responsible for 'Security IN the Cloud'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3, not EC2",
+      "D": "Only if using a dedicated host"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of AWS IAM?",
+    "options": {
+      "A": "To provide high-speed content delivery.",
+      "B": "To securely control access to AWS services and resources.",
+      "C": "To monitor the cost of your AWS account.",
+      "D": "To automatically back up your databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'MFA' stand for in AWS security?",
+    "options": {
+      "A": "Main Firewall Access",
+      "B": "Multi-Factor Authentication",
+      "C": "Managed File Authorization",
+      "D": "Multi-Factor Archiving"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these should be done with the AWS Account 'Root User' credentials?",
+    "options": {
+      "A": "Share them with the lead developer for easy access.",
+      "B": "Use them for daily administrative tasks.",
+      "C": "Enable MFA and lock them away; use IAM users instead.",
+      "D": "Post them in a private GitHub repository."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An IAM User is an entity that you create in AWS to represent the person or service that uses it to interact with AWS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for human users",
+      "D": "Only if using the AWS Console"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AWS service helps you audit and record API calls made within your account?",
+    "options": {
+      "A": "Amazon Inspector",
+      "B": "AWS CloudTrail",
+      "C": "AWS Shield",
+      "D": "Amazon GuardDuty"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of an AWS Security Group?",
+    "options": {
+      "A": "A firewall that controls traffic at the subnet level.",
+      "B": "A virtual firewall that controls traffic for one or more EC2 instances.",
+      "C": "A tool for encrypting hard drives.",
+      "D": "A service that monitors network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Security Groups are stateful, meaning if you allow an inbound request, the outbound response is automatically allowed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in private subnets",
+      "D": "Only for HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service provides automated security assessments to improve the security and compliance of applications deployed on AWS?",
+    "options": {
+      "A": "AWS WAF",
+      "B": "Amazon Inspector",
+      "C": "AWS Artifact",
+      "D": "AWS Key Management Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the AWS service used specifically for DDoS protection?",
+    "options": {
+      "A": "AWS Shield",
+      "B": "AWS GuardDuty",
+      "C": "Amazon Macie",
+      "D": "AWS Secrets Manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: AWS Trusted Advisor can provide recommendations on security best practices for your account.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Enterprise support plans",
+      "D": "Only for non-production accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which IAM entity is intended for temporary access and does not have permanent credentials?",
+    "options": {
+      "A": "IAM User",
+      "B": "IAM Role",
+      "C": "IAM Group",
+      "D": "IAM Policy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'Principle of Least Privilege'?",
+    "options": {
+      "A": "Giving users as many permissions as possible to avoid errors.",
+      "B": "Granting only the permissions required to perform a specific task.",
+      "C": "Allowing only the CEO to access the AWS Console.",
+      "D": "Removing all permissions from inactive users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM Policies are written in JSON format.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for inline policies",
+      "D": "Only if using the AWS CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service helps you protect your web applications from common web exploits like SQL injection?",
+    "options": {
+      "A": "AWS Shield",
+      "B": "AWS WAF (Web Application Firewall)",
+      "C": "Amazon VPC",
+      "D": "AWS CloudMap"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of AWS Artifact?",
+    "options": {
+      "A": "To store old versions of software code.",
+      "B": "To provide on-demand access to AWS compliance reports and agreements.",
+      "C": "To encrypt S3 buckets.",
+      "D": "To monitor network performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: By default, all data stored in Amazon S3 is private.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'Glacier' tier",
+      "D": "Only if the bucket name is unique"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AWS service is a managed threat detection service that continuously monitors for malicious activity?",
+    "options": {
+      "A": "Amazon Macie",
+      "B": "Amazon GuardDuty",
+      "C": "AWS Firewall Manager",
+      "D": "AWS Config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption at Rest' referring to in AWS?",
+    "options": {
+      "A": "Encrypting data while it is being transferred over the internet.",
+      "B": "Encrypting data while it is stored on physical media like a disk.",
+      "C": "Turning off encryption when a server is idle.",
+      "D": "Using a password to open a text file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM Groups are a collection of IAM Users.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for administrative users",
+      "D": "Only if the users have the same job title"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AWS service can be used to store and manage secrets such as database passwords and API keys?",
+    "options": {
+      "A": "AWS KMS",
+      "B": "AWS Secrets Manager",
+      "C": "Amazon S3",
+      "D": "AWS CloudTrail"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Network ACL' (NACL) control?",
+    "options": {
+      "A": "Traffic at the individual instance level.",
+      "B": "Traffic entering or leaving a subnet.",
+      "C": "The encryption of VPC traffic.",
+      "D": "The number of users logged into a VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Network ACL is stateless, meaning you must explicitly allow both inbound and outbound traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6 traffic",
+      "D": "Only in public subnets"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service uses machine learning to automatically discover, classify, and protect sensitive data in S3?",
+    "options": {
+      "A": "Amazon Inspector",
+      "B": "Amazon Macie",
+      "C": "AWS Shield",
+      "D": "AWS Certificate Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of AWS KMS (Key Management Service)?",
+    "options": {
+      "A": "To manage physical keys for data center doors.",
+      "B": "To create and control the cryptographic keys used to encrypt your data.",
+      "C": "To store passwords for IAM users.",
+      "D": "To provide high-speed Wi-Fi in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply an IAM Policy directly to an IAM Group.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the group has more than 10 users",
+      "D": "Only if using managed policies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of AWS Global Infrastructure provides the highest level of physical isolation and security for data centers?",
+    "options": {
+      "A": "Edge Locations",
+      "B": "Availability Zones",
+      "C": "VPC Subnets",
+      "D": "CloudFront Distributions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Key ID' and 'Secret Access Key' used for in AWS?",
+    "options": {
+      "A": "Logging into the AWS Management Console.",
+      "B": "Programmatic access to AWS via the CLI or SDKs.",
+      "C": "Opening the physical server rack.",
+      "D": "Paying for the monthly AWS bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS IAM is a global service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if used with CloudFront"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service would you use to manage SSL/TLS certificates for your AWS-based websites?",
+    "options": {
+      "A": "AWS Artifact",
+      "B": "AWS Certificate Manager (ACM)",
+      "C": "AWS KMS",
+      "D": "AWS Secrets Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary focus of 'Security IN the Cloud' responsibilities?",
+    "options": {
+      "A": "Hardware maintenance.",
+      "B": "Customer-defined configurations and data protection.",
+      "C": "Global infrastructure cooling.",
+      "D": "Software used to run the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An explicit 'Deny' in an IAM policy always overrides an 'Allow'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 actions",
+      "D": "Only if the policy is attached to a user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service allows you to centrally manage and enforce security policies across multiple AWS accounts?",
+    "options": {
+      "A": "AWS Control Tower",
+      "B": "AWS Firewall Manager",
+      "C": "AWS Organizations",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'VPC Endpoint' used for?",
+    "options": {
+      "A": "To connect a VPC to the internet.",
+      "B": "To privately connect a VPC to supported AWS services without using an internet gateway.",
+      "C": "To mark the end of a subnet.",
+      "D": "To monitor VPC traffic speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM Roles provide permanent credentials that never expire.",
+    "options": {
+      "A": "False (They provide temporary security credentials).",
+      "B": "True",
+      "C": "Only for EC2 service roles",
+      "D": "Only if assigned to an IAM group"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service would you use to record and evaluate the configuration of your AWS resources for compliance?",
+    "options": {
+      "A": "AWS CloudTrail",
+      "B": "AWS Config",
+      "C": "Amazon Inspector",
+      "D": "AWS Shield"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'S3 Block Public Access'?",
+    "options": {
+      "A": "To delete all public S3 buckets.",
+      "B": "To provide account-level and bucket-level settings to prevent public access to S3 resources.",
+      "C": "To encrypt S3 data with a public key.",
+      "D": "To limit S3 storage size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS is responsible for patching the guest OS on an Amazon EC2 instance.",
+    "options": {
+      "A": "False (That is the customer's responsibility).",
+      "B": "True",
+      "C": "Only for Windows instances",
+      "D": "Only for Linux instances"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service helps you analyze and visualize relationships between security data to investigate incidents?",
+    "options": {
+      "A": "Amazon Detective",
+      "B": "Amazon Macie",
+      "C": "AWS Security Hub",
+      "D": "AWS Firewall Manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Identity-based Policy' in IAM?",
+    "options": {
+      "A": "A policy attached to a specific AWS resource like an S3 bucket.",
+      "B": "A policy attached to an IAM user, group, or role that defines permissions.",
+      "C": "A policy that defines the company's identity.",
+      "D": "A policy that only works for federated users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use AWS IAM Identity Center to centrally manage SSO access to all your AWS accounts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production accounts",
+      "D": "Only if using Active Directory"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default behavior of a Security Group's outbound rules?",
+    "options": {
+      "A": "Blocks all outbound traffic.",
+      "B": "Allows all outbound traffic.",
+      "C": "Allows only HTTP outbound traffic.",
+      "D": "Allows traffic only to the internet gateway."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a central place to view and manage security alerts and compliance status?",
+    "options": {
+      "A": "Amazon GuardDuty",
+      "B": "AWS Security Hub",
+      "C": "AWS Artifact",
+      "D": "Amazon CloudWatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Resource-based Policy' is attached directly to an AWS resource (e.g., S3 Bucket Policy).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IAM roles",
+      "D": "Only if the resource is in a public subnet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'CVE' stand for in the context of security vulnerabilities?",
+    "options": {
+      "A": "Cloud Vulnerability Encryption",
+      "B": "Common Vulnerabilities and Exposures",
+      "C": "Critical Value Entry",
+      "D": "Certified Vulnerability Expert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a managed private network connection from your on-premises data center to AWS?",
+    "options": {
+      "A": "AWS Direct Connect",
+      "B": "AWS Site-to-Site VPN",
+      "C": "Amazon VPC Peering",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You should use 'Service Control Policies' (SCPs) to set the maximum available permissions for accounts in an AWS Organization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the Root account",
+      "D": "Only for billing accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'AWS CloudShell'?",
+    "options": {
+      "A": "To protect AWS resources from physical impact.",
+      "B": "To provide a browser-based shell for managing AWS resources with pre-installed security tools.",
+      "C": "To encrypt data in S3.",
+      "D": "To monitor AWS data center temperatures."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service enables you to create and manage 'Permission Boundaries' for IAM users?",
+    "options": {
+      "A": "AWS Shield",
+      "B": "AWS IAM",
+      "C": "AWS WAF",
+      "D": "Amazon GuardDuty"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS Key Management Service (KMS) uses 'FIPS 140-2' validated hardware security modules.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the Enterprise tier",
+      "D": "Only for military accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Penetration Testing' in AWS?",
+    "options": {
+      "A": "Measuring the weight of the server hardware.",
+      "B": "Performing authorized security testing of your own AWS environment.",
+      "C": "A way to increase the speed of your VPC.",
+      "D": "Testing if your office has a high-speed internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service helps you identify potentially unintended access to your resources and data?",
+    "options": {
+      "A": "IAM Access Analyzer",
+      "B": "Amazon Inspector",
+      "C": "AWS Security Hub",
+      "D": "AWS Config"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'IAM Roles for EC2' eliminates the need to store long-term credentials on the instance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public instances",
+      "D": "Only if using Amazon Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Bastion Host' often referred to as?",
+    "options": {
+      "A": "A primary gateway.",
+      "B": "A jump box.",
+      "C": "A security proxy.",
+      "D": "A database node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service allows you to view 'Service Health' and 'Personal Health' notifications related to AWS security events?",
+    "options": {
+      "A": "AWS Health Dashboard",
+      "B": "AWS Artifact",
+      "C": "Amazon GuardDuty",
+      "D": "AWS Trusted Advisor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'VPC Peering' connection allows two VPCs to communicate as if they were on the same network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the same AWS region",
+      "D": "Only for IPv4 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'IAM Credential Report'?",
+    "options": {
+      "A": "To list the salaries of the security team.",
+      "B": "To provide a list of all IAM users in your account and the status of their various credentials (passwords, access keys, MFA).",
+      "C": "To track the cost of IAM usage.",
+      "D": "To monitor the expiration of SSL certificates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service helps you meet the 'Integrity' requirement by providing a tamper-proof ledger database?",
+    "options": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon QLDB (Quantum Ledger Database)",
+      "C": "Amazon RDS",
+      "D": "Amazon Aurora"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should delete unused Access Keys to improve your account's security posture.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the keys were for the root user",
+      "D": "Only if the keys were created over a year ago"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "The principle that data is subject to the laws and governance of the nation where it is physically located.",
+      "C": "A specialized way to encrypt government data.",
+      "D": "A database field that stores the user's country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to protect your AWS resources from Layer 7 (application layer) attacks?",
+    "options": {
+      "A": "AWS Shield",
+      "B": "AWS WAF",
+      "C": "Amazon VPC",
+      "D": "AWS Direct Connect"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS, 'IAM' is free to use.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the first 100 users",
+      "D": "Only in the free tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SAML' stand for in federation?",
+    "options": {
+      "A": "Security Access Management Language",
+      "B": "Security Assertion Markup Language",
+      "C": "Standard Application Markup Language",
+      "D": "System Access Member List"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool provides a score based on how well your architecture aligns with AWS security best practices?",
+    "options": {
+      "A": "AWS Trusted Advisor",
+      "B": "AWS Well-Architected Tool",
+      "C": "AWS Security Hub",
+      "D": "AWS Config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC Security Groups' are associated with subnets.",
+    "options": {
+      "A": "False (NACLs are associated with subnets; Security Groups are associated with network interfaces/instances).",
+      "B": "True",
+      "C": "Only for public subnets",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When granting an IAM user in Account A access to a resource in Account B, what is the best-practice method?",
+    "options": {
+      "A": "Create an IAM user in Account B with the same password as the user in Account A.",
+      "B": "Create a cross-account IAM role in Account B that the user in Account A can assume.",
+      "C": "Share Account B's root credentials with the user in Account A.",
+      "D": "Move the resource from Account B to Account A."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A KMS Key Policy is required to allow IAM users to use a Customer Managed Key (CMK), even if the IAM user already has an IAM policy with 'kms:Decrypt' permissions.",
+    "options": {
+      "A": "True (The key policy must explicitly delegate authority to IAM to manage access).",
+      "B": "False",
+      "C": "Only if the key is an asymmetric key",
+      "D": "Only if the key is stored in a CloudHSM cluster"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary security advantage of using AWS PrivateLink to access an AWS service?",
+    "options": {
+      "A": "It doubles the network throughput of the service.",
+      "B": "It allows traffic to stay within the AWS network, avoiding exposure to the public internet.",
+      "C": "It automatically encrypts data with a 4096-bit RSA key.",
+      "D": "It removes the need for any IAM permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Transit Gateway architecture, how should you configure Network ACLs for the dedicated Transit Gateway subnets?",
+    "options": {
+      "A": "Block all traffic by default to maximize security.",
+      "B": "Keep them open and apply granular security rules at the workload subnets or via Security Groups.",
+      "C": "Copy the NACL rules from the Internet Gateway.",
+      "D": "Only allow traffic from the on-premises VPN."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS service is specifically designed to automatically discover and protect sensitive data like PII in S3 buckets?",
+    "options": {
+      "A": "Amazon Inspector",
+      "B": "Amazon Macie",
+      "C": "AWS Shield Advanced",
+      "D": "AWS Config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: VPC Peering is non-transitive, meaning if VPC A is peered with VPC B, and VPC B is peered with VPC C, VPC A cannot communicate with VPC C through VPC B.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the VPCs are in different regions",
+      "D": "Only for IPv6 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'aws:PrincipalOrgID' condition key allow you to do in a resource-based policy?",
+    "options": {
+      "A": "Restrict access to only those users whose names start with the Organization ID.",
+      "B": "Restrict access to all accounts within a specific AWS Organization.",
+      "C": "Automatically create IAM users for everyone in the organization.",
+      "D": "Calculate the total cost of resources across the organization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to centrally manage WAF rules across multiple AWS accounts in an organization?",
+    "options": {
+      "A": "AWS Systems Manager",
+      "B": "AWS Firewall Manager",
+      "C": "AWS Control Tower",
+      "D": "Amazon GuardDuty"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Enabling 'S3 Object Lock' with Compliance mode prevents any user, including the root user, from deleting the object until the retention period expires.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the bucket has versioning disabled",
+      "D": "Only if using the AWS CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'External ID' in a cross-account IAM role trust policy?",
+    "options": {
+      "A": "To identify the physical location of the user.",
+      "B": "To mitigate the 'Confused Deputy' problem when a third party is assuming the role.",
+      "C": "To set the expiration time of the temporary credentials.",
+      "D": "To provide a backup password for the role."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature of AWS KMS allows you to share an encrypted EBS snapshot with another AWS account?",
+    "options": {
+      "A": "AWS Direct Connect",
+      "B": "KMS Key Grants / Policy updates to allow cross-account usage.",
+      "C": "VPC Peering",
+      "D": "IAM User groups"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Amazon GuardDuty uses VPC Flow Logs and DNS query logs as primary data sources for its threat detection algorithms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the account has AWS Shield Advanced enabled",
+      "D": "Only for EC2 instances running Amazon Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an 'IAM Permission Boundary'?",
+    "options": {
+      "A": "To block all access to the AWS Console.",
+      "B": "To set the maximum permissions that an identity-based policy can grant to an IAM entity.",
+      "C": "To encrypt all IAM policies in the account.",
+      "D": "To monitor how many times a user logs in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS service helps you perform forensic investigations by visualizing relationships between security findings and VPC traffic?",
+    "options": {
+      "A": "Amazon Macie",
+      "B": "Amazon Detective",
+      "C": "AWS Security Hub",
+      "D": "Amazon Inspector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Control Policies' (SCPs) can be used to grant permissions to a specific IAM user.",
+    "options": {
+      "A": "False (SCPs only act as filters to restrict maximum permissions; they never grant permissions).",
+      "B": "True",
+      "C": "Only in the Root OU",
+      "D": "Only if using IAM Identity Center"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default Key Policy' behavior when you create a new KMS key in the AWS Console?",
+    "options": {
+      "A": "It blocks all access until a policy is manually added.",
+      "B": "It gives the account root (and thus IAM policies) full access to the key.",
+      "C": "It makes the key public to everyone in the world.",
+      "D": "It assigns the key to the 'Administrators' IAM group automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a secure VPC, where should a 'NAT Gateway' be placed?",
+    "options": {
+      "A": "In a private subnet.",
+      "B": "In a public subnet (with a route to an Internet Gateway).",
+      "C": "Directly on the EC2 instance.",
+      "D": "Inside the on-premises data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM roles are regional resources and must be recreated in every region you wish to use them.",
+    "options": {
+      "A": "False (IAM is a global service; roles can be used across any region).",
+      "B": "True",
+      "C": "Only for service-linked roles",
+      "D": "Only if using CloudFront"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'AWS CloudTrail Insights'?",
+    "options": {
+      "A": "To encrypt CloudTrail logs.",
+      "B": "To automatically detect unusual API activity patterns, such as a spike in 'AccessDenied' errors.",
+      "C": "To provide a map of all AWS data centers.",
+      "D": "To count the number of files in an S3 bucket."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header must be present in an S3 'PutObject' request to ensure the object is encrypted using SSE-KMS?",
+    "options": {
+      "A": "x-amz-acl",
+      "B": "x-amz-server-side-encryption",
+      "C": "x-amz-kms-key-id",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Using 'IAM Identity Center' (formerly AWS SSO) is the recommended way to manage multi-account access and application assignments.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if you don't use Active Directory",
+      "D": "Only for AWS Organizations with fewer than 10 accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a '403 Forbidden' error usually indicate when accessing an S3 bucket via an IAM role?",
+    "options": {
+      "A": "The bucket does not exist.",
+      "B": "The IAM role lacks the necessary S3 permissions or is blocked by a bucket policy/SCP.",
+      "C": "The internet connection is down.",
+      "D": "The S3 service is currently unavailable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'VPC Flow Logs' best used for in a security investigation?",
+    "options": {
+      "A": "Viewing the actual content of HTTP requests.",
+      "B": "Analyzing rejected traffic patterns to identify potential port scanning or unauthorized access attempts.",
+      "C": "Increasing the speed of network packets.",
+      "D": "Changing the IP address of an EC2 instance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Amazon Inspector can perform 'Network Reachability' assessments to check if EC2 ports are reachable from outside the VPC.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if a NAT Gateway is present",
+      "D": "Only if using the AWS CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pre-signed URL' expiration behavior?",
+    "options": {
+      "A": "The URL works forever.",
+      "B": "The URL remains valid until the specified expiration time, even if the creator's IAM permissions are removed.",
+      "C": "The URL becomes invalid immediately if the IAM user who created it is deleted or loses permissions.",
+      "D": "The URL only works for 5 minutes by default."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which KMS feature allows for 'Automatic Key Rotation'?",
+    "options": {
+      "A": "Manual Key Rotation",
+      "B": "The 'Enable Key Rotation' checkbox for Customer Managed Keys (rotates every year).",
+      "C": "KMS Key Policy versioning.",
+      "D": "IAM user password rotation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: S3 'Default Encryption' with SSE-S3 requires you to manage the encryption keys yourself.",
+    "options": {
+      "A": "False (AWS manages the keys and the rotation automatically).",
+      "B": "True",
+      "C": "Only for buckets over 1TB",
+      "D": "Only if using the 'Glacier' storage class"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a benefit of 'VPC Endpoints' for security compliance?",
+    "options": {
+      "A": "They allow you to use older, non-secure protocols.",
+      "B": "They ensure sensitive traffic never traverses the public internet, simplifying audit requirements.",
+      "C": "They make the VPC invisible to hackers.",
+      "D": "They remove the need for VPC Flow Logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'CloudTrail Lake' feature?",
+    "options": {
+      "A": "To provide a physical lake for cooling servers.",
+      "B": "To provide a managed security data lake for storing, querying, and analyzing activity logs for up to 7 years.",
+      "C": "To encrypt CloudFront distributions.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GuardDuty can detect EC2 instances that are performing cryptocurrency mining by analyzing DNS logs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Amazon Linux 2023",
+      "D": "Only in the US-East-1 region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AWS service provides 'Compliance as Code' by monitoring for resources that drift from a desired security state?",
+    "options": {
+      "A": "AWS CloudTrail",
+      "B": "AWS Config",
+      "C": "AWS Shield",
+      "D": "Amazon Inspector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Identity Provider' (IdP) in AWS IAM?",
+    "options": {
+      "A": "A person who identifies hackers.",
+      "B": "An external service (like Okta or AD) that manages user identities and allows them to sign into AWS using federation.",
+      "C": "A specialized database for storing passports.",
+      "D": "A way to encrypt user tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'AWS Certificate Manager' (ACM) allows for the automatic renewal of SSL/TLS certificates.",
+    "options": {
+      "A": "True (for DNS-validated certificates used with AWS services like CloudFront/ALB).",
+      "B": "False",
+      "C": "Only for non-production domains",
+      "D": "Only if using a 2048-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which IAM policy element is used to specify 'Who' is affected by the policy in a resource-based policy?",
+    "options": {
+      "A": "Action",
+      "B": "Principal",
+      "C": "Resource",
+      "D": "Condition"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'FIPS 140-2 Level 3' validation signify for an AWS service like CloudHSM?",
+    "options": {
+      "A": "It is the fastest service in the world.",
+      "B": "It meets a high standard of physical tamper-resistance for cryptographic hardware.",
+      "C": "It only works for government agencies.",
+      "D": "It automatically encrypts all user emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS Secrets Manager can automatically rotate database credentials for supported RDS databases.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the database is MySQL",
+      "D": "Only if using a Lambda function manually"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'AWS Security Hub'?",
+    "options": {
+      "A": "To act as a central firewall for the whole organization.",
+      "B": "To aggregate security findings from GuardDuty, Inspector, and Macie into a single pane of glass.",
+      "C": "To store the account root credentials.",
+      "D": "To monitor the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which VPC feature would you use to 'Mirror' traffic from an EC2 instance to a security appliance for deep packet inspection?",
+    "options": {
+      "A": "VPC Peering",
+      "B": "VPC Traffic Mirroring",
+      "C": "Direct Connect",
+      "D": "NAT Gateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS, 'IAM Users' are regional and can only be used in the region where they were created.",
+    "options": {
+      "A": "False (IAM is a global service).",
+      "B": "True",
+      "C": "Only for the root user",
+      "D": "Only if using MFA"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Least Privilege' in the context of an S3 Bucket Policy?",
+    "options": {
+      "A": "Allowing 's3:*' for all users to ensure nothing breaks.",
+      "B": "Explicitly listing only the specific actions (e.g., s3:GetObject) and specific users required.",
+      "C": "Making the bucket public but using long filenames for security.",
+      "D": "Granting access based on the user's age."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS service provides 'Managed Rules' for WAF to protect against the OWASP Top 10 vulnerabilities?",
+    "options": {
+      "A": "AWS Shield",
+      "B": "AWS WAF",
+      "C": "Amazon Macie",
+      "D": "AWS Config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS is responsible for the physical security of the host where your EC2 instance is running.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using 'Dedicated Hosts'",
+      "D": "Only in 'GovCloud' regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'AWS Resource Access Manager' (RAM)?",
+    "options": {
+      "A": "To increase the RAM of a virtual machine.",
+      "B": "To securely share AWS resources (like Transit Gateways or subnets) across AWS accounts.",
+      "C": "To monitor the memory usage of an EC2 instance.",
+      "D": "To encrypt the physical RAM chips in the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In AWS IAM, what is an 'Inline Policy'?",
+    "options": {
+      "A": "A policy that only works when the user is online.",
+      "B": "A policy that is embedded directly into a single IAM user, group, or role.",
+      "C": "A policy that is written in a single line of code.",
+      "D": "A policy that applies to all users in the organization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IAM Roles for Service Accounts' (IRSA) allows Kubernetes pods in EKS to have fine-grained IAM permissions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for pods running as root",
+      "D": "Only if using the 'standard' networking plugin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingress' security?",
+    "options": {
+      "A": "Protecting data as it leaves the cloud.",
+      "B": "Controlling and monitoring traffic as it enters your AWS environment from the internet.",
+      "C": "Changing the format of data as it enters a database.",
+      "D": "The speed at which data is uploaded."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to audit your AWS account for 'Publicly Accessible' RDS databases?",
+    "options": {
+      "A": "AWS Trusted Advisor",
+      "B": "IAM Access Analyzer",
+      "C": "AWS Security Hub",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: AWS CloudTrail is enabled by default for all AWS accounts and records management events for the last 90 days at no charge.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Enterprise customers",
+      "D": "Only for S3 bucket activity"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of 'AWS Control Tower'?",
+    "options": {
+      "A": "To physically control the data center cooling towers.",
+      "B": "To set up and govern a secure, multi-account AWS environment (Landing Zone) following best practices.",
+      "C": "To increase the height of the AWS networking towers.",
+      "D": "To monitor the cloud provider's stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In IAM, what does the 'Resource' element '*' mean in a statement?",
+    "options": {
+      "A": "It means the policy is a secret.",
+      "B": "It applies the permission to all resources of that service type.",
+      "C": "It means the policy has an error.",
+      "D": "It applies the policy to every user in the account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC Gateway Endpoint' is used specifically for S3 and DynamoDB.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only for non-encrypted buckets"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Context' in AWS KMS?",
+    "options": {
+      "A": "A text file explaining how to use the key.",
+      "B": "An optional set of key-value pairs that provides additional authenticated data for a cryptographic operation.",
+      "C": "The history of every time a key was rotated.",
+      "D": "The physical location of the key hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS service helps you detect and investigate 'Insider Threats' by analyzing user activity and data access patterns?",
+    "options": {
+      "A": "Amazon Macie",
+      "B": "Amazon Detective",
+      "C": "GuardDuty",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'MFA Delete' on S3 buckets adds an extra layer of protection by requiring MFA to permanently delete an object version.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the AWS Console",
+      "D": "Only for buckets under 100GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'AWS Systems Manager Run Command' for security?",
+    "options": {
+      "A": "To run a command as fast as possible.",
+      "B": "To remotely and securely manage instances at scale without needing to open SSH/RDP ports.",
+      "C": "To encrypt the CLI commands of a user.",
+      "D": "To monitor the server's room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'SOC 1' compliance in AWS?",
+    "options": {
+      "A": "Ensuring the logo is correctly displayed.",
+      "B": "Reporting on internal controls that are relevant to a customer's financial reporting.",
+      "C": "Hiring a security guard for the office.",
+      "D": "Moving all data to a private cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS WAF can be attached to an Application Load Balancer, Amazon CloudFront, and Amazon API Gateway.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using HTTPS",
+      "D": "Only in the US-East-1 region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IAM Access Analyzer' primarily used for?",
+    "options": {
+      "A": "To speed up IAM policy creation.",
+      "B": "To identify resources that are shared with external principals or are publicly accessible.",
+      "C": "To encrypt IAM policies.",
+      "D": "To monitor the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to provide temporary, fine-grained access to S3 objects for mobile app users?",
+    "options": {
+      "A": "AWS IAM",
+      "B": "Amazon Cognito",
+      "C": "AWS Secrets Manager",
+      "D": "AWS CloudTrail"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS is responsible for the security of the virtualization layer (hypervisor).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Fargate",
+      "D": "Only in 'dedicated' regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'S3 Object Ownership' setting used for?",
+    "options": {
+      "A": "To decide who pays for the storage.",
+      "B": "To control whether objects uploaded by other accounts are owned by the bucket owner (ignoring ACLs).",
+      "C": "To change the name of the bucket owner.",
+      "D": "To set the physical location of the object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header in a CloudTrail log entry identifies the IAM user or role that made the API call?",
+    "options": {
+      "A": "eventSource",
+      "B": "userIdentity",
+      "C": "requestID",
+      "D": "userAgent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'VPC Peering' encrypts the traffic between the VPCs by default at the application layer.",
+    "options": {
+      "A": "False (Traffic is isolated but not encrypted at the application layer unless done by the user).",
+      "B": "True",
+      "C": "Only if using IPv6",
+      "D": "Only in the EU regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'Amazon GuardDuty Malware Protection'?",
+    "options": {
+      "A": "To block all incoming traffic.",
+      "B": "To scan EBS volumes of suspected compromised EC2 instances for malware without an agent.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the data center's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should use 'IAM Roles' instead of 'IAM User Access Keys' for applications running on EC2 whenever possible.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production applications",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does IMDSv2 (Instance Metadata Service Version 2) specifically mitigate Server-Side Request Forgery (SSRF) vulnerabilities compared to IMDSv1?",
+    "options": {
+      "A": "By requiring a 4096-bit RSA key for every metadata request.",
+      "B": "By using a session-oriented approach that requires a PUT request to obtain a temporary token (X-aws-ec2-metadata-token).",
+      "C": "By disabling the metadata service automatically when an attack is detected.",
+      "D": "By encrypting the metadata with the account's root master key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS KMS Multi-Region keys share the same Key ID and key material across different AWS Regions, allowing for decryption without cross-Region API calls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Asymmetric keys",
+      "D": "Only if the regions are in the same continent"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary security risk of using 'Wildcard' (*) principals in a cross-account S3 Bucket Policy combined with 'Condition' keys?",
+    "options": {
+      "A": "It makes the bucket name visible to everyone on the internet.",
+      "B": "If the condition key (e.g., aws:PrincipalAccount) is missing or incorrectly configured, the bucket becomes globally accessible.",
+      "C": "It doubles the cost of S3 storage.",
+      "D": "It prevents the root user from deleting the bucket."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an EKS cluster, what is the primary benefit of using 'EKS Pod Identity' over the traditional 'IAM Roles for Service Accounts' (IRSA)?",
+    "options": {
+      "A": "It removes the need for OIDC providers and simplifies role management across multiple clusters.",
+      "B": "It allows pods to use the EC2 instance's IAM role directly.",
+      "C": "It encrypts the communication between the pod and the API server.",
+      "D": "It allows pods to bypass the VPC firewall."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'aws:SourceVpc' condition key in an IAM policy for a VPC Endpoint?",
+    "options": {
+      "A": "To tell the service which VPC the data is coming from.",
+      "B": "To ensure that requests to a specific AWS service are only allowed if they originate from within a specific VPC.",
+      "C": "To map the VPC ID to a human-readable name.",
+      "D": "To increase the priority of traffic from that VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using eBPF-based security tools allows for the detection of malicious activity (like container escapes) by monitoring syscalls at the host kernel level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Fargate",
+      "D": "Only if the kernel is 32-bit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific IAM policy variable would you use to create a policy that allows users access to only their own 'folder' in an S3 bucket named after their username?",
+    "options": {
+      "A": "${aws:PrincipalAccount}",
+      "B": "${aws:username}",
+      "C": "${aws:SourceIp}",
+      "D": "${aws:CurrentTime}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Confused Deputy' attack in the context of AWS service integrations?",
+    "options": {
+      "A": "An attacker tricking a developer into deleting a resource.",
+      "B": "An attacker tricking an AWS service (the deputy) into using its permissions to access a resource in another account that the attacker shouldn't have access to.",
+      "C": "Two AWS services trying to update the same resource at once.",
+      "D": "A database error caused by conflicting IAM roles."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS CloudTrail 'Digest Files' are used to verify that your log files have not been tampered with or deleted after they were delivered.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 bucket activity logs",
+      "D": "Only if using a hardware security module"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default' behavior of a VPC Endpoint Policy if no policy is explicitly attached?",
+    "options": {
+      "A": "Blocks all access to the service.",
+      "B": "Allows full access to the service for any principal in the VPC.",
+      "C": "Only allows access from the root user.",
+      "D": "Prompts the user to create a policy before continuing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which NIST-compliant AWS service provides a tamper-proof, transparent ledger of all transactions for auditing and data integrity?",
+    "options": {
+      "A": "Amazon DynamoDB",
+      "B": "Amazon QLDB",
+      "C": "Amazon RDS",
+      "D": "Amazon Redshift"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS KMS, an 'Asymmetric' key pair is used for both encryption and digital signatures within the same key object.",
+    "options": {
+      "A": "False (A KMS key must be designated for either Encryption/Decryption OR Signing/Verification, not both).",
+      "B": "True",
+      "C": "Only if using the RSA_4096 spec",
+      "D": "Only for Government cloud accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Amazon GuardDuty Runtime Monitoring' (for EKS) collect data from containers?",
+    "options": {
+      "A": "By installing a Java agent in every container image.",
+      "B": "By using a lightweight, non-intrusive security agent that leverages eBPF technology on the node.",
+      "C": "By reading the application logs from CloudWatch.",
+      "D": "By scanning the source code in GitHub."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'kms:ViaService' condition key in a KMS key policy?",
+    "options": {
+      "A": "To tell the user which service is using the key.",
+      "B": "To restrict the use of a KMS key to requests that come through a specific AWS service (like S3 or EBS).",
+      "C": "To send a copy of the key to another service.",
+      "D": "To monitor the speed of the encryption service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS Secrets Manager 'Secret Rotation' requires a Lambda function to be configured to handle the rotation logic for custom secrets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for RDS databases",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Segmentation' in a multi-account AWS environment using AWS Organizations?",
+    "options": {
+      "A": "Splitting a single account into multiple subnets.",
+      "B": "Creating strong logical boundaries between business units or environments (Dev/Prod) by using separate AWS accounts.",
+      "C": "Deleting resources that are not tagged correctly.",
+      "D": "The process of moving data between regions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header must be included in a metadata request to an IMDSv2 instance to provide the required security token?",
+    "options": {
+      "A": "Authorization",
+      "B": "X-aws-ec2-metadata-token",
+      "C": "X-Amz-Security-Token",
+      "D": "Metadata-Token-ID"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IAM Identity Center' (SSO) removes the need for IAM Users with long-term access keys for human developers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Active Directory",
+      "D": "Only for accounts in the same organization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Mutating Admission Controller' in Kubernetes security?",
+    "options": {
+      "A": "To block any pods that have security vulnerabilities.",
+      "B": "To intercept requests to the API server and modify them (e.g., to automatically inject a sidecar container) before they are persisted.",
+      "C": "To encrypt the etcd database.",
+      "D": "To monitor the CPU usage of the control plane."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption Context' in AWS KMS, and why is it important for security?",
+    "options": {
+      "A": "It is a text file explaining the key's history.",
+      "B": "It is a set of key-value pairs that provides additional authenticated data (AAD) to ensure the integrity of the encrypted data.",
+      "C": "It is the physical location where the key is stored.",
+      "D": "It is a way to backup the master key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: S3 'Inventory' reports can be used to audit the encryption status of billions of objects across a bucket.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for objects under 1GB",
+      "D": "Only in the 'Glacier' storage class"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'AWS Network Firewall' compared to a standard Security Group?",
+    "options": {
+      "A": "It is a hardware device installed in the office.",
+      "B": "It is a managed stateful network firewall that provides deep packet inspection (DPI) and URL filtering across your entire VPC.",
+      "C": "It only works for internal traffic.",
+      "D": "It is free for all AWS users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which condition key is used to ensure that a user can only perform an action if they have successfully authenticated with Multi-Factor Authentication (MFA)?",
+    "options": {
+      "A": "aws:MfaEnabled",
+      "B": "aws:MultiFactorAuthPresent",
+      "C": "aws:PrincipalMfaStatus",
+      "D": "aws:SecureAuthActive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deleting a KMS multi-Region primary key will automatically delete all of its related replica keys in other Regions.",
+    "options": {
+      "A": "False (Replica keys must be deleted independently, though the primary must be deleted to completely remove the key material).",
+      "B": "True",
+      "C": "Only if the keys have the same alias",
+      "D": "Only for asymmetric keys"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the security purpose of 'VPC Traffic Mirroring'?",
+    "options": {
+      "A": "To backup network data to S3.",
+      "B": "To capture and inspect network traffic for security monitoring, troubleshooting, and forensics without impacting application performance.",
+      "C": "To double the network speed.",
+      "D": "To show a live feed of the network on a dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an IAM trust policy, what does 'sts:AssumeRole' allow?",
+    "options": {
+      "A": "A user to change their own password.",
+      "B": "An entity to obtain temporary security credentials to access AWS resources.",
+      "C": "A developer to delete an S3 bucket.",
+      "D": "A service to monitor the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Amazon Macie' can be used to automatically detect if sensitive data like credit card numbers is being stored in plain text in S3.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the data is in CSV format",
+      "D": "Only for non-encrypted buckets"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'AWS Firewall Manager'?",
+    "options": {
+      "A": "To create physical firewalls for data centers.",
+      "B": "To centrally manage and enforce firewall rules (WAF, Shield, Network Firewall) across multiple accounts and resources in an organization.",
+      "C": "To encrypt the physical network cables.",
+      "D": "To monitor the uptime of the AWS Console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific risk does 'S3 Block Public Access' at the ACCOUNT level prevent?",
+    "options": {
+      "A": "The cloud provider from seeing your data.",
+      "B": "Any bucket in the account from being made public, regardless of individual bucket policies or ACLs.",
+      "C": "Hackers from deleting your account.",
+      "D": "The account from going over budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IAM Permission Boundaries' can be used to grant extra permissions that a user doesn't already have in their identity-based policies.",
+    "options": {
+      "A": "False (Boundaries only restrict; they never grant).",
+      "B": "True",
+      "C": "Only for root users",
+      "D": "Only in the 'standard' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Exfiltration' in a cloud context?",
+    "options": {
+      "A": "Deleting data from the cloud.",
+      "B": "The unauthorized transfer of sensitive data from within the cloud environment to an external location.",
+      "C": "The process of moving data to a faster region.",
+      "D": "A database error where data is lost."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service provides a managed 'Client VPN' to allow users to securely access AWS and on-premises resources?",
+    "options": {
+      "A": "AWS Direct Connect",
+      "B": "AWS Client VPN",
+      "C": "AWS Transit Gateway",
+      "D": "Amazon Route 53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Type II' SOC 2 report for AWS, the audit covers the 'operational effectiveness' of AWS controls over a specified period.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only in the EU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Amazon GuardDuty Threat Intel Sets'?",
+    "options": {
+      "A": "To store passwords for the security team.",
+      "B": "To allow users to upload their own lists of known malicious IP addresses for GuardDuty to monitor.",
+      "C": "To encrypt the security logs.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary security benefit of using 'S3 Object Lock' in 'Compliance' mode?",
+    "options": {
+      "A": "It makes the data invisible to hackers.",
+      "B": "It ensures that objects cannot be deleted by ANY user, including the root user, during the retention period.",
+      "C": "It automatically encrypts the data with a public key.",
+      "D": "It doubles the storage size for backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM 'Access Analyzer' can automatically generate a least-privilege policy based on a user's actual past activity in CloudTrail.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the root account",
+      "D": "Only if using the AWS CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption in Use'?",
+    "options": {
+      "A": "Encrypting data as it is typed.",
+      "B": "Protecting data while it is being processed in the RAM or CPU.",
+      "C": "Using a password to open a text file.",
+      "D": "A specialized way to hide the application icon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which VPC networking component is required for a 'Site-to-Site VPN' connection?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Virtual Private Gateway or Transit Gateway",
+      "C": "NAT Gateway",
+      "D": "VPC Peering"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IAM Roles for Service Accounts' (IRSA) requires an OIDC identity provider to be associated with your EKS cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'AWS Security Reference Architecture' (AWS SRA)?",
+    "options": {
+      "A": "To provide a physical map of AWS data centers.",
+      "B": "To provide a comprehensive set of guidelines and best practices for deploying a full suite of AWS security services across a multi-account environment.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the cloud provider's stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an IAM Policy, what is the 'NotAction' element used for?",
+    "options": {
+      "A": "To tell the user what they cannot do.",
+      "B": "To allow access to all actions EXCEPT those specifically listed.",
+      "C": "To delete a policy that has errors.",
+      "D": "To increase the priority of a policy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC Peering' connection can be established between VPCs in different AWS accounts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the same region",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lateral Movement' prevention in a cloud network?",
+    "options": {
+      "A": "Stopping a server from moving physically.",
+      "B": "Using granular security rules to prevent an attacker from moving from one compromised instance to others in the same network.",
+      "C": "A database error where data shifts to the left.",
+      "D": "A way to backup only the UI components."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to find 'Hardcoded Secrets' (like API keys) in your application source code?",
+    "options": {
+      "A": "Amazon Macie",
+      "B": "Amazon CodeGuru Security / Amazon Inspector",
+      "C": "AWS Shield",
+      "D": "AWS CloudTrail"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS 'CloudHSM' provides single-tenant, hardware-based key storage that is under your exclusive control.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government agencies",
+      "D": "Only if using a 10Gbps connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'AWS Resource Access Manager' (RAM)?",
+    "options": {
+      "A": "To increase the RAM of a virtual machine.",
+      "B": "To securely share AWS resources across accounts in an organization.",
+      "C": "To monitor the memory usage of an EC2 instance.",
+      "D": "To encrypt the physical RAM chips."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to audit your AWS account for 'Publicly Accessible' S3 buckets?",
+    "options": {
+      "A": "AWS Trusted Advisor",
+      "B": "IAM Access Analyzer",
+      "C": "AWS Security Hub",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'MFA Delete' on S3 buckets adds an extra layer of protection by requiring MFA to permanently delete an object version.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the AWS Console",
+      "D": "Only for buckets under 100GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'AWS Systems Manager Run Command' for security?",
+    "options": {
+      "A": "To run a command as fast as possible.",
+      "B": "To remotely and securely manage instances at scale without needing to open SSH/RDP ports.",
+      "C": "To encrypt the CLI commands of a user.",
+      "D": "To monitor the server's room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'SOC 1' compliance in AWS?",
+    "options": {
+      "A": "Ensuring the logo is correctly displayed.",
+      "B": "Reporting on internal controls that are relevant to a customer's financial reporting.",
+      "C": "Hiring a security guard for the office.",
+      "D": "Moving all data to a private cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS WAF can be attached to an Application Load Balancer, Amazon CloudFront, and Amazon API Gateway.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using HTTPS",
+      "D": "Only in the US-East-1 region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IAM Access Analyzer' primarily used for?",
+    "options": {
+      "A": "To speed up IAM policy creation.",
+      "B": "To identify resources that are shared with external principals or are publicly accessible.",
+      "C": "To encrypt IAM policies.",
+      "D": "To monitor the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service would you use to provide temporary, fine-grained access to S3 objects for mobile app users?",
+    "options": {
+      "A": "AWS IAM",
+      "B": "Amazon Cognito",
+      "C": "AWS Secrets Manager",
+      "D": "AWS CloudTrail"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS is responsible for the security of the virtualization layer (hypervisor).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Fargate",
+      "D": "Only in 'dedicated' regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'S3 Object Ownership' setting used for?",
+    "options": {
+      "A": "To decide who pays for the storage.",
+      "B": "To control whether objects uploaded by other accounts are owned by the bucket owner (ignoring ACLs).",
+      "C": "To change the name of the bucket owner.",
+      "D": "To set the physical location of the object."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which header in a CloudTrail log entry identifies the IAM user or role that made the API call?",
+    "options": {
+      "A": "eventSource",
+      "B": "userIdentity",
+      "C": "requestID",
+      "D": "userAgent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'VPC Peering' encrypts the traffic between the VPCs by default at the application layer.",
+    "options": {
+      "A": "False (Traffic is isolated but not encrypted at the application layer unless done by the user).",
+      "B": "True",
+      "C": "Only if using IPv6",
+      "D": "Only in the EU regions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'Amazon GuardDuty Malware Protection'?",
+    "options": {
+      "A": "To block all incoming traffic.",
+      "B": "To scan EBS volumes of suspected compromised EC2 instances for malware without an agent.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the data center's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should use 'IAM Roles' instead of 'IAM User Access Keys' for applications running on EC2 whenever possible.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production applications",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using 'S3 Object Lock' in 'Compliance' mode?",
+    "options": {
+      "A": "It makes the data invisible to hackers.",
+      "B": "It ensures that objects cannot be deleted by ANY user, including the root user, during the retention period.",
+      "C": "It automatically encrypts the data with a public key.",
+      "D": "It doubles the storage size for backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: IAM 'Access Analyzer' can automatically generate a least-privilege policy based on a user's actual past activity in CloudTrail.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the root account",
+      "D": "Only if using the AWS CLI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption in Use'?",
+    "options": {
+      "A": "Encrypting data as it is typed.",
+      "B": "Protecting data while it is being processed in the RAM or CPU.",
+      "C": "Using a password to open a text file.",
+      "D": "A specialized way to hide the application icon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which VPC networking component is required for a 'Site-to-Site VPN' connection?",
+    "options": {
+      "A": "Internet Gateway",
+      "B": "Virtual Private Gateway or Transit Gateway",
+      "C": "NAT Gateway",
+      "D": "VPC Peering"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IAM Roles for Service Accounts' (IRSA) requires an OIDC identity provider to be associated with your EKS cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of the 'AWS Security Reference Architecture' (AWS SRA)?",
+    "options": {
+      "A": "To provide a physical map of AWS data centers.",
+      "B": "To provide a comprehensive set of guidelines and best practices for deploying a full suite of AWS security services across a multi-account environment.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the cloud provider's stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an IAM Policy, what is the 'NotAction' element used for?",
+    "options": {
+      "A": "To tell the user what they cannot do.",
+      "B": "To allow access to all actions EXCEPT those specifically listed.",
+      "C": "To delete a policy that has errors.",
+      "D": "To increase the priority of a policy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC Peering' connection can be established between VPCs in different AWS accounts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the same region",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  }
+  ]
+}

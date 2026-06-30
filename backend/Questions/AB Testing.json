@@ -1,0 +1,1995 @@
+{ 
+  "skill": "AB Testing", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of an A/B test?",
+    "options": {
+      "A": "To fix bugs in the back-end code.",
+      "B": "To compare two versions of a single variable to determine which one performs better.",
+      "C": "To decrease the total number of users on a platform.",
+      "D": "To increase the security of a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an A/B test, what do we call the original version that serves as a baseline?",
+    "options": {
+      "A": "The Variant",
+      "B": "The Variable",
+      "C": "The Control",
+      "D": "The Constant"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a common metric measured in A/B testing for e-commerce?",
+    "options": {
+      "A": "Conversion Rate",
+      "B": "Computer Fan Speed",
+      "C": "Font Size",
+      "D": "Operating System version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Hypothesis' in the context of A/B testing?",
+    "options": {
+      "A": "A proven fact that cannot be changed.",
+      "B": "A prediction that changing a specific element will lead to a certain outcome.",
+      "C": "A type of database query.",
+      "D": "The final report generated after a test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How are users typically assigned to different groups in an A/B test?",
+    "options": {
+      "A": "Based on their age.",
+      "B": "Manually by the developer.",
+      "C": "Randomly.",
+      "D": "By alphabetical order of their names."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Statistical Significance' indicate in an A/B test?",
+    "options": {
+      "A": "The test was very expensive to run.",
+      "B": "The observed difference is likely not due to chance.",
+      "C": "The test took more than a year to complete.",
+      "D": "The results were manually entered into the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these elements is most commonly tested in an A/B test on a website?",
+    "options": {
+      "A": "The color of a 'Call to Action' (CTA) button.",
+      "B": "The physical location of the server.",
+      "C": "The office address of the company.",
+      "D": "The personal email of the CEO."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sample Size'?",
+    "options": {
+      "A": "The physical size of the computer monitor.",
+      "B": "The number of participants or users included in the test.",
+      "C": "The length of the test in days.",
+      "D": "The number of developers working on the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Variant' in A/B testing?",
+    "options": {
+      "A": "The original version of the webpage.",
+      "B": "The modified version of the variable being tested.",
+      "C": "A user who refuses to participate.",
+      "D": "A software bug found during testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Null Hypothesis' (H0)?",
+    "options": {
+      "A": "The belief that the new variant will be 100% better.",
+      "B": "The assumption that there is no difference between the Control and the Variant.",
+      "C": "The idea that the test should be deleted.",
+      "D": "A hypothesis that has zero data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Split Testing' refer to?",
+    "options": {
+      "A": "Testing two different keyboards.",
+      "B": "Another common name for A/B testing.",
+      "C": "Splitting the computer screen in half.",
+      "D": "Testing only on mobile phones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Confidence Level'?",
+    "options": {
+      "A": "How happy the users feel during the test.",
+      "B": "The probability that the results are accurate and not due to random chance.",
+      "C": "The speed of the internet connection.",
+      "D": "The number of years the company has been in business."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bounce Rate'?",
+    "options": {
+      "A": "The percentage of users who leave a site after viewing only one page.",
+      "B": "The number of times a user clicks a button.",
+      "C": "The physical movement of a laptop.",
+      "D": "The time it takes for a page to load."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Segmentation' in the context of A/B testing?",
+    "options": {
+      "A": "Dividing the audience into subgroups based on specific characteristics.",
+      "B": "Deleting segments of the code.",
+      "C": "Moving data to a different hard drive.",
+      "D": "Splitting the test into 100 different variants."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a potential risk of ending an A/B test too early?",
+    "options": {
+      "A": "The results being too accurate.",
+      "B": "Drawing incorrect conclusions due to a lack of sufficient data.",
+      "C": "Increasing the budget of the project.",
+      "D": "Making the website run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'P-value' used for?",
+    "options": {
+      "A": "To measure the price of the software.",
+      "B": "To help determine the statistical significance of the results.",
+      "C": "To count the number of pages on a site.",
+      "D": "To store user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Click-Through Rate' (CTR)?",
+    "options": {
+      "A": "The speed at which a user clicks.",
+      "B": "The ratio of users who click on a specific link to the total users who view the page.",
+      "C": "The sound a mouse makes.",
+      "D": "The total number of pixels on a screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Winner' in an A/B test?",
+    "options": {
+      "A": "The developer who wrote the code.",
+      "B": "The version (Control or Variant) that performed significantly better.",
+      "C": "The user who clicked the most buttons.",
+      "D": "The company that owns the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Why is 'Random Assignment' important?",
+    "options": {
+      "A": "To make the test harder to manage.",
+      "B": "To minimize bias and ensure that groups are comparable.",
+      "C": "To ensure every user sees every variant.",
+      "D": "To increase the storage requirements."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'False Positive' (Type I Error)?",
+    "options": {
+      "A": "Correctly identifying a winner.",
+      "B": "Concluding there is a difference when one does not actually exist.",
+      "C": "Missing a real difference between versions.",
+      "D": "Deleting the wrong data file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'False Negative' (Type II Error)?",
+    "options": {
+      "A": "Missing a real difference that actually exists between versions.",
+      "B": "Claiming a winner when there isn't one.",
+      "C": "The variant performing worse than the control.",
+      "D": "A user reporting a bug that isn't real."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'User Experience' (UX) testing in the context of A/B tests?",
+    "options": {
+      "A": "Testing how much the server weighs.",
+      "B": "Measuring how the changes affect the user's interaction and satisfaction.",
+      "C": "Fixing the user's computer.",
+      "D": "Recording the user's voice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Call to Action' (CTA)?",
+    "options": {
+      "A": "A phone call to the customer support team.",
+      "B": "An instruction or button intended to prompt an immediate response (e.g., 'Buy Now').",
+      "C": "A legal warning on a website.",
+      "D": "A way to restart the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Running a test to power' mean?",
+    "options": {
+      "A": "Using more electricity for the server.",
+      "B": "Ensuring the sample size is large enough to detect a difference if it exists.",
+      "C": "Making the AI smarter.",
+      "D": "Increasing the volume of the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Validity'?",
+    "options": {
+      "A": "The extent to which results can be generalized to the real world.",
+      "B": "The security of the external firewall.",
+      "C": "The price of the software license.",
+      "D": "The number of external hard drives connected."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Internal Validity'?",
+    "options": {
+      "A": "How many employees use the software.",
+      "B": "The degree to which the observed effect is actually caused by the variable being tested.",
+      "C": "The speed of the internal network.",
+      "D": "The storage capacity of the internal drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used for A/B testing on websites?",
+    "options": {
+      "A": "Microsoft Word",
+      "B": "Google Optimize (or similar platforms like Optimizely)",
+      "C": "Adobe Photoshop",
+      "D": "Spotify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B/n Testing'?",
+    "options": {
+      "A": "Testing only one version.",
+      "B": "Testing a control against multiple variations (A, B, C, etc.) at once.",
+      "C": "A test that takes 'n' years.",
+      "D": "A test conducted by 'n' number of robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Baseline'?",
+    "options": {
+      "A": "The very last line of code.",
+      "B": "The starting value or current performance level used for comparison.",
+      "C": "The bottom of the computer case.",
+      "D": "A line drawn on the floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Average Order Value' (AOV)?",
+    "options": {
+      "A": "The average number of words in a sentence.",
+      "B": "The average amount of money spent each time a customer places an order.",
+      "C": "The total weight of the products.",
+      "D": "The speed of the delivery truck."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Revenue Per Visitor' (RPV)?",
+    "options": {
+      "A": "The number of visitors who buy nothing.",
+      "B": "A metric that combines conversion rate and average order value.",
+      "C": "The cost of the ads used to get a visitor.",
+      "D": "The age of the visitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Qualitative' insight?",
+    "options": {
+      "A": "A user's comment in a feedback survey.",
+      "B": "A conversion rate of 5%.",
+      "C": "A total of 1000 clicks.",
+      "D": "A bounce rate of 40%."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a 'Quantitative' insight?",
+    "options": {
+      "A": "A description of how a user felt.",
+      "B": "A numerical data point like '8% increase in clicks'.",
+      "C": "A video of a user looking confused.",
+      "D": "An opinion from the lead designer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Lift' in A/B testing?",
+    "options": {
+      "A": "An elevator in the company building.",
+      "B": "The percentage improvement in performance between the variant and control.",
+      "C": "Moving a server to a higher shelf.",
+      "D": "A type of physical exercise."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate Testing' (MVT)?",
+    "options": {
+      "A": "Testing only one change at a time.",
+      "B": "Testing multiple variables in various combinations simultaneously.",
+      "C": "Testing on multiple different countries.",
+      "D": "Hiring multiple people to run the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'User Onboarding'?",
+    "options": {
+      "A": "Hiring a new employee.",
+      "B": "The process of helping new users understand and start using a product.",
+      "C": "Putting users onto a physical boat.",
+      "D": "Deleting user accounts that are inactive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mobile First' testing?",
+    "options": {
+      "A": "Buying a new phone for every user.",
+      "B": "Prioritizing testing on mobile devices over desktop versions.",
+      "C": "Moving the mobile app to the front of the list.",
+      "D": "Charging users for using mobile apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Friction' point in a user journey?",
+    "options": {
+      "A": "A part of the UI that is very smooth.",
+      "B": "Anything that prevents a user from completing a desired action (e.g., a long form).",
+      "C": "A physical rubbing of two computer parts.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Driven' decision making?",
+    "options": {
+      "A": "Making decisions based on a coin flip.",
+      "B": "Using collected facts and figures to guide business choices.",
+      "C": "Letting the computer make every decision automatically.",
+      "D": "Driving a car while looking at data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Personalization' in testing?",
+    "options": {
+      "A": "Showing the exact same thing to everyone.",
+      "B": "Tailoring experiences to individual users based on their data.",
+      "C": "Writing the user's name on a piece of paper.",
+      "D": "Using personal computers for testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Test Duration'?",
+    "options": {
+      "A": "How hard the test is.",
+      "B": "The length of time a test is active.",
+      "C": "The price of the test.",
+      "D": "The number of questions in the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Browser Consistency'?",
+    "options": {
+      "A": "Using only one browser for the whole company.",
+      "B": "Ensuring the test looks and functions correctly across different browsers (Chrome, Safari, etc.).",
+      "C": "The speed of the browser.",
+      "D": "The color of the browser's icon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Real-time Reporting'?",
+    "options": {
+      "A": "Reporting only once a year.",
+      "B": "The ability to view data and results as they happen.",
+      "C": "Reporting the time of day.",
+      "D": "Talking to a reporter in person."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Retention Rate'?",
+    "options": {
+      "A": "The percentage of users who return to use an app or site over time.",
+      "B": "The number of users who delete the app.",
+      "C": "The size of the hard drive.",
+      "D": "The number of hours the server was active."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Customer Lifetime Value' (CLV)?",
+    "options": {
+      "A": "The age of the customer.",
+      "B": "The total revenue a business can expect from a single customer account.",
+      "C": "How long a customer stays in a physical store.",
+      "D": "The price of a single product."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Engagement' in digital marketing?",
+    "options": {
+      "A": "Getting married to a user.",
+      "B": "The level of interaction users have with a piece of content (likes, shares, clicks).",
+      "C": "Turning on the computer screen.",
+      "D": "Sending an email to a user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UX Design'?",
+    "options": {
+      "A": "X-raying the computer hardware.",
+      "B": "User Experience design, focusing on how a user interacts with a product.",
+      "C": "Designing the external case of the monitor.",
+      "D": "Choosing the fastest CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UI Design'?",
+    "options": {
+      "A": "Underwater Interface design.",
+      "B": "User Interface design, focusing on the visual elements users interact with.",
+      "C": "Choosing the best internet provider.",
+      "D": "Designing the office layout."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pop-up' in website design?",
+    "options": {
+      "A": "A type of physical toy.",
+      "B": "A graphical window that suddenly appears in the foreground of the interface.",
+      "C": "A noise the computer makes when it's hot.",
+      "D": "A way to turn off the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Navigation' in a website?",
+    "options": {
+      "A": "Using a GPS to find the office.",
+      "B": "The system of links and menus that allow users to move through different pages.",
+      "C": "Driving a car on a map.",
+      "D": "Hiring a sailor for the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Heatmap'?",
+    "options": {
+      "A": "A map of hot cities in the summer.",
+      "B": "A visual representation showing where users click or move their mouse on a page.",
+      "C": "Measuring the temperature of the CPU.",
+      "D": "A way to see infrared light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Conversion'?",
+    "options": {
+      "A": "Changing money into a different currency.",
+      "B": "When a user completes a desired action (like making a purchase).",
+      "C": "Turning text into an image.",
+      "D": "Restarting the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-conversion'?",
+    "options": {
+      "A": "A very small coin.",
+      "B": "A small step toward a primary goal (like signing up for a newsletter).",
+      "C": "A conversion that takes 1 second.",
+      "D": "A purchase under 1 dollar."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Macro-conversion'?",
+    "options": {
+      "A": "A very large computer.",
+      "B": "A primary business goal (like a completed sale).",
+      "C": "A conversion that takes 1 hour.",
+      "D": "A purchase over 1000 dollars."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample Ratio Mismatch' (SRM)?",
+    "options": {
+      "A": "Having the same number of users in each group.",
+      "B": "When the actual distribution of users between groups differs significantly from the intended split.",
+      "C": "A bug in the camera sensor.",
+      "D": "The colors in two images not matching."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Lead'?",
+    "options": {
+      "A": "A heavy metal element.",
+      "B": "A potential customer who has shown interest in a product or service.",
+      "C": "The person who is first in a race.",
+      "D": "A type of electrical wire."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lead Generation'?",
+    "options": {
+      "A": "Creating heavy metals in a lab.",
+      "B": "The process of attracting and converting strangers into leads.",
+      "C": "Hiring a new manager.",
+      "D": "Generating electricity for the city."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Iterative Testing'?",
+    "options": {
+      "A": "Testing once and never again.",
+      "B": "The practice of running multiple tests in a sequence to continuously improve results.",
+      "C": "Testing using only robots.",
+      "D": "Testing only on Tuesdays."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Documentation'?",
+    "options": {
+      "A": "A type of movie.",
+      "B": "The process of recording test details, results, and learnings for future reference.",
+      "C": "A folder on a desktop.",
+      "D": "Choosing a doctor for the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hypothesis Prioritization'?",
+    "options": {
+      "A": "Doing all tests at the same time.",
+      "B": "Ranking different test ideas based on potential impact and ease of implementation.",
+      "C": "Choosing the longest hypothesis first.",
+      "D": "Writing a hypothesis in capital letters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Duration Calculator' used for?",
+    "options": {
+      "A": "To measure the speed of the CPU.",
+      "B": "To estimate how long a test needs to run based on current traffic and expected lift.",
+      "C": "To count the number of days in a year.",
+      "D": "To set the system clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Winning Probability'?",
+    "options": {
+      "A": "The chance of winning a sports game.",
+      "B": "The likelihood that a variant will outperform the control in the long run.",
+      "C": "The number of users in a test.",
+      "D": "The price of the winning prize."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-test Analysis'?",
+    "options": {
+      "A": "Mailing a letter after a test.",
+      "B": "The process of reviewing data and drawing conclusions after a test is completed.",
+      "C": "Deleting the data after a test.",
+      "D": "Running the test again immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Traffic' in a digital context?",
+    "options": {
+      "A": "Cars on a highway.",
+      "B": "The number of users visiting a website or app.",
+      "C": "The speed of light in a vacuum.",
+      "D": "The number of files on a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Desktop' testing?",
+    "options": {
+      "A": "Testing the physical wood of the desk.",
+      "B": "Running tests on the version of a site viewed on a computer/laptop.",
+      "C": "Cleaning the computer screen.",
+      "D": "Testing only at a specific desk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UX/UI' consistency?",
+    "options": {
+      "A": "Ensuring the design looks identical for all users.",
+      "B": "Ensuring that the brand's look and feel remain stable throughout different experiments.",
+      "C": "The speed of the UI updates.",
+      "D": "Hiring the same designer for 10 years."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Statistical Power' represent in an A/B test?",
+    "options": {
+      "A": "The speed at which the server processes test data.",
+      "B": "The probability of correctly rejecting the null hypothesis when there is a true effect.",
+      "C": "The total number of users divided by the number of variants.",
+      "D": "The amount of revenue generated during the test period."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a primary symptom of 'Peeking' at results before a test is complete?",
+    "options": {
+      "A": "The website loading speed decreases significantly.",
+      "B": "The probability of finding a 'false positive' increases.",
+      "C": "The sample size automatically doubles.",
+      "D": "The variant and control groups swap places."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Minimum Detectable Effect' (MDE)?",
+    "options": {
+      "A": "The smallest change in metrics that is worth the business cost of implementation.",
+      "B": "The lowest possible conversion rate observed during the test.",
+      "C": "The number of users who clicked a button by accident.",
+      "D": "The shortest duration a test can run before it crashes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In A/B testing, what is the 'Novelty Effect'?",
+    "options": {
+      "A": "When a test fails because the design is too old-fashioned.",
+      "B": "A temporary boost in engagement because users are curious about a new change, not because it's better.",
+      "C": "The cost of hiring a new UI designer.",
+      "D": "When the results are so unique that they cannot be repeated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Two-Tailed Test' used for in optimization?",
+    "options": {
+      "A": "To test two different websites at the exact same time.",
+      "B": "To determine if a variant is either significantly better OR significantly worse than the control.",
+      "C": "To measure the bounce rate of users coming from two different countries.",
+      "D": "To increase the number of buttons on a landing page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Confidence Interval' of [2%, 5%] for an improvement mean?",
+    "options": {
+      "A": "The variant is exactly 3.5% better than the control.",
+      "B": "There is a 95% chance that the true uplift falls between 2% and 5%.",
+      "C": "Only 2% to 5% of users saw the new version.",
+      "D": "The test must run for at least 5 more days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common cause of 'Sample Ratio Mismatch' (SRM)?",
+    "options": {
+      "A": "Using a font that is too small for mobile users.",
+      "B": "A bug in the randomization logic that favors one group over another.",
+      "C": "The variant being much more colorful than the control.",
+      "D": "Running the test on a weekend instead of a weekday."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Primary Metric' in an experiment?",
+    "options": {
+      "A": "The metric used to determine the winner of the test (e.g., Conversion).",
+      "B": "The first metric that appears in the analytics dashboard.",
+      "C": "A metric that only measures the age of the users.",
+      "D": "The speed of the network connection for the control group."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What are 'Guardrail Metrics'?",
+    "options": {
+      "A": "Metrics that measure the physical safety of the data center.",
+      "B": "Secondary metrics used to ensure the variant isn't causing unintended harm (e.g., latency or uninstalls).",
+      "C": "Metrics that only senior managers are allowed to see.",
+      "D": "Metrics that track the movement of the mouse cursor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequential Testing'?",
+    "options": {
+      "A": "Running tests in alphabetical order.",
+      "B": "A framework that allows for valid data peeking and stopping a test as soon as results are significant.",
+      "C": "Testing one user after another in a long line.",
+      "D": "A test that repeats the same variable 10 times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Simpson's Paradox' warn against in A/B testing?",
+    "options": {
+      "A": "Making a website too yellow and bright.",
+      "B": "Aggregating data across segments which might hide contradictory trends within those segments.",
+      "C": "Using a sample size that is too large for the database.",
+      "D": "Running a test for only one hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bonferroni Correction' used for?",
+    "options": {
+      "A": "Correcting spelling errors in the variant copy.",
+      "B": "Adjusting p-values when testing multiple hypotheses to prevent 'False Positives'.",
+      "C": "Increasing the speed of the browser rendering.",
+      "D": "Ensuring the variant works on old versions of Internet Explorer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interaction Effect' in a Multivariate Test (MVT)?",
+    "options": {
+      "A": "When users talk to each other about the test.",
+      "B": "When the impact of one variable depends on the level of another variable.",
+      "C": "The time it takes for a user to interact with a button.",
+      "D": "A bug that causes the screen to flicker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'User Bucketing'?",
+    "options": {
+      "A": "Giving every user a physical bucket as a gift.",
+      "B": "The process of consistently assigning a user to a specific variant using a hash of their ID.",
+      "C": "Deleting user data that is more than a year old.",
+      "D": "Storing all test results in a single large file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Priming Effect'?",
+    "options": {
+      "A": "Using only primary colors in the UI.",
+      "B": "When a previous exposure to a stimulus influences a user's response to a later stimulus.",
+      "C": "The time it takes for the server to prime the database.",
+      "D": "Hiring a prime minister to endorse the product."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attribution Window'?",
+    "options": {
+      "A": "The size of the browser window.",
+      "B": "The defined period of time after a user sees an ad or variant during which a conversion is credited.",
+      "C": "A window in the office where data is displayed.",
+      "D": "The time it takes to credit a developer for their code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Validity' threat in a laboratory A/B test?",
+    "options": {
+      "A": "The lab being too cold for the participants.",
+      "B": "The results not being applicable to real-world users in their natural environment.",
+      "C": "A hacker attacking the external server.",
+      "D": "The participants not being paid enough."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian A/B Testing'?",
+    "options": {
+      "A": "Testing conducted only in large bays or coastal areas.",
+      "B": "An approach that calculates the probability of one variant being better than another based on prior knowledge.",
+      "C": "A test that uses zero mathematical formulas.",
+      "D": "A manual way to count clicks using a tally sheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Z-score' in the context of test results?",
+    "options": {
+      "A": "The last score recorded in a sequence.",
+      "B": "A measure of how many standard deviations a data point is from the mean.",
+      "C": "A score given to a variant by a robot.",
+      "D": "The number of users who reached the end of a funnel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Selection Bias' risk?",
+    "options": {
+      "A": "Selecting the wrong color for a button.",
+      "B": "When the groups being compared are fundamentally different before the test even starts.",
+      "C": "Selecting only the best developers for a project.",
+      "D": "A bug in the 'Select' dropdown menu."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In optimization, what does 'Standard Error' tell you?",
+    "options": {
+      "A": "A common mistake made by a junior analyst.",
+      "B": "An estimate of the variability of the sample mean.",
+      "C": "The total number of errors in the code.",
+      "D": "The difference between two standard deviations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-stratification'?",
+    "options": {
+      "A": "Mailing a physical letter after a test.",
+      "B": "Weighting the results after a test to account for imbalances in segments.",
+      "C": "Deleting the strata from the database.",
+      "D": "A way to build a taller website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Twyman's Law'?",
+    "options": {
+      "A": "The law that says A/B testing is always profitable.",
+      "B": "The principle that any figure that looks interesting or different is usually wrong.",
+      "C": "A law about the number of pixels on a mobile screen.",
+      "D": "The idea that every test should last 14 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AA Testing'?",
+    "options": {
+      "A": "Testing two versions that are exactly the same to check the validity of the testing tool.",
+      "B": "Testing for users whose names start with A.",
+      "C": "A test that uses two different brands of batteries.",
+      "D": "Testing only on Apple devices."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Holdout Group'?",
+    "options": {
+      "A": "A group of users who refuse to use the internet.",
+      "B": "A group of users who are never exposed to any experiments to measure long-term impact.",
+      "C": "A group of developers who work on weekends.",
+      "D": "A folder for deleted test data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample Variance'?",
+    "options": {
+      "A": "The number of users in a sample.",
+      "B": "A measure of the spread of data points within a sample.",
+      "C": "The time it takes to collect a sample.",
+      "D": "The color of the sample data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical Interference'?",
+    "options": {
+      "A": "When a manager interrupts a data analyst.",
+      "B": "When one experiment affects the results of another running at the same time.",
+      "C": "Radio waves disrupting the server.",
+      "D": "When the results are too clear to be true."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression to the Mean'?",
+    "options": {
+      "A": "The data becoming more extreme over time.",
+      "B": "The tendency for extreme results to move closer to the average upon further testing.",
+      "C": "A way to calculate the average of multiple regressions.",
+      "D": "When the mean of the data becomes negative."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heterogeneity of Treatment Effect' (HTE)?",
+    "options": {
+      "A": "When the treatment effect is identical for every single user.",
+      "B": "When the variant works better for some user segments than others.",
+      "C": "When the variant causes the server to crash.",
+      "D": "A way to encrypt the treatment data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is a 'Lagging Indicator' in A/B testing?",
+    "options": {
+      "A": "Add-to-cart rate.",
+      "B": "Annual Retention Rate.",
+      "C": "Click rate on a 'Learn More' button.",
+      "D": "Page load time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Leading Indicator'?",
+    "options": {
+      "A": "A metric that tells you what happened 5 years ago.",
+      "B": "A predictive metric that signals future success (e.g., higher initial engagement).",
+      "C": "The person who leads the optimization team.",
+      "D": "The very first line in a data report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cannibalization' in an experiment?",
+    "options": {
+      "A": "When a variant is so bad it's deleted.",
+      "B": "When a gain in one area (e.g., clicks) causes a loss in another (e.g., total revenue).",
+      "C": "When two variants are merged into one.",
+      "D": "A bug that eats the data files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Counterbalancing' in experimental design?",
+    "options": {
+      "A": "Placing weights on a server to keep it steady.",
+      "B": "A method to control for 'Order Effects' by varying the sequence of treatments.",
+      "C": "Balancing the budget of the test.",
+      "D": "Hiring an equal number of male and female users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-value' of 0.04 signify if your Alpha is 0.05?",
+    "options": {
+      "A": "The results are not significant.",
+      "B": "The results are statistically significant, and the null hypothesis is rejected.",
+      "C": "The test was a total failure.",
+      "D": "The variant is 4% better than the control."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Survivorship Bias'?",
+    "options": {
+      "A": "Bias toward users who are still alive.",
+      "B": "Only analyzing users who 'survived' or stayed through the entire funnel, ignoring those who dropped off.",
+      "C": "A type of insurance for data analysts.",
+      "D": "Hiring only analysts who have never lost a test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Armed Bandit' (MAB) testing?",
+    "options": {
+      "A": "A test involving physical robots with multiple arms.",
+      "B": "An algorithm that dynamically shifts traffic to the winning variant during the test to maximize conversions.",
+      "C": "A test conducted in a casino.",
+      "D": "A way to catch hackers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploitation' in Bandit testing?",
+    "options": {
+      "A": "Hiring workers for very low pay.",
+      "B": "Showing the currently best-performing variant to more users to increase revenue.",
+      "C": "Deleting the data of users you don't like.",
+      "D": "Using the computer until it breaks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exploration' in Bandit testing?",
+    "options": {
+      "A": "Traveling to a new country.",
+      "B": "Allocating some traffic to less certain variants to gather more data.",
+      "C": "Searching for a lost file.",
+      "D": "Opening the computer to see the chips."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Frequentist' approach characteristic?",
+    "options": {
+      "A": "Using prior beliefs to influence results.",
+      "B": "Basing conclusions solely on the frequency of data in the current experiment.",
+      "C": "Updating the results every 5 minutes.",
+      "D": "Using zero math in the analysis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample Size Calculator' 'Alpha' setting?",
+    "options": {
+      "A": "The first letter of the Greek alphabet.",
+      "B": "The threshold for the significance level (commonly set to 0.05).",
+      "C": "The speed of the CPU.",
+      "D": "The number of users in the control group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Beta' in the context of statistical power?",
+    "options": {
+      "A": "A version of the software that isn't finished.",
+      "B": "The probability of making a Type II error (False Negative).",
+      "C": "The second variant in an A/B/C test.",
+      "D": "The number of clicks on a button."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Duration Bias'?",
+    "options": {
+      "A": "Bias toward tests that last 100 years.",
+      "B": "When the time of day, week, or season influences the test results (e.g., weekend shopping behavior).",
+      "C": "The speed of the system clock.",
+      "D": "Hiring only analysts who work long hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-assignment Bias'?",
+    "options": {
+      "A": "Assigning a test to a developer before they are ready.",
+      "B": "Bias that occurs if users are bucketed into groups before they even reach the experiment page.",
+      "C": "Choosing a color for the variant too early.",
+      "D": "A bug in the user login system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lurking Variable'?",
+    "options": {
+      "A": "A variable that hides in a folder.",
+      "B": "An unobserved variable that influences both the independent and dependent variables, causing a false correlation.",
+      "C": "A user who never clicks anything.",
+      "D": "A secret password for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In A/B testing, what is 'Standard Deviation' used to measure?",
+    "options": {
+      "A": "The height of the CTA button.",
+      "B": "The amount of variation or dispersion in a set of values.",
+      "C": "The total number of users.",
+      "D": "The speed of the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity Matching'?",
+    "options": {
+      "A": "Matching a user's name to their ID.",
+      "B": "A statistical technique used to compare groups that were not randomly assigned by matching similar participants.",
+      "C": "Matching the color of two different buttons.",
+      "D": "Finding identical files in the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cohort Analysis' in optimization?",
+    "options": {
+      "A": "Analyzing data from one single person.",
+      "B": "Tracking a specific group of users over time after they were exposed to a variant.",
+      "C": "A study on the weather in different cities.",
+      "D": "Analyzing the average age of the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Look-alike' modeling?",
+    "options": {
+      "A": "Hiring actors who look like the users.",
+      "B": "Using data from high-converting users to find and target similar people.",
+      "C": "Making the variant look like the control.",
+      "D": "A way to see hidden files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Search Engine Optimization' (SEO) A/B testing?",
+    "options": {
+      "A": "Testing how fast Google can find a site.",
+      "B": "Testing changes to see if they improve organic search rankings and click-through rates.",
+      "C": "Hiring a search engine expert.",
+      "D": "Deleting the search bar from a site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Client-Side' testing?",
+    "options": {
+      "A": "Testing only on the client's laptop.",
+      "B": "Experiments where the changes are rendered by the user's browser (usually via JavaScript).",
+      "C": "A test where the client makes the final decision.",
+      "D": "Cleaning the client's computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Server-Side' testing?",
+    "options": {
+      "A": "Testing only on the physical server hardware.",
+      "B": "Experiments where the logic is handled on the server before the page is sent to the browser.",
+      "C": "A test conducted in a dark server room.",
+      "D": "Hiring a server administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Flicker' (or FOOC) in A/B testing?",
+    "options": {
+      "A": "A small light on the server rack.",
+      "B": "When a user briefly sees the original content before the variant loads.",
+      "C": "The computer monitor turning on and off.",
+      "D": "A user clicking a button very quickly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge Computing' for testing?",
+    "options": {
+      "A": "Testing on the literal edge of a table.",
+      "B": "Running test logic at the 'network edge' (CDNs) to reduce latency and eliminate flicker.",
+      "C": "A dangerous way to run experiments.",
+      "D": "The very first version of an experiment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded Theory' in qualitative analysis?",
+    "options": {
+      "A": "A theory about the Earth.",
+      "B": "A methodology for developing a theory based on systematically gathered and analyzed data.",
+      "C": "A theory that is proven to be true.",
+      "D": "A theory taught in elementary school."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triangulation' in UX research?",
+    "options": {
+      "A": "Using three participants for a study.",
+      "B": "Using multiple methods or data sources to gain a more complete understanding of a problem.",
+      "C": "A geometric measurement on a screen.",
+      "D": "Testing three variables at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heuristic Evaluation'?",
+    "options": {
+      "A": "A math problem for students.",
+      "B": "A usability inspection where experts evaluate an interface against set design principles.",
+      "C": "A type of robot arm.",
+      "D": "The speed of the computer's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Card Sorting'?",
+    "options": {
+      "A": "Playing a card game.",
+      "B": "A UX method used to help design or evaluate the information architecture of a site.",
+      "C": "Sorting business cards alphabetically.",
+      "D": "A way to organize files on a drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Tree Testing'?",
+    "options": {
+      "A": "Planting trees in the office.",
+      "B": "A usability technique for evaluating the findability of topics in a website structure.",
+      "C": "A way to organize folders on a desktop.",
+      "D": "Testing only the wood of a physical tree."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Prototype'?",
+    "options": {
+      "A": "A finished product.",
+      "B": "A preliminary model or version of a product used for testing and feedback.",
+      "C": "A secret code used by developers.",
+      "D": "A hardware chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Eye Tracking'?",
+    "options": {
+      "A": "Remembering someone's name.",
+      "B": "A process of measuring either the point of gaze or the motion of an eye relative to the head.",
+      "C": "A filter that makes you look like a cat.",
+      "D": "A way to unlock a physical door using a key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Usability Testing'?",
+    "options": {
+      "A": "Testing if the computer is turned on.",
+      "B": "Evaluating a product by testing it with representative users.",
+      "C": "A type of software for editing text.",
+      "D": "A security scan for a bank."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Remote Usability Testing'?",
+    "options": {
+      "A": "Testing conducted using a TV remote.",
+      "B": "Testing where the moderator and participant are in different physical locations.",
+      "C": "A high-end gaming computer.",
+      "D": "A security system for a bank."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Moderated' vs 'Unmoderated' testing?",
+    "options": {
+      "A": "Moderated has a facilitator; Unmoderated does not.",
+      "B": "Moderated is for experts; Unmoderated for students.",
+      "C": "They are identical in Large Language Models.",
+      "D": "Moderated is for images; Unmoderated is for text."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Think-Aloud' protocol?",
+    "options": {
+      "A": "A user shouting at the computer.",
+      "B": "Asking participants to verbalize their thoughts as they complete tasks during a test.",
+      "C": "A specialized microphone for recording.",
+      "D": "A way to translate audio into text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'System Usability Scale' (SUS)?",
+    "options": {
+      "A": "A physical scale for weighing servers.",
+      "B": "A reliable 10-item questionnaire used to measure the usability of products.",
+      "C": "The version number of an AI model.",
+      "D": "The number of layers in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time on Task'?",
+    "options": {
+      "A": "The amount of time a developer works.",
+      "B": "The duration it takes for a user to successfully complete a specific task.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of users currently online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of using 'CUPED' (Controlled-experiment Using Pre-Experiment Data) in A/B testing?",
+    "options": {
+      "A": "To ensure that every user sees the exact same variant every time.",
+      "B": "To reduce the variance of the metric by using pre-experiment data, thereby increasing statistical power.",
+      "C": "To automatically delete outliers from the dataset before the test begins.",
+      "D": "To translate the test results into multiple currencies for international reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bayesian' A/B testing, what does the 'Posterior' distribution represent?",
+    "options": {
+      "A": "The initial assumption about the conversion rate before any data is collected.",
+      "B": "The probability distribution of the conversion rate after combining the prior and the observed data.",
+      "C": "A specialized report generated only after the test has concluded.",
+      "D": "The number of users who dropped out of the funnel at the very last step."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Interference' (or SUTVA violation) in a social media A/B test?",
+    "options": {
+      "A": "When the internet connection in the data center is unstable.",
+      "B": "When the treatment of one user affects the outcome of another user (e.g., in a messaging app).",
+      "C": "When a competitor tries to hack into the testing platform.",
+      "D": "When the CPU usage of the server exceeds 95%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific statistical test is most appropriate when the dependent variable is 'Revenue per User' which is highly skewed with many zeros?",
+    "options": {
+      "A": "Standard Student's T-test",
+      "B": "Mann-Whitney U Test (Rank-Sum Test)",
+      "C": "Chi-Square Test of Independence",
+      "D": "A standard Pie Chart comparison"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequential Probability Ratio Test' (SPRT) designed to prevent?",
+    "options": {
+      "A": "Fixed-horizon tests running for too long when a winner is already obvious.",
+      "B": "The website from crashing under high traffic load.",
+      "C": "The user from seeing two different variants in the same session.",
+      "D": "The database from duplicating user IDs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Multi-Armed Bandits', what is 'Thompson Sampling'?",
+    "options": {
+      "A": "A manual way to pick a winner using a coin flip.",
+      "B": "A Bayesian algorithm that assigns traffic to variants based on the probability that they are the best.",
+      "C": "A way to backup the results on a physical tape drive.",
+      "D": "A security certificate used for e-commerce transactions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Delta Method' typically approximate in A/B testing statistics?",
+    "options": {
+      "A": "The total number of users in a segment.",
+      "B": "The variance of ratio metrics (e.g., Click-Through Rate or Revenue per Click).",
+      "C": "The time it takes to refresh the dashboard.",
+      "D": "The difference between two different programming languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heteroscedasticity' in the context of A/B test residuals?",
+    "options": {
+      "A": "When the variance of the errors is constant across all variants.",
+      "B": "When the variance of the errors differs across different levels of an independent variable.",
+      "C": "When the mean and the median of the results are exactly the same.",
+      "D": "When two different tests produce identical results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Factorial Design' A/B test, what is a 'Main Effect'?",
+    "options": {
+      "A": "The combined effect of every variable in the test.",
+      "B": "The individual effect of a single independent variable on the dependent variable.",
+      "C": "The most expensive part of the experimental setup.",
+      "D": "The unintended consequence of a software bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample Ratio Mismatch' (SRM) 'P-value' used to detect?",
+    "options": {
+      "A": "If the variant is better than the control.",
+      "B": "If the actual split of users across variants deviates significantly from the expected split.",
+      "C": "The total duration of the test in seconds.",
+      "D": "The number of users who speak a specific language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Wald Test' used for in large-sample optimization?",
+    "options": {
+      "A": "Testing the speed of the browser.",
+      "B": "Evaluating the significance of individual coefficients in a regression model.",
+      "C": "Counting the number of clicks in a specific region.",
+      "D": "A security check for the SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cluster Randomization'?",
+    "options": {
+      "A": "Randomizing the order of the files on a server.",
+      "B": "Randomizing entire groups of people (e.g., cities or classrooms) rather than individuals.",
+      "C": "Randomizing the colors in a logo automatically.",
+      "D": "A way to backup data in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interleaving' in the context of search engine A/B testing?",
+    "options": {
+      "A": "Showing variant A for one hour and variant B for the next.",
+      "B": "Combining results from two different algorithms into a single list to see which items users click more.",
+      "C": "Deleting the search results if they are not accurate.",
+      "D": "A way to encrypt the search query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Epsilon-Greedy' algorithms, what does 'Epsilon' ($epsilon$) represent?",
+    "options": {
+      "A": "The amount of profit generated.",
+      "B": "The probability that the algorithm will explore a random variant instead of the best known one.",
+      "C": "The number of users in the control group.",
+      "D": "The duration of the test in weeks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Survivorship' effect in longitudinal A/B tests?",
+    "options": {
+      "A": "Bias caused by focusing only on users who continue using the product over a long period.",
+      "B": "The effect of a variant that is so good it 'survives' for 10 years.",
+      "C": "A type of insurance for the data analysis team.",
+      "D": "When the results are so clear that the test ends early."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Propensity Score' in a quasi-experiment?",
+    "options": {
+      "A": "A score given to a variant by a professional designer.",
+      "B": "The probability of a unit being assigned to a particular treatment given its observed covariates.",
+      "C": "The number of times a user clicks a button.",
+      "D": "A way to count the total revenue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Interference' in a marketplace A/B test (e.g., Uber or Airbnb)?",
+    "options": {
+      "A": "A competitor launching a massive sale at the same time as your test.",
+      "B": "When a change in the supply side (drivers) affects the demand side (riders) in the other group.",
+      "C": "A power outage at the company headquarters.",
+      "D": "The user's computer being too slow to load the page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-Hacking' behavior involve?",
+    "options": {
+      "A": "Hacking into a server to change the results.",
+      "B": "Repeatedly analyzing data or sub-segments until a significant p-value is found.",
+      "C": "Writing code in a very messy way.",
+      "D": "Using a font that is hard to read in reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fixed Effects' in a regression-based A/B analysis?",
+    "options": {
+      "A": "Effects that never change during the test.",
+      "B": "Variables that are constant across individuals (like time) or constant across time for individuals.",
+      "C": "A bug that is fixed by the developer.",
+      "D": "A way to lock the results so they cannot be edited."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Law of Iterated Logarithm' relevant to in A/B testing?",
+    "options": {
+      "A": "The speed of the SQL database.",
+      "B": "Determining the correct boundaries for sequential testing to avoid inflated Type I errors.",
+      "C": "The number of users allowed in a single bucket.",
+      "D": "A law about how many colors can be used in a variant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bayesian' testing, what is the 'Expected Loss'?",
+    "options": {
+      "A": "The total amount of money lost by the company.",
+      "B": "The expected decrease in the metric if we choose the wrong variant as the winner.",
+      "C": "The number of users who will leave the site.",
+      "D": "The duration of the downtime during deployment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stratified Sampling'?",
+    "options": {
+      "A": "Sampling only from the top layer of data.",
+      "B": "Dividing the population into subgroups and sampling from each to ensure representation.",
+      "C": "Sampling people from different countries only.",
+      "D": "Randomly picking people from a telephone book."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Switchback' testing commonly used for?",
+    "options": {
+      "A": "Testing two different keyboards.",
+      "B": "A marketplace experiment where the treatment is toggled on and off for the entire region over time.",
+      "C": "A way to switch between two different cloud providers.",
+      "D": "Testing only on mobile phones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Error of the Difference'?",
+    "options": {
+      "A": "A common mistake made in the lab.",
+      "B": "A measure of the statistical accuracy of the difference between two sample means.",
+      "C": "The total number of outliers.",
+      "D": "The difference between two standard deviations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-parametric' testing?",
+    "options": {
+      "A": "Testing that uses zero mathematical formulas.",
+      "B": "Statistical tests that do not assume the data follows a specific distribution (like a Normal distribution).",
+      "C": "A test that only uses qualitative interviews.",
+      "D": "A test conducted entirely through computer simulation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample' 'Representativeness'?",
+    "options": {
+      "A": "How many people are in the sample.",
+      "B": "The degree to which the sample accurately reflects the characteristics of the whole population.",
+      "C": "How famous the participants are.",
+      "D": "The cost of the sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' 'History Effect'?",
+    "options": {
+      "A": "The history of the company.",
+      "B": "When an external event occurs during the test that impacts the control and variant differently.",
+      "C": "A list of previous experiments.",
+      "D": "The age of the users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantile' regression used for in optimization?",
+    "options": {
+      "A": "Predicting the exact mean of a group.",
+      "B": "Estimating the conditional median or other quantiles of the response variable.",
+      "C": "A way to count the number of users.",
+      "D": "A security feature for the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity' 'Matching' 'Caliper'?",
+    "options": {
+      "A": "A tool to measure the thickness of paper.",
+      "B": "The maximum allowed distance between matched propensity scores.",
+      "C": "The speed of the matching process.",
+      "D": "A way to count the number of matches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ordinal' 'Logistic Regression'?",
+    "options": {
+      "A": "A regression for numbers 1 to 10.",
+      "B": "A type of regression used when the dependent variable is ordinal (ranked).",
+      "C": "A regular regression done in order.",
+      "D": "A regression for categorical data with no order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bootstrap' 'Resampling'?",
+    "options": {
+      "A": "Starting a computer.",
+      "B": "A technique that involves repeatedly sampling from a data set with replacement to estimate a statistic's distribution.",
+      "C": "Putting on boots for a study.",
+      "D": "A way to delete data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dixon’s Q-Test'?",
+    "options": {
+      "A": "A test for the letter Q.",
+      "B": "A statistical test used to identify and reject outliers in small datasets.",
+      "C": "A test for the quality of the sample.",
+      "D": "A test for the speed of data collection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multivariate' 'Normality'?",
+    "options": {
+      "A": "Everyone behaving normally in a study.",
+      "B": "The assumption that all combinations of variables in a dataset are normally distributed.",
+      "C": "A dataset with only one variable.",
+      "D": "The mean being equal to zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fixed Effects' vs 'Random Effects'?",
+    "options": {
+      "A": "Fixed effects are for permanent things; Random are for temporary.",
+      "B": "Fixed effects assume data is the entire population; Random assume it is a sample from a larger population.",
+      "C": "Fixed effects are for numbers; Random are for words.",
+      "D": "Fixed effects never change; Random change every day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mahalanobis Distance'?",
+    "options": {
+      "A": "The distance from the lab to the city.",
+      "B": "A measure of the distance between a point and a distribution, used for outlier detection.",
+      "C": "The height of a researcher named Mahalanobis.",
+      "D": "The time it takes to travel between two points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hausman Test'?",
+    "options": {
+      "A": "A test for house prices.",
+      "B": "A statistical test used to decide between fixed effects or random effects models.",
+      "C": "A test for the presence of a ghost in a house.",
+      "D": "A test for the durability of a lab building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gini Coefficient' used for in research?",
+    "options": {
+      "A": "Measuring the cost of a study.",
+      "B": "Measuring statistical dispersion or inequality within a distribution.",
+      "C": "Calculating the number of authors.",
+      "D": "Determining the age of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Kolmogorov-Smirnov' (K-S) test?",
+    "options": {
+      "A": "A test for the presence of chemicals.",
+      "B": "A non-parametric test used to determine if a sample comes from a specific distribution.",
+      "C": "A test for the speed of light.",
+      "D": "A test for the quality of HDFS data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Levene's Test'?",
+    "options": {
+      "A": "A test for the presence of water.",
+      "B": "A test used to check the assumption of homogeneity of variance before an ANOVA.",
+      "C": "A test for the personality of a researcher.",
+      "D": "A test for the weight of a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shapiro-Wilk' test?",
+    "options": {
+      "A": "A test for the presence of animals.",
+      "B": "A statistical test specifically used to check the assumption of normality.",
+      "C": "A test for the speed of a computer.",
+      "D": "A test for the height of a researcher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' 'Maturation' threat?",
+    "options": {
+      "A": "When the researcher becomes older.",
+      "B": "When users change their behavior naturally over time, independent of the experiment.",
+      "C": "When the code becomes stable.",
+      "D": "When the budget is exhausted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Optimization', what is 'Confounding'?",
+    "options": {
+      "A": "Finding something very confusing.",
+      "B": "A situation where an outside variable affects both the independent and dependent variables.",
+      "C": "When the data team disagrees.",
+      "D": "A network error during ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Robust' 'Regression'?",
+    "options": {
+      "A": "A regression performed by a robot.",
+      "B": "A form of regression designed to be less sensitive to outliers than OLS.",
+      "C": "A regression that is 100% accurate.",
+      "D": "A regression for very large datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hierarchical' 'Linear' 'Modeling' (HLM)?",
+    "options": {
+      "A": "Data stored in a bird's nest.",
+      "B": "A statistical model used to analyze data that is organized at more than one level (e.g., nested data).",
+      "C": "Data stored in many folders.",
+      "D": "A way to hide data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian' 'Prior'?",
+    "options": {
+      "A": "The probability of an event after it happens.",
+      "B": "The probability distribution that represents uncertainty before the data is considered.",
+      "C": "The price before research starts.",
+      "D": "The number of hours a lab was open."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sensitivity' vs 'Specificity'?",
+    "options": {
+      "A": "Sensitivity is for emotions; Specificity is for details.",
+      "B": "Sensitivity is the True Positive Rate; Specificity is the True Negative Rate.",
+      "C": "Sensitivity is for small data; Specificity is for big data.",
+      "D": "They are the same thing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian' 'Credible Interval'?",
+    "options": {
+      "A": "A interval that sounds believable.",
+      "B": "The Bayesian equivalent of a confidence interval, representing the range where a parameter lies with a certain probability.",
+      "C": "The time between two test results.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multiple Testing Problem'?",
+    "options": {
+      "A": "Having too many computers.",
+      "B": "The increased chance of finding a false positive when conducting many statistical tests simultaneously.",
+      "C": "Testing on two different days.",
+      "D": "Hiring 10 different data analysts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Bucket' 'Hashing'?",
+    "options": {
+      "A": "Using a physical bucket.",
+      "B": "Applying a hash function to a user ID to consistently assign them to the same variant.",
+      "C": "Deleting user data.",
+      "D": "A way to name user groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Experiment' 'Velocity'?",
+    "options": {
+      "A": "The speed of the internet.",
+      "B": "The rate at which a team can design, launch, and analyze experiments.",
+      "C": "The speed of the cursor.",
+      "D": "The time it takes to load a variant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Null' 'Result' in optimization?",
+    "options": {
+      "A": "A result that is zero.",
+      "B": "When an experiment fails to show a statistically significant difference between variants.",
+      "C": "A bug in the SQL query.",
+      "D": "A result that is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Testing' 'Governance'?",
+    "options": {
+      "A": "AI running the government.",
+      "B": "The set of processes and standards that ensure experiments are high-quality and ethically sound.",
+      "C": "A way to vote for the best variant.",
+      "D": "Hiring a CEO for the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloud-native' 'Experimentation'?",
+    "options": {
+      "A": "Testing on clouds in the sky.",
+      "B": "Running A/B tests using cloud infrastructure and specialized SaaS platforms.",
+      "C": "A test for weather apps.",
+      "D": "Testing only on Mac computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Post-hoc' 'Power Analysis'?",
+    "options": {
+      "A": "Mailing a letter after a test.",
+      "B": "Calculating the power of a test after it has been completed, which is often considered controversial.",
+      "C": "A way to increase the electricity.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synthetic Control Method'?",
+    "options": {
+      "A": "A fake controller.",
+      "B": "A statistical method used to create a weighted combination of control units to mimic the treated unit before treatment.",
+      "C": "A way to control a robot.",
+      "D": "A bug in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Propensity' 'Score' 'Weighting'?",
+    "options": {
+      "A": "Weighing the user on a scale.",
+      "B": "Using propensity scores to weigh observations so the distribution of covariates is similar across groups.",
+      "C": "Giving more points to the winner.",
+      "D": "A way to count revenue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Interference' 'Sillover'?",
+    "options": {
+      "A": "Spilling coffee on the server.",
+      "B": "When the treatment given to one group 'spills over' and affects the other group.",
+      "C": "A network delay.",
+      "D": "A user seeing two variants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian' 'Factor'?",
+    "options": {
+      "A": "A person who does Bayesian math.",
+      "B": "A ratio that measures the strength of evidence for one hypothesis over another.",
+      "C": "The price of the test.",
+      "D": "A number between 1 and 10."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Difference-in-Differences' (DiD)?",
+    "options": {
+      "A": "Finding the difference between two groups.",
+      "B": "A statistical technique that calculates the effect of a treatment by comparing changes over time between groups.",
+      "C": "A way to subtract numbers in SQL.",
+      "D": "A bug in the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instrumental Variables' (IV) used for?",
+    "options": {
+      "A": "Variables for musical instruments.",
+      "B": "A method used to estimate causal relationships when experiments are not possible or have non-compliance.",
+      "C": "A way to name variables.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Compliance'?",
+    "options": {
+      "A": "Hiring a compliance officer.",
+      "B": "The degree to which users actually receive the treatment they were assigned.",
+      "C": "The legal rules for testing.",
+      "D": "The number of users who finish a test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Local' 'Average' 'Treatment' 'Effect' (LATE)?",
+    "options": {
+      "A": "A result that arrives late.",
+      "B": "The treatment effect for the subset of the population that complies with their assignment.",
+      "C": "The average score of a local city.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Sample' 'Attrition'?",
+    "options": {
+      "A": "Users becoming tired.",
+      "B": "The loss of participants during the course of an experiment.",
+      "C": "A bug in the database.",
+      "D": "Deleting user data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Contamination'?",
+    "options": {
+      "A": "A virus in the server room.",
+      "B": "When users in the control group are accidentally exposed to the treatment.",
+      "C": "A bug in the UI.",
+      "D": "A way to mix two datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multiple' 'Hypothesis' 'Testing' 'FDR'?",
+    "options": {
+      "A": "A US president.",
+      "B": "False Discovery Rate: the expected proportion of false positives among the rejected hypotheses.",
+      "C": "A way to count results.",
+      "D": "A security firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Power' 'Post-hoc'?",
+    "options": {
+      "A": "Using more power after a test.",
+      "B": "Determining power after a test is completed based on the observed effect size.",
+      "C": "A way to speed up the network.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'A/B Test' 'Variance' 'Reduction' 'CUPED'?",
+    "options": {
+      "A": "Making the results smaller.",
+      "B": "A technique to increase test sensitivity by using pre-experiment data to reduce metric noise.",
+      "C": "A way to delete outliers.",
+      "D": "A security feature for data."
+    },
+    "answer": "B"
+  }
+  ]
+}

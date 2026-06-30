@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Qualys", 
+  "questions": [
+    {
+    "question": "What is the primary function of the Qualys Cloud Platform?",
+    "options": {
+      "A": "To provide a physical cloud storage for personal photos.",
+      "B": "To provide a suite of information security and compliance solutions, primarily for vulnerability management.",
+      "C": "To automatically write and deploy code for mobile apps.",
+      "D": "To replace the need for physical firewalls in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Vulnerability' in Qualys is technically defined as a weakness in an asset that can be exploited by a threat actor.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Qualys component is a small, lightweight program installed on an asset to provide continuous security monitoring without a scan window?",
+    "options": {
+      "A": "Qualys Scanner Appliance",
+      "B": "Qualys Cloud Agent",
+      "C": "Qualys Virtual Scanner",
+      "D": "Qualys Gateway Service"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'VMDR' technically stand for in the Qualys ecosystem?",
+    "options": {
+      "A": "Virtual Machine Data Recovery",
+      "B": "Vulnerability Management, Detection, and Response",
+      "C": "Variable Metric Desktop Reporting",
+      "D": "Volume Management for Digital Resources"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods for Qualys to discover assets on a network? (Select all that apply)",
+    "options": {
+      "A": "IP-based Network Scanning",
+      "B": "Cloud Agent Inventory",
+      "C": "Passive Network Sensor",
+      "D": "Physical office security guards"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'QID' in Qualys terminology?",
+    "options": {
+      "A": "A physical ID card for Qualys employees.",
+      "B": "Qualys ID: A unique identifier for a specific vulnerability in the Qualys KnowledgeBase.",
+      "C": "A specialized tool for measuring light levels in data centers.",
+      "D": "A SQL query used to delete old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Authenticated Scan' (Trusted Scan) allows Qualys to log into the asset to perform a deeper search for vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Qualys severity level is technically represented by a 'Red' icon and indicates a high or urgent risk?",
+    "options": {
+      "A": "Severity 1",
+      "B": "Severity 5",
+      "C": "Severity 0",
+      "D": "Severity 2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of the 'KnowledgeBase' in Qualys?",
+    "options": {
+      "A": "To provide a library of physical books on cybersecurity.",
+      "B": "To maintain a central repository of all vulnerabilities (QIDs) that Qualys is capable of detecting.",
+      "C": "A specialized software for poets to store rhymes.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Qualys 'Asset Tags' are used to dynamically group assets based on specific rules like OS type or IP range.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Qualys module is used to ensure systems are configured according to industry best practices like CIS Benchmarks?",
+    "options": {
+      "A": "Vulnerability Management (VM)",
+      "B": "Policy Compliance (PC)",
+      "C": "Asset Inventory (AI)",
+      "D": "Web Application Scanning (WAS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Patch Report' in Qualys? (Select all that apply)",
+    "options": {
+      "A": "A report identifying exactly which patches are needed to fix found vulnerabilities",
+      "B": "A report on the physical cloth patches worn by staff",
+      "C": "A process to correlate vulnerabilities with their corresponding remediation",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is a 'Vulnerability Scan'?",
+    "options": {
+      "A": "A physical scan of a person's body.",
+      "B": "An automated process of testing assets for known security weaknesses.",
+      "C": "A security scan for physical computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Qualys Gateway Service' (QGS) is used to proxy traffic from Cloud Agents in restricted networks to the Qualys Cloud.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Asset Discovery' in the context of VMDR?",
+    "options": {
+      "A": "Discovering a physical computer under a desk.",
+      "B": "The process of identifying all devices, IP addresses, and applications active within an environment.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Remediation' in Qualys?",
+    "options": {
+      "A": "Fixing the physical paint on a server rack.",
+      "B": "The process of fixing or mitigating a vulnerability discovered during a scan.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Qualys is a purely on-premise solution that cannot be accessed via a web browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Qualys Scanner Appliance' used for?",
+    "options": {
+      "A": "A physical kitchen appliance in the office.",
+      "B": "Performing internal network scans of assets that cannot host a Cloud Agent.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Dashboard' in Qualys?",
+    "options": {
+      "A": "A visual representation of real-time security data and vulnerability metrics.",
+      "B": "A physical board used for dashing in the hallway.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the Qualys scan report does not match the actual configuration of the server due to an outdated scan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Scan Status' types in Qualys? (Select all that apply)",
+    "options": {
+      "A": "Running",
+      "B": "Finished",
+      "C": "Buying physical snacks for the team",
+      "D": "Queued"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'External Scanning'?",
+    "options": {
+      "A": "Scanning the outside of a physical building.",
+      "B": "Using Qualys Internet-based scanners to test an organization's public-facing IP addresses and websites.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Asset Grouping'?",
+    "options": {
+      "A": "Organizing assets into logical sets (like by department or location) to make scanning and reporting easier.",
+      "B": "Putting physical computers in a group.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Score' in Qualys helps prioritize which issues to fix first based on their risk level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Scanning benefits? (Select all that apply)",
+    "options": {
+      "A": "Regular, scheduled checks for new vulnerabilities",
+      "B": "Reduction in manual effort for the security team",
+      "C": "Guaranteed to fix all code bugs automatically",
+      "D": "Consistent application of scan profiles"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Compliance' in the context of Qualys?",
+    "options": {
+      "A": "Complying with the physical laws of gravity.",
+      "B": "Ensuring that systems meet specific security standards, laws, or regulatory requirements.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Remediation' (MTTR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a vulnerability is discovered until the fix is successfully applied and verified.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an organization promises to fix Severity 5 issues in 24 hours but lacks the staff to do so.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Scan Profiles'? (Select all that apply)",
+    "options": {
+      "A": "Initial Options",
+      "B": "Payment Card Industry (PCI) Options",
+      "C": "The SQL query parser",
+      "D": "Complete HTTP Scan"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Passive Scanning' in Qualys?",
+    "options": {
+      "A": "Scanning a person who is acting passive.",
+      "B": "Identifying assets and vulnerabilities by analyzing network traffic without sending any probes to the target devices.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Vulnerability Triage'?",
+    "options": {
+      "A": "The process of reviewing scan results to prioritize which vulnerabilities need immediate attention versus those that can wait.",
+      "B": "A physical triage tent for computers.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Qualys can scan for vulnerabilities in web applications as well as traditional network infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Cloud' Security in Qualys? (Select all that apply)",
+    "options": {
+      "A": "Scanning AWS/Azure/GCP instances for misconfigurations",
+      "B": "Monitoring public cloud storage for exposure",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring cloud-native services follow security policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Dynamic' Tagging?",
+    "options": {
+      "A": "Automatically assigning tags to assets based on real-time data or attributes discovered during a scan.",
+      "B": "Tagging a person who is physically dynamic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk Exposure' in Qualys?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A measure of the organization's potential damage from vulnerabilities, considering severity and asset criticality.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a user expects a scan to finish in 1 second while the network requires 1 hour to traverse.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Qualys modules? (Select all that apply)",
+    "options": {
+      "A": "VMDR",
+      "B": "EASM (External Attack Surface Management)",
+      "C": "EDR (Endpoint Detection and Response)",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Qualys Container Security'?",
+    "options": {
+      "A": "Protecting physical shipping containers.",
+      "B": "Monitoring and securing Docker or Kubernetes images and running containers for vulnerabilities.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' Aging?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A report showing how long specific vulnerabilities have remained unpatched on an asset since their first discovery.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a scanner designed for 'Windows' is used to try and audit a 'Mainframe' environment without proper drivers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'VM' Lifecycle? (Select all that apply)",
+    "options": {
+      "A": "Discovery of assets",
+      "B": "Vulnerability assessment",
+      "C": "Identifying program satisfaction trends",
+      "D": "Remediation and verification"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys Patch Management'?",
+    "options": {
+      "A": "Picking up physical patches for a jacket.",
+      "B": "The module that allows teams to deploy missing patches directly to assets from the Qualys console.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Scan' Duration?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The total amount of time a scanner took to complete its inspection of the target assets.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a scanner attempts to use 'SNMP' on a server that only has 'WMI' enabled for authentication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' VMDR stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Security Operations Center (SOC) Lead",
+      "B": "IT Infrastructure Manager",
+      "C": "CISO",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Virtual' Scanning?",
+    "options": {
+      "A": "Calculating the physical volume of a virtual room.",
+      "B": "Using a software-based scanner (Virtual Appliance) to test assets within a virtualized or cloud environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' Variance?",
+    "options": {
+      "A": "The difference between the number of vulnerabilities found in the current scan compared to the previous scan.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a manager expects a Cloud Agent to update its status instantly while the check-in interval is set to 4 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Compliance benefits? (Select all that apply)",
+    "options": {
+      "A": "Continuous verification of configuration hardening",
+      "B": "Consistency in result presentation for auditors",
+      "C": "Guaranteed to replace all human security managers",
+      "D": "Reduction in manual spreadsheet tracking for policy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys Web Application Scanning' (WAS)?",
+    "options": {
+      "A": "Scanning a person who is actially a website.",
+      "B": "The automated process of crawling and testing web applications for vulnerabilities like XSS and SQLi.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Asset' Criticality?",
+    "options": {
+      "A": "A ranking of how important an asset is to the business, used to prioritize its security needs.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when Qualys identifies a vulnerability but the system log fails to record the scanner's activity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Qualys management roles? (Select all that apply)",
+    "options": {
+      "A": "Vulnerability Analyst",
+      "B": "Security Administrator",
+      "C": "Compliance Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Certificate View' in Qualys?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical certificate.",
+      "B": "A module for identifying and managing expired or weak SSL/TLS certificates across the global asset base.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The average time from when a new vulnerability is released until it is officially identified by a Qualys scan.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in Qualys refers to trying to perform a high-performance internal scan using an underpowered scanner appliance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' vulnerability planning? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all project teams understand their role in the patching process",
+      "B": "Conducting 'blind' methodology reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where security concerns can be voiced without blame"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys Endpoint Detection and Response' (EDR)?",
+    "options": {
+      "A": "A tool that monitors endpoints for suspicious activity and allows for real-time threat response.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric tracking how quickly technical vulnerabilities are closed after being flagged in the dashboard.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive expects a '100% Secure' environment 5 minutes after Qualys is first installed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which business units have the highest 'Risk' scores",
+      "B": "Predicting release delays based on current vulnerability burn-down",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing trends in remediation performance"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys Gateway Service' (QGS)?",
+    "options": {
+      "A": "Allocating a person named Gateway.",
+      "B": "A solution that acts as a secure intermediary for Cloud Agents to communicate with the Qualys platform in segmented environments.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Scan' Efficiency?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A measure of the number of assets scanned per scanner appliance within a specific timeframe.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an organization claims to fix all vulnerabilities in 7 days, regardless of severity level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Compliance Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Chief Compliance Officer",
+      "B": "Director of IT Operations",
+      "C": "CISO",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Qualys Multi-Vector EDR'?",
+    "options": {
+      "A": "An advanced module that integrates vulnerability data with endpoint events to provide a more complete security context.",
+      "B": "Building a physical warehouse for vectors.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical purpose of a 'Search List' in Qualys VMDR?",
+    "options": {
+      "A": "To search for physical hardware missing from the office inventory.",
+      "B": "To create a customized set of QIDs based on specific criteria like CVE ID, Category, or CVSS score for targeted scanning or reporting.",
+      "C": "To automatically search for and hire security analysts on LinkedIn.",
+      "D": "To manage the SQL query font size for the database search engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Static Search List' must be manually updated every time a new vulnerability is released to the Qualys KnowledgeBase.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Option Profile' setting technically allows a scanner to ignore the 'ICMP' ping and attempt to scan a host even if it doesn't respond to a ping request?",
+    "options": {
+      "A": "Standard Discovery strictly",
+      "B": "Skip Host Discovery (Assume Alive)",
+      "C": "Low Bandwidth Mode",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Authenticated Scanning' (Trusted Scanning)?",
+    "options": {
+      "A": "To physically verify the identity of the person running the scan.",
+      "B": "To allow the scanner to login to the OS or Database to identify vulnerabilities that are not visible over the network, such as missing patches or insecure registry settings.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'VMDR', what is a 'Potential Vulnerability' (represented by a yellow icon) technically defined as?",
+    "options": {
+      "A": "A vulnerability that might exist, but Qualys was unable to definitively confirm its presence (e.g., due to lack of version info).",
+      "B": "A vulnerability that will physically explode the server next week.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the size of the font on the privacy notice."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Asset Tagging' can use 'Regex' (Regular Expressions) to automatically group assets based on complex hostname or attribute patterns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Remediation' strategy involves the lead 'Accepting the Risk' of a vulnerability for a set period because a patch would break a critical legacy application?",
+    "options": {
+      "A": "Immediate Patching",
+      "B": "Exception Management (Risk Acceptance)",
+      "C": "Deleting the asset from the inventory",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Purge' function in Qualys and when should it technically be used?",
+    "options": {
+      "A": "To physically clean the dust out of a server appliance.",
+      "B": "To permanently delete old scan data for decommissioned assets to ensure they no longer appear in vulnerability reports.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' configurations for a Qualys 'Option Profile'? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Dead Host Recovery' to retry failed IP connections",
+      "B": "Configuring 'Performance Settings' to limit the number of parallel processes per scanner",
+      "C": "Setting the 'TCP Port Scan' range (e.g., Standard vs. Full)",
+      "D": "Changing the color of the physical scanner appliance LEDs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in VMDR occur when the remediation policy requires a 48-hour fix for Severity 5 bugs, but the 'Cloud Agent' only syncs every 72 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of the 'Qualys Cloud Agent' delta upload logic?",
+    "options": {
+      "A": "Hiring a person named Delta to upload files.",
+      "B": "The agent only uploads 'changes' in asset data rather than a full snapshot, technically reducing network bandwidth usage significantly.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font in the final report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'False' 'Positive' 'Logic'?",
+    "options": {
+      "A": "When a scan correctly identifies a bug that exists.",
+      "B": "When a scanner identifies a vulnerability that does not actually exist on the target system, often due to misleading version banners.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategic' check allows an admin to verify if an authenticated scan actually succeeded or if the credentials failed?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Checking QID 105015 (Windows Authentication Failed)",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in Qualys occur when the security team runs aggressive scans that cause legacy production servers to crash due to 'Denial of Service' sensitivity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Remediation' 'Ticketing' benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically creating Jira tickets based on high-severity scan results",
+      "B": "Syncing 'Ticket Status' in ServiceNow back to the Qualys dashboard",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Assigning owners to vulnerabilities based on Asset Tags"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys' 'Network' 'Passive' 'Sensor' (QNS)?",
+    "options": {
+      "A": "A physical person who stands in a dark room and listens.",
+      "B": "A virtual appliance that monitors network traffic to discover 'unmanaged' assets that are not currently being scanned by agents or appliances.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Remediate' (MTTR) a 'Severity 5' vulnerability?",
+    "options": {
+      "A": "The average duration from the moment a Critical bug is first detected until the scan verifies that the patch has been applied.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Qualys Gateway Service' (QGS) can technically cache patch downloads to reduce the amount of external internet traffic during large-scale patching.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' VMDR framework handles 'External' 'Attack' 'Surface' management?",
+    "options": {
+      "A": "Qualys EASM",
+      "B": "The initial Nmap scan strictly",
+      "C": "The physical building floor plan",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual' 'Patching' and how does it relate to Qualys WAF?",
+    "options": {
+      "A": "Patching a physical virtual machine with a cloth patch.",
+      "B": "Implementing a web application firewall rule to block an exploit targeting a known vulnerability before the actual code can be patched.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Asset' 'Inventory' 'Drift'?",
+    "options": {
+      "A": "The discrepancy between the known IT inventory and the 'Unknown' assets discovered by Qualys on the network.",
+      "B": "Hiring a person named Drift.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects an 'Authenticated' report for 10,000 servers 10 minutes after adding the credentials to the vault.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Qualys' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of IT Operations (Patching)",
+      "B": "CISO (Risk Reporting)",
+      "C": "Security Architect (Design)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'IT' discovery in a Qualys context?",
+    "options": {
+      "A": "Discovering IT equipment in a dark room.",
+      "B": "Finding unauthorized servers or cloud instances that were stood up by business units without the knowledge of the central IT or Security team.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Burn-down' 'Velocity'?",
+    "options": {
+      "A": "Analytics of a person named Velocity.",
+      "B": "A metric tracking how quickly the IT team is closing vulnerabilities compared to the rate at which new ones are being discovered.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Qualys scanner is configured with 'Read-Only' rights but the specific QID technically requires 'Registry Write' access to verify a fix.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Vulnerability' 'Management'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring the 'Server Owners' are included in the triage process",
+      "B": "Conducting 'blind' reporting reviews to reduce investigator bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a 'No-Blame' culture when a Critical vulnerability is found"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a Qualys asset?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Severity 5 counts', 'Days since last scan', and 'Criticality of the Asset Tag'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Detect' (MTTD) a 'Zero-Day'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when a new CVE is announced until Qualys publishes a QID and your environment is scanned for that QID.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a security lead enforces 2010 'Password Complexity' while the Qualys Policy Compliance module mandates 2026 'Passphrase' standards.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Compliance' benefits? (Select all that apply)",
+    "options": {
+      "A": "Generating immutable audit logs for PCI-DSS compliance",
+      "B": "Verifying that 'Auth tokens' are redacted in all Qualys reports",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring all 'Severity 5' issues have a linked remediation ticket"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an VMDR pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Remediation Workflows' where each department follows the same independently verifiable patching lifecycle.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Technical' 'Debt' in Vulnerability Management?",
+    "options": {
+      "A": "The cumulative future cost of 'Deferred' vulnerabilities that are not fixed today, increasing the organization's 'Breach Risk' over time.",
+      "B": "A physical debt owed to a computer store.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Qualys Cloud Agent' to report a reboot instantly, but the agent only check-ins every 4 hours by default.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'VMDR' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Regulatory Compliance (HIPAA/SOC2)",
+      "B": "Reduction of 'Mean Time to Remediation'",
+      "C": "Protecting Brand Reputation",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Security' logic in a patching squad?",
+    "options": {
+      "A": "Hiring servants to type in the patches.",
+      "B": "The security team provides the automated reports and tools so that the IT team can fix bugs easily without being 'policed'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Density'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The number of identified vulnerabilities per asset; high density identifies a 'Fragile' or unmanaged system.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in Qualys refers to trying to run a massive enterprise-wide internal scan using a single low-power scanner appliance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Asset' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which OS versions are reaching 'End of Life' (EOL)",
+      "B": "Predicting future server crashes based on patch levels",
+      "C": "Guaranteed to replace all human security analysts",
+      "D": "Analyzing trends in remediation performance across global squads"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in VMDR reporting?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful 'Dashboard configuration' or 'Search List' from one business unit and apply it to another to ensure global consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Global' 'Scans' (MTBGS)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking the duration of organizational safety between complete environment-wide scans.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a Lead assigns 'Scanning' tasks to a user but does not provide them with 'Write' access to the required Option Profile.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Qualys' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Security Engineering",
+      "B": "Lead Vulnerability Analyst",
+      "C": "Principal Infrastructure Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a newly formed VMDR squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The process of quickly establishing standard Asset Tags, Option Profiles, and scheduled scans for a new business acquisition.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Verification' 'Scans'?",
+    "options": {
+      "A": "The percentage of vulnerabilities that are successfully confirmed as 'Closed' in the first scan after a patch was claimed to be applied.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects '100% Remediation Confirmation' for a zero-day bug exactly 5 minutes after the patch was released.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for Qualys leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'Patching Teams' in IT",
+      "B": "Predicting future breach probability based on vulnerability debt levels",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing system sentiment to identify 'Patching Fatigue'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in a Qualys Multi-tenant environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' scan results technically cannot be accessed by 'Business Unit B' through restricted user roles and Asset Tag scope.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Policy' 'Violations' (MTBPV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how long a system remains compliant with a 'Policy Compliance' benchmark before a configuration change breaks the standard.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker bug' is based on 'Fixed Dates' rather than 'Current System Exposure'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Governance' standards",
+      "B": "Keeping records updated with rapidly changing global 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Safety' if scans are only performed on a subset of assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a vulnerability scanner?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the technical 'How' of a scan (the packet probes) is isolated from the 'What' (the risk score), allowing for engine updates without changing the risk model.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an 'Unmanaged' 'Asset'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from a new device connecting to the network until the 'Qualys Passive Sensor' flags it as a new, unmanaged asset.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a scan lead uses 2010 'Signature' logic for a 2026 'Fileless' malware threat.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'VMDR' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Principal Cloud Security Architect",
+      "C": "Corporate Legal / Risk Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Qualys' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Scanners, Agents, Passive Sensors, and Ticketing integrations to ensure a seamless security view.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'Posture' (MTRSP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant security control failure until the organization's 'Vulnerability Baseline' is restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after performing exactly one vulnerability scan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Security' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Global Risk' heatmaps for the Board",
+      "B": "Reduction in manual spreadsheet work for security leads",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a patching pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Remediation Sprints' where each phase results in a specific, independently verifiable compliance score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in VMDR?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical vulnerability analyst seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a Lead assigns 10 high-priority vulnerability audits to a single Architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Vulnerability' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Breach Probability' scores",
+      "B": "Predicting future market 'Security' needs based on user data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Patch Training' spend with 'Vulnerability Reduction' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Qualys?",
+    "options": {
+      "A": "A rating of how well a specific asset is hardened, based on its vulnerability history, patch level, and compliance benchmark score.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major vulnerability strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in vulnerability leadership occur when the remediation timeline for a 'zero-day exploit' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Qualys TruRisk', how should a Director technically model the 'Risk Reduction ROI' when deciding between patching a Severity 4 vulnerability on a 'Crown Jewel' asset versus a Severity 5 on a 'Dev' asset?",
+    "options": {
+      "A": "By always prioritizing Severity 5 regardless of asset importance.",
+      "B": "By calculating the 'TruRisk Score' delta, which weights the Asset Criticality Score (ACS) alongside the QID's detection risk to identify the maximum systemic risk reduction.",
+      "C": "By monitoring the physical electricity usage of the scanner appliances.",
+      "D": "By requiring a manual board-level signature for every 'Dev' asset patch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Remediation Fatigue' in an enterprise occurs when the volume of 'High' findings exceeds the technical bandwidth of the IT team, leading to 'Strategic Ignoring' where teams only patch for compliance audits.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Architect to predict the impact of 'Lateral Movement' risk based on the presence of unpatched 'Service-Level' vulnerabilities across a hybrid cloud mesh?",
+    "options": {
+      "A": "Bayesian Attack Path Modeling using Qualys Asset Metadata",
+      "B": "Standard SQL AVG strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Asset Identification Calibration' during a global M&A process using Qualys?",
+    "options": {
+      "A": "To ensure both companies use the same physical brand of monitor.",
+      "B": "To merge disparate naming conventions and 'Asset Tags' into a unified global hierarchy to identify 'Orphaned' or 'Shadow' assets in the newly acquired network.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the Qualys dashboard animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Compensating Control' verification logic and how does it technically impact the 'TruRisk' score?",
+    "options": {
+      "A": "When an employee physically guards a server with a weapon.",
+      "B": "The process of identifying external defenses (like an active WAF rule) that mitigate a QID, allowing the Director to technically lower the 'Effective Risk' without applying a code-level patch.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the risk acceptance form."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scanning' 'Archetypes' occur when an 'Aggressive/Intrusive' scan profile is run against 'Legacy OT' (Operational Technology) hardware, often causing mechanical failure or system freezes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Director deliberately implementing 'Chaos Vulnerability Injection' (simulating a breach signal) to verify if the 'Remediation Workflow' correctly triggers a Jira ticket within 15 minutes?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Synthetic Failure Injection)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Vulnerability' 'Contagion' and its relation to 'Shared Credentials' in Qualys?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a single unpatched 'Gateway' asset (cause) allows an attacker to harvest credentials that unlock the entire authenticated environment (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Resilience' ROI calculations for a Qualys VMDR shift? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Remediation' (MTTR) for critical assets",
+      "B": "Financial savings from 'Cyber Insurance' premium reductions due to verified patch hygiene",
+      "C": "The cost of 'Brand Recovery' avoided through successful zero-day containment",
+      "D": "The number of security cameras in the data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the VMDR level ensures that IT admins can flag 'Un-patchable' legacy systems without fear of management reprimand, allowing for proper risk acceptance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Vulnerability Architect?",
+    "options": {
+      "A": "The physical weight of the scanner appliance.",
+      "B": "The ability to integrate contradictory risk signals (e.g., high-risk QID vs. low-impact environment) into a cohesive 'Remediation Roadmap'.",
+      "C": "A specialized tool for measuring distance between global offices.",
+      "D": "Hiring a professional actor to simulate a release decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Asset' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of isolating high-risk 'Experimental' or 'Sandbox' assets from the 'Production' inventory to prevent a vulnerability in the lab from triggering a corporate compliance failure.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Containment' during an emerging global cyber crisis?",
+    "options": {
+      "A": "Waiting for the vendor to provide a final patch.",
+      "B": "Immediately triggering a 'Virtual Patch' via WAF or IPS based on Qualys 'Threat Research' feeds before the technical patch is released.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a VM acquisition often result in 'Discovery Rejection', where the acquired firm's IT leads find ways to block 'Cloud Agent' deployment to hide technical debt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Security' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Ethics' risk competencies within the VMDR team",
+      "B": "Standardizing 'Remediation Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Security Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in a Vulnerability Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Procurement Policy' (e.g., why we buy insecure IoT) is the root cause of vulnerability, rather than just fixing the single device.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative risk of having too many unpatched Severity 5 vulnerabilities hosted in a single, high-criticality cloud region.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in VMDR occurs when a firm continues to rely on 'Monthly Scan Windows' while attackers utilize 'Automated Zero-Day' exploits that trigger in under 12 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'VMDR' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Capital (RAROC) for Security Spend",
+      "B": "Percentage of 'Business Critical' assets with 0 'Severity 5' findings",
+      "C": "Velocity of 'High-Risk' Remediation across the top 10% of critical threats",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Compliance' 'Entrenchment' risk during an automated patching transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured sysadmins will block 'Automated Patching' to protect their manual 'Job Security' and approval authority.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately bypass the Board-mandated 'Risk Appetite' thresholds (e.g., leaving a critical bug unpatched).",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a Director demands 'Zero Critical Vulnerabilities' while the IT team's only bonus metric is '100% System Uptime'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VM' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using ML to correlate 'Attacker Sentiment' with internal QID priorities",
+      "B": "Automatically identifying 'Asset Ownership' gaps in real-time as new devices join",
+      "C": "Guaranteed to replace all human Directors",
+      "D": "Analyzing global vulnerability data to predict 'Exploit Availability' in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Qualys' 'Ecosystem' 'Architecture' (QEA)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Patching, EDR, EASM, and Policy Compliance into a single 'Unified Security View'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Asset' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The process of identifying the 'Hidden Liabilities' and 'Cyber Hygiene Gaps' in an acquired firm's Qualys instance before merging accounts.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Security' from a newly acquired offshore team that requires 12 months of 'Tool Standardisation' to be compliant.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VMDR' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of scan history for GDPR auditors",
+      "B": "Automatically calculating 'Fair-Lending' risk scores based on asset locations",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Sovereignty' rules are enforced by Qualys Asset Tags"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Risk Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Strategic Risk Policies' are isolated from 'Departmental Patching Tactics', allowing for local speed within corporate safety guardrails.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between a major global vulnerability release and the Qualys dashboard flagging the total internal exposure count.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '99% Patched' to the board while the 'Scanner Reachability' is only 50%, hiding 5,000 unmanaged assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'VMDR' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Asset Security scores' directly to 'Service Access' eligibility",
+      "B": "Connecting 'Real-time Vendor Breaches' to 'Asset De-prioritization' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Qualys Reporting' data with 'Legal Case Management' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Scanners, Option Profiles, and Agent deployments to stabilize a new offshore office in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Scanning Coverage' as complex new cloud resources outpace the security team's discovery tools.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Compliance' with a 1,000-page new policy after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VMDR' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Risk' heatmaps for the CEO",
+      "B": "Reduction in 'Deck-building' labor for the Security Management office",
+      "C": "Guaranteed to replace all human Leads",
+      "D": "Automatic generation of 'Remediation Velocity' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Qualys Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Sensitive vulnerability data' from the EU region technically cannot be accessed by Admins in regions with different privacy laws.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Remediation' 'Trust' (MTRRT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile patching failure (e.g., patch caused a crash) and the point at which 'IT Confidence' in security tools returns to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in VM strategy refers to an organization promising 'Zero Vulnerability Risk' while utilizing a 'Monthly Scan' model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'VMDR' 'Governance' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Vulnerability Management",
+      "B": "Chief Remediation Architect",
+      "C": "Director of Asset Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Asset' 'Resilience' for a global network?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Agent Health', 'Last Scan Success', 'MTTR', and 'Compliance Drift' across all critical asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Administrator' (Single Point of Failure) in the Qualys team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Network-only' scanning models to manage a 2026 'Container/Serverless' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'VMDR' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Logic' vulnerability risks",
+      "B": "Keeping Search Lists updated with rapidly changing 'CISA KEV' data",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if scanners cannot reach segmented networks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Patching Pipeline' can sustain major OS shifts (e.g., Win 10 to 11) without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Global' 'Zero-Day'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between a Zero-Day being announced and the Qualys CISO presenting a 'Total Internal Impact' report to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in VM occurs when 'Vulnerability Data' is stored in a portal that only the 'Sales' team can access, blocking the 'IT' audit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'VMDR' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Patching Compliance Leads",
+      "C": "Business Unit Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Asset Intelligence' tools and 'Vulnerability Maturity Scoring' to a newly acquired network within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'VM' 'Strategy' 'Refreshes' (MTBRSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Risk Acceptance' and 'Option Profile' rules to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a University Intern after exactly 48 hours of Qualys training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Scan' (e.g., PCI-ASV) has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Technical Score' matches the VMDR Architect role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global VMDR talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in VMDR Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Remediation Model' can be 'Lifted' from one product line (e.g., Windows Laptops) and applied to another (e.g., Linux Servers).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Vulnerability' 'ROI' (MTR-VROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated scanner appliance going 'Offline' and the point where its 'Reliability' is restored to provide organizational value again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Patch Budget Increase' while the Director is enforcing a 'Global Zero-Day' hard gate.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'VM' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Risk ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' build time for Security Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Risk-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Asset' 'Encapsulation' in a 'Micro-Security' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Scanning Pipelines' that are independently verifiable, preventing a 'Systemic Scan Freeze' if one scanner fails.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in VMDR?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new threat vector (e.g., Quantum Decryption) is identified until the VM Architect specifies the necessary Qualys modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Cyber Hygiene Audits' are planned annually, but 'Zero-Day' threats update every 12 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'VM' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' complexity for a 'Turnaround' VM Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' vulnerability culture into a 'Modern and Proactive' engineering organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Security' 'Lead' 'Exits' (MTB-SLE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Remediation Burnout' is causing frequent strategic shifts in the VMDR team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'VM' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Threat' mapping across global subsidiaries",
+      "B": "Reducing the 'Compliance Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Risk.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Remediation' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-vulnerability-incident?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'VM' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic scanning grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Risk' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on remediation benchmarking",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Remediation Alliances' relative to market stability automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Risk' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic VM Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

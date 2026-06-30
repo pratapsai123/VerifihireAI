@@ -1,0 +1,1940 @@
+{
+  "skill": "FastAPI",
+  "questions": [
+    {
+      "question": "What does the acronym REST stand for?",
+      "options": {
+        "A": "Relational Enforced State Transfer",
+        "B": "Representational State Transfer",
+        "C": "Remote Exchange State Terminal",
+        "D": "Responsive Engine System Transmission"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is primarily used to retrieve data from a server?",
+      "options": {
+        "A": "POST",
+        "B": "PUT",
+        "C": "GET",
+        "D": "DELETE"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: REST is a protocol, much like HTTP or FTP.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code represents a successful request where a new resource was created?",
+      "options": {
+        "A": "200 OK",
+        "B": "201 Created",
+        "C": "204 No Content",
+        "D": "401 Unauthorized"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is the most common data format used in modern REST APIs?",
+      "options": {
+        "A": "XML",
+        "B": "HTML",
+        "C": "JSON",
+        "D": "YAML"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which HTTP method is typically used to create a new resource on the server?",
+      "options": {
+        "A": "GET",
+        "B": "DELETE",
+        "C": "POST",
+        "D": "OPTIONS"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In a REST API, the client and server should be loosely coupled.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code category represents Client Errors?",
+      "options": {
+        "A": "2xx",
+        "B": "3xx",
+        "C": "4xx",
+        "D": "5xx"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'Statelessness' mean in the context of REST?",
+      "options": {
+        "A": "The server stores the client's session data.",
+        "B": "Each request from a client must contain all the information needed to understand the request.",
+        "C": "The API cannot be used in different countries.",
+        "D": "The server state never changes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is used to remove a resource?",
+      "options": {
+        "A": "PATCH",
+        "B": "REMOVE",
+        "C": "DELETE",
+        "D": "ERASE"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: A REST API must always return JSON.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is used by the client to tell the server what media type it can accept?",
+      "options": {
+        "A": "Content-Type",
+        "B": "Accept",
+        "C": "User-Agent",
+        "D": "Authorization"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Resource' in REST terminology?",
+      "options": {
+        "A": "The server's RAM and CPU.",
+        "B": "Any object, data, or service that can be accessed via a URI.",
+        "C": "The physical cable connecting the server.",
+        "D": "The documentation of the API."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code is returned when a resource is not found?",
+      "options": {
+        "A": "400",
+        "B": "401",
+        "C": "403",
+        "D": "404"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: The PUT method is typically used to update an existing resource by replacing it entirely.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid HTTP methods? (Select all that apply)",
+      "options": {
+        "A": "GET",
+        "B": "POST",
+        "C": "UPDATE",
+        "D": "PATCH"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What does URI stand for?",
+      "options": {
+        "A": "Universal Resource Identifier",
+        "B": "Uniform Resource Identifier",
+        "C": "Uniform Resource Index",
+        "D": "Universal Route Id"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is sent when the server encounters an unexpected condition (General Server Error)?",
+      "options": {
+        "A": "400",
+        "B": "500",
+        "C": "502",
+        "D": "503"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: REST APIs can be cached to improve performance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a URL like 'https://api.example.com/v1/users/123', which part is the path parameter?",
+      "options": {
+        "A": "api.example.com",
+        "B": "v1",
+        "C": "123",
+        "D": "https"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which HTTP method is used for partial updates to a resource?",
+      "options": {
+        "A": "PUT",
+        "B": "POST",
+        "C": "PATCH",
+        "D": "UPDATE"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Query parameters appear after a question mark (?) in the URL.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which header informs the receiver about the media type of the sent data?",
+      "options": {
+        "A": "Accept",
+        "B": "Content-Type",
+        "C": "Connection",
+        "D": "Host"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of the 'OPTIONS' method?",
+      "options": {
+        "A": "To delete all options in a database.",
+        "B": "To describe the communication options for the target resource (CORS).",
+        "C": "To choose between JSON and XML.",
+        "D": "To refresh a token."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 204 No Content status means the request failed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is an idempotent method?",
+      "options": {
+        "A": "POST",
+        "B": "GET",
+        "C": "PATCH (usually not)",
+        "D": "Both B and C"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is used for 'Forbidden' (authenticated but no permission)?",
+      "options": {
+        "A": "401",
+        "B": "403",
+        "C": "404",
+        "D": "400"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: REST requires the use of HTTPS.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What part of the HTTP request contains the data being sent to the server in a POST request?",
+      "options": {
+        "A": "Header",
+        "B": "Query String",
+        "C": "Body",
+        "D": "Path"
+      },
+      "answer": "C"
+    },
+    {
+      "id": 30,
+      "question": "Which of these is a correct way to version an API in the URL?",
+      "options": {
+        "A": "/v1/products",
+        "B": "/products/v1",
+        "C": "/products?version=1",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: GET requests should never be used to modify data on the server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code represents 'Bad Request' (malformed syntax)?",
+      "options": {
+        "A": "400",
+        "B": "401",
+        "C": "402",
+        "D": "403"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Idempotent' property mean in HTTP?",
+      "options": {
+        "A": "The request is fast.",
+        "B": "Making the same request multiple times has the same effect as making it once.",
+        "C": "The request is encrypted.",
+        "D": "The request requires a password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code is used when a client must authenticate itself to get the requested response?",
+      "options": {
+        "A": "400 Bad Request",
+        "B": "401 Unauthorized",
+        "C": "403 Forbidden",
+        "D": "405 Method Not Allowed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Safe' property in HTTP means the method does not modify the state of the resource.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a 'Safe' HTTP method?",
+      "options": {
+        "A": "POST",
+        "B": "DELETE",
+        "C": "GET",
+        "D": "PATCH"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which character separates the base URL from the query parameters?",
+      "options": {
+        "A": "&",
+        "B": "#",
+        "C": "?",
+        "D": ":"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In a REST API, what is the standard way to represent a collection of users?",
+      "options": {
+        "A": "/getUserList",
+        "B": "/users",
+        "C": "/all_users",
+        "D": "/fetch-users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: REST APIs can only be accessed by web browsers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP header is typically used to pass a Bearer Token for authentication?",
+      "options": {
+        "A": "Authentication",
+        "B": "Proxy-Authenticate",
+        "C": "Authorization",
+        "D": "X-Access-Token"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'Location' header in a 201 Created response?",
+      "options": {
+        "A": "It shows the physical location of the server.",
+        "B": "It provides the URL of the newly created resource.",
+        "C": "It identifies the IP address of the client.",
+        "D": "It specifies the redirect URL for a 404 error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following status codes indicates that the server is currently unavailable (e.g., overloaded or down for maintenance)?",
+      "options": {
+        "A": "500",
+        "B": "501",
+        "C": "503",
+        "D": "504"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: A REST API should use nouns instead of verbs in its URIs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which HTTP method is commonly used to 'ping' a server or check the validity of a URL without downloading the body?",
+      "options": {
+        "A": "GET",
+        "B": "HEAD",
+        "C": "OPTIONS",
+        "D": "TRACE"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is returned if the client uses an HTTP method that the server does not support for that resource?",
+      "options": {
+        "A": "400",
+        "B": "404",
+        "C": "405",
+        "D": "415"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select all valid reasons to use JSON over XML in REST APIs:",
+      "options": {
+        "A": "JSON is less verbose and smaller in size.",
+        "B": "JSON is natively supported by JavaScript.",
+        "C": "XML is no longer supported by any browser.",
+        "D": "JSON is easier for humans to read and write."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the 'payload' in a REST request?",
+      "options": {
+        "A": "The metadata in the headers.",
+        "B": "The actual data being transmitted in the body.",
+        "C": "The time it takes for a request to complete.",
+        "D": "The authentication credentials."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Path parameters are usually used to identify a specific resource, while query parameters are used to filter or sort.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which character is used to separate multiple query parameters in a URL?",
+      "options": {
+        "A": ";",
+        "B": ",",
+        "C": "&",
+        "D": "|"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'Cache-Control' header do?",
+      "options": {
+        "A": "It clears the server's cache.",
+        "B": "It provides instructions on how, and for how long, the response should be cached.",
+        "C": "It controls the speed of the data transfer.",
+        "D": "It identifies the user's browser version."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code represents 'No Content' (Success, but nothing to return)?",
+      "options": {
+        "A": "200",
+        "B": "201",
+        "C": "202",
+        "D": "204"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: HATEOAS is a constraint of the REST application architecture.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'CORS' in API development?",
+      "options": {
+        "A": "Cross-Origin Resource Sharing",
+        "B": "Centralized Online Resource System",
+        "C": "Client Optimized Request Server",
+        "D": "Core Object Relational Schema"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code is returned when a client sends a request that is too large for the server to process?",
+      "options": {
+        "A": "403",
+        "B": "413",
+        "C": "429",
+        "D": "500"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A REST API can be stateful if it uses cookies.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the standard port for HTTPS traffic?",
+      "options": {
+        "A": "80",
+        "B": "8080",
+        "C": "443",
+        "D": "22"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of these is a common 'User-Agent' value?",
+      "options": {
+        "A": "application/json",
+        "B": "Mozilla/5.0",
+        "C": "keep-alive",
+        "D": "no-cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: DELETE requests should usually return the deleted object in the response body.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is used for 'Method Not Allowed'?",
+      "options": {
+        "A": "401",
+        "B": "403",
+        "C": "404",
+        "D": "405"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'Base URL' refer to in an API?",
+      "options": {
+        "A": "The version of the API.",
+        "B": "The root address of the API (e.g., https://api.example.com).",
+        "C": "The last part of the URL.",
+        "D": "The query string."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is used to define the expected format of a resource?",
+      "options": {
+        "A": "API Key",
+        "B": "Schema",
+        "C": "Endpoint",
+        "D": "Method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: POST is idempotent.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'User-Agent' header?",
+      "options": {
+        "A": "To authenticate the user.",
+        "B": "To identify the software/client making the request.",
+        "C": "To set the user's language.",
+        "D": "To determine the user's geolocation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes a RESTful URI?",
+      "options": {
+        "A": "http://api.com/deleteUser?id=1",
+        "B": "http://api.com/users/1/delete",
+        "C": "http://api.com/users/1",
+        "D": "http://api.com/cgi-bin/users.pl"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: REST APIs are strictly limited to the HTTP protocol.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code indicates that the client has sent too many requests in a given amount of time (Rate Limiting)?",
+      "options": {
+        "A": "401",
+        "B": "403",
+        "C": "422",
+        "D": "429"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which of the following best describes 'HATEOAS' in a RESTful system?",
+      "options": {
+        "A": "A security protocol for encrypting headers.",
+        "B": "A constraint where the client interacts with the application entirely through hyperlinks provided dynamically by the server.",
+        "C": "A method for compressing JSON payloads.",
+        "D": "A tool used to convert XML to JSON."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why is the PUT method considered idempotent while POST is not?",
+      "options": {
+        "A": "PUT is faster than POST.",
+        "B": "Multiple identical PUT requests will result in the same state, whereas multiple POST requests may create multiple resources.",
+        "C": "POST is only used for SSL connections.",
+        "D": "PUT requires a specialized header called 'Idempotency-Key'."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 401 Unauthorized status indicates that the server understands the request but refuses to authorize it due to lack of permissions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code is most appropriate when a resource has been permanently moved to a new URL?",
+      "options": {
+        "A": "301 Moved Permanently",
+        "B": "302 Found",
+        "C": "307 Temporary Redirect",
+        "D": "410 Gone"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of a 'Refresh Token' in JWT-based authentication?",
+      "options": {
+        "A": "To encrypt the payload of the Access Token.",
+        "B": "To obtain a new Access Token without requiring the user to log in again.",
+        "C": "To invalidate the user's password.",
+        "D": "To increase the expiration time of the current Access Token."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are components of a JSON Web Token (JWT)? (Select all that apply)",
+      "options": {
+        "A": "Header",
+        "B": "Payload",
+        "C": "Signature",
+        "D": "Encryption Key"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The PATCH method should be used when you only need to update a single field of a resource rather than the entire object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 422 Unprocessable Entity status code typically indicate?",
+      "options": {
+        "A": "The server is down for maintenance.",
+        "B": "The request was well-formed but contained semantic errors (e.g., failed validation).",
+        "C": "The user is not logged in.",
+        "D": "The API version is deprecated."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of REST, what is 'Resource Nesting'?",
+      "options": {
+        "A": "Putting multiple APIs on one server.",
+        "B": "A URI structure that shows a hierarchy, such as /users/{id}/posts.",
+        "C": "Nesting JSON objects inside XML files.",
+        "D": "Grouping all GET methods at the top of a file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is used to prevent 'MIME type sniffing' by the browser?",
+      "options": {
+        "A": "X-Frame-Options",
+        "B": "X-Content-Type-Options",
+        "C": "Content-Security-Policy",
+        "D": "Strict-Transport-Security"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using the 'HEAD' method is an effective way to check if a large file has changed using the ETag or Last-Modified headers without downloading the file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following is a drawback of 'Stateful' architecture compared to RESTful 'Stateless' architecture?",
+      "options": {
+        "A": "It is harder to scale horizontally because session data is tied to a specific server.",
+        "B": "It is less secure.",
+        "C": "It does not support JSON.",
+        "D": "It requires more bandwidth for every request."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is an 'ETag' (Entity Tag) used for in REST APIs?",
+      "options": {
+        "A": "To tag resources for search engine indexing.",
+        "B": "For web cache validation and conditional requests (optimistic concurrency).",
+        "C": "To identify the user's geographic location.",
+        "D": "To define the data type of the response."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should an API return if it receives a request with a 'Content-Type' it does not support (e.g., XML instead of JSON)?",
+      "options": {
+        "A": "400 Bad Request",
+        "B": "406 Not Acceptable",
+        "C": "415 Unsupported Media Type",
+        "D": "501 Not Implemented"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In a purely RESTful system, the server should not need to keep track of the client's state between requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select the correct URI design for filtering a list of active products:",
+      "options": {
+        "A": "/getActiveProducts",
+        "B": "/products?status=active",
+        "C": "/products/status/active",
+        "D": "/products/filter/active"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Vary' HTTP header?",
+      "options": {
+        "A": "To show different versions of the API.",
+        "B": "To tell caches which parts of the request headers should be used to determine if a cached response can be reused.",
+        "C": "To allow various types of authentication.",
+        "D": "To vary the response time based on server load."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is returned when a resource is hidden or the server doesn't want to reveal its existence for security reasons?",
+      "options": {
+        "A": "401",
+        "B": "403",
+        "C": "404",
+        "D": "Both B and C are commonly used."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Basic Authentication sends the username and password in plain text (encoded in Base64) within the request header.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'API Rate Limiting' primarily used for?",
+      "options": {
+        "A": "To charge users for every click.",
+        "B": "To protect the server from being overwhelmed by too many requests (DoS protection).",
+        "C": "To increase the speed of the API for premium users.",
+        "D": "To limit the number of developers working on the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is neither safe nor idempotent?",
+      "options": {
+        "A": "GET",
+        "B": "PUT",
+        "C": "POST",
+        "D": "DELETE"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "When implementing pagination, which approach is generally more performant for very large datasets?",
+      "options": {
+        "A": "Offset-based pagination (?offset=100&limit=10)",
+        "B": "Cursor-based pagination (?after_id=xyz)",
+        "C": "Page-based pagination (?page=10)",
+        "D": "Returning all results in a single array."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: CORS is a security feature implemented by the Server to prevent it from being hacked.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Preflight' request in CORS?",
+      "options": {
+        "A": "A request made to check if the server is online.",
+        "B": "An OPTIONS request sent by the browser to check if the actual request is safe to send.",
+        "C": "A request sent before the user logs in.",
+        "D": "The first request in an OAuth2 flow."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code represents 'Conflict' (e.g., trying to create a user that already exists)?",
+      "options": {
+        "A": "400",
+        "B": "403",
+        "C": "409",
+        "D": "412"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In JWT, where is the information about the user (like user_id) typically stored?",
+      "options": {
+        "A": "Header",
+        "B": "Payload (Claims)",
+        "C": "Signature",
+        "D": "It is stored on the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: An API Key is a secure way to identify a specific user and their permissions in a public mobile app.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Uniform Interface' constraint in REST?",
+      "options": {
+        "A": "All developers must use the same IDE.",
+        "B": "The API must use a consistent set of rules (URIs, Methods, Media Types) so it is easy to understand.",
+        "C": "The API must look the same on mobile and desktop.",
+        "D": "The server must use the same language as the client."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is used to specify the character encoding of the resource?",
+      "options": {
+        "A": "Content-Encoding",
+        "B": "Accept-Charset",
+        "C": "Content-Type (via the charset parameter)",
+        "D": "Transfer-Encoding"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of a 'GET' request to a non-existent resource according to REST best practices?",
+      "options": {
+        "A": "200 OK with an empty body.",
+        "B": "204 No Content.",
+        "C": "404 Not Found.",
+        "D": "500 Internal Server Error."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Using 'HTTP 1.1' is a requirement for an API to be considered RESTful.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are 'Idempotent' methods? (Select all that apply)",
+      "options": {
+        "A": "GET",
+        "B": "PUT",
+        "C": "DELETE",
+        "D": "POST"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Payload Validation' in an API?",
+      "options": {
+        "A": "Checking the size of the request.",
+        "B": "Ensuring the incoming data matches the required schema and constraints before processing.",
+        "C": "Verifying the user's credit card info.",
+        "D": "Checking if the server has enough RAM."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes the 'Idempotency-Key' header pattern?",
+      "options": {
+        "A": "A key used to encrypt the body of a POST request.",
+        "B": "A unique value sent by the client to allow the server to identify and skip processing duplicate requests (common in payments).",
+        "C": "A key used to identify the version of the API.",
+        "D": "The same as an API Key used for authentication."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a REST API, the client should be able to store the response if it is marked as 'public' in the Cache-Control header.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Content-Negotiation' mechanism in REST?",
+      "options": {
+        "A": "The process of deciding the price of an API subscription.",
+        "B": "The process where the client and server agree on the media type (JSON, XML, etc.) to be used for the response.",
+        "C": "A way to negotiate lower latency between servers.",
+        "D": "Setting the character limit for a text field."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should be used if a client sends a request with an 'If-Match' header that does not match the current ETag on the server?",
+      "options": {
+        "A": "400 Bad Request",
+        "B": "404 Not Found",
+        "C": "412 Precondition Failed",
+        "D": "409 Conflict"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "When using 'OAuth2', what is the 'Scope' parameter used for?",
+      "options": {
+        "A": "To limit the geographic area where the token works.",
+        "B": "To define the specific permissions or access levels being requested (e.g., 'read-only').",
+        "C": "To determine the expiration time of the token.",
+        "D": "To set the maximum number of devices a user can log into."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'HTTP 200 OK' for every response, including errors (and putting the error in the body), is considered a best practice in REST design.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is best suited for an 'Action' that doesn't map perfectly to a CRUD operation, such as 'calculating a tax rate'?",
+      "options": {
+        "A": "GET",
+        "B": "POST",
+        "C": "PATCH",
+        "D": "PUT"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select all valid ways to provide an API version:",
+      "options": {
+        "A": "URL path (/v1/users)",
+        "B": "Custom Header (X-API-Version: 1)",
+        "C": "Accept Header (application/vnd.example.v1+json)",
+        "D": "File extension (/users.v1.json)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Over-fetching' in the context of REST APIs?",
+      "options": {
+        "A": "The server sending too many requests to the database.",
+        "B": "An endpoint returning more data than the client actually needs for a specific view.",
+        "C": "The client calling the same API multiple times in a loop.",
+        "D": "The API being too popular and crashing the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Transfer-Encoding: chunked' header is used when the server doesn't know the total size of the response before it starts sending it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code represents 'Gateway Timeout'?",
+      "options": {
+        "A": "500",
+        "B": "502",
+        "C": "503",
+        "D": "504"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the primary difference between a 'Proxy' and a 'Gateway' in an API architecture?",
+      "options": {
+        "A": "A proxy is always on the client side.",
+        "B": "A gateway often performs additional tasks like authentication and protocol translation (e.g., HTTP to gRPC).",
+        "C": "A proxy is faster than a gateway.",
+        "D": "There is no difference; they are the same thing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: RESTful APIs must use JSON Web Tokens (JWT) for all security.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these headers is used for 'Cross-Origin' security to list allowed HTTP methods?",
+      "options": {
+        "A": "Access-Control-Allow-Origin",
+        "B": "Access-Control-Allow-Methods",
+        "C": "Allow-Methods-List",
+        "D": "X-Safe-Methods"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the '406 Not Acceptable' status code mean?",
+      "options": {
+        "A": "The server refuses to accept the data sent by the client.",
+        "B": "The server cannot produce a response matching the list of acceptable values defined in the client's 'Accept' headers.",
+        "C": "The user is not authorized.",
+        "D": "The resource has been deleted."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using query parameters for sensitive data (like passwords) is secure because the body is encrypted.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a RESTful design, how should you handle a request to delete a resource that has already been deleted?",
+      "options": {
+        "A": "Return 404 Not Found.",
+        "B": "Return 204 No Content (treating it as idempotent).",
+        "C": "Return 410 Gone.",
+        "D": "Both A and B are acceptable depending on the implementation."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is a 'Side Effect' in API terminology?",
+      "options": {
+        "A": "A bug in the code.",
+        "B": "A change in the state of the server (e.g., database update) as a result of a request.",
+        "C": "An error message shown to the user.",
+        "D": "Slow performance during peak hours."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should be used if a client tries to access a resource that requires a different API version?",
+      "options": {
+        "A": "400 Bad Request",
+        "B": "404 Not Found",
+        "C": "426 Upgrade Required",
+        "D": "505 HTTP Version Not Supported"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Paging and Filtering logic should ideally be handled at the database level, not just in the API code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'WWW-Authenticate' header?",
+      "options": {
+        "A": "To tell the user their password is correct.",
+        "B": "Sent in a 401 response to define the authentication method the client should use.",
+        "C": "To redirect the user to a login page.",
+        "D": "To show the website's URL."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a benefit of 'Sub-resources' in URIs (e.g., /authors/1/books)?",
+      "options": {
+        "A": "It makes the URL shorter.",
+        "B": "It clearly expresses the relationship between resources.",
+        "C": "It prevents the need for headers.",
+        "D": "It automatically encrypts the response."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The '202 Accepted' status code means the request has been fully processed and completed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Long Polling' technique?",
+      "options": {
+        "A": "The client keeps the connection open until the server has new data to send.",
+        "B": "The client asks for data every 1 second.",
+        "C": "The server sends a push notification.",
+        "D": "The client uses a very long URL."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which HTTP status code is used for 'Gone' (resource existed but is now permanently deleted)?",
+      "options": {
+        "A": "404",
+        "B": "410",
+        "C": "403",
+        "D": "451"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: REST APIs are inherently less secure than SOAP APIs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Under-fetching'?",
+      "options": {
+        "A": "When an endpoint doesn't return enough data, forcing the client to make multiple requests.",
+        "B": "When the database returns no results.",
+        "C": "When the client uses a GET method instead of POST.",
+        "D": "When the API documentation is missing fields."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select all valid HTTP status codes for a DELETE request:",
+      "options": {
+        "A": "200 OK",
+        "B": "202 Accepted (if processed later)",
+        "C": "204 No Content",
+        "D": "201 Created"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which header is used to specify that the response should not be stored in any cache?",
+      "options": {
+        "A": "Cache-Control: no-store",
+        "B": "Cache-Control: private",
+        "C": "Cache-Control: max-age=0",
+        "D": "Pragma: no-cache"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: An API 'Endpoint' is the combination of a URI and an HTTP Method.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Optimistic Concurrency Control'?",
+      "options": {
+        "A": "Assuming the user will always send correct data.",
+        "B": "Using ETags/versions to ensure a resource hasn't changed since the client last fetched it before allowing an update.",
+        "C": "Locking the database row as soon as a GET request is made.",
+        "D": "A way to speed up the server by ignoring errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following status codes is most appropriate for a 'Rate Limit' warning?",
+      "options": {
+        "A": "400",
+        "B": "403",
+        "C": "429",
+        "D": "503"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: The 'Host' header is mandatory in HTTP/1.1 requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a microservices architecture, what is the 'Circuit Breaker' pattern used for in REST communication?",
+      "options": {
+        "A": "To encrypt traffic between services.",
+        "B": "To prevent a failing service from causing a cascading failure across the entire system by failing fast.",
+        "C": "To automatically retry every failed request 10 times.",
+        "D": "To shut down the server when it gets too hot."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following best describes 'Idempotency' in the context of a distributed system with retries?",
+      "options": {
+        "A": "The ability of a system to process requests in parallel.",
+        "B": "A property where a client can safely retry a request without worrying about side effects occurring more than once.",
+        "C": "The requirement that all requests must be logged in a database.",
+        "D": "The method of ensuring all responses are exactly 200 OK."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using the 'PATCH' method with 'JSON Merge Patch' (RFC 7396) allows you to set a value to null, but cannot be used to delete a key if the server doesn't support it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary security risk of 'Idempotency Keys' stored in a shared cache like Redis?",
+      "options": {
+        "A": "The keys are too long.",
+        "B": "Race conditions if two identical requests arrive at the exact same millisecond before the key is 'locked'.",
+        "C": "Redis doesn't support JSON.",
+        "D": "The keys make the URL look messy."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of REST, what does the 'Richardson Maturity Model' Level 3 represent?",
+      "options": {
+        "A": "Using HTTP Verbs correctly.",
+        "B": "Using URIs for resource identification.",
+        "C": "The introduction of Hypermedia Controls (HATEOAS).",
+        "D": "Using SSL/TLS for all requests."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following is a significant disadvantage of the 'JWT' (JSON Web Token) approach for session management?",
+      "options": {
+        "A": "They are too small to carry data.",
+        "B": "They are difficult to revoke before they expire without maintaining a blacklist.",
+        "C": "They only work with JavaScript.",
+        "D": "They cannot be used over HTTPS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A RESTful API can technically support 'Atomic' transactions across multiple resources in a single request without violating REST principles.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Idempotency Poisoning'?",
+      "options": {
+        "A": "When a hacker deletes your API keys.",
+        "B": "When an attacker sends a request with an existing idempotency key but a different payload to see if the server returns the previous cached response.",
+        "C": "When the server runs out of memory.",
+        "D": "When you use the same key for GET and POST."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP status code is most appropriate for 'Write Conflict' in a distributed database when using Optimistic Concurrency?",
+      "options": {
+        "A": "400",
+        "B": "403",
+        "C": "409",
+        "D": "412"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the 'Thundering Herd' problem in API caching?",
+      "options": {
+        "A": "Too many users logging in at once.",
+        "B": "When a specific cached item expires and multiple clients simultaneously attempt to refresh it, overwhelming the backend.",
+        "C": "When the database is too large to index.",
+        "D": "When the API documentation is not clear."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'GRPC' is a type of RESTful architecture.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is used in a 'Conditional GET' to ask the server to only send the body if it has changed since a specific date?",
+      "options": {
+        "A": "If-None-Match",
+        "B": "If-Modified-Since",
+        "C": "Cache-Control",
+        "D": "Last-Modified"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select all that apply: Which of the following are valid 'OAuth2' Grant Types?",
+      "options": {
+        "A": "Authorization Code",
+        "B": "Client Credentials",
+        "C": "Implicit (Deprecated)",
+        "D": "Password (Deprecated)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Semantic Versioning' (SemVer) in the context of API development?",
+      "options": {
+        "A": "A way to name variables.",
+        "B": "A versioning system (MAJOR.MINOR.PATCH) where MAJOR changes indicate breaking changes.",
+        "C": "Naming endpoints after their meaning.",
+        "D": "The version of the server hardware."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'OPTIONS' preflight request is required for 'Simple Requests' (like a standard GET with no custom headers).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is an example of a 'Side-channel attack' on a REST API?",
+      "options": {
+        "A": "Brute forcing a password.",
+        "B": "Analyzing the timing of a response to determine if a username exists in the database.",
+        "C": "SQL Injection.",
+        "D": "Deleting the database via an open endpoint."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'CQRS' (Command Query Responsibility Segregation)?",
+      "options": {
+        "A": "A way to compress JSON.",
+        "B": "An architectural pattern that separates read and write operations into different models/paths.",
+        "C": "A type of firewall.",
+        "D": "A database indexing strategy."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should be used when the server is a proxy and received a 'Connection Refused' from the upstream server?",
+      "options": {
+        "A": "500",
+        "B": "502 Bad Gateway",
+        "C": "503",
+        "D": "504"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'ETag' values must be unique across the entire API, not just per resource.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'Content Security Policy' (CSP) headers in a web-based API consumer?",
+      "options": {
+        "A": "To encrypt the body of the request.",
+        "B": "To prevent Cross-Site Scripting (XSS) and data injection attacks by restricting where resources can be loaded from.",
+        "C": "To set the user's password.",
+        "D": "To increase the speed of the API."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Hydration' refer to in the context of an API returning HATEOAS links?",
+      "options": {
+        "A": "Adding water to the server cooling system.",
+        "B": "The process of the client filling in templates in the URI (e.g., /users/{id}) provided by the server.",
+        "C": "Converting XML to JSON.",
+        "D": "Logging the user out after inactivity."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is best for 'Purging' a cache?",
+      "options": {
+        "A": "DELETE",
+        "B": "POST",
+        "C": "PURGE (Custom/Extension method)",
+        "D": "PUT"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: HTTP/2 allows for 'Server Push', where the server can send resources to the client before they are requested.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'JWT Replay Attack'?",
+      "options": {
+        "A": "When a user logs in twice.",
+        "B": "When an attacker intercepts a valid JWT and sends it again to the server to gain unauthorized access.",
+        "C": "When the server resets the token.",
+        "D": "When the token is too large to process."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Breaking Change' in a REST API?",
+      "options": {
+        "A": "Adding a new optional query parameter.",
+        "B": "Removing a field from the response JSON that was previously present.",
+        "C": "Adding a new endpoint.",
+        "D": "Improving the performance of a GET request."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Optimistic Locking', what happens if the ETag sent in 'If-Match' does not match the server's ETag?",
+      "options": {
+        "A": "The server overwrites the data anyway.",
+        "B": "The server returns a 412 Precondition Failed, indicating the data has changed since the client last read it.",
+        "C": "The server deletes the resource.",
+        "D": "The server crashes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Stateless' API cannot use any kind of database because databases store state.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'API Orchestration'?",
+      "options": {
+        "A": "Playing music while coding.",
+        "B": "A layer that interacts with multiple microservices to fulfill a single complex client request.",
+        "C": "Ordering your endpoints alphabetically.",
+        "D": "Using a load balancer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should be used if the request is valid, but the user has reached their monthly quota for the API?",
+      "options": {
+        "A": "401",
+        "B": "403",
+        "C": "429 Too Many Requests",
+        "D": "503"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the 'Backpressure' concept in API streaming?",
+      "options": {
+        "A": "When the server is under high physical pressure.",
+        "B": "A mechanism where the consumer signals to the producer to slow down the data flow to avoid being overwhelmed.",
+        "C": "When the database is slow.",
+        "D": "When the user cancels a request."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'HTTP 1.0' supports the 'Host' header by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is used to prevent the API response from being framed in an iframe (Clickjacking protection)?",
+      "options": {
+        "A": "X-Frame-Options",
+        "B": "X-Content-Type",
+        "C": "X-Iframe-None",
+        "D": "Strict-Transport-Security"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary benefit of 'JSON-API' or 'HAL' specifications?",
+      "options": {
+        "A": "They make JSON look like XML.",
+        "B": "They provide a standardized way to structure JSON responses and links, making APIs more predictable for clients.",
+        "C": "They automatically encrypt the data.",
+        "D": "They reduce the size of the payload by 90%."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code represents 'Request Header Fields Too Large'?",
+      "options": {
+        "A": "400",
+        "B": "413",
+        "C": "431",
+        "D": "500"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which of the following describes the 'Idempotency-Key' collision resolution strategy?",
+      "options": {
+        "A": "If a key exists but the request body is different from the original, return 400 Bad Request or 409 Conflict.",
+        "B": "If a key exists, always overwrite the previous result with the new data.",
+        "C": "Ignore the key if the request body changes.",
+        "D": "Delete the original record and create a new one."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The '205 Reset Content' status code requires the server to return a message body containing the new state.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DNS Prefetching' in the context of API performance optimization?",
+      "options": {
+        "A": "Caching the database queries in DNS.",
+        "B": "A mechanism to resolve domain names before a user follows a link to reduce perceived latency.",
+        "C": "Storing the IP address of the client in the header.",
+        "D": "A way to hide the API's IP address."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which HTTP method is considered 'Safe' but NOT 'Idempotent'?",
+      "options": {
+        "A": "GET",
+        "B": "HEAD",
+        "C": "OPTIONS",
+        "D": "None; all safe methods are also idempotent."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In a 'Micro-frontend' architecture calling multiple REST APIs, what is the primary purpose of a 'BFF' (Backend for Frontend) layer?",
+      "options": {
+        "A": "To provide a single point of entry for security.",
+        "B": "To create a tailored API that aggregates data specifically for a particular user interface/client.",
+        "C": "To replace the database.",
+        "D": "To act as a firewall for the entire company."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'TE' (Transfer-Encoding) header can be used to negotiate which compression algorithm (like Gzip) is used for the response body.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the security risk of 'Excessive Data Exposure' in an API response?",
+      "options": {
+        "A": "The server runs out of bandwidth.",
+        "B": "The API returns full objects (including sensitive fields) and relies on the frontend to filter the data, allowing attackers to see hidden info.",
+        "C": "The user sees too many advertisements.",
+        "D": "The API documentation is public."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code is most appropriate for a 'Legal' restriction (e.g., content blocked in a specific country)?",
+      "options": {
+        "A": "403",
+        "B": "404",
+        "C": "451 Unavailable For Legal Reasons",
+        "D": "500"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'Strict-Transport-Security' (HSTS) header prevent?",
+      "options": {
+        "A": "SQL Injection.",
+        "B": "Protocol downgrade attacks and cookie hijacking by forcing the browser to only communicate via HTTPS.",
+        "C": "Cross-site request forgery.",
+        "D": "Brute force attacks."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In REST, 'Media Types' (like application/vnd.myapi+json) are used to version the representation of a resource rather than the URI.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select all that apply: Which of the following are 'Layered System' benefits in REST?",
+      "options": {
+        "A": "Improved scalability through load balancing.",
+        "B": "Shared caching at the edge (CDNs).",
+        "C": "Reduced security because there are more points of failure.",
+        "D": "Encapsulation of legacy services behind a modern API."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the 'Double Submit Cookie' pattern used to prevent?",
+      "options": {
+        "A": "XSS (Cross-Site Scripting).",
+        "B": "CSRF (Cross-Site Request Forgery).",
+        "C": "Man-in-the-middle attacks.",
+        "D": "Database injection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens in a 'TCP Slow Start' scenario for an API?",
+      "options": {
+        "A": "The server takes a long time to boot.",
+        "B": "The congestion control algorithm limits the number of packets sent until the network capacity is confirmed, impacting small, frequent requests.",
+        "C": "The user has a slow internet connection.",
+        "D": "The API key takes time to validate."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 304 Not Modified response must NOT contain a message body.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code should be used if a server, acting as a gateway, receives an invalid response from the upstream server?",
+      "options": {
+        "A": "500",
+        "B": "502 Bad Gateway",
+        "C": "503",
+        "D": "504"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'HTTP Request Smuggling'?",
+      "options": {
+        "A": "Sending an API key in the body instead of the header.",
+        "B": "An attack that exploits differences in how a front-end proxy and a back-end server interpret the 'Content-Length' and 'Transfer-Encoding' headers.",
+        "C": "Using a VPN to bypass rate limits.",
+        "D": "Compressing a request so much that it becomes unreadable."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In an API using 'Eventual Consistency', what should the server return after a successful POST that is still being processed?",
+      "options": {
+        "A": "200 OK",
+        "B": "201 Created",
+        "C": "202 Accepted",
+        "D": "204 No Content"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'JSON Merge Patch' (PATCH) can be used to remove an element from a list/array by index.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of the 'X-Request-ID' (or Correlation ID) header?",
+      "options": {
+        "A": "To identify the user.",
+        "B": "To track a single request as it passes through multiple distributed microservices for debugging and logging.",
+        "C": "To encrypt the request.",
+        "D": "To bypass the cache."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Weak ETag'?",
+      "options": {
+        "A": "\"12345\"",
+        "B": "W/\"12345\"",
+        "C": "ETAG: 12345",
+        "D": "Weak-\"12345\""
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Weak ETag' indicates that the resource is semantically equivalent but not necessarily byte-for-byte identical.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'BOLA' (Broken Object Level Authorization)?",
+      "options": {
+        "A": "When the server crashes due to too many objects.",
+        "B": "An vulnerability where a user can access or modify a resource they don't own by simply changing the ID in the URL.",
+        "C": "When the API documentation is wrong.",
+        "D": "When the JSON is malformed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header allows a server to specify which other headers are 'Safe' to expose to the client-side JavaScript in a CORS request?",
+      "options": {
+        "A": "Access-Control-Allow-Headers",
+        "B": "Access-Control-Expose-Headers",
+        "C": "Access-Control-Max-Age",
+        "D": "Vary"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Long-lived' caching (Immutable Caching)?",
+      "options": {
+        "A": "Caching for exactly 1 hour.",
+        "B": "A strategy where resources are cached indefinitely because their URIs contain a unique hash that changes when the content changes.",
+        "C": "Storing data in the database forever.",
+        "D": "Caching the user's password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'PATCH' method can be used to perform operations like 'increment a counter' if the server defines a custom patch format.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which status code should be used when a client request is missing a required 'Content-Length' header?",
+      "options": {
+        "A": "400",
+        "B": "411 Length Required",
+        "C": "413",
+        "D": "415"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'N+1 Query Problem' in API development?",
+      "options": {
+        "A": "Too many users accessing one endpoint.",
+        "B": "An inefficiency where the code executes one query to fetch a list and then N additional queries to fetch details for each item in that list.",
+        "C": "When the API version is N+1.",
+        "D": "When the server has N+1 CPU cores."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select all that apply: Which of the following are valid 'Hypermedia' formats?",
+      "options": {
+        "A": "HAL (Hypertext Application Language)",
+        "B": "JSON-LD",
+        "C": "Siren",
+        "D": "Collection+JSON"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'Mass Assignment' vulnerability?",
+      "options": {
+        "A": "When a teacher assigns too much homework.",
+        "B": "When an API allows a user to update sensitive fields (like 'is_admin') by including them in a POST/PUT request that the developer didn't explicitly block.",
+        "C": "When the database has too many tables.",
+        "D": "When the API key is shared with too many people."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'HTTP 308 Permanent Redirect' is different from '301' because it requires the client to use the same HTTP method for the redirected request.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which header is used to signal that the connection should be upgraded to a different protocol, like WebSockets?",
+      "options": {
+        "A": "Connection: Upgrade",
+        "B": "Upgrade: websocket",
+        "C": "Protocol: change",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Polyfill' in the context of an API response?",
+      "options": {
+        "A": "A way to fill a database with test data.",
+        "B": "Code (usually JavaScript) that provides modern functionality to older browsers that do not natively support it.",
+        "C": "A JSON field that holds multiple values.",
+        "D": "A security patch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the result of using 'Cache-Control: private'?",
+      "options": {
+        "A": "The response cannot be cached at all.",
+        "B": "The response can be cached by the user's browser, but NOT by shared caches like a CDN or Proxy.",
+        "C": "The response is encrypted.",
+        "D": "Only the admin can see the response."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which status code should be used if the server is unable to store the representation needed to complete the request (common in WebDAV)?",
+      "options": {
+        "A": "500",
+        "B": "503",
+        "C": "507 Insufficient Storage",
+        "D": "413"
+      },
+      "answer": "C"
+    }
+  ]
+}

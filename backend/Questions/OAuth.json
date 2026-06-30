@@ -1,0 +1,2005 @@
+{ 
+  "skill": "OAuth", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of OAuth 2.0?",
+    "options": {
+      "A": "To provide a secure way to store user passwords in a database.",
+      "B": "To allow a third-party application to access resources on behalf of a user without sharing credentials.",
+      "C": "To encrypt all hard drives on a local network.",
+      "D": "To replace the need for a web browser when accessing APIs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OAuth 2.0 terminology, who is the 'Resource Owner'?",
+    "options": {
+      "A": "The server that hosts the user's data.",
+      "B": "The developer who wrote the application.",
+      "C": "The end-user who grants access to their data.",
+      "D": "The hardware manufacturer of the server."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which role represents the application making protected resource requests on behalf of the user?",
+    "options": {
+      "A": "Resource Server",
+      "B": "Client",
+      "C": "Authorization Server",
+      "D": "Access Provider"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Token'?",
+    "options": {
+      "A": "A string used by the client to make authenticated requests to the Resource Server.",
+      "B": "The user's original password encrypted with Base64.",
+      "C": "A physical key used to enter a data center.",
+      "D": "A list of all users registered on the platform."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which server issues access tokens after successfully authenticating the resource owner?",
+    "options": {
+      "A": "Resource Server",
+      "B": "Proxy Server",
+      "C": "Authorization Server",
+      "D": "Database Server"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'OIDC' stand for?",
+    "options": {
+      "A": "Open ID Connect",
+      "B": "Official Identity Control",
+      "C": "Open Interface Data Center",
+      "D": "Original Identity Connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main difference between OAuth 2.0 and OpenID Connect?",
+    "options": {
+      "A": "OAuth is for Authorization; OIDC adds an Authentication layer on top of it.",
+      "B": "OAuth is for mobile apps; OIDC is only for desktop websites.",
+      "C": "OAuth is developed by Google; OIDC is developed by Microsoft.",
+      "D": "There is no difference; they are two names for the same thing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which token is specifically used in OIDC to provide user profile information?",
+    "options": {
+      "A": "Refresh Token",
+      "B": "ID Token",
+      "C": "Access Token",
+      "D": "Secret Token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Scope' in OAuth 2.0?",
+    "options": {
+      "A": "A physical lens used for biometric scanning.",
+      "B": "A mechanism to limit an application's access to specific parts of a user's account.",
+      "C": "The geographical region where the server is located.",
+      "D": "The total number of requests an API can handle per second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Redirect URI'?",
+    "options": {
+      "A": "The URL where the user is sent after the authorization process is complete.",
+      "B": "The internal IP address of the database server.",
+      "C": "A link to the application's CSS files.",
+      "D": "The home page of the Authorization Server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common OAuth 2.0 'Grant Type'?",
+    "options": {
+      "A": "Authorization Code",
+      "B": "Implicit",
+      "C": "Client Credentials",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Refresh Token' used for?",
+    "options": {
+      "A": "To refresh the user's browser automatically.",
+      "B": "To obtain a new access token without requiring the user to log in again.",
+      "C": "To update the application's source code.",
+      "D": "To clear the server's cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role hosts the protected data that the client wants to access?",
+    "options": {
+      "A": "Client",
+      "B": "Authorization Server",
+      "C": "Resource Server",
+      "D": "Service Provider"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OAuth 2.0 shares the user's password directly with the third-party client.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Client Credentials flow",
+      "D": "Only if the password is encrypted"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What format is typically used for ID Tokens in OpenID Connect?",
+    "options": {
+      "A": "XML",
+      "B": "CSV",
+      "C": "JWT (JSON Web Token)",
+      "D": "YAML"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Client ID'?",
+    "options": {
+      "A": "A public identifier for the application.",
+      "B": "The user's social security number.",
+      "C": "The developer's email address.",
+      "D": "A secret password known only to the user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Client Secret'?",
+    "options": {
+      "A": "A password used by the client to authenticate with the Authorization Server.",
+      "B": "A hidden feature in the application UI.",
+      "C": "The user's middle name.",
+      "D": "The physical location of the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Authorization Code flow, what does the client receive first after the user grants access?",
+    "options": {
+      "A": "Access Token",
+      "B": "ID Token",
+      "C": "Authorization Code",
+      "D": "Refresh Token"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which grant type is best suited for machine-to-machine communication where no user is involved?",
+    "options": {
+      "A": "Implicit",
+      "B": "Client Credentials",
+      "C": "Authorization Code",
+      "D": "Device Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'State' parameter in an OAuth request?",
+    "options": {
+      "A": "To specify the user's home state.",
+      "B": "To prevent Cross-Site Request Forgery (CSRF) attacks.",
+      "C": "To keep the server in an active state.",
+      "D": "To count the number of log-ins."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consent' in the context of OAuth?",
+    "options": {
+      "A": "The user's explicit permission for an app to access their data.",
+      "B": "The server's agreement to host the data.",
+      "C": "The developer's agreement to follow the laws.",
+      "D": "A type of encryption key."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP header is commonly used to send an Access Token to a Resource Server?",
+    "options": {
+      "A": "Authentication",
+      "B": "Authorization",
+      "C": "Access-Control",
+      "D": "Token-ID"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bearer' token authentication?",
+    "options": {
+      "A": "A security model where anyone who possesses the token can use it to access resources.",
+      "B": "Authentication using a fingerprint of a bear.",
+      "C": "Authentication that only works on internal company networks.",
+      "D": "A method where tokens are physically mailed to the user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SSO' stand for?",
+    "options": {
+      "A": "Single Sign-On",
+      "B": "Secure System Operation",
+      "C": "Standard Service Object",
+      "D": "Simple Server Output"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In OIDC, which endpoint provides standard information about the authenticated user?",
+    "options": {
+      "A": "/authorize",
+      "B": "/userinfo",
+      "C": "/token",
+      "D": "/logout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Claims' in a JWT?",
+    "options": {
+      "A": "Pieces of information asserted about a subject (e.g., user email or name).",
+      "B": "Complaints filed by users against the API.",
+      "C": "A list of files on the server.",
+      "D": "The cost of using the service."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which grant type is used for devices with limited input capabilities, like Smart TVs?",
+    "options": {
+      "A": "Implicit",
+      "B": "Device Code",
+      "C": "Authorization Code",
+      "D": "Client Credentials"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An Access Token has a limited lifetime and eventually expires.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using JWT",
+      "D": "Only if the user logs out"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a Refresh Token expires?",
+    "options": {
+      "A": "The app automatically generates a new one.",
+      "B": "The user must re-authenticate to grant a new set of tokens.",
+      "C": "The user's data is deleted.",
+      "D": "The server restarts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OAuth role is responsible for verifying the Access Token?",
+    "options": {
+      "A": "Resource Server",
+      "B": "Authorization Server",
+      "C": "Client",
+      "D": "Both A and B"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Public Client'?",
+    "options": {
+      "A": "An application that cannot keep a secret, such as a browser-based or mobile app.",
+      "B": "An application that is free to use.",
+      "C": "An application owned by the government.",
+      "D": "An application that does not require a login."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Confidential Client'?",
+    "options": {
+      "A": "An application capable of maintaining the confidentiality of its credentials (e.g., a server-side app).",
+      "B": "An application that encrypts user messages.",
+      "C": "An application that is not listed in any app store.",
+      "D": "An application that requires a fingerprint scan."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which scope is mandatory to initiate an OpenID Connect flow?",
+    "options": {
+      "A": "profile",
+      "B": "email",
+      "C": "openid",
+      "D": "offline_access"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary benefit of the 'Authorization Code' flow over the 'Implicit' flow?",
+    "options": {
+      "A": "It is faster for the user.",
+      "B": "Tokens are not exposed in the browser's URL fragment.",
+      "C": "It does not require an Authorization Server.",
+      "D": "It works without an internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of a JWT ensures that the token has not been tampered with?",
+    "options": {
+      "A": "Header",
+      "B": "Payload",
+      "C": "Signature",
+      "D": "Expiration"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'PKCE' used for in OAuth 2.0?",
+    "options": {
+      "A": "To speed up the network connection.",
+      "B": "To secure the Authorization Code flow for public clients (like mobile apps).",
+      "C": "To encrypt the database password.",
+      "D": "To count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of OAuth, what is an 'Endpoint'?",
+    "options": {
+      "A": "A specific URL on the Authorization or Resource server used for a task.",
+      "B": "The end of a user's session.",
+      "C": "The last line of the code.",
+      "D": "A physical computer terminal."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Token Introspection' allow a Resource Server to do?",
+    "options": {
+      "A": "To view the user's password.",
+      "B": "To check the validity and metadata of an access token with the Authorization Server.",
+      "C": "To change the token's expiration date.",
+      "D": "To delete the token from the client's device."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a typical ID Token claim representing the user's unique identifier?",
+    "options": {
+      "A": "sub (Subject)",
+      "B": "id",
+      "C": "user_id",
+      "D": "uid"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Discovery' in OpenID Connect?",
+    "options": {
+      "A": "Finding new APIs to use.",
+      "B": "A mechanism for clients to automatically find the OIDC provider's configuration and endpoints.",
+      "C": "Learning how to code in OIDC.",
+      "D": "A security scan performed by the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the standard name of the OIDC discovery document?",
+    "options": {
+      "A": "/config.json",
+      "B": "/.well-known/openid-configuration",
+      "C": "/oidc-setup",
+      "D": "/server-info.yaml"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OAuth 2.0 requires the use of HTTPS (TLS) for all communications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the Client Credentials flow",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Grant' in OAuth?",
+    "options": {
+      "A": "A financial payment for using the API.",
+      "B": "A method for the client to acquire an access token.",
+      "C": "A database permission level.",
+      "D": "The name of the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which grant type involves a one-step process where the access token is returned directly in the redirect?",
+    "options": {
+      "A": "Authorization Code",
+      "B": "Implicit",
+      "C": "Refresh Token",
+      "D": "Password"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AuthZ' shorthand for?",
+    "options": {
+      "A": "Authentication",
+      "B": "Authorization",
+      "C": "Authorized Zone",
+      "D": "Authority"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AuthN' shorthand for?",
+    "options": {
+      "A": "Authentication",
+      "B": "Authorization",
+      "C": "Author Name",
+      "D": "Authentic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a JWT, where is the information about the algorithm used for signing stored?",
+    "options": {
+      "A": "Payload",
+      "B": "Header",
+      "C": "Signature",
+      "D": "Secret"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'iss' claim in a JWT represent?",
+    "options": {
+      "A": "The Issue Date.",
+      "B": "The Issuer (who created the token).",
+      "C": "The Issue Number.",
+      "D": "The Internal System Status."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'iat' stand for in a JWT payload?",
+    "options": {
+      "A": "Issued At",
+      "B": "International Authentication Time",
+      "C": "Initial Access Token",
+      "D": "Internal Account Type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a widely used OIDC Provider?",
+    "options": {
+      "A": "Google Identity",
+      "B": "Auth0",
+      "C": "Okta",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the role of the 'Audience' (aud) claim in an ID token?",
+    "options": {
+      "A": "To list the users who are watching the site.",
+      "B": "To identify the client for which the token is intended.",
+      "C": "To store the user's audio preferences.",
+      "D": "To measure the size of the API response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Revocation' in OAuth?",
+    "options": {
+      "A": "Invalidating a token before its natural expiration time.",
+      "B": "Deleting a user's account.",
+      "C": "Adding a new scope to a token.",
+      "D": "Changing the client's secret."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'User Agent' in OAuth flows?",
+    "options": {
+      "A": "A person who works for the user.",
+      "B": "The software used by the user, typically a web browser.",
+      "C": "A robot that logs in for the user.",
+      "D": "The user's internet provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OAuth 2.0 provides a way to verify the identity of the user.",
+    "options": {
+      "A": "False (OpenID Connect is needed for identity verification).",
+      "B": "True",
+      "C": "Only if using the Implicit flow",
+      "D": "Only if using the Password flow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Resource' in OAuth context?",
+    "options": {
+      "A": "The user's computer hardware.",
+      "B": "The data or service being accessed (e.g., photos, files, email).",
+      "C": "The electricity used by the server.",
+      "D": "The developer's keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a standard OAuth 2.0 role?",
+    "options": {
+      "A": "Resource Owner",
+      "B": "Client",
+      "C": "End User Representative",
+      "D": "Authorization Server"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How are JWTs typically encoded for transport over the web?",
+    "options": {
+      "A": "Hexadecimal",
+      "B": "Binary",
+      "C": "Base64Url",
+      "D": "Encryption"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'at_hash' in an ID Token used for?",
+    "options": {
+      "A": "To verify that the Access Token matches the ID Token.",
+      "B": "To encrypt the Access Token.",
+      "C": "To count the number of Access Tokens.",
+      "D": "To show the time the Access Token was issued."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Self-Contained' token?",
+    "options": {
+      "A": "A token that contains all necessary info within itself (like JWT), requiring no server-side lookup.",
+      "B": "A token that works without a network.",
+      "C": "A token that can only be used by one person.",
+      "D": "A token that is stored in a secure box."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Opaque' token?",
+    "options": {
+      "A": "A token that is invisible.",
+      "B": "A token that has no readable structure to the client and requires an introspection call.",
+      "C": "A token used for image processing.",
+      "D": "A token that is too long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'nonce' in an OIDC request used for?",
+    "options": {
+      "A": "To specify the encryption level.",
+      "B": "To associate a client session with an ID Token to mitigate replay attacks.",
+      "C": "To store the user's name.",
+      "D": "To determine the token's font size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which grant type is now discouraged for use in single-page apps (SPAs) in favor of Authorization Code + PKCE?",
+    "options": {
+      "A": "Client Credentials",
+      "B": "Implicit",
+      "C": "Refresh Token",
+      "D": "Device Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Two-Factor Authentication' (2FA) in OAuth context?",
+    "options": {
+      "A": "Requiring two different apps to work.",
+      "B": "An additional security layer where the user provides two different authentication factors.",
+      "C": "Sending the token twice.",
+      "D": "Requiring two developers to approve a login."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which scope is typically used to request a Refresh Token?",
+    "options": {
+      "A": "profile",
+      "B": "offline_access",
+      "C": "refresh_me",
+      "D": "openid"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a status code 401 Unauthorized usually mean when sending a token?",
+    "options": {
+      "A": "The server is offline.",
+      "B": "The provided Access Token is invalid or has expired.",
+      "C": "The user needs to change their password.",
+      "D": "The JSON body is malformed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'state' parameter in preventing CSRF?",
+    "options": {
+      "A": "It ensures the response matches the request sent by the original client.",
+      "B": "It specifies the user's location state.",
+      "C": "It stores the application's configuration state.",
+      "D": "It counts the total number of redirects."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of PKCE, what is the 'Code Verifier'?",
+    "options": {
+      "A": "A cryptographically random high-entropy string generated by the client.",
+      "B": "A server-side secret used to encrypt the database.",
+      "C": "A public key shared with all third-party applications.",
+      "D": "The user's hashed password stored in the browser."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'sub' claim in a JSON Web Token (JWT)?",
+    "options": {
+      "A": "To specify the subscription level of the user.",
+      "B": "To identify the principal that is the subject of the JWT (usually the User ID).",
+      "C": "To list the sub-domains the token is valid for.",
+      "D": "To provide a sub-header for extra metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during 'Refresh Token Rotation'?",
+    "options": {
+      "A": "The refresh token is changed every time the user refreshes the page.",
+      "B": "A new refresh token is issued with every access token request, invalidating the old one.",
+      "C": "The token is rotated between different servers to balance the load.",
+      "D": "The expiration time of the token is extended by 24 hours automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cryptographic algorithm is commonly used for signing JWTs with a shared secret?",
+    "options": {
+      "A": "RS256",
+      "B": "HS256",
+      "C": "ES256",
+      "D": "MD5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'nonce' parameter in an OIDC Authentication Request?",
+    "options": {
+      "A": "To specify the version of the OIDC protocol.",
+      "B": "To associate a client session with an ID Token to mitigate replay attacks.",
+      "C": "To encrypt the payload of the access token.",
+      "D": "To generate a random background color for the login page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Introspection' (RFC 7662) differ from standard JWT validation?",
+    "options": {
+      "A": "Introspection is done locally by the client; standard validation is server-side.",
+      "B": "Introspection requires a network call to the Authorization Server to check the token's status.",
+      "C": "Introspection only works for ID tokens, not access tokens.",
+      "D": "There is no difference; they are the same process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'exp' claim in a JWT represent?",
+    "options": {
+      "A": "The time the token was exported from the server.",
+      "B": "The expiration time after which the JWT must not be accepted.",
+      "C": "The expected response time of the API.",
+      "D": "The experience level of the authenticated user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which OAuth 2.0 component is responsible for presenting the 'Consent Screen' to the user?",
+    "options": {
+      "A": "The Client Application",
+      "B": "The Authorization Server",
+      "C": "The Resource Server",
+      "D": "The User Agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'JWS' (JSON Web Signature)?",
+    "options": {
+      "A": "A method of encrypting JSON data with a password.",
+      "B": "The standard used to represent a signed JWT.",
+      "C": "A database for storing security tokens.",
+      "D": "A JavaScript library for building APIs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OIDC, what is the 'UserInfo Endpoint' used for?",
+    "options": {
+      "A": "To change the user's password.",
+      "B": "To return claims about the authenticated end-user.",
+      "C": "To delete the user's account.",
+      "D": "To see a list of all logged-in users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of using the 'Implicit Grant' flow in modern web apps?",
+    "options": {
+      "A": "It is too slow for mobile devices.",
+      "B": "Tokens are exposed in the URL, increasing the risk of leakage via browser history.",
+      "C": "It does not support multi-factor authentication.",
+      "D": "It requires a physical hardware token to function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'kid' (Key ID) header parameter in a JWT used for?",
+    "options": {
+      "A": "To identify the child account associated with the user.",
+      "B": "To indicate which specific key was used to sign the token (for key rotation).",
+      "C": "To set the priority of the token handling.",
+      "D": "To store a unique identifier for the Postman workspace."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Response Type' in an OAuth 2.0 request?",
+    "options": {
+      "A": "token",
+      "B": "code",
+      "C": "id_token",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Bearer' token usage considered 'at-risk' if not used over HTTPS?",
+    "options": {
+      "A": "Because the token is too large for HTTP packets.",
+      "B": "Because anyone who intercepts the token can use it to impersonate the user.",
+      "C": "Because HTTP does not support JSON formats.",
+      "D": "Because the token will expire instantly on insecure networks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scope Creep' in the context of API authorization?",
+    "options": {
+      "A": "An application requesting more permissions than it actually needs to function.",
+      "B": "A bug where tokens never expire.",
+      "C": "A user changing their own permissions in the database.",
+      "D": "The API server getting slower over time."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the 'Client Credentials' flow, where is the Client Secret typically sent?",
+    "options": {
+      "A": "In the URL query parameters.",
+      "B": "In the 'Authorization' header or the POST body.",
+      "C": "In a physical envelope to the user.",
+      "D": "It is never sent to the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'iat' (Issued At) claim in a JWT help prevent?",
+    "options": {
+      "A": "SQL injection attacks.",
+      "B": "Using tokens that are logically too old, even if not yet expired.",
+      "C": "Unauthorized database access.",
+      "D": "Duplicate user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Hybrid Flow' in OIDC?",
+    "options": {
+      "A": "A flow that works on both Mac and Windows.",
+      "B": "A flow where some tokens are returned from the authorization endpoint and others from the token endpoint.",
+      "C": "A flow that uses both OAuth and SAML at the same time.",
+      "D": "A flow that requires both a fingerprint and a password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'aud' (Audience) claim in a token?",
+    "options": {
+      "A": "To identify the users who are currently viewing the API.",
+      "B": "To identify the recipients that the JWT is intended for.",
+      "C": "To store the user's audio preferences.",
+      "D": "To list the authorized IP addresses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JWT signature ensures that the payload is encrypted and hidden.",
+    "options": {
+      "A": "True",
+      "B": "False (The payload is only Base64 encoded and can be read by anyone).",
+      "C": "True, but only if using RS256",
+      "D": "False, JWTs cannot be signed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Authorization Code' used for?",
+    "options": {
+      "A": "To log the user into their computer.",
+      "B": "A temporary code used to exchange for an access token at the token endpoint.",
+      "C": "To encrypt the final API response.",
+      "D": "To identify the user's browser version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Token Revocation' (RFC 7009)?",
+    "options": {
+      "A": "Renewing a token before it expires.",
+      "B": "An endpoint used by clients to signal that a previously issued token is no longer needed.",
+      "C": "Deleting a user's entire profile.",
+      "D": "Increasing the security level of a token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the PKCE flow, which hashing algorithm is recommended for generating the 'Code Challenge'?",
+    "options": {
+      "A": "MD5",
+      "B": "S256 (SHA-256)",
+      "C": "plain",
+      "D": "Bcrypt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Identity Brokering'?",
+    "options": {
+      "A": "Selling user identities on the dark web.",
+      "B": "A service that acts as an intermediary between a client and one or more Identity Providers.",
+      "C": "A tool to merge two different databases.",
+      "D": "A way to reset passwords via SMS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JWT claim is used to ensure a token is not used before a specific time?",
+    "options": {
+      "A": "iat",
+      "B": "nbf (Not Before)",
+      "C": "exp",
+      "D": "active_at"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Prompt' parameter used for in an OIDC request?",
+    "options": {
+      "A": "To set the timeout for the login page.",
+      "B": "To specify whether the Authorization Server should prompt the user for re-authentication or consent.",
+      "C": "To provide a hint for the user's password.",
+      "D": "To set the language of the login form."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dynamic Client Registration'?",
+    "options": {
+      "A": "The server automatically registering users.",
+      "B": "A protocol that allows OAuth clients to register themselves with an Authorization Server programmatically.",
+      "C": "A tool to change the Client ID every day.",
+      "D": "A way to register mobile apps without using an App Store."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Claims Parameter' in OIDC?",
+    "options": {
+      "A": "A list of complaints from the client.",
+      "B": "A parameter used to request specific claims be returned in the ID Token or from the UserInfo endpoint.",
+      "C": "A setting to increase the token size.",
+      "D": "A way to verify the developer's identity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a risk if a Refresh Token is stolen?",
+    "options": {
+      "A": "The attacker can delete the user's database.",
+      "B": "The attacker can obtain new access tokens and maintain long-term access to the user's account.",
+      "C": "The attacker can change the server's encryption keys.",
+      "D": "The attacker can see the user's physical location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWT Header Injection'?",
+    "options": {
+      "A": "Adding extra CSS to the JWT.",
+      "B": "An attack where the header is modified to bypass signature verification (e.g., changing 'alg' to 'none').",
+      "C": "Inserting a JWT into a SQL database.",
+      "D": "Sending a JWT via email."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Opaque Token' validation strategy?",
+    "options": {
+      "A": "The resource server parses the token locally.",
+      "B": "The resource server must call the Authorization Server's introspection endpoint.",
+      "C": "The token is validated using a physical scanner.",
+      "D": "Opaque tokens cannot be validated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'JWKS' (JSON Web Key Set) endpoint?",
+    "options": {
+      "A": "To store user passwords.",
+      "B": "To provide the public keys used by the Authorization Server to sign tokens, allowing clients to verify them.",
+      "C": "To list all active access tokens.",
+      "D": "To backup the server configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an OAuth flow, what is the 'User-Agent' usually?",
+    "options": {
+      "A": "A corporate spy.",
+      "B": "A web browser or mobile app environment used by the resource owner.",
+      "C": "A specialized script for hacking APIs.",
+      "D": "A representative from the Authorization Server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Front-channel' communication?",
+    "options": {
+      "A": "Direct server-to-server communication.",
+      "B": "Communication that happens via the User-Agent (browser) using redirects.",
+      "C": "Communication through a physical cable.",
+      "D": "The first request sent by the client."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Back-channel' communication?",
+    "options": {
+      "A": "Communication through social media.",
+      "B": "Direct, secure server-to-server communication that does not involve the browser.",
+      "C": "Communication that is hidden from the user.",
+      "D": "The final response from the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'id_token_hint' parameter do?",
+    "options": {
+      "A": "It gives a hint about the user's password.",
+      "B": "It provides a previously issued ID Token to the Authorization Server to identify the user.",
+      "C": "It helps the user find their Client ID.",
+      "D": "It suggests a new username for the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the benefit of 'Asymmetric' (RS256) signing for JWTs?",
+    "options": {
+      "A": "It is much faster than symmetric signing.",
+      "B": "The Resource Server only needs the public key to verify tokens, so it never sees the private key used for signing.",
+      "C": "It produces much smaller tokens.",
+      "D": "It does not require a secret key at all."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which claim in an OIDC ID Token indicates when the user was actually authenticated?",
+    "options": {
+      "A": "iat",
+      "B": "auth_time",
+      "C": "exp",
+      "D": "user_verified_at"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ACR' (Authentication Context Class Reference)?",
+    "options": {
+      "A": "A type of server hardware.",
+      "B": "A claim that specifies the level of security used during authentication (e.g., 2FA).",
+      "C": "A method to compress tokens.",
+      "D": "A database of user roles."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Token Binding' aim to achieve?",
+    "options": {
+      "A": "Merging two different tokens into one.",
+      "B": "Cryptographically binding a token to the TLS connection, preventing it from being used if stolen.",
+      "C": "Storing tokens in a physical folder.",
+      "D": "Restricting tokens to a specific IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OIDC, what is a 'Subject Identifier'?",
+    "options": {
+      "A": "The title of an email.",
+      "B": "A locally unique and never reassigned identifier for the user (the 'sub' claim).",
+      "C": "A list of things the user likes.",
+      "D": "The Client ID of the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pairwise Subject Identifier' used for?",
+    "options": {
+      "A": "To link two different user accounts.",
+      "B": "To provide a different 'sub' value to each client, preventing them from correlating users across different apps.",
+      "C": "To identify users who log in as a pair.",
+      "D": "To encrypt the user's name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'at_hash' claim in an ID Token?",
+    "options": {
+      "A": "It stores the user's email address.",
+      "B": "It provides a hash of the access token so the client can verify the access token hasn't been substituted.",
+      "C": "It defines the total number of access attempts.",
+      "D": "It identifies the server that issued the token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Discovery' (RFC 8414) provide for an OAuth implementation?",
+    "options": {
+      "A": "A list of new developers to hire.",
+      "B": "A standardized metadata format to describe the Authorization Server's capabilities and endpoints.",
+      "C": "A way to discover hidden database tables.",
+      "D": "A tool to search for users by their email."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Logout Propagation' in a SSO environment?",
+    "options": {
+      "A": "Telling a user they should log out soon.",
+      "B": "Ensuring that when a user logs out of one application, they are logged out of all federated applications.",
+      "C": "Automatically deleting the user's browser history.",
+      "D": "Turning off the server at night."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which parameter is used to request the 'Authorization Code' flow?",
+    "options": {
+      "A": "response_type=token",
+      "B": "response_type=code",
+      "C": "grant_type=authorization_code",
+      "D": "access_type=offline"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'acr_values' parameter?",
+    "options": {
+      "A": "To set the font size of the login page.",
+      "B": "To request a specific authentication method or security level (e.g., mfa).",
+      "C": "To list the user's favorite values.",
+      "D": "To specify the currency for API billing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DPoP' (Demonstrating Proof-of-Possession)?",
+    "options": {
+      "A": "A new biometric for developers.",
+      "B": "A mechanism to sender-constrain tokens by requiring the client to sign a proof of possession with a private key.",
+      "C": "A way to print physical tokens.",
+      "D": "A logging system for tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Issued OpenID Provider' (SIOP)?",
+    "options": {
+      "A": "The user acting as their own identity provider using a local application or device.",
+      "B": "A server that only works for the developer.",
+      "C": "A bug where anyone can issue tokens.",
+      "D": "A company that sells OIDC software."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you handle 'Clock Skew' when validating JWTs?",
+    "options": {
+      "A": "By ignoring the 'exp' claim entirely.",
+      "B": "By allowing a small 'leeway' (e.g., 60 seconds) when comparing current time to 'exp' or 'nbf'.",
+      "C": "By forcing the server to use a specific timezone.",
+      "D": "By restarting the server every hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'offline_access' scope used for in OIDC?",
+    "options": {
+      "A": "To allow the user to use the app without an internet connection.",
+      "B": "To request a Refresh Token so the app can access resources when the user is not present.",
+      "C": "To store user data on a physical hard drive.",
+      "D": "To download the API documentation for offline reading."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a '403 Forbidden' response usually indicate in OAuth?",
+    "options": {
+      "A": "The token is expired.",
+      "B": "The token is valid, but it does not have the required scopes for the specific resource.",
+      "C": "The server is under maintenance.",
+      "D": "The Client Secret is incorrect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resource Indicators' (RFC 8707) used for?",
+    "options": {
+      "A": "To show the CPU usage of the resource server.",
+      "B": "To allow a client to specify the exact resource server it wants an access token for.",
+      "C": "To list the available files in a directory.",
+      "D": "To track the location of the resource server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'amr' (Authentication Methods References) claim?",
+    "options": {
+      "A": "It lists the user's favorite websites.",
+      "B": "It identifies the specific methods used during authentication (e.g., password, sms, pin).",
+      "C": "It identifies the server hardware model.",
+      "D": "It provides a link to the user's profile picture."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Step-up Authentication' logic in OAuth?",
+    "options": {
+      "A": "Upgrading the hardware.",
+      "B": "Requiring a stronger authentication factor (like MFA) for a high-risk action within an existing session.",
+      "C": "Adding more users to a group.",
+      "D": "Increasing the password length."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mutual TLS' (mTLS) for OAuth 2.0?",
+    "options": {
+      "A": "Two users logging in together.",
+      "B": "Using client certificates to authenticate the client and bind tokens to the TLS connection.",
+      "C": "Encrypting the database twice.",
+      "D": "A method where both the server and client use the same password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Private Key JWT' client authentication?",
+    "options": {
+      "A": "To encrypt the user's personal messages.",
+      "B": "The client authenticates to the token endpoint by sending a JWT signed with its own private key.",
+      "C": "To store the private key in the browser.",
+      "D": "To hide the Client ID from the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SAML' vs 'OAuth' primarily?",
+    "options": {
+      "A": "OAuth is for desktop; SAML is for mobile.",
+      "B": "SAML is an XML-based authentication protocol often used for enterprise SSO; OAuth is for delegated authorization.",
+      "C": "SAML is faster than OAuth.",
+      "D": "There is no difference; they are the same standard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a client uses a 'Code Challenge' but does not provide a 'Code Verifier' during the token exchange?",
+    "options": {
+      "A": "The server uses a default verifier.",
+      "B": "The request is rejected with an error (invalid_grant).",
+      "C": "The token is issued but with limited scopes.",
+      "D": "The user is prompted to enter their password again."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Client Assertion'?",
+    "options": {
+      "A": "The client claiming it is the best app in the store.",
+      "B": "A JWT sent by the client to prove its identity to the Authorization Server instead of a static Client Secret.",
+      "C": "A legal statement signed by the developer.",
+      "D": "The client's list of technical requirements."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session Management' in OIDC (Check Session Iframe/Front-channel Logout)?",
+    "options": {
+      "A": "Managing the server's CPU sessions.",
+      "B": "Techniques used to keep the login state in sync between the OIDC Provider and the Client.",
+      "C": "Deleting old user accounts.",
+      "D": "Formatting the user's browser tabs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'Metadata' in an OAuth server?",
+    "options": {
+      "A": "To store user profile pictures.",
+      "B": "To describe the server's configuration (supported algorithms, scopes, endpoints).",
+      "C": "To keep a log of all errors.",
+      "D": "To store the server's IP address history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PAR' (Pushed Authorization Requests)?",
+    "options": {
+      "A": "A request that is sent through the mail.",
+      "B": "A mechanism where the client pushes authorization parameters to the server via a back-channel request before the redirect.",
+      "C": "A way to push notifications to the user.",
+      "D": "A tool to delete old authorizations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a JWT, what is the 'typ' header used for?",
+    "options": {
+      "A": "To specify the user's type.",
+      "B": "To indicate the type of the token (usually 'JWT').",
+      "C": "To count the number of typos in the code.",
+      "D": "To specify the language of the payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JAR' (JWT Secured Authorization Request)?",
+    "options": {
+      "A": "A file format for Java applications.",
+      "B": "Encoding authorization request parameters into a signed and optionally encrypted JWT.",
+      "C": "A way to store tokens in a glass container.",
+      "D": "A system to log API requests into a JAR file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which endpoint is typically used to exchange the Authorization Code for an Access Token?",
+    "options": {
+      "A": "/authorize",
+      "B": "/token",
+      "C": "/exchange",
+      "D": "/access"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Mix-up Attack', how does an attacker compromise an OAuth session?",
+    "options": {
+      "A": "By confusing the client into sending an authorization code to a malicious Authorization Server.",
+      "B": "By mixing two different JWTs into a single header to bypass signature verification.",
+      "C": "By injecting a malicious script into the client's redirect URI handler.",
+      "D": "By swapping the client secret with a public key during the token exchange."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical reason for using 'RS256' over 'HS256' in a decentralized microservices architecture?",
+    "options": {
+      "A": "RS256 is significantly faster to sign and verify than HS256.",
+      "B": "HS256 does not support the 'exp' claim, making it less secure.",
+      "C": "RS256 allows Resource Servers to verify tokens using a public key without needing the private signing key.",
+      "D": "RS256 automatically encrypts the payload, whereas HS256 only signs it."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'at_hash' claim in an OIDC ID Token prevent?",
+    "options": {
+      "A": "Access token leakage in the front channel.",
+      "B": "Access token substitution attacks by providing a binding between the ID and Access Token.",
+      "C": "Brute force attacks on the Authorization Code.",
+      "D": "Replay attacks by ensuring the token is only used once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'DPoP' (Demonstrating Proof-of-Possession) mitigate the risk of stolen bearer tokens?",
+    "options": {
+      "A": "It encrypts the bearer token with the user's biometric data.",
+      "B": "It reduces the expiration time of bearer tokens to exactly 60 seconds.",
+      "C": "It forces all bearer tokens to be sent via a physical hardware module.",
+      "D": "It requires the client to sign a unique string with a private key, binding the token to that key."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Issuer Identifier' validation rule in OIDC meant to solve?",
+    "options": {
+      "A": "Ensuring the 'iss' claim matches the expected provider URL to prevent discovery attacks.",
+      "B": "Ensuring the client application is registered with more than one provider.",
+      "C": "Preventing the user from logging in from an unauthorized geographical region.",
+      "D": "Verifying that the server hardware is manufactured by a trusted vendor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the PKCE flow, if an attacker intercepts the 'Authorization Code', why can they still not obtain an 'Access Token'?",
+    "options": {
+      "A": "They lack the 'Client Secret' which is required for all public clients.",
+      "B": "The code is cryptographically bound to the attacker's unique IP address.",
+      "C": "They cannot provide the original 'Code Verifier' that hashes to the 'Code Challenge'.",
+      "D": "The code expires in less than 500 milliseconds after the first interception."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'JWE' (JSON Web Encryption) and when is it typically required in OIDC?",
+    "options": {
+      "A": "It is a way to sign tokens; required when the user name contains special characters.",
+      "B": "It is a compression format for tokens; required for low-bandwidth mobile networks.",
+      "C": "It is a method to store tokens in a SQL database for large scale applications.",
+      "D": "It provides content confidentiality; required when the ID Token contains highly sensitive PII."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which claim is used in a JWT to prevent 'Replay Attacks' by providing a unique identifier for each token?",
+    "options": {
+      "A": "sub",
+      "B": "iat",
+      "C": "cid",
+      "D": "jti (JWT ID)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'PAR' (Pushed Authorization Requests) intended to improve in the OAuth 2.0 flow?",
+    "options": {
+      "A": "User interface responsiveness during the redirect.",
+      "B": "Security and integrity by allowing clients to push parameters via a secure back-channel.",
+      "C": "Database performance on the Resource Server during peak traffic.",
+      "D": "The speed of the initial DNS lookup for the Authorization Server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a vulnerability specific to the 'Implicit Flow' that led to its deprecation?",
+    "options": {
+      "A": "Access Tokens are leaked through browser history because they are in the URL fragment.",
+      "B": "The flow requires a 'Client Secret' which is easily stolen from JavaScript code.",
+      "C": "It does not support the use of Scopes to limit access.",
+      "D": "It is incompatible with modern React and Vue frontend frameworks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'c_hash' claim in a Hybrid Flow ID Token?",
+    "options": {
+      "A": "To hash the client's secret key for transmission.",
+      "B": "To provide a checksum for the user's email address.",
+      "C": "To verify the integrity of the Authorization Code.",
+      "D": "To store the compressed version of the CSS layout."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Mutual TLS' (mTLS) sender-constraining for access tokens?",
+    "options": {
+      "A": "A method to share a single certificate between all users of an application.",
+      "B": "A mechanism that binds an access token to a specific client's X.509 certificate.",
+      "C": "A way to encrypt the database using the server's public key.",
+      "D": "A protocol that requires the user to provide two different passwords over TLS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Token Exchange' (RFC 8693) allow in a complex microservices environment?",
+    "options": {
+      "A": "A user to trade their access token for a physical gift card.",
+      "B": "An automated way to delete expired tokens from the cache.",
+      "C": "The client to change the 'scope' of an existing token without user consent.",
+      "D": "A security service to swap a token from one domain/actor for one valid in another."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In OIDC 'Dynamic Client Registration', what is the purpose of the 'Software Statement'?",
+    "options": {
+      "A": "A signed JWT that contains metadata about the client software to verify its authenticity.",
+      "B": "A legal contract signed by the software developer.",
+      "C": "A list of all the software libraries used by the application.",
+      "D": "A diagnostic report generated when the client crashes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of an 'Open Redirector' vulnerability in an Authorization Server?",
+    "options": {
+      "A": "It causes the server to restart if too many redirects occur.",
+      "B": "It allows an attacker to steal the Authorization Code by redirecting users to a malicious site.",
+      "C": "It increases the latency of the user's login process.",
+      "D": "It bypasses the need for a Client ID during the request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RAR' (Rich Authorization Requests) used for in modern OAuth?",
+    "options": {
+      "A": "To include high-resolution images in the authorization request.",
+      "B": "To speed up the rendering of the consent screen.",
+      "C": "To request permissions that require complex data structures (e.g., bank transactions).",
+      "D": "To allow the user to log in using a remote control."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the security implication of using 'JWT alg: none' during development?",
+    "options": {
+      "A": "It makes the code easier to read for new developers.",
+      "B": "It increases the speed of unit tests by 50%.",
+      "C": "It is the recommended setting for production environments in 2026.",
+      "D": "It allows anyone to forge tokens by removing the signature and changing the header."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In the context of 'Private Key JWT' authentication, what does the client send to the token endpoint?",
+    "options": {
+      "A": "The raw private key in a JSON object.",
+      "B": "A request to download the server's private key.",
+      "C": "An encrypted version of the Client Secret.",
+      "D": "A JWT signed with its private key as a 'client_assertion'."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Step-up Authentication' specifically designed to protect?",
+    "options": {
+      "A": "The user's password from being changed by the admin.",
+      "B": "High-value operations that require a higher trust level than the initial login.",
+      "C": "The server from being physically moved to a different location.",
+      "D": "The application from being used on more than one device at a time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'acr_values' parameter used for in an OIDC request?",
+    "options": {
+      "A": "To specify the color scheme of the login interface.",
+      "B": "To list the user's favorite acronyms.",
+      "C": "To request that the user be authenticated using a specific security level (e.g., MFA).",
+      "D": "To define the currency for API billing calculations."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Token Introspection' (RFC 7662) return if the token is valid but the scope is insufficient?",
+    "options": {
+      "A": "A '403 Forbidden' error message.",
+      "B": "An 'active: true' response, but the Resource Server must check the 'scope' field.",
+      "C": "An 'active: false' response to force the client to re-authenticate.",
+      "D": "The user's full password in the 'errors' field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Front-channel Logout' work in OIDC?",
+    "options": {
+      "A": "The server sends an email to the user asking them to log out.",
+      "B": "The user physically turns off their computer.",
+      "C": "The client application deletes the database records for the session.",
+      "D": "The provider renders a hidden iframe that triggers the logout at the client's domain."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Subject Identifier' (sub) requirement in OIDC regarding stability?",
+    "options": {
+      "A": "It must change every time the user logs in for privacy.",
+      "B": "It must be locally unique and never reassigned to a different user over time.",
+      "C": "It must be exactly 32 characters long and start with a capital letter.",
+      "D": "It must match the user's current IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Device Authorization Grant' (RFC 8628) and its typical 'Verification URI' process?",
+    "options": {
+      "A": "The device prints a physical QR code that the user must mail to the developer.",
+      "B": "The device sends a text message to the server automatically.",
+      "C": "The user visits a URL on a separate device and enters a short code.",
+      "D": "The user must connect the device to a laptop via a USB cable."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In OIDC, what is a 'Sector Identifier URI' used for?",
+    "options": {
+      "A": "To identify the geographical sector of the server.",
+      "B": "To define the sector size of the database storage.",
+      "C": "To track the financial sector the user works in.",
+      "D": "To ensure multiple clients in the same sector receive the same pairwise 'sub' value."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'JWT Secured Authorization Request' (JAR)?",
+    "options": {
+      "A": "A method to store JWTs in a Java Archive file.",
+      "B": "Passing authorization parameters as a signed JWT to prevent tampering.",
+      "C": "A tool to compress the authorization request into a smaller size.",
+      "D": "A security feature that blocks all authorization requests from Java applications."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Refresh Token Rotation' handle a situation where a stolen token is used after the legitimate client has rotated it?",
+    "options": {
+      "A": "The server allows both tokens to work for 24 hours.",
+      "B": "The server invalidates the entire refresh token chain, logging out all sessions.",
+      "C": "The server automatically sends a new password to the user's email.",
+      "D": "The server ignores the stolen token and continues normally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'prompt=none' parameter used for in an OIDC request?",
+    "options": {
+      "A": "To disable all security prompts for the user.",
+      "B": "To tell the server that the developer does not want any help.",
+      "C": "To check if a user is already authenticated without showing any UI.",
+      "D": "To hide the login form from everyone except the admin."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the risk of 'Resource Owner Password Credentials' (ROPC) grant?",
+    "options": {
+      "A": "It is too fast and causes server load issues.",
+      "B": "It does not allow the use of special characters in passwords.",
+      "C": "It only works for users who are currently offline.",
+      "D": "It trains users to provide passwords to third-party apps, undermining OAuth security."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which claim in a JWT prevents the token from being used before a certain time?",
+    "options": {
+      "A": "exp",
+      "B": "iat",
+      "C": "active_after",
+      "D": "nbf (Not Before)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'ACR' (Authentication Context Class Reference) and its relation to 'Step-up Authentication'?",
+    "options": {
+      "A": "ACR specifies the authentication strength (e.g., MFA) used for the session.",
+      "B": "ACR is the name of the server; used to reboot the server.",
+      "C": "ACR is a compression algorithm for ID tokens.",
+      "D": "ACR is the user's role in the database; used to delete users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Token Binding' (RFC 8471) require to work correctly?",
+    "options": {
+      "A": "A physical rope to tie the server to the rack.",
+      "B": "Support for the protocol in both the browser and the Authorization/Resource servers.",
+      "C": "A database that only accepts binary data.",
+      "D": "A subscription to the Postman Enterprise plan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Federated SSO, what is 'Identity Brokering'?",
+    "options": {
+      "A": "Selling user data to the highest bidder.",
+      "B": "A service acting as a gateway between a client and multiple external Identity Providers.",
+      "C": "A tool that allows users to buy and sell digital identities.",
+      "D": "A method to bypass authentication by using a broker's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when a 'Pairwise' subject identifier is used across two different Client IDs?",
+    "options": {
+      "A": "Both clients see the same 'sub' value for the same user.",
+      "B": "The user is forced to create a second account.",
+      "C": "The server returns an error because the IDs do not match.",
+      "D": "Each client sees a different 'sub' value, preventing cross-app tracking."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the purpose of the 'JWKS' endpoint having multiple keys?",
+    "options": {
+      "A": "To allow for seamless key rotation without downtime.",
+      "B": "To provide different keys for each individual user of the application.",
+      "C": "To store the keys for all the other websites on the internet.",
+      "D": "To ensure that if one key is lost, the others can be used as backups."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'id_token_hint' parameter facilitate during a logout flow?",
+    "options": {
+      "A": "It gives a hint to the user about what their password might be.",
+      "B": "It identifies the client application to the user's browser.",
+      "C": "It stores a backup of the user's profile information.",
+      "D": "It allows the OIDC Provider to know which user is being logged out."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Discovery' (RFC 8414) metadata used for in a client application?",
+    "options": {
+      "A": "To discover if any team members are currently online.",
+      "B": "To find new and interesting APIs to use in the project.",
+      "C": "To automatically configure endpoint URLs and supported algorithms.",
+      "D": "To scan the server for hidden security vulnerabilities."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the risk of 'JWT Signature Stripping'?",
+    "options": {
+      "A": "The token becomes too light and is lost by the network.",
+      "B": "The server restarts because it cannot find the signature.",
+      "C": "An attacker removes the signature, and the server fails to realize it is unsigned.",
+      "D": "The user is logged out because the signature was too complex."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which 'Grant Type' is most appropriate for a background service that needs to sync data with an API nightly?",
+    "options": {
+      "A": "Implicit",
+      "B": "Authorization Code",
+      "C": "Client Credentials",
+      "D": "Hybrid"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Back-channel Logout' (OIDC) security advantage over Front-channel?",
+    "options": {
+      "A": "It is much faster to execute.",
+      "B": "It does not rely on the user's browser to be active to terminate the session.",
+      "C": "It allows the user to stay logged in on their mobile device.",
+      "D": "It is easier to implement for beginner developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Nonce' validation logic at the client-side?",
+    "options": {
+      "A": "The client checks if the 'nonce' is a valid prime number.",
+      "B": "The client ensures the 'nonce' in the ID Token matches the 'nonce' it sent initially.",
+      "C": "The client deletes the 'nonce' after 5 minutes of inactivity.",
+      "D": "The client sends the 'nonce' to the database for storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'at_hash' algorithm in OIDC?",
+    "options": {
+      "A": "A random string generated by the client.",
+      "B": "The user's password hashed with MD5.",
+      "C": "A list of all previous access tokens.",
+      "D": "Half of the SHA-256 hash of the access_token, Base64Url encoded."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How does 'PAR' help prevent 'Authorization Request Leaks'?",
+    "options": {
+      "A": "By encrypting the request using a physical key.",
+      "B": "By keeping sensitive parameters out of the browser URL and in a server call.",
+      "C": "By deleting the authorization request after it is read.",
+      "D": "By limiting authorization requests to one per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OIDC, what is the 'azp' (Authorized Party) claim?",
+    "options": {
+      "A": "The party responsible for paying the API fees.",
+      "B": "The geographical zone where the user is authorized.",
+      "C": "A list of all parties currently using the OIDC provider.",
+      "D": "The Client ID of the application that the ID Token was issued to."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Offline Access' security risk?",
+    "options": {
+      "A": "The user can use the app without an internet connection.",
+      "B": "It grants long-lived Refresh Tokens used to access data when the user is not active.",
+      "C": "The database becomes accessible to everyone on the local network.",
+      "D": "The application's CSS files can be modified by anyone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CORS' and why does it matter for OAuth clients written in JavaScript?",
+    "options": {
+      "A": "CORS is a type of database; it matters for storing tokens.",
+      "B": "CORS is a security feature preventing cross-domain browser requests.",
+      "C": "CORS is a compression algorithm for API responses.",
+      "D": "CORS is a law that requires all websites to have a privacy policy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'amr' (Authentication Methods References) claim in an ID Token?",
+    "options": {
+      "A": "To list the user's favorite authentication methods.",
+      "B": "To identify specific methods (e.g., pwd, totp) used to authenticate the user.",
+      "C": "To provide a link to the user's biometric data.",
+      "D": "To track the time it took to complete each authentication step."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PKCE S256' vs 'plain' code_challenge_method?",
+    "options": {
+      "A": "S256 is for mobile apps; plain is for desktop apps.",
+      "B": "S256 is slower but more colorful than plain.",
+      "C": "S256 uses a SHA-256 hash; plain sends the verifier as-is (less secure).",
+      "D": "There is no difference in security between the two."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Token Binding' prevent that standard 'Bearer Tokens' cannot?",
+    "options": {
+      "A": "A token from expiring too soon.",
+      "B": "The user from changing their own password.",
+      "C": "The client from requesting too many scopes.",
+      "D": "A stolen token being used by an attacker on a different TLS connection."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In OIDC, what is a 'Distributed Claim'?",
+    "options": {
+      "A": "A claim that is shared with every person in the world.",
+      "B": "A claim not in the ID Token but fetched from a provided URL.",
+      "C": "A claim that is spread across multiple different databases.",
+      "D": "A claim that is used to distribute money to the users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aggregated Claim' in OIDC?",
+    "options": {
+      "A": "A claim that is asserted by a different provider than the one issuing the ID Token.",
+      "B": "A claim that is very angry.",
+      "C": "A claim that combines all the user's data into one large string.",
+      "D": "A claim that counts the total number of logins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutual TLS' (mTLS) for OAuth 2.0 (RFC 8705)?",
+    "options": {
+      "A": "A way for two users to log in at the same time.",
+      "B": "A method to encrypt the database using the server's public key.",
+      "C": "A protocol that requires two passwords for every request.",
+      "D": "Using client certificates for authentication and token binding."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'OAuth 2.0 Security Best Current Practice' (BCP) regarding the 'State' parameter?",
+    "options": {
+      "A": "It should be replaced by 'PKCE' entirely in all flows.",
+      "B": "It should contain the user's social security number for verification.",
+      "C": "It is no longer needed in any modern OAuth implementation.",
+      "D": "It should be a cryptographically strong random value to prevent CSRF."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which 'Flow' is recommended for a server-side web application that can securely store a 'Client Secret'?",
+    "options": {
+      "A": "Implicit",
+      "B": "Resource Owner Password",
+      "C": "Device Code",
+      "D": "Authorization Code"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Proof-of-Possession' (PoP) tokens?",
+    "options": {
+      "A": "Tokens that require the client to prove they possess a specific secret.",
+      "B": "Tokens that prove the user owns a house.",
+      "C": "Tokens that are physically mailed to the user.",
+      "D": "Tokens that contain the user's biometric fingerprint."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In OIDC, what is 'Discovery' (.well-known/openid-configuration)?",
+    "options": {
+      "A": "Finding new developers for the project.",
+      "B": "A standardized document listing provider endpoints and features.",
+      "C": "Learning how the OIDC protocol works from a tutorial.",
+      "D": "A feature that scans for new user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Session Fixation' in OAuth and how is it mitigated?",
+    "options": {
+      "A": "Repairing a broken session; mitigated by restarting the server.",
+      "B": "Deleting an old session; mitigated by clearing the cache.",
+      "C": "Keeping a session open forever; mitigated by setting an expiration time.",
+      "D": "An attacker forcing a user into a known session; mitigated by 'state'."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Dynamic Client Registration' security risk?",
+    "options": {
+      "A": "The server automatically registering users.",
+      "B": "The client ID changing every day.",
+      "C": "The registration process being too slow.",
+      "D": "Malicious apps registering to gain unauthorized data access."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In a JWT, what does 'exp' stand for?",
+    "options": {
+      "A": "Export",
+      "B": "Experience",
+      "C": "Expected",
+      "D": "Expiration Time"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'AuthN' shorthand for?",
+    "options": {
+      "A": "Authority",
+      "B": "Authentication",
+      "C": "Authorization",
+      "D": "Authentic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AuthZ' shorthand for?",
+    "options": {
+      "A": "Authority",
+      "B": "Authorization",
+      "C": "Authentication",
+      "D": "Authorized"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SAML' vs 'OAuth' primarily?",
+    "options": {
+      "A": "OAuth is for desktop; SAML is for mobile.",
+      "B": "SAML is for enterprise SSO (XML); OAuth is for delegated authorization (JSON).",
+      "C": "SAML is faster than OAuth.",
+      "D": "There is no difference; they are the same standard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Authorization Code' used for?",
+    "options": {
+      "A": "To exchange for an access token at the token endpoint.",
+      "B": "To log the user into their computer.",
+      "C": "To encrypt the final API response.",
+      "D": "To identify the user's browser version."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Revocation' in OAuth?",
+    "options": {
+      "A": "Deleting a user's account.",
+      "B": "Adding a new scope to a token.",
+      "C": "Changing the client's secret.",
+      "D": "Invalidating a token before its natural expiration time."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the standard name of the OIDC discovery document?",
+    "options": {
+      "A": "/config.json",
+      "B": "/.well-known/openid-configuration",
+      "C": "/oidc-setup",
+      "D": "/server-info.yaml"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which endpoint is typically used to exchange the Authorization Code for an Access Token?",
+    "options": {
+      "A": "/authorize",
+      "B": "/exchange",
+      "C": "/access",
+      "D": "/token"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'nonce' in an OIDC request used for?",
+    "options": {
+      "A": "To specify the encryption level.",
+      "B": "To associate a client session with an ID Token.",
+      "C": "To store the user's name.",
+      "D": "To determine the token's font size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a typical ID Token claim representing the user's unique identifier?",
+    "options": {
+      "A": "id",
+      "B": "user_id",
+      "C": "uid",
+      "D": "sub (Subject)"
+    },
+    "answer": "D"
+  }
+  ]
+}

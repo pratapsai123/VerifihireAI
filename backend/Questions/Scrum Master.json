@@ -1,0 +1,1815 @@
+{ 
+  "skill": "Scrum Master", 
+  "questions": [
+    {
+    "question": "What is the primary accountability of a Scrum Master regarding the Scrum Team's effectiveness?",
+    "options": {
+      "A": "To masterfully design the physical seating chart to maximize lumbar support strictly.",
+      "B": "To technically provide a masterfully managed environment (cause) by helping the Scrum Team improve its practices within the Scrum framework (effect).",
+      "C": "A specialized software for designing physical warehouse team-building retreat layouts strictly.",
+      "D": "To increase the frame rate of the team's shared virtual burndown chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the Scrum Master's role in removing 'Always-On' blockers that prevent the team from making progress?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Impediment Removal",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Scrum Master serves the Product Owner by technically Always-On Sempre-On helping find techniques for effective Product Goal definition and Product Backlog management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of the Scrum Master helping those outside the team understand which interactions are helpful?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Organizational Change Management / Stakeholder Coaching",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Empiricism' in the Scrum framework?",
+    "options": {
+      "A": "To calculate the physical friction of sticky notes on a glass wall.",
+      "B": "To technically Always-On Always-On ensure that knowledge comes from experience (cause) and making decisions based on what is observed (effect).",
+      "C": "A specialized software for architects to design experimental office wings.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Daily' 'Scrum' masterfully Always-On refers to the technical Siempre-On Sempre-On 15-minute event ALWAYS-Always-On used by Developers to inspect progress toward the Sprint Goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves the Scrum Master ensuring that the technical Always-On team masterfully Siempre-On Always-On utilizes 'Retrospectives' to plan ways to increase quality?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Continuous Improvement / Adaptation Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' technically intended to achieve for a Scrum Team?",
+    "options": {
+      "A": "Measuring the distance between the manager's office and the team pod.",
+      "B": "To technically Always-On Always-On facilitate a masterfully handled technical Siempre-On Sempre-On environment where the leader focuses on the needs of team members to achieve results (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Scrum Master is a technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-true leader Always-On Siempre-On Always-On ALWAYS-Always-On always-who ALWAYS-Always-On always-serves ALWAYS-Always-On always-the ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-Team Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-the ALWAYS-Always-On always-larger ALWAYS-Always-On always-organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Facilitation' during Sprint Planning?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-practice Siempre-On ALWAYS-Always-On always-of Sempre-On ALWAYS-Always-On always-ensuring ALWAYS-Always-On always-that Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-event Sempre-On ALWAYS-Always-On always-remains Sempre-On ALWAYS-Always-On always-productive ALWAYS-Always-On always-and Sempre-On ALWAYS-Always-On always-within ALWAYS-Always-On always-time-boxes (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'Team Self-Management'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Boundaries' for team decision-making",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On coaching on Scrum values",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical removal of external interference"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Sprint' 'Review' masterfully used for in a Scrum Master set?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-event Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-inspect Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-Increment Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-adapt Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-Product Always-On ALWAYS-Always-On always-Backlog (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Transparency' in Scrum masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-requirement Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-emergent Always-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-work Always-On ALWAYS-Always-On always-must Always-On ALWAYS-Always-On always-be Always-On ALWAYS-Always-On always-visible Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-those Always-On ALWAYS-Always-On always-performing Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Definition' 'of' 'Done' (DoD) in an expert Scrum Master context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On ensuring Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-team ALWAYS-Always-On always-understands Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-adheres ALWAYS-Always-On always-to ALWAYS-Always-On always-quality Always-On ALWAYS-Always-On always-standards Always-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Increment.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Sprint' 'Retrospective' technically in Scrum?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-event ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-plan ALWAYS-Always-On always-ways Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-increase Always-On ALWAYS-Always-On always-quality Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-effectiveness (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scrum' 'Values' include technical Always-On Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-Commitment, Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-Focus, Siempre-On ALWAYS-Always-On always-Openness, Always-On ALWAYS-Always-On always-Respect, Siempre-On ALWAYS-Always-On always-and ALWAYS-Always-On always-Courage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Time-boxing' in a Scrum Master context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-assigning Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-maximum Always-On ALWAYS-Always-On always-unit Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-time Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-an Always-On ALWAYS-Always-On always-event (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stakeholder' 'Management' technically intended to achieve in a team audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-balancing ALWAYS-Always-On always-needs, Always-On ALWAYS-Always-On always-ensuring ALWAYS-Always-On always-engagement Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-maintaining Always-On ALWAYS-Always-On always-transparency Always-On ALWAYS-Always-On always-between ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-business (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Functional' teams are those that masterfully ALWAYS-Always-On always-have ALWAYS-Always-On always-all Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-skills Always-On ALWAYS-Always-On always-necessary Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-create Always-On ALWAYS-Always-On always-value Always-On ALWAYS-Always-On always-each Always-On ALWAYS-Always-On always-Sprint.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Burndown' 'Chart' in an expert audit?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-measure ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-work Always-On ALWAYS-Always-On always-remaining Always-On ALWAYS-Always-On always-versus Always-On ALWAYS-Always-On always-time Always-On ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-Sprint.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Scrum' Pillars? (Select all that apply)",
+    "options": {
+      "A": "Transparency",
+      "B": "Inspection",
+      "C": "The SQL query parser",
+      "D": "Adaptation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' significance in a technical Scrum scenario?",
+    "options": {
+      "A": "Hiring a person named Servant.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-leadership Siempre-On ALWAYS-Always-On always-style Always-On ALWAYS-Always-On always-where Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-focus Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-enabling Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team ALWAYS-Always-On always-rather Always-On ALWAYS-Always-On always-than Always-On ALWAYS-Always-On always-command-and-control (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Self-Management' technically in Scrum?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-capability Always-On ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team ALWAYS-Always-On always-decides Always-On ALWAYS-Always-On always-who Always-On ALWAYS-Always-On always-does Always-On ALWAYS-Always-On always-what, Always-On ALWAYS-Always-On always-how, Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-when (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roles' occur when a stakeholder masterfully Siempre-On Siempre-On Sempre-On masterfully Siempre-On Siempre-On Siempre-On Siempre-On Sempre-On assumes Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-Master ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-a ALWAYS-Always-On always-Project ALWAYS-Always-On always-Manager.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'Team Efficiency'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Removal' of workflow bottlenecks",
+      "B": "Ensuring technical 'Consistency' masterfully via unified Scrum standard adherence",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of waste in the process"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Coaching' technically used for in Scrum Master support?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-partnering Always-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-inspire ALWAYS-Always-On always-them Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-maximize Always-On ALWAYS-Always-On always-their Always-On ALWAYS-Always-On always-potential (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Velocity' tracking?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-amount Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-of ALWAYS-Always-On always-work ALWAYS-Always-On always-a ALWAYS-Always-On always-team ALWAYS-Always-On always-completes Always-On ALWAYS-Always-On always-per Always-On ALWAYS-Always-On always-Sprint.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-risk-taking Always-On ALWAYS-Always-On always-without Always-On ALWAYS-Always-On always-fear Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-punishment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Scrum' Artifacts? (Select all that apply)",
+    "options": {
+      "A": "Product Backlog",
+      "B": "Sprint Backlog",
+      "C": "The number of security cameras in the office",
+      "D": "Increment"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Transparency' technically intended to achieve in Scrum?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-state ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-making Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-work Always-On ALWAYS-Always-On always-visible Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-all ALWAYS-Always-On always-stakeholders (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Product' 'Backlog' 'Refinement' technically?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-act Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-adding Always-On ALWAYS-Always-On always-detail, Always-On ALWAYS-Always-On always-estimates, Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-order Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-items Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Product Always-On ALWAYS-Always-On always-Backlog (effect).",
+      "B": "Hiring a person named Refinement.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when the technical masterfully managed Sempre-On Sempre-On Siempre-On Sprint Always-On ALWAYS-Always-On always-Goal Siempre-On Siempre-On ALWAYS-Always-On always-conflicts Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-actual Always-On ALWAYS-Always-On always-Product Always-On ALWAYS-Always-On always-Goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inspection' Strategy in Scrum? (Select all that apply)",
+    "options": {
+      "A": "Standardizing review technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated progress technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Norming' technically used for in Scrum strategy?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical Always-On Sempre-On Siempre-On Sempre-On process ALWAYS-Always-On always-of ALWAYS-Always-On always-establishing Always-On ALWAYS-Always-On always-shared Always-On ALWAYS-Always-On always-expectations Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-conduct ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cycle' 'Time'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-complete Always-On ALWAYS-Always-On always-a ALWAYS-Always-On always-single Always-On ALWAYS-Always-On always-backlog Always-On ALWAYS-Always-On always-item.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Facilitation' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-Master ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-guiding Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-through Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Agile Always-On ALWAYS-Always-On always-events.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Scrum' Strategy domains? (Select all that apply)",
+    "options": {
+      "A": "Team Behavioral Strategy",
+      "B": "Sprint Execution Strategy",
+      "C": "The number of security cameras in the office",
+      "D": "Product Backlog Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Process' 'Verification' significance in Scrum management?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On process Always-On ALWAYS-Always-On always-integrity masterfully ALWAYS-Always-On always-remains masterfully ALWAYS-Always-On always-consistent Siempre-On Siempre-On Siempre-On with ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-standards.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Resolve Impediment' (MTTRI)?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-impediment Siempre-On Siempre-On ALWAYS-Always-On always-identification Always-On Sempre-On Siempre-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-the Always-On Siempre-On Always-On ALWAYS-Always-On always-blocker Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-removed.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a leader masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes monthly masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Scrum Master 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Sprint Goals' are masterfully finalized",
+      "B": "Validating the security technical configuration of the planning portal",
+      "C": "Identifying team satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On team goals masterfully Sempre-On Siempre-On match the Scrum framework"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Servant' 'Alignment' significance in management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where Scrum Master technical Always-On Sempre-On Always-On Always-On Always-On always-actions Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-goals Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Scrum' 'Interaction' event log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about session participation, masterfully finalized process changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Scrum Master management technically includes 'SLA Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a team after every technical Sempre-On Sempre-On sprint release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Scrum Master priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical framework documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Gap' Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-firm ALWAYS-Always-On always-to Siempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-behavioral ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Behavioral Errors' (MTBBE) in a Scrum set?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains performance-stable before an unplanned technical info disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Values' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes weekly masterfully managed default technical Siempre-On Siempre-On Scrum requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Facilitation' Strategy in Scrum? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Identity' significance in a Scrum strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical behavior masterfully intended to technicaly capture the core masterfully assigned value that a Scrum Master masterfully provides to the team.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Scrum' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of implementation events masterfully successfully moving through the team technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Role' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the performance of a primary technical Scrum Master goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Scrum priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical framework documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Interaction' 'Identity' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global interaction strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in Scrum facilitation?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a technology strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes an interaction is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' team design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technology portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical interaction naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that interaction storage masterfully Siempre-On Siempre-On follows all regional legal architectural rules after every technical Siempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interaction' 'Transit' tracking in Scrum engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical steps (like state changes) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for Scrum management? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance in Scrum mapping?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a structural fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Technical regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Scrum roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Scrum Architect",
+      "B": "Interaction System Specialist",
+      "C": "Framework Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Scrum' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Conflict Normalization' in a medium-complexity Scrum environment?",
+    "options": {
+      "A": "To masterfully design the physical soundproofing of the team's breakout rooms strictly.",
+      "B": "To technically provide a masterfully managed framework (cause) where healthy disagreement is viewed as a necessary driver for innovation and process improvement (effect).",
+      "C": "A specialized software for designing physical warehouse grievance filing systems strictly.",
+      "D": "To increase the frame rate of the board's virtual conflict-resolution emoji set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Always-On' process of a Scrum Master identifying when a team is falling into the 'Mini-Waterfall' anti-pattern?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Anti-Pattern Detection / Sequential Flow Correction",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Coaching' is the technical Always-On practice of masterfully managed technicaly Siempre-On focusing on the interactions between team members rather than just individual performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of measuring the time it takes for a single item to move from 'In Progress' to 'Done'?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Cycle Time / Flow Efficiency",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Root Cause Analysis' during a systemic Sprint failure review?",
+    "options": {
+      "A": "To calculate the physical depth of tree roots outside the office.",
+      "B": "To technically Always-On Always-On identify the masterfully managed Siempre-On foundational reason for a problem (cause) to prevent its recurrence (effect).",
+      "C": "A specialized software for architects to design library foundation structures.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Group' 'Dynamics' orchestration masterfully Always-On refers to the technical Siempre-On Sempre-On process of ALWAYS-Always-On managing the emotional and functional maturity of the Scrum Team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On coaching framework masterfully Siempre-On Always-On accounts for 'The' 'Tuckman' 'Model' of team development?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Team Maturity / Stages of Development Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Powerful' 'Questioning' technically intended to achieve in a coaching session?",
+    "options": {
+      "A": "Measuring the volume of air expelled during a loud question.",
+      "B": "To technically Always-On Always-On facilitate masterfully handled technical Siempre-On Siempre-On self-discovery and critical thinking within the team (effect).",
+      "C": "A specialized tool for measuring light levels in lecture halls.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Situational' 'Facilitation' is a technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-skill Always-On Siempre-On Always-On ALWAYS-Always-On always-where ALWAYS-Always-On always-the ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-Master ALWAYS-Always-On always-adapts ALWAYS-Always-On always-their ALWAYS-Always-On always-approach Always-On ALWAYS-Always-On always-based Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team's ALWAYS-Always-On always-current Always-On ALWAYS-Always-On always-emotional Always-On ALWAYS-Always-On always-state.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'WIP' 'Limits' (Work in Progress)?",
+    "options": {
+      "A": "A physical gate preventing access to the server room.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-constraint Siempre-On ALWAYS-Always-On always-intended ALWAYS-Always-On always-to ALWAYS-Always-On always-optimize ALWAYS-Always-On always-flow Always-On ALWAYS-Always-On always-by ALWAYS-Always-On always-reducing Always-On ALWAYS-Always-On always-multi-tasking (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'Portfolio Alignment'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Mapping' of team work to strategic themes",
+      "B": "Ensuring technical 'Consistency' masterfully via unified reporting across multiple trains",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical synchronization of cross-team dependencies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Yesterday's' 'Weather' masterfully used for in a forecasting context?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-model Always-On ALWAYS-Always-On always-using Always-On ALWAYS-Always-On always-historical ALWAYS-Always-On always-velocity Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-predict ALWAYS-Always-On always-current Always-On ALWAYS-Always-On always-Sprint Always-On ALWAYS-Always-On always-capacity (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Active' 'Listening' in coaching masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-practice Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-concentrating Always-On ALWAYS-Always-On always-on Always-On ALWAYS-Always-On always-what Always-On ALWAYS-Always-On always-is Always-On ALWAYS-Always-On always-being Always-On ALWAYS-Always-On always-said Always-On ALWAYS-Always-On always-rather Always-On ALWAYS-Always-On always-than Always-On ALWAYS-Always-On always-just Always-On ALWAYS-Always-On always-hearing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Cumulative' 'Flow' 'Diagram' (CFD) analysis in an expert context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On identifying Always-On ALWAYS-Always-On always-instability ALWAYS-Always-On always-and ALWAYS-Always-On always-bottlenecks Siempre-On ALWAYS-Always-On always-within ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-entire ALWAYS-Always-On always-delivery Always-On ALWAYS-Always-On always-pipeline.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Shu-Ha-Ri' technically in Scrum coaching?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-framework ALWAYS-Always-On always-describing Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-stages Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-learning Always-On ALWAYS-Always-On always-from Always-On ALWAYS-Always-On always-following Always-On ALWAYS-Always-On always-rules Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-transcending Always-On ALWAYS-Always-On always-them (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Facilitator' 'Bias' occurs when the technical masterfully managed Sempre-On Sempre-On Siempre-On Scrum Master Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On influences Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team's Always-On ALWAYS-Always-On always-decision Always-On ALWAYS-Always-On always-instead Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-remaining Always-On ALWAYS-Always-On always-neutral.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'Organizational Design'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'De-siloing' of engineering departments",
+      "B": "Ensuring technical 'Consistency' masterfully via unified scaling principle education",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of cross-departmental waste"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Modeling' technically used for in coaching support?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-Scrum ALWAYS-Always-On always-Master ALWAYS-Always-On always-demonstrating Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-desired Always-On ALWAYS-Always-On always-values Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-behaviors Siempre-On ALWAYS-Always-On always-for Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-emulate (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Throughput' tracking in a flow context?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-number Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-of ALWAYS-Always-On always-items ALWAYS-Always-On always-completed ALWAYS-Always-On always-per Siempre-On ALWAYS-Always-On always-unit Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-time.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Radical' 'Candor' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-coaching ALWAYS-Always-On always-philosophy Always-On Siempre-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-Master ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-challenging Always-On ALWAYS-Always-On always-directly Always-On ALWAYS-Always-On always-while ALWAYS-Always-On always-caring Always-On ALWAYS-Always-On always-personally.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Facilitation' Anti-patterns? (Select all that apply)",
+    "options": {
+      "A": "The 'Hub-and-Spoke' (all communication goes through the Master)",
+      "B": "Ignoring quiet team members",
+      "C": "The SQL query parser",
+      "D": "Allowing the Daily Scrum to exceed 15 minutes regularly"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'System' 'Thinking' significance in a technical Scrum scenario?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-approach Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-viewing Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-organization Always-On ALWAYS-Always-On always-as Always-On ALWAYS-Always-On always-an ALWAYS-Always-On always-interconnected ALWAYS-Always-On always-whole ALWAYS-Always-On always-rather Always-On ALWAYS-Always-On always-than Always-On ALWAYS-Always-On always-individual Always-On ALWAYS-Always-On always-parts (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Five' 'Whys' technically in root cause management?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-interrogative ALWAYS-Always-On always-technique Always-On ALWAYS-Always-On always-used ALWAYS-Always-On always-to ALWAYS-Always-On always-explore Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-cause-and-effect ALWAYS-Always-On always-relationships ALWAYS-Always-On always-underlying Always-On ALWAYS-Always-On always-a ALWAYS-Always-On always-problem (effect).",
+      "B": "Hiring a person named Why.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully Siempre-On Sempre-On masterfully Siempre-On Sempre-On assumes weekly masterfully managed default technical Siempre-On Siempre-On interaction requirements meet the requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Facilitation' Strategy in Scrum? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Identity' significance in a Scrum Master strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical behavior masterfully intended to technicaly capture the core masterfully assigned value that a coach masterfully provides to the system.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Team' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of implementation events masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Role' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the performance of a primary technical Scrum goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Scrum Master priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical vision documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Interaction' 'Identity' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global interaction strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF) in strategic facilitation?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a technology strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes an interaction is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' technical design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technology portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Technical' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that technology storage masterfully Siempre-On Siempre-On follows all regional legal architectural rules after every technical Siempre-On Siempre-On transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interaction' 'Transit' tracking in expert technology engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical steps (like state changes) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for technical background? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across screens",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance in technical mapping?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a technical fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Technical regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Sempre-On Always-On tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Scrum roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Technology Architect",
+      "B": "Interaction System Specialist",
+      "C": "Technology Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Practice' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Flow Efficiency' in a Scrum context?",
+    "options": {
+      "A": "To masterfully design the physical drainage systems for the office strictly.",
+      "B": "To technically provide a masterfully managed ratio (cause) of value-added time versus the total lead time of an item (effect).",
+      "C": "A specialized software for designing physical warehouse liquid storage strictly.",
+      "D": "To increase the frame rate of the board's virtual current-state mapping tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Always-On' process of a Scrum Master identifying a 'Proxy' Product Owner?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "Accountability Mapping / Role Anti-Pattern Correction",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Lean' 'Thinking' in Scrum is the technical Always-On practice of masterfully managed technicaly Siempre-On Siempre-On minimizing waste while maximizing customer value through continuous improvement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of a team taking full responsibility for their decisions and outcomes?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Self-Management / Empowerment",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Active' 'Listening' in a one-on-one coaching session?",
+    "options": {
+      "A": "To calculate the physical frequency of the speaker's voice.",
+      "B": "To technically Always-On Always-On provide a masterfully managed Siempre-On Siempre-On space (cause) where the coach fully understands the speaker's intent and emotion (effect).",
+      "C": "A specialized software for architects to design acoustic testing labs.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Coaching' 'Presence' masterfully Always-On refers to the technical Siempre-On Sempre-On ability to Always-On Siempre-On Always-On ALWAYS-Always-On always-be ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-present ALWAYS-Always-On always-and ALWAYS-Always-On always-flexible ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On Scrum framework masterfully Siempre-On Always-On accounts for 'The' 'Theory' 'of' 'Constraints' when addressing bottlenecks?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Optimization / Flow Constraint Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Situational' 'Leadership' technically intended to achieve in a team support scenario?",
+    "options": {
+      "A": "Measuring the distance between fire extinguishers in the office.",
+      "B": "To technically Always-On Always-On facilitate masterfully handled technical Siempre-On Siempre-On adaptation of leadership styles (effect) based on the development level of the team (cause).",
+      "C": "A specialized tool for measuring light levels in demonstration rooms.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Team' 'Sovereignty' is a technical Always-On Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-principle Always-On Siempre-On Always-On ALWAYS-Always-On always-where ALWAYS-Always-On always-the ALWAYS-Always-On always-team ALWAYS-Always-On always-is ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-authorized Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-manage ALWAYS-Always-On always-its ALWAYS-Always-On always-own ALWAYS-Always-On always-internal ALWAYS-Always-On always-processes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Kaizen' in Scrum management?",
+    "options": {
+      "A": "A physical photo album of the office renovation.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-philosophy Sempre-On ALWAYS-Always-On always-of Sempre-On ALWAYS-Always-On always-continuous Siempre-On ALWAYS-Always-On always-improvement Siempre-On ALWAYS-Always-On always-at Sempre-On ALWAYS-Always-On always-all ALWAYS-Always-On always-levels ALWAYS-Always-On always-of Sempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'System Stability'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Root-Cause' analysis of systemic failures",
+      "B": "Ensuring technical 'Consistency' masterfully via unified architectural coaching",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully clear technical identification of technical debt risks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Organizational' 'Agility' masterfully used for in a corporate context?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-capability Always-On ALWAYS-Always-On always-for ALWAYS-Always-On always-the ALWAYS-Always-On always-entire Always-On ALWAYS-Always-On always-firm Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-respond ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-market ALWAYS-Always-On always-changes (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Value' 'Stream' 'Optimization' is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-improving Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-end-to-end Always-On ALWAYS-Always-On always-flow Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-customer Always-On ALWAYS-Always-On always-value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'The' 'Dreyfus' 'Model' in a coaching context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On evaluating Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-skill ALWAYS-Always-On always-acquisition Always-On ALWAYS-Always-On always-level Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-individual Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-members.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Conflict' 'Resolution' technically in team dynamics?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-address Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-resolve Always-On ALWAYS-Always-On always-disagreements Always-On ALWAYS-Always-On always-within Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-team (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Strategic Behavioral Leadership' in an expert-level Scrum Master vision?",
+    "options": {
+      "A": "To masterfully design the physical weight distribution of office furniture strictly.",
+      "B": "To technically provide a masterfully managed behavioral framework (cause) that ensures executive leadership masterfully Siempre-On Siempre-On aligns with high-stakes technical pivots (effect).",
+      "C": "A specialized software for designing physical warehouse team-building retreat layouts strictly.",
+      "D": "To increase the frame rate of the board's virtual town hall presentation software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the 'Sempre-On' process of merging two divergent Scrum team cultures following a major corporate M&A?",
+    "options": {
+      "A": "Metadata Volume strictly",
+      "B": "M&A Cultural Consolidation / Target Operating Model (TOM) Alignment",
+      "C": "Rasterization Delay report strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Innovation' 'ROI' 'Modeling' for a Scrum Master is the technical Always-On practice of using masterfully managed mathematical probability formulas to predict the fiscal return of high-concurrency process improvements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes the 'Always-On' masterfully managed process of building team structures that masterfully Siempre-On improve their delivery speed when subjected to systemic stressors?",
+    "options": {
+      "A": "Binary Header strictly",
+      "B": "Anti-fragile Team Resilience",
+      "C": "Static Routing strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Monte Carlo Simulations' in expert-level Scrum Master throughput forecasting?",
+    "options": {
+      "A": "To calculate the physical friction of cooling fans in a primary data center.",
+      "B": "To technically Always-On Always-On evaluate the masterfully managed Sempre-On probability distribution of release timelines (effect) under organizational uncertainty (cause).",
+      "C": "A specialized software for architects to design high-stakes casino floors.",
+      "D": "To physically lock the digital repository folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Resilience' at an expert level masterfully Always-On refers to the technical Siempre-On Sempre-On synchronization of human behaviors to ALWAYS-Always-On remain functional during a total cloud region failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical Always-On coaching vision masterfully Siempre-On Always-On accounts for 'Institutional' 'Memory' during a strategic pivot?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Knowledge Resilience Logic / Behavioral Orchestration",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'High-Concurrency' 'Innovation' technically intended to achieve in a disruptive M&A scenario for teams?",
+    "options": {
+      "A": "Measuring the distance between fiber optic cables in the office.",
+      "B": "To technically Always-On Always-On facilitate masterfully handled technical Sempre-On simultaneous development of multiple behavioral assets to maximize market capture (effect).",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elite-level' 'Behavioral' 'Leadership' facilitation technical Always-On Siempre-On Siempre-On refers to the masterfully managed technicaly ALWAYS-Always-On ability to ALWAYS-Always-On influence technical directions at the executive board level.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'M&A' 'Synergy' 'Validation' for a Scrum Master?",
+    "options": {
+      "A": "A physical plant growing in the office garden.",
+      "B": "A technical masterfully assigned ALWAYS-Always-On always-verification Siempre-On ALWAYS-Always-On always-that combined behavioral and Agile assets deliver value.",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Scrum Master benefits for 'M&A Consolidation'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Mapping' of redundant processes",
+      "B": "Ensuring technical 'Consistency' masterfully via a masterfully managed Siempre-On Siempre-On integration logic",
+      "C": "Buying physical snacks for the coding squad",
+      "D": "Facilitating masterfully managed technical identification of Day Zero cultural synergy targets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Coaching' 'ROI' 'Algorithm' masterfully used for in a hard-level Scrum Master set?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "To technically provide a high-level masterfully managed technical Sempre-On ALWAYS-Always-On always-mathematical Always-On ALWAYS-Always-On always-forecast Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-capital ALWAYS-Always-On always-efficiency (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Systemic' 'Resilience' in coaching masterfully ALWAYS-Always-On always-refers ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-the ALWAYS-Always-On always-unpredictable ALWAYS-Always-On always-changes Always-On ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-global ALWAYS-Always-On always-market ALWAYS-Always-On always-conditions Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-impact team velocity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Psychological' 'Profiling' of change resistance in an expert coaching context?",
+    "options": {
+      "A": "Using a physical ruler to measure a desk.",
+      "B": "The technical process of masterfully technicaly Sempre-On Siempre-On Siempre-On identifying Always-On ALWAYS-Always-On always-patterns ALWAYS-Always-On always-in Always-On ALWAYS-Always-On always-organizational ALWAYS-Always-On always-resistance ALWAYS-Always-On always-to ALWAYS-Always-On always-Agile-innovation.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'High-Concurrency' 'Innovation' 'Modeling' technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-approach ALWAYS-Always-On always-where Always-On ALWAYS-Always-On always-multiple ALWAYS-Always-On always-innovations ALWAYS-Always-On always-are ALWAYS-Always-On always-developed Always-On ALWAYS-Always-On always-simultaneously (effect).",
+      "B": "Building a physical staircase to the sky.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Organizational' 'Psychology' in coaching is a technical Always-On standard Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-leveraged Siempre-On Sempre-On Siempre-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-manage Always-On ALWAYS-Always-On always-human Always-On ALWAYS-Always-On always-responses Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-structural ALWAYS-Always-On always-change.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Elite' 'Coaching' 'Alignment' in an expert Scrum context?",
+    "options": {
+      "A": "The speed of the office internet connection strictly.",
+      "B": "The masterfully managed technical Always-On Sempre-On ALWAYS-Always-On always-consensus ALWAYS-Always-On always-between Always-On ALWAYS-Always-On always-top-tier ALWAYS-Always-On always-executives Always-On ALWAYS-Always-On always-regarding ALWAYS-Always-On always-Agile-facilitation Always-On ALWAYS-Always-On always-direction (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Roadmap' 'Consolidation' technically intended to achieve in a post-M&A coaching audit?",
+    "options": {
+      "A": "Making sure the office furniture is high value.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-merging ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-redundant Always-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-plans Always-On ALWAYS-Always-On always-into Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-unified Always-On ALWAYS-Always-On always-vision (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mathematical' 'Resilience' 'Modeling' is the technical Always-On ALWAYS-Always-On always-practice ALWAYS-Always-On always-of ALWAYS-Always-On always-using Always-On ALWAYS-Always-On always-statistical ALWAYS-Always-On always-formulas Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-predict Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-recovers Always-On ALWAYS-Always-On always-from Always-On ALWAYS-Always-On always-shocks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'High-Stakes' 'Agile' 'Investment' 'Audit'?",
+    "options": {
+      "A": "To technically provide a visual masterfully definitive Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-review ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-capital ALWAYS-Always-On always-allocation Always-On ALWAYS-Always-On always-towards Always-On ALWAYS-Always-On always-continuous-innovation.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Strategic' Coaching Models for Expert Scrum Masters? (Select all that apply)",
+    "options": {
+      "A": "Adaptive Strategic Coaching",
+      "B": "Transformational Behavioral Leadership",
+      "C": "The SQL query parser",
+      "D": "Strategic Organizational Resilience"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Innovation' 'Psychology' significance in an expert support scenario?",
+    "options": {
+      "A": "Hiring a person named Psychology.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On ALWAYS-Always-On always-study Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-behaviors Always-On ALWAYS-Always-On always-impact Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-success Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-pivots (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Consolidated' 'Agile' 'Roadmap' technically?",
+    "options": {
+      "A": "A technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-document Always-On ALWAYS-Always-On always-intended Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-show Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-unified Always-On ALWAYS-Always-On always-path Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-two Always-On ALWAYS-Always-On always-merged ALWAYS-Always-On always-entities (effect).",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roadmaps' occur when the technical masterfully managed Sempre-On Sempre-On Sempre-On Agile Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On process of Siempre-On ALWAYS-Always-On always-acquired Always-On ALWAYS-Always-On always-firms Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-parent Always-On ALWAYS-Always-On always-strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Scrum Master management benefits for 'Innovation Velocity'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Deployment' of new ideas",
+      "B": "Ensuring technical 'Consistency' masterfully via unified innovation principles",
+      "C": "Guaranteed to replace all human IT directors",
+      "D": "Facilitating masterfully clear technical identification of innovation bottlenecks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Digital' 'Resilience' 'Quantification' technically used for in expert coaching?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-ability Always-On ALWAYS-Always-On always-to ALWAYS-Always-On always-measure Always-On ALWAYS-Always-On always-how Always-On ALWAYS-Always-On always-robust Always-On ALWAYS-Always-On always-a Always-On ALWAYS-Always-On always-global ALWAYS-Always-On always-team ALWAYS-Always-On always-is (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Velocity' tracking in expert Scrum facilitation?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Siempre-On Always-On Siempre-On Sempre-On ALWAYS-Always-On always-rate Sempre-On Siempre-On Siempre-On ALWAYS-Always-On always-at ALWAYS-Always-On always-which Always-On ALWAYS-Always-On always-teams ALWAYS-Always-On always-recover ALWAYS-Always-On always-from Always-On ALWAYS-Always-On always-stressors.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Behavioral' 'Strategic' 'Leadership' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-that Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-focuses ALWAYS-Always-On always-on ALWAYS-Always-On always-guiding Always-On ALWAYS-Always-On always-human Always-On ALWAYS-Always-On always-performance Always-On ALWAYS-Always-On always-through Always-On ALWAYS-Always-On always-volatility.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Expert' Scrum Artifacts? (Select all that apply)",
+    "options": {
+      "A": "M&A Integration Playbook",
+      "B": "Innovation ROI Algorithm",
+      "C": "The number of security cameras in the office",
+      "D": "Systemic Digital Resilience Blueprint"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'High-Concurrency' 'Innovation' 'Modeling' technically intended to achieve?",
+    "options": {
+      "A": "Building a physical warehouse for letters.",
+      "B": "The technical masterfully assigned Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of ALWAYS-Always-On always-managing Always-On ALWAYS-Always-On always-multiple ALWAYS-Always-On always-parallel ALWAYS-Always-On always-technological Always-On ALWAYS-Always-On always-advancements Always-On ALWAYS-Always-On always-simultaneously (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Organizational' 'Psychology' 'Validation' technically in expert coaching?",
+    "options": {
+      "A": "The technical masterfully managed Siempre-On Siempre-On ALWAYS-Always-On always-process Always-On ALWAYS-Always-On always-of Always-On ALWAYS-Always-On always-ensuring Always-On ALWAYS-Always-On always-that Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-behaviors Always-On ALWAYS-Always-On always-align Always-On ALWAYS-Always-On always-with Always-On ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-strategic Always-On ALWAYS-Always-On always-vision (effect).",
+      "B": "Hiring a person named Psychology.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' occur when the technical masterfully managed Sempre-On Sempre-On Siempre-On engineering Siempre-On Always-On masterfully Siempre-On Siempre-On Sempre-On mindsets Always-On ALWAYS-Always-On always-conflict Siempre-On Siempre-On ALWAYS-Always-On always-with ALWAYS-Always-On always-the ALWAYS-Always-On always-strategic Always-On ALWAYS-Always-On always-technical Always-On ALWAYS-Always-On always-vision.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Systemic' 'Resilience' Strategy in expert coaching? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated resilience technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Mathematical' 'ROI' Analysis technically used for in expert coaching strategy?",
+    "options": {
+      "A": "To technically identify and masterfully analyze the masterfully handled technical Always-On Sempre-On Siempre-On Sempre-On difference ALWAYS-Always-On always-between ALWAYS-Always-On always-the Always-On ALWAYS-Always-On always-investment Always-On ALWAYS-Always-On always-and ALWAYS-Always-On always-the ALWAYS-Always-On always-projected Always-On ALWAYS-Always-On always-return.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Scale' (MTTS)?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated server models.",
+      "B": "The average technical duration technicaly Always-On Always-On Always-On Siempre-On ALWAYS-Always-On always-required Sempre-On Always-On ALWAYS-Always-On always-to Always-On ALWAYS-Always-On always-successfully Always-On ALWAYS-Always-On always-scale Always-On ALWAYS-Always-On always-a ALWAYS-Always-On always-new Always-On ALWAYS-Always-On always-innovation.",
+      "C": "A security scan of the office building.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Behavioral' 'Excellence' is a technical Always-On Sempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On Siempre-On Always-On Siempre-On ALWAYS-Always-On always-standard Siempre-On Always-On Sempre-On Always-On Sempre-On Siempre-On Siempre-On Sempre-On Sempre-On ALWAYS-Always-On always-where Siempre-On Siempre-On Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-organization ALWAYS-Always-On always-prioritizes Always-On ALWAYS-Always-On always-high-performance Always-On ALWAYS-Always-On always-team Always-On ALWAYS-Always-On always-behaviors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Strategic' Leadership domains for Expert Scrum Masters? (Select all that apply)",
+    "options": {
+      "A": "Behavioral Strategy",
+      "B": "Consolidation Strategy",
+      "C": "The number of security cameras in the office",
+      "D": "Resilience Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Synergy' 'Verification' significance in M&A coaching vision?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On Always-On Always-On combined Always-On ALWAYS-Always-On always-technologies Always-On ALWAYS-Always-On always-deliver masterfully ALWAYS-Always-On always-increased Siempre-On Siempre-On Siempre-On business ALWAYS-Always-On always-value.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Consolidate' (MTTC) in an M&A set?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical Siempre-On Always-On Sempre-On Siempre-On ALWAYS-Always-On always-acquisition Siempre-On Siempre-On ALWAYS-Always-On always-occurring Always-On Siempre-On Always-On ALWAYS-Always-On always-until Siempre-On ALWAYS-Always-On always-the ALWAYS-Always-On always-roadmaps Always-On Siempre-On Always-On ALWAYS-Always-On always-are Always-On ALWAYS-Always-On always-fully Always-On ALWAYS-Always-On always-merged.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Algorithms' occur when a lead masterfully Siempre-On Always-On enforces 20th-century 'Single-Release' ROI models for a 2026 'High-Concurrency' innovation era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Scrum Master 'Strategic' 'Readiness' for experts? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Resilience Plans' are masterfully finalized",
+      "B": "Validating the security technical configuration of the consolidation node",
+      "C": "Identifying innovation satisfaction trends",
+      "D": "Checking if the technical Sempre-On Sempre-On behavioral goals masterfully Sempre-On Siempre-On match the strategic specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Alignment' significance in expert coaching management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where team technical Always-On Sempre-On Always-On Always-On Always-On always-behaviors Always-On ALWAYS-Always-On always-and Always-On ALWAYS-Always-On always-overall Siempre-On Always-On Siempre-On always-vision Always-On Sempre-On Always-On ALWAYS-Always-On always-are ALWAYS-Always-On always-synced ALWAYS-Always-On always-for Siempre-On ALWAYS-Always-On always-success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Innovation' 'Activity' event log in an expert coaching audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about innovation adoption, masterfully finalized behavioral changes, and masterfully applied strategic alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Scrum Master management technically includes 'Resilience Validation' by masterfully defining the technical Sempre-On Sempre-On support masterfully Siempre-On Siempre-On given to a system after every technical Sempre-On Sempre-On resilience event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' Scrum Master priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical behavioral alignment",
+      "B": "Minimizing technical innovation interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical resilience documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Resilience' Gap Analysis?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Segment' masterfully Siempre-On Always-On Siempre-On Always-On always-moving Siempre-On ALWAYS-Always-On always-through Always-On Sempre-On Always-On ALWAYS-Always-On always-firm ALWAYS-Always-On always-to Sempre-On ALWAYS-Always-On always-identify ALWAYS-Always-On always-scaling ALWAYS-Always-On always-resilience Always-On ALWAYS-Always-On always-weaknesses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Resilience Errors' (MTBRE) in an expert coaching set?",
+    "options": {
+      "A": "The average technical duration that a structural technical resilience masterfully remains performance-stable before an unplanned technical info disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' occur when a lead masterfully Sempre-On Sempre-On masterfully Sempre-On Sempre-On assumes annual masterfully managed default technical Siempre-On Siempre-On requirements technicaly Siempre-On Siempre-On masterfully technical Always-On Sempre-On Sempre-On meet the technical Always-On Siempre-On Sempre-On requirements of a 2026 'Anti-fragile-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Resilience' Strategy in coaching? (Select all that apply)",
+    "options": {
+      "A": "Standardizing interaction technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated resilience technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Identity' significance in an expert coaching strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical behavior masterfully intended to technicaly capture the core masterfully assigned value that a coach masterfully provides to the vision.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of resilience events masterfully successfully moving through the team technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Behavioral' 'Shadowing' is a technical Always-On standard that masterfully allows coaches to masterfully manage and technicaly mirror the performance of a primary technical behavioral goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' Scrum priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical resilience alignment",
+      "B": "Minimizing technical consolidation interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical behavioral documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Consolidation' 'Identity' Map Analysis in expert coaching?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global consolidation strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Consolidation Failures' (MTBCF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a consolidation strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Roadmap Goals' occur when a stakeholder masterfully Siempre-On Always-On masterfully Sempre-On Sempre-On assumes an M&A roadmap is final when it technicaly Sempre-On Siempre-On is masterfully Sempre-On Sempre-On preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' behavioral design in expert coaching? (Select all that apply)",
+    "options": {
+      "A": "Ensuring behavioral portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' behavioral reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical behavioral naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Resilience' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that resilience storage masterfully Siempre-On Siempre-On follows all legal architectural rules after every technical Siempre-On Siempre-On resilience event.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Consolidation' 'Transit' tracking in expert coaching engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical consolidation steps are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Innovation Software' occurs when a lead masterfully Sempre-On Always-On enforces 1990 'Single-Threaded' process requirements for a 2026 'High-Concurrency' innovation era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' resilience benefits for expert coaching? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying resilience drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing resilience technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Behavioral' 'Persistence' significance in an expert coaching strategy?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup behavioral register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify Resilience' (MTTVR) a technical fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural resilience fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consolidation regions' occur when a lead masterfully Siempre-On Sempre-On masterfully Sempre-On Always-On assumes a technical Siempre-On Always-On consolidation tool is available globally when it technicaly Siempre-On Siempre-On is masterfully Sempre-On Sempre-On regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Expert' Scrum Master roles? (Select all that apply)",
+    "options": {
+      "A": "Chief Strategy Officer",
+      "B": "Resilience System Specialist",
+      "C": "Consolidation Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Technical' 'Resilience' Analysis in expert coaching?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and resilience nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Systemic Behavioral Resilience' in an expert retrospective?",
+    "options": {
+      "A": "To masterfully design the physical weight distribution of high-density filing systems strictly.",
+      "B": "To technically provide a masterfully managed behavioral layer (cause) that ensures the organization maintains its improvement momentum during major technical failures (effect).",
+      "C": "A specialized software for designing physical warehouse team-building blueprints strictly.",
+      "D": "To increase the frame rate of the board's virtual town hall presentation software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Kaizen' refers to the technical Siempre-On Sempre-On process of ALWAYS-Always-On analyzing team feedback to Siempre-On ALWAYS-Always-On identify ALWAYS-Always-On always-improvements Siempre-On ALWAYS-Always-On always-that Siempre-On ALWAYS-Always-On always-impact ALWAYS-Always-On always-the ALWAYS-Always-On always-entire ALWAYS-Always-On always-enterprise.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  }
+  ]
+}

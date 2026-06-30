@@ -1,0 +1,1904 @@
+{ 
+  "skill": "Leadership", 
+  "questions": [
+    {
+    "question": "What is the primary difference between 'Leadership' and 'Management'?",
+    "options": {
+      "A": "Leaders focus on physical building security; managers focus on snacks.",
+      "B": "Leaders focus on vision, inspiration, and change, while managers focus on processes, structure, and stability.",
+      "C": "Managers are always higher in rank than leaders.",
+      "D": "Leadership is only for people who own the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Autocratic' leadership style involves a leader making decisions unilaterally without much input from the team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of 'Emotional Intelligence' (EQ) refers to the ability to understand one's own moods and emotions?",
+    "options": {
+      "A": "Social Skill",
+      "B": "Self-Awareness",
+      "C": "Empathy",
+      "D": "Motivation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Servant Leadership'?",
+    "options": {
+      "A": "Hiring servants to do the leader's work.",
+      "B": "A leadership philosophy where the main goal of the leader is to serve and support the growth of their team members.",
+      "C": "A specialized software for office cleaning.",
+      "D": "A way to count the number of employees in a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical stages of team development according to Tuckman's Model? (Select all that apply)",
+    "options": {
+      "A": "Forming",
+      "B": "Storming",
+      "C": "Norming",
+      "D": "Manufacturing physical office supplies"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Delegation' involve in a leadership context?",
+    "options": {
+      "A": "Deleting all emails from the team.",
+      "B": "Entrusting a task or responsibility to another person, typically from a leader to a team member.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of the team's video calls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A leader should always avoid conflict at all costs to keep the team happy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which leadership style encourages team members to participate in the decision-making process?",
+    "options": {
+      "A": "Dictatorial",
+      "B": "Democratic (Participative)",
+      "C": "Transactional",
+      "D": "Laissez-faire"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of leadership, what does 'Active Listening' require?",
+    "options": {
+      "A": "Listening to the radio while working.",
+      "B": "Paying full attention, reflecting on what is said, and providing verbal/non-verbal feedback.",
+      "C": "Interrupting to show that you are paying attention.",
+      "D": "A way to increase the size of the font in a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Transformational' leaders focus on inspiring team members to go beyond their own self-interests for the good of the organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Psychological Safety' within a team?",
+    "options": {
+      "A": "Physical safety locks on the office doors.",
+      "B": "The shared belief that it is safe for team members to take risks, ask questions, and admit mistakes without being punished.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are benefits of a 'Diverse' team? (Select all that apply)",
+    "options": {
+      "A": "Increased creativity and innovation",
+      "B": "Better problem-solving perspectives",
+      "C": "Getting a 50% discount on all physical goods",
+      "D": "Improved employee engagement"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Vision' in a leadership sense?",
+    "options": {
+      "A": "Having 20/20 physical eyesight.",
+      "B": "A clear, inspiring description of what the organization or team wants to achieve in the future.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Leadership is a skill that can be developed and practiced; it is not just an innate trait people are born with.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Transactional' leadership primarily based on?",
+    "options": {
+      "A": "A system of rewards and punishments based on performance.",
+      "B": "Testing with actual radioactive atoms.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Conflict Resolution' techniques? (Select all that apply)",
+    "options": {
+      "A": "Compromising (Finding a middle ground)",
+      "B": "Collaborating (Finding a win-win solution)",
+      "C": "Ignoring the problem until it goes away",
+      "D": "Accommodating (Putting the other person's needs first)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Laissez-faire' leadership?",
+    "options": {
+      "A": "A 'hands-off' approach where team members are given complete freedom to make decisions.",
+      "B": "A specialized software for architects.",
+      "C": "A security scan of the server room.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Micromanagement' is generally considered an effective leadership trait for long-term growth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which activity helps a leader build 'Rapport' with their team?",
+    "options": {
+      "A": "Assigning 100 hours of work without speaking to them.",
+      "B": "Regular one-on-one meetings and active interest in their professional well-being.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the brightness of the monitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Accountability' in leadership?",
+    "options": {
+      "A": "Taking a physical head count of employees.",
+      "B": "Taking responsibility for one's actions and the outcomes of the team's work.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users in a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when a leader assumes the team knows the priority of a task without explicitly stating it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Soft Skills' critical for leadership? (Select all that apply)",
+    "options": {
+      "A": "Communication",
+      "B": "Empathy",
+      "C": "Adaptability",
+      "D": "SQL Query Optimization"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Motivation' in a leadership context?",
+    "options": {
+      "A": "Giving a person physical energy drinks.",
+      "B": "The process that initiates, guides, and maintains goal-oriented behaviors in team members.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Status Report'?",
+    "options": {
+      "A": "A report made of actual physical bricks.",
+      "B": "A summary of progress, challenges, and next steps for a project provided to stakeholders.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Empathy involves physically feeling the exact same pain as another person.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Change Management'?",
+    "options": {
+      "A": "Managing the physical change (coins) in the office jar.",
+      "B": "The structured approach to transitioning individuals, teams, and organizations from a current state to a desired future state.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Situational' leadership?",
+    "options": {
+      "A": "Adapting your leadership style based on the maturity and skill level of the individual or team.",
+      "B": "Leadership that only happens in a dark room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Intrapreneurship' refers to employees acting like entrepreneurs within a large organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to conduct a 'Performance Review'?",
+    "options": {
+      "A": "A physical hammer.",
+      "B": "A structured assessment form and a one-on-one conversation.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mentoring'?",
+    "options": {
+      "A": "Testing a person's physical strength.",
+      "B": "A professional relationship in which an experienced person (mentor) assists another (mentee) in developing specific skills and knowledge.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Conflict' Management?",
+    "options": {
+      "A": "Identifying and handling conflicts sensibly, fairly, and efficiently.",
+      "B": "A physical fight in the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Feedback should be 'Actionable', meaning the recipient knows exactly what steps to take to improve.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common leadership 'Pillars'? (Select all that apply)",
+    "options": {
+      "A": "Integrity",
+      "B": "Trust",
+      "C": "Communication",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' thinking?",
+    "options": {
+      "A": "Thinking about physical game strategies.",
+      "B": "The ability to plan for the future, set goals, and determine the best way to achieve them in a complex environment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Employee Engagement' score?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric indicating how committed and enthusiastic employees are about their work and organization.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Values' in leadership occur when a leader prioritizes speed above all else, while the team values high-quality accuracy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Leadership tools? (Select all that apply)",
+    "options": {
+      "A": "Workday",
+      "B": "Lattice",
+      "C": "Culture Amp",
+      "D": "Adobe After Effects"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Succession Planning'?",
+    "options": {
+      "A": "Planning a physical party for a successor.",
+      "B": "A strategy for identifying and developing future leaders to fill key roles when current leaders leave.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Resource' Allocation?",
+    "options": {
+      "A": "Allocating physical office chairs.",
+      "B": "Distributing available resources (time, money, people) in the most effective way to meet project goals.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occurs when a manager promises a client a feature in 1 week without checking the team's capacity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' leadership? (Select all that apply)",
+    "options": {
+      "A": "Ensuring all team members feel their voices are heard",
+      "B": "Deliberately seeking out diverse viewpoints",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Treating all employees with dignity and respect"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Resilience' in a leader?",
+    "options": {
+      "A": "The physical ability to bounce like a ball.",
+      "B": "The capacity to recover quickly from difficulties and maintain a positive attitude during challenges.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Turnover Rate'?",
+    "options": {
+      "A": "Planning a physical party for a person turning over.",
+      "B": "The percentage of employees who leave an organization during a certain period of time.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a leader takes 3 weeks to respond to a time-sensitive team request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Culture' in an organization? (Select all that apply)",
+    "options": {
+      "A": "Shared values and beliefs",
+      "B": "Common behaviors and norms",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "The 'vibe' or environment of the workplace"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Ethics' in leadership?",
+    "options": {
+      "A": "A system of moral principles that guide how a leader makes decisions and interacts with others.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Team' Synergy?",
+    "options": {
+      "A": "Synergy across two different physical buildings.",
+      "B": "The interaction or cooperation of two or more members to produce a combined effect greater than the sum of their separate parts.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a leader uses a very formal communication style with a startup team that prefers casual Slack messages.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Goal' setting frameworks? (Select all that apply)",
+    "options": {
+      "A": "OKRs (Objectives and Key Results)",
+      "B": "SMART Goals",
+      "C": "The SQL query parser",
+      "D": "KPIs (Key Performance Indicators)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Empowerment'?",
+    "options": {
+      "A": "Giving a person physical power cables.",
+      "B": "The process of giving employees the authority, skills, and resources to make decisions and take initiative.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'NPS' (Net Promoter Score) for employees?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric used to measure employee loyalty and satisfaction by asking how likely they are to recommend the company as a place to work.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when a leader fails to document disciplinary conversations or performance improvements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'External' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Customers",
+      "B": "Investors",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Suppliers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Active' Feedback?",
+    "options": {
+      "A": "Feedback that only happens in specific physical situations.",
+      "B": "Regularly providing team members with clear information about their performance to guide improvement.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Leader' Onboarding?",
+    "options": {
+      "A": "Putting the leader on a physical boat.",
+      "B": "The process of integrating a new leader into the organization's culture, expectations, and team dynamics.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager trying to use outdated management software that the team cannot access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' Business Goals? (Select all that apply)",
+    "options": {
+      "A": "Increasing market share",
+      "B": "Improving brand reputation",
+      "C": "Buying physical snack for the office",
+      "D": "Enhancing operational efficiency"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Collaboration'?",
+    "options": {
+      "A": "The intelligence of a person named EQ.",
+      "B": "Individuals working together to achieve a common goal or produce a shared outcome.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Diversity' Index?",
+    "options": {
+      "A": "A quantitative measure of the variety of different demographic groups represented within a team or organization.",
+      "B": "The rate at which physical papers are lost.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a promotion immediately after their first successful project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Leadership' Training? (Select all that apply)",
+    "options": {
+      "A": "Workshops on effective communication",
+      "B": "Identifying program satisfaction trends",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Developing conflict resolution skills"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Lobbying'?",
+    "options": {
+      "A": "Lobbying a person name Executive.",
+      "B": "The act of attempting to influence the actions, policies, or decisions of officials in their daily life.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Project' ROI?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A financial metric that calculates the profit or loss generated by a project relative to its cost.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a leader tries to enforce 'Business Casual' dress codes in a 100% remote software company.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Leadership stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CEO",
+      "B": "Board of Directors",
+      "C": "Department Heads",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Change' Resistance?",
+    "options": {
+      "A": "Building a physical wall to stop change.",
+      "B": "The act of opposing or struggling with modifications or transformations that alter the status quo.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kotter's 8-Step Change Model, what is the primary technical objective of 'Generating Short-Term Wins'?",
+    "options": {
+      "A": "To give the team a physical trophy for their desks.",
+      "B": "To build credibility, silence critics, and maintain momentum by proving the change effort is producing results.",
+      "C": "To finish the entire project in under one week.",
+      "D": "To automatically update the company's financial stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Adaptive Leadership' is a framework that focuses on helping individuals and organizations adapt to 'Technical Problems' which have known solutions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Conflict Management' style is technically the most effective when both parties' concerns are too important to be compromised?",
+    "options": {
+      "A": "Avoiding",
+      "B": "Collaborating (Integrating)",
+      "C": "Competing",
+      "D": "Accommodating"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Coalition' in high-level organizational leadership?",
+    "options": {
+      "A": "A physical group of soldiers guarding the office.",
+      "B": "A group of influential stakeholders from different departments who work together to lead and support a specific change initiative.",
+      "C": "A specialized software for architects to design shared workspaces.",
+      "D": "A way to backup SQL server logs across multiple regions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which aspect of 'Emotional Intelligence' is technically required for a leader to handle 'Social Loafing' within a team?",
+    "options": {
+      "A": "Self-Awareness strictly",
+      "B": "Social Regulation (Conflict Management) and Motivation",
+      "C": "Owning the fastest computer in the office",
+      "D": "Hiring a professional actor to represent the team"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Developmental' 'Stages' occur when a leader uses a 'Delegating' style for a team member who is a 'Disillusioned Learner' with low commitment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Strategic Management', what is the 'VRIO' framework used for?",
+    "options": {
+      "A": "Measuring the physical volume of a server.",
+      "B": "Evaluating an organization's resources and capabilities to determine its competitive advantage (Value, Rarity, Imitability, Organization).",
+      "C": "A specialized security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Psychological' 'Reactance' and how should a leader address it during a transition?",
+    "options": {
+      "A": "When a physical server reacts to static electricity.",
+      "B": "The negative emotional response to a perceived threat to one's autonomy; leaders address it by involving employees in the decision process.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the size of the font in a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are characteristics of a 'High-Performance' team culture? (Select all that apply)",
+    "options": {
+      "A": "Radical Candor (honest feedback)",
+      "B": "High levels of Psychological Safety",
+      "C": "Clear alignment between individual goals and company vision",
+      "D": "All employees working 80 hours per week"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Cross-Functional' leadership logic requires a leader to have technical mastery over every single department they manage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of the 'Abilene Paradox' for a leadership team?",
+    "options": {
+      "A": "A physical road in Texas that leads to a dead end.",
+      "B": "A situation where a group collectively decides on a course of action that is counter to the preferences of many individuals because no one wants to object.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Succession' 'Bench' 'Strength'?",
+    "options": {
+      "A": "The physical strength of the office chairs.",
+      "B": "The count and readiness level of internal candidates prepared to step into critical leadership roles immediately.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Assertion' strategy should a leader use when delivering 'Negative' feedback to a 'High-Performer'?",
+    "options": {
+      "A": "The 'Sandwich' method (Positive, Negative, Positive)",
+      "B": "Direct, data-driven feedback focused on future growth rather than past blame",
+      "C": "Publicly announcing the mistake in a meeting",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership refers to a scenario where a manager promises a 'Zero Defect' product to a client while the engineering budget is cut by 50%.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Sentiment' 'Analysis' benefits for HR leaders? (Select all that apply)",
+    "options": {
+      "A": "Identifying early signs of team burnout via anonymized surveys",
+      "B": "Tracking morale trends across different departments",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Enabling data-driven interventions for culture issues"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Leader' 'Standard' 'Work' (LSW) in a Lean Management context?",
+    "options": {
+      "A": "A physical manual for building server racks.",
+      "B": "A set of daily, weekly, and monthly tasks that leaders perform to ensure processes are stable and improvements are sustained.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Resolution' (MTTR) for internal conflicts?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A metric tracking how long it takes for a formal employee dispute to be resolved by management or HR.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' occur when a 'Top-Down' leader is placed in charge of a 'Holacracy' (flat) organization, causing total process friction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' leadership framework handles 'External' 'Threat' analysis?",
+    "options": {
+      "A": "SWOT Analysis (specifically the 'T')",
+      "B": "PESTLE Analysis",
+      "C": "Both A and B",
+      "D": "The SQL query parser"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' and why is it important for senior leaders?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "A method where leaders challenge the underlying assumptions, policies, and goals of the organization, not just the technical steps.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Talent' 'Calibration'?",
+    "options": {
+      "A": "Calibrating a physical person name Talent.",
+      "B": "A process where managers across departments meet to ensure consistent performance standards and ratings across the whole company.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a leader expects a 'Culture Shift' to happen in 2 weeks, while typical behavioral change takes 6-18 months.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Decision' 'Making' styles? (Select all that apply)",
+    "options": {
+      "A": "Consensus (Everyone agrees)",
+      "B": "Consultative (Leader asks, then decides)",
+      "C": "Autocratic (Leader decides alone)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Leadership'?",
+    "options": {
+      "A": "Leading a person in a dark room.",
+      "B": "The informal influence exerted by employees who do not have formal authority but shape the culture and decisions of the team.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Retention' 'Analytics'?",
+    "options": {
+      "A": "Analytics of a person named Retention.",
+      "B": "Using data to identify high-risk 'flight' employees and the leading causes of resignation within a business unit.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a leader uses a 1990s management framework for a Gen-Z team with different work-life values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Investors",
+      "B": "Regulatory Bodies",
+      "C": "Community Leaders",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Risk' 'Management' in leadership?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The process of weighing the potential positive outcomes of a decision against the probable negative consequences using data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Hire' (MTTH)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a job req is opened until an offer is accepted by a candidate.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a leader uses formal email for a time-critical server outage when the team uses a 'War-Room' Discord/Slack channel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' 'Decision' 'Making'? (Select all that apply)",
+    "options": {
+      "A": "Actively inviting minority voices into the boardroom",
+      "B": "Conducting 'blind' idea reviews where the author is unknown",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Ensuring quiet team members have a dedicated space to speak"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cognitive' 'Bias' in leadership hiring?",
+    "options": {
+      "A": "Unconscious shortcuts in thinking that lead to unfair judgment, such as 'Halo Effect' or 'Affinity Bias'.",
+      "B": "A bias that is physically small.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cultural' 'Debt'?",
+    "options": {
+      "A": "The future cost of negative cultural issues (toxic behavior, lack of trust) caused by choosing quick, easy social fixes today.",
+      "B": "A physical debt owed to a museum.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a leader provides feedback 6 months after an event occurs during the annual review.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Engagement' 'Drivers'? (Select all that apply)",
+    "options": {
+      "A": "Meaningful Work",
+      "B": "Opportunities for Growth",
+      "C": "Trust in Leadership",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Leadership' logic in a DevOps team?",
+    "options": {
+      "A": "Hiring servants to write the code.",
+      "B": "Focusing on removing technical and bureaucratic blockers so the engineering team can achieve 'Flow'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Promotion' 'Velocity'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how quickly top-performing employees move through hierarchical levels within an organization.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Creative' designer a laptop that cannot run high-end graphics software.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Leadership' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into project burn-down charts",
+      "B": "Consistency in data presentation for executive boards",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual spreadsheet tracking for managers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in leadership training?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' leadership lessons from one industry (e.g., Military) and apply them to another (e.g., Tech).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a team's performance dip?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a team-wide drop in output until the leader's intervention restores productivity.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a leader delegates a project but does not provide the team member with the actual signing authority/budget to execute it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Board of Directors",
+      "B": "Chief People Officer (CPO)",
+      "C": "External Talent Headhunters",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a new management team?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The process of quickly establishing shared values, communication norms, and decision-making protocols for a newly formed leadership group.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of strategic goals?",
+    "options": {
+      "A": "The percentage of company OKRs that were fully achieved during a fiscal year.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects 'Instant' feedback on every Slack message they send to the CEO.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' for leaders? (Select all that apply)",
+    "options": {
+      "A": "Identifying high-performer 'flight risks' before they resign",
+      "B": "Predicting future revenue based on current sales pipeline velocity",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing team sentiment to identify management bottlenecks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in leadership confidentiality?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Salary' and 'Performance' data for Team A is technically unreachable by the manager of Team B.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Resignations' (MTBR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of team stability before a voluntary departure occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the board expects '100% Growth' in a market that is physically limited to '5% Capacity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' for HR? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Culture' requirements",
+      "B": "Keeping records updated with rapidly changing local labor laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if leaders check boxes without actual change"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a strategic plan?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical execution details are isolated from the high-level business goals, so tactics can change without the vision shifting.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a cultural problem?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the first signal of toxic behavior until management officially begins an investigation or intervention.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in leadership occur when an organization uses a 2010 'Waterfall' leadership approach for a 2024 'Agile' software project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategy' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Operations Officer (COO)",
+      "B": "Strategy Architect",
+      "C": "Compliance Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Ecosystem' 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of partnerships, tools, vendors, and internal talent to ensure long-term market dominance.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ) in a team?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a team's output dropping below standard and the manager restoring high-quality production through training or coaching.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Instant' promotion after achieving 1 goal in a 12-month fiscal cycle.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' for leaders? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into product release readiness",
+      "B": "Reduction in manual administrative work for directors",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Consistency in result presentation across different global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a leadership pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Leadership Sprints' where each phase results in a specific, independently verifiable management skill.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical seat being vacated until the new hire is fully onboarded and productive.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a leader assigns 5 top-priority projects to a single team with only enough bandwidth for 1 project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying which business units have the highest 'Retention' risk",
+      "B": "Predicting future market trends based on current data patterns",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Manager Feedback' with 'Team Performance' scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Leadership' 'Asset' 'Maturity' score?",
+    "options": {
+      "A": "A rating of how well a specific leader is developed, based on their team's engagement scores, historical pass rates, and conflict resolution speed.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major strategic error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'toxic employee' is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Organizational Ambidexterity', how should a strategic leader balance 'Exploitation' and 'Exploration'?",
+    "options": {
+      "A": "By ignoring new ideas to focus 100% on current profitable products.",
+      "B": "By simultaneously optimizing current business operations (exploitation) while fostering radical innovation and new market entries (exploration).",
+      "C": "By firing the innovation team whenever the current quarterly revenue dips.",
+      "D": "By creating a physical wall between the 'Sales' and 'Product' departments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Heifetz’s Theory of Adaptive Leadership' posits that 'Technical Challenges' are those that cannot be solved by existing expertise and require a shift in people's values and beliefs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique is used to evaluate the potential impact of multiple, plausible future states on the organization's current trajectory?",
+    "options": {
+      "A": "Scenario Planning",
+      "B": "Linear Regression only",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Strategic Calibration' in a multi-national executive leadership team?",
+    "options": {
+      "A": "To ensure everyone has the same physical office furniture.",
+      "B": "To standardize performance benchmarks and high-potential (HiPo) definitions across different global regions to ensure fair talent mobility.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the executive dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Organizational Psychology', what is 'Moral Disengagement' and how does a strategic leader technically mitigate its risk?",
+    "options": {
+      "A": "When employees forget to go to church.",
+      "B": "The process of convincing oneself that ethical standards do not apply in a particular context; mitigated by establishing explicit 'Ethical Guardrails' and transparent accountability loops.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the company's code of conduct."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Archetypes' occur when a 'Crisis Leader' is kept in power during a long period of 'Steady State' growth, often leading to unnecessary organizational stress and high attrition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a leader deliberately creating a 'Burning Platform' to overcome deep-seated organizational inertia?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Urgency Orchestration (Kotter's Step 1)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Leadership' and its relation to 'Causal Loops'?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The ability to see organizational issues as parts of a dynamic system, identifying how a change in one area (e.g., Incentives) impacts another (e.g., Quality) over time.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Human Capital' ROI calculations for a strategic acquisition? (Select all that apply)",
+    "options": {
+      "A": "Revenue per Full-Time Employee (FTE) growth post-integration",
+      "B": "Retention rate of 'Critical Talent' (Key Developers/Sellers) post-merger",
+      "C": "The cost of 'Knowledge Attrition' due to cultural mismatch",
+      "D": "The number of coffee machines in the new office"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Executive level allows for 'Productive Friction', where leaders can challenge the CEO's vision without fear of political retaliation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in senior leadership evaluation?",
+    "options": {
+      "A": "The physical weight of a person's brain.",
+      "B": "A leader's ability to process and integrate multiple, often conflicting, perspectives to make a decision in a highly ambiguous environment.",
+      "C": "A specialized tool for measuring distance between office locations.",
+      "D": "Hiring a professional actor to simulate a decision."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Resource' 'Sharding'?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of allocating top-tier talent and budget across different innovation 'shards' (horizons) to ensure both short-term revenue and long-term viability.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' leadership behavior involves the leader absorbing the team's anxiety during a pivot to maintain 'Collective Focus'?",
+    "options": {
+      "A": "Micromanagement",
+      "B": "Containment (Emotional Regulation)",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a merger often result in 'Organizational Rejection', where the acquired company's employees actively undermine the parent company's processes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Bench Depth' for roles that don't exist yet (future-proofing)",
+      "B": "Objectively comparing internal vs. external candidate 'Readiness' scores",
+      "C": "Buying physical snacks for the Board of Directors",
+      "D": "Assessing the 'Cultural Fit' of a potential external CEO hire"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-Loop' 'Learning' logic in an Executive Retrospective?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning not just 'did we hit the goal' but 'is this goal still relevant given the shift in market dynamics'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Talent' 'Attrition' 'Risk' 'Aggregation'?",
+    "options": {
+      "A": "The cumulative business risk of losing 'Single Points of Failure' (individuals with unique, undocumented knowledge) across a department.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' occurs when an organization's internal processes and culture become so rigid that they cannot respond to obvious external market threats.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Governance' metrics for a CEO? (Select all that apply)",
+    "options": {
+      "A": "Customer Acquisition Cost (CAC) vs. Lifetime Value (LTV) ratio",
+      "B": "Employee Net Promoter Score (eNPS) trends",
+      "C": "Percentage of revenue from products launched in the last 24 months",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Leadership' 'Entrenchment' risk during a digital transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured leaders will resist new technologies or data-driven decision-making to protect their perceived status or traditional power base.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Strategic' 'Pivot' (MTTSP)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration between a major market shift signal and the organization's official reallocation of resources to address it.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a leader demands 'Cross-team Collaboration' while the compensation structure only rewards 'Individual Performance'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Insight' 'Engines'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to identify 'Blind Spots' in a competitive SWOT analysis",
+      "B": "Predicting churn risk based on employee engagement platform sentiment",
+      "C": "Guaranteed to replace all human CEOs",
+      "D": "Analyzing market data to identify 'Emerging Competitors' automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Portfolio' 'Management' (SPM)?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The high-level balancing of business investments across 'Run the business', 'Grow the business', and 'Transform the business' horizons.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Human' 'Capital' 'Arbitrage'?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "Strategic reallocation of talent from low-value manual tasks to high-value strategic initiatives through the use of automation or outsourcing.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Quarterly Profits' while the CEO is executing a '3-Year Cultural Transformation', leading to friction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Governance' for Strategy? (Select all that apply)",
+    "options": {
+      "A": "Flagging 'Strategic Projects' that have not met a milestone in 30 days",
+      "B": "Automatically calculating 'Budget Variance' across all departments",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Compliance Certifications' are current across the organization"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Chart?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that 'Support Functions' (HR, Finance) are isolated from 'Delivery Units' (Product, Sales) to prevent operational friction while maintaining a shared core.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'High' 'Value' 'Resignation' risk?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between an executive showing 'Disengagement Signals' and the Board triggering a 'Retention Playbook'.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a leader shares 'Bad News' with the public board before sharing it with the internal team, destroying trust.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Connecting the 'Sales Pipeline' data to the 'Talent Acquisition' roadmap",
+      "B": "Syncing 'Customer Feedback' directly with the 'Product Development' priority list",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Linking 'Employee Engagement' scores to 'Manager Bonus' calculations"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' orchestration for a new acquisition?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes common IT, HR, and Communication protocols to stabilize an acquired company immediately.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cultural' 'Degradation' Index?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Trust' or 'Collaboration' scores, identifying teams at risk of becoming 'Toxic'.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Board of Directors expects 'Instant AI ROI' from a department that is still migrating legacy data to the cloud.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Executive' 'Reporting' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Real-time 'Global Revenue' heatmaps for the Board",
+      "B": "Consolidated 'Strategic KPI' views that ignore operational 'Noise'",
+      "C": "Guaranteed to replace all human HR managers",
+      "D": "Automatic generation of 'Exception Reports' when a business unit misses a target by >10%"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Strategic M&A?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The practice of keeping the acquired company's 'Sensitive Customer Data' separate until all legal and privacy audits are verified.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'Clarity' (MTRSC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a major corporate scandal or failure and the point at which a new 'Path Forward' is successfully communicated and accepted by staff.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in strategy refers to an organization promising '100% Availability' for a product that is currently undergoing a 'Massive Architectural Refactor'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Leadership' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Chief Strategy Officer (CSO)",
+      "B": "Head of Corporate Development (M&A)",
+      "C": "Director of Organizational Effectiveness",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Quality' for a Business Unit?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Profitability', 'Employee Retention', 'Customer CSAT', and 'Innovation Output'.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Cultural' 'Incidents' (MTBCI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational peace before a major HR dispute or public PR crisis occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a CEO tries to use 1980s 'Management by Objectives' (MBO) in a 2024 'Remote-First' 'Asynchronous' culture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Brand Trust' requirements",
+      "B": "Keeping records updated with rapidly changing global 'ESG' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Strategic Health' if KPIs are easily manipulated ('Goodhart's Law')"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Executive' 'Maintainability'?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The degree to which an organization's 'Leadership Pipeline' can sustain major departures without a loss of strategic momentum.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Hostile' 'Takeover' signal?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an unusual market accumulation of stock and the Board's 'Poison Pill' team being activated.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' in strategy occurs when 'Board Minutes' are kept by a third-party firm that does not share the data with the executive team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Regulatory Agencies",
+      "C": "Employee Resource Groups (ERGs)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "The rapid establishment of local legal entities, core leadership teams, and initial office culture in a new country within 90 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Cycles' (MTBSC)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking how often the organization completely refreshes its 3-year vision and capital allocation strategy.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'New Product Market Fit' within 30 days of the project kickoff.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Top 100' leader has zero identified successors",
+      "B": "Identifying if a successor's current 'Agility Score' matches the target role requirements",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Tracking the 'Readiness' of the top 10% of global talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Executive Development?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a leader can 'Lift' a successful turnaround strategy from one industry (e.g., Automotive) and apply it to another (e.g., Tech).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Investor' 'Confidence' (MTRIC)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a significant stock price drop caused by internal failure and the point where the stock returns to its 200-day moving average.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the Board expects 'Lean Cost Cutting' while the CEO is executing a 'Growth-at-all-costs' strategy.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Global Risk' data presentation for the Board",
+      "B": "Reduction in manual 'Status deck' building for Directors",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Instant generation of 'Profit-per-Employee' reports by region"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Encapsulation' in a 'Hold-Co' (Holding Company) model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing the organization so that the failure of one business unit does not technically or financially jeopardize the entire corporate parent.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Market' 'Anomaly'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the first signal of a new disruptive technology until the Strategy team officially presents a response plan.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when the 'Strategic Review' is performed annually, but the market's 'Product Lifecycle' is only 6 months.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Leadership' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "VP of Strategy and Transformation",
+      "B": "Director of Organizational Design",
+      "C": "Chief Growth Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategic' 'Bootstrap' complexity for a 'Turnaround' CEO?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and social difficulty of resetting an organization's core values and financial trajectory within the first 100 days of leadership.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Executive' 'Exits' (MTBEE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the C-suite, identifying if 'Executive Burnout' is causing frequent leadership churn.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Cultural Shift' in a 100,000-person company to be completed in a single fiscal quarter.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Analytics' benefits? (Select all that apply)",
+    "options": {
+      "A": "Enabling 'Predictive Talent' mapping across global subsidiaries",
+      "B": "Reducing the 'Reporting Lag' between regional offices and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Strategic Priority' scoring across all projects"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Executive' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Executive.",
+      "B": "The ability of a leader to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to update their mental models.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Profitability' (MTRP) post-merger?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from the legal close of a merger until the 'Synergy-corrected' profit margins return to the target levels.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in strategy refers to having a 'Decentralized' decision-making culture while using a 'Centralized' monolithic budgeting system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation to Maintenance' spend ratio",
+      "B": "Identifying business units that are 'Stagnating' based on employee skill decay",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing market share changes relative to R&D spend automatically"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring the 'Tactical Execution' (the How) is hidden from the 'High-level Vision' (the What), allowing departments to innovate without drifting from the core goal.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+]
+  
+}

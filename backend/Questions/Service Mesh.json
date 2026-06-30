@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Service Mesh", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a Service Mesh in a microservices architecture?",
+    "options": {
+      "A": "To provide a physical hardware layer for servers.",
+      "B": "To manage service-to-service communication, security, and observability.",
+      "C": "To act as a primary database for user records.",
+      "D": "To compile source code into executable binaries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh typically uses a 'Sidecar' proxy pattern to intercept network traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in legacy monolith systems",
+      "D": "Only if using Windows containers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of a Service Mesh is responsible for actually handling the data traffic between services?",
+    "options": {
+      "A": "Control Plane",
+      "B": "Management UI",
+      "C": "Data Plane",
+      "D": "Build Pipeline"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Control Plane' responsible for in a Service Mesh?",
+    "options": {
+      "A": "Physically moving packets of data between servers.",
+      "B": "Managing and configuring the proxies that make up the data plane.",
+      "C": "Storing the application's CSS and image files.",
+      "D": "Generating unique passwords for every user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Istio is one of the most widely used open-source Service Mesh implementations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python applications",
+      "D": "Only for non-Kubernetes environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a popular sidecar proxy often used within a Service Mesh?",
+    "options": {
+      "A": "Apache Server",
+      "B": "Envoy",
+      "C": "MySQL",
+      "D": "Docker Engine"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'mTLS' stand for in the context of Service Mesh security?",
+    "options": {
+      "A": "Message Transfer Layer System",
+      "B": "Mutual Transport Layer Security",
+      "C": "Multi-Tenant Login Service",
+      "D": "Main Terminal Link Socket"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh requires changes to the application's source code to manage its network traffic.",
+    "options": {
+      "A": "False (It is designed to be transparent to the application code).",
+      "B": "True",
+      "C": "Only if using Java",
+      "D": "Only if the application is not containerized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Splitting' used for?",
+    "options": {
+      "A": "Splitting a single server into two virtual machines.",
+      "B": "Directing a percentage of traffic to a new version of a service (Canary deployment).",
+      "C": "Separating the front-end and back-end code.",
+      "D": "Increasing the size of the network packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the ability to see and understand the state of the microservices communication?",
+    "options": {
+      "A": "Encryption",
+      "B": "Redundancy",
+      "C": "Observability",
+      "D": "Compilation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Linkerd is known for being a lightweight and easy-to-install Service Mesh.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for ARM-based servers",
+      "D": "Only if using the linkerd-java library"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Service Discovery' mechanism?",
+    "options": {
+      "A": "Searching for a service in Google.",
+      "B": "A system that allows services to find and communicate with each other automatically.",
+      "C": "A tool that deletes unused services.",
+      "D": "The process of writing documentation for an API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Circuit Breaker' in a Service Mesh context?",
+    "options": {
+      "A": "A physical fuse in the server room.",
+      "B": "A pattern that stops requests to a failing service to prevent a total system crash.",
+      "C": "A way to turn off the internet for the whole cluster.",
+      "D": "An error that occurs when a service runs out of memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Service meshes are most commonly deployed within Kubernetes clusters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using AWS",
+      "D": "Only for mobile app backends"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is the primary focus for interception in most Service Meshes?",
+    "options": {
+      "A": "FTP",
+      "B": "HTTP/gRPC",
+      "C": "SMTP",
+      "D": "SSH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Retries' as a service mesh feature?",
+    "options": {
+      "A": "Asking a developer to write the code again.",
+      "B": "Automatically attempting a failed network request again before returning an error.",
+      "C": "Restarting the entire server.",
+      "D": "Moving a service to a different cloud provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh can provide automatic encryption for all internal traffic.",
+    "options": {
+      "A": "True (via mTLS)",
+      "B": "False",
+      "C": "Only if using a VPN",
+      "D": "Only for public-facing websites"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using a 'Sidecar' rather than a central gateway for service-to-service communication?",
+    "options": {
+      "A": "It costs less money.",
+      "B": "It avoids a single point of failure and allows for more granular control.",
+      "C": "It reduces the amount of RAM used by the application.",
+      "D": "It makes the network cables run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a core functionality typically provided by a Service Mesh?",
+    "options": {
+      "A": "Load Balancing",
+      "B": "Database Indexing",
+      "C": "Policy Enforcement",
+      "D": "Service Authentication"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Envoy is a proxy developed originally by the team at Lyft.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only the open-source version",
+      "D": "Only the C++ components"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ingress Gateway' in a Service Mesh?",
+    "options": {
+      "A": "The entrance to the data center.",
+      "B": "A dedicated proxy that manages traffic entering the mesh from external sources.",
+      "C": "A way to leave the mesh and go to the internet.",
+      "D": "The password for the administrator dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Egress Gateway'?",
+    "options": {
+      "A": "The exit door of the office.",
+      "B": "A proxy that manages traffic leaving the mesh to external services.",
+      "C": "A specialized tool for deleting microservices.",
+      "D": "A way to backup the cluster configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Linkerd, the data plane is written in Rust for high performance and safety.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.x",
+      "D": "It is written in Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main goal of 'Service-to-Service Authentication'?",
+    "options": {
+      "A": "To check if a user is logged in.",
+      "B": "To ensure that only authorized services can communicate with each other.",
+      "C": "To verify the server's serial number.",
+      "D": "To scan the network for viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Virtual Service' in Istio?",
+    "options": {
+      "A": "A service that doesn't actually exist.",
+      "B": "A set of traffic routing rules to apply when a host is addressed.",
+      "C": "A backup copy of a service.",
+      "D": "A service running on a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Consul can be used as a Service Mesh in addition to its service discovery and K/V store features.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for HashiCorp employees",
+      "D": "Only on Windows Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Telemetry' refer to in a Service Mesh?",
+    "options": {
+      "A": "Remote control of a drone.",
+      "B": "Metrics, logs, and traces collected from the microservices traffic.",
+      "C": "The distance between server nodes.",
+      "D": "The phone number of the support team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Layer 7' load balancing?",
+    "options": {
+      "A": "Balancing the weight of 7 server racks.",
+      "B": "Distributing traffic based on application-level data like URLs or headers.",
+      "C": "Balancing the electricity across 7 phases.",
+      "D": "Connecting 7 different networks together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kuma is an open-source Service Mesh from Kong.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for enterprise customers",
+      "D": "Only for non-Kubernetes platforms"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Zero Trust' network security in a Service Mesh?",
+    "options": {
+      "A": "Trusting no one, including internal services, and verifying every request.",
+      "B": "Removing all passwords from the system.",
+      "C": "Closing all network ports.",
+      "D": "Hiring zero security guards."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fault Injection' used for in a Service Mesh?",
+    "options": {
+      "A": "Fixing bugs in the code automatically.",
+      "B": "Intentionally introducing errors or delays to test the system's resilience.",
+      "C": "Injecting electricity into a broken server.",
+      "D": "Deleting data to see what happens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Open Service Mesh (OSM) is a lightweight service mesh that runs on Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Microsoft Azure",
+      "D": "Only if using Docker Compose"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Namespace' in the context of Service Mesh configuration?",
+    "options": {
+      "A": "A person's name.",
+      "B": "A logical grouping or isolation unit for services and policies.",
+      "C": "The folder where the source code is kept.",
+      "D": "A database table name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Canary Release'?",
+    "options": {
+      "A": "Releasing a bird into the server room.",
+      "B": "Rolling out a new version to a small subset of users before a full release.",
+      "C": "Deleting an old version of a service.",
+      "D": "Updating all services at the exact same time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a Service Mesh can increase the network latency slightly due to the extra proxy hop.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Linkerd",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Drawing a map of the office.",
+      "B": "Tracking a single request as it passes through multiple microservices.",
+      "C": "Searching for a lost file in the cloud.",
+      "D": "Tracing the path of a physical network cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common dashboard used to visualize Istio service mesh metrics?",
+    "options": {
+      "A": "Kiali",
+      "B": "Photoshop",
+      "C": "Excel",
+      "D": "VS Code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SMI' stands for Service Mesh Interface, a standard for service mesh interoperability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Microsoft products",
+      "D": "Only for version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rate Limiting'?",
+    "options": {
+      "A": "Limiting the number of developers in a project.",
+      "B": "Restricting the number of requests a service can receive over a period of time.",
+      "C": "Limiting the speed of the CPU.",
+      "D": "Reducing the monthly cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Traffic Mirroring' (Shadowing)?",
+    "options": {
+      "A": "Looking at the server in a mirror.",
+      "B": "Sending a copy of live traffic to a test version of a service without affecting users.",
+      "C": "Reversing the direction of the network traffic.",
+      "D": "Deleting duplicate network packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Maesh is a service mesh designed by the creators of Traefik.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Docker Swarm",
+      "D": "It was renamed to Traefik Mesh"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Destination Rule' in Istio?",
+    "options": {
+      "A": "A rule about where the office is located.",
+      "B": "Policies that apply to traffic after routing has occurred (e.g., load balancing settings).",
+      "C": "The URL of the API endpoint.",
+      "D": "A security rule for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Proxy Injection'?",
+    "options": {
+      "A": "Injecting a virus into a proxy.",
+      "B": "The process of adding the sidecar proxy container to a service pod automatically.",
+      "C": "Manually installing a proxy on a laptop.",
+      "D": "Deleting the proxy from the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh handles communication logic, allowing developers to focus on business logic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using the Go language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mutual TLS' (mTLS)?",
+    "options": {
+      "A": "Encryption that only works for two people.",
+      "B": "A method where both client and server verify each other's certificates to secure the connection.",
+      "C": "A way to send messages to two different servers.",
+      "D": "The password for the network router."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Blue-Green Deployment'?",
+    "options": {
+      "A": "Changing the color of the application UI.",
+      "B": "Running two identical production environments and switching traffic from old to new.",
+      "C": "Updating the server hardware every two years.",
+      "D": "A way to recycle old server components."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: App Mesh is a managed service mesh provided by Amazon Web Services (AWS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-AWS customers",
+      "D": "Only for mobile applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Mixer' in early versions of Istio (now deprecated)?",
+    "options": {
+      "A": "To mix different programming languages together.",
+      "B": "To handle telemetry and policy checks.",
+      "C": "To restart failed services.",
+      "D": "To manage the server's power usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Health Checking' in a Service Mesh?",
+    "options": {
+      "A": "A medical checkup for the developers.",
+      "B": "The process of verifying if a service instance is alive and capable of receiving traffic.",
+      "C": "Scanning the hard drive for errors.",
+      "D": "Measuring the server's room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Consul Connect uses Envoy as its default sidecar proxy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes",
+      "D": "Only for Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Timeout' configuration used for?",
+    "options": {
+      "A": "Setting the time for a coffee break.",
+      "B": "Defining how long a service should wait for a response before giving up.",
+      "C": "Closing the application after 8 hours of work.",
+      "D": "Measuring the age of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Namespace Isolation'?",
+    "options": {
+      "A": "Hiding a developer's name from others.",
+      "B": "Ensuring that services in one namespace cannot communicate with services in another by default.",
+      "C": "Removing all names from the code.",
+      "D": "Storing each namespace on a different hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Linkerd does not support mTLS out of the box.",
+    "options": {
+      "A": "False (It enables mTLS by default for all communication).",
+      "B": "True",
+      "C": "Only in the 'Edge' version",
+      "D": "Only for TCP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Load Balancing'?",
+    "options": {
+      "A": "Balancing the weight of the entire planet.",
+      "B": "Distributing traffic across services located in different geographical regions.",
+      "C": "Connecting every server to the same internet provider.",
+      "D": "Using the same password for all servers globally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Access Control Policy'?",
+    "options": {
+      "A": "Rules about who can enter the office building.",
+      "B": "Defining who or what is allowed to access specific services or data.",
+      "C": "A tool to change the screen resolution.",
+      "D": "A database of all user addresses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Service meshes can work with both REST and gRPC traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for REST",
+      "D": "Only if using Envoy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Envoy Filter' in Istio?",
+    "options": {
+      "A": "An air filter for the server fans.",
+      "B": "A mechanism to customize or extend the behavior of the Envoy proxy.",
+      "C": "A tool to delete old logs from Envoy.",
+      "D": "A way to change the color of the Envoy logo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service Entry' in Istio?",
+    "options": {
+      "A": "The physical entrance to the data center.",
+      "B": "A way to add an entry for an external service into the internal service mesh registry.",
+      "C": "A log of all people who accessed the service.",
+      "D": "A way to start a service manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh is strictly required for every microservices deployment.",
+    "options": {
+      "A": "False (It adds complexity; the benefits must outweigh the overhead).",
+      "B": "True",
+      "C": "Only if using Docker",
+      "D": "Only if using more than 2 microservices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency'?",
+    "options": {
+      "A": "The total number of messages sent.",
+      "B": "The time delay between a request being sent and a response being received.",
+      "C": "The physical size of the server.",
+      "D": "The percentage of errors in the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput'?",
+    "options": {
+      "A": "The weight of the network cables.",
+      "B": "The number of requests a service can process in a given amount of time.",
+      "C": "The total capacity of the hard drive.",
+      "D": "The number of lines of code in a service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Istio provides a 'Pilot' component for service discovery and configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only for non-Kubernetes environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mesh Federation'?",
+    "options": {
+      "A": "A government for all microservices.",
+      "B": "Connecting and managing multiple service meshes across different clusters or clouds as a single unit.",
+      "C": "A way to combine different programming languages.",
+      "D": "A database for storing cloud provider logos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sidecar Proxy'?",
+    "options": {
+      "A": "A small car kept in the data center.",
+      "B": "An auxiliary container that runs alongside the main application container to handle cross-cutting concerns like networking.",
+      "C": "A specialized tool for backing up a single server.",
+      "D": "A way to increase the RAM of a single container."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The use of a Service Mesh can help achieve PCI DSS compliance by securing internal traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking apps",
+      "D": "Only if using AWS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Data Plane' typically comprised of?",
+    "options": {
+      "A": "The developers' laptops.",
+      "B": "A network of sidecar proxies.",
+      "C": "The central management server.",
+      "D": "The physical fiber optic cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'Gateway API' in modern Service Mesh (like Istio 1.16+)?",
+    "options": {
+      "A": "To provide a physical hardware interface for the cluster.",
+      "B": "To replace standard Kubernetes Ingress with a more expressive and role-oriented API for traffic routing.",
+      "C": "To automatically encrypt the application source code.",
+      "D": "To manage the server's BIOS settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Service Mesh, 'Locality Load Balancing' prioritizes traffic to instances within the same zone or region to reduce latency.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Linkerd",
+      "D": "Only for non-HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Outlier Detection' feature specifically help with in a mesh?",
+    "options": {
+      "A": "Finding developers who are working from unusual locations.",
+      "B": "Identifying and temporarily ejecting unhealthy service instances from the load balancing pool.",
+      "C": "Scanning for security vulnerabilities in the OS kernel.",
+      "D": "Calculating the average electricity usage of a server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Request Mirroring' in a production environment?",
+    "options": {
+      "A": "Making a backup of the database every 5 minutes.",
+      "B": "Sending a duplicate of live traffic to a test service while ignoring the test service's response.",
+      "C": "Using a mirror to physically see the back of the server rack.",
+      "D": "Reversing the order of fields in a JSON payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'PeerAuthentication' in Istio?",
+    "options": {
+      "A": "To verify the identity of the developer writing the code.",
+      "B": "To define how a service accepts mTLS traffic (e.g., PERMISSIVE or STRICT mode).",
+      "C": "To allow services to share the same password.",
+      "D": "To count the number of users connected to a service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Sidecar' proxy increases the number of network hops for a single request between two microservices.",
+    "options": {
+      "A": "True (It adds two proxy hops: one at the source and one at the destination).",
+      "B": "False (The proxy is embedded in the application process).",
+      "C": "True, but only if mTLS is disabled",
+      "D": "False, proxies reduce the number of hops"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'REB' or 'RED' metrics pattern often monitored via a Service Mesh?",
+    "options": {
+      "A": "Random, Error, Delay",
+      "B": "Rate, Errors, and Duration",
+      "C": "Requests, Encryption, and Databases",
+      "D": "Read, Edit, Delete"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Envoy filter is responsible for mapping an incoming HTTP request to a specific upstream cluster?",
+    "options": {
+      "A": "The TCP Proxy filter",
+      "B": "The Router filter",
+      "C": "The Health Check filter",
+      "D": "The Rate Limit filter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero Trust' architecture provided by a mesh, service identity is typically based on IP addresses.",
+    "options": {
+      "A": "False (Identity is typically based on cryptographically signed certificates like SPIFFE IDs).",
+      "B": "True",
+      "C": "Only if using IPv6",
+      "D": "Only on local area networks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'SPIFFE' standard used for in a Service Mesh?",
+    "options": {
+      "A": "To compress network traffic.",
+      "B": "To provide a universal identity framework for workloads in highly dynamic environments.",
+      "C": "To manage the server's physical cooling fans.",
+      "D": "To translate code between Go and Java."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Istio, what does 'Permissive Mode' in mTLS allow?",
+    "options": {
+      "A": "It allows any user to delete the mesh configuration.",
+      "B": "It allows a service to accept both plaintext and mTLS traffic simultaneously.",
+      "C": "It permits developers to bypass the firewall.",
+      "D": "It allows the server to run without a CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ambient Mesh' is an Istio deployment model that eliminates the need for sidecar proxies.",
+    "options": {
+      "A": "True (It uses node-level proxies and waypoints instead).",
+      "B": "False (Ambient refers to the lighting in the data center).",
+      "C": "True, but only for Windows nodes",
+      "D": "False, it requires two sidecars per pod"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of a 'ServiceEntry' object in Istio?",
+    "options": {
+      "A": "To list the employees allowed in the server room.",
+      "B": "To add external dependencies (like an external API) into the mesh's internal service registry.",
+      "C": "To create a new microservice automatically.",
+      "D": "To monitor the uptime of the external internet provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for issuing and rotating certificates in the Istio Control Plane?",
+    "options": {
+      "A": "Pilot",
+      "B": "Citadel (integrated into istiod)",
+      "C": "Galley",
+      "D": "Mixer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh can perform 'Header-based routing', allowing traffic to be directed based on custom HTTP headers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the gRPC protocol",
+      "D": "Only for mobile device headers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Connection Pool' settings used for in a DestinationRule?",
+    "options": {
+      "A": "To manage the server's swimming pool.",
+      "B": "To control the number of concurrent connections and requests to an upstream service.",
+      "C": "To limit the number of users who can log in.",
+      "D": "To group multiple network cards into one."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Wasm' (WebAssembly) integration allow in a Service Mesh like Istio or Kuma?",
+    "options": {
+      "A": "To run web browsers inside the data center.",
+      "B": "To implement high-performance, custom data plane filters using various programming languages.",
+      "C": "To encrypt the BIOS of the server.",
+      "D": "To automatically generate documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Linkerd 2.x uses a control plane written primarily in Go and a data plane written in Rust.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only the enterprise version",
+      "D": "It is written entirely in C++"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Sidecar' resource in Istio used for?",
+    "options": {
+      "A": "To physically attach a small car to the server rack.",
+      "B": "To fine-tune the configuration of the Envoy proxies, such as limiting the set of services they can see.",
+      "C": "To backup the proxy logs.",
+      "D": "To set the CPU priority for the sidecar container."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a drawback of the 'Sidecar' model compared to 'Sidecar-less' models?",
+    "options": {
+      "A": "Increased resource consumption (RAM/CPU) per pod.",
+      "B": "Lower security because certificates are shared.",
+      "C": "It requires a physical network cable for every pod.",
+      "D": "It only works with Java applications."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Request Timeouts' in a mesh helps prevent a single slow service from causing a cascade of waiting requests across the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using circuit breakers",
+      "D": "Only for GET requests"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'AuthorizationPolicy' in a mesh?",
+    "options": {
+      "A": "To grant access to the building's parking lot.",
+      "B": "To define fine-grained access control rules (Who can do What to which service).",
+      "C": "To set the administrative password for the cluster.",
+      "D": "To authorize the purchase of more cloud credits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Envoy, what is a 'Cluster'?",
+    "options": {
+      "A": "A group of servers in the same room.",
+      "B": "A logical group of similar upstream endpoints that Envoy routes traffic to.",
+      "C": "A collection of different programming languages.",
+      "D": "A way to group pods in Kubernetes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shadow Traffic' (Mirroring) allows you to test the performance of a new version using real-world data without affecting the user experience.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the response is JSON",
+      "D": "Only on weekends"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'xDS' in the context of Envoy and Service Mesh?",
+    "options": {
+      "A": "A new type of encrypted hard drive.",
+      "B": "A set of APIs used by the control plane to dynamically discover and update Envoy proxy configurations.",
+      "C": "An error code for a disconnected socket.",
+      "D": "A specialized programming language for meshes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Retries' with 'exponential backoff' prevent in a mesh?",
+    "options": {
+      "A": "The server from getting too old.",
+      "B": "Overwhelming a recovering service with a flood of immediate retry requests.",
+      "C": "Deleting data by accident.",
+      "D": "The network from running out of bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'istioctl' command-line tool is used for installing, managing, and debugging an Istio mesh.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux",
+      "D": "Only if using the root user"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Waypoint Proxy' in Istio's Ambient Mesh architecture?",
+    "options": {
+      "A": "A proxy that gives directions to the data center.",
+      "B": "A dedicated, layer-7 proxy that handles complex traffic processing for a specific namespace or service account.",
+      "C": "A backup proxy for the ingress gateway.",
+      "D": "A proxy used only for external database traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric would you monitor to detect 'Circuit Breaker' trips in Istio?",
+    "options": {
+      "A": "cpu_usage_total",
+      "B": "upstream_rq_pending_overflow",
+      "C": "disk_io_wait",
+      "D": "memory_allocation_failures"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Service Mesh telemetry can be sent directly to external systems like Prometheus, Zipkin, or Jaeger.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Mixer",
+      "D": "Only for HTTP/1.1 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SNI Routing'?",
+    "options": {
+      "A": "Routing traffic based on the server's serial number.",
+      "B": "Routing TLS traffic based on the 'Server Name Indication' field without decrypting the payload.",
+      "C": "Routing traffic based on the user's social security number.",
+      "D": "Deleting packets that don't have an ID."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Max Connections' setting in a circuit breaker configuration control?",
+    "options": {
+      "A": "The total number of servers in the cluster.",
+      "B": "The maximum number of concurrent TCP connections to an upstream host.",
+      "C": "The number of developers who can access the dashboard.",
+      "D": "The maximum number of users on the website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Consul's 'Intentions' are used to define which services are allowed to communicate with each other.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the enterprise version",
+      "D": "Only for non-Kubernetes services"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Rate Limiting' versus 'Local Rate Limiting'?",
+    "options": {
+      "A": "Global is for the whole world; local is for the office.",
+      "B": "Global uses a centralized service to enforce limits across all proxies; local is enforced by each individual proxy.",
+      "C": "Global is faster than local.",
+      "D": "Local is only for internal developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Distributed Tracing' in a Service Mesh?",
+    "options": {
+      "A": "It automatically fixes bugs in the code.",
+      "B": "It allows developers to visualize the path and timing of a single request across many microservices.",
+      "C": "It backups the database traces.",
+      "D": "It identifies the location of physical network failures."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Mesh' can provide 'Automatic Retries' for idempotent HTTP methods like GET and PUT.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for POST methods",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Istio, what is a 'Gateway' resource used for?",
+    "options": {
+      "A": "To open the door of the data center.",
+      "B": "To describe a load balancer operating at the edge of the mesh for ingress or egress traffic.",
+      "C": "To create a secure tunnel between two clusters.",
+      "D": "To set the password for the Wi-Fi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JWT Authentication' in a mesh context?",
+    "options": {
+      "A": "Java Web Timing for performance.",
+      "B": "Verifying JSON Web Tokens at the proxy level before traffic reaches the application.",
+      "C": "A way to backup user passwords in JSON format.",
+      "D": "A specialized encryption for mobile apps."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kiali provides a visual topology map of the services and traffic flow within an Istio mesh.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS App Mesh",
+      "D": "Only if using the Linkerd dashboard"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Shifting'?",
+    "options": {
+      "A": "Moving physical servers to a different building.",
+      "B": "Gradually migrating traffic from one version of a service to another using weights (e.g., 90/10).",
+      "C": "Changing the color of the network packets.",
+      "D": "Switching from HTTP to FTP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Listener' in Envoy configuration?",
+    "options": {
+      "A": "A developer who listens to feedback.",
+      "B": "A specific network address (IP/Port) that Envoy opens to accept incoming connections.",
+      "C": "A tool that records all conversations in the office.",
+      "D": "A way to monitor the server room noise level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Egress Gateways' are often used to enforce that all outgoing traffic from a cluster goes through a specific security checkpoint.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for traffic to Google.com",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'WorkloadGroup' in Istio?",
+    "options": {
+      "A": "To group team members by their salary.",
+      "B": "To describe a set of non-Kubernetes workloads (like VMs) that should be part of the mesh.",
+      "C": "To group pods by their memory usage.",
+      "D": "To count the number of work hours per day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Envoy SDS' (Secret Discovery Service)?",
+    "options": {
+      "A": "A service that hides the server's location.",
+      "B": "An API used to dynamically deliver TLS certificates and keys to the proxies.",
+      "C": "A specialized database for storing user secrets.",
+      "D": "A way to encrypt the mesh configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Service Meshes can automatically handle 'gRPC-Web' translation for browser-based clients.",
+    "options": {
+      "A": "True (often via an Envoy filter).",
+      "B": "False",
+      "C": "Only if using Linkerd",
+      "D": "Only for internal traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'HTTPRoute' in the Kubernetes Gateway API?",
+    "options": {
+      "A": "To draw a map of the HTTP protocol.",
+      "B": "To define specific rules for routing HTTP traffic from a Gateway to a Backend Service.",
+      "C": "To set the timeout for all HTTP requests.",
+      "D": "To monitor the status code of the last request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'mTLS Strict Mode' enforce?",
+    "options": {
+      "A": "Strict rules for the developers' behavior.",
+      "B": "That all incoming traffic must be encrypted with mTLS; plaintext is rejected.",
+      "C": "That only the administrator can access the mesh.",
+      "D": "That passwords must be at least 20 characters long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Linkerd uses 'ServiceProfiles' to define per-route metrics and retries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if using Java"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-cluster Load Balancing'?",
+    "options": {
+      "A": "Balancing the weight of two different server clusters.",
+      "B": "Distributing traffic to service instances that are running in a different Kubernetes cluster.",
+      "C": "Connecting two clusters with a physical bridge.",
+      "D": "Using the same password for two different clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Namespace Injection'?",
+    "options": {
+      "A": "Injecting a virus into a namespace.",
+      "B": "Configuring a namespace so that all pods started in it automatically receive a sidecar proxy.",
+      "C": "Manually adding a namespace to the database.",
+      "D": "Deleting a namespace from the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS App Mesh supports 'Cloud Map' for service discovery.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-AWS services",
+      "D": "Only on the US-East-1 region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fault Tolerance' in a Service Mesh context?",
+    "options": {
+      "A": "The ability to ignore all errors in the code.",
+      "B": "The system's ability to continue operating correctly in the event of partial failures (via retries, timeouts, etc.).",
+      "C": "A measure of how much a developer can tolerate a bug.",
+      "D": "Scanning for hardware errors on the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Request Hedging'?",
+    "options": {
+      "A": "Planting a hedge around the server room.",
+      "B": "Sending the same request to multiple instances and using the first response to reduce tail latency.",
+      "C": "Stopping all requests to a service temporarily.",
+      "D": "Increasing the price of an API request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'istiod' component combines functions that were previously separate, such as Pilot, Citadel, and Galley.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Istio version 1.0",
+      "D": "Only in the enterprise version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Shedding'?",
+    "options": {
+      "A": "Building a small shed for the server rack.",
+      "B": "Intentionally dropping requests when a service is overloaded to maintain stability for existing traffic.",
+      "C": "Turning off the server room lights to save power.",
+      "D": "Moving the database to a different cloud provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Envoy Bootstrap' configuration?",
+    "options": {
+      "A": "The shoes worn by the Envoy developers.",
+      "B": "The initial static configuration Envoy needs to start up and connect to the control plane.",
+      "C": "A script that restarts Envoy automatically.",
+      "D": "The password for the Envoy dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Consul Connect can integrate with Kubernetes using an 'inject-connect' annotation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Vault",
+      "D": "Only on Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Hijacking' in a Service Mesh installation?",
+    "options": {
+      "A": "A security attack by hackers.",
+      "B": "The process where iptables rules are used to transparently redirect pod traffic to the sidecar proxy.",
+      "C": "Stopping the network traffic manually.",
+      "D": "Deleting network packets that don't have a specific header."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Discovery Address' in an Envoy sidecar?",
+    "options": {
+      "A": "The address of the office building.",
+      "B": "The network address (usually istiod) that the proxy connects to for its dynamic configuration.",
+      "C": "The URL of the API documentation.",
+      "D": "The home address of the mesh administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SMI' (Service Mesh Interface) allows you to use the same configuration objects across Istio, Linkerd, and Consul.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security policies",
+      "D": "Only for non-Kubernetes clusters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HTTP/2 multiplexing' and why is it beneficial for a mesh?",
+    "options": {
+      "A": "Multiplying the HTTP protocol by two.",
+      "B": "Allowing multiple requests to be sent over a single TCP connection, reducing the overhead of connection management.",
+      "C": "Increasing the number of servers automatically.",
+      "D": "Encrypting the traffic twice for extra safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Request Header Transformation'?",
+    "options": {
+      "A": "Changing the font of the header.",
+      "B": "Adding, removing, or modifying HTTP headers as a request passes through the proxy.",
+      "C": "Moving the header to the end of the payload.",
+      "D": "Deleting the header to save space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Service Meshes can help provide 'Compliance' by creating an immutable audit log of all service-to-service communication.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking services",
+      "D": "Only if using the cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Weighting'?",
+    "options": {
+      "A": "Measuring the physical weight of the server.",
+      "B": "Assigning a percentage of traffic to different versions of a service for A/B testing.",
+      "C": "Calculating the importance of a service based on its RAM usage.",
+      "D": "Counting the number of lines of code in a service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Identity-based Authorization'?",
+    "options": {
+      "A": "Checking a user's driver's license.",
+      "B": "Making access decisions based on the secure identity of the calling service (e.g., its SPIFFE ID).",
+      "C": "Using the server's serial number to grant access.",
+      "D": "Scanning the developer's fingerprint."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Sidecar' resource is mandatory for every Istio deployment.",
+    "options": {
+      "A": "False (It is used for optimization; without it, proxies see all services in the mesh).",
+      "B": "True",
+      "C": "Only if using mTLS",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Envoy Discovery Service (xDS) is responsible for delivering the actual IP addresses of healthy service instances to the proxy?",
+    "options": {
+      "A": "CDS (Cluster Discovery Service)",
+      "B": "EDS (Endpoint Discovery Service)",
+      "C": "RDS (Route Discovery Service)",
+      "D": "LDS (Listener Discovery Service)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Istio Ambient Mesh, the 'ztunnel' proxy is responsible for Layer 7 functions like HTTP header-based routing.",
+    "options": {
+      "A": "False (ztunnel is scoped to L4 functions; Waypoint proxies handle L7).",
+      "B": "True",
+      "C": "Only if the 'permissive-l7' flag is enabled",
+      "D": "Only for internal cluster traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of the 'Delta xDS' protocol compared to the standard State-of-the-World (SotW) xDS?",
+    "options": {
+      "A": "It encrypts the configuration using a different algorithm.",
+      "B": "It only transmits the changes (deltas) in configuration, significantly reducing CPU and network overhead in large meshes.",
+      "C": "It allows the proxy to run without a control plane connection.",
+      "D": "It forces the proxy to restart after every update for safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a multi-cluster 'Primary-Remote' Istio deployment, where does the 'Remote' cluster obtain its service discovery information?",
+    "options": {
+      "A": "From its local API server only.",
+      "B": "By connecting to the istiod instance running in the 'Primary' cluster.",
+      "C": "Via a physical VPN link between data centers.",
+      "D": "Through a manual export of JSON service lists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'HBONE' (HTTP-Based Overlay Network Encapsulation) protocol used for in Ambient Mesh?",
+    "options": {
+      "A": "To compress image files for faster transfer.",
+      "B": "To tunnel L4 traffic over standard HTTP/2 CONNECT requests, simplifying mTLS and intermediate routing.",
+      "C": "To backup the Kubernetes etcd database.",
+      "D": "To provide a specialized database query language for Envoy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'EnvoyFilter' resource allows users to inject custom Lua scripts or Wasm modules into the Envoy filter chain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Linkerd data plane",
+      "D": "Only for egress traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mechanism does Istio CNI use in Ambient mode to redirect traffic to the ztunnel without using iptables inside the application pod?",
+    "options": {
+      "A": "Physical hardware switches.",
+      "B": "eBPF programs attached to the host's network interfaces.",
+      "C": "A specialized Java agent in every container.",
+      "D": "Manually changing the application's DNS settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Locality Failover' and how is it triggered in Istio?",
+    "options": {
+      "A": "When a developer leaves the office.",
+      "B": "A mechanism that shifts traffic to a different zone or region when the local service instances fail health checks.",
+      "C": "A way to restart the cluster automatically.",
+      "D": "When the cloud provider changes the server's IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Waypoint Proxy' in Ambient Mesh is shared across all namespaces in the cluster by default.",
+    "options": {
+      "A": "False (Waypoints are typically scoped to a specific ServiceAccount or Namespace).",
+      "B": "True",
+      "C": "True, but only for ingress traffic",
+      "D": "False, waypoints are node-level components"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'PILOT_ENABLE_CONFIG_DISTRIBUTION_TRACKING' flag in istiod?",
+    "options": {
+      "A": "To track the location of all developers.",
+      "B": "To monitor and report the acknowledgment status of xDS pushes to ensure all proxies are in sync.",
+      "C": "To encrypt the configuration distribution channel.",
+      "D": "To limit the number of proxies that can connect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Envoy architecture, what is a 'Virtual Host'?",
+    "options": {
+      "A": "A server that doesn't physically exist.",
+      "B": "A logical grouping of routes based on the 'Host' or ':authority' header of an incoming request.",
+      "C": "A backup copy of the control plane.",
+      "D": "A way to run Envoy on a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'STRICT' mTLS mode prevents any workload outside the mesh from communicating with services inside the mesh.",
+    "options": {
+      "A": "True (unless an Ingress Gateway is explicitly configured to allow it).",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only if the 'permissive-deny' flag is set"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Tail Latency' (p99) monitoring help identify in a Service Mesh?",
+    "options": {
+      "A": "The speed of the slowest 1% of requests, often caused by proxy overhead or resource contention.",
+      "B": "The total number of requests per second.",
+      "C": "The average response time across the entire day.",
+      "D": "The size of the network packets in bytes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used in an Istio AuthorizationPolicy to allow access only if a specific JWT claim is present?",
+    "options": {
+      "A": "jwt_claim",
+      "B": "requestPrincipals",
+      "C": "when (with key: request.auth.claims[key])",
+      "D": "source.token"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Istio's 'Distroless' images improve security by removing unnecessary shell and package managers from the control plane containers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the data plane",
+      "D": "Only in the 'alpha' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Congestion Control' in the context of Envoy's circuit breaker?",
+    "options": {
+      "A": "Managing traffic jams on the highway.",
+      "B": "Limiting the number of pending requests and concurrent connections to protect upstream services from being overwhelmed.",
+      "C": "Turning off the server if it gets too hot.",
+      "D": "Scanning for viruses in the network buffer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In multi-cluster 'Multi-Primary' mode, how do istiod instances across clusters sync their service discovery data?",
+    "options": {
+      "A": "By sharing a single central etcd database.",
+      "B": "By each istiod watching the API servers of all other clusters in the mesh.",
+      "C": "Via a manual nightly sync script.",
+      "D": "They do not sync; services must be identical in all clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Filter Chain Match' logic in Envoy?",
+    "options": {
+      "A": "Matching the physical chain used to lock the server.",
+      "B": "The criteria (IP, SNI, Port) used to determine which set of filters should process an incoming connection.",
+      "C": "Searching for a specific string in the log files.",
+      "D": "A way to link different programming languages together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'WorkloadEntry' resource allows for the manual registration of VM-based workloads into the Istio service registry.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the VM is running Ubuntu",
+      "D": "Only in the Enterprise edition"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'LDS Warm-up' in Envoy?",
+    "options": {
+      "A": "Increasing the temperature of the CPU before starting.",
+      "B": "The process where Envoy waits for dependent RDS/CDS resources to be fetched before activating a new Listener.",
+      "C": "A period of 5 minutes where no traffic is allowed.",
+      "D": "A way to test the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'consecutive_5xx' setting in an Istio OutlierDetection policy control?",
+    "options": {
+      "A": "The number of times a developer can fail a test.",
+      "B": "The number of consecutive server errors that will cause an instance to be ejected from the load balancing pool.",
+      "C": "The total number of 500 errors allowed in a day.",
+      "D": "The font size of the error messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cilium Service Mesh can implement L7 traffic management without using any sidecar proxies by leveraging eBPF and an optional per-node Envoy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using the Linkerd control plane"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sidecar Hot Restart' in Envoy?",
+    "options": {
+      "A": "Restarting the server without turning it off.",
+      "B": "Starting a new Envoy process that shares sockets with the old one to update configuration or code without dropping connections.",
+      "C": "Restarting the proxy only when it gets too hot.",
+      "D": "Deleting the old logs before restarting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages 'Sidecar Injection' webhooks in a standard Istio installation?",
+    "options": {
+      "A": "The Kubernetes API Server",
+      "B": "istiod",
+      "C": "The Ingress Gateway",
+      "D": "The Envoy proxy itself"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SPIRE' (SPIFFE Runtime Environment) can be used as an external identity provider for Istio instead of the built-in CA.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS deployments",
+      "D": "Only in version 1.15+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Request Hedging' intended to reduce?",
+    "options": {
+      "A": "The cost of API requests.",
+      "B": "P99 tail latency by aggressively retrying slow requests against a different backend instance.",
+      "C": "The total number of requests sent to the server.",
+      "D": "The size of the request body."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Envoy, what is a 'Downstream' vs 'Upstream'?",
+    "options": {
+      "A": "Downstream is the caller; Upstream is the target service Envoy is connecting to.",
+      "B": "They are the same thing.",
+      "C": "Downstream is for binary; Upstream is for text.",
+      "D": "Downstream is the database; Upstream is the UI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ECDS' (Extension Config Discovery Service) used for?",
+    "options": {
+      "A": "To discover new browser extensions.",
+      "B": "To dynamically deliver filter configurations (like Wasm or WAF rules) independently of the main Listener/Route push.",
+      "C": "To encrypt the Envoy source code.",
+      "D": "To monitor the uptime of external Git repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'mTLS' provides encryption but does NOT provide service-level authorization.",
+    "options": {
+      "A": "True (Authorization requires separate AuthorizationPolicy rules).",
+      "B": "False (mTLS automatically blocks all unauthorized services).",
+      "C": "Only if using JWT",
+      "D": "Only in Ambient mesh"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Quota' in rate limiting?",
+    "options": {
+      "A": "A limit on the number of servers on Earth.",
+      "B": "A rate limit enforced by a central service across all proxies in the mesh, regardless of which instance receives the request.",
+      "C": "A limit on the total size of the database.",
+      "D": "The amount of cloud credits allowed for a single team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'PILOT_PUSH_THROTTLE' configuration in istiod help manage?",
+    "options": {
+      "A": "The speed of the server fans.",
+      "B": "The rate at which istiod sends xDS updates to proxies to prevent overwhelming the control plane or network.",
+      "C": "The total number of users allowed in the mesh.",
+      "D": "The priority of the ingress gateway."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a multi-network Istio setup, a 'Cross-Network Gateway' is required to facilitate communication between clusters that cannot reach each other directly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Linkerd",
+      "D": "Only for non-HTTP traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Protocol Detection' in Istio?",
+    "options": {
+      "A": "Detecting which developer wrote the code.",
+      "B": "The ability of the sidecar to automatically determine if traffic is HTTP or TCP and apply relevant filters.",
+      "C": "Scanning for security vulnerabilities in the protocol.",
+      "D": "Deleting packets that use old protocols."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Envoy filter type is used to implement 'Custom Metrics' or 'Access Logs'?",
+    "options": {
+      "A": "Network filter",
+      "B": "HTTP filter",
+      "C": "Both A and B",
+      "D": "Only Ingress filter"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'istio-proxy' is the name of the container that runs Envoy alongside the application pod.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'stable' profile",
+      "D": "Only for egress gateways"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Locality Weighted Load Balancing'?",
+    "options": {
+      "A": "Measuring the weight of servers in different rooms.",
+      "B": "Assigning weights to different localities to distribute traffic proportionally across zones.",
+      "C": "Calculating the importance of a service based on its locality.",
+      "D": "Using the same weight for all servers globally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Aggregate Cluster' in Envoy?",
+    "options": {
+      "A": "A group of all services in the mesh.",
+      "B": "A cluster that combines multiple other clusters and attempts to route traffic to them in priority order.",
+      "C": "A specialized database for storing cluster names.",
+      "D": "A way to group different programming languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Istio's 'ServiceDiscovery' can integrate with non-Kubernetes platforms like Consul or AWS Cloud Map.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise edition",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'xDS Cache' in istiod?",
+    "options": {
+      "A": "A place to store physical server keys.",
+      "B": "An internal memory store that saves generated Envoy configurations to speed up subsequent pushes to similar proxies.",
+      "C": "A tool to delete old configurations.",
+      "D": "A backup of the etcd database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of observability, what is a 'Span' in distributed tracing?",
+    "options": {
+      "A": "The time it takes to build a service.",
+      "B": "A single operation (hop) within a trace, representing a unit of work in a service.",
+      "C": "The distance between two servers.",
+      "D": "The number of users connected to a span."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Service Mesh can mitigate 'SSRF' (Server-Side Request Forgery) attacks by enforcing strict Egress policies.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the Linkerd sidecar",
+      "D": "Only for internal cluster traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Least Request' load balancing?",
+    "options": {
+      "A": "Sending traffic to the service with the fewest lines of code.",
+      "B": "Routing traffic to the service instance that currently has the lowest number of active requests.",
+      "C": "A policy that deletes requests to save energy.",
+      "D": "Using the oldest service instance first."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Maglev' load balancing in Envoy?",
+    "options": {
+      "A": "A high-speed train for developers.",
+      "B": "A consistent hashing algorithm designed by Google to minimize the impact of backend changes on traffic distribution.",
+      "C": "A specialized encryption for magnetic drives.",
+      "D": "A way to float the server rack using magnets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Telemetry V2' in Istio uses Envoy's native stats without needing the Mixer component.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Wasm filters",
+      "D": "Only in Istio version 1.5 and earlier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'RDS' (Route Discovery Service) used for in Envoy?",
+    "options": {
+      "A": "To find the physical route to the office.",
+      "B": "To dynamically update HTTP routing tables (VirtualServices) without restarting the proxy.",
+      "C": "To encrypt the routing data.",
+      "D": "To monitor the uptime of the network routers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TCP Proxy' filter in Envoy used for?",
+    "options": {
+      "A": "To process only encrypted traffic.",
+      "B": "To handle Layer 4 (TCP) communication by forwarding raw bytes to an upstream cluster.",
+      "C": "To convert TCP to HTTP.",
+      "D": "To delete TCP packets that are too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Istio's 'RequestAuthentication' is used to define which JWT issuers are trusted for an end-user request.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for service-to-service traffic",
+      "D": "Only if using mTLS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Envoy Control' (by Allegro)?",
+    "options": {
+      "A": "A remote control for the data center.",
+      "B": "A lightweight alternative control plane for Envoy that implements the xDS API.",
+      "C": "A specialized browser for viewing Envoy logs.",
+      "D": "A way to manage Envoy on a laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Admin Port' (usually 15000) on an Envoy sidecar used for?",
+    "options": {
+      "A": "To log in as the system administrator.",
+      "B": "A local endpoint used to retrieve statistics, view configuration, and change log levels for that proxy.",
+      "C": "To start the proxy manually.",
+      "D": "To backup the proxy configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Mesh' and 'API Gateway' are essentially the same and one can always replace the other.",
+    "options": {
+      "A": "False (Gateways handle 'North-South' external traffic; Meshes handle 'East-West' internal traffic).",
+      "B": "True",
+      "C": "Only if using NGINX",
+      "D": "Only for Kubernetes clusters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Global Mesh configuration' in Istio?",
+    "options": {
+      "A": "Settings that apply to every server on the planet.",
+      "B": "The 'MeshConfig' object that defines global settings like mTLS default mode and telemetry providers.",
+      "C": "A database of all mesh users.",
+      "D": "A way to combine different programming languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subset' in an Istio DestinationRule?",
+    "options": {
+      "A": "A small part of the server room.",
+      "B": "A logical grouping of service instances based on labels (e.g., version=v1), often used for traffic splitting.",
+      "C": "A backup of the service data.",
+      "D": "A way to group team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kuma's 'Universal' mode allows it to manage services running on both Kubernetes and traditional VMs in a single mesh.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'stable' branch",
+      "D": "Only for Enterprise customers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Overload Manager' in Envoy?",
+    "options": {
+      "A": "A person who manages too many developers.",
+      "B": "A component that monitors resource usage (like heap memory) and takes protective actions (like dropping connections) if limits are exceeded.",
+      "C": "A tool to increase the RAM of the server.",
+      "D": "A script that restarts Envoy if it gets too hot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Retries' in advanced service meshes?",
+    "options": {
+      "A": "Retrying only when the developer is online.",
+      "B": "A mechanism that dynamically adjusts retry logic based on the success rate and latency of the upstream service.",
+      "C": "Deleting retries that take too long.",
+      "D": "A way to retry only for specific users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Wasm' filters allows you to extend Envoy with custom logic without needing to recompile the Envoy binary or restart the proxy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.10",
+      "D": "Only if using the Go language"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cluster DNS' in the context of Istio sidecar proxying?",
+    "options": {
+      "A": "A global DNS service for the entire cluster.",
+      "B": "The sidecar's ability to intercept and resolve DNS queries locally to enable cross-cluster discovery and VM integration.",
+      "C": "A tool to delete old DNS entries.",
+      "D": "A way to start a DNS server manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Self-Signed Root Certificate' in a default Istio installation?",
+    "options": {
+      "A": "A certificate signed by the developer.",
+      "B": "The root CA created by istiod at startup used to sign all workload certificates for mTLS.",
+      "C": "A certificate that is only used for internal clusters.",
+      "D": "A way to backup user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Egress Gateways' are strictly required if a service in the mesh needs to call an external API.",
+    "options": {
+      "A": "False (Sidecars can call external APIs directly if 'REGISTRY_ONLY' is not enabled).",
+      "B": "True",
+      "C": "Only if using Linkerd",
+      "D": "Only for non-Kubernetes clusters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadowing' (Mirroring) impact on production traffic?",
+    "options": {
+      "A": "It makes the production traffic faster.",
+      "B": "It has no impact on users because responses from the mirrored service are discarded, and the original request continues uninterrupted.",
+      "C": "It doubles the cost of the cloud server.",
+      "D": "It identifies the user's location."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pilot-Agent' in the sidecar container?",
+    "options": {
+      "A": "A pilot who flies the server.",
+      "B": "The local process that bootstraps Envoy, manages its lifecycle, and facilitates its connection to istiod.",
+      "C": "A tool that deletes old Envoy logs.",
+      "D": "A way to start the proxy manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Istio Ambient mode requires the 'Istio CNI' plugin to be installed in the cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows nodes",
+      "D": "Only if using mTLS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Route Matching' by precedence in a VirtualService?",
+    "options": {
+      "A": "Matching the routes based on the developer's salary.",
+      "B": "The order in which routing rules are evaluated; the first matching rule is applied, so more specific rules must come first.",
+      "C": "A way to split the network traffic.",
+      "D": "A tool to delete old routes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weighted Load Balancing'?",
+    "options": {
+      "A": "Measuring the weight of servers in the cluster.",
+      "B": "A mechanism that distributes traffic based on the relative weights assigned to different service subsets.",
+      "C": "Calculating the importance of a service based on its priority.",
+      "D": "Using the same weight for all services."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a Service Mesh can help with 'Canary Testing' by allowing precise control over what traffic reaches a new version.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for HTTP/1.1 traffic",
+      "D": "Only if using the Cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Istio Ingress Gateway' implementation?",
+    "options": {
+      "A": "A physical gate for the data center.",
+      "B": "A standalone Envoy proxy running at the cluster edge, configured by Istio to handle incoming traffic.",
+      "C": "A specialized database for storing ingress rules.",
+      "D": "A way to leave the mesh manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Locality-Aware Routing'?",
+    "options": {
+      "A": "Routing traffic to the nearest server to the developer.",
+      "B": "An optimization where the mesh prefers routing traffic to service instances in the same zone or region.",
+      "C": "A way to split the cloud bill by locality.",
+      "D": "Deleting packets that don't have a locality header."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Envoy's 'h2' internal name refers to the HTTP/2 protocol implementation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the Linkerd data plane",
+      "D": "Only for internal cluster traffic"
+    },
+    "answer": "A"
+  }
+  ]
+}

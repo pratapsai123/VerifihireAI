@@ -1,0 +1,1893 @@
+{ 
+  "skill": "Power Query", 
+  "questions": [
+    {
+    "question": "What is the primary function of Power Query?",
+    "options": {
+      "A": "To create 3D animations and video effects.",
+      "B": "To extract, transform, and load (ETL) data from various sources.",
+      "C": "To act as a primary database for long-term data storage.",
+      "D": "To replace the need for an operating system like Windows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query records every transformation you perform as a sequence of 'Applied Steps' that can be replayed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common data sources Power Query can connect to? (Select all that apply)",
+    "options": {
+      "A": "Excel Workbooks",
+      "B": "SQL Server Databases",
+      "C": "Web pages (via URL)",
+      "D": "Physical paper documents"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Where can you find the 'Applied Steps' pane in the Power Query Editor?",
+    "options": {
+      "A": "Inside the Ribbon under the 'View' tab.",
+      "B": "In the Query Settings pane on the right side of the window.",
+      "C": "At the bottom of the data preview table.",
+      "D": "In the 'Help' menu only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which transformation should you use to combine two or more columns into a single column (e.g., First Name and Last Name)?",
+    "options": {
+      "A": "Split Column",
+      "B": "Merge Columns",
+      "C": "Group By",
+      "D": "Transpose"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query transformations are 'destructive,' meaning they permanently change the original source file data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Data Types' in Power Query? (Select all that apply)",
+    "options": {
+      "A": "Decimal Number",
+      "B": "Text",
+      "C": "Date/Time",
+      "D": "Bold Font"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Promote Headers' transformation do?",
+    "options": {
+      "A": "It gives the project manager a promotion.",
+      "B": "It uses the first row of data as the column names.",
+      "C": "It increases the font size of the headers in Excel.",
+      "D": "It sorts the columns in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows you to change a vertical list of data into horizontal columns?",
+    "options": {
+      "A": "Merge Queries",
+      "B": "Pivot Column",
+      "C": "Append Queries",
+      "D": "Remove Rows"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can delete or re-order steps in the 'Applied Steps' list after they have been created.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of using 'Unpivot Columns'?",
+    "options": {
+      "A": "It deletes all columns except the first one.",
+      "B": "It transforms columns into attribute-value pairs, making the table 'taller' and narrower.",
+      "C": "It calculates the sum of all numerical columns automatically.",
+      "D": "It creates a backup copy of the query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Join Kind' returns only the rows that have matching values in both tables?",
+    "options": {
+      "A": "Left Outer",
+      "B": "Inner",
+      "C": "Full Outer",
+      "D": "Right Anti"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to see a summary of data quality (Errors, Empty, Valid) for each column? (Select all that apply)",
+    "options": {
+      "A": "Column Quality",
+      "B": "Column Distribution",
+      "C": "Column Profile",
+      "D": "Applied Steps list"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: The 'M' language is the underlying functional language used by Power Query.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which transformation is used to divide one column into multiple columns based on a delimiter like a comma or space?",
+    "options": {
+      "A": "Merge Column",
+      "B": "Split Column",
+      "C": "Extract",
+      "D": "Format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Folding' in Power Query?",
+    "options": {
+      "A": "Folding the paper report into an airplane.",
+      "B": "The process where Power Query pushes transformations back to the source database to be executed as a single SQL query.",
+      "C": "Compressing the query file to save disk space.",
+      "D": "Hiding the query window so you can see Excel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you refresh the data in Power Query to get the latest information from the source?",
+    "options": {
+      "A": "Restarting the computer.",
+      "B": "Clicking the 'Refresh' button in the Ribbon or Data tab.",
+      "C": "Deleting the query and starting over.",
+      "D": "Typing 'REFRESH' into a cell in Excel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query is case-sensitive when it comes to text filtering (e.g., 'apple' is different from 'Apple').",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following can be used to 'Filter' rows in Power Query? (Select all that apply)",
+    "options": {
+      "A": "Filter by specific values (Checkboxes)",
+      "B": "Filter by text containing a certain string",
+      "C": "Filter by a number range (Greater than/Less than)",
+      "D": "Filtering by cell background color"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Append Queries' function do?",
+    "options": {
+      "A": "It merges columns from two different tables side-by-side.",
+      "B": "It stacks rows from one table on top of another table.",
+      "C": "It deletes duplicate rows in the current table.",
+      "D": "It changes all text to uppercase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to replace null or error values with a specific number or text string?",
+    "options": {
+      "A": "Remove Errors",
+      "B": "Replace Values",
+      "C": "Change Type",
+      "D": "Fill Down"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query allows you to connect to data stored in a folder and combine all files in that folder into one table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Close & Load'?",
+    "options": {
+      "A": "To close the computer and load the car.",
+      "B": "To save the transformations and load the resulting data into an Excel table or the Power BI Data Model.",
+      "C": "To delete the query and save the source file.",
+      "D": "To encrypt the query settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which button allows you to view and edit the raw 'M' code of a query?",
+    "options": {
+      "A": "Applied Steps",
+      "B": "Advanced Editor",
+      "C": "Query Settings",
+      "D": "Data Source Settings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Transpose' do to a table?",
+    "options": {
+      "A": "Translates the data into another language.",
+      "B": "Swaps rows and columns (turning rows into columns and vice versa).",
+      "C": "Sorts the data in descending order.",
+      "D": "Calculates the average of all rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can be used in both Microsoft Excel and Microsoft Power BI.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which transformations are available under the 'Transform' tab? (Select all that apply)",
+    "options": {
+      "A": "Lowercase",
+      "B": "Extract Length",
+      "C": "Round Number",
+      "D": "Change Desktop Wallpaper"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What happens when you click 'Remove Duplicates' on a selected column?",
+    "options": {
+      "A": "It deletes the entire table.",
+      "B": "It keeps only the first occurrence of each unique value and removes subsequent identical rows.",
+      "C": "It highlights the duplicates in red.",
+      "D": "It moves duplicates to a separate worksheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Fill Down' do in a column?",
+    "options": {
+      "A": "It moves all data to the bottom of the table.",
+      "B": "It replaces null values with the value from the non-null cell immediately above them.",
+      "C": "It fills the column with random numbers.",
+      "D": "It deletes all data in the selected column."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can rename a query by double-clicking its name in the 'Queries' pane on the left.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operation is used to aggregate data (e.g., finding the total sales per region)?",
+    "options": {
+      "A": "Pivot Column",
+      "B": "Group By",
+      "C": "Merge Queries",
+      "D": "Sort"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Parameter' in Power Query?",
+    "options": {
+      "A": "A physical measurement of the monitor.",
+      "B": "A variable value that can be easily changed to filter data or change a file path without editing the query steps.",
+      "C": "The name of the database administrator.",
+      "D": "A specialized type of pie chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Add Column' features? (Select all that apply)",
+    "options": {
+      "A": "Column From Examples",
+      "B": "Custom Column",
+      "C": "Index Column",
+      "D": "Delete Source Table"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Keep Top Rows' do?",
+    "options": {
+      "A": "It keeps only the rows that have the highest values.",
+      "B": "It keeps a specific number of rows starting from the very first row of the table.",
+      "C": "It moves the header to the top of the screen.",
+      "D": "It ensures the headers are always visible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can connect to data directly from a PDF file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which menu allows you to manage permissions for data sources (e.g., changing a password for a database)?",
+    "options": {
+      "A": "View",
+      "B": "Data Source Settings",
+      "C": "Advanced Editor",
+      "D": "Format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Formula Bar' used for in the Power Query Editor?",
+    "options": {
+      "A": "To write Excel formulas like =SUM().",
+      "B": "To view and edit the M-code generated for the current step.",
+      "C": "To search for help articles on Google.",
+      "D": "To change the UI color theme."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Merge Queries' operation is similar to a VLOOKUP or a JOIN in SQL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following options can you choose when loading data from Power Query to Excel? (Select all that apply)",
+    "options": {
+      "A": "Table",
+      "B": "PivotTable Report",
+      "C": "Only Create Connection",
+      "D": "External Hard Drive"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Capitalize Each Word' transformation do?",
+    "options": {
+      "A": "It changes all text to UPPERCASE.",
+      "B": "It changes the first letter of every word in a text column to uppercase.",
+      "C": "It only capitalizes the very first letter of the entire column.",
+      "D": "It deletes all lowercase letters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you remove a single step from the middle of the 'Applied Steps' list?",
+    "options": {
+      "A": "Pressing Ctrl + Z.",
+      "B": "Clicking the 'X' icon next to the step name.",
+      "C": "Deleting the entire query.",
+      "D": "Right-clicking the data table and selecting 'Delete'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query allows you to create a custom 'Index Column' that starts at any number you choose.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Custom Column' in Power Query?",
+    "options": {
+      "A": "A column that only users with 'Custom' permission can see.",
+      "B": "A new column created by writing a formula using the M language.",
+      "C": "A column that is physically wider than the others.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which transformation is used to remove all non-printable characters from a text column?",
+    "options": {
+      "A": "Trim",
+      "B": "Clean",
+      "C": "Clear",
+      "D": "Delete Space"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Merge Queries' creates a new query by combining columns, while 'Append Queries' creates a new query by combining rows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Split Column' methods? (Select all that apply)",
+    "options": {
+      "A": "By Delimiter",
+      "B": "By Number of Characters",
+      "C": "By Positions",
+      "D": "By Random Selection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Drill Down' do when you right-click a specific cell value?",
+    "options": {
+      "A": "It opens a web search for that value.",
+      "B": "It converts the entire table into a single value or a list based on that selection.",
+      "C": "It sorts the table based on that value.",
+      "D": "It deletes all other rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Query Dependencies' view used for?",
+    "options": {
+      "A": "To see which employees are dependent on the report.",
+      "B": "To visualize the relationships and flow between all queries and their data sources.",
+      "C": "To find bugs in the computer's memory.",
+      "D": "To list the queries in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can handle millions of rows of data even if Excel's grid limit is 1,048,576 rows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'M' language syntax? (Select all that apply)",
+    "options": {
+      "A": "It uses 'let' and 'in' blocks",
+      "B": "It is case-sensitive",
+      "C": "It is exactly the same as Excel DAX",
+      "D": "Steps are separated by commas"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of 'Choose Columns'?",
+    "options": {
+      "A": "To choose a favorite column to highlight.",
+      "B": "To select only the specific columns you want to keep and remove all others efficiently.",
+      "C": "To change the color of a column.",
+      "D": "To increase the width of the columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Power Query, what is 'Standard' transformation under the 'Number' menu?",
+    "options": {
+      "A": "Hiring a person named Standard.",
+      "B": "Basic arithmetic operations like Add, Multiply, Subtract, and Divide.",
+      "C": "A specialized software for poets.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Trim' removes all spaces from a text string, including spaces between words.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section allows you to 'Replace Errors' with a specific value? (Select all that apply)",
+    "options": {
+      "A": "Right-click a column header",
+      "B": "Transform tab in the Ribbon",
+      "C": "View tab in the Ribbon",
+      "D": "Help menu"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Extract' used for in text columns?",
+    "options": {
+      "A": "To delete the entire column.",
+      "B": "To get specific parts of a text string (e.g., the first 3 characters or text before a delimiter).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Sort Ascending' do to a column of dates?",
+    "options": {
+      "A": "It puts the most recent date at the top.",
+      "B": "It puts the oldest date at the top.",
+      "C": "It removes all dates from the weekend.",
+      "D": "It changes all dates to the current year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query 'Column From Examples' allows you to create a new column by simply typing the desired output based on existing columns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Join' types in Merge Queries? (Select all that apply)",
+    "options": {
+      "A": "Left Outer",
+      "B": "Full Outer",
+      "C": "Right Anti",
+      "D": "Diagonal Join"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Query' 'Grouping'?",
+    "options": {
+      "A": "Hiring a group of people to write queries.",
+      "B": "Organizing related queries into folders in the 'Queries' pane for better management.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Data' 'Preview'?",
+    "options": {
+      "A": "A movie about data.",
+      "B": "The sample of data (usually the top 1,000 rows) displayed in the editor window to show the effect of your steps.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' stands for 'Data Mashup'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Date' transformations? (Select all that apply)",
+    "options": {
+      "A": "Year",
+      "B": "Quarter",
+      "C": "Start of Month",
+      "D": "Time until Lunch"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Remove' 'Other' 'Columns'?",
+    "options": {
+      "A": "Deleting all columns in the entire database.",
+      "B": "A transformation that keeps only the currently selected columns and deletes everything else.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power BI', what is 'Transform' 'Data' button for?",
+    "options": {
+      "A": "To open the Power Query Editor.",
+      "B": "To change the color of the charts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Power Query transformations are automatically updated in Excel whenever you click 'Save'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Query Folding' in Power Query?",
+    "options": {
+      "A": "It reduces the file size of the Excel workbook.",
+      "B": "It allows the data source (like SQL) to handle the processing, improving performance.",
+      "C": "It automatically translates M code into Python.",
+      "D": "It organizes the 'Applied Steps' into collapsible folders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Merge Queries' operation is equivalent to a 'JOIN' in SQL or a 'VLOOKUP' in Excel.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Join Kinds' in Power Query? (Select all that apply)",
+    "options": {
+      "A": "Left Outer",
+      "B": "Full Outer",
+      "C": "Left Anti",
+      "D": "Zig-Zag Join"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does a 'Left Anti Join' do in a Merge operation?",
+    "options": {
+      "A": "Returns all rows from both tables.",
+      "B": "Returns only rows from the first table that do NOT have a match in the second table.",
+      "C": "Returns only the rows that match in both tables.",
+      "D": "Returns all rows from the second table that match the first."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'M' language, which keyword is used to start the definition of a query's steps?",
+    "options": {
+      "A": "start",
+      "B": "let",
+      "C": "define",
+      "D": "begin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Once a step is deleted in the middle of the 'Applied Steps' list, it can lead to errors in subsequent steps that refer to the deleted step.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which transformation should you use to aggregate data by a specific column (e.g., finding the average price per category)?",
+    "options": {
+      "A": "Transpose",
+      "B": "Group By",
+      "C": "Pivot Column",
+      "D": "Unpivot Column"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Pivot Column' and 'Unpivot Columns'?",
+    "options": {
+      "A": "Pivot makes a table 'taller'; Unpivot makes it 'wider'.",
+      "B": "Pivot turns unique values from one column into multiple columns; Unpivot turns multiple columns into attribute-value pairs.",
+      "C": "There is no difference; they are different names for Transpose.",
+      "D": "Pivot is only for text; Unpivot is for numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are available 'Number' transformations in Power Query? (Select all that apply)",
+    "options": {
+      "A": "Scientific (Square Root, Logarithm)",
+      "B": "Rounding (Round up, Round down)",
+      "C": "Information (Is Even, Is Odd)",
+      "D": "Font Scaling"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Power Query's 'Buffer' functions (like Table.Buffer) are used to load a table into memory to prevent multiple calls to the data source.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to create a custom column based on complex 'If...Then...Else' logic?",
+    "options": {
+      "A": "Index Column",
+      "B": "Conditional Column",
+      "C": "Duplicate Column",
+      "D": "Merge Column"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs during a 'Fuzzy Merge'?",
+    "options": {
+      "A": "The data is blurred for security reasons.",
+      "B": "Power Query uses approximate matching logic to join rows that are similar but not identical (e.g., 'Microsoft' vs 'Microsoft Inc').",
+      "C": "The query fails if the data is not sorted alphabetically.",
+      "D": "The query is deleted automatically after one use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you identify which step in Power Query is currently being 'folded' to the data source?",
+    "options": {
+      "A": "The step turns green.",
+      "B": "Right-click the step; if 'View Native Query' is enabled, the step is folded.",
+      "C": "A pop-up appears saying 'Folding Successful'.",
+      "D": "The computer makes a specific sound."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can create a 'Custom Function' in Power Query by defining a query and then transforming it into a function via the Advanced Editor.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Schema Drift' in Power Query? (Select all that apply)",
+    "options": {
+      "A": "When the source data adds new columns unexpectedly.",
+      "B": "When a column in the source data is renamed or deleted, causing the query to break.",
+      "C": "When the data types in the source change (e.g., Number to Text).",
+      "D": "When the monitor resolution changes."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of the 'Drill Down' feature on a list or record?",
+    "options": {
+      "A": "To delete all other tables in the model.",
+      "B": "To convert a specific cell value into a single-value output or a list that can be used as a parameter.",
+      "C": "To see the data in 3D.",
+      "D": "To increase the calculation speed of a SQL server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M' code, what does the symbol '#' usually indicate before a step name (e.g., #\"Renamed Columns\")?",
+    "options": {
+      "A": "It marks the step as a primary key.",
+      "B": "It allows for step names that contain spaces or special characters.",
+      "C": "It indicates that the step is a comment.",
+      "D": "It means the step is hidden from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query's 'Column From Examples' can learn to extract text patterns (like emails or dates) just by looking at a few manual entries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Data Sampling' or profiling tools? (Select all that apply)",
+    "options": {
+      "A": "Column Quality",
+      "B": "Column Profile",
+      "C": "Column Statistics",
+      "D": "Column Colorizer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the difference between 'Append' and 'Merge'?",
+    "options": {
+      "A": "Append adds columns; Merge adds rows.",
+      "B": "Append adds rows (stacks tables); Merge adds columns (joins tables).",
+      "C": "They are exactly the same.",
+      "D": "Append is for local files; Merge is for cloud files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the function 'Table.Distinct' do in M code?",
+    "options": {
+      "A": "It sorts the table alphabetically.",
+      "B": "It removes duplicate rows from the specified table.",
+      "C": "It adds a new index column.",
+      "D": "It changes the data type to 'Distinct'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' is a case-sensitive language, meaning 'table.selectrows' would fail if it should be 'Table.SelectRows'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are required to connect to a 'Web' data source? (Select all that apply)",
+    "options": {
+      "A": "A valid URL",
+      "B": "An active internet connection",
+      "C": "Authentication (if the site is private)",
+      "D": "The website's physical IP address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Parameter' primarily used for in a Power Query template?",
+    "options": {
+      "A": "To measure the dimensions of the table.",
+      "B": "To allow users to change inputs (like file paths or date ranges) without editing the M code.",
+      "C": "To set the password for the Excel file.",
+      "D": "To rotate the table by 90 degrees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle a 'Data Format Error' during the 'Change Type' step?",
+    "options": {
+      "A": "Restart the computer.",
+      "B": "Use 'Replace Errors' or investigate the source data for non-matching characters.",
+      "C": "Change the font size of the error message.",
+      "D": "Delete the entire column."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Remove Other Columns' is better for performance and maintenance than 'Remove Columns'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to find the number of characters in a text string in M?",
+    "options": {
+      "A": "Text.Size",
+      "B": "Text.Length",
+      "C": "String.Count",
+      "D": "Len"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'Table.Combine({Table1, Table2})'?",
+    "options": {
+      "A": "A join between the two tables.",
+      "B": "An append (stacking) of the two tables into one.",
+      "C": "The deletion of both tables.",
+      "D": "A comparison of the differences between the tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'View' option allows you to see the relationships between multiple queries and their data sources?",
+    "options": {
+      "A": "Query Settings",
+      "B": "Query Dependencies",
+      "C": "Advanced Editor",
+      "D": "Formula Bar"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can load data into the 'Data Model' (Power Pivot) without loading it to an Excel worksheet grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid 'Split Column' methods? (Select all that apply)",
+    "options": {
+      "A": "By Delimiter",
+      "B": "By Number of Characters",
+      "C": "By Non-Digit to Digit",
+      "D": "By Color of Text"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Transpose' function do?",
+    "options": {
+      "A": "Translates the table into another language.",
+      "B": "Swaps the rows and columns of the selected table.",
+      "C": "Sorts the table in descending order.",
+      "D": "Calculates the average value of the first row."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M' language, what does 'in' signify?",
+    "options": {
+      "A": "The start of an input parameter.",
+      "B": "The final step or expression that the query returns.",
+      "C": "A command to look inside a folder.",
+      "D": "The end of a comment block."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can process JSON and XML data structures by 'Expanding' the nested records and lists.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which transformation is best for removing leading and trailing whitespace from every cell in a column?",
+    "options": {
+      "A": "Clean",
+      "B": "Trim",
+      "C": "Format",
+      "D": "Clear"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Invoking' a function in Power Query?",
+    "options": {
+      "A": "Calling a function by name and providing the required arguments to run it against a dataset.",
+      "B": "Deleting a function.",
+      "C": "Renaming a function.",
+      "D": "Printing the source code of a function."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which setting ensures that Power Query ignores privacy levels and speeds up data merging from different sources?",
+    "options": {
+      "A": "Query Folding",
+      "B": "Fast Combine",
+      "C": "Incremental Refresh",
+      "D": "DirectQuery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Replace Errors' will only work if the column has been assigned a specific Data Type first.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Combine Files' feature in a folder connector? (Select all that apply)",
+    "options": {
+      "A": "It creates a 'Sample File' to define transformations.",
+      "B": "It uses a 'Transform File' function to process each document.",
+      "C": "It automatically merges files with different column headers.",
+      "D": "It works with CSV, Excel, and Text files."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of 'Keep Duplicates'?",
+    "options": {
+      "A": "To increase the size of the database.",
+      "B": "To isolate and audit rows that have non-unique values in the selected column.",
+      "C": "To create a backup copy of the data.",
+      "D": "To sort the data by frequency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Power Query, what does 'Index from 0' vs 'Index from 1' change?",
+    "options": {
+      "A": "The speed of the calculation.",
+      "B": "The starting number of the new auto-incrementing column.",
+      "C": "The data type of the column.",
+      "D": "The number of rows displayed in the preview."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Transformations in Power Query are automatically updated in real-time in the underlying source file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function extracts the 'Year' from a Date column in M?",
+    "options": {
+      "A": "Date.GetYear",
+      "B": "Date.Year",
+      "C": "Year.From",
+      "D": "Calendar.Year"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Source Settings' used for?",
+    "options": {
+      "A": "To change the color of the data source.",
+      "B": "To update file paths, database credentials, or privacy levels for your connections.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M' language, what is a 'Record'?",
+    "options": {
+      "A": "A physical music disc.",
+      "B": "A set of named fields (key-value pairs) representing a single row or object.",
+      "C": "A security certificate.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Table.SelectColumns' is the M function used when a user chooses to 'Remove Other Columns'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Text' formatting options in Power Query? (Select all that apply)",
+    "options": {
+      "A": "UPPERCASE",
+      "B": "lowercase",
+      "C": "Capitalize Each Word",
+      "D": "Bold/Italic"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Query' 'Refresh' 'Order'?",
+    "options": {
+      "A": "Hiring a person to order the queries.",
+      "B": "The sequence in which Power Query updates data, often determined by query dependencies.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'DirectQuery' mode?",
+    "options": {
+      "A": "Querying a person directly.",
+      "B": "A connection type where no data is imported; instead, queries are sent directly to the source in real-time.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query's 'Group By' can perform multiple aggregations (like Sum and Count) at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Column' profile statistics? (Select all that apply)",
+    "options": {
+      "A": "Min/Max values",
+      "B": "Average value",
+      "C": "Count of Nulls",
+      "D": "The font color of the values"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Functional' language type?",
+    "options": {
+      "A": "A language that works perfectly.",
+      "B": "A programming paradigm (like M) where programs are constructed by applying and composing functions.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Query' 'Folding' 'Indicator'?",
+    "options": {
+      "A": "A little flag on the server.",
+      "B": "A visual way (like the 'View Native Query' option) to check if a step is being offloaded to the source.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Append Queries as New' creates a third query that combines the data from two existing queries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' List syntax? (Select all that apply)",
+    "options": {
+      "A": "Enclosed in curly braces { }",
+      "B": "Items are separated by commas",
+      "C": "Can contain mixed data types",
+      "D": "Must be exactly 10 items"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Parameter' 'Binding'?",
+    "options": {
+      "A": "Binding a physical book.",
+      "B": "The process of linking a Power Query parameter to an Excel cell or a user-input field.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Incremental' 'Refresh'?",
+    "options": {
+      "A": "Refreshing the report every 1 minute.",
+      "B": "A process that only refreshes data that has changed or is new, rather than the entire dataset.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Unpivot Other Columns' is usually more robust than selecting specific columns to unpivot, as it adapts to new columns in the source data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'M' Error handling keywords? (Select all that apply)",
+    "options": {
+      "A": "try",
+      "B": "otherwise",
+      "C": "error",
+      "D": "catch"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Query' 'Staging'?",
+    "options": {
+      "A": "Setting up a stage for a query play.",
+      "B": "Creating intermediate queries that perform part of the transformation to be reused by other 'final' queries.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power Query', what is 'Formula' 'Intellisense'?",
+    "options": {
+      "A": "Hiring a person named Intellisense.",
+      "B": "The auto-complete feature that suggests function names and parameters as you type M code.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Pivot Column' transformation requires an aggregate function (like Sum or Count) to handle multiple values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Editor' features? (Select all that apply)",
+    "options": {
+      "A": "Directly editing M script",
+      "B": "Adding comments to the script",
+      "C": "Changing the color of the text",
+      "D": "Validating M syntax"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'List' 'Expansion'?",
+    "options": {
+      "A": "Expanding a physical list.",
+      "B": "The process of converting a column containing lists into multiple rows, one for each list item.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Native' 'Query'?",
+    "options": {
+      "A": "A query born in the local area.",
+      "B": "The actual SQL or source-specific code that Power Query generates and sends to a database.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Power Query can be extended by writing custom 'M' code that isn't available in the standard user interface buttons.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Power Query M function is used to create a manual 'Buffer' of a table in memory to prevent the 'Multiple Pass' issue during expensive transformations?",
+    "options": {
+      "A": "Table.Cache",
+      "B": "Table.Buffer",
+      "C": "Table.Memorize",
+      "D": "Table.Hold"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In M language, the 'each' keyword is syntactical shorthand for a function that takes a single parameter, often represented as (_) =>.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following scenarios will typically 'Break' Query Folding? (Select all that apply)",
+    "options": {
+      "A": "Merging a SQL table with a local Excel file",
+      "B": "Using a custom M function that cannot be translated to SQL",
+      "C": "Performing a simple 'Filter' on a date column",
+      "D": "Changing a column's data type using logic not supported by the source"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary difference between the 'Table.Join' and 'Table.NestedJoin' functions in M?",
+    "options": {
+      "A": "Table.Join is for numbers; Table.NestedJoin is for text.",
+      "B": "Table.Join flattens the result immediately; Table.NestedJoin creates a new column containing a Table object for each match.",
+      "C": "Table.Join only works on SQL sources, while NestedJoin is for Excel.",
+      "D": "There is no difference; they are aliases for the same operation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the M language, how do you handle errors within an expression to provide a fallback value?",
+    "options": {
+      "A": "if error then ...",
+      "B": "try ... otherwise ...",
+      "C": "catch (error) { ... }",
+      "D": "on error resume next"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Value.NativeQuery' allows you to write custom SQL strings that can still participate in query folding for subsequent steps.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'List' transformation functions in M? (Select all that apply)",
+    "options": {
+      "A": "List.Generate",
+      "B": "List.Accumulate",
+      "C": "List.Transform",
+      "D": "List.SQLJoin"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'List.Accumulate' do in Power Query?",
+    "options": {
+      "A": "It counts the number of items in a list.",
+      "B": "It iterates through a list and accumulates a result based on an initial seed and an accumulator function.",
+      "C": "It sorts a list in a recursive pattern.",
+      "D": "It deletes duplicate values from a list to save memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the 'metadata' of a value or a table in M?",
+    "options": {
+      "A": "Value.GetInfo",
+      "B": "Value.Metadata",
+      "C": "Meta.Data",
+      "D": "Table.Schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' supports recursion, allowing a function to call itself to process hierarchical data structures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical impact of 'Privacy Levels' (Public, Organizational, Private) on Query Folding?",
+    "options": {
+      "A": "They determine the color of the query icon.",
+      "B": "They can prevent the 'Firewall' from combining data across sources, effectively stopping query folding to protect sensitive info.",
+      "C": "They encrypt the M code so it cannot be read in the Advanced Editor.",
+      "D": "They increase the number of threads used by the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert a JSON binary string into an M record or list?",
+    "options": {
+      "A": "Json.Parse",
+      "B": "Json.Document",
+      "C": "Json.FromBinary",
+      "D": "Table.FromJson"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a complex M script, what is the 'Shared' scope?",
+    "options": {
+      "A": "A list of queries shared with other users via the cloud.",
+      "B": "An environment containing all the standard library functions and defined queries available in the current session.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The '#shared' keyword can be used to see a list of every function available in your Power Query environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid ways to improve the performance of a slow query? (Select all that apply)",
+    "options": {
+      "A": "Pushing filters as early as possible in the step sequence",
+      "B": "Using Table.Buffer on tables that are referenced multiple times",
+      "C": "Reducing the number of 'Change Type' steps",
+      "D": "Adding a 'Sort' step at the very beginning of every query"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Partial Folding'?",
+    "options": {
+      "A": "Folding only the first row of a table.",
+      "B": "When the first few steps of a query are folded to the source, but a later step forces the remaining processing to happen locally.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional to fold data half-way."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In M, what is the purpose of the 'let' block?",
+    "options": {
+      "A": "To let the computer take a break.",
+      "B": "To define local variables or steps and their associated expressions.",
+      "C": "To set the permissions of a database.",
+      "D": "To increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' variables are immutable, meaning once a variable is defined in a 'let' block, its value cannot be changed within that scope.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Data Source' function is used to connect to a REST API that requires header authentication? (Select all that apply)",
+    "options": {
+      "A": "Web.Contents",
+      "B": "Web.Page",
+      "C": "Web.Action",
+      "D": "Http.Request"
+    },
+    "answer": ["A"]
+  },
+  {
+    "question": "What does the 'Binary.Decompress' function do?",
+    "options": {
+      "A": "Deletes duplicate binary files.",
+      "B": "Unzips data that has been compressed using GZip or Deflate algorithms.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In M, how do you specify a 'Type' for a function's parameter?",
+    "options": {
+      "A": "parameter as text",
+      "B": "(parameter as text) => ...",
+      "C": "type text parameter",
+      "D": "parameter: string"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Table.Group' function's fourth argument allows you to specify the group kind (Global vs. Local).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Record' functions in M? (Select all that apply)",
+    "options": {
+      "A": "Record.FromList",
+      "B": "Record.AddField",
+      "C": "Record.ToTable",
+      "D": "Record.SQLConnect"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Firewall Error' typically caused by in Power Query?",
+    "options": {
+      "A": "The computer's antivirus blocking Excel.",
+      "B": "Attempting to merge data from two different sources with incompatible privacy levels.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy Evaluation' in the context of the M engine?",
+    "options": {
+      "A": "An engine that takes a long time to start.",
+      "B": "Steps are only calculated if they are actually needed for the final output ('in' statement).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' uses a 'Zero-based' index for its functions (e.g., the first item in a list is at index 0).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions help in 'Dynamic' column selection? (Select all that apply)",
+    "options": {
+      "A": "Table.ColumnNames",
+      "B": "Table.SelectColumns",
+      "C": "List.Select",
+      "D": "Table.RenameAll"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the role of 'Expression.Evaluate' in M?",
+    "options": {
+      "A": "To evaluate the performance of the developer.",
+      "B": "To dynamically execute a string as if it were M code.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M', what does the '?' operator do when accessing a field (e.g., Record?[Field])?",
+    "options": {
+      "A": "It asks the user for the value.",
+      "B": "It performs a 'Null-safe' access, returning null instead of an error if the field doesn't exist.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Value.Action' function is used to create 'Data Actions' in specific Power BI environments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' Record syntax? (Select all that apply)",
+    "options": {
+      "A": "Enclosed in square brackets [ ]",
+      "B": "Fields are separated by commas",
+      "C": "Uses equal signs for assignment (Name = 'Value')",
+      "D": "Must have exactly 5 fields"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Section' logic in M?",
+    "options": {
+      "A": "A way to divide the office into sections.",
+      "B": "A grouping of queries and definitions, usually starting with 'section Section1;'.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power Query', what is 'Query' 'Referencing' significance?",
+    "options": {
+      "A": "Asking a friend for a reference.",
+      "B": "Building a new query using the output of an existing query as the source, creating a dependency chain.",
+      "C": "A security scan for computer viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In M, you can use the '...' (triple dot) to indicate a range in a list (e.g., {1..10}).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Metadata' attributes of a Power Query step? (Select all that apply)",
+    "options": {
+      "A": "Step Name",
+      "B": "Formula Expression",
+      "C": "Query Folding status (internal)",
+      "D": "The color of the query icon"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Folding' 'Blocking' operator?",
+    "options": {
+      "A": "A physical block on the server.",
+      "B": "An M function or logic that cannot be translated into the data source's native language, ending the folding process.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M' language, what is the 'Function.InvokeAfter' used for?",
+    "options": {
+      "A": "Deleting a function after it runs.",
+      "B": "Delaying the execution of a function by a specified duration (useful for API rate limits).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' is considered a 'Turing Complete' language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Table' profiling functions in M? (Select all that apply)",
+    "options": {
+      "A": "Table.Profile",
+      "B": "Table.Schema",
+      "C": "Table.ColumnCount",
+      "D": "Table.ColorStats"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Parameter' 'Typing' in M?",
+    "options": {
+      "A": "Typing a parameter on the keyboard.",
+      "B": "Defining the specific data type a function parameter must accept to improve code safety.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'DirectQuery' 'Query' 'Folding'?",
+    "options": {
+      "A": "Folding a direct query in half.",
+      "B": "The absolute necessity of transformations being folded back to the source for DirectQuery to work efficiently.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' code is case-sensitive, so 'Text.From' and 'text.from' are different.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' Function syntax? (Select all that apply)",
+    "options": {
+      "A": "Uses ( ) => notation",
+      "B": "Parameters are defined in parentheses",
+      "C": "The body follows the arrow symbol",
+      "D": "Functions must always be named 'Func'"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Join' 'Algorithm' 'NestedLoop' in M?",
+    "options": {
+      "A": "A loop that never ends.",
+      "B": "A specific join strategy (JoinAlgorithm.NestedLoop) that can be passed to Table.Join to control execution logic.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Dynamic' 'Schema' 'Handling'?",
+    "options": {
+      "A": "Changing the schema manually every day.",
+      "B": "Writing M code that automatically adapts to changes in source column names or counts.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Value.Type' function returns the type of a given value as an M type object.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' List.Generate? (Select all that apply)",
+    "options": {
+      "A": "It can be used to create an infinite list",
+      "B": "It requires an initial value, a condition, and a next value function",
+      "C": "It is often used for paginating through API results",
+      "D": "It only works with numbers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive' 'Function' 'Limit' in M?",
+    "options": {
+      "A": "There is no limit.",
+      "B": "The engine has a stack limit; deep recursion can lead to an overflow error.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power Query', what is 'Function' 'Metadata' used for?",
+    "options": {
+      "A": "To store the function's favorite color.",
+      "B": "To add documentation, descriptions, and sample values to a custom function UI.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Table.ReplaceValue' function can use a custom function as the 'replacer' argument for complex replacements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'M' functional types? (Select all that apply)",
+    "options": {
+      "A": "number",
+      "B": "text",
+      "C": "logical",
+      "D": "binary"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Environment' 'Capture' in M functions?",
+    "options": {
+      "A": "Capturing the physical environment of the server room.",
+      "B": "When a nested function has access to the variables defined in its outer 'let' block (Closure).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Power Query', what is 'Binary' 'Encoding'?",
+    "options": {
+      "A": "Encoding data in a secret code.",
+      "B": "Converting binary data into a text representation like Base64 or Hex.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' supports 'Error Raising' using the 'error' keyword followed by a record or text message.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' Table.TransformRows? (Select all that apply)",
+    "options": {
+      "A": "It returns a list where each item is the result of the transformation",
+      "B": "It is often more flexible than Table.AddColumn",
+      "C": "It automatically converts the result back into a table",
+      "D": "It applies a function to each row of the table"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Value' 'Replace' 'Optimization'?",
+    "options": {
+      "A": "Hiring a person named Optimizer.",
+      "B": "A technique to minimize data scanning when performing mass replacements in large tables.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Native' 'Query' 'Security'?",
+    "options": {
+      "A": "Ensuring the native query is pretty.",
+      "B": "The risk of 'SQL Injection' if parameters are not handled correctly when passing user input to a native query.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' allows for 'Function Overloading' where multiple functions share the same name but have different parameters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'M' relational join types? (Select all that apply)",
+    "options": {
+      "A": "JoinKind.Inner",
+      "B": "JoinKind.LeftOuter",
+      "C": "JoinKind.FullOuter",
+      "D": "JoinKind.CrossProduct (manual)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Record' 'Expansion' 'Scaling'?",
+    "options": {
+      "A": "Expanding a physical record disc.",
+      "B": "The performance penalty associated with expanding nested records in extremely wide tables.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'ETL' 'Incremental' 'Load' 'Marker'?",
+    "options": {
+      "A": "A physical marker pen.",
+      "B": "A stored value (like a timestamp) used to identify which new records need to be fetched in the next refresh.",
+      "C": "A security scan for computer viruses.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' is a purely functional language, meaning it has no side effects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'M' data structures? (Select all that apply)",
+    "options": {
+      "A": "Tables",
+      "B": "Lists",
+      "C": "Records",
+      "D": "Binary"
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What is 'Query' 'Folding' 'View'?",
+    "options": {
+      "A": "Viewing a query that has been folded.",
+      "B": "The ability to inspect the Native Query generated by the M engine to troubleshoot performance.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'M', what is 'Expression' 'Syntax' 'Error'?",
+    "options": {
+      "A": "When the developer makes a typo in the M code.",
+      "B": "When the SQL server is down.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Power Query, 'Table.Unpivot' is the M function used to turn columns into rows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'M' Functional composition? (Select all that apply)",
+    "options": {
+      "A": "Using the output of one function as the input to another",
+      "B": "Nesting functions within a single expression",
+      "C": "Defining multiple functions in a let block",
+      "D": "Changing the color of the function text"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Row' 'Context' 'Transfer' in M?",
+    "options": {
+      "A": "Moving a row to another table.",
+      "B": "M does not have row context transfer in the same way as DAX; context is explicitly passed via function parameters.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  }
+  ]
+}

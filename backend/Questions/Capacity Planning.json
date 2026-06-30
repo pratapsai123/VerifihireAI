@@ -1,0 +1,2015 @@
+{ 
+  "skill": "Capacity Planning", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Capacity Planning in an IT environment?",
+    "options": {
+      "A": "To ensure the server room has enough physical chairs for staff.",
+      "B": "To ensure that IT resources are sized correctly to meet current and future business requirements at a reasonable cost.",
+      "C": "To delete old data to save electricity.",
+      "D": "To replace all human engineers with automated scripts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Resource' that must be monitored for capacity planning?",
+    "options": {
+      "A": "CPU (Central Processing Unit)",
+      "B": "Memory (RAM)",
+      "C": "Disk Storage",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In capacity planning, what does 'Utilization' refer to?",
+    "options": {
+      "A": "The color of the server rack.",
+      "B": "The percentage of a resource that is currently being used compared to its total capacity.",
+      "C": "The number of times a server has been restarted.",
+      "D": "The annual cost of a software license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Horizontal Scaling'?",
+    "options": {
+      "A": "Increasing the height of the physical server.",
+      "B": "Adding more machines or nodes to a system to share the workload.",
+      "C": "Adding more RAM to a single existing server.",
+      "D": "Moving the servers to a wider room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vertical Scaling'?",
+    "options": {
+      "A": "Adding more CPU or RAM to an existing server to increase its power.",
+      "B": "Stacking servers on top of each other physically.",
+      "C": "Moving the data center to a higher floor.",
+      "D": "Hiring taller system administrators."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Forecasting' in capacity planning involves using historical data to predict future resource needs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Lead Time' mean in the context of resource procurement?",
+    "options": {
+      "A": "The time it takes for a CPU to process a command.",
+      "B": "The time between placing an order for hardware and having it installed and ready for use.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The total length of the power cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows how much of a hard drive is currently full?",
+    "options": {
+      "A": "CPU Load",
+      "B": "Disk Usage percentage",
+      "C": "Network Latency",
+      "D": "Memory Paging"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Headroom' in a capacity planning report?",
+    "options": {
+      "A": "The physical distance between the server and the ceiling.",
+      "B": "The amount of spare capacity available before a resource becomes saturated.",
+      "C": "The height of the data center door.",
+      "D": "The salary of the department head."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Over-provisioning resources is a cost-effective way to manage a data center.",
+    "options": {
+      "A": "False (It leads to wasted money on resources that aren't being used).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if the hardware is free"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Elasticity'?",
+    "options": {
+      "A": "The ability to stretch physical network cables.",
+      "B": "The ability of a cloud provider to automatically scale resources up or down based on real-time demand.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these tools is commonly used to monitor system performance metrics for capacity planning?",
+    "options": {
+      "A": "Prometheus / Grafana",
+      "B": "Microsoft Paint",
+      "C": "Adobe Reader",
+      "D": "Google Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Under-provisioning can lead to system crashes and poor user experience during peak traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Baseline' data?",
+    "options": {
+      "A": "Data collected at the very bottom of the ocean.",
+      "B": "Performance data collected during normal operations used as a reference point for future comparisons.",
+      "C": "The lowest price a server can be bought for.",
+      "D": "A specialized tool for drawing networks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' measures the amount of data flowing through a network interface?",
+    "options": {
+      "A": "IOPS",
+      "B": "Throughput / Bandwidth Utilization",
+      "C": "CPU Clock Speed",
+      "D": "RAM Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bottleneck'?",
+    "options": {
+      "A": "A physical defect in a glass bottle.",
+      "B": "A single component that limits the overall performance or capacity of a system.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Seasonality refers to predictable changes in resource demand that repeat over specific time periods (e.g., higher traffic during Black Friday).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for grocery stores",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Rule of Thumb' for safe CPU utilization in a production environment before planning an upgrade?",
+    "options": {
+      "A": "100%",
+      "B": "Typically 70-80% to allow for unexpected spikes.",
+      "C": "10%",
+      "D": "0%"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes the maximum amount of work a system can handle?",
+    "options": {
+      "A": "Latency",
+      "B": "Capacity",
+      "C": "Jitter",
+      "D": "Packet Loss"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Capacity planning only needs to be done once when a system is first built.",
+    "options": {
+      "A": "False (It is a continuous process as business needs and technology change).",
+      "B": "True",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage Tiering'?",
+    "options": {
+      "A": "Stacking hard drives in a pyramid shape.",
+      "B": "Moving data between different types of storage (e.g., SSD vs HDD) based on how frequently it is accessed to save costs.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows how often a system is paging or swapping memory to disk?",
+    "options": {
+      "A": "CPU Idle",
+      "B": "Swap Usage / Paging Rate",
+      "C": "Network Jitter",
+      "D": "Disk Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The ability of a system to handle a growing amount of work by adding resources.",
+      "B": "The weight of the server rack on a scale.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Virtualization' allows a single physical server to be partitioned into multiple virtual servers, improving hardware capacity utilization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Auto-scaling'?",
+    "options": {
+      "A": "Manually turning servers on and off.",
+      "B": "A feature that automatically adds or removes compute resources based on defined rules and demand.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Input/Output' operations per second on a storage device?",
+    "options": {
+      "A": "IOPS",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Bandwidth' is the maximum rate of data transfer across a network path.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reserved Instances' in cloud capacity planning?",
+    "options": {
+      "A": "Servers kept in a separate room for emergencies.",
+      "B": "A billing model where you commit to using a specific amount of capacity for a set term in exchange for a significant discount.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard secure web traffic (HTTPS), often used to access cloud capacity management consoles?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Monitoring 'Daily Peaks' is more important for capacity planning than monitoring 'Monthly Averages'.",
+    "options": {
+      "A": "True (Averages can hide spikes that cause system failures).",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Quota'?",
+    "options": {
+      "A": "A physical limit on how many servers can fit in a rack.",
+      "B": "A limit set by an administrator on how much of a resource a specific user or team can consume.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'RAM' currently in use?",
+    "options": {
+      "A": "Memory Utilization",
+      "B": "CPU Load",
+      "C": "Disk Space",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Adding more RAM to a server is an example of Horizontal Scaling.",
+    "options": {
+      "A": "False (It is Vertical Scaling).",
+      "B": "True",
+      "C": "Only for Linux servers",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Provisioning'?",
+    "options": {
+      "A": "The process of setting up IT infrastructure.",
+      "B": "Deleting data from a database.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Latentcy' of a network request?",
+    "options": {
+      "A": "Response Time / Delay",
+      "B": "Throughput",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Capacity Management' aims to balance cost against performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload' in capacity planning?",
+    "options": {
+      "A": "The amount of processing that a computer has to do at a given time.",
+      "B": "The weight of the computer hardware.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Concurrent Users'?",
+    "options": {
+      "A": "Active Session Count",
+      "B": "Total Data Stored",
+      "C": "CPU Utilization",
+      "D": "Network Speed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Endurance Testing' helps identify memory leaks that impact long-term capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion' rate?",
+    "options": {
+      "A": "The speed at which data is brought into a system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' idle time?",
+    "options": {
+      "A": "CPU Idle",
+      "B": "CPU Load",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Cloud Bursting' is a configuration where a private cloud uses a public cloud when it runs out of capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inventory Management'?",
+    "options": {
+      "A": "Tracking all hardware and software assets owned by an organization.",
+      "B": "Naming the servers after famous people.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Requests per Second'?",
+    "options": {
+      "A": "Throughput",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scalability' is a key factor in capacity planning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Level Agreement' (SLA)?",
+    "options": {
+      "A": "A contract between a service provider and a customer that defines expected performance levels.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a system?",
+    "options": {
+      "A": "Uptime percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Benchmarking' helps compare system performance against a standard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Contention'?",
+    "options": {
+      "A": "When multiple processes compete for the same limited hardware resource.",
+      "B": "Naming the servers after colors.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets' in a network?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' helps avoid emergency hardware purchases.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Demand Management'?",
+    "options": {
+      "A": "The process of influencing or controlling the amount of work coming into a system.",
+      "B": "Hiring a new manager.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' response time?",
+    "options": {
+      "A": "Mean Response Time",
+      "B": "90th Percentile",
+      "C": "Total Throughput",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scalability' testing helps determine the limits of a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Allocation'?",
+    "options": {
+      "A": "Assigning available resources to specific tasks or users.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Database Connections'?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Utilization' is a key metric for identifying bottlenecks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Planning' report?",
+    "options": {
+      "A": "A document that summarizes current resource usage and future needs.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Disk Space' free?",
+    "options": {
+      "A": "Free Space percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can be used for long-term storage of capacity metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation?",
+    "options": {
+      "A": "Using network segmentation to improve performance and security.",
+      "B": "Naming the virtual cables after colors.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' helps in creating reliable automated capacity scaling scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage'?",
+    "options": {
+      "A": "Tracing the history of data for capacity trend analysis.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Running Virtual Machines'?",
+    "options": {
+      "A": "VM Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' capacity planning means considering resource needs early in the design phase.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific concept from 'Queuing Theory' explains why system response times increase exponentially as a single resource (like a CPU) approaches 100% utilization?",
+    "options": {
+      "A": "Amortized Analysis",
+      "B": "M/M/1 Queue Model / Utilization Law",
+      "C": "The Law of Large Numbers",
+      "D": "Binary Search Optimization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Cloud Capacity Planning, what is the process of 'Right-sizing' an instance primarily concerned with?",
+    "options": {
+      "A": "Making sure the server physically fits in the rack.",
+      "B": "Matching instance types and sizes to your workload performance and capacity requirements at the lowest possible cost.",
+      "C": "Adding as many CPUs as possible to every workload for safety.",
+      "D": "Upgrading the OS version to the newest release."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Time-to-Full' is a forecasting metric that predicts the date a storage volume will reach 100% capacity based on current growth trends.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud storage",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which phenomenon occurs when a small increase in user load leads to a massive, non-linear increase in 'Tail Latency' (p99), even if average CPU usage is moderate?",
+    "options": {
+      "A": "Linear Scaling",
+      "B": "Resource Contention / Micro-queuing",
+      "C": "Data Compression",
+      "D": "Thermal Throttling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Predictive Scaling' and 'Reactive Scaling' in an auto-scaling group?",
+    "options": {
+      "A": "Predictive uses machine learning to scale before a spike; Reactive scales only after a metric threshold is crossed.",
+      "B": "Reactive is always faster than Predictive.",
+      "C": "Predictive only works for physical hardware.",
+      "D": "There is no difference between the two."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does 'Hyper-threading' affect capacity planning calculations for compute-intensive workloads?",
+    "options": {
+      "A": "It doubles the physical processing power of the CPU.",
+      "B": "It provides a modest performance boost (often 15-30%) by allowing two threads to share a core, but it is not equivalent to adding a full physical core.",
+      "C": "It eliminates the need for RAM.",
+      "D": "It only works for 32-bit applications."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memeory Ballooning' is a technique used by hypervisors to reclaim unused memory from virtual machines to support higher consolidation ratios.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only in development environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Variability' and why is it a challenge for capacity forecasting?",
+    "options": {
+      "A": "The speed of the network cables changing.",
+      "B": "The unpredictable fluctuations in demand that make it difficult to maintain a steady resource baseline.",
+      "C": "The different colors of the dashboard graphs.",
+      "D": "Hiring a new team of developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Microservices' architecture, what is 'Capacity Cascading'?",
+    "options": {
+      "A": "When one service runs out of capacity and causes a chain reaction of failures in downstream services.",
+      "B": "A specialized way to name VM folders.",
+      "C": "The process of moving servers to a higher floor.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' is most useful for identifying 'IOPS' starvation on a database server?",
+    "options": {
+      "A": "CPU Idle Time",
+      "B": "Disk Queue Length / Disk I/O Wait",
+      "C": "Memory Utilization",
+      "D": "Network Bandwidth"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Knee of the Curve' in a performance-load graph?",
+    "options": {
+      "A": "The point where the system is physically cold.",
+      "B": "The point where response times begin to degrade rapidly as the system nears saturation.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary limit of a data architect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Over-subscription' in virtualization allows a host to allocate more vCPUs to virtual machines than the physical core count of the server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Orphaned Capacity' in a data center or cloud account?",
+    "options": {
+      "A": "Capacity that has no human owner.",
+      "B": "Resources (like unattached storage volumes or idle load balancers) that are being paid for but are not actively used by any application.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a capacity dashboard indicates that a resource has exceeded its 'Soft Limit' but not its 'Hard Limit'?",
+    "options": {
+      "A": "Critical",
+      "B": "Warning / Over-quota",
+      "C": "Success",
+      "D": "Idle"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Amdahl's Law' is used to predict the maximum theoretical speedup of a system when only a portion of the system is improved or parallelized.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for GPU performance",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the impact of 'Context Switching' overhead on a server with thousands of active threads?",
+    "options": {
+      "A": "It increases the CPU clock speed.",
+      "B": "It wastes CPU cycles as the kernel constantly swaps thread states in and out of the processor, reducing overall throughput.",
+      "C": "It increases the amount of available RAM.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'FinOps', what is a 'Commitment-based Discount' (like AWS Savings Plans)?",
+    "options": {
+      "A": "A discount for promising to be nice to the servers.",
+      "B": "A model where you commit to a consistent amount of usage in exchange for a lower hourly rate.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Service Time'—the time a resource spends actually processing a request, excluding wait time?",
+    "options": {
+      "A": "Latency",
+      "B": "Response Time - Wait Time",
+      "C": "Throughput",
+      "D": "Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' for a database must include the impact of 'Index Bloat' on disk space and query performance over time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NoSQL databases",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throttling' in a shared resource environment?",
+    "options": {
+      "A": "Turning the server off physically.",
+      "B": "Intentionally slowing down a process or user when they exceed their allocated capacity limit to protect overall system stability.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'SNMP' Traps, commonly used to send capacity alerts to a monitoring station?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vertical Scaling' (Scaling Up) usually requires a reboot or downtime, while 'Horizontal Scaling' (Scaling Out) often does not.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Fragmentation' in a virtualized cluster?",
+    "options": {
+      "A": "When the server hardware breaks into pieces.",
+      "B": "When resources are available across several nodes but no single node has enough contiguous capacity to host a new large VM.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Context Switches' per second on a system?",
+    "options": {
+      "A": "Throughput",
+      "B": "cs (context switches)",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool for visualizing 3D data center rack layouts for physical capacity planning.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for resource management?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Separating management traffic from data traffic to ensure monitoring tools always have enough bandwidth to report capacity issues.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a capacity-monitored environment?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a common feature in virtualization that allows for higher capacity utilization by sharing physical RAM.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' tiering policy?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "Automated rules that move files to cheaper storage classes (like Glacier) as they age to optimize capacity costs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic, which should have its capacity managed on a dedicated network?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can increase network capacity by grouping multiple physical links into one logical link.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for resource security?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying capacity and security rules to individual workloads to prevent one 'noisy neighbor' from consuming all resources.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' for capacity monitoring in Prometheus?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common method for tracking the historical usage patterns of individual resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' impact on capacity?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The requirement to store data in specific locations, which may limit the available data centers and capacity pools you can use.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an auto-scaling event?",
+    "options": {
+      "A": "Scale-up Success %",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in infrastructure-as-code ensures that re-running a capacity upgrade script doesn't create duplicate resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a capacity database?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "Using unique IDs to track resource usage history without relying on shifting physical asset tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the massive capacity of modern data warehouses for transformation tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' impact on capacity?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The CPU and I/O overhead required to identify and fix data errors, which must be factored into capacity plans.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for capacity tools?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' tasks should be scheduled during 'Off-peak' hours to optimize overall cluster capacity utilization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Monitor'?",
+    "options": {
+      "A": "A physical screen for the server.",
+      "B": "A dashboard or system that provides real-time visibility into resource usage and projected exhaustion dates.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Workers'?",
+    "options": {
+      "A": "Worker Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' can impact capacity by requiring resources for scanning and patching.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's resource allocation and usage policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern capacity management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for capacity?",
+    "options": {
+      "A": "Analyzing historical usage data without active testing to predict future resource requirements.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a capacity shortage?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves active testing under various load conditions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management'?",
+    "options": {
+      "A": "A structured process for managing passwords and keys used by capacity monitoring tools.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for capacity monitoring agents.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where security duties are split between the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Resource Limit Adjustments' completed?",
+    "options": {
+      "A": "Adjustment Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' capacity planning means moving resource considerations earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for capacity?",
+    "options": {
+      "A": "Identifying and evaluating potential threats to system capacity (e.g., DoS attacks).",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Capacity planning is essential for maintaining service reliability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption' impact on capacity?",
+    "options": {
+      "A": "The CPU overhead required to encrypt and decrypt data, which must be factored into capacity models.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Users'?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in resource security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network capacity threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect capacity monitoring data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mathematical formula is used in capacity planning to calculate the probability that a transaction will have to wait in a queue, given a fixed number of servers and a specific arrival rate?",
+    "options": {
+      "A": "Erlang-B",
+      "B": "Erlang-C",
+      "C": "Little's Law",
+      "D": "Amdahl's Law"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a distributed system, how does 'Metastable Failure' impact capacity planning models that rely on simple utilization thresholds?",
+    "options": {
+      "A": "It makes the graphs more colorful.",
+      "B": "It creates a state where a system remains in a failed or degraded mode even after the workload returns to normal capacity, making simple thresholds insufficient for recovery planning.",
+      "C": "It reduces the need for CPU monitoring.",
+      "D": "It only occurs in local development environments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When designing for an 'Active-Active' multi-region architecture, what is the 'N+1' capacity requirement for ensuring total regional failover capability?",
+    "options": {
+      "A": "Each region must run at exactly 100% capacity.",
+      "B": "Each region must maintain enough idle headroom (e.g., running at <50% utilization) to absorb the entire traffic load of the other region instantly if it fails.",
+      "C": "One region must be turned off until a failure occurs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'NUMA' (Non-Uniform Memory Access) node imbalance affect the performance and capacity of high-memory database servers?",
+    "options": {
+      "A": "It makes the RAM physically smaller.",
+      "B": "It introduces significant latency if a CPU core on one socket attempts to access memory controlled by a different socket, effectively reducing the predictable capacity of the system.",
+      "C": "It eliminates the need for L3 cache.",
+      "D": "It only affects 32-bit operating systems."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Little's Law' (L = λW) states that the long-term average number of items in a stable system is equal to the average arrival rate multiplied by the average time an item spends in the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network packets",
+      "D": "Only if the system is in a 'Failed' state"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'LLC' (Last Level Cache) contention, and how does it manifest in high-density container environments?",
+    "options": {
+      "A": "When the server rack is too full.",
+      "B": "When multiple 'noisy neighbor' containers compete for the shared L3 cache on a physical CPU, causing a decrease in instructions per cycle (IPC) and overall capacity.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the BIOS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the best indicator of 'TCP Receive Window' exhaustion leading to throughput degradation in a high-bandwidth pipeline?",
+    "options": {
+      "A": "CPU User Time",
+      "B": "ZeroWindow / WindowFull events in packet captures.",
+      "C": "Total Disk IOPS",
+      "D": "Number of active VLANs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'FinOps' context, what is 'Unit Economics' for capacity planning?",
+    "options": {
+      "A": "The price of one single server.",
+      "B": "Calculating the infrastructure cost per specific business transaction (e.g., cost per order processed) to ensure scalability remains profitable.",
+      "C": "The total number of IT employees.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Coordinated Omission' is a statistical error in many monitoring tools that ignores the time a request spends waiting in a client-side or tool-side queue, leading to optimistic capacity reports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Machine Learning' (ML) in advanced demand forecasting for capacity planning?",
+    "options": {
+      "A": "To write the Python code for the website.",
+      "B": "To identify complex non-linear patterns and multi-variable seasonality (e.g., weather + holidays + promotions) that traditional linear models miss.",
+      "C": "To act as a physical firewall.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' code on a cloud load balancer indicates that the backend targets have reached their 'Maximum Concurrent Connection' limit?",
+    "options": {
+      "A": "200 OK",
+      "B": "503 Service Unavailable / 504 Gateway Timeout",
+      "C": "404 Not Found",
+      "D": "302 Found"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical impact of 'Stop-the-World' (STW) Garbage Collection on a system running at 90% capacity?",
+    "options": {
+      "A": "It increases the CPU clock speed.",
+      "B": "It causes a sudden, complete pause in application processing, which can trigger timeouts and cascading failures in upstream components already at peak capacity.",
+      "C": "It clears all database records automatically.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Amdahl's Law' predicts that the maximum speedup of a system is limited by the serial (non-parallelizable) fraction of the workload, regardless of how much capacity is added.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for GPU clusters",
+      "D": "Only if using 100Gbps links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Universal Scalability Law' (USL), what happens to throughput if the 'Contention' parameter (alpha) is high?",
+    "options": {
+      "A": "Throughput increases linearly.",
+      "B": "Throughput levels off and eventually decreases as more resources are added due to the overhead of coordination.",
+      "C": "The database size shrinks.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Prometheus' API used for gathering capacity metrics?",
+    "options": {
+      "A": "9090",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a built-in capacity planning feature of the AWS Management Console.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation 'Noisy Neighbor' mitigation?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 isolation to prevent the broadcast traffic of one tenant from saturating the network capacity of another tenant.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a secure infrastructure stack?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a safe practice for production systems with hard 'Real-Time' performance requirements.",
+    "options": {
+      "A": "False (The non-deterministic nature of memory swapping can violate real-time latency guarantees).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' throughput 'Provisioning'?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "Explicitly purchasing a guaranteed level of I/O performance (IOPS) independent of the amount of storage capacity purchased.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for high-performance capacity storage?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can improve the resilience of a capacity monitoring system by allowing traffic to flow even if one physical cable is disconnected.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for resource security?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying firewall rules to individual workloads to prevent a single compromised service from exhausting the network capacity of the whole cluster.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a Prometheus monitoring stack?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common method for tracking the history of capacity plan changes in a CMDB.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal requirement that data is subject to the laws of the country where it is physically located, potentially limiting cross-border capacity sharing.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Failed Auto-scaling' events?",
+    "options": {
+      "A": "Scale Failure Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for automated remediation scripts that add capacity to a cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a capacity database?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "Using unique, non-meaningful IDs to track historical resource trends across hardware migrations.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the massively parallel capacity of modern cloud data warehouses for transformation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a capacity context?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and removing errors from historical capacity data to improve the accuracy of forecasting models.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for cloud management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' tasks should be scheduled during low-utilization periods to maximize existing capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Monitor' interface?",
+    "options": {
+      "A": "A dashboard providing real-time visibility into current resource levels vs. projected limits.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Workers'?",
+    "options": {
+      "A": "Worker Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' can impact capacity by requiring resources for patching and re-boots.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's hardware and software allocation policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps includes ensuring that security scanning does not overwhelm system capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for capacity planning?",
+    "options": {
+      "A": "Analyzing historical trends without active workload simulation to estimate future needs.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a capacity shortage?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves active stress testing to find the breaking point of capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management'?",
+    "options": {
+      "A": "A structured process for managing passwords and keys for infrastructure management tools.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes scanning management agents for capacity vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where both the provider and the customer manage resource availability and security.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' impacting capacity?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' capacity means planning for resources during the initial application design phase.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for capacity?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to resource availability.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Capacity planning is essential for a reliable infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption' impact on capacity?",
+    "options": {
+      "A": "The additional CPU processing required to encrypt data in transit and at rest.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active VPN Users' consuming network capacity?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in capacity management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats to capacity.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect management traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface to protect resource availability.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for capacity management dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "The fraudulent practice of sending emails to induce individuals to reveal personal capacity management credentials.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a capacity report?",
+    "options": {
+      "A": "Uptime %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Capacity planning is a key part of IT governance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system for capacity analysis.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Failed Requests'?",
+    "options": {
+      "A": "Fail Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Capacity planning helps optimize IT spending.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Utilization'?",
+    "options": {
+      "A": "The percentage of a resource's capacity that is currently used.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  }
+  ]
+}

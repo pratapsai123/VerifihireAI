@@ -1,14 +1,22 @@
-from django.urls import path
+from django.urls import path # Reload trigger 2
 from . import views
 from . import coding_views
+from .views.user_views import add_team_member_view
 
 urlpatterns = [
+    path('track-events/', views.track_events_view, name='track_events'),
     path('login/', views.login_view, name='login'),
+
     path('verify-login-otp/', views.verify_login_otp_view, name='verify_login_otp'),
+    path('token/refresh/', views.refresh_token_view, name='token_refresh'),
+    path('heartbeat/', views.heartbeat_view, name='heartbeat'),
+
     path('register/', views.register_view, name='register'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     path('reset-password/', views.reset_password_view, name='reset_password'),
+    path('change-password/', views.change_password_view, name='change_password'),
+    path('verify-current-password/', views.verify_current_password_view, name='verify_current_password'),
     path('extract-skills/', views.extract_skills_from_resume_view, name='extract_skills'),
     path('questions/', views.get_questions_view, name='get_questions'),
     path('questions/create/', views.create_question_view, name='create_question'),
@@ -16,12 +24,42 @@ urlpatterns = [
     path('questions/by-skills/', views.get_questions_by_skills_view, name='get_questions_by_skills'),
     path('questions/manual/', views.get_manual_questions_view, name='get_manual_questions'),
     path('questions/parse-document/', views.parse_questions_document_view, name='parse_questions_document'),
+    path('questions/sample-pdf/', views.sample_questions_pdf_view, name='sample_questions_pdf'),
     path('custom-assessments/', views.create_custom_assessment_view, name='create_custom_assessment'),
-    path('custom-assessments/<int:custom_assessment_id>/', views.get_custom_assessment_view, name='get_custom_assessment'),
+    path('custom-assessments/<int:custom_assessment_id>/', views.update_custom_assessment_view, name='update_custom_assessment'),
+    path('custom-assessments/<int:custom_assessment_id>/get/', views.get_custom_assessment_view, name='get_custom_assessment'),
     path('assessments/', views.create_assessment_view, name='create_assessment'),
     path('assessments/<int:assessment_id>/', views.get_assessment_detail_view, name='get_assessment_detail'),
     path('assessments/<int:assessment_id>/invite/', views.create_invitations_and_send_email_view, name='invite_candidates'),
     path('assessments/public/<uuid:token>/', views.get_assessment_public_view, name='get_assessment_public'),
+    path('interviews/invite/', views.create_interview_invitations_and_send_email_view, name='invite_interview_candidates'),
+    path('interviews/invitations/', views.interview_invitations_overview_view, name='interview_invitations_overview'),
+    path('interviews/invitations/<uuid:token>/', views.get_interview_invitation_by_token_view, name='get_interview_invitation_by_token'),
+    path('interviews/draft-invites/', views.draft_interview_invitations_view, name='draft_interview_invitations_list'),
+    path('interviews/draft-invites/<int:draft_id>/', views.draft_interview_invitations_view, name='draft_interview_invitations_detail'),
+    path('interviews/add-participant/', views.add_interview_participant_view, name='add_interview_participant'),
+    path('interviews/participants/validate/<uuid:token>/', views.validate_participant_token_view, name='validate_participant_token'),
+    
+    # Slot Booking
+    path('interviews/slots/generate/', views.generate_all_interviewer_slots_view, name='generate_slots'),
+    path('interviews/slots/<uuid:token>/', views.get_available_slots_view, name='get_available_slots'),
+    path('interviews/slots/<uuid:token>/reserve/', views.reserve_interview_slot_view, name='reserve_slot'),
+    path('interviews/slots/<uuid:token>/confirm/', views.confirm_interview_booking_view, name='confirm_booking'),
+    path('interviews/availability/', views.get_interviewer_availability_view, name='interviewer_availability_list'),
+    path('interviews/availability/manage/', views.manage_interviewer_availability_view, name='interviewer_availability_manage'),
+
+    path('interviews/chat/<uuid:session_id>/', views.get_interview_chat_view, name='get_interview_chat'),
+    path('interviews/violations/', views.create_interview_violation_view, name='create_interview_violation'),
+    path('interviews/<uuid:session_id>/violations/', views.get_interview_violations_view, name='get_interview_violations'),
+    path('interviews/<int:interview_id>/violations/', views.get_interview_violations_by_id_view, name='get_interview_violations_by_id'),
+
+
+    # HR Offboarding: transfer / deactivate / reactivate
+    path('users/<int:user_id>/transfer-preview/', views.transfer_preview_view, name='transfer_preview'),
+    path('users/<int:user_id>/transfer-ownership/', views.transfer_ownership_view, name='transfer_ownership'),
+    path('users/<int:user_id>/deactivate/', views.deactivate_user_view, name='deactivate_user'),
+    path('users/<int:user_id>/reactivate/', views.reactivate_user_view, name='reactivate_user'),
+    path('users/transfer-logs/', views.transfer_logs_view, name='transfer_logs'),
 
     # Internal user invitations (HR Manager / HR)
     path('users/invite/', views.invite_user_view, name='invite_user'),
@@ -30,18 +68,34 @@ urlpatterns = [
     path('users/invite/<uuid:token>/resend/', views.resend_invite_view, name='resend_invite'),
     path('users/accept-invite/', views.accept_invite_view, name='accept_invite'),
     path('users/team-members/', views.team_members_view, name='team_members'),
+    path('users/team-members/add/', add_team_member_view, name='add_team_member'),
+    path('profile/', views.profile_view, name='profile'),
 
     path('invitations/public/<uuid:token>/', views.get_invitation_public_view, name='get_invitation_public'),
     path('invitations/public/<uuid:token>/submit/', views.submit_invitation_answers_view, name='submit_invitation_answers'),
+    path('invitations/public/<uuid:token>/submit-objective/', views.submit_objective_section, name='submit_objective_section'),
     path('invitations/public/<uuid:token>/result/', views.get_invitation_result_view, name='get_invitation_result'),
     path('invitations/public/<uuid:token>/rating/', views.submit_rating_view, name='submit_rating'),
-    path('candidate-details/', views.save_candidate_details_view, name='save_candidate_details'),
-    path('candidate-details/<uuid:token>/', views.get_candidate_details_view, name='get_candidate_details'),
+    path('invitations/public/<uuid:token>/integrity/', views.update_standard_integrity_view, name='update_standard_integrity'),
+    path('invitations/public/<uuid:token>/verify-identity/', views.verify_identity_view, name='verify_identity'),
+    path('invitations/public/<uuid:token>/log/', views.log_candidate_activity_view, name='log_candidate_activity'),
+    path('invitations/public/<uuid:token>/terminal-close-strike/', views.record_terminal_close_strike_view, name='record_terminal_close_strike'),
+    path('invitations/public/<uuid:token>/tab-heartbeat/', views.exam_tab_heartbeat_view, name='exam_tab_heartbeat'),
+    path('invitations/<int:invitation_id>/activity-logs/', views.invitation_activity_logs_view, name='invitation_activity_logs'),
+    path('invitations/public/<uuid:token>/terminate/', views.terminate_invitation_exam_view, name='terminate_invitation_exam'),
+    path('candidate-details/', views.save_all_candidate_details_view, name='save_candidate_details'),
+    path('candidate-details/verify-pan/', views.verify_pan_backend_view, name='verify_pan_backend'),
+    path('candidate-details/<str:token>/', views.get_candidate_details_view, name='get_candidate_details'),
     path('invitations/public/<uuid:token>/coding/run/', views.invitation_coding_run_view, name='invitation_coding_run'),
     path('invitations/public/<uuid:token>/coding/submit/', views.invitation_coding_submit_view, name='invitation_coding_submit'),
     path('invitations/public/<uuid:token>/coding/finalize/', views.invitation_coding_finalize_view, name='invitation_coding_finalize'),
     path('results/', views.results_overview_view, name='results_overview'),
-    path('candidates/', views.candidates_overview_view, name='candidates_overview'),
+    path('results/<str:submission_id>/detail/', views.results_detail_view, name='results_detail'),
+    path('submissions/<int:pk>/', views.CandidateSubmissionDeleteView.as_view(), name='delete_submission'),
+    path('results/<int:submission_id>/report/', views.download_candidate_report_view, name='download_candidate_report'),
+    path('results/<int:submission_id>/update-result/', views.update_submission_result_view, name='update_submission_result'),
+    path('results/<int:submission_id>/request-photo-update/', views.request_photo_update_view, name='request_photo_update'),
+    path('results/face-request/<uuid:token>/decide/', views.decide_photo_update_view, name='decide_photo_update'),
     path('assessments/backfill-questions/', views.backfill_assessment_questions_view, name='backfill_assessment_questions'),
 
     # Coding Platform (isolated)
@@ -57,5 +111,51 @@ urlpatterns = [
     path('coding/invites/<uuid:token>/select-language/', coding_views.coding_invite_select_language_view, name='coding_invite_select_language'),
     path('coding/invites/<uuid:token>/run/', coding_views.coding_invite_run_view, name='coding_invite_run'),
     path('coding/invites/<uuid:token>/submit/', coding_views.coding_invite_submit_view, name='coding_invite_submit'),
+    path('submit-interview-feedback/', views.submit_interview_feedback, name='submit_interview_feedback'),
+    path('job-roles/', views.job_role_list_create_view, name='job_role_list_create'),
+    path('job-roles/<int:pk>/', views.job_role_detail_view, name='job_role_detail'),
+
+    # Superadmin (Platform ApplicationAdmin) endpoints
+    path('superadmin/companies/', views.superadmin_companies_view, name='superadmin_companies'),
+    path('superadmin/companies/<int:company_id>/approve/', views.superadmin_approve_company_view, name='superadmin_approve_company'),
+    path('superadmin/companies/<int:company_id>/reject/', views.superadmin_reject_company_view, name='superadmin_reject_company'),
+    path('superadmin/users/', views.superadmin_users_view, name='superadmin_users'),
+    path('superadmin/users/<int:user_id>/approve/', views.superadmin_approve_user_view, name='superadmin_approve_user'),
+    path('superadmin/restricted-domains/', views.superadmin_restricted_domains_view, name='superadmin_restricted_domains'),
+    path('superadmin/restricted-domains/<int:domain_id>/', views.superadmin_delete_restricted_domain_view, name='superadmin_delete_restricted_domain'),
+
+    # Workflow / Settings
+    path('settings/deletion/', views.company_deletion_settings_view, name='company_deletion_settings'),
+    path('workflow/deletion-requests/', views.list_deletion_requests_view, name='list_deletion_requests'),
+    path('workflow/deletion-requests/count/', views.pending_deletion_requests_count_view, name='pending_deletion_requests_count'),
+    path('workflow/deletion-requests/<int:request_id>/action/', views.action_deletion_request_view, name='action_deletion_request'),
+    path('workflow/deletion-requests/<int:request_id>/restore/', views.restore_deletion_request_view, name='restore_deletion_request'),
+
+    # Qualification Approval Workflow
+    path('workflow/qualification-requests/', views.list_qualification_requests_view, name='list_qualification_requests'),
+    path('workflow/qualification-requests/count/', views.pending_qualification_requests_count_view, name='pending_qualification_requests_count'),
+    path('workflow/qualification-requests/<int:request_id>/action/', views.action_qualification_request_view, name='action_qualification_request'),
+    path('workflow/qualification-requests/ai/', views.create_ai_qualification_request_view, name='create_ai_qualification_request'),
+
+    # Face Mismatch Approval Workflow
+    path('workflow/face-requests/', views.list_face_requests_view, name='list_face_requests'),
+    path('workflow/face-requests/count/', views.pending_face_requests_count_view, name='pending_face_requests_count'),
+    path('workflow/face-requests/<int:request_id>/action/', views.action_face_request_view, name='action_face_request'),
+
+    path('dashboard/summary/', views.dashboard_summary_view, name='dashboard_summary'),
+    path('contact/', views.contact_us_view, name='contact_us'),
+    path('security-session/start', views.start_security_session_view, name='security_session_start'),
+    path('security-session/consume', views.consume_agent_instance_view, name='security_session_consume'),
+    path('security-session/terminal-close-terminate', views.terminate_terminal_close_view, name='security_session_terminal_close_terminate'),
+    path('security-check', views.security_check_view, name='security_check'),
+    path('security-heartbeat', views.security_heartbeat_view, name='security_heartbeat'),
+    path('security-session/<uuid:session_id>/status', views.security_session_status_view, name='security_session_status'),
+    path('security-session/<uuid:token>/violation-status', views.check_violation_status_view, name='check_violation_status'),
+    path('security-signatures', views.security_signatures_view, name='security_signatures'),
+
+    # Pricing Plans
+    path('plans/', views.get_public_plans_view, name='public_plans'),
+    path('admin/plans/', views.manage_plans_list_view, name='manage_plans_list'),
+    path('admin/plans/<int:plan_id>/', views.manage_plan_detail_view, name='manage_plan_detail'),
 ]
 

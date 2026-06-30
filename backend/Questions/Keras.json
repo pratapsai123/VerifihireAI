@@ -1,0 +1,2016 @@
+{ 
+  "skill": "Keras", 
+  "questions":  [
+    {
+    "question": "What is the core philosophy of Keras?",
+    "options": {
+      "A": "Maximizing raw hardware performance at the cost of readability.",
+      "B": "Prioritizing developer experience, fast prototyping, and modularity.",
+      "C": "Providing a database engine for Big Data.",
+      "D": "Automating the physical assembly of GPU clusters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which model building API in Keras is best suited for a simple stack of layers?",
+    "options": {
+      "A": "Functional API",
+      "B": "Subclassing API",
+      "C": "Sequential API",
+      "D": "Recursive API"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which layer is used to transform a 2D input image into a 1D vector?",
+    "options": {
+      "A": "Dense",
+      "B": "Conv2D",
+      "C": "Dropout",
+      "D": "Flatten"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the most common activation function used for hidden layers in modern deep learning?",
+    "options": {
+      "A": "ReLU",
+      "B": "Sigmoid",
+      "C": "Softmax",
+      "D": "Linear"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which argument in model.compile() defines the strategy for updating weights?",
+    "options": {
+      "A": "metrics",
+      "B": "optimizer",
+      "C": "loss",
+      "D": "callbacks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "To prevent overfitting by randomly ignoring neurons during training, which layer should be used?",
+    "options": {
+      "A": "BatchNormalization",
+      "B": "Dropout",
+      "C": "GaussianNoise",
+      "D": "ActivityRegularization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is appropriate for a binary classification task?",
+    "options": {
+      "A": "MeanSquaredError",
+      "B": "CategoricalCrossentropy",
+      "C": "BinaryCrossentropy",
+      "D": "KLDivergence"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a 'Dense' layer represent in Keras?",
+    "options": {
+      "A": "A layer with high-density data compression.",
+      "B": "A layer that only accepts integer inputs.",
+      "C": "A layer used for 3D image rendering.",
+      "D": "A regular fully-connected NN layer."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which method is called to evaluate the model on a test dataset after training?",
+    "options": {
+      "A": "model.predict()",
+      "B": "model.evaluate()",
+      "C": "model.test()",
+      "D": "model.score()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In model.fit(), what does 'epochs=10' mean?",
+    "options": {
+      "A": "The model will use 10 GPUs.",
+      "B": "The training will stop after 10 minutes.",
+      "C": "The model will iterate 10 times over the entire training data.",
+      "D": "The model will use 10 neurons per layer."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which activation function is used in the final layer for multi-class classification?",
+    "options": {
+      "A": "Softmax",
+      "B": "Sigmoid",
+      "C": "ReLU",
+      "D": "Tanh"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Keras layer is specialized for 2D spatial feature extraction (images)?",
+    "options": {
+      "A": "Dense",
+      "B": "Conv2D",
+      "C": "LSTM",
+      "D": "Embedding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method displays the model's architecture details?",
+    "options": {
+      "A": "model.print()",
+      "B": "model.info()",
+      "C": "model.report()",
+      "D": "model.summary()"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "In the Functional API, how do you define the starting point of the model?",
+    "options": {
+      "A": "Input()",
+      "B": "Sequential()",
+      "C": "Start()",
+      "D": "Source()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Adam' in the context of Keras?",
+    "options": {
+      "A": "A recurrent neural network.",
+      "B": "A dataset for facial recognition.",
+      "C": "An optimization algorithm.",
+      "D": "The founder of Keras."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which callback would you use to save the model periodically during training?",
+    "options": {
+      "A": "EarlyStopping",
+      "B": "ModelCheckpoint",
+      "C": "TensorBoard",
+      "D": "CSVLogger"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'val_loss' represent in the training output?",
+    "options": {
+      "A": "The loss on the training data.",
+      "B": "The model's current learning rate.",
+      "C": "The loss on the validation data.",
+      "D": "The number of validated weights."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which utility converts integer labels to One-Hot encoded vectors?",
+    "options": {
+      "A": "to_categorical()",
+      "B": "to_numerical()",
+      "C": "normalize()",
+      "D": "pad_sequences()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Keras 3 supports TensorFlow, PyTorch, and JAX.",
+    "options": {
+      "A": "False",
+      "B": "True",
+      "C": "Only for GPUs",
+      "D": "Only in legacy mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary effect of 'MaxPooling2D'?",
+    "options": {
+      "A": "It increases image resolution.",
+      "B": "It adds padding to the edges.",
+      "C": "It calculates the average pixel value.",
+      "D": "It reduces spatial dimensions by taking the max value."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which layer is best for processing text or time-series sequences?",
+    "options": {
+      "A": "Conv2D",
+      "B": "Flatten",
+      "C": "LSTM",
+      "D": "Dense"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of an 'Embedding' layer in NLP?",
+    "options": {
+      "A": "Encrypting text data.",
+      "B": "Mapping integers to dense vectors.",
+      "C": "Removing stop words.",
+      "D": "Converting text to audio."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which activation is standard for the output layer of a binary classifier?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "Softmax",
+      "C": "ReLU",
+      "D": "Linear"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the loss function for multi-class classification with integer labels?",
+    "options": {
+      "A": "CategoricalCrossentropy",
+      "B": "BinaryCrossentropy",
+      "C": "SparseCategoricalCrossentropy",
+      "D": "MeanAbsoluteError"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In model.fit(), what does 'batch_size=32' specify?",
+    "options": {
+      "A": "The model will use 32 cores.",
+      "B": "The number of samples per weight update.",
+      "C": "The model has 32 layers.",
+      "D": "The input image width."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which module contains pre-trained models like ResNet50?",
+    "options": {
+      "A": "keras.layers",
+      "B": "keras.datasets",
+      "C": "keras.applications",
+      "D": "keras.preprocessing"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you save only the parameters (weights) of a model?",
+    "options": {
+      "A": "model.save()",
+      "B": "model.save_weights()",
+      "C": "model.export()",
+      "D": "model.dump()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a major advantage of the Functional API over Sequential?",
+    "options": {
+      "A": "It is faster.",
+      "B": "It uses less memory.",
+      "C": "It is easier for beginners.",
+      "D": "It supports multiple inputs/outputs."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which parameter controls the step size of weight updates?",
+    "options": {
+      "A": "momentum",
+      "B": "learning_rate",
+      "C": "decay",
+      "D": "epsilon"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where do you define custom metrics like 'AUC' for a model?",
+    "options": {
+      "A": "Inside the optimizer.",
+      "B": "Inside model.compile().",
+      "C": "Inside model.fit().",
+      "D": "Inside the last layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'padding=\"same\"' do in a Conv2D layer?",
+    "options": {
+      "A": "Ensures the input and output have same spatial size.",
+      "B": "Keeps the weights constant.",
+      "C": "Normalizes the pixel values.",
+      "D": "Removes the edges of the image."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which method is used to get the final predictions for test data?",
+    "options": {
+      "A": "evaluate()",
+      "B": "fit()",
+      "C": "predict()",
+      "D": "forward()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'BatchNormalization' layer?",
+    "options": {
+      "A": "To group data into batches.",
+      "B": "To stabilize and accelerate training.",
+      "C": "To shuffle the dataset.",
+      "D": "To increase the batch size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which submodule loads standard datasets like MNIST?",
+    "options": {
+      "A": "keras.utils",
+      "B": "keras.datasets",
+      "C": "keras.layers",
+      "D": "keras.models"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GlobalAveragePooling2D' used for?",
+    "options": {
+      "A": "Increasing parameters.",
+      "B": "Visualizing averages.",
+      "C": "Reducing a feature map to a single vector.",
+      "D": "Splitting the image into channels."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In text processing, what does 'pad_sequences' do?",
+    "options": {
+      "A": "Deletes long sentences.",
+      "B": "Translates text to integers.",
+      "C": "Normalizes word case.",
+      "D": "Makes all sequences the same length."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which callback enables the use of the TensorBoard web dashboard?",
+    "options": {
+      "A": "TensorBoard",
+      "B": "CSVLogger",
+      "C": "ProgbarLogger",
+      "D": "RemoteMonitor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the effect of 'trainable=False' on a layer?",
+    "options": {
+      "A": "The layer is removed.",
+      "B": "The weights are frozen and not updated.",
+      "C": "The layer only uses CPU.",
+      "D": "The layer stops processing data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss is standard for regression tasks?",
+    "options": {
+      "A": "BinaryCrossentropy",
+      "B": "MeanSquaredError",
+      "C": "Poisson",
+      "D": "Softmax"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'validation_split' in model.fit()?",
+    "options": {
+      "A": "Setting aside data for validation automatically.",
+      "B": "Dividing the model architecture.",
+      "C": "Splitting the learning rate.",
+      "D": "Alternating between CPU and GPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer implements a Gated Recurrent Unit?",
+    "options": {
+      "A": "SimpleRNN",
+      "B": "LSTM",
+      "C": "GRU",
+      "D": "Bidirectional"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you define input shape in the first layer of a Sequential model?",
+    "options": {
+      "A": "Input(shape=(...))",
+      "B": "Dense(input_dims=...)",
+      "C": "Flatten(size=...)",
+      "D": "Reshape(dims=...)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'learning rate' in an optimizer?",
+    "options": {
+      "A": "Data reading speed.",
+      "B": "The total epochs per hour.",
+      "C": "The frequency of weight saves.",
+      "D": "The step size for gradient updates."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What indicates 'overfitting' in Keras logs?",
+    "options": {
+      "A": "Both losses decrease.",
+      "B": "Training loss decreases, validation loss increases.",
+      "C": "Training loss increases, validation loss decreases.",
+      "D": "Accuracy is constant at 100%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer wraps another to process sequences in both directions?",
+    "options": {
+      "A": "RepeatVector",
+      "B": "TimeDistributed",
+      "C": "Bidirectional",
+      "D": "Wrapper"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of 'ActivityRegularization'?",
+    "options": {
+      "A": "Monitoring GPU active time.",
+      "B": "Applying a penalty on layer output/activation.",
+      "C": "Updating the server OS.",
+      "D": "Shuffling the RAM usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which optimizer is the foundation for most modern alternatives?",
+    "options": {
+      "A": "SGD",
+      "B": "Adam",
+      "C": "RMSprop",
+      "D": "Adadelta"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you access weights of a specific layer?",
+    "options": {
+      "A": "get_weights()",
+      "B": "show_params()",
+      "C": "weights_list()",
+      "D": "dump_values()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Image Data Augmentation' in Keras?",
+    "options": {
+      "A": "Using higher-res photos.",
+      "B": "Converting images to text.",
+      "C": "Deleting blurred images.",
+      "D": "Randomly transforming images for more training variety."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which layer is used to normalize input features to mean 0 and variance 1?",
+    "options": {
+      "A": "BatchNormalization",
+      "B": "Normalization",
+      "C": "StandardScaler",
+      "D": "CenterLayer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'model.predict_on_batch()'?",
+    "options": {
+      "A": "Predicting for a single batch of samples.",
+      "B": "Training the model on one batch.",
+      "C": "Generating a batch of fake data.",
+      "D": "Saving a batch to H5 format."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer is common in autoencoders for bottlenecking?",
+    "options": {
+      "A": "Upsampling2D",
+      "B": "Dense (with few neurons)",
+      "C": "Dropout",
+      "D": "Flatten"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'shuffle=True' in model.fit() do?",
+    "options": {
+      "A": "Randomly changes the weights.",
+      "B": "Shuffles layers order.",
+      "C": "Shuffles training data before each epoch.",
+      "D": "Shuffles the GPU cores."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which layer allows custom Python logic inside a model?",
+    "options": {
+      "A": "Lambda",
+      "B": "Add",
+      "C": "Constant",
+      "D": "PythonLayer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Transfer Learning' in Keras?",
+    "options": {
+      "A": "Moving data from local to cloud.",
+      "B": "Using a pre-trained model on a new task.",
+      "C": "Converting Python to C++.",
+      "D": "Training two models at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which activation function outputs values specifically between -1 and 1?",
+    "options": {
+      "A": "ReLU",
+      "B": "Sigmoid",
+      "C": "Tanh",
+      "D": "ELU"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is Keras default behavior when calling fit() twice?",
+    "options": {
+      "A": "Resets weights.",
+      "B": "Continues from current weights.",
+      "C": "Throws error.",
+      "D": "Deletes the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer repeats an input vector N times?",
+    "options": {
+      "A": "RepeatVector",
+      "B": "Reshape",
+      "C": "Permute",
+      "D": "Concatenate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you evaluate large datasets that don't fit in memory?",
+    "options": {
+      "A": "Evaluate in batches using a Dataset object.",
+      "B": "Increase server RAM.",
+      "C": "Use only 10% of data.",
+      "D": "Compress data to ZIP."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer applies an operation to every temporal slice?",
+    "options": {
+      "A": "LSTM",
+      "B": "SimpleRNN",
+      "C": "LocallyConnected",
+      "D": "TimeDistributed"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the function of the 'Concatenate' layer?",
+    "options": {
+      "A": "Adding tensor values.",
+      "B": "Multiplying tensors.",
+      "C": "Joining tensors along an axis.",
+      "D": "Subtracting tensors."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which tool automates hyperparameter search?",
+    "options": {
+      "A": "Keras Search",
+      "B": "Keras Finder",
+      "C": "Keras Tuner",
+      "D": "Keras Optimizer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you enable GPU training in Keras?",
+    "options": {
+      "A": "model.use_gpu()",
+      "B": "Keras uses it automatically if available.",
+      "C": "By setting compile(target='gpu').",
+      "D": "Adding a GpuStart layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Tensor' in Keras?",
+    "options": {
+      "A": "A physical chip sensor.",
+      "B": "A multidimensional data array.",
+      "C": "The name of a layer.",
+      "D": "The loss value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which callback stops training when a metric reaches a goal?",
+    "options": {
+      "A": "EarlyStopping",
+      "B": "Terminator",
+      "C": "GoalSeek",
+      "D": "Halt"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard file format for saving Keras models?",
+    "options": {
+      "A": ".csv",
+      "B": ".txt",
+      "C": ".keras (or .h5 legacy)",
+      "D": ".jpg"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When building a custom layer by subclassing 'keras.layers.Layer', in which method should you ideally define the weights (variables) of the layer?",
+    "options": {
+      "A": "The __init__() method",
+      "B": "The call() method",
+      "C": "The build() method",
+      "D": "The compute_output_shape() method"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary technical reason to use 'tf.GradientTape' with a Keras model?",
+    "options": {
+      "A": "To save the model to a physical tape drive.",
+      "B": "To implement custom training loops where you need manual control over gradient updates.",
+      "C": "To increase the speed of standard model.fit() operations.",
+      "D": "To automatically visualize the weights in TensorBoard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Keras optimizer is specifically designed to handle non-stationary objectives by using a moving average of squared gradients?",
+    "options": {
+      "A": "SGD",
+      "B": "Adagrad",
+      "C": "RMSprop",
+      "D": "AdamW"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the Functional API, how do you handle a model that requires two different input sources (e.g., an image and a text metadata vector)?",
+    "options": {
+      "A": "By creating two separate Sequential models and adding them.",
+      "B": "By defining two Input objects and using a Concatenate or Add layer to merge the branches.",
+      "C": "By flattening both inputs into a single list before passing to model.fit().",
+      "D": "Keras does not support multiple inputs in a single model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'masking' argument or the 'Masking' layer do in a recurrent neural network?",
+    "options": {
+      "A": "It hides the model architecture from unauthorized users.",
+      "B": "It tells the network to skip specific timesteps (like padding) during computation.",
+      "C": "It applies a dropout rate to the input pixels.",
+      "D": "It converts color images to black and white."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When subclassing 'keras.Model', what is the purpose of the 'call()' method?",
+    "options": {
+      "A": "To initialize the layers and hyperparameters.",
+      "B": "To define the forward pass of the model.",
+      "C": "To compile the model with an optimizer.",
+      "D": "To trigger an external API call during training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regularization technique adds the sum of the absolute values of the weights to the loss function?",
+    "options": {
+      "A": "L2 Regularization (Weight Decay)",
+      "B": "Elastic Net",
+      "C": "L1 Regularization (Lasso)",
+      "D": "Dropout"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Teacher Forcing' technique often implemented in Keras sequence-to-sequence models?",
+    "options": {
+      "A": "Forcing the teacher to grade the model faster.",
+      "B": "Using the actual ground-truth output from the previous timestep as input to the next timestep during training.",
+      "C": "Increasing the learning rate when the model makes a mistake.",
+      "D": "Using a larger dataset for the first 10 epochs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Keras 3, how can you ensure a custom layer is 'Backend Agnostic'?",
+    "options": {
+      "A": "By only using TensorFlow-specific functions (tf.xxx).",
+      "B": "By using the 'keras.ops' namespace for all mathematical operations.",
+      "C": "By writing the layer in raw C++.",
+      "D": "By disabling the JAX backend in the config file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Keras layer wrapper is used to apply a specific layer (like a Dense layer) to every temporal slice of an input sequence?",
+    "options": {
+      "A": "Bidirectional",
+      "B": "TimeDistributed",
+      "C": "RepeatVector",
+      "D": "Wrapper"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'LeakyReLU' activation function's advantage over standard 'ReLU'?",
+    "options": {
+      "A": "It is mathematically simpler.",
+      "B": "It allows a small, non-zero gradient when the unit is not active, preventing the 'dying ReLU' problem.",
+      "C": "It only works on positive numbers.",
+      "D": "It automatically scales the input to mean zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'model.compile()', what does the 'loss_weights' argument allow you to do?",
+    "options": {
+      "A": "Specify different weights for different layers.",
+      "B": "Assign different levels of importance to multiple outputs in a multi-output model.",
+      "C": "Weight the training samples based on their difficulty.",
+      "D": "Reduce the total size of the saved model file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'SpatialDropout2D' layer is preferred over standard 'Dropout' for convolutional layers because it drops entire feature maps rather than individual pixels.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 1D sequences",
+      "D": "Only if using the PyTorch backend"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'LearningRateScheduler' callback?",
+    "options": {
+      "A": "To keep the learning rate constant throughout training.",
+      "B": "To dynamically adjust the learning rate based on the epoch number according to a custom function.",
+      "C": "To stop training if the learning rate gets too high.",
+      "D": "To log the learning rate to a CSV file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Keras 'Op' would you use to calculate the dot product of two tensors in a backend-agnostic way?",
+    "options": {
+      "A": "tf.matmul",
+      "B": "keras.ops.dot",
+      "C": "torch.dot",
+      "D": "jax.numpy.dot"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a custom training loop, which method of the Optimizer is called to apply the calculated gradients to the model's trainable variables?",
+    "options": {
+      "A": "optimizer.minimize()",
+      "B": "optimizer.apply_gradients()",
+      "C": "optimizer.update_weights()",
+      "D": "optimizer.step()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SeparableConv2D' and why is it used?",
+    "options": {
+      "A": "It separates the training and validation data.",
+      "B": "A depthwise separable convolution that reduces the number of parameters and computation while maintaining performance.",
+      "C": "A convolution that only works on the edges of an image.",
+      "D": "A way to run convolutions on two GPUs at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stateful LSTM' maintains its internal state between batches, meaning the hidden state for sample i in batch n is used as the initial state for sample i in batch n+1.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the Sequential API",
+      "D": "Only for binary classification"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which argument in 'model.fit()' allows you to provide a custom generator or 'tf.data.Dataset' for training data?",
+    "options": {
+      "A": "x",
+      "B": "data_generator",
+      "C": "input_list",
+      "D": "source"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'compute_loss' method do when overriding 'train_step' in a subclassed Keras Model?",
+    "options": {
+      "A": "It deletes the loss values from memory.",
+      "B": "It encapsulates the logic for calculating the scalar loss value from predictions and targets.",
+      "C": "It updates the gradients automatically.",
+      "D": "It visualizes the loss curve."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is most appropriate for a multi-label classification problem where an image can have multiple tags?",
+    "options": {
+      "A": "Accuracy",
+      "B": "BinaryAccuracy",
+      "C": "CategoricalAccuracy",
+      "D": "TopKCategoricalAccuracy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Keras, what is the 'Hiearchical Softmax' primarily used to optimize?",
+    "options": {
+      "A": "Image pixel values.",
+      "B": "The efficiency of calculating output probabilities in models with a very large vocabulary (NLP).",
+      "C": "The depth of the neural network.",
+      "D": "The physical memory layout of the weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'Add' layer in implementing ResNet-style skip connections?",
+    "options": {
+      "A": "To add new neurons to the layer.",
+      "B": "To perform an element-wise addition of the output of a layer and a previous identity/residual mapping.",
+      "C": "To concatenate two feature maps together.",
+      "D": "To sum the total loss of the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'UpSampling2D' layer uses learnable weights to increase the size of an image, similar to Transposed Convolution.",
+    "options": {
+      "A": "False (UpSampling2D is a simple non-learnable interpolation; Conv2DTranspose is the learnable version).",
+      "B": "True",
+      "C": "Only in Keras 2.0",
+      "D": "Only if using the TensorFlow backend"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which callback is used to reduce the learning rate when a metric has stopped improving (e.g., a plateau)?",
+    "options": {
+      "A": "LearningRateScheduler",
+      "B": "ReduceLROnPlateau",
+      "C": "EarlyStopping",
+      "D": "TerminateOnNaN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Keras Tuner', what does the 'HyperParameters' object define?",
+    "options": {
+      "A": "The physical hardware specs of the GPU.",
+      "B": "The search space for tuning (e.g., range of units, choice of activation).",
+      "C": "The final optimized weights of the model.",
+      "D": "The number of users allowed to run the tuner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'initialization' strategy sets weights based on the number of input and output units to keep the variance of activations consistent?",
+    "options": {
+      "A": "Zeros",
+      "B": "Glorot (Xavier) Initialization",
+      "C": "RandomNormal",
+      "D": "Constant"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical function of 'LayerNormalization' compared to 'BatchNormalization'?",
+    "options": {
+      "A": "It is faster to compute.",
+      "B": "It normalizes across the features of a single sample rather than across the batch, making it suitable for RNNs.",
+      "C": "It only works on the input layer.",
+      "D": "It requires a larger batch size to be effective."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When building a multi-output model, how do you specify multiple loss functions in 'model.compile()'?",
+    "options": {
+      "A": "By passing a single string with all loss names.",
+      "B": "By passing a dictionary or list of loss functions matching the output layer names.",
+      "C": "By adding the loss functions together in the call() method.",
+      "D": "Multi-output models must use the same loss for all outputs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' tracks the mean of a given value over the course of an epoch?",
+    "options": {
+      "A": "keras.metrics.Sum",
+      "B": "keras.metrics.Mean",
+      "C": "keras.metrics.Average",
+      "D": "keras.metrics.RunningAverage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mixed Precision Training' uses both 16-bit and 32-bit floating-point types to make models run faster and use less memory on modern GPUs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using the JAX backend"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Permute' layer in Keras?",
+    "options": {
+      "A": "To randomly change the weights of a layer.",
+      "B": "To change the order of the dimensions of the input tensor according to a given pattern.",
+      "C": "To delete specific dimensions from a tensor.",
+      "D": "To rotate an input image 90 degrees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to save a Keras model in the 'SavedModel' format (the default in Keras 3/TF 2.x)?",
+    "options": {
+      "A": "model.export_json()",
+      "B": "model.save()",
+      "C": "model.dump_saved_model()",
+      "D": "model.to_pb()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'model.trainable_variables' return?",
+    "options": {
+      "A": "A list of all variables in the model, including non-trainable ones.",
+      "B": "A list of weight and bias tensors that will be updated by the optimizer during training.",
+      "C": "The current learning rate of the model.",
+      "D": "A boolean indicating if the model is currently training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In sequence modeling, what is 'GlobalMaxPooling1D' often used for after a convolutional layer?",
+    "options": {
+      "A": "To increase the sequence length.",
+      "B": "To extract the most significant features across the entire temporal dimension, resulting in a fixed-size vector.",
+      "C": "To normalize the sequence values.",
+      "D": "To convert the sequence into an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for the TensorBoard backend communication?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 6006",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a Keras-compatible optimizer that automatically balances resource usage across distributed workers.",
+    "options": {
+      "A": "False (Mimir is a metrics storage system; it does not optimize neural networks).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation used for in a distributed Keras training cluster?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Ensuring the high-speed data interconnect between training nodes is isolated from standard management and user traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a model serving endpoint during an automated deployment?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a reliable way to scale model training on multi-tenant hardware clusters.",
+    "options": {
+      "A": "False (Neural network training is memory-intensive and sensitive to page faults; overcommitting can cause crashes or severe slowness).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in the context of ML training data?",
+    "options": {
+      "A": "Naming the training database after a president.",
+      "B": "The legal requirement that training data remains physically located within the borders of a specific country.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets' on the network during model weight synchronization?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation) can improve the stability of distributed Keras training by providing redundant network paths.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for AI model security?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Enforcing security rules at the individual model container level to prevent lateral movement of threats in the production environment.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a Prometheus monitoring system for model health?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common method for tracking the historical performance changes of deployed models over time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in an ML experiment database?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique IDs for experiments that do not reveal the underlying data or logic.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server' for storing model metadata?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures can be used to prepare massive datasets for Keras model training by leveraging warehouse-level transformations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an ML pipeline?",
+    "options": {
+      "A": "Wiping the hard drive physically.",
+      "B": "The process of identifying and fixing data errors or outliers that could negatively impact model training quality.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for accessing the model registry?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically used to perform scheduled model re-training on new data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Model Monitor' architecture?",
+    "options": {
+      "A": "A system that provides continuous oversight of health across processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Users' interacting with a served model?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' for Keras includes keeping Python packages and underlying CUDA libraries updated.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance' for an AI team?",
+    "options": {
+      "A": "A framework for managing an organization's AI/ML software tools and compliance standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is essential for reliable AI model delivery pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for Keras model code?",
+    "options": {
+      "A": "Analyzing model Python scripts for syntax or structural errors before execution.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a model bias issue?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live model environment for potential drift.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in an ML context?",
+    "options": {
+      "A": "A structured process for managing API keys and cloud storage credentials used by Keras.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for model deployment containers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' performed?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When implementing a custom training loop with 'tf.GradientTape', why is it critical to explicitly use 'tape.watch()' for certain tensors?",
+    "options": {
+      "A": "To display the tensor values in real-time on the monitor.",
+      "B": "To ensure that non-trainable variables or intermediate tensors are tracked for gradient calculation if they are not automatically watched Keras variables.",
+      "C": "To encrypt the tensor data before backpropagation.",
+      "D": "To prevent the GPU from entering sleep mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which decorator is used to compile a Keras function into a high-performance graph, enabling optimizations like XLA (Accelerated Linear Algebra) and operator fusion?",
+    "options": {
+      "A": "@keras.optimize",
+      "B": "@tf.function",
+      "C": "@keras.layers.compile",
+      "D": "@tf.jit_compile"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Mixed Precision' training, what is the primary purpose of 'Loss Scaling'?",
+    "options": {
+      "A": "To make the loss function look larger on a graph.",
+      "B": "To prevent small gradient values from underflowing to zero when using float16 numerical formats.",
+      "C": "To reduce the number of epochs required for convergence.",
+      "D": "To balance the loss between multiple GPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When subclassing 'keras.layers.Layer', which method must be implemented to ensure the layer can be correctly re-instantiated from a saved config file (e.g., using 'get_config')?",
+    "options": {
+      "A": "compute_output_shape()",
+      "B": "from_config()",
+      "C": "build()",
+      "D": "call()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Keras 3, 'keras.ops' provides a unified mathematical API that allows the same model code to be executed across JAX, PyTorch, and TensorFlow backends without modification.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for computer vision models",
+      "D": "Only if using 64-bit precision"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific mechanism in Keras allows for 'Dynamic Architecture' where the forward pass (call method) logic can change based on the input values, such as in recursive or tree-structured networks?",
+    "options": {
+      "A": "Sequential API",
+      "B": "Model Subclassing with Eager Execution",
+      "C": "Functional API with Lambda layers",
+      "D": "Static Graph compilation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical reason why 'BatchNormalization' behaves differently during 'training' vs. 'inference' (testing)?",
+    "options": {
+      "A": "It uses different encryption keys for each phase.",
+      "B": "During training, it uses batch statistics; during inference, it uses moving averages of mean and variance calculated during the training phase.",
+      "C": "It is disabled during inference to save power.",
+      "D": "It only works on batches larger than 100 during inference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specialized layer is used to implement 'Attention' mechanisms by calculating a weight for each element in a sequence relative to other elements?",
+    "options": {
+      "A": "keras.layers.Dense",
+      "B": "keras.layers.Attention (or MultiHeadAttention)",
+      "C": "keras.layers.Concatenate",
+      "D": "keras.layers.RepeatVector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a distributed training setup using 'MirroredStrategy', how are the gradients synchronized across multiple GPUs?",
+    "options": {
+      "A": "Each GPU sends its gradients to the CPU for averaging.",
+      "B": "An All-Reduce algorithm is used to communicate and aggregate gradients across all devices in parallel.",
+      "C": "Gradients are stored in a central SQL database.",
+      "D": "Gradients are not synchronized; each GPU trains independently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an advanced Keras backend that enables training models directly on encrypted datasets without decryption.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is associated with 'HTTPS' encrypted management of a Keras model registry?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for high-performance GPU clusters?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Separating the high-speed RDMA/RoCE traffic used for model weight synchronization from general management and storage traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vCenter' management heartbeats to monitor ML infrastructure availability?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is generally discouraged for large LLM training in Keras because swap-to-disk events will catastrophically degrade iteration speed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) usage in a deep learning data pipeline?",
+    "options": {
+      "A": "Measuring the weight of the logs.",
+      "B": "Automatically moving training dataset volumes between datastores based on I/O latency to prevent bottlenecking the GPU ingestion pipeline.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' to manage the Keras cluster?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' uses a three-node configuration to protect the management plane of the Keras infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in virtualized ML networking?",
+    "options": {
+      "A": "The largest number of nodes allowed.",
+      "B": "A special ID that enables Virtual Guest Tagging (VGT), allowing a container to manage its own 802.1Q tags for network isolation.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' provides near-native network performance for distributed Keras jobs but can limit 'vMotion' live migration support.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' management in an AI hypervisor environment?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "The ability to adjust memory allocation to a VM in real-time based on the specific memory footprint of the Keras model being trained.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' architecture feature is required for hardware-assisted virtualization of MMU pages to reduce overhead in model training?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX-512",
+      "D": "SSE4.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' dataset volume can cause a complete training halt if the underlying physical array reaches 100% capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The layer of the hypervisor that manages the physical resource allocation and hardware abstraction for a virtual machine.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' in an AI disaster recovery setup?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' generally provides higher performance for data-intensive AI tasks than full emulation because the Guest OS is 'hypervisor-aware'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A mechanism that mirrors write operations to both source and destination during a live migration to ensure consistency of active model weights.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of distributed training nodes?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface policy that places a port into an error-disabled state immediately if an unauthorized MAC address is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is the node with the lowest Bridge ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a specific VLAN segment to improve internal security and data isolation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access (which should be disabled for Keras nodes)?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' effectively disables STP on a per-port basis, which can lead to loops if enabled on ports connecting to other switches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "The algorithm used to determine which physical link in a bundle is used for a specific traffic flow to ensure load distribution.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent unauthorized VLAN access and VLAN hopping.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A security feature that prevents the VTP password from being displayed in plain text in the device configuration.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that completely saturates a training network cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' restrict action?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface policy that drops unauthorized traffic and increments a security counter without disabling the port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides faster Spanning Tree convergence times than the standard 802.1D standard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in AI deployment automation?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property of a system where applying a configuration change multiple times results in the same final state.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a Keras build?",
+    "options": {
+      "A": "(Successes / Total Runs) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means finding bugs earlier in the AI development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for AI systems?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to an AI system architecture.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a Keras repo?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for AI infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's AI tools and compliance standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in an AI pipeline?",
+    "options": {
+      "A": "The time from code commit to model deployment.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for ensuring that AI deployments do not introduce security risks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' impact in a Keras script?",
+    "options": {
+      "A": "The resource overhead required to fork a child process to execute commands.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI pipeline?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can store historical Keras performance metrics for years to identify long-term regressions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation?",
+    "options": {
+      "A": "Using network isolation to logically separate AI cluster components.",
+      "B": "Naming the virtual cables.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that re-running a deployment task results in the same final state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' traceability in an AI context?",
+    "options": {
+      "A": "The ability to follow data from its source through all Keras transformations to its final model state.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' request duration?",
+    "options": {
+      "A": "Mean response time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find AI logic bugs earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of bringing data into an AI system for training.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Training Nodes'?",
+    "options": {
+      "A": "Node Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in AI cluster security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "Identifying and evaluating network security threats to AI system components.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect AI cluster traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface to protect AI nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for AI system dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+]
+
+}

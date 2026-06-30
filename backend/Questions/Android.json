@@ -1,0 +1,2005 @@
+{
+  "skill": "Android",
+  "questions": [
+    {
+      "question": "Which component is the entry point of an Android application and provides a window to draw the UI?",
+      "options": {
+        "A": "Service",
+        "B": "Activity",
+        "C": "Content Provider",
+        "D": "Broadcast Receiver"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary language currently recommended by Google for Android development?",
+      "options": {
+        "A": "Java",
+        "B": "C++",
+        "C": "Kotlin",
+        "D": "Dart"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which file is used to declare permissions, activities, and services for an Android app?",
+      "options": {
+        "A": "build.gradle",
+        "B": "AndroidManifest.xml",
+        "C": "activity_main.xml",
+        "D": "strings.xml"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the Activity Lifecycle, which method is called just before the activity becomes visible to the user?",
+      "options": {
+        "A": "onCreate()",
+        "B": "onStart()",
+        "C": "onResume()",
+        "D": "onPause()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to perform long-running operations in the background without a UI?",
+      "options": {
+        "A": "Fragment",
+        "B": "Service",
+        "C": "Intent",
+        "D": "View"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Intent' in Android?",
+      "options": {
+        "A": "A background database",
+        "B": "A messaging object used to request an action from another app component",
+        "C": "A layout manager",
+        "D": "A tool to compile code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layout is used to position child views relative to each other or the parent?",
+      "options": {
+        "A": "LinearLayout",
+        "B": "FrameLayout",
+        "C": "RelativeLayout",
+        "D": "AbsoluteLayout"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of a 'Content Provider'?",
+      "options": {
+        "A": "To play video content",
+        "B": "To manage access to a structured set of data shared between different applications",
+        "C": "To create UI widgets",
+        "D": "To handle network requests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is the official IDE for Android development?",
+      "options": {
+        "A": "Xcode",
+        "B": "Visual Studio",
+        "C": "Android Studio",
+        "D": "Eclipse"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In Kotlin, which keyword is used to declare a read-only (immutable) variable?",
+      "options": {
+        "A": "var",
+        "B": "val",
+        "C": "const",
+        "D": "final"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to receive and react to system-wide announcements like 'Battery Low'?",
+      "options": {
+        "A": "Service",
+        "B": "Content Provider",
+        "C": "Broadcast Receiver",
+        "D": "Fragment"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'ADB' stand for in Android development?",
+      "options": {
+        "A": "Android Debug Bridge",
+        "B": "Android Data Builder",
+        "C": "App Design Base",
+        "D": "Android Deployment Binary"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which UI component is best suited for displaying a long, scrollable list of data efficiently?",
+      "options": {
+        "A": "ScrollView",
+        "B": "ListView",
+        "C": "RecyclerView",
+        "D": "GridView"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which file format is used for UI layout declarations in Android?",
+      "options": {
+        "A": "JSON",
+        "B": "XML",
+        "C": "HTML",
+        "D": "YAML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'Gradle' in Android Studio?",
+      "options": {
+        "A": "To design the UI",
+        "B": "To manage dependencies and build the application",
+        "C": "To debug the app on a phone",
+        "D": "To translate Java to Kotlin"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which lifecycle method is called when the user is leaving the activity, often used to save data?",
+      "options": {
+        "A": "onStop()",
+        "B": "onPause()",
+        "C": "onDestroy()",
+        "D": "onRestart()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Fragment' in Android?",
+      "options": {
+        "A": "A piece of data in the database",
+        "B": "A modular portion of an activity's user interface",
+        "C": "A broken piece of code",
+        "D": "A network error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to store and manage UI-related data in a lifecycle-conscious way?",
+      "options": {
+        "A": "DataStore",
+        "B": "ViewModel",
+        "C": "Repository",
+        "D": "LiveData"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, how do you handle a potential NullPointerException?",
+      "options": {
+        "A": "By using try-catch only",
+        "B": "By using Nullable types with the '?' operator",
+        "C": "By avoiding variables",
+        "D": "Kotlin doesn't have nulls"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Jetpack Compose'?",
+      "options": {
+        "A": "A tool to speed up builds",
+        "B": "Android's modern toolkit for building native UI using declarative functions",
+        "C": "A library for background tasks",
+        "D": "An emulator plugin"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which folder in an Android project contains images and icons?",
+      "options": {
+        "A": "layout",
+        "B": "values",
+        "C": "drawable",
+        "D": "raw"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'R.java' file (or the R class)?",
+      "options": {
+        "A": "To handle Routing",
+        "B": "An auto-generated file that contains resource IDs for the project",
+        "C": "To store Runtime errors",
+        "D": "To manage Remote data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which background component is used to schedule tasks that run only under specific conditions (like charging)?",
+      "options": {
+        "A": "AsyncTask",
+        "B": "WorkManager",
+        "C": "Thread",
+        "D": "IntentService"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Context' represent in Android?",
+      "options": {
+        "A": "The text on the screen",
+        "B": "An interface to global information about the application environment",
+        "C": "The user's contact list",
+        "D": "A database table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to launch a new Activity from an existing one?",
+      "options": {
+        "A": "openActivity()",
+        "B": "startActivity()",
+        "C": "runIntent()",
+        "D": "launch()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Main Thread' primarily responsible for in Android?",
+      "options": {
+        "A": "Database operations",
+        "B": "Rendering the UI and handling user interactions",
+        "C": "Downloading large files",
+        "D": "Complex math calculations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin feature allows you to extend a class with new functionality without inheriting from it?",
+      "options": {
+        "A": "Mixins",
+        "B": "Extension Functions",
+        "C": "Companion Objects",
+        "D": "Static Methods"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Room' in the Android ecosystem?",
+      "options": {
+        "A": "A chat application",
+        "B": "A persistence library that provides an abstraction layer over SQLite",
+        "C": "A way to organize XML layouts",
+        "D": "A physical office for developers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in an XML layout determines the width of a view relative to its parent?",
+      "options": {
+        "A": "android:padding",
+        "B": "android:layout_width",
+        "C": "android:gravity",
+        "D": "android:id"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Bundle' used for in Android?",
+      "options": {
+        "A": "To compress files",
+        "B": "To pass data between activities via Intents",
+        "C": "To group dependencies",
+        "D": "To store images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layout is the most flexible and recommended for creating complex, flat UI hierarchies to improve performance?",
+      "options": {
+        "A": "LinearLayout",
+        "B": "FrameLayout",
+        "C": "ConstraintLayout",
+        "D": "TableLayout"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which library is the industry standard for making type-safe HTTP requests in Android?",
+      "options": {
+        "A": "Volley",
+        "B": "Retrofit",
+        "C": "OkHttp",
+        "D": "Picasso"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'ViewHolder' pattern in a RecyclerView?",
+      "options": {
+        "A": "To store the database connection",
+        "B": "To avoid frequent calls to findViewById() by caching view references",
+        "C": "To handle network errors",
+        "D": "To change the app's theme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, what is a 'Coroutine' used for?",
+      "options": {
+        "A": "To design UI layouts",
+        "B": "To manage asynchronous tasks in a simplified, non-blocking way",
+        "C": "To store constant values",
+        "D": "To navigate between activities"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to display a small message at the bottom of the screen for a short duration?",
+      "options": {
+        "A": "AlertDialog",
+        "B": "Toast",
+        "C": "Notification",
+        "D": "ProgressBar"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'LiveData' in Android Architecture Components?",
+      "options": {
+        "A": "To perform math calculations",
+        "B": "An observable data holder class that is lifecycle-aware",
+        "C": "To play live video streams",
+        "D": "To manage the hardware camera"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to inflate a Fragment's UI in its lifecycle?",
+      "options": {
+        "A": "onCreate()",
+        "B": "onStart()",
+        "C": "onCreateView()",
+        "D": "onAttach()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Data Binding' in Android?",
+      "options": {
+        "A": "A way to connect two phones via Bluetooth",
+        "B": "A support library that allows you to bind UI components to data sources in layouts",
+        "C": "A method to encrypt the database",
+        "D": "A tool to compress images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is commonly used for loading and caching images in Android?",
+      "options": {
+        "A": "Retrofit",
+        "B": "Glide",
+        "C": "Room",
+        "D": "Gson"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SharedPreferences' primarily used for?",
+      "options": {
+        "A": "Storing large image files",
+        "B": "Storing small amounts of primitive data in key-value pairs",
+        "C": "Sharing data with social media apps",
+        "D": "Managing high-speed network transfers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component acts as a bridge between an AdapterView (like ListView) and the underlying data?",
+      "options": {
+        "A": "Intent",
+        "B": "Adapter",
+        "C": "Fragment",
+        "D": "Context"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'ANR' stand for in Android?",
+      "options": {
+        "A": "Android Network Receiver",
+        "B": "Application Not Responding",
+        "C": "App Notification Runtime",
+        "D": "Android Native Repository"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tag is used in XML to include one layout inside another?",
+      "options": {
+        "A": "<merge>",
+        "B": "<include>",
+        "C": "<layout>",
+        "D": "<fragment>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'ProGuard' in the Android build process?",
+      "options": {
+        "A": "To add new features",
+        "B": "To shrink, optimize, and obfuscate code for production",
+        "C": "To manage multiple users",
+        "D": "To speed up the emulator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which scope is typically used for launching Coroutines in a ViewModel?",
+      "options": {
+        "A": "GlobalScope",
+        "B": "viewModelScope",
+        "C": "lifecycleScope",
+        "D": "MainScope"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'PendingIntent'?",
+      "options": {
+        "A": "An intent that failed to run",
+        "B": "A token you give to a foreign application which allows it to execute an intent with your permissions",
+        "C": "A scheduled background service",
+        "D": "A placeholder for a future activity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which folder is used to store high-definition raw resources like video or audio files?",
+      "options": {
+        "A": "assets",
+        "B": "raw",
+        "C": "drawable",
+        "D": "values"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, what does 'lazy initialization' mean?",
+      "options": {
+        "A": "The variable is never initialized",
+        "B": "The object is created only when it is accessed for the first time",
+        "C": "The object is created in a background thread",
+        "D": "The object is destroyed immediately after use"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of an 'Intent Filter' in the Manifest?",
+      "options": {
+        "A": "To block spam calls",
+        "B": "To declare which intents an activity, service, or broadcast receiver can respond to",
+        "C": "To filter data from a database",
+        "D": "To manage network traffic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to build and display notifications in the status bar?",
+      "options": {
+        "A": "NotificationManager",
+        "B": "NotificationCompat.Builder",
+        "C": "AlertBuilder",
+        "D": "StatusManager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Backstack' in Android?",
+      "options": {
+        "A": "A backup of the database",
+        "B": "A stack of activities/fragments the user has visited, used for 'back' navigation",
+        "C": "A cloud storage service",
+        "D": "The undo history in Android Studio"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in a LinearLayout is used to distribute space among its children proportionally?",
+      "options": {
+        "A": "android:gravity",
+        "B": "android:layout_weight",
+        "C": "android:orientation",
+        "D": "android:layout_margin"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between a 'Service' and a 'Thread'?",
+      "options": {
+        "A": "A Service is a UI component",
+        "B": "A Service is an application component that can run without a UI; a Thread is a task execution unit",
+        "C": "They are the same thing",
+        "D": "Threads only work on iOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Android Studio is used to view real-time logs and system messages?",
+      "options": {
+        "A": "Gradle",
+        "B": "Logcat",
+        "C": "Inspector",
+        "D": "Device Manager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, what is the 'Safe Call' operator?",
+      "options": {
+        "A": "!!",
+        "B": "?.",
+        "C": "?:",
+        "D": "as?"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'DiffUtil' in a RecyclerView?",
+      "options": {
+        "A": "To sort the data",
+        "B": "To calculate the difference between two lists and update only the changed items",
+        "C": "To filter the network requests",
+        "D": "To change the layout style"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which callback is triggered when the configuration of the device (like orientation) changes?",
+      "options": {
+        "A": "onConfigChange()",
+        "B": "onConfigurationChanged()",
+        "C": "onRotate()",
+        "D": "onResume()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Elvis Operator' in Kotlin?",
+      "options": {
+        "A": "!!",
+        "B": "?:",
+        "C": "?.",
+        "D": "->"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component allows you to perform operations across different processes?",
+      "options": {
+        "A": "Intent",
+        "B": "AIDL (Android Interface Definition Language)",
+        "C": "ViewModel",
+        "D": "SharedFlow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'targetSdkVersion' in build.gradle indicate?",
+      "options": {
+        "A": "The minimum Android version the app supports",
+        "B": "The highest API level that the app has been tested against",
+        "C": "The version of Kotlin being used",
+        "D": "The version of Android Studio"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary architectural pattern recommended by Google for modern Android apps?",
+      "options": {
+        "A": "MVC (Model-View-Controller)",
+        "B": "MVP (Model-View-Presenter)",
+        "C": "MVVM (Model-View-ViewModel)",
+        "D": "MVI (Model-View-Intent)"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In Jetpack Compose, which keyword is used to preserve state across recompositions?",
+      "options": {
+        "A": "persist",
+        "B": "remember",
+        "C": "save",
+        "D": "hold"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin Coroutine builder is used to start a coroutine and return a 'Deferred' result?",
+      "options": {
+        "A": "launch",
+        "B": "async",
+        "C": "runBlocking",
+        "D": "withContext"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Hilt' in Android development?",
+      "options": {
+        "A": "To manage image loading",
+        "B": "A library for Dependency Injection built on top of Dagger",
+        "C": "To handle network caching",
+        "D": "To create vector animations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used to mark a function as a 'Composable' UI element?",
+      "options": {
+        "A": "@UI",
+        "B": "@Layout",
+        "C": "@Composable",
+        "D": "@View"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is a 'Flow' in Kotlin Coroutines?",
+      "options": {
+        "A": "A single value returned asynchronously",
+        "B": "A stream of values that are computed asynchronously",
+        "C": "A layout manager for Compose",
+        "D": "A tool for screen transitions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Dispatcher should be used for Coroutines performing CPU-intensive tasks like sorting large lists?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.IO",
+        "C": "Dispatchers.Default",
+        "D": "Dispatchers.Unconfined"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In Jetpack Compose, what is 'Recomposition'?",
+      "options": {
+        "A": "The process of compiling the app",
+        "B": "Re-executing composable functions when their underlying data changes",
+        "C": "Changing the app icon",
+        "D": "Restarting the Activity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used for navigating between different composable screens?",
+      "options": {
+        "A": "Intent",
+        "B": "NavController",
+        "C": "FragmentManager",
+        "D": "RouteHandler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'StateFlow' in the ViewModel?",
+      "options": {
+        "A": "To handle user input only",
+        "B": "A state-holder observable flow that emits the current and new state updates",
+        "C": "To manage database migrations",
+        "D": "To encrypt network data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dependency Injection' (DI)?",
+      "options": {
+        "A": "A way to inject viruses into apps",
+        "B": "A design pattern where an object receives its dependencies from an external source rather than creating them itself",
+        "C": "A method for downloading dependencies from Gradle",
+        "D": "A UI animation style"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used in Compose to arrange elements vertically?",
+      "options": {
+        "A": "Row",
+        "B": "Column",
+        "C": "VerticalList",
+        "D": "Box"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, which keyword is used to mark a function that can be paused and resumed?",
+      "options": {
+        "A": "async",
+        "B": "suspend",
+        "C": "pause",
+        "D": "await"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which scope ensures that a Coroutine is cancelled when the ViewModel is cleared?",
+      "options": {
+        "A": "GlobalScope",
+        "B": "viewModelScope",
+        "C": "lifecycleScope",
+        "D": "processScope"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Modifier' in Jetpack Compose?",
+      "options": {
+        "A": "To change the Kotlin compiler settings",
+        "B": "To decorate or augment composables (change size, layout, behavior, or appearance)",
+        "C": "To create new variables",
+        "D": "To manage dependencies"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation in Hilt is used to inject a dependency into a constructor?",
+      "options": {
+        "A": "@Provide",
+        "B": "@Inject",
+        "C": "@Bind",
+        "D": "@Module"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Side Effect' in the context of Jetpack Compose?",
+      "options": {
+        "A": "An error in the UI",
+        "B": "A change to the state of the app that happens outside the scope of a composable function",
+        "C": "A new screen animation",
+        "D": "A background service"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Dispatcher is optimized for disk or network I/O tasks?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.IO",
+        "C": "Dispatchers.Default",
+        "D": "Dispatchers.Unconfined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, which component acts as the communication link between the Model and the View?",
+      "options": {
+        "A": "Activity",
+        "B": "ViewModel",
+        "C": "Repository",
+        "D": "Adapter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Box' layout in Compose?",
+      "options": {
+        "A": "To arrange items in a grid",
+        "B": "To stack elements on top of each other",
+        "C": "To create a scrollable list",
+        "D": "To handle user input"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin feature provides a way to create a class that only holds data?",
+      "options": {
+        "A": "Data Class",
+        "B": "Sealed Class",
+        "C": "Abstract Class",
+        "D": "Enum Class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Navigation Component' used for?",
+      "options": {
+        "A": "To find GPS coordinates",
+        "B": "To manage screen transitions and backstack within an app",
+        "C": "To browse the internet",
+        "D": "To update the app store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation is used in Room to define a table?",
+      "options": {
+        "A": "@Table",
+        "B": "@Entity",
+        "C": "@Database",
+        "D": "@Row"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Lifting State Up' mean in Compose?",
+      "options": {
+        "A": "Making state variables global",
+        "B": "Moving state to a common ancestor to share it between children",
+        "C": "Deleting the state",
+        "D": "Moving state to the cloud"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used for 'Jetpack Compose' UI previews inside Android Studio?",
+      "options": {
+        "A": "Layout Inspector",
+        "B": "@Preview annotation",
+        "C": "Emulator",
+        "D": "Logcat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Sealed Class' in Kotlin?",
+      "options": {
+        "A": "To prevent a class from being inherited",
+        "B": "To represent restricted class hierarchies (useful for state representation)",
+        "C": "To hide the class from other modules",
+        "D": "To make the class private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to execute a block of code on a specific Dispatcher within a coroutine?",
+      "options": {
+        "A": "switchTo()",
+        "B": "withContext()",
+        "C": "launchOn()",
+        "D": "changeDispatcher()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'Repository' pattern?",
+      "options": {
+        "A": "To design the UI",
+        "B": "To provide a clean API for data access to the rest of the application, abstracting the data sources",
+        "C": "To manage version control",
+        "D": "To handle activity results"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Jetpack Compose, which Composable is used for displaying a high-performance scrollable list?",
+      "options": {
+        "A": "RecyclerView",
+        "B": "LazyColumn",
+        "C": "ScrollView",
+        "D": "VerticalList"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Hilt annotation is used to tell Hilt how to provide instances of types that cannot be constructor-injected (like interfaces)?",
+      "options": {
+        "A": "@Inject",
+        "B": "@Module",
+        "C": "@AndroidEntryPoint",
+        "D": "@HiltViewModel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Jetpack library should be used to store sensitive key-value data, such as auth tokens, using hardware-backed encryption?",
+      "options": {
+        "A": "SharedPreferences",
+        "B": "EncryptedSharedPreferences",
+        "C": "SafeStorage",
+        "D": "SecureData"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary advantage of the 'Android App Bundle' (.aab) format over the legacy .apk format?",
+      "options": {
+        "A": "It is easier to install manually",
+        "B": "It allows Google Play to generate optimized APKs for specific device configurations, reducing download size",
+        "C": "It supports only Kotlin code",
+        "D": "It doesn't require a signing key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Android Studio allows you to record and analyze the execution of your app to find CPU bottlenecks?",
+      "options": {
+        "A": "Logcat",
+        "B": "CPU Profiler",
+        "C": "Database Inspector",
+        "D": "Network Inspector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'R8' do in the Android build process?",
+      "options": {
+        "A": "It compiles Java to Kotlin",
+        "B": "It is a code shrinker and obfuscator that replaces ProGuard for faster builds and smaller app sizes",
+        "C": "It manages the app's version numbers",
+        "D": "It handles image compression"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to run a background task even if the app is closed or the device restarts?",
+      "options": {
+        "A": "Thread",
+        "B": "WorkManager",
+        "C": "IntentService",
+        "D": "AsyncTask"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Memory Churn' in Android?",
+      "options": {
+        "A": "When the app uses no RAM",
+        "B": "The rapid allocation and deallocation of objects, causing frequent Garbage Collection and UI stutters",
+        "C": "When the database is too large",
+        "D": "When the internet is slow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which permission level must be explicitly granted by the user at runtime for privacy-sensitive data?",
+      "options": {
+        "A": "Normal Permissions",
+        "B": "Dangerous Permissions",
+        "C": "Signature Permissions",
+        "D": "System Permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Baseline Profiles' in Android?",
+      "options": {
+        "A": "To store user profiles",
+        "B": "To improve app startup time and performance by pre-compiling critical code paths",
+        "C": "To set the default language",
+        "D": "To manage multiple app themes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to inspect the local 'Room' or 'SQLite' database directly while the app is running?",
+      "options": {
+        "A": "Logcat",
+        "B": "Database Inspector",
+        "C": "Memory Profiler",
+        "D": "Build Analyzer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the Play Store, what is the 'Production Track' used for?",
+      "options": {
+        "A": "Internal testing only",
+        "B": "The final version of the app that is available to all users on Google Play",
+        "C": "Developing the app locally",
+        "D": "Managing alpha testers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Android component is responsible for making the decision to kill an app when the system is low on memory?",
+      "options": {
+        "A": "Activity Manager",
+        "B": "Low Memory Killer (LMK)",
+        "C": "Package Manager",
+        "D": "Task Scheduler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary use of the 'onTrimMemory()' callback in an Activity?",
+      "options": {
+        "A": "To delete temporary files",
+        "B": "To release UI resources when the system's memory pressure increases",
+        "C": "To trim the size of images",
+        "D": "To clear the SharedPreferences"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which encryption algorithm is used by default in Jetpack Security's EncryptedSharedPreferences?",
+      "options": {
+        "A": "AES-256 GCM",
+        "B": "RSA-4096",
+        "C": "DES",
+        "D": "MD5"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Kotlin Coroutines, what is the 'supervisorScope' used for?",
+      "options": {
+        "A": "To speed up background tasks",
+        "B": "To ensure a failure in one child doesn't automatically cancel other children",
+        "C": "To observe the memory usage of coroutines",
+        "D": "To run coroutines on the Main thread only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to generate a 'Baseline Profile' to improve app startup time?",
+      "options": {
+        "A": "Macrobenchmark library",
+        "B": "Logcat",
+        "C": "CPU Profiler",
+        "D": "Lint"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'reified' keyword in a Kotlin inline function allow you to do?",
+      "options": {
+        "A": "Access the type of T at runtime",
+        "B": "Make the function private",
+        "C": "Run the function asynchronously",
+        "D": "Return multiple values"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Android permission level allows an app to automatically clear other apps' caches (now restricted in newer APIs)?",
+      "options": {
+        "A": "Normal",
+        "B": "Dangerous",
+        "C": "Signature / Privileged",
+        "D": "None of the above"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of 'WindowInsets' in modern Android development?",
+      "options": {
+        "A": "To set the window background color",
+        "B": "To handle the area occupied by system UI elements like the status bar or notch",
+        "C": "To manage multiple windows",
+        "D": "To create popup menus"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Room, which annotation is used to define a relationship between two entities using a foreign key?",
+      "options": {
+        "A": "@Link",
+        "B": "@ForeignKey",
+        "C": "@Relation",
+        "D": "@Join"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to implement a custom 'View' by drawing directly on a Canvas?",
+      "options": {
+        "A": "SurfaceView",
+        "B": "TextureView",
+        "C": "CustomView (extending View)",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the role of 'Zygote' in the Android OS?",
+      "options": {
+        "A": "To manage network traffic",
+        "B": "A warm-up process that forks itself to launch new app processes quickly",
+        "C": "To handle battery optimization",
+        "D": "To encrypt user data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Jetpack Compose, which side-effect API is used to run a block of code once when a Composable enters the Composition?",
+      "options": {
+        "A": "SideEffect",
+        "B": "LaunchedEffect",
+        "C": "DisposableEffect",
+        "D": "rememberUpdatedState"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'android:exported' attribute in the Manifest signify for an Activity?",
+      "options": {
+        "A": "The app can be moved to an SD card",
+        "B": "Whether the activity can be launched by components of other applications",
+        "C": "The activity is ready for production",
+        "D": "The activity uses the internet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Coroutine dispatcher is most suitable for heavy JSON parsing or Image processing?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "Dispatchers.IO",
+        "C": "Dispatchers.Default",
+        "D": "Dispatchers.Unconfined"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of 'PendingIntent.FLAG_IMMUTABLE'?",
+      "options": {
+        "A": "To make the intent run faster",
+        "B": "To prevent the receiving app from modifying the intent's properties",
+        "C": "To encrypt the intent",
+        "D": "To allow the intent to run only once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mechanism is used by Android to prevent 'Deep Link Hijacking'?",
+      "options": {
+        "A": "App Links (Digital Asset Links)",
+        "B": "HTTPS",
+        "C": "Intent Filters",
+        "D": "ProGuard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Memory Leak' in the context of a ViewModel holding a reference to an Activity?",
+      "options": {
+        "A": "The Activity is destroyed but the ViewModel keeps it in memory",
+        "B": "The database grows too large",
+        "C": "The internet connection drops",
+        "D": "The UI stops responding"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Hilt, which annotation is used to provide an instance of a class that you don't own (e.g., from a library)?",
+      "options": {
+        "A": "@Inject",
+        "B": "@Provides",
+        "C": "@Bind",
+        "D": "@Singleton"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool helps in identifying 'Overdraw' in an Android application?",
+      "options": {
+        "A": "Layout Inspector",
+        "B": "GPU Overdraw (Developer Options)",
+        "C": "CPU Profiler",
+        "D": "Lint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Partial Recomposition' in Jetpack Compose?",
+      "options": {
+        "A": "Only updating parts of the code",
+        "B": "Compose skips functions whose inputs haven't changed to optimize UI updates",
+        "C": "Restarting the activity partially",
+        "D": "Recompiling the Gradle build"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to detect and handle 'Back' gestures in modern Android apps without using onBackPressed?",
+      "options": {
+        "A": "OnBackPressedDispatcher",
+        "B": "GestureManager",
+        "C": "BackLink",
+        "D": "IntentHandler"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary use of 'DataStore' over 'SharedPreferences'?",
+      "options": {
+        "A": "It is faster for small data",
+        "B": "It handles data updates asymmetrically and safely on a background thread",
+        "C": "It stores images",
+        "D": "It works on iOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin feature allows you to return a value from a 'when' block without an 'else' if all cases are covered?",
+      "options": {
+        "A": "Data Classes",
+        "B": "Sealed Classes",
+        "C": "Interfaces",
+        "D": "Enums"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'StrictMode' in Android development?",
+      "options": {
+        "A": "To enforce a specific coding style",
+        "B": "To detect disk or network operations occurring on the main thread",
+        "C": "To prevent the app from crashing",
+        "D": "To increase security"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Android, what is the 'Dalvik/ART' executable file format?",
+      "options": {
+        "A": ".class",
+        "B": ".dex",
+        "C": ".jar",
+        "D": ".apk"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Jetpack library is used to manage and test complex screen navigation using a visual graph?",
+      "options": {
+        "A": "Router",
+        "B": "Navigation Component",
+        "C": "FragmentLink",
+        "D": "ActivityManager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Cold Start' in Android?",
+      "options": {
+        "A": "The phone starting up",
+        "B": "Launching an app that isn't currently in memory (system must create the process)",
+        "C": "Running an app in winter",
+        "D": "An app update"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component allows an app to expose its data to other apps via a URI?",
+      "options": {
+        "A": "Service",
+        "B": "Content Provider",
+        "C": "Intent",
+        "D": "Broadcast Receiver"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'transient' keyword in Java/Android serialization?",
+      "options": {
+        "A": "To make a variable public",
+        "B": "To prevent a variable from being serialized",
+        "C": "To make a variable immutable",
+        "D": "To share a variable between threads"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Android Studio is used to analyze the 'Battery' impact of your application?",
+      "options": {
+        "A": "Energy Profiler",
+        "B": "Battery Stats",
+        "C": "Voltage Meter",
+        "D": "Power Inspector"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Kotlin Coroutines, what is the difference between 'StateFlow' and 'SharedFlow'?",
+      "options": {
+        "A": "StateFlow is for UI, SharedFlow is for Database",
+        "B": "StateFlow always has an initial value and emits the last known state to new subscribers; SharedFlow does not by default",
+        "C": "SharedFlow is synchronous, StateFlow is asynchronous",
+        "D": "They are identical"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of the 'JNI' (Java Native Interface) in Android?",
+      "options": {
+        "A": "To write UI in Java",
+        "B": "To allow Java/Kotlin code to interact with code written in C or C++",
+        "C": "To connect to the internet",
+        "D": "To manage the app's versioning"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method should be overridden in a custom View to determine its size based on its parent's constraints?",
+      "options": {
+        "A": "onDraw()",
+        "B": "onMeasure()",
+        "C": "onLayout()",
+        "D": "onSizeChanged()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'View Stub' in Android XML layouts?",
+      "options": {
+        "A": "A placeholder for a recurring layout",
+        "B": "A lightweight, invisible view used to lazy-load layout resources at runtime",
+        "C": "A tool to debug views",
+        "D": "A styling property"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of 'MVI' (Model-View-Intent) architecture, what is a 'Reducer'?",
+      "options": {
+        "A": "A tool to compress images",
+        "B": "A function that takes the previous state and an action to produce a new state",
+        "C": "A background service",
+        "D": "A network interceptor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation in Room is used to ignore a specific field so it isn't persisted in the database?",
+      "options": {
+        "A": "@Skip",
+        "B": "@Ignore",
+        "C": "@Transient",
+        "D": "@Hidden"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'inline' keyword do in Kotlin?",
+      "options": {
+        "A": "Executes code on a single line",
+        "B": "Tells the compiler to copy the function body into the call site to reduce overhead of lambda parameters",
+        "C": "Prevents a function from being called",
+        "D": "Makes a function private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Choreographer' in the Android UI framework?",
+      "options": {
+        "A": "To manage app animations only",
+        "B": "To coordinate the timing of animations, input, and drawing with the display VSYNC",
+        "C": "To handle network requests",
+        "D": "To manage fragment transitions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Coroutine operator is used to switch the execution context (Dispatcher) within a block?",
+      "options": {
+        "A": "changeContext",
+        "B": "withContext",
+        "C": "switchContext",
+        "D": "useDispatcher"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Sticky Intent' in the context of Broadcast Receivers?",
+      "options": {
+        "A": "An intent that cannot be deleted",
+        "B": "An intent that stays around after the broadcast is complete so others can quickly check the state (e.g., Battery status)",
+        "C": "An intent for a foreground service",
+        "D": "An intent that only works on old Android versions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to detect memory leaks by monitoring objects that should have been garbage collected?",
+      "options": {
+        "A": "Logcat",
+        "B": "LeakCanary",
+        "C": "Firebase Test Lab",
+        "D": "Lint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Backpressure' problem in reactive programming (like RxJava or Flow)?",
+      "options": {
+        "A": "When the UI is slow",
+        "B": "When an observable emits data faster than the observer can process it",
+        "C": "When the database is locked",
+        "D": "When the internet connection is unstable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'launch' and 'async' in coroutines?",
+      "options": {
+        "A": "launch returns a result; async does not",
+        "B": "launch does not return a result; async returns a Deferred that can be awaited",
+        "C": "launch is for UI; async is for IO",
+        "D": "They are functionally the same"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in a custom view’s Paint object is used to create smooth edges for shapes?",
+      "options": {
+        "A": "isSmooth",
+        "B": "isAntiAlias",
+        "C": "isBlurry",
+        "D": "isFiltered"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Method Tracing' in the Android Profiler?",
+      "options": {
+        "A": "A way to find where a function is defined",
+        "B": "Recording every method call to see exactly how much time is spent in each function",
+        "C": "A tool for refactoring code",
+        "D": "A way to track user clicks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Hilt annotation is used to provide a dependency that requires a Context?",
+      "options": {
+        "A": "@ContextInject",
+        "B": "@ApplicationContext or @ActivityContext",
+        "C": "@ProvideContext",
+        "D": "@GlobalContext"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Jetpack Compose, what is the purpose of 'CompositionLocal'?",
+      "options": {
+        "A": "To store data in a local database",
+        "B": "To pass data through the UI tree implicitly without passing it as a parameter to every function",
+        "C": "To handle local notifications",
+        "D": "To manage localized strings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'reified' keyword require in a Kotlin function?",
+      "options": {
+        "A": "The function must be 'suspend'",
+        "B": "The function must be 'inline'",
+        "C": "The function must be 'private'",
+        "D": "The function must return 'Unit'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is used to manage and display a sequence of background tasks that have dependencies on each other?",
+      "options": {
+        "A": "JobScheduler",
+        "B": "WorkManager with 'beginWith' and 'then'",
+        "C": "IntentService",
+        "D": "AsyncTask"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Canvas.save()' and 'Canvas.restore()' used for?",
+      "options": {
+        "A": "To save and load images from disk",
+        "B": "To save the current transformation matrix/clip state and return to it later",
+        "C": "To backup the database",
+        "D": "To pause and resume an animation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Android security feature prevents an app from reading data belonging to another app?",
+      "options": {
+        "A": "Firewall",
+        "B": "Application Sandboxing (Linux User IDs)",
+        "C": "ProGuard",
+        "D": "VPN"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Kotlin, what is a 'Companion Object'?",
+      "options": {
+        "A": "An object that follows the user",
+        "B": "An object scoped to a class that can contain methods/properties accessible like static members",
+        "C": "A secondary class",
+        "D": "A copy of an object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Surface' in Jetpack Compose?",
+      "options": {
+        "A": "The phone's physical screen",
+        "B": "A basic layout building block that provides a background and handles common UI requirements like elevation",
+        "C": "A drawing tool",
+        "D": "A touch handler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Coroutine dispatcher is the default for 'launch' if no dispatcher is specified?",
+      "options": {
+        "A": "Dispatchers.Main",
+        "B": "It depends on the scope it is launched in",
+        "C": "Dispatchers.IO",
+        "D": "Dispatchers.Default"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'AIDL'?",
+      "options": {
+        "A": "To speed up the app",
+        "B": "To allow communication between two processes using an interface",
+        "C": "To design the UI",
+        "D": "To manage assets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class provides the 'diffing' logic for the ListAdapter in RecyclerView?",
+      "options": {
+        "A": "ListDiff",
+        "B": "DiffUtil.ItemCallback",
+        "C": "AdapterDiff",
+        "D": "ChangeCallback"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Edge-to-Edge' display implementation?",
+      "options": {
+        "A": "Removing the phone case",
+        "B": "Drawing app content behind system bars (Status/Navigation) for an immersive look",
+        "C": "Increasing the screen resolution",
+        "D": "Using two screens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'IsolatedProcess=true' in a Service declaration?",
+      "options": {
+        "A": "To make the service faster",
+        "B": "To run the service in a separate, heavily restricted process with no permissions of its own",
+        "C": "To stop the service from being killed",
+        "D": "To allow it to access user files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin scope function returns the result of the lambda (instead of the object itself)?",
+      "options": {
+        "A": "also",
+        "B": "run / let / with",
+        "C": "apply",
+        "D": "Both A and C"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Main Dispatcher' backed by in Android?",
+      "options": {
+        "A": "A background thread",
+        "B": "The Android Looper on the main thread",
+        "C": "The file system",
+        "D": "The network card"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which testing library is specifically designed for mocking in Kotlin, providing native support for features like Coroutines and final classes?",
+      "options": {
+        "A": "Mockito",
+        "B": "MockK",
+        "C": "PowerMock",
+        "D": "Hamcrest"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a multi-module Android project, what is 'Dynamic Delivery'?",
+      "options": {
+        "A": "Delivering the app via drone",
+        "B": "A feature that allows certain modules to be downloaded from the Play Store only when needed",
+        "C": "Real-time UI updates without a build",
+        "D": "Instant network response"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of '@Component' in Dagger 2?",
+      "options": {
+        "A": "To define a UI widget",
+        "B": "To act as a bridge between the provider of dependencies (Modules) and the consumer (Inject points)",
+        "C": "To create a database",
+        "D": "To handle activity results"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used for 'UI Testing' to simulate user interactions like clicking buttons and entering text?",
+      "options": {
+        "A": "JUnit",
+        "B": "Espresso",
+        "C": "Robolectric",
+        "D": "Lint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Hilt, what does '@AndroidEntryPoint' do?",
+      "options": {
+        "A": "It marks the app's starting activity",
+        "B": "It enables dependency injection in an Android class (Activity, Fragment, View, etc.)",
+        "C": "It creates a new thread",
+        "D": "It registers a service in the manifest"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'Modularization' in Android development?",
+      "options": {
+        "A": "Faster incremental build times and improved code separation",
+        "B": "Fewer lines of code",
+        "C": "It removes the need for Gradle",
+        "D": "It automatically fixes bugs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which annotation is used in Dagger to provide a single instance of a dependency throughout the lifecycle of a component?",
+      "options": {
+        "A": "@Provide",
+        "B": "@Singleton",
+        "C": "@Unique",
+        "D": "@Static"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Robolectric' used for?",
+      "options": {
+        "A": "Running UI tests on a real device",
+        "B": "A framework that allows you to run Android tests on a local JVM without an emulator",
+        "C": "Creating robot animations",
+        "D": "Managing cloud servers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used in Espresso to find a specific view in the UI hierarchy?",
+      "options": {
+        "A": "findView()",
+        "B": "onView()",
+        "C": "checkView()",
+        "D": "getView()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dependency Inversion Principle' in the context of Clean Architecture?",
+      "options": {
+        "A": "Deleting all dependencies",
+        "B": "High-level modules should not depend on low-level modules; both should depend on abstractions",
+        "C": "Inheriting everything from one class",
+        "D": "Using only static methods"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Hilt annotation is used to provide a ViewModel to an Activity or Fragment?",
+      "options": {
+        "A": "@ProvideViewModel",
+        "B": "@HiltViewModel",
+        "C": "@InjectViewModel",
+        "D": "@ViewModelScoped"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'TDD' (Test-Driven Development)?",
+      "options": {
+        "A": "Writing code and then testing it",
+        "B": "A process where you write a failing test first, then write the code to make it pass",
+        "C": "A tool to measure battery usage",
+        "D": "A way to design icons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Dagger/Hilt, what is a 'Module'?",
+      "options": {
+        "A": "A separate app",
+        "B": "A class used to provide information to Dagger on how to construct specific dependencies",
+        "C": "A library dependency",
+        "D": "A UI component"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'IdlingResource' in Espresso testing?",
+      "options": {
+        "A": "A resource that is not used",
+        "B": "A mechanism to tell Espresso to wait for background tasks (like network calls) to finish",
+        "C": "A tool to stop the phone from sleeping",
+        "D": "A memory management tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Kotlin feature allows you to define a set of related classes that can only exist within the same file, often used for UI State?",
+      "options": {
+        "A": "Inner Class",
+        "B": "Sealed Class",
+        "C": "Data Class",
+        "D": "Static Class"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Baseline Profiles'?",
+      "options": {
+        "A": "To store user login info",
+        "B": "To provide the ART compiler with critical code paths to improve app startup and performance",
+        "C": "To create a backup of the app",
+        "D": "To manage app versions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which annotation in Dagger is used when there are multiple providers for the same type (e.g., two different String constants)?",
+      "options": {
+        "A": "@Named or @Qualifier",
+        "B": "@Multiple",
+        "C": "@Select",
+        "D": "@Choice"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Instrumentation' in Android testing?",
+      "options": {
+        "A": "Adding music to the app",
+        "B": "Testing code that runs in the same process as the application being tested, requiring a device/emulator",
+        "C": "Recording logs",
+        "D": "Measuring code coverage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of '@Binds' in a Dagger Module?",
+      "options": {
+        "A": "To bind the UI to data",
+        "B": "A more efficient way to provide an implementation for an interface compared to @Provides",
+        "C": "To connect to the database",
+        "D": "To link two modules"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to analyze the 'Dependency Graph' and identify circular dependencies?",
+      "options": {
+        "A": "Dagger Visualizer",
+        "B": "Gradle Dependencies Task / Build Analyzer",
+        "C": "Logcat",
+        "D": "Inspector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Single Activity Architecture'?",
+      "options": {
+        "A": "An app that only has one screen",
+        "B": "A design pattern where the app uses one Activity as a container and swaps Fragments for navigation",
+        "C": "An app that only runs on one device",
+        "D": "Deleting all activities except one"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which testing component is used to verify that a specific function was called during a test?",
+      "options": {
+        "A": "Spy / Verify",
+        "B": "Assert",
+        "C": "Check",
+        "D": "Match"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Jetpack Compose, how do you perform UI testing?",
+      "options": {
+        "A": "Using Espresso exclusively",
+        "B": "Using the ComposeTestRule and 'onNode' finders",
+        "C": "Compose cannot be tested",
+        "D": "Using Logcat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Method Count' limit in Android (64K limit)?",
+      "options": {
+        "A": "The maximum number of methods in a single DEX file",
+        "B": "The maximum number of methods in a project",
+        "C": "The maximum number of lines in a function",
+        "D": "A limit on internet speed"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Hilt annotation is used to create a custom Scope (e.g., for a specific user session)?",
+      "options": {
+        "A": "@UserScope",
+        "B": "@DefineComponent and @Scope",
+        "C": "@InjectScope",
+        "D": "@HiltScope"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Code Coverage'?",
+      "options": {
+        "A": "The amount of code hidden from users",
+        "B": "A measure of how much of your source code is executed when tests are run",
+        "C": "The size of the app",
+        "D": "The number of comments in code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which library is commonly used for 'Snapshot Testing' in Android (comparing UI pixels)?",
+      "options": {
+        "A": "Espresso",
+        "B": "Paparazzi or Shot",
+        "C": "MockK",
+        "D": "JUnit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does '@InstallIn(SingletonComponent::class)' do in Hilt?",
+      "options": {
+        "A": "Installs the app on the phone",
+        "B": "Specifies that the dependencies in that module should be available for the entire application's lifetime",
+        "C": "Registers the app in the Play Store",
+        "D": "Sets the database location"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Flaky Test'?",
+      "options": {
+        "A": "A test for a fragile feature",
+        "B": "A test that passes and fails intermittently without any changes to the code",
+        "C": "A very fast test",
+        "D": "A test that only works on weekends"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used in the terminal to run only 'Unit' tests in a specific module?",
+      "options": {
+        "A": "./gradlew test",
+        "B": "./gradlew connectedCheck",
+        "C": "./gradlew runTests",
+        "D": "./gradlew build"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jetpack library provides a standardized way to implement fingerprint and face unlock across different Android versions?",
+      "options": {
+        "A": "FingerprintManager",
+        "B": "BiometricPrompt",
+        "C": "SecurityAuth",
+        "D": "FaceLink"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of the 'Android Keystore' system?",
+      "options": {
+        "A": "To store user passwords in plain text",
+        "B": "To store cryptographic keys in a container to make them more difficult to extract from the device",
+        "C": "To manage the app's theme colors",
+        "D": "To host the app's local database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CI/CD tool is commonly used to automate the delivery of Android builds to 'Firebase App Distribution'?",
+      "options": {
+        "A": "Fastlane",
+        "B": "GitHub Actions",
+        "C": "CircleCI",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'Certificate Pinning' protect against in an Android application?",
+      "options": {
+        "A": "SQL Injection",
+        "B": "Man-in-the-Middle (MITM) attacks by ensuring the app only trusts a specific server certificate",
+        "C": "Brute force login attempts",
+        "D": "Unauthorized app installs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which file is used in a CI/CD pipeline to automate the 'signing' of an Android APK/AAB without hardcoding credentials?",
+      "options": {
+        "A": "local.properties",
+        "B": "Environment Secrets (e.g., GitHub Secrets)",
+        "C": "build.gradle",
+        "D": "AndroidManifest.xml"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cleartext Traffic' in Android, and why is it generally disabled by default in modern versions?",
+      "options": {
+        "A": "Encrypted traffic; it is disabled for speed",
+        "B": "Unencrypted HTTP traffic; it is disabled to prevent sensitive data from being intercepted",
+        "C": "Compressed traffic; it is disabled for compatibility",
+        "D": "Traffic sent via Bluetooth"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to perform 'Static Analysis' of your Android code to find potential bugs and security vulnerabilities during a CI build?",
+      "options": {
+        "A": "Logcat",
+        "B": "SonarQube or Detekt (for Kotlin)",
+        "C": "Profiler",
+        "D": "Emulator"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'App Integrity' (Play Integrity API)?",
+      "options": {
+        "A": "To check the app's rating on the Play Store",
+        "B": "To help protect your apps and games from potentially risky and fraudulent interactions",
+        "C": "To check the app's file size",
+        "D": "To manage user feedback"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a CI/CD workflow, what does 'Linting' do?",
+      "options": {
+        "A": "Compiles the code to machine language",
+        "B": "Scans your code for structural problems, styling errors, and deprecated API usage",
+        "C": "Uploads the app to the store",
+        "D": "Runs unit tests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property in the 'signingConfigs' of build.gradle is required to point to your release certificate?",
+      "options": {
+        "A": "keyAlias",
+        "B": "storeFile",
+        "C": "keyPassword",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    }
+  ]
+}

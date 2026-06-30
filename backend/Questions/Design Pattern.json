@@ -1,0 +1,2050 @@
+{
+  "skill": "Design Patterns",
+  "questions": [
+    {
+      "question": "Design patterns are typically divided into how many main categories according to the Gang of Four?",
+      "options": {
+        "A": "Two",
+        "B": "Three",
+        "C": "Four",
+        "D": "Five"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Design patterns are finished pieces of code that can be directly transformed into a program.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which category of patterns deals with object creation mechanisms, trying to create objects in a manner suitable to the situation?",
+      "options": {
+        "A": "Creational",
+        "B": "Structural",
+        "C": "Behavioral",
+        "D": "Concurrency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that belong to the 'Creational' category.",
+      "options": {
+        "A": "Singleton",
+        "B": "Factory Method",
+        "C": "Adapter",
+        "D": "Observer"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary intent of the Singleton pattern?",
+      "options": {
+        "A": "To ensure a class has only one instance and provides a global point of access to it.",
+        "B": "To allow a class to have multiple instances with different states.",
+        "C": "To hide the constructor of a class from all other classes.",
+        "D": "To speed up the instantiation process of an object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Factory Method' pattern defines an interface for creating an object but lets subclasses decide which class to instantiate.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to separate the construction of a complex object from its representation?",
+      "options": {
+        "A": "Builder",
+        "B": "Prototype",
+        "C": "Abstract Factory",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of the 'Structural' pattern category.",
+      "options": {
+        "A": "They explain how to assemble objects and classes into larger structures.",
+        "B": "They focus on the composition of classes and objects.",
+        "C": "They are primarily concerned with the instantiation process.",
+        "D": "They manage algorithms and the assignment of responsibilities between objects."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern acts as a bridge between two incompatible interfaces?",
+      "options": {
+        "A": "Adapter",
+        "B": "Facade",
+        "C": "Proxy",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Prototype' pattern involves creating new objects by cloning an existing 'prototype' instance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which behavioral pattern defines a one-to-many dependency so that when one object changes state, all its dependents are notified?",
+      "options": {
+        "A": "Observer",
+        "B": "Strategy",
+        "C": "Command",
+        "D": "Mediator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns used to provide a simplified or controlled interface to a complex system.",
+      "options": {
+        "A": "Facade",
+        "B": "Proxy",
+        "C": "Decorator",
+        "D": "Builder"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the main goal of the 'Strategy' pattern?",
+      "options": {
+        "A": "To define a family of algorithms, encapsulate each one, and make them interchangeable.",
+        "B": "To choose the best algorithm at compile time.",
+        "C": "To prevent the user from knowing which algorithm is being used.",
+        "D": "To combine multiple algorithms into a single function."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Decorator' pattern allows behavior to be added to an individual object, either statically or dynamically, without affecting the behavior of other objects from the same class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern uses a sharing mechanism to support large numbers of fine-grained objects efficiently?",
+      "options": {
+        "A": "Flyweight",
+        "B": "Composite",
+        "C": "Proxy",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are classified as 'Behavioral'.",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "State",
+        "C": "Flyweight",
+        "D": "Adapter"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation?",
+      "options": {
+        "A": "Iterator",
+        "B": "Visitor",
+        "C": "Memento",
+        "D": "Template Method"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Abstract Factory' pattern provides an interface for creating families of related or dependent objects without specifying their concrete classes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Template Method' pattern?",
+      "options": {
+        "A": "To define the skeleton of an algorithm in an operation, deferring some steps to subclasses.",
+        "B": "To create a reusable template for UI design.",
+        "C": "To duplicate an object's structure exactly.",
+        "D": "To ensure that a method is only called once."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using Design Patterns in software development.",
+      "options": {
+        "A": "They provide a common vocabulary for developers.",
+        "B": "They offer proven solutions to recurring problems.",
+        "C": "They guarantee that the code will be shorter.",
+        "D": "They eliminate the need for unit testing."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which design pattern allows an object to alter its behavior when its internal state changes, making the object appear to change its class?",
+      "options": {
+        "A": "State",
+        "B": "Strategy",
+        "C": "Observer",
+        "D": "Memento"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Command' pattern encapsulates a request as an object, thereby letting you parameterize clients with different requests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which structural pattern is used to compose objects into tree structures to represent part-whole hierarchies?",
+      "options": {
+        "A": "Composite",
+        "B": "Bridge",
+        "C": "Decorator",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are used to wrap an object to provide a different or additional interface.",
+      "options": {
+        "A": "Adapter",
+        "B": "Decorator",
+        "C": "Singleton",
+        "D": "Factory"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary intent of the 'Memento' pattern?",
+      "options": {
+        "A": "To capture and externalize an object's internal state so the object can be restored to this state later.",
+        "B": "To ensure an object is deleted from memory correctly.",
+        "C": "To create a log of all method calls.",
+        "D": "To share an object's state across different threads."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Facade' pattern provides a high-level interface that makes a subsystem easier to use.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to avoid coupling the sender of a request to its receiver by giving more than one object a chance to handle the request?",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "Mediator",
+        "C": "Command",
+        "D": "Interpreter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that help in reducing the complexity of communication between multiple objects.",
+      "options": {
+        "A": "Mediator",
+        "B": "Observer",
+        "C": "Prototype",
+        "D": "Builder"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In the 'Proxy' pattern, the proxy object typically:",
+      "options": {
+        "A": "Controls access to the original object.",
+        "B": "Replaces the original object entirely to save memory.",
+        "C": "Changes the interface of the original object.",
+        "D": "Converts the original object into a string."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Design patterns are often considered more abstract than architectural patterns like MVC or Microservices.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which behavioral pattern defines a representation for a language's grammar along with an evaluator to process sentences in that language?",
+      "options": {
+        "A": "Interpreter",
+        "B": "Template Method",
+        "C": "Visitor",
+        "D": "Strategy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO Creational patterns that focus on 'families' or 'complex' objects rather than single instances.",
+      "options": {
+        "A": "Abstract Factory",
+        "B": "Builder",
+        "C": "Singleton",
+        "D": "Flyweight"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which design principle is the 'Strategy' pattern a prime implementation of?",
+      "options": {
+        "A": "Open-Closed Principle",
+        "B": "Liskov Substitution Principle",
+        "C": "Single Responsibility Principle",
+        "D": "Interface Segregation Principle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Flyweight' pattern is most useful when an application uses a large number of objects that share significant amounts of data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to decouple an abstraction from its implementation so that the two can vary independently?",
+      "options": {
+        "A": "Bridge",
+        "B": "Adapter",
+        "C": "Facade",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO Behavioral patterns that involve defining a 'skeleton' or 'steps' of an algorithm.",
+      "options": {
+        "A": "Template Method",
+        "B": "Strategy",
+        "C": "Memento",
+        "D": "Proxy"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the role of the 'Visitor' pattern?",
+      "options": {
+        "A": "To represent an operation to be performed on the elements of an object structure without changing the classes of the elements.",
+        "B": "To keep track of which users have accessed a specific class.",
+        "C": "To automatically update the UI when data changes.",
+        "D": "To move an object from one server to another."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using the 'Builder' pattern is preferable to a constructor with a long list of parameters (telescoping constructor).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to handle 'undo' operations by storing a previous state?",
+      "options": {
+        "A": "Memento",
+        "B": "State",
+        "C": "Iterator",
+        "D": "Command"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO differences between the 'Decorator' and 'Adapter' patterns.",
+      "options": {
+        "A": "Decorator adds responsibilities; Adapter changes the interface.",
+        "B": "Decorator is intended for transparent usage; Adapter is intended for making things fit.",
+        "C": "Decorator creates new objects; Adapter only modifies existing ones.",
+        "D": "There is no difference between them."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "The 'Dependency Injection' pattern is primarily used to achieve:",
+      "options": {
+        "A": "Loose coupling between components.",
+        "B": "Faster database connections.",
+        "C": "Automatic documentation generation.",
+        "D": "Encryption of class variables."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Observer' pattern is the foundation for Model-View-Controller (MVC) communication.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to provide a placeholder for another object to control its creation or access?",
+      "options": {
+        "A": "Proxy",
+        "B": "Singleton",
+        "C": "Facade",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO Behavioral patterns that deal with the 'state' or 'history' of an object.",
+      "options": {
+        "A": "State",
+        "B": "Memento",
+        "C": "Command",
+        "D": "Interpreter"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which design pattern is used to define a family of algorithms and encapsulate each one?",
+      "options": {
+        "A": "Strategy",
+        "B": "Bridge",
+        "C": "Factory Method",
+        "D": "State"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Private Class Data' pattern is used to reduce exposure of attributes by encapsulating them in a single Data object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to define an object that encapsulates how a set of objects interact, promoting loose coupling?",
+      "options": {
+        "A": "Mediator",
+        "B": "Observer",
+        "C": "Chain of Responsibility",
+        "D": "Adapter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of the 'Singleton' pattern implementation.",
+      "options": {
+        "A": "Private constructor",
+        "B": "Static method to get the instance",
+        "C": "Publicly accessible fields",
+        "D": "Must implement the Cloneable interface"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "The 'Abstract Factory' is often called a:",
+      "options": {
+        "A": "Factory of factories",
+        "B": "Single source of truth",
+        "C": "Object cloner",
+        "D": "Algorithm switcher"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Composition over Inheritance' is a principle that many structural patterns (like Decorator and Composite) follow.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern provides a surrogate for another object to control its access?",
+      "options": {
+        "A": "Proxy",
+        "B": "Adapter",
+        "C": "Facade",
+        "D": "Strategy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are helpful for building a graphical user interface (GUI) component tree.",
+      "options": {
+        "A": "Composite",
+        "B": "Decorator",
+        "C": "Abstract Factory",
+        "D": "Command"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Loose Coupling'?",
+      "options": {
+        "A": "A design goal where components have little or no knowledge of the definitions of other separate components.",
+        "B": "A bug where objects lose their references.",
+        "C": "When a class has too many subclasses.",
+        "D": "When variables are not explicitly typed."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Pattern names (like 'Flyweight' or 'Mediator') are important because they create a shared language among developers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to separate an object's external interface from its internal implementation?",
+      "options": {
+        "A": "Bridge",
+        "B": "Facade",
+        "C": "Adapter",
+        "D": "Proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO Behavioral patterns that are often used to process collections of objects.",
+      "options": {
+        "A": "Iterator",
+        "B": "Visitor",
+        "C": "Abstract Factory",
+        "D": "Prototype"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern involves a subscriber being notified of changes in a publisher?",
+      "options": {
+        "A": "Observer",
+        "B": "Mediator",
+        "C": "Chain of Responsibility",
+        "D": "State"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Builder' pattern is strictly for creating immutable objects.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary difference between a 'Pattern' and an 'Algorithm'?",
+      "options": {
+        "A": "An algorithm defines a clear set of actions, while a pattern is a high-level blueprint for a solution.",
+        "B": "Patterns are only for UI; algorithms are for backend.",
+        "C": "Algorithms are patented; patterns are open-source.",
+        "D": "There is no difference."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that would be useful in a document editor (like MS Word).",
+      "options": {
+        "A": "Memento (for undo)",
+        "B": "Composite (for nested elements)",
+        "C": "Singleton (for the printer)",
+        "D": "Strategy (for different font styles)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern is used to change the interface of an existing class to another interface that clients expect?",
+      "options": {
+        "A": "Adapter",
+        "B": "Bridge",
+        "C": "Decorator",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Singleton' pattern is considered an anti-pattern by some because it can introduce global state into an application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern provides a simple interface to a complex system?",
+      "options": {
+        "A": "Facade",
+        "B": "Decorator",
+        "C": "Proxy",
+        "D": "Adapter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of the 'Behavioral' pattern category.",
+      "options": {
+        "A": "They manage algorithms and relationships between objects.",
+        "B": "They focus on how objects communicate.",
+        "C": "They focus on how classes are composed.",
+        "D": "They only deal with static class structures."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern uses a special 'Wrapper' to add functionality to an object?",
+      "options": {
+        "A": "Decorator",
+        "B": "Flyweight",
+        "C": "Bridge",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'State' and 'Strategy' patterns have nearly identical class diagrams but different intents.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is often used to implement 'Middleware' in web frameworks, allowing a request to pass through multiple filters?",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "Proxy",
+        "C": "Strategy",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a multi-threaded environment, a simple Singleton implementation without 'double-checked locking' or synchronization can result in multiple instances being created.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is best suited for implementing a complex 'Undo' system that requires traveling back through multiple states while maintaining memory efficiency?",
+      "options": {
+        "A": "Command (storing the inverse operation)",
+        "B": "Memento (storing full state snapshots)",
+        "C": "State",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are commonly used together to implement an extensible 'Plugin' architecture.",
+      "options": {
+        "A": "Abstract Factory",
+        "B": "Strategy",
+        "C": "Singleton",
+        "D": "Facade"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary difference between the 'Proxy' and 'Decorator' patterns?",
+      "options": {
+        "A": "Proxy controls access to an object, while Decorator adds responsibilities to it.",
+        "B": "Proxy changes the interface, while Decorator keeps it the same.",
+        "C": "Proxy is creational, while Decorator is structural.",
+        "D": "There is no difference; they are aliases."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Composite' pattern allows clients to treat individual objects and compositions of objects uniformly.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern would you use to convert a set of nested 'if-else' or 'switch' statements that depend on an object's current status into a cleaner, object-oriented structure?",
+      "options": {
+        "A": "State",
+        "B": "Command",
+        "C": "Adapter",
+        "D": "Mediator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using the 'Builder' pattern over a standard constructor.",
+      "options": {
+        "A": "It supports the creation of immutable objects more cleanly.",
+        "B": "It allows for step-by-step construction of complex objects.",
+        "C": "It is faster at runtime than a standard constructor.",
+        "D": "It eliminates the need for an interface."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In the 'Bridge' pattern, what is being 'bridged'?",
+      "options": {
+        "A": "The abstraction and its implementation.",
+        "B": "Two incompatible interfaces.",
+        "C": "The client and a complex subsystem.",
+        "D": "A class and its subclasses."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Flyweight' pattern uses a 'Factory' to manage and provide references to existing shared objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which behavioral pattern is specifically designed to handle communication between objects so they don't have to refer to each other explicitly?",
+      "options": {
+        "A": "Mediator",
+        "B": "Observer",
+        "C": "Visitor",
+        "D": "State"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are used to implement the 'Inversion of Control' (IoC) principle.",
+      "options": {
+        "A": "Dependency Injection",
+        "B": "Service Locator",
+        "C": "Singleton",
+        "D": "Memento"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Double Dispatch' mechanism often associated with?",
+      "options": {
+        "A": "Visitor pattern",
+        "B": "Abstract Factory pattern",
+        "C": "Observer pattern",
+        "D": "Proxy pattern"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Adapter' pattern can be implemented using either 'Class Adapter' (inheritance) or 'Object Adapter' (composition).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern provides a way to evaluate sentences in a language by defining a grammar and an evaluator?",
+      "options": {
+        "A": "Interpreter",
+        "B": "Template Method",
+        "C": "Strategy",
+        "D": "Chain of Responsibility"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common real-world examples of the 'Observer' pattern.",
+      "options": {
+        "A": "Event listeners in JavaScript (UI events)",
+        "B": "Pub/Sub messaging systems",
+        "C": "Database connection pooling",
+        "D": "Recursive file searching"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary risk of using the 'Singleton' pattern in a unit-testing environment?",
+      "options": {
+        "A": "It can cause test interference because state persists between tests.",
+        "B": "It makes the code run too slowly.",
+        "C": "It prevents the use of interfaces.",
+        "D": "It makes the tests too easy to write."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Strategy' pattern is generally used when the choice of algorithm is made by the client at runtime.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern should be used when you want to execute a sequence of operations, but allow subclasses to override specific steps without changing the overall structure?",
+      "options": {
+        "A": "Template Method",
+        "B": "Strategy",
+        "C": "Visitor",
+        "D": "Command"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons to use 'Lazy Initialization' in a Singleton implementation.",
+      "options": {
+        "A": "To save resources if the object is never actually used.",
+        "B": "To speed up the initial application startup time.",
+        "C": "To ensure thread-safety without locks.",
+        "D": "To allow the object to be garbage collected."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How does the 'Facade' pattern differ from the 'Mediator' pattern?",
+      "options": {
+        "A": "Facade provides a one-way interface to a subsystem, while Mediator provides multi-directional communication between peers.",
+        "B": "Facade is behavioral, while Mediator is structural.",
+        "C": "Facade is used for security, while Mediator is used for speed.",
+        "D": "There is no difference."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Prototype' pattern is particularly useful when the cost of creating a new object from scratch is higher than cloning an existing one.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is effectively used to implement 'Virtual Proxies' that load heavy objects (like high-res images) only when they are needed?",
+      "options": {
+        "A": "Proxy",
+        "B": "Flyweight",
+        "C": "Facade",
+        "D": "Decorator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of the 'Memento' pattern.",
+      "options": {
+        "A": "It uses an 'Originator' to create and restore snapshots.",
+        "B": "It uses a 'Caretaker' to keep track of snapshots without knowing their content.",
+        "C": "It allows objects to modify their internal state through public methods.",
+        "D": "It is a creational pattern."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the main drawback of the 'Flyweight' pattern?",
+      "options": {
+        "A": "Increased complexity in separating intrinsic (shared) and extrinsic (contextual) state.",
+        "B": "It consumes more memory than standard objects.",
+        "C": "It is not compatible with modern compilers.",
+        "D": "It can only be used with primitive data types."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In the 'Abstract Factory' pattern, a single factory can only produce one type of product.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is best used when you have a flat list of items that needs to be grouped into a hierarchy (like folders and files)?",
+      "options": {
+        "A": "Composite",
+        "B": "Bridge",
+        "C": "Chain of Responsibility",
+        "D": "Builder"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key differences between 'Strategy' and 'Template Method'.",
+      "options": {
+        "A": "Strategy uses composition; Template Method uses inheritance.",
+        "B": "Strategy changes the whole algorithm; Template Method changes parts of it.",
+        "C": "Strategy is creational; Template Method is structural.",
+        "D": "They are identical in implementation."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "The 'Registry' pattern is often used as an alternative or supplement to which other pattern?",
+      "options": {
+        "A": "Singleton",
+        "B": "Adapter",
+        "C": "Observer",
+        "D": "Memento"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'Dependency Injection' allows for easier mocking of dependencies during unit tests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is most appropriate for implementing a 'Logging' system where messages are handled differently based on their severity level (e.g., Error, Info, Debug)?",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "Bridge",
+        "C": "Singleton",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Adapter' pattern is typically used to add new functionality to an existing class without modifying its source code.",
+      "options": {
+        "A": "False (Adapter is for interface compatibility; Decorator is for adding functionality).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to provide a centralized point of communication for a group of objects to prevent them from having explicit references to each other?",
+      "options": {
+        "A": "Mediator",
+        "B": "Facade",
+        "C": "Proxy",
+        "D": "Observer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are effectively used to decouple a 'Sender' and a 'Receiver' of a request.",
+      "options": {
+        "A": "Command",
+        "B": "Chain of Responsibility",
+        "C": "Abstract Factory",
+        "D": "Adapter"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary motivation for using the 'Bridge' pattern instead of simple inheritance?",
+      "options": {
+        "A": "To avoid a permanent binding between an abstraction and its implementation, preventing a 'class explosion'.",
+        "B": "To make the code run faster by reducing the call stack.",
+        "C": "To allow private methods to be accessed by subclasses.",
+        "D": "To ensure that only one instance of the implementation exists."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In the 'Visitor' pattern, the 'Element' classes must know about the specific 'Visitor' implementations.",
+      "options": {
+        "A": "False (Elements only need to know the Visitor interface/base class).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to 'save' the state of an object so it can be restored without violating encapsulation?",
+      "options": {
+        "A": "Memento",
+        "B": "Prototype",
+        "C": "State",
+        "D": "Command"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that utilize 'Composition' to achieve their primary structural goal.",
+      "options": {
+        "A": "Composite",
+        "B": "Decorator",
+        "C": "Template Method",
+        "D": "Factory Method"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Double Dispatch' (used in the Visitor pattern) refer to?",
+      "options": {
+        "A": "The operation executed depends on the type of the request and the type of the receiver.",
+        "B": "Calling a method twice to ensure it executes correctly.",
+        "C": "Sending a message to two different servers simultaneously.",
+        "D": "Using two different interfaces for the same class."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Interpreter' pattern is widely used in high-performance compilers for complex programming languages.",
+      "options": {
+        "A": "False (It is generally used for simple grammars; complex languages use more optimized parsing tools).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is commonly used to implement 'Smart Pointers' or 'Reference Counting' in languages like C++?",
+      "options": {
+        "A": "Proxy",
+        "B": "Bridge",
+        "C": "Flyweight",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways in which the 'Abstract Factory' differs from the 'Factory Method'.",
+      "options": {
+        "A": "Abstract Factory creates families of related objects.",
+        "B": "Factory Method uses inheritance; Abstract Factory often uses composition.",
+        "C": "Factory Method is for creating large objects; Abstract Factory is for small ones.",
+        "D": "Abstract Factory is a behavioral pattern; Factory Method is creational."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In a 'Memento' pattern, which participant is responsible for keeping the memento safe but never operates on its contents?",
+      "options": {
+        "A": "Caretaker",
+        "B": "Originator",
+        "C": "SnapshotManager",
+        "D": "Visitor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'State' pattern enables an object to change its behavior at runtime by switching its state object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which structural pattern uses a single 'FlyweightFactory' to ensure that flyweights are shared correctly?",
+      "options": {
+        "A": "Flyweight",
+        "B": "Abstract Factory",
+        "C": "Builder",
+        "D": "Prototype"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO risks associated with overusing the 'Mediator' pattern.",
+      "options": {
+        "A": "The Mediator object can become a 'God Object' (too complex).",
+        "B": "It can hide the actual flow of logic, making debugging harder.",
+        "C": "It increases the coupling between peer objects.",
+        "D": "It prevents the use of the Observer pattern."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern is most useful for implementing a 'Wizard' UI that guides a user through steps, where the next step depends on previous input?",
+      "options": {
+        "A": "State",
+        "B": "Strategy",
+        "C": "Flyweight",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Command' pattern is excellent for implementing 'Macro' recording by storing a list of command objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of the 'Object Pool' pattern (a non-GoF creational pattern)?",
+      "options": {
+        "A": "To reuse objects that are expensive to create (like database connections).",
+        "B": "To store objects in a global array.",
+        "C": "To prevent objects from being garbage collected.",
+        "D": "To create a backup of every object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are commonly used to implement 'Asynchronous' processing.",
+      "options": {
+        "A": "Observer (via callbacks/events)",
+        "B": "Command (via task queues)",
+        "C": "Singleton",
+        "D": "Facade"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern is best for navigating and performing operations on a 'Composite' tree structure without changing the structure's classes?",
+      "options": {
+        "A": "Visitor",
+        "B": "Iterator",
+        "C": "Mediator",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In 'Lazy Initialization' of a Singleton, the instance is created only when it is first requested.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which behavioral pattern allows you to offer several different ways to perform a task, letting the client choose which one at runtime?",
+      "options": {
+        "A": "Strategy",
+        "B": "Template Method",
+        "C": "Chain of Responsibility",
+        "D": "Decorator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of the 'Decorator' pattern implementation.",
+      "options": {
+        "A": "The Decorator implements the same interface as the object it decorates.",
+        "B": "The Decorator contains a reference to a component object.",
+        "C": "The Decorator must be a subclass of the Concrete Component.",
+        "D": "Decorators can only be applied once to an object."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Intrinsic State' in the context of the Flyweight pattern?",
+      "options": {
+        "A": "The constant data shared by multiple objects that can be stored in the flyweight.",
+        "B": "The unique data specific to a single instance.",
+        "C": "The private variables of a class.",
+        "D": "The memory address of the object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Facade' pattern is often used to decouple a client from a library or complex API to make the library easier to swap out later.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern involves a 'Context' object that delegates requests to its current state object?",
+      "options": {
+        "A": "State",
+        "B": "Mediator",
+        "C": "Proxy",
+        "D": "Observer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of the 'Iterator' pattern.",
+      "options": {
+        "A": "It supports multiple simultaneous traversals of a collection.",
+        "B": "It simplifies the aggregate interface by removing traversal logic.",
+        "C": "It makes the collection faster to access.",
+        "D": "It automatically sorts the collection."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern is used to provide a single interface for a set of related objects in a hierarchy, like a GUI window system?",
+      "options": {
+        "A": "Composite",
+        "B": "Bridge",
+        "C": "Strategy",
+        "D": "Memento"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Abstract Factory' pattern is an implementation of the Dependency Inversion Principle.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Caretaker' in a Memento pattern?",
+      "options": {
+        "A": "An object that triggers the save/restore but doesn't know the state details.",
+        "B": "The database where snapshots are stored.",
+        "C": "The user interface component.",
+        "D": "The garbage collector."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common names for the 'Observer' pattern.",
+      "options": {
+        "A": "Publish-Subscribe",
+        "B": "Dependents",
+        "C": "Listener",
+        "D": "Delegator"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which pattern is effectively used to create a 'Thread Pool'?",
+      "options": {
+        "A": "Object Pool (Creational)",
+        "B": "Flyweight (Structural)",
+        "C": "Command (Behavioral)",
+        "D": "Singleton (Creational)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Null Object' pattern is a behavioral pattern used to avoid null checks by providing an object with neutral behavior.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern provides a surrogate to control the 'lazy' loading of a resource?",
+      "options": {
+        "A": "Virtual Proxy",
+        "B": "Remote Proxy",
+        "C": "Protection Proxy",
+        "D": "Smart Reference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are examples of 'Behavioral' patterns from the Gang of Four.",
+      "options": {
+        "A": "Command",
+        "B": "Visitor",
+        "C": "Facade",
+        "D": "Composite"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which concurrency pattern decouples method execution from method invocation to enhance concurrency and simplify synchronized access to an object that resides in its own thread of control?",
+      "options": {
+        "A": "Active Object",
+        "B": "Monitor Object",
+        "C": "Read-Write Lock",
+        "D": "Double-Checked Locking"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Double-Checked Locking' pattern is primarily used to reduce the overhead of acquiring a lock by first testing the locking criterion without actually acquiring the lock.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is considered an 'Anti-pattern' when it leads to a giant, bloated class that handles far too many responsibilities, violating the Single Responsibility Principle?",
+      "options": {
+        "A": "God Object",
+        "B": "Singleton",
+        "C": "Golden Hammer",
+        "D": "Spaghetti Code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns used to manage 'Distributed Transactions' or state consistency in microservices.",
+      "options": {
+        "A": "Saga Pattern",
+        "B": "Event Sourcing",
+        "C": "Flyweight",
+        "D": "Bridge"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Object Mother' pattern commonly used for in software testing?",
+      "options": {
+        "A": "To provide a factory for creating various 'ready-to-use' test objects with specific data configurations.",
+        "B": "To manage the lifecycle of mock objects.",
+        "C": "To ensure that all objects are deleted after each test.",
+        "D": "To monitor memory leaks during integration tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Visitor' pattern is highly effective for stable object structures but becomes a maintenance burden if the element hierarchy changes frequently.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which structural pattern uses 'Canonical Mapping' to ensure that only one object instance is created for each unique value, often used in persistent object storage?",
+      "options": {
+        "A": "Flyweight",
+        "B": "Identity Map",
+        "C": "Unit of Work",
+        "D": "Data Mapper"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO concurrency patterns from the following list.",
+      "options": {
+        "A": "Balking",
+        "B": "Thread-Specific Storage",
+        "C": "Interpreter",
+        "D": "Memento"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary risk of using the 'Mediator' pattern in a high-traffic distributed system?",
+      "options": {
+        "A": "The Mediator becomes a bottleneck or a Single Point of Failure (SPOF).",
+        "B": "It prevents the use of asynchronous messaging.",
+        "C": "It requires all peer objects to be written in the same language.",
+        "D": "It increases the memory footprint of individual peer objects."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Balking' pattern is used to execute an action on an object only when the object is in a particular state; otherwise, it returns immediately without doing anything.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to encapsulate a 'Unit of Work' to track changes to objects and coordinate the writing out of these changes to a database?",
+      "options": {
+        "A": "Unit of Work",
+        "B": "Data Access Object (DAO)",
+        "C": "Active Record",
+        "D": "Repository"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns that are part of the 'Enterprise Application Architecture' patterns (Fowler).",
+      "options": {
+        "A": "Data Mapper",
+        "B": "Transaction Script",
+        "C": "Factory Method",
+        "D": "Chain of Responsibility"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In the 'Monitor Object' pattern, what is the 'Condition Variable' used for?",
+      "options": {
+        "A": "To allow threads to wait for a specific state change or condition to become true within the monitor.",
+        "B": "To count the number of threads currently accessing the object.",
+        "C": "To encrypt the data before it is processed.",
+        "D": "To log errors during the synchronization process."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Anemic Domain Model' is an anti-pattern where the domain objects contain little or no business logic (only getters and setters).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to provide a local representative for an object that resides in a different address space (Remote Proxy)?",
+      "options": {
+        "A": "Proxy",
+        "B": "Adapter",
+        "C": "Bridge",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of the 'Flyweight' pattern that make it difficult to implement in multi-threaded environments.",
+      "options": {
+        "A": "Intrinsic state must be immutable or properly synchronized.",
+        "B": "The Flyweight Factory must be thread-safe to prevent duplicate creation.",
+        "C": "It requires the use of global variables.",
+        "D": "It cannot be used with garbage-collected languages."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Circuit Breaker' pattern primarily used for in microservices architecture?",
+      "options": {
+        "A": "To stop a service from attempting an operation that is likely to fail, preventing cascading failures.",
+        "B": "To encrypt communication between services.",
+        "C": "To balance the load between different server nodes.",
+        "D": "To automatically update the service version."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Interceptor' pattern allows for the transparent addition of services to a framework, where the framework triggers the interceptors at specific 'Join Points'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is commonly used in reactive programming to handle streams of data where multiple observers can react to the same stream?",
+      "options": {
+        "A": "Observer (with variations like Observable/Subject)",
+        "B": "Iterator",
+        "C": "Memento",
+        "D": "Command"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO differences between 'State' and 'Strategy' patterns from a technical perspective.",
+      "options": {
+        "A": "State handles transitions between behaviors internally; Strategy usually has behaviors set externally by a client.",
+        "B": "State objects often hold a reference to the Context to trigger transitions; Strategy objects rarely do.",
+        "C": "State is creational; Strategy is structural.",
+        "D": "They are exactly the same and only the name differs."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Law of Demeter' (Principle of Least Knowledge) often used to justify in pattern selection?",
+      "options": {
+        "A": "The use of the Facade pattern to hide subsystem complexity.",
+        "B": "The use of the Singleton pattern for global access.",
+        "C": "The use of Inheritance for code reuse.",
+        "D": "The use of Static methods for utility functions."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Abstract Factory' pattern can violate the Open-Closed Principle when a new product type is added to the family, as it requires modifying the Factory interface and all concrete implementations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to transform a set of objects into a different structure, often used for data migration or exporting data to formats like XML/JSON?",
+      "options": {
+        "A": "Visitor",
+        "B": "Adapter",
+        "C": "Bridge",
+        "D": "Decorator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO risks associated with the 'Proxy' pattern.",
+      "options": {
+        "A": "It can introduce latency if the proxy performs complex logic or network calls.",
+        "B": "It can lead to a 'heavy' system if too many proxies are created for small objects.",
+        "C": "It prevents the object from being inherited.",
+        "D": "It automatically bypasses private methods."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which specific issue in the 'Observer' pattern occurs when a subject holds a strong reference to an observer, preventing it from being garbage collected even after the observer is no longer needed?",
+      "options": {
+        "A": "Lapsed Listener problem",
+        "B": "Dangling Pointer",
+        "C": "Circular Dependency",
+        "D": "Memory Fragmentation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Thread-Specific Storage' pattern is used to give multiple threads their own unique copy of a global or static variable, avoiding the need for locking.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to implement 'Content-Based Routing' in a messaging system, where the receiver of a message is determined by the message content itself?",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "Strategy",
+        "C": "Mediator",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons why the 'Singleton' pattern is often criticized in modern dependency injection-based architectures.",
+      "options": {
+        "A": "It hides dependencies, making the class contract dishonest.",
+        "B": "It introduces global state which makes unit testing difficult.",
+        "C": "It prevents the use of private constructors.",
+        "D": "It consumes more memory than a standard class."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary difference between 'Active Record' and 'Data Mapper' patterns?",
+      "options": {
+        "A": "Active Record combines data and behavior in one class; Data Mapper keeps them separate.",
+        "B": "Active Record is for NoSQL; Data Mapper is for SQL.",
+        "C": "Active Record is structural; Data Mapper is creational.",
+        "D": "Active Record is faster than Data Mapper in all cases."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Service Locator' pattern is generally considered a better alternative to 'Dependency Injection' because it centralizes dependency resolution.",
+      "options": {
+        "A": "False (Service Locator is often considered an anti-pattern as it hides dependencies).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which structural pattern should be used to provide a specific, thread-safe interface to a legacy library that is not thread-safe?",
+      "options": {
+        "A": "Proxy (specifically a Thread-safe Proxy)",
+        "B": "Adapter",
+        "C": "Facade",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO patterns used to solve the 'N+1 Query Problem' in ORMs.",
+      "options": {
+        "A": "Eager Loading (Identity Map)",
+        "B": "Batch Processing",
+        "C": "Lazy Loading",
+        "D": "Prototype"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Golden Hammer' anti-pattern?",
+      "options": {
+        "A": "Using a single favorite tool or design pattern for every problem, regardless of suitability.",
+        "B": "Refusing to use third-party libraries.",
+        "C": "Over-optimizing code for performance.",
+        "D": "Writing code without any documentation."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Bulkhead' pattern, different components of an application are isolated into separate resource pools so that if one fails, the others can continue.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is best for implementing a 'Compensating Transaction' in a long-running distributed workflow (Saga)?",
+      "options": {
+        "A": "Command",
+        "B": "State",
+        "C": "Memento",
+        "D": "Strategy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of 'Immutable' objects in design patterns.",
+      "options": {
+        "A": "They are inherently thread-safe.",
+        "B": "Their state cannot be changed after construction.",
+        "C": "They must always use the Singleton pattern.",
+        "D": "They require more locking than mutable objects."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "In the 'Monitor Object' pattern, what is the role of the 'Lock'?",
+      "options": {
+        "A": "To ensure mutual exclusion so only one thread executes a synchronized method at a time.",
+        "B": "To prevent the object from being deleted.",
+        "C": "To encrypt the object's fields.",
+        "D": "To speed up method execution."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Visitor' pattern uses 'Static Dispatch' to determine which method to call on the visitor.",
+      "options": {
+        "A": "False (It uses Double Dispatch—a combination of static and dynamic dispatch).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to minimize the cost of object creation by keeping a collection of already initialized objects ready to use?",
+      "options": {
+        "A": "Object Pool",
+        "B": "Flyweight",
+        "C": "Prototype",
+        "D": "Lazy Loading"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of the 'Unit of Work' pattern.",
+      "options": {
+        "A": "It tracks all changes to objects in a single transaction.",
+        "B": "It coordinates the writing out of changes to the database.",
+        "C": "It is a structural pattern.",
+        "D": "It prevents the use of the Repository pattern."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Write Amplification' in the context of persistence patterns?",
+      "options": {
+        "A": "The phenomenon where the amount of data physically written to storage is a multiple of the data logically written by the application.",
+        "B": "An increase in the number of database writes per second.",
+        "C": "Writing to multiple shards simultaneously.",
+        "D": "Using too many indexes on a single table."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dependency Inversion' states that high-level modules should depend on abstractions, not on low-level concrete implementations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to handle 'Graceful Degradation' by providing a default, non-functional response when a service is unavailable?",
+      "options": {
+        "A": "Null Object (often used with Circuit Breaker)",
+        "B": "Proxy",
+        "C": "Strategy",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO consequences of using the 'Mediator' pattern for internal component communication.",
+      "options": {
+        "A": "Reduced coupling between the components being mediated.",
+        "B": "Centralization of interaction logic.",
+        "C": "Significant improvement in execution speed.",
+        "D": "Elimination of the need for an interface."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Big Ball of Mud' anti-pattern?",
+      "options": {
+        "A": "A system that lacks a perceivable architecture and has haphazardly structured, spaghetti-like code.",
+        "B": "A database with too many tables.",
+        "C": "A frontend with inconsistent styling.",
+        "D": "A server that has not been rebooted in years."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In 'Shadow DOM' implementation, the 'Decorator' pattern is often used to wrap elements without leaking their internal styles.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which concurrency pattern involves a thread waiting for a signal before proceeding, preventing 'busy-waiting'?",
+      "options": {
+        "A": "Guard Suspension",
+        "B": "Balking",
+        "C": "Double-Checked Locking",
+        "D": "Active Object"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to implement the 'Factory Method' pattern in JavaScript.",
+      "options": {
+        "A": "Using a function that returns an object literal or a class instance.",
+        "B": "Using a static method on a class that instantiates itself or a subclass.",
+        "C": "Using 'new' on a plain variable.",
+        "D": "Hard-coding 'new ClassName()' inside the client code."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'Sidecar' pattern in cloud-native applications?",
+      "options": {
+        "A": "To attach an auxiliary service to a primary application container to handle cross-cutting concerns like logging or monitoring.",
+        "B": "To run a backup of the database.",
+        "C": "To create a mobile version of the website.",
+        "D": "To host the CSS files for the application."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Data Access Object' (DAO) pattern provides an abstract interface to some type of database or other persistence mechanism.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern involves 'Event Sourcing' and 'CQRS' working together to maintain an audit trail of state changes?",
+      "options": {
+        "A": "Command Query Responsibility Segregation (CQRS)",
+        "B": "Strategy",
+        "C": "Memento",
+        "D": "Observer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO risks of using the 'Singleton' pattern in a distributed system.",
+      "options": {
+        "A": "Ensuring only one instance exists across multiple servers (requires a distributed lock).",
+        "B": "State synchronization between instances in different clusters.",
+        "C": "It is impossible to use Singleton in the cloud.",
+        "D": "It requires the use of a NoSQL database."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Composition Root' in Dependency Injection?",
+      "options": {
+        "A": "A single location in an application where the object graph is composed/instantiated.",
+        "B": "The base class of all objects.",
+        "C": "The main database table.",
+        "D": "The folder containing all CSS files."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Interface Segregation' suggests that a class should only be forced to implement methods that it actually needs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to encapsulate a request so it can be handled as a command object, specifically for task scheduling or queuing?",
+      "options": {
+        "A": "Command",
+        "B": "Strategy",
+        "C": "Visitor",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common implementation methods for 'Object-Relational Mapping' (ORM).",
+      "options": {
+        "A": "Active Record",
+        "B": "Data Mapper",
+        "C": "Prototype",
+        "D": "Strategy"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Polymorphic Dispatch'?",
+      "options": {
+        "A": "The mechanism by which a request to an object results in the execution of the method associated with the object's actual class at runtime.",
+        "B": "Sending an email to multiple people.",
+        "C": "Loading multiple JavaScript files at once.",
+        "D": "Converting an object into a JSON string."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Flyweight' pattern, extrinsic state must be passed to the flyweight object by the client whenever a method is called.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which behavioral pattern allows an object to perform an operation when its internal state changes, without using large switch/case blocks?",
+      "options": {
+        "A": "State",
+        "B": "Mediator",
+        "C": "Bridge",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of the 'Bridge' pattern.",
+      "options": {
+        "A": "Independence of interface and implementation.",
+        "B": "Improved extensibility of both the abstraction and its implementation.",
+        "C": "Smaller memory footprint for objects.",
+        "D": "Automatic memory management."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Fluent Interface' in design patterns?",
+      "options": {
+        "A": "An API design that relies on method chaining to provide more readable code (often used in Builders).",
+        "B": "An interface that translates multiple languages.",
+        "C": "A class that only uses public variables.",
+        "D": "A method that returns a Promise."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Lazy Loading' can be implemented using a 'Virtual Proxy' that holds a reference to a real subject but only instantiates it upon method invocation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to provide an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created?",
+      "options": {
+        "A": "Factory Method",
+        "B": "Abstract Factory",
+        "C": "Prototype",
+        "D": "Singleton"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO participants in the 'Chain of Responsibility' pattern.",
+      "options": {
+        "A": "Handler (defines the interface for handling requests)",
+        "B": "ConcreteHandler (handles the request or passes it to the successor)",
+        "C": "Originator",
+        "D": "Caretaker"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Encapsulate what varies' mean in the context of design patterns?",
+      "options": {
+        "A": "Identify the aspects of your application that vary and separate them from what stays the same (e.g., using the Strategy pattern).",
+        "B": "Put all variables into a single global object.",
+        "C": "Make all variables private.",
+        "D": "Hide the entire class from the user."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Composite' pattern uses a 'Component' interface so that clients can treat leaves and composites identically.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern uses a 'Director' class to control the construction process of a complex object?",
+      "options": {
+        "A": "Builder",
+        "B": "Factory Method",
+        "C": "Abstract Factory",
+        "D": "Prototype"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of the 'Decorator' pattern.",
+      "options": {
+        "A": "It provides a flexible alternative to subclassing for extending functionality.",
+        "B": "It is a structural pattern.",
+        "C": "It is a behavioral pattern.",
+        "D": "It prevents objects from being modified at runtime."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Computer Vision", 
+  "questions": [
+    {
+    "question": "What is the smallest unit of a digital image?",
+    "options": {
+      "A": "A kernel",
+      "B": "A pixel",
+      "C": "A bit",
+      "D": "A vector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which color model is standard for digital displays like monitors and smartphones?",
+    "options": {
+      "A": "CMYK",
+      "B": "Grayscale",
+      "C": "RGB",
+      "D": "HSV"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Grayscale' mean in the context of digital images?",
+    "options": {
+      "A": "An image with 256 different colors.",
+      "B": "An image containing only shades of gray, from black to white.",
+      "C": "An image with a gray background and colorful foreground.",
+      "D": "An image that has been permanently deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a standard 8-bit grayscale image, what is the value of a pure white pixel?",
+    "options": {
+      "A": "0",
+      "B": "100",
+      "C": "128",
+      "D": "255"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Computer Vision' primarily concerned with?",
+    "options": {
+      "A": "Making computer screens easier for humans to see.",
+      "B": "Enabling computers to interpret and understand visual information from the world.",
+      "C": "Repairing the physical hardware of digital cameras.",
+      "D": "Increasing the speed of high-speed internet cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Image Histogram' used to visualize?",
+    "options": {
+      "A": "The physical weight of the camera.",
+      "B": "The distribution of pixel intensities in an image.",
+      "C": "The history of every time the image was edited.",
+      "D": "The location where the photo was taken."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Pre-processing' step in Computer Vision?",
+    "options": {
+      "A": "Image Resizing",
+      "B": "Sound Recording",
+      "C": "Text Translation",
+      "D": "Hard Drive Formatting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Thresholding' in image processing?",
+    "options": {
+      "A": "To increase the brightness of the entire image.",
+      "B": "To convert a grayscale image into a binary image (black and white).",
+      "C": "To rotate the image by 45 degrees.",
+      "D": "To count the number of users viewing the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'R' in 'RGB' stand for?",
+    "options": {
+      "A": "Resolution",
+      "B": "Red",
+      "C": "Radius",
+      "D": "Raster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Binary Image'?",
+    "options": {
+      "A": "An image that only has two pixels.",
+      "B": "An image where each pixel has only two possible values (usually 0 and 1).",
+      "C": "An image that contains hidden text code.",
+      "D": "A copy of an image stored on a backup drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a task where a computer identifies where an object is located in an image?",
+    "options": {
+      "A": "Object Detection",
+      "B": "Audio Transcription",
+      "C": "Sentiment Analysis",
+      "D": "Spam Filtering"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Noise' in a digital image?",
+    "options": {
+      "A": "Loud sounds coming from the camera speaker.",
+      "B": "Random variations in brightness or color information.",
+      "C": "The sound of a person taking a photo.",
+      "D": "A type of background music in a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Segmentation'?",
+    "options": {
+      "A": "Compressing an image to save space.",
+      "B": "Dividing an image into multiple segments or objects.",
+      "C": "Sending an image through email in parts.",
+      "D": "Taking a photo with a wide-angle lens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Computer Vision, what is a 'Kernel' (or Filter)?",
+    "options": {
+      "A": "The core of the computer's operating system.",
+      "B": "A small matrix used for mathematical operations like blurring or sharpening.",
+      "C": "The physical glass of the camera lens.",
+      "D": "The power button on a digital camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Blurring' primarily used for?",
+    "options": {
+      "A": "To make the image look like a painting.",
+      "B": "To reduce detail and noise in an image.",
+      "C": "To increase the sharpness of the edges.",
+      "D": "To identify the names of people in a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these libraries is most famous for Open Source Computer Vision?",
+    "options": {
+      "A": "Django",
+      "B": "OpenCV",
+      "C": "Flask",
+      "D": "React"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge Detection'?",
+    "options": {
+      "A": "Finding the physical edge of a computer desk.",
+      "B": "Identifying points in a digital image where the brightness changes sharply.",
+      "C": "Cleaning the borders of a computer screen.",
+      "D": "Hiring a developer to work on the edge of a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Face Recognition'?",
+    "options": {
+      "A": "Remembering someone's name in person.",
+      "B": "The process of identifying or verifying a person from a digital image.",
+      "C": "A filter that makes you look like a cat.",
+      "D": "A way to unlock a physical door with a key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'FPS' stand for in video processing?",
+    "options": {
+      "A": "First Pixel Source",
+      "B": "Frames Per Second",
+      "C": "File Processing System",
+      "D": "Fast Picture Scan"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Cropping'?",
+    "options": {
+      "A": "Deleting the entire image.",
+      "B": "Removing unwanted outer areas from a photographic or illustrated image.",
+      "C": "Changing the color of the background.",
+      "D": "Increasing the resolution of the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bayer Filter'?",
+    "options": {
+      "A": "A software for editing audio files.",
+      "B": "A color filter array for arranging RGB color filters on a square grid of photosensors.",
+      "C": "A specialized tool for cleaning camera lenses.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Transformation' used for?",
+    "options": {
+      "A": "To change the image into a different file format.",
+      "B": "To perform operations based on the shape of features (like erosion or dilation).",
+      "C": "To record the user's voice while they edit.",
+      "D": "To increase the internet speed of the upload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Resolution'?",
+    "options": {
+      "A": "The physical weight of the camera sensor.",
+      "B": "The total number of pixels in an image (e.g., 1920x1080).",
+      "C": "The price of the camera lens.",
+      "D": "The amount of time it takes to take a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Occlusion' in computer vision?",
+    "options": {
+      "A": "A special lens for nighttime photography.",
+      "B": "When an object of interest is hidden by another object in the scene.",
+      "C": "A software bug that turns the screen black.",
+      "D": "The process of deleting duplicate photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Image Augmentation' technique?",
+    "options": {
+      "A": "Image Rotation",
+      "B": "Hiring a photographer",
+      "C": "Buying more RAM",
+      "D": "Printing the image"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Optical Flow'?",
+    "options": {
+      "A": "The flow of electricity into the camera.",
+      "B": "The pattern of apparent motion of objects between two consecutive frames.",
+      "C": "The way water flows in a high-resolution video.",
+      "D": "A way to clean the data center floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Aspect Ratio'?",
+    "options": {
+      "A": "The price of the image divided by the size.",
+      "B": "The proportional relationship between an image's width and its height.",
+      "C": "The number of colors used in an image.",
+      "D": "The speed of the camera's shutter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Smoothing' in image processing?",
+    "options": {
+      "A": "Making the physical surface of the monitor smooth.",
+      "B": "Reducing image noise and detail through blurring filters.",
+      "C": "Sorting images alphabetically.",
+      "D": "Ensuring the frame rate is consistent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Depth Sensing' used for?",
+    "options": {
+      "A": "Measuring the depth of the ocean with AI.",
+      "B": "Determining the distance of objects from the camera.",
+      "C": "Calculating the total size of a file.",
+      "D": "A specialized software for deep learning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pixel Intensity'?",
+    "options": {
+      "A": "How much the pixel wants to work.",
+      "B": "The brightness value of a specific pixel.",
+      "C": "The number of users who clicked on a pixel.",
+      "D": "The time it takes for a pixel to change color."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Lossy' image compression format?",
+    "options": {
+      "A": "PNG",
+      "B": "JPEG",
+      "C": "BMP",
+      "D": "TIFF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Extraction' in Computer Vision?",
+    "options": {
+      "A": "Removing unwanted people from a photo.",
+      "B": "Identifying important patterns like corners, edges, or shapes.",
+      "C": "Buying new features for the software.",
+      "D": "Hiding the features from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrast'?",
+    "options": {
+      "A": "The total number of pixels in an image.",
+      "B": "The difference in color or luminance that makes an object distinguishable.",
+      "C": "The weight of the camera lens.",
+      "D": "A document signed by a developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Color Space Conversion'?",
+    "options": {
+      "A": "Taking a camera into outer space.",
+      "B": "Changing an image from one color model to another (e.g., RGB to Grayscale).",
+      "C": "Painting the office a different color.",
+      "D": "Increasing the number of pixels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bounding Box'?",
+    "options": {
+      "A": "A physical box used to ship cameras.",
+      "B": "An imaginary rectangle used in object detection to specify an object's location.",
+      "C": "A security firewall for images.",
+      "D": "A type of storage case for hard drives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Metadata' 'EXIF' data?",
+    "options": {
+      "A": "The pixels that make up the image.",
+      "B": "Information stored in an image file about how it was taken (date, camera settings, etc.).",
+      "C": "A specialized encryption for images.",
+      "D": "The list of users who have liked the photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Frame Rate'?",
+    "options": {
+      "A": "The price of a picture frame.",
+      "B": "The frequency at which consecutive images (frames) appear on a display.",
+      "C": "The size of a video file.",
+      "D": "The time it takes to save a single image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stereo Vision'?",
+    "options": {
+      "A": "Listening to music while looking at images.",
+      "B": "Using two cameras to extract 3D information from a scene.",
+      "C": "A screen that is very easy for humans to read.",
+      "D": "A specialized speaker for digital cameras."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Dilation'?",
+    "options": {
+      "A": "Shrinking the bright areas of an image.",
+      "B": "Expanding the bright areas or foreground objects in a binary image.",
+      "C": "Deleting the image permanently.",
+      "D": "Changing the image to grayscale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Erosion'?",
+    "options": {
+      "A": "The physical breakdown of the camera lens.",
+      "B": "Shrinking the foreground objects in a binary image.",
+      "C": "Increasing the file size.",
+      "D": "Adding more colors to a photo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hough Transform' commonly used for?",
+    "options": {
+      "A": "Identifying faces in a crowd.",
+      "B": "Detecting simple shapes like lines or circles in an image.",
+      "C": "Translating text inside a photo.",
+      "D": "Improving the audio quality of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Template Matching'?",
+    "options": {
+      "A": "Choosing the best template for a website.",
+      "B": "Finding small parts of an image which match a template image.",
+      "C": "Deleting duplicate files.",
+      "D": "Searching for an author's name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Camera Calibration'?",
+    "options": {
+      "A": "Buying a new camera lens.",
+      "B": "The process of estimating a camera's internal and external parameters.",
+      "C": "Fixing the physical battery of a camera.",
+      "D": "Wiping the memory card."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Motion Detection'?",
+    "options": {
+      "A": "The camera physically moving.",
+      "B": "Identifying a change in the position of an object relative to its surroundings.",
+      "C": "A developer getting up from their chair.",
+      "D": "Recording sound in a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grayscale Conversion'?",
+    "options": {
+      "A": "Adding more color to a black and white photo.",
+      "B": "Eliminating all color information and leaving only luminance.",
+      "C": "Deleting an image from the server.",
+      "D": "Translating text into images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Pixel-level' operation?",
+    "options": {
+      "A": "Adjusting the brightness of every pixel in an image.",
+      "B": "Sorting all images in a folder.",
+      "C": "Deleting a user's account.",
+      "D": "Writing a blog post about AI."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Image Inpainting'?",
+    "options": {
+      "A": "Painting a physical picture of a digital image.",
+      "B": "The process of reconstructing lost or deteriorated parts of images.",
+      "C": "Drawing a circle around a face.",
+      "D": "A way to backup images on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Augmented Reality' (AR)?",
+    "options": {
+      "A": "A completely fake digital world.",
+      "B": "Overlaying digital information onto a real-world camera view.",
+      "C": "Improving the memory of a computer.",
+      "D": "A way to see in the dark."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Optical Character Recognition' (OCR)?",
+    "options": {
+      "A": "Listening to an audiobook.",
+      "B": "Converting images of typed, handwritten or printed text into machine-encoded text.",
+      "C": "A specialized software for blind users.",
+      "D": "A way to see through walls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lidar'?",
+    "options": {
+      "A": "A specialized camera for taking selfies.",
+      "B": "A method for determining ranges by targeting an object with a laser and measuring the time for the reflected light to return.",
+      "C": "A type of digital currency.",
+      "D": "A way to edit photos on a phone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic Segmentation'?",
+    "options": {
+      "A": "Naming all the files on a computer.",
+      "B": "The process of classifying each pixel in an image into a category (e.g., road, car, person).",
+      "C": "A way to backup video data.",
+      "D": "Increasing the volume of an audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Blending'?",
+    "options": {
+      "A": "Mixing two different cameras in one office.",
+      "B": "Combining two or more images into a single image.",
+      "C": "Deleting two images to save space.",
+      "D": "Hiding an image from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Noise Reduction'?",
+    "options": {
+      "A": "Asking everyone in the office to be quiet.",
+      "B": "The process of removing unwanted artifacts from an image.",
+      "C": "A specialized headphone for developers.",
+      "D": "A way to backup the camera lens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Face Detection' vs 'Face Recognition'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Detection finds if a face exists; Recognition identifies who it is.",
+      "C": "Recognition is for animals; Detection for humans.",
+      "D": "Detection is much more expensive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is 'Blue' in RGB?",
+    "options": {
+      "A": "The second color channel.",
+      "B": "The third color channel.",
+      "C": "The first color channel.",
+      "D": "The only color channel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Flipping'?",
+    "options": {
+      "A": "Throwing a camera into the air.",
+      "B": "Reversing an image horizontally or vertically.",
+      "C": "Deleting the image file.",
+      "D": "Changing the color to grayscale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Luminance'?",
+    "options": {
+      "A": "The total number of pixels.",
+      "B": "The perceived brightness of an image.",
+      "C": "The price of the lighting equipment.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grayscale' bit depth usually?",
+    "options": {
+      "A": "1-bit",
+      "B": "8-bit",
+      "C": "100-bit",
+      "D": "1000-bit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Padding'?",
+    "options": {
+      "A": "Adding extra glass to a lens.",
+      "B": "Adding extra pixels around the border of an image (often zeros).",
+      "C": "Hiding the image in a folder.",
+      "D": "Storing images on a tablet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sharpening'?",
+    "options": {
+      "A": "Sharpening a physical pencil.",
+      "B": "An image processing technique to enhance the edges and details.",
+      "C": "Buying a more expensive camera.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Downsampling'?",
+    "options": {
+      "A": "Sampling water from a river.",
+      "B": "Reducing the resolution of an image.",
+      "C": "Increasing the file size.",
+      "D": "Naming the pixels in descending order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Upsampling'?",
+    "options": {
+      "A": "Buying a new computer.",
+      "B": "Increasing the spatial resolution of an image.",
+      "C": "Deleting half the pixels.",
+      "D": "Taking a photo from a higher angle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Color Balance'?",
+    "options": {
+      "A": "Weighing the camera on a scale.",
+      "B": "The global adjustment of the intensities of the colors.",
+      "C": "Hiring a professional artist.",
+      "D": "Ensuring the monitor is perfectly horizontal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Saturation' in color?",
+    "options": {
+      "A": "The price of the color paint.",
+      "B": "The intensity or purity of a color.",
+      "C": "The total number of colors available.",
+      "D": "The speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brightness'?",
+    "options": {
+      "A": "The IQ of the camera.",
+      "B": "The overall lightness or darkness of an image.",
+      "C": "The speed of the internet connection.",
+      "D": "The number of hours the camera was on."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Infrared' imaging?",
+    "options": {
+      "A": "Imaging using red paint only.",
+      "B": "Capturing images using light in the infrared spectrum (often for heat detection).",
+      "C": "A secret code for photographers.",
+      "D": "A way to backup images on a CD."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of a 'Convolutional' layer in a CNN?",
+    "options": {
+      "A": "To act as a persistent storage for raw image files.",
+      "B": "To automatically extract spatial features and patterns from an image using filters.",
+      "C": "To randomly shuffle the pixels of the input image to prevent bias.",
+      "D": "To increase the brightness of every pixel by a constant factor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of CNNs, what does 'Stride' refer to?",
+    "options": {
+      "A": "The physical width of the camera sensor used to take the image.",
+      "B": "The total number of layers in the entire neural network.",
+      "C": "The step size with which the filter slides across the input image.",
+      "D": "The amount of zero-padding added to the edges of the image."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which specific edge detection operator uses the first-order derivative to find gradients in both horizontal and vertical directions?",
+    "options": {
+      "A": "Sobel Operator",
+      "B": "Gaussian Blur",
+      "C": "Max Pooling",
+      "D": "ReLU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Max Pooling' in a Computer Vision pipeline?",
+    "options": {
+      "A": "To increase the spatial resolution of the feature maps.",
+      "B": "To reduce the dimensionality of feature maps while retaining the most important information.",
+      "C": "To multiply the weights of the filters by their maximum value.",
+      "D": "To identify the names of the objects detected in the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature descriptor is designed to be invariant to image scale and rotation by using a 128-dimensional vector?",
+    "options": {
+      "A": "SIFT (Scale-Invariant Feature Transform)",
+      "B": "Binary Thresholding",
+      "C": "Linear Regression",
+      "D": "Mean Squared Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canny' edge detection technically known for compared to simpler methods?",
+    "options": {
+      "A": "Being much faster than any other method.",
+      "B": "Providing a multi-stage algorithm that includes noise reduction and non-maximum suppression.",
+      "C": "Only working on images that are perfectly black and white.",
+      "D": "Requiring a specialized hardware chip to execute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Transformation', what does an 'Affine' transformation preserve?",
+    "options": {
+      "A": "The exact color values of every pixel.",
+      "B": "Points, straight lines, and planes (parallelism).",
+      "C": "The total file size of the digital image.",
+      "D": "The number of people appearing in the photograph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hough Transform' primarily used to detect in pre-processed images?",
+    "options": {
+      "A": "The emotional sentiment of faces.",
+      "B": "The average brightness of the sky.",
+      "C": "Geometric shapes like lines, circles, and ellipses.",
+      "D": "The file format of the original image."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Zero Padding' used for in a convolutional operation?",
+    "options": {
+      "A": "To delete all pixels that have a value of zero.",
+      "B": "To ensure that the output feature map has the same spatial dimensions as the input.",
+      "C": "To decrease the processing speed of the GPU.",
+      "D": "To encrypt the image data before it enters the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Image Histogram Equalization'?",
+    "options": {
+      "A": "A method to delete the background of an image.",
+      "B": "A technique to improve contrast by stretching the distribution of pixel intensities.",
+      "C": "A way to count the number of objects in a scene.",
+      "D": "A software for labeling training data manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Receptive Field' of a neuron in a CNN?",
+    "options": {
+      "A": "The physical area of the data center where the GPU is located.",
+      "B": "The specific region of the input image that contributes to that neuron's activation.",
+      "C": "The total number of images stored in the training set.",
+      "D": "The distance between the camera and the object being photographed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a '1x1 Convolution' (Pointwise Convolution) primarily used for?",
+    "options": {
+      "A": "To increase the spatial height and width of an image.",
+      "B": "To change the number of channels (dimensionality reduction/expansion) without altering spatial size.",
+      "C": "To act as a high-pass filter for edge detection.",
+      "D": "To rotate the image by 90 degrees internally."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Object Detection', what does 'Intersection over Union' (IoU) measure?",
+    "options": {
+      "A": "The speed at which the model detects a bounding box.",
+      "B": "The overlap between the predicted bounding box and the ground truth box.",
+      "C": "The total number of objects found in a single frame.",
+      "D": "The ratio of red pixels to blue pixels in a box."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-Maximum Suppression' (NMS) used for in detection models?",
+    "options": {
+      "A": "To increase the number of bounding boxes for every object.",
+      "B": "To filter out overlapping bounding boxes and keep only the most confident one for an object.",
+      "C": "To maximize the brightness of the detected objects.",
+      "D": "To prevent the model from using too much VRAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific activation function is most common in CNNs to handle non-linearity?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "Tanh",
+      "C": "ReLU (Rectified Linear Unit)",
+      "D": "Linear"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Data Leakage' in the context of training a Computer Vision model?",
+    "options": {
+      "A": "When information from the test set is accidentally used during the training phase.",
+      "B": "When the GPU memory leaks into the system RAM.",
+      "C": "When the image file is corrupted during upload.",
+      "D": "When the camera lens is physically leaking oil."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Semantic Segmentation' vs 'Instance Segmentation'?",
+    "options": {
+      "A": "They are the exact same thing.",
+      "B": "Semantic labels categories (all cars); Instance labels individual objects (car 1, car 2).",
+      "C": "Instance is for text; Semantic is for images.",
+      "D": "Semantic is 10x faster than Instance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a CNN is responsible for making the final classification decision?",
+    "options": {
+      "A": "Convolutional Layer",
+      "B": "Fully Connected (Dense) Layer",
+      "C": "Max Pooling Layer",
+      "D": "Input Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Batch Normalization' in a CNN?",
+    "options": {
+      "A": "To organize images into alphabetical batches.",
+      "B": "To normalize the activations of a layer, which stabilizes and speeds up training.",
+      "C": "To delete small batches of data from the hard drive.",
+      "D": "To ensure all images have exactly the same file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Feature Map'?",
+    "options": {
+      "A": "A physical map of where the data center is located.",
+      "B": "The output of a convolutional layer representing the detected features in an image.",
+      "C": "A list of all the features currently missing from the software.",
+      "D": "A security certificate for digital images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Transfer Learning' allow a developer to do?",
+    "options": {
+      "A": "Move a computer from one office to another.",
+      "B": "Use a model pre-trained on a large dataset (like ImageNet) for a new, specific task.",
+      "C": "Translate an image from JPG to PNG instantly.",
+      "D": "Charge the camera battery using the computer's USB port."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Global Average Pooling' (GAP) layer used for?",
+    "options": {
+      "A": "To calculate the average price of all cameras in the world.",
+      "B": "To reduce each feature map to a single value, replacing large fully connected layers.",
+      "C": "To increase the spatial resolution of the output.",
+      "D": "To backup the weights of the convolutional layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vanishing Gradient' in deep CNNs?",
+    "options": {
+      "A": "The model becoming invisible on the computer screen.",
+      "B": "Gradients becoming so small that the weights in early layers stop updating.",
+      "C": "The loss function reaching zero perfectly in one epoch.",
+      "D": "A hardware bug that causes the GPU to shut down."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does a 'Residual Connection' (Skip Connection) help deep networks like ResNet?",
+    "options": {
+      "A": "By skipping the training phase for small images.",
+      "B": "By allowing gradients to flow more easily through the network to solve the vanishing gradient problem.",
+      "C": "By connecting the camera directly to the cloud.",
+      "D": "By deleting every second layer to save processing time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dropout' technically doing during training?",
+    "options": {
+      "A": "Dropping the camera onto the floor.",
+      "B": "Randomly deactivating neurons to prevent the model from overfitting to the training data.",
+      "C": "Reducing the internet bandwidth to slow down training.",
+      "D": "Deleting the oldest images in the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is best for evaluating a model on an imbalanced dataset (e.g., detecting a rare disease)?",
+    "options": {
+      "A": "Overall Accuracy",
+      "B": "Mean Squared Error",
+      "C": "F1-Score / PR AUC",
+      "D": "R-Squared"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Image Inpainting' used for?",
+    "options": {
+      "A": "Painting a physical portrait based on a digital file.",
+      "B": "Filling in missing or corrupted parts of an image using surrounding information.",
+      "C": "Increasing the number of colors in an image.",
+      "D": "Identifying the author of an artwork."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backpropagation'?",
+    "options": {
+      "A": "The process of deleting old data files.",
+      "B": "The algorithm used to calculate gradients and update model weights to minimize error.",
+      "C": "Moving a robot camera backward in a room.",
+      "D": "A security feature that prevents the model from learning too fast."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Augmentation' in Computer Vision?",
+    "options": {
+      "A": "Buying more storage space for the data center.",
+      "B": "Artificially increasing the dataset size by applying transformations like flips and rotations.",
+      "C": "Hiring more people to label images.",
+      "D": "Encrypting the images to protect them from theft."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used 'Loss Function' for multi-class image classification?",
+    "options": {
+      "A": "Mean Absolute Error",
+      "B": "Binary Thresholding",
+      "C": "Categorical Cross-Entropy",
+      "D": "Euclidean Distance"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Object Tracking'?",
+    "options": {
+      "A": "Finding an object in a single image.",
+      "B": "Following a specific object across consecutive frames in a video sequence.",
+      "C": "Deleting an object from a video permanently.",
+      "D": "Recording the sound of an object as it moves."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Depth of Field'?",
+    "options": {
+      "A": "The distance between the camera and the subject that appears sharp.",
+      "B": "The total number of hidden layers in a deep neural network.",
+      "C": "The price of the camera's memory card.",
+      "D": "The width of the data center's hallway."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Saliency Map' used for?",
+    "options": {
+      "A": "To navigate through a physical laboratory.",
+      "B": "To highlight the most important or visually dominant parts of an image.",
+      "C": "To calculate the total revenue of the project.",
+      "D": "To list the names of the project developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Optical Character Recognition' (OCR)?",
+    "options": {
+      "A": "Recognizing different types of eyeglasses.",
+      "B": "The mechanical or electronic conversion of images of text into machine-encoded text.",
+      "C": "Improving the eyesight of people using AI software.",
+      "D": "A way to see through walls using a camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Processing', what is 'Salt and Pepper' noise?",
+    "options": {
+      "A": "Food particles falling on the camera lens.",
+      "B": "Random occurrences of black and white pixels across an image.",
+      "C": "A specific type of filter used to sharpen edges.",
+      "D": "The color of the office walls."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Mean Average Precision' (mAP) evaluate in object detection?",
+    "options": {
+      "A": "The speed of the CPU processing.",
+      "B": "The accuracy of the model across various categories and IoU thresholds.",
+      "C": "The average brightness of the pixels in the detected area.",
+      "D": "The file size of the bounding box data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stereo Match' in Computer Vision?",
+    "options": {
+      "A": "Listening to music in high quality.",
+      "B": "Finding corresponding points in two images from different viewpoints to calculate depth.",
+      "C": "Connecting a camera to a stereo system.",
+      "D": "Ensuring two cameras have the same brand name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Homography'?",
+    "options": {
+      "A": "A bug that turns the screen blue.",
+      "B": "A transformation that maps points from one plane to another in a projective space.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The process of deleting duplicate photos from a drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Keypoint' matching?",
+    "options": {
+      "A": "Finding the physical key to the lab.",
+      "B": "The process of finding similar features in two different images to align or recognize them.",
+      "C": "Deleting unimportant pixels to save memory.",
+      "D": "Writing a password in secret code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Pyramid'?",
+    "options": {
+      "A": "Building a pyramid of physical photos in an office.",
+      "B": "A multi-scale representation of an image at different resolutions.",
+      "C": "A way to sort images by their file size.",
+      "D": "A security feature that prevents image leaks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anchor Boxes' in YOLO or Faster R-CNN?",
+    "options": {
+      "A": "Physical boxes used to store camera equipment.",
+      "B": "Pre-defined bounding boxes of different shapes and sizes used as references for object detection.",
+      "C": "Boxes that stay at the bottom of the user interface.",
+      "D": "A way to anchor the model to a specific GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'Encoder-Decoder' architecture in segmentation?",
+    "options": {
+      "A": "To compress the image and then expand it to predict pixel-wise labels.",
+      "B": "To encrypt the image for security.",
+      "C": "To translate the labels from English into Spanish.",
+      "D": "To increase the training time by 200%."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dilated Convolution' (Atrous Convolution)?",
+    "options": {
+      "A": "A convolution that takes 10 days to run.",
+      "B": "A convolution with holes between the kernel elements to increase the receptive field without increasing parameters.",
+      "C": "A way to rotate the image by 5 degrees.",
+      "D": "A way to skip convolutional layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mask R-CNN' specifically designed for?",
+    "options": {
+      "A": "Hiding the AI's identity.",
+      "B": "Detecting objects and simultaneously predicting a high-quality segmentation mask for each instance.",
+      "C": "A security scan of the image database.",
+      "D": "Counting the number of pixels in a frame."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Point Cloud' data?",
+    "options": {
+      "A": "A data structure representing a 3D space as a set of points with X, Y, Z coordinates.",
+      "B": "A type of weather data for aviation.",
+      "C": "A list of all users connected to the cloud.",
+      "D": "A way to hide points in an image."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Neural Style Transfer', what are you trying to combine?",
+    "options": {
+      "A": "The content of one image with the artistic style of another image.",
+      "B": "Two different models into one single model.",
+      "C": "The user's face with a cat's face.",
+      "D": "A video file with an audio file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'YOLO' (You Only Look Once)?",
+    "options": {
+      "A": "A life philosophy for developers.",
+      "B": "A real-time object detection system that treats detection as a single regression problem.",
+      "C": "A way to delete data after looking at it once.",
+      "D": "A social media platform for sharing photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' in a Vision Transformer (ViT)?",
+    "options": {
+      "A": "The model focusing on its own power consumption.",
+      "B": "A mechanism that allows the model to relate different parts of an image to each other, regardless of distance.",
+      "C": "A way for the model to fix its own bugs.",
+      "D": "Ignoring the user's input images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Epipolar Geometry'?",
+    "options": {
+      "A": "The study of polar bears using AI.",
+      "B": "The geometry of stereo vision, describing the relationship between 3D points and their 2D projections in two cameras.",
+      "C": "A way to design icons for a website.",
+      "D": "The physical layout of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pose Estimation'?",
+    "options": {
+      "A": "Guessing how much an object weighs.",
+      "B": "Predicting the orientation and position of an object or human body in an image.",
+      "C": "Hiring models to pose for photos.",
+      "D": "Counting the number of characters in a sentence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Color Histogram' matching?",
+    "options": {
+      "A": "Choosing the best color for a button.",
+      "B": "Finding images with similar color distributions for retrieval or indexing.",
+      "C": "Counting the number of pixels in a frame.",
+      "D": "Identifying the author of a photo by its color."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'LBP' (Local Binary Patterns) used for?",
+    "options": {
+      "A": "Identifying the brand of a computer.",
+      "B": "A powerful feature used for texture classification in images.",
+      "C": "A type of internet protocol.",
+      "D": "A way to name files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structure from Motion' (SfM)?",
+    "options": {
+      "A": "The structure of a camera building.",
+      "B": "The process of estimating 3D structures from 2D image sequences.",
+      "C": "Moving a server from one room to another.",
+      "D": "Recording the sound of a moving car."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Visual Odometry'?",
+    "options": {
+      "A": "The measurement of a camera's odometer.",
+      "B": "The process of determining the position and orientation of a robot by analyzing camera images.",
+      "C": "Counting the number of pixels in a frame.",
+      "D": "A specialized software for blind users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayer' 'Demosaicing'?",
+    "options": {
+      "A": "Deleting the mosaic from a photo.",
+      "B": "The process of reconstructing a full-color image from the incomplete color samples output from an image sensor.",
+      "C": "A specialized software for musicians.",
+      "D": "A way to backup raw image files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Histogram of Oriented Gradients' (HOG) used for?",
+    "options": {
+      "A": "Measuring the heat of the GPU.",
+      "B": "A feature descriptor used for object detection, particularly human detection.",
+      "C": "A way to count the number of pixels.",
+      "D": "The speed of the network data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Depth-wise Separable Convolution'?",
+    "options": {
+      "A": "A convolution that takes 10 days to run.",
+      "B": "A form of convolution used in light-weight models like MobileNet to reduce computation and parameters.",
+      "C": "A way to separate colors in an image.",
+      "D": "A way to skip convolutional layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Super-Resolution' in Computer Vision?",
+    "options": {
+      "A": "Making a very important business decision.",
+      "B": "Techniques used to enhance the resolution of an image from a low-resolution input.",
+      "C": "Deleting an image from the server.",
+      "D": "The price of the software license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature' 'Hierarchy' in a CNN?",
+    "options": {
+      "A": "The rank of the developers in a team.",
+      "B": "The layers of a network learning from simple features (edges) to complex objects (faces).",
+      "C": "A list of software bugs.",
+      "D": "The total number of parameters in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image Flattening'?",
+    "options": {
+      "A": "Physically flattening a printed photo.",
+      "B": "Converting a 2D or 3D feature map into a 1D vector before a dense layer.",
+      "C": "Compressing an image into a smaller file.",
+      "D": "A way to rotate the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Squared Error' (MSE) used for in image reconstruction?",
+    "options": {
+      "A": "The average number of pixels.",
+      "B": "A loss function that measures the average squared difference between the original and reconstructed pixel values.",
+      "C": "The price of the software.",
+      "D": "The number of hours training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bounding Box' 'Regression'?",
+    "options": {
+      "A": "Moving backward through a video.",
+      "B": "Predicting the coordinates of the bounding box around an object.",
+      "C": "A way to count the number of objects.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inference' 'Latency'?",
+    "options": {
+      "A": "The time it takes for a model to process a single image and give an output.",
+      "B": "The total time it takes to train a model.",
+      "C": "The price of the cloud storage.",
+      "D": "The size of the output file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Label' 'Noise' in a Computer Vision dataset?",
+    "options": {
+      "A": "Loud sounds from the data center.",
+      "B": "Inaccuracies or errors in the ground-truth labels provided for images.",
+      "C": "A type of background music.",
+      "D": "The font used for the training labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spatial' 'Resolution'?",
+    "options": {
+      "A": "The weight of the paper in grams.",
+      "B": "The clarity of the image detail, determined by the number of pixels per unit area.",
+      "C": "The number of users who view a photo.",
+      "D": "A bug in the word processor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Temporal' 'Consistency' in video segmentation?",
+    "options": {
+      "A": "Analyzing ghosts in the data.",
+      "B": "Ensuring that the segmented masks for an object remain stable across consecutive video frames.",
+      "C": "A security scan of the database.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'ROI Align' (introduced in Mask R-CNN), how does it technically improve upon 'ROI Pooling'?",
+    "options": {
+      "A": "It uses 64-bit precision to store every pixel coordinate.",
+      "B": "It replaces max pooling with average pooling to keep images brighter.",
+      "C": "It avoids harsh quantization of coordinates by using bilinear interpolation to preserve spatial exactness.",
+      "D": "It deletes all features that are not within the central 10% of the bounding box."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary function of the 'Lipschitz Continuity' constraint when applied to the Discriminator in a WGAN-GP for image synthesis?",
+    "options": {
+      "A": "Ensuring the gradient norm is bounded to maintain training stability and prevent mode collapse.",
+      "B": "Forcing the model to only generate images with exactly three color channels.",
+      "C": "Increasing the learning rate of the Generator by a factor of 10 every epoch.",
+      "D": "Encrypting the latent space vector using a 256-bit rotating key."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific issue does 'Focal Loss' address in one-stage object detectors like RetinaNet?",
+    "options": {
+      "A": "The lack of high-resolution images in the training set.",
+      "B": "The high cost of hiring human annotators for segmentation masks.",
+      "C": "The extreme imbalance between foreground and background classes during training.",
+      "D": "The physical overheating of the GPU during the backpropagation step."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 3D Computer Vision, what does the 'Essential Matrix' (E) relate between two calibrated camera views?",
+    "options": {
+      "A": "The total number of pixels shared between the two image sensors.",
+      "B": "The price of the lenses used in each camera setup.",
+      "C": "The geometric relationship between corresponding points in normalized image coordinates.",
+      "D": "The difference in file size between the two captured frames."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Vanishing Gradient' solution specifically employed by the 'Inception' architecture (GoogLeNet)?",
+    "options": {
+      "A": "Reducing the depth of the network to only 3 layers.",
+      "B": "The use of auxiliary classifiers at intermediate layers to inject gradients deeper into the network.",
+      "C": "Switching all activation functions from ReLU to Sigmoid.",
+      "D": "Deleting 50% of the weights randomly during every forward pass."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical operation allows 'Vision Transformers' (ViT) to perform global information exchange without using convolutions?",
+    "options": {
+      "A": "Multi-Head Self-Attention applied to a sequence of flattened image patches.",
+      "B": "Recursive Least Squares applied to the pixel intensity values.",
+      "C": "1D Linear Regression across the color channels.",
+      "D": "A standard Fast Fourier Transform applied to the input tensor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spectral Normalization' in the context of training robust GANs?",
+    "options": {
+      "A": "Normalizing the color spectrum of the input images to a mean of zero.",
+      "B": "A way to backup the model weights onto a cloud server.",
+      "C": "Normalizing the weight matrices by their largest eigenvalue to satisfy the Lipschitz constraint.",
+      "D": "A specialized encryption method for high-resolution video files."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Neural Radiance Fields' (NeRF), what does the 'Positional Encoding' assist the network with?",
+    "options": {
+      "A": "Tracking the GPS coordinates of the camera.",
+      "B": "Representing the 3D coordinates and viewing directions as high-frequency functions to capture fine details.",
+      "C": "Mapping the user's facial features onto a 3D avatar.",
+      "D": "Measuring the distance between the server and the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Atrous Spatial Pyramid Pooling' (ASPP) in DeepLab architectures?",
+    "options": {
+      "A": "To increase the internet bandwidth used for downloading datasets.",
+      "B": "To handle the largest gradients by clipping them at the end of the encoder.",
+      "C": "To capture multi-scale contextual information by using filters with different dilation rates.",
+      "D": "To rotate the feature maps by 90 degrees to detect vertical objects."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which specific problem does 'Group Normalization' (GN) solve that 'Batch Normalization' (BN) cannot?",
+    "options": {
+      "A": "Stabilizing training when the batch size is very small (e.g., 1 or 2 per GPU).",
+      "B": "Reducing the total number of parameters in a convolutional layer.",
+      "C": "Converting grayscale images into RGB images automatically.",
+      "D": "Detecting faces in extremely low-light conditions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Single-Shot MultiBox Detector' (SSD) primary architectural trait?",
+    "options": {
+      "A": "It requires a human to manually draw boxes during inference.",
+      "B": "It uses a separate region proposal network before doing classification.",
+      "C": "It predicts bounding boxes and classes directly from feature maps at different scales in a single pass.",
+      "D": "It only works on images that contain exactly one object."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Optical Flow', what does the 'Lucas-Kanade' method assume for a local neighborhood of pixels?",
+    "options": {
+      "A": "That all pixels in the neighborhood move with the same constant motion.",
+      "B": "That the color of the pixels changes every 5 frames.",
+      "C": "That the camera is moving at the speed of light.",
+      "D": "That the pixels are being deleted as they move."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Neural Style Transfer' 'Gram Matrix' technically representing?",
+    "options": {
+      "A": "A matrix that checks for grammatical errors in text analysis.",
+      "B": "The total number of parameters in the style-transfer model.",
+      "C": "The correlations between different filter responses, capturing textural information independent of content.",
+      "D": "A way to encrypt the stylistic features of an artist."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a characteristic of 'PointNet' for 3D point cloud processing?",
+    "options": {
+      "A": "It requires points to be ordered in a specific sequence to work.",
+      "B": "It uses a symmetric function (like max pooling) to ensure invariance to point permutations.",
+      "C": "It converts all 3D points into a 2D grayscale image first.",
+      "D": "It can only process exactly 1,000 points at a time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Center Loss' function primarily used for in Face Recognition?",
+    "options": {
+      "A": "To move the face to the center of the image frame.",
+      "B": "To increase the distance between different faces in the embedding space.",
+      "C": "To minimize intra-class variation by pulling embeddings of the same person toward a learned center.",
+      "D": "To delete all faces that are not looking directly at the camera."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Visual Question Answering' (VQA), what is the 'Attention' mechanism used to link?",
+    "options": {
+      "A": "The user's eye movement to the computer screen.",
+      "B": "Relevant regions of the image to the specific words in the text query.",
+      "C": "The price of the image to the length of the question.",
+      "D": "The CPU speed to the GPU memory usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Epipolar Constraint' in stereo vision?",
+    "options": {
+      "A": "The constraint that a pixel must be black or white.",
+      "B": "The rule that the camera must be exactly 5 meters away from the object.",
+      "C": "The geometric rule that a 3D point's projection in one camera must lie on a specific line in the other camera.",
+      "D": "A specialized encryption for polar region imagery."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Anchor' in a Triplet Loss function?",
+    "options": {
+      "A": "A physical weight used to hold down the server.",
+      "B": "A reference sample used to compare against a 'Positive' and a 'Negative' sample.",
+      "C": "The very first layer of a deep neural network.",
+      "D": "A way to lock the learning rate to a constant value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deformable Convolution' designed to handle?",
+    "options": {
+      "A": "Images that have been physically folded or crumpled.",
+      "B": "Spatial variations and geometric transformations by learning offsets for the sampling locations of the kernel.",
+      "C": "Automatically deleting blurry images from the training set.",
+      "D": "A way to rotate images by 180 degrees using a single layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Image Registration', what does 'Mutual Information' maximize?",
+    "options": {
+      "A": "The amount of profit shared between two AI companies.",
+      "B": "The statistical dependence between the pixel intensities of two images to be aligned.",
+      "C": "The total number of users who view both images.",
+      "D": "The resolution of the images after they are combined."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Distillation' in the context of Computer Vision?",
+    "options": {
+      "A": "Purifying the data to remove noisy images.",
+      "B": "Training a smaller 'student' model to mimic the soft labels or feature maps of a larger 'teacher' model.",
+      "C": "Hiding the model's architecture from competitors.",
+      "D": "Turning a neural network into a hardware ASIC chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Capsule Networks' (CapsNet) primary goal relative to CNNs?",
+    "options": {
+      "A": "To use capsules to store the model weights physically.",
+      "B": "To better preserve spatial hierarchies and relationships between parts of an object (pose information).",
+      "C": "To decrease the processing power required by 90%.",
+      "D": "To replace all convolutional layers with standard linear layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bag-of-Visual-Words' (BoVW)?",
+    "options": {
+      "A": "A physical bag with printed words inside.",
+      "B": "Representing an image as a frequency histogram of local feature descriptors (like SIFT keypoints).",
+      "C": "A way to hide visual information from a model.",
+      "D": "A list of all labels that have been deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised' 'Contrastive Learning' (e.g., SimCLR)?",
+    "options": {
+      "A": "A model that learns by comparing itself to a human.",
+      "B": "Learning representations by maximizing similarity between different augmentations of the same image.",
+      "C": "A supervised method where every image has 100 different labels.",
+      "D": "A technique to increase the contrast of an image automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Semantic Segmentation', what is the 'Dice Coefficient' used to measure?",
+    "options": {
+      "A": "The speed of the segmentation algorithm.",
+      "B": "The amount of memory used by the GPU.",
+      "C": "The overlap between the predicted segmentation mask and the ground truth.",
+      "D": "The number of categories detected in a frame."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the function of 'Feature Pyramid Networks' (FPN)?",
+    "options": {
+      "A": "To build a pyramid structure for the data center storage.",
+      "B": "To construct high-level semantic feature maps at all scales, improving detection of small objects.",
+      "C": "To sort features in order of their computational cost.",
+      "D": "To increase the brightness of the feature maps in the final layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adversarial Patch' attack?",
+    "options": {
+      "A": "A physical sticker designed to fool a computer vision system into misclassifying an object.",
+      "B": "A software patch used to fix bugs in a GAN.",
+      "C": "A way to speed up the network connection.",
+      "D": "Deleting a small patch of data to save space."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Transformers for Vision', what is the 'Patch Embedding' layer?",
+    "options": {
+      "A": "A layer that patches software bugs automatically.",
+      "B": "A linear projection layer that converts image patches into a sequence of vectors.",
+      "C": "A specialized hardware chip for image processing.",
+      "D": "A way to hide parts of an image from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Structure from Motion' (SfM) 'Bundle Adjustment'?",
+    "options": {
+      "A": "Adjusting the physical bundle of cables in the server room.",
+      "B": "A non-linear optimization step to refine 3D coordinates and camera parameters simultaneously.",
+      "C": "A way to bundle images into a single ZIP file.",
+      "D": "Hiring a group of people to move the camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Active Learning' in the context of labeling image datasets?",
+    "options": {
+      "A": "Learning while doing physical exercise.",
+      "B": "An iterative process where the model identifies which unlabeled images would be most beneficial to label.",
+      "C": "A model that trains only when the user is active.",
+      "D": "Deleting the images that the model finds too easy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' for evaluating generative image models?",
+    "options": {
+      "A": "RMSE",
+      "B": "Fréchet Inception Distance (FID)",
+      "C": "Accuracy",
+      "D": "Word Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pruning' in the context of deep CNNs?",
+    "options": {
+      "A": "Cutting down trees to build a data center.",
+      "B": "Removing unimportant weights or neurons to reduce model size and latency.",
+      "C": "Increasing the number of layers in a network.",
+      "D": "Hiring fewer developers to work on the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization' for Computer Vision deployment?",
+    "options": {
+      "A": "Increasing the number of parameters to improve accuracy.",
+      "B": "Reducing the precision of the model's weights (e.g., from 32-bit to 8-bit) to save memory.",
+      "C": "A way to count the number of neurons in a network.",
+      "D": "Using a quantum computer to train a CNN."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural Architecture Search' (NAS) for vision?",
+    "options": {
+      "A": "Searching for images of buildings on Google.",
+      "B": "Automating the design of the best neural network structure for a specific vision task.",
+      "C": "A search engine for finding AI jobs.",
+      "D": "Scanning a human brain to copy its visual cortex."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-Shot' Object Detection?",
+    "options": {
+      "A": "A model that never works.",
+      "B": "The ability to detect and identify objects from classes that were not seen during training.",
+      "C": "Training a model with zero image data.",
+      "D": "A model with only one layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hard Negative Mining' in object detection training?",
+    "options": {
+      "A": "Digging for negative numbers in a database.",
+      "B": "Identifying and training specifically on examples that the model currently misclassifies as positive.",
+      "C": "Deleting negative results from a scientific study.",
+      "D": "A way to speed up the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Internal Covariate Shift'?",
+    "options": {
+      "A": "Moving the physical servers to a different room.",
+      "B": "The change in the distribution of network activations as parameters are updated during training.",
+      "C": "A change in the user's password.",
+      "D": "A network delay that occurs between layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global' 'Average' 'Pooling' (GAP) 'Class Activation Maps' (CAM)?",
+    "options": {
+      "A": "Maps for finding the way to the lab.",
+      "B": "A technique to visualize which regions of an image the CNN is using to make its classification decision.",
+      "C": "A list of the most expensive features.",
+      "D": "A way to see hidden layers in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Depth-wise' 'Separable' 'Convolution' 'Efficiency'?",
+    "options": {
+      "A": "It is much more expensive than standard convolution.",
+      "B": "It significantly reduces the number of parameters and floating-point operations while maintaining accuracy.",
+      "C": "It is exactly the same as standard convolution.",
+      "D": "It is only used for audio files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Self-Attention' 'Quadratic' 'Complexity'?",
+    "options": {
+      "A": "The price of the transformer.",
+      "B": "The fact that memory and computation requirements grow with the square of the number of image patches ($N^2$).",
+      "C": "The weight of the computer hardware.",
+      "D": "The number of colors in a logo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Squeeze-and-Excitation' (SE) block 'Channel-wise' recalibration?",
+    "options": {
+      "A": "It compresses the model to save disk space.",
+      "B": "It explicitly models the dependencies between channels to weight more important features more heavily.",
+      "C": "It excites the GPU to run at a higher clock speed.",
+      "D": "It deletes small features automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instance' 'Segmentation' 'Mask'?",
+    "options": {
+      "A": "Hiding the AI's identity.",
+      "B": "A binary or probability map that outlines the exact pixels belonging to a specific object instance.",
+      "C": "A security scan of the database.",
+      "D": "A list of all users who have accessed a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Object' 'Detection' 'NMS' 'Threshold'?",
+    "options": {
+      "A": "The price of the software.",
+      "B": "A value used to determine how much two bounding boxes must overlap to be considered the same object.",
+      "C": "The speed of the network data.",
+      "D": "The total number of objects in an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vision' 'Transformer' 'Positional' 'Embedding'?",
+    "options": {
+      "A": "An embedding based on the user's location.",
+      "B": "A learned vector added to each patch embedding to retain information about where the patch came from in the image.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A way to skip position info."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Super-Resolution' 'GAN'?",
+    "options": {
+      "A": "Using a GAN to increase the resolution of low-quality images by generating realistic high-frequency details.",
+      "B": "A GAN that only generates images of people named Susan.",
+      "C": "Deleting an image from the server.",
+      "D": "A way to backup images on a CD."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Mean' 'Average' 'Precision' (mAP) calculated over?",
+    "options": {
+      "A": "The average number of pixels in a frame.",
+      "B": "The mean of the average precision (AP) values across all classes in the dataset.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The price of the cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Convolutional' 'Neural' 'Network' 'Backbone'?",
+    "options": {
+      "A": "The physical spine of a robot.",
+      "B": "The feature extraction part of the network (e.g., ResNet-50) that is often used as a starting point for other tasks.",
+      "C": "A security certificate for a SQL database.",
+      "D": "A list of all developers who worked on the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Segmentation' 'One-Hot' 'Label'?",
+    "options": {
+      "A": "A label that is very hot to touch.",
+      "B": "A representation where each pixel's category is represented by a binary vector (e.g., [1,0,0] for 'car').",
+      "C": "A way to count the number of pixels.",
+      "D": "Identifying the author by their use of semicolons."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Image' 'Augmentation' 'Mixup'?",
+    "options": {
+      "A": "A mistake made in a 3D model.",
+      "B": "A technique that blends two images and their labels together to create a new training sample.",
+      "C": "A way to merge two datasets.",
+      "D": "A type of GPU memory error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Point' 'Cloud' 'Segmentation'?",
+    "options": {
+      "A": "Identifying the weather from a cloud photo.",
+      "B": "Assigning a category label to each point in a 3D point cloud (e.g., ground, tree, car).",
+      "C": "A list of all users connected to the cloud.",
+      "D": "A way to hide points in an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature' 'Attribution' 'Grad-CAM'?",
+    "options": {
+      "A": "Calculating the grades of university students.",
+      "B": "A method to explain model predictions by visualizing gradients in the final convolutional layer.",
+      "C": "A way to delete unimportant features.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrastive' 'Predictive' 'Coding' (CPC) for vision?",
+    "options": {
+      "A": "A new programming language.",
+      "B": "A self-supervised learning technique that predicts future parts of an image in a latent space.",
+      "C": "A way to encrypt text files.",
+      "D": "A tool for the developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Exposure Bias'?",
+    "options": {
+      "A": "Being biased against researchers who are famous.",
+      "B": "The discrepancy between the exposure settings of the training data and the real-world inference data.",
+      "C": "A security risk from exposing the source code.",
+      "D": "A problem with too much light in the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Checkpoint' 'Averaging' for vision?",
+    "options": {
+      "A": "Checking the model's overall grade.",
+      "B": "A technique where weights from several points during training are averaged to produce a more robust final model.",
+      "C": "Deleting the model after every epoch.",
+      "D": "A security check for the source code repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Multi-Head' 'Attention' 'Heads' for vision?",
+    "options": {
+      "A": "Using 100 different computers.",
+      "B": "Parallel attention mechanisms that allow the model to focus on different visual relationships simultaneously.",
+      "C": "A way to name the different layers.",
+      "D": "A way to skip position info entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'ODE' for image flows?",
+    "options": {
+      "A": "A math problem for students.",
+      "B": "Using Ordinary Differential Equations to model the continuous transformations of images.",
+      "C": "A way to solve equations using Python.",
+      "D": "A network that only works in one dimension."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware' 'Accelerator' 'TPU' for vision?",
+    "options": {
+      "A": "A new type of computer monitor.",
+      "B": "Specialized hardware from Google designed specifically to accelerate the matrix operations used in neural networks.",
+      "C": "A faster internet cable.",
+      "D": "A tool for cooling the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Panoptic' 'Segmentation'?",
+    "options": {
+      "A": "Deleting parts of an image.",
+      "B": "A unified task that combines Semantic Segmentation (categories) and Instance Segmentation (individual objects).",
+      "C": "Compressing an image into a smaller file.",
+      "D": "A way to rotate the image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Encoder' only model for classification (e.g., ViT)?",
+    "options": {
+      "A": "A model that has zero output layer.",
+      "B": "A model designed to process an image as a whole sequence and predict a single global class.",
+      "C": "A model that can only encode images.",
+      "D": "A model used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Rollout' for Vision Transformers?",
+    "options": {
+      "A": "Rolling the server down a hill.",
+      "B": "A technique to visualize and explain how a ViT model makes its decisions by tracing attention across layers.",
+      "C": "A way to name the different layers.",
+      "D": "A list of software bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Accumulation' 'Batch' Size simulation for vision?",
+    "options": {
+      "A": "Summing gradients over multiple steps before a weight update to effectively increase the batch size on limited hardware.",
+      "B": "Increasing the batch size to infinity.",
+      "C": "A bug where gradients get stuck.",
+      "D": "A way to speed up the network bandwidth."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Transformer' 'Linear' 'Attention' complexity?",
+    "options": {
+      "A": "Complexity that is only for linear functions.",
+      "B": "Techniques to make self-attention scale linearly $O(N)$ with image resolution instead of quadratically $O(N^2)$.",
+      "C": "Complexity that is 100% accurate.",
+      "D": "Attention used only by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised' 'DINO' for visual features?",
+    "options": {
+      "A": "A model about dinosaurs.",
+      "B": "A self-distillation method where a model learns features by matching the outputs of two versions of itself.",
+      "C": "A network that only works on old data.",
+      "D": "A way to speed up the data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Initialization' 'He' (Kaiming) for ReLU CNNs?",
+    "options": {
+      "A": "Initializing weights to the value of PI.",
+      "B": "An initialization designed to account for the zeroing of half the activations, keeping gradient variance stable.",
+      "C": "Initializing all weights to zero.",
+      "D": "Naming the model after its inventor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inference' 'Static' vs 'Dynamic' batching for vision servers?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Dynamic batching groups incoming user requests on-the-fly to maximize GPU utilization during inference.",
+      "C": "Static is for text; Dynamic for images.",
+      "D": "Dynamic is 100x slower."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' 'Log-sum-exp' trick for stability?",
+    "options": {
+      "A": "A magic trick for developers.",
+      "B": "A method to calculate the Softmax denominator that prevents numerical overflow with large input values.",
+      "C": "A way to compress image data.",
+      "D": "A way to backup the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Head' 'Attention' 'Projection' for vision?",
+    "options": {
+      "A": "Projecting a movie onto a screen.",
+      "B": "The linear transformations that map the input embedding into Queries, Keys, and Values for each head.",
+      "C": "A list of all the queries in the database.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Encoder' context representation?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A set of vectors where each element contains a weighted summary of the entire image or sequence.",
+      "C": "A model that has zero output layer.",
+      "D": "A model used by robots."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -1,42 +1,38 @@
 """
-Django settings for VerifiHireAI_backend project.
+Django settings for VerifiHireAI_backend project. # Reload trigger
 """
+
 
 import os
 from pathlib import Path
-
-
-def _env_list(key: str, default: list[str]) -> list[str]:
-    """Return a list from a comma-separated environment variable, falling back to default."""
-    value = os.environ.get(key)
-    if not value:
-        return default
-    return [item.strip() for item in value.split(",") if item.strip()]
+from decouple import config, Csv
+from datetime import timedelta
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Load environment variables from .env file
-import dotenv
-dotenv.load_dotenv(BASE_DIR / '.env')
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-change-this-in-production-12345")
+SECRET_KEY = config("DJANGO_SECRET_KEY", default="django-insecure-change-this-in-production-12345")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() == "true"
+DEBUG = config("DJANGO_DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = _env_list("DJANGO_ALLOWED_HOSTS", ["*"])
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*", cast=Csv())
+
+FRONTEND_BASE_URL = config("FRONTEND_BASE_URL", default="http://localhost:3000")
 
 
 # Application definition
 
 INSTALLED_APPS = [
+#    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,8 +41,19 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    'channels',
     'api',
+    'ai_assessments',
+    'ai_candidates',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',  # Required for BLACKLIST_AFTER_ROTATION
+    'deepface_proctoring',
 ]
+
+# Trust Nginx to handle SSL and Host headers
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -57,6 +64,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'ai_candidates.middleware.InterviewRateLimitMiddleware',
+    'ai_candidates.middleware.InterviewQueueMiddleware',
+    'ai_candidates.middleware.InterviewHealthCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'VerifiHireAI_backend.urls'
@@ -78,13 +88,40 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'VerifiHireAI_backend.wsgi.application'
+ASGI_APPLICATION = 'VerifiHireAI_backend.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            # Since Redis is in Docker but exposed to 6379, 127.0.0.1 works for local backend
+           "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
+# Celery Configuration
+CELERY_BROKER_URL = f"redis://{config('REDIS_HOST', default='127.0.0.1')}:{config('REDIS_PORT', default=6379, cast=int)}/0"
+CELERY_RESULT_BACKEND = f"redis://{config('REDIS_HOST', default='127.0.0.1')}:{config('REDIS_PORT', default=6379, cast=int)}/0"
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kolkata'
+
+from celery.schedules import crontab
+CELERY_BEAT_SCHEDULE = {
+    'cleanup-expired-reservations-every-minute': {
+        'task': 'api.tasks.cleanup_expired_reservations_task',
+        'schedule': crontab(minute='*'),
+    },
+}
 
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DB_CONNECT_TIMEOUT = int(os.environ.get('DB_CONNECT_TIMEOUT', '10'))
-DB_SSLMODE = os.environ.get('DB_SSLMODE', '').strip().lower()  # e.g. "require" for Supabase
+DB_SSLMODE = os.environ.get('DB_SSLMODE', '').strip().lower()
 
 db_options = {}
 if DB_SSLMODE:
@@ -94,12 +131,12 @@ if DB_SSLMODE:
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME', 'react_user1'),
-        'USER': os.environ.get('DB_USER', 'postgres'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', '12345'),
-        # IMPORTANT: In Docker this should be "db"; locally it can be "localhost"
-        'HOST': os.environ.get('DB_HOST', 'localhost'),
-        'PORT': os.environ.get('DB_PORT', '5432'),
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
+        'CONN_MAX_AGE': 0,  # Set to 0 to close connection at the end of each request
         **({'OPTIONS': db_options} if db_options else {}),
     }
 }
@@ -129,7 +166,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -139,15 +176,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/django-static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Media files (User uploaded files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# File upload limits (2.5MB)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 2621440
+FILE_UPLOAD_MAX_MEMORY_SIZE = 2621440
+
 # OTP settings
-# OTP validity duration (in seconds). Default used by `EmailOTP.is_expired()`.
 EMAIL_OTP_EXPIRY_SECONDS = 120
 
 # Default primary key field type
@@ -158,27 +198,35 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # REST Framework settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # Removed SessionAuthentication to avoid CSRF token requirement for API
-        # 'rest_framework.authentication.SessionAuthentication',
+        'api.authentication.DBContextJWTAuthentication',
+
     ],
+    # Issue 8 fix: Default to IsAuthenticated so any new endpoint added
+    # is secure by default. Public endpoints must explicitly set @permission_classes([AllowAny]).
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+        'rest_framework.permissions.IsAuthenticated',
     ],
-    # Disable browsable API - return JSON only
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
     ],
 }
 
+# Issue 1 fix: Removed first (stale) SIMPLE_JWT block — only one block below is active.
+
 default_cors_origins = [
     "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://localhost:3001",
-    "http://127.0.0.1:3001",
-    "http://192.168.1.22:3001",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://localhost:3000",
+    "http://20.205.31.46",
+    "http://localhost:3000",
 ]
 
-CORS_ALLOWED_ORIGINS = _env_list("CORS_ALLOWED_ORIGINS", default_cors_origins)
+CORS_ALLOW_ALL_ORIGINS = True
+CSRF_ALLOW_WILD_CARD_HOST = True
+
+CORS_ALLOWED_ORIGINS = config("CORS_ALLOWED_ORIGINS", default=",".join(default_cors_origins), cast=Csv())
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -203,22 +251,296 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'x-session-id',
 ]
 
 # CSRF settings for API
-CSRF_TRUSTED_ORIGINS = _env_list("CSRF_TRUSTED_ORIGINS", default_cors_origins)
+CSRF_TRUSTED_ORIGINS = config("CSRF_TRUSTED_ORIGINS", default=",".join(default_cors_origins), cast=Csv())
 
 # CSRF cookie settings
 CSRF_COOKIE_HTTPONLY = False
-CSRF_COOKIE_SECURE = False  # Set to True in production with HTTPS
+CSRF_COOKIE_SECURE = True  # Enforce HTTPS
 CSRF_USE_SESSIONS = False
+
+# Session cookie settings
+SESSION_COOKIE_SECURE = True # Enforce HTTPS
 
 # Email Configuration for Gmail SMTP
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.environ.get('EMAIL_HOST', 'smtp.gmail.com')
-EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'python.nexnoratech@gmail.com')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'aazm gwze vplo kehg')
-DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
 
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='python.nexnoratech@gmail.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = f"VerifiHire AI <{EMAIL_HOST_USER}>"
+DEEPSEEK_BASE_URL = config('DEEPSEEK_BASE_URL', default='https://api.deepseek.com')
+DEEPSEEK_MODEL = config('DEEPSEEK_MODEL', default='deepseek-v4-flash')
+DEEPSEEK_API_KEYS = [
+    config('DEEPSEEK_API_KEY_1', default='sk-6535c0f5ed654ee1a48ebf2a08efa1cd'),
+    # Add more keys for rotation / higher concurrency:
+    # config('DEEPSEEK_API_KEY_2', default=''),
+    # config('DEEPSEEK_API_KEY_3', default=''),
+]
+# Remove empty/placeholder keys
+DEEPSEEK_API_KEYS = [k for k in DEEPSEEK_API_KEYS if k and k != 'your-deepseek-api-key-here']
+# Legacy aliases so existing references don't break during migration
+DEEPSEEK_API_KEY = DEEPSEEK_API_KEYS[0] if DEEPSEEK_API_KEYS else None
+
+# ── GROQ Keys for Resume Screening Fallback ──
+GROQ_API_KEYS = [
+    config('GROQ_API_KEY_1', default=''),
+    config('GROQ_API_KEY_2', default=''),
+    config('GROQ_API_KEY_3', default=''),
+]
+# Remove empty/placeholder keys
+GROQ_API_KEYS = [k for k in GROQ_API_KEYS if k]
+GROQ_API_KEY = GROQ_API_KEYS[0] if GROQ_API_KEYS else None
+
+ASSEMBLYAI_API_KEY = config('ASSEMBLYAI_API_KEY', default=None)
+
+# Issue 1 & 6 fix: Single canonical SIMPLE_JWT config.
+# Access token is 30 min (short-lived). In-memory storage + auto-refresh via cookie
+# means there is no UX cost to a short access token lifetime.
+# REFRESH_TOKEN_LIFETIME matches the cookie max_age set in verify_login_otp_view.
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),   # Issue 6: was 12 hours
+    'REFRESH_TOKEN_LIFETIME': timedelta(hours=12),    # Issue 7: used as cookie max_age source of truth
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,                 # Now functional — token_blacklist is in INSTALLED_APPS
+    'UPDATE_LAST_LOGIN': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+}
+
+SECURITY_SIGNATURE_RULES = [
+    {
+        "label": "AnyDesk",
+        "signatures": ["anydesk", "ad_svc", "ad.tray"],
+        "pathSignatures": ["anydesk.exe", "/anydesk", "com.philandro.anydesk", "philandro"],
+        "serviceProcesses": ["anydesk service"],
+        "activeIndicators": {
+            "listenPorts": [7070],
+            "activeConnectionKeywords": ["anydesk"],
+            "windowTitles": ["anydesk"],
+        },
+    },
+    {
+        "label": "TeamViewer",
+        "signatures": ["teamviewer", "teamviewer_desktop", "teamviewer_host", "tv_w32"],
+        "pathSignatures": ["teamviewer.exe", "/teamviewer", "com.teamviewer", "teamviewerhost"],
+        "serviceProcesses": ["teamviewer_service.exe"],
+        "activeIndicators": {
+            "listenPorts": [5938],
+            "activeConnectionKeywords": ["teamviewer"],
+            "windowTitles": ["teamviewer"],
+        },
+    },
+    {
+        "label": "UltraViewer",
+        "signatures": ["ultraviewer", "ultraviewer_desktop", "ultraviewer_service"],
+        "pathSignatures": ["ultraviewer.exe", "/ultraviewer"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "listenPorts": [],
+            "activeConnectionKeywords": ["ultraviewer"],
+            "windowTitles": ["ultraviewer"],
+        },
+    },
+    {
+        "label": "Chrome Remote Desktop",
+        "signatures": ["remoting_host", "chromoting", "remote_assistance_host", "remoting_native_messaging_host"],
+        "pathSignatures": ["remoting_host.exe", "/chrome-remote-desktop", "chromoting", "remote_assistance_host.exe", "remoting_native_messaging_host.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "listenPorts": [],
+            "activeConnectionKeywords": ["remoting_host", "chromoting", "remote_assistance_host", "remoting_native_messaging_host"],
+            "windowTitles": ["chrome remote desktop"],
+        },
+    },
+    {
+        "label": "RustDesk",
+        "signatures": ["rustdesk"],
+        "pathSignatures": ["rustdesk.exe", "/rustdesk"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["rustdesk"],
+        },
+    },
+    {
+        "label": "Zoom",
+        "signatures": ["zoom", "zoom meetings"],
+        "pathSignatures": ["zoom.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["zoom meeting", "zoom cloud meetings"],
+        },
+    },
+    {
+        "label": "Discord",
+        "signatures": ["discord"],
+        "pathSignatures": ["discord.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["discord"],
+        },
+    },
+    {
+        "label": "Microsoft Teams",
+        "signatures": ["teams", "msteams"],
+        "pathSignatures": ["teams.exe", "msteams.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["microsoft teams", "teams meeting"],
+        },
+    },
+    {
+        "label": "Skype",
+        "signatures": ["skype"],
+        "pathSignatures": ["skype.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["skype"],
+        },
+    },
+    {
+        "label": "Supremo",
+        "signatures": ["supremo"],
+        "pathSignatures": ["supremo.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["supremo"],
+        },
+    },
+    {
+        "label": "Google Meet",
+        "signatures": [],
+        "pathSignatures": [],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["google meet", "meet.google.com"],
+        },
+    },
+    {
+        "label": "Webex",
+        "signatures": ["webex"],
+        "pathSignatures": ["webex.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["webex", "cisco webex"],
+        },
+    },
+    {
+        "label": "Parsec",
+        "signatures": ["parsec", "parsecd", "parsec-windows"],
+        "pathSignatures": ["parsecd.exe", "parsec.exe", "/parsec"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["parsec"],
+        },
+    },
+    {
+        "label": "NoMachine",
+        "signatures": ["nxplayer", "nxclient", "nxservice", "nxserver", "nomachine"],
+        "pathSignatures": ["nxplayer.exe", "nxclient.exe", "nxservice.exe", "/nomachine", "/nxclient"],
+        "serviceProcesses": ["nxservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["nomachine", "nxclient", "nxplayer"],
+        },
+    },
+    {
+        "label": "VNC",
+        "signatures": ["vncserver", "vncviewer", "vncservice", "winvnc", "tvnserver", "tvnviewer", "ultravnc", "tightvnc", "tigervnc", "realvnc", "vncscreensaver"],
+        "pathSignatures": ["vncviewer.exe", "vncserver.exe", "winvnc.exe", "winvnc4.exe", "tvnserver.exe", "tvnviewer.exe", "ultravnc.exe", "uvnc_service.exe", "tightvnc.exe", "tigervnc.exe", "/realvnc", "/tightvnc", "/ultravnc", "/tigervnc"],
+        "serviceProcesses": ["vncservice.exe", "tvnservice.exe", "uvnc_service.exe"],
+        "activeIndicators": {
+            "windowTitles": ["vnc viewer", "vnc server", "realvnc", "tightvnc", "ultravnc", "tigervnc"],
+        },
+    },
+    {
+        "label": "Windows Quick Assist",
+        "signatures": ["quickassist", "remoteassistance", "msra"],
+        "pathSignatures": ["quickassist.exe", "msra.exe", "raserver.exe"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["quick assist", "remote assistance", "windows remote assistance"],
+        },
+    },
+    {
+        "label": "Splashtop",
+        "signatures": ["splashtop", "srmanager", "srfeature", "splash_streamer"],
+        "pathSignatures": ["splashtop.exe", "srmanager.exe", "srfeature.exe", "/splashtop"],
+        "serviceProcesses": ["srmanager.exe"],
+        "activeIndicators": {
+            "windowTitles": ["splashtop"],
+        },
+    },
+    {
+        "label": "LogMeIn",
+        "signatures": ["logmein", "lmi_rescue", "logmeinrescue", "lmiguardiansvc", "lmiignition"],
+        "pathSignatures": ["logmein.exe", "lmi_rescue.exe", "lmiguardiansvc.exe", "/logmein"],
+        "serviceProcesses": ["lmiguardiansvc.exe"],
+        "activeIndicators": {
+            "windowTitles": ["logmein", "logmein rescue"],
+        },
+    },
+    {
+        "label": "ConnectWise Control",
+        "signatures": ["screenconnect", "connectwisecontrol", "screenconnect.clientservice", "screenconnect.windowsclient"],
+        "pathSignatures": ["screenconnect.exe", "screenconnect.clientservice.exe", "screenconnect.windowsclient.exe", "/screenconnect", "/connectwise"],
+        "serviceProcesses": ["screenconnect.clientservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["screenconnect", "connectwise control"],
+        },
+    },
+    {
+        "label": "Iperius Remote",
+        "signatures": ["iperiusremote", "iperius"],
+        "pathSignatures": ["iperiusremote.exe", "/iperiusremote"],
+        "serviceProcesses": [],
+        "activeIndicators": {
+            "windowTitles": ["iperius remote"],
+        },
+    },
+    {
+        "label": "DWService",
+        "signatures": ["dwservice", "dwagent"],
+        "pathSignatures": ["dwagent.exe", "dwservice.exe", "/dwagent", "/dwservice"],
+        "serviceProcesses": ["dwagent.exe"],
+        "activeIndicators": {
+            "windowTitles": ["dwservice", "dwagent"],
+        },
+    },
+    {
+        "label": "Zoho Assist",
+        "signatures": ["zohoassist", "zaservice", "zascreenshare"],
+        "pathSignatures": ["zohoassist.exe", "zaservice.exe", "/zohoassist"],
+        "serviceProcesses": ["zaservice.exe"],
+        "activeIndicators": {
+            "windowTitles": ["zoho assist"],
+        },
+    },
+    {
+        "label": "Remote Utilities",
+        "signatures": ["rutserv", "rfusclient"],
+        "pathSignatures": ["rutserv.exe", "rfusclient.exe", "/remoteutilities"],
+        "serviceProcesses": ["rutserv.exe"],
+        "activeIndicators": {
+            "windowTitles": ["remote utilities", "rut viewer"],
+        },
+    },
+    {
+        "label": "ISL Online",
+        "signatures": ["islonline", "isllight", "islalwayson"],
+        "pathSignatures": ["isllight.exe", "islalwayson.exe", "islonline.exe", "/islonline", "/isllight"],
+        "serviceProcesses": ["islalwayson.exe"],
+        "activeIndicators": {
+            "windowTitles": ["isl online", "isl light"],
+        },
+    },
+]

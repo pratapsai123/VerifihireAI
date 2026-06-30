@@ -1,0 +1,1891 @@
+{ 
+  "skill": "JIRA", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of Jira in a software development team?",
+    "options": {
+      "A": "To host the website's source code.",
+      "B": "To track issues, bugs, and project tasks.",
+      "C": "To create 3D graphic designs.",
+      "D": "To act as a social media platform for employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Issue' is the basic unit of work in Jira and can represent a bug, task, or story.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are standard 'Issue Types' in Jira? (Select all that apply)",
+    "options": {
+      "A": "Story",
+      "B": "Bug",
+      "C": "Epic",
+      "D": "Novel"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In Jira, what is a 'Project'?",
+    "options": {
+      "A": "A single line of code.",
+      "B": "A collection of issues that share a common goal or purpose.",
+      "C": "A list of all employees in the company.",
+      "D": "The physical location of the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Workflow' represent in Jira?",
+    "options": {
+      "A": "The path an issue takes from creation to completion.",
+      "B": "The speed of the office internet.",
+      "C": "The total number of hours worked by a team.",
+      "D": "The process of hiring new developers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scrum' and 'Kanban' are the two most common project types available in Jira.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which field is used to identify the person currently responsible for working on an issue?",
+    "options": {
+      "A": "Reporter",
+      "B": "Assignee",
+      "C": "Creator",
+      "D": "Watcher"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Backlog' in a Scrum project?",
+    "options": {
+      "A": "A list of issues that have already been completed.",
+      "B": "A holding area for all issues that are not yet started or assigned to a sprint.",
+      "C": "A security backup of the database.",
+      "D": "A list of issues that were deleted by mistake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status typically indicates that work has not yet begun on an issue?",
+    "options": {
+      "A": "In Progress",
+      "B": "To Do",
+      "C": "Done",
+      "D": "In Review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Epic' is used to capture a large body of work that can be broken down into several smaller stories.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which features are found on a Jira 'Board'? (Select all that apply)",
+    "options": {
+      "A": "Columns representing workflow statuses",
+      "B": "Issue cards",
+      "C": "Quick filters",
+      "D": "A calculator for personal expenses"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Sprint' in the context of Jira Scrum projects?",
+    "options": {
+      "A": "A competition to see who can type the fastest.",
+      "B": "A fixed period of time (usually 2-4 weeks) during which a specific set of work must be completed.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "The time it takes to restart the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Priority' field help define?",
+    "options": {
+      "A": "The color of the issue card.",
+      "B": "The importance of an issue in relation to others.",
+      "C": "The name of the project manager.",
+      "D": "The physical weight of the task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can 'Watch' an issue to receive email notifications whenever it is updated, even if you are not the assignee.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Jira role is responsible for creating and configuring projects? (Select all that apply)",
+    "options": {
+      "A": "Jira Administrator",
+      "B": "Project Administrator",
+      "C": "Reporter",
+      "D": "Guest User"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'JQL'?",
+    "options": {
+      "A": "Jira Quick List",
+      "B": "Jira Query Language, used for advanced searching of issues.",
+      "C": "Java Quality Link",
+      "D": "A specialized type of issue icon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where can you see a visual representation of all the transitions an issue can make?",
+    "options": {
+      "A": "Project Settings > Workflow",
+      "B": "Profile Settings > Security",
+      "C": "The Dashboard",
+      "D": "The Notifications tab"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Sub-tasks are used to break down an individual story or task into smaller pieces of work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Project Templates' in Jira? (Select all that apply)",
+    "options": {
+      "A": "Software Development",
+      "B": "Service Management",
+      "C": "Business/Work Management",
+      "D": "Game Console Emulator"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Component' in a Jira project?",
+    "options": {
+      "A": "A physical part of a computer.",
+      "B": "A subsection of a project used to group related issues (e.g., Frontend, Backend).",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Resolving' an issue mean?",
+    "options": {
+      "A": "Increasing the screen resolution.",
+      "B": "Marking an issue as finished or fixed after work is complete.",
+      "C": "Deleting an issue from the system.",
+      "D": "Restarting the project from scratch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' in Jira is a personalized page where you can see gadgets that display project data and statistics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Summary' field of a Jira issue?",
+    "options": {
+      "A": "A 50-page document explaining the project.",
+      "B": "A short, one-line title that describes the issue.",
+      "C": "The total cost of fixing a bug.",
+      "D": "A list of all users who have viewed the issue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Comment' section on an issue?",
+    "options": {
+      "A": "To play games during breaks.",
+      "B": "To allow team members to communicate and share updates about that specific task.",
+      "C": "To store the user's password.",
+      "D": "To increase the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you move an issue from one status to another on a Kanban board?",
+    "options": {
+      "A": "By deleting it and creating a new one.",
+      "B": "By dragging and dropping the issue card into a different column.",
+      "C": "By restarting the computer.",
+      "D": "By typing 'MOVE' in the comment box."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Jira 'Key' (e.g., PROJ-123) is a unique identifier for every issue.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Agile' reports available in Jira? (Select all that apply)",
+    "options": {
+      "A": "Burndown Chart",
+      "B": "Velocity Chart",
+      "C": "Cumulative Flow Diagram",
+      "D": "Weather Forecast"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Label' in Jira?",
+    "options": {
+      "A": "A physical sticker for the monitor.",
+      "B": "A flexible tag used to categorize and search for issues outside of standard fields.",
+      "C": "A specialized software for poets.",
+      "D": "The name of the company's CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when you 'Link' two issues in Jira?",
+    "options": {
+      "A": "They become a single issue.",
+      "B": "A relationship is established between them (e.g., 'blocks' or 'is duplicated by').",
+      "C": "The data is deleted for security.",
+      "D": "Both issues are automatically assigned to the same person."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard Jira Cloud allows for unlimited file attachments on a single issue.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which button do you click to find specific issues using filters or JQL?",
+    "options": {
+      "A": "Create",
+      "B": "Filters (or Issues)",
+      "C": "Settings",
+      "D": "Help"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Estimation' in a Jira story?",
+    "options": {
+      "A": "Guessing the price of the software.",
+      "B": "Assigning a value (like Story Points or Hours) to represent the effort required to complete a task.",
+      "C": "Counting the number of letters in the summary.",
+      "D": "Predicting the weather on the release date."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jira supports 'Markdown' or rich text formatting in the Description field.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these can trigger a notification in Jira? (Select all that apply)",
+    "options": {
+      "A": "Assigning an issue to a user",
+      "B": "Adding a comment",
+      "C": "Changing the issue status",
+      "D": "Moving the mouse cursor"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Version' (or Release) in Jira?",
+    "options": {
+      "A": "The version of the Jira software itself.",
+      "B": "A milestone or set of work that is scheduled for a specific release to customers.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where can you change the columns shown on your Scrum board?",
+    "options": {
+      "A": "Board Settings",
+      "B": "Personal Profile",
+      "C": "The Help Menu",
+      "D": "The Dashboard"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Jira, you can search for issues that were created by a specific user using JQL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'WIP Limit' stand for in Kanban?",
+    "options": {
+      "A": "Work-In-Progress Limit, used to restrict the number of issues in a column.",
+      "B": "Worker-Identity-Protocol Limit.",
+      "C": "Web-Integration-Point Limit.",
+      "D": "Weekly-Issue-Production Limit."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which element in Jira tracks the history of all changes made to an issue?",
+    "options": {
+      "A": "Summary",
+      "B": "Activity (or History tab)",
+      "C": "Labels",
+      "D": "Priority"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Scrum project requires a 'Product Owner' to manage the backlog.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are parts of an Issue View? (Select all that apply)",
+    "options": {
+      "A": "Description",
+      "B": "Attachments",
+      "C": "Agile Board",
+      "D": "Comments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Swimlanes' in a Jira board?",
+    "options": {
+      "A": "Physical lanes in a swimming pool.",
+      "B": "Horizontal rows used to group issues (e.g., by Assignee or Priority) on a board.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Roadmap' feature used for?",
+    "options": {
+      "A": "To provide GPS directions to the office.",
+      "B": "To visualize long-term plans and progress of Epics over time.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can bulk-edit multiple issues at once in Jira to change their status or assignee.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Story Points'?",
+    "options": {
+      "A": "A measurement of the number of words in a story.",
+      "B": "A relative unit of measure used to estimate the size and complexity of a story.",
+      "C": "The total number of clicks on a webpage.",
+      "D": "The salary of the developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Gadget' in Jira?",
+    "options": {
+      "A": "A physical machine used in a factory.",
+      "B": "A small, self-contained report or visual used on a Dashboard.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Issues can belong to multiple projects at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows you to save a specific search for future use?",
+    "options": {
+      "A": "Filters",
+      "B": "Components",
+      "C": "Epics",
+      "D": "Labels"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Reporter' of an issue?",
+    "options": {
+      "A": "The person currently fixing the bug.",
+      "B": "The person who originally created the issue.",
+      "C": "A security scan of the database.",
+      "D": "The news anchor for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jira Service Management is specifically designed for IT and help desk support teams.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Issue Linking' types? (Select all that apply)",
+    "options": {
+      "A": "blocks",
+      "B": "is blocked by",
+      "C": "relates to",
+      "D": "is an actual airplane"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Log Work' allow you to do?",
+    "options": {
+      "A": "Write a physical log of wood.",
+      "B": "Record the actual amount of time spent working on an issue.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Jira, what is an 'Attachment'?",
+    "options": {
+      "A": "An emotional bond with an issue.",
+      "B": "A file (like an image or document) uploaded to an issue for extra context.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can mention a team member in a comment using the '@' symbol followed by their name.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Status Categories' in Jira? (Select all that apply)",
+    "options": {
+      "A": "To Do",
+      "B": "In Progress",
+      "C": "Done",
+      "D": "In The Cloud"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Project Sidebar'?",
+    "options": {
+      "A": "A bar where employees go after work.",
+      "B": "The navigation menu on the left side of the project screen providing access to the backlog, board, and reports.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can only have one Board per Jira project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Task' issue type?",
+    "options": {
+      "A": "A large body of work that takes 6 months.",
+      "B": "A standard unit of work that is not necessarily a bug or a user story.",
+      "C": "A way to backup the SQL code.",
+      "D": "A physical machine on the desk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Resolution' vs 'Status'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Status is where the issue is in the workflow; Resolution describes why the issue is closed (e.g., Fixed, Won't Do).",
+      "C": "Resolution is only for images.",
+      "D": "Status is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Jira can be integrated with other tools like Slack, Confluence, and GitHub.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Jira Work Management' features? (Select all that apply)",
+    "options": {
+      "A": "List view",
+      "B": "Calendar view",
+      "C": "Timeline view",
+      "D": "3D modeling view"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Issue Transition'?",
+    "options": {
+      "A": "Changing the color of the issue.",
+      "B": "The action of moving an issue from one status to another (e.g., from 'To Do' to 'In Progress').",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Private' project in Jira can only be seen by users who are explicitly added to it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which field is typically used to group issues for a specific release date?",
+    "options": {
+      "A": "Labels",
+      "B": "Fix Version",
+      "C": "Epic Link",
+      "D": "Priority"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Flagging' an issue on a board?",
+    "options": {
+      "A": "To delete it from the system.",
+      "B": "To visually highlight that there is an impediment or blocker for that issue.",
+      "C": "A way to count the number of users.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Company-managed' and 'Team-managed' projects in Jira Cloud?",
+    "options": {
+      "A": "Team-managed projects can only be used by one person at a time.",
+      "B": "Company-managed projects use shared configurations across the site; Team-managed projects are independent and configured by the team lead.",
+      "C": "Company-managed projects are for hardware; Team-managed are for software.",
+      "D": "There is no difference; they are different names for the same project type."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In JQL, the 'CHANGED' operator can be used to find issues that have moved from one specific status to another.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of a Jira 'Permission Scheme'? (Select all that apply)",
+    "options": {
+      "A": "Project Roles",
+      "B": "Application access",
+      "C": "Groups",
+      "D": "Physical office security clearance"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a 'Screen' in Jira administration?",
+    "options": {
+      "A": "To record the user's desktop for security auditing.",
+      "B": "To define which fields are displayed to a user during specific operations like 'Create' or 'Edit'.",
+      "C": "To protect the computer monitor from dust.",
+      "D": "To increase the contrast of the Jira user interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Jira Automation, what are 'Smart Values' used for?",
+    "options": {
+      "A": "To automatically calculate the price of a Jira license.",
+      "B": "To dynamically access and manipulate issue data (like {{issue.summary}}) within an automation rule.",
+      "C": "A specialized tool for measuring light in the office.",
+      "D": "To sort issues by the intelligence level of the assignee."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Post Function' in a workflow transition is used to perform an action (like updating a field) after the transition has been executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which JQL query correctly finds all unresolved issues in the 'ALPHA' project that are assigned to the current user?",
+    "options": {
+      "A": "project = ALPHA AND assignee = currentUser() AND status != Done",
+      "B": "project = ALPHA AND user = me AND resolution = Unresolved",
+      "C": "project = ALPHA AND assignee = currentUser() AND resolution = Unresolved",
+      "D": "FIND issues WHERE project IS ALPHA"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the technical role of a 'Field Configuration Scheme'?",
+    "options": {
+      "A": "To hide or show specific fields based on the issue type within a project.",
+      "B": "To change the database schema of the Jira server.",
+      "C": "To define the password requirements for Jira users.",
+      "D": "To translate field names into different languages."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid Jira 'Automation' triggers? (Select all that apply)",
+    "options": {
+      "A": "Issue created",
+      "B": "Field value changed",
+      "C": "Scheduled (e.g., every morning)",
+      "D": "User logged out"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Parallel Sprints' must be explicitly enabled in Jira settings to allow a team to run multiple active sprints on the same board.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What occurs when you 'Re-index' Jira?",
+    "options": {
+      "A": "Jira deletes all old issues to save space.",
+      "B": "Jira rebuilds the search index to ensure that recent changes to issues or configuration are searchable via JQL.",
+      "C": "Jira automatically renames all projects alphabetically.",
+      "D": "The server hardware is physically cleaned."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Conditions' in a Jira workflow transition?",
+    "options": {
+      "A": "To set the physical temperature of the server room.",
+      "B": "To control whether a user is allowed to see the transition button based on roles or permissions.",
+      "C": "To calculate the final cost of a task.",
+      "D": "To increase the frame rate of the workflow animation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Portfolio for Jira' (Advanced Roadmaps), what is 'Capacity Planning'?",
+    "options": {
+      "A": "Determining how many people can fit in a meeting room.",
+      "B": "Balancing the workload across teams based on their available hours or story point velocity.",
+      "C": "A security scan for database capacity.",
+      "D": "Hiring new employees based on their physical height."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Validator' in a workflow check if certain input (like a required field) is provided before allowing the transition to proceed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are characteristics of 'Jira Service Management' (JSM)? (Select all that apply)",
+    "options": {
+      "A": "Customer Portal for submitting requests",
+      "B": "SLA (Service Level Agreement) tracking",
+      "C": "Incident and Change management workflows",
+      "D": "3D modeling of hardware assets"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Issue Security Level' used for?",
+    "options": {
+      "A": "To set the password for a specific issue.",
+      "B": "To restrict the visibility of specific issues within a project to a subset of users.",
+      "C": "A specialized software for measuring distance.",
+      "D": "To encrypt the issue's summary field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JQL, what does the 'ORDER BY' clause do?",
+    "options": {
+      "A": "Forces users to order lunch through Jira.",
+      "B": "Sorts the search results by a specified field (e.g., created Date).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read the issues."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Draft Workflows' allow an administrator to modify a workflow while the original is still active in a project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following can be used as a 'Quick Filter' on a Scrum board? (Select all that apply)",
+    "options": {
+      "A": "Assignee = currentUser()",
+      "B": "Priority = High",
+      "C": "IssueType = Bug",
+      "D": "The color of the office carpet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control Chart' used for in Jira reports?",
+    "options": {
+      "A": "To control the movements of employees.",
+      "B": "To monitor the cycle time of issues to identify outliers and determine if the process is predictable.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Jira, what is a 'Scheme'?",
+    "options": {
+      "A": "A secret plan to take over the company.",
+      "B": "A reusable collection of configurations (Permissions, Workflows, Screens) that can be applied to one or more projects.",
+      "C": "A specialized software for poets.",
+      "D": "The physical layout of the network cables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cascading Select' is a custom field type where the options in the second dropdown change based on the selection in the first dropdown.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which features describe 'Jira Expressions'?",
+    "options": {
+      "A": "The facial expressions of users while using Jira.",
+      "B": "A domain-specific language used for advanced workflow conditions and data validation.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Component Lead'?",
+    "options": {
+      "A": "To lead the physical assembly of computers.",
+      "B": "A designated person who can be automatically assigned issues that are tagged with a specific component.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you share a Jira 'Filter' with a specific group of people?",
+    "options": {
+      "A": "By printing it on paper and handing it out.",
+      "B": "By editing the 'Permissions' of the saved filter and selecting the desired group or project.",
+      "C": "By restarting the server.",
+      "D": "By typing their names in the JQL box."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Marketplace Apps' can add new functionality to Jira, such as advanced time tracking or testing management tools.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Board' sub-settings in Jira? (Select all that apply)",
+    "options": {
+      "A": "Swimlanes",
+      "B": "Card Colors",
+      "C": "Estimation (Story Points vs. Time)",
+      "D": "The salary of the developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira Query Language' (JQL) 'WAS' operator used for?",
+    "options": {
+      "A": "To find issues that were physically moved.",
+      "B": "To search for issues that previously had a specific value (e.g., status WAS 'In Progress').",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Sub-task' limitation in Jira standard configuration?",
+    "options": {
+      "A": "Sub-tasks cannot have their own comments.",
+      "B": "Sub-tasks cannot have sub-tasks of their own (one level deep).",
+      "C": "Sub-tasks are only for bug issue types.",
+      "D": "Sub-tasks are deleted when the parent task is closed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can configure Jira to automatically transition an issue when a linked pull request is merged in GitHub.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Global Permissions' in Jira? (Select all that apply)",
+    "options": {
+      "A": "Bulk Change issues",
+      "B": "Create shared objects (filters/dashboards)",
+      "C": "Jira System Administrator access",
+      "D": "Moving the physical server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Issue Type Screen Scheme'?",
+    "options": {
+      "A": "A scheme to hide the screen from users.",
+      "B": "A mapping that determines which 'Screen Scheme' is used for each issue type in a project.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'SLA' 'Breach' in Jira Service Management?",
+    "options": {
+      "A": "When a security alarm goes off.",
+      "B": "When a support request is not handled within the time frame defined in the Service Level Agreement.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Issue Collectors' allow you to embed a Jira feedback form into an external website.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Agile' values Jira helps teams implement? (Select all that apply)",
+    "options": {
+      "A": "Transparency (via boards)",
+      "B": "Continuous Improvement (via retrospectives/reports)",
+      "C": "Customer Collaboration (via portals)",
+      "D": "Micromanagement"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Bulk Change' in Jira?",
+    "options": {
+      "A": "Changing the bulk weight of a product.",
+      "B": "The ability to perform the same action (like changing status) on multiple issues simultaneously.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Velocity' in a Scrum context?",
+    "options": {
+      "A": "The speed of the office internet.",
+      "B": "The average amount of work (usually in story points) a team completes during a sprint.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Issue Linking' can be customized to create new relationship types like 'depends on' or 'causes'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'User Management' sources for Jira? (Select all that apply)",
+    "options": {
+      "A": "Atlassian Cloud internal directory",
+      "B": "Google Workspace / Okta (SSO)",
+      "C": "Microsoft Active Directory (Sync)",
+      "D": "A handwritten list of employees"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Project' 'Role' vs 'Group'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Groups are site-wide; Roles are project-specific memberships defined in settings.",
+      "C": "Groups are only for developers.",
+      "D": "Roles are 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is a 'Transition' 'Property'?",
+    "options": {
+      "A": "The physical property of the computer.",
+      "B": "Key-value pairs used to add extra logic or restrictions to a workflow transition (e.g., jira.permission.comment.group).",
+      "C": "A security certificate.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'JQL' allows searching for issues based on the value of a specific custom field.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Dashboard' 'Gadget' types? (Select all that apply)",
+    "options": {
+      "A": "Created vs. Resolved Chart",
+      "B": "Filter Results",
+      "C": "Pie Chart",
+      "D": "The weather in New York"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Issue' 'Clone'?",
+    "options": {
+      "A": "A biological copy of the user.",
+      "B": "Creating an exact duplicate of an existing issue, including all field values and attachments.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cycle' 'Time' vs 'Lead' 'Time'?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Cycle Time is work duration; Lead Time is total duration from request to delivery.",
+      "C": "Lead time is only for hardware.",
+      "D": "Cycle time is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'System Dashboard' is the default dashboard seen by all new users until they create their own.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Priority' levels in a default Jira setup? (Select all that apply)",
+    "options": {
+      "A": "Highest",
+      "B": "Medium",
+      "C": "Lowest",
+      "D": "Blue"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Custom' 'Workflow' 'Scheme'?",
+    "options": {
+      "A": "A scheme to custom-make Jira clothes.",
+      "B": "A mapping that specifies which workflow applies to which issue type within a project.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is 'Issue' 'Type' 'Icon'?",
+    "options": {
+      "A": "The physical icon of a computer.",
+      "B": "A visual symbol that helps users quickly distinguish between different types of work (e.g., Red circle for Bug).",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can export Jira issue data into a CSV or Excel file for external reporting.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automation' 'Actions'? (Select all that apply)",
+    "options": {
+      "A": "Edit issue",
+      "B": "Send email",
+      "C": "Create sub-task",
+      "D": "Order a pizza"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Project' 'Category'?",
+    "options": {
+      "A": "A physical category of paper folders.",
+      "B": "A grouping of projects used for organization and reporting at the site level.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is the 'Resolution' field's primary function?",
+    "options": {
+      "A": "To increase the monitor resolution.",
+      "B": "To record the outcome of an issue (e.g., 'Fixed', 'Duplicate', 'Won't Fix').",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Quick Edit' allows users to change issue fields directly from the search results or board without opening the full issue view.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Jira Cloud' vs 'Jira Data Center'? (Select all that apply)",
+    "options": {
+      "A": "Cloud is hosted by Atlassian; Data Center is self-hosted",
+      "B": "Cloud has a newer, simplified interface",
+      "C": "Data Center is for large, high-availability enterprises",
+      "D": "Cloud is only for companies with 5 employees"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Advanced' 'Searching' in Jira?",
+    "options": {
+      "A": "Searching for an employee's home address.",
+      "B": "Using JQL (Jira Query Language) to perform complex queries that simple filters cannot handle.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Agile', what is a 'Product' 'Backlog' 'Refinement'?",
+    "options": {
+      "A": "Cleaning the physical backlog box.",
+      "B": "The process of reviewing and detailing backlog items to prepare them for future sprints.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can delete a 'Status' from Jira while it is still being used in an active workflow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Workflow' 'Trigger' options? (Select all that apply)",
+    "options": {
+      "A": "GitHub Commit",
+      "B": "Bitbucket Branch Created",
+      "C": "Deployment successful",
+      "D": "SQL database restart"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Issue' 'History' 'Audit'?",
+    "options": {
+      "A": "Auditing a person name History.",
+      "B": "The ability to see every change made to an issue, including who made it and when.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is a 'Notification' 'Scheme'?",
+    "options": {
+      "A": "A scheme to hide notifications.",
+      "B": "A set of rules that determines which users receive email alerts for specific issue events.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Story' issue types are typically used to represent a feature from the perspective of an end-user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Kanban' board logic? (Select all that apply)",
+    "options": {
+      "A": "Continuous flow of work",
+      "B": "Uses WIP limits to prevent bottlenecks",
+      "C": "Work is planned in fixed sprints",
+      "D": "Columns represent status"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Jira' 'Site' 'Administration'?",
+    "options": {
+      "A": "Hiring a person to manage the physical office site.",
+      "B": "High-level management of users, subscriptions, and global settings across the entire Jira instance.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is 'Issue' 'Security' 'Scheme'?",
+    "options": {
+      "A": "A scheme to steal issue data.",
+      "B": "A project-level configuration that allows for granular control over which users can see specific issues.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Epics' can span multiple projects in Jira Cloud.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Jira administrative configuration determines which fields are 'Required', 'Hidden', or 'Read-Only' based on the Issue Type and Project?",
+    "options": {
+      "A": "Screen Scheme",
+      "B": "Field Configuration Scheme",
+      "C": "Issue Security Scheme",
+      "D": "Workflow Property Scheme"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Jira Cloud, 'Project Roles' are defined globally but their membership is managed at the individual project level, allowing for decentralized permission management.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid uses of the 'Jira REST API' in an enterprise environment? (Select all that apply)",
+    "options": {
+      "A": "Automatically creating issues from external monitoring tools",
+      "B": "Bulk-updating custom fields across thousands of issues",
+      "C": "Syncing Jira issues with a third-party CRM like Salesforce",
+      "D": "Physically rebooting the cloud server hardware"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical purpose of a 'Workflow Property' like 'jira.permission.edit.group'?",
+    "options": {
+      "A": "To change the background color of the 'Edit' button.",
+      "B": "To restrict the ability to edit an issue while it is in a specific status to members of a certain group.",
+      "C": "To automatically assign the issue to a random developer.",
+      "D": "To increase the character limit of the summary field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Advanced Roadmaps' (Portfolio), what does the 'Roll-up' feature primarily calculate?",
+    "options": {
+      "A": "The total number of employees in a department.",
+      "B": "Aggregated values from child issues (like Story Points or Estimates) up to the Epic or Initiative level.",
+      "C": "A security scan for database vulnerabilities.",
+      "D": "The physical weight of the hardware assets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Transition Validator' prevents a transition from completing if the criteria are not met, whereas a 'Condition' prevents the transition button from being visible entirely.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which JQL function is used to find issues that were in a specific status at a specific point in time (e.g., status was 'In Progress' on 2024-01-01)?",
+    "options": {
+      "A": "status CHANGED TO 'In Progress' AFTER '2024-01-01'",
+      "B": "status WAS 'In Progress' ON '2024-01-01'",
+      "C": "status = 'In Progress' AND date = '2024-01-01'",
+      "D": "FIND issues WHERE status IS 'In Progress'"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical impact of a 'Circular Workflow' (Allow all statuses to transition to all others)?",
+    "options": {
+      "A": "It doubles the performance of the Jira database.",
+      "B": "It bypasses the need for 'Transitions' and allows for 'Global' transitions, but may lead to poor data integrity.",
+      "C": "It prevents users from deleting any issues.",
+      "D": "It forces Jira to run in a loop until the server crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these 'Automation for Jira' components allows for conditional logic based on the value of a field? (Select all that apply)",
+    "options": {
+      "A": "If/Else block",
+      "B": "Advanced Compare Condition",
+      "C": "JQL Condition",
+      "D": "The physical power switch"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In Jira Data Center, 'Zero Downtime Upgrades' allow nodes in a cluster to be upgraded one at a time while the system remains available to users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which administrative setting is used to associate specific 'Issue Types' with specific 'Workflows' within a single project?",
+    "options": {
+      "A": "Workflow Scheme",
+      "B": "Issue Type Scheme",
+      "C": "Permission Scheme",
+      "D": "Notification Scheme"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Entity Properties' in Jira development?",
+    "options": {
+      "A": "To define the physical properties of a server.",
+      "B": "Key-value pairs that allow apps to store data on Jira entities (like issues or projects) without creating custom fields.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira Service Management', what is the function of the 'Insight' (Assets) database?",
+    "options": {
+      "A": "To provide insights into the developer's feelings.",
+      "B": "A Configuration Management Database (CMDB) that tracks assets and their relationships to issues.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cascading Permissions' in Jira mean that if you have permission to view a project, you automatically have permission to delete any issue within it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe the 'Shared Configuration' feature when creating a new project? (Select all that apply)",
+    "options": {
+      "A": "The new project inherits all schemes from an existing project",
+      "B": "Changes to schemes in one project will affect all other projects sharing them",
+      "C": "It creates a physical clone of the database",
+      "D": "It is only available for Company-managed projects"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Jira Expression' evaluation context?",
+    "options": {
+      "A": "The facial expression of the admin.",
+      "B": "The specific objects (like 'issue', 'user', or 'project') that are available to a Jira Expression when it is executed.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'JQL', what is the purpose of the 'membersOf()' function?",
+    "options": {
+      "A": "To find all members of the company's board of directors.",
+      "B": "To search for issues assigned to or reported by any user within a specific Jira Group.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read the group list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Issue Type Screen Scheme' allows you to use different 'Create', 'Edit', and 'View' screens for the same issue type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Service Level Agreements' (SLAs) in JSM? (Select all that apply)",
+    "options": {
+      "A": "Defined by a Start, Stop, and Pause condition",
+      "B": "Can be based on JQL queries",
+      "C": "Visible only to administrators",
+      "D": "Track 'Time to First Response' and 'Time to Resolution'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the 'Jira Forge' platform?",
+    "options": {
+      "A": "A physical furnace for making server components.",
+      "B": "Atlassian's serverless development platform for building Jira apps with built-in hosting and security.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Configuration', what is a 'Component Lead' automatic assignment?",
+    "options": {
+      "A": "Assigning a lead part to a computer assembly.",
+      "B": "A setting where an issue is automatically assigned to the Component Lead when that specific component is selected.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Webhooks' in Jira can be configured to send a POST request to an external URL whenever an issue is transitioned.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Global Permission' vs 'Project Permission'? (Select all that apply)",
+    "options": {
+      "A": "Global permissions apply to the entire Jira site (e.g., Create Project)",
+      "B": "Project permissions apply to a specific project (e.g., Resolve Issue)",
+      "C": "Project permissions are managed in a Permission Scheme",
+      "D": "Global permissions are stored in a physical vault"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Workflow Post Function' sequence significance?",
+    "options": {
+      "A": "The order of photos in a post.",
+      "B": "The order in which actions are performed (e.g., updating a field before sending an email) which can impact the final state of the issue.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Change Management' in Jira Service Management?",
+    "options": {
+      "A": "Managing the physical change in the office pockets.",
+      "B": "A structured process for requesting, auditing, and approving changes to IT infrastructure to minimize risk.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'System Administrator' in Jira has the power to access and modify every project, even those marked as Private.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Jira Software' specific reports? (Select all that apply)",
+    "options": {
+      "A": "Sprint Report",
+      "B": "Epic Report",
+      "C": "Version Report",
+      "D": "The salary of the developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira Query Language' (JQL) 'historical' searching?",
+    "options": {
+      "A": "Searching for issues from the year 1800.",
+      "B": "Using operators like WAS and CHANGED to query the history of issue field values.",
+      "C": "A specialized tool for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cumulative Flow Diagram' (CFD) used for?",
+    "options": {
+      "A": "Calculating the flow of water in a pipe.",
+      "B": "Visualizing the distribution of issues across different statuses over time to identify bottlenecks.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Issue Security Levels' can be applied automatically based on the value of a field using Automation for Jira.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Jira Data Center' 'High Availability' components? (Select all that apply)",
+    "options": {
+      "A": "Shared File Store",
+      "B": "External Database",
+      "C": "Load Balancer",
+      "D": "A shared office desk"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'App Assessment' in Jira Cloud migration?",
+    "options": {
+      "A": "Assessing the quality of the developer's snacks.",
+      "B": "The process of determining which third-party apps are needed in Cloud and whether their data can be migrated.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is a 'Project' 'Avatar'?",
+    "options": {
+      "A": "A character in a 3D movie.",
+      "B": "The visual icon used to represent a project in the navigation and lists.",
+      "C": "A security scan of the database.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Jira Cloud, 'Atlassian Access' is required to enable Single Sign-On (SSO) and enforce Two-Factor Authentication (2FA) across the site.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Advanced Roadmaps' 'Initiatives'? (Select all that apply)",
+    "options": {
+      "A": "A hierarchy level above Epics",
+      "B": "Used to track large, multi-project goals",
+      "C": "Directly linked to Story Points",
+      "D": "Must be created using a special Issue Type"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Screen' 'Tab' logic?",
+    "options": {
+      "A": "Using a physical tab to open a screen.",
+      "B": "Organizing fields into multiple sections (tabs) on a single screen to reduce clutter for users.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Resolution' (MTTR) calculation?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the time an issue is created until it is resolved.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Team-managed' projects do not use schemes and their configuration does not affect any other project in the Jira instance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Workflow' 'Condition' types? (Select all that apply)",
+    "options": {
+      "A": "Only Assignee Condition",
+      "B": "Permission Condition",
+      "C": "User in Group Condition",
+      "D": "Current weather condition"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Site' 'Import' tool used for?",
+    "options": {
+      "A": "Importing physical goods into the office.",
+      "B": "Moving an entire Jira instance from one location (e.g., Server) to another (e.g., Cloud).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is the 'Global' 'Mail' 'Handler'?",
+    "options": {
+      "A": "A person who delivers physical mail.",
+      "B": "A configuration that allows Jira to create or comment on issues by reading incoming emails to a specific address.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'Bulk' 'Move' operation to move issues from a Scrum project to a Kanban project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Jira Service Management' 'Queue' features? (Select all that apply)",
+    "options": {
+      "A": "Filtering based on SLA status",
+      "B": "Sorting by Priority",
+      "C": "Automatically deleting old tickets",
+      "D": "Groupings by issue type"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'JQL' 'Empty' vs 'Null' searching?",
+    "options": {
+      "A": "They are identical terms in JQL.",
+      "B": "JQL uses 'IS EMPTY' or 'IS NULL' to find fields that have no value assigned.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Burndown' 'Chart' 'Scope' 'Creep'?",
+    "options": {
+      "A": "When a bug physically creeps across the screen.",
+      "B": "The vertical increase in the remaining work line when new tasks are added to a sprint after it has started.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Issue Security Schemes' are the only way to prevent a Project Administrator from seeing specific issues in their own project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automation' 'Loop' 'Prevention' mechanisms? (Select all that apply)",
+    "options": {
+      "A": "Max execution limit per rule",
+      "B": "Rules cannot trigger other rules by default",
+      "C": "Automatically deleting the rule if it loops",
+      "D": "Service limits on rule runs per month"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Jira' 'Entity' 'ID' vs 'Issue' 'Key'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "The Entity ID is a hidden database primary key; the Issue Key (e.g., PROJ-1) is the human-readable identifier.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is a 'Workflow' 'Transition' 'ID'?",
+    "options": {
+      "A": "A physical ID card for the user.",
+      "B": "A unique numerical identifier for a specific transition used in the API and advanced configuration.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard Jira Dashboards can be shared with the public so that anyone with the link can view them without logging in.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Jira' 'API' 'Authentication' methods? (Select all that apply)",
+    "options": {
+      "A": "API Token",
+      "B": "OAuth 2.0",
+      "C": "Basic Auth (deprecated in Cloud)",
+      "D": "Physical thumbprint scan"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Cloud' 'Sandbox'?",
+    "options": {
+      "A": "A physical box of sand in the Atlassian office.",
+      "B": "An isolated environment used for testing configuration changes or apps before applying them to production.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Major' 'Incident' 'Workflow' in JSM?",
+    "options": {
+      "A": "Hiring a person with the rank of Major.",
+      "B": "A specialized high-priority workflow used to coordinate the rapid resolution of critical service outages.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Permission Schemes' can grant permissions to specific users, groups, project roles, or even the values of custom 'User Picker' fields.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Atlassian' 'Cloud' 'Compliance' standards? (Select all that apply)",
+    "options": {
+      "A": "SOC2",
+      "B": "ISO 27001",
+      "C": "GDPR",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Project' 'Template' 'Inheritance'?",
+    "options": {
+      "A": "Inheriting money from a project.",
+      "B": "There is no true inheritance; templates are used once to create a starting configuration that can then be modified independently.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resolved' vs 'Closed' in Jira default logic?",
+    "options": {
+      "A": "They are identical terms.",
+      "B": "Resolved means a fix is provided; Closed is the final status after verification (depending on workflow design).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'JQL' to search for issues that have been 'Flagged' as impeded.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Issue' 'Navigator' 'Views'? (Select all that apply)",
+    "options": {
+      "A": "List View",
+      "B": "Detail View",
+      "C": "Excel View",
+      "D": "3D View"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Jira' 'User' 'Anonymization'?",
+    "options": {
+      "A": "Hiring a person who is anonymous.",
+      "B": "The process of deleting or obfuscating a user's personal data to comply with privacy laws like GDPR.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Jira', what is a 'Transition' 'Screen'?",
+    "options": {
+      "A": "A physical screen in the office.",
+      "B": "A screen that pops up during a status change to prompt the user for specific info (like a 'Resolution' or 'Comment').",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Components' in Jira can have a default assignee, but 'Labels' cannot.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Jira' 'Dashboard' 'Gadget' 'Limit' factors? (Select all that apply)",
+    "options": {
+      "A": "Browser performance",
+      "B": "Database query complexity",
+      "C": "Number of gadgets on a single page",
+      "D": "The physical speed of the light"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Cloud' 'IP' 'Allowlisting'?",
+    "options": {
+      "A": "Allowing the color white in the UI.",
+      "B": "A security feature that restricts Jira access to users connecting from specific authorized IP addresses.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Control' 'Chart' 'Standard' 'Deviation' significance?",
+    "options": {
+      "A": "Calculating the deviation of the team lead.",
+      "B": "Used to identify issues that took significantly longer than average, indicating process anomalies.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sub-tasks' inherit the 'Security Level' of their parent task automatically and this cannot be changed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Jira' 'API' 'Rate' 'Limits'? (Select all that apply)",
+    "options": {
+      "A": "Limits on the number of requests per second/minute",
+      "B": "Intended to prevent system overload",
+      "C": "Vary based on the Jira license type (Standard vs. Premium)",
+      "D": "Only apply to human users"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Jira' 'Advanced' 'Roadmaps' 'Dependency' 'Management'?",
+    "options": {
+      "A": "Managing the team's dependency on coffee.",
+      "B": "Visualizing and tracking 'Blocks' or 'Depends On' relationships between issues across different projects and teams.",
+      "C": "A security scan of the database.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  }
+  ]
+}

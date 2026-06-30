@@ -1,276 +1,327 @@
-/* Dashboard Styles */
+/* Dashboard Layout - Minimalist SaaS Style */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
-/* Core Reset */
-.dashboard-container * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  background-color: #f3f4f6;
-  color: #1f2937;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* Page Container */
-.page-container {
-  max-width: 1280px;
-  margin: 2rem auto 1.5rem;
-  padding: 0 1rem;
-}
-
-/* Cards Grid */
-.cards-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-@media (min-width: 768px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 1024px) {
-  .cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Card Wrapper */
-.card-wrapper {
+.dashboard-container {
+  min-height: 100vh;
+  /* Solid professional background as requested instead of gradient */
+  background-color: #F8FAFC;
+  background-image: none;
+  padding-top: var(--vh-header-height);
   display: flex;
   flex-direction: column;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
-.card-title-above {
-  font-size: 1.125rem;
+.dashboard-main {
+  max-width: 1400px;
+  /* Allows stretching on 15-inch laptops but caps on massive screens */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  /* Comfortable left and right gaps */
+  flex: 1;
+}
+
+/* Hero Section */
+.dashboard-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3.5rem;
+}
+
+.hero-content h1 {
+  font-size: 2rem;
   font-weight: 700;
-  color: #1f2937;
-  margin-bottom: 0.75rem;
-  line-height: 1.4;
-  text-align: center;
+  color: #111827;
+  /* Dark gray */
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
 }
 
-/* Dashboard Card */
-.dashboard-card {
-  position: relative;
-  background: #fff;
-  border: 2px solid #60a5fa;
-  border-radius: 12px;
-  padding: 1.5rem;
-  padding-top: 2.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  transition: all 0.3s ease;
-  min-height: 200px;
+.hero-content p {
+  color: #6B7280;
+  /* Medium gray */
+  font-size: 1.125rem;
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* Modules Grid */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Module Card - Clean & Structured */
+.module-card {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
-.dashboard-card:hover {
+.module-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-color: #3b82f6;
+  border-color: #D1D5DB;
 }
 
-.card-wrapper:nth-child(2) .dashboard-card {
-  border-color: #3b82f6;
-}
-
-.card-wrapper:nth-child(2) .card-number-badge {
-  background-color: #3b82f6;
-}
-
-.card-number-badge {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #60a5fa;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 0 0 12px 0;
-  font-weight: 600;
-  font-size: 0.875rem;
-  z-index: 1;
-}
-
-.card-description {
-  font-size: 0.875rem;
-  color: #4b5563;
-  line-height: 1.6;
-  margin: 0;
-  flex-grow: 1;
-}
-
-/* Split Card Styles */
-.card-split {
-  padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
-}
-
-.split-container {
+/* Header & Icon */
+.module-header {
   display: flex;
-  height: 100%;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
-.split-section {
-  flex: 1;
+.module-header h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1F2937;
+  letter-spacing: -0.01em;
+}
+
+/* Icon Wrappers - Soft Pastels */
+.module-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.module-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Updated Colors - Professional Palette */
+.blue-glow {
+  background-color: #EFF6FF;
+  /* blue-50 */
+  color: #2563EB;
+  /* blue-600 */
+}
+
+.purple-glow {
+  background-color: #FAF5FF;
+  /* purple-50 */
+  color: #9333EA;
+  /* purple-600 */
+}
+
+.teal-glow {
+  background-color: #CCFBF1;
+  /* teal-100 (for brighter contrast on dark card) */
+  color: #0F766E;
+  /* teal-700 */
+}
+
+.orange-glow {
+  background-color: #FFF7ED;
+  /* orange-50 */
+  color: #EA580C;
+  /* orange-600 */
+}
+
+.green-glow {
+  background-color: #F0FDF4;
+  /* green-50 */
+  color: #16A34A;
+  /* green-600 */
+}
+
+.pink-glow {
+  background-color: #FDF2F8;
+  /* pink-50 */
+  color: #DB2777;
+  /* pink-600 */
+}
+
+.indigo-glow {
+  background-color: #EEF2FF;
+  /* indigo-50 */
+  color: #4F46E5;
+  /* indigo-600 */
+}
+
+.module-card:hover .module-icon-wrapper {
+  transform: scale(1.05);
+  /* Subtle scale */
+}
+
+/* Actions */
+.module-actions {
+  margin-top: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   gap: 0.75rem;
-  padding: 1rem;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #F9FAFB;
+  border: 1px solid #F3F4F6;
+  border-radius: 0.5rem;
+  color: #4B5563;
+  font-weight: 500;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 8px;
 }
 
-.split-section:hover {
-  background-color: #f3f4f6;
+.action-btn:hover {
+  background-color: #F3F4F6;
+  border-color: #E5E7EB;
+  color: #111827;
 }
 
-.split-icon {
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
+.arrow-icon {
+  width: 16px;
+  height: 16px;
+  color: #9CA3AF;
+  transition: transform 0.2s;
 }
 
-.split-text {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #1f2937;
-  text-align: center;
+.action-btn:hover .arrow-icon {
+  transform: translateX(2px);
+  color: #4B5563;
 }
 
-.split-divider {
-  width: 1px;
-  background-color: #e5e7eb;
-  align-self: stretch;
-  flex-shrink: 0;
+/* Highlight Card (AI Interview) - Clean & Featured */
+.highlight-card {
+  grid-row: span 2;
+  background-color: #FFFFFF;
+  border: 2px solid #6366F1;
+  /* Indigo 500 border to show importance */
+  color: #1F2937;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.1), 0 2px 4px -1px rgba(99, 102, 241, 0.06);
 }
 
-/* Modal Styles */
-.modal-container {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  z-index: 1000;
+.highlight-card:hover {
+  background-color: #FFFFFF;
+  box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+  transform: translateY(-4px);
 }
 
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  background-color: rgba(17, 24, 39, 0.75);
+/* Ensure highlight card keeps its background on hover */
+.module-card.highlight-card:hover {
+  background: #FFFFFF;
+  color: #1F2937;
 }
 
-.modal-content {
-  position: relative;
-  background: #fff;
-  padding: 1.5rem 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  width: 100%;
-  max-width: 42rem;
-  z-index: 1001;
+.highlight-card .module-icon-wrapper {
+  background-color: #EEF2FF;
+  /* Indigo 50 */
+  color: #4F46E5;
+  /* Indigo 600 */
+  margin-bottom: 2rem;
 }
 
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.highlight-card h3 {
+  color: #111827;
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
-.modal-title {
-  font-size: 1.5rem;
+.highlight-card p {
+  color: #6B7280;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.primary-link-btn {
+  background-color: #4F46E5;
+  color: #FFFFFF;
+  border: none;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  /* Pill shape */
   font-weight: 600;
-  color: #1f2937;
-}
-
-.modal-grid {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .modal-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.modal-option {
-  border: 1px solid #d1d5db;
-  border-radius: 0.5rem;
-  padding: 1.5rem;
-  text-align: center;
-  transition: all 0.2s;
+  font-size: 0.95rem;
   cursor: pointer;
+  transition: all 0.2s ease;
+  width: fit-content;
 }
 
-.modal-option:hover {
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  transform: translateY(-2px);
+.primary-link-btn:hover {
+  background-color: #4338CA;
+  transform: translateY(-1px);
 }
 
-.modal-option h3 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #374151;
+/* Simple Card (Results) */
+.simple-card {
+  cursor: pointer;
+  justify-content: center;
+  min-height: 140px;
+}
+
+.simple-card-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  z-index: 10;
+}
+
+.simple-card-content h3 {
+  color: #1F2937;
   margin-bottom: 0.25rem;
 }
 
-.modal-option p {
-  font-size: 0.875rem;
-  color: #6b7280;
+.simple-card-content p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #6B7280;
 }
 
-.modal-close-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
+.card-arrow-bg {
+  position: absolute;
+  bottom: -10px;
+  right: -4px;
+  width: 100px;
+  height: 100px;
+  color: #F3F4F6;
+  transform: rotate(-15deg);
+  transition: all 0.3s ease;
+  z-index: 0;
 }
 
-/* Button Styles */
-.btn {
-  padding: 0.25rem 0.625rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  transition: all 0.2s ease-in-out;
-  border: 1px solid transparent;
-  cursor: pointer;
-  display: inline-block;
+.simple-card:hover .card-arrow-bg {
+  transform: rotate(0deg) scale(1.1);
+  color: #E5E7EB;
 }
 
-.btn-blue {
-  background-color: #3b82f6;
-  color: #fff;
-}
-
-.btn-blue:hover {
-  background-color: #2563eb;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .page-container {
-    margin-top: 1rem;
-    padding: 0 0.75rem;
+/* Responsive */
+@media (min-width: 1024px) {
+  .dashboard-hero {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
+@media (max-width: 640px) {
+  .modules-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .highlight-card {
+    grid-row: span 1;
+  }
+}

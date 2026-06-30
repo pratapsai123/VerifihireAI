@@ -9,11 +9,18 @@ from api import views
 
 urlpatterns = [
     path('', views.api_root, name='api-root'),
-    path('admin/', admin.site.urls),
+    path('django-admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('api/ai/', include('ai_assessments.urls')),
+    path('api/ai-candidates/', include('ai_candidates.urls')),
 ]
 
-# Serve media files in development
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files directly from backend (used as fallback for Nginx proxy)
+from django.urls import re_path
+from django.views.static import serve
 
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
+]

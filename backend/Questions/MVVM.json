@@ -1,0 +1,2385 @@
+{
+  "skill": "MVVM",
+  "questions": [
+    {
+      "question": "What is the primary goal of the MVVM architectural pattern?",
+      "options": {
+        "A": "To make the app run faster",
+        "B": "To achieve a clear separation of concerns between the UI logic and business logic",
+        "C": "To eliminate the need for a database",
+        "D": "To replace the need for unit testing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, which component is responsible for handling the UI and user interactions?",
+      "options": {
+        "A": "Model",
+        "B": "View",
+        "C": "ViewModel",
+        "D": "Controller"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component in MVVM acts as the 'State' of the View, providing data in a format the View can easily consume?",
+      "options": {
+        "A": "Model",
+        "B": "ViewModel",
+        "C": "Repository",
+        "D": "Service"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer of MVVM contains the data structures, business rules, and logic for data access?",
+      "options": {
+        "A": "Model",
+        "B": "View",
+        "C": "ViewModel",
+        "D": "UI"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Binding' in the context of MVVM?",
+      "options": {
+        "A": "Connecting the app to a database",
+        "B": "The automatic synchronization of data between the ViewModel and the View",
+        "C": "Compiling code into a binary format",
+        "D": "Linking two different apps together"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a strict MVVM implementation, the ViewModel should have a direct reference to the View.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in Android",
+        "D": "Only in iOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why is the lack of a reference to the View in the ViewModel beneficial?",
+      "options": {
+        "A": "It makes the app use less RAM",
+        "B": "It allows the ViewModel to be unit-tested without any UI dependencies",
+        "C": "It speeds up network requests",
+        "D": "It automatically generates the UI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a typical responsibility of the ViewModel?",
+      "options": {
+        "A": "Displaying a Toast or Alert",
+        "B": "Formatting a raw Date object into a String for a Label",
+        "C": "Drawing a custom shape on a Canvas",
+        "D": "Managing the hardware camera"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does the View typically notify the ViewModel of a user action (like a button click)?",
+      "options": {
+        "A": "By calling a method on the Model",
+        "B": "By calling a command or function exposed by the ViewModel",
+        "C": "By sending a text message",
+        "D": "By restarting the activity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Model-View-ViewModel' chain, what is the correct flow of data for an update?",
+      "options": {
+        "A": "View -> Model -> ViewModel",
+        "B": "Model -> ViewModel -> View",
+        "C": "ViewModel -> Model -> View",
+        "D": "View -> ViewModel -> View"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mechanism is commonly used in Android (using LiveData or Flow) or iOS (using Combine) to implement the 'binding' from ViewModel to View?",
+      "options": {
+        "A": "The Singleton Pattern",
+        "B": "The Observer Pattern",
+        "C": "The Factory Pattern",
+        "D": "The Strategy Pattern"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Two-Way Data Binding'?",
+      "options": {
+        "A": "Data moves from View to Model and back",
+        "B": "Changes in the UI update the ViewModel, and changes in the ViewModel update the UI automatically",
+        "C": "Connecting two ViewModels together",
+        "D": "A database synchronization technique"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should handle the navigation logic (routing) in a large MVVM application?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel (via a Router or Coordinator)",
+        "C": "The Model",
+        "D": "The XML layout"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Command' in MVVM?",
+      "options": {
+        "A": "A terminal command",
+        "B": "An object or closure that encapsulates an action to be performed by the ViewModel",
+        "C": "A database query",
+        "D": "A system-level interrupt"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, where should validation logic for a login form usually reside?",
+      "options": {
+        "A": "Inside the View (Activity/Fragment)",
+        "B": "Inside the ViewModel",
+        "C": "In the server-side code only",
+        "D": "In the app's build.gradle file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Separation of Concerns' mean in the context of MVVM?",
+      "options": {
+        "A": "Keeping the developer teams separate",
+        "B": "Ensuring each component has a distinct responsibility and minimal dependency on others",
+        "C": "Putting code in different folders",
+        "D": "Using different programming languages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is NOT a benefit of MVVM?",
+      "options": {
+        "A": "Easier maintenance",
+        "B": "Enhanced testability",
+        "C": "Increased complexity for very small/simple apps",
+        "D": "Elimination of all runtime bugs"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In an Android MVVM setup, what usually survives configuration changes (like screen rotation)?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel",
+        "C": "The Activity",
+        "D": "The Fragment"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer of MVVM is most likely to contain an instance of a networking library (like Retrofit or Alamofire)?",
+      "options": {
+        "A": "View",
+        "B": "ViewModel",
+        "C": "Model (often via a Repository)",
+        "D": "Resource folder"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the role of a 'Repository' in an MVVM architecture?",
+      "options": {
+        "A": "To design the UI",
+        "B": "To act as a clean API for data access, deciding whether to fetch from network or local database",
+        "C": "To manage view transitions",
+        "D": "To store the app's secret keys"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In SwiftUI, which property wrapper is the standard way to declare a ViewModel in a View?",
+      "options": {
+        "A": "@State",
+        "B": "@StateObject or @ObservedObject",
+        "C": "@Binding",
+        "D": "@Environment"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Jetpack Compose, how is the ViewModel usually provided to a Composable?",
+      "options": {
+        "A": "Via a global variable",
+        "B": "Through the viewModel() function or Hilt injection",
+        "C": "By creating a new instance inside the function body",
+        "D": "Using an Intent"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should decide when a loading spinner is visible?",
+      "options": {
+        "A": "The View (observing a 'isLoading' state in the ViewModel)",
+        "B": "The Model",
+        "C": "The Operating System",
+        "D": "The CSS file"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'State' object in MVVM?",
+      "options": {
+        "A": "A country",
+        "B": "A single object or data class in the ViewModel that represents the entire UI status",
+        "C": "The saved data on the disk",
+        "D": "The current location of the device"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the risk of putting too much logic in the View?",
+      "options": {
+        "A": "The app becomes too small",
+        "B": "The View becomes difficult to test and maintain (Massive View Controller syndrome)",
+        "C": "The UI becomes too pretty",
+        "D": "The app is rejected by the App Store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, how is data 'passed back' from a Model to a ViewModel?",
+      "options": {
+        "A": "The Model calls a method in the ViewModel",
+        "B": "The ViewModel observes a stream or uses a callback provided by the Model",
+        "C": "The Model sends a broadcast",
+        "D": "Using a static variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between MVC and MVVM?",
+      "options": {
+        "A": "MVVM doesn't use data",
+        "B": "In MVVM, the ViewModel is 'View-aware' only through binding/observation, whereas the Controller often manages the View directly",
+        "C": "MVC is newer than MVVM",
+        "D": "MVVM is only for web development"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which concept describes the ViewModel converting Model data into something displayable?",
+      "options": {
+        "A": "Translation",
+        "B": "Presentation Logic",
+        "C": "Hardcoding",
+        "D": "Recursion"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why is MVVM preferred for reactive frameworks like React, SwiftUI, and Jetpack Compose?",
+      "options": {
+        "A": "Because those frameworks are built on a declarative UI-follows-state model",
+        "B": "Because those frameworks don't support Java",
+        "C": "Because those frameworks are faster",
+        "D": "Because it's easier to write in one file"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In MVVM, where would you typically store a 'userLoggedIn' boolean flag?",
+      "options": {
+        "A": "In a UI Label",
+        "B": "In the ViewModel",
+        "C": "In the View's constructor",
+        "D": "In the strings.xml file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes the relationship between View and ViewModel?",
+      "options": {
+        "A": "One-to-One or Many-to-One (Many Views can use one ViewModel)",
+        "B": "Many-to-Many",
+        "C": "No relationship",
+        "D": "The ViewModel owns the View"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Loose Coupling' mean in an MVVM project?",
+      "options": {
+        "A": "The code is written poorly",
+        "B": "Components have little knowledge of the inner workings of other components",
+        "C": "The app crashes often",
+        "D": "Using only one library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "If you need to show a confirmation dialog, where should the logic to 'show' the dialog be triggered?",
+      "options": {
+        "A": "The ViewModel (via a state change that the View observes)",
+        "B": "Directly in the Model",
+        "C": "In the database",
+        "D": "In a background thread"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'notifyPropertyChanged' event (or similar) in MVVM?",
+      "options": {
+        "A": "To save data to the server",
+        "B": "To inform the View that a piece of data in the ViewModel has changed and should be re-rendered",
+        "C": "To update the app version",
+        "D": "To change the app theme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'Model' in a Todo app?",
+      "options": {
+        "A": "The 'Add Todo' button",
+        "B": "A 'TodoItem' class with 'title' and 'isCompleted' properties",
+        "C": "The color of the list item",
+        "D": "The logic to navigate to the settings screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Where should business logic like 'Calculating the total price after tax' be located?",
+      "options": {
+        "A": "View",
+        "B": "Model or ViewModel (depending on if it's domain or presentation logic)",
+        "C": "Main Thread",
+        "D": "UI XML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Android helps implement the binding between XML and ViewModel?",
+      "options": {
+        "A": "Data Binding Library",
+        "B": "Retrofit",
+        "C": "Glide",
+        "D": "Room"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property of a ViewModel makes it 'testable'?",
+      "options": {
+        "A": "It contains no UI framework classes (like Activity or SwiftUI.View)",
+        "B": "It has many variables",
+        "C": "It is written in Kotlin",
+        "D": "It uses the internet"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary difference between @StateObject and @ObservedObject in SwiftUI's MVVM implementation?",
+      "options": {
+        "A": "@StateObject is faster than @ObservedObject",
+        "B": "@StateObject ensures the ViewModel is not destroyed when the view redraws; @ObservedObject does not guarantee this",
+        "C": "@ObservedObject is only for strings",
+        "D": "@StateObject can only be used in the AppDelegate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Android MVVM, why is it recommended to use a 'Repository' between the ViewModel and the Data Sources?",
+      "options": {
+        "A": "To increase the app's file size",
+        "B": "To provide a clean API to the ViewModel and manage multiple data sources (like Network vs Cache) internally",
+        "C": "To design the UI layouts",
+        "D": "To handle user button clicks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unidirectional Data Flow' (UDF) often used alongside MVVM?",
+      "options": {
+        "A": "Data flows in circles",
+        "B": "A pattern where state only flows down to the View and actions only flow up to the ViewModel",
+        "C": "A way to download data faster",
+        "D": "A database synchronization method"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Code Smell' in an MVVM architecture?",
+      "options": {
+        "A": "A ViewModel containing a reference to a Context or a UIView",
+        "B": "A View that observes a ViewModel",
+        "C": "A Model that is a simple Data Class",
+        "D": "A ViewModel that is unit tested"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How should a ViewModel typically communicate a one-time event (like showing a Snackbar) to the View in Android?",
+      "options": {
+        "A": "By calling a public method on the Activity",
+        "B": "Using a SingleLiveEvent or a SharedFlow/Channel to emit a one-time signal",
+        "C": "By changing a global static variable",
+        "D": "By restarting the View"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, what is 'View Composition'?",
+      "options": {
+        "A": "Writing an essay about the UI",
+        "B": "Breaking down a large View and its ViewModel into smaller, reusable child Views and ViewModels",
+        "C": "Merging two apps into one",
+        "D": "The process of compiling the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the benefit of using 'Interfaces' or 'Protocols' for the Model layer in MVVM?",
+      "options": {
+        "A": "It makes the code harder to read",
+        "B": "It allows the ViewModel to be tested with 'Mock' data sources instead of real network calls",
+        "C": "It speeds up the database",
+        "D": "It is required by the App Store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component in MVVM is responsible for maintaining the 'UI State' during a device rotation in Android?",
+      "options": {
+        "A": "The Activity",
+        "B": "The ViewModel",
+        "C": "The XML layout",
+        "D": "The Manifest file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of MVVM, what does 'Fat ViewModel' refer to?",
+      "options": {
+        "A": "A ViewModel that takes up too much RAM",
+        "B": "An anti-pattern where the ViewModel contains too much business logic or irrelevant code",
+        "C": "A ViewModel with many users",
+        "D": "A ViewModel used for large screens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property wrapper is used in SwiftUI to publish changes from a ViewModel to a View?",
+      "options": {
+        "A": "@State",
+        "B": "@Published",
+        "C": "@Binding",
+        "D": "@Environment"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dependency Injection' (DI) and how does it relate to MVVM?",
+      "options": {
+        "A": "Injecting code into other apps",
+        "B": "The process of providing a ViewModel with its dependencies (like a Repository) from the outside, enhancing testability",
+        "C": "A way to update app versions",
+        "D": "A network security protocol"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'Mappers' in MVVM?",
+      "options": {
+        "A": "To find the user's GPS location",
+        "B": "To convert Data Models (Network/Database) into UI Models (ViewModel-friendly objects)",
+        "C": "To map the navigation flow",
+        "D": "To design the app icon"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Unit Test for a ViewModel, what should you 'Mock'?",
+      "options": {
+        "A": "The View",
+        "B": "The Data Sources or Repositories that the ViewModel depends on",
+        "C": "The ViewModel itself",
+        "D": "The Compiler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid way for a View to 'bind' to a ViewModel in React/Native?",
+      "options": {
+        "A": "Using 'useState' and 'useEffect' to sync with an external store/logic class",
+        "B": "Calling the database directly in the component",
+        "C": "Hardcoding the values",
+        "D": "Using only CSS"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Presentation Logic'?",
+      "options": {
+        "A": "The logic used to present a slideshow",
+        "B": "Logic in the ViewModel that determines how data should be displayed (e.g., hiding a button if a list is empty)",
+        "C": "The database query syntax",
+        "D": "The network protocol details"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, which component is usually a 'Struct' or 'Data Class'?",
+      "options": {
+        "A": "The View",
+        "B": "The Model",
+        "C": "The ViewModel",
+        "D": "The Controller"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main drawback of using MVVM for extremely simple, single-screen apps?",
+      "options": {
+        "A": "It makes the app run slow",
+        "B": "It introduces unnecessary boilerplate and complexity for a simple task",
+        "C": "It is not compatible with modern phones",
+        "D": "It requires an internet connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does MVVM support 'Design-Time Data' in tools like Android Studio or Xcode?",
+      "options": {
+        "A": "By downloading data from the web",
+        "B": "By allowing the View to bind to a ViewModel with hardcoded mock values for previewing",
+        "C": "By using the camera",
+        "D": "It doesn't support design-time data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'ViewModel-First' navigation approach, who decides which screen to show next?",
+      "options": {
+        "A": "The user only",
+        "B": "The current ViewModel (which then triggers the View or a Coordinator to navigate)",
+        "C": "The database",
+        "D": "The Main Activity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'MutableStateOf' in the context of Android Jetpack Compose MVVM?",
+      "options": {
+        "A": "A type of network error",
+        "B": "An observable state holder that Compose tracks to trigger recomposition when the value changes",
+        "C": "A database field",
+        "D": "A way to rename variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these testing types is most associated with the ViewModel in MVVM?",
+      "options": {
+        "A": "UI Testing (Espresso/XCUITest)",
+        "B": "Unit Testing (JUnit/XCTest)",
+        "C": "End-to-End Testing",
+        "D": "Manual Beta Testing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if a ViewModel is initialized inside a View's 'init' in SwiftUI using @ObservedObject?",
+      "options": {
+        "A": "It works perfectly",
+        "B": "The ViewModel might be re-initialized every time the View is redrawn, losing state",
+        "C": "The app crashes",
+        "D": "The ViewModel becomes private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Initialization' of a ViewModel?",
+      "options": {
+        "A": "Never initializing the ViewModel",
+        "B": "Initializing the ViewModel only when it is first accessed by the View",
+        "C": "Initializing the ViewModel on a slow thread",
+        "D": "Initializing the ViewModel after the app closes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer handles the 'Mapping' of a network JSON response to a domain object?",
+      "options": {
+        "A": "View",
+        "B": "ViewModel",
+        "C": "Model (or Data layer)",
+        "D": "Resource Manager"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Command Pattern' implementation in MVVM?",
+      "options": {
+        "A": "Using terminal commands",
+        "B": "Exposing actions as objects or functions that the View can execute without knowing the implementation",
+        "C": "A specific type of database",
+        "D": "A way to design buttons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you avoid a 'Memory Leak' when the ViewModel uses an observer in Android?",
+      "options": {
+        "A": "By never using observers",
+        "B": "By using Lifecycle-aware components like LiveData or cleaning up subscriptions in 'onCleared()'",
+        "C": "By making the ViewModel static",
+        "D": "By deleting the observer manually"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Transformations.map' in Android's LiveData MVVM?",
+      "options": {
+        "A": "To change the app's map view",
+        "B": "To create a new LiveData based on the output of another, effectively 'translating' data for the View",
+        "C": "To find a URL",
+        "D": "To navigate between sections"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, what should happen if a Model's data is updated from a background network thread?",
+      "options": {
+        "A": "The View should be updated immediately on the background thread",
+        "B": "The ViewModel should observe the change and ensure the update is posted to the Main Thread for the View",
+        "C": "The app should crash for safety",
+        "D": "Nothing happens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Binder' in some MVVM implementations?",
+      "options": {
+        "A": "A folder for papers",
+        "B": "The middle-ware or framework-level logic that handles the synchronization between View and ViewModel",
+        "C": "A tool to merge files",
+        "D": "A database connector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid 'ViewModel' name for a login screen?",
+      "options": {
+        "A": "LoginScreenActivity",
+        "B": "LoginViewModel",
+        "C": "UserDatabase",
+        "D": "LoginLayoutXml"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the main benefit of 'Two-Way Binding' for forms?",
+      "options": {
+        "A": "It is safer than one-way binding",
+        "B": "It reduces boilerplate code by automatically updating the ViewModel as the user types in a TextField",
+        "C": "It speeds up the server",
+        "D": "It allows for 3D UI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, who owns the 'Business Logic'?",
+      "options": {
+        "A": "The View",
+        "B": "The Model (Domain layer)",
+        "C": "The ViewModel",
+        "D": "The App Store"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'ObservableObject' in iOS Combine/SwiftUI MVVM?",
+      "options": {
+        "A": "To observe the user",
+        "B": "A protocol that allows a class to announce changes to its properties to any listening views",
+        "C": "To create a database",
+        "D": "To manage app permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State Reducer' in advanced MVVM/MVI?",
+      "options": {
+        "A": "A function that takes the current state and an action to produce a new state",
+        "B": "A tool to compress the app size",
+        "C": "A network error handler",
+        "D": "A way to reduce the number of views"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool helps in 'Visualizing' the MVVM data flow in Android Studio?",
+      "options": {
+        "A": "Logcat",
+        "B": "Layout Inspector and Database Inspector",
+        "C": "The Debugger",
+        "D": "Resource Manager"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why is 'Single Responsibility Principle' critical in MVVM?",
+      "options": {
+        "A": "To make the app run faster",
+        "B": "To ensure each layer (M, V, VM) is only doing what it's supposed to, making it modular and testable",
+        "C": "To use only one programming language",
+        "D": "To have only one developer on the project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you pass 'Arguments' (like a User ID) to a ViewModel upon initialization?",
+      "options": {
+        "A": "Via a static global variable",
+        "B": "Through a ViewModelFactory or custom initializer/Dependency Injection",
+        "C": "By putting it in the XML",
+        "D": "It's not possible"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Computed Properties' in a ViewModel?",
+      "options": {
+        "A": "To do heavy math on the main thread",
+        "B": "To provide a derived state (e.g., fullName from firstName and lastName) that the View can easily bind to",
+        "C": "To store secret keys",
+        "D": "To manage the app icon"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should handle 'Error Messages' formatting?",
+      "options": {
+        "A": "The View (displays the string)",
+        "B": "The ViewModel (prepares the localized string based on the error code)",
+        "C": "The Model",
+        "D": "The Server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Reactive Programming' in the context of MVVM?",
+      "options": {
+        "A": "Programming that reacts to viruses",
+        "B": "A programming paradigm concerned with data streams and the propagation of change (essential for MVVM binding)",
+        "C": "Programming with many buttons",
+        "D": "A type of database query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'View-Agnostic' mean for a ViewModel?",
+      "options": {
+        "A": "The ViewModel doesn't have any UI code",
+        "B": "The ViewModel doesn't know which specific View is observing it (could be an Activity, Fragment, or even a Unit Test)",
+        "C": "Both A and B",
+        "D": "The ViewModel is invisible"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In a 'Clean Architecture' + MVVM setup, where does MVVM sit?",
+      "options": {
+        "A": "The Domain Layer",
+        "B": "The Presentation Layer",
+        "C": "The Data Layer",
+        "D": "The Network Layer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Binding Expression' in Android Data Binding?",
+      "options": {
+        "A": "A way to calculate math in XML",
+        "B": "A small snippet of code inside the layout XML that links a UI property to a ViewModel property",
+        "C": "A network request",
+        "D": "A database key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a typical 'Action' from View to ViewModel?",
+      "options": {
+        "A": "onLoginClicked()",
+        "B": "updateDatabase()",
+        "C": "parseJson()",
+        "D": "showNotification()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In MVVM, what is a 'Wrapper' around a Model?",
+      "options": {
+        "A": "A security layer",
+        "B": "The ViewModel itself, wrapping Model data for presentation",
+        "C": "A folder",
+        "D": "A network interceptor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'LiveData'?",
+      "options": {
+        "A": "A TV broadcast",
+        "B": "An observable data holder class that is lifecycle-aware (Android specific)",
+        "C": "A type of database",
+        "D": "A real-time network connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between 'State' and 'Event' in a ViewModel?",
+      "options": {
+        "A": "There is no difference",
+        "B": "State is persistent (e.g., username); Event is transient (e.g., navigate to screen)",
+        "C": "State is for iOS; Event is for Android",
+        "D": "State is public; Event is private"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why does MVVM make it easier to fix 'Visual Bugs'?",
+      "options": {
+        "A": "It makes the code prettier",
+        "B": "Because you can isolate if the bug is in the data (Model), the translation (ViewModel), or the display (View)",
+        "C": "It automatically fixes the layout",
+        "D": "It uses fewer colors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'Hilt' or 'Dagger' in an MVVM project?",
+      "options": {
+        "A": "To design icons",
+        "B": "To automate the 'Dependency Injection' of Repositories into ViewModels",
+        "C": "To handle local storage",
+        "D": "To manage app themes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'MVVM-C' stand for?",
+      "options": {
+        "A": "Model-View-ViewModel-Controller",
+        "B": "Model-View-ViewModel-Coordinator (adding a navigation layer)",
+        "C": "Model-View-ViewModel-Cloud",
+        "D": "Model-View-ViewModel-Cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary role of a 'Mapper' class in an MVVM-based project?",
+      "options": {
+        "A": "To map UI touches to specific buttons",
+        "B": "To convert Data Models (from API/Database) into Domain or UI Models used by the ViewModel",
+        "C": "To find the physical location of the user",
+        "D": "To manage the navigation stack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, how should a 'Loading' state typically be represented in the ViewModel?",
+      "options": {
+        "A": "By calling a 'showLoading()' method on the View",
+        "B": "By updating an observable Boolean or State property that the View is listening to",
+        "C": "By freezing the UI thread",
+        "D": "By showing a static image in the XML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is responsible for 'Caching' logic in a robust MVVM architecture?",
+      "options": {
+        "A": "View",
+        "B": "ViewModel",
+        "C": "Repository (Model Layer)",
+        "D": "Activity/Fragment"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'State Slicing' in a large ViewModel?",
+      "options": {
+        "A": "Cutting the code into pieces",
+        "B": "Breaking down a single complex State object into multiple smaller, more manageable streams of data",
+        "C": "Deleting unused variables",
+        "D": "Managing different app versions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Where should 'Error Message Localization' happen in an ideal MVVM setup?",
+      "options": {
+        "A": "In the API response",
+        "B": "In the ViewModel (it provides the specific string or resource ID to the View)",
+        "C": "In the View (hardcoded)",
+        "D": "In the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pattern is often used within the Model layer to allow the ViewModel to observe database changes in real-time?",
+      "options": {
+        "A": "Singleton Pattern",
+        "B": "Observer Pattern (e.g., Room Flow/LiveData)",
+        "C": "Factory Pattern",
+        "D": "Command Pattern"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State Loss' and why is it a concern in MVVM?",
+      "options": {
+        "A": "Losing the user's internet connection",
+        "B": "When a View is destroyed/recreated and the ViewModel wasn't properly scoped to survive the change",
+        "C": "When the database is deleted",
+        "D": "When the app is uninstalled"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property wrapper in SwiftUI allows a ViewModel to be shared as a 'Global' style state across the entire app?",
+      "options": {
+        "A": "@State",
+        "B": "@EnvironmentObject",
+        "C": "@Binding",
+        "D": "@ObservedObject"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Side Effect' in a ViewModel?",
+      "options": {
+        "A": "A bug in the code",
+        "B": "An action that happens outside of the state change, such as logging or analytics",
+        "C": "A visual animation",
+        "D": "A network delay"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MVVM, what is 'Two-Way Binding' mostly used for?",
+      "options": {
+        "A": "Navigation",
+        "B": "Form inputs (syncing a TextField with a String property in the ViewModel)",
+        "C": "Image loading",
+        "D": "Sorting a list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer should handle 'Token Refresh' logic in a mobile app?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel",
+        "C": "The Data Layer (e.g., a Network Interceptor in the Model layer)",
+        "D": "The UI designer"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the benefit of using 'Sealed Classes' (Kotlin) or 'Enums' (Swift) to represent UI State?",
+      "options": {
+        "A": "They are faster",
+        "B": "They allow the View to handle 'Loading', 'Success', and 'Error' states in a type-safe, exhaustive way",
+        "C": "They automatically design the UI",
+        "D": "They reduce the app size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Loose Coupling' mean for testing a ViewModel?",
+      "options": {
+        "A": "The ViewModel depends on many classes",
+        "B": "The ViewModel can be tested by providing 'fake' implementations of its dependencies",
+        "C": "The test runs slowly",
+        "D": "The test requires a physical device"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid 'Command' from the View in a Todo app?",
+      "options": {
+        "A": "onDeleteTask(id: String)",
+        "B": "updateSqliteTable()",
+        "C": "printDebugLogs()",
+        "D": "renderCell()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Presentation Logic'?",
+      "options": {
+        "A": "Logic that decides which colors to use",
+        "B": "Logic that determines *what* to display based on the data (e.g., showing 'Guest' if name is null)",
+        "C": "Logic that handles GPU rendering",
+        "D": "Logic that writes to a CSV file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Computed Properties' in a ViewModel?",
+      "options": {
+        "A": "To perform complex math on the server",
+        "B": "To expose data that is derived from other pieces of state (e.g., isValidLogin)",
+        "C": "To hide private variables",
+        "D": "To manage app memory"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why is 'Unit Testing' easier in MVVM than in MVC?",
+      "options": {
+        "A": "Because ViewModels don't have a direct dependency on the UI/Platform framework",
+        "B": "Because MVVM uses more files",
+        "C": "Because the code is shorter",
+        "D": "Because it only works with Kotlin/Swift"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'State Reducer' pattern?",
+      "options": {
+        "A": "Reducing the number of views",
+        "B": "A function that takes the current state and an action to return a brand new state object",
+        "C": "A tool to compress images",
+        "D": "A way to delete data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should handle the 'Timer' logic for a countdown in a quiz app?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel",
+        "C": "The Device Clock",
+        "D": "The Layout XML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'View Model Factory' used for in Android?",
+      "options": {
+        "A": "To create new views",
+        "B": "To pass parameters (like a Repository) into a ViewModel's constructor",
+        "C": "To manufacture APKs",
+        "D": "To design layouts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'Data Binding' reduce boilerplate in the View?",
+      "options": {
+        "A": "It writes the code for you",
+        "B": "It eliminates the need for manual 'setText' or 'updateUI' calls by linking UI directly to data sources",
+        "C": "It removes the need for a ViewModel",
+        "D": "It compiles the app faster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a large app, what is a 'Shared ViewModel'?",
+      "options": {
+        "A": "A ViewModel used by multiple developers",
+        "B": "A single ViewModel instance shared by multiple Fragments/Views to communicate with each other",
+        "C": "A ViewModel stored in the cloud",
+        "D": "A ViewModel with no private variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the risk of having 'View-specific' code in the ViewModel?",
+      "options": {
+        "A": "It makes the app prettier",
+        "B": "It breaks the platform independence and makes it harder to reuse the ViewModel or unit test it",
+        "C": "It increases the font size",
+        "D": "It blocks the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which architectural pattern is considered a 'flavor' of MVVM that focuses on immutable state?",
+      "options": {
+        "A": "MVC",
+        "B": "MVI (Model-View-Intent)",
+        "C": "VIPER",
+        "D": "MVP"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Property Injection' in a ViewModel?",
+      "options": {
+        "A": "Injecting CSS into the view",
+        "B": "Assigning a dependency directly to a public property after the ViewModel is created",
+        "C": "Using only strings",
+        "D": "A type of database injection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you handle 'Alert Dialogs' in MVVM without passing a Context to the ViewModel?",
+      "options": {
+        "A": "You can't do it",
+        "B": "The ViewModel updates a state (e.g., 'showDialog = true'), and the View observes and displays the dialog",
+        "C": "You pass the Context anyway",
+        "D": "The Model shows the dialog"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Repository Pattern'?",
+      "options": {
+        "A": "A place to store code on GitHub",
+        "B": "An abstraction that mediates between the domain and data mapping layers, acting like an in-memory collection of objects",
+        "C": "A way to design buttons",
+        "D": "A network protocol"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer handles 'Pagination' logic in a list?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel (keeping track of current page) and Repository (fetching next page)",
+        "C": "The Phone's hardware",
+        "D": "The XML scroll listener only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Reactive' data binding?",
+      "options": {
+        "A": "Binding data to a virus",
+        "B": "A system where the UI 'reacts' automatically to any changes in the underlying data stream",
+        "C": "Manual UI updates",
+        "D": "Using only React.js"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Where should 'Analytics' tracking usually be triggered in MVVM?",
+      "options": {
+        "A": "In the View's onClick",
+        "B": "In the ViewModel, when it processes the user's intent/action",
+        "C": "In the database",
+        "D": "In the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Debouncing' in a ViewModel search implementation?",
+      "options": {
+        "A": "Removing double letters",
+        "B": "Waiting for a pause in user input before triggering a network request to avoid overloading the API",
+        "C": "A database error",
+        "D": "A slow animation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State Persistence'?",
+      "options": {
+        "A": "Saving the state of the app to survive process death or system shutdown",
+        "B": "A fast network",
+        "C": "A permanent view",
+        "D": "An unchangeable variable"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a 'ViewModel' responsibility?",
+      "options": {
+        "A": "Setting the status bar color",
+        "B": "Deciding if the 'Submit' button is enabled based on form input",
+        "C": "Saving a file to the SD card",
+        "D": "Inflating a layout"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Observer' in a SwiftUI MVVM setup?",
+      "options": {
+        "A": "The ViewModel",
+        "B": "The View",
+        "C": "The Model",
+        "D": "The User"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Observable' in an Android MVVM setup?",
+      "options": {
+        "A": "The XML file",
+        "B": "The LiveData/Flow properties inside the ViewModel",
+        "C": "The Activity",
+        "D": "The Database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Constructor Injection'?",
+      "options": {
+        "A": "Injecting code into the app constructor",
+        "B": "Passing all required dependencies through the class constructor during instantiation",
+        "C": "A type of virus",
+        "D": "A database tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Why should a ViewModel avoid 'Static' references to the View?",
+      "options": {
+        "A": "It's not allowed by the language",
+        "B": "It causes memory leaks because the static reference prevents the View from being garbage collected",
+        "C": "It makes the code too fast",
+        "D": "It's a security risk"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Business Logic' vs 'UI Logic'?",
+      "options": {
+        "A": "They are the same",
+        "B": "Business logic is the core rules of the app; UI logic is how it looks and behaves (e.g., animations)",
+        "C": "Business logic is for money; UI logic is for colors",
+        "D": "Business logic is server-side; UI logic is client-side"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which layer handles 'Networking Exceptions' and turns them into user-friendly messages?",
+      "options": {
+        "A": "The View",
+        "B": "The ViewModel",
+        "C": "The Model (or Repository)",
+        "D": "The Router"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Binding' in React Native?",
+      "options": {
+        "A": "A special library",
+        "B": "The process of passing 'props' down and triggering 'state' updates",
+        "C": "Using only JSON",
+        "D": "A CSS property"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'Separation of Concerns'?",
+      "options": {
+        "A": "The app uses more memory",
+        "B": "The code is more modular, easier to maintain, and simpler to test",
+        "C": "The app is harder to build",
+        "D": "The developer earns more"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'View Model Scoping'?",
+      "options": {
+        "A": "Looking at the ViewModel through a telescope",
+        "B": "Defining the lifecycle of a ViewModel (e.g., scoped to a Fragment, Activity, or Navigation Graph)",
+        "C": "Naming a ViewModel",
+        "D": "Deleting a ViewModel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should handle the 'Back' button press logic?",
+      "options": {
+        "A": "The Model",
+        "B": "The View (Activity/Fragment/SwiftUI View)",
+        "C": "The ViewModel (if it affects business state/navigation flow)",
+        "D": "The Database"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'State Persistence' using 'SavedStateHandle' in Android?",
+      "options": {
+        "A": "Saving the state to a cloud server",
+        "B": "A way for the ViewModel to save and restore its state across system-initiated process death",
+        "C": "A database feature",
+        "D": "A way to save images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Pure Function' in the context of Model/ViewModel logic?",
+      "options": {
+        "A": "A function with no code",
+        "B": "A function that always returns the same output for the same input and has no side effects",
+        "C": "A function only in Kotlin",
+        "D": "A public function"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool helps verify that the 'View' is correctly displaying the 'ViewModel' state?",
+      "options": {
+        "A": "Unit Test",
+        "B": "UI Test (Espresso / XCUITest)",
+        "C": "Lint",
+        "D": "Profiler"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mocking'?",
+      "options": {
+        "A": "Laughing at other apps",
+        "B": "Creating fake objects that simulate the behavior of real dependencies for testing purposes",
+        "C": "A type of database injection",
+        "D": "An animation style"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Inverse Data Binding'?",
+      "options": {
+        "A": "Binding data to the server",
+        "B": "When the View automatically updates the ViewModel (e.g., a Toggle changing a Boolean)",
+        "C": "Removing data",
+        "D": "Binding two models"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which design pattern is MVVM most closely related to?",
+      "options": {
+        "A": "Singleton",
+        "B": "Observer",
+        "C": "Adapter",
+        "D": "Facade"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State management'?",
+      "options": {
+        "A": "Managing the country",
+        "B": "The process of managing the inputs and outputs of an app to ensure the UI is consistent with the data",
+        "C": "Storing data in the cloud",
+        "D": "A tool to design layouts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a key advantage of using a 'State' data class in a ViewModel over multiple individual LiveData properties?",
+      "options": {
+        "A": "It makes the app run faster",
+        "B": "It ensures 'Atomicity', meaning the UI receives a single consistent update rather than multiple partial updates",
+        "C": "It allows the ViewModel to be larger",
+        "D": "It removes the need for a Model"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'BehaviorSubject' in reactive MVVM (RxSwift/RxJava)?",
+      "options": {
+        "A": "A way to track user behavior",
+        "B": "A subject that emits the most recent item to new subscribers, ideal for representing UI state",
+        "C": "A network error handler",
+        "D": "A tool to design animations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Clean Architecture approach, which layer does the 'ViewModel' translate data into?",
+      "options": {
+        "A": "Domain models into UI state",
+        "B": "JSON into SQL",
+        "C": "UI state into binary",
+        "D": "Server logs into text"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'View's' responsibility when it receives an error state from the ViewModel?",
+      "options": {
+        "A": "Retry the network call directly",
+        "B": "Decide how to visually present the error (e.g., showing a dialog or a red label)",
+        "C": "Log the error to the database",
+        "D": "Restart the application"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which testing pattern involves checking that the View correctly reflects the ViewModel's state without a real device?",
+      "options": {
+        "A": "Unit Testing",
+        "C": "Beta Testing",
+        "D": "Stress Testing",
+        "B": "Snapshot Testing (verifying the UI output for a given state)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'ViewModelStore' in Android?",
+      "options": {
+        "A": "To sell apps",
+        "B": "An object that manages the collection of ViewModels and ensures they are cleared when the scope is destroyed",
+        "C": "A local database",
+        "D": "A cloud storage for code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Thread Switching' in MVVM?",
+      "options": {
+        "A": "Moving logic from the Main thread (UI) to a Background thread (Data) and back for the result",
+        "B": "Using multiple programming languages",
+        "C": "Switching between different apps",
+        "D": "A database migration"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which modifier in SwiftUI is used to inject a ViewModel into the environment for all subviews to use?",
+      "options": {
+        "A": ".viewModel()",
+        "B": ".environmentObject()",
+        "C": ".provide()",
+        "D": ".shared()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cold vs Hot Observables' in the context of MVVM data binding?",
+      "options": {
+        "A": "Cold starts only when observed; Hot emits data regardless of observers",
+        "B": "Cold is for background; Hot is for UI",
+        "C": "Cold is local; Hot is network",
+        "D": "They are different names for variables"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Binding.constant' in SwiftUI?",
+      "options": {
+        "A": "To create a permanent database",
+        "B": "To create a hardcoded, immutable binding often used for previews or static UI",
+        "C": "To declare a constant variable",
+        "D": "To speed up the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a multi-module project, where should the 'Domain Models' reside to keep the MVVM clean?",
+      "options": {
+        "A": "In the View module",
+        "B": "In a core 'Domain' module with no platform dependencies",
+        "C": "In the ViewModel module",
+        "D": "In the Resource folder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'State Restoration' for a ViewModel?",
+      "options": {
+        "A": "Resetting the app",
+        "B": "Saving the ViewModel's internal state to disk so it can be restored after the system kills the app process",
+        "C": "Updating the app version",
+        "D": "Refreshing the UI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used in Android to facilitate 'Two-Way Binding' without manual listeners?",
+      "options": {
+        "A": "ObservableField",
+        "B": "StaticField",
+        "C": "ConstantField",
+        "D": "RemoteField"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'ViewModel Invalidation'?",
+      "options": {
+        "A": "When the code is wrong",
+        "B": "The process of clearing the ViewModel's resources (like cancelling network jobs) when it is no longer used",
+        "C": "Deleting the app",
+        "D": "A security error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of a 'Use Case' (Interactor) in an MVVM + Clean Architecture setup?",
+      "options": {
+        "A": "To design the UI",
+        "B": "To contain a single unit of business logic that the ViewModel calls to get data",
+        "C": "To manage navigation",
+        "D": "To store API keys"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which reactive operator is used to 'throttle' user input in a ViewModel to prevent too many API calls?",
+      "options": {
+        "A": "filter",
+        "B": "debounce",
+        "C": "map",
+        "D": "merge"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Single Source of Truth' principle imply for the View?",
+      "options": {
+        "A": "The View should have its own copy of the data",
+        "B": "The View should only ever display what the ViewModel provides and not hold its own business state",
+        "C": "The View should trust the user",
+        "D": "The View should ignore the Model"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Prop Drilling' in React Native MVVM, and how is it solved?",
+      "options": {
+        "A": "Drilling holes in code; solved by comments",
+        "B": "Passing data through many layers of components; solved by Context API or a State Management library (Redux/Zustand)",
+        "C": "A network error; solved by a router",
+        "D": "A database issue; solved by SQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'ViewModel's' relationship to the 'Lifecycle' of a View in Android?",
+      "options": {
+        "A": "The ViewModel is destroyed when the View is rotated",
+        "B": "The ViewModel is independent and survives configuration changes until the Activity is permanently finished",
+        "C": "The ViewModel controls the Lifecycle",
+        "D": "There is no relationship"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Circular Dependency' in MVVM?",
+      "options": {
+        "A": "A recursive function",
+        "B": "When the ViewModel depends on the View, and the View depends on the ViewModel, making the code impossible to compile or test",
+        "C": "A database loop",
+        "D": "A repeating animation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describes 'MVI' (Model-View-Intent) compared to MVVM?",
+      "options": {
+        "A": "MVI is for web; MVVM is for mobile",
+        "B": "MVI uses a single immutable state and formalizes user actions as 'Intents'",
+        "C": "MVVM is faster than MVI",
+        "D": "MVI does not use a Model"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'MockK' or 'Mockito' used for in MVVM testing?",
+      "options": {
+        "A": "To build the UI",
+        "B": "To create fake versions of Repositories to test the ViewModel's logic in isolation",
+        "C": "To mock the user's name",
+        "D": "To simulate slow internet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component should handle the 'Initialization' of data when a screen first opens?",
+      "options": {
+        "A": "The View (calls a 'loadData()' method in ViewModel's init or onAppear)",
+        "B": "The Model",
+        "C": "The Main Thread",
+        "D": "The OS"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Manual Dependency Injection'?",
+      "options": {
+        "A": "Typing code manually",
+        "B": "Passing dependencies into the constructor by hand without using a framework like Hilt or Dagger",
+        "C": "A type of virus",
+        "D": "A database update"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Stateful vs Stateless' Views in MVVM?",
+      "options": {
+        "A": "Stateless Views only display data passed to them; Stateful Views manage their own local state",
+        "B": "Stateful is for Android; Stateless is for iOS",
+        "C": "Stateful uses more battery",
+        "D": "They are the same"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property in a ViewModel should be 'Private'?",
+      "options": {
+        "A": "The MutableState (so only the ViewModel can change it)",
+        "B": "The View reference",
+        "C": "The strings.xml file",
+        "D": "All variables"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the benefit of 'ViewModel Composition'?",
+      "options": {
+        "A": "It makes the app heavier",
+        "B": "It allows complex screens to be built from smaller, focused ViewModels that are easier to test",
+        "C": "It removes the need for a Model",
+        "D": "It designs the app logo"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Unit Test, what does 'Verify' do?",
+      "options": {
+        "A": "Checks if the UI is pretty",
+        "B": "Checks that a specific method on a mock (like repository.fetchData) was actually called by the ViewModel",
+        "C": "Checks the app's version",
+        "D": "Checks for network errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Flow' or 'Publisher' in the context of MVVM?",
+      "options": {
+        "A": "The design of the app",
+        "B": "A stream of data that the View can observe to receive updates asynchronously",
+        "C": "A type of navigation",
+        "D": "A database table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you test a 'StateFlow' in a Kotlin Unit Test?",
+      "options": {
+        "A": "By clicking on the screen",
+        "B": "By using 'runTest' and 'collect' to assert the values emitted by the Flow",
+        "C": "By looking at Logcat",
+        "D": "By restarting the computer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Backpressure' in reactive MVVM?",
+      "options": {
+        "A": "When the phone gets hot",
+        "B": "A situation where the data source emits updates faster than the UI can process them",
+        "C": "A type of database error",
+        "D": "A slow network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'ViewModelDelegate' in Kotlin?",
+      "options": {
+        "A": "To delegate work to a user",
+        "B": "A concise way to initialize a ViewModel (e.g., 'by viewModels()') while handling its lifecycle and factory automatically",
+        "C": "To delete a ViewModel",
+        "D": "To manage project files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pattern helps in 'Decoupling' the ViewModel from the specific navigation framework?",
+      "options": {
+        "A": "Observer Pattern",
+        "B": "Coordinator or Router Pattern",
+        "C": "Singleton Pattern",
+        "D": "Factory Pattern"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unidirectional' vs 'Bidirectional' binding?",
+      "options": {
+        "A": "Unidirectional is one-way (VM to View); Bidirectional is two-way (VM to View and View to VM)",
+        "B": "Unidirectional is for simple apps",
+        "C": "Bidirectional is always better",
+        "D": "They are network protocols"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Presentation' layer in Clean Architecture?",
+      "options": {
+        "A": "The database",
+        "B": "The layer containing the View and ViewModel",
+        "C": "The server",
+        "D": "The UI assets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'MediatorLiveData' used for?",
+      "options": {
+        "A": "To observe multiple LiveData sources and react to changes in any of them",
+        "B": "To connect to the internet",
+        "C": "To create a 3D UI",
+        "D": "To manage app versions"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In MVVM, what should the View do with 'Business Exceptions'?",
+      "options": {
+        "A": "Ignore them",
+        "B": "Observe an error state and show the appropriate UI feedback (e.g., error message)",
+        "C": "Fix the error automatically",
+        "D": "Crash"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Model' in a simple 'Weather' app?",
+      "options": {
+        "A": "The refresh button",
+        "B": "The data class representing current temperature and conditions",
+        "C": "The background image",
+        "D": "The logic to show a cloud icon"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ViewModel-to-ViewModel' communication?",
+      "options": {
+        "A": "Two ViewModels talking via a shared Repository or a parent ViewModel",
+        "B": "ViewModels talking directly to each other (anti-pattern)",
+        "C": "Both A and B",
+        "D": "It's not possible"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Why is 'State' immutability important in modern MVVM?",
+      "options": {
+        "A": "It makes the app run faster",
+        "B": "It prevents accidental side effects and makes state changes predictable and easy to debug",
+        "C": "It is required by the compiler",
+        "D": "It uses less memory"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Binding' in the context of a 'Search' feature?",
+      "options": {
+        "A": "Connecting the search bar to the internet",
+        "B": "Automatically updating the search results list as the 'results' state in the ViewModel changes",
+        "C": "Binding the keyboard to the screen",
+        "D": "Saving the search history"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in iOS helps 'Publish' changes from the ViewModel to the View?",
+      "options": {
+        "A": "Combine Framework",
+        "B": "Storyboard",
+        "C": "Core Data",
+        "D": "UIKit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'View Model Injection'?",
+      "options": {
+        "A": "Giving the ViewModel a shot",
+        "B": "Using a DI framework to provide a ViewModel with its necessary Repositories or Use Cases",
+        "C": "Adding code to the ViewModel",
+        "D": "Deleting a ViewModel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sealed UI State'?",
+      "options": {
+        "A": "A hidden UI",
+        "B": "Using a sealed class/enum to define restricted states like Success, Loading, and Error",
+        "C": "A locked view",
+        "D": "A type of database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'DiffUtil' and how does it relate to MVVM List binding?",
+      "options": {
+        "A": "A tool to calculate math",
+        "B": "A utility that calculates the difference between two lists to update only the changed items in the UI for better performance",
+        "C": "A network tool",
+        "D": "A database key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'UI Testing' vs 'Unit Testing' in MVVM?",
+      "options": {
+        "A": "Unit tests the logic (ViewModel); UI tests the appearance and interaction (View)",
+        "B": "They are the same",
+        "C": "Unit is for Android; UI is for iOS",
+        "D": "Unit is for developers; UI is for users"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Live Template' in the context of MVVM productivity?",
+      "options": {
+        "A": "A template for a website",
+        "B": "Pre-defined code snippets in the IDE to quickly generate boilerplate MVVM code",
+        "C": "A design for a view",
+        "D": "A network request"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'Context' in a ViewModel Unit Test?",
+      "options": {
+        "A": "It is essential",
+        "B": "It should be absent; ViewModels should be plain objects to be easily testable on a JVM without Android dependencies",
+        "C": "It is used for math",
+        "D": "It is for logs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component manages 'Background Threads' for the ViewModel?",
+      "options": {
+        "A": "The View",
+        "B": "Coroutine Scopes or Thread Pools managed within the ViewModel or Repository",
+        "C": "The user",
+        "D": "The Phone's screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Final Goal' of MVVM for the developer?",
+      "options": {
+        "A": "To write more code",
+        "B": "To create a highly maintainable, testable, and scalable codebase",
+        "C": "To use every possible library",
+        "D": "To build only for iOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Swift 5.5 keyword is used to ensure a class is thread-safe by isolating its state to a single concurrency domain?",
+      "options": {
+        "A": "Class",
+        "B": "Actor",
+        "C": "Isolated",
+        "D": "SafeClass"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of the 'Coordinator' pattern in iOS development?",
+      "options": {
+        "A": "To handle network requests",
+        "B": "To remove the responsibility of navigation from the View Controllers",
+        "C": "To manage the Core Data stack",
+        "D": "To design the app icon"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to tell the system to flatten a view hierarchy into a single layer for faster rendering of complex shapes?",
+      "options": {
+        "A": ".flatten()",
+        "B": ".drawingGroup()",
+        "C": ".renderLayer()",
+        "D": ".metal()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Swift, what does the 'Sendable' protocol indicate?",
+      "options": {
+        "A": "The type can be sent via email",
+        "B": "The type can be safely passed across concurrency boundaries",
+        "C": "The type is compatible with JSON",
+        "D": "The type is a reference type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'App Thinning' in the context of iOS deployment?",
+      "options": {
+        "A": "Removing unused code from the source",
+        "B": "A set of strategies (Slicing, Bitcode, On-Demand Resources) to optimize app delivery based on the user's specific device",
+        "C": "Reducing the number of screens in the app",
+        "D": "Minifying Swift code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property wrapper is used in SwiftUI to store small amounts of data that should persist between app launches in UserDefaults?",
+      "options": {
+        "A": "@State",
+        "B": "@AppStorage",
+        "C": "@SceneStorage",
+        "D": "@Published"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of 'MainActor' in a modern Swift application?",
+      "options": {
+        "A": "To act as the main character of the app",
+        "B": "To ensure that code (usually UI updates) runs on the main thread",
+        "C": "To manage the app delegate",
+        "D": "To handle background downloads"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Method Swizzling' in iOS?",
+      "options": {
+        "A": "A way to rename variables",
+        "B": "Exchanging the implementations of two methods at runtime",
+        "C": "Deleting unused methods",
+        "D": "A build error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier allows you to change the background of the safe area for a specific view?",
+      "options": {
+        "A": ".background()",
+        "B": ".ignoresSafeArea()",
+        "C": ".safeAreaInset()",
+        "D": ".margin()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Opaque Return Type' in SwiftUI (some View)?",
+      "options": {
+        "A": "A view that is semi-transparent",
+        "B": "A return type that hides the specific implementation of the view tree from the compiler for efficiency",
+        "C": "A private view",
+        "D": "A generic view"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which framework is used to implement Apple's 'Sign in with Apple' feature?",
+      "options": {
+        "A": "UIKit",
+        "B": "AuthenticationServices",
+        "C": "CryptoKit",
+        "D": "SocialKit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bitcode' in the iOS build process?",
+      "options": {
+        "A": "A type of encryption",
+        "B": "An intermediate representation of a compiled program that allows Apple to re-optimize the app binary for new hardware later",
+        "C": "A binary file for the database",
+        "D": "A QR code for the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In SwiftUI, what is a 'Namespace' used for?",
+      "options": {
+        "A": "To group code files",
+        "B": "To provide a common identifier for synchronized animations, like 'matchedGeometryEffect'",
+        "C": "To name variables",
+        "D": "To manage network domains"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'XCTestExpectation' in unit testing?",
+      "options": {
+        "A": "To expect the app to crash",
+        "B": "To test asynchronous code by waiting for a specific event to occur",
+        "C": "To set the app's version",
+        "D": "To check for syntax errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which modifier allows you to perform an action when a SwiftUI view appears for the first time?",
+      "options": {
+        "A": ".onStart()",
+        "B": ".onAppear()",
+        "C": ".start()",
+        "D": ".launch()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Deadlock' in iOS multi-threading?",
+      "options": {
+        "A": "The app running out of battery",
+        "B": "Two or more threads waiting forever for each other to release resources",
+        "C": "A network timeout",
+        "D": "A slow animation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI component is used to display a hierarchical set of views with a sidebar on iPad?",
+      "options": {
+        "A": "NavigationView",
+        "B": "NavigationSplitView",
+        "C": "SidebarView",
+        "D": "SplitStack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Type Erasure' in Swift?",
+      "options": {
+        "A": "Deleting a variable's type",
+        "B": "The process of hiding a specific type behind a generic wrapper (like AnyView or AnyCancellable)",
+        "C": "Converting an Int to a String",
+        "D": "A compiler error"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to monitor the device's battery level and state programmatically?",
+      "options": {
+        "A": "BatteryManager",
+        "B": "UIDevice",
+        "C": "PowerStats",
+        "D": "EnergyMonitor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'On-Demand Resources' in iOS?",
+      "options": {
+        "A": "To buy resources online",
+        "B": "To download specific app assets (like game levels) only when the user needs them to save initial download size",
+        "C": "To update the app automatically",
+        "D": "To manage RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier adds a 'badge' (number or dot) to a tab item or list row?",
+      "options": {
+        "A": ".notification()",
+        "B": ".badge()",
+        "C": ".dot()",
+        "D": ".alert()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dynamic Type' in iOS?",
+      "options": {
+        "A": "Changing the programming language at runtime",
+        "B": "A feature that allows users to adjust the size of text system-wide for accessibility",
+        "C": "A variable that can be any type",
+        "D": "An animation style"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to declare a property that is initialized only once, the first time it is accessed?",
+      "options": {
+        "A": "static",
+        "B": "lazy",
+        "C": "init",
+        "D": "once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'SKAdNetwork' for iOS developers?",
+      "options": {
+        "A": "To manage game networks",
+        "B": "A privacy-focused framework for measuring the effectiveness of ad campaigns without tracking users",
+        "C": "To connect to Wi-Fi",
+        "D": "To manage in-app purchases"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Xcode is used to find memory leaks and retain cycles visually?",
+      "options": {
+        "A": "Logcat",
+        "B": "Memory Graph Debugger",
+        "C": "CPU Profiler",
+        "D": "Inspector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Swift Charts'?",
+      "options": {
+        "A": "A way to see app ratings",
+        "B": "A powerful framework for creating data visualizations in SwiftUI using declarative syntax",
+        "C": "A tool to track code changes",
+        "D": "A database of icons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which attribute is used to allow a function to return multiple values wrapped in a result builder (like a ViewBuilder)?",
+      "options": {
+        "A": "@escaping",
+        "B": "@ViewBuilder",
+        "C": "@result",
+        "D": "@multi"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Background Tasks' (BGTaskScheduler) used for?",
+      "options": {
+        "A": "To run animations while the user is typing",
+        "B": "To perform maintenance tasks like data syncing or cleaning while the app is in the background",
+        "C": "To play music",
+        "D": "To manage push notifications"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to define the 'safe area' for a view?",
+      "options": {
+        "A": ".margin()",
+        "B": ".safeAreaInset()",
+        "C": ".border()",
+        "D": ".padding()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Swift Package Index'?",
+      "options": {
+        "A": "A book about Swift",
+        "B": "A community-maintained search engine for Swift packages",
+        "C": "A folder in Xcode",
+        "D": "An Apple documentation site"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to call a superclass's implementation of a method?",
+      "options": {
+        "A": "this",
+        "B": "super",
+        "C": "parent",
+        "D": "base"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'UIPresentationController' in UIKit?",
+      "options": {
+        "A": "To present a slideshow",
+        "B": "To manage the transition animations and display of a presented view controller",
+        "C": "To design the UI",
+        "D": "To handle touch events"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI view allows for building a 'Form' that automatically styles its inputs for settings screens?",
+      "options": {
+        "A": "List",
+        "B": "Form",
+        "C": "Stack",
+        "D": "Settings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Haptic Feedback' in iOS?",
+      "options": {
+        "A": "A type of sound",
+        "B": "Physical vibrations or pulses using the Taptic Engine to provide tactile feedback to the user",
+        "C": "A visual flash",
+        "D": "A network status"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which modifier is used to apply a custom shadow to a SwiftUI view?",
+      "options": {
+        "A": ".elevation()",
+        "B": ".shadow()",
+        "C": ".glow()",
+        "D": ".darken()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'App Groups'?",
+      "options": {
+        "A": "To group apps on the home screen",
+        "B": "To allow multiple apps or an app and its extension from the same developer to share data and resources",
+        "C": "To manage app versions",
+        "D": "To track users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to change the navigation style to a stack instead of a split view on iPad?",
+      "options": {
+        "A": ".stackStyle()",
+        "B": ".navigationViewStyle(.stack)",
+        "C": ".split(false)",
+        "D": ".full()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'StoreKit'?",
+      "options": {
+        "A": "A tool to store data",
+        "B": "Apple's framework for managing in-app purchases and subscriptions",
+        "C": "A physical Apple Store app",
+        "D": "A database tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is the foundation for creating 'Interactive Transitions' in UIKit?",
+      "options": {
+        "A": "UIPercentDrivenInteractiveTransition",
+        "B": "UIAnimator",
+        "C": "UITransitionManager",
+        "D": "UIPresentation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Self-Sizing' cells in modern UITableView/UICollectionView?",
+      "options": {
+        "A": "Cells that change color",
+        "B": "Cells that automatically calculate their height based on Auto Layout constraints",
+        "C": "Manual height calculation",
+        "D": "A database feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to create a paged-style scroll view?",
+      "options": {
+        "A": ".paged()",
+        "B": ".tabViewStyle(.page)",
+        "C": ".scrollStyle(.paged)",
+        "D": ".snap()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Core Motion' framework?",
+      "options": {
+        "A": "To manage app animations",
+        "B": "To process data from device hardware like the accelerometer, gyroscope, and pedometer",
+        "C": "To handle gestures",
+        "D": "To track the user's GPS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to set the 'accent color' for the entire view hierarchy?",
+      "options": {
+        "A": ".foregroundColor()",
+        "B": ".tint()",
+        "C": ".accentColor() (deprecated)",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'CloudKit'?",
+      "options": {
+        "A": "A tool to weather forecast",
+        "B": "Apple's remote database service that allows apps to store data in iCloud",
+        "C": "A network security tool",
+        "D": "A type of server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which modifier allows you to change the corner radius of a SwiftUI view?",
+      "options": {
+        "A": ".radius()",
+        "B": ".cornerRadius()",
+        "C": ".round()",
+        "D": ".shape()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'App Store Connect'?",
+      "options": {
+        "A": "A social network for developers",
+        "B": "The web-based tool for managing apps, releases, and financial reports for the App Store",
+        "C": "A debugging tool",
+        "D": "A Wi-Fi setting"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SwiftUI modifier is used to add a header to a Section in a List?",
+      "options": {
+        "A": ".header()",
+        "B": "Section(header: )",
+        "C": ".title()",
+        "D": ".addHeader()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Universal Links'?",
+      "options": {
+        "A": "Links that work on any website",
+        "B": "Standard HTTPS links that open your app to specific content instead of a web browser",
+        "C": "A type of network connection",
+        "D": "A tool to link apps"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which modifier is used to apply a 3D rotation to a SwiftUI view?",
+      "options": {
+        "A": ".rotate3D()",
+        "B": ".rotation3DEffect()",
+        "C": ".transform3D()",
+        "D": ".skew()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'SwiftUI Previews' feature?",
+      "options": {
+        "A": "A way to see the app before it is built",
+        "B": "A feature in Xcode that allows you to see real-time UI changes as you code",
+        "C": "An app store trailer",
+        "D": "A database view"
+      },
+      "answer": "B"
+    }
+  ]
+}

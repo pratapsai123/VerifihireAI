@@ -1,0 +1,2015 @@
+{ 
+  "skill": "Tooling", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of 'Git' in software development?",
+    "options": {
+      "A": "To host the application on a public website.",
+      "B": "A version control system used to track changes in source code during development.",
+      "C": "To compile high-level code into machine language.",
+      "D": "To act as a physical database for user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Git, which command is used to save your staged changes to the local repository?",
+    "options": {
+      "A": "git push",
+      "B": "git commit",
+      "C": "git add",
+      "D": "git pull"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GitHub and Git are the same thing.",
+    "options": {
+      "A": "False (Git is the tool; GitHub is a hosting service for Git repositories).",
+      "B": "True",
+      "C": "Only for open-source projects",
+      "D": "Only if using a Mac"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Package Manager' like npm or pip?",
+    "options": {
+      "A": "To wrap physical hardware in boxes for shipping.",
+      "B": "To automate the process of installing, upgrading, and configuring software dependencies.",
+      "C": "To write the application's user documentation.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular 'Integrated Development Environment' (IDE)?",
+    "options": {
+      "A": "Visual Studio Code",
+      "B": "Google Chrome",
+      "C": "Microsoft Excel",
+      "D": "Adobe Photoshop"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the command 'git clone' do?",
+    "options": {
+      "A": "Deletes a repository from the server.",
+      "B": "Creates a local copy of a remote repository.",
+      "C": "Renames a branch in the repository.",
+      "D": "Encrypts the source code files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A '.gitignore' file is used to specify which files or directories Git should ignore and not track.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for temporary text files",
+      "D": "Only in production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Linting' in the context of development tooling?",
+    "options": {
+      "A": "Cleaning the dust off a server rack.",
+      "B": "The automated checking of source code for programmatic and stylistic errors.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous code deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is typically used in Linux/Unix to view the contents of a directory in the terminal?",
+    "options": {
+      "A": "dir",
+      "B": "ls",
+      "C": "view",
+      "D": "open"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Docker is a tool used to create, deploy, and run applications using containers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux kernels",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Pull Request' (or Merge Request)?",
+    "options": {
+      "A": "A request to pull a server out of a rack.",
+      "B": "A method of submitting contributions to an open development project, allowing for code review before merging.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these file formats is commonly used for configuration files in modern DevOps tools?",
+    "options": {
+      "A": "MP3",
+      "B": "YAML",
+      "C": "JPEG",
+      "D": "AVI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bash' is a Unix shell and command language used to interact with the operating system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'SSH' (Secure Shell)?",
+    "options": {
+      "A": "To speed up the internet connection.",
+      "B": "A cryptographic network protocol for operating network services securely over an unsecured network (e.g., remote login).",
+      "C": "To encrypt the database BIOS.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to automate the 'Build' process for Java applications?",
+    "options": {
+      "A": "Maven",
+      "B": "Notepad++",
+      "C": "Windows Explorer",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Homebrew' is a popular package manager for macOS and Linux.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for server software",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Markdown' (.md) primarily used for?",
+    "options": {
+      "A": "To write high-performance C++ code.",
+      "B": "A lightweight markup language with plain-text-formatting syntax often used for README files.",
+      "C": "A specialized tool for drawing 3D models.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Git, what does 'git push' do?",
+    "options": {
+      "A": "Deletes the local repository.",
+      "B": "Updates remote refs using local refs, essentially sending your commits to the server.",
+      "C": "Merges two branches together locally.",
+      "D": "Encrypts the network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Postman' is a tool primarily used for testing and interacting with APIs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internal APIs",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Command Line Interface' (CLI)?",
+    "options": {
+      "A": "The physical front of a server rack.",
+      "B": "A text-based interface used to interact with software and operating systems by typing commands.",
+      "C": "A graphical user interface with buttons and icons.",
+      "D": "The history of all previous hardware changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'JavaScript' package manager?",
+    "options": {
+      "A": "pip",
+      "B": "npm",
+      "C": "apt",
+      "D": "yum"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Docker Hub' is a cloud-based repository for finding and sharing container images.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-commercial data",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Visual Studio Code' (VS Code)?",
+    "options": {
+      "A": "A video editing software.",
+      "B": "A lightweight but powerful source code editor that runs on your desktop.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Git command is used to check the status of your working directory and staging area?",
+    "options": {
+      "A": "git check",
+      "B": "git status",
+      "C": "git view",
+      "D": "git log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vim' and 'Nano' are text editors that can be used directly within a terminal.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Continuous Integration' (CI)?",
+    "options": {
+      "A": "Paying for software continuously.",
+      "B": "The practice of automating the integration of code changes from multiple contributors into a single software project.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these tools is commonly used for 'CI/CD' automation?",
+    "options": {
+      "A": "Jenkins",
+      "B": "Adobe Reader",
+      "C": "Microsoft Paint",
+      "D": "Google Sheets"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Slack' and 'Microsoft Teams' are often integrated with development tools to provide real-time alerts and collaboration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Debugging'?",
+    "options": {
+      "A": "Cleaning physical bugs out of the server.",
+      "B": "The process of identifying and removing errors from computer hardware or software.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The salary of a junior developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is the primary 'Package Manager' for Python?",
+    "options": {
+      "A": "pip",
+      "B": "npm",
+      "C": "brew",
+      "D": "apt"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Git 'Branching' allows developers to work on different features or fixes in isolation from the main codebase.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Repository' (Repo)?",
+    "options": {
+      "A": "A physical box for storing hard drives.",
+      "B": "A central location where data, such as source code, is stored and managed.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Version Control' hosting provider?",
+    "options": {
+      "A": "Bitbucket",
+      "B": "GitLab",
+      "C": "GitHub",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Unit Testing' involves testing individual components or pieces of code to ensure they work correctly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java code",
+      "D": "Only if the code is in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jira' primarily used for?",
+    "options": {
+      "A": "To edit code.",
+      "B": "To track issues, bugs, and manage project workflows.",
+      "C": "To encrypt network signals.",
+      "D": "The brand name of a popular monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command in Git is used to fetch and integrate changes from a remote repository into your current branch?",
+    "options": {
+      "A": "git pull",
+      "B": "git send",
+      "C": "git commit",
+      "D": "git add"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Virtualization' allows developers to run different operating systems or environments on a single physical machine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Terraform'?",
+    "options": {
+      "A": "A tool for fixing server hardware.",
+      "B": "An open-source infrastructure as code software tool.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Local Tooling'?",
+    "options": {
+      "A": "Your terminal emulator",
+      "B": "A cloud-based database",
+      "C": "A global CDN",
+      "D": "An external API"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Prettier' is a tool used to automatically format code for consistent style.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for HTML",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Environment Variables'?",
+    "options": {
+      "A": "Variables that change based on the weather.",
+      "B": "Key-value pairs used to configure the behavior of applications and tools across different environments.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mercurial' is another type of version control system, similar to Git.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python code",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DevOps'?",
+    "options": {
+      "A": "Hiring two different teams for every project.",
+      "B": "A set of practices that combines software development (Dev) and IT operations (Ops) to shorten the systems development life cycle.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of hours a server has been on."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'CLI-based' version control tool?",
+    "options": {
+      "A": "Git",
+      "B": "Adobe Reader",
+      "C": "Windows Media Player",
+      "D": "Microsoft Word"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Kubectl' is a command-line tool for controlling Kubernetes clusters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Source Code'?",
+    "options": {
+      "A": "The text version of a computer program that a human can read.",
+      "B": "The physical hardware of the computer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' in a project?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Slack' can be used as a tool for ChatOps, where commands are executed directly from the chat interface.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior engineers",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Automation' in the context of tooling?",
+    "options": {
+      "A": "Using robots to clean the office.",
+      "B": "The use of software to create and deliver software and systems with minimal human intervention.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Package' file used by npm?",
+    "options": {
+      "A": "package.json",
+      "B": "config.xml",
+      "C": "init.sh",
+      "D": "main.c"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Visual Studio' (not Code) is a full-featured IDE often used for .NET development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SSH Key' primarily used for?",
+    "options": {
+      "A": "Unlocking the server room door.",
+      "B": "To provide a secure way to log into a remote server without using a password.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Git command is used to create a new branch?",
+    "options": {
+      "A": "git branch [name]",
+      "B": "git new [name]",
+      "C": "git add [name]",
+      "D": "git commit [name]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ansible' is a tool used for configuration management and automation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows servers",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Artifact' in a build pipeline?",
+    "options": {
+      "A": "An old computer from the 1970s.",
+      "B": "The output of a build process (e.g., a compiled binary or a JAR file) that is ready for deployment.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snyk' is a tool used to find vulnerabilities in open-source dependencies.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scripting'?",
+    "options": {
+      "A": "The process of writing small programs to automate repetitive tasks.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Failed Builds'?",
+    "options": {
+      "A": "Build Failure Rate",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is the practice of integrating security into every part of the DevOps process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hotkeys' (Shortcuts) in an IDE?",
+    "options": {
+      "A": "Physical keys that are physically hot.",
+      "B": "Combinations of keys that perform specific actions quickly, improving developer productivity.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'SSH'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Compiler' translates source code into machine code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for C++",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Software Tooling'?",
+    "options": {
+      "A": "The collection of programs and utilities used to build, manage, and deploy software.",
+      "B": "The physical tools used to build a server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Users' using a specific tool?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'git merge' and 'git rebase' when integrating changes from a feature branch into the main branch?",
+    "options": {
+      "A": "Merge deletes the branch; Rebase renames it.",
+      "B": "Merge creates a new commit that joins the histories; Rebase moves the entire feature branch to the tip of the main branch, creating a linear history.",
+      "C": "Rebase is safer because it doesn't change commit hashes.",
+      "D": "Merge only works for local branches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In package managers like npm or Yarn, what is the critical role of a 'lockfile' (e.g., package-lock.json or yarn.lock)?",
+    "options": {
+      "A": "To lock the source code so it cannot be edited.",
+      "B": "To ensure that every installation of the project results in the exact same dependency tree, regardless of when it is installed.",
+      "C": "To encrypt the project's passwords.",
+      "D": "To prevent the project from running on older versions of Node.js."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'git stash' command is used to temporarily shelf changes you've made to your working copy so you can work on something else, then come back and re-apply them later.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for untracked files",
+      "D": "Only if the branch is protected"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Docker Volumes' in a containerized development environment?",
+    "options": {
+      "A": "To increase the volume of the audio output.",
+      "B": "To provide persistent storage that exists outside the container's lifecycle, allowing data to be shared and saved between restarts.",
+      "C": "To compress the container image size.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Git command allows you to pick a single commit from one branch and apply it to another branch?",
+    "options": {
+      "A": "git copy",
+      "B": "git cherry-pick",
+      "C": "git move",
+      "D": "git select"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Bash script, the variable '$?' is used to capture the exit status of the previously executed command.",
+    "options": {
+      "A": "True (0 usually means success, any other number means failure).",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if using the Zsh shell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Refactoring' in an IDE like VS Code or IntelliJ primarily involve?",
+    "options": {
+      "A": "Deleting the code and starting over.",
+      "B": "Restructuring existing computer code without changing its external behavior to improve readability or reduce complexity.",
+      "C": "Converting the code into a different programming language automatically.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to 'Containerize' a local development environment, ensuring all team members have identical setups (OS, libraries, etc.)?",
+    "options": {
+      "A": "Docker Compose",
+      "B": "Slack",
+      "C": "Postman",
+      "D": "FileZilla"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Semantic Versioning' (SemVer) uses a three-part version number (MAJOR.MINOR.PATCH) to communicate the extent of changes in a software release.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for open-source projects",
+      "D": "Only if using GitHub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Interactive Staging' in Git (git add -p)?",
+    "options": {
+      "A": "A physical stage for showing code to the team.",
+      "B": "A way to review and select specific 'hunks' or parts of a file to stage for a commit rather than the whole file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving commits between different servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Git' traffic over SSH by default?",
+    "options": {
+      "A": "80",
+      "B": "22",
+      "C": "443",
+      "D": "9418"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Pre-commit Hooks' can automatically run linters or tests before a developer is allowed to commit code to the repository.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java projects",
+      "D": "Only if the user is an admin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Dotfiles' (e.g., .bashrc, .vimrc, .gitconfig) in a developer's environment?",
+    "options": {
+      "A": "To store deleted files.",
+      "B": "To customize and store the configuration settings for various tools and shells.",
+      "C": "A specialized way to encrypt password files.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Docker, what is the 'Build Cache' used for?",
+    "options": {
+      "A": "To store the user's login credentials.",
+      "B": "To reuse previously built layers of an image if the instructions haven't changed, significantly speeding up the build process.",
+      "C": "To backup the source code.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Port Forwarding' in an IDE like VS Code allows you to access a web server running inside a remote container or server on your local browser.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Code Snippets' in a modern IDE?",
+    "options": {
+      "A": "To encrypt small pieces of code.",
+      "B": "To provide reusable templates for common code patterns, allowing developers to insert them quickly using a keyword.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Git command is used to change the commit message of the most recent commit?",
+    "options": {
+      "A": "git commit --amend",
+      "B": "git rewrite",
+      "C": "git fix",
+      "D": "git log --edit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Monorepo', multiple different projects or services are stored within a single Git repository.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small startups",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Technical Debt' in the context of developer experience?",
+    "options": {
+      "A": "Financial debt from buying server hardware.",
+      "B": "The long-term cost of choosing an easy, short-term solution or neglecting code quality/tooling updates.",
+      "C": "A specialized way to encrypt database connections.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of an IDE allows you to search for and install extensions to add new features (e.g., Python support, Docker integration)?",
+    "options": {
+      "A": "Extension Marketplace / Plugin Manager",
+      "B": "Source Control Tab",
+      "C": "Output Console",
+      "D": "File Explorer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'SSH-Agent' allows you to store your decrypted SSH keys in memory so you don't have to type your passphrase every time you use Git.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Context Switching' and why is it considered a negative for DX?",
+    "options": {
+      "A": "Switching the physical cables on a switch.",
+      "B": "The mental overhead required when a developer has to stop one task and start another, leading to decreased productivity and higher error rates.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Git, what does 'git fetch' do compared to 'git pull'?",
+    "options": {
+      "A": "Fetch downloads changes but does not merge them; Pull downloads AND merges changes.",
+      "B": "Fetch merges changes; Pull only downloads them.",
+      "C": "Fetch is used for branches; Pull is used for tags.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Docker Engine' is required on a developer's machine to build and run container images locally.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production servers",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Path' environment variable used for in an operating system?",
+    "options": {
+      "A": "To tell the OS which physical path to the server is shortest.",
+      "B": "A list of directories that the OS searches when looking for an executable command typed in the terminal.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' (DORA metric)?",
+    "options": {
+      "A": "The time from code committed to code successfully running in production.",
+      "B": "The number of lines of code written per day.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The number of users logged into Jira."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Webhooks' are used to automatically trigger an action (like a CI build) in another tool when an event occurs (like a Git push).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for GitHub",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'In-IDE Debugging'?",
+    "options": {
+      "A": "Using a physical magnifying glass on the monitor.",
+      "B": "The ability to set breakpoints, step through code, and inspect variables directly within the IDE interface.",
+      "C": "A specialized way to encrypt source code.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Docker API' (unencrypted/legacy)?",
+    "options": {
+      "A": "2375",
+      "B": "2376",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Hardlinking' dependencies in a package manager (like pnpm) saves disk space by sharing the same physical files across multiple projects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Code Review' primarily intended to accomplish?",
+    "options": {
+      "A": "To find out who to fire.",
+      "B": "To improve code quality, share knowledge among the team, and catch bugs/security flaws before they reach production.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a shell script, what does 'chmod +x script.sh' do?",
+    "options": {
+      "A": "Deletes the script.",
+      "B": "Makes the file executable so it can be run as a program.",
+      "C": "Encrypts the script's contents.",
+      "D": "Changes the script's name to uppercase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Remote Development' (e.g., VS Code Remote - SSH) allows you to use your local IDE UI to edit and run code on a powerful remote server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dev Container' (development container)?",
+    "options": {
+      "A": "A physical box for developers to sit in.",
+      "B": "A Docker container that contains a full-featured development environment (tools, compilers, extensions) configured specifically for a project.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to measure 'Deployment Frequency'?",
+    "options": {
+      "A": "How often code is successfully deployed to production.",
+      "B": "The number of lines of code in the master branch.",
+      "C": "The physical weight of the server rack.",
+      "D": "The number of emails sent by the CI tool."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Git Hook' is a script that runs automatically every time a specific event occurs in a Git repository.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for server-side repositories",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secret Masking' in CI/CD tool logs?",
+    "options": {
+      "A": "To hide the passwords of the IT team.",
+      "B": "The automatic replacement of sensitive information (like API keys) with asterisks in the build output to prevent accidental exposure.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new security manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command in Git is used to permanently remove a file from the repository's history (e.g., if a secret was accidentally committed)?",
+    "options": {
+      "A": "git rm",
+      "B": "git filter-branch (or specialized tools like BFG Repo-Cleaner)",
+      "C": "git delete",
+      "D": "git hide"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'YAML' is a recursive acronym for 'YAML Ain't Markup Language'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only for configuration files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IDE Extension' bloat?",
+    "options": {
+      "A": "When the monitor gets physically larger.",
+      "B": "The performance degradation of an IDE caused by installing too many active plugins or extensions.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool used for versioning large datasets in a Git-like manner.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for developer environments?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using separate network segments to ensure that a developer's local experimental server cannot accidentally access production databases.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' can be used on developer workstations to run more VMs than the physical RAM allows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud IDE' (e.g., GitHub Codespaces)?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "An IDE that runs entirely in a web browser, backed by a remote containerized development environment.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can be used to increase the network speed for developer build servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for developer tools?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Ensuring that developer tools (like a CI server) have strictly defined access to only the specific resources they need to perform their tasks.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a developer's local monitoring stack?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a strategy for tracking tool usage history in a developer portal.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the laws of the country where it is located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a build job?",
+    "options": {
+      "A": "Success / Failure Percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for automated tool installation scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique, non-business keys for a database.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' is often used by modern developer platforms for internal data processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in the context of developer logs?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of removing sensitive info from logs before they are stored.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is common for log rotation tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DX Monitor'?",
+    "options": {
+      "A": "A physical screen for the server.",
+      "B": "A dashboard that shows the health and availability of developer tools.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI pipeline?",
+    "options": {
+      "A": "Build Succeeded %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a one-time process for tools.",
+    "options": {
+      "A": "False (It is a continuous process of discovery and remediation).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's software tools.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern software development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Git object model, what is the primary structural difference between a 'Blob' and a 'Tree' object?",
+    "options": {
+      "A": "A Blob stores metadata; a Tree stores file content.",
+      "B": "A Blob stores raw file data without a filename; a Tree stores a list of filenames and mode bits, pointing to Blobs or other Trees.",
+      "C": "A Tree is just a compressed version of a Blob.",
+      "D": "Blobs only exist in the remote repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When optimizing Docker builds, what is the technical advantage of using '--mount=type=cache' in a RUN instruction compared to standard layer caching?",
+    "options": {
+      "A": "It makes the final image physically smaller.",
+      "B": "It allows a persistent directory to be shared across multiple builds, even if the layer's instructions change, which is highly effective for compiler caches like Maven or Go.",
+      "C": "It encrypts the cache with a hardware-based key.",
+      "D": "It forces the build to run in a single-threaded mode for safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Bash script, using a 'Trap' allows you to catch system signals (like SIGINT or SIGTERM) to perform cleanup actions before the script exits.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if running as the root user",
+      "D": "Only if the script is shorter than 100 lines"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Developer Portal' like Spotify Backstage in a large microservices organization?",
+    "options": {
+      "A": "To replace the need for an IDE.",
+      "B": "To act as a centralized 'Service Catalog' and platform to standardize software templates, documentation, and infrastructure management.",
+      "C": "To act as a physical firewall for the office.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Git' mechanism allows for the retrieval of lost commits that are no longer reachable by any branch or tag, but have not yet been garbage collected?",
+    "options": {
+      "A": "git status",
+      "B": "git reflog",
+      "C": "git log --lost-found",
+      "D": "git checkout --force"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Infrastructure as Code' (IaC), what does 'State Locking' prevent during a team-based Terraform workflow?",
+    "options": {
+      "A": "It prevents the source code from being edited.",
+      "B": "It prevents concurrent executions of Terraform against the same state file, which could lead to race conditions and corruption.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Docker BuildKit' supports 'Secret Mounts', which allow secrets to be passed to a build without them being stored in the final image layers or the build cache.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' execution in a shell script, and how is it triggered?",
+    "options": {
+      "A": "Running a script under a physical shelf.",
+      "B": "Executing commands in a child process environment, typically triggered by enclosing commands in parentheses (e.g., (cd /tmp && ls)).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'HashiCorp Vault' API used by CI/CD tools to fetch secrets?",
+    "options": {
+      "A": "8200",
+      "B": "9092",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Git 'Submodules' store the entire history of the external repository within the parent repository's objects directory.",
+    "options": {
+      "A": "False (They only store a reference to a specific commit hash in the external repository).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hermetic Testing' in the context of a developer build toolchain?",
+    "options": {
+      "A": "Testing that only works in the winter.",
+      "B": "Tests that run in total isolation with no external network access or dependencies, ensuring perfectly reproducible results.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The newest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical property is used by 'Merkle Trees' in Git to efficiently determine if two repositories have diverged?",
+    "options": {
+      "A": "Recursive Hashing (the hash of a node depends on the hashes of its children).",
+      "B": "Linear Regression.",
+      "C": "Binary Search.",
+      "D": "Modular Arithmetic."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Multi-stage Builds' in Docker is a key technique for creating secure, minimal production images by separating the build environment from the runtime environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python apps",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'LSP' (Language Server Protocol) in modern IDE architecture?",
+    "options": {
+      "A": "To speed up the internet.",
+      "B": "To standardize how IDEs communicate with 'Language Servers' to provide features like autocomplete and refactoring across different editors.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' is the best indicator of 'Developer Toil' in an SRE organization?",
+    "options": {
+      "A": "Number of manual, repetitive tasks that could be automated.",
+      "B": "The amount of lines of code written.",
+      "C": "The physical weight of the server rack.",
+      "D": "The number of emails sent."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Git 'Rebase' involves rewriting commit history, which can be dangerous if performed on branches that have already been pushed to a shared remote.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Environment Parity' in a modern DX workflow?",
+    "options": {
+      "A": "Making sure the servers are the same color.",
+      "B": "The goal of keeping development, staging, and production environments as similar as possible to reduce 'it works on my machine' errors.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vSphere Client' secure access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed to provide deep-trace observability for Git push events.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' tagging (802.1Q) at the virtual switch level?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using tags to allow multiple VLANs to share a single physical or virtual network trunk while remaining logically isolated.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management heartbeats?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' in a hypervisor is a memory reclamation technique that forces the Guest OS to use its own paging mechanisms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) I/O Metric usage?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "Automatically balancing VM disk placement across datastores based on latency and space utilization to avoid I/O bottlenecks.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard 'HTTPS' encrypted management?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' (VCHA) uses a three-node cluster for management redundancy.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID that enables Virtual Guest Tagging (VGT), allowing a VM to manage its own VLAN tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides high-performance hardware access but often limits the ability to perform Live Migration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in a virtualized environment?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is essential for performing nested virtualization with acceptable performance?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a host failure if the physical underlying storage is over-allocated and becomes full.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The specific component of the hypervisor responsible for managing the execution and resource isolation of a single VM.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' requires the Guest OS to be modified to communicate with the hypervisor via Hypercalls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' data consistency mechanism?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A process that mirrors write operations to both source and destination during a migration to ensure data integrity.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' remote management?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An action that disables the specific port and moves it to an error-disabled state immediately when an unauthorized MAC is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management of a network device?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in a spanning-tree topology is determined by the lowest Bridge ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN (intra-VLAN) to enforce security before it is routed between segments.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' prevents a port from sending or receiving BPDUs, effectively disabling Spanning Tree on that port.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' load balancing 'Hashing'?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "An algorithm that determines which physical link in a bundle to use for a specific packet to ensure traffic distribution.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is enabled by default on many enterprise switch ports, which can be a security risk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' security feature 'Hidden Password'?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A configuration where the password is not stored in plain text in the device configuration file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can be instantly created if redundant physical paths exist between switches without STP or Link Aggregation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Dropping packets from unauthorized MACs and incrementing a counter while keeping the port operational for known MACs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' is a Cisco implementation that provides a separate Spanning Tree instance for every VLAN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in a tool chain?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where applying an operation multiple times has the same effect as applying it once, which is critical for automated deployment scripts.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a build?",
+    "options": {
+      "A": "(Successful Builds / Total Builds) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security testing to the end of the development process.",
+    "options": {
+      "A": "False (It means moving it earlier).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' in development?",
+    "options": {
+      "A": "Identifying and evaluating security threats to a system during the design phase.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests'?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's software tools.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes'?",
+    "options": {
+      "A": "The time from commit to production deployment.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' in shell scripting?",
+    "options": {
+      "A": "A child process environment created to execute commands.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI pipeline?",
+    "options": {
+      "A": "Build Succeeded %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed for long-term storage of metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation?",
+    "options": {
+      "A": "Using Layer 2 isolation to separate network segments.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that repeating an action has the same result as doing it once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' traceability?",
+    "options": {
+      "A": "The ability to follow data from its source to its destination.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' build time?",
+    "options": {
+      "A": "Mean Build Duration",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find bugs earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+  ]
+}

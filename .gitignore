@@ -1,49 +1,75 @@
-venv/
-**/__pycache__/
-*.py[cod]
-*.sqlite3
-db.sqlite3
+# Sync .project/sourceTexts/ folder (source text files)
 
-node_modules/
-frontend/node_modules/
+# Don't sync user-specific SQLite databases
+.project/*.sqlite
 
-frontend/build/
+# Don't sync SQLite auxiliary files
+.project/*.sqlite-wal
+.project/*.sqlite-shm
 
-*.log
-*.env
-.env
-.env.*
+# Don't sync temporary files
+.project/.temp/**
 
-.DS_Store
-Thumbs.db
+# Don't sync user-specific files
+.project/complete_drafts.txt
+.project/localProjectSettings.json
+.project/localProjectSwap.json
+copilot-messages.log
 
-*.coverage
-.coverage*
-htmlcov/
-coverage.xml
-
-*.pot
-*.mo
-
-*.swp
-*.swo
-
-.idea/
-.vscode/
-.vs/
-
-*.iml
-
-*.pid
-
-*.tgz
+# Archive formats
+*.zip
+*.rar
+*.7z
 *.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
 *.gz
+*.bz2
+*.xz
 
-dist/
-build/
+# Windows executables and installers
+*.exe
+*.msi
+*.bat
+*.cmd
+*.com
+*.scr
+*.dll
 
-*.bak
-*.tmp
+# macOS executables and disk images
+*.dmg
+*.pkg
 
+# Disk images and virtual machine files
+*.iso
+*.img
+*.vhd
+*.vmdk
 
+# System files
+.DS_Store
+.project/attachments/files/**
+
+# Python cache
+__pycache__/
+*.pyc
+ 
+# Virtual environments
+venv/
+ 
+# Node modules
+node_modules/
+ 
+# DeepFace registered faces
+deepface/data/registered_faces/
+
+#secureAgent
+secureAgent/dist/
+
+# admin-build
+admin-build/assets/
+certbot/conf
+
+backend/scratch/
+media/temp/dist_check/

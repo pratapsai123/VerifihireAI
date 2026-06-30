@@ -1,0 +1,2005 @@
+{ 
+  "skill": "JSON", 
+  "questions": [
+    {
+    "question": "What does JSON stand for?",
+    "options": {
+      "A": "Java Standard Object Notation",
+      "B": "JavaScript Object Notation",
+      "C": "Joint Source Object Network",
+      "0": "Junction Standard Output Normalizer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to represent an object in JSON?",
+    "options": {
+      "A": "[ \"key\": \"value\" ]",
+      "B": "( \"key\": \"value\" )",
+      "C": "{ \"key\": \"value\" }",
+      "D": "< \"key\": \"value\" >"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In strict JSON, keys must be enclosed in double quotes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they contain spaces",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which data type is NOT supported by standard JSON?",
+    "options": {
+      "A": "Number",
+      "B": "Boolean",
+      "C": "Function",
+      "D": "Array"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What character is used to separate a key from its value in a JSON object?",
+    "options": {
+      "A": "Equals (=)",
+      "B": "Colon (:)",
+      "C": "Arrow (->)",
+      "D": "Semicolon (;)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following characters is used to define an array in JSON?",
+    "options": {
+      "A": "{ }",
+      "B": "[ ]",
+      "C": "( )",
+      "D": "< >"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON is a language-independent data format.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if used with JavaScript",
+      "D": "Only for web-based applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the correct file extension for a JSON file?",
+    "options": {
+      "A": ".js",
+      "B": ".jso",
+      "C": ".json",
+      "D": ".xml"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a valid JSON string value?",
+    "options": {
+      "A": "'Hello World'",
+      "B": "Hello World",
+      "C": "\"Hello World\"",
+      "D": "(Hello World)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A JSON object can contain another JSON object as a value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they share the same key",
+      "D": "Only if the file size is under 1MB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How are multiple key-value pairs separated within a JSON object?",
+    "options": {
+      "A": "With a semicolon (;)",
+      "B": "With a pipe (|)",
+      "C": "With a comma (,)",
+      "D": "With a space"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a valid JSON numeric value?",
+    "options": {
+      "A": "1,000",
+      "B": "100.50",
+      "C": "0x1A",
+      "D": "Infinity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON supports comments using // or /* */ syntax.",
+    "options": {
+      "A": "False (Standard JSON does not support comments)",
+      "B": "True",
+      "C": "Only in JSON5",
+      "D": "True, but only at the end of the file"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary use of JSON in web development?",
+    "options": {
+      "A": "To style HTML elements.",
+      "B": "To transmit data between a server and a web application.",
+      "C": "To create physical database tables.",
+      "D": "To compile server-side logic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JavaScript method is used to convert a JSON string into a JavaScript object?",
+    "options": {
+      "A": "JSON.toString()",
+      "B": "JSON.parse()",
+      "C": "JSON.convert()",
+      "D": "JSON.toObject()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Trailing commas (a comma after the last item) are allowed in standard JSON.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in arrays",
+      "D": "Only in objects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the correct Boolean representation in JSON?",
+    "options": {
+      "A": "TRUE / FALSE",
+      "B": "\"true\" / \"false\"",
+      "C": "true / false",
+      "D": "1 / 0"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does a value of 'null' indicate in a JSON file?",
+    "options": {
+      "A": "An empty string.",
+      "B": "The number zero.",
+      "C": "The intentional absence of any object value.",
+      "D": "A system error."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON is considered more verbose (wordy) than XML.",
+    "options": {
+      "A": "False (JSON is generally much lighter and more concise than XML).",
+      "B": "True",
+      "C": "Only if using many arrays",
+      "D": "True, because of the quotes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which JavaScript method is used to convert a JavaScript object into a JSON string?",
+    "options": {
+      "A": "JSON.parse()",
+      "B": "JSON.stringify()",
+      "C": "JSON.serialize()",
+      "D": "JSON.print()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON, which of the following is used to store an ordered list of values?",
+    "options": {
+      "A": "Object",
+      "B": "Map",
+      "C": "Array",
+      "D": "Table"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Whitespace (tabs, spaces, newlines) outside of strings is ignored by JSON parsers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only spaces are ignored",
+      "D": "Only in small files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to escape special characters inside a JSON string?",
+    "options": {
+      "A": "Forward slash (/)",
+      "B": "Backslash (\\)",
+      "C": "Percent (%)",
+      "D": "Hash (#)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a valid root element for a JSON document?",
+    "options": {
+      "A": "Only an Object { }",
+      "B": "Only an Array [ ]",
+      "C": "An Object, an Array, or a primitive value like a string or number.",
+      "D": "A Header <head>"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON values can be of type 'Undefined'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in JavaScript-based JSON",
+      "D": "Only if the key is missing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the MIME type for JSON data?",
+    "options": {
+      "A": "text/json",
+      "B": "application/javascript",
+      "C": "application/json",
+      "D": "text/javascript"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In JSON, can you use single quotes for keys like 'username': 'admin'?",
+    "options": {
+      "A": "Yes, it is optional.",
+      "B": "No, standard JSON requires double quotes.",
+      "C": "Yes, but only in Node.js.",
+      "D": "No, keys do not require quotes at all."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON array can contain a mixture of different data types (e.g., strings and numbers).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using JSON5",
+      "D": "Only if the array has more than 10 items"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of parsing this JSON: {\"age\": \"25\"}?",
+    "options": {
+      "A": "The age is stored as a number 25.",
+      "B": "The age is stored as a string \"25\".",
+      "C": "It produces a syntax error.",
+      "D": "It produces a null value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a valid JSON value?",
+    "options": {
+      "A": "1.23e4",
+      "B": "null",
+      "C": "undefined",
+      "D": "\"\""
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON is case-sensitive.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for keys",
+      "D": "Only for values"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these represents a nested array in JSON?",
+    "options": {
+      "A": "[ 1, 2, [ 3, 4 ] ]",
+      "B": "[ 1, 2, { 3, 4 } ]",
+      "C": "{ 1, 2, [ 3, 4 ] }",
+      "D": "[ [ [ ] ] ]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the maximum file size for a single JSON document?",
+    "options": {
+      "A": "10 MB",
+      "B": "1 GB",
+      "C": "There is no theoretical limit in the spec (limited by RAM/system).",
+      "D": "64 KB"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON can represent complex hierarchical data structures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using third-party libraries",
+      "D": "Only for flat data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In JavaScript, if you try to JSON.parse() an invalid JSON string, what happens?",
+    "options": {
+      "A": "It returns null.",
+      "B": "It returns an empty object.",
+      "C": "It throws a SyntaxError.",
+      "D": "It returns the original string."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is used to separate an array element from the next?",
+    "options": {
+      "A": "Space",
+      "B": "Comma (,)",
+      "C": "Colon (:)",
+      "D": "Pipe (|)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON keys can be duplicate in a single object without any issues.",
+    "options": {
+      "A": "False (Keys should be unique; behavior is undefined or the last one wins).",
+      "B": "True",
+      "C": "Only if the values are different",
+      "D": "Only in arrays"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you represent a date in JSON?",
+    "options": {
+      "A": "Using a special 'Date' type.",
+      "B": "Typically as a string (ISO 8601) or a number (timestamp).",
+      "C": "As a nested object with day, month, and year.",
+      "D": "Dates cannot be stored in JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between JSON and BSON?",
+    "options": {
+      "A": "BSON is for browsers; JSON is for servers.",
+      "B": "BSON is a binary representation of JSON (used in MongoDB).",
+      "C": "BSON is much larger than JSON.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: '007' is a valid number in JSON.",
+    "options": {
+      "A": "False (Leading zeros are not allowed in JSON numbers).",
+      "B": "True",
+      "C": "Only if enclosed in quotes",
+      "D": "True, if it is a whole number"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to represent 'nothing' in JSON?",
+    "options": {
+      "A": "none",
+      "B": "nil",
+      "C": "null",
+      "D": "empty"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In JSON, what is the value of 1.0e2?",
+    "options": {
+      "A": "1.02",
+      "B": "100",
+      "C": "1.0",
+      "D": "200"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every valid JSON file is also valid JavaScript code.",
+    "options": {
+      "A": "True (It is a valid expression or object literal).",
+      "B": "False",
+      "C": "Only if it starts with an object",
+      "D": "Only in ES6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is NOT a structural character in JSON?",
+    "options": {
+      "A": "{",
+      "B": "]",
+      "C": "!",
+      "D": ","
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the encoding standard recommended for JSON?",
+    "options": {
+      "A": "ASCII",
+      "B": "UTF-8",
+      "C": "UTF-16",
+      "D": "Base64"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON string can contain unicode characters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the \\u escape sequence",
+      "D": "Only for non-English languages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to separate items in an array?",
+    "options": {
+      "A": ";",
+      "B": ":",
+      "C": ",",
+      "D": "."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Top-Level' array in JSON?",
+    "options": {
+      "A": "An array that contains only strings.",
+      "B": "A JSON document where the root element is an array [ ] instead of an object { }.",
+      "C": "The first array found in the file.",
+      "D": "An array with high priority."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON can be used with Python using the 'json' module.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the JSON is formatted as a dictionary",
+      "D": "Only with Python 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these represents a valid empty object in JSON?",
+    "options": {
+      "A": "[ ]",
+      "B": "{ }",
+      "C": "( )",
+      "D": "null"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Prettified' JSON file?",
+    "options": {
+      "A": "A file that has been encrypted.",
+      "B": "A file that has been formatted with indentation and newlines for human readability.",
+      "C": "A file that contains images.",
+      "D": "A file that has no syntax errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON file must start with a curly brace {.",
+    "options": {
+      "A": "False (It can also start with a square bracket [ ).",
+      "B": "True",
+      "C": "Only if it contains an object",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you represent the number zero in JSON?",
+    "options": {
+      "A": "\"0\"",
+      "B": "zero",
+      "C": "0",
+      "D": "0.0"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is a valid way to write an array of two strings?",
+    "options": {
+      "A": "{ \"A\", \"B\" }",
+      "B": "[ 'A', 'B' ]",
+      "C": "[ \"A\", \"B\" ]",
+      "D": "( \"A\", \"B\" )"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON data can be requested using AJAX from a web server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the server is running PHP",
+      "D": "Only for local files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a JSON key has no value?",
+    "options": {
+      "A": "It defaults to null.",
+      "B": "It produce a syntax error (A value is required after the colon).",
+      "C": "The key is ignored.",
+      "D": "It defaults to an empty string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON, what is the purpose of the square brackets [ ]?",
+    "options": {
+      "A": "To define an object.",
+      "B": "To define an array.",
+      "C": "To define a string.",
+      "D": "To define a comment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON is case-insensitive for boolean values (TRUE vs true).",
+    "options": {
+      "A": "False (It must be lowercase 'true' or 'false').",
+      "B": "True",
+      "C": "Only if using double quotes",
+      "D": "Only in older parsers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is used to group data into a key-value structure?",
+    "options": {
+      "A": "Array",
+      "B": "Object",
+      "C": "Primitive",
+      "D": "Literal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Minified' JSON?",
+    "options": {
+      "A": "JSON with all whitespace removed to reduce file size.",
+      "B": "JSON that only contains small numbers.",
+      "C": "JSON that has been converted to binary.",
+      "D": "JSON used only on mobile devices."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Standard JSON supports the 'NaN' (Not-a-Number) value.",
+    "options": {
+      "A": "False (JSON does not support NaN; use null instead).",
+      "B": "True",
+      "C": "Only if using scientific notation",
+      "D": "Only for large calculations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these data types is allowed as a JSON value?",
+    "options": {
+      "A": "Date",
+      "B": "RegExp",
+      "C": "Number",
+      "D": "Error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you represent a floating-point number in JSON?",
+    "options": {
+      "A": "1.5",
+      "B": "1,5",
+      "C": "\"1.5\"",
+      "D": "1.5f"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: JSON supports scientific notation for numbers (e.g., 5e-2).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for positive exponents",
+      "D": "Only in the Enterprise version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the standard name for a JSON document containing a single value like 42?",
+    "options": {
+      "A": "JSON Object",
+      "B": "JSON Array",
+      "C": "JSON Value",
+      "D": "JSON Fragment"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a JSON object, can the key be a number without quotes?",
+    "options": {
+      "A": "Yes, but only in JavaScript.",
+      "B": "No, keys must always be strings in double quotes.",
+      "C": "Yes, for array-like objects.",
+      "D": "No, keys must be booleans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JSON Schema' used for in modern application development?",
+    "options": {
+      "A": "To style the JSON output in the browser.",
+      "B": "To provide a contract for JSON data, defining its required structure, types, and constraints.",
+      "C": "To automatically convert JSON into a SQL database schema.",
+      "D": "To encrypt the JSON file using a public key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a JSON Schema, the 'required' keyword takes an array of strings representing mandatory keys.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 4 of the schema",
+      "D": "Only for nested objects"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'JSONP' (JSON with Padding) primarily help bypass?",
+    "options": {
+      "A": "Slow internet connections.",
+      "B": "The Same-Origin Policy (SOP) in web browsers.",
+      "C": "Database size limits.",
+      "D": "Password protection on JSON files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does JSON differ from YAML regarding syntax?",
+    "options": {
+      "A": "JSON is whitespace-sensitive, while YAML uses braces.",
+      "B": "YAML uses indentation to define structure, whereas JSON uses braces and brackets.",
+      "C": "JSON supports comments, while YAML does not.",
+      "D": "YAML only supports strings; JSON supports numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a JSON Schema, which keyword limits the number of items allowed in an array?",
+    "options": {
+      "A": "limit",
+      "B": "maxItems",
+      "C": "length",
+      "D": "size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON string must be encoded in UTF-8 to be considered strictly valid according to RFC 8259.",
+    "options": {
+      "A": "True",
+      "B": "False (UTF-16 and UTF-32 are also allowed)",
+      "C": "Only if it contains emojis",
+      "D": "Only in the 'Enterprise' edition of the spec"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a valid JSON escape sequence for a 'Tab' character?",
+    "options": {
+      "A": "\\t",
+      "B": "\\b",
+      "C": "\\f",
+      "D": "\\v"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'reviver' parameter in the JavaScript 'JSON.parse(text, reviver)' function?",
+    "options": {
+      "A": "To fix syntax errors in the string automatically.",
+      "B": "To transform the resulting object before it is returned (e.g., converting strings to Dates).",
+      "C": "To check if the user has permission to parse the file.",
+      "D": "To restart the browser if the parsing fails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard JSON supports the storage of circular references (an object that points back to itself).",
+    "options": {
+      "A": "False (Attempting to stringify circular structures will result in an error).",
+      "B": "True",
+      "C": "Only if using JSON.stringify()",
+      "D": "Only if the reference is in an array"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a JSON Schema, what does the 'enum' keyword provide?",
+    "options": {
+      "A": "A way to number the objects in the file.",
+      "B": "A fixed list of allowed values for a property.",
+      "C": "An encryption key for the schema.",
+      "D": "A way to link multiple schemas together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'JSON-LD'?",
+    "options": {
+      "A": "To compress JSON for mobile devices.",
+      "B": "A method of encoding Linked Data using JSON (used for SEO and semantic web).",
+      "C": "To store large binary files inside JSON.",
+      "D": "To provide a local database for JSON files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following characters MUST be escaped inside a JSON string value?",
+    "options": {
+      "A": "Forward slash (/)",
+      "B": "Double quote (\")",
+      "C": "Single quote (')",
+      "D": "Asterisk (*)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The JavaScript 'JSON.stringify()' method allows you to filter which properties are included in the output string.",
+    "options": {
+      "A": "True (using the 'replacer' parameter)",
+      "B": "False",
+      "C": "Only if the properties are numbers",
+      "D": "Only in Node.js"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a JSON Schema, how do you define that a property can be EITHER a string OR a number?",
+    "options": {
+      "A": "\"type\": [\"string\", \"number\"]",
+      "B": "\"type\": \"string|number\"",
+      "C": "\"oneOf\": [\"string\", \"number\"]",
+      "D": "\"mixed\": [\"string\", \"number\"]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the '$schema' keyword at the top of a JSON Schema file?",
+    "options": {
+      "A": "To specify the currency of the values in the JSON.",
+      "B": "To identify which version of the JSON Schema standard the document follows.",
+      "C": "To encrypt the document.",
+      "D": "To set the background color of the code editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON is considered a subset of YAML.",
+    "options": {
+      "A": "True (Every valid JSON file is also a valid YAML file).",
+      "B": "False",
+      "C": "Only if the JSON file is minified",
+      "D": "Only in the 'prod' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens to 'undefined' values when a JavaScript object is passed to 'JSON.stringify()'?",
+    "options": {
+      "A": "They are converted to the string \"undefined\".",
+      "B": "They are converted to 'null'.",
+      "C": "They are omitted from the resulting JSON string (if in an object).",
+      "D": "The function throws an error."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a JSON Schema, what does 'additionalProperties: false' ensure?",
+    "options": {
+      "A": "The object cannot have any properties at all.",
+      "B": "The object cannot contain any keys that are not explicitly defined in the 'properties' section.",
+      "C": "The object must have at least one property.",
+      "D": "All additional properties are converted to strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents a valid 'nested object inside an array' structure?",
+    "options": {
+      "A": "[ { \"id\": 1 }, { \"id\": 2 } ]",
+      "B": "{ [ \"id\": 1 ], [ \"id\": 2 ] }",
+      "C": "[ ( \"id\": 1 ), ( \"id\": 2 ) ]",
+      "D": "{ \"id\": [ 1, 2 ] }"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: JSON.stringify() can take a third parameter to add indentation to the output string.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Google Chrome",
+      "D": "Only if the input is an array"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'root' of a JSON document that represents a list of users?",
+    "options": {
+      "A": "A Header object",
+      "B": "A Square bracket [ ] starting an array.",
+      "C": "A database connection string.",
+      "D": "A variable name like 'users ='."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'JSON Pointer' (RFC 6901)?",
+    "options": {
+      "A": "A laser pointer for presentations about JSON.",
+      "B": "A string syntax for identifying a specific value within a JSON document.",
+      "C": "A specialized mouse for developers.",
+      "D": "A way to point the database to a new JSON file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard JSON supports hexidecimal numbers like 0xFF.",
+    "options": {
+      "A": "False (Only decimal notation is supported).",
+      "B": "True",
+      "C": "Only if used with the 'eval' function",
+      "D": "True, but only in JSON5"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which validation keyword in JSON Schema ensures a number is a multiple of another number?",
+    "options": {
+      "A": "multipleOf",
+      "B": "factor",
+      "C": "divisibleBy",
+      "D": "mod"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'JSON-RPC'?",
+    "options": {
+      "A": "To style JSON in the browser.",
+      "B": "A remote procedure call protocol encoded in JSON.",
+      "C": "To create physical hard drive partitions for JSON files.",
+      "D": "To translate JSON into multiple languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to represent an 'Infinity' value in a valid JSON file?",
+    "options": {
+      "A": "Infinity",
+      "B": "9999999999999",
+      "C": "There is no way; JSON does not support Infinity (use a placeholder or string).",
+      "D": "1.0e+999"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A JSON Schema can reference another external schema file using the '$ref' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are on the same domain",
+      "D": "Only if using the 'import' tag"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'format' keyword do in a JSON Schema?",
+    "options": {
+      "A": "It re-indents the JSON file.",
+      "B": "It provides a hint for validating specific string formats like 'date-time', 'email', or 'ipv4'.",
+      "C": "It changes the font size of the text.",
+      "D": "It identifies the file extension."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a JSON object, if you have {\"price\": 10, \"price\": 20}, what is the most common behavior for a parser?",
+    "options": {
+      "A": "It returns an array [10, 20].",
+      "B": "It throws an error immediately.",
+      "C": "It typically keeps the last value (20) and ignores the first.",
+      "D": "It adds the numbers together."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON.parse() is a safe way to evaluate untrusted data without any risk of code execution.",
+    "options": {
+      "A": "True (It only parses data, unlike eval()).",
+      "B": "False (It can still be used for Prototype Pollution in some environments).",
+      "C": "Only if the data is under 1KB",
+      "D": "Only in older versions of Internet Explorer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is used in JSON Schema to ensure a string matches a specific Regular Expression?",
+    "options": {
+      "A": "regex",
+      "B": "pattern",
+      "C": "matches",
+      "D": "validate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Streaming JSON'?",
+    "options": {
+      "A": "Watching a movie about JSON.",
+      "B": "A way to parse very large JSON files piece by piece without loading the whole thing into memory.",
+      "C": "Sending JSON via a physical stream of water.",
+      "D": "JSON that updates automatically every second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can store a 'RegExp' (Regular Expression) object directly as a value in a JSON file.",
+    "options": {
+      "A": "False (You must store it as a string).",
+      "B": "True",
+      "C": "Only if using JSON.stringify()",
+      "D": "Only if it is a global RegExp"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of JSON, what is 'Normalization'?",
+    "options": {
+      "A": "Making all the keys lowercase.",
+      "B": "The process of ensuring JSON data follows a consistent structure or canonical form.",
+      "C": "Deleting all the numbers to make it text-only.",
+      "D": "Sending the JSON to a therapist."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is the correct way to specify a minimum length for a string in JSON Schema?",
+    "options": {
+      "A": "min: 5",
+      "B": "minLength: 5",
+      "C": "sizeMin: 5",
+      "D": "len: 5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON is capable of representing a 'Matrix' (2D Array).",
+    "options": {
+      "A": "True (by using an array of arrays).",
+      "B": "False",
+      "C": "Only if using the 'matrix' package",
+      "D": "Only for numeric values"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'oneOf' keyword in JSON Schema validate?",
+    "options": {
+      "A": "That the data matches at least one of the schemas.",
+      "B": "That the data matches exactly one of the given schemas.",
+      "C": "That the data matches all of the given schemas.",
+      "D": "That the data is a single value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to view JSON data in a tree structure in the browser console?",
+    "options": {
+      "A": "console.log()",
+      "B": "console.table()",
+      "C": "console.dir()",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: JSON 'Keys' are technically required to be strings, but some parsers allow non-quoted keys.",
+    "options": {
+      "A": "True (but this is invalid according to the official spec).",
+      "B": "False",
+      "C": "Only in version 3.0",
+      "D": "Only in PHP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of JSON.stringify([undefined, null, NaN])?",
+    "options": {
+      "A": "[undefined, null, NaN]",
+      "B": "[null, null, null]",
+      "C": "[]",
+      "D": "error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON Schema, what is the 'dependencies' keyword used for?",
+    "options": {
+      "A": "To list the packages needed to run the program.",
+      "B": "To require the presence of certain properties based on the presence of another property.",
+      "C": "To update the schema automatically.",
+      "D": "To monitor the uptime of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: BSON (Binary JSON) allows for more data types than standard JSON, such as Date and Binary data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'dev' environment",
+      "D": "Only for mobile apps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NDJSON' (Newline Delimited JSON)?",
+    "options": {
+      "A": "JSON that has no newlines.",
+      "B": "A format where each line is a separate, valid JSON object.",
+      "C": "JSON used only for New Year's Day websites.",
+      "D": "JSON that uses pipes instead of commas."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used in JSON Schema to define a default value if one isn't provided?",
+    "options": {
+      "A": "initial",
+      "B": "placeholder",
+      "C": "default",
+      "D": "fallback"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON.stringify() can handle the transformation of a Map or Set object directly into a string.",
+    "options": {
+      "A": "False (They are converted to empty objects {} unless a custom replacer is used).",
+      "B": "True",
+      "C": "Only in ES6+",
+      "D": "Only if they contain strings"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'uniqueItems' keyword do in an array schema?",
+    "options": {
+      "A": "It assigns a unique ID to every item.",
+      "B": "It ensures that all elements in the array are unique (no duplicates).",
+      "C": "It sorts the array automatically.",
+      "D": "It deletes all items that appear more than once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a common way to handle 'Versioning' in a JSON API?",
+    "options": {
+      "A": "Changing the file extension to .json2",
+      "B": "Including a 'version' key in the JSON response or using a URL prefix like /v1/.",
+      "C": "Renaming all the keys in the object.",
+      "D": "Formatting the code differently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON document can be effectively 'validated' by comparing it to an XSD file.",
+    "options": {
+      "A": "False (XSD is for XML; JSON uses JSON Schema).",
+      "B": "True",
+      "C": "Only if converted to XML first",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'top-level' object in a JSON file that starts with { \"users\": [] }?",
+    "options": {
+      "A": "An Array",
+      "B": "An Object",
+      "C": "A Variable",
+      "D": "A Schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON Schema, what does 'allOf' require?",
+    "options": {
+      "A": "That the data matches at least one of the schemas.",
+      "B": "That the data matches all of the provided schemas.",
+      "C": "That all properties are strings.",
+      "D": "That all arrays are empty."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON is considered 'self-describing' because the keys provide context for the values.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the keys are in English",
+      "D": "Only if using a JSON Schema"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'JSON Web Token' (JWT)?",
+    "options": {
+      "A": "A physical card for accessing servers.",
+      "B": "A compact, URL-safe means of representing claims between two parties, encoded as JSON.",
+      "C": "A specialized password for JSON files.",
+      "D": "A way to backup JSON data to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these allows you to define a list of 'optional' properties in a JSON Schema?",
+    "options": {
+      "A": "optional keyword",
+      "B": "Any property NOT listed in the 'required' array.",
+      "C": "properties keyword",
+      "D": "The '?' symbol"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The order of properties in a JSON object is guaranteed to be preserved by all parsers.",
+    "options": {
+      "A": "False (The spec says objects are an 'unordered' collection of pairs).",
+      "B": "True",
+      "C": "Only in JavaScript",
+      "D": "Only if the keys are numbers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'JSON Patch' (RFC 6902)?",
+    "options": {
+      "A": "A piece of tape used to fix a server.",
+      "B": "A format for describing changes to a JSON document.",
+      "C": "A way to update the JSON software.",
+      "D": "A tool to delete comments from JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JSON Schema keyword is used to provide a human-readable title for a field?",
+    "options": {
+      "A": "label",
+      "B": "title",
+      "C": "name",
+      "D": "summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON.parse() can be used to deep-clone a simple object in JavaScript.",
+    "options": {
+      "A": "True (by using JSON.parse(JSON.stringify(obj))).",
+      "B": "False",
+      "C": "Only if the object has no methods",
+      "D": "Only if the object is frozen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a JSON Schema, what does 'exclusiveMaximum: true' mean?",
+    "options": {
+      "A": "The value must be exactly the maximum.",
+      "B": "The value must be strictly less than the maximum.",
+      "C": "The value can be anything.",
+      "D": "The maximum value is ignored."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Content-Type' header value for a JSONP request?",
+    "options": {
+      "A": "application/json",
+      "B": "application/javascript",
+      "C": "text/html",
+      "D": "application/xml"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON key can be an empty string \"\".",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in arrays",
+      "D": "Only if the value is also empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is used to define a 'sub-schema' that can be reused within the same file?",
+    "options": {
+      "A": "definitions (or $defs in newer drafts)",
+      "B": "globals",
+      "C": "reusables",
+      "D": "links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if you try to parse '{\"val\": .5}' as JSON?",
+    "options": {
+      "A": "It is parsed as 0.5.",
+      "B": "It is parsed as a string \".5\".",
+      "C": "It produces a syntax error (JSON numbers must start with a digit).",
+      "D": "It returns null."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON Schema validation can be performed both on the client and the server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on the server for security",
+      "D": "Only on the client for speed"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which character is used to start a comment in the JSON5 format?",
+    "options": {
+      "A": "//",
+      "B": "#",
+      "C": "--",
+      "D": "!"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'JSON Diff'?",
+    "options": {
+      "A": "To convert JSON to XML.",
+      "B": "To find and display the differences between two JSON objects.",
+      "C": "To encrypt a JSON file.",
+      "D": "To monitor the server speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The JSON specification prohibits the use of any character with a value less than 0x20 in a string unless escaped.",
+    "options": {
+      "A": "True (This includes control characters like newlines and tabs).",
+      "B": "False",
+      "C": "Only if using ASCII",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "According to RFC 8259, which of the following is technically a valid JSON document?",
+    "options": {
+      "A": "42",
+      "B": "\"A single string\"",
+      "C": "false",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: In a JSON Schema, the 'unevaluatedProperties' keyword can 'see' through 'allOf' and '$ref' to determine which properties have been validated.",
+    "options": {
+      "A": "False, it only sees local properties.",
+      "B": "True, this is a key feature of modern drafts (2019-09+).",
+      "C": "Only if 'additionalProperties' is set to true.",
+      "D": "Only if the schema is written in JSON, not YAML."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary security risk of 'JSON Hijacking' in older web browsers?",
+    "options": {
+      "A": "Attackers can modify the JSON on the server.",
+      "B": "Malicious sites could override the Array constructor to steal data from a top-level JSON array via a script tag.",
+      "C": "It allows for cross-site scripting (XSS) in the URL.",
+      "D": "It forces the user to download a virus disguised as a JSON file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JSON Schema keyword is used to apply a sub-schema only if another sub-schema matches (logical implication)?",
+    "options": {
+      "A": "when",
+      "B": "if",
+      "C": "switch",
+      "D": "case"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The JSON specification (ECMA-404) defines a maximum precision for numeric values.",
+    "options": {
+      "A": "True, it is limited to 64-bit floats.",
+      "B": "False, it allows any sequence of digits, though parsers may have practical limits.",
+      "C": "True, it is limited to 15 decimal places.",
+      "D": "False, numbers must be integers only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during 'Prototype Pollution' when parsing a malicious JSON string into a JavaScript object?",
+    "options": {
+      "A": "The JSON parser crashes the browser.",
+      "B": "Properties are added to the global Object.prototype, potentially changing the behavior of all objects.",
+      "C": "The JSON file is deleted from the server.",
+      "D": "The user's password is automatically sent to the attacker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'JSON Merge Patch' (RFC 7396) handle a key with a value of 'null'?",
+    "options": {
+      "A": "It sets the value to null in the target document.",
+      "B": "It ignores the key.",
+      "C": "It removes the key from the target document.",
+      "D": "It throws a 'PatchError'."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In JSON Schema, 'additionalItems' has been replaced by 'items' and 'prefixItems' in recent drafts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the OpenAPI specification",
+      "D": "Only for schemas that use the 'anyOf' keyword"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of using a JSON Pointer like '/foo/0' on the document {'foo': ['bar', 'baz']}?",
+    "options": {
+      "A": "['bar', 'baz']",
+      "B": "null",
+      "C": "bar",
+      "D": "Error"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a valid character to use in a JSON number according to the grammar?",
+    "options": {
+      "A": "x (for hex)",
+      "B": "e (for exponent)",
+      "C": "_ (for digit separation)",
+      "D": "f (for float)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The '$id' keyword in a JSON Schema establishes a new base URI for all relative '$ref' pointers within that schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the ID starts with 'http'",
+      "D": "Only if using Draft 4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'I-JSON' (Internet JSON) profile (RFC 7493) primarily concerned with?",
+    "options": {
+      "A": "Increasing the speed of JSON transfers.",
+      "B": "Defining a subset of JSON to maximize interoperability (e.g., handling large numbers and duplicate keys).",
+      "C": "Adding support for binary data types.",
+      "D": "Replacing XML entirely in government systems."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword in JSON Schema is used to provide an alternative schema if the 'if' condition fails?",
+    "options": {
+      "A": "else",
+      "B": "otherwise",
+      "C": "fallback",
+      "D": "default"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'JSON Path' is a standardized specification maintained by the IETF, similar to XPath for XML.",
+    "options": {
+      "A": "False (It was a popular proposal but only recently became a formalized IETF standard as RFC 9535).",
+      "B": "True",
+      "C": "Only for JavaScript-based systems",
+      "D": "True, but only for nested arrays"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the JSON Schema 'dependencies' keyword, what is a 'property dependency'?",
+    "options": {
+      "A": "The value of one property must be the same as another.",
+      "B": "The presence of one property requires the presence of one or more other properties.",
+      "C": "A property that cannot be deleted.",
+      "D": "A way to link a JSON property to a hardware port."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Canonical JSON' format used for?",
+    "options": {
+      "A": "To make JSON look prettier.",
+      "B": "To produce a consistent, predictable byte stream for hashing and digital signatures.",
+      "C": "To translate JSON into machine code.",
+      "D": "To store JSON on a CD-ROM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON parser must support nesting levels of at least 100 to be fully compliant.",
+    "options": {
+      "A": "False (The spec does not mandate a minimum depth, though it suggests parsers should be reasonable).",
+      "B": "True",
+      "C": "True, but only for arrays",
+      "D": "False, the limit is strictly 32"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In JSON Schema, what is the 'vocabulary' concept introduced in Draft 2019-09?",
+    "options": {
+      "A": "A list of all keys used in the JSON file.",
+      "B": "A way to group keywords and define how they should be processed, allowing for custom extensions.",
+      "C": "A translation table for multi-language support.",
+      "D": "A dictionary of common JSON errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the '~1' sequence in a JSON Pointer?",
+    "options": {
+      "A": "It represents the number 1.",
+      "B": "It is an escaped forward slash (/) within a key name.",
+      "C": "It is an escaped tilde (~) within a key name.",
+      "D": "It points to the second item in an array."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a valid escape sequence for a control character in a JSON string?",
+    "options": {
+      "A": "\\r",
+      "B": "\\n",
+      "C": "\\e",
+      "D": "\\f"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The keyword 'exclusiveMinimum' in modern JSON Schema (Draft 6+) takes a boolean value.",
+    "options": {
+      "A": "False (It now takes a number; the boolean behavior was Draft 4).",
+      "B": "True",
+      "C": "Only if 'minimum' is also present",
+      "D": "Only for integer types"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How does a JSON parser handle the escaped sequence '\\u0000'?",
+    "options": {
+      "A": "It is treated as a literal string '\\u0000'.",
+      "B": "It is parsed as a Null character (U+0000).",
+      "C": "It throws a 'ZeroLengthError'.",
+      "D": "It terminates the parsing of the string immediately."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JSON Sequence' (RFC 7464)?",
+    "options": {
+      "A": "A way to sort JSON keys alphabetically.",
+      "B": "A format that prefixes JSON objects with a Record Separator character for robust logging/streaming.",
+      "C": "The history of all JSON versions.",
+      "D": "A tool to convert JSON to binary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In JSON Schema, 'contains' ensures that an array contains at least one item matching the sub-schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if 'minItems' is set to 1",
+      "D": "Only for arrays of objects"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'anchor' ($anchor) in a JSON Schema?",
+    "options": {
+      "A": "To lock the JSON file to a specific hard drive.",
+      "B": "To create a plain-text identifier for a sub-schema that can be referenced via a fragment URI.",
+      "C": "To set the priority of a schema.",
+      "D": "To prevent the schema from being updated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which RFC currently defines the 'standard' for JSON and its media type?",
+    "options": {
+      "A": "RFC 4627",
+      "B": "RFC 7159",
+      "C": "RFC 8259",
+      "D": "RFC 2616"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: JSON Schema 'patternProperties' takes precedence over 'properties' during validation.",
+    "options": {
+      "A": "False (They are evaluated independently; a property can be validated against both).",
+      "B": "True",
+      "C": "Only if 'additionalProperties' is false",
+      "D": "Only in Draft 7"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TOML' and how does it compare to JSON?",
+    "options": {
+      "A": "A binary format faster than JSON.",
+      "B": "A configuration format designed to be more human-friendly than JSON for flat settings.",
+      "C": "A specialized version of JSON for mobile apps.",
+      "D": "A database query language for JSON files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON Schema, what does the 'propertyNames' keyword validate?",
+    "options": {
+      "A": "The value of every property in an object.",
+      "B": "The names (keys) of the properties in an object.",
+      "C": "The total number of properties.",
+      "D": "The length of the first property name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON allows for trailing zeros in the fractional part of a number (e.g., 10.50).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if in scientific notation",
+      "D": "Only if the number is under 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'oneOf' and 'anyOf' in JSON Schema?",
+    "options": {
+      "A": "oneOf is for objects; anyOf is for arrays.",
+      "B": "oneOf requires matching exactly one schema; anyOf requires matching one or more.",
+      "C": "anyOf is faster than oneOf.",
+      "D": "There is no difference in modern drafts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid JSON Pointer to access the 'y' value in {'x': {'y': 'z'}}?",
+    "options": {
+      "A": "x.y",
+      "B": "/x/y",
+      "C": "#x/y",
+      "D": "->x->y"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to the spec, a JSON parser should fail if it encounters a number that is out of range for its internal representation.",
+    "options": {
+      "A": "False (The spec allows parsers to lose precision or cap values).",
+      "B": "True",
+      "C": "Only if the number is an exponent",
+      "D": "True, but only in strict mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'JSON-RPC' batching?",
+    "options": {
+      "A": "Running JSON-RPC on a mainframe.",
+      "B": "Sending multiple request objects in a single JSON array to be processed together.",
+      "C": "Deleting multiple JSON files at once.",
+      "D": "Compressing JSON-RPC requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON Schema, what is the 'dependentRequired' keyword?",
+    "options": {
+      "A": "A keyword that requires the whole schema to be valid.",
+      "B": "A keyword where the presence of one property requires the presence of others (successor to Draft 7 dependencies).",
+      "C": "A way to link the schema to a CSS file.",
+      "D": "A way to set the timeout for validation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON string cannot contain a literal newline character.",
+    "options": {
+      "A": "True (it must be escaped as \\n).",
+      "B": "False",
+      "C": "Only if the string is in an object",
+      "D": "Only if using UTF-16"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Jolt' library used for?",
+    "options": {
+      "A": "To speed up the server's CPU.",
+      "B": "A JSON-to-JSON transformation library that uses a 'spec' to define how to shift and transform data.",
+      "C": "To encrypt JSON data for mobile devices.",
+      "D": "To convert JSON to PDF."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal mechanism does 'JSON.stringify()' use to allow objects to define their own custom JSON representation?",
+    "options": {
+      "A": "The .toString() method.",
+      "B": "The .toJSON() method.",
+      "C": "The .serialize() method.",
+      "D": "The .format() method."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In JSON Schema, 'maxContains' and 'minContains' can be used to limit how many items in an array match the 'contains' schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in OpenAPI 3.0",
+      "D": "Only for primitive types"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Slow JSON' attack (Denial of Service)?",
+    "options": {
+      "A": "Sending JSON via a very slow internet connection.",
+      "B": "Sending deeply nested objects or large arrays that consume excessive CPU/Memory during parsing.",
+      "C": "A bug where JSON files are deleted slowly.",
+      "D": "A way to bypass the firewall by sending small chunks of JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'const' keyword in JSON Schema Draft 6+?",
+    "options": {
+      "A": "To mark a property as constant in memory.",
+      "B": "To restrict a value to a single, specific value (essentially an enum with one item).",
+      "C": "To define the encryption constant.",
+      "D": "To set the maximum size of the file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The JSON specification allows for 'signed' zeros (-0).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in scientific notation",
+      "D": "Only if in quotes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'JSON-Stat' used for?",
+    "options": {
+      "A": "To monitor the statistics of JSON downloads.",
+      "B": "A JSON dissemination format for multi-dimensional statistical data.",
+      "C": "To count the number of keys in a file.",
+      "D": "To measure the entropy of JSON data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JSON Schema, what does '$recursiveRef' do?",
+    "options": {
+      "A": "It deletes the schema automatically.",
+      "B": "It allows for dynamic recursion where the reference can be overridden by a more specific definition (Draft 2019-09).",
+      "C": "It creates a loop in the network.",
+      "D": "It identifies a schema that never finishes validating."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON key can contain spaces and special characters if they are escaped within the quotes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in arrays",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bison' in the context of data formats?",
+    "options": {
+      "A": "A binary version of JSON.",
+      "B": "A parser generator that can be used to write JSON parsers.",
+      "C": "A specialized cloud storage for JSON.",
+      "D": "A tool to minify JSON for mobile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which validation keyword in JSON Schema ensures an array has a specific number of unique items?",
+    "options": {
+      "A": "uniqueOnly",
+      "B": "uniqueItems: true (combined with min/maxItems)",
+      "C": "distinctItems",
+      "D": "set: true"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RFC 8259, 'Null' is considered a literal and is always lowercase.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a key",
+      "D": "Only in the 'standard' profile"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'replacer' function's 'this' value in JavaScript's 'JSON.stringify(obj, replacer)'?",
+    "options": {
+      "A": "The global window object.",
+      "B": "The object containing the key being currently processed.",
+      "C": "The final result string.",
+      "D": "undefined"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'readOnly' and 'writeOnly' keywords contribute to JSON Schema validation?",
+    "options": {
+      "A": "They enforce file system permissions.",
+      "B": "They provide metadata but do not typically affect the validation of the data itself by standard validators.",
+      "C": "They encrypt the property automatically.",
+      "D": "They prevent the property from being read by the admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON Schema '$defs' is the modern replacement for the 'definitions' keyword.",
+    "options": {
+      "A": "True (since Draft 2019-09).",
+      "B": "False",
+      "C": "Only in OpenAPI 3.1",
+      "D": "Only for schemas over 10KB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the JSON number format, which part is optional?",
+    "options": {
+      "A": "The integer part.",
+      "B": "The fraction and exponent parts.",
+      "C": "The minus sign.",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the significance of the 'depth' parameter in many JSON parsers?",
+    "options": {
+      "A": "To set the font size in the UI.",
+      "B": "A security limit to prevent stack overflow from excessively nested JSON objects.",
+      "C": "To count the number of users in the system.",
+      "D": "To measure the physical length of the file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON.stringify() can result in data loss if an object contains a key with a value of NaN or Infinity.",
+    "options": {
+      "A": "True (they are converted to null).",
+      "B": "False",
+      "C": "Only if the key is a string",
+      "D": "Only in Node.js"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Non-standard' extension in some JSON parsers that allows for large integers?",
+    "options": {
+      "A": "BigInt strings.",
+      "B": "Lossless JSON parsing (parsing numbers as strings to avoid float precision issues).",
+      "C": "Using the 'long' keyword.",
+      "D": "Formatting integers with commas."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to represent an empty array in JSON?",
+    "options": {
+      "A": "{ }",
+      "B": "[ ]",
+      "C": "null",
+      "D": "empty"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'contentSchema' in JSON Schema to validate the contents of a string that contains a JSON encoded value.",
+    "options": {
+      "A": "True (introduced in Draft 7).",
+      "B": "False",
+      "C": "Only if the string is in Base64",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'prefixItems' keyword do in Draft 2020-12?",
+    "options": {
+      "A": "Adds a prefix to every item in the array.",
+      "B": "Defines schemas for array items at specific indices (positional validation).",
+      "C": "Checks if the first item is a string.",
+      "D": "Deletes the prefix from array keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a JSON Schema, '$ref' can point to a location within the same file using a relative JSON Pointer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Draft 4",
+      "D": "Only if the target is in the root object"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'media' object in JSON Schema Draft 4 used for?",
+    "options": {
+      "A": "To play video files.",
+      "B": "To define the media type of a string (predecessor to contentMediaType).",
+      "C": "To store images in a JSON file.",
+      "D": "To monitor the bandwidth of JSON downloads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON.parse() ignores any characters found after the initial valid JSON value in the string.",
+    "options": {
+      "A": "False (Standard implementations throw an error if there is trailing data).",
+      "B": "True",
+      "C": "Only if using the 'lazy' flag",
+      "D": "Only in Node.js"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to provide a schema for the values of an object when the keys are unknown?",
+    "options": {
+      "A": "properties",
+      "B": "additionalProperties",
+      "C": "patternProperties",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: In JSON Schema Draft 2019-09, '$recursiveAnchor' and '$recursiveRef' were introduced to support dynamic recursion.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for recursive arrays",
+      "D": "Only in the 'cloud' version of the schema"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'unescaped' form of the JSON escape sequence '\\/'?",
+    "options": {
+      "A": "\\",
+      "B": "/",
+      "C": "//",
+      "D": "Error"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: JSON strings cannot contain the tab character (0x09) literally; it must be escaped as \\t.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using ASCII",
+      "D": "Only in older versions of the spec"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword in JSON Schema is used to provide a default value?",
+    "options": {
+      "A": "initial",
+      "B": "default",
+      "C": "placeholder",
+      "D": "fallback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A JSON Pointer that refers to a non-existent key results in a Null value when resolved.",
+    "options": {
+      "A": "False (It results in an error/exception depending on the implementation).",
+      "B": "True",
+      "C": "Only in JavaScript",
+      "D": "Only if the key is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'deprecated' keyword in modern JSON Schema (Draft 2019-09+) indicate?",
+    "options": {
+      "A": "The property has been deleted.",
+      "B": "The property is scheduled for removal and its use is discouraged.",
+      "C": "The property is mandatory but broken.",
+      "D": "The property's value is zero."
+    },
+    "answer": "B"
+  }
+  ]
+}

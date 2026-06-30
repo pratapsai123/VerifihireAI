@@ -1,0 +1,2117 @@
+{
+  "skill": "Micro Frontends",
+  "questions": [
+    {
+      "question": "What is the primary goal of a Micro Frontend architecture?",
+      "options": {
+        "A": "To make the website load faster for all users.",
+        "B": "To break a frontend monolith into smaller, manageable, and independently deployable pieces.",
+        "C": "To replace all JavaScript with CSS.",
+        "D": "To ensure only one framework is used across the entire company."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a Micro Frontend architecture, different teams can use different technologies (e.g., Team A uses React, Team B uses Vue).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are common integration patterns for Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Server-side composition (e.g., SSI or Edge Side Includes).",
+        "B": "Build-time integration (e.g., using NPM packages).",
+        "C": "Run-time integration via JavaScript (e.g., Module Federation).",
+        "D": "Physical hard drive partitioning."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does 'Independent Deployability' mean in the context of Micro Frontends?",
+      "options": {
+        "A": "The whole site must be redeployed for every small change.",
+        "B": "A single micro frontend can be updated and deployed without requiring a full rebuild of the entire system.",
+        "C": "The frontend can be deployed without a backend.",
+        "D": "Users must download a separate app for every feature."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Micro Frontends are always the best choice for small, 2-page startup websites.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are potential benefits of adopting Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Smaller, more decoupled codebases.",
+        "B": "Autonomous teams with independent release cycles.",
+        "C": "Easier incremental upgrades of legacy code.",
+        "D": "Zero network latency for the end user."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a 'Shell' or 'Container' app in Micro Frontends?",
+      "options": {
+        "A": "The database that stores frontend code.",
+        "B": "The parent application that orchestrates and mounts various micro frontends onto the page.",
+        "C": "A command-line tool for minifying code.",
+        "D": "The CSS file that holds all global styles."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using iframes is considered one of the simplest (though often restricted) ways to implement a Micro Frontend.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following challenges are associated with Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Potential payload size increase due to duplicated dependencies.",
+        "B": "Complexity in managing consistent global styling.",
+        "C": "Increased operational overhead for CI/CD pipelines.",
+        "D": "It makes local development impossible."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "In a Micro Frontend setup, what is 'Build-time Integration'?",
+      "options": {
+        "A": "Loading JS files from a CDN at runtime.",
+        "B": "Publishing micro frontends as private packages and installing them as dependencies in a container app at compile time.",
+        "C": "Writing code directly in the browser console.",
+        "D": "Using a database to store HTML tags."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Micro Frontends should ideally share the same database and backend service to remain synchronized.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these technologies is a popular Webpack 5 feature used for Micro Frontends?",
+      "options": {
+        "A": "Babel Transpilation",
+        "B": "Module Federation",
+        "C": "Hot Module Replacement",
+        "D": "Tree Shaking"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select the methods used for runtime communication between micro frontends: (Select all that apply)",
+      "options": {
+        "A": "Custom Browser Events.",
+        "B": "A shared global state/store (if carefully managed).",
+        "C": "URL Query Parameters.",
+        "D": "Directly calling private functions of other micro frontends."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: A 'Monolithic Frontend' is characterized by having all its features and components in a single, large repository and build process.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the term 'Vertical Slice' refer to in micro frontend team organization?",
+      "options": {
+        "A": "A team that only works on CSS.",
+        "B": "A cross-functional team that owns a feature from the database to the user interface.",
+        "C": "Dividing the page into horizontal rows.",
+        "D": "A specific type of deployment server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are examples of Micro Frontend frameworks or libraries? (Select all that apply)",
+      "options": {
+        "A": "single-spa",
+        "B": "Luigi",
+        "C": "Piral",
+        "D": "Express.js"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: One of the biggest risks of Micro Frontends is a fragmented User Experience (UX) if teams don't align on design systems.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which integration style is most likely to cause a 'version lock' where every micro frontend must be updated to deploy one change?",
+      "options": {
+        "A": "Runtime Integration",
+        "B": "Build-time Integration",
+        "C": "Server-side Composition",
+        "D": "Edge-side Includes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid ways to ensure style isolation? (Select all that apply)",
+      "options": {
+        "A": "Shadow DOM.",
+        "B": "CSS Modules.",
+        "C": "BEM naming convention.",
+        "D": "Putting all styles in the <body> tag."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In a runtime-integrated Micro Frontend, the container application fetches a remote entry point (JavaScript file) to load the child application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Polyglot' development in the context of Micro Frontends?",
+      "options": {
+        "A": "Writing code in multiple programming languages for the same component.",
+        "B": "Allowing different teams to choose the frontend framework that best fits their specific problem.",
+        "C": "Using only one language across the entire company.",
+        "D": "A specific type of database indexing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following factors would lead you to choose Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Large-scale application with dozens of developers.",
+        "B": "Need for independent team autonomous deployment.",
+        "C": "Migrating a legacy application one feature at a time.",
+        "D": "A simple landing page for a local bakery."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends require a shared Design System to maintain a consistent look and feel across the application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In server-side composition, what is the role of the web server (like Nginx)?",
+      "options": {
+        "A": "To compile TypeScript into JavaScript.",
+        "B": "To assemble the final HTML page by merging fragments from different services.",
+        "C": "To store the user's password.",
+        "D": "To act as a secondary firewall."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these tools are commonly used to manage 'Monorepos' which often house Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Nx",
+        "B": "Turborepo",
+        "C": "Lerna",
+        "D": "Adobe XD"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Single-spa is a popular framework for orchestrating Micro Frontends using different frameworks on the same page.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dependency Duplication' in Micro Frontends?",
+      "options": {
+        "A": "Having too many developers on one team.",
+        "B": "When multiple micro frontends each load their own copy of a library (like React), increasing bundle size.",
+        "C": "Using the same variable name twice.",
+        "D": "Backing up the code on two servers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are true about using iframes for Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "They provide strong isolation for CSS and JS.",
+        "B": "They can be difficult to make responsive (fluid height).",
+        "C": "They are bad for SEO if not handled correctly.",
+        "D": "They allow for instant, seamless state sharing."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: To minimize bundle size, shared dependencies should be configured as 'externals' or 'shared' in the build configuration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of a 'Design System' in a Micro Frontend architecture?",
+      "options": {
+        "A": "To provide a set of reusable UI components and patterns to ensure visual consistency across independent teams.",
+        "B": "To write the backend code for the teams.",
+        "C": "To replace the need for QA testing.",
+        "D": "To host the micro frontend files."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are 'Composition' levels in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Route-level composition (different apps per URL).",
+        "B": "Fragment-level composition (multiple apps on one page).",
+        "C": "Database-level composition.",
+        "D": "Cloud-provider-level composition."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Every Micro Frontend must have its own Git repository.",
+      "options": {
+        "A": "True",
+        "B": "False (They can be in a Monorepo)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Module Federation, what is a 'Remote'?",
+      "options": {
+        "A": "A team member working from home.",
+        "B": "The application that exposes components or logic to be used by other applications.",
+        "C": "A database located in another country.",
+        "D": "The TV remote used for presentations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of Micro Frontends, what does the 'Host' application do?",
+      "options": {
+        "A": "It provides the database for the entire system.",
+        "B": "It acts as the container that dynamically loads and displays different micro frontends.",
+        "C": "It is another name for the server-side hardware.",
+        "D": "It handles only the CSS and styling."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using a 'Monorepo' is a common strategy for managing multiple Micro Frontends within a single version control repository.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are valid ways to share state between Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Using Browser LocalStorage or SessionStorage.",
+        "B": "Passing data through URL parameters or the hash.",
+        "C": "Emitting and listening for Custom DOM Events.",
+        "D": "Directly modifying the private state of another app's React components."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Route-based' Micro Frontend integration?",
+      "options": {
+        "A": "Each route/URL in the browser loads a completely different micro frontend application.",
+        "B": "Routing traffic using a physical router device.",
+        "C": "Hardcoding all paths into the HTML file.",
+        "D": "Using a database to manage link clicks."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Every team working on a Micro Frontend must use the exact same version of every library to avoid conflicts.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are significant risks of Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Operational complexity in CI/CD.",
+        "B": "Inconsistent user experience (UX).",
+        "C": "Higher memory consumption in the user's browser.",
+        "D": "The inability to use JavaScript."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the role of 'Entry Points' in a run-time Micro Frontend integration?",
+      "options": {
+        "A": "The place where users log into the application.",
+        "B": "A JavaScript bundle or manifest file that the host app uses to initialize the micro frontend.",
+        "C": "The main office building of the development team.",
+        "D": "The first line of code in the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Micro Frontends allow a large organization to scale by letting teams work autonomously on separate features.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which techniques help in 'Scoped Styling'? (Select all that apply)",
+      "options": {
+        "A": "Shadow DOM.",
+        "B": "CSS-in-JS (with unique class name generation).",
+        "C": "Unique Namespace Prefixes in CSS selectors.",
+        "D": "Making all CSS selectors global."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "In Module Federation, what is 'Shared' configuration used for?",
+      "options": {
+        "A": "To share computer screens during meetings.",
+        "B": "To ensure common libraries (like React) are only loaded once by the browser.",
+        "C": "To share the same database password.",
+        "D": "To allow users to share the app on social media."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Micro Frontends usually result in a larger initial bundle size compared to a perfectly optimized monolith.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a common strategy for local development in a Micro Frontend environment?",
+      "options": {
+        "A": "Running every single micro frontend on your local machine simultaneously.",
+        "B": "Using 'Import Maps' or local proxies to point the host app to a locally running version of just one micro frontend.",
+        "C": "Developing without a browser.",
+        "D": "Using a single Git branch for all teams."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are true about 'Independent Versioning'? (Select all that apply)",
+      "options": {
+        "A": "Micro Frontend A can be on version 2.0 while Micro Frontend B is on 1.5.",
+        "B": "It allows for faster iteration for specific teams.",
+        "C": "It requires careful management of shared contracts/APIs.",
+        "D": "It is only possible when using Build-time integration."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Iframes isolate JavaScript variables completely between the host and the micro frontend.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Incremental Migration' in the context of Micro Frontends?",
+      "options": {
+        "A": "Moving all code to a new server at midnight.",
+        "B": "Gradually replacing parts of a legacy monolith with micro frontends over time.",
+        "C": "Increasing the version number of the app by 0.1 every day.",
+        "D": "Buying more RAM for the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these tools are related to Server-side Composition? (Select all that apply)",
+      "options": {
+        "A": "Tailor (by Zalando).",
+        "B": "Podium.",
+        "C": "OpenComponents.",
+        "D": "React Router."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In a Micro Frontend architecture, the 'Footer' and 'Header' are often treated as separate micro frontends themselves.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which concept describes a micro frontend that is embedded inside another as part of the page content?",
+      "options": {
+        "A": "Route-level app.",
+        "B": "Fragment or Component-level micro frontend.",
+        "C": "Database view.",
+        "D": "Pop-up window."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are valid 'Deployment' strategies for Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Deploying each micro frontend to its own S3 bucket/CDN path.",
+        "B": "Updating a manifest file that the host app reads.",
+        "C": "Deploying all micro frontends as a single ZIP file.",
+        "D": "Rebuilding the host app every time a child app changes."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Module Federation' is exclusive to the Vue.js framework.",
+      "options": {
+        "A": "True",
+        "B": "False (It is a Webpack 5 feature)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Single-SPA' library, what is an 'Application'?",
+      "options": {
+        "A": "A mobile app on the App Store.",
+        "B": "A micro frontend that is active for certain routes and has its own lifecycle methods (bootstrap, mount, unmount).",
+        "C": "The backend server.",
+        "D": "The user's computer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are characteristics of 'Loose Coupling' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Micro frontends do not rely on the internal implementation of others.",
+        "B": "Changes in one micro frontend rarely require changes in another.",
+        "C": "They communicate through well-defined interfaces or events.",
+        "D": "They all use the same global Redux store."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Edge Side Includes' (ESI) allows a CDN to assemble a page from different micro frontend fragments before it reaches the user.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary disadvantage of using 'Build-time Integration' (NPM packages)?",
+      "options": {
+        "A": "It is too easy to use.",
+        "B": "It creates a tight coupling where the host must be redeployed to see changes in any micro frontend.",
+        "C": "It is not compatible with React.",
+        "D": "It doesn't allow for CSS styling."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid ways to test Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Unit testing each micro frontend in isolation.",
+        "B": "Integration testing using the host application.",
+        "C": "End-to-End (E2E) testing of critical user flows across multiple micro frontends.",
+        "D": "Testing only the CSS."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends make it easier to hire and organize specialized teams (e.g., a Team specifically for 'Checkout').",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'App Shell' responsible for in a Micro Frontend architecture?",
+      "options": {
+        "A": "Parsing the database.",
+        "B": "Common UI elements (Header/Nav), authentication, and managing the lifecycle of child apps.",
+        "C": "Compiling the code into machine language.",
+        "D": "Compressing images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes 'Run-time Integration'? (Select all that apply)",
+      "options": {
+        "A": "The host app downloads micro frontends at the moment they are needed in the browser.",
+        "B": "Micro frontends are served as independent JavaScript bundles.",
+        "C": "The host app is unaware of the child app's code at compile time.",
+        "D": "The child app is hardcoded into the host app's package.json."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: A Micro Frontend must always be a Single Page Application (SPA).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Import Maps' in a Micro Frontend setup?",
+      "options": {
+        "A": "To show the geographical location of the servers.",
+        "B": "To control which URLs the browser should use to resolve JavaScript module imports.",
+        "C": "To import images into a project.",
+        "D": "To map the database schema."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are common communication patterns? (Select all that apply)",
+      "options": {
+        "A": "Pub/Sub (Publish-Subscribe) model via an event bus.",
+        "B": "Observation of URL changes.",
+        "C": "Prop drilling through 50 different micro frontends.",
+        "D": "Broadcast Channel API."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends are primarily a solution for organizational scaling issues, not just technical ones.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Hydration' refer to in a server-side composed Micro Frontend?",
+      "options": {
+        "A": "Giving the servers enough water to stay cool.",
+        "B": "The process where client-side JavaScript takes over the static HTML sent from the server to make it interactive.",
+        "C": "Refreshing the database cache.",
+        "D": "Cleaning up the code before deployment."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a key advantage of Webpack 5 Module Federation over simple script loading?",
+      "options": {
+        "A": "It automatically translates code into different languages.",
+        "B": "It allows sharing of dependencies (like React) between the host and remotes with version negotiation.",
+        "C": "It eliminates the need for a web server.",
+        "D": "It only works with CSS files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid strategies for managing shared dependencies in Module Federation? (Select all that apply)",
+      "options": {
+        "A": "singleton: true (ensures only one instance of a library is loaded).",
+        "B": "requiredVersion (specifies a version range for the shared library).",
+        "C": "eager: true (loads the dependency immediately rather than asynchronously).",
+        "D": "global: true (makes the library a global window variable)."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In a 'single-spa' orchestration, the container (root config) must contain the business logic for every child application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'Custom Events' communication work between two Micro Frontends on the same page?",
+      "options": {
+        "A": "They write to a shared text file on the server.",
+        "B": "One app dispatches an event on the 'window' object, and the other app listens for that specific event.",
+        "C": "They use a physical cable connection.",
+        "D": "They must be from the same framework to communicate."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are true regarding 'Shadow DOM' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "It provides true encapsulation for CSS, preventing styles from leaking in or out.",
+        "B": "It can break global CSS libraries (like Bootstrap) if they rely on global selectors.",
+        "C": "It is natively supported by all browsers for all HTML tags.",
+        "D": "It isolates the JavaScript heap of the micro frontend."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Build-time integration' often leads to a 'distributed monolith' where teams lose their deployment autonomy.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Semantic Versioning' (SemVer) essential for in Micro Frontend architectures?",
+      "options": {
+        "A": "Managing breaking changes in shared component libraries or shared state interfaces.",
+        "B": "Naming the servers in the data center.",
+        "C": "Counting the number of users on the site.",
+        "D": "Choosing the color palette for the UI."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these concepts are part of the 'single-spa' lifecycle? (Select all that apply)",
+      "options": {
+        "A": "bootstrap",
+        "B": "mount",
+        "C": "unmount",
+        "D": "rehydrate"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: If two Micro Frontends use different versions of React, Module Federation can allow both to run on the same page by loading two separate instances.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a Micro Frontend environment, what is a 'Manifest File' usually used for?",
+      "options": {
+        "A": "To list the names of all the developers.",
+        "B": "To map human-readable micro frontend names to their actual, versioned bundle URLs.",
+        "C": "To store the CSS of the application.",
+        "D": "To act as a secondary package.json."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which strategies can be used for 'BFF' (Backend For Frontend) in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "A single BFF for the entire Micro Frontend application.",
+        "B": "A dedicated BFF for each specific Micro Frontend (Team).",
+        "C": "Shared GraphQL gateway for all teams.",
+        "D": "Eliminating backends entirely."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Edge-Side Composition' is generally faster than 'Client-Side Composition' because the page is assembled closer to the user.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Runtime CSS Injection' in Micro Frontends?",
+      "options": {
+        "A": "The container app hardcodes all CSS.",
+        "B": "The micro frontend app dynamically injects its own <style> tags into the document head when it is mounted.",
+        "C": "Using a global CSS file for everything.",
+        "D": "Writing CSS in the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are 'Anti-patterns' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Micro frontends sharing a common database directly.",
+        "B": "Frequent cross-app state synchronization.",
+        "C": "Creating too many tiny micro frontends (Nano-frontends).",
+        "D": "Using a shared component library for buttons."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: When using Module Federation, the 'remotes' must be deployed to the same domain as the 'host'.",
+      "options": {
+        "A": "True",
+        "B": "False (They can be on different domains/CDNs)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Utility Modules' in a Micro Frontend architecture?",
+      "options": {
+        "A": "To perform garbage collection.",
+        "B": "To share common logic (auth, API clients, helpers) across multiple micro frontends without duplication.",
+        "C": "To host the images of the site.",
+        "D": "To act as a backup server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid methods for 'Routing' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "The Shell/Host app handles all top-level routing.",
+        "B": "Each Micro Frontend handles its own internal sub-routing.",
+        "C": "The Backend server decides which JS bundle to serve based on the path.",
+        "D": "Using physical redirect files for every page."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends are primarily intended for projects where the codebase has grown too large for a single team to manage effectively.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of 'Shared Libraries', what is the risk of the 'Fat Bundle' problem?",
+      "options": {
+        "A": "The servers becoming physically too heavy.",
+        "B": "Including large libraries multiple times in the payload because they weren't properly externalized.",
+        "C": "The database becoming too large.",
+        "D": "Using too many high-resolution images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tools help enforce 'Boundary Constraints' in a Micro Frontend Monorepo? (Select all that apply)",
+      "options": {
+        "A": "Nx Workspace Lint Rules.",
+        "B": "ESLint with 'import/no-restricted-paths'.",
+        "C": "TypeScript Project References.",
+        "D": "Prettier code formatting."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Server-Side Rendering' (SSR) is significantly more complex to implement in Micro Frontends than in a single monolith.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Capability-based' team division?",
+      "options": {
+        "A": "Teams organized by their coding skill level.",
+        "B": "Teams organized around a specific business domain or capability (e.g., 'Payments', 'Search').",
+        "C": "Teams that only work on 'capabilities' of the browser.",
+        "D": "A team that handles all bug fixes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid ways to load a Micro Frontend at runtime? (Select all that apply)",
+      "options": {
+        "A": "SystemJS.",
+        "B": "Native Browser ESM Imports.",
+        "C": "Webpack's dynamic __webpack_init_sharing__.",
+        "D": "FTP file transfer."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: A 'Single-SPA' application must use the 'parcel' feature to exist on the same page as another application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Zombie' Micro Frontend?",
+      "options": {
+        "A": "An app that has been deleted but still runs.",
+        "B": "A micro frontend that continues to run and listen to events in the background even after it has been unmounted from the DOM.",
+        "C": "A virus in the frontend code.",
+        "D": "A micro frontend with no CSS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which strategies can be used for 'Authentication' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Host app handles login and shares the JWT/token via a shared cookie.",
+        "B": "Host app passes the token as a 'prop' to child applications.",
+        "C": "Every micro frontend has its own separate login page.",
+        "D": "Sharing a 'Subject' or 'Observable' from a central auth utility module."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Using 'Global Styles' (like reset.css) is generally discouraged in Micro Frontends unless managed by the host app.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Module Federation, what does the 'remoteEntry.js' file contain?",
+      "options": {
+        "A": "All the source code of the application.",
+        "B": "A manifest and orchestration logic that tells the host how to load the shared modules and remotes.",
+        "C": "The user's session data.",
+        "D": "The routing table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are 'Event Bus' implementations? (Select all that apply)",
+      "options": {
+        "A": "Window.addEventListener / Window.dispatchEvent.",
+        "B": "RxJS Observables in a shared library.",
+        "C": "A central Redux store with cross-app access.",
+        "D": "Node.js EventEmitter (on the client side)."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends can reduce the total 'Time to Interactive' (TTI) for a user because the entire app bundle doesn't need to be loaded at once.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Orchestrator's' job in a client-side Micro Frontend?",
+      "options": {
+        "A": "To compile the CSS.",
+        "B": "To detect URL changes and decide which micro frontends to load, mount, or unmount.",
+        "C": "To act as a firewall.",
+        "D": "To manage the SQL database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Error Handling' strategies in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Using 'Error Boundaries' (React) to prevent one micro frontend from crashing the whole page.",
+        "B": "Host app showing a fallback UI if a child app fails to load.",
+        "C": "Restarting the user's computer automatically.",
+        "D": "Logging errors to a centralized service with metadata about which micro frontend failed."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Lazy Loading' is a fundamental requirement for efficient Micro Frontend implementation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following is a potential security risk in Micro Frontend architectures?",
+      "options": {
+        "A": "CSS leaking between applications.",
+        "B": "Cross-Site Scripting (XSS) spreading if a single micro frontend is compromised and has access to a shared global scope.",
+        "C": "Using too many different versions of React.",
+        "D": "The server running out of disk space."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are the common strategies for 'Versioning' Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Using 'Always Latest' (pointing to a constant URL like /main.js).",
+        "B": "Using immutable versioned URLs (e.g., /v1.2.3/main.js).",
+        "C": "Locking all micro frontends to the same global version number.",
+        "D": "Using Git hashes in the filename (e.g., main.a1b2c3.js)."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: In a Module Federation setup, a 'Bi-directional' host can both consume remotes and be consumed as a remote by other applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of 'Import Maps' in a Micro Frontend deployment?",
+      "options": {
+        "A": "To translate code into different languages.",
+        "B": "To provide a centralized way to manage the mapping of module names to specific URLs without changing the application code.",
+        "C": "To create a site map for SEO.",
+        "D": "To manage the database schema."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Shared State' management libraries that support multi-app environments? (Select all that apply)",
+      "options": {
+        "A": "Zustand (with a shared external store).",
+        "B": "Redux (using the 'Single Store' pattern with namespaces).",
+        "C": "RxJS (via an Event Bus utility).",
+        "D": "jQuery Data."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The 'Shell' application should ideally be kept as thin as possible to avoid becoming a 'Monolithic Shell'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which concept allows a micro frontend to 'Export' a component for use inside another micro frontend at runtime?",
+      "options": {
+        "A": "Cross-app Drifting.",
+        "B": "Exposing (in Module Federation) or Parcels (in single-spa).",
+        "C": "Direct Script Injection.",
+        "D": "Iframe Message Passing."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are the benefits of using 'Shadow DOM' for isolation? (Select all that apply)",
+      "options": {
+        "A": "Prevents global CSS from affecting the internal components of a micro frontend.",
+        "B": "Prevents internal micro frontend styles from affecting the rest of the page.",
+        "C": "Isolates JavaScript variables from the global window object.",
+        "D": "Improves SEO naturally for all fragments."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'Pre-fetching' micro frontend bundles can improve the user experience by reducing wait times when a user navigates to a new route.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes a 'Shell-driven' routing strategy?",
+      "options": {
+        "A": "The database decides the route.",
+        "B": "The main container app listens to URL changes and mounts/unmounts the appropriate micro frontend.",
+        "C": "The user must type the full URL manually.",
+        "D": "Each micro frontend has its own physical server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which factors contribute to 'Micro Frontend Overloading' (Browser Performance)? (Select all that apply)",
+      "options": {
+        "A": "Loading multiple heavy frameworks simultaneously (e.g., Angular + React + Vue).",
+        "B": "Too many active Event Listeners from different apps.",
+        "C": "Large amounts of duplicated CSS in the DOM.",
+        "D": "Using a dark mode theme."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Module Federation' handles dependency versions by default using a 'Semantic Versioning' (SemVer) check to see if it can reuse an existing loaded version.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Server-Side Includes' (SSI) used for in Micro Frontends?",
+      "options": {
+        "A": "Encrypting the source code.",
+        "B": "A simple server-side composition technique where the server combines HTML fragments before sending the response to the browser.",
+        "C": "Installing NPM packages on the server.",
+        "D": "Managing user login sessions."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are characteristic of 'Micro Frontend Autonomy'? (Select all that apply)",
+      "options": {
+        "A": "Independent CI/CD pipelines.",
+        "B": "Independent choice of technology stack.",
+        "C": "Independent release cycles (no release trains).",
+        "D": "Sharing the same local development server for all teams."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: A 'Parcel' in single-spa is a component that is manually mounted and unmounted, rather than being tied to a specific route.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is commonly used to generate a 'Remote Entry' file in a micro frontend project?",
+      "options": {
+        "A": "Babel.",
+        "B": "Webpack (with Module Federation Plugin).",
+        "C": "Prettier.",
+        "D": "Jest."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid 'Inter-app' communication patterns? (Select all that apply)",
+      "options": {
+        "A": "Directly modifying the DOM of another micro frontend.",
+        "B": "Custom Events on the window object.",
+        "C": "An Event Bus using the Pub/Sub pattern.",
+        "D": "Sharing state via the Redux DevTools."
+      },
+      "answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Monolith first' is often recommended, as Micro Frontends add significant complexity that might not be needed early in a project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Distributed Monolith' trap in Micro Frontends?",
+      "options": {
+        "A": "When the servers are physically far apart.",
+        "B": "When micro frontends are technically separated but so tightly coupled that they must always be deployed together.",
+        "C": "When the database is too big.",
+        "D": "When the app uses too many images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which techniques help reduce 'Network Latency' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Using a Content Delivery Network (CDN) for bundles.",
+        "B": "HTTP/2 or HTTP/3 (for parallel file loading).",
+        "C": "Server-Side Rendering (SSR) for the initial view.",
+        "D": "Removing the 'Shell' application."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'SystemJS' is a module loader that can be used to load Micro Frontends in browsers that do not fully support native ESM imports.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of 'Content Security Policy' (CSP) in a Micro Frontend application?",
+      "options": {
+        "A": "To choose the font for the app.",
+        "B": "To restrict which domains the browser is allowed to fetch scripts and resources from, reducing XSS risks.",
+        "C": "To translate the site into different languages.",
+        "D": "To manage the user's password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are true about 'Shared Components' (Design System)? (Select all that apply)",
+      "options": {
+        "A": "They should be versioned to prevent breaking changes across teams.",
+        "B": "They ensure a consistent Look & Feel.",
+        "C": "They should contain all the business logic for the apps.",
+        "D": "They can be shared via an NPM package or Module Federation."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: In a Micro Frontend architecture, the 'Global Window' object is the safest place to store shared business data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Eager Loading' mean in Module Federation?",
+      "options": {
+        "A": "Loading a module immediately in the main bundle rather than as an async chunk.",
+        "B": "Downloading the app before the user visits the site.",
+        "C": "Writing code very quickly.",
+        "D": "Using a faster database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are valid ways to manage 'Local Development' dependencies? (Select all that apply)",
+      "options": {
+        "A": "Yarn or NPM Workspaces.",
+        "B": "Git Submodules.",
+        "C": "Link-module (npm link).",
+        "D": "Copy-pasting the code into every folder."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Micro Frontends allow for 'Incremental Upgrades', such as upgrading one part of the app to React 19 while the rest remains on React 18.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'single-spa', what is the purpose of the 'Root Config'?",
+      "options": {
+        "A": "To store the user's login details.",
+        "B": "To serve as the entry point that registers applications and starts the framework.",
+        "C": "To compile the CSS.",
+        "D": "To act as a backup server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describe 'Client-Side Composition'? (Select all that apply)",
+      "options": {
+        "A": "The browser is responsible for fetching and mounting the different apps.",
+        "B": "It often uses JavaScript frameworks to orchestrate the UI.",
+        "C": "It is faster for the first-paint than server-side composition.",
+        "D": "It can lead to a 'Loading Spinner' experience if not optimized."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Using 'iframes' is the most performant way to implement Micro Frontends due to their lightweight nature.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyfill' management in Micro Frontends?",
+      "options": {
+        "A": "Managing the different colors in the app.",
+        "B": "Ensuring that necessary browser compatibility scripts are loaded once by the shell, rather than by every individual micro frontend.",
+        "C": "Cleaning up old code.",
+        "D": "Formatting the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Deployment' units? (Select all that apply)",
+      "options": {
+        "A": "A single JS file.",
+        "B": "A directory of static assets (JS, CSS, Images).",
+        "C": "A Docker container (for SSR-based micro frontends).",
+        "D": "A SQL script."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Module Federation' can be used with Vite through specific plugins, even though it was originally built for Webpack.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes the 'Bidirectional' relationship in Webpack 5 Module Federation?",
+      "options": {
+        "A": "A project can only be a host or a remote, but not both.",
+        "B": "A project can act as a host (consuming remotes) and a remote (being consumed) simultaneously, allowing for shared logic across a mesh of apps.",
+        "C": "Data only flows from the server to the client.",
+        "D": "It refers to using both React and Vue in the same file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a complex Micro Frontend setup with Server-Side Rendering (SSR), which of the following is a major 'Hydration' challenge?",
+      "options": {
+        "A": "The database cannot be reached from the server.",
+        "B": "Ensuring the client-side bundle for a specific fragment is loaded and ready before the browser attempts to hydrate the HTML delivered by the server.",
+        "C": "The CSS is too large for the browser.",
+        "D": "Server-side code cannot use the 'if' statement."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Module Federation, if a 'Remote' is unavailable at runtime, the 'Host' will catch the error and can provide a fallback component if an Error Boundary is implemented.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these are valid strategies for 'Auth Token' propagation across micro frontends? (Select all that apply)",
+      "options": {
+        "A": "Storing the token in a Secure/HttpOnly cookie accessible by the top-level domain.",
+        "B": "Using a shared 'Observable' in a utility module that all micro frontends subscribe to.",
+        "C": "Hardcoding the token into the JavaScript bundles.",
+        "D": "Passing the token as a serialized string in every URL hash."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Double-Bundle' problem in Micro Frontends?",
+      "options": {
+        "A": "Having two copies of the same image.",
+        "B": "When a shared dependency (e.g., React) is bundled into both the host and the remote instead of being externalized, doubling the download size.",
+        "C": "Saving the code on two different hard drives.",
+        "D": "Using two different web servers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using the 'Broadcast Channel API' allows for zero-latency communication between Micro Frontends even if they are in different browser tabs/windows on the same origin.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following describes 'Island Architecture' in the context of Micro Frontends?",
+      "options": {
+        "A": "Every micro frontend is on its own physical island server.",
+        "B": "A technique where the page is primarily static HTML with small, independent 'islands' of interactive JavaScript (micro frontends) hydrated separately.",
+        "C": "A team organization where members do not speak to each other.",
+        "D": "The app only works when the user is on an island."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific Webpack 5 fields prevent 'version mismatch' errors in shared libraries? (Select all that apply)",
+      "options": {
+        "A": "strictVersion: true",
+        "B": "singleton: true",
+        "C": "requiredVersion: '^18.0.0'",
+        "D": "forceUpdate: true"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'SystemJS' is primarily used to polyfill the 'Import Maps' functionality for older browsers in a Micro Frontend environment.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cross-Runtime' state sharing?",
+      "options": {
+        "A": "Sharing data between a Node.js server and a Java server.",
+        "B": "Sharing state between micro frontends that are running in different frameworks (e.g., React state to a Vue component) via a framework-agnostic bridge.",
+        "C": "Running two versions of the same app at once.",
+        "D": "A way to speed up the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which security headers are critical for protecting a Micro Frontend Host from malicious Remotes? (Select all that apply)",
+      "options": {
+        "A": "Content-Security-Policy (CSP)",
+        "B": "X-Frame-Options",
+        "C": "Cross-Origin Resource Sharing (CORS) configurations",
+        "D": "X-Powered-By"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In a 'single-spa' application, the 'mount' lifecycle function is the only place where you can safely perform DOM manipulations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Partial Hydration'?",
+      "options": {
+        "A": "Drinking only half a glass of water.",
+        "B": "A technique where only the interactive parts of a page (Micro Frontends) are hydrated with JS, while the rest remains static HTML to improve performance.",
+        "C": "Refreshing only the CSS of the page.",
+        "D": "Loading the database in chunks."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid 'Module Federation' remotes configuration types? (Select all that apply)",
+      "options": {
+        "A": "Internal (same build)",
+        "B": "External (dynamic URL at runtime)",
+        "C": "Static (hardcoded URL in config)",
+        "D": "Recursive (self-referencing)"
+      },
+      "answer": [
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: A 'BFF' (Backend For Frontend) must be written in the same language as its corresponding Micro Frontend.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'App Shell' model in a Micro Frontend context?",
+      "options": {
+        "A": "A shell script for deployment.",
+        "B": "The minimal HTML, CSS, and JS required to power the user interface, which acts as the 'host' for all dynamic micro frontends.",
+        "C": "A tool for compressing images.",
+        "D": "A database schema."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are effective ways to handle 'Global Error' reporting? (Select all that apply)",
+      "options": {
+        "A": "A global window.onerror listener in the App Shell.",
+        "B": "Individual try-catch blocks in every single function.",
+        "C": "Integrating Sentry/LogRocket at the Shell level with custom tags for each micro frontend.",
+        "D": "Ignoring errors from non-critical micro frontends."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The 'Shadow DOM' prevents JavaScript in the Host app from accessing elements inside the Micro Frontend via standard document.querySelector.",
+      "options": {
+        "A": "True",
+        "B": "False (Unless 'mode: closed' is used)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'Composition' type allows for the highest SEO performance?",
+      "options": {
+        "A": "Client-side Composition",
+        "B": "Server-side Composition (SSR)",
+        "C": "Iframe-based Composition",
+        "D": "Build-time Integration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid 'Routing' challenges in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Synchronizing the browser URL with multiple independent app routers.",
+        "B": "Handling 404 pages across different micro frontend domains.",
+        "C": "Ensuring the back button works correctly across different micro frontends.",
+        "D": "The user's mouse speed."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In Webpack Module Federation, 'eager: true' should be used for the largest dependencies to improve initial load speed.",
+      "options": {
+        "A": "True",
+        "B": "False (It increases initial bundle size; use it only for core entry-point requirements)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Design System Versioning' strategy?",
+      "options": {
+        "A": "Naming the colors differently every day.",
+        "B": "Releasing the design system as an NPM package with SemVer to allow micro frontend teams to upgrade at their own pace.",
+        "C": "Using a single global CSS file that everyone must edit.",
+        "D": "Deleting old designs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid methods for 'Micro Frontend Discovery'? (Select all that apply)",
+      "options": {
+        "A": "Static configuration in the host app.",
+        "B": "A central Discovery Service API that returns a list of active remotes and their URLs.",
+        "C": "Parsing a remote import-map.json at runtime.",
+        "D": "Using a physical list of IP addresses."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Z-index' management is a common styling conflict in Micro Frontend architectures with multiple floating elements (modals, tooltips).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'top-level-await' proposal allow in Micro Frontend development?",
+      "options": {
+        "A": "Waiting for the user to click a button.",
+        "B": "Simplifying the asynchronous loading and initialization of remote modules directly at the top level of a JavaScript file.",
+        "C": "Waiting for the CSS to load before the JS.",
+        "D": "Pausing the entire browser."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are risks of 'Micro Frontend Proliferation'? (Select all that apply)",
+      "options": {
+        "A": "Excessive browser memory usage.",
+        "B": "Fragmented team communication.",
+        "C": "Inconsistent accessibility standards.",
+        "D": "The project becomes too easy to manage."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Cross-Framework' communication should ideally be handled via the 'props' of the component whenever possible.",
+      "options": {
+        "A": "True",
+        "B": "False (Use framework-agnostic events or a shared observable bridge)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which strategy prevents 'CSS Leakage' without using Shadow DOM?",
+      "options": {
+        "A": "CSS Modules (scoped class names).",
+        "B": "Using '!important' on every single CSS line.",
+        "C": "Unique namespace prefixes for all classes (e.g., .auth-button).",
+        "D": "Putting all CSS in the database."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "Which Webpack plugin is required to use 'Module Federation' in Webpack 5?",
+      "options": {
+        "A": "ModuleFederationPlugin",
+        "B": "MicroFrontendPlugin",
+        "C": "RemoteLoaderPlugin",
+        "D": "HostContainerPlugin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of the following are valid ways to manage 'Local Dev' shared state? (Select all that apply)",
+      "options": {
+        "A": "Local storage mock servers.",
+        "B": "Shared development Redux stores (if using the same framework).",
+        "C": "URL hash syncing.",
+        "D": "Physical USB drives."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Feature Flags' can be used to control the rollout of new micro frontends to specific user segments.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of an 'Adapter' in Micro Frontends?",
+      "options": {
+        "A": "To plug the computer into the wall.",
+        "B": "A wrapper that translates a specific framework's lifecycle (e.g., React mount) into a standard interface the orchestrator understands.",
+        "C": "To convert JSON into XML.",
+        "D": "To manage the CSS of the application."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Composition' patterns on the Client side? (Select all that apply)",
+      "options": {
+        "A": "Dynamic <script> tag injection.",
+        "B": "Web Components (Custom Elements).",
+        "C": "Module Federation.",
+        "D": "Hardcoded HTML imports."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: In a 'Container-less' Micro Frontend architecture, there is no App Shell; micro frontends discover and load each other peer-to-peer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Runtime Module Transformation'?",
+      "options": {
+        "A": "Changing the code while the user is typing.",
+        "B": "The process of modifying the JavaScript modules on-the-fly (e.g., rewriting URLs) as they are loaded into the browser.",
+        "C": "A way to speed up the database.",
+        "D": "Deleting unused code at runtime."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are 'Governance' tasks in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Defining the standard for inter-app communication.",
+        "B": "Managing the lifecycle of shared dependencies.",
+        "C": "Reviewing the database schema for every team.",
+        "D": "Setting performance budgets for each micro frontend."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Cross-Origin' Micro Frontends (hosted on different subdomains) require pre-flight OPTIONS requests for every JS bundle if CORS is not configured correctly.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Semantic Versioning' enforcement in a Micro Frontend Monorepo?",
+      "options": {
+        "A": "Naming the files with numbers.",
+        "B": "Using automated tools (like Changesets or Lerna) to ensure that changes in a shared utility trigger version bumps for all dependent micro frontends.",
+        "C": "Deleting old versions of the app.",
+        "D": "A way to handle server crashes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Shared Dependency' pitfalls? (Select all that apply)",
+      "options": {
+        "A": "Version mismatch leading to 'Invalid Hook Call' in React.",
+        "B": "Loading multiple versions of a global state library (like Redux).",
+        "C": "The host app becoming too small.",
+        "D": "A child app breaking because the host updated a shared library without backward compatibility."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Web Workers' can be used to run heavy logic for Micro Frontends in a separate thread, but they cannot directly manipulate the DOM shared with the Host.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Micro-Frontend-Aware' CDN?",
+      "options": {
+        "A": "A CDN that knows the names of the developers.",
+        "B": "A CDN configuration (or Edge function) that can dynamically select and serve the correct version of a micro frontend bundle based on user headers or a manifest.",
+        "C": "A faster hard drive.",
+        "D": "A database located on the CDN."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'single-spa' function allows you to manually mount an application at any time? (Select all that apply)",
+      "options": {
+        "A": "mountRootParcel",
+        "B": "navigateToUrl",
+        "C": "registerApplication",
+        "D": "start"
+      },
+      "answer": [
+        "A"
+      ]
+    },
+    {
+      "question": "True or False: A 'Distributed Design System' means every team builds their own components from scratch without any shared code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Correlation IDs' in Micro Frontend logging?",
+      "options": {
+        "A": "To identify which user is on the site.",
+        "B": "To track a single user request as it travels from the host app through various micro frontends and into backend microservices.",
+        "C": "To name the images in the app.",
+        "D": "To sort the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describe 'Edge-Side' Composition? (Select all that apply)",
+      "options": {
+        "A": " assembly happens at the CDN layer.",
+        "B": "It reduces the load on the origin server.",
+        "C": "It is essentially a client-side only technique.",
+        "D": "It uses ESI (Edge Side Includes) or Lambda@Edge."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Top-level await' can cause a 'Deadlock' if two Micro Frontends are waiting for each other to initialize before they can finish their own loading.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In 'Podium' (a micro frontend framework), what is a 'Podlet'?",
+      "options": {
+        "A": "A small database.",
+        "B": "A server-side fragment that generates HTML, CSS, and JS to be consumed by a layout server.",
+        "C": "The user's mobile device.",
+        "D": "A type of CSS file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Shared Data' synchronization techniques? (Select all that apply)",
+      "options": {
+        "A": "BroadcastChannel.",
+        "B": "PostMessage (for iframes).",
+        "C": "SharedWebWorker.",
+        "D": "Physical network packets."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Using 'Module Federation' automatically solves all CSS scoping issues.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Contract Testing' (Pact) used for in Micro Frontends?",
+      "options": {
+        "A": "Testing the speed of the internet.",
+        "B": "Ensuring that the 'Host' and 'Remote' still agree on the API/Interface used for communication and data sharing.",
+        "C": "Writing legal documents.",
+        "D": "Checking the database password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid 'Deployment' environments for Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Kubernetes Pods (for SSR fragments).",
+        "B": "Cloudflare Workers.",
+        "C": "Static S3 Buckets.",
+        "D": "A single SQL Table."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The 'Host' application is responsible for managing the Z-index of its child micro frontends' modals to prevent overlap issues.",
+      "options": {
+        "A": "True",
+        "B": "False (Managed by a shared styling contract/Design System)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Recursive Module Federation'?",
+      "options": {
+        "A": "An app that imports itself.",
+        "B": "A pattern where a Host imports a Remote, which itself acts as a Host to another Remote (Nested Micro Frontends).",
+        "C": "A database that loops forever.",
+        "D": "A way to handle errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describe 'Hot-Swap' in Micro Frontends? (Select all that apply)",
+      "options": {
+        "A": "Replacing a micro frontend on a live page without a full browser refresh.",
+        "B": "Changing the server while it's hot.",
+        "C": "Useful for A/B testing or instant rollbacks.",
+        "D": "A type of database indexing."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Pre-flight' requests in Micro Frontends can be eliminated by hosting the Host and all Remotes on the same domain and port.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Synthetic State' propagation?",
+      "options": {
+        "A": "Artificial intelligence creating data.",
+        "B": "Creating a fake state object in the Host app and passing it to Child apps to simulate a unified experience.",
+        "C": "A way to speed up the database.",
+        "D": "Cleaning up the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Shared State' hazards? (Select all that apply)",
+      "options": {
+        "A": "Race conditions between two apps updating the same local storage key.",
+        "B": "Inconsistent state between the server and the client during hydration.",
+        "C": "The host app being too fast.",
+        "D": "Memory leaks from unremoved event listeners in a shared store."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: 'Cross-App' communication should never involve passing large objects or complex data structures, as it increases coupling.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Module Federation' in Node.js (SSR)?",
+      "options": {
+        "A": "A way to run React on the server.",
+        "B": "Using the same Module Federation configuration on the server side to allow different microservices to share code or pre-render fragments.",
+        "C": "A database tool.",
+        "D": "A way to handle server crashes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Performance Budgets' for a Micro Frontend? (Select all that apply)",
+      "options": {
+        "A": "Maximum initial bundle size (e.g., < 50KB).",
+        "B": "Maximum time to mount (e.g., < 100ms).",
+        "C": "Maximum number of network requests.",
+        "D": "Maximum number of team members."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Event Sourcing' can be used as a high-level communication pattern between Micro Frontends to maintain a shared history of user actions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Splitting' vs 'Micro Frontend'?",
+      "options": {
+        "A": "Code splitting is for teams; micro frontends are for files.",
+        "B": "Code splitting is a technical optimization within a single build; Micro Frontends are an architectural separation into multiple builds.",
+        "C": "They are the same thing.",
+        "D": "Micro frontends are for CSS; code splitting is for JS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following are valid 'Registry' types? (Select all that apply)",
+      "options": {
+        "A": "Consul.",
+        "B": "Etcd.",
+        "C": "A simple JSON file on S3.",
+        "D": "A SQL database."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Shadow DOM' is the only way to ensure complete style isolation in a modern browser.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Contextual' loading?",
+      "options": {
+        "A": "Loading the app based on the time of day.",
+        "B": "The Host app loading specific Micro Frontends only based on the user's role, permissions, or feature flags.",
+        "C": "A way to speed up the database.",
+        "D": "Loading the CSS before the JS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these are valid 'Security' considerations? (Select all that apply)",
+      "options": {
+        "A": "Preventing 'Prototype Pollution' between shared modules.",
+        "B": "Sanitizing data passed via the Event Bus.",
+        "C": "Ensuring subresource integrity (SRI) for remote bundles.",
+        "D": "The user's password."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'Dynamic Module Federation' allows a Host to decide which Remote URL to load at runtime based on logic, rather than having it hardcoded in the configuration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Micro-Frontend-as-a-Service'?",
+      "options": {
+        "A": "A way to buy micro frontends from a store.",
+        "B": "A pattern where a micro frontend is treated as a fully independent, versioned, and hosted service that can be consumed by multiple shells across an organization.",
+        "C": "A database tool.",
+        "D": "A way to handle server crashes."
+      },
+      "answer": "B"
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+    "format": "scripture burrito",
+    "projectName": "VerifiHireAI",
+    "projectId": "a3p3szt9u0wfct9hv9kz6p",
+    "meta": {
+        "version": "0.0.0",
+        "category": "Translation",
+        "generator": {
+            "softwareName": "Codex Editor",
+            "softwareVersion": "0.24.0",
+            "userName": "",
+            "userEmail": ""
+        },
+        "defaultLocale": "en",
+        "dateCreated": "Fri Apr 10 2026",
+        "normalization": "NFC",
+        "comments": [],
+        "requiredExtensions": {
+            "codexEditor": "0.27.0",
+            "frontierAuthentication": "0.6.0"
+        },
+        "validationCount": 1,
+        "validationCountAudio": 1,
+        "abbreviation": ""
+    },
+    "idAuthorities": {},
+    "identification": {},
+    "languages": [],
+    "type": {
+        "flavorType": {
+            "name": "default",
+            "flavor": {
+                "name": "default",
+                "usfmVersion": "3.0",
+                "translationType": "unknown",
+                "audience": "general",
+                "projectType": "unknown"
+            },
+            "currentScope": {
+                "GEN": [],
+                "EXO": [],
+                "LEV": [],
+                "NUM": [],
+                "DEU": [],
+                "JOS": [],
+                "JDG": [],
+                "RUT": [],
+                "1SA": [],
+                "2SA": [],
+                "1KI": [],
+                "2KI": [],
+                "1CH": [],
+                "2CH": [],
+                "EZR": [],
+                "NEH": [],
+                "EST": [],
+                "JOB": [],
+                "PSA": [],
+                "PRO": [],
+                "ECC": [],
+                "SNG": [],
+                "ISA": [],
+                "JER": [],
+                "LAM": [],
+                "EZK": [],
+                "DAN": [],
+                "HOS": [],
+                "JOL": [],
+                "AMO": [],
+                "OBA": [],
+                "JON": [],
+                "MIC": [],
+                "NAM": [],
+                "HAB": [],
+                "ZEP": [],
+                "HAG": [],
+                "ZEC": [],
+                "MAL": [],
+                "MAT": [],
+                "MRK": [],
+                "LUK": [],
+                "JHN": [],
+                "ACT": [],
+                "ROM": [],
+                "1CO": [],
+                "2CO": [],
+                "GAL": [],
+                "EPH": [],
+                "PHP": [],
+                "COL": [],
+                "1TH": [],
+                "2TH": [],
+                "1TI": [],
+                "2TI": [],
+                "TIT": [],
+                "PHM": [],
+                "HEB": [],
+                "JAS": [],
+                "1PE": [],
+                "2PE": [],
+                "1JN": [],
+                "2JN": [],
+                "3JN": [],
+                "JUD": [],
+                "REV": []
+            }
+        }
+    },
+    "confidential": false,
+    "agencies": [],
+    "targetAreas": [],
+    "localizedNames": {},
+    "ingredients": {},
+    "copyright": {
+        "shortStatements": []
+    },
+    "edits": [
+        {
+            "editMap": [
+                "meta",
+                "validationCount"
+            ],
+            "value": 1,
+            "timestamp": 1775806151615,
+            "type": "user-edit",
+            "author": "saipratap"
+        },
+        {
+            "editMap": [
+                "meta",
+                "validationCountAudio"
+            ],
+            "value": 1,
+            "timestamp": 1775806151615,
+            "type": "user-edit",
+            "author": "saipratap"
+        },
+        {
+            "editMap": [
+                "meta",
+                "abbreviation"
+            ],
+            "value": "",
+            "timestamp": 1775806151615,
+            "type": "user-edit",
+            "author": "saipratap"
+        },
+        {
+            "editMap": [
+                "spellcheckIsEnabled"
+            ],
+            "value": false,
+            "timestamp": 1775806151615,
+            "type": "user-edit",
+            "author": "saipratap"
+        }
+    ],
+    "spellcheckIsEnabled": false,
+    "users": [
+        {
+            "userName": "saipratap",
+            "codexVersion": "3.4.20",
+            "updatedAt": 1779168615994
+        }
+    ]
+}

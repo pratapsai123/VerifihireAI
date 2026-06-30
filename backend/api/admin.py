@@ -10,6 +10,8 @@ from .models import (
     CodingQuestion,
     CodingTestCase,
     CodingSubmission,
+    OwnershipTransferLog,
+    ContactSubmission,
 )
 
 
@@ -54,10 +56,11 @@ class UserProfileAdmin(admin.ModelAdmin):
 
 @admin.register(Company)
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('name', 'domain', 'created_at')
+    list_display = ('name', 'domain', 'approval_status', 'created_at', 'approved_at')
+    list_filter = ('approval_status', 'created_at')
     search_fields = ('name', 'domain')
-    readonly_fields = ('created_at',)
-    ordering = ['name']
+    readonly_fields = ('created_at', 'approved_at')
+    ordering = ['-created_at']
 
 
 @admin.register(ApplicationAdmin)
@@ -96,3 +99,29 @@ class CodingSubmissionAdmin(admin.ModelAdmin):
     list_filter = ('status', 'created_at')
     search_fields = ('question_id', 'user_email', 'candidate_name')
     readonly_fields = ('created_at',)
+
+
+@admin.register(OwnershipTransferLog)
+class OwnershipTransferLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'from_email', 'to_email', 'by_email', 'transferred_at',
+        'assessments_transferred', 'subordinates_reassigned', 'also_deactivated',
+    )
+    list_filter = ('also_deactivated', 'transferred_at')
+    search_fields = ('from_email', 'to_email', 'by_email', 'transfer_reason')
+    readonly_fields = (
+        'transferred_at', 'from_name', 'from_email', 'to_name', 'to_email',
+        'by_name', 'by_email', 'assessments_transferred',
+        'custom_assessments_transferred', 'candidate_invitations_transferred',
+        'ai_assessments_transferred', 'ai_candidates_transferred',
+        'subordinates_reassigned',
+    )
+
+
+@admin.register(ContactSubmission)
+class ContactSubmissionAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'company', 'subject', 'created_at')
+    list_filter = ('created_at',)
+    search_fields = ('full_name', 'email', 'company', 'subject', 'message')
+    readonly_fields = ('created_at',)
+    ordering = ['-created_at']

@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Pig", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of Apache Pig in the Hadoop ecosystem?",
+    "options": {
+      "A": "To provide a low-level Java interface for MapReduce.",
+      "B": "To provide a high-level scripting language (Pig Latin) for analyzing large datasets.",
+      "C": "To act as a physical cooling system for the server rack.",
+      "D": "To manage the hardware power cycles of the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the name of the scripting language used in Apache Pig?",
+    "options": {
+      "A": "Pig Script",
+      "B": "Pig Latin",
+      "C": "Hadoop Query Language",
+      "D": "Pig SQL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Pig operator is used to read data from the file system into a relation?",
+    "options": {
+      "A": "READ",
+      "B": "LOAD",
+      "C": "IMPORT",
+      "D": "FETCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to write processed data back to the file system?",
+    "options": {
+      "A": "WRITE",
+      "B": "EXPORT",
+      "C": "STORE",
+      "D": "SAVE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Pig, what is a 'Tuple'?",
+    "options": {
+      "A": "An unordered collection of records.",
+      "B": "An ordered set of fields (similar to a row in a table).",
+      "C": "A single data item or field.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Pig Latin operator is used to remove records based on a specific condition?",
+    "options": {
+      "A": "REMOVE",
+      "B": "DELETE",
+      "C": "FILTER",
+      "D": "WHERE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Grunt' in the context of Apache Pig?",
+    "options": {
+      "A": "A physical tool for cleaning server fans.",
+      "B": "The interactive shell used to execute Pig commands.",
+      "C": "The name of the background database.",
+      "D": "A specialized tool for drawing networks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Pig data model, what is a 'Bag'?",
+    "options": {
+      "A": "A physical container for hard drives.",
+      "B": "A collection of tuples (similar to a table).",
+      "C": "A single key-value pair.",
+      "D": "A tool used for deleting old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator allows you to apply transformations to every record in a relation?",
+    "options": {
+      "A": "ALL",
+      "B": "FOR_EACH",
+      "C": "FOREACH",
+      "D": "MAP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Apache Pig automatically translates Pig Latin scripts into MapReduce or Tez jobs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'DUMP' operator in Pig?",
+    "options": {
+      "A": "To permanently delete a relation from the disk.",
+      "B": "To display the contents of a relation on the screen/console for debugging.",
+      "C": "To encrypt the relation metadata.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to group data based on one or more keys?",
+    "options": {
+      "A": "AGGREGATE",
+      "B": "GROUP",
+      "C": "CLUSTER",
+      "D": "COLLECT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Pig, what does the 'DESCRIBE' command do?",
+    "options": {
+      "A": "Writes a text description of the data center.",
+      "B": "Displays the schema of a specific relation.",
+      "C": "Deletes the metadata of a table.",
+      "D": "Hires a new visualization team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary advantage of Pig Latin over writing raw MapReduce in Java?",
+    "options": {
+      "A": "It requires more lines of code.",
+      "B": "It is easier to learn and requires significantly less code for complex data flows.",
+      "C": "It is only compatible with old hardware.",
+      "D": "It eliminates the need for Hadoop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Pig data type is used to represent an associative array or a collection of key-value pairs?",
+    "options": {
+      "A": "Bag",
+      "B": "Map",
+      "C": "Tuple",
+      "D": "Atom"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to see the execution plan of a Pig script without actually running it?",
+    "options": {
+      "A": "RUN",
+      "B": "EXEC",
+      "C": "EXPLAIN",
+      "D": "ILLUSTRATE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Pig can be run in two modes: Local Mode (using the local file system) and MapReduce Mode (using HDFS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only if the CPU is at 50% load"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'LIMIT' operator do in a Pig script?",
+    "options": {
+      "A": "Increases the network speed limit.",
+      "B": "Restricts the output to a specified number of tuples.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to combine two or more relations based on a common key?",
+    "options": {
+      "A": "UNION",
+      "B": "JOIN",
+      "C": "MERGE",
+      "D": "COMBINE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Pig, what is the default delimiter for 'PigStorage' if none is specified?",
+    "options": {
+      "A": "Comma (,)",
+      "B": "Tab (\\t)",
+      "C": "Semicolon (;)",
+      "D": "Space ( )"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'ILLUSTRATE' command provide?",
+    "options": {
+      "A": "A physical drawing of the server.",
+      "B": "A step-by-step example execution showing how sample data flows through the script transformations.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pig Latin is a 'Declarative' language, meaning you specify 'what' to do rather than 'how' to do it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python integration",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command allows you to view the logical, physical, and MapReduce execution plans for a relation?",
+    "options": {
+      "A": "SHOW",
+      "B": "VIEW",
+      "C": "EXPLAIN",
+      "D": "DEBUG"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used to sort the data in a relation?",
+    "options": {
+      "A": "SORT",
+      "B": "ARRANGE",
+      "C": "ORDER BY",
+      "D": "RANK"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'UDF' in Apache Pig?",
+    "options": {
+      "A": "Universal Data Folder.",
+      "B": "User Defined Function (allows custom logic to be added to Pig).",
+      "C": "Unified Debugging Framework.",
+      "D": "A specialized way to encrypt trace IDs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific operator is used to remove duplicate tuples from a relation?",
+    "options": {
+      "A": "REMOVE DUPLICATES",
+      "B": "UNIQUE",
+      "C": "DISTINCT",
+      "D": "CLEAN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Apache Pig is better suited for structured data analysis than unstructured data processing.",
+    "options": {
+      "A": "False (Pig is highly flexible and excels at semi-structured and unstructured data).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'PigStorage'?",
+    "options": {
+      "A": "A physical barn for pigs.",
+      "B": "The default load/store function for structured text files in Pig.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator would you use to merge the data from two relations with the same schema into one?",
+    "options": {
+      "A": "JOIN",
+      "B": "UNION",
+      "C": "CROSS",
+      "D": "MERGE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the keyword used to specify the schema while using the LOAD operator?",
+    "options": {
+      "A": "WITH",
+      "B": "SCHEMA",
+      "C": "AS",
+      "D": "TYPE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In Pig Latin, variable names (aliases) are case-sensitive.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numbers",
+      "D": "Only if encrypted with AES"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to calculate the Cartesian product of two relations?",
+    "options": {
+      "A": "PRODUCT",
+      "B": "MULTIPLY",
+      "C": "CROSS",
+      "D": "ALL"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Maps' spawned by a Pig job in the Hadoop UI?",
+    "options": {
+      "A": "Map Task Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a built-in monitoring tool for Apache Pig that provides real-time CPU tracking.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for a Pig cluster?",
+    "options": {
+      "A": "Naming virtual cables.",
+      "B": "Separating data processing traffic from management traffic to ensure Pig jobs don't saturate the whole network.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a virtualized Hadoop/Pig environment?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is generally avoided on Pig worker nodes to prevent job failure during heavy shuffles.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' integration in Pig?",
+    "options": {
+      "A": "Moving physical hard drives.",
+      "B": "The ability to LOAD and STORE data directly from/to cloud services like S3 using the proper URI (s3://).",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for Pig storage backend?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide higher bandwidth for shuffling large relations between Pig nodes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for secure Pig execution?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Ensuring Pig workers can only access specific HDFS paths or data sources required for the current job.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a security monitoring system?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a method commonly implemented in Pig pipelines to track historical data in history tables.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming a database after a king.",
+      "B": "The requirement that data is subject to the laws of the country where it is physically located, affecting cluster deployment.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated Pig job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for ensuring Pig scripts can be safely retried.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a Pig script?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of using built-in functions to create unique IDs for processed records.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures often involve using Pig to transform data already loaded into HDFS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a Pig pipeline?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of using FILTER and FOREACH to remove errors or null values from raw data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the native execution model for Apache Pig.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pig Monitoring'?",
+    "options": {
+      "A": "A system that provides oversight of Pig job performance and resource usage.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Running Tasks' in a Pig job?",
+    "options": {
+      "A": "Task Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' for Pig includes keeping the Hadoop ecosystem libraries updated.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's Big Data tools and policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is important for securing the Big Data development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for Pig Latin?",
+    "options": {
+      "A": "Checking Pig Latin scripts for logic errors or security flaws before they run.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a job failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live Pig environment under load.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in a Pig context?",
+    "options": {
+      "A": "A structured process for managing credentials used to access external data sources in Pig.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for Hadoop worker nodes running Pig.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the provider and the customer.",
+      "B": "Everyone in the company shares one password.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' performed?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific JOIN optimization in Pig is used when one relation is small enough to fit entirely in memory, allowing the join to happen in the Map phase and avoiding a Shuffle?",
+    "options": {
+      "A": "Merge Join",
+      "B": "Replicated Join",
+      "C": "Skewed Join",
+      "D": "Self Join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Pig Latin, what is the 'FLATTEN' operator used for within a FOREACH statement?",
+    "options": {
+      "A": "To encrypt a bag of data.",
+      "B": "To unnest or 'explode' a bag or tuple into individual rows.",
+      "C": "To physically compress the HDFS file.",
+      "D": "To delete all empty fields in a relation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When should you use a 'Skewed Join' in Apache Pig?",
+    "options": {
+      "A": "When the data is perfectly balanced across all nodes.",
+      "B": "When one or more join keys are highly frequent, causing specific Reducers to become bottlenecks due to uneven data distribution.",
+      "C": "When joining more than 10 relations at once.",
+      "D": "When the data is stored in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pig Latin allows for 'Parameter Substitution', enabling you to pass values into a script at runtime using the -param or -param_file flags.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numeric parameters",
+      "D": "Only if using the Tez engine"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a Pig 'Macro' and why is it useful in large-scale data engineering?",
+    "options": {
+      "A": "A physical lens for looking at servers.",
+      "B": "A reusable block of Pig Latin code that can be defined once and called multiple times with different parameters to reduce redundancy.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to register a Java JAR file containing custom User Defined Functions (UDFs) into a Pig script?",
+    "options": {
+      "A": "IMPORT",
+      "B": "REGISTER",
+      "C": "INCLUDE",
+      "D": "LOAD_JAR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'COGROUP' operator groups two or more relations based on a common key, producing a result where each key is associated with bags of tuples from each input relation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical reason to use 'Tez' as the execution engine for Pig instead of the legacy 'MapReduce'?",
+    "options": {
+      "A": "Tez is easier to type.",
+      "B": "Tez creates complex Directed Acyclic Graphs (DAGs) that eliminate unnecessary HDFS write/read cycles between stages, significantly improving performance.",
+      "C": "Tez only works on ARM processors.",
+      "D": "Tez automatically backups the source code to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a FOREACH operation, how do you refer to a specific field in a relation that does not have a defined schema (alias)?",
+    "options": {
+      "A": "By the field name 'column1'.",
+      "B": "By using the position notation, such as $0, $1, etc.",
+      "C": "By the memory address of the data.",
+      "D": "By the color of the data point."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'DEFINE' command in Pig Latin besides registering UDFs?",
+    "options": {
+      "A": "To define the physical location of the server rack.",
+      "B": "To create an alias for a UDF or to configure streaming commands (like a shell script) used within the script.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an automated Pig script optimizer that reduces the number of MapReduce jobs by merging adjacent FOREACH statements.",
+    "options": {
+      "A": "False (Mimir is a long-term metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to 'split' a single relation into multiple relations based on conditions in a single pass of the data?",
+    "options": {
+      "A": "DIVIDE",
+      "B": "SPLIT",
+      "C": "BRANCH",
+      "D": "FORK"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for the Hadoop NameNode UI, which can be used to verify if Pig is loading data correctly from HDFS?",
+    "options": {
+      "A": "9870",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Merge Join' in Pig is highly efficient but requires that both input relations are already sorted by the join key in HDFS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local files",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the impact of 'Nested FOREACH' in Pig Latin?",
+    "options": {
+      "A": "It crashes the cluster if used more than twice.",
+      "B": "It allows you to perform complex transformations (like filtering or sorting) on an inner bag within a grouped relation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a Pig job across a multi-node cluster?",
+    "options": {
+      "A": "Successfully Finished Tasks / Total Tasks",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'VLAN' isolation helps ensure that heavy Pig data shuffles do not impact the latency of management traffic for the Hadoop cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Overcommit' impact on a Pig execution node?",
+    "options": {
+      "A": "It speeds up the processing by 50%.",
+      "B": "It can lead to 'Out of Memory' (OOM) errors during the Reduce phase when large bags are held in memory for grouping or joining.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of Hadoop nodes where Pig scripts are initiated?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can be configured between Hadoop nodes to increase the available bandwidth for shuffling data during a Pig JOIN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for a secure Pig environment?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Assigning specific security policies to data processing nodes to prevent lateral movement if one node is compromised.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a security monitoring system for Pig clusters?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' can be managed via Pig by loading current and history relations and performing a JOIN to identify changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal concept that data is subject to the laws of the country in which it is physically located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated Pig cleanup job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in a Pig script ensures that re-running a job does not cause data corruption or unintended duplicates in the output path.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a Pig transformation?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique, non-meaningful identifiers for records during the processing phase.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the parallel processing of a Hadoop cluster for transformations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing'?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The automated process of identifying and removing errors or sensitive information from a data set.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the primary way Pig handles data movement.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pig Monitor' architecture?",
+    "options": {
+      "A": "A system that provides continuous oversight of health across processing nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Records' processed?",
+    "options": {
+      "A": "Row Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for Hadoop ecosystems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's Big Data tools and policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is essential for reliable Big Data software delivery.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for Pig code?",
+    "options": {
+      "A": "Analyzing source code or configuration for logic errors without running it.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a Pig job failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live Hadoop environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in a Pig context?",
+    "options": {
+      "A": "A structured process for managing passwords and keys used by nodes.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for Hadoop nodes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where security duties are split between the provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' performed on the cluster?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means finding bugs earlier in the Big Data lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating security threats to a processing architecture.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for a reliable Hadoop infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption'?",
+    "options": {
+      "A": "The process of encoding data so that only authorized parties can access it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Nodes'?",
+    "options": {
+      "A": "Node Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in Hadoop security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for the Hadoop dashboard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "The fraudulent practice of sending emails to induce individuals to reveal personal info.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a Hadoop service?",
+    "options": {
+      "A": "Uptime %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Pig is a leading Big Data tool.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Failed Jobs' in a Pig cluster?",
+    "options": {
+      "A": "Fail Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Pig manages task dependencies via scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Workflow'?",
+    "options": {
+      "A": "A sequence of data tasks that run as a group.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When implementing a custom Java Eval UDF in Pig, which interface should be implemented to allow Pig to calculate results incrementally on small batches of data, preventing 'Out of Memory' errors for very large bags?",
+    "options": {
+      "A": "SimpleEvalFunc",
+      "B": "Accumulator",
+      "C": "Algebraic",
+      "D": "BatchListener"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface allows an Eval UDF to be decomposed into three distinct phases (Initial, Intermediate, and Final), enabling it to run more efficiently by leveraging the MapReduce Combiner?",
+    "options": {
+      "A": "Accumulator",
+      "B": "Algebraic",
+      "C": "MapReduceAware",
+      "D": "StreamingUDF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Query Optimization' in the Apache Pig engine, and how does it reduce cluster overhead?",
+    "options": {
+      "A": "It allows multiple users to run scripts at the same time.",
+      "B": "It combines multiple Pig Latin statements that share a common ancestor into a single pipeline to avoid reading the same data multiple times from HDFS.",
+      "C": "It automatically encrypts the HDFS blocks during the Map phase.",
+      "D": "It splits one Map task into multiple smaller JVMs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'PushDown' optimization in the Pig Optimizer refers to pushing FILTER and FOREACH (projection) operators as close to the LOAD operator as possible to minimize the amount of data shuffled over the network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for scripts using the Tez engine",
+      "D": "Only if using 100Gbps network links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a high-scale production environment, what is the primary risk of using the 'PARALLEL' clause with an excessively high value for a small dataset?",
+    "options": {
+      "A": "It makes the output files too large to read.",
+      "B": "It creates a large number of Reducer tasks that produce many tiny files, leading to 'NameNode' memory pressure and inefficient I/O.",
+      "C": "It encrypts the data using an unsupported algorithm.",
+      "D": "It forces the job to run in Local Mode automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Pig specific 'Status' on an EXPLAIN plan indicates that the optimizer has successfully performed 'Column Pruning'?",
+    "options": {
+      "A": "Load (schema: {field1, field2})",
+      "B": "Project (columns: [0, 1]) - where unused columns from the source are discarded immediately after loading.",
+      "C": "Shuffle (key: hashed)",
+      "D": "Task Pending"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Merge-Sparse Join' is a specialized join designed for cases where one relation is large and sorted, while the other is extremely small and has many 'gaps' in the join key range.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NoSQL backends",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When configuring 'Pig on Tez', which parameter allows Pig to automatically determine the number of reducers (parallelism) based on the volume of data being processed?",
+    "options": {
+      "A": "pig.exec.reducers.max",
+      "B": "pig.tez.auto.parallelism",
+      "C": "tez.runtime.io.sort.mb",
+      "D": "pig.parallel.auto.enable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'YARN Resource Manager' Web UI, which is critical for monitoring the resource allocation of heavy Pig scripts?",
+    "options": {
+      "A": "8088",
+      "B": "9870",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a technical optimization layer for Pig that enables 'Predicate Pushdown' into Parquet files at the HDFS storage level.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical impact of 'Secondary Sorting' in a Pig script (e.g., GROUP relation BY key, then ORDER inner_bag BY sub_key)?",
+    "options": {
+      "A": "It doubles the number of MapReduce jobs.",
+      "B": "It utilizes the MapReduce shuffle mechanism to sort values within a group at the reducer level without loading the entire bag into memory.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vCenter' management in a virtualized Hadoop stack where Pig is executed?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' on Hadoop hosts can cause Pig jobs to fail during 'Spill to Disk' events if the OS attempts to reclaim buffers used by the MapReduce task.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) usage in a Hadoop cluster running Pig?",
+    "options": {
+      "A": "Measuring the physical weight of the racks.",
+      "B": "Automatically migrating virtual disk files between datastores based on space or I/O latency to prevent a single node from bottlenecking a distributed shuffle.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard 'HTTPS' encrypted management of a Hadoop/Pig dashboard?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' uses a three-node configuration to ensure the Hadoop management plane remains reachable during an ESXi host failure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in a virtualized Pig worker node network?",
+    "options": {
+      "A": "The maximum number of reducers allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a node to manage its own 802.1Q tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides higher network throughput for Pig shuffles but can interfere with 'vMotion' live migrations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in a hypervisor environment hosting Hadoop?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts memory allocation to a VM based on task demand and host pressure.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' architecture feature is required for hardware-assisted memory virtualization to reduce overhead in high-throughput data processing?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX-512",
+      "D": "SSE4.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can lead to a 'HDFS Corruption' event if the physical underlying array reaches 100% capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The layer of the hypervisor that manages physical resource allocation and isolation for specific virtual machines.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic in a disaster recovery plan?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' generally provides higher performance for data tasks than full emulation because the Guest OS is 'hypervisor-aware'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks on a rack.",
+      "B": "A mechanism that mirrors write operations to both source and destination during migration to ensure data consistency without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of distributed nodes?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire network switch.",
+      "B": "An interface configuration that places a port into an error-disabled state immediately if an unauthorized MAC is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is selected based on the lowest Bridge ID (Priority + MAC).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN (intra-VLAN) to enhance security and logical separation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access (which should be disabled for security)?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' effectively disables Spanning Tree on a specific port by preventing it from sending or receiving BPDUs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing?",
+    "options": {
+      "A": "A physical tool for grouping cables.",
+      "B": "The algorithm used to select a specific physical link in a bundle to ensure consistent load distribution for a traffic flow.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent unauthorized VLAN access and 'VLAN Hopping' attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A feature that prevents the VTP password from being displayed in the running configuration file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that disables the entire cluster's network connectivity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An action that drops unauthorized packets and increments a counter without shutting down the physical port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides faster Spanning Tree convergence times than legacy 802.1D.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in a Pig automation script?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where applying a configuration or running a task multiple times results in the same final state.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a distributed build?",
+    "options": {
+      "A": "(Successes / Total Runs) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing to the earliest possible stage of the development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for distributed systems?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to the architecture.",
+      "B": "Building physical models of the servers.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a Pig repository?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for nodes in a Pig cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pig Platform Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's Pig scripts, standards, and compliance policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a Pig pipeline?",
+    "options": {
+      "A": "The time from script commit to data available in production.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for ensuring secure Big Data delivery.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' impact on a streaming Pig task?",
+    "options": {
+      "A": "The resource overhead required to fork a child process to execute a binary.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI pipeline?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can store historical Pig performance metrics for years to identify trend regressions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation?",
+    "options": {
+      "A": "Using Layer 2 isolation to logically separate network components.",
+      "B": "Naming the virtual cables.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that repeating an operation results in the same final state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' for a Pig script?",
+    "options": {
+      "A": "The ability to track the data from its source through every Pig Latin transformation to its final HDFS destination.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' request duration?",
+    "options": {
+      "A": "Mean response time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find Big Data logic bugs earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of bringing data into a cluster for processing.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Nodes'?",
+    "options": {
+      "A": "Node Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in Hadoop security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "Identifying and evaluating network security threats to Pig cluster components.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect Hadoop cluster traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,2005 @@
+{
+  "skill": "Power BI",
+  "questions": [
+    {
+      "question": "What are the three main views available in Power BI Desktop?",
+      "options": {
+        "A": "Report, Data, and Model",
+        "B": "Design, View, and Format",
+        "C": "Import, DirectQuery, and Live",
+        "D": "Visual, Table, and Relationship"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which language is used by Power Query to perform data transformations?",
+      "options": {
+        "A": "DAX",
+        "B": "M",
+        "C": "SQL",
+        "D": "Python"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'DAX' stand for in Power BI?",
+      "options": {
+        "A": "Data Analysis Expressions",
+        "B": "Direct Access XML",
+        "C": "Data Analytical X-factor",
+        "D": "Digital Analysis Engine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Power BI, which connectivity mode offers the best performance by loading data into the machine's memory?",
+      "options": {
+        "A": "DirectQuery",
+        "B": "Import",
+        "C": "Live Connection",
+        "D": "Dual Mode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of the 'Power Query Editor'?",
+      "options": {
+        "A": "To create visual charts",
+        "B": "To Extract, Transform, and Load (ETL) data",
+        "C": "To write DAX measures",
+        "D": "To manage user permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is best suited for showing the contribution of each category to a total?",
+      "options": {
+        "A": "Line Chart",
+        "B": "Pie Chart",
+        "C": "Scatter Plot",
+        "D": "Slicer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Calculated Column' in Power BI?",
+      "options": {
+        "A": "A column created using DAX that is computed during data refresh and stored in the model",
+        "B": "A column that only exists in the report view",
+        "C": "A measure that changes based on user filters",
+        "D": "A column imported directly from the source"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the difference between a 'Measure' and a 'Calculated Column'?",
+      "options": {
+        "A": "Calculated columns are for text; measures are for numbers",
+        "B": "Measures are calculated on the fly based on filters; columns are pre-calculated",
+        "C": "Measures increase the file size; columns do not",
+        "D": "There is no functional difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to change the filter context of a calculation in DAX?",
+      "options": {
+        "A": "SUM()",
+        "B": "CALCULATE()",
+        "C": "FILTER()",
+        "D": "ALL()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cardinality' in a Power BI data relationship?",
+      "options": {
+        "A": "The color scheme of the report",
+        "B": "The nature of the relationship between two tables (e.g., One-to-Many)",
+        "C": "The number of pages in a report",
+        "D": "The size of the dataset in MB"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature in Power Query allows you to revert to a previous state of data transformation?",
+      "options": {
+        "A": "Undo button",
+        "B": "Applied Steps pane",
+        "C": "History Log",
+        "D": "Refresh button"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'DirectQuery' mode do?",
+      "options": {
+        "A": "Copies all data into Power BI",
+        "B": "Leaves the data at the source and queries it in real-time",
+        "C": "Only works with Excel files",
+        "D": "Automatically deletes old data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Time Intelligence' function in DAX?",
+      "options": {
+        "A": "COUNTROWS",
+        "B": "SAMEPERIODLASTYEAR",
+        "C": "RELATED",
+        "D": "LOOKUPVALUE"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Star Schema' in data modeling?",
+      "options": {
+        "A": "A layout where all tables are connected in a circle",
+        "B": "A model consisting of a central Fact table surrounded by Dimension tables",
+        "C": "A model with only one table",
+        "D": "A way to color-code tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Filter Pane' in Power BI Reports?",
+      "options": {
+        "A": "To edit the underlying data",
+        "B": "To apply filters at the visual, page, or report level",
+        "C": "To write DAX code",
+        "D": "To change the theme of the report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Row-Level Security' (RLS) used for?",
+      "options": {
+        "A": "To encrypt the hard drive",
+        "B": "To restrict data access for given users based on filters defined in roles",
+        "C": "To hide specific columns from everyone",
+        "D": "To speed up the report rendering"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to publish Power BI reports to the web for sharing with others?",
+      "options": {
+        "A": "Power BI Desktop",
+        "B": "Power BI Service",
+        "C": "Power BI Gateway",
+        "D": "Power BI Mobile"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Slicer' in Power BI?",
+      "options": {
+        "A": "A tool to cut the data into pieces",
+        "B": "An on-canvas visual filter that allows users to segment data",
+        "C": "A way to delete rows",
+        "D": "A type of 3D chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function returns a table and is often used inside a CALCULATE function?",
+      "options": {
+        "A": "MAX",
+        "B": "FILTER",
+        "C": "SUM",
+        "D": "AVERAGE"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Power BI Gateway'?",
+      "options": {
+        "A": "The login page for Power BI",
+        "B": "Software that enables secure data transfer between on-premises data and Power BI Service",
+        "C": "A type of visual for maps",
+        "D": "A tool to create custom icons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Context Transition' in DAX?",
+      "options": {
+        "A": "Moving a report from one workspace to another",
+        "B": "The process where a row context is transformed into a filter context, typically by the CALCULATE function",
+        "C": "Changing the data source from Excel to SQL",
+        "D": "Formatting a date from MM/DD to DD/MM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function would you use to ignore all filters applied to a specific table or column?",
+      "options": {
+        "A": "FILTER()",
+        "B": "ALL()",
+        "C": "REMOVEFILTERS()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the primary difference between SUM and SUMX?",
+      "options": {
+        "A": "SUMX is faster than SUM",
+        "B": "SUMX is an iterator that evaluates an expression for every row in a table; SUM just aggregates a column",
+        "C": "SUMX only works with dates",
+        "D": "There is no difference"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which relationship cross-filter direction should be used sparingly due to performance and ambiguity risks?",
+      "options": {
+        "A": "Single",
+        "B": "Both (Bidirectional)",
+        "C": "None",
+        "D": "One-to-Many"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Fact Table' in a Star Schema?",
+      "options": {
+        "A": "A table containing descriptive attributes (like Product Name)",
+        "B": "A central table that contains quantitative measures (like Sales Amount) and foreign keys",
+        "C": "A table that lists company facts",
+        "D": "A table used for slicers only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Power Query, what does 'Query Folding' refer to?",
+      "options": {
+        "A": "Hiding queries in folders",
+        "B": "The ability of Power Query to push data transformations back to the source (like SQL) for execution",
+        "C": "Compressing the file size of the report",
+        "D": "Deleting duplicate rows automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to create a virtual relationship between two unrelated tables in a measure?",
+      "options": {
+        "A": "RELATED()",
+        "B": "USERELATIONSHIP()",
+        "C": "TREATAS()",
+        "D": "CROSSFILTER()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'Divide' function in DAX over the standard '/' operator?",
+      "options": {
+        "A": "It is faster",
+        "B": "It automatically handles division by zero errors by returning an alternative result (or BLANK)",
+        "C": "It can only divide integers",
+        "D": "It works with text strings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Snowflake Schema'?",
+      "options": {
+        "A": "A model where data is only refreshed in winter",
+        "B": "An extension of a Star Schema where dimension tables are normalized into multiple related tables",
+        "C": "A report theme with white colors",
+        "D": "A model with no relationships"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to use an inactive relationship for the duration of a specific calculation?",
+      "options": {
+        "A": "RELATED()",
+        "B": "USERELATIONSHIP()",
+        "C": "KEEPFILTERS()",
+        "D": "ACTIVE()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'VertiPaq' engine?",
+      "options": {
+        "A": "The cloud server for Power BI",
+        "B": "The in-memory columnar database engine that powers Power BI and Analysis Services",
+        "C": "The name of the Power Query compiler",
+        "D": "A tool to create mobile apps"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Granularity' in the context of a Fact Table?",
+      "options": {
+        "A": "The total number of rows",
+        "B": "The level of detail at which the data is stored (e.g., daily sales vs. monthly sales)",
+        "C": "The color intensity of the visuals",
+        "D": "The speed of data loading"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns the first non-blank expression among its arguments?",
+      "options": {
+        "A": "IFBLANK()",
+        "B": "COALESCE()",
+        "C": "FIRSTNONBLANK()",
+        "D": "LOOKUP()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Power Query, what is 'Unpivoting'?",
+      "options": {
+        "A": "Rotating columns into rows to normalize a dataset",
+        "B": "Creating a pivot table in Excel",
+        "C": "Deleting columns with null values",
+        "D": "Sorting data in descending order"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Disconnected Table' useful for?",
+      "options": {
+        "A": "Storing broken data",
+        "B": "Creating dynamic slicers that aren't tied to the model, such as a 'What-If' parameter",
+        "C": "Speeding up the report",
+        "D": "Temporary data storage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'EARLIER()' do in DAX?",
+      "options": {
+        "A": "Compares dates to the previous year",
+        "B": "Refers to the value of a column in a previous outer row context (useful in nested iterators)",
+        "C": "Calculates the time difference",
+        "D": "Clears the current filter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is commonly used for 'Moving Averages'?",
+      "options": {
+        "A": "AVERAGEX()",
+        "B": "DATESINPERIOD()",
+        "C": "TOTALYTD()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'M' function to combine two tables by appending rows?",
+      "options": {
+        "A": "Table.Join",
+        "B": "Table.Combine",
+        "C": "Table.NestedJoin",
+        "D": "Table.AddRows"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Filter Context'?",
+      "options": {
+        "A": "The filters applied in the Power Query editor",
+        "B": "The set of filters currently active in a report visual (from slicers, filters, and cross-highlighting)",
+        "C": "The row number of the current record",
+        "D": "A way to hide data from users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to check if a specific column is being filtered in the current context?",
+      "options": {
+        "A": "ISFILTERED()",
+        "B": "HASONEVALUE()",
+        "C": "SELECTEDVALUE()",
+        "D": "ALL()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of 'Aggregations' in Power BI?",
+      "options": {
+        "A": "To create new colors for charts",
+        "B": "To improve query performance over very large datasets by storing summarized data",
+        "C": "To combine multiple Power BI files into one",
+        "D": "To delete old records automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is commonly used to analyze the performance of DAX measures and identify bottlenecks?",
+      "options": {
+        "A": "Power BI Desktop",
+        "B": "DAX Studio",
+        "C": "SQL Server Management Studio",
+        "D": "Excel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Circular Dependency' in a Power BI model?",
+      "options": {
+        "A": "A report that never stops loading",
+        "B": "A logical error where two or more objects (columns/tables) depend on each other, preventing calculation",
+        "C": "A relationship that goes in a circle",
+        "D": "A type of pie chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Row-Level Security (RLS), which DAX function is most commonly used to identify the logged-in user?",
+      "options": {
+        "A": "USERID()",
+        "B": "USERPRINCIPALNAME()",
+        "C": "USERNAME()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'Dynamic RLS' refer to?",
+      "options": {
+        "A": "Security that changes every hour",
+        "B": "Using a security table within the model to filter data based on the user's login credentials",
+        "C": "Restricting access to the entire report",
+        "D": "Applying security at the database level"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to create a table from a list of values for use in a slicer or relationship?",
+      "options": {
+        "A": "VALUES()",
+        "B": "DATATABLE()",
+        "C": "SELECTCOLUMNS()",
+        "D": "DISTINCT()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Performance Analyzer' in Power BI Desktop used for?",
+      "options": {
+        "A": "To check the computer's CPU usage",
+        "B": "To measure the processing time required for each report element (visuals, DAX, etc.)",
+        "C": "To speed up the internet connection",
+        "D": "To compress the .pbix file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bidirectional Cross-filtering' likely to cause in complex models?",
+      "options": {
+        "A": "Faster report loading",
+        "B": "Ambiguity in filter paths and potential performance degradation",
+        "C": "Automatic data refresh",
+        "D": "Better data accuracy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to evaluate an expression in a modified filter context while keeping existing filters?",
+      "options": {
+        "A": "CALCULATE()",
+        "B": "KEEPFILTERS()",
+        "C": "FILTER()",
+        "D": "ALL()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Many-to-Many' relationship in Power BI, and why is it complex?",
+      "options": {
+        "A": "It connects many reports to many users",
+        "B": "A relationship where both tables have multiple occurrences of the join key, requiring bridge tables or careful handling",
+        "C": "It means the database is too large",
+        "D": "It is a relationship that doesn't need a key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Power Query, what is the 'Schema' of a table?",
+      "options": {
+        "A": "The color of the rows",
+        "B": "The structure defining column names and their data types",
+        "C": "The number of rows in the table",
+        "D": "The location of the source file"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Incremental Refresh'?",
+      "options": {
+        "A": "Refreshing the report every 5 minutes",
+        "B": "A feature that refreshes only new or changed data rather than the entire dataset",
+        "C": "Manually clicking the refresh button",
+        "D": "Deleting data in small increments"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is used to identify the key factors that influence a specific metric?",
+      "options": {
+        "A": "Line Chart",
+        "B": "Key Influencers visual",
+        "C": "Q&A visual",
+        "D": "Decomposition Tree"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Parameter Hoisting' in the context of DAX optimization?",
+      "options": {
+        "A": "Moving a variable outside of an iterator (like SUMX) so it is calculated only once",
+        "B": "A way to upload parameters to the cloud",
+        "C": "Deleting unused parameters",
+        "D": "Renaming parameters"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Composite Model' in Power BI?",
+      "options": {
+        "A": "A model with multiple colors",
+        "B": "A model that combines data from different sources (Import and DirectQuery) in a single report",
+        "C": "A report made of multiple pages",
+        "D": "A model that uses both DAX and Python"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns a single value if the column has only one distinct value in the current context?",
+      "options": {
+        "A": "VALUES()",
+        "B": "SELECTEDVALUE()",
+        "C": "FIRSTNONBLANK()",
+        "D": "DISTINCTCOUNT()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the risk of having 'High Cardinality' columns in an Import model?",
+      "options": {
+        "A": "They take up significantly more memory and slow down query performance",
+        "B": "They cause the database to crash",
+        "C": "They are incompatible with DAX",
+        "D": "They change the data types"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Power BI, what is an 'Active Relationship'?",
+      "options": {
+        "A": "A relationship that is currently being edited",
+        "B": "The primary path used by Power BI to propagate filters between tables",
+        "C": "A relationship that is updated daily",
+        "D": "A relationship with no primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to convert a table into a scalar value, usually for display in a Card visual?",
+      "options": {
+        "A": "SUM()",
+        "B": "SELECTCOLUMNS()",
+        "C": "COUNTROWS()",
+        "D": "FILTER()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Shadowing' in the context of RLS?",
+      "options": {
+        "A": "A security breach",
+        "B": "Testing RLS roles by viewing the report 'as' a specific user within Power BI Desktop",
+        "C": "Hiding a report page",
+        "D": "Encrypting a visual"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Workspace' in the Power BI Service?",
+      "options": {
+        "A": "A private folder on your local computer",
+        "B": "A collaborative environment where teams create and share collections of reports and dashboards",
+        "C": "A type of database connection",
+        "D": "A tool to edit M code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between a 'Report' and a 'Dashboard'?",
+      "options": {
+        "A": "Reports have only one page; Dashboards have many",
+        "B": "Reports are built on a single dataset; Dashboards can pin visuals from multiple reports and datasets",
+        "C": "Dashboards can be created in Power BI Desktop",
+        "D": "Reports cannot be shared"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What are 'Dataflows' in Power BI?",
+      "options": {
+        "A": "A way to animate charts",
+        "B": "Self-service data prep that allows you to store reusable transformation logic in the cloud",
+        "C": "The speed at which data moves through a cable",
+        "D": "A type of waterfall chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Power BI Premium' capacity primarily used for?",
+      "options": {
+        "A": "To get more colors for visuals",
+        "B": "To provide dedicated resources, larger dataset limits, and frequent refresh rates for enterprise needs",
+        "C": "To allow users to use Power BI for free",
+        "D": "To increase the internet speed of the office"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual allows users to ask natural language questions about their data?",
+      "options": {
+        "A": "Decomposition Tree",
+        "B": "Q&A Visual",
+        "C": "Smart Narrative",
+        "D": "Key Influencers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Paginated Report' (.rdl)?",
+      "options": {
+        "A": "A report that only has one page",
+        "B": "A highly formatted, pixel-perfect report designed to be printed or shared as a PDF",
+        "C": "A report that loads slowly",
+        "D": "A dashboard with many slicers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Content Pack' (Legacy) or 'Power BI App'?",
+      "options": {
+        "A": "To package reports, dashboards, and datasets for easy distribution to end-users",
+        "B": "To store passwords",
+        "C": "To create mobile apps for iOS",
+        "D": "To download data to Excel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows you to see the history of changes and revert to a previous version of a report in a workspace?",
+      "options": {
+        "A": "Deployment Pipelines",
+        "B": "Version History (via SharePoint/OneDrive integration)",
+        "C": "Applied Steps",
+        "D": "Refresh History"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sensitivity Labeling' in Power BI?",
+      "options": {
+        "A": "A way to label charts as 'Sensitive'",
+        "B": "Integration with Microsoft Purview to protect and classify data based on its confidentiality",
+        "C": "A filter for emotional data",
+        "D": "A setting to make visuals smaller"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Lineage View' used for in the Power BI Service?",
+      "options": {
+        "A": "To see the family tree of the developers",
+        "B": "To visualize the relationships between data sources, datasets, reports, and dashboards",
+        "C": "To sort reports alphabetically",
+        "D": "To track the cost of the workspace"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which role in a workspace allows a user to publish and edit content but not manage permissions?",
+      "options": {
+        "A": "Admin",
+        "B": "Member",
+        "C": "Contributor",
+        "D": "Viewer"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Incremental Refresh' policy based on?",
+      "options": {
+        "A": "The number of users",
+        "B": "RangeStart and RangeEnd parameters",
+        "C": "The file size",
+        "D": "The report name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Data Alert' in Power BI?",
+      "options": {
+        "A": "A popup that says 'Hello'",
+        "B": "A notification sent when data in a dashboard tile reaches a specific threshold",
+        "C": "A security warning",
+        "D": "A sound that plays when the data is wrong"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool allows you to automate the deployment of content through Development, Test, and Production stages?",
+      "options": {
+        "A": "Dataflows",
+        "B": "Deployment Pipelines",
+        "C": "Power Automate",
+        "D": "Git"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Smart Narrative'?",
+      "options": {
+        "A": "A bot that talks to the user",
+        "B": "An AI-driven visual that provides a text summary of trends and insights in your report",
+        "C": "A way to rename columns automatically",
+        "D": "A setting to make reports load faster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Power BI Service, what does the 'Subscribe' feature do?",
+      "options": {
+        "A": "Allows users to pay for Power BI",
+        "B": "Sends an email snapshot of a report or dashboard on a set schedule",
+        "C": "Adds a user to a workspace",
+        "D": "Downloads the data to the hard drive"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'External Tools' in Power BI Desktop?",
+      "options": {
+        "A": "Other Microsoft apps like Word",
+        "B": "A ribbon tab that allows integration with third-party tools like Tabular Editor and ALM Toolkit",
+        "C": "A way to open web pages",
+        "D": "A tool to fix hardware issues"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Automatic Page Refresh' used for?",
+      "options": {
+        "A": "Refreshing the browser every 5 minutes",
+        "B": "Refreshing report pages at set intervals specifically for DirectQuery sources",
+        "C": "Loading the next page of the report",
+        "D": "Updating the Power BI version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to embed Power BI reports directly into Microsoft Teams?",
+      "options": {
+        "A": "Power BI App for Teams",
+        "B": "Excel Online",
+        "C": "Teams Connector",
+        "D": "SharePoint Link"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dataset Discovery'?",
+      "options": {
+        "A": "Searching for data on Google",
+        "B": "Allowing users to find and request access to datasets across different workspaces",
+        "C": "Finding errors in the data",
+        "D": "Scanning a QR code for a report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Microsoft Fabric' in relation to Power BI?",
+      "options": {
+        "A": "A new brand of hardware for Power BI",
+        "B": "An all-in-one analytics solution that integrates Power BI, Data Factory, and Synapse into a single platform",
+        "C": "A tool to design report themes",
+        "D": "A replacement for Excel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'OneLake' in the Microsoft Fabric ecosystem?",
+      "options": {
+        "A": "A single database for Power BI Pro users",
+        "B": "A single, unified, logical data lake for the entire organization",
+        "C": "A backup storage for .pbix files",
+        "D": "A visual that shows water levels"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Direct Lake' mode offer in Power BI?",
+      "options": {
+        "A": "It is a slower version of DirectQuery",
+        "B": "It allows Power BI to read Parquet files directly from OneLake without importing or querying a SQL engine",
+        "C": "It is only for mobile reports",
+        "D": "It connects to local SQL servers only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Copilot for Power BI'?",
+      "options": {
+        "A": "To allow two people to edit a report at once",
+        "B": "Using AI to help create reports, summarize insights, and write DAX measures via natural language",
+        "C": "To automatically send emails to the boss",
+        "D": "To host the report on a different server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is specifically designed to calculate 'Year-Over-Year' growth efficiently?",
+      "options": {
+        "A": "GROWTH()",
+        "B": "CALCULATE( [Measure], DATEADD( 'Date'[Date], -1, YEAR ) )",
+        "C": "SUM()",
+        "D": "TOTALYTD()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'ALM Toolkit' used for?",
+      "options": {
+        "A": "To design icons",
+        "B": "A schema comparison tool for Power BI datasets to manage Application Lifecycle Management",
+        "C": "To track user logins",
+        "D": "To compress data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object-Level Security' (OLS)?",
+      "options": {
+        "A": "Restricting access to the entire file",
+        "B": "Restricting access to specific tables or columns based on user roles",
+        "C": "Encrypting the hard drive",
+        "D": "Hiding the 'Publish' button"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power BI API allows you to programmatically trigger a dataset refresh?",
+      "options": {
+        "A": "Power BI Desktop API",
+        "B": "Power BI REST API",
+        "C": "Excel API",
+        "D": "SQL API"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Power BI Embedded'?",
+      "options": {
+        "A": "Embedding a Power BI file in an email",
+        "B": "A service that allows developers to embed Power BI visuals and reports into their own custom applications",
+        "C": "Putting a Power BI sticker on a laptop",
+        "D": "Storing data inside a visual"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tabular Editor' used for by Power BI professionals?",
+      "options": {
+        "A": "To write emails",
+        "B": "A lightweight alternative to Power BI Desktop for managing the BIM model and writing DAX",
+        "C": "To edit SQL tables",
+        "D": "To create PDF reports"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Calculation Groups' in Power BI?",
+      "options": {
+        "A": "Grouping users by their department",
+        "B": "A feature (managed via Tabular Editor) that allows you to apply the same logic to multiple measures",
+        "C": "A folder for DAX measures",
+        "D": "A type of table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'TMDL' (Tabular Model Definition Language) format provide?",
+      "options": {
+        "A": "A way to play videos in reports",
+        "B": "A human-readable, developer-friendly string representation of a Power BI model",
+        "C": "A faster data refresh",
+        "D": "A new chart type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Small Multiples' in Power BI visuals?",
+      "options": {
+        "A": "Small numbers in a table",
+        "B": "A feature that splits a visual into multiple versions of itself based on a category",
+        "C": "A way to multiply data by a factor",
+        "D": "A tiny pie chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to dynamically switch between different measures in a report?",
+      "options": {
+        "A": "SWITCH()",
+        "B": "IF()",
+        "C": "CHOOSE()",
+        "D": "SELECT()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Field Parameters' used for?",
+      "options": {
+        "A": "To change the database password",
+        "B": "To allow users to dynamically change the dimensions or measures used in a visual",
+        "C": "To limit the number of fields in a report",
+        "D": "To rename columns"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Composite Model'?",
+      "options": {
+        "A": "A model with a mix of colors",
+        "B": "A model that combines Import, DirectQuery, and Live Connection sources",
+        "C": "A report with two pages",
+        "D": "A model that uses only one table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Streaming Datasets' in Power BI?",
+      "options": {
+        "A": "To watch movies in Power BI",
+        "B": "To display real-time data from sensors or social media feeds with low latency",
+        "C": "To download data continuously",
+        "D": "To refresh the page every second"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Metric' (formerly Goals) in Power BI Service?",
+      "options": {
+        "A": "A unit of measurement",
+        "B": "A feature to track business objectives and key results (OKRs) against data",
+        "C": "A type of ruler in the UI",
+        "D": "A way to measure file size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'XMLA Endpoint'?",
+      "options": {
+        "A": "An error message in Power BI",
+        "B": "A communication protocol that allows third-party tools to connect to Power BI datasets",
+        "C": "A type of data source for XML files",
+        "D": "A way to send data to a printer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns the result of an expression evaluated for the last day of the month?",
+      "options": {
+        "A": "LASTDAY()",
+        "B": "CLOSINGBALANCEMONTH()",
+        "C": "ENDOFMONTH()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of the 'Value.NativeQuery' function in Power Query (M)?",
+      "options": {
+        "A": "To create a new table from scratch",
+        "B": "To execute a raw SQL query against a database while still allowing for some query folding",
+        "C": "To convert text into a number",
+        "D": "To refresh the data automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Tenant Setting must be enabled to allow users to use the 'Publish to Web' feature?",
+      "options": {
+        "A": "Global Sharing",
+        "B": "Publish to Web (Public)",
+        "C": "External Distribution",
+        "D": "Allow Public Access"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Drillthrough' in a Power BI report?",
+      "options": {
+        "A": "A way to delete data rows",
+        "B": "A feature that allows users to click a data point and navigate to a detailed page filtered by that point",
+        "C": "A method for sorting columns",
+        "D": "A type of 3D bar chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'IsInService' function do in Power BI Desktop (via Tabular Editor/DAX)?",
+      "options": {
+        "A": "Checks if the computer is connected to the internet",
+        "B": "Returns TRUE if the model is running in the Power BI Service rather than Desktop",
+        "C": "Checks if the Power BI license is active",
+        "D": "Checks if the server is down"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to retrieve a value from a previous row in a sorted table without using EARLIER?",
+      "options": {
+        "A": "PREVIOUS()",
+        "B": "OFFSET()",
+        "C": "WINDOW()",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'What-If Parameter' in Power BI used for?",
+      "options": {
+        "A": "To check for errors in the data",
+        "B": "To create a dynamic variable that users can adjust via a slicer to see different calculation results",
+        "C": "To predict the future using AI",
+        "D": "To change the language of the report"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Power Query, what does 'Buffer' (e.g., Table.Buffer) do?",
+      "options": {
+        "A": "Clears the cache",
+        "B": "Loads a table into memory to prevent it from being re-calculated multiple times during a query",
+        "C": "Compresses the data",
+        "D": "Stops the query from running"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Auto Date/Time' setting in Power BI Desktop?",
+      "options": {
+        "A": "It automatically formats dates to the local time zone",
+        "B": "It creates hidden date tables for every date column in your model (often discouraged for large models)",
+        "C": "It updates the report every hour",
+        "D": "It connects to a world clock"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is specifically designed to show progress toward a target value?",
+      "options": {
+        "A": "Gauge Chart",
+        "B": "Line Chart",
+        "C": "Donut Chart",
+        "D": "Slicer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Incremental Refresh' range controlled by?",
+      "options": {
+        "A": "The number of rows",
+        "B": "The RangeStart and RangeEnd parameters",
+        "C": "The file modification date",
+        "D": "The size of the dataset"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to manage and deploy Power BI reports using Git-based version control?",
+      "options": {
+        "A": "Power BI Desktop",
+        "B": "Microsoft Fabric Git Integration",
+        "C": "Power Automate",
+        "D": "Excel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Personalize Visuals' feature?",
+      "options": {
+        "A": "Changing the report theme to your favorite color",
+        "B": "Allowing end-users in the Power BI Service to change a visual's dimensions or measures for their own view",
+        "C": "Putting a photo of the user in the report",
+        "D": "Renaming a report to the user's name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'DAX Query View' in Power BI Desktop (released late 2023) allow you to do?",
+      "options": {
+        "A": "Edit the database schema",
+        "B": "Run and test DAX queries directly within Desktop to see table results",
+        "C": "Create a new visual using AI",
+        "D": "Export the report to PowerPoint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Tool-tip Page' in Power BI?",
+      "options": {
+        "A": "A help page for the report",
+        "B": "A custom report page that appears when a user hovers over a data point in another visual",
+        "C": "A small icon that gives advice",
+        "D": "A page that lists all the formulas used"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to calculate the 'Rank' of a value within a list?",
+      "options": {
+        "A": "RANK()",
+        "B": "RANKX()",
+        "C": "ORDER()",
+        "D": "SORT()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Anonymized Data' in the context of Power BI Admin?",
+      "options": {
+        "A": "Data that is hidden from the developer",
+        "B": "Data used in usage metrics where user identities are removed for privacy",
+        "C": "Data that has no name",
+        "D": "Encrypted SQL tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which type of visual is best for displaying the workflow or steps in a process?",
+      "options": {
+        "A": "Funnel Chart",
+        "B": "Pie Chart",
+        "C": "Line Chart",
+        "D": "Map Visual"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'On-Object Interaction' feature in Power BI Desktop?",
+      "options": {
+        "A": "A way to talk to the report",
+        "B": "A new UI that allows users to build and format visuals directly on the visual itself",
+        "C": "A setting for touchscreens",
+        "D": "A bug in the selection pane"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function in M (Power Query) is used to handle errors by providing a fallback value?",
+      "options": {
+        "A": "error.handler",
+        "B": "try...otherwise",
+        "C": "if.error",
+        "D": "catch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cross-report Drillthrough'?",
+      "options": {
+        "A": "Connecting two reports using a line",
+        "B": "Allowing a user to navigate from a visual in one report to a detailed page in a completely different report",
+        "C": "Printing two reports at once",
+        "D": "Sharing a report with another company"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Privacy Levels' in Power BI Desktop?",
+      "options": {
+        "A": "A setting to hide data from the developer",
+        "B": "Settings (Public, Private, Organizational) that prevent Power Query from leaking data between different sources during query folding",
+        "C": "A way to encrypt the .pbix file",
+        "D": "The number of users who can see the data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to dynamically change the title of a visual based on a user's selection?",
+      "options": {
+        "A": "TITLE()",
+        "B": "SELECTEDVALUE() in a string expression",
+        "C": "FORMAT()",
+        "D": "NAMEOF()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Object-Level Security' (OLS) in the Tabular Model?",
+      "options": {
+        "A": "To hide specific visuals on a report page",
+        "B": "To completely hide sensitive tables or columns from specific users, as if they don't exist in the model",
+        "C": "To prevent users from moving objects in the report",
+        "D": "To restrict access to the Power BI Service"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Calculation Group' primarily used for?",
+      "options": {
+        "A": "Grouping users by their math skills",
+        "B": "Reducing the number of measures by applying common logic (like Time Intelligence) to multiple existing measures",
+        "C": "Creating folders in the field list",
+        "D": "Calculating the total size of the dataset"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is used to show the path of a process and where 'leakage' or drops occur between stages?",
+      "options": {
+        "A": "Sankey Chart",
+        "B": "Funnel Chart",
+        "C": "Waterfall Chart",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What does 'DAX Studio's View Metrics' feature show you?",
+      "options": {
+        "A": "How many people viewed the report",
+        "B": "Detailed memory usage of tables, columns, and relationships within the VertiPaq engine",
+        "C": "The number of measures in the file",
+        "D": "The computer's GPU temperature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Reference' vs 'Duplicate' when right-clicking a query in Power Query?",
+      "options": {
+        "A": "There is no difference",
+        "B": "Duplicate copies the steps; Reference creates a new query that uses the output of the original as its starting point",
+        "C": "Reference is for SQL only",
+        "D": "Duplicate is faster for large files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power BI Service feature allows you to bundle several reports together and distribute them as a single package to an audience?",
+      "options": {
+        "A": "Workspace",
+        "B": "Power BI App",
+        "C": "Deployment Pipeline",
+        "D": "Dataflow"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'DirectQuery for Power BI datasets and Analysis Services'?",
+      "options": {
+        "A": "To delete old datasets",
+        "B": "To allow users to create a local composite model by connecting to a remote, published dataset",
+        "C": "To speed up Excel exports",
+        "D": "To connect to local text files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns a table of dates for the last year, relative to the current context?",
+      "options": {
+        "A": "PREVIOUSYEAR()",
+        "B": "SAMEPERIODLASTYEAR()",
+        "C": "LASTYEAR()",
+        "D": "DATESYTD()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query Parameters' in Power BI Desktop useful for?",
+      "options": {
+        "A": "Giving users a way to filter visuals",
+        "B": "Making the data source dynamic (e.g., switching between Dev and Prod database servers)",
+        "C": "Writing DAX code",
+        "D": "Hiding columns"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Row-Level Security' (RLS) Static vs Dynamic?",
+      "options": {
+        "A": "Static uses fixed values in the filter; Dynamic uses DAX functions like USERPRINCIPALNAME() to filter based on login",
+        "B": "Static is for Excel; Dynamic is for SQL",
+        "C": "Static cannot be changed; Dynamic changes every day",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature in Power BI Service allows you to track key business goals and targets in a centralized view?",
+      "options": {
+        "A": "Dashboards",
+        "B": "Metrics (Goals)",
+        "C": "Usage Metrics",
+        "D": "Activity Logs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Direct Lake' mode in Microsoft Fabric?",
+      "options": {
+        "A": "A way to swim in a lake",
+        "B": "A technology that reads data directly from Delta tables in OneLake without any translation, offering Import-like performance",
+        "C": "A new name for DirectQuery",
+        "D": "A connection for local files only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function allows you to perform an action if a condition is met, otherwise returns an alternative?",
+      "options": {
+        "A": "IF()",
+        "B": "SWITCH()",
+        "C": "COALESCE()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'Filter Context' transition when using a Measure in a Calculated Column?",
+      "options": {
+        "A": "There is no transition",
+        "B": "Calculated columns have a row context; calling a measure triggers an implicit CALCULATE which performs context transition",
+        "C": "It deletes the row context",
+        "D": "It makes the column load faster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Information Protection' in Power BI?",
+      "options": {
+        "A": "A firewall for the report",
+        "B": "Applying sensitivity labels (Confidential, Public, etc.) that persist even when data is exported to Excel or PDF",
+        "C": "A way to hide the developer's name",
+        "D": "A tool to fix data errors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power Query transformation changes a column of values into multiple new columns (one for each unique value)?",
+      "options": {
+        "A": "Unpivot",
+        "B": "Pivot",
+        "C": "Transpose",
+        "D": "Group By"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'Small Multiples' in a visual?",
+      "options": {
+        "A": "It shows more data points",
+        "B": "It allows for easy comparison across different categories by using multiple smaller versions of the same chart",
+        "C": "It reduces the file size",
+        "D": "It makes the labels smaller"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'OneLake' in the context of Microsoft Fabric and Power BI?",
+      "options": {
+        "A": "A single database for the whole world",
+        "B": "A unified, logical data lake for the entire organization that serves as the single place for all data",
+        "C": "A cloud storage for .pbix files",
+        "D": "A way to connect to one SQL table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Hybrid Table' in Power BI?",
+      "options": {
+        "A": "A table that combines Excel and CSV data",
+        "B": "A table that uses Import mode for historical data and DirectQuery for real-time data in a single partition",
+        "C": "A table that can be edited by both Power BI and Tableau",
+        "D": "A table that uses both DAX and Python"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power Query function is used to create a custom function from an existing query?",
+      "options": {
+        "A": "Function.Create()",
+        "B": "The 'as function' keyword or (x) => syntax",
+        "C": "Table.ToFunction()",
+        "D": "Query.Convert()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'Best Practice Analyzer' (BPA) in Tabular Editor?",
+      "options": {
+        "A": "To fix spelling errors in the report",
+        "B": "To scan your model against a set of rules to find performance, naming, or security improvements",
+        "C": "To automatically publish the report",
+        "D": "To check if the user is authorized"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Semantic Link' in Microsoft Fabric?",
+      "options": {
+        "A": "A way to link two reports",
+        "B": "A feature that allows data scientists to use Python (in notebooks) to interact with Power BI datasets and measures",
+        "C": "A bridge between SQL and Excel",
+        "D": "A tool to translate report languages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to return a single value from a column when only one value remains in the filter context, preventing errors in cards?",
+      "options": {
+        "A": "VALUES()",
+        "B": "SELECTEDVALUE()",
+        "C": "DISTINCT()",
+        "D": "FIRST()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Refresh Summary' page in the Power BI Admin Portal used for?",
+      "options": {
+        "A": "To see what time the developer woke up",
+        "B": "To monitor the success/failure and duration of dataset refreshes across the entire tenant",
+        "C": "To change the database passwords",
+        "D": "To delete old reports"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Table.Buffer' accomplish in Power Query?",
+      "options": {
+        "A": "It clears the cache of the browser",
+        "B": "It loads a table into memory to prevent multiple scans of the data source during a single query",
+        "C": "It increases the font size of the table",
+        "D": "It encrypts the table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is used to compare a measure against a target and show the distance remaining?",
+      "options": {
+        "A": "KPI Visual",
+        "B": "Gauge Chart",
+        "C": "Card Visual",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Object-Level Security' (OLS) used to protect?",
+      "options": {
+        "A": "The physical hardware of the server",
+        "B": "Metadata and data of specific tables or columns from unauthorized users",
+        "C": "The report's background image",
+        "D": "The workspace name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Incremental Refresh' for Dataflows?",
+      "options": {
+        "A": "Refreshing the dataflow every minute",
+        "B": "The ability to refresh only the partitions that contain new or changed data within a Dataflow",
+        "C": "Adding one row at a time manually",
+        "D": "A feature for Power BI Free users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function allows you to use a temporary table within a measure to perform multi-step calculations?",
+      "options": {
+        "A": "CALCULATE()",
+        "B": "VAR (using Variables)",
+        "C": "FILTER()",
+        "D": "SUMX()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Workspace Identity' in Power BI Service?",
+      "options": {
+        "A": "The name of the workspace",
+        "B": "A managed identity used to authenticate the workspace to other Azure services like OneLake",
+        "C": "The list of users in the workspace",
+        "D": "The color theme of the workspace"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Group By' in Power Query?",
+      "options": {
+        "A": "To sort data into alphabetical order",
+        "B": "To aggregate data by one or more columns, reducing the total number of rows in the dataset",
+        "C": "To put queries into folders",
+        "D": "To share data with a group of people"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Computed Entity' in Power BI Dataflows?",
+      "options": {
+        "A": "An entity that calculates math problems",
+        "B": "An entity that references another entity in the same dataflow and performs additional transformations",
+        "C": "A hidden table",
+        "D": "A SQL stored procedure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used to manage Power BI capacity and monitor CPU usage for Premium Gen2?",
+      "options": {
+        "A": "Performance Analyzer",
+        "B": "Microsoft Fabric Capacity Metrics App",
+        "C": "Task Manager",
+        "D": "Power Automate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Auto-Exist' behavior in DAX?",
+      "options": {
+        "A": "Data that automatically deletes itself",
+        "B": "An optimization where DAX filters the combinations of columns from the same table to only those that exist",
+        "C": "A bug in the relationship view",
+        "D": "A feature for automatic report generation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'R-script' or 'Python' visual used for in Power BI?",
+      "options": {
+        "A": "To write the entire report in code",
+        "B": "To create advanced statistical or custom visualizations that are not available out-of-the-box",
+        "C": "To speed up data refresh",
+        "D": "To connect to Google Drive"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Enable Load' do when unchecked in Power Query?",
+      "options": {
+        "A": "It deletes the query",
+        "B": "It keeps the query in Power Query for transformation steps but does not load it into the Data Model",
+        "C": "It makes the query run faster",
+        "D": "It hides the data from the user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function evaluates an expression for each row of a table and then averages the results?",
+      "options": {
+        "A": "AVERAGE()",
+        "B": "AVERAGEX()",
+        "C": "SUMX()",
+        "D": "MEAN()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Deployment Pipeline' in Power BI?",
+      "options": {
+        "A": "A tool to move reports between Dev, Test, and Production environments",
+        "B": "A way to send reports via email",
+        "C": "A type of chart",
+        "D": "A server for hosting reports"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Filter Context' transition when a Measure is used inside a row context (like a Calculated Column or SUMX)?",
+      "options": {
+        "A": "There is no transition; it remains a row context",
+        "B": "The row context is automatically wrapped in an implicit CALCULATE, turning it into a filter context",
+        "C": "The calculation fails with a circular dependency error",
+        "D": "It forces the measure to evaluate only once for the whole table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power BI feature allows you to use a 'Live Connection' to a published dataset while also importing local Excel data?",
+      "options": {
+        "A": "Composite Models (DirectQuery for Power BI Datasets)",
+        "B": "Import Mode only",
+        "C": "Live Connection cannot be combined with Import",
+        "D": "Dataflows"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Aggressive Folding' in Power Query?",
+      "options": {
+        "A": "Hiding the query editor window",
+        "B": "A design pattern where as much transformation logic as possible is pushed to the source SQL engine",
+        "C": "Combining two queries into one",
+        "D": "Deleting duplicate rows at the source"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'KEEPFILTERS' function in DAX?",
+      "options": {
+        "A": "To prevent the user from deleting filters",
+        "B": "To ensure that existing filters are not overridden by a new filter context within CALCULATE",
+        "C": "To keep the report page open",
+        "D": "To save the filter state in the browser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Microsoft Fabric, which experience is used to write Spark-based notebooks to transform data for Power BI?",
+      "options": {
+        "A": "Data Engineering",
+        "B": "Data Warehouse",
+        "C": "Real-Time Analytics",
+        "D": "Data Factory"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which DAX function is specifically optimized for 'Moving Totals' or 'Running Sums'?",
+      "options": {
+        "A": "SUM()",
+        "B": "WINDOW()",
+        "C": "TOTALYTD()",
+        "D": "CALCULATE()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query Reduction' in Power BI Desktop settings?",
+      "options": {
+        "A": "Deleting old queries",
+        "B": "Options to disable cross-highlighting and require an 'Apply' button for slicers to reduce server hits",
+        "C": "Compressing the query code",
+        "D": "Limiting the number of tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to 'script' a Power BI model using C# or a scripting language?",
+      "options": {
+        "A": "Power BI Desktop",
+        "B": "Tabular Editor (using C# scripts)",
+        "C": "DAX Studio",
+        "D": "Visual Studio Code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Exploration' vs 'Reporting' in the Power BI ecosystem?",
+      "options": {
+        "A": "Exploration is for mobile; Reporting is for web",
+        "B": "Exploration is the ad-hoc analysis of data (like Q&A or Excel Pivot); Reporting is a curated visual story",
+        "C": "There is no difference",
+        "D": "Exploration is only for Power BI Free users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'BISM' (Business Intelligence Semantic Model)?",
+      "options": {
+        "A": "A new brand of database",
+        "B": "The underlying conceptual model that Power BI uses (encompassing both Tabular and Multidimensional)",
+        "C": "A tool to design report logos",
+        "D": "The security layer of the cloud"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns the current row context values as a single-row table?",
+      "options": {
+        "A": "VALUES()",
+        "B": "ROW()",
+        "C": "SELECTEDVALUE()",
+        "D": "ALLSELECTED()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Short-Circuit Evaluation' in DAX IF statements?",
+      "options": {
+        "A": "When the server crashes",
+        "B": "When DAX only evaluates the 'true' or 'false' result branch that is required, saving resources",
+        "C": "A way to speed up the internet",
+        "D": "Skipping the first 10 rows"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Table.View' do in Power Query (M)?",
+      "options": {
+        "A": "Changes the visual layout of the query editor",
+        "B": "Allows developers to create custom query folding logic for their own data connectors",
+        "C": "Creates a temporary table",
+        "D": "Displays the query on a map"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'V-Order' in Microsoft Fabric?",
+      "options": {
+        "A": "A way to sort visuals alphabetically",
+        "B": "A write-time optimization for Parquet files in OneLake that enables ultra-fast reading for Power BI",
+        "C": "The order of the developers in the project",
+        "D": "A type of vertical bar chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual allows you to break down a measure across multiple dimensions in a tree-like hierarchy?",
+      "options": {
+        "A": "Decomposition Tree",
+        "B": "Waterfall Chart",
+        "C": "Matrix Visual",
+        "D": "Funnel Chart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the 'Capacity Admin' in the Power BI Service?",
+      "options": {
+        "A": "To design report layouts",
+        "B": "To manage dedicated resources, monitor workload performance, and assign workspaces to capacities",
+        "C": "To write DAX measures for the team",
+        "D": "To manage the office internet bandwidth"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Microsoft Fabric, what is 'Mirroring'?",
+      "options": {
+        "A": "Creating a duplicate report for backup",
+        "B": "A low-latency, zero-ETL way to bring data from external databases (like Cosmos DB or Snowflake) into OneLake",
+        "C": "Flipping a chart horizontally for better view",
+        "D": "A tool to compare two different DAX measures"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power BI feature allows a user to create a 'subscription' for someone else in the organization?",
+      "options": {
+        "A": "Standard Subscription",
+        "B": "Per-user sharing",
+        "C": "Admin-led subscriptions (requires Member or Admin role in workspace)",
+        "D": "Public Publishing"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of 'Private Links' in Power BI networking?",
+      "options": {
+        "A": "To share reports privately with family",
+        "B": "To ensure that data traffic between your local network and Power BI Service stays within the Microsoft backbone network",
+        "C": "To hide URLs from the browser history",
+        "D": "To create private Slack channels for report discussion"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to calculate a value based on a relationship that is not 'Active' in the model?",
+      "options": {
+        "A": "RELATED()",
+        "B": "USERELATIONSHIP()",
+        "C": "PATH()",
+        "D": "LOOKUPVALUE()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tenant Settings' in the Power BI Admin Portal?",
+      "options": {
+        "A": "A list of people who rent office space",
+        "B": "The central location to control features like exporting, sharing, and AI capabilities for the entire organization",
+        "C": "The setting to change the Power BI logo",
+        "D": "A way to manage local SQL server passwords"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between 'Direct Lake' and 'Import' mode in Fabric?",
+      "options": {
+        "A": "Direct Lake is slower",
+        "B": "Direct Lake reads directly from Delta tables in OneLake without needing to refresh or load data into Power BI memory",
+        "C": "Import mode is only for CSV files",
+        "D": "Direct Lake requires a SQL connection string"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Power BI API is used to manage service principals and automate report deployments?",
+      "options": {
+        "A": "Power BI Desktop API",
+        "B": "Power BI REST API",
+        "C": "Excel Interop API",
+        "D": "Azure DevOps API"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Aggregations' in the context of Big Data in Power BI?",
+      "options": {
+        "A": "Combining two reports into one",
+        "B": "A performance feature where summarized data is stored in memory, while detail remains in the source (DirectQuery)",
+        "C": "Adding up all the rows in Excel",
+        "D": "Groupings of users by their department"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Object-Level Security' (OLS) rule 'None'?",
+      "options": {
+        "A": "It gives everyone access",
+        "B": "It completely hides the existence of a table or column from the user, causing errors if they try to use it",
+        "C": "It removes the security from the object",
+        "D": "It means the object is deleted"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to 'pin' an entire report page to a dashboard?",
+      "options": {
+        "A": "Live Page Pinning",
+        "B": "Static Snapshot",
+        "C": "Visual Clipping",
+        "D": "Page Link"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Query Parallelization' in the Power BI engine?",
+      "options": {
+        "A": "Running Power BI on two computers",
+        "B": "The ability of the engine to execute multiple data source queries simultaneously to speed up visual rendering",
+        "C": "Writing code in two languages",
+        "D": "Sharing a report with two people at once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function returns a table of the unique values in a column, ignoring the current filter context?",
+      "options": {
+        "A": "VALUES()",
+        "B": "ALLNOBLANKROW()",
+        "C": "DISTINCT()",
+        "D": "ALL()"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the 'Scanner API' used for by Power BI Admins?",
+      "options": {
+        "A": "Scanning documents into Power BI",
+        "B": "Efficiently extracting metadata (lineage, tables, measures) from all artifacts in a tenant for governance",
+        "C": "Checking the hardware for viruses",
+        "D": "Scanning barcodes in the mobile app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Composite Model' (DirectQuery over Power BI datasets)?",
+      "options": {
+        "A": "A model made of clay",
+        "B": "A feature that allows you to connect to a published dataset and add your own local data or another DirectQuery source",
+        "C": "A report with a mix of colors",
+        "D": "A dataset that has both text and numbers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Semantic Link' in Fabric?",
+      "options": {
+        "A": "Linking two websites",
+        "B": "A bridge that allows Python users in notebooks to discover and interact with Power BI datasets and measures",
+        "C": "A way to join two SQL tables",
+        "D": "A tool for translating reports"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which visual is best for showing 'Top N' items with an 'Others' category dynamically?",
+      "options": {
+        "A": "Pie Chart",
+        "B": "Bar Chart (combined with DAX ranking)",
+        "C": "Slicer",
+        "D": "Line Chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Incremental Refresh' for a large DirectQuery source?",
+      "options": {
+        "A": "Refreshing the whole table",
+        "B": "It is not needed because DirectQuery is real-time; however, it can be used for Hybrid tables (Import + DQ partitions)",
+        "C": "Deleting rows every hour",
+        "D": "Adding one column at a time"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Hub' in the Power BI Service?",
+      "options": {
+        "A": "A physical server in the office",
+        "B": "A central location to discover, manage, and reuse datasets across the organization",
+        "C": "A chat room for data analysts",
+        "D": "A tool to download datasets to Excel"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which setting in Power BI Desktop improves performance by disabling the automatic creation of relationships?",
+      "options": {
+        "A": "Autodetect new relationships",
+        "B": "Manual Relationships only",
+        "C": "Strict Schema",
+        "D": "Relationship Lock"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In DAX Query plans, what is the 'Logical Plan'?",
+      "options": {
+        "A": "The actual machine code executed by the CPU",
+        "B": "A high-level representation of the query steps before the engine optimizes it for the physical layer",
+        "C": "A list of all users who can see the report",
+        "D": "The structure of the SQL database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Row-level Security' (RLS) in the context of Microsoft Fabric's Direct Lake mode?",
+      "options": {
+        "A": "Security must be defined in the SQL Endpoint",
+        "B": "Security is defined in the Power BI semantic model and is applied even when reading directly from OneLake",
+        "C": "RLS is not supported in Direct Lake mode",
+        "D": "Security is handled by the folder permissions in OneLake"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which DAX function is used to create a 'Window' of data for calculating rolling averages or running totals without using complex filter overrides?",
+      "options": {
+        "A": "WINDOW()",
+        "B": "SLICER()",
+        "C": "FRAME()",
+        "D": "ROLLUP()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Query Parallelization' for DirectQuery sources in Power BI?",
+      "options": {
+        "A": "Splitting the report into two different files",
+        "B": "The ability of the Power BI engine to send multiple queries to the data source simultaneously to speed up visual loading",
+        "C": "Running Power BI on multiple monitors",
+        "D": "Translating DAX into two different SQL dialects"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'Calculation Groups' regarding 'Measure Explosion'?",
+      "options": {
+        "A": "They make measures run faster",
+        "B": "They reduce the need for dozens of similar measures by allowing a single measure to be viewed in different 'formats' (e.g., YTD, MTD, PY)",
+        "C": "They delete old measures automatically",
+        "D": "They allow for measures to be used in Excel"
+      },
+      "answer": "B"
+    }
+  ]
+}

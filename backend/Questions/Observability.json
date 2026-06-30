@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Observability", 
+  "questions": [
+    {
+    "question": "What are the commonly recognized 'Three Pillars' of Observability?",
+    "options": {
+      "A": "CPU, RAM, and Disk",
+      "B": "Metrics, Logs, and Traces",
+      "C": "HTML, CSS, and JavaScript",
+      "D": "Planning, Coding, and Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In observability, what is a 'Metric'?",
+    "options": {
+      "A": "A long text description of an error.",
+      "B": "A numerical representation of data measured over intervals of time.",
+      "C": "A physical tool used to measure server height.",
+      "D": "A backup of the entire database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Logging' refers to the process of recording discrete events that happen within a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security errors",
+      "D": "Only if using a cloud provider"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of 'Distributed Tracing'?",
+    "options": {
+      "A": "To draw a map of the office network.",
+      "B": "To track the path of a single request as it moves through various microservices.",
+      "C": "To count the number of users in the building.",
+      "D": "To encrypt the server's hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main difference between 'Monitoring' and 'Observability'?",
+    "options": {
+      "A": "Monitoring tells you if a system is broken; Observability helps you understand why it is broken by looking at internal states.",
+      "B": "Observability is only for hardware; Monitoring is for software.",
+      "C": "Monitoring is free; Observability is always expensive.",
+      "D": "There is no difference between the two."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of tracing, what is a 'Span'?",
+    "options": {
+      "A": "The physical distance between two servers.",
+      "B": "A single operation or unit of work within a trace.",
+      "C": "The total amount of memory a server has.",
+      "D": "A specialized tool for cleaning monitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of a 'Structured Log'?",
+    "options": {
+      "A": "A random sentence in a text file.",
+      "B": "A log entry formatted as a JSON object with key-value pairs.",
+      "C": "A handwritten note in a notebook.",
+      "D": "A screenshot of an error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: High 'Cardinality' in metrics means you have a very small number of unique label combinations.",
+    "options": {
+      "A": "False (High cardinality means a large number of unique combinations).",
+      "B": "True",
+      "C": "Only for database metrics",
+      "D": "Only if using Prometheus"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLI' stand for in Site Reliability Engineering?",
+    "options": {
+      "A": "System Level Integration",
+      "B": "Service Level Indicator",
+      "C": "Software Logic Interface",
+      "D": "Standard Level Information"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for collecting and forwarding telemetry data to a backend?",
+    "options": {
+      "A": "The API",
+      "B": "The Collector (or Agent)",
+      "C": "The Database",
+      "D": "The UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency'?",
+    "options": {
+      "A": "The amount of data stored on a disk.",
+      "B": "The time it takes for a request to be processed and a response returned.",
+      "C": "The number of pixels on a screen.",
+      "D": "The price of the cloud subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Event' is a record of a single point in time when something significant happened in the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for system crashes",
+      "D": "Only if using a mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Dashboard' in an observability tool?",
+    "options": {
+      "A": "A physical steering wheel for a server.",
+      "B": "A visual interface that displays key metrics and charts in real-time.",
+      "C": "A list of employee names.",
+      "D": "A tool to update server firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Open Source' standard for observability data?",
+    "options": {
+      "A": "OpenTelemetry",
+      "B": "Microsoft Office",
+      "C": "Adobe Reader",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Uptime' measure?",
+    "options": {
+      "A": "How long it takes to turn on a computer.",
+      "B": "The percentage of time a system is available and functioning.",
+      "C": "The speed of the network upload.",
+      "D": "The number of hours a developer works."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Alerting' is the process of automatically notifying humans when a system's health reaches a dangerous state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for memory errors",
+      "D": "Only during business hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In observability, what is 'Retention'?",
+    "options": {
+      "A": "The process of hiring new staff.",
+      "B": "The length of time that telemetry data is kept before being deleted.",
+      "C": "The amount of RAM used by a process.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these metrics would indicate 'Saturation'?",
+    "options": {
+      "A": "The number of items in a shopping cart.",
+      "B": "A CPU utilization of 99%.",
+      "C": "The color of the website's font.",
+      "D": "The time since the last reboot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Whitebox Monitoring'?",
+    "options": {
+      "A": "Monitoring the physical color of the server case.",
+      "B": "Monitoring based on internal information from the system, such as logs or internal metrics.",
+      "C": "Monitoring a system from the outside only.",
+      "D": "Deleting all monitoring data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tracing' helps pinpoint where latency is occurring in a complex chain of microservices.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using a Service Mesh"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of an 'Exporter' in a Prometheus setup?",
+    "options": {
+      "A": "To send servers to another country.",
+      "B": "To collect metrics from a target and make them available in a format Prometheus can understand.",
+      "C": "To backup the Prometheus database.",
+      "D": "To increase the internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SLA' stand for?",
+    "options": {
+      "A": "System Level Access",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "Security Layer Audit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Time Series' database often used for metrics?",
+    "options": {
+      "A": "Prometheus / InfluxDB",
+      "B": "Microsoft Word",
+      "C": "Google Search",
+      "D": "Slack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An 'Anomaly' is a data point that deviates significantly from the expected normal behavior.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network traffic",
+      "D": "Only if using AI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blackbox Monitoring'?",
+    "options": {
+      "A": "Monitoring a system from the outside (e.g., checking if a URL is reachable) without knowing its internals.",
+      "B": "Monitoring a server in a dark room.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The password for the monitoring dashboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In logging, what is 'Aggregation'?",
+    "options": {
+      "A": "Making the logs harder to read.",
+      "B": "Collecting logs from multiple sources into a single, centralized location.",
+      "C": "Deleting logs that are older than one day.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: High latency always means a system is completely down.",
+    "options": {
+      "A": "False (It means the system is slow, not necessarily unavailable).",
+      "B": "True",
+      "C": "Only for mobile users",
+      "D": "Only if the error rate is 100%"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Grafana'?",
+    "options": {
+      "A": "To write application code.",
+      "B": "To provide a powerful visualization and dashboarding tool for observability data.",
+      "C": "To act as a physical firewall.",
+      "D": "To backup the whole internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE 'Golden Signal' measures the number of requests failing?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Trace ID'?",
+    "options": {
+      "A": "The serial number of a server.",
+      "B": "A unique identifier assigned to a single request to link all its related spans together.",
+      "C": "The password for the developer.",
+      "D": "The name of the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Observability allows teams to debug 'Unknown Unknowns' (problems they didn't anticipate).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLO' stand for?",
+    "options": {
+      "A": "Service Level Objective",
+      "B": "System Logic Option",
+      "C": "Standard Level Order",
+      "D": "Software Line Owner"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Log Level'?",
+    "options": {
+      "A": "INFO / ERROR / DEBUG",
+      "B": "FAST / SLOW / MEDIUM",
+      "C": "BLUE / GREEN / RED",
+      "D": "TOP / MIDDLE / BOTTOM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Tags' or 'Labels' makes it easier to filter and group metrics by environment (e.g., 'prod' vs 'dev').",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only for traces"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Instrumentation'?",
+    "options": {
+      "A": "Building physical musical instruments.",
+      "B": "The process of adding code to an application to generate telemetry data (logs, metrics, traces).",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the weight of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Traffic' signal measure in SRE?",
+    "options": {
+      "A": "How many cars are in the parking lot.",
+      "B": "A measure of how much demand is being placed on the system (e.g., HTTP requests per second).",
+      "C": "The physical movement of data packets.",
+      "D": "The number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Observability is strictly about looking at dashboards and doesn't involve any analysis.",
+    "options": {
+      "A": "False (It involves active analysis and exploration of data to find root causes).",
+      "B": "True",
+      "C": "Only for junior engineers",
+      "D": "Only if using legacy tools"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Context' in Distributed Tracing?",
+    "options": {
+      "A": "To explain why the code was written.",
+      "B": "To pass metadata (like Trace IDs) between services so the whole journey can be reconstructed.",
+      "C": "To encrypt the trace data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Self-Healing' systems triggered by observability?",
+    "options": {
+      "A": "Infrastructure that repairs itself using nanobots.",
+      "B": "Automated actions taken by a system (like restarting a pod) in response to a failed health check.",
+      "C": "A backup of the whole system.",
+      "D": "The physical repair of a server by a technician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Root Cause Analysis' (RCA) is the practice of finding the fundamental reason why a failure occurred.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security breaches",
+      "D": "Only if the downtime was over 4 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Alert Manager'?",
+    "options": {
+      "A": "To create as many alerts as possible.",
+      "B": "To handle deduplication, grouping, and routing of alerts to the right notification channel (e.g., Slack or PagerDuty).",
+      "C": "To encrypt the alert message.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Pull' based monitoring model, which component initiates the data transfer?",
+    "options": {
+      "A": "The monitored target.",
+      "B": "The monitoring server (e.g., Prometheus).",
+      "C": "The end user.",
+      "D": "The firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Logs are generally more expensive to store and process at high volumes than metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed' tracing versus local tracing?",
+    "options": {
+      "A": "Distributed tracing follows requests across multiple network-separated systems; local tracing only looks at a single process.",
+      "B": "Distributed tracing is for mobile apps; local is for desktops.",
+      "C": "There is no difference.",
+      "D": "Local tracing is more expensive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Alert Fatigue' prevention strategy?",
+    "options": {
+      "A": "Sending an alert for every single 1% CPU change.",
+      "B": "Setting intelligent thresholds and grouping related alerts.",
+      "C": "Turning off all alerts completely.",
+      "D": "Deleting the monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Observability aims to provide a 'Single Source of Truth' for system health.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for startups",
+      "D": "Only if using ELK stack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sampling' in tracing or logging?",
+    "options": {
+      "A": "Testing a server before you buy it.",
+      "B": "Choosing to only record a percentage of total data to save on storage and processing costs.",
+      "C": "Writing a summary of a project.",
+      "D": "To monitor the daily growth of the traces."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in OpenTelemetry is responsible for receiving and processing telemetry data before sending it to a backend?",
+    "options": {
+      "A": "The SDK",
+      "B": "The Collector",
+      "C": "The API",
+      "D": "The UI"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Observability is a cultural shift as much as it is a technical one.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for remote teams",
+      "D": "Only if using Kubernetes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput' in a monitoring context?",
+    "options": {
+      "A": "The delay in processing a request.",
+      "B": "The volume of work a system processes over a specific time (e.g., transactions per second).",
+      "C": "The physical size of the data center.",
+      "D": "The number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these metrics is most useful for 'Capacity Planning'?",
+    "options": {
+      "A": "Historical resource usage trends (CPU/Memory).",
+      "B": "The color of the server racks.",
+      "C": "The individual performance of a developer.",
+      "D": "The number of coffee breaks taken."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Health Check' endpoint (like /health) should return a success status if the service and its dependencies are working.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Grafana Loki'?",
+    "options": {
+      "A": "A metrics database.",
+      "B": "A high-efficiency log aggregation system designed to be cost-effective.",
+      "C": "A specialized tool for drawing clouds.",
+      "D": "A way to backup the power grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Prometheus, what is a 'Scrape'? ",
+    "options": {
+      "A": "A hardware failure in the disk.",
+      "B": "The act of the monitoring server pulling metrics from a client endpoint.",
+      "C": "Deleting old monitoring data.",
+      "D": "A specialized way to encrypt network traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Distributed tracing is essential for debugging monolith applications.",
+    "options": {
+      "A": "False (It is most valuable for microservices; monoliths are usually traced locally).",
+      "B": "True",
+      "C": "Only if the monolith is in the cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Rotation'?",
+    "options": {
+      "A": "Rotating the server rack 90 degrees.",
+      "B": "The process of archiving old log files and starting new ones to prevent disk space issues.",
+      "C": "Encrypting the logs word-by-word.",
+      "D": "A specialized way to backup the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to search and visualize large volumes of log data (the 'K' in ELK)?",
+    "options": {
+      "A": "Kibana",
+      "B": "Kafka",
+      "C": "Kubernetes",
+      "D": "Keycloak"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Push' based model, the monitoring server doesn't need to know the location of all targets beforehand.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 buckets",
+      "D": "Only for non-profit accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Service Map'?",
+    "options": {
+      "A": "A physical map of the office building.",
+      "B": "A visual representation of how different services in a system are connected and interact with each other.",
+      "C": "A list of all users in a specific time zone.",
+      "D": "A specialized tool for cleaning server fans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' measures how long a service has been running since its last restart?",
+    "options": {
+      "A": "Latency",
+      "B": "Uptime / Process Start Time",
+      "C": "Throughput",
+      "D": "Bandwidth"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Observability tools should ideally be decoupled from the system they are monitoring.",
+    "options": {
+      "A": "True (To ensure monitoring continues even if the main system fails).",
+      "B": "False",
+      "C": "Only for small companies",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Structured' versus 'Unstructured' logging?",
+    "options": {
+      "A": "Structured logs are machine-readable (JSON); unstructured logs are plain text strings.",
+      "B": "Structured logs are for managers; unstructured are for developers.",
+      "C": "Structured logs are free; unstructured are paid.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Incident' response phase involves looking back at what happened to prevent it from happening again?",
+    "options": {
+      "A": "Preparation",
+      "B": "Containment",
+      "C": "Post-Mortem / Retrospective",
+      "D": "Recovery"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Prometheus uses a 'Time Series' data model.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network logs",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Correlation' between logs, metrics, and traces?",
+    "options": {
+      "A": "To make the data much heavier.",
+      "B": "To allow an engineer to jump between different data types (e.g., from a metric spike to a specific trace) for better troubleshooting.",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Trace' visualization format?",
+    "options": {
+      "A": "Gantt Chart / Waterfall diagram",
+      "B": "Pie Chart",
+      "C": "Word Cloud",
+      "D": "Excel Spreadsheet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Distributed Tracing, what is the purpose of 'Context Propagation'?",
+    "options": {
+      "A": "To propagate hardware upgrades to all servers.",
+      "B": "To pass trace identifiers and metadata across process boundaries so that individual spans can be linked into a single trace.",
+      "C": "To encrypt the monitoring database.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of the ELK stack is primarily responsible for processing, filtering, and enriching logs before they are indexed?",
+    "options": {
+      "A": "Elasticsearch",
+      "B": "Logstash",
+      "C": "Kibana",
+      "D": "Beats"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Prometheus Query Language (PromQL), which function is used to calculate the per-second average rate of increase of a counter over a time range?",
+    "options": {
+      "A": "increase()",
+      "B": "rate()",
+      "C": "delta()",
+      "D": "sum()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Error Budget' in Site Reliability Engineering (SRE)?",
+    "options": {
+      "A": "The physical money set aside for server repairs.",
+      "B": "The amount of allowed unreliability (errors/downtime) a service can have before the team must prioritize stability over new features.",
+      "C": "A list of all previous system bugs.",
+      "D": "The salary bonus given for 100% uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Level Indicator' (SLI) is a quantitative measure of some aspect of the level of service provided, such as 'Latency' or 'Availability'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if defined in a legal contract",
+      "D": "Only for cloud-native applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Baggage' in Distributed Tracing?",
+    "options": {
+      "A": "To store old monitoring data that is no longer needed.",
+      "B": "To carry arbitrary key-value pairs across service boundaries, making them available to all spans in a trace for business context.",
+      "C": "A specialized way to encrypt data.",
+      "D": "The size of the trace payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL metric type is used for values that only ever increase, such as total request counts or total error counts?",
+    "options": {
+      "A": "Gauge",
+      "B": "Counter",
+      "C": "Histogram",
+      "D": "Summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cardinality' refers to the number of unique combinations of label/dimension values for a specific metric.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in SQL databases",
+      "D": "Only for text-based logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Log Parser' in an observability pipeline?",
+    "options": {
+      "A": "To delete logs that are too long.",
+      "B": "To transform unstructured text into structured data (like JSON) by identifying and extracting specific fields.",
+      "C": "To backup logs to a physical drive.",
+      "D": "To monitor the temperature of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Prometheus metric type would you use to track values that go up and down, such as current memory usage or the number of active threads?",
+    "options": {
+      "A": "Counter",
+      "B": "Gauge",
+      "C": "Histogram",
+      "D": "Summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SRE, what does the 'Saturation' signal primarily identify?",
+    "options": {
+      "A": "The maximum speed of the internet connection.",
+      "B": "How 'full' a resource is (e.g., CPU or memory) and the point at which performance will start to degrade.",
+      "C": "The total number of users logged in.",
+      "D": "The physical weight of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Heartbeat Monitoring' involves a service periodically sending a signal to a monitor to confirm it is still functioning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for physical hardware",
+      "D": "Only if using the TCP protocol"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Sampling' mean in the context of Distributed Tracing?",
+    "options": {
+      "A": "Testing a server before you buy it.",
+      "B": "Choosing to record only a percentage of total traces to reduce overhead and storage costs while maintaining statistical significance.",
+      "C": "Writing a summary of a project.",
+      "D": "Monitoring the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of the Grafana 'LGTM' stack is used for high-performance log aggregation?",
+    "options": {
+      "A": "Loki",
+      "B": "Tempo",
+      "C": "Mimir",
+      "D": "Grafana"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary objective of 'Alert Grouping'?",
+    "options": {
+      "A": "To make the dashboard appear more complex.",
+      "B": "To combine related alerts (e.g., 20 servers failing in one cluster) into a single notification to prevent noise and fatigue.",
+      "C": "To delete alerts automatically.",
+      "D": "To increase the speed of the notification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Push' based monitoring model (like StatsD) requires the application to actively send metrics to the monitoring server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if the server is behind a firewall"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes a 'Histogram' metric in Prometheus?",
+    "options": {
+      "A": "A single value that goes up and down.",
+      "B": "Observations (like request durations) sampled into configurable buckets to allow for quantile calculation (e.g., P99).",
+      "C": "A list of all system errors.",
+      "D": "A tool to update the server's firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Instrumentation?",
+    "options": {
+      "A": "Building physical musical instruments.",
+      "B": "The process of adding code to an application to generate and export trace data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Monitoring the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An availability SLO of 99.9% allows for approximately 8.77 hours of downtime per year.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in leap years",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Labels' (Dimensions) in a modern metrics system?",
+    "options": {
+      "A": "To name the physical servers.",
+      "B": "To allow metrics to be sliced, filtered, and grouped by various attributes (e.g., environment, region, or service).",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily cost of the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool in the OpenTelemetry project is used to receive, process, and export telemetry data (metrics, logs, traces)?",
+    "options": {
+      "A": "The Collector",
+      "B": "The SDK",
+      "C": "The API",
+      "D": "The UI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In PromQL, what does the 'by' keyword accomplish in an aggregation?",
+    "options": {
+      "A": "It deletes a metric.",
+      "B": "It groups the results by specified labels (e.g., sum(rate) by (instance)).",
+      "C": "It increases the query speed.",
+      "D": "It sets the password for the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Runbook' used for during an operational incident?",
+    "options": {
+      "A": "To write a fictional story about the server.",
+      "B": "To provide a documented, step-by-step procedure for troubleshooting and resolving a specific alert.",
+      "C": "To monitor the time spent running in the office.",
+      "D": "To backup the whole monitoring system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an open-source, horizontally scalable, highly available time series database for Prometheus metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if using Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Quantiles' (e.g., P99) in latency monitoring?",
+    "options": {
+      "A": "To measure the average speed of all users.",
+      "B": "To understand the experience of the 'slowest' users (e.g., P99 shows the maximum latency for the top 99% of requests).",
+      "C": "To count the total number of requests.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular 'Trace' backend used to store and visualize span data?",
+    "options": {
+      "A": "Jaeger / Zipkin",
+      "B": "Nginx",
+      "C": "PostgreSQL",
+      "D": "Memcached"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Observability is considered an evolution or a 'superset' of traditional monitoring.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for microservices",
+      "D": "Only in SRE teams"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Scrape Interval' in Prometheus?",
+    "options": {
+      "A": "The frequency at which the server room is cleaned.",
+      "B": "The frequency at which Prometheus pulls (scrapes) metrics from its targets.",
+      "C": "The price of the cloud subscription.",
+      "D": "The size of a single log file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific log aggregation component is typically 'Agentless' and retrieves logs from a remote API rather than a local file?",
+    "options": {
+      "A": "Fluent Bit",
+      "B": "Promtail",
+      "C": "CloudWatch Logs Insights",
+      "D": "Filebeat"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In an observability pipeline, what does 'Enrichment' involve?",
+    "options": {
+      "A": "Giving the monitoring team a higher budget.",
+      "B": "Adding additional context to telemetry (e.g., adding a container ID or GeoIP data) as it flows through the pipeline.",
+      "C": "Encrypting the source code of the logs.",
+      "D": "Monitoring the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loki' is designed to be cost-effective because it only indexes log labels and metadata, not the full log text.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anomaly Detection' using machine learning primarily used for?",
+    "options": {
+      "A": "To replace all human system administrators.",
+      "B": "To automatically identify data patterns that fall outside of historical norms without needing manual thresholds.",
+      "C": "To encrypt monitoring data.",
+      "D": "To monitor the weight of the servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of the OpenTelemetry project defines the 'standard' format for traces, metrics, and logs data?",
+    "options": {
+      "A": "OTLP (OpenTelemetry Protocol)",
+      "B": "The Collector",
+      "C": "The SDK",
+      "D": "The API"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Structured Logging' involves writing logs in a machine-readable format like JSON or Key-Value pairs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using the ELK stack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Service Level Objective' (SLO)?",
+    "options": {
+      "A": "The target numerical goal for an SLI (e.g., '99.9% of requests must succeed').",
+      "B": "The actual measured value of a service's performance.",
+      "C": "A legal contract with a customer.",
+      "D": "A way to backup the monitoring system."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric is the best indicator of 'Traffic' for a message queue system like Apache Kafka?",
+    "options": {
+      "A": "CPU usage",
+      "B": "Messages published or consumed per second",
+      "C": "The size of the server's hard drive",
+      "D": "The number of active users in the system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'High Cardinality' can significantly increase the storage costs and query latency of a monitoring system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for log data",
+      "D": "Only if using Prometheus"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Dead Man's Switch' in an alerting system?",
+    "options": {
+      "A": "To turn off a server that is overheating.",
+      "B": "An alert that triggers if the monitoring system itself fails to send a signal (monitoring the monitor).",
+      "C": "A specialized way to encrypt user data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Continuous Profiling'?",
+    "options": {
+      "A": "Taking a picture of the server every hour.",
+      "B": "The automatic and frequent collection of application performance data (like CPU/Memory usage by code function) at runtime.",
+      "C": "A weekly meeting to review developer output.",
+      "D": "Naming your servers after famous people."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VictoriaMetrics' is a highly scalable and cost-effective monitoring solution and time series database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows users",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Throttling' or 'Rate Limiting'?",
+    "options": {
+      "A": "Increasing the throughput of the log server.",
+      "B": "Intentionally dropping or slowing logs when they exceed a certain volume to protect the monitoring infrastructure.",
+      "C": "Encrypting logs word-by-word.",
+      "D": "A specialized way to backup the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific PromQL operator allows you to perform arithmetic calculations between two different metrics?",
+    "options": {
+      "A": "+, -, *, /",
+      "B": "join()",
+      "C": "union()",
+      "D": "group()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time to Acknowledge' (MTTA)?",
+    "options": {
+      "A": "The time it takes to fix a broken server.",
+      "B": "The average time it takes for an administrator to respond to an alert once it has triggered.",
+      "C": "The price of the monitoring software.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tempo' is a high-volume, low-dependency distributed tracing backend from Grafana Labs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java traces",
+      "D": "Only if using Loki"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Sidecar' deployment for an observability agent?",
+    "options": {
+      "A": "A physical motorcycle attached to a server rack.",
+      "B": "Running a monitoring container alongside the main application container within the same Pod.",
+      "C": "A backup server located in a different region.",
+      "D": "The name of a popular programming language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Metric' aggregation function used in PromQL?",
+    "options": {
+      "A": "Average (Mean)",
+      "B": "Maximum",
+      "C": "95th Percentile",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Synthetic Monitoring' can be used to simulate user traffic and monitor API availability from global locations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public APIs",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of an 'Alert Manager' in a Prometheus environment?",
+    "options": {
+      "A": "To create as many alerts as possible to be safe.",
+      "B": "To handle deduplication, grouping, and routing of alerts to the correct notification channel.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE metric specifically measures the 'Errors' of a service?",
+    "options": {
+      "A": "The count of failed requests (e.g., HTTP 5xx responses).",
+      "B": "The total number of users logged in.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The salary of the IT staff."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Monitoring 'Battery Health' is a critical task for systems utilizing Uninterruptible Power Supplies (UPS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile devices",
+      "D": "Only if using solar power"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Metadata' (attributes) in observability data?",
+    "options": {
+      "A": "To make the telemetry data much heavier.",
+      "B": "To provide extra context about the data source (e.g., host ID, version, or region).",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily growth of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Zero-trust' monitoring principles?",
+    "options": {
+      "A": "Monitoring every network packet and access request as if the origin were untrusted.",
+      "B": "Monitoring a system without using any monitoring tools.",
+      "C": "A specialized way to encrypt monitoring data.",
+      "D": "Monitoring a server located in a black-box room."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Fluent Bit' is a lightweight log processor and forwarder used frequently in containerized environments.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Uptime' monitoring frequency for a mission-critical web service?",
+    "options": {
+      "A": "Once every year.",
+      "B": "High frequency (e.g., every 30 to 60 seconds).",
+      "C": "Only when the system crashes.",
+      "D": "Never, if the system is 'Serverless'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific component is responsible for 'visualizing' trace data in an observability stack?",
+    "options": {
+      "A": "Grafana / Jaeger UI",
+      "B": "Elasticsearch",
+      "C": "Prometheus",
+      "D": "Logstash"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'MTR' is a network tool that provides real-time diagnostic information by combining ping and traceroute.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows users",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'External Monitoring' (checking from outside the network)?",
+    "options": {
+      "A": "To view the physical data center building.",
+      "B": "To verify that services are accessible to end-users over the public internet.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular 'Trace' instrumentation library used in modern applications?",
+    "options": {
+      "A": "OpenTelemetry",
+      "B": "Nginx",
+      "C": "PostgreSQL",
+      "D": "Memcached"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Observability can assist with 'Capacity Planning' by providing historical usage trends.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small companies",
+      "D": "Only if using AI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Sampling' used for?",
+    "options": {
+      "A": "Testing a log server before buying it.",
+      "B": "Discarding a percentage of logs to reduce noise and costs while keeping enough data for analysis.",
+      "C": "Writing a summary of a software project.",
+      "D": "Monitoring the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific tool is used for 'Dashboarding' in the Grafana LGTM stack?",
+    "options": {
+      "A": "Grafana",
+      "B": "Loki",
+      "C": "Tempo",
+      "D": "Mimir"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Service Level Agreement' (SLA) is typically a legal document defining penalties for failing to meet SLOs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Google Cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The time it takes to fix a server.",
+      "B": "The average time elapsed between one system failure and the next.",
+      "C": "The price of the monitoring software.",
+      "D": "The number of users active during the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function calculates the 'increase' of a counter over a specific time range?",
+    "options": {
+      "A": "increase()",
+      "B": "rate()",
+      "C": "sum()",
+      "D": "avg()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Distributed Tracing is designed to identify which service in a complex chain is causing a delay.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database services",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Prometheus TSDB architecture, what is the primary role of the 'Write Ahead Log' (WAL)?",
+    "options": {
+      "A": "To provide a historical record of all user queries for auditing.",
+      "B": "To record incoming samples immediately to disk to allow for recovery of the in-memory 'Head' block in case of a crash.",
+      "C": "To act as a long-term storage archive for data older than 2 weeks.",
+      "D": "To encrypt data before it is sent to a remote write endpoint."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Sampling' strategy in Distributed Tracing ensuries that rare 'Error' traces are captured while common 'Healthy' traces are discarded?",
+    "options": {
+      "A": "Head-based Sampling",
+      "B": "Tail-based Sampling",
+      "C": "Adaptive Sampling",
+      "D": "Probabilistic Sampling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using eBPF (extended Berkeley Packet Filter) allows observability tools to collect performance data from the Linux kernel without requiring any manual code changes to the application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for applications written in Go",
+      "D": "Only on ARM-based architectures"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In PromQL, what is the 'Staleness' behavior for a time series that has stopped being scraped?",
+    "options": {
+      "A": "It remains at the last known value indefinitely.",
+      "B": "It is marked as stale and disappears from query results after a default of 5 minutes.",
+      "C": "It is immediately deleted from the TSDB index.",
+      "D": "It resets to a value of zero automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical impact of 'High Cardinality' on a monitoring system's RAM usage?",
+    "options": {
+      "A": "RAM usage stays constant regardless of label counts.",
+      "B": "RAM usage increases linearly with the number of unique label-value combinations (series), as each requires its own in-memory index entry.",
+      "C": "High cardinality only affects disk I/O, not memory.",
+      "D": "It causes the monitoring agent to use more CPU cycles but less RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in an OpenTelemetry architecture is responsible for performing stateful processing like 'Tail-based Sampling'?",
+    "options": {
+      "A": "The Application SDK",
+      "B": "The OpenTelemetry Collector (running as a Gateway/Service)",
+      "C": "The Managed Cloud Exporter",
+      "D": "The UI Dashboard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Rolling Window' SLI calculation provides a smoothed view of system health but can hide short, intense bursts of errors compared to a 'Calendar-Aligned' window.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for monthly reports",
+      "D": "Only if the target is 99.999%"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Histogram_quantile' function in PromQL actually perform internally?",
+    "options": {
+      "A": "It calculates the exact latency of every individual request recorded.",
+      "B": "It estimates quantiles by interpolating between the boundaries of the recorded histogram buckets.",
+      "C": "It counts the total number of errors in the highest bucket.",
+      "D": "It deletes data points that are considered outliers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of the 'Loki' log system, what is the 'Index' versus a 'Chunk'?",
+    "options": {
+      "A": "The Index stores the log text; the Chunk stores the metadata.",
+      "B": "The Index stores label sets and pointers; the Chunk stores the compressed raw log data.",
+      "C": "They are identical components used for redundancy.",
+      "D": "Index is for writing; Chunk is for reading."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric 'Aggregation' type is most resilient to data gaps caused by a single failed scrape when calculating per-second rates?",
+    "options": {
+      "A": "Gauge",
+      "B": "Counter (when used with the rate() function, which handles resets and missing data).",
+      "C": "Summary",
+      "D": "Average"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Distributed Tracing 'Spans' can contain 'Events' which are timestamped structured messages representing discrete milestones within that operation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Zipkin format",
+      "D": "Only if the trace ID is 128-bit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'Alertmanager' inhibit_rules?",
+    "options": {
+      "A": "To turn off all alerts during the weekend.",
+      "B": "To suppress a set of alerts if another set of alerts is already firing (e.g., suppress 'ApplicationDown' if 'RegionOffline' is firing).",
+      "C": "To increase the volume of an alert notification.",
+      "D": "To encrypt the alert message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Remote Write' in Prometheus, what is the 'WAL Truncation' process?",
+    "options": {
+      "A": "Deleting the oldest data to save disk space.",
+      "B": "Removing data from the WAL once it has been successfully flushed to persistent blocks on disk or the remote endpoint.",
+      "C": "Formatting the local database.",
+      "D": "Compressing logs into ZIP files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Exemplar' feature in modern observability platforms bridges the gap between metrics and traces?",
+    "options": {
+      "A": "The ability to link a specific Trace ID to a data point on a metric graph, allowing a direct jump from a spike to a trace.",
+      "B": "A specialized backup tool for metrics.",
+      "C": "A way to rename metrics automatically.",
+      "D": "A tool to calculate the cost of a single request."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In SRE, 'Burn Rate' is the speed at which a service is consuming its Error Budget relative to the SLO window.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native systems",
+      "D": "Only if the error budget is over $1000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mmap' (Memory Mapping) used for in the Prometheus storage engine?",
+    "options": {
+      "A": "To map the physical location of servers.",
+      "B": "To allow the OS to manage the caching of on-disk data blocks into memory, optimizing query speed for cold data.",
+      "C": "To encrypt the database files.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' value is recorded by a Prometheus Counter upon a service restart?",
+    "options": {
+      "A": "It continues from the last known value.",
+      "B": "It resets to 0.",
+      "C": "It is marked as null.",
+      "D": "It records the system uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a high-availability Prometheus setup using 'Thanos', what is the role of the 'Sidecar' component?",
+    "options": {
+      "A": "To backup Prometheus data to object storage and provide a gRPC API for global query engines.",
+      "B": "To run a secondary web server.",
+      "C": "To encrypt the network traffic between nodes.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Instrumentation' allows for adding logs or metrics to a running production application without restarting it or redeploying code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python applications",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'Metric-based' alerting and 'Log-based' alerting performance-wise?",
+    "options": {
+      "A": "Logs are faster to process.",
+      "B": "Metrics are significantly more efficient to query and alert on at scale; logs require expensive scanning or full-text indexing.",
+      "C": "There is no performance difference.",
+      "D": "Log-based alerting is only for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Recording Rule' in Prometheus would you use to optimize query time for a complex dashboard?",
+    "options": {
+      "A": "An alert rule.",
+      "B": "A pre-calculated expression saved as a new time series in the TSDB.",
+      "C": "A rule that deletes old data.",
+      "D": "A rule that renames labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary disadvantage of 'Summary' metrics in Prometheus compared to 'Histograms'?",
+    "options": {
+      "A": "Summaries are slower.",
+      "B": "Quantiles in Summaries are pre-calculated and cannot be accurately aggregated across multiple service instances.",
+      "C": "Summaries use more disk space.",
+      "D": "Summaries do not support labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'OpenTelemetry' project provides a unified set of APIs, SDKs, and tools to collect and export metrics, logs, and traces.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the SDKs",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Distributed Tracing, what is 'Baggage'?",
+    "options": {
+      "A": "Old, unused monitoring data.",
+      "B": "Key-value pairs that are propagated along the entire trace and made available to every span.",
+      "C": "A specialized way to encrypt data.",
+      "D": "The size of the trace payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Collector' deployment pattern is best for reducing the CPU impact on a high-throughput application host?",
+    "options": {
+      "A": "Sidecar/Agent on every host reporting to a central Gateway.",
+      "B": "Direct export to the backend.",
+      "C": "Periodic manual exports.",
+      "D": "Sampling only on Sundays."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Compaction' in the Prometheus TSDB?",
+    "options": {
+      "A": "Compressing the hard drive.",
+      "B": "The process of merging smaller data blocks into larger blocks while removing obsolete data.",
+      "C": "A way to backup the system.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SLI calculation of 'Proportion of successful requests' should typically exclude HTTP 4xx errors if they are considered expected 'client' errors.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Labels' in Prometheus configuration used for?",
+    "options": {
+      "A": "To name the physical server location.",
+      "B": "To uniquely identify a Prometheus instance when sending data to global systems like Thanos or Mimir.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Loki, what is 'LogQL'?",
+    "options": {
+      "A": "A new programming language for Linux.",
+      "B": "A query language heavily inspired by PromQL used to search and aggregate logs using labels.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "A tool to delete old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Prometheus server to scrape its own metrics?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' uses a 'microservices' architecture to handle ingestion, querying, and storage separately for horizontal scalability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2.0",
+      "D": "Only for Azure users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Service Mesh' impact on observability architectures?",
+    "options": {
+      "A": "It makes monitoring impossible.",
+      "B": "It provides uniform, out-of-the-box telemetry for all inter-service network traffic without code changes.",
+      "C": "It reduces the number of metrics collected.",
+      "D": "It encrypts the monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a monitoring pipeline, what is the 'Dead Letter Queue' used for?",
+    "options": {
+      "A": "To store metrics from failed servers.",
+      "B": "To store telemetry data that could not be processed or delivered to the backend for later auditing/retries.",
+      "C": "To encrypt the monitoring database.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Grafana Faro' is an SDK designed to capture performance data and errors directly from the user's web browser (RUM).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for React applications",
+      "D": "Only in the Enterprise version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Alert flapping' and how do you resolve it?",
+    "options": {
+      "A": "When a server physically vibrates.",
+      "B": "When an alert rapidly switches between 'Firing' and 'Resolved'; it is resolved using 'for' durations in the alert rule.",
+      "C": "A hardware failure in the network switch.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Prometheus' component is responsible for grouping and routing alerts?",
+    "options": {
+      "A": "The Server Core",
+      "B": "The Alertmanager",
+      "C": "The Pushgateway",
+      "D": "The Node Exporter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Trace Id' is a globally unique identifier for a single request across its entire lifecycle in a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Jaeger format",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Automatic Resource Detection' in the OpenTelemetry Collector context?",
+    "options": {
+      "A": "To find a lost server.",
+      "B": "The ability to automatically add metadata (like cloud provider or region) to telemetry based on the environment.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL keyword allows you to exclude certain labels when performing an aggregation?",
+    "options": {
+      "A": "without",
+      "B": "ignore",
+      "C": "exclude",
+      "D": "by"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Clock Skew?",
+    "options": {
+      "A": "When the server clock runs too fast.",
+      "B": "The time difference between servers that can cause a child span to appear to start before its parent.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is built to be fully compatible with PromQL queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific SRE metric is most valuable for 'Capacity Planning' efforts?",
+    "options": {
+      "A": "Latency",
+      "B": "Saturation",
+      "C": "Errors",
+      "D": "Traffic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Query Frontend' in a distributed system like Mimir?",
+    "options": {
+      "A": "To provide a login screen.",
+      "B": "To handle query results caching and split large queries into parallel sub-queries.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Loki requires structured logs (like JSON) to function.",
+    "options": {
+      "A": "False (Loki can process unstructured text, though structured logs are easier to query).",
+      "B": "True",
+      "C": "Only for Java applications",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Synthetic Monitoring' compared to 'Real User Monitoring' (RUM)?",
+    "options": {
+      "A": "Synthetic is for machines; RUM is for people.",
+      "B": "Synthetic uses scripts to simulate traffic; RUM captures data from actual user interactions.",
+      "C": "RUM is paid; Synthetic is free.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Node Exporter?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus Histograms are 'Cumulative', meaning each bucket includes counts from all lower-valued buckets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only if using version 2.10+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Span Context?",
+    "options": {
+      "A": "The text content of the code.",
+      "B": "The metadata (IDs and flags) required to maintain the relationship between spans in a trace.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of the LGTM stack is responsible for 'storing' trace data?",
+    "options": {
+      "A": "Loki",
+      "B": "Tempo",
+      "C": "Mimir",
+      "D": "Grafana"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' typically uses object storage (like S3) for its persistent data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for backups",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Error Budget Policy' in an SRE organization?",
+    "options": {
+      "A": "The rules for how a company spends its money.",
+      "B": "The agreed-upon actions to take when an Error Budget is exhausted (e.g., freezing deployments).",
+      "C": "A way to backup the monitoring system.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by Grafana's web UI by default?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 99.9% availability SLI over 10 million requests permits up to 10,000 failures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Pipeline' backpressure?",
+    "options": {
+      "A": "Increasing the water pressure in the server room.",
+      "B": "A mechanism that slows down log ingestors when the backend is overwhelmed, preventing data loss.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Prometheus' feature allows for automated discovery of scrapable endpoints in Kubernetes?",
+    "options": {
+      "A": "Static Config",
+      "B": "Service Discovery",
+      "C": "Remote Write",
+      "D": "Relabeling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Trace ID propagation?",
+    "options": {
+      "A": "Moving the trace to a different server.",
+      "B": "The act of passing a unique Trace ID through HTTP headers to maintain request identity across services.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' supports 'Native Histograms' which offer better precision and lower memory overhead than classic histograms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Gateway' in an OpenTelemetry architecture?",
+    "options": {
+      "A": "To provide a login screen.",
+      "B": "To act as a central hub for collecting, processing, and routing telemetry from multiple agents to backends.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loki' and Prometheus can share the same labels, allowing for easy correlation between metrics and logs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes logs",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predictive Alerting' in a modern monitoring context?",
+    "options": {
+      "A": "Guessing when an alert might happen manually.",
+      "B": "Using functions like predict_linear() to alert based on a projected future value of a metric.",
+      "C": "A specialized way to encrypt alert data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Loki 'Distributor'?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "3100",
+      "D": "3000"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'VictoriaMetrics' is compatible with the Graphite and InfluxDB protocols.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for version 1.0",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Head-based Sampling?",
+    "options": {
+      "A": "Sampling without a head.",
+      "B": "A sampling decision made at the beginning of a trace that is honored by all downstream services.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Prometheus' feature allows for modifying label names or values before data is ingested?",
+    "options": {
+      "A": "Scrape Config",
+      "B": "Relabeling",
+      "C": "Recording Rules",
+      "D": "Alert Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing' Span Kind?",
+    "options": {
+      "A": "The personality of the span.",
+      "B": "A metadata field indicating the span's relationship to the network (e.g., Client, Server, Producer).",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' can act as a long-term storage backend for multiple independent Prometheus instances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Grouping' in a log aggregation system?",
+    "options": {
+      "A": "Combining similar logs into a single aggregated entry to reduce visual noise.",
+      "B": "Searching for logs using a physical tool.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PromQL function is used to calculate the 'delta' between the first and last values in a range vector?",
+    "options": {
+      "A": "delta()",
+      "B": "idelta()",
+      "C": "increase()",
+      "D": "rate()"
+    },
+    "answer": "A"
+  }
+  ]
+}

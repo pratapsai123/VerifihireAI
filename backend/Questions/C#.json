@@ -1,0 +1,1859 @@
+{ 
+  "skill": "C#", 
+  "questions": [
+    {
+"question":"What type of language is C#?",
+"options":{
+"A":"Object-oriented programming language",
+"B":"Markup language",
+"C":"Database language",
+"D":"Assembly language"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: C# was developed by Microsoft.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which framework is mainly used with C#?",
+"options":{
+"A":".NET",
+"B":"Spring",
+"C":"Django",
+"D":"Laravel"
+},
+"answer":"A"
+},
+
+{
+"question":"Which symbol ends a C# statement?",
+"options":{
+"A":";",
+"B":":",
+"C":".",
+"D":"!"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: C# is strongly typed.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares a class in C#?",
+"options":{
+"A":"class",
+"B":"Class",
+"C":"define",
+"D":"struct"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method is the entry point of a C# program?",
+"options":{
+"A":"Main",
+"B":"Start",
+"C":"Run",
+"D":"Execute"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Every C# console application must have a Main method.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword is used to create an object?",
+"options":{
+"A":"new",
+"B":"create",
+"C":"object",
+"D":"instance"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are C# data types? (Select all that apply)",
+"options":{
+"A":"int",
+"B":"float",
+"C":"bool",
+"D":"character"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: int is used for integer values in C#.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which data type stores decimal numbers?",
+"options":{
+"A":"double",
+"B":"string",
+"C":"bool",
+"D":"char"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data type stores text values?",
+"options":{
+"A":"string",
+"B":"char",
+"C":"text",
+"D":"word"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: char stores a single character.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares a constant variable?",
+"options":{
+"A":"const",
+"B":"static",
+"C":"readonly",
+"D":"final"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator is used for assignment?",
+"options":{
+"A":"=",
+"B":"==",
+"C":"!=",
+"D":"+="
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: == compares two values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which operator checks inequality?",
+"options":{
+"A":"!=",
+"B":"==",
+"C":"=",
+"D":"<>"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator increments value by 1?",
+"options":{
+"A":"++",
+"B":"--",
+"C":"+=",
+"D":"+"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: -- decreases value by 1.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword is used for conditional branching?",
+"options":{
+"A":"if",
+"B":"loop",
+"C":"branch",
+"D":"case"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword provides alternative condition?",
+"options":{
+"A":"else",
+"B":"other",
+"C":"alternate",
+"D":"switch"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: else if checks multiple conditions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which statement selects among multiple options?",
+"options":{
+"A":"switch",
+"B":"if",
+"C":"select",
+"D":"option"
+},
+"answer":"A"
+},
+
+{
+"question":"Which loop executes while condition is true?",
+"options":{
+"A":"while",
+"B":"for",
+"C":"loop",
+"D":"repeat"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: for loop is used when iteration count is known.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which loop executes at least once?",
+"options":{
+"A":"do-while",
+"B":"for",
+"C":"while",
+"D":"foreach"
+},
+"answer":"A"
+},
+
+{
+"question":"Which loop iterates over collection elements?",
+"options":{
+"A":"foreach",
+"B":"for",
+"C":"while",
+"D":"loop"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: foreach is used to iterate arrays or collections.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword exits a loop?",
+"options":{
+"A":"break",
+"B":"stop",
+"C":"exit",
+"D":"end"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword skips current iteration?",
+"options":{
+"A":"continue",
+"B":"skip",
+"C":"pass",
+"D":"jump"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: break terminates loop immediately.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines a method?",
+"options":{
+"A":"void",
+"B":"method",
+"C":"define",
+"D":"function"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword returns a value from method?",
+"options":{
+"A":"return",
+"B":"send",
+"C":"exit",
+"D":"output"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Methods improve code reusability.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares inheritance?",
+"options":{
+"A":":",
+"B":"inherits",
+"C":"extends",
+"D":"implements"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword prevents inheritance?",
+"options":{
+"A":"sealed",
+"B":"private",
+"C":"locked",
+"D":"static"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: sealed classes cannot be inherited.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword allows overriding method?",
+"options":{
+"A":"virtual",
+"B":"override",
+"C":"base",
+"D":"abstract"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword overrides base method?",
+"options":{
+"A":"override",
+"B":"replace",
+"C":"change",
+"D":"modify"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: abstract classes cannot be instantiated.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines interface?",
+"options":{
+"A":"interface",
+"B":"contract",
+"C":"protocol",
+"D":"abstract"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword implements interface?",
+"options":{
+"A":":",
+"B":"implements",
+"C":"interface",
+"D":"use"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Interfaces contain method declarations without implementation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword handles exceptions?",
+"options":{
+"A":"try",
+"B":"handle",
+"C":"catch",
+"D":"throw"
+},
+"answer":"A"
+},
+
+{
+"question":"Which block catches exceptions?",
+"options":{
+"A":"catch",
+"B":"handle",
+"C":"error",
+"D":"exception"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: finally block always executes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which keyword is used to throw an exception in C#?",
+"options":{
+"A":"throw",
+"B":"raise",
+"C":"exception",
+"D":"error"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: try block contains code that may generate exceptions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which block is optional in exception handling?",
+"options":{
+"A":"finally",
+"B":"try",
+"C":"catch",
+"D":"throw"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword is used for defining properties?",
+"options":{
+"A":"get",
+"B":"set",
+"C":"Both A and B",
+"D":"property"
+},
+"answer":"C"
+},
+
+{
+"question":"True or False: Properties provide controlled access to fields.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares a structure in C#?",
+"options":{
+"A":"struct",
+"B":"structure",
+"C":"class",
+"D":"record"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines enumeration?",
+"options":{
+"A":"enum",
+"B":"enumerate",
+"C":"list",
+"D":"set"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: enum represents a group of named constants.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which collection stores key-value pairs?",
+"options":{
+"A":"Dictionary",
+"B":"List",
+"C":"Array",
+"D":"Stack"
+},
+"answer":"A"
+},
+
+{
+"question":"Which collection follows FIFO order?",
+"options":{
+"A":"Queue",
+"B":"Stack",
+"C":"List",
+"D":"Dictionary"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Stack follows LIFO order.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which namespace contains basic classes in C#?",
+"options":{
+"A":"System",
+"B":"Core",
+"C":"Base",
+"D":"Library"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class handles console input and output?",
+"options":{
+"A":"Console",
+"B":"Input",
+"C":"SystemIO",
+"D":"Display"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Console.WriteLine prints output to console.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword allows method overloading?",
+"options":{
+"A":"same method name with different parameters",
+"B":"override",
+"C":"virtual",
+"D":"abstract"
+},
+"answer":"A"
+},
+
+{
+"question":"Which concept allows same method name with different parameters?",
+"options":{
+"A":"Method Overloading",
+"B":"Method Overriding",
+"C":"Encapsulation",
+"D":"Abstraction"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Method overriding requires inheritance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword accesses base class members?",
+"options":{
+"A":"base",
+"B":"parent",
+"C":"super",
+"D":"this"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword refers to current object?",
+"options":{
+"A":"this",
+"B":"self",
+"C":"object",
+"D":"current"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: this keyword refers to current instance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which access modifier allows access only within same class?",
+"options":{
+"A":"private",
+"B":"public",
+"C":"protected",
+"D":"internal"
+},
+"answer":"A"
+},
+
+{
+"question":"Which modifier allows access everywhere?",
+"options":{
+"A":"public",
+"B":"private",
+"C":"protected",
+"D":"internal"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: protected members are accessible in derived classes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which modifier allows access within same assembly?",
+"options":{
+"A":"internal",
+"B":"private",
+"C":"public",
+"D":"protected"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares static member?",
+"options":{
+"A":"static",
+"B":"constant",
+"C":"fixed",
+"D":"global"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Static members belong to class rather than instance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines constant value?",
+"options":{
+"A":"const",
+"B":"static",
+"C":"readonly",
+"D":"fixed"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines read-only variable?",
+"options":{
+"A":"readonly",
+"B":"const",
+"C":"static",
+"D":"fixed"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: readonly variables can be assigned in constructor.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# type represents date and time?",
+"options":{
+"A":"DateTime",
+"B":"Time",
+"C":"Date",
+"D":"Clock"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines namespace?",
+"options":{
+"A":"namespace",
+"B":"package",
+"C":"library",
+"D":"module"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Namespaces organize code into logical groups.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword imports namespace?",
+"options":{
+"A":"using",
+"B":"include",
+"C":"import",
+"D":"require"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# type represents boolean values?",
+"options":{
+"A":"bool",
+"B":"boolean",
+"C":"flag",
+"D":"binary"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: bool values are true or false.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# type stores large integers?",
+"options":{
+"A":"long",
+"B":"int",
+"C":"short",
+"D":"byte"
+},
+"answer":"A"
+},
+
+{
+"question":"Which data type stores decimal values with high precision?",
+"options":{
+"A":"decimal",
+"B":"float",
+"C":"double",
+"D":"int"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: decimal is used for financial calculations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which keyword allocates memory dynamically in C#?",
+"options":{
+"A":"new",
+"B":"malloc",
+"C":"alloc",
+"D":"create"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: C# supports garbage collection automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class performs garbage collection?",
+"options":{
+"A":"GC",
+"B":"Memory",
+"C":"Collector",
+"D":"Garbage"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method forces garbage collection?",
+"options":{
+"A":"GC.Collect()",
+"B":"GC.Run()",
+"C":"Memory.Clear()",
+"D":"GC.Dispose()"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Garbage collection frees unused memory automatically.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# feature allows grouping multiple values into one type?",
+"options":{
+"A":"Struct",
+"B":"Interface",
+"C":"Namespace",
+"D":"Delegate"
+},
+"answer":"A"
+},
+
+{
+"question":"Which type stores sequence of elements of same type?",
+"options":{
+"A":"Array",
+"B":"List",
+"C":"Dictionary",
+"D":"Stack"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Arrays have fixed size in C#.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which collection provides dynamic array functionality?",
+"options":{
+"A":"List",
+"B":"Array",
+"C":"Stack",
+"D":"Queue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which namespace contains generic collections?",
+"options":{
+"A":"System.Collections.Generic",
+"B":"System.Collections",
+"C":"System.Generic",
+"D":"System.List"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Generics improve type safety.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which collection ensures unique elements?",
+"options":{
+"A":"HashSet",
+"B":"List",
+"C":"Queue",
+"D":"Stack"
+},
+"answer":"A"
+},
+
+{
+"question":"Which collection stores key-value pairs?",
+"options":{
+"A":"Dictionary",
+"B":"List",
+"C":"Array",
+"D":"Queue"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Dictionary keys must be unique.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which collection uses LIFO principle?",
+"options":{
+"A":"Stack",
+"B":"Queue",
+"C":"List",
+"D":"Dictionary"
+},
+"answer":"A"
+},
+
+{
+"question":"Which collection uses FIFO principle?",
+"options":{
+"A":"Queue",
+"B":"Stack",
+"C":"List",
+"D":"Dictionary"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Stack.Push adds element to stack.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword creates asynchronous method?",
+"options":{
+"A":"async",
+"B":"await",
+"C":"thread",
+"D":"parallel"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword waits for asynchronous operation?",
+"options":{
+"A":"await",
+"B":"wait",
+"C":"async",
+"D":"pause"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: async methods can contain await keyword.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents asynchronous task?",
+"options":{
+"A":"Task",
+"B":"Thread",
+"C":"Process",
+"D":"Worker"
+},
+"answer":"A"
+},
+
+{
+"question":"Which namespace contains Task class?",
+"options":{
+"A":"System.Threading.Tasks",
+"B":"System.Tasks",
+"C":"System.Threads",
+"D":"System.Async"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Task represents asynchronous operation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# keyword defines delegate?",
+"options":{
+"A":"delegate",
+"B":"function",
+"C":"event",
+"D":"callback"
+},
+"answer":"A"
+},
+
+{
+"question":"What is a delegate?",
+"options":{
+"A":"Type that references methods",
+"B":"Variable",
+"C":"Loop",
+"D":"Collection"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Delegates allow methods to be passed as parameters.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines event in C#?",
+"options":{
+"A":"event",
+"B":"delegate",
+"C":"trigger",
+"D":"signal"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator subscribes to event?",
+"options":{
+"A":"+ =",
+"B":"=",
+"C":"-=",
+"D":"=="
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: -= removes event subscription.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows querying collections in C#?",
+"options":{
+"A":"LINQ",
+"B":"SQL",
+"C":"Query",
+"D":"Select"
+},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword selects data?",
+"options":{
+"A":"select",
+"B":"choose",
+"C":"filter",
+"D":"pick"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LINQ stands for Language Integrated Query.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword filters data?",
+"options":{
+"A":"where",
+"B":"filter",
+"C":"search",
+"D":"scan"
+},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword sorts results?",
+"options":{
+"A":"orderby",
+"B":"sort",
+"C":"arrange",
+"D":"group"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LINQ works with collections and databases.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines lambda expression?",
+"options":{
+"A":"=>",
+"B":"->",
+"C":"::",
+"D":"lambda"
+},
+"answer":"A"
+},
+
+{
+"question":"Which feature enables functional style programming in C#?",
+"options":{
+"A":"Lambda Expressions",
+"B":"Loops",
+"C":"Structs",
+"D":"Classes"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Lambda expressions simplify delegate usage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which C# feature allows defining methods with same name but different parameters?",
+"options":{
+"A":"Method Overloading",
+"B":"Method Overriding",
+"C":"Inheritance",
+"D":"Encapsulation"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Method overloading occurs within the same class.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which concept allows redefining a base class method in derived class?",
+"options":{
+"A":"Method Overriding",
+"B":"Method Overloading",
+"C":"Abstraction",
+"D":"Polymorphism"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword must be used in base class method to allow overriding?",
+"options":{
+"A":"virtual",
+"B":"override",
+"C":"abstract",
+"D":"sealed"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: override keyword is used in derived class method.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword hides inherited members?",
+"options":{
+"A":"new",
+"B":"override",
+"C":"sealed",
+"D":"virtual"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# keyword prevents further overriding?",
+"options":{
+"A":"sealed",
+"B":"abstract",
+"C":"static",
+"D":"virtual"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: sealed methods cannot be overridden.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines abstract class?",
+"options":{
+"A":"abstract",
+"B":"virtual",
+"C":"sealed",
+"D":"static"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines abstract method?",
+"options":{
+"A":"abstract",
+"B":"override",
+"C":"virtual",
+"D":"sealed"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Abstract methods have no implementation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which concept hides internal implementation details?",
+"options":{
+"A":"Encapsulation",
+"B":"Polymorphism",
+"C":"Inheritance",
+"D":"Abstraction"
+},
+"answer":"A"
+},
+
+{
+"question":"Which access modifier allows access in derived classes and same class?",
+"options":{
+"A":"protected",
+"B":"private",
+"C":"public",
+"D":"internal"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: private members are accessible only within the same class.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which modifier allows access within same assembly?",
+"options":{
+"A":"internal",
+"B":"private",
+"C":"public",
+"D":"protected"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# type represents sequence of characters?",
+"options":{
+"A":"string",
+"B":"char",
+"C":"text",
+"D":"word"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: string is immutable in C#.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class provides mutable string functionality?",
+"options":{
+"A":"StringBuilder",
+"B":"StringBuffer",
+"C":"StringObject",
+"D":"MutableString"
+},
+"answer":"A"
+},
+
+{
+"question":"Which namespace contains StringBuilder?",
+"options":{
+"A":"System.Text",
+"B":"System.String",
+"C":"System.Buffer",
+"D":"System.Builder"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: StringBuilder improves performance for repeated string modifications.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares nullable type?",
+"options":{
+"A":"?",
+"B":"null",
+"C":"nullable",
+"D":"value"
+},
+"answer":"A"
+},
+
+{
+"question":"Which type can hold null value?",
+"options":{
+"A":"Nullable type",
+"B":"Value type",
+"C":"Reference type",
+"D":"Primitive type"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Nullable types are written like int?.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which operator provides default value if null?",
+"options":{
+"A":"??",
+"B":"?:",
+"C":"==",
+"D":"!="
+},
+"answer":"A"
+},
+
+{
+"question":"Which operator checks for null before accessing member?",
+"options":{
+"A":"?.",
+"B":"??",
+"C":"::",
+"D":"->"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ?. prevents null reference exceptions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# feature supports parallel programming?",
+"options":{
+"A":"Parallel Library",
+"B":"Async Library",
+"C":"Thread Engine",
+"D":"Execution Pool"
+},
+"answer":"A"
+},
+
+{
+"question":"Which namespace supports threading?",
+"options":{
+"A":"System.Threading",
+"B":"System.Thread",
+"C":"System.Tasks",
+"D":"System.Process"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Thread class represents thread execution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# keyword locks resource for thread safety?",
+"options":{
+"A":"lock",
+"B":"sync",
+"C":"safe",
+"D":"mutex"
+},
+"answer":"A"
+},
+
+{
+"question":"Which synchronization object allows single thread access?",
+"options":{
+"A":"Mutex",
+"B":"Semaphore",
+"C":"Thread",
+"D":"Queue"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Semaphore allows limited number of threads access.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# feature automatically manages memory?",
+"options":{
+"A":"Garbage Collection",
+"B":"Memory Manager",
+"C":"Heap Controller",
+"D":"Runtime Manager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# environment executes compiled programs?",
+"options":{
+"A":"CLR",
+"B":"JVM",
+"C":"Compiler",
+"D":"Runtime"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CLR stands for Common Language Runtime.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which component converts C# code to intermediate language?",
+"options":{
+"A":"Compiler",
+"B":"Interpreter",
+"C":"Runtime",
+"D":"Loader"
+},
+"answer":"A"
+},
+
+{
+"question":"Which intermediate language is generated by C#?",
+"options":{
+"A":"MSIL",
+"B":"Bytecode",
+"C":"Assembly",
+"D":"NativeCode"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CLR converts IL to machine code using JIT.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which compiler compiles C# code?",
+"options":{
+"A":"csc",
+"B":"gcc",
+"C":"javac",
+"D":"dotnetc"
+},
+"answer":"A"
+},
+
+{
+"question":"Which company developed C#?",
+"options":{
+"A":"Microsoft",
+"B":"Google",
+"C":"Apple",
+"D":"Oracle"
+},
+"answer":"A"
+},
+{
+"question":"Which C# keyword is used to define a property?",
+"options":{
+"A":"get",
+"B":"property",
+"C":"field",
+"D":"value"
+},
+"answer":"A"
+},
+
+{
+"question":"Which accessor assigns value to property?",
+"options":{
+"A":"set",
+"B":"get",
+"C":"assign",
+"D":"value"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Properties provide controlled access to fields.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword allows defining extension methods?",
+"options":{
+"A":"this",
+"B":"extend",
+"C":"attach",
+"D":"method"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# feature allows adding methods to existing classes?",
+"options":{
+"A":"Extension Methods",
+"B":"Delegates",
+"C":"Interfaces",
+"D":"Inheritance"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Extension methods must be static.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which type represents anonymous methods?",
+"options":{
+"A":"Lambda Expression",
+"B":"Delegate",
+"C":"Method",
+"D":"Action"
+},
+"answer":"A"
+},
+
+{
+"question":"Which symbol defines lambda expression?",
+"options":{
+"A":"=>",
+"B":"->",
+"C":"::",
+"D":"lambda"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Lambda expressions simplify delegate syntax.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which delegate type represents method returning void?",
+"options":{
+"A":"Action",
+"B":"Func",
+"C":"Predicate",
+"D":"Task"
+},
+"answer":"A"
+},
+
+{
+"question":"Which delegate type represents method returning value?",
+"options":{
+"A":"Func",
+"B":"Action",
+"C":"Task",
+"D":"Delegate"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Func delegates must return a value.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which delegate type returns boolean value?",
+"options":{
+"A":"Predicate",
+"B":"Action",
+"C":"Func",
+"D":"Task"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines asynchronous programming?",
+"options":{
+"A":"async",
+"B":"await",
+"C":"thread",
+"D":"parallel"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword waits for async operation?",
+"options":{
+"A":"await",
+"B":"wait",
+"C":"hold",
+"D":"pause"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: async methods return Task or Task<T>.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents asynchronous operation?",
+"options":{
+"A":"Task",
+"B":"Thread",
+"C":"Process",
+"D":"Async"
+},
+"answer":"A"
+},
+
+{
+"question":"Which namespace contains Task class?",
+"options":{
+"A":"System.Threading.Tasks",
+"B":"System.Tasks",
+"C":"System.Async",
+"D":"System.Thread"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Task represents background operation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature enables querying collections in C#?",
+"options":{
+"A":"LINQ",
+"B":"SQL",
+"C":"Query",
+"D":"Select"
+},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword selects values?",
+"options":{
+"A":"select",
+"B":"choose",
+"C":"filter",
+"D":"pick"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LINQ stands for Language Integrated Query.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword filters records?",
+"options":{
+"A":"where",
+"B":"filter",
+"C":"search",
+"D":"scan"
+},
+"answer":"A"
+},
+
+{
+"question":"Which LINQ keyword sorts results?",
+"options":{
+"A":"orderby",
+"B":"sort",
+"C":"arrange",
+"D":"group"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: LINQ works with arrays and collections.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword creates anonymous type?",
+"options":{
+"A":"var",
+"B":"object",
+"C":"dynamic",
+"D":"anonymous"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword allows runtime type resolution?",
+"options":{
+"A":"dynamic",
+"B":"var",
+"C":"object",
+"D":"runtime"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: dynamic bypasses compile-time type checking.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which C# type represents base type for all objects?",
+"options":{
+"A":"object",
+"B":"base",
+"C":"root",
+"D":"system"
+},
+"answer":"A"
+},
+
+{
+"question":"Which C# feature automatically manages memory?",
+"options":{
+"A":"Garbage Collection",
+"B":"Memory Manager",
+"C":"Heap Control",
+"D":"Memory Pool"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Garbage collector frees unused objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which environment executes .NET applications?",
+"options":{
+"A":"CLR",
+"B":"JVM",
+"C":"Runtime",
+"D":"Executor"
+},
+"answer":"A"
+},
+
+{
+"question":"Which runtime converts IL to machine code?",
+"options":{
+"A":"JIT Compiler",
+"B":"CLR",
+"C":"Interpreter",
+"D":"Loader"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: JIT stands for Just-In-Time compiler.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which compiler compiles C# programs?",
+"options":{
+"A":"csc",
+"B":"gcc",
+"C":"javac",
+"D":"clang"
+},
+"answer":"A"
+},
+
+{
+"question":"Which organization created C#?",
+"options":{
+"A":"Microsoft",
+"B":"Google",
+"C":"Apple",
+"D":"Oracle"
+},
+"answer":"A"
+}
+  ]
+}

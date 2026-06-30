@@ -68,7 +68,6 @@ function normalizeSqlOutput(s) {
     .filter(l => l); // Remove empty lines
 
   // Filter out table separator lines. 
-  // Filter out table separator lines. 
   // Matches lines containing only -, +, |, and whitespace
   const separatorRegex = /^[\s\-\+\|]+$/;
   // Filter "(N rows)" or "(N row)" footer from Postgres
@@ -79,6 +78,11 @@ function normalizeSqlOutput(s) {
     if (rowCountRegex.test(l)) return false;
     return true;
   });
+
+  // Remove the header row so column aliases don't affect the result
+  if (dataLines.length > 0) {
+    dataLines.shift();
+  }
 
   // Normalize internal whitespace: 
   // 1. Replace | with space (for MySQL/Postgres borders)
@@ -103,6 +107,10 @@ function demuxDockerMultiplexedBuffer(buf) {
     pos = end;
   }
   return { stdout: out, stderr: err };
+}
+function stripAnsi(str) {
+  if (typeof str !== "string") return str;
+  return str.replace(/\x1b\[[0-9;]*[a-zA-Z]/g, "");
 }
 
 function buildTarFiles(files) {
@@ -233,7 +241,7 @@ function languageSpec(language, sourceCode, dbEngine) {
         image: "local-kotlin",
         workdir: "/tmp",
         files: [{ name: "Main.kt", contentName: "source_code" }],
-        cmd: ["sh", "-c", "kotlinc /tmp/Main.kt -include-runtime -d /tmp/main.jar 2>&1 && java -Djava.io.tmpdir=/tmp -jar /tmp/main.jar 2>&1"],
+        cmd: ["sh", "-c", "kotlinc -J-Xmx512m /tmp/Main.kt -include-runtime -d /tmp/main.jar 2>&1 && java -Xmx256m -Djava.io.tmpdir=/tmp -jar /tmp/main.jar 2>&1"],
       };
     case "swift":
       return {
@@ -287,10 +295,14 @@ function languageSpec(language, sourceCode, dbEngine) {
     case "typescript":
     case "ts":
       return {
-        image: "local-typescript:stable",
-        workdir: "/tmp",
+        image: "local-typescript:v2",
+        workdir: "/app",
         files: [{ name: "main.ts", contentName: "source_code" }],
-        cmd: ["sh", "-c", "tsc /tmp/main.ts && node /tmp/main.js"],
+        cmd: [
+          "sh",
+          "-c",
+          "tsc main.ts --target ESNext --module CommonJS --lib ESNext --skipLibCheck --esModuleInterop --types node --typeRoots /app/node_modules/@types && node main.js"
+        ],
       };
     case "sql":
       const engine = (dbEngine || "sqlite").toLowerCase();
@@ -380,7 +392,7 @@ function languageSpec(language, sourceCode, dbEngine) {
           { name: "query.sql", contentName: "source_code" },
           { name: "schema.sql", contentName: "schema_sql" },
         ],
-        cmd: ["sh", "-c", "cat > /tmp/data.sql && sqlite3 /tmp/db.sqlite < /tmp/schema.sql && sqlite3 /tmp/db.sqlite < /tmp/data.sql && sqlite3 -header -column /tmp/db.sqlite < /tmp/query.sql"],
+        cmd: ["sh", "-c", "sqlite3 /tmp/db.sqlite < /tmp/query.sql"],
       };
     default:
       return null;
@@ -419,8 +431,9 @@ WORKDIR /tmp
       console.log("Building local-kotlin image...");
       const pack = tar.pack();
       // Use amazoncorretto:21 which is already available/cached and reliable
-      pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/amazoncorretto/amazoncorretto:21
-RUN yum install -y tar gzip unzip findutils shadow-utils \\
+      // Using openjdk:21-slim-bookworm for superior build stability with apt-get
+      pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/docker/library/openjdk:21-slim-bookworm
+RUN apt-get update && apt-get install -y curl unzip \\
     && curl -L https://github.com/JetBrains/kotlin/releases/download/v1.9.23/kotlin-compiler-1.9.23.zip -o kotlin.zip \\
     && unzip kotlin.zip -d /opt \\
     && rm kotlin.zip \\
@@ -448,7 +461,7 @@ RUN yum install -y tar gzip unzip findutils shadow-utils \\
     }
   }
 
-  const imageName = "local-typescript:stable";
+  const imageName = "local-typescript:v2";
   if (image === "local-typescript" || image === imageName) {
     try {
       await docker.getImage(imageName).inspect();
@@ -456,11 +469,11 @@ RUN yum install -y tar gzip unzip findutils shadow-utils \\
     } catch (_) {
       console.log(`Building ${imageName} image...`);
       const pack = tar.pack();
-      // Install in /tmp so it merges with user code. tsc will find node_modules in current dir.
+      // Install in /app so it merges with user code.
       pack.entry({ name: "Dockerfile" }, `FROM public.ecr.aws/docker/library/node:20-alpine
-WORKDIR /tmp
+WORKDIR /app
 RUN npm init -y && npm install typescript @types/node
-ENV PATH /tmp/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 `);
       pack.finalize();
 
@@ -501,7 +514,13 @@ ENV PATH /tmp/node_modules/.bin:$PATH
 async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, schema_sql }) {
   const id = uuidv4();
   const tl = Math.max(1000, toInt(time_limit_ms, 3000));
-  const mem = Math.max(128, toInt(memory_mb, 512));
+  let mem = Math.max(128, toInt(memory_mb, 512));
+
+  // Kotlin/Scala/C#/Swift/Java compilers are memory-hungry; enforce a minimum of 1536 MB
+  const heavyLangs = ['local-kotlin', 'sbtscala/scala-sbt', 'mcr.microsoft.com/dotnet/sdk', 'swift:5.10', 'amazoncorretto'];
+  if (heavyLangs.some(prefix => spec.image.startsWith(prefix))) {
+    mem = Math.max(mem, 1536);
+  }
 
   let container = null;
   let timedOut = false;
@@ -510,22 +529,37 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
   try {
     await ensureImage(spec.image);
 
+    // Build the command that pipes stdin from file
+    // Coerce stdin to a string — test cases may pass objects/numbers from JSON payloads
+    const stdinStr = (typeof stdin === 'string') ? stdin : (stdin != null ? JSON.stringify(stdin) : '');
+    const hasStdin = stdinStr.trim().length > 0;
+    let finalCmd = spec.cmd;
+    if (hasStdin && Array.isArray(spec.cmd) && spec.cmd.length >= 3 && spec.cmd[0] === 'sh') {
+      // Wrap the original command to pipe stdin from file
+      const origScript = spec.cmd[spec.cmd.length - 1];
+      finalCmd = ['sh', spec.cmd[1], `${origScript} < ${spec.workdir}/stdin.txt`];
+    }
+
+    const memoryBytes = mem * 1024 * 1024;
+    // Allow 30% extra as Swap (Total = 1.3 * Memory)
+    const totalMemoryBytes = Math.floor(memoryBytes * 1.3);
+
     container = await docker.createContainer({
       Image: spec.image,
       WorkingDir: spec.workdir,
-      Cmd: spec.cmd,
+      Cmd: finalCmd,
       Env: spec.env || [],
       User: spec.user,
-      OpenStdin: true,
-      StdinOnce: true,
-      AttachStdin: true,
+      OpenStdin: false,
+      AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
       Tty: false,
       NetworkDisabled: true,
       HostConfig: {
         AutoRemove: false,
-        Memory: mem * 1024 * 1024,
+        Memory: memoryBytes,
+        MemorySwap: totalMemoryBytes,
         PidsLimit: 256,
         Privileged: false,
         ReadonlyRootfs: false,
@@ -538,29 +572,29 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
     const filesToWrite = spec.files.map((f) => {
       if (f.contentName === "source_code") return { name: f.name, content: code };
       if (f.contentName === "schema_sql") return { name: f.name, content: normalizeNewlines(schema_sql || "") };
-      if (f.contentName === "csproj") {
-        const defaultCsproj = `<Project Sdk="Microsoft.NET.Sdk"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net8.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup></Project>`;
-        return { name: f.name, content: spec.extra?.csproj || defaultCsproj };
+      
+      // Handle generic "extra" files from the language spec
+      if (spec.extra && spec.extra[f.contentName]) {
+        return { name: f.name, content: spec.extra[f.contentName] };
       }
+
       return { name: f.name, content: "" };
     });
 
+    // Add stdin as a file in the archive
+    if (hasStdin) {
+      const stdinContent = normalizeNewlines(stdinStr);
+      filesToWrite.push({ name: 'stdin.txt', content: stdinContent.endsWith('\n') ? stdinContent : stdinContent + '\n' });
+    }
+
     const tarBuffer = await buildTarFiles(filesToWrite);
     await container.putArchive(Readable.from([tarBuffer]), { path: spec.workdir });
-
-    // Stream setup
-    const attach = await container.attach({ stream: true, stdin: true, stdout: true, stderr: true });
 
     let stdout = "";
     let stderr = "";
     let tStart = Date.now();
 
     await container.start();
-
-    // Write input
-    const input = normalizeNewlines(stdin);
-    if (input) attach.write(input);
-    attach.end();
 
     // Timeout kill
     timeout = setTimeout(async () => {
@@ -597,8 +631,8 @@ async function executeOne({ spec, source_code, stdin, time_limit_ms, memory_mb, 
       memory_mb: mem,
       timed_out: timedOut,
       exit_code: exitCode,
-      stdout,
-      stderr,
+      stdout: stripAnsi(stdout),
+      stderr: stripAnsi(stderr),
       execution_time_ms: (exitCode !== null && typeof tStart === 'number') ? (Date.now() - tStart) : 0,
     };
 

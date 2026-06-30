@@ -1,0 +1,2505 @@
+{
+  "skill": "UI/UX",
+  "questions": [
+    {
+      "question": "Which principle describes the phenomenon where users perceive objects that are close to each other as being related?",
+      "options": {
+        "A": "Proximity",
+        "B": "Similarity",
+        "C": "Enclosure",
+        "D": "Closure"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Affordance' refer to in UI design?",
+      "options": {
+        "A": "The cost of designing the interface",
+        "B": "The properties of an object that show users how to use it",
+        "C": "The accessibility score of a website",
+        "D": "The brand's color palette"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which law states that the time to acquire a target is a function of the distance to and size of the target?",
+      "options": {
+        "A": "Hick's Law",
+        "B": "Fitts's Law",
+        "C": "Miller's Law",
+        "D": "Jakob's Law"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'White Space' (Negative Space)?",
+      "options": {
+        "A": "To save on printing costs",
+        "B": "To reduce cognitive load and group related elements",
+        "C": "To hide low-resolution images",
+        "D": "To make the page look empty"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UX law suggests that users spend most of their time on other sites and prefer yours to work the same way?",
+      "options": {
+        "A": "Occam's Razor",
+        "B": "The Peak-End Rule",
+        "C": "Jakob's Law",
+        "D": "Postel's Law"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the goal of a 'User Persona'?",
+      "options": {
+        "A": "To design for a specific fictional character",
+        "B": "To represent the needs and behaviors of a larger segment of users",
+        "C": "To create a profile picture for the app",
+        "D": "To track the individual user's GPS data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which research method involves observing users in their natural environment while they perform tasks?",
+      "options": {
+        "A": "A/B Testing",
+        "B": "Contextual Inquiry",
+        "C": "Card Sorting",
+        "D": "Focus Groups"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'Card Sorting'?",
+      "options": {
+        "A": "To design a logo",
+        "B": "To understand how users categorize information for navigation",
+        "C": "To test the speed of a server",
+        "D": "To decide on the color scheme"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'MVP' stand for in product design?",
+      "options": {
+        "A": "Most Valuable Product",
+        "B": "Minimum Viable Product",
+        "C": "Maximum Visual Prototype",
+        "D": "Main Variable Project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'User Journey Map'?",
+      "options": {
+        "A": "A physical map of where the users live",
+        "B": "A visual representation of the process a user goes through to achieve a goal",
+        "C": "A directory of every page in the app",
+        "D": "A flowchart of the code logic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between a Wireframe and a Prototype?",
+      "options": {
+        "A": "Wireframes are for mobile; Prototypes are for desktop",
+        "B": "Wireframes show structure; Prototypes show interaction and flow",
+        "C": "Wireframes use images; Prototypes only use text",
+        "D": "Prototypes are always static"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which navigation pattern is best for apps with many top-level categories?",
+      "options": {
+        "A": "Hamburger Menu",
+        "B": "Tab Bar",
+        "C": "Floating Action Button",
+        "D": "Breadcrumbs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Visual Hierarchy'?",
+      "options": {
+        "A": "The order of files in a folder",
+        "B": "The arrangement of elements to imply importance",
+        "C": "The resolution of the screen",
+        "D": "The number of fonts used"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the recommended minimum touch target size for mobile UI elements?",
+      "options": {
+        "A": "24x24 px",
+        "B": "44x44 px",
+        "C": "10x10 px",
+        "D": "100x100 px"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which color contrast ratio is required by WCAG 2.1 for normal text (Level AA)?",
+      "options": {
+        "A": "2:1",
+        "B": "3:1",
+        "C": "4.5:1",
+        "D": "7:1"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'Information Architecture' (IA)?",
+      "options": {
+        "A": "The speed of the database",
+        "B": "The organization and labeling of website content to help users find information",
+        "C": "The server-side code structure",
+        "D": "The history of web design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In typography, what is 'Kerning'?",
+      "options": {
+        "A": "The space between lines of text",
+        "B": "The space between two individual characters",
+        "C": "The thickness of the font",
+        "D": "The height of capital letters"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Golden Ratio' in design roughly equal to?",
+      "options": {
+        "A": "1:1",
+        "B": "1:1.618",
+        "C": "1:2.5",
+        "D": "1:3"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Empathy Map' used for?",
+      "options": {
+        "A": "To track website performance",
+        "B": "To visualize what users say, do, think, and feel",
+        "C": "To create a marketing budget",
+        "D": "To map out the site's database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hick's Law'?",
+      "options": {
+        "A": "The time it takes to make a decision increases with the number and complexity of choices",
+        "B": "The time to reach a target is based on distance",
+        "C": "Users remember the first and last items in a list",
+        "D": "Design should be simple"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'A/B Testing'?",
+      "options": {
+        "A": "Testing two different users",
+        "B": "Comparing two versions of a webpage to see which performs better",
+        "C": "A test for Accessibility",
+        "D": "Testing a site on two different browsers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Breadcrumb' in UI?",
+      "options": {
+        "A": "A small error message",
+        "B": "A secondary navigation aid that reveals the user's location in a website",
+        "C": "A type of progress bar",
+        "D": "A social media icon"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'User Experience' (UX) primarily focus on?",
+      "options": {
+        "A": "How pretty the website looks",
+        "B": "The overall feel of the interaction and how easy it is to use",
+        "C": "The backend database speed",
+        "D": "The number of lines of code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which design tool is industry-standard for vector-based UI design and prototyping?",
+      "options": {
+        "A": "Photoshop",
+        "B": "Figma",
+        "C": "InDesign",
+        "D": "MS Paint"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skeuomorphism'?",
+      "options": {
+        "A": "A design that uses very few colors",
+        "B": "Design elements that mimic real-world objects in appearance and function",
+        "C": "A mobile-first design approach",
+        "D": "Design only for screens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Flat Design'?",
+      "options": {
+        "A": "Design without any text",
+        "B": "A minimalist style that avoids 3D effects, shadows, and textures",
+        "C": "A design that only works on flat screens",
+        "D": "A black and white design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Design System'?",
+      "options": {
+        "A": "A collection of random images",
+        "B": "A collection of reusable components and standards to guide design and code",
+        "C": "A folder on a computer",
+        "D": "The software used to design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is '60-30-10' in color theory?",
+      "options": {
+        "A": "A rule for text sizes",
+        "B": "A rule for balancing colors: 60% dominant, 30% secondary, 10% accent",
+        "C": "A screen resolution ratio",
+        "D": "A rule for loading times"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Three-Click Rule'?",
+      "options": {
+        "A": "Users should find information within three clicks",
+        "B": "The site must load in three seconds",
+        "C": "Users should only click three times per day",
+        "D": "A method to delete files"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Responsive Web Design'?",
+      "options": {
+        "A": "A site that responds to user voice commands",
+        "B": "A design that adjusts smoothly to different screen sizes and devices",
+        "C": "A site with high-speed animations",
+        "D": "A site that responds to email"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Micro-copy'?",
+      "options": {
+        "A": "Very small font size",
+        "B": "Short, functional text found on buttons, error messages, and labels",
+        "C": "A copy of a small file",
+        "D": "Text hidden in the source code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dark Patterns' in UX?",
+      "options": {
+        "A": "Websites with dark backgrounds",
+        "B": "Deceptive UI techniques used to trick users into doing things they didn't intend to",
+        "C": "A design trend for 2024",
+        "D": "Night-mode themes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Usability Testing'?",
+      "options": {
+        "A": "Testing if the code runs",
+        "B": "Evaluating a product by testing it with representative users",
+        "C": "Checking the server speed",
+        "D": "Testing if the colors are pretty"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Eye Tracking' in UX research?",
+      "options": {
+        "A": "A way to unlock the phone",
+        "B": "Measuring where users look while interacting with a product",
+        "C": "A method to improve vision",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Material Design'?",
+      "options": {
+        "A": "Designing clothes",
+        "B": "A design system developed by Google",
+        "C": "A design system developed by Apple",
+        "D": "A database framework"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'F-Pattern' in web design?",
+      "options": {
+        "A": "A way to write code",
+        "B": "The common eye-scanning pattern for text-heavy web pages",
+        "C": "A font style",
+        "D": "A layout for images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Z-Pattern'?",
+      "options": {
+        "A": "The scanning pattern for simple web pages with less text",
+        "B": "A way to sleep during design",
+        "C": "A complex navigation system",
+        "D": "A 3D design method"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Grid System'?",
+      "options": {
+        "A": "A type of power grid",
+        "B": "A structure of intersecting lines used to align content",
+        "C": "A database organization",
+        "D": "An animation tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Heuristic Evaluation'?",
+      "options": {
+        "A": "A user interview",
+        "B": "A usability inspection method where experts judge a UI against established principles",
+        "C": "A type of A/B test",
+        "D": "A server-side check"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mobile-First Design'?",
+      "options": {
+        "A": "Designing only for mobile phones",
+        "B": "Starting the design process for the smallest screen first",
+        "C": "Buying a mobile phone before designing",
+        "D": "An app that sells phones"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Double Diamond' in design thinking?",
+      "options": {
+        "A": "A logo style",
+        "B": "A process model involving Discover, Define, Develop, and Deliver",
+        "C": "A type of jewelry design",
+        "D": "A grid system"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Heatmap'?",
+      "options": {
+        "A": "A weather map",
+        "B": "A visual representation of data showing where users click or hover most",
+        "C": "The temperature of the server",
+        "D": "A color palette for summer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Iterative Design'?",
+      "options": {
+        "A": "Designing once and finishing",
+        "B": "A repetitive process of prototyping, testing, and refining",
+        "C": "Copying other people's designs",
+        "D": "Automated design generation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Micro-interaction'?",
+      "options": {
+        "A": "A small meeting",
+        "B": "Small functional animations that provide feedback (e.g., a 'like' button pop)",
+        "C": "Interactions between two apps",
+        "D": "A type of user research"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Leading' in typography?",
+      "options": {
+        "A": "The most important text",
+        "B": "The vertical space between lines of text",
+        "C": "The size of the header",
+        "D": "The font weight"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Serial Position Effect'?",
+      "options": {
+        "A": "Users remember the first and last items in a series best",
+        "B": "Users remember only the middle items",
+        "C": "Users don't remember lists",
+        "D": "Users remember items with colors"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'System Usability Scale' (SUS)?",
+      "options": {
+        "A": "The weight of the computer",
+        "B": "A quick, reliable tool for measuring usability via a 10-item questionnaire",
+        "C": "The speed of the internet",
+        "D": "A screen resolution scale"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mood Board'?",
+      "options": {
+        "A": "A board to track emotions",
+        "B": "A visual collection of images, fonts, and colors to set the design direction",
+        "C": "A chart for user research",
+        "D": "A type of wireframe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Contrast' used for in UI?",
+      "options": {
+        "A": "To make things look different",
+        "B": "To create emphasis and ensure readability",
+        "C": "To use as many colors as possible",
+        "D": "To slow down the user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User-Centered Design' (UCD)?",
+      "options": {
+        "A": "Designing what the developer wants",
+        "B": "A framework where users' needs and goals are the focus at each stage of design",
+        "C": "A design that puts the logo in the center",
+        "D": "Designing without any research"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In typography, what is 'Leading'?",
+      "options": {
+        "A": "The space between characters",
+        "B": "The vertical space between lines of text",
+        "C": "The thickness of the font",
+        "D": "The height of an uppercase 'X'"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary goal of a 'High-Fidelity Prototype'?",
+      "options": {
+        "A": "To test the core information architecture",
+        "B": "To simulate the final product's look, feel, and interaction for user testing",
+        "C": "To create a quick sketch for developers",
+        "D": "To save time during the research phase"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UX term describes the emotional peak and the end of a user's experience as the most memorable parts?",
+      "options": {
+        "A": "The Serial Position Effect",
+        "B": "The Peak-End Rule",
+        "C": "The Zeigarnik Effect",
+        "D": "The Von Restorff Effect"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Skeleton Screens' during loading states?",
+      "options": {
+        "A": "To show the full code structure",
+        "B": "To reduce perceived wait time by showing a placeholder version of the content",
+        "C": "To act as a security firewall",
+        "D": "To replace the Need for a loading spinner entirely"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Cognitive Load' refer to in UX design?",
+      "options": {
+        "A": "The amount of memory an app uses",
+        "B": "The amount of mental effort required by a user to complete a task",
+        "C": "The speed of the internet connection",
+        "D": "The number of users on a site at once"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which navigation element remains visible at the bottom of the screen on most mobile apps?",
+      "options": {
+        "A": "Side Drawer",
+        "B": "Tab Bar",
+        "C": "Breadcrumbs",
+        "D": "Hamburger Menu"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Von Restorff Effect'?",
+      "options": {
+        "A": "Users remember similar items as a group",
+        "B": "Multiple similar objects are present, the one that differs from the rest is most likely to be remembered",
+        "C": "Users prefer simple designs",
+        "D": "Target size affects speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Responsive Typography'?",
+      "options": {
+        "A": "Fonts that change color based on user mood",
+        "B": "Font sizes that adjust dynamically based on screen width or device",
+        "C": "A font that only works on Apple devices",
+        "D": "Typing that happens automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of a 'Call to Action' (CTA)?",
+      "options": {
+        "A": "To provide a phone number for support",
+        "B": "To prompt the user to take a specific, desired action",
+        "C": "To explain the company history",
+        "D": "To display a legal disclaimer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In color theory, what are 'Analogous Colors'?",
+      "options": {
+        "A": "Colors opposite each other on the color wheel",
+        "B": "Colors that are next to each other on the color wheel",
+        "C": "Different shades of the same color",
+        "D": "Colors that are only black and white"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mobile First' indexing?",
+      "options": {
+        "A": "An app that is only for phones",
+        "B": "When a search engine uses the mobile version of content for indexing and ranking",
+        "C": "Designing for the largest screen first",
+        "D": "A mobile network provider"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Aesthetic-Usability Effect'?",
+      "options": {
+        "A": "Beautiful designs are always easier to use",
+        "B": "Users perceive more aesthetic designs as being more usable",
+        "C": "Aesthetics do not matter in UX",
+        "D": "Only developers care about aesthetics"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Breadcrumb' trail in a web interface?",
+      "options": {
+        "A": "A history of user passwords",
+        "B": "A secondary navigation scheme that reveals the user's location",
+        "C": "A type of small image",
+        "D": "A method to delete cookies"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Alt Text' on images?",
+      "options": {
+        "A": "To make images look sharper",
+        "B": "To provide a text description for screen readers and SEO",
+        "C": "To add a watermark to the image",
+        "D": "To change the image file format"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which design principle suggests that the most important information should be 'Above the Fold'?",
+      "options": {
+        "A": "Visual Hierarchy",
+        "B": "Prioritization of visible area on initial load",
+        "C": "Consistency",
+        "D": "The Rule of Thirds"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Mood Board' in the UX process?",
+      "options": {
+        "A": "A chart showing user emotions",
+        "B": "A visual collection of textures, images, and colors to set a design's aesthetic direction",
+        "C": "A board for tracking task progress",
+        "D": "A database of user feedback"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Implicit Feedback' in UI?",
+      "options": {
+        "A": "A large pop-up message",
+        "B": "Subtle visual cues (like a button changing color on hover) that signal a state change",
+        "C": "An email confirmation",
+        "D": "A phone call from the support team"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Information Scent'?",
+      "options": {
+        "A": "The smell of new hardware",
+        "B": "The extent to which users can predict what they will find at a link",
+        "C": "A data security protocol",
+        "D": "The background color of a news site"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UX research method involves users organizing topics into groups that make sense to them?",
+      "options": {
+        "A": "Tree Testing",
+        "B": "Card Sorting",
+        "C": "Heuristic Review",
+        "D": "Eye Tracking"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Zeigarnik Effect'?",
+      "options": {
+        "A": "Users remember finished tasks better",
+        "B": "People remember uncompleted or interrupted tasks better than completed tasks",
+        "C": "Design should always be symmetric",
+        "D": "Users only look at the center of the screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Design System, what is an 'Atom'?",
+      "options": {
+        "A": "The largest component",
+        "B": "The smallest, most basic building block (e.g., a button or input label)",
+        "C": "A full page layout",
+        "D": "A database entry"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Friction' in User Experience?",
+      "options": {
+        "A": "A physical interaction with the screen",
+        "B": "Anything that prevents a user from accomplishing a goal or slows them down",
+        "C": "A style of animation",
+        "D": "The heat generated by the processor"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Anticipatory Design'?",
+      "options": {
+        "A": "Waiting for the user to make a mistake",
+        "B": "Design that predicts user needs and automates decisions to simplify the experience",
+        "C": "A design that takes a long time to load",
+        "D": "A sketch made before the project starts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which law states that an object’s weight should be proportional to its importance?",
+      "options": {
+        "A": "The Law of Gravity",
+        "B": "Visual Weight Principle",
+        "C": "The Pareto Principle",
+        "D": "Tesler's Law"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'WCAG' stand for?",
+      "options": {
+        "A": "Web Content Accessibility Guidelines",
+        "B": "World Color And Graphics",
+        "C": "Website Coding and Animation Group",
+        "D": "Web Control and Access Guide"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Infinite Scroll' best suited for?",
+      "options": {
+        "A": "E-commerce sites searching for a specific product",
+        "B": "Social media feeds or discovery-based content",
+        "C": "Legal documents",
+        "D": "Technical manuals"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Progressive Disclosure'?",
+      "options": {
+        "A": "Showing all features at once to save time",
+        "B": "Hiding complex features until the user specifically needs or requests them",
+        "C": "Making the website load slowly",
+        "D": "Revealing the company's financial records"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In UI, what is a 'Tooltip'?",
+      "options": {
+        "A": "A tool used for coding",
+        "B": "A brief, informative message that appears when a user hovers over an element",
+        "C": "The tip of the mouse cursor",
+        "D": "A professional advice section"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dark Mode' primarily used for besides aesthetics?",
+      "options": {
+        "A": "Reducing eye strain in low-light environments and saving battery on OLED screens",
+        "B": "Making the website load faster",
+        "C": "Improving internet speed",
+        "D": "Hiding low-quality images"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Service Design'?",
+      "options": {
+        "A": "Designing the server hardware",
+        "B": "Designing the end-to-end experience of a service, including both digital and physical touchpoints",
+        "C": "Repairing broken websites",
+        "D": "Customer service training"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'Micro-interaction'?",
+      "options": {
+        "A": "Downloading a 2GB file",
+        "B": "A 'pull-to-refresh' animation",
+        "C": "Creating a new account",
+        "D": "A 10-minute tutorial video"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Rule of Thirds' in UI layout?",
+      "options": {
+        "A": "Dividing a screen into a 3x3 grid to place key elements at intersections",
+        "B": "Having only three colors in a design",
+        "C": "Making sure the site loads in three seconds",
+        "D": "Using only three different fonts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Haptic Feedback'?",
+      "options": {
+        "A": "A sound effect",
+        "B": "The use of touch or vibration to communicate with the user",
+        "C": "A bright flash of light",
+        "D": "A fast loading screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the '3-click rule'?",
+      "options": {
+        "A": "The user should find what they want in 3 clicks",
+        "B": "Users must click 3 times to log in",
+        "C": "Double clicking is counted as 3 clicks",
+        "D": "Clicking 3 times refreshes the page"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Information Architecture' (IA)?",
+      "options": {
+        "A": "The visual design of a building",
+        "B": "The structural design of shared information environments (navigation, labeling, and search)",
+        "C": "The database schema",
+        "D": "The hardware architecture of a server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Gamification' in UX?",
+      "options": {
+        "A": "Adding a video game to a website",
+        "B": "Integrating game-design elements (like points or badges) into non-game contexts",
+        "C": "Making the website look like a cartoon",
+        "D": "Designing only for children"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is used for 'A/B Testing'?",
+      "options": {
+        "A": "Figma",
+        "B": "Google Optimize / Optimizely",
+        "C": "Photoshop",
+        "D": "Visual Studio Code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User Retention'?",
+      "options": {
+        "A": "The ability to keep users returning to your product over time",
+        "B": "The speed at which a user deletes an app",
+        "C": "The memory usage of the user's phone",
+        "D": "The number of users who complain"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Typography Scale'?",
+      "options": {
+        "A": "The weight of the fonts",
+        "B": "A set of harmonious font sizes used to create a consistent visual hierarchy",
+        "C": "A tool to measure the height of letters",
+        "D": "The number of fonts in a family"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'White-labeling'?",
+      "options": {
+        "A": "Designing with only white colors",
+        "B": "A product produced by one company that other companies rebrand as their own",
+        "C": "A website with no labels",
+        "D": "Deleting all the text"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a qualitative research method?",
+      "options": {
+        "A": "Analytics data",
+        "B": "User interviews",
+        "C": "Heatmaps",
+        "D": "Conversion rates"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Eye Tracking' data used for?",
+      "options": {
+        "A": "To unlock the app using the camera",
+        "B": "To see which parts of the screen users look at first and most frequently",
+        "C": "To check if the user is tired",
+        "D": "To change the screen brightness"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the '5-second test'?",
+      "options": {
+        "A": "Testing if the site loads in 5 seconds",
+        "B": "Showing a user a design for 5 seconds to see what information they retain",
+        "C": "A quick coding test",
+        "D": "A test for internet speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mental Model'?",
+      "options": {
+        "A": "A psychological test",
+        "B": "A user's internal understanding of how a system works based on past experiences",
+        "C": "A 3D model made in software",
+        "D": "The brain's structure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Clickstreaming'?",
+      "options": {
+        "A": "A live stream of a designer",
+        "B": "The record of parts of a screen a user clicks on while web browsing",
+        "C": "A fast way to click",
+        "D": "A new gaming trend"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Card UI'?",
+      "options": {
+        "A": "A UI for a card game",
+        "B": "An interface design pattern where content is grouped into digestible, rectangular containers",
+        "C": "A payment gateway UI",
+        "D": "A UI that uses only icons"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'User Flow'?",
+      "options": {
+        "A": "To show the path a user takes through a product to complete a task",
+        "B": "To track where a user physically moves",
+        "C": "To measure the speed of user typing",
+        "D": "To show the code execution path"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Skeuomorphism'?",
+      "options": {
+        "A": "A style that mimics real-world textures and objects",
+        "B": "A style that uses only flat colors",
+        "C": "A type of database",
+        "D": "A mobile network"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Flat Design'?",
+      "options": {
+        "A": "Minimalist design with no 3D elements (no shadows or gradients)",
+        "B": "Design for a flat-screen TV",
+        "C": "A design that has no images",
+        "D": "A low-resolution design"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Tesler's Law'?",
+      "options": {
+        "A": "Complexity should be removed",
+        "B": "The Law of Conservation of Complexity: Every system has a certain amount of complexity that cannot be removed",
+        "C": "Target size is important",
+        "D": "Users prefer beautiful sites"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Atomic Design'?",
+      "options": {
+        "A": "A method for designing nuclear power interfaces",
+        "B": "A methodology for creating design systems by breaking components into atoms, molecules, and organisms",
+        "C": "A design style that uses circular elements only",
+        "D": "A way to compress image files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Atomic Design, which level represents a group of atoms bonded together into a functional unit?",
+      "options": {
+        "A": "Template",
+        "B": "Molecule",
+        "C": "Organism",
+        "D": "Page"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of a 'Design Audit'?",
+      "options": {
+        "A": "To calculate the project's financial cost",
+        "B": "To evaluate a product's current design for consistency, usability, and branding",
+        "C": "To fire underperforming designers",
+        "D": "To change the company logo"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Fidelity' refer to in prototyping?",
+      "options": {
+        "A": "The speed of the prototype",
+        "B": "The level of detail and realism in a prototype",
+        "C": "The number of screens in the app",
+        "D": "The brand loyalty of the users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Paper Prototyping' best used for?",
+      "options": {
+        "A": "Final user testing before launch",
+        "B": "Quickly iterating and validating ideas in the early ideation stage",
+        "C": "Testing the server's response time",
+        "D": "Presenting to high-level investors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UX term describes users' tendency to perceive similar-looking elements as having the same function?",
+      "options": {
+        "A": "The Law of Similarity",
+        "B": "The Law of Common Region",
+        "C": "The Law of Proximity",
+        "D": "The Law of Closure"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Click-through Rate' (CTR)?",
+      "options": {
+        "A": "The time it takes for a page to load",
+        "B": "The percentage of users who click on a specific link or CTA",
+        "C": "The number of users who visit the homepage",
+        "D": "The total number of clicks on a website"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Design Sprint'?",
+      "options": {
+        "A": "A competition to see who designs fastest",
+        "B": "A five-day process for answering critical business questions through design, prototyping, and testing",
+        "C": "A quick update to a mobile app",
+        "D": "A marathon for developers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Rule of 7' in UI design?",
+      "options": {
+        "A": "A user can remember roughly 7 items in their short-term memory",
+        "B": "A site must have 7 colors",
+        "C": "A site must load in 7 seconds",
+        "D": "Users must click 7 times to buy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Inclusive Design'?",
+      "options": {
+        "A": "Designing for as many people as possible, considering diversity in ability, age, and culture",
+        "B": "Designing only for experts",
+        "C": "Designing within a specific budget",
+        "D": "A design that includes many images"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Information Architecture' (IA)?",
+      "options": {
+        "A": "The speed of the database",
+        "B": "The structural design of shared information environments",
+        "C": "The coding of the UI",
+        "D": "The height of the text"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which principle suggests that the most important information should be visually distinct?",
+      "options": {
+        "A": "Contrast",
+        "B": "Alignment",
+        "C": "Repetition",
+        "D": "Proximity"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Stepper' in UI?",
+      "options": {
+        "A": "A person who tests the app",
+        "B": "A control for increasing or decreasing a value by a set amount",
+        "C": "A type of progress bar",
+        "D": "A button that goes to the next page"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Body Copy' in typography?",
+      "options": {
+        "A": "Large text used for headers",
+        "B": "The main text of a document or website, designed for readability",
+        "C": "The legal text at the bottom of a page",
+        "D": "The text used in logos"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Emotional Design'?",
+      "options": {
+        "A": "Designing for sad users only",
+        "B": "Designing products that trigger positive emotional responses from users",
+        "C": "A design that uses only bright colors",
+        "D": "The process of managing designer stress"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Heuristic Markup'?",
+      "options": {
+        "A": "A type of coding language",
+        "B": "A method where experts check a UI against established usability principles",
+        "C": "A way to organize images",
+        "D": "A tool for screen recording"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Visual Noise'?",
+      "options": {
+        "A": "The sound an app makes",
+        "B": "Excessive or distracting visual elements that make it harder to find information",
+        "C": "Low-resolution images",
+        "D": "The background music of a site"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UI element is best for selecting one option from a small list (2-5 items)?",
+      "options": {
+        "A": "Dropdown Menu",
+        "B": "Radio Buttons",
+        "C": "Checkboxes",
+        "D": "Text Input"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UI element is best for selecting multiple options from a list?",
+      "options": {
+        "A": "Radio Buttons",
+        "B": "Checkboxes",
+        "C": "Toggle Switch",
+        "D": "Slider"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Graceful Degradation'?",
+      "options": {
+        "A": "Deleting the app slowly",
+        "B": "Building for modern browsers first and ensuring a functional experience in older ones",
+        "C": "A style of animation",
+        "D": "The process of a server crashing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Progressive Enhancement'?",
+      "options": {
+        "A": "Building a core experience for all users and adding features for modern browsers",
+        "B": "Adding more RAM to a server",
+        "C": "A way to update an app",
+        "D": "Designing the mobile version last"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Hero Image'?",
+      "options": {
+        "A": "An image of a superhero",
+        "B": "A large, prominent image at the top of a webpage",
+        "C": "A small profile icon",
+        "D": "An image used in an advertisement"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Parallax Scrolling'?",
+      "options": {
+        "A": "Scrolling that is very fast",
+        "B": "A technique where background content moves at a different speed than foreground content",
+        "C": "A bug in web browsers",
+        "D": "A way to scroll horizontally"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'UX Debt'?",
+      "options": {
+        "A": "Money owed to a design agency",
+        "B": "The accumulation of design flaws and inconsistencies over time",
+        "C": "The cost of user research",
+        "D": "The time spent on a project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the '8pt Grid System'?",
+      "options": {
+        "A": "A system where all sizes and spacing are multiples of 8",
+        "B": "A system using 8 different colors",
+        "C": "A system with only 8 screens",
+        "D": "A system for 8-bit graphics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Serif' font?",
+      "options": {
+        "A": "A font without small lines at the ends of characters",
+        "B": "A font with small decorative lines or strokes at the ends of characters",
+        "C": "A bold font",
+        "D": "A font used for coding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sans-Serif' font?",
+      "options": {
+        "A": "A font with decorative strokes",
+        "B": "A font without decorative strokes at the ends of characters",
+        "C": "A script font",
+        "D": "A very small font"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Leading'?",
+      "options": {
+        "A": "The space between characters",
+        "B": "The space between lines of text",
+        "C": "The size of the header",
+        "D": "The color of the text"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tracking' in typography?",
+      "options": {
+        "A": "The space between specific letters",
+        "B": "The consistent spacing across a block of text",
+        "C": "Following the user's eye movement",
+        "D": "The speed of the scroll"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Kerning'?",
+      "options": {
+        "A": "The space between all lines",
+        "B": "The adjustment of space between two specific characters",
+        "C": "The height of the font",
+        "D": "The weight of the font"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'X-Height'?",
+      "options": {
+        "A": "The height of the capital letters",
+        "B": "The height of the lowercase 'x' in a typeface",
+        "C": "The width of the text",
+        "D": "The total page height"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Focal Point' in UI?",
+      "options": {
+        "A": "The center of the screen",
+        "B": "The area of the design that captures the user's attention first",
+        "C": "A button at the bottom",
+        "D": "The company logo"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Contrast' primarily used for?",
+      "options": {
+        "A": "To make the site look colorful",
+        "B": "To create visual hierarchy and improve readability",
+        "C": "To hide some elements",
+        "D": "To speed up loading"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Rule of Proximity'?",
+      "options": {
+        "A": "Objects that are close together are perceived as related",
+        "B": "Objects that are different are perceived as a group",
+        "C": "Objects that are large are more important",
+        "D": "Objects that are bright are clickable"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Style Guide'?",
+      "options": {
+        "A": "A book about fashion",
+        "B": "A document that defines the colors, fonts, and UI elements of a brand",
+        "C": "A tutorial for using the app",
+        "D": "A list of developer rules"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Micro-copy'?",
+      "options": {
+        "A": "Small snippets of text like button labels and error messages",
+        "B": "A copy of a small file",
+        "C": "Very small font size",
+        "D": "Hidden text in the code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Affordance'?",
+      "options": {
+        "A": "The cost of the app",
+        "B": "A visual clue that tells the user how an object can be used",
+        "C": "The accessibility rating",
+        "D": "The number of features"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Signifier' in UI?",
+      "options": {
+        "A": "A user's signature",
+        "B": "An indicator that highlights the affordance (e.g., a 'click here' label)",
+        "C": "A type of icon",
+        "D": "A security warning"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Feedback' in interaction design?",
+      "options": {
+        "A": "A user's review of the app",
+        "B": "The system's response to a user's action (e.g., a loading bar or button sound)",
+        "C": "The designer's comments",
+        "D": "The database output"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mapping' in UX?",
+      "options": {
+        "A": "Drawing a physical map",
+        "B": "The relationship between a control and its effect (e.g., vertical scroll for vertical movement)",
+        "C": "The user's location tracking",
+        "D": "A site map of the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Constraints' in UI design?",
+      "options": {
+        "A": "Limits on what a user can do to prevent errors",
+        "B": "The time limit for the project",
+        "C": "The screen resolution",
+        "D": "The color palette limits"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Mental Model'?",
+      "options": {
+        "A": "A 3D model of the brain",
+        "B": "How the user thinks the system works",
+        "C": "A psychological test",
+        "D": "The designer's plan"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skeuomorphism'?",
+      "options": {
+        "A": "Design that mimics real-world objects and textures",
+        "B": "Minimalist design",
+        "C": "Design using only code",
+        "D": "Mobile-first design"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Flat Design'?",
+      "options": {
+        "A": "A design that has no images",
+        "B": "Minimalist design using two-dimensional elements and bright colors",
+        "C": "A design for a flat screen",
+        "D": "A low-resolution design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Material Design'?",
+      "options": {
+        "A": "Designing clothes",
+        "B": "A design system created by Google",
+        "C": "A design system created by Apple",
+        "D": "A type of database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Neumorphism'?",
+      "options": {
+        "A": "A new version of flat design",
+        "B": "A style using soft shadows and highlights to make elements look like they are behind or in front of the background",
+        "C": "A style using only neon colors",
+        "D": "Design for neural networks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Glassmorphism'?",
+      "options": {
+        "A": "A style that uses glass textures",
+        "B": "A style characterized by background blur and a frosted-glass effect",
+        "C": "A very fragile design",
+        "D": "Design for smart glasses"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User Journey'?",
+      "options": {
+        "A": "The user's physical travel",
+        "B": "A map of the steps a user takes to complete a task",
+        "C": "The history of the user's account",
+        "D": "A tutorial for the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Pain Point'?",
+      "options": {
+        "A": "A bug in the code",
+        "B": "A specific problem that users face during their experience",
+        "C": "An injury caused by using the app",
+        "D": "The most expensive part of the project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Accessibility' (a11y)?",
+      "options": {
+        "A": "The speed of the internet",
+        "B": "Designing products that are usable by everyone, including people with disabilities",
+        "C": "The number of users on a site",
+        "D": "The price of the app"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'SUS' stand for in usability testing?",
+      "options": {
+        "A": "Software Usage Statistics",
+        "B": "System Usability Scale",
+        "C": "Standard User Survey",
+        "D": "Secure User System"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term describes the time it takes for a user to react to a visual stimulus?",
+      "options": {
+        "A": "Latency",
+        "B": "Reaction Time",
+        "C": "Hick's Law Time",
+        "D": "Interaction Gap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Tesler’s Law' also known as?",
+      "options": {
+        "A": "The Law of Simplicity",
+        "B": "The Law of Conservation of Complexity",
+        "C": "The Law of Minimal Effort",
+        "D": "The Rule of Efficiency"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a common 'Dark Pattern' where a user is tricked into a recurring subscription?",
+      "options": {
+        "A": "Bait and Switch",
+        "B": "Roach Motel",
+        "C": "Forced Continuity",
+        "D": "Hidden Costs"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of a 'Design Handoff' document?",
+      "options": {
+        "A": "To sell the design to investors",
+        "B": "To provide developers with all specs, assets, and documentation needed for build",
+        "C": "To keep a copy for the designer's portfolio",
+        "D": "To archive old versions of the logo"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which principle states that objects that share an area with a clearly defined boundary are perceived as a group?",
+      "options": {
+        "A": "Common Region",
+        "B": "Uniform Connectedness",
+        "C": "Parallelism",
+        "D": "Symmetry"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Gamification'?",
+      "options": {
+        "A": "Building a mobile game",
+        "B": "Applying game-design elements and principles in non-game contexts",
+        "C": "Using high-resolution graphics only",
+        "D": "Adding a leaderboard to a database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User Engagement'?",
+      "options": {
+        "A": "The number of times a user clicks a button",
+        "B": "The depth of a user's interaction with a product over time",
+        "C": "The speed of the server response",
+        "D": "The initial sign-up process"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which navigation pattern uses a 'drawer' that slides out from the side?",
+      "options": {
+        "A": "Breadcrumbs",
+        "B": "Off-canvas Navigation",
+        "C": "Accordion",
+        "D": "Mega Menu"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'SVG' files in UI design?",
+      "options": {
+        "A": "They are always smaller than JPEGs",
+        "B": "They are vector-based and scale perfectly without losing quality",
+        "C": "They support 3D animations natively",
+        "D": "They are easier to edit in Photoshop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cognitive Bias' in UX?",
+      "options": {
+        "A": "A coding error",
+        "B": "Predictable patterns of thought that influence how users perceive and interact with info",
+        "C": "A user's preference for certain colors",
+        "D": "The physical speed of clicking"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term refers to the perceived weight of an element in a layout?",
+      "options": {
+        "A": "Visual Mass",
+        "B": "Visual Weight",
+        "C": "Pixel Density",
+        "D": "Layout Gravity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Progressive Disclosure'?",
+      "options": {
+        "A": "Showing all information to the user immediately",
+        "B": "Strategically showing information only when the user needs it to reduce clutter",
+        "C": "Making the website load slowly for dramatic effect",
+        "D": "Revealing the code to the user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Double Diamond' model, what happens during the 'Deliver' phase?",
+      "options": {
+        "A": "Initial brainstorming",
+        "B": "Finalizing, testing, and launching the product",
+        "C": "Hiring new designers",
+        "D": "Writing the initial project brief"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Haptic Feedback'?",
+      "options": {
+        "A": "A sound notification",
+        "B": "Tactile feedback, such as vibrations, used to communicate with the user",
+        "C": "A visual flash on the screen",
+        "D": "A survey sent to the user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'Vanity Metric'?",
+      "options": {
+        "A": "Retention Rate",
+        "B": "Total App Downloads (without active usage data)",
+        "C": "Task Completion Rate",
+        "D": "Error Rate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Fitts’s Law' primarily used to optimize?",
+      "options": {
+        "A": "Color palettes",
+        "B": "The size and placement of buttons and interactive elements",
+        "C": "The font size of body text",
+        "D": "The speed of the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Accessibility' (A11y) Level AAA represent?",
+      "options": {
+        "A": "The lowest level of compliance",
+        "B": "The highest and most stringent level of web accessibility",
+        "C": "A standard for mobile apps only",
+        "D": "A requirement for gaming consoles"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Aesthetic-Usability Effect'?",
+      "options": {
+        "A": "Users believe that more attractive products are more usable",
+        "B": "Usable products are always perceived as attractive",
+        "C": "Designers should focus only on beauty",
+        "D": "Aesthetics hinder usability"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Breadcrumb'?",
+      "options": {
+        "A": "A small UI component used for image filters",
+        "B": "A secondary navigation aid showing the user's location in a site hierarchy",
+        "C": "A type of loading animation",
+        "D": "A social media sharing button"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which UX tool is used to identify where users are dropping off in a multi-step process?",
+      "options": {
+        "A": "Persona",
+        "B": "Funnel Analysis",
+        "C": "Mood Board",
+        "D": "Wireframe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Social Proof' principle?",
+      "options": {
+        "A": "Showing user photos in the UI",
+        "B": "Using reviews, testimonials, or 'used by X people' to build trust",
+        "C": "Allowing users to post on Facebook",
+        "D": "Adding a 'Like' button"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term describes a menu that appears when a user right-clicks an element?",
+      "options": {
+        "A": "Global Menu",
+        "B": "Contextual Menu",
+        "C": "Hamburger Menu",
+        "D": "Footer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Information Architecture' (IA)?",
+      "options": {
+        "A": "The visual design of a data center",
+        "B": "The way content is organized, structured, and labeled within a digital product",
+        "C": "The server-side file structure",
+        "D": "The resolution of the images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mental Model'?",
+      "options": {
+        "A": "A user’s intuitive understanding of how a system works based on past experience",
+        "B": "The project manager's vision",
+        "C": "A 3D model of the user's brain",
+        "D": "The technical documentation of the software"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Affordance'?",
+      "options": {
+        "A": "The cost of the software license",
+        "B": "Visual cues that hint at how an element should be used (e.g., a button looking clickable)",
+        "C": "The accessibility rating of a site",
+        "D": "The number of features available"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Micro-interaction'?",
+      "options": {
+        "A": "A small meeting between designers",
+        "B": "Small, single-task functional animations (like a 'like' heart animation)",
+        "C": "Interacting with a small screen",
+        "D": "A quick phone call with a user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Design Debt'?",
+      "options": {
+        "A": "Money owed to a freelancer",
+        "B": "The accumulation of design inconsistencies and poor UX choices over time",
+        "C": "The total budget of the project",
+        "D": "The time spent on the research phase"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which principle suggests that the human eye naturally follows a line or curve?",
+      "options": {
+        "A": "Similarity",
+        "B": "Continuity",
+        "C": "Proximity",
+        "D": "Closure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Inclusive Design'?",
+      "options": {
+        "A": "Designing for as many people as possible, regardless of their ability or situation",
+        "B": "Including all designers in every meeting",
+        "C": "Putting as much content as possible on one page",
+        "D": "Using every color in the palette"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Card Sorting' primarily used to build?",
+      "options": {
+        "A": "A color palette",
+        "B": "An Information Architecture (Navigation)",
+        "C": "A user persona",
+        "D": "A wireframe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Usability'?",
+      "options": {
+        "A": "How pretty an interface is",
+        "B": "The ease of use and learnability of a human-made object",
+        "C": "The speed of the internet connection",
+        "D": "The number of lines of code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which research method involves asking a user to perform a task while 'thinking out loud'?",
+      "options": {
+        "A": "A/B Testing",
+        "B": "Usability Testing",
+        "C": "Surveys",
+        "D": "Focus Groups"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Responsive Design'?",
+      "options": {
+        "A": "A design that responds to voice commands",
+        "B": "A layout that adjusts dynamically to different screen sizes",
+        "C": "A site with high-speed animations",
+        "D": "A design that changes colors based on the time of day"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the '3-Click Rule'?",
+      "options": {
+        "A": "A user should find any information on a site within 3 clicks",
+        "B": "Users must click 3 times to log out",
+        "C": "Double-clicking is equal to 3 clicks",
+        "D": "A mouse must last for at least 3 million clicks"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a qualitative research tool?",
+      "options": {
+        "A": "Google Analytics",
+        "B": "User Interviews",
+        "C": "Heatmaps",
+        "D": "Conversion Rates"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interaction Design' (IxD)?",
+      "options": {
+        "A": "Designing static posters",
+        "B": "Designing the interaction between users and products",
+        "C": "Writing the backend logic",
+        "D": "Managing a design team"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Iterative Design'?",
+      "options": {
+        "A": "Designing the same thing over and over",
+        "B": "A methodology based on a cyclic process of prototyping, testing, and refining",
+        "C": "Copying designs from a competitor",
+        "D": "Using automated tools to generate UI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'White Space' used for?",
+      "options": {
+        "A": "Saving space on the screen",
+        "B": "Organizing content and reducing visual noise",
+        "C": "Filling up empty gaps",
+        "D": "Displaying ads"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skeuomorphism'?",
+      "options": {
+        "A": "Designing with only flat colors",
+        "B": "Design that mimics real-world objects in texture and appearance",
+        "C": "A mobile-only design philosophy",
+        "D": "Using code to generate shapes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Flat Design'?",
+      "options": {
+        "A": "A 2D minimalist style that avoids shadows and gradients",
+        "B": "A design for flat-screen TVs",
+        "C": "A design with no text",
+        "D": "A low-resolution layout"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Eye Tracking' used for?",
+      "options": {
+        "A": "Unlocking the app with biometric data",
+        "B": "Analyzing where users look on a screen and in what order",
+        "C": "Improving user vision",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Wireframe'?",
+      "options": {
+        "A": "A high-fidelity mockup",
+        "B": "A low-fidelity visual guide that represents the skeletal framework of a website",
+        "C": "The final HTML/CSS code",
+        "D": "A list of colors used"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Nielsen’s 10 Heuristics'?",
+      "options": {
+        "A": "10 rules for coding",
+        "B": "10 general principles for interaction design",
+        "C": "10 laws for choosing fonts",
+        "D": "10 steps to hire a designer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User Journey Mapping'?",
+      "options": {
+        "A": "A visual story of a user’s interaction with a service or product",
+        "B": "A physical map of a user's location",
+        "C": "A diagram of the server's data flow",
+        "D": "A list of every page in the app"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Pain Point'?",
+      "options": {
+        "A": "An injury caused by typing",
+        "B": "A specific problem that prospective customers of your business are experiencing",
+        "C": "The most expensive feature of a design",
+        "D": "A bug in the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mobile-First' design?",
+      "options": {
+        "A": "Starting the design process for the smallest screen size first",
+        "B": "Designing only for mobile phones",
+        "C": "Giving a phone to every designer",
+        "D": "The oldest mobile phone ever made"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Golden Ratio'?",
+      "options": {
+        "A": "A mathematical ratio commonly used in design for aesthetic proportions",
+        "B": "The ratio of designers to developers",
+        "C": "The price of the design software",
+        "D": "The number of users who visit a site"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Grid System'?",
+      "options": {
+        "A": "A series of intersecting vertical and horizontal lines used to structure content",
+        "B": "A type of power grid",
+        "C": "A list of colors",
+        "D": "An animation technique"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a key principle of 'Material Design'?",
+      "options": {
+        "A": "Shadows and elevation to convey hierarchy",
+        "B": "No use of color",
+        "C": "Only using text",
+        "D": "Randomly placing buttons"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Design Tokenization'?",
+      "options": {
+        "A": "A security feature for user passwords",
+        "B": "The process of storing design attributes (colors, spacing, fonts) as variables for cross-platform consistency",
+        "C": "Selling design assets as NFTs",
+        "D": "Compressing code into small fragments"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term refers to the 'skeleton' of a UI before the content loads?",
+      "options": {
+        "A": "Ghost UI / Skeleton Screen",
+        "B": "Draft Layout",
+        "C": "Low-Fi Frame",
+        "D": "Loading Mask"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary difference between UX and Service Design?",
+      "options": {
+        "A": "UX is only for mobile; Service Design is for desktop",
+        "B": "UX focuses on the end-user's digital experience; Service Design focuses on the entire ecosystem, including employees and physical spaces",
+        "C": "There is no difference",
+        "D": "UX is a part of marketing; Service Design is part of engineering"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Design Debt' audit?",
+      "options": {
+        "A": "Calculating how much money the design team spent",
+        "B": "The process of identifying and cataloging inconsistencies and outdated components in a product",
+        "C": "A legal review of design patents",
+        "D": "A test for color blindness"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which principle suggests that the most frequently used items should be the easiest to access?",
+      "options": {
+        "A": "Pareto Principle (80/20 Rule)",
+        "B": "Occam's Razor",
+        "C": "The Principle of Least Effort",
+        "D": "Fitts's Law"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Inclusive Design'?",
+      "options": {
+        "A": "Designing for the 'average' user",
+        "B": "A methodology that enables and draws on the full range of human diversity",
+        "C": "A design that includes many different fonts",
+        "D": "Allowing users to design their own interface"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dark Mode's' main benefit for OLED screens?",
+      "options": {
+        "A": "It increases the resolution",
+        "B": "It saves battery because black pixels are turned off",
+        "C": "It makes the phone run faster",
+        "D": "It prevents screen scratches"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which cognitive bias makes users favor information that confirms their existing beliefs?",
+      "options": {
+        "A": "Confirmation Bias",
+        "B": "Anchoring Bias",
+        "C": "Framing Effect",
+        "D": "Availability Heuristic"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Ethical Design'?",
+      "options": {
+        "A": "Designing for the cheapest price",
+        "B": "A design approach that prioritizes user well-being and transparency over manipulative tactics",
+        "C": "Following copyright laws only",
+        "D": "Using recycled materials for hardware"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In UI design, what is a 'Stepper'?",
+      "options": {
+        "A": "A person who tests the app steps",
+        "B": "A control for increasing or decreasing a value by a set amount",
+        "C": "A type of progress bar",
+        "D": "An animation of a walking person"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'VUI'?",
+      "options": {
+        "A": "Visual User Interaction",
+        "B": "Voice User Interface",
+        "C": "Virtual Unit Instance",
+        "D": "Vector User Interface"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term describes the 'stiffness' or 'bounciness' of a UI animation?",
+      "options": {
+        "A": "Velocity",
+        "B": "Easing",
+        "C": "Frame Rate",
+        "D": "Damping"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Redlining' in a design handoff?",
+      "options": {
+        "A": "Deleting bad designs",
+        "B": "Providing exact measurements, margins, and hex codes for developers",
+        "C": "Marking areas where users clicked most",
+        "D": "Highlighting errors in the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Glassmorphism'?",
+      "options": {
+        "A": "A design style using frosted-glass effects and background blur",
+        "B": "Making the screen look like a window",
+        "C": "A very fragile UI",
+        "D": "A style using only transparent colors"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Micro-copy'?",
+      "options": {
+        "A": "Small font sizes",
+        "B": "Short bits of functional text (labels, buttons, error messages) that guide users",
+        "C": "A copy of a very small file",
+        "D": "Hidden text for SEO"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Information Scent'?",
+      "options": {
+        "A": "The smell of new electronics",
+        "B": "The degree to which a user can predict what is behind a link based on its label",
+        "C": "A way to track data",
+        "D": "The background color of a site"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which design law states that users perceive elements with a common moving direction as a group?",
+      "options": {
+        "A": "Law of Proximity",
+        "B": "Law of Common Fate",
+        "C": "Law of Closure",
+        "D": "Law of Symmetry"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Progressive Disclosure' used for?",
+      "options": {
+        "A": "To show every feature immediately",
+        "B": "To reduce clutter by showing advanced features only when needed",
+        "C": "To reveal the source code slowly",
+        "D": "To increase the screen brightness over time"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Card Sorting'?",
+      "options": {
+        "A": "A game for designers",
+        "B": "A research method used to help design or evaluate the information architecture of a site",
+        "C": "Sorting business cards",
+        "D": "Organizing files by size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'serial position effect'?",
+      "options": {
+        "A": "Users remember the first and last items in a list best",
+        "B": "Users only remember items in the middle",
+        "C": "Users don't remember lists",
+        "D": "Users remember items with icons"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Skeuomorphism'?",
+      "options": {
+        "A": "A minimalist flat design",
+        "B": "Design that mimics real-world objects and textures",
+        "C": "Design using only code",
+        "D": "Design for small screens"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Neumorphism'?",
+      "options": {
+        "A": "A new version of skeuomorphism using soft shadows and light to look like extruded plastic",
+        "B": "A design style for neurons",
+        "C": "A black-and-white only design",
+        "D": "Design for VR"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which term refers to the vertical distance between the baseline and the top of a lowercase 'x'?",
+      "options": {
+        "A": "Cap Height",
+        "B": "X-Height",
+        "C": "Ascender",
+        "D": "Descender"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'User Retention'?",
+      "options": {
+        "A": "The percentage of users who keep using your product over a period of time",
+        "B": "The amount of data a user saves",
+        "C": "The time it takes to sign up",
+        "D": "The number of users who complain"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Heuristic Evaluation'?",
+      "options": {
+        "A": "A type of user interview",
+        "B": "A usability inspection method where experts judge a UI against established principles",
+        "C": "A speed test for the app",
+        "D": "An accessibility audit"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interplay' in UI animation?",
+      "options": {
+        "A": "The connection between two different apps",
+        "B": "How different animated elements relate to and affect each other",
+        "C": "A specific software for designers",
+        "D": "The time between two clicks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Accessibility' Level AA require for contrast ratio?",
+      "options": {
+        "A": "3.0:1",
+        "B": "4.5:1",
+        "C": "7.0:1",
+        "D": "10:1"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Gamification'?",
+      "options": {
+        "A": "Adding games to a website",
+        "B": "Applying game mechanics to non-game environments to increase engagement",
+        "C": "Designing only for children",
+        "D": "Using a joystick to navigate a site"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mental Model'?",
+      "options": {
+        "A": "How a designer thinks the system should look",
+        "B": "A user's internal belief about how a system works",
+        "C": "A 3D model of a brain",
+        "D": "A psychiatric test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cognitive Load'?",
+      "options": {
+        "A": "The memory used by the server",
+        "B": "The total amount of mental effort being used in the working memory",
+        "C": "The speed of the brain",
+        "D": "The weight of a VR headset"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Visual Hierarchy'?",
+      "options": {
+        "A": "The order of designers in a company",
+        "B": "The arrangement of elements to imply importance",
+        "C": "The resolution of a screen",
+        "D": "The number of colors used"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool is best for 'Heatmapping' user behavior?",
+      "options": {
+        "A": "Figma",
+        "B": "Hotjar",
+        "C": "Photoshop",
+        "D": "Slack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Anticipatory Design'?",
+      "options": {
+        "A": "Waiting for a user to make a choice",
+        "B": "Predicting what a user needs and making decisions on their behalf to simplify the experience",
+        "C": "Designing a placeholder before the real design",
+        "D": "A style of futuristic design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Information Architecture'?",
+      "options": {
+        "A": "The visual design of a library",
+        "B": "The structural design of shared information environments (navigation, labeling, search)",
+        "C": "The server-side database structure",
+        "D": "The height of the text"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Responsive Design'?",
+      "options": {
+        "A": "A design that responds to voice",
+        "B": "A design that adjusts based on the user's device screen size",
+        "C": "A site that loads very fast",
+        "D": "A design that changes colors"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mobile-First' design?",
+      "options": {
+        "A": "Designing for the smallest screen first and then scaling up",
+        "B": "Designing only for mobile phones",
+        "C": "The first phone ever made",
+        "D": "Buying a mobile phone before starting a project"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Three-Click Rule'?",
+      "options": {
+        "A": "Users should find what they need in three clicks or less",
+        "B": "Users must click three times to log in",
+        "C": "A mouse only lasts for three years",
+        "D": "Double-clicking is equal to three clicks"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'White Space'?",
+      "options": {
+        "A": "Empty space on a page used to improve readability and aesthetics",
+        "B": "A space where white text is written",
+        "C": "A bug where the site doesn't load",
+        "D": "Space for advertisements"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Call to Action' (CTA)?",
+      "options": {
+        "A": "A phone call from the client",
+        "B": "An interactive element designed to prompt an immediate response (e.g., 'Buy Now')",
+        "C": "A meeting for the design team",
+        "D": "A legal disclaimer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Affordance'?",
+      "options": {
+        "A": "The price of the software",
+        "B": "The visual properties of an object that suggest how it should be used",
+        "C": "The accessibility score",
+        "D": "The number of images"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Constraint' in UI?",
+      "options": {
+        "A": "Forcing a designer to use only two colors",
+        "B": "Limiting the possible actions of a user to prevent errors",
+        "C": "The small screen of a watch",
+        "D": "The time limit of a project"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Symmetry' in design?",
+      "options": {
+        "A": "A sense of balance and order in a layout",
+        "B": "Using only one color",
+        "C": "Making the left side different from the right",
+        "D": "A type of font"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Contrast'?",
+      "options": {
+        "A": "The difference between two or more elements to create emphasis",
+        "B": "Making everything look the same",
+        "C": "The size of the screen",
+        "D": "The speed of the scroll"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Consistency' in UX?",
+      "options": {
+        "A": "Ensuring the UI elements behave the same way throughout the application",
+        "B": "Using a different color on every page",
+        "C": "Changing the logo every week",
+        "D": "Randomly placing buttons"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Mapping' in design?",
+      "options": {
+        "A": "Drawing a map of the city",
+        "B": "The relationship between controls and their movements (e.g., a scroll bar)",
+        "C": "A site map for developers",
+        "D": "The user's location tracking"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Feedback'?",
+      "options": {
+        "A": "The response of the system to a user's action",
+        "B": "A user's negative comment",
+        "C": "The noise a computer makes",
+        "D": "A survey sent after a month"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'User Journey Mapping'?",
+      "options": {
+        "A": "A physical map of where the users live",
+        "B": "A visualization of the process a user goes through to accomplish a goal",
+        "C": "A site map of the app",
+        "D": "A database of user emails"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Empathy' in Design Thinking?",
+      "options": {
+        "A": "Feeling sorry for the user",
+        "B": "Gaining a deep understanding of the people for whom you are designing",
+        "C": "Designing for yourself",
+        "D": "Ignoring user feedback"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Double Diamond'?",
+      "options": {
+        "A": "A expensive piece of jewelry",
+        "B": "A design process model divided into four phases: Discover, Define, Develop, and Deliver",
+        "C": "A logo style",
+        "D": "A type of screen resolution"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Usability Testing'?",
+      "options": {
+        "A": "Testing if the code works",
+        "B": "Observing real users as they interact with a product to identify friction points",
+        "C": "A security check",
+        "D": "Checking the internet speed"
+      },
+      "answer": "B"
+    }
+  ]
+}

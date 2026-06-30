@@ -1,0 +1,2015 @@
+{ 
+  "skill": "ETL", 
+  "questions": [
+    {
+    "question": "What does the 'E' in ETL stand for?",
+    "options": {
+      "A": "Encryption",
+      "B": "Extract",
+      "C": "Export",
+      "D": "Eliminate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the 'Transform' stage in ETL?",
+    "options": {
+      "A": "To physically move servers to a new location.",
+      "B": "To clean, format, and convert raw data into a structured format suitable for analysis.",
+      "C": "To delete all data that is older than one year.",
+      "D": "To increase the physical storage capacity of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In ETL, the 'Load' stage refers to the process of writing the transformed data into a target database or data warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Excel",
+      "D": "Only if the data is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Source' system for an ETL process?",
+    "options": {
+      "A": "Relational Databases (SQL Server, MySQL)",
+      "B": "Flat files (CSV, JSON)",
+      "C": "Cloud APIs",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Data Warehouse'?",
+    "options": {
+      "A": "A physical building where hard drives are stored.",
+      "B": "A central repository of integrated data from one or more disparate sources used for reporting and analysis.",
+      "C": "A specialized software for drawing flowcharts.",
+      "D": "The recycling bin for deleted data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In ETL, what does 'Data Cleaning' involve?",
+    "options": {
+      "A": "Wiping the dust off the physical servers.",
+      "B": "Identifying and fixing errors, duplicates, and inconsistencies in the data.",
+      "C": "Encrypting the database passwords.",
+      "D": "Upgrading the operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Full Loading' means replacing the entire content of a target table with new data from the source.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only if using a 64-bit CPU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incremental Loading' in an ETL context?",
+    "options": {
+      "A": "Loading data one character at a time.",
+      "B": "Loading only the data that has changed or been added since the last successful execution.",
+      "C": "Randomly selecting data to load.",
+      "D": "Deleting data in small increments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file format uses a 'comma' to separate different data values in a single row?",
+    "options": {
+      "A": "XML",
+      "B": "CSV",
+      "C": "JSON",
+      "D": "PDF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL is a process typically used in Data Integration to combine data from different systems into a single view.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking data",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Staging Area' in an ETL pipeline?",
+    "options": {
+      "A": "A physical stage for presentations.",
+      "B": "An intermediate storage area used to hold data temporarily during the transformation process.",
+      "C": "The final destination for analyzed data.",
+      "D": "The folder where software updates are stored."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Transformation' task?",
+    "options": {
+      "A": "Filtering out null values",
+      "B": "Joining tables from different sources",
+      "C": "Converting currency formats",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'ELT' (Extract, Load, Transform) differs from ETL because the transformation happens inside the target database rather than an intermediate engine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local databases",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Schema' refer to in a database?",
+    "options": {
+      "A": "The color of the database icon.",
+      "B": "The formal structure and organization of data, including table names, fields, and types.",
+      "C": "The password used to access the cloud.",
+      "D": "The physical weight of the storage array."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deduplication'?",
+    "options": {
+      "A": "Adding more copies of the same data for safety.",
+      "B": "The process of identifying and removing identical copies of data to ensure each record is unique.",
+      "C": "A specialized way to compress network files.",
+      "D": "Encrypting the data twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to write queries to extract data from a relational database?",
+    "options": {
+      "A": "HTML",
+      "B": "SQL",
+      "C": "CSS",
+      "D": "Photoshop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Mart' is a subset of a Data Warehouse, usually focused on a specific department or business line.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for sales data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metadata'?",
+    "options": {
+      "A": "The physical metal used in server racks.",
+      "B": "Data that provides information about other data (e.g., source, date created, data type).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The backup copy of a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In ETL, what is 'Mapping'?",
+    "options": {
+      "A": "Creating a physical map of the data center.",
+      "B": "The process of defining how fields from a source system correspond to fields in the target system.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Finding a lost file on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Null' values in a dataset represent a value of zero.",
+    "options": {
+      "A": "False (Null represents the absence of a value or 'unknown' data).",
+      "B": "True",
+      "C": "Only in Excel",
+      "D": "Only if the column is numeric"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component is usually the 'Target' in an enterprise ETL process?",
+    "options": {
+      "A": "The user's local desktop",
+      "B": "Data Warehouse (like Snowflake, BigQuery, or Redshift)",
+      "C": "A physical printer",
+      "D": "A temporary web browser cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' in an ETL pipeline?",
+    "options": {
+      "A": "The physical size of the data packets.",
+      "B": "The time delay between when data is generated at the source and when it is available at the target.",
+      "C": "The annual cost of the ETL software.",
+      "D": "The number of rows processed per second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Data profiling is the process of examining the data available in an existing source and collecting statistics about that data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Join' operation in ETL?",
+    "options": {
+      "A": "To separate data into different files.",
+      "B": "To combine records from two or more tables based on a related column between them.",
+      "C": "To encrypt the database connection.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Delimiter' in a flat file?",
+    "options": {
+      "A": "Comma (,)",
+      "B": "Pipe (|)",
+      "C": "Tab",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: ETL can be used to convert data from an old legacy system to a modern cloud database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows systems",
+      "D": "Only if the database is under 10GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Validation' in ETL?",
+    "options": {
+      "A": "Making sure the data looks pretty.",
+      "B": "Checking that the data meets specific quality and accuracy requirements before it is loaded.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new database administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file format uses 'Tags' (like <name>John</name>) to structure data?",
+    "options": {
+      "A": "JSON",
+      "B": "XML",
+      "C": "CSV",
+      "D": "TXT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL processes can be scheduled to run automatically (e.g., every night at midnight).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Dimension' table in a data warehouse?",
+    "options": {
+      "A": "A table that stores the weight and height of servers.",
+      "B": "A table that contains descriptive attributes (e.g., product names, customer regions) used to filter and group data.",
+      "C": "A table that stores only numerical calculations.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Fact' table in a data warehouse?",
+    "options": {
+      "A": "A table that only stores true statements.",
+      "B": "A central table that stores quantitative information (metrics/measures) like sales amount or quantity sold.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The salary of a senior engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL is only used for Big Data and cannot be used for small spreadsheets.",
+    "options": {
+      "A": "False (ETL principles apply to data of any size).",
+      "B": "True",
+      "C": "Only for Google",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of deleting data.",
+      "B": "The process of obtaining and importing data for immediate use or storage in a database.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL command is used to 'Extract' all columns from a table named 'Users'?",
+    "options": {
+      "A": "GET ALL FROM Users",
+      "B": "SELECT * FROM Users",
+      "C": "EXTRACT * FROM Users",
+      "D": "SHOW Users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Job' in an ETL tool refers to a specific workflow or set of instructions to move data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python scripts",
+      "D": "Only if it lasts over 1 hour"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalability' in an ETL system?",
+    "options": {
+      "A": "The ability of the system to handle increasing volumes of data by adding resources.",
+      "B": "The ability to measure the weight of the server rack.",
+      "C": "To backup the system configuration.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Redundancy'?",
+    "options": {
+      "A": "Having too many engineers.",
+      "B": "Storing the same piece of data in more than one place, which can cause inconsistencies if not managed.",
+      "C": "Deleting old system logs.",
+      "D": "Hiring junior developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL tools often provide a 'GUI' (Graphical User Interface) to design data flows without writing much code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using AI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Integrity'?",
+    "options": {
+      "A": "How honest the data is.",
+      "B": "The overall accuracy, completeness, and consistency of data throughout its lifecycle.",
+      "C": "A tool used for measuring network speed.",
+      "D": "The brand name of a popular database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'ETL Tool'?",
+    "options": {
+      "A": "Informatica",
+      "B": "Talend",
+      "C": "Apache NiFi",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Scripting' (e.g., using Python or SQL) is a valid alternative to using a dedicated ETL software tool.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Microsoft",
+      "D": "Only for startups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Parsing' in an ETL transformation?",
+    "options": {
+      "A": "Deleting a file.",
+      "B": "Analyzing a string of symbols or data to understand its structure (e.g., turning a JSON string into individual fields).",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "Hiring a new data manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Primary Key'?",
+    "options": {
+      "A": "The key to the data center front door.",
+      "B": "A unique identifier for each record in a database table.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Transformation rules can include mathematical calculations, such as summing values or calculating averages.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only in the first draft"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Source-to-Target Mapping'?",
+    "options": {
+      "A": "A document that describes how data moves and changes from the source system to the final target system.",
+      "B": "A specialized way to encrypt network signals.",
+      "C": "The speed of the download connection.",
+      "D": "The time spent cleaning the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Loading Strategy'?",
+    "options": {
+      "A": "Append (Adding new data to the end)",
+      "B": "Truncate and Load (Clear the table first)",
+      "C": "Upsert (Update existing, insert new)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: High 'Data Quality' ensures that business decisions are based on accurate information.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Foreign Key'?",
+    "options": {
+      "A": "A key used in a different country.",
+      "B": "A field in one table that refers to the Primary Key in another table, creating a relationship between them.",
+      "C": "A tool to monitor the daily growth of the log server.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these file formats is known for being 'Key-Value' based and widely used in web APIs?",
+    "options": {
+      "A": "CSV",
+      "B": "JSON",
+      "C": "XML",
+      "D": "XLSX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In ETL, 'Load' can also mean sending data to a flat file instead of a database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for managers",
+      "D": "Only if using Grafana"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Logging' in an ETL process?",
+    "options": {
+      "A": "To find a new cloud provider.",
+      "B": "To record the status of the data movement, including success, failure, and the number of rows processed, for troubleshooting.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL keyword is used to 'Transform' data by keeping only unique rows and removing duplicates?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "DISTINCT",
+      "C": "SINGLE",
+      "D": "ONLY"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL is a key component of 'Business Intelligence' (BI).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Processing'?",
+    "options": {
+      "A": "Processing data in large, discrete groups at scheduled intervals.",
+      "B": "A set of stairs in the data center.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Real-time ETL' (or Streaming ETL)?",
+    "options": {
+      "A": "Processing data immediately as it is generated, rather than in batches.",
+      "B": "The delay in processing a request.",
+      "C": "The physical speed of light in a fiber cable.",
+      "D": "The number of users currently active."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Lookup' operations are used to retrieve additional data from a secondary source based on a value in the primary data stream.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "Naming the servers after famous politicians.",
+      "B": "A set of rules and processes that ensure an organization's data is accurate, private, and secure.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Data Type' in a database?",
+    "options": {
+      "A": "String (Text)",
+      "B": "Integer (Number)",
+      "C": "Boolean (True/False)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: ETL can help move data from an on-premises server to a cloud-based Data Warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Reconciliation'?",
+    "options": {
+      "A": "Wiping a server physically.",
+      "B": "The process of verifying that the data in the target system matches the data from the source system after the ETL process.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'ETL Architect'?",
+    "options": {
+      "A": "To write application code all day.",
+      "B": "To design and manage the overall structure and strategy for moving data within an organization.",
+      "C": "To handle all of the company's financial accounting.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL tools can connect to social media platforms to extract data for analysis.",
+    "options": {
+      "A": "True (via APIs).",
+      "B": "False",
+      "C": "Only for banks",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Aggregation' in an ETL context?",
+    "options": {
+      "A": "Using robots to clean the server room.",
+      "B": "The process of summarizing data (e.g., calculating the total sales for a month) to provide a high-level view.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Data Extraction'?",
+    "options": {
+      "A": "Reading a file from an S3 bucket",
+      "B": "Downloading records from a web API",
+      "C": "Running a SELECT query on a database",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: ETL is a one-time process and never needs to be repeated once the data is loaded.",
+    "options": {
+      "A": "False (ETL is usually a recurring process to keep data warehouses up to date).",
+      "B": "True",
+      "C": "Only for junior engineers",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Transformation' 'Formatting'?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "Changing the way data looks (e.g., converting '01-Jan-2026' to '2026-01-01') to ensure consistency in the target system.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Slowly Changing Dimension' (SCD) type is used when you want to overwrite existing data in a dimension table with no historical tracking?",
+    "options": {
+      "A": "SCD Type 0",
+      "B": "SCD Type 1",
+      "C": "SCD Type 2",
+      "D": "SCD Type 4"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical objective of 'Change Data Capture' (CDC) in an ETL pipeline?",
+    "options": {
+      "A": "To encrypt the database logs for security.",
+      "B": "To identify and capture only the data that has changed at the source to allow for efficient incremental loading.",
+      "C": "To automatically change the data types of columns in the target.",
+      "D": "To monitor the daily growth of the server's CPU usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'SCD Type 2' implementation tracks history by creating a new record with a unique version or effective date range whenever an attribute changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer names",
+      "D": "Only if using a NoSQL database"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Star Schema', why is the 'Fact Table' usually much larger than the 'Dimension Tables'?",
+    "options": {
+      "A": "It stores the source code of the ETL tool.",
+      "B": "It contains the quantitative metrics and keys for every individual transaction or event occurring in the business.",
+      "C": "It stores high-resolution images of products.",
+      "D": "It is designed to be a backup of the entire database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Surrogate Key' in a data warehouse environment?",
+    "options": {
+      "A": "A key used by a third-party vendor to access the data.",
+      "B": "An internally generated, system-assigned unique identifier used as a primary key, independent of the source system's natural key.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "A backup key kept in a physical safe."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific schema design is characterized by normalized dimension tables that branch out into sub-dimensions?",
+    "options": {
+      "A": "Star Schema",
+      "B": "Snowflake Schema",
+      "C": "Galaxy Schema",
+      "D": "Flat Schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Skew' occurs when data is distributed unevenly across shards or partitions, causing some nodes to work much harder than others during processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in local SQL databases",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of an 'Upsert' operation in a Load stage?",
+    "options": {
+      "A": "To delete all records that are not uppercase.",
+      "B": "To update a record if it already exists in the target, or insert it if it is a new record.",
+      "C": "To sort the data in ascending order.",
+      "D": "To increase the speed of the data upload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which ETL strategy involves transforming data directly within the target cloud data warehouse using its own compute power?",
+    "options": {
+      "A": "ETL",
+      "B": "ELT (Extract, Load, Transform)",
+      "C": "Batch Processing",
+      "D": "Manual Entry"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Degenerate Dimension' is a dimension attribute (like an order number) that is stored directly in the Fact table because it doesn't require a separate dimension table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Grain' of a Fact table?",
+    "options": {
+      "A": "The physical size of the data blocks on disk.",
+      "B": "The level of detail or the definition of what a single row in the table represents (e.g., one row per transaction).",
+      "C": "The speed of the network bandwidth.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is used to verify that every row extracted from the source has been successfully loaded into the target?",
+    "options": {
+      "A": "Data Masking",
+      "B": "Record Count Reconciliation",
+      "C": "SCD Type 1",
+      "D": "Primary Key Encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Late Arriving Data' refers to records that reach the data warehouse long after the events they describe have occurred, often complicating historical reporting.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Orchestrator' like Apache Airflow in an ETL environment?",
+    "options": {
+      "A": "To physically clean the server room.",
+      "B": "To manage the scheduling, dependencies, and monitoring of complex data pipelines.",
+      "C": "To encrypt the database passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'SCD Type 3', how is historical change tracked?",
+    "options": {
+      "A": "By creating a new row for every change.",
+      "B": "By adding a new column to store the previous value of an attribute (limited to tracking one previous state).",
+      "C": "By deleting the old data immediately.",
+      "D": "By creating a separate table for every customer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a risk associated with 'Full Refresh' loading on a large dataset?",
+    "options": {
+      "A": "The table becomes physically smaller.",
+      "B": "High resource consumption and potential downtime/unavailability of the target table during the reload process.",
+      "C": "Encryption keys will expire faster.",
+      "D": "The OS will require a reboot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Lineage' provides a visual or documented path showing how data has flowed from its original source to its final destination.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security audits",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pushdown Optimization' in an ETL tool?",
+    "options": {
+      "A": "Physically pushing the server into the rack.",
+      "B": "Generating SQL to execute transformations directly on the source or target database rather than processing them in the ETL engine's memory.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a database, what is a 'Materialized View'?",
+    "options": {
+      "A": "A view that is physically printed out.",
+      "B": "A pre-computed table that stores the result of a query to improve performance for complex aggregations.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The newest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dirty Read' occurs when an ETL process reads data that has been modified by another transaction but not yet committed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NoSQL databases",
+      "D": "Only if the network is slow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Drift'?",
+    "options": {
+      "A": "The database physically moving on the disk.",
+      "B": "The situation where the source system's data structure changes (e.g., new columns added) without prior notice, potentially breaking the ETL pipeline.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL 'JOIN' should you use to return all records from the 'Orders' table and only matching records from the 'Customers' table?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "LEFT JOIN (if Orders is the left table)",
+      "C": "RIGHT JOIN",
+      "D": "FULL OUTER JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bridge Table' is used in a data warehouse to resolve many-to-many relationships between dimensions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking data",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Masking' used for in an ETL process?",
+    "options": {
+      "A": "To make the data icons look like masks.",
+      "B": "To hide or obfuscate sensitive data (like PII) during the transformation stage to protect privacy in non-production environments.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Incremental Loading', what is a 'Watermark'?",
+    "options": {
+      "A": "A physical stain on the server case.",
+      "B": "A column (usually a timestamp or ID) used to keep track of the last record processed to determine where to start the next load.",
+      "C": "A specialized way to encrypt database connections.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that an ETL job has failed because of a 'Primary Key' violation?",
+    "options": {
+      "A": "Constraint Violation / Duplicate Key Error",
+      "B": "Timeout",
+      "C": "Out of Memory",
+      "D": "Connectivity Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Parquet' or 'ORC' file formats is generally better for Big Data processing than CSV because they are columnar and support compression.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Profiling' and why is it performed before building an ETL process?",
+    "options": {
+      "A": "Creating social media profiles for the data.",
+      "B": "The technical analysis of source data to understand its quality, distribution, and structure to ensure the ETL rules are accurate.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'Data Validation' in an ETL pipeline?",
+    "options": {
+      "A": "The Source System",
+      "B": "The Transformation Logic",
+      "C": "The Target Database",
+      "D": "The Network Switch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Snowflake Schema', the goal is to reduce data redundancy through normalization, even if it leads to more complex JOIN operations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing'?",
+    "options": {
+      "A": "Cleaning the physical hard drives with soap.",
+      "B": "The process of removing or correcting data in a database that is incorrect, incomplete, improperly formatted, or duplicated.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new data manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Join' in SQL returns only the rows that have matching values in both tables?",
+    "options": {
+      "A": "LEFT JOIN",
+      "B": "INNER JOIN",
+      "C": "RIGHT JOIN",
+      "D": "CROSS JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Lake' is typically used to store unstructured or semi-structured data in its raw format, unlike a Data Warehouse which requires a defined schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Latency' 'End-to-End'?",
+    "options": {
+      "A": "The time it takes to buy a server.",
+      "B": "The total time it takes for a data point to move from the source system through the ETL process and into the final report.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The speed of light in a cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these file formats is 'Self-Describing' and uses a tree-like structure of nested objects?",
+    "options": {
+      "A": "CSV",
+      "B": "JSON",
+      "C": "TXT",
+      "D": "XLSX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Functional Dependencies' in a database refer to a relationship where the value of one attribute determines the value of another attribute.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for managers",
+      "D": "Only if using Grafana"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Enrichment'?",
+    "options": {
+      "A": "Giving money to the data center.",
+      "B": "Enhancing existing data by adding additional information from external sources (e.g., adding demographic data to a customer record).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL command is used to 'Update' existing data in a table based on a condition?",
+    "options": {
+      "A": "CHANGE",
+      "B": "UPDATE",
+      "C": "MODIFY",
+      "D": "SET"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Batch' ETL process, data is processed in real-time as it arrives.",
+    "options": {
+      "A": "False (Batch processing happens at scheduled intervals; Streaming/Real-time ETL happens as data arrives).",
+      "B": "True",
+      "C": "Only for cloud-native apps",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Junk Dimension' in a data warehouse?",
+    "options": {
+      "A": "A table that stores deleted data.",
+      "B": "A single dimension table used to group multiple low-cardinality flags and indicators (e.g., Yes/No flags) to avoid cluttering the Fact table.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parallel Loading'?",
+    "options": {
+      "A": "Loading two servers into a rack at once.",
+      "B": "The ability to load multiple data streams or chunks of data into the target database simultaneously to improve speed.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' in an ETL pipeline means that running the same job multiple times with the same data will produce the same result without creating duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the data center after a king.",
+      "B": "The legal requirement that data is subject to the laws and regulations of the country in which it is physically located.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL command would you use to 'Delete' all data from a table while keeping the table structure intact, often used in a 'Truncate and Load' strategy?",
+    "options": {
+      "A": "DROP TABLE",
+      "B": "TRUNCATE TABLE",
+      "C": "REMOVE ALL",
+      "D": "CLEAR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL 'Metadata' can include information about the performance of the ETL jobs themselves (e.g., execution time).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deadlock' in an ETL context?",
+    "options": {
+      "A": "A physical lock on a server rack.",
+      "B": "A situation where two or more processes are waiting for each other to release database resources, causing the ETL job to hang.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The final test before a project is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Load Balancing' in an ETL tool can help distribute data processing tasks across multiple nodes in a cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' 'Impact Analysis'?",
+    "options": {
+      "A": "Analyzing the weight of the servers.",
+      "B": "The process of determining which downstream reports or systems will be affected if a specific source field is changed or deleted.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Rows Processed per Second' in an ETL job?",
+    "options": {
+      "A": "Throughput",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Performance 'Baselining' should be performed after every major code release.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Locking'?",
+    "options": {
+      "A": "Locking the physical server room.",
+      "B": "A mechanism that prevents multiple users from modifying the same data simultaneously to maintain data integrity.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'vCenter'?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' involves moving historical data to a separate 'History Table' while keeping only current data in the main table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for version 1.0",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Profiling'?",
+    "options": {
+      "A": "Naming the servers after famous people.",
+      "B": "Analyzing data from an existing source to collect statistics or informative summaries about that data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Skew' is a term used to describe an uneven distribution of data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Star Schema'?",
+    "options": {
+      "A": "Naming the database after stars.",
+      "B": "A database schema that consists of one central fact table surrounded by multiple dimension tables.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' processing time?",
+    "options": {
+      "A": "Mean Processing Time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL can help identify data quality issues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Snowflake Schema'?",
+    "options": {
+      "A": "A schema that is physically cold.",
+      "B": "A database schema that is a more complex version of the star schema, with normalized dimension tables.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Surrogate Keys' are used as primary keys in a data warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Change Data Capture' tracks changes in the source data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Workflow'?",
+    "options": {
+      "A": "The sequence of steps in an ETL job.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Change Data Capture (CDC) methodology is considered the most performant and least intrusive to the source production database?",
+    "options": {
+      "A": "Trigger-based CDC (creating shadows tables via DB triggers).",
+      "B": "Log-based CDC (reading the database transaction logs directly).",
+      "C": "Query-based CDC (using 'Last_Updated' timestamps).",
+      "D": "Full-table diffing (comparing source and target snapshots)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a distributed processing framework like Apache Spark, what does 'Data Skew' during a JOIN operation typically cause at the hardware level?",
+    "options": {
+      "A": "It causes all executors to run out of disk space simultaneously.",
+      "B": "A few executors process a disproportionately large amount of data, leading to 'Stragglers' that delay the entire job while other nodes sit idle.",
+      "C": "It automatically switches the processing to a single-threaded mode.",
+      "D": "It encrypts the shuffle files with a corrupted key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Idempotent' ETL pipeline is one that can be retried multiple times with the same input data without changing the final state of the target system or creating duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a 'Write-Ahead' log",
+      "D": "Only if the target is a NoSQL database"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Slowly Changing Dimension' (SCD) strategy is most effective for a multi-million row table where you need to track full history (Type 2) but also require a high-performance 'Current-Only' view without filtering on dates?",
+    "options": {
+      "A": "SCD Type 1",
+      "B": "SCD Type 6 (Hybrid of Type 1, 2, and 3).",
+      "C": "SCD Type 0",
+      "D": "SCD Type 4 (History Table)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical challenge of 'Schema Evolution' when using columnar file formats like Parquet or Avro in an ETL pipeline?",
+    "options": {
+      "A": "It makes the files physically heavier on the disk.",
+      "B": "Ensuring backward and forward compatibility so that older data can still be read by newer code, and newer data doesn't break older reports.",
+      "C": "Calculating the total number of bytes in a single column.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Big Data' ETL, what is 'Predicate Pushdown' and how does it optimize performance?",
+    "options": {
+      "A": "Pushing the server physically into the rack.",
+      "B": "Moving the filtering logic (WHERE clause) as close to the data source as possible to reduce the amount of data read and transferred over the network.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Broadcast Join' in a distributed ETL job is used when one of the tables is small enough to fit into the memory of every worker node, avoiding an expensive network shuffle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CSV files",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Bloom Filter' in a high-performance data extraction process?",
+    "options": {
+      "A": "To filter the air in the server room.",
+      "B": "A space-efficient probabilistic data structure used to quickly test whether an element is a member of a set, reducing unnecessary disk lookups.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific design pattern handles 'Late Arriving Dimensions' where a transaction arrives at the warehouse before the associated customer or product record has been created?",
+    "options": {
+      "A": "Discarding the transaction.",
+      "B": "Inferred Members (creating a placeholder dimension record with a surrogate key to be updated later).",
+      "C": "Stopping the ETL pipeline until the record appears.",
+      "D": "Encrypting the natural key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Exactly-once' processing semantics provide in a streaming ETL pipeline (e.g., using Flink or Kafka Streams)?",
+    "options": {
+      "A": "The system only processes one record per day.",
+      "B": "Even in the event of a failure and restart, the final results will reflect each input record being processed exactly one time, with no duplicates or missing data.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Checkpointing' in a data pipeline is the process of saving the state of the application to a reliable storage system to allow for recovery after a crash.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for batch jobs",
+      "D": "Only if the database is in the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary architectural role of a 'Dead Letter Queue' (DLQ) in an ETL pipeline?",
+    "options": {
+      "A": "To store old letters from the IT team.",
+      "B": "To isolate records that fail transformation or validation rules so the rest of the pipeline can continue while the failures are audited and re-processed.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Medallion Architecture' (Brone/Silver/Gold), what is typically the 'Grain' and format of the 'Silver' layer?",
+    "options": {
+      "A": "Raw files exactly as they came from the source.",
+      "B": "Cleaned, filtered, and augmented data, often stored in a columnar format, representing 'Single Version of Truth' entities.",
+      "C": "Highly aggregated data ready for BI dashboards.",
+      "D": "A backup of the entire database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Join' type can lead to a 'Cartesian Product' and potentially crash an ETL engine if the join keys are not properly defined?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "CROSS JOIN",
+      "C": "LEFT JOIN",
+      "D": "ANTI JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Delta Lake' or 'Iceberg' implementation, 'Acid Transactions' are supported on top of standard object storage (like S3) using a transaction log/metadata layer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for JSON files",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Columnar Compression' (e.g., Run-length encoding) and why is it effective in data warehousing?",
+    "options": {
+      "A": "Compressing the physical servers.",
+      "B": "Storing similar data types together in columns allows for high compression ratios and efficient reading of only the necessary columns for a query.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port must be allowed for an ETL tool to connect to a standard PostgreSQL database?",
+    "options": {
+      "A": "3306",
+      "B": "5432",
+      "C": "1433",
+      "D": "1521"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Surrogate Keys' help insulate the data warehouse from changes in the source system's natural keys (e.g., if a company changes their SKU format).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle' in a distributed data processing context?",
+    "options": {
+      "A": "Shuffling physical hard drives between nodes.",
+      "B": "The process of redistributing data across a cluster so that all records with the same key are on the same node, which is required for JOINs or Aggregations.",
+      "C": "A specialized way to encrypt database connections.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' indicates that an ETL job is 'I/O Bound' rather than 'CPU Bound'?",
+    "options": {
+      "A": "High CPU utilization across all cores.",
+      "B": "High Disk I/O Wait and low overall CPU percentage.",
+      "C": "The color of the dashboard is red.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Partitioning' on a large table in a data warehouse can significantly speed up queries by allowing the engine to skip reading entire folders or files of irrelevant data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted logs",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Two-Phase Commit' (2PC) protocol used for in a distributed ETL transaction?",
+    "options": {
+      "A": "To encrypt the logs twice.",
+      "B": "To coordinate all nodes in a distributed system to either all commit or all roll back a transaction, ensuring atomic consistency.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Action' in an ETL pipeline ensures that sensitive data is transformed into a non-reversible format for privacy compliance?",
+    "options": {
+      "A": "Masking",
+      "B": "Hashing",
+      "C": "Obfuscation",
+      "D": "Tokenization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In 'SCD Type 1', historical data is permanently lost once it is updated.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' impact analysis 'Back-tracing'?",
+    "options": {
+      "A": "Walking backward through the data center.",
+      "B": "The ability to trace a final report value back through every transformation and source to its original raw input for audit purposes.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'Spark UI' to monitor running ETL applications?",
+    "options": {
+      "A": "80",
+      "B": "4040",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Window Functions' in SQL allow you to perform calculations across a set of table rows that are related to the current row without using a GROUP BY clause.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for integer fields",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema on Read' vs 'Schema on Write'?",
+    "options": {
+      "A": "Writing the schema in a book.",
+      "B": "Schema on Write (Data Warehouse) validates data at ingestion; Schema on Read (Data Lake) applies structure only when the data is queried.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a distributed ETL environment is responsible for 'Serialization' of data for network transport?",
+    "options": {
+      "A": "The Router",
+      "B": "The Application Code / Codec (e.g., Kryo, Avro)",
+      "C": "The Physical Cable",
+      "D": "The Power Supply"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Snowflake' schema, dimension tables are normalized to Third Normal Form (3NF).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Locking' escalation?",
+    "options": {
+      "A": "Locking the physical server room.",
+      "B": "When the database automatically converts many small row-level locks into a single table-level lock to save memory, potentially blocking all other users.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'MySQL' database connections?",
+    "options": {
+      "A": "5432",
+      "B": "3306",
+      "C": "1433",
+      "D": "1521"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Event Sourcing' is an architectural pattern where changes to the application state are stored as a sequence of events, which can be replayed to rebuild the ETL target state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Change Data Capture' (CDC) 'Redo Log' mining?",
+    "options": {
+      "A": "Naming the servers after famous people.",
+      "B": "A high-performance CDC method that reads the database's internal redo/undo logs to capture changes without impacting the active database engine.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records in Flight' in a streaming ETL pipeline?",
+    "options": {
+      "A": "Throughput",
+      "B": "Backlog / Consumer Lag",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SCD Type 3' is rarely used because it only supports tracking a single previous value and doesn't scale to multiple changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Data Processing' 'Locality'?",
+    "options": {
+      "A": "The physical location of the server.",
+      "B": "The principle of moving the compute task to the node that already holds the required data to minimize network traffic.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based management (HTTPS) of an ETL orchestrator like Airflow?",
+    "options": {
+      "A": "80",
+      "B": "443 / 8080",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Paravirtualization' provides better performance than full virtualization because the guest OS is aware it's virtualized.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 95",
+      "D": "Only if using an IDE drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage Latency' (or I/O Wait) impact on an ETL job?",
+    "options": {
+      "A": "The time it takes to buy a new hard drive.",
+      "B": "High disk latency causes CPU wait cycles, leading to significant delays in processing large batches of records.",
+      "C": "A specialized way to encrypt the rule base.",
+      "D": "Hiring a new storage manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of CPU time the OS kernel is spending on 'System' tasks during an ETL shuffle?",
+    "options": {
+      "A": "User CPU",
+      "B": "System CPU / Kernel Time",
+      "C": "Idle CPU",
+      "D": "Wait CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DirectPath I/O' (or Passthrough) allows a VM to directly access a physical PCIe device, but it prevents the VM from using Live Migration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Anycast Routing' in a global infrastructure?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To allow the BGP network to route users to the 'closest' available server node using a shared IP address.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' encrypted management interfaces?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a horizontally scalable, multi-tenant long-term storage backend for metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation at the switch level?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "A security feature that prevents devices in different VLANs from communicating without a Layer 3 device.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' communication from ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' allows a hypervisor to assign more RAM than is physically available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' used for?",
+    "options": {
+      "A": "Moving a physical hard drive while the server is on.",
+      "B": "Moving a running virtual machine's disk files between different storage arrays without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'iSCSI' traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation Control Protocol) allows for the grouping of physical network ports into a single high-bandwidth logical link.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a data center?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying security rules to each individual workload to prevent lateral movement of attackers within the same subnet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' time series in a Prometheus server?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Star Schema, which table is usually at the center and contains the foreign keys to other tables?",
+    "options": {
+      "A": "Dimension Table",
+      "B": "Fact Table",
+      "C": "Reference Table",
+      "D": "Metadata Table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SQL command is used to combine two different result sets, removing any duplicate rows between them?",
+    "options": {
+      "A": "UNION",
+      "B": "UNION ALL",
+      "C": "JOIN",
+      "D": "INTERSECT"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Snowflake Schema' is generally more normalized than a Star Schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Natural Key'?",
+    "options": {
+      "A": "A key found in nature.",
+      "B": "A unique identifier that exists in the real world (e.g., a Social Security Number or a SKU) and is extracted from the source system.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an ETL job?",
+    "options": {
+      "A": "(Records Loaded / Records Extracted) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 2' maintains a full history of changes by adding new rows with timestamps.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance' policy?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "A framework for managing the quality, security, and use of an organization's data assets.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Records Rejected' due to validation errors?",
+    "options": {
+      "A": "Rejection Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL jobs should ideally be idempotent.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique system-assigned keys to replace natural keys in a data warehouse for better performance and decoupling.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' (Extract, Load, Transform) is often used with modern cloud data warehouses like Snowflake or BigQuery.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Cleaning' in ETL?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and correcting errors, inconsistencies, and inaccuracies in the dataset.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the processing of data in large blocks at scheduled times.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  }
+  ]
+}

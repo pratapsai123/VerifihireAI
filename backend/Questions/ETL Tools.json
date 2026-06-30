@@ -1,0 +1,2005 @@
+{ 
+  "skill": "ETL Tools", 
+  "questions": [
+    {
+    "question": "Which of the following is a leading enterprise ETL tool known for its long-standing legacy in data governance and complex on-premises migrations?",
+    "options": {
+      "A": "Informatica PowerCenter",
+      "B": "Microsoft Paint",
+      "C": "Google Chrome",
+      "D": "Slack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of modern cloud-native ETL, what does a 'no-code' or 'low-code' tool like Fivetran primarily automate?",
+    "options": {
+      "A": "Writing the application's CSS files.",
+      "B": "The extraction and loading of data from SaaS sources (like Salesforce) via pre-built connectors.",
+      "C": "The physical cooling of the server racks.",
+      "D": "Employee payroll processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Talend Open Studio is a popular open-source ETL tool that allows users to design data jobs using a graphical drag-and-drop interface.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile app development",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AWS service is a serverless data integration service that makes it easy to discover, prepare, and combine data for analytics?",
+    "options": {
+      "A": "AWS Glue",
+      "B": "AWS S3 (only storage)",
+      "C": "AWS EC2",
+      "D": "AWS Route 53"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Connector' in an ETL tool like Matillion or Airbyte?",
+    "options": {
+      "A": "A physical electrical plug for the server.",
+      "B": "A pre-configured component used to link to a specific data source or destination (e.g., a Google Ads connector).",
+      "C": "A specialized tool for cleaning monitors.",
+      "D": "A way to join two physical offices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these tools is primarily known as a 'Workflow Orchestrator' that manages the timing and dependencies of ETL jobs rather than performing the data movement itself?",
+    "options": {
+      "A": "Apache Airflow",
+      "B": "Informatica",
+      "C": "Talend",
+      "D": "Stitch"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Microsoft SSIS (SQL Server Integration Services) is typically used in environments that heavily rely on the Microsoft SQL Server ecosystem.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In an ETL tool's UI, what does a 'Pipeline' or 'Flow' represent?",
+    "options": {
+      "A": "A physical water pipe in the building.",
+      "B": "The visual representation of the path data takes from source to destination, including all transformation steps.",
+      "C": "A list of employee phone numbers.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of a 'Cloud-based' ETL tool (SaaS) over an on-premises installation?",
+    "options": {
+      "A": "It requires the user to buy physical hard drives.",
+      "B": "Reduced infrastructure management, automatic scaling, and easier connectivity to other cloud services.",
+      "C": "It makes the source code free for everyone.",
+      "D": "It only works during the daytime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Many modern ETL tools (like Matillion) actually perform 'ELT', where data is loaded into a warehouse like Snowflake and then transformed using the warehouse's compute power.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only if using a 64-bit CPU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in an ETL tool is used to 'schedule' a job to run every night at 2:00 AM?",
+    "options": {
+      "A": "The Scheduler",
+      "B": "The Transformer",
+      "C": "The Extractor",
+      "D": "The Monitor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CDC' (Change Data Capture) capability in an ETL tool?",
+    "options": {
+      "A": "Capturing data only when the computer crashes.",
+      "B": "A feature that identifies and moves only the records that have changed at the source since the last run.",
+      "C": "Encrypting the database passwords.",
+      "D": "Monitoring the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ETL tools often provide 'Data Profiling' features to help users understand the quality and structure of their source data before moving it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mapping' in an ETL tool's workspace?",
+    "options": {
+      "A": "Creating a physical map of the data center.",
+      "B": "Defining the relationship between source columns and target columns (e.g., 'src_id' goes to 'target_customer_id').",
+      "C": "A specialized way to name VM folders.",
+      "D": "Finding a lost file on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Transformation' component found in most drag-and-drop ETL tools?",
+    "options": {
+      "A": "Filter",
+      "B": "Join",
+      "C": "Aggregate (Sum/Avg)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Stitch is an example of a simple 'Extract and Load' (EL) tool that focuses on moving data into a warehouse with minimal transformation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for on-prem databases",
+      "D": "Only if the data is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Metadata Management' in a tool like Informatica?",
+    "options": {
+      "A": "To store the weight of the server rack.",
+      "B": "To track and manage information about the data's origin, format, and lineage throughout the organization.",
+      "C": "To encrypt network signals.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Google Cloud service is a fully managed, code-free data integration service with a visual interface?",
+    "options": {
+      "A": "Cloud Data Fusion",
+      "B": "Google Sheets",
+      "C": "Google Drive",
+      "D": "Cloud Search"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In most ETL tools, an 'OnComponentError' trigger can be used to notify an admin if a specific part of the job fails.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the team is over 50 people",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Staging Layer' usually used for within an ETL tool's process?",
+    "options": {
+      "A": "A physical stage for presentations.",
+      "B": "An intermediate location to store raw data before complex transformations are applied.",
+      "C": "The final report shown to the CEO.",
+      "D": "A folder for deleted software updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is known for its 'AI-powered' no-code platform and extensive connector library for enterprise data management?",
+    "options": {
+      "A": "Astera Centerprise",
+      "B": "Microsoft Word",
+      "C": "Adobe Reader",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL tools can often handle 'Semi-structured' data like JSON files from web APIs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for on-prem servers",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of a 'Lookup' transformation in a tool like Informatica or Talend?",
+    "options": {
+      "A": "To find a lost password.",
+      "B": "To retrieve data from a separate table or file based on a key (e.g., looking up a 'City Name' using a 'Zip Code').",
+      "C": "To encrypt the database connection.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Data Lineage' in an ETL tool?",
+    "options": {
+      "A": "The history of the server manufacturer.",
+      "B": "The visual path showing where data came from and how it was changed before reaching its destination.",
+      "C": "The physical length of the fiber cables.",
+      "D": "The number of users logged into the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Azure Data Factory (ADF) uses 'Activities' (like Copy or Databricks Notebook) to define the steps in a data pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Evolution' in a tool like Hevo Data?",
+    "options": {
+      "A": "Manually changing the names of all tables every month.",
+      "B": "The tool's ability to automatically detect and apply changes (like new columns) from the source to the target warehouse.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in an ETL job allows you to 'Join' data from two different sources (e.g., a SQL table and a CSV file)?",
+    "options": {
+      "A": "The Joiner / Join Transformation",
+      "B": "The Filter",
+      "C": "The Loader",
+      "D": "The Router"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Many ETL tools offer 'Pre-built Templates' for common business scenarios like 'Salesforce to Snowflake'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Processing' in an ETL tool?",
+    "options": {
+      "A": "Hiring a batch of new employees.",
+      "B": "Processing data in large, discrete groups at scheduled intervals (e.g., nightly).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The speed of the download connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Self-Service' ETL tools for business analysts?",
+    "options": {
+      "A": "They allow non-technical users to build simple data pipelines without waiting for IT.",
+      "B": "They remove the need for a database entirely.",
+      "C": "They make the internet speed faster.",
+      "D": "They backup all personal emails automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL tools can be used to 'Anonymize' or 'Mask' sensitive data (like Social Security Numbers) before loading it into a reporting environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banks",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Variable' or 'Parameter' do in an ETL job?",
+    "options": {
+      "A": "Allows you to reuse the same job for different environments (e.g., changing the 'database_name' from 'test' to 'prod' easily).",
+      "B": "Deletes the source data after extraction.",
+      "C": "Encrypts the source code.",
+      "D": "Calculates the annual cloud bill."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Talend, what is a 'Context Variable'?",
+    "options": {
+      "A": "A variable that only works in the context of a specific office.",
+      "B": "A parameter whose value can change depending on the environment (context) in which the job is running.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Oracle Data Integrator (ODI) is an ELT tool that leverages the power of the target database to perform transformations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only for MySQL databases"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit Logging' in an ETL platform?",
+    "options": {
+      "A": "Wiping a server physically.",
+      "B": "Recording details about who ran a job, when it ran, and whether it succeeded or failed for compliance purposes.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Rows Rejected' by an ETL tool because of data quality errors?",
+    "options": {
+      "A": "Reject Count / Error Rows",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Fivetran is a 'fully managed' service, meaning the user does not need to worry about hosting the software or managing the servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Unit' of work in an ETL tool often called?",
+    "options": {
+      "A": "A Job or a Task",
+      "B": "A Folder",
+      "C": "A Pixel",
+      "D": "A Byte"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool uses the 'Python' language as its primary way to define data pipelines and orchestration logic?",
+    "options": {
+      "A": "Apache Airflow",
+      "B": "Informatica",
+      "C": "SQL Server",
+      "D": "Excel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Scalability' in a tool like AWS Glue means it can automatically provision more resources to handle larger datasets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Change Data Capture' tracks changes in the source data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Workflow'?",
+    "options": {
+      "A": "The sequence of steps in an ETL job.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Informatica, what is a 'Transformation'?",
+    "options": {
+      "A": "A rule or function applied to data to change its format or content.",
+      "B": "The process of buying new hardware.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SQL command is used to combine two result sets into one, including duplicates?",
+    "options": {
+      "A": "UNION ALL",
+      "B": "UNION",
+      "C": "JOIN",
+      "D": "MERGE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Data Mart' is a subset of a Data Warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Reconciliation'?",
+    "options": {
+      "A": "Comparing source and target data to ensure they match.",
+      "B": "Deleting the data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' execution time?",
+    "options": {
+      "A": "Mean execution time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL can help identify data quality issues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Snowflake Schema'?",
+    "options": {
+      "A": "A database schema with normalized dimension tables.",
+      "B": "A schema that is physically cold.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Surrogate Keys' are used as primary keys in a data warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Change Data Capture' tracks changes in the source data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Workflow'?",
+    "options": {
+      "A": "The sequence of steps in an ETL job.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Informatica PowerCenter' repository?",
+    "options": {
+      "A": "A database that stores metadata for the PowerCenter system.",
+      "B": "A physical box for servers.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SQL command is used to 'Insert' data into a table?",
+    "options": {
+      "A": "INSERT INTO",
+      "B": "UPDATE",
+      "C": "SELECT",
+      "D": "DELETE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Talend can connect to Big Data systems like Hadoop.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Staging'?",
+    "options": {
+      "A": "Temporarily storing raw data before transformation.",
+      "B": "Wiping the hard drive.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is common in traditional ETL.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Tool' UI?",
+    "options": {
+      "A": "A graphical interface to design data flows.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Connections'?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud ETL tools reduce infrastructure management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Informatica PowerCenter, what is the primary architectural difference between a 'Connected' and an 'Unconnected' Lookup transformation?",
+    "options": {
+      "A": "Connected Lookups only work with flat files; Unconnected only with SQL.",
+      "B": "A Connected Lookup is part of the mapping pipeline and returns multiple ports; an Unconnected Lookup is called from an expression and returns only one port.",
+      "C": "Unconnected Lookups cannot use a cache.",
+      "D": "Connected Lookups are only used in the 'Load' stage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Talend component is considered the most powerful for complex joins and multi-output routing, often replacing several individual Informatica-style transformations?",
+    "options": {
+      "A": "tJoin",
+      "B": "tMap",
+      "C": "tAggregateRow",
+      "D": "tFilterRow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS Glue, a 'Crawler' is used to automatically scan data in S3 to infer the schema and update the Data Catalog.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CSV files",
+      "D": "Only if using the PySpark engine"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When using Azure Data Factory (ADF), which 'Activity' would you use to execute a stored procedure in an Azure SQL Database as part of a pipeline?",
+    "options": {
+      "A": "Copy Activity",
+      "B": "Stored Procedure Activity",
+      "C": "Web Activity",
+      "D": "Lookup Activity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of 'Pushdown Optimization' (PDO) in Informatica or Matillion?",
+    "options": {
+      "A": "To compress the source files before extraction.",
+      "B": "To offload transformation logic to the source or target database by generating and executing native SQL queries instead of processing data in the ETL server memory.",
+      "C": "To automatically delete rows that contain Null values.",
+      "D": "To monitor the physical power consumption of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an ETL tool that connects to a REST API, why is 'Pagination' support critical for large datasets?",
+    "options": {
+      "A": "To ensure the data is encrypted during transit.",
+      "B": "To prevent timeouts and memory errors by fetching data in smaller, manageable 'pages' or chunks rather than one giant request.",
+      "C": "To change the language of the API response.",
+      "D": "To increase the physical speed of the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fivetran' follows an ELT model where it first loads raw data into a destination (like Snowflake) and then allows for transformations via SQL or dbt integration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Salesforce sources",
+      "D": "Only if using the 'Free' tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Talend, what is the 'Die on error' checkbox used for in a component's settings?",
+    "options": {
+      "A": "To restart the whole server if an error occurs.",
+      "B": "To stop the execution of the entire job immediately if the specific component encounters an error.",
+      "C": "To delete all data processed so far if an error is found.",
+      "D": "To ignore the error and continue to the next record."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AWS Glue feature allows for a 'self-describing' data structure that handles schema inconsistencies (like a field being an Int in one row and a String in another) better than a standard Spark DataFrame?",
+    "options": {
+      "A": "Static Frame",
+      "B": "Dynamic Frame",
+      "C": "Schema Frame",
+      "D": "Logic Frame"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Job Bookmarks' in AWS Glue?",
+    "options": {
+      "A": "To save a link to the job's documentation.",
+      "B": "To persist state information and prevent the job from re-processing data that has already been successfully moved in a previous run.",
+      "C": "To encrypt the job's source code.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Azure Data Factory, a 'Linked Service' defines the connection information to an external data source (like a server name and credentials).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Blob storage",
+      "D": "Only if using a Managed Identity"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Informatica component is an 'Active' transformation because it can change the number of rows passing through it by splitting one row into multiple rows based on a repeating field?",
+    "options": {
+      "A": "Filter",
+      "B": "Normalizer",
+      "C": "Expression",
+      "D": "Sequence Generator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Matillion, what is the difference between an 'Orchestration Job' and a 'Transformation Job'?",
+    "options": {
+      "A": "Orchestration moves data; Transformation only manages the UI.",
+      "B": "Orchestration manages environmental tasks (creating tables, loading files); Transformation performs the SQL-based logic inside the warehouse.",
+      "C": "Transformation is only for Python scripts.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Airbyte' is an open-source ELT tool that allows you to build custom connectors using their CDK (Connector Development Kit).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for enterprise customers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In an ETL tool, what does 'Incremental Delta' logic refer to?",
+    "options": {
+      "A": "Deleting the oldest delta in a database.",
+      "B": "Fetching only the records that have been created or modified since a specific 'Watermark' (like a timestamp).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a higher floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Control Flow' activity in Azure Data Factory allows you to iterate over a collection of items (like a list of file names) and run a set of activities for each one?",
+    "options": {
+      "A": "If Condition",
+      "B": "ForEach Activity",
+      "C": "Until Activity",
+      "D": "Execute Pipeline"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Quality' components in Talend can be used to perform 'Fuzzy Matching' to identify similar records that aren't exact matches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the subscription edition",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Informatica, which transformation would you use to divide one input stream into multiple output streams based on different conditions (e.g., one stream for Dept 10, another for Dept 20)?",
+    "options": {
+      "A": "Filter",
+      "B": "Router",
+      "C": "Sorter",
+      "D": "Joiner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Gateway' (like the Power BI Gateway or ADF Self-hosted IR) in a cloud ETL setup?",
+    "options": {
+      "A": "To act as a firewall for the cloud.",
+      "B": "To provide a secure bridge for the cloud ETL service to access on-premises data sources located behind a corporate firewall.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stitch' (a Talend company) supports complex multi-stage transformations within its UI before loading data.",
+    "options": {
+      "A": "False (Stitch is a lightweight EL tool; transformations are usually handled downstream).",
+      "B": "True",
+      "C": "Only for SQL targets",
+      "D": "Only if using the Enterprise tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'AWS Glue DataBrew', what is the main benefit for non-technical users?",
+    "options": {
+      "A": "It writes Python code for them.",
+      "B": "It provides a visual, spreadsheet-like interface to clean and normalize data without writing any code.",
+      "C": "It acts as a physical hardware firewall.",
+      "D": "It makes the source code free for everyone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' code on an Informatica session indicates that the job failed because it couldn't acquire a lock on the target table?",
+    "options": {
+      "A": "Deadlock / Lock Contention",
+      "B": "Timeout",
+      "C": "Out of Memory",
+      "D": "Connectivity Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Talend 'Joblets' are reusable sets of components that can be shared across multiple different Jobs to ensure logic consistency.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Dynamic Partitioning' in a tool like AWS Glue or Hive?",
+    "options": {
+      "A": "Manually moving files into folders.",
+      "B": "Automatically creating and loading data into new partitions based on the values in a specific column (like 'year' or 'month') at runtime.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Azure Data Factory component is used to define the specific 'structure' (schema) of the data being read or written?",
+    "options": {
+      "A": "Linked Service",
+      "B": "Dataset",
+      "C": "Pipeline",
+      "D": "Trigger"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Informatica 'Active' transformations can change the row count, while 'Passive' transformations never change the row count.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL sources",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'API Throttling' and how should an ETL tool handle it?",
+    "options": {
+      "A": "A physical blockage in a network cable.",
+      "B": "When an API limits the number of requests; the tool should implement 'Retry' logic with 'Backoff' to wait before trying again.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Talend, what does the 'tPreJob' component do?",
+    "options": {
+      "A": "Deletes the job before it starts.",
+      "B": "Triggers a set of tasks (like opening connections or logging) that must be completed before the main processing begins.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AWS Glue 'Interactive Sessions' allow data engineers to write and test ETL code in real-time using Jupyter notebooks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Scala",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Column Masking' in a data integration tool used for?",
+    "options": {
+      "A": "To change the color of the UI columns.",
+      "B": "To redact or obfuscate sensitive data in specific columns (like PII) for security and compliance during the transfer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Informatica Administration Console' by default?",
+    "options": {
+      "A": "8443",
+      "B": "9092",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Matillion is specifically optimized for 'Cloud Data Warehouses' like Snowflake, Amazon Redshift, and Google BigQuery.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Parallelism' setting in an Informatica session?",
+    "options": {
+      "A": "Running two physical servers at once.",
+      "B": "The degree to which the Integration Service can split a mapping into multiple threads to process data concurrently for better performance.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based management (HTTPS) of an ADF Integration Runtime?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Schema Drift' in Azure Data Factory allows the pipeline to continue running even if the source schema changes unexpectedly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pushdown Optimization' 'Full' mode in Informatica?",
+    "options": {
+      "A": "Pushing the server physically.",
+      "B": "Pushing both the extraction and transformation logic entirely into the target database.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Talend can handle 'Big Data' processing by generating MapReduce or Spark code that runs natively on a Hadoop cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' 'Traceability'?",
+    "options": {
+      "A": "Walking backward through the data center.",
+      "B": "The ability to follow a piece of data from its origin to its final state in a report, ensuring auditability and impact analysis.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Rows Succeeded' vs 'Rows Failed' in an ETL job report?",
+    "options": {
+      "A": "Success / Failure Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is an ETL tool for transforming log data into metrics.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for ETL workloads?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using separate network segments to ensure that high-volume ETL traffic doesn't interfere with general application traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a common feature in ETL server virtualization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' integration in an ETL tool?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "The tool's ability to natively read and write data to cloud storage buckets like Amazon S3 or Google Cloud Storage.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for high-speed ETL storage?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide higher bandwidth for ETL servers by combining multiple network links.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for secure data movement?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining specific firewall rules for each ETL job to ensure it can only access the specific databases it needs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Buffer Block' usage in an Informatica session?",
+    "options": {
+      "A": "Buffer usage percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is supported by most enterprise ETL tools through historical tracking components.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the laws of the country where it is located, affecting where ETL servers can be hosted.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Transformation Time' vs 'Extraction Time'?",
+    "options": {
+      "A": "Processing Breakdown",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in an ETL tool ensures that running a job twice doesn't create duplicate records.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in an ETL tool?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The automated process of creating unique, non-business keys for a target table to maintain data integrity.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' is more efficient for modern cloud data warehouses because it leverages their massive parallel processing (MPP) power.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an ETL tool?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and fixing data errors during the transformation phase.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically used for move large amounts of data at regular intervals.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Monitor'?",
+    "options": {
+      "A": "A physical screen for the server.",
+      "B": "A dashboard or UI component that shows the real-time status and performance of running jobs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an ETL job?",
+    "options": {
+      "A": "Records Succeeded %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a one-time process for ETL tools.",
+    "options": {
+      "A": "False (It is a continuous lifecycle of discovering and patching vulnerabilities in the tool and its connectors).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Governance' for ETL?",
+    "options": {
+      "A": "A framework for managing security tasks using automated tools and code.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security testing earlier in the ETL development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for data pipelines?",
+    "options": {
+      "A": "A structured process to identify and evaluate security threats to a data pipeline.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Informatica PowerCenter, what is the primary consequence of setting the 'DTM Buffer Size' too low for a session processing high-precision data with complex transformations?",
+    "options": {
+      "A": "The session automatically switches to a shell command mode.",
+      "B": "Excessive 'Buffer Block' swapping to disk, significantly increasing I/O wait and decreasing processing throughput.",
+      "C": "The target table is automatically truncated to save space.",
+      "D": "The encryption keys for the source connection are invalidated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary architectural advantage of 'Partial Pushdown Optimization' compared to 'Full Pushdown Optimization' in a hybrid cloud ETL environment?",
+    "options": {
+      "A": "Partial PDO is always faster than Full PDO.",
+      "B": "It allows the ETL engine to process transformations that are not supported by the target database's native SQL dialect while still offloading heavy filtering to the source.",
+      "C": "It eliminates the need for any network connectivity between source and target.",
+      "D": "It requires only a 32-bit CPU to execute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In AWS Glue, 'Shuffle Spilling' occurs when the Spark executors run out of RAM and must write intermediate data to local disk, which can be mitigated by increasing the 'Worker Type' (e.g., from G.1X to G.2X).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python shell jobs",
+      "D": "Only if using the Blueprints feature"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When building a custom connector using a tool's SDK (e.g., Fivetran or Airbyte CDK), why is 'Idempotency' at the record level mandatory for reliable data syncing?",
+    "options": {
+      "A": "To ensure the source code is easier to debug.",
+      "B": "To prevent data duplication in the target warehouse in the event of a network failure and subsequent job retry.",
+      "C": "To encrypt the API payload with a unique salt.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the 'Informatica Secure Agent' to communicate with the Informatica Intelligent Cloud Services (IICS) control plane?",
+    "options": {
+      "A": "TCP 443 (Outbound initiated, typically no inbound port is required through the firewall).",
+      "B": "TCP 8080",
+      "C": "TCP 1433",
+      "D": "UDP 500"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Azure Data Factory, what is the role of 'Managed Identity' in ensuring a Zero Trust security model for data movement?",
+    "options": {
+      "A": "It identifies the physical location of the administrator.",
+      "B": "It allows the ADF service to authenticate to other Azure resources (like Data Lake or Key Vault) without storing static credentials in the pipeline.",
+      "C": "It acts as a hardware-based encryption key.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Resource Allocation' in a cloud ETL tool allows the engine to scale executors down during the 'Extraction' phase and scale them up for heavy 'Transformation' logic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' specifically in the context of an AWS Glue job reading Parquet files from S3?",
+    "options": {
+      "A": "Manually pushing the server into the rack.",
+      "B": "The ability of the Spark engine to read only the specific Parquet 'row groups' that match the filter criteria, drastically reducing S3 GET requests and network traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal mechanism in a distributed ETL tool prevents 'Data Skew' from causing one worker node to run out of memory during a massive JOIN operation?",
+    "options": {
+      "A": "Salting the join keys to redistribute the data more evenly across the cluster.",
+      "B": "Deleting the skewed data points automatically.",
+      "C": "Moving the entire job to a single node with 1TB of RAM.",
+      "D": "Encrypting the join keys with a random salt."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Matillion, an 'Environment' variable can be used to dynamically change the database schema name based on whether the job is running in 'Dev', 'Test', or 'Prod'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Snowflake targets",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'API Rate Limit' detection and 'Backoff' algorithms in an enterprise ELT tool like Fivetran?",
+    "options": {
+      "A": "To slow down the internet on purpose.",
+      "B": "To detect when a SaaS source (like Shopify) is throttling requests and automatically wait for a calculated duration before retrying to ensure the job eventually completes.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Multi-tenant' ETL platform architecture, how is 'Data Isolation' typically enforced at the storage layer?",
+    "options": {
+      "A": "By using different colors for different tenants' folders.",
+      "B": "Using unique Customer-Managed Keys (CMK) and separate logical storage containers or database schemas for every tenant.",
+      "C": "Hiring a separate admin for every tenant.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Uptime' monitoring for an ETL secure agent is critical because if the agent goes offline, all on-premises data extractions for that organization will fail.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Two-Phase Commit' (2PC) protocol used for in a distributed ETL tool?",
+    "options": {
+      "A": "To encrypt the logs twice.",
+      "B": "To ensure that data is committed across multiple distributed databases atomically—either all sites commit or all roll back.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on an Azure Data Factory pipeline indicates that an activity is waiting for an available 'Integration Runtime' slot?",
+    "options": {
+      "A": "Queued",
+      "B": "Running",
+      "C": "Failed",
+      "D": "Succeeded"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Sink' transformation in a mapping defines the final format and location where the data will be written.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CSV targets",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Schema Drift' handling in a tool like Hevo Data or ADF?",
+    "options": {
+      "A": "To stop the job immediately if a column name changes.",
+      "B": "To automatically detect new columns at the source and create corresponding columns in the target warehouse without manual intervention.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' used for web management of an ETL orchestrator?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an open-source ETL tool designed for high-performance streaming of social media data.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation in an ETL cluster architecture?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "A security practice that separates ETL traffic from general network traffic to prevent packet sniffing and ensure dedicated bandwidth.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from ESXi hosts in a virtualized ETL environment?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' allows an ETL server host to allocate more RAM to VMs than is physically available, but it can lead to severe performance degradation if multiple jobs peak simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' used for in a high-availability ETL infrastructure?",
+    "options": {
+      "A": "Moving a physical hard drive while it is spinning.",
+      "B": "Moving a running ETL server's virtual disk files between storage arrays without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'iSCSI' traffic in a storage network?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' allows for the grouping of physical network ports into a single high-bandwidth logical link for heavy ETL workloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a secure ETL environment?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying security rules to each individual ETL job or container to prevent unauthorized lateral access to databases.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' being written to a Prometheus sink by an ETL job?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Informatica, a 'Passive' transformation never changes the number of rows passing through it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL sources",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pushdown Optimization' 'Source-Side' only?",
+    "options": {
+      "A": "Pushing the server physically.",
+      "B": "Generating SQL to perform filtering and simple transformations at the source database level, but returning the data to the ETL engine for final processing.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'MySQL' database connections?",
+    "options": {
+      "A": "3306",
+      "B": "5432",
+      "C": "1433",
+      "D": "1521"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a horizontally scalable long-term storage backend for metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for secure data integration?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using separate VLANs to ensure that sensitive data movement is logically isolated from the public internet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is common in ETL server virtualization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' integration in an ETL tool?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "The tool's ability to natively read/write data to cloud object stores like S3 or Azure Blob.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide higher bandwidth for ETL nodes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation'?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying security rules to each individual workload to prevent lateral movement.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a Prometheus sink?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is supported by most enterprise ETL tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the laws of the country where it is located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Transformation Time'?",
+    "options": {
+      "A": "Processing Breakdown",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in an ETL tool ensures that running a job twice doesn't create duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in an ETL tool?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The automated process of creating unique keys for a target table.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' is more efficient for modern data warehouses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an ETL tool?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and fixing data errors during transformation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is common in traditional ETL.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Tool' UI?",
+    "options": {
+      "A": "A graphical interface to design flows.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Connections'?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Cloud ETL tools reduce infrastructure management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SCD Type 1' overwrite?",
+    "options": {
+      "A": "Overwriting existing data with no history.",
+      "B": "A physical tool for fixing servers.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing earlier in the ETL development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for data integration?",
+    "options": {
+      "A": "Identifying and evaluating security threats to a data pipeline.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of building secure modern data applications.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "Getting data into a system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed'?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Change Data Capture' tracks changes in the source data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ETL Workflow'?",
+    "options": {
+      "A": "The sequence of steps in an ETL job.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Informatica, what is a 'Transformation'?",
+    "options": {
+      "A": "A rule applied to data to change its format.",
+      "B": "The process of buying new hardware.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SQL command is used to combine result sets?",
+    "options": {
+      "A": "UNION",
+      "B": "JOIN",
+      "C": "MERGE",
+      "D": "UPDATE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Data Mart' is a subset of a Data Warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Reconciliation'?",
+    "options": {
+      "A": "Verifying that source and target data match.",
+      "B": "Deleting the data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' execution time?",
+    "options": {
+      "A": "Mean execution time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ETL can help identify data quality issues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  }
+  ]
+}

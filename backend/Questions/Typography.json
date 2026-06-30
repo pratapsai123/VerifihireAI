@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Typography", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of 'Typography' in graphic and digital design?",
+    "options": {
+      "A": "To write the backend server scripts for font hosting strictly.",
+      "B": "To masterfully arrange type to make written language technically legible, readable, and visually appealing when displayed.",
+      "C": "A specialized software for designing physical architectural blueprints strictly.",
+      "D": "To increase the frame rate of the user's screen refresh."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the invisible line upon which most characters technically sit?",
+    "options": {
+      "A": "Mean Line",
+      "B": "Baseline",
+      "C": "Rasterization Line strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Serif' typefaces technically feature small decorative strokes or 'feet' at the ends of the character lines.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term refers to the vertical space masterfully managed between lines of text in a paragraph?",
+    "options": {
+      "A": "Kerning",
+      "B": "Leading",
+      "C": "Binary Header strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Kerning' in a typography layout?",
+    "options": {
+      "A": "To calculate the physical weight of the paper.",
+      "B": "To masterfully adjust the horizontal space between two specific technical characters to achieve visual balance.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To physically lock the font size on a web page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Sans-Serif' typefaces technically lack the small strokes at the ends of characters and are masterfully used for a clean, modern look.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Hierarchy' to technically guide the reader's eye to the most important technical information first?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Visual Prioritization Orchestration / Scale Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Ascender' technically defined as in character anatomy?",
+    "options": {
+      "A": "The speed at which a font loads on a screen.",
+      "B": "The technical part of a lowercase letter that masterfully technicaly extends above the mean line (e.g., in 'h' or 'd').",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tracking' (Letter-Spacing) technically refers to the masterfully managed horizontal space across an entire block or technical string of text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of a 'Font Family'?",
+    "options": {
+      "A": "A physical group of designers related by blood.",
+      "B": "The technical masterfully assigned collection of related technical typefaces (e.g., Bold, Italic, Light) sharing a core design.",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Typography benefits for 'Readability'? (Select all that apply)",
+    "options": {
+      "A": "Optimizing technical 'Line Length' to prevent eye strain",
+      "B": "Ensuring masterfully perceived technical 'Contrast' between text and background",
+      "C": "Buying physical snacks for the type designers",
+      "D": "Providing masterfully clear technical 'Hierarchy' via font weight"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Descender' masterfully used to describe in character anatomy?",
+    "options": {
+      "A": "Ensuring the physical office floor is level.",
+      "B": "The technical part of a letter that masterfully technicaly extends below the baseline (e.g., in 'g' or 'y').",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'X-Height' refers to the technical Always-On distance between the baseline and the mean line of lowercase letters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Alignment' in typography?",
+    "options": {
+      "A": "Using a physical ruler to measure the screen.",
+      "B": "The technical process of masterfully arranging text relative to a margin (e.g., Left, Right, Centered, Justified).",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Display' type technically?",
+    "options": {
+      "A": "A technical category of masterfully managed fonts intended for large headings and masterfully assigned visual impact (30pt+).",
+      "B": "A physical monitor in a server room.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Monospaced' typefaces technically feature characters that all masterfully technicaly occupy the exact same horizontal space.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes a 'Typeface' vs. a 'Font'?",
+    "options": {
+      "A": "The weight of the ink on paper.",
+      "B": "A Typeface is the masterfully assigned 'Creative Design', while a Font is the technical 'Digital File' used to display it.",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cap Height' technically intended to measure?",
+    "options": {
+      "A": "Making sure the designer is wearing a hat.",
+      "B": "The masterfully managed technical distance from the baseline to the masterfully assigned top of flat capital letters (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Legibility' technically refers to how masterfully easy it is to technicaly distinguish individual characters from one another.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of a 'Specimen' 'Sheet'?",
+    "options": {
+      "A": "To technically provide a masterfully definitive record of a typeface's masterfully intended look and technical performance across sizes.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Typography' classifications? (Select all that apply)",
+    "options": {
+      "A": "Slab Serif",
+      "B": "Geometric Sans",
+      "C": "The SQL query parser",
+      "D": "Script / Cursive"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Counter' significance in character anatomy?",
+    "options": {
+      "A": "Hiring a person named Counter.",
+      "B": "The technical masterfully assigned empty technical space fully or masterfully partially enclosed by a letterform (e.g., inside an 'o' or 'p').",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Hierarchy' technically in type?",
+    "options": {
+      "A": "A technical masterfully managed system of masterfully organizing content by scale, weight, and masterfully handled color to signal importance.",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Type' occur when a designer masterfully masterfully assumes a decorative script will be legible for technical body text when it technically is masterfully managed for headings only.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Typography benefits for 'Accessibility'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Line Height' (leading) is masterfully sufficient for readability",
+      "B": "Providing masterfully clear technical 'Contrast' ratios for text accessibility",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Facilitating masterfully clear technical distinction between similar characters like 'I', 'l', and '1'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Point' (pt) technically used for in typography?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "A technical masterfully assigned unit of measurement masterfully used to define the masterfully handled size of type and technical spacing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Widow' or 'Orphan' tracking in a layout?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of masterfully assigned technical words or masterfully handled short lines left isolated at the start or masterfully assigned end of a column.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Measure' refers to the technical Always-On width of a single masterfully managed column of text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Typography tools? (Select all that apply)",
+    "options": {
+      "A": "Adobe Fonts / Typekit",
+      "B": "Google Fonts",
+      "C": "The number of security cameras in the office",
+      "D": "WhatTheFont / Font Squirrel"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Font' 'Weight' logic in typography?",
+    "options": {
+      "A": "Building a physical warehouse for heavy letters.",
+      "B": "The technical masterfully assigned understanding of the masterfully handled thickness of the character strokes (e.g., Thin, Regular, Bold).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Justification' technically?",
+    "options": {
+      "A": "A technical masterfully managed alignment setting where text masterfully is technicaly expanded to fill the entire masterfully assigned width of a column.",
+      "B": "Hiring a person named Justify.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Pairing' occurs when two typefaces masterfully masterfully conflict technicaly rather than masterfully complement each other in a design.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Consistency' Strategy in typography? (Select all that apply)",
+    "options": {
+      "A": "Standardizing technical type styles masterfully for global brand consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Templates' for automated type technical style collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Ligature' technically used for?",
+    "options": {
+      "A": "To technically identify and masterfully merge two or more masterfully handled technical characters into a single masterfully finalized visual unit (e.g., 'fi').",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Type' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' un-standardized font weights and manual CSS overrides, which makes the layout technicaly 'Riskier' over time.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Kerning' logs are technical Always-On standards that masterfully allow designers to masterfully manage and technicaly mirror the spacing performance of a primary typeface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Type' Categories? (Select all that apply)",
+    "options": {
+      "A": "Humanist",
+      "B": "Transitional",
+      "C": "The number of security cameras in the office",
+      "D": "Modern / Didone"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Line' 'Length' significance in support?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical line widths masterfully remain masterfully consistent with the masterfully assigned optimal reading technical experience (45-75 chars).",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a typo or font error?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a technical type flaw masterfully occurring technicaly until it is masterfully flagged in the technical QA report.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encodings' occur when a lead masterfully enforces 1990 'ASCII-only' requirements for a 2026 'Unicode-Native' typography era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Type 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Web Fonts' are masterfully optimized",
+      "B": "Validating the security technical configuration of the font server",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if the type technical goals masterfully match the brand specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Font' 'Pairing' significance in management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where two or more typefaces masterfully are technicaly chosen to work together to ensure masterfully managed visual success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Type' 'Event' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about font updates, masterfully finalized layout changes, and masterfully applied hardware alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Type management technically includes 'Loading Validation' by masterfully defining the technical performance masterfully given to a user after every technical font request.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Type priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical brand alignment",
+      "B": "Minimizing technical font rendering latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical type documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Rhythm' Analysis in type?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Space' masterfully moving through the layout to masterfully identify technical friction points.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in typesetting?",
+    "options": {
+      "A": "The average technical duration that a type technical baseline masterfully remains performance-stable before an unplanned technical layout disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully masterfully assumes a font is 100% stable for all devices when it technicaly is masterfully only optimized for one browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Workflow' Strategy in typography? (Select all that apply)",
+    "options": {
+      "A": "Standardizing type technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated type technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Typeface' significance in a brand?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary font masterfully intended to technicaly capture the core masterfully assigned value that a company masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Type' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of type approvals masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Style' 'Shadowing' is a technical Always-On standard that masterfully allows designers to masterfully manage and technicaly mirror the configuration of a primary font style.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Type priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical font transit latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical type documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'User' 'Reading' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global type engagement strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a type strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a designer masterfully masterfully assumes an interaction is final when it technicaly is masterfully preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' type design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring type portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Type' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that type data masterfully follows all legal architectural rules after every technical transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Style' 'Transit' tracking?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well type states (like style changes) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' type era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for typography? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying layout drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing type technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Type' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup type register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the type integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Type regions' occur when a lead masterfully masterfully assumes a font is available globally when it technicaly is masterfully regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Type roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Type Architect",
+      "B": "Systemic Type Specialist",
+      "C": "Type Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Typography' 'Architecture' Analysis?",
+    "options": {
+      "A": "The technical evaluation of characters, goals, and style nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical evolution allows a single font file to behave like an entire font family by masterfully using 'Axes' (e.g., Weight, Width, Slant) to technicaly interpolate between styles?",
+    "options": {
+      "A": "Static TrueType strictly",
+      "B": "Variable Fonts (OpenType Font Variations)",
+      "C": "Rasterization Delay strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Vertical Rhythm' is a technical orchestration technique where the masterfully managed leading and margins are technicaly aligned to a masterfully assigned baseline grid to create visual harmony.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Subsetting' a web font before masterfully deploying it to a global production environment?",
+    "options": {
+      "A": "To physically change the color of the characters.",
+      "B": "To technically reduce file size by masterfully removing unused glyphs (e.g., foreign characters) from the font file to improve performance (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live text editor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', which technical concept involves ensuring that font sizes technicaly adapt masterfully to the viewport width using units like 'vw' or 'clamp()' functions?",
+    "options": {
+      "A": "Monolithic Sizing",
+      "B": "Fluid Typography / Responsive Scaling",
+      "C": "The Recycle Bin strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Layout Engineering', what is the technical significance of the 'Em-box' in digital typography auditing?",
+    "options": {
+      "A": "It defines the physical color of the cardboard shipping box.",
+      "B": "The technical masterfully established Always-On square unit used to masterfully define the masterfully assigned bounding box for character design and spacing logic.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the size of the font on the admin console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'OpenType' features technically allow for advanced typographic effects like masterfully managed 'Small Caps', 'Oldstyle Figures', and 'Discretionary Ligatures' within a single font file.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Font-Display' properties (e.g., Swap, Block) to technically manage how text masterfully renders technicaly while a web font is masterfully loading?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Perceived Performance Orchestration / FOUT Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hinting' technically designed to achieve in low-resolution screen rendering?",
+    "options": {
+      "A": "Measuring the weight of physical paper books.",
+      "B": "To technically provide mathematical masterfully managed instructions that masterfully align font outlines to the masterfully assigned pixel grid for clarity (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for managing 'Typography Performance' at scale? (Select all that apply)",
+    "options": {
+      "A": "Implementing technical 'WOFF2' compression masterfully",
+      "B": "Utilizing masterfully configured 'Preconnect' hints for external font CDNs",
+      "C": "Buying physical snacks for the front-end leads",
+      "D": "Self-hosting technical fonts to masterfully minimize third-party DNS lookups"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: In 'Responsive Typography', the technical 'Modular Scale' must masterfully be verified to ensure that font sizes technicaly maintain a masterfully assigned mathematical ratio as they scale.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Contextual' 'Alternates' significance in an OpenType feature audit?",
+    "options": {
+      "A": "Ensuring the physical room temperature is level.",
+      "B": "The technical evaluation of how masterfully a font technicaly swaps characters based on masterfully assigned surrounding letters to create a more masterfully managed natural flow (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Render' (MTTR) for a web font payload?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A technical metric tracking organizational responsiveness by measuring the duration from a technical CSS request until the masterfully assigned text is visible on-screen.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Font Loading API' to technically manage the masterfully assigned 'Switch' between fallback and primary fonts?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "State Orchestration / Flash of Unstyled Text (FOUT) Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' expectations in typography occur when a lead masterfully promises '100% Visual Parity' while technicaly utilizing a masterfully managed 'Web-Safe-Only' fallback stack.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Type' 'Hardening' benefits? (Select all that apply)",
+    "options": {
+      "A": "Technically finalizing an Interaction Standard for masterfully global product alignment",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Reducing technical 'Stylistic Debt' masterfully by locking masterfully validated design tokens"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Optical' 'Sizing' significance in a variable font technical audit?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical act of masterfully adjusting the character technical structure based on the masterfully assigned display size to technically optimize legibility at small sizes (effect).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Type' 'Volatility' monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the frequency of masterfully identified rendering glitches, identifying an unstable technical behavioral baseline.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Tabular' 'Figures' logic technically refers to character technical settings where numbers all masterfully technicaly occupy the exact same horizontal space for masterfully assigned data alignment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' framework handles 'Automated' 'Font' 'Auditing'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Lighthouse / Font-Face / Webfont-Loader API orchestration",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Baseline' 'Grid' significance in a multi-column interaction support?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The technical masterfully assigned underlying framework used to technically ensure that all text masterfully aligns to a masterfully managed vertical rhythm (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Anti-Aliasing' logic technically in digital type?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical process of masterfully smoothing technical character edges by technically blending the pixels at the masterfully assigned boundary (effect).",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Mental Models' occur when a lead masterfully assumes 'System Fonts' technicaly provide the masterfully assigned same emotional impact as masterfully managed 'Custom Branding' typefaces.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Type' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Lead Type Architect (Defining core font hierarchies and token taxonomies)",
+      "B": "Front-end Performance Lead (Enforcing technical latency and rendering policies)",
+      "C": "Product Insights Manager (Monitoring technical readability MTBF and stability)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Kerning' 'Drift' discovery in an organizational typography audit?",
+    "options": {
+      "A": "Designing icons in a dark room.",
+      "B": "The technical process of identifying 'Manual' technical spacing overrides (cause) that masterfully impede the masterfully assigned global consistency (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Type' 'Error'?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long a technical interaction error exists before the masterfully configured 'Linter' flags the dropout.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scales' logic technically occurs when a designer masterfully attempts 'Fluid Typography' while the technical hardware masterfully enforces 'Static-Grid' technical rendering.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Style' 'Optimization' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical pages with technically high 'Type Weight' waste automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technicaly enforcing 'Variable-Font' masterfully managed range constraints across the entire fabric"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Visual' 'Resilience' in type?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Style reusability', 'MTTR for recent layout bugs', 'Baseline stability', and 'Identity integrity maturity'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Failures' (MTBSF) in type platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the typographic baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Typography Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Type' 'Analytics' for leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical pages with the highest 'Operational Waste' (Slow loading) automatically",
+      "B": "Predicting future 'Storage' needs based on historical growth in technical session data",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Accessibility Blindspots' in un-vetted technical type segments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Typography Component?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a style trigger (the CSS property) is isolated from the service 'What' (the brand intent), allowing for central masterfully updated standards.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Type' 'Technical' 'Debt' in an enterprise environment?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated font versions and manual CSS overrides, which makes the product technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a lead reports '100% Type Readiness' while the internal team is aware that 'Branch B' is technically suffering from character drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Type' 'Design' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Architecture Policy' (e.g. Mandatory Variable Font usage) via automated compliance linters",
+      "B": "Accelerating 'App Onboarding' through standardized Type Library Blueprints",
+      "C": "Ensuring 'Systemic' integrity for global interaction logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Resiliency' orchestration in a Typography squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted Type Modules' and 'Glyph Sinks' so local units can manage their own technical type health without manual roadblocks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Type' 'Success' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Interactive' failures and resets, identifying an unstable technical environment or masterfully inconsistent design logic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in typography leadership refers to a manager giving a 'Design Lead' a test machine that technicaly lacks the masterfully required Retina technical resolution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Typography? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Style' waste via automated auditing",
+      "B": "Predicting future market 'No-Code Tooling' needs based on technical adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Type Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in type automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful structural logic state (like a proven Responsive Heading pattern) from one site and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a technical type fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a structural fix being committed until 'Automated Smoke Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Static-Type' requirements for a 2026 'Cloud-Native' interaction environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Type' 'Design' 'Succession' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Typography Health",
+      "B": "Principal Type Architect",
+      "C": "Lead Regulatory Transit Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Typography squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Style Sinks', 'Organization Permissions', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Type' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Snapshot' runs where the organization's technical design logic masterfully matched the masterfully expected behavioral outcome without manual correction.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Type Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Typography? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded subnets) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead creative directors",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global regional centers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Type Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' technical definitions masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Registry RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in type platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the design platform baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IT leadership occurs when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Performance Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping component templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' technical hardware"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Type' 'Support' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a monitoring control (the Font-Face config) is isolated from the visual 'What' (the branding target), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Telemetry' 'Failure' in monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated technical sensor going 'Offline' until the 'Log Platform' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead masterfully enforces 2010 'Signature-only' models to manage a 2026 'Experience-Edge' type environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Type' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Connectivity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Typography' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Symbols, Type Audits, Extended Variables, and Secret Managers to ensure a seamless and safe service release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP) in type?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant skeletal control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one complex user simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded subnets) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead creative directors",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Design Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Experience Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical creative expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' for design platforms? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Type Training' spend with 'MTTR' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Typography?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major interactive strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global multi-tenant SaaS ecosystem, how should a Principal Architect technically model 'Glyph Entropy' to predict the impact of custom web font subsetting on 'Rendering Latency' across 50+ languages?",
+    "options": {
+      "A": "By assuming a flat 500ms delay for every un-cached font-face request strictly.",
+      "B": "By utilizing 'Probabilistic Glyph Mapping' to calculate the delta between character frequency and binary payload size, applying a stochastic model to the 'Composite Glyph' variance.",
+      "C": "By limiting the number of global languages to exactly 10 to prevent metadata overhead strictly.",
+      "D": "By requiring a manual board-level signature for every increase in the local WOFF2 file count."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Type' 'Decoupling' refers to the technical practice of isolating 'Font Logic' from 'CSS Component Classes' via Design Tokens to ensure that a pivot in the brand typeface (cause) does not systemically force a manual re-validation of the layout's vertical rhythm (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows a Lead Architect to predict the 'FinOps ROI' of shifting from 'Static Font Families' to 'Variable Font Axis Engineering' for a high-concurrency mobile application?",
+    "options": {
+      "A": "Probabilistic Analysis of 'Payload Amortization' (HTTP request reduction) vs. the fixed technical cost of building a custom interpolation engine for legacy browsers.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Glyph Arbitrage' during an international M&A involving the merger of a firm using 'Unicode-Standard' fonts and a firm using 'Legacy Proprietary' character encodings?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Character Archetypes' into a unified 'Encoding Fabric' that technically satisfies the data-integrity and cross-platform resolution requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live text rendering monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Type' 'Splicing' (Sub-setting Injection) and how does it technically enable 'Regional Resilience' during a rolling blue-green deployment of a core localization service?",
+    "options": {
+      "A": "When an employee physically routes support calls to a different country.",
+      "B": "A technical design pattern where the system masterfully manages 'Font-Face' loading via mapped logic, technically allowing for the instantaneous injection of regional glyphs without re-loading the primary typeface (effect).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the interaction specification logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Low-Fidelity' system font policy is technically applied to a 'High-Precision' task (e.g. cockpit instrumentation), leading to systemic 'Character Collision' and user-operator failure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Typographic' 'Chaos' (injecting randomized 200ms 'Anti-Aliasing Jitter' on headings) to verify if the 'Visual Accessibility' technically maintains 'Legibility Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Typography Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Kerning' 'Contagion' and its relation to 'Reflow Collisions' in a massive 10,000-screen enterprise interaction ecosystem?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flawed auto-kerning logic in a core 'Atom' (cause) masterfully triggers a surge in inconsistent line breaks across nested 'Organisms', resulting in a systemic 'Layout Freeze' (effect).",
+      "C": "A specialized tool for measuring light levels in the design studio.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Typography Fabric' ROI calculations for a strategic shift to 'Algorithmic/Generative' Layout? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'TCO' by automatically identifying and masterfully purging 90% of redundant font-weight variants",
+      "B": "Financial savings from 'QA' labor reclamation due to 100% verified 'Responsive-Break-Point' mapping",
+      "C": "The value of 'Brand Integrity' gained through 100% verified compliance with WCAG 2.2 line-height standards",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Type Leadership level ensures that 'Designers' can flag 'Technical Debt in the Glyphic Baseline' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anatomic' 'Complexity' in the evaluation of a Lead Architect's 'Multivariate Typeface' design for a high-concurrency VR surgical interface?",
+    "options": {
+      "A": "The physical weight of the 'Elements of Typographic Style' book.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'X-Height' vs. anomalous 'Optical Drift' in 3D spatial depth) into a cohesive 'Legibility Failure' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Axis' 'Splicing' logic during a high-throughput variable font event?",
+    "options": {
+      "A": "Breaking a physical router into pieces.",
+      "B": "The process of masterfully isolating 'Layout-Critical Axes' (Weight/Width) from 'Stylistic Axes' on dedicated processing tiers to ensure 'Action Accessibility' during low-latency windows.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Style Dampening' during a suspected 'Rendering Regression' on a core global finance dashboard?",
+    "options": {
+      "A": "Waiting for the user to complain about blurry text before acting.",
+      "B": "Immediately initiating a 'System-Font-Fallback' policy and technically diverting high-weight rendering to a 'Static-Shadow-Silo' before the client engine masterfully enters a 'CPU-Lock' state.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a type acquisition often result in 'System Rejection', where the acquired firm's designers find ways to 'Side-load' personal legacy fonts to bypass parent firm's 'Token-Strict' logic guardrails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Type' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Variable Font Tooling' and 'Haptically-Responsive-Type' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the design team",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Typography Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Typography Systems Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Type Strategy' itself (e.g. why we use 'Remote CDNs' vs 'Self-Hosting') is the cause of systemic failure, rather than just fixing a single 'Missing Glyf'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Font' 'Concentration' 'Aggregation' in Experience Management?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Font Foundry' that technically has zero redundant regions.",
+      "B": "Aggregating physical risks like fire in the design studio.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Design Ops occurs when a firm continues to rely on 'Static OTF files' in 2026, despite modern business requirements necessitating 'Edge-Computed-Variable' type fabrics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Type' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Stylistic Spend (RAROSS)",
+      "B": "Percentage of 'Business Critical' flows with 100% verified 'Idempotent' baseline alignment",
+      "C": "Velocity of 'Legacy Font' retirement across the top 10% of high-debt regions",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Human-to-AI' Typographic transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the design studio.",
+      "B": "The risk that long-tenured 'Type Gatekeepers' will block 'Autonomy-Native' font axis selection to protect their manual 'Subjective-Oversight' power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Token-Only' or 'Accessibility-Strict' typography policies.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CDO demands 'Zero Type Drift' while the Board only rewards the team for '100% Roadmap Launch Velocity' (ignoring character debt).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Type' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Reading Path Signatures' with potential 'Kernel-level' data exfiltration attempts",
+      "B": "Automatically identifying 'Font Owner' gaps in real-time as a new Type State is provisioned",
+      "C": "Guaranteed to replace all human Lead Architects",
+      "D": "Analyzing global metadata to predict 'Character drift' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Typography' 'Experience' 'Ecosystem' 'Architecture' (TEEA) for a Principal Lead?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Variable Engines, Global Font CDNs, Behavioral Read-ability Mesh, and Real-time Glyph Telemetry into a single 'Unified Experience Fabric'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in Design M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Type' logic matches the parent company's 'Readability Standard' before fabric merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Global Type Efficiency' from a newly hired team that requires 12 months of 'Historic Reading-Data Baselining' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges' in Typography? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Rendering Safety' rules are enforced during automated multi-region replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Type Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Execution Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in character rendering?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Font' vulnerability release and the Architect officially flagging the total internal strategy exposure count based on version scans.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Rendering Readiness' to the board while the internal team is aware that 'Segment B' is technically suffering from glyph drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Typographic' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Type-Style Write' eligibility",
+      "B": "Connecting 'Real-time UX Breach News' to 'Automated Experience Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Reading Audit' data with 'Corporate Risk' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global design region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Monitoring Sinks, Glyph-tags, and RBAC to stabilize a new offshore design studio in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Type architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new font data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed font telemetry after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Type' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Type Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Design Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Path Hubs?",
+    "options": {
+      "A": "Isolating font designers on a deserted island.",
+      "B": "Ensuring that 'Raw character logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT) post-rendering-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile behavioral failure (e.g. global font outage during tax season) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Type strategy refers to an organization promising 'Zero Latency' while utilizing a 'Low-Budget' public internet backbone for live event streams.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Roles' in Typography?",
+    "options": {
+      "A": "Global Head of Visual Resilience",
+      "B": "Chief Experience Architect",
+      "C": "Director of Behavioral Telemetry",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global type firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'API Uptime', 'MTTI for rendering findings', 'Redundancy', and 'Identity Integrity Maturity' across all interaction paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Typography team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Signature-only' models to manage a 2026 'Intent-Native' type environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Verification' 'Challenges' in Typography Design? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Owner' intent analysis",
+      "B": "Keeping hardware artifacts updated with rapidly changing OS versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Type Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Behavioral Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency' in Type?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Interaction Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired circuit within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Strategic Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from an Engineering Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Strategic Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Interaction Model' can be 'Lifted' from one product line and applied to another to ensure global parity.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated security service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Strategy Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for IT Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' Experience model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Path Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new performance vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Interaction Audits' are planned annually, but 'Global Threat TTPs' update every 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' type culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic strategy shifts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Interaction' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named Interaction.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'AIOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through execution process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic type grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Type' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

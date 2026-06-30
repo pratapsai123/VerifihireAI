@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Active Directory", 
+  "questions": [
+    {
+    "question": "What is the highest level of organization in an Active Directory hierarchy?",
+    "options": {
+      "A": "Domain",
+      "B": "Tree",
+      "C": "Forest",
+      "D": "Organizational Unit"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An Organizational Unit (OU) can contain other OUs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Azure AD",
+      "D": "Only if they share the same administrator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a primary function of Active Directory Domain Services (AD DS)?",
+    "options": {
+      "A": "To host public websites.",
+      "B": "To provide centralized authentication and authorization for network resources.",
+      "C": "To act as a physical router for the network.",
+      "D": "To monitor the server room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service is used to translate domain names into IP addresses within an AD environment?",
+    "options": {
+      "A": "DHCP",
+      "B": "DNS",
+      "C": "WINS",
+      "D": "NAT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the name of the database file that stores Active Directory data?",
+    "options": {
+      "A": "ad.db",
+      "B": "ntds.dit",
+      "C": "registry.pol",
+      "D": "config.xml"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A user can be a member of multiple security groups at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the groups are in different OUs",
+      "D": "Only for the Administrator account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is most commonly used to create new user accounts in a traditional Windows Server environment?",
+    "options": {
+      "A": "Group Policy Management",
+      "B": "Active Directory Users and Computers (ADUC)",
+      "C": "DNS Manager",
+      "D": "Task Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does GPO stand for in Active Directory?",
+    "options": {
+      "A": "Global Policy Optimization",
+      "B": "Group Policy Object",
+      "C": "General Protocol Order",
+      "D": "Grouped Organizational Path"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Group Policies can be used to restrict which applications a user can run on their workstation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile users",
+      "D": "Only if the server is virtualized"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific server role holds a writable copy of the Active Directory database?",
+    "options": {
+      "A": "File Server",
+      "B": "Domain Controller (DC)",
+      "C": "Print Server",
+      "D": "Application Server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Global Catalog' server?",
+    "options": {
+      "A": "A server that lists all company products.",
+      "B": "A domain controller that stores a partial replica of all objects in the entire forest.",
+      "C": "A backup of the internet history.",
+      "D": "The primary DHCP server for the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Domain Admins' have administrative rights over every computer joined to the domain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are logged in locally",
+      "D": "Only for servers, not workstations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of group is used primarily for assigning permissions to shared resources like folders and printers?",
+    "options": {
+      "A": "Distribution Group",
+      "B": "Security Group",
+      "C": "Static Group",
+      "D": "Public Group"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you forcefully update Group Policy settings on a Windows client without restarting?",
+    "options": {
+      "A": "Restart the monitor.",
+      "B": "Run the command 'gpupdate /force'.",
+      "C": "Delete the user account and recreate it.",
+      "D": "Unplug the network cable for 10 seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Tree' in AD is a collection of one or more domains that share a contiguous DNS namespace.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large enterprises",
+      "D": "Only if they share the same physical server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of an 'Organizational Unit' (OU)?",
+    "options": {
+      "A": "To create a backup of the domain.",
+      "B": "To logically organize objects for management and to apply Group Policy settings.",
+      "C": "To increase the internet speed of the users.",
+      "D": "To host the company's email server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is the primary method for querying and modifying directory service providers like Active Directory?",
+    "options": {
+      "A": "HTTP",
+      "B": "LDAP",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Active Directory requires a functional DNS infrastructure to operate correctly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for external users",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Trust Relationship' in Active Directory?",
+    "options": {
+      "A": "Believing that the users won't delete files.",
+      "B": "A link between two domains that allows users in one domain to be authenticated by a domain controller in the other domain.",
+      "C": "A specialized way to encrypt user passwords.",
+      "D": "The password shared between the CEO and the IT manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages the replication of data between domain controllers in different physical locations (sites)?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Sites and Services",
+      "C": "AD Domains and Trusts",
+      "D": "DNS Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Default Domain Policy' applies to all users and computers in the domain by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only for password settings"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Schema' in Active Directory?",
+    "options": {
+      "A": "The physical layout of the server room.",
+      "B": "The blueprint that defines all object classes and attributes that can be created in the directory.",
+      "C": "The list of IP addresses on the network.",
+      "D": "The backup schedule for the domain controllers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to check which domain controller a user is currently authenticated against?",
+    "options": {
+      "A": "whoami",
+      "B": "echo %logonserver%",
+      "C": "netstat -a",
+      "D": "ipconfig /all"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Child Domain' automatically shares the same name suffix as its parent domain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the first 10 domains",
+      "D": "Only if they are in the same physical site"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Replication' in Active Directory?",
+    "options": {
+      "A": "Making a physical copy of a server rack.",
+      "B": "The process by which changes made on one domain controller are synchronized to all other domain controllers.",
+      "C": "Deleting duplicate user accounts.",
+      "D": "The history of all previous passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service is responsible for assigning IP addresses to clients so they can connect to the domain?",
+    "options": {
+      "A": "DNS",
+      "B": "DHCP",
+      "C": "WINS",
+      "D": "IIS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can apply a GPO directly to an individual user object.",
+    "options": {
+      "A": "False (GPOs are linked to Sites, Domains, or OUs, not individual objects).",
+      "B": "True",
+      "C": "Only if they have admin rights",
+      "D": "Only in Windows Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'RID Master' FSMO role?",
+    "options": {
+      "A": "To update the time on all computers.",
+      "B": "To assign pools of unique identifiers (SIDs) to domain controllers for creating new objects.",
+      "C": "To host the company's public DNS.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which default container holds the accounts of computers that have joined the domain but haven't been moved to an OU?",
+    "options": {
+      "A": "Users",
+      "B": "Computers",
+      "C": "Builtin",
+      "D": "ForeignSecurityPrincipals"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Site' in Active Directory usually represents a physical location connected by a high-speed network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if there are over 1,000 users",
+      "D": "Only for cloud-based environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when a user account is 'Disabled' in Active Directory?",
+    "options": {
+      "A": "The account is deleted immediately.",
+      "B": "The user can no longer log in, but the account and its permissions remain in the directory.",
+      "C": "The user's computer is automatically formatted.",
+      "D": "The password is changed to 'disabled'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard LDAP communication?",
+    "options": {
+      "A": "80",
+      "B": "389",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Active Directory 'Groups' can contain other 'Groups' as members.",
+    "options": {
+      "A": "True (Group Nesting).",
+      "B": "False",
+      "C": "Only for distribution groups",
+      "D": "Only in the root domain"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary tool used to manage replication and site topology?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Sites and Services",
+      "C": "AD Domains and Trusts",
+      "D": "DNS Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which FSMO role is responsible for ensuring that password changes are processed quickly across the domain?",
+    "options": {
+      "A": "RID Master",
+      "B": "PDC Emulator",
+      "C": "Schema Master",
+      "D": "Infrastructure Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Guest' account in Active Directory is enabled by default for easy access.",
+    "options": {
+      "A": "False (It is disabled by default for security).",
+      "B": "True",
+      "C": "Only in lab environments",
+      "D": "Only if the server is not on the internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SYSVOL'?",
+    "options": {
+      "A": "A system volume control tool.",
+      "B": "A shared directory that stores a copy of the domain's public files, including Group Policy templates and scripts.",
+      "C": "The physical hard drive where the OS is installed.",
+      "D": "A way to measure the network volume."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to verify the 'Forest Functional Level'?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Domains and Trusts",
+      "C": "AD Sites and Services",
+      "D": "Server Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Only one Domain Controller in a domain can hold the FSMO roles at any given time.",
+    "options": {
+      "A": "True (per role basis).",
+      "B": "False",
+      "C": "Only for the Schema Master",
+      "D": "Only if there are fewer than 3 DCs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Service Principal Name' (SPN)?",
+    "options": {
+      "A": "The name of the lead IT engineer.",
+      "B": "A unique identifier for a service instance used during Kerberos authentication to associate a service with a login account.",
+      "C": "The password for a service account.",
+      "D": "The physical location of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Object' that can be stored in Active Directory?",
+    "options": {
+      "A": "User",
+      "B": "Computer",
+      "C": "Printer",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Read-Only Domain Controller' (RODC) cannot be used to make changes to the Active Directory database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for user accounts",
+      "D": "Only if the forest level is 2003"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inheritance' in the context of Group Policy?",
+    "options": {
+      "A": "Getting money from a relative.",
+      "B": "The process by which policy settings from a higher-level container (like a Domain) automatically apply to lower-level containers (like an OU).",
+      "C": "A specialized way to backup the directory.",
+      "D": "The time it takes for a user to log in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which authentication protocol is the default for Active Directory clients?",
+    "options": {
+      "A": "NTLM",
+      "B": "Kerberos",
+      "C": "OIDC",
+      "D": "SAML"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should use 'Containers' (like the 'Users' folder) instead of 'OUs' whenever possible.",
+    "options": {
+      "A": "False (OUs are preferred because they support GPO linking and administrative delegation).",
+      "B": "True",
+      "C": "Only for temporary accounts",
+      "D": "Only if the domain is small"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Managed Service Account' (MSA)?",
+    "options": {
+      "A": "An account managed by an external company.",
+      "B": "A specialized account that provides automatic password management and simplified SPN management for services.",
+      "C": "A user account with limited hours.",
+      "D": "The name of the administrator's backup account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS record type is used by AD clients to find domain controllers?",
+    "options": {
+      "A": "A",
+      "B": "SRV",
+      "C": "MX",
+      "D": "TXT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Delegation' allows an administrator to grant specific permissions (like resetting passwords) to a non-admin user for a specific OU.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is in the 'IT' group",
+      "D": "Only in the 'standard' tier of AD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Loopback Processing' in Group Policy?",
+    "options": {
+      "A": "A way to run a script in a circle.",
+      "B": "A feature that allows user settings to be applied based on the computer the user is logging into, rather than the user's location in AD.",
+      "C": "A specialized tool for network testing.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool allows you to restore a deleted object in modern versions of Active Directory?",
+    "options": {
+      "A": "DNS Manager",
+      "B": "Active Directory Recycle Bin",
+      "C": "Task Manager",
+      "D": "Event Viewer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Forest' can contain only one 'Tree'.",
+    "options": {
+      "A": "False (A forest can contain multiple trees with different DNS namespaces).",
+      "B": "True",
+      "C": "Only if the functional level is 2016",
+      "D": "Only if using Azure AD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'KDC' (Key Distribution Center) in AD?",
+    "options": {
+      "A": "To keep the data center cool.",
+      "B": "To handle Kerberos ticket requests and authentication for the domain.",
+      "C": "To encrypt the physical server rack.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these represents a 'Distinguished Name' (DN)?",
+    "options": {
+      "A": "CN=User,OU=Sales,DC=example,DC=com",
+      "B": "User@example.com",
+      "C": "EXAMPLE\\User",
+      "D": "User Name"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: By default, users can join their own workstations to the domain up to 10 times.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IT staff",
+      "D": "Only on weekends"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Infrastructure Master' role responsible for?",
+    "options": {
+      "A": "Building the physical server racks.",
+      "B": "Updating cross-domain object references (like group memberships) in a multi-domain forest.",
+      "C": "To encrypt the routing table.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to manage and view AD logs for security auditing?",
+    "options": {
+      "A": "ADUC",
+      "B": "Event Viewer (Security Log)",
+      "C": "Notepad",
+      "D": "Registry Editor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Group Policy settings applied at the OU level override settings applied at the Domain level.",
+    "options": {
+      "A": "True (Closest to the object wins).",
+      "B": "False",
+      "C": "Only if 'Enforced' is checked",
+      "D": "Only for desktop backgrounds"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'WMI Filtering' in Group Policy?",
+    "options": {
+      "A": "A way to filter out spam emails.",
+      "B": "A feature that allows a GPO to be applied only if the target computer meets certain hardware or OS criteria.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total bandwidth usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role is required to add or remove domains from an Active Directory forest?",
+    "options": {
+      "A": "Schema Master",
+      "B": "Domain Naming Master",
+      "C": "RID Master",
+      "D": "PDC Emulator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AD DS replication is multi-master, meaning changes can be made on any writable domain controller.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for password resets",
+      "D": "Only if there are fewer than 5 DCs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Fine-Grained Password Policies'?",
+    "options": {
+      "A": "To make the password look pretty.",
+      "B": "To allow different password and account lockout settings for different sets of users in the same domain.",
+      "C": "To encrypt the whole database.",
+      "D": "To monitor the daily growth of the directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to verify Active Directory database integrity?",
+    "options": {
+      "A": "Task Manager",
+      "B": "NTDSUTIL",
+      "C": "Disk Management",
+      "D": "Event Viewer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Security Filtering' on a GPO allows you to apply it only to a specific group of users within an OU.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for workstations",
+      "D": "Only if they have a static IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Domain Naming Master' role responsible for?",
+    "options": {
+      "A": "Naming all the employees.",
+      "B": "Managing the addition and removal of domains in the forest.",
+      "C": "To encrypt the domain's source code.",
+      "D": "To monitor the daily growth of the forest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which container in AD is used to manage physical network segments and replication?",
+    "options": {
+      "A": "Domains",
+      "B": "Sites",
+      "C": "Trees",
+      "D": "OUs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'UPN' (User Principal Name) looks like an email address (e.g., user@example.com).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Azure",
+      "D": "Only for administrators"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which FSMO role is responsible for updating an object's SID and Distinguished Name when it is moved between domains in a forest?",
+    "options": {
+      "A": "PDC Emulator",
+      "B": "Infrastructure Master",
+      "C": "RID Master",
+      "D": "Schema Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of an 'Active Directory-Integrated' DNS zone over a standard Primary zone?",
+    "options": {
+      "A": "It is stored as a flat text file for easier editing.",
+      "B": "It uses AD replication to synchronize data across all Domain Controllers, providing multi-master updates and increased security.",
+      "C": "It only works with IPv6, making it future-proof.",
+      "D": "It removes the requirement for the DNS Server role to be installed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a domain with only one Domain Controller, that DC must hold all five FSMO roles.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the functional level is 2016",
+      "D": "Only if the DC is a Global Catalog"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Enforced' (formerly No Override) setting on a GPO link accomplish?",
+    "options": {
+      "A": "It ensures the GPO settings are applied even if 'Block Inheritance' is set on a lower-level OU.",
+      "B": "It deletes all other GPOs in the domain.",
+      "C": "It makes the GPO apply only to the Administrator account.",
+      "D": "It prevents the GPO from being edited by other admins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PowerShell cmdlet is used to move a FSMO role from one Domain Controller to another?",
+    "options": {
+      "A": "Move-ADRole",
+      "B": "Move-ADDirectoryServerOperationMasterRole",
+      "C": "Set-ADFSMORole",
+      "D": "Transfer-FSMO"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Active Directory Recycle Bin' introduced in Windows Server 2008 R2?",
+    "options": {
+      "A": "To save disk space by deleting old user profiles.",
+      "B": "To allow for the recovery of deleted AD objects without needing to restore from a backup or restart Domain Services.",
+      "C": "To act as a temporary folder for files shared via SMB.",
+      "D": "To monitor the daily growth of the ntds.dit file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Global Catalog' server is required for a user to log in if they are authenticating with a User Principal Name (UPN) in a multi-domain forest.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is in a child domain",
+      "D": "Only if the domain functional level is below 2012"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DNS record type is used to map an IPv6 address to a host name in an Active Directory environment?",
+    "options": {
+      "A": "A",
+      "B": "AAAA",
+      "C": "CNAME",
+      "D": "PTR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Group Policy, what is the 'LSDOU' processing order?",
+    "options": {
+      "A": "Local, Site, Domain, OU",
+      "B": "OU, Domain, Site, Local",
+      "C": "Site, OU, Local, Domain",
+      "D": "Domain, Site, OU, Local"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'KCC' (Knowledge Consistency Checker) in AD?",
+    "options": {
+      "A": "To verify the hardware serial numbers of servers.",
+      "B": "To automatically create and maintain the replication topology for the forest.",
+      "C": "To check for viruses in user passwords.",
+      "D": "To calculate the monthly cost of cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Fine-Grained Password Policy' (FGPP) allows you to apply different password requirements to different users in the same domain without creating new domains.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2003",
+      "D": "Only if applied to an OU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AD tool would you use to 'Seize' FSMO roles if the original role holder has suffered a permanent hardware failure?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "ntdsutil",
+      "C": "dcdiag",
+      "D": "Server Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bridgehead Server' in the context of inter-site replication?",
+    "options": {
+      "A": "A server that physically connects two offices with a cable.",
+      "B": "A designated Domain Controller in a site that handles all replication traffic to and from other sites for a specific partition.",
+      "C": "A backup server used only during site power outages.",
+      "D": "A specialized firewall for DNS traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS zone contains only the information required to identify the authoritative DNS servers for a specific zone?",
+    "options": {
+      "A": "Primary Zone",
+      "B": "Stub Zone",
+      "C": "Secondary Zone",
+      "D": "Forward Lookup Zone"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Selective Authentication' is a setting on a Forest Trust that requires users in the trusted forest to be explicitly granted permission to access resources in the trusting forest.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for child domains",
+      "D": "Only if using NTLM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Active Directory Administrative Center' (ADAC) over the older ADUC tool?",
+    "options": {
+      "A": "It is a text-only interface for faster management.",
+      "B": "It is built on PowerShell and provides advanced features like the PowerShell History Viewer and the Recycle Bin UI.",
+      "C": "It removes the need for Domain Controllers.",
+      "D": "It is used exclusively for managing Linux servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port must be open for Kerberos authentication in Active Directory?",
+    "options": {
+      "A": "389 (LDAP)",
+      "B": "88 (Kerberos)",
+      "C": "445 (SMB)",
+      "D": "53 (DNS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Managed Service Account' (MSA) primarily designed for?",
+    "options": {
+      "A": "To allow external contractors to log in.",
+      "B": "To provide automatic password management and simplified SPN management for services running on a server.",
+      "C": "To act as a guest account for web users.",
+      "D": "To monitor the electricity usage of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When a user is a member of two groups with conflicting NTFS permissions (one 'Allow Read', one 'Deny Read'), the 'Deny' permission always takes precedence.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is an Administrator",
+      "D": "Only if using the FAT32 file system"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which FSMO role is responsible for maintaining the master copy of the forest's data definitions and object classes?",
+    "options": {
+      "A": "Domain Naming Master",
+      "B": "Schema Master",
+      "C": "PDC Emulator",
+      "D": "RID Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'ntds.dit' file?",
+    "options": {
+      "A": "It is a log file for the DNS service.",
+      "B": "It is the main database file for Active Directory Domain Services.",
+      "C": "It stores the Group Policy templates for the domain.",
+      "D": "It is a temporary file used during server reboots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DNS 'Reverse Lookup Zone', which record type maps an IP address to a hostname?",
+    "options": {
+      "A": "A",
+      "B": "PTR",
+      "C": "MX",
+      "D": "SRV"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Group Policy Preferences' (GPP) can be used to perform tasks that standard GPO settings cannot, such as creating local users or mapping drives with 'item-level targeting'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 7 clients",
+      "D": "Only in the 'Default Domain Policy'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command-line tool is used to verify the health of a Domain Controller and check for replication errors?",
+    "options": {
+      "A": "ping",
+      "B": "dcdiag",
+      "C": "netstat",
+      "D": "tracert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Site Link' in Active Directory topology?",
+    "options": {
+      "A": "A physical Ethernet cable between two buildings.",
+      "B": "A logical object that represents a connection between sites and defines the cost and schedule for replication.",
+      "C": "A URL that points to the company's internal portal.",
+      "D": "A way to backup the whole forest to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which FSMO role is most critical for handling time synchronization across all computers in the domain?",
+    "options": {
+      "A": "Infrastructure Master",
+      "B": "PDC Emulator",
+      "C": "RID Master",
+      "D": "Domain Naming Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Read-Only Domain Controller' (RODC) stores a full writable copy of the Active Directory database.",
+    "options": {
+      "A": "False (It stores a read-only replica and does not store most user passwords by default for security).",
+      "B": "True",
+      "C": "Only if it is the first DC in the site",
+      "D": "Only if the forest level is 2003"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'WMI Filtering' in Group Policy primarily used for?",
+    "options": {
+      "A": "To filter out malicious emails.",
+      "B": "To ensure a GPO only applies to computers that meet specific hardware or OS criteria (e.g., 'Only laptops' or 'Only Windows 11').",
+      "C": "To encrypt the connection between the client and the DC.",
+      "D": "To monitor the bandwidth usage of the domain."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which AD container is used to handle objects from trusted domains outside of the current forest?",
+    "options": {
+      "A": "Users",
+      "B": "ForeignSecurityPrincipals",
+      "C": "Computers",
+      "D": "Builtin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during a 'Group Policy Refresh' on a client computer?",
+    "options": {
+      "A": "The computer is formatted and reinstalled.",
+      "B": "The client queries the Domain Controller for any updated GPOs and reapplies the settings.",
+      "C": "The user is logged out automatically.",
+      "D": "The DNS cache is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a forest with multiple domains, the 'Schema Master' role must be unique across the entire forest.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the root domain",
+      "D": "Only in Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which DNS record is used by clients to locate the global catalog service in an AD forest?",
+    "options": {
+      "A": "A",
+      "B": "SRV",
+      "C": "TXT",
+      "D": "CNAME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SYSVOL' primarily used for?",
+    "options": {
+      "A": "To store the server's operating system files.",
+      "B": "A shared directory on all Domain Controllers that stores Group Policy files and login scripts for replication.",
+      "C": "A specialized way to measure the volume of network traffic.",
+      "D": "To host the company's internal intranet site."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to manage 'Forest Trusts' between two separate AD infrastructures?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Domains and Trusts",
+      "C": "AD Sites and Services",
+      "D": "DNS Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Active Directory replication is 'Multi-Master', meaning updates can be made on any writable Domain Controller and will propagate to all others.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for user accounts",
+      "D": "Only if there are more than 10 DCs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Domain Naming Master' role?",
+    "options": {
+      "A": "To name the server computers.",
+      "B": "To manage the addition or removal of domains from the forest.",
+      "C": "To update the DNS names of all users.",
+      "D": "To monitor the daily growth of the domain."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Active Directory, what is an 'Attributes' defined in the schema?",
+    "options": {
+      "A": "A physical property of the server hardware.",
+      "B": "A specific piece of information associated with an object, such as a user's 'GivenName' or 'PhoneNumber'.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The salary of the network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Block Inheritance' on an OU prevents 'Enforced' GPOs from higher levels from being applied.",
+    "options": {
+      "A": "False ('Enforced' GPOs bypass 'Block Inheritance').",
+      "B": "True",
+      "C": "Only for security settings",
+      "D": "Only in Windows Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which service handles the authentication of users using 'Kerberos' tickets in an AD domain?",
+    "options": {
+      "A": "DNS",
+      "B": "KDC (Key Distribution Center)",
+      "C": "DHCP",
+      "D": "WINS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Site Link Bridge' used for in Active Directory?",
+    "options": {
+      "A": "To physically connect two routers together.",
+      "B": "To logically connect site links so that replication can occur between sites that do not have a direct link object.",
+      "C": "To encrypt the site-to-site communication.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to edit the attributes of an object that are not visible in the standard ADUC interface?",
+    "options": {
+      "A": "Task Manager",
+      "B": "ADSI Edit",
+      "C": "Registry Editor",
+      "D": "Notepad"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Child Domain' can be removed from a forest while still keeping its parent domain intact.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is the only child",
+      "D": "Only if using Azure AD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default replication interval for inter-site replication in Active Directory?",
+    "options": {
+      "A": "5 minutes",
+      "B": "180 minutes (3 hours)",
+      "C": "24 hours",
+      "D": "Replication is instantaneous by default"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which FSMO role must be available to create a new 'Security Identifier' (SID) for a new user account?",
+    "options": {
+      "A": "PDC Emulator",
+      "B": "RID Master",
+      "C": "Infrastructure Master",
+      "D": "Schema Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'UPN Suffix' used for in a forest with multiple domain names?",
+    "options": {
+      "A": "To encrypt the email addresses.",
+      "B": "To allow users to log in using an alternative, simplified domain name (e.g., user@company.com instead of user@internal.local).",
+      "C": "To backup the DNS zone.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loopback Processing' in 'Replace' mode ignores all GPO settings from the user's OU and only applies those from the computer's OU.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for desktop settings",
+      "D": "Only if the user is an Administrator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AD role allows for the issuance of digital certificates for users and computers?",
+    "options": {
+      "A": "AD DS",
+      "B": "AD CS (Active Directory Certificate Services)",
+      "C": "AD FS",
+      "D": "AD RMS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Global Catalog' during the login process in a multi-domain environment?",
+    "options": {
+      "A": "To find the user's password.",
+      "B": "To verify 'Universal Group' memberships for the user.",
+      "C": "To encrypt the login session.",
+      "D": "To monitor the daily growth of the user profile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the 'Domain Functional Level' to a lower version after it has been raised (in Windows Server 2008 R2 and later).",
+    "options": {
+      "A": "False (Raising the functional level is generally a one-way operation).",
+      "B": "True",
+      "C": "Only if using PowerShell",
+      "D": "Only in the first 24 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to verify the 'Forest Functional Level' from a GUI?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Domains and Trusts",
+      "C": "AD Sites and Services",
+      "D": "Server Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DNS Scavenging' used for in an Active Directory environment?",
+    "options": {
+      "A": "To look for viruses in the DNS database.",
+      "B": "To automatically remove stale or old DNS records from the zone.",
+      "C": "To backup the whole DNS zone.",
+      "D": "To encrypt the DNS requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Transitive Trusts' mean that if Domain A trusts B, and B trusts C, then A automatically trusts C.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for child domains",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for Global Catalog queries?",
+    "options": {
+      "A": "389",
+      "B": "3268",
+      "C": "636",
+      "D": "3269"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Active Directory Rights Management Services' (AD RMS)?",
+    "options": {
+      "A": "To manage the rights of employees to use the office gym.",
+      "B": "To protect sensitive data by specifying who can open, edit, or forward documents and emails.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Primary Domain Controller (PDC) Emulator' must be available for clients running older operating systems (like Windows NT) to join the domain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2003",
+      "D": "Only for mobile devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool allows you to perform an 'Authoritative Restore' of a deleted OU?",
+    "options": {
+      "A": "Active Directory Administrative Center",
+      "B": "ntdsutil (in Directory Services Restore Mode)",
+      "C": "Server Manager",
+      "D": "Event Viewer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed File System Replication' (DFSR) used for in AD?",
+    "options": {
+      "A": "To backup the user's hard drive.",
+      "B": "To synchronize the contents of the SYSVOL folder across all Domain Controllers.",
+      "C": "To increase the internet speed of the servers.",
+      "D": "To encrypt the connection between sites."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should always place the 'Infrastructure Master' role on a Domain Controller that is also a Global Catalog server in a multi-domain forest.",
+    "options": {
+      "A": "False (The Infrastructure Master should NOT be a Global Catalog unless all DCs in the domain are GCs).",
+      "B": "True",
+      "C": "Only in the root domain",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Group Nesting'?",
+    "options": {
+      "A": "Putting groups of servers into a physical rack.",
+      "B": "The practice of adding one security group as a member of another security group to simplify permission management.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The history of all previous groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for secure LDAP (LDAPS) communication?",
+    "options": {
+      "A": "389",
+      "B": "636",
+      "C": "3268",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Item-Level Targeting' in GPP allows you to apply settings based on conditions like the amount of free disk space or the presence of a specific file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Registry settings",
+      "D": "Only if using Windows Server 2022"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Fine-Grained Password Policy' (FGPP)?",
+    "options": {
+      "A": "To make the password look better.",
+      "B": "To define multiple password and account lockout policies within a single domain.",
+      "C": "To encrypt the whole database.",
+      "D": "To monitor the daily growth of the directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to create a 'Secondary DNS Zone' that mirrors another server?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "DNS Manager",
+      "C": "Server Manager",
+      "D": "Registry Editor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Active Directory 'Sites' are used to control how replication traffic moves across the physical network to optimize bandwidth usage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large enterprises",
+      "D": "Only for wireless connections"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'FSMO' role is responsible for ensuring that two domains are not created with the same name in a forest?",
+    "options": {
+      "A": "Schema Master",
+      "B": "Domain Naming Master",
+      "C": "PDC Emulator",
+      "D": "Infrastructure Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of an 'Active Directory Forest'?",
+    "options": {
+      "A": "To provide a physical location for servers.",
+      "B": "To act as the ultimate security boundary for the entire AD infrastructure.",
+      "C": "To host the company's external email.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Forest Recovery scenario, which specific action must be taken on the first restored Domain Controller to prevent it from attempting to replicate with its original partners?",
+    "options": {
+      "A": "Reset the machine account password.",
+      "B": "Invalidate the current RID pool and mark the database as 'authoritative' for the naming contexts.",
+      "C": "Change the IP address and hostname.",
+      "D": "Delete the SYSVOL folder manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Kerberos Armoring' (FAST) is designed to protect Kerberos messages by establishing a secure tunnel between the client and the KDC using the computer's credentials.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using NTLM fallback",
+      "D": "Only for users in the 'Protected Users' group"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific attribute is used by the Knowledge Consistency Checker (KCC) to determine the replication 'cost' between two AD sites?",
+    "options": {
+      "A": "msDS-ReplicationCost",
+      "B": "cost",
+      "C": "priority",
+      "D": "replInterval"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical requirement for implementing 'group Managed Service Accounts' (gMSA) across multiple servers in a web farm?",
+    "options": {
+      "A": "A Windows Server 2022 Forest Functional Level.",
+      "B": "The deployment of a Key Distribution Service (KDS) root key in Active Directory.",
+      "C": "A minimum of 5 Domain Controllers in the root domain.",
+      "D": "Disabling Kerberos AES-256 encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Just-Enough Administration' (JEA) configuration, which file type is used to define exactly which cmdlets and parameters a user is allowed to execute?",
+    "options": {
+      "A": ".ps1",
+      "B": ".psrc (Role Capability file)",
+      "C": ".pssc (Session Configuration file)",
+      "D": ".json"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Infrastructure Master' role should never be placed on a Global Catalog server in a multi-domain forest unless every DC in that domain is also a Global Catalog.",
+    "options": {
+      "A": "True (To ensure the Infrastructure Master can identify phantom objects for cross-domain references).",
+      "B": "False",
+      "C": "Only if using Azure AD Connect",
+      "D": "Only if the forest level is below 2012"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Active Directory mechanism prevents a 'USN Rollback' when a virtualized Domain Controller is incorrectly restored from a snapshot?",
+    "options": {
+      "A": "Active Directory Recycle Bin",
+      "B": "VM Generation ID",
+      "C": "Strict Replication Consistency",
+      "D": "Tombstone Lifetime"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the effect of the 'msDS-SupportedEncryptionTypes' attribute on a computer object in AD?",
+    "options": {
+      "A": "It limits the website's SSL versions.",
+      "B": "It informs the KDC which encryption algorithms (e.g., AES-128/256, RC4) the client or service supports for Kerberos tickets.",
+      "C": "It encrypts the physical network card output.",
+      "D": "It determines the password complexity requirements."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'External Trust' is non-transitive by default, while a 'Forest Trust' is transitive between all domains in the respective forests.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SID Filtering",
+      "D": "Only for child domains"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port must be allowed through a firewall for the RPC Endpoint Mapper, essential for AD replication?",
+    "options": {
+      "A": "389",
+      "B": "135",
+      "C": "445",
+      "D": "636"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs when the 'Tombstone Lifetime' of a deleted object expires in Active Directory?",
+    "options": {
+      "A": "The object is moved to the Recycle Bin.",
+      "B": "The object is physically removed from the database during a garbage collection cycle.",
+      "C": "The user's password is changed.",
+      "D": "The object is replicated to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resource-based Constrained Delegation' (RBCD) allows a service to delegate authentication to another service without requiring Domain Admin rights to configure it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2012",
+      "D": "Only if using the classic 'Constrained' delegation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is used to perform 'Metadata Cleanup' after a Domain Controller has been permanently lost without being gracefully demoted?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "ntdsutil or AD Sites and Services (Windows 2008+)",
+      "C": "dcdiag",
+      "D": "repadmin"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Knowledge Consistency Checker' (KCC) in a multi-site topology?",
+    "options": {
+      "A": "To verify the integrity of the ntds.dit file.",
+      "B": "To evaluate the site link costs and automatically generate the most efficient replication path (Connection Objects).",
+      "C": "To encrypt the replication stream.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In an 'Authoritative Restore', the specific AD object's version number (USN) is set significantly higher than any other DC to ensure the restored version propagates throughout the domain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the Schema partition",
+      "D": "Only if using the Recycle Bin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Kerberos ticket is used by a client to request access to a target service (like a file share or database)?",
+    "options": {
+      "A": "TGT (Ticket Granting Ticket)",
+      "B": "ST (Service Ticket) / TGS Ticket",
+      "C": "PAC (Privilege Attribute Certificate)",
+      "D": "AS-REP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SID Filtering' in the context of Active Directory Trusts?",
+    "options": {
+      "A": "A way to search for users by their SID.",
+      "B": "A security feature that prevents a user in a trusted domain from using unauthorized SIDs (like Domain Admin SIDs) to gain privileges in the trusting domain.",
+      "C": "A tool to delete duplicate SIDs.",
+      "D": "An encryption method for the SID attribute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fine-Grained Password Policies' (FGPP) cannot be applied to an Organizational Unit (OU) directly; they must be applied to a User or a Global Security Group.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if using the ADAC"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AD partition contains the definitions for all objects and attributes used within the entire forest?",
+    "options": {
+      "A": "Domain Partition",
+      "B": "Configuration Partition",
+      "C": "Schema Partition",
+      "D": "Application Partition"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'NTDSUTIL's' 'Files' command set?",
+    "options": {
+      "A": "To create a backup of the SYSVOL folder.",
+      "B": "To manage the physical database files, including moving ntds.dit or performing an offline defragmentation.",
+      "C": "To encrypt the server's hard drive.",
+      "D": "To monitor user file access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Child Domain' can be promoted to a 'Tree Root' domain within the same forest after creation.",
+    "options": {
+      "A": "False (The hierarchy is fixed at creation; moving it requires a full migration).",
+      "B": "True",
+      "C": "Only if using PowerShell",
+      "D": "Only if it is the only child domain"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for the Global Catalog (Non-SSL)?",
+    "options": {
+      "A": "389",
+      "B": "3268",
+      "C": "636",
+      "D": "3269"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'Active Directory Database Mounting Tool' (dsamain.exe)?",
+    "options": {
+      "A": "To repair a corrupt AD database.",
+      "B": "To mount an AD snapshot or backup as an LDAP server on a specific port for data comparison.",
+      "C": "To move the AD database to the cloud.",
+      "D": "To monitor the daily growth of the directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Privileged Attribute Certificate' (PAC) is a field in a Kerberos ticket that contains the user's group memberships and SIDs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in NTLM",
+      "D": "Only if using smart cards"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Failover Cluster, what is a 'Cloud Witness' used for?",
+    "options": {
+      "A": "To backup the cluster to the cloud.",
+      "B": "To provide a neutral quorum vote from an Azure storage account, ideal for two-site clusters.",
+      "C": "To encrypt the cluster heartbeats.",
+      "D": "To monitor the cluster's electricity usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DNS record is used to enable 'DNSSEC' validation for an Active Directory integrated zone?",
+    "options": {
+      "A": "A",
+      "B": "RRSIG (Resource Record Signature)",
+      "C": "MX",
+      "D": "PTR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Group Policy Caching' allows client machines to use a locally cached version of the GPO if the Domain Controller is unreachable during boot.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security settings",
+      "D": "Only in Windows 10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'Active Directory Bridgehead Server'?",
+    "options": {
+      "A": "To act as a physical bridge between routers.",
+      "B": "To act as the primary point of contact for inter-site replication for a specific partition (e.g., Domain or Schema).",
+      "C": "To encrypt the site-to-site communication.",
+      "D": "To monitor the daily growth of the forest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which FSMO role must be available for a 'Domain Controller' to be demoted gracefully?",
+    "options": {
+      "A": "Schema Master",
+      "B": "Infrastructure Master",
+      "C": "PDC Emulator",
+      "D": "Domain Naming Master"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'LAPS' (Local Administrator Password Solution) stores the local administrator passwords of domain-joined computers in a secure attribute in Active Directory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 7",
+      "D": "Only if using Azure AD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Active Directory Recycle Bin' object lifetime?",
+    "options": {
+      "A": "Determined by the 'msDS-deletedObjectLifetime' attribute, typically matching the forest's tombstone lifetime.",
+      "B": "30 days.",
+      "C": "Permanent until manually cleared.",
+      "D": "1 year."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Kerberos, what is 'Pre-Authentication'?",
+    "options": {
+      "A": "Logging in before the shift starts.",
+      "B": "A mechanism where the client sends a timestamp encrypted with its password hash to the KDC to prove identity before a TGT is issued.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The password for the Kerberos administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Global Catalog' server is required to resolve 'UPN' logins if the user account is in a different domain than the one the user is logging into.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2003",
+      "D": "Only if using smart cards"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AD mechanism ensures that a DC does not replicate 'lingering objects' from a DC that has been offline longer than the tombstone lifetime?",
+    "options": {
+      "A": "Strict Replication Consistency",
+      "B": "Active Directory Recycle Bin",
+      "C": "USN Rollback",
+      "D": "KCC"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Active Directory Sites and Services' replication 'Schedule'?",
+    "options": {
+      "A": "To schedule employee shifts.",
+      "B": "To define the specific times during which replication is allowed to occur between physical sites to save bandwidth.",
+      "C": "To encrypt the replication stream.",
+      "D": "To monitor the daily growth of the domain."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stub Zone' contains a copy of the actual DNS records (A, MX, etc.) of the target zone.",
+    "options": {
+      "A": "False (It only contains Name Server (NS), SOA, and Glue A records to find authoritative servers).",
+      "B": "True",
+      "C": "Only for forward lookup zones",
+      "D": "Only if AD-integrated"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific PowerShell AD cmdlet is used to find all user accounts that have not logged in for 90 days?",
+    "options": {
+      "A": "Get-ADUser -Filter 'LastLogonDate -le (Get-Date).AddDays(-90)'",
+      "B": "Search-InactiveUsers -Days 90",
+      "C": "Find-ADAccount -Inactive -TimeSpan 90",
+      "D": "List-OldAccounts"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of the 'Active Directory Schema Master'?",
+    "options": {
+      "A": "Naming all the employees.",
+      "B": "The only DC authorized to perform writable updates to the AD schema Definitions.",
+      "C": "To encrypt the domain's source code.",
+      "D": "To monitor the daily growth of the schema."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Managed Service Accounts' (MSAs) cannot be used on multiple computers unless they are 'group' MSAs (gMSAs).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2008",
+      "D": "Only if using SQL Server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which FSMO role is responsible for ensuring that a newly created object has a globally unique Security Identifier (SID)?",
+    "options": {
+      "A": "RID Master",
+      "B": "Schema Master",
+      "C": "PDC Emulator",
+      "D": "Domain Naming Master"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Group Policy, what is 'Loopback Processing' 'Replace' mode?",
+    "options": {
+      "A": "Combining user and computer policies.",
+      "B": "Ignoring all GPOs linked to the User object and applying only GPOs linked to the Computer object.",
+      "C": "A specialized way to encrypt GPO files.",
+      "D": "To monitor the daily cost of the GPO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SID History' allows a migrated user to retain access to resources in their old domain by including their old SID in their new authentication token.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for child domains",
+      "D": "Only if using NTLM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Knowledge Consistency Checker' (KCC) in a multi-domain forest?",
+    "options": {
+      "A": "To find all servers in the forest.",
+      "B": "To generate the replication topology within and between sites to ensure all DCs are updated efficiently.",
+      "C": "To encrypt the forest-wide communication.",
+      "D": "To monitor the daily growth of the forest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for AD DS replication over RPC (Dynamic Ports)?",
+    "options": {
+      "A": "445",
+      "B": "49152-65535 (Default for modern Windows Server)",
+      "C": "1024-5000",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Forest Trust' is always transitive between all domains in Forest A and Forest B.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if SID Filtering is off",
+      "D": "Only for non-root domains"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Active Directory Rights Management Services' (AD RMS) 'Exclusion Policies'?",
+    "options": {
+      "A": "To exclude employees from the office gym.",
+      "B": "To prevent specific users, applications, or OS versions from opening protected content.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PowerShell cmdlet is used to find all Domain Controllers in a specific site?",
+    "options": {
+      "A": "Get-ADDomainController -Filter 'Site -eq \"SiteName\"'",
+      "B": "List-DCs -Site \"SiteName\"",
+      "C": "Show-ADObjects -Type DC -Site \"SiteName\"",
+      "D": "Find-ADAccount -Site \"SiteName\""
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Active Directory Global Catalog'?",
+    "options": {
+      "A": "To provide a physical location for servers.",
+      "B": "To provide forest-wide search and facilitate multi-domain authentication by storing a partial set of attributes for all objects in the forest.",
+      "C": "To host the company's external email.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Active Directory Domain Services' (AD DS) can be installed on a Windows Server Core machine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2022",
+      "D": "Only if using PowerShell"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed File System Replication' (DFSR) 'Staging' area used for?",
+    "options": {
+      "A": "To host a physical stage for company presentations.",
+      "B": "To store compressed files before they are replicated to other servers to optimize performance.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "To monitor the daily growth of the directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'FSMO' role is responsible for managing the addition and removal of cross-domain naming contexts?",
+    "options": {
+      "A": "Schema Master",
+      "B": "Domain Naming Master",
+      "C": "PDC Emulator",
+      "D": "Infrastructure Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Active Directory 'Sites' are logically mapped to IP subnets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large enterprises",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Active Directory Certificate Services' (AD CS) 'Certificate Templates'?",
+    "options": {
+      "A": "To make the certificate look pretty.",
+      "B": "To define the properties and permissions for certificates issued by a CA.",
+      "C": "To encrypt the whole database.",
+      "D": "To monitor the daily growth of the directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for Kerberos Change Password?",
+    "options": {
+      "A": "389",
+      "B": "464",
+      "C": "636",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Managed Service Accounts' provide automatic password management, requiring no manual intervention from the administrator.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Server 2008 R2",
+      "D": "Only if using SQL Server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fine-Grained Password Policy' (FGPP) 'PSO' priority?",
+    "options": {
+      "A": "Determined by the 'msDS-PasswordSettingsPrecedence' attribute (lower value is higher priority).",
+      "B": "Determined by the order they were created.",
+      "C": "The administrator decides manually.",
+      "D": "It depends on the size of the AD database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific tool would you use to verify 'Forest Functional Level' from a command line?",
+    "options": {
+      "A": "ping",
+      "B": "Get-ADForest",
+      "C": "netstat",
+      "D": "tracert"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Child Domain' can be removed from a forest while still keeping its parent domain intact.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is the only child",
+      "D": "Only if using Azure AD"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default replication interval for inter-site replication in Active Directory?",
+    "options": {
+      "A": "5 minutes",
+      "B": "180 minutes (3 hours)",
+      "C": "24 hours",
+      "D": "Replication is instantaneous by default"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which FSMO role must be available to create a new 'Security Identifier' (SID) for a new user account?",
+    "options": {
+      "A": "PDC Emulator",
+      "B": "RID Master",
+      "C": "Infrastructure Master",
+      "D": "Schema Master"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'UPN Suffix' used for in a forest with multiple domain names?",
+    "options": {
+      "A": "To encrypt the email addresses.",
+      "B": "To allow users to log in using an alternative, simplified domain name (e.g., user@company.com instead of user@internal.local).",
+      "C": "To backup the DNS zone.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Loopback Processing' in 'Replace' mode ignores all GPO settings from the user's OU and only applies those from the computer's OU.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for desktop settings",
+      "D": "Only if the user is an Administrator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which AD role allows for the issuance of digital certificates for users and computers?",
+    "options": {
+      "A": "AD DS",
+      "B": "AD CS (Active Directory Certificate Services)",
+      "C": "AD FS",
+      "D": "AD RMS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Global Catalog' during the login process in a multi-domain environment?",
+    "options": {
+      "A": "To find the user's password.",
+      "B": "To verify 'Universal Group' memberships for the user.",
+      "C": "To encrypt the login session.",
+      "D": "To monitor the daily growth of the user profile."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the 'Domain Functional Level' to a lower version after it has been raised (in Windows Server 2008 R2 and later).",
+    "options": {
+      "A": "False (Raising the functional level is generally a one-way operation).",
+      "B": "True",
+      "C": "Only if using PowerShell",
+      "D": "Only in the first 24 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to verify the 'Forest Functional Level' from a GUI?",
+    "options": {
+      "A": "AD Users and Computers",
+      "B": "AD Domains and Trusts",
+      "C": "AD Sites and Services",
+      "D": "Server Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DNS Scavenging' used for in an Active Directory environment?",
+    "options": {
+      "A": "To look for viruses in the DNS database.",
+      "B": "To automatically remove stale or old DNS records from the zone.",
+      "C": "To backup the whole DNS zone.",
+      "D": "To encrypt the DNS requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Transitive Trusts' mean that if Domain A trusts B, and B trusts C, then A automatically trusts C.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for child domains",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  }
+  ]
+}

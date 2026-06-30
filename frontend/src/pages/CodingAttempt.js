@@ -4,8 +4,8 @@ import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/Coding.css';
 import '../styles/CodingAttempt.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
+import { Eye, EyeOff } from 'lucide-react';
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -357,6 +357,7 @@ export default function CodingAttempt() {
     setError('');
     setResult(null);
     setLastAction('run');
+    setResultHeightPct(50); // Expand results area upon running
     try {
       const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/run/?mode=visible`, {
         code,
@@ -381,8 +382,13 @@ export default function CodingAttempt() {
     setError('');
     setResult(null);
     setLastAction('submit');
+    setResultHeightPct(50); // Expand results area upon submitting
     try {
-      const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/submit/`, { code, language: selectedLanguage });
+      const resp = await axios.post(`${API_BASE_URL}/coding/questions/${id}/submit/`, {
+        code,
+        language: selectedLanguage,
+        skip_save: true
+      });
       setResult(resp.data);
       setTimeout(() => {
         if (resultRef.current) {
@@ -433,7 +439,7 @@ export default function CodingAttempt() {
   };
 
   const resultPaneStyle = showResultPanel && result
-    ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '400px' }
+    ? { flex: '0 0 auto', display: 'block' }
     : { display: 'none' };
 
   return (
@@ -467,18 +473,7 @@ export default function CodingAttempt() {
                 <div className="coding-pane-header">
                   <div>
                     <div className="coding-title">{q?.title || 'Untitled'}</div>
-                    <div className="coding-meta">
-                      {languages.length === 0 ? (
-                        <span className="coding-pill coding-pill-muted">—</span>
-                      ) : (
-                        languages.map((lang) => (
-                          <span key={lang} className="coding-pill coding-pill-muted">
-                            {lang}
-                          </span>
-                        ))
-                      )}
-                      <span className="coding-pill coding-pill-muted">{q?.mode || '—'}</span>
-                    </div>
+
                   </div>
                   <div className="coding-toolbar">
                     <button type="button" className="btn btn-secondary" onClick={() => navigate('/coding')}>
@@ -545,7 +540,7 @@ export default function CodingAttempt() {
               </div>
             </div>
 
-            <div className="coding-editor-wrap" ref={editorWrapRef}>
+            <div className="coding-editor-wrap" ref={editorWrapRef} onClick={() => setResultHeightPct(30)}>
               <div className="coding-monaco">
                 <Suspense fallback={<div className="coding-monaco-loading">Loading editor…</div>}>
                   <MonacoEditor
@@ -586,27 +581,34 @@ export default function CodingAttempt() {
                         {lastAction === 'submit' && result.submission_id ? `• Submission #${result.submission_id}` : ''}
                         {lastAction === 'run' ? ' • (visible tests only)' : ''}
                       </div>
-                      <div className="coding-table">
+                      <div className={`coding-table is-results ${!(result.results || []).some(r => (r.stderr || '').trim()) ? 'hide-stderr' : ''}`}>
                         <div className="coding-table-head">
                           <div>Test</div>
                           <div>Status</div>
                           <div>stdout</div>
-                          <div>stderr</div>
+                          {(result.results || []).some(r => (r.stderr || '').trim()) && <div>stderr</div>}
                         </div>
                         {result.results.map((r, idx) => {
                           const isHidden = r.is_hidden ?? r.hidden ?? false;
                           return (
                             <div key={r.testcase_id ?? idx} className="coding-table-row">
-                              <div className="coding-test-label">
-                                <span className={isHidden ? 'coding-pill-hidden' : 'coding-pill-visible'}>
-                                  {isHidden ? 'Hidden' : 'Visible'}
-                                </span>
-                                <span className="coding-test-name">Test {idx + 1}</span>
+                              <div className="coding-test-label" title={isHidden ? 'Hidden Test' : 'Visible Test'}>
+                                {isHidden ? <EyeOff size={16} color="#64748b" /> : <Eye size={16} color="#22c55e" />}
+                                <span className="coding-test-name">{idx + 1}</span>
                               </div>
                               <div className={`coding-status coding-status-${String(r.status || '').toLowerCase()}`}>{r.status}</div>
-                              <div className="coding-mono">{(r.stdout || '').trim() || '—'}</div>
-                              <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>
+                              {r.status === 'ERROR' && r.message ? (
+                                <div className="coding-mono coding-error-message" style={{ gridColumn: (result.results || []).some(res => (res.stderr || '').trim()) ? 'span 2' : 'span 1', color: '#ff6b6b' }}>
+                                  {r.message}
+                                </div>
+                              ) : (
+                                <>
+                                  <div className="coding-mono">{(r.stdout || '').trim() || '—'}</div>
+                                  {(result.results || []).some(res => (res.stderr || '').trim()) && <div className="coding-mono">{(r.stderr || '').trim() || '—'}</div>}
+                                </>
+                              )}
                             </div>
+
                           );
                         })}
                       </div>

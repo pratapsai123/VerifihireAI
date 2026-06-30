@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Data Pipeline", 
+  "questions": [
+    {
+    "question": "What is the primary function of a Data Pipeline?",
+    "options": {
+      "A": "To create physical backups on floppy disks.",
+      "B": "To automate the movement and transformation of data from a source to a destination.",
+      "C": "To act as a social media platform for data engineers.",
+      "D": "To monitor the physical power usage of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a data pipeline, what does 'Ingestion' refer to?",
+    "options": {
+      "A": "The final stage where data is deleted.",
+      "B": "The initial process of pulling or receiving data from various sources into the system.",
+      "C": "The process of renaming folders on a server.",
+      "D": "Encrypting the source code of the pipeline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Batch' pipeline processes data in discrete groups at scheduled intervals rather than in real-time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Excel files",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which term describes a pipeline that processes data immediately as it is generated?",
+    "options": {
+      "A": "Batch Pipeline",
+      "B": "Streaming Pipeline",
+      "C": "Static Pipeline",
+      "D": "Manual Pipeline"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Orchestrator' (like Apache Airflow) in a data ecosystem?",
+    "options": {
+      "A": "To play music in the server room.",
+      "B": "To manage the scheduling, execution, and dependencies of multiple data tasks.",
+      "C": "To act as a physical hardware firewall.",
+      "D": "To increase the internet speed of the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of data pipelines, what does 'Sink' refer to?",
+    "options": {
+      "A": "The physical kitchen sink in the office.",
+      "B": "The final destination where the processed data is stored (e.g., a database or Data Lake).",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ETL' (Extract, Transform, Load) is a common pattern for building data pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Validation' in a pipeline?",
+    "options": {
+      "A": "Wiping the hard drive to clear space.",
+      "B": "Checking data for accuracy and quality before it moves to the next stage.",
+      "C": "Adding more users to the system.",
+      "D": "Upgrading the operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Source' for a data pipeline?",
+    "options": {
+      "A": "Application Logs",
+      "B": "Relational Databases",
+      "C": "Third-party APIs",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Data Lake' is often used as a storage layer in pipelines to store raw, unstructured data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial records",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Workflow' mean in pipeline terminology?",
+    "options": {
+      "A": "A sequence of connected tasks that perform a specific data process.",
+      "B": "The physical path a developer walks to the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latentcy' in a data pipeline?",
+    "options": {
+      "A": "The physical weight of the data packets.",
+      "B": "The time delay between when data is produced and when it is available in the target system.",
+      "C": "The annual cost of the cloud storage.",
+      "D": "The number of users currently logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pipeline 'Monitoring' is used to track the health, performance, and failures of data flows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for startups",
+      "D": "Only if the data is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes 'Data Cleaning'?",
+    "options": {
+      "A": "Removing duplicates and fixing formatting errors in a dataset.",
+      "B": "Using soap to clean a physical hard drive.",
+      "C": "A tool used for measuring network speed.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Directed Acyclic Graph' (DAG) in orchestration?",
+    "options": {
+      "A": "A physical chart showing server rack locations.",
+      "B": "A collection of tasks organized in a way that reflects their dependencies without any circular loops.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pipeline 'Throughput' refers to the amount of data processed by the system in a given amount of time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for streaming pipelines",
+      "D": "Only if the CPU is at 100%"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema' in a data context?",
+    "options": {
+      "A": "The physical blueprint of the office building.",
+      "B": "The formal definition of the structure, data types, and relationships within a dataset.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that a pipeline task has been scheduled but hasn't started running yet?",
+    "options": {
+      "A": "Running",
+      "B": "Queued / Pending",
+      "C": "Success",
+      "D": "Failed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Lineage' allows you to trace the history of data from its source through all transformations to its destination.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backfilling' in a data pipeline?",
+    "options": {
+      "A": "Filling a hole in the server room floor.",
+      "B": "Running a pipeline on historical data to populate a target system with past information.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard unencrypted web-based pipeline management interfaces (HTTP)?",
+    "options": {
+      "A": "443",
+      "B": "80",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' is the ability of a pipeline to handle increasing amounts of data by adding more resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Message Queue' (like RabbitMQ or Kafka) used for in pipelines?",
+    "options": {
+      "A": "To store the user's personal emails.",
+      "B": "To act as a buffer between different stages of a pipeline to ensure reliable data delivery.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Data Masking' in a pipeline?",
+    "options": {
+      "A": "To make the data icons look like masks.",
+      "B": "To hide sensitive information (like PII) during the transformation process for privacy.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Parallel Processing' allows multiple parts of a data pipeline to run at the same time to increase speed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fault Tolerance'?",
+    "options": {
+      "A": "The ability of a system to continue operating even if one or more components fail.",
+      "B": "The process of deleting faulty data.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The brand name of a popular monitor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Flat File' format used in data pipelines?",
+    "options": {
+      "A": "CSV",
+      "B": "MP4",
+      "C": "JPEG",
+      "D": "EXE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An 'API' can serve as both a source and a destination for data in a pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google APIs",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Reconciliation'?",
+    "options": {
+      "A": "Comparing source and target data to ensure they match and are accurate after movement.",
+      "B": "Deleting the data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of hours a server has been on."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Failed Pipeline Runs'?",
+    "options": {
+      "A": "Success Rate",
+      "B": "Failure Rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Governance' is a set of policies for managing the availability, usability, integrity, and security of data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metadata'?",
+    "options": {
+      "A": "Data that provides information about other data (e.g., date created, source).",
+      "B": "The physical metal used in server racks.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "Hiring a new database administrator."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool is commonly used to write 'SQL' queries to transform data within a database?",
+    "options": {
+      "A": "Adobe Reader",
+      "B": "DBeaver / SQL Workbench",
+      "C": "Microsoft Word",
+      "D": "WinZip"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' in a pipeline means that running the same job twice with the same data will result in the same final state without duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion' strategy 'Full Load'?",
+    "options": {
+      "A": "Replacing the entire target dataset with the current source data during every run.",
+      "B": "Loading only the changed data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed per Second'?",
+    "options": {
+      "A": "Throughput / RPS",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Transformation' logic can include mathematical operations like summing or averaging values.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing'?",
+    "options": {
+      "A": "Cleaning the physical hard drives with soap.",
+      "B": "The process of identifying and removing errors or inconsistencies from a dataset.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure management (HTTPS) of a pipeline tool?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pipelines can be triggered by external events, such as a file appearing in an S3 bucket.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Enrichment'?",
+    "options": {
+      "A": "Adding extra information to a dataset from external sources to make it more useful.",
+      "B": "Giving money to the data center.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' time a task takes to complete?",
+    "options": {
+      "A": "Mean Execution Time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Partitioning' data involves dividing it into smaller, manageable chunks based on a key (e.g., date).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Retry Logic' in a pipeline?",
+    "options": {
+      "A": "Automatically attempting to run a failed task again a certain number of times.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of 'CPU' usage during a data transformation?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' (Extract, Load, Transform) moves the transformation step to the target database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of bringing data into a processing system.",
+      "B": "Deleting data from a database.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Workers' in a distributed pipeline?",
+    "options": {
+      "A": "Worker Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Schema Drift' occurs when the source data structure changes unexpectedly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pipeline Orchestration'?",
+    "options": {
+      "A": "Managing the timing and execution of data tasks and their dependencies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The salary of a data engineer."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Filtered' out during processing?",
+    "options": {
+      "A": "Filter Count / Dropped Records",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically scheduled using cron expressions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Latency' 'End-to-End'?",
+    "options": {
+      "A": "The total time from data generation to its availability in the reporting layer.",
+      "B": "The speed of the network bandwidth.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'SSH' for remote pipeline debugging?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Stream Processing' is essential for real-time fraud detection.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large banks",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backfilling' 'Historical Data'?",
+    "options": {
+      "A": "Processing past data to update a target system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an API call in a pipeline?",
+    "options": {
+      "A": "HTTP 200 percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Metadata Management' helps in understanding the data's context.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pipeline Monitoring'?",
+    "options": {
+      "A": "Providing visibility into the execution and health of data flows.",
+      "B": "Hiring a person to watch the server rack.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Consumers' in a stream?",
+    "options": {
+      "A": "Consumer Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Lineage' provides an audit trail for data changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Parallelism' in data processing?",
+    "options": {
+      "A": "Executing multiple data tasks concurrently to improve performance.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Data Skew' in a distributed process?",
+    "options": {
+      "A": "Skew Coefficient",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Fault Tolerance' ensures pipeline reliability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion' pipeline?",
+    "options": {
+      "A": "A pipeline designed specifically to bring data from sources into a central store.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Database Connections' used by a pipeline?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which data delivery guarantee ensures that a message is never lost but may be delivered more than once, requiring the downstream consumer to be idempotent?",
+    "options": {
+      "A": "At-most-once",
+      "B": "At-least-once",
+      "C": "Exactly-once",
+      "D": "Zero-copy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a streaming pipeline, what is a 'Tumbling Window'?",
+    "options": {
+      "A": "A window that physically tumbles in the server rack.",
+      "B": "A fixed-size, non-overlapping, and contiguous time interval (e.g., every 5 minutes).",
+      "C": "A window that changes size based on data volume.",
+      "D": "A specialized way to encrypt network signals."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Backpressure' is a mechanism where a downstream system signals an upstream system to slow down its rate of data transmission to avoid being overwhelmed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python-based pipelines",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical challenge of achieving 'Exactly-once' processing in a distributed system?",
+    "options": {
+      "A": "It requires the data center to be located at sea level.",
+      "B": "The overhead of coordinating state checkpoints and atomic commits across multiple distributed components.",
+      "C": "It only works with unencrypted data.",
+      "D": "It forces the pipeline to run in a single-threaded mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Window' type would you use to group events that occur within a specific time gap of each other, closing the window only after a period of inactivity?",
+    "options": {
+      "A": "Sliding Window",
+      "B": "Session Window",
+      "C": "Tumbling Window",
+      "D": "Global Window"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Apache Airflow, what does a 'Sensor' do?",
+    "options": {
+      "A": "It measures the physical temperature of the CPU.",
+      "B": "It is a special type of operator that waits for a specific condition to be met (e.g., a file to appear) before allowing the workflow to continue.",
+      "C": "It encrypts the database connection string.",
+      "D": "It monitors the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Idempotent' operation is one that can be applied multiple times without changing the result beyond the initial application.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Checkpointing' used for in a streaming engine like Apache Flink or Spark Streaming?",
+    "options": {
+      "A": "To check the price of the cloud resources.",
+      "B": "To periodically save the state of the pipeline to durable storage to allow for recovery from the exact last successful point after a failure.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technique involves adding a unique 'Transaction ID' to every record to help the sink system identify and discard duplicates?",
+    "options": {
+      "A": "Deduplication via Bloom Filters",
+      "B": "Idempotency Keys / Deterministic IDs",
+      "C": "Symmetric Encryption",
+      "D": "Load Balancing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Sliding Window' allows for overlapping time intervals, where an event can belong to multiple windows at once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Dead Letter Queue' (DLQ) in an asynchronous data pipeline?",
+    "options": {
+      "A": "To store old emails from the IT team.",
+      "B": "To capture messages that could not be processed successfully so they can be inspected and reprocessed later without blocking the main pipeline.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an orchestration DAG, what happens if a 'Upstream' task fails and no retry logic is defined?",
+    "options": {
+      "A": "The 'Downstream' tasks are skipped or marked as 'Upstream Failed'.",
+      "B": "The whole server restarts automatically.",
+      "C": "The data is deleted permanently.",
+      "D": "The encryption keys are rotated."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Late Data' in a streaming context refers to events that arrive after the system has already processed the window they belong to, often handled using 'Watermarks'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unencrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Push-based' ingestion compared to 'Pull-based' ingestion?",
+    "options": {
+      "A": "Push involves the source sending data to the pipeline; Pull involves the pipeline actively requesting data from the source.",
+      "B": "Push is only for files; Pull is for databases.",
+      "C": "Push is always faster.",
+      "D": "There is no difference in modern systems."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Consumer Lag' in a pipeline using a message broker?",
+    "options": {
+      "A": "The difference between the number of messages produced and the number of messages consumed.",
+      "B": "The total throughput of the network card.",
+      "C": "The physical weight of the server rack.",
+      "D": "The number of users logged into the dashboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Micro-batches' is a technique used by some streaming engines to process data in very small, high-frequency batches to approximate real-time processing.",
+    "options": {
+      "A": "True (e.g., Spark Streaming).",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Fan-out' architecture in a data pipeline?",
+    "options": {
+      "A": "To use physical fans to cool the server.",
+      "B": "To take a single data input and send it to multiple different destinations or processing branches simultaneously.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a pipeline, what does 'Data Serialization' (e.g., Avro, Protobuf) achieve?",
+    "options": {
+      "A": "It creates a series of physical backups.",
+      "B": "It converts complex data objects into a compact binary format for efficient storage and transmission over the network.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Event Time' is the time when an event actually occurred at the source, while 'Processing Time' is when the system receives and processes the event.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking data",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Tracing' used for in pipeline observability?",
+    "options": {
+      "A": "Tracking the physical location of the server.",
+      "B": "Following the path of a single data record through multiple distributed services to identify where latency or errors occur.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of a pipeline ensures that data types and structures match between the producer and the consumer?",
+    "options": {
+      "A": "Schema Registry",
+      "B": "Load Balancer",
+      "C": "Firewall",
+      "D": "DNS Server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'At-most-once' delivery guarantees that no message will ever be delivered more than once, but some messages might be lost.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backfilling' in a data pipeline?",
+    "options": {
+      "A": "Filling a hole in the server room.",
+      "B": "The process of running a pipeline on historical data to populate a new system or fix data issues from the past.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated data validation check?",
+    "options": {
+      "A": "(Valid Records / Total Records) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Stateless' transformation in a pipeline does not require knowledge of previous records to process the current one.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CSV files",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Sharding' in a high-volume data ingestion system?",
+    "options": {
+      "A": "Dividing the data into smaller, horizontal pieces (shards) that can be processed in parallel across multiple servers.",
+      "B": "Deleting the oldest data points.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is associated with standard secure management (HTTPS) of an orchestration tool like Airflow?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Skew' occurs when data is distributed unevenly across processing nodes, causing some nodes to be much busier than others.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Change Data Capture' (CDC) used for in pipeline engineering?",
+    "options": {
+      "A": "To encrypt the database logs.",
+      "B": "To identify and capture only the data that has changed at the source, allowing for efficient incremental updates.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' being generated by a pipeline's monitoring logic?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed for long-term, scalable storage of pipeline metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for data pipelines?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 isolation to ensure that sensitive data pipeline traffic is logically separated from general office traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a virtualized data center?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a common practice on pipeline worker nodes to maximize resource utilization.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in a global pipeline context?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The requirement that data is subject to the laws and regulations of the country where it is physically stored.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for high-performance pipeline storage?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide higher network bandwidth for data pipeline ingestion servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for pipeline security?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining granular security rules for each individual pipeline task to prevent lateral movement of an attacker.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Rejected' during the transformation phase?",
+    "options": {
+      "A": "Reject Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 2' is a strategy for tracking historical changes in a dimension table within a data warehouse pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion' strategy 'Incremental Load'?",
+    "options": {
+      "A": "Loading only the data that has changed since the last run.",
+      "B": "Loading everything every time.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a pipeline job?",
+    "options": {
+      "A": "Success / Failure percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that repeating an action has the same result as doing it once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a pipeline?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The automated process of creating unique system-generated keys to replace real IDs for better performance and privacy.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server' targeted by a pipeline?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the target system's compute power for transformations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Cleaning' in a pipeline?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and fixing data errors during the transformation phase.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is common for log rotation tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pipeline Monitor' interface?",
+    "options": {
+      "A": "A graphical UI to view the health of data flows.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Consumers' in a message queue?",
+    "options": {
+      "A": "Consumer Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for data platforms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance' for pipelines?",
+    "options": {
+      "A": "A framework for managing an organization's data assets and policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of building reliable modern data pipelines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for code-based pipelines?",
+    "options": {
+      "A": "The automated analysis of source code to find security flaws or bugs.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a pipeline failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' for data pipelines?",
+    "options": {
+      "A": "A structured process for managing sensitive data like database passwords and API keys.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for data pipeline tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where security duties are split between the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations'?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing earlier in the pipeline lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to a data system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which distributed algorithm is commonly used by stream processing engines like Apache Flink to capture a consistent global state for 'Exactly-Once' processing without stopping the entire world?",
+    "options": {
+      "A": "Paxos",
+      "B": "Chandy-Lamport Algorithm (Distributed Snapshots)",
+      "C": "Raft Consensus",
+      "D": "Two-Phase Commit (2PC)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a high-availability Data Orchestrator setup, what is the primary purpose of a 'Distributed Lock Manager' (DLM) like Zookeeper or etcd?",
+    "options": {
+      "A": "To encrypt the workflow metadata.",
+      "B": "To ensure that only one 'Scheduler' instance is active at a time to prevent duplicate task execution in a multi-master setup.",
+      "C": "To act as a physical firewall for the cluster.",
+      "D": "To monitor the temperature of the CPU on worker nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a streaming pipeline, 'Watermarks' are a mechanism used to track the progress of 'Event Time' and decide when to close a window, even if data arrives out of order.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unencrypted traffic",
+      "D": "Only if using 100Gbps network links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in the context of a distributed data pipeline during a system recovery phase?",
+    "options": {
+      "A": "A physical server rack falling over.",
+      "B": "When a large number of worker nodes or processes simultaneously request resources or connections from a single source/sink upon restart, causing it to crash again.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The newest version of the JVM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When tuning a JVM-based pipeline (like Spark or Flink), what does 'Garbage Collection (GC) Overhead Limit Exceeded' usually indicate regarding the pipeline's memory configuration?",
+    "options": {
+      "A": "The CPU clock speed is too high.",
+      "B": "The application is spending more than 98% of its time doing GC and reclaiming less than 2% of the heap, usually because the heap is too small for the data volume.",
+      "C": "The network bandwidth is saturated.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the situation where a streaming pipeline's 'Sink' is slower than its 'Source', leading to an unbounded growth of data in intermediate buffers?",
+    "options": {
+      "A": "Backpressure Failure",
+      "B": "Unbounded Consumer Lag / Buffer Overflow",
+      "C": "Shuffle Spilling",
+      "D": "Resource Contention"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Kappa Architecture', the system uses only a single stream processing engine to handle both real-time data and historical re-processing by replaying the log.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java-based stacks",
+      "D": "Only in version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' in a distributed pipeline reading from a columnar storage format like Parquet or ORC?",
+    "options": {
+      "A": "Manually pushing the server into the rack.",
+      "B": "The ability of the engine to filter data at the storage level so that only relevant columns and rows are read into memory, reducing I/O and network traffic.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Multi-tenant' data platform, which mechanism is best for ensuring that a massive query from 'Tenant A' does not starve the resources of 'Tenant B'?",
+    "options": {
+      "A": "Hiring more people.",
+      "B": "Resource Isolation using CGroups, Quotas, or dedicated compute clusters per tenant.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Region' data pipelines are primarily bottlenecked by the speed of the CPU rather than network latency and the CAP theorem's consistency trade-offs.",
+    "options": {
+      "A": "False (Network latency and the speed of light are the primary constraints for cross-region data movement).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Bloom Filter' in a high-performance data deduplication pipeline?",
+    "options": {
+      "A": "To filter the air in the data center.",
+      "B": "A space-efficient probabilistic data structure used to quickly check if a record has been seen before, reducing expensive database lookups.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Status' on a distributed task indicates that a node has become a 'Straggler'?",
+    "options": {
+      "A": "Successful",
+      "B": "Running (while all other parallel tasks have completed), often due to data skew or hardware issues.",
+      "C": "Pending",
+      "D": "Retrying"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' in a pipeline allows for 'At-Least-Once' delivery to behave like 'Exactly-Once' from the perspective of the end user or target database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Correlation' in a pipeline observability context?",
+    "options": {
+      "A": "Linking the location of server racks.",
+      "B": "Passing a unique TraceID through all stages of a distributed pipeline to correlate logs and metrics for a specific data transaction.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'Airflow' worker communication with the Celery backend if using Redis?",
+    "options": {
+      "A": "6379",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed to provide long-term storage and high-cardinality analysis for pipeline performance metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for secure pipeline processing?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 network segmentation to ensure that high-volume data traffic is logically isolated from the management network.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a secure data center?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is safe for production data pipelines with strictly defined SLAs.",
+    "options": {
+      "A": "False (It can lead to unpredictable OOM kills and latency spikes when multiple pipeline workers contend for the same physical RAM).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' used for in a high-availability data infrastructure?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "Moving the virtual disk files of a running pipeline worker between different storage arrays without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' storage traffic, which should be isolated from the general network?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation Control Protocol) can be used to increase the network throughput for data ingestion nodes by combining multiple physical links.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for secure data movement?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining granular security rules for each individual data service or task to prevent lateral movement of an attacker.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a pipeline's Prometheus sink?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common strategy for maintaining an audit trail of sensitive data changes in a separate table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in a pipeline context?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal principle that data is subject to the laws of the country where it is physically located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Records Rejected' by a pipeline's quality gate?",
+    "options": {
+      "A": "Rejection Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is critical for ensuring pipeline reliability during automated retries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a data platform?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique, system-assigned keys to replace real-world IDs for better indexing and privacy.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the massively parallel processing power of modern cloud data warehouses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Cleaning' in a pipeline transformation?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The automated process of identifying and fixing data errors during the pipeline execution.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for pipeline management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is typically used for non-time-critical data movement.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pipeline Orchestrator' architecture?",
+    "options": {
+      "A": "The process of turning off the server.",
+      "B": "A system that manages the execution, dependencies, and monitoring of complex data workflows.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Consumers' in a data stream?",
+    "options": {
+      "A": "Consumer Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for data pipeline components.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance' policy enforcement?",
+    "options": {
+      "A": "A framework for managing data security and quality via automated checks and rules.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is essential for securing modern data platforms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for pipeline code?",
+    "options": {
+      "A": "The automated checking of pipeline definitions for security flaws or syntax errors.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a data quality failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves testing a running pipeline in a staging environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in a pipeline?",
+    "options": {
+      "A": "A structured process for managing passwords and keys used by pipeline workers to access databases.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for data pipeline tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations'?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to a data system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for protecting data platform integrity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption'?",
+    "options": {
+      "A": "Encoding data so that only authorized parties can read it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Pipeline Runs'?",
+    "options": {
+      "A": "Run Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in data center security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "Identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between two points.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for data in transit.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "Sending emails to induce individuals to reveal personal info.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of a data pipeline?",
+    "options": {
+      "A": "(Uptime / Total Time) * 100",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data pipelines are critical for modern analytics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Failed Tasks'?",
+    "options": {
+      "A": "Fail Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Orchestrators manage task dependencies.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stream Processing'?",
+    "options": {
+      "A": "Processing data in real-time.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "A"
+  }
+  ]
+}

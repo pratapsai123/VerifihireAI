@@ -1,0 +1,1995 @@
+{
+  "skill": "STL",
+  "questions": [
+    {
+      "question": "Which header must be included to use the dynamic array container in the STL?",
+      "options": {
+        "A": "<array>",
+        "B": "<vector>",
+        "C": "<list>",
+        "D": "<deque>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'std::vector' container grows automatically in size when elements are added using push_back().",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which STL algorithm is used to arrange elements in ascending order by default?",
+      "options": {
+        "A": "std::arrange()",
+        "B": "std::order()",
+        "C": "std::sort()",
+        "D": "std::group()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are standard STL Sequence Containers?",
+      "options": {
+        "A": "std::vector",
+        "B": "std::list",
+        "C": "std::deque",
+        "D": "std::map"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does the 'size()' member function of a container return?",
+      "options": {
+        "A": "The maximum number of elements the container can hold.",
+        "B": "The number of elements currently stored in the container.",
+        "C": "The memory address of the first element.",
+        "D": "The total bytes occupied by the container."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which operator is used to access an element in a 'std::vector' without bounds checking?",
+      "options": {
+        "A": "at()",
+        "B": "[] (subscript operator)",
+        "C": "-> (arrow operator)",
+        "D": "* (dereference operator)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::list' is implemented as a doubly-linked list.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which iterator points to the position immediately following the last element in a container?",
+      "options": {
+        "A": "begin()",
+        "B": "front()",
+        "C": "back()",
+        "D": "end()"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which function is used to remove all elements from an STL container?",
+      "options": {
+        "A": "empty()",
+        "B": "erase()",
+        "C": "clear()",
+        "D": "remove_all()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which methods can be used to add elements to a 'std::list'?",
+      "options": {
+        "A": "push_back()",
+        "B": "push_front()",
+        "C": "insert()",
+        "D": "enqueue()"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which member function is used to access the first element of a std::vector?",
+      "options": {
+        "A": "begin()",
+        "B": "front()",
+        "C": "first()",
+        "D": "start()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The std::array container has a fixed size that must be known at compile time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which STL algorithm is used to reverse the order of elements in a range?",
+      "options": {
+        "A": "std::flip()",
+        "B": "std::invert()",
+        "C": "std::reverse()",
+        "D": "std::swap_all()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following can be used to iterate through a std::vector?",
+      "options": {
+        "A": "A standard for loop with an index.",
+        "B": "A range-based for loop.",
+        "C": "STL Iterators.",
+        "D": "The std::search() algorithm."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the return type of the 'push_back()' function in std::vector?",
+      "options": {
+        "A": "int",
+        "B": "bool",
+        "C": "void",
+        "D": "A reference to the element"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In a std::map, keys must be unique.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which header is required to use std::set?",
+      "options": {
+        "A": "<map>",
+        "B": "<set>",
+        "C": "<unordered_set>",
+        "D": "<collection>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to check if an STL container has no elements?",
+      "options": {
+        "A": "is_null()",
+        "B": "size() == 0",
+        "C": "empty()",
+        "D": "clear()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What happens when you call 'pop_back()' on a std::vector?",
+      "options": {
+        "A": "It deletes the first element.",
+        "B": "It reduces the capacity of the vector to zero.",
+        "C": "It removes the last element from the vector.",
+        "D": "It returns the last element and then deletes it."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of these are 'Associative Containers' in STL?",
+      "options": {
+        "A": "std::set",
+        "B": "std::map",
+        "C": "std::multiset",
+        "D": "std::deque"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which iterator is returned by 'rbegin()'?",
+      "options": {
+        "A": "A random access iterator to the start.",
+        "B": "A reverse iterator to the last element.",
+        "C": "A constant iterator to the middle.",
+        "D": "A pointer to the raw internal array."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: std::stack follows the FIFO (First-In, First-Out) principle.",
+      "options": {
+        "A": "True",
+        "B": "False (It follows LIFO - Last-In, First-Out)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which algorithm counts the occurrences of a specific value in a range?",
+      "options": {
+        "A": "std::count()",
+        "B": "std::sum()",
+        "C": "std::find_all()",
+        "D": "std::total()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a std::pair, how do you access the second element?",
+      "options": {
+        "A": "pair.get(2)",
+        "B": "pair.second",
+        "C": "pair[1]",
+        "D": "pair.last"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function adds an element to the front of a std::list?",
+      "options": {
+        "A": "push_back()",
+        "B": "push_front()",
+        "C": "insert_first()",
+        "D": "prepend()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: std::multimap allows multiple elements to have the same key.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operator is used to increment an iterator to move to the next element?",
+      "options": {
+        "A": "++",
+        "B": "+= 1",
+        "C": "next()",
+        "D": ">>"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of std::algorithm?",
+      "options": {
+        "A": "To define new data structures.",
+        "B": "To provide a collection of functions for searching, sorting, and manipulating data.",
+        "C": "To manage memory allocation for containers.",
+        "D": "To handle input and output operations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function returns the number of elements a std::vector can hold before needing to reallocate?",
+      "options": {
+        "A": "size()",
+        "B": "max_size()",
+        "C": "capacity()",
+        "D": "length()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which containers support the subscript operator []?",
+      "options": {
+        "A": "std::vector",
+        "B": "std::deque",
+        "C": "std::map",
+        "D": "std::list"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which header is used for algorithms like std::sort and std::find?",
+      "options": {
+        "A": "<stl_alg>",
+        "B": "<algorithm>",
+        "C": "<math>",
+        "D": "<utility>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: std::queue allows insertion at one end and removal from the other.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to get the last element of a std::list without removing it?",
+      "options": {
+        "A": "end()",
+        "B": "tail()",
+        "C": "back()",
+        "D": "pop_back()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What happens if you use std::sort on an already sorted container?",
+      "options": {
+        "A": "It throws an error.",
+        "B": "It reverses the order.",
+        "C": "It remains sorted with minimal work.",
+        "D": "It removes duplicate elements."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which container is a singly-linked list in C++?",
+      "options": {
+        "A": "std::list",
+        "B": "std::forward_list",
+        "C": "std::single_list",
+        "D": "std::vector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: std::vector elements are guaranteed to be stored in contiguous memory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to find the maximum element in a range?",
+      "options": {
+        "A": "std::max_value()",
+        "B": "std::highest()",
+        "C": "std::max_element()",
+        "D": "std::peak()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the effect of the 'std::fill()' algorithm?",
+      "options": {
+        "A": "It copies one container to another.",
+        "B": "It assigns a specific value to every element in a range.",
+        "C": "It increases the capacity of a vector.",
+        "D": "It removes all null values from a container."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which container is most efficient for frequent insertions and deletions at the middle?",
+      "options": {
+        "A": "std::vector",
+        "B": "std::array",
+        "C": "std::list",
+        "D": "std::deque"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of these can be used as a key in a std::map?",
+      "options": {
+        "A": "int",
+        "B": "std::string",
+        "C": "float",
+        "D": "void"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which function is used to add an element at a specific position in a std::vector?",
+      "options": {
+        "A": "push()",
+        "B": "place()",
+        "C": "insert()",
+        "D": "add_at()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: std::set only stores unique elements.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm swaps the values of two variables?",
+      "options": {
+        "A": "std::exchange()",
+        "B": "std::move()",
+        "C": "std::swap()",
+        "D": "std::replace()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "How do you define a constant iterator for a std::vector<int>?",
+      "options": {
+        "A": "std::vector<int>::const_iterator it;",
+        "B": "const iterator it;",
+        "C": "std::vector<int>::it_const it;",
+        "D": "std::vector<int>::static_iterator it;"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to exchange the contents of two containers of the same type?",
+      "options": {
+        "A": "transfer()",
+        "B": "assign()",
+        "C": "swap()",
+        "D": "replace()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: std::stack can be implemented using std::vector, std::list, or std::deque.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm replaces all occurrences of a specific value with another value?",
+      "options": {
+        "A": "std::change()",
+        "B": "std::switch()",
+        "C": "std::replace()",
+        "D": "std::transform()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is 'std::pair' found in which header?",
+      "options": {
+        "A": "<pair>",
+        "B": "<algorithm>",
+        "C": "<utility>",
+        "D": "<tuple>"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which member function of std::vector removes the element at a given iterator position?",
+      "options": {
+        "A": "remove()",
+        "B": "delete()",
+        "C": "erase()",
+        "D": "pop()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of these algorithms are used for searching?",
+      "options": {
+        "A": "std::find()",
+        "B": "std::binary_search()",
+        "C": "std::search()",
+        "D": "std::sort()"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: An iterator can be thought of as a generalized pointer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function allows you to change the size of a std::vector after it has been created?",
+      "options": {
+        "A": "re-size()",
+        "B": "adjust()",
+        "C": "resize()",
+        "D": "scale()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the return type of 'std::find()' if the element is not found?",
+      "options": {
+        "A": "NULL",
+        "B": "0",
+        "C": "The 'end' iterator of the range.",
+        "D": "An 'invalid_iterator' exception."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which container adapter is LIFO?",
+      "options": {
+        "A": "std::queue",
+        "B": "std::priority_queue",
+        "C": "std::stack",
+        "D": "std::deque"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Iterators for std::list support the '+' operator for jumping multiple steps (e.g., it + 5).",
+      "options": {
+        "A": "True",
+        "B": "False (std::list only supports bidirectional movement, not random access)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header is required for std::deque?",
+      "options": {
+        "A": "<queue>",
+        "B": "<vector>",
+        "C": "<deque>",
+        "D": "<list>"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the time complexity of 'std::sort()' in the average case?",
+      "options": {
+        "A": "O(N)",
+        "B": "O(N^2)",
+        "C": "O(N log N)",
+        "D": "O(log N)"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which function returns a reference to the element at a specific index in a std::vector with bounds checking?",
+      "options": {
+        "A": "[]",
+        "B": "index()",
+        "C": "at()",
+        "D": "get()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: std::unordered_map is faster than std::map on average for insertions and lookups.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm merges two sorted ranges into a single sorted range?",
+      "options": {
+        "A": "std::combine()",
+        "B": "std::join()",
+        "C": "std::merge()",
+        "D": "std::concat()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which iterator allows moving in both forward and backward directions?",
+      "options": {
+        "A": "Forward Iterator",
+        "B": "Input Iterator",
+        "C": "Bidirectional Iterator",
+        "D": "Single-step Iterator"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select ALL that apply: Which of these member functions are found in std::stack?",
+      "options": {
+        "A": "push()",
+        "B": "pop()",
+        "C": "top()",
+        "D": "front()"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: The 'std::accumulate()' algorithm is found in the <numeric> header.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used to remove an element from a std::set?",
+      "options": {
+        "A": "delete()",
+        "B": "discard()",
+        "C": "erase()",
+        "D": "pop()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does 'std::distance(it1, it2)' do?",
+      "options": {
+        "A": "Returns the number of bytes between two iterators.",
+        "B": "Returns the absolute memory difference.",
+        "C": "Returns the number of elements between two iterators.",
+        "D": "Moves it1 to the position of it2."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which algorithm checks if all elements in a range satisfy a specific condition?",
+      "options": {
+        "A": "std::check_all()",
+        "B": "std::every()",
+        "C": "std::all_of()",
+        "D": "std::test_range()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary difference between 'std::set' and 'std::unordered_set' regarding their internal implementation?",
+      "options": {
+        "A": "std::set uses a Hash Table, while std::unordered_set uses a Balanced Binary Tree.",
+        "B": "std::set is usually implemented as a Red-Black Tree, while std::unordered_set uses a Hash Table.",
+        "C": "std::set allows duplicate elements, while std::unordered_set does not.",
+        "D": "std::set is faster for insertions but slower for searching than std::unordered_set."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'std::vector::at()' is generally safer than the subscript operator '[]' because it performs bounds checking.",
+      "options": {
+        "A": "True (It throws a std::out_of_range exception if the index is invalid).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which STL algorithm would you use to move all elements that satisfy a specific condition to the front of the container without necessarily sorting them?",
+      "options": {
+        "A": "std::sort()",
+        "B": "std::partition()",
+        "C": "std::rotate()",
+        "D": "std::move_if()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens to a 'std::priority_queue' if you use 'std::greater<int>' as the third template parameter?",
+      "options": {
+        "A": "It remains a max-heap.",
+        "B": "It transforms into a min-heap, keeping the smallest element at the top.",
+        "C": "It sorts the elements in descending order after every pop.",
+        "D": "It restricts the queue to only hold positive integers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these operations are valid for a 'Random Access Iterator' but NOT for a 'Bidirectional Iterator'?",
+      "options": {
+        "A": "it++",
+        "B": "it += n",
+        "C": "it1 < it2",
+        "D": "it[n]"
+      },
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the time complexity of 'std::lower_bound()' when used on a sorted 'std::vector'?",
+      "options": {
+        "A": "O(1)",
+        "B": "O(log N)",
+        "C": "O(N)",
+        "D": "O(N log N)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is true about 'std::deque' (Double-Ended Queue) memory layout?",
+      "options": {
+        "A": "It uses a single contiguous block of memory like std::vector.",
+        "B": "It uses a sequence of fixed-size memory blocks, often managed via a central controller map.",
+        "C": "It is exactly the same as a std::list but with random access.",
+        "D": "It stores elements in a circular buffer that must be resized manually."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'std::binary_search()' algorithm returns an iterator to the found element.",
+      "options": {
+        "A": "False (It returns a boolean indicating if the element exists; use std::lower_bound to get the iterator).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Predicate' in the context of STL algorithms?",
+      "options": {
+        "A": "A special type of container that stores boolean values.",
+        "B": "A function or function object that returns a boolean value.",
+        "C": "An iterator that only moves in one direction.",
+        "D": "The initial state of a container before an algorithm runs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function would you use to efficiently merge two sorted 'std::list' containers into one sorted list?",
+      "options": {
+        "A": "std::merge()",
+        "B": "list1.merge(list2)",
+        "C": "std::concat()",
+        "D": "list1.splice(list2)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'std::map<K, V>', what is the data type of the elements returned by an iterator?",
+      "options": {
+        "A": "V (the value only)",
+        "B": "std::pair<const K, V>",
+        "C": "K (the key only)",
+        "D": "std::tuple<K, V>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'std::back_inserter'?",
+      "options": {
+        "A": "To reverse the order of elements being inserted.",
+        "B": "To create an insert iterator that calls push_back() on the target container.",
+        "C": "To move the 'end' iterator to the front of the container.",
+        "D": "To prevent a vector from reallocating memory during a copy operation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::stack' and 'std::queue' do not support iterators for traversing their elements.",
+      "options": {
+        "A": "True (They are adapters designed to restrict access according to LIFO/FIFO principles).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm can be used to convert all elements in a container to a different type or modify them in place and store them in a new container?",
+      "options": {
+        "A": "std::copy()",
+        "B": "std::transform()",
+        "C": "std::convert()",
+        "D": "std::replace_if()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the complexity of 'std::distance()' when applied to 'std::list' iterators?",
+      "options": {
+        "A": "O(1)",
+        "B": "O(N)",
+        "C": "O(log N)",
+        "D": "O(N^2)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these are considered 'Binary Function Objects' in C++?",
+      "options": {
+        "A": "std::plus",
+        "B": "std::less",
+        "C": "std::negate",
+        "D": "std::logical_and"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "How does 'std::unique()' work on a range of elements?",
+      "options": {
+        "A": "It deletes all duplicate elements from the container immediately.",
+        "B": "It moves consecutive duplicate elements to the end and returns an iterator to the new 'logical' end.",
+        "C": "It only works on std::set and std::unordered_set.",
+        "D": "It sorts the container first and then removes duplicates."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'std::multiset' maintains its elements in a sorted order even though it allows duplicate keys.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of 'std::bind' (or lambda expressions) in modern STL usage?",
+      "options": {
+        "A": "To connect two containers together into a single stream.",
+        "B": "To create a new function object by fixing (binding) some arguments of an existing function.",
+        "C": "To prevent an algorithm from accessing the global scope.",
+        "D": "To allocate memory for a container and bind it to a variable name."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which container is generally the best default choice for a sequence of elements if you need fast random access and mostly end-insertions?",
+      "options": {
+        "A": "std::list",
+        "B": "std::vector",
+        "C": "std::deque",
+        "D": "std::forward_list"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the complexity of 'std::sort' as specified by the C++ standard?",
+      "options": {
+        "A": "O(N log N)",
+        "B": "O(N^2)",
+        "C": "O(N)",
+        "D": "O(log N)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'std::map' iterator remains valid even after inserting new elements into the map.",
+      "options": {
+        "A": "True (Only the iterator to an element being erased is invalidated).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific header provides the 'std::accumulate' and 'std::inner_product' algorithms?",
+      "options": {
+        "A": "<algorithm>",
+        "B": "<numeric>",
+        "C": "<functional>",
+        "D": "<utility>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Strong Exception Guarantee' in the context of std::vector::push_back()?",
+      "options": {
+        "A": "The program will crash safely if an error occurs.",
+        "B": "If an exception is thrown, the state of the vector remains unchanged as it was before the call.",
+        "C": "The exception is caught internally and the element is discarded.",
+        "D": "It guarantees that no exception will ever be thrown."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function object (functor) is used by default as the comparison criteria for 'std::set' and 'std::map'?",
+      "options": {
+        "A": "std::equal_to",
+        "B": "std::less",
+        "C": "std::greater",
+        "D": "std::compare"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'std::list::size()' and 'std::list::empty()' regarding performance in older C++ standards (pre-C++11)?",
+      "options": {
+        "A": "size() was always O(1), while empty() was O(N).",
+        "B": "empty() is always O(1), while size() could be O(N) in some implementations.",
+        "C": "Both were always O(1).",
+        "D": "Both were always O(N)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these containers are considered 'Reversible Containers'?",
+      "options": {
+        "A": "std::vector",
+        "B": "std::list",
+        "C": "std::deque",
+        "D": "std::forward_list"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "How does 'std::lower_bound' differ from 'std::upper_bound'?",
+      "options": {
+        "A": "lower_bound returns the first element >= value, while upper_bound returns the first element > value.",
+        "B": "lower_bound is for ascending order, upper_bound is for descending.",
+        "C": "lower_bound returns a pointer, upper_bound returns a reference.",
+        "D": "There is no functional difference; they are aliases."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'std::priority_queue' allows you to iterate through its elements using a standard for-loop.",
+      "options": {
+        "A": "False (It only provides access to the top element to maintain heap integrity).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to check if one sorted range contains all elements of another sorted range?",
+      "options": {
+        "A": "std::find_end()",
+        "B": "std::includes()",
+        "C": "std::search()",
+        "D": "std::set_intersection()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'std::back_insert_iterator' typically used for?",
+      "options": {
+        "A": "To remove elements from the back of a container.",
+        "B": "To allow algorithms like std::copy to append elements to a container by calling push_back.",
+        "C": "To reverse the bits of a container.",
+        "D": "To find the last element of a vector."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if you use 'std::sort' on a 'std::vector' containing pointers?",
+      "options": {
+        "A": "It sorts the objects the pointers point to.",
+        "B": "It sorts the memory addresses (pointers) themselves.",
+        "C": "It produces a compilation error.",
+        "D": "It sorts the pointers based on the size of the objects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which member function of 'std::map' is most efficient for inserting a new key-value pair only if the key doesn't exist?",
+      "options": {
+        "A": "insert()",
+        "B": "emplace()",
+        "C": "operator[]",
+        "D": "assign()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a 'std::unordered_map', the order of elements is guaranteed to change if a rehash occurs.",
+      "options": {
+        "A": "True (Since elements are redistributed across new buckets).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'std::iterator_traits' member identifies the category of an iterator (e.g., random access vs bidirectional)?",
+      "options": {
+        "A": "value_type",
+        "B": "iterator_category",
+        "C": "difference_type",
+        "D": "pointer_type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which member function of 'std::vector' should be used to ensure the internal buffer is at least a certain size without changing the actual element count?",
+      "options": {
+        "A": "resize()",
+        "B": "reserve()",
+        "C": "shrink_to_fit()",
+        "D": "assign()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'std::deque' (Double-Ended Queue) stores all its elements in a single contiguous memory block like 'std::vector'.",
+      "options": {
+        "A": "True",
+        "B": "False (It uses a sequence of fixed-size memory blocks managed by a map/controller)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the average time complexity for inserting an element into a 'std::unordered_map'?",
+      "options": {
+        "A": "O(log N)",
+        "B": "O(1)",
+        "C": "O(N)",
+        "D": "O(N log N)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following STL containers use a 'Balanced Binary Tree' (typically a Red-Black Tree) for their internal implementation?",
+      "options": {
+        "A": "std::set",
+        "B": "std::map",
+        "C": "std::multiset",
+        "D": "std::unordered_set"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "Which STL algorithm is specifically designed to perform a binary search on a sorted range and return a boolean result?",
+      "options": {
+        "A": "std::lower_bound",
+        "B": "std::binary_search",
+        "C": "std::find",
+        "D": "std::equal_range"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a 'std::multimap', using the subscript operator '[]' (e.g., myMap[key]) is a valid way to access or insert values.",
+      "options": {
+        "A": "True",
+        "B": "False (Multimaps do not support operator[] because a single key can map to multiple values)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is the most efficient way to merge two already-sorted 'std::list' objects?",
+      "options": {
+        "A": "std::merge(list1.begin(), list1.end(), ...)",
+        "B": "list1.merge(list2)",
+        "C": "std::sort(list1.begin(), list1.end())",
+        "D": "list1.insert(list1.end(), list2.begin(), list2.end())"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens to a 'std::vector' iterator if a 'push_back' operation triggers a memory reallocation?",
+      "options": {
+        "A": "The iterator is automatically updated to the new memory address.",
+        "B": "The iterator becomes invalidated and using it results in undefined behavior.",
+        "C": "The vector prevents the reallocation if an iterator is active.",
+        "D": "The iterator only remains valid if it points to the first element."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'std::iterator_traits' member is used to determine the distance type (usually ptrdiff_t) between two iterators?",
+      "options": {
+        "A": "value_type",
+        "B": "difference_type",
+        "C": "iterator_category",
+        "D": "pointer_type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::priority_queue' allows you to modify an element while it is currently inside the queue.",
+      "options": {
+        "A": "True",
+        "B": "False (You must remove the element, modify it, and re-insert it to maintain heap property)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which STL algorithm would you use to find the first position where a value could be inserted into a sorted range without violating the order?",
+      "options": {
+        "A": "std::upper_bound",
+        "B": "std::lower_bound",
+        "C": "std::binary_search",
+        "D": "std::find_if"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'std::copy' and 'std::move' algorithms in the STL?",
+      "options": {
+        "A": "std::copy is faster than std::move.",
+        "B": "std::move transfers ownership of resources (using Rvalue references), potentially leaving the source in a valid but unspecified state.",
+        "C": "std::copy only works on integers, while std::move works on objects.",
+        "D": "There is no difference in C++17 and later."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function object (functor) is used by 'std::set' by default to maintain its sorted order?",
+      "options": {
+        "A": "std::equal_to",
+        "B": "std::less",
+        "C": "std::greater",
+        "D": "std::binary_negate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'std::vector::emplace_back' is generally more efficient than 'push_back' for objects because it constructs the object in-place.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following algorithms belong to the 'Modifying Sequence Operations' category?",
+      "options": {
+        "A": "std::transform",
+        "B": "std::replace",
+        "C": "std::find",
+        "D": "std::swap"
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the complexity of 'std::sort' as specified by the C++ standard?",
+      "options": {
+        "A": "O(N log N)",
+        "B": "O(N^2)",
+        "C": "O(N)",
+        "D": "O(log N)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'std::map' iterator remains valid even after inserting new elements into the map.",
+      "options": {
+        "A": "True (Only the iterator to an element being erased is invalidated).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific header provides the 'std::accumulate' and 'std::inner_product' algorithms?",
+      "options": {
+        "A": "<algorithm>",
+        "B": "<numeric>",
+        "C": "<functional>",
+        "D": "<utility>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Strong Exception Guarantee' in the context of std::vector::push_back()?",
+      "options": {
+        "A": "The program will crash safely if an error occurs.",
+        "B": "If an exception is thrown, the state of the vector remains unchanged as it was before the call.",
+        "C": "The exception is caught internally and the element is discarded.",
+        "D": "It guarantees that no exception will ever be thrown."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function object (functor) is used by default as the comparison criteria for 'std::set' and 'std::map'?",
+      "options": {
+        "A": "std::equal_to",
+        "B": "std::less",
+        "C": "std::greater",
+        "D": "std::compare"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'std::list::size()' and 'std::list::empty()' regarding performance in older C++ standards (pre-C++11)?",
+      "options": {
+        "A": "size() was always O(1), while empty() was O(N).",
+        "B": "empty() is always O(1), while size() could be O(N) in some implementations.",
+        "C": "Both were always O(1).",
+        "D": "Both were always O(N)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these containers are considered 'Reversible Containers'?",
+      "options": {
+        "A": "std::vector",
+        "B": "std::list",
+        "C": "std::deque",
+        "D": "std::forward_list"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "How does 'std::lower_bound' differ from 'std::upper_bound'?",
+      "options": {
+        "A": "lower_bound returns the first element >= value, while upper_bound returns the first element > value.",
+        "B": "lower_bound is for ascending order, upper_bound is for descending.",
+        "C": "lower_bound returns a pointer, upper_bound returns a reference.",
+        "D": "There is no functional difference; they are aliases."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'std::priority_queue' allows you to iterate through its elements using a standard for-loop.",
+      "options": {
+        "A": "False (It only provides access to the top element to maintain heap integrity).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to check if one sorted range contains all elements of another sorted range?",
+      "options": {
+        "A": "std::find_end()",
+        "B": "std::includes()",
+        "C": "std::search()",
+        "D": "std::set_intersection()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'std::back_insert_iterator' typically used for?",
+      "options": {
+        "A": "To remove elements from the back of a container.",
+        "B": "To allow algorithms like std::copy to append elements to a container by calling push_back.",
+        "C": "To reverse the bits of a container.",
+        "D": "To find the last element of a vector."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if you use 'std::sort' on a 'std::vector' containing pointers?",
+      "options": {
+        "A": "It sorts the objects the pointers point to.",
+        "B": "It sorts the memory addresses (pointers) themselves.",
+        "C": "It produces a compilation error.",
+        "D": "It sorts the pointers based on the size of the objects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which member function of 'std::map' is most efficient for inserting a new key-value pair only if the key doesn't exist?",
+      "options": {
+        "A": "insert()",
+        "B": "emplace()",
+        "C": "operator[]",
+        "D": "assign()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a 'std::unordered_map', the order of elements is guaranteed to change if a rehash occurs.",
+      "options": {
+        "A": "True (Since elements are redistributed across new buckets).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'std::iterator_traits' member identifies the category of an iterator (e.g., random access vs bidirectional)?",
+      "options": {
+        "A": "value_type",
+        "B": "iterator_category",
+        "C": "difference_type",
+        "D": "pointer_type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which container adapter is implemented using a 'std::deque' by default?",
+      "options": {
+        "A": "std::stack",
+        "B": "std::queue",
+        "C": "std::priority_queue",
+        "D": "std::set"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the effect of calling 'std::rotate' on a range?",
+      "options": {
+        "A": "It reverses the elements in the range.",
+        "B": "It performs a left circular shift such that the element at 'middle' becomes the first element.",
+        "C": "It sorts the elements in a circular fashion.",
+        "D": "It swaps the first and last halves of the container."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::stable_sort' preserves the relative order of elements with equal keys.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to obtain the union of two sorted ranges?",
+      "options": {
+        "A": "std::merge",
+        "B": "std::set_union",
+        "C": "std::combine",
+        "D": "std::concat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In STL, what does the term 'In-place' algorithm usually imply?",
+      "options": {
+        "A": "It requires O(N) extra space.",
+        "B": "It modifies the elements directly within the original range without requiring significant extra memory.",
+        "C": "It can only be used on std::array.",
+        "D": "It runs in O(1) time regardless of input size."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of 'std::vector', what is the primary purpose of the 'noexcept' specifier on a move constructor during reallocation?",
+      "options": {
+        "A": "It allows the vector to use move semantics instead of copy semantics, maintaining the Strong Exception Guarantee.",
+        "B": "It prevents the vector from growing beyond its initial capacity.",
+        "C": "It forces the compiler to inline all member functions of the stored object.",
+        "D": "It is only used to reduce the size of the compiled binary."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of 'std::allocator_traits::rebind' in custom allocator development?",
+      "options": {
+        "A": "To change the memory alignment of a previously allocated block.",
+        "B": "To allow a container to obtain an allocator for a different type, such as internal nodes in a std::list.",
+        "C": "To convert a pointer to a reference at compile time.",
+        "D": "To restart the reference count for a shared_ptr within the allocator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following describes the 'Single-Pass' property of an Input Iterator?",
+      "options": {
+        "A": "The iterator can only be incremented once per session.",
+        "B": "Incrementing a copy of the iterator may invalidate the original iterator's ability to dereference the same element.",
+        "C": "The iterator can only be used with primitive data types.",
+        "D": "It can only move backward, never forward."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::sort' can be safely used on 'std::forward_list' if the elements are already partially sorted.",
+      "options": {
+        "A": "True",
+        "B": "False (std::sort requires Random Access Iterators; std::forward_list only provides Forward Iterators)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these are requirements for a type to be 'MoveInsertable' into an STL container?",
+      "options": {
+        "A": "The type must have a valid move constructor.",
+        "B": "The move constructor should ideally be marked 'noexcept' for performance during reallocation.",
+        "C": "The type must also be 'CopyAssignable'.",
+        "D": "The allocator used must support the 'construct' method for that type."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is 'SFINAE' (Substitution Failure Is Not An Error) primarily used for in STL implementations?",
+      "options": {
+        "A": "To catch runtime errors during iterator arithmetic.",
+        "B": "To enable function overloading based on type properties (e.g., choosing a faster algorithm for random access iterators).",
+        "C": "To prevent memory leaks in associative containers.",
+        "D": "To optimize the hash function in unordered_map."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'std::unordered_map', what happens when the 'load_factor()' exceeds the 'max_load_factor()'?",
+      "options": {
+        "A": "The container throws a 'std::overflow_error'.",
+        "B": "A rehash occurs, increasing the bucket count and redistributing elements.",
+        "C": "The container switches to a Red-Black Tree structure.",
+        "D": "Insertion is disabled until elements are removed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'std::stable_sort' algorithm generally requires more temporary memory than 'std::sort'.",
+      "options": {
+        "A": "True (It typically uses an additional buffer to maintain relative order).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which member of 'std::iterator_traits' is used to define the type returned by subtracting two iterators?",
+      "options": {
+        "A": "value_type",
+        "B": "difference_type",
+        "C": "pointer",
+        "D": "iterator_category"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'std::deque' provide O(1) insertion at both ends without being a linked list?",
+      "options": {
+        "A": "By using a circular buffer on a single contiguous block.",
+        "B": "By using a map of pointers to several fixed-size contiguous memory blocks.",
+        "C": "By reallocating the entire container on every push_front.",
+        "D": "By storing elements in a skip-list structure."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of these are characteristics of 'std::pmr' (Polymorphic Memory Resources) introduced in C++17?",
+      "options": {
+        "A": "They allow containers of the same type to have different allocation behaviors at runtime.",
+        "B": "They use a virtual function interface for allocation/deallocation.",
+        "C": "They are incompatible with standard STL algorithms.",
+        "D": "They help in implementing 'arena' or 'pool' allocation easily."
+      },
+      "answer": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the 'Empty Base Optimization' (EBO) in the context of STL allocators?",
+      "options": {
+        "A": "A technique to ensure empty containers don't use any heap memory.",
+        "B": "An optimization where an empty allocator class does not add to the size of the container object.",
+        "C": "A method to delete the base class of a container if it is not used.",
+        "D": "The automatic removal of null elements from a vector."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::transform' can be used to perform an operation on elements from two different source containers and store the result in a third.",
+      "options": {
+        "A": "True (Using the version that takes two input ranges).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which header contains 'std::void_t', often used in SFINAE to check for the existence of member types in containers?",
+      "options": {
+        "A": "<utility>",
+        "B": "<type_traits>",
+        "C": "<algorithm>",
+        "D": "<functional>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the complexity of 'std::set::insert(iterator hint, const value_type& value)' if the hint is correct?",
+      "options": {
+        "A": "O(log N)",
+        "B": "Amortized O(1)",
+        "C": "O(N)",
+        "D": "O(1)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of 'std::iterator_traits' in generic programming?",
+      "options": {
+        "A": "To provide a uniform interface for accessing properties of both pointer types and class-based iterators.",
+        "B": "To count the number of elements in a container at compile time.",
+        "C": "To convert a Forward Iterator into a Random Access Iterator.",
+        "D": "To handle memory allocation for iterator objects."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In C++20, how do 'Ranges' improve upon the traditional 'begin/end' iterator pair approach?",
+      "options": {
+        "A": "They allow for 'Lazy Evaluation' through views, avoiding unnecessary copies and computations.",
+        "B": "They make all STL algorithms run in O(1) time complexity.",
+        "C": "They eliminate the need for the <algorithm> header.",
+        "D": "They prevent the use of templates to reduce compile times."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'std::vector' member function guarantees that no reallocations will occur until the size exceeds a specific limit?",
+      "options": {
+        "A": "resize()",
+        "B": "reserve()",
+        "C": "shrink_to_fit()",
+        "D": "assign()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'std::pmr::vector' (Polymorphic Memory Resource) allows changing the allocation strategy at runtime without changing the vector's type.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the complexity of 'std::set_intersection' when applied to two sorted ranges of size N and M?",
+      "options": {
+        "A": "O(N * M)",
+        "B": "O(N + M)",
+        "C": "O(log(N + M))",
+        "D": "O(N log M)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which conditions must be met for 'std::copy' to be optimized into a 'std::memmove' or 'std::memcpy' internally?",
+      "options": {
+        "A": "The iterators must be raw pointers or behave like them.",
+        "B": "The value type must be 'Trivially Copyable'.",
+        "C": "The source and destination ranges must not overlap.",
+        "D": "The container must be a std::list."
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What does 'std::lower_bound' return if all elements in the sorted range are smaller than the search value?",
+      "options": {
+        "A": "The 'begin' iterator.",
+        "B": "The 'end' iterator.",
+        "C": "A null pointer.",
+        "D": "The iterator to the last element."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which STL component is used to manage 'SFINAE' by checking if a type defines a nested 'iterator_category'?",
+      "options": {
+        "A": "std::void_t",
+        "B": "std::enable_if",
+        "C": "std::conditional",
+        "D": "std::is_base_of"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In 'std::unordered_map', a 'rehash' operation preserves the validity of all existing iterators.",
+      "options": {
+        "A": "False (Iterators are invalidated; however, references and pointers to elements remain valid).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Empty Base Optimization' (EBO) applied to STL allocators?",
+      "options": {
+        "A": "It ensures that an empty allocator does not increase the size of the container that inherits from it.",
+        "B": "It deletes empty containers automatically from the heap.",
+        "C": "It optimizes the 'empty()' function to run in O(0) time.",
+        "D": "It removes unused base classes from the binary."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to obtain the 'Stable Partition' of a range where the relative order of elements is preserved?",
+      "options": {
+        "A": "std::partition",
+        "B": "std::stable_partition",
+        "C": "std::inplace_merge",
+        "D": "std::rotate"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if you use 'std::move' on a 'const' object?",
+      "options": {
+        "A": "The object is moved and its state becomes unspecified.",
+        "B": "The object is copied instead, as 'const' prevents moving.",
+        "C": "A compilation error occurs.",
+        "D": "The 'const' qualifier is removed automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which header contains the 'std::execution' policies for parallel STL algorithms (e.g., std::execution::par)?",
+      "options": {
+        "A": "<algorithm>",
+        "B": "<execution>",
+        "C": "<thread>",
+        "D": "<future>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::list::splice' is an O(1) operation because it only re-links pointers without copying elements.",
+      "options": {
+        "A": "True (If splicing a whole list or a single element).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the internal data structure typically used to implement 'std::multiset'?",
+      "options": {
+        "A": "Hash Table",
+        "B": "Red-Black Tree",
+        "C": "Splay Tree",
+        "D": "Min-Heap"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which member of 'std::allocator' is responsible for invoking the constructor of an object in a pre-allocated memory block?",
+      "options": {
+        "A": "allocate()",
+        "B": "construct()",
+        "C": "initialize()",
+        "D": "create()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the complexity of 'std::nth_element'?",
+      "options": {
+        "A": "O(N log N)",
+        "B": "Average O(N)",
+        "C": "O(N^2)",
+        "D": "O(log N)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are 'Iterator Tags' in the STL?",
+      "options": {
+        "A": "std::input_iterator_tag",
+        "B": "std::random_access_iterator_tag",
+        "C": "std::bidirectional_iterator_tag",
+        "D": "std::contiguous_iterator_tag"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "In 'std::deque', why is random access O(1) despite memory not being fully contiguous?",
+      "options": {
+        "A": "Because it uses a central map to jump to the correct memory block via a simple calculation.",
+        "B": "Because it is actually a vector of vectors.",
+        "C": "Because the elements are small enough to fit in the L1 cache.",
+        "D": "Because it uses a hashing algorithm to find indexes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'std::search' algorithm can be used to find a sub-sequence within another sequence.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary risk of using 'std::bind' over Lambdas in modern C++?",
+      "options": {
+        "A": "It has no type safety.",
+        "B": "It is harder for the compiler to optimize and can lead to complex template errors.",
+        "C": "It cannot be used with STL algorithms.",
+        "D": "It only works with global functions."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to get both the lower and upper bounds of a key in a sorted range at the same time?",
+      "options": {
+        "A": "std::find_both",
+        "B": "std::equal_range",
+        "C": "std::pair_bound",
+        "D": "std::range_search"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'std::forward' do in the context of Perfect Forwarding?",
+      "options": {
+        "A": "It moves an object to the end of a container.",
+        "B": "It casts an argument to its original value category (Lvalue or Rvalue) based on how it was passed.",
+        "C": "It converts a pointer to a reference.",
+        "D": "It increments an iterator to the next forward position."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::priority_queue' does not provide a 'clear()' member function.",
+      "options": {
+        "A": "True (To clear it, you must assign an empty container or pop all elements).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to find the first pair of adjacent elements that are equal in a range?",
+      "options": {
+        "A": "std::find_duplicate",
+        "B": "std::adjacent_find",
+        "C": "std::search_n",
+        "D": "std::unique_copy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'std::map', what is the complexity of inserting N elements if they are inserted in sorted order using a correct 'hint'?",
+      "options": {
+        "A": "O(N log N)",
+        "B": "Amortized O(N)",
+        "C": "O(N^2)",
+        "D": "O(1)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the return type of 'std::mismatch'?",
+      "options": {
+        "A": "bool",
+        "B": "std::pair of iterators to the first mismatched elements.",
+        "C": "size_t (index of the mismatch).",
+        "D": "void"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::array' can be initialized with an initializer list like std::vector.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which container adapter is specifically designed to provide a First-In-First-Out (FIFO) interface?",
+      "options": {
+        "A": "std::stack",
+        "B": "std::queue",
+        "C": "std::priority_queue",
+        "D": "std::deque"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'std::make_heap'?",
+      "options": {
+        "A": "To allocate memory for a new heap structure.",
+        "B": "To rearrange elements in an existing range into a heap structure in-place.",
+        "C": "To sort a container using the Heap Sort algorithm.",
+        "D": "To create a priority_queue object."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'std::unordered_set', what determines the 'Bucket Count'?",
+      "options": {
+        "A": "It is always a power of two.",
+        "B": "It is managed by the container to keep the load factor below a threshold.",
+        "C": "It is fixed at compile time.",
+        "D": "It equals the number of elements in the set."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::forward_list' does not store the size of the container to save memory.",
+      "options": {
+        "A": "True (Calling size() on a forward_list is O(N) or unsupported in some versions).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to determine if the first range is 'lexicographically smaller' than the second range?",
+      "options": {
+        "A": "std::lexicographical_compare",
+        "B": "std::compare_range",
+        "C": "std::is_smaller",
+        "D": "std::mismatch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the effect of 'std::partial_sort'?",
+      "options": {
+        "A": "It sorts only the odd-indexed elements.",
+        "B": "It sorts the range until the first N elements are the smallest and in order, while the rest remain unsorted.",
+        "C": "It sorts elements based on a partial key.",
+        "D": "It sorts elements using a stable sorting algorithm."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which C++20 feature allows for compile-time validation of template arguments against STL requirements like 'Sortable'?",
+      "options": {
+        "A": "SFINAE",
+        "B": "Concepts",
+        "C": "Modules",
+        "D": "Coroutines"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'std::for_each' algorithm can modify the elements of the container it is iterating over.",
+      "options": {
+        "A": "True (If the function passed takes a non-const reference).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'std::unit_buf' in STL streams?",
+      "options": {
+        "A": "To compress the output buffer.",
+        "B": "To flush the buffer after every output operation.",
+        "C": "To increase the buffer size to 1 unit.",
+        "D": "To prevent multiple threads from writing to the same buffer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which algorithm finds the first element in a range that is not less than a given value?",
+      "options": {
+        "A": "std::upper_bound",
+        "B": "std::lower_bound",
+        "C": "std::binary_search",
+        "D": "std::find_if"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'std::vector', what does the 'shrink_to_fit()' member function do?",
+      "options": {
+        "A": "It reduces the size of the elements.",
+        "B": "It requests the removal of unused capacity to save memory.",
+        "C": "It deletes all elements from the vector.",
+        "D": "It compresses the vector using a ZIP algorithm."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: All STL containers provide 'Thread Safety' for concurrent writes to the same container object.",
+      "options": {
+        "A": "False (Standard containers are not thread-safe for concurrent modifications; you must use external locking).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of 'std::back_inserter' when used with 'std::copy'?",
+      "options": {
+        "A": "It reverses the elements being copied.",
+        "B": "It creates an output iterator that calls 'push_back' on the target container for each element.",
+        "C": "It moves elements from the back of the source to the front of the target.",
+        "D": "It prevents the copy if the target is too small."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which STL algorithm generates the next permutation of elements in a range based on lexicographical order?",
+      "options": {
+        "A": "std::permute_next",
+        "B": "std::next_permutation",
+        "C": "std::rotate_permutation",
+        "D": "std::shuffle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'std::numeric_limits' used for?",
+      "options": {
+        "A": "To set the maximum number of elements in a container.",
+        "B": "To query properties of arithmetic types, such as the maximum value of an int.",
+        "C": "To restrict the range of values a variable can hold.",
+        "D": "To perform precision-based math operations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'std::set::erase(iterator)' returns an iterator to the element following the one that was removed in C++11 and later.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to compute the sum of a range of values, potentially with a custom operation?",
+      "options": {
+        "A": "std::sum",
+        "B": "std::accumulate",
+        "C": "std::add_range",
+        "D": "std::total"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'std::set' and 'std::unordered_set'?",
+      "options": {
+        "A": "std::set is faster.",
+        "B": "std::set keeps elements sorted, while std::unordered_set does not guarantee any order.",
+        "C": "std::set allows duplicate keys.",
+        "D": "std::unordered_set is implemented as a tree."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which iterator category allows for read, write, and movement in any direction with arbitrary jumps?",
+      "options": {
+        "A": "Forward Iterator",
+        "B": "Bidirectional Iterator",
+        "C": "Random Access Iterator",
+        "D": "Output Iterator"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'std::transform' can work 'in-place' if the source and destination iterators are the same.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How does 'std::map::operator[]' behave if the requested key does not exist?",
+      "options": {
+        "A": "It throws an exception.",
+        "B": "It inserts a new element with that key and a default-constructed value.",
+        "C": "It returns a null pointer.",
+        "D": "It returns the 'end()' iterator."
+      },
+      "answer": "B"
+    }
+  ]
+}

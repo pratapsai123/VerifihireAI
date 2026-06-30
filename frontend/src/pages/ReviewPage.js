@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
 import '../styles/ReviewPage.css';
-
-// Django API base URL
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import CodingQuestionSelector from '../components/CodingQuestionSelector';
+import { API_BASE_URL } from '../apiConfig';
 const MANUAL_TOPIC_LABEL = 'Custom Questions';
 const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
 const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
+const DIFFICULTY_WEIGHTS = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+};
 
 function ReviewPage() {
   const navigate = useNavigate();
@@ -23,20 +27,128 @@ function ReviewPage() {
   const [minPassPercentage, setMinPassPercentage] = useState(60);
   const [timeLimit, setTimeLimit] = useState('00:00:00');
   const [isTimeEdited, setIsTimeEdited] = useState(false);
+  const [showCodingModal, setShowCodingModal] = useState(false);
 
-  // NOTE: `analyzeAndFetchQuestions` is intentionally omitted from deps to avoid
-  // rerunning on every render; `location`/navigation changes are the trigger.
+  // Split Assessment State
+  const [objectiveTime, setObjectiveTime] = useState('00:00:00');
+  const [codingTime, setCodingTime] = useState('00:00:00');
+  const [hasObjectiveCutoff, setHasObjectiveCutoff] = useState(false);
+  const [objPassPercentage, setObjPassPercentage] = useState(60);
+  const [objWeight, setObjWeight] = useState(30);
+  const [codingWeight, setCodingWeight] = useState(70);
+  const [removedQuestionIds, setRemovedQuestionIds] = useState(new Set());
+  const [isEditingRole, setIsEditingRole] = useState(false);
+  const [editedRole, setEditedRole] = useState('');
+
+  const totalCodingPoints = useMemo(() => {
+    const list = questions['Coding'] || [];
+    return list.reduce((sum, q) => {
+      const diff = String(q.difficulty || 'medium').toLowerCase();
+      const w = DIFFICULTY_WEIGHTS[diff] || 2;
+      return sum + (w * 100);
+    }, 0);
+  }, [questions]);
+
+  const objectiveCount = useMemo(() => {
+    return Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+  }, [questions]);
+
+  const codingCount = useMemo(() => {
+    return (questions['Coding'] || []).length;
+  }, [questions]);
+
+  // State Persistence Effect
   useEffect(() => {
-    // Get assessment data from navigation state; if missing (e.g. user refreshed or navigated away),
-    // restore from localStorage so manual questions still appear until assessment is created.
-    let state = location.state || null;
-    if (!state) {
+    if (!loading && assessmentData) {
+      const stateToSave = {
+        ...assessmentData,
+        questions,
+        topics,
+        assessmentName,
+        minPassPercentage,
+        timeLimit,
+        objectiveTime,
+        codingTime,
+        hasObjectiveCutoff,
+        objPassPercentage,
+        removedQuestionIds: Array.from(removedQuestionIds),
+        objWeight,
+        codingWeight,
+      };
       try {
-        const saved = localStorage.getItem(REVIEW_STATE_STORAGE_KEY);
-        if (saved) state = JSON.parse(saved);
-      } catch {
-        // ignore parse errors
+        localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(stateToSave));
+      } catch (e) {
+        console.error('Failed to save state to localStorage:', e);
       }
+    }
+  }, [
+    loading,
+    assessmentData,
+    questions,
+    topics,
+    assessmentName,
+    minPassPercentage,
+    timeLimit,
+    objectiveTime,
+    codingTime,
+    hasObjectiveCutoff,
+    objWeight,
+    codingWeight,
+    removedQuestionIds,
+    objPassPercentage
+  ]);
+
+  // Automatic Weight Balancing
+  useEffect(() => {
+    if (loading || !questions) return;
+
+    const objCount = Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+    const codingCount = (questions['Coding'] || []).length;
+    if (objCount > 0 && codingCount === 0) {
+      if (objWeight !== 100) {
+        setObjWeight(100);
+        setCodingWeight(0);
+      }
+    } else if (objCount === 0 && codingCount > 0) {
+      if (codingWeight !== 100) {
+        setObjWeight(0);
+        setCodingWeight(100);
+      }
+    }
+    // Note: If both counts are > 0, we allow the user to choose any weight split, 
+    // including manual 100/0 or 0/100 if they wish.
+  }, [questions, loading, objWeight, codingWeight]);
+  // Initial Data Loading & Restoration
+  useEffect(() => {
+    let state = location.state || null;
+
+    // Always try to restore from localStorage if navigation state is missing or partial
+    // This handles page refreshes.
+    try {
+      const saved = localStorage.getItem(REVIEW_STATE_STORAGE_KEY);
+      if (saved) {
+        const parsedSaved = JSON.parse(saved);
+        // If we have saved state and either no location state OR location state is from a fresh navigation
+        // (like coming from CustomAssessment without questions yet populated),
+        // we might want to prioritize location state's customAssessmentId but keep our local modifications.
+        if (!state) {
+          state = parsedSaved;
+        } else if (state.customAssessmentId === parsedSaved.customAssessmentId) {
+          // Merge: location state often has the source data, but parsedSaved has user edits (removed questions, settings)
+          // Ensure we preserve incoming navigation flags like refreshManual
+          const incomingRefresh = state.refreshManual;
+          state = { ...parsedSaved, ...state };
+          if (incomingRefresh) state.refreshManual = incomingRefresh;
+        }
+      }
+    } catch {
+      // ignore parse errors
     }
 
     // If state exists but customAssessmentId is missing, fall back to draft ID
@@ -53,41 +165,146 @@ function ReviewPage() {
     }
 
     if (state) {
-      // If coding questions were passed directly, show them immediately
-      if (Array.isArray(state.codingQuestions) && state.codingQuestions.length > 0) {
-        const codingList = state.codingQuestions;
-        setAssessmentData(state);
-        setTopics(['Coding']);
-        setQuestions({ Coding: codingList });
-        const defaultName =
-          state.assessmentName ||
-          state.role ||
-          (codingList.length === 1 ? codingList[0]?.title : 'Coding Assessment');
-        setAssessmentName(defaultName || 'Coding Assessment');
-        setLoading(false);
-        try {
-          localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
-        } catch {
-          // ignore
+      // Restore all state fields
+      setAssessmentData(state);
+      const fallbackRoleLabel = state.role === 'other'
+        ? state.customRole
+        : state.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const exactRoleLabel = state.roleLabel || fallbackRoleLabel || '';
+      // Prefer exact dropdown label when available; keep edited assessmentName if it is custom.
+      const roleToShow = state.assessmentName && state.assessmentName !== fallbackRoleLabel
+        ? state.assessmentName
+        : exactRoleLabel;
+      if (roleToShow) {
+        setAssessmentName(roleToShow);
+        setEditedRole(roleToShow);
+      }
+      if (state.minPassPercentage !== undefined) setMinPassPercentage(state.minPassPercentage);
+      if (state.timeLimit) setTimeLimit(state.timeLimit);
+      if (state.objectiveTime) setObjectiveTime(state.objectiveTime);
+      if (state.codingTime) setCodingTime(state.codingTime);
+      if (state.hasObjectiveCutoff !== undefined) setHasObjectiveCutoff(state.hasObjectiveCutoff);
+      if (state.objPassPercentage !== undefined) setObjPassPercentage(state.objPassPercentage);
+      if (state.objWeight !== undefined) setObjWeight(state.objWeight);
+      if (state.codingWeight !== undefined) setCodingWeight(state.codingWeight);
+      if (state.removedQuestionIds) setRemovedQuestionIds(new Set(state.removedQuestionIds));
+
+      // Restore questions if they exist in state
+      if (state.questions && state.topics && !state.refreshManual) {
+        const removedIds = new Set(state.removedQuestionIds || []);
+        const filteredQ = {};
+        for (const [t, qs] of Object.entries(state.questions)) {
+          if (Array.isArray(qs)) {
+            filteredQ[t] = qs.filter(q => !removedIds.has(q.id) && q.is_active !== false && q.status !== 'inactive');
+          } else {
+            filteredQ[t] = qs;
+          }
         }
+        setQuestions(filteredQ);
+        setTopics(state.topics);
+        setLoading(false);
         return;
       }
 
-      setAssessmentData(state);
-      setAssessmentName(
-        state.assessmentName ||
-        state.displayName ||
-        state.role ||
-        'Assessment'
-      );
-      try {
-        localStorage.setItem(REVIEW_STATE_STORAGE_KEY, JSON.stringify(state));
-      } catch {
-        // ignore storage errors
+      // If we need to refresh manual questions (e.g. just came back from ManualQuestions page)
+      if (state.refreshManual) {
+        console.log("ReviewPage: refreshManual is true, preparing to fetch latest manual questions.");
+        // If onlyManual is true, start with empty questions/topics to discard AI-generated ones.
+        const restoredQuestions = state.onlyManual ? {} : { ...(state.questions || {}) };
+        const restoredTopics = state.onlyManual ? [] : [...(state.topics || [])];
+        console.log("Initial questions groups:", Object.keys(restoredQuestions));
+
+        const fetchLatestManual = async (forcedRemovedIds) => {
+          const removedSet = forcedRemovedIds || removedQuestionIds;
+          try {
+            let cid = state.customAssessmentId;
+            if (!cid) {
+              const draft = localStorage.getItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+              if (draft) cid = Number(draft);
+            }
+            console.log("ReviewPage fetchLatestManual: cid =", cid);
+
+            if (cid) {
+              const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
+                params: { custom_assessment_id: cid }
+              });
+              let manualList = manualResp.data?.results || [];
+              console.log(`ReviewPage fetchLatestManual: Fetched ${manualList.length} questions before filtering.`);
+
+              // Filter out removed and inactive questions
+              manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
+              console.log(`ReviewPage fetchLatestManual: ${manualList.length} questions after filtering.`);
+
+              if (manualList.length > 0) {
+                manualList.sort((a, b) => {
+                  const ta = new Date(a.created_at || 0).getTime();
+                  const tb = new Date(b.created_at || 0).getTime();
+                  return ta - tb;
+                });
+
+                const codingQs = [];
+                const standardQs = [];
+
+                manualList.forEach(q => {
+                  if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                    codingQs.push(q);
+                  } else {
+                    standardQs.push(q);
+                  }
+                });
+
+                if (codingQs.length > 0) {
+                  const existingCoding = restoredQuestions['Coding'] || [];
+                  const existingIds = new Set(existingCoding.map(q => q.id));
+                  const newCoding = [...existingCoding];
+                  codingQs.forEach(q => {
+                    if (!existingIds.has(q.id)) newCoding.push(q);
+                  });
+                  restoredQuestions['Coding'] = newCoding;
+                  if (!restoredTopics.includes('Coding')) restoredTopics.push('Coding');
+                }
+
+                if (standardQs.length > 0) {
+                  // Use a Set to avoid duplicates if standardQs contains questions already in restoredQuestions
+                  const existingStandard = restoredQuestions[MANUAL_TOPIC_LABEL] || [];
+                  const existingIds = new Set(existingStandard.map(q => q.id));
+                  const newStandard = [...existingStandard];
+                  standardQs.forEach(q => {
+                    if (!existingIds.has(q.id)) newStandard.push(q);
+                  });
+                  restoredQuestions[MANUAL_TOPIC_LABEL] = newStandard;
+                  if (!restoredTopics.includes(MANUAL_TOPIC_LABEL)) restoredTopics.push(MANUAL_TOPIC_LABEL);
+                }
+              }
+            }
+          } catch (e) {
+            console.error('Failed to refresh manual questions:', e);
+          } finally {
+            setQuestions(restoredQuestions);
+            setTopics(restoredTopics);
+            setLoading(false);
+          }
+        };
+
+        const initialRemovedSet = new Set(state.removedQuestionIds || []);
+        fetchLatestManual(initialRemovedSet);
+        return;
       }
+
+      // If coding questions were passed directly
+      if (Array.isArray(state.codingQuestions) && state.codingQuestions.length > 0) {
+        const codingList = state.codingQuestions;
+        setTopics(['Coding']);
+        setQuestions({ Coding: codingList });
+        const defaultName = state.assessmentName || state.role || (codingList.length === 1 ? codingList[0]?.title : 'Coding Assessment');
+        setAssessmentName(defaultName || 'Coding Assessment');
+        setLoading(false);
+        return;
+      }
+
+      // Default: analyze and fetch from scratch
       analyzeAndFetchQuestions(state);
     } else {
-      // If no state, redirect back to custom assessment
       navigate('/custom-assessment');
     }
   }, [location, navigate]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -108,6 +325,22 @@ function ReviewPage() {
 
 
 
+
+  const formatInputTime = (value) => {
+    // Remove non-digits
+    let val = value.replace(/\D/g, '');
+    // Limit to 6 digits (HHMMSS)
+    if (val.length > 6) val = val.slice(0, 6);
+
+    if (val.length >= 5) {
+      // HH:MM:SS
+      return `${val.slice(0, 2)}:${val.slice(2, 4)}:${val.slice(4)}`;
+    } else if (val.length >= 3) {
+      // HH:MM
+      return `${val.slice(0, 2)}:${val.slice(2)}`;
+    }
+    return val;
+  };
 
   // Analyze skills and fetch questions
   const analyzeAndFetchQuestions = async (data) => {
@@ -140,15 +373,40 @@ function ReviewPage() {
             const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
               params: { custom_assessment_id: customAssessmentId }
             });
-            const manualList = manualResp.data?.results || [];
+            let manualList = manualResp.data?.results || [];
+
+            // Filter out removed and inactive questions
+            const removedSet = new Set(data.removedQuestionIds || []);
+            manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
+
             if (manualList.length > 0) {
               manualList.sort((a, b) => {
                 const ta = new Date(a.created_at || 0).getTime();
                 const tb = new Date(b.created_at || 0).getTime();
                 return ta - tb;
               });
-              questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
-              setTopics([MANUAL_TOPIC_LABEL]);
+
+              // Split coding vs standard
+              const codingQs = [];
+              const standardQs = [];
+              manualList.forEach(q => {
+                if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                  codingQs.push(q);
+                } else {
+                  standardQs.push(q);
+                }
+              });
+
+              const newTopics = [];
+              if (codingQs.length > 0) {
+                questionsByTopic['Coding'] = codingQs;
+                newTopics.push('Coding');
+              }
+              if (standardQs.length > 0) {
+                questionsByTopic[MANUAL_TOPIC_LABEL] = standardQs;
+                newTopics.push(MANUAL_TOPIC_LABEL);
+              }
+              setTopics(newTopics);
               setQuestions(questionsByTopic);
             } else {
               setTopics([]);
@@ -198,9 +456,18 @@ function ReviewPage() {
           apiParams.difficulty = difficulty;
         }
 
-        const response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+        let response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
           params: apiParams
         });
+
+        // If no questions found for strict difficulty, retry without it
+        if (difficulty && response.data && response.data.count === 0) {
+          console.log(`ReviewPage: No questions found for ${difficulty}, retrying without difficulty filter.`);
+          delete apiParams.difficulty;
+          response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+            params: apiParams
+          });
+        }
 
         console.log('API Response:', response.data);
 
@@ -209,10 +476,19 @@ function ReviewPage() {
 
           // Process the response and limit questions per skill based on distribution
           allSkills.forEach(skill => {
-            const skillQuestions = response.data.questions_by_topic[skill] || [];
+            let skillQuestions = response.data.questions_by_topic[skill];
+            // Handle cases where backend returns {results: []} instead of a raw array.
+            if (skillQuestions && typeof skillQuestions === 'object' && !Array.isArray(skillQuestions)) {
+              skillQuestions = skillQuestions.results || [];
+            } else if (!Array.isArray(skillQuestions)) {
+              skillQuestions = [];
+            }
             const requiredCount = data.questionDistribution[skill] || 0;
 
             console.log(`Skill: ${skill}, Required: ${requiredCount}, Found: ${skillQuestions.length}`);
+
+            const removedSet = new Set(data.removedQuestionIds || []);
+            skillQuestions = skillQuestions.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
 
             // Limit to required count
             if (requiredCount > 0) {
@@ -232,7 +508,11 @@ function ReviewPage() {
               const manualResp = await axios.get(`${API_BASE_URL}/questions/manual/`, {
                 params: { custom_assessment_id: customAssessmentId }
               });
-              const manualList = manualResp.data?.results || [];
+              let manualList = manualResp.data?.results || [];
+
+              // Filter out removed and inactive questions
+              const removedSet = new Set(data.removedQuestionIds || []);
+              manualList = manualList.filter(q => !removedSet.has(q.id) && q.is_active !== false && q.status !== 'inactive');
 
               if (manualList.length > 0) {
                 // Sort so newest appears last
@@ -241,8 +521,37 @@ function ReviewPage() {
                   const tb = new Date(b.created_at || 0).getTime();
                   return ta - tb;
                 });
-                questionsByTopic[MANUAL_TOPIC_LABEL] = manualList;
-                setTopics([...allSkills, MANUAL_TOPIC_LABEL]);
+
+                // Split coding vs standard
+                const codingQs = [];
+                const standardQs = [];
+                manualList.forEach(q => {
+                  if (q.question_type === 'CODING' || q.topic === 'Coding') {
+                    codingQs.push(q);
+                  } else {
+                    standardQs.push(q);
+                  }
+                });
+
+                const updatedTopics = [...allSkills];
+                if (codingQs.length > 0) {
+                  // Merge with existing if any (unlikely here but safe)
+                  const existingCoding = questionsByTopic['Coding'] || [];
+                  const existingIds = new Set(existingCoding.map(q => q.id));
+                  const mergedCoding = [...existingCoding];
+                  codingQs.forEach(q => {
+                    if (!existingIds.has(q.id)) mergedCoding.push(q);
+                  });
+                  questionsByTopic['Coding'] = mergedCoding;
+                  if (!updatedTopics.includes('Coding')) updatedTopics.push('Coding');
+                }
+
+                if (standardQs.length > 0) {
+                  questionsByTopic[MANUAL_TOPIC_LABEL] = standardQs;
+                  if (!updatedTopics.includes(MANUAL_TOPIC_LABEL)) updatedTopics.push(MANUAL_TOPIC_LABEL);
+                }
+
+                setTopics(updatedTopics);
               } else {
                 setTopics(allSkills);
               }
@@ -277,8 +586,54 @@ function ReviewPage() {
 
 
 
+  // Helper to get current state for navigation
+  const getCurrentState = () => {
+    return {
+      ...assessmentData,
+      customAssessmentId: assessmentData.id || assessmentData.customAssessmentId, // Explicitly pass the ID
+      questions,
+      topics,
+      assessmentName,
+      minPassPercentage,
+      timeLimit,
+      objectiveTime,
+      codingTime,
+      hasObjectiveCutoff,
+      objPassPercentage,
+      objWeight,
+      codingWeight,
+      removedQuestionIds: Array.from(removedQuestionIds),
+    };
+  };
+
+  const handleUpdateRole = async () => {
+    if (!editedRole.trim()) return;
+
+    const caid = assessmentData?.id || assessmentData?.customAssessmentId;
+    if (!caid) return;
+
+    try {
+      const url = `${API_BASE_URL}/custom-assessments/${caid}/`;
+      await axios.patch(url, {
+        role: editedRole.trim()
+      });
+
+      setAssessmentName(editedRole.trim());
+      setIsEditingRole(false);
+
+      setAssessmentData(prev => ({
+        ...prev,
+        role: editedRole.trim()
+      }));
+    } catch (err) {
+      console.error('Error updating role:', err);
+      const detail = err.response?.data?.error || err.response?.data?.detail || err.message;
+      alert(`Failed to update role: ${detail}`);
+    }
+  };
+
   const handleBack = () => {
-    navigate('/custom-assessment', { state: assessmentData });
+    navigate('/custom-assessment', { state: getCurrentState() });
   };
 
 
@@ -290,6 +645,37 @@ function ReviewPage() {
 
     if (!assessmentData.customAssessmentId && !(Array.isArray(assessmentData.codingQuestions) && assessmentData.codingQuestions.length > 0)) {
       alert('Custom assessment ID not found. Please go back and recreate the assessment.');
+      return;
+    }
+
+    const parseTimeToSeconds = (timeValue) => {
+      if (!timeValue || typeof timeValue !== 'string') return 0;
+      const parts = timeValue.split(':').map(Number);
+      if (parts.length !== 3 || parts.some(Number.isNaN)) return 0;
+      const [h, m, s] = parts;
+      return (h * 3600) + (m * 60) + s;
+    };
+
+    const totalSec = parseTimeToSeconds(timeLimit);
+    const objSec = parseTimeToSeconds(objectiveTime);
+    const codSec = parseTimeToSeconds(codingTime);
+
+    const objectiveCount = Object.entries(questions).reduce((sum, [topic, list]) => {
+      if (topic === 'Coding') return sum;
+      return sum + (list || []).length;
+    }, 0);
+    const codingCount = (questions['Coding'] || []).length || (Array.isArray(assessmentData.codingQuestions) ? assessmentData.codingQuestions.length : 0);
+
+    if (totalSec <= 0) {
+      alert('Total Time must be greater than 00:00:00.');
+      return;
+    }
+    if (objectiveCount > 0 && objSec <= 0) {
+      alert('Objective Time must be greater than 00:00:00 when objective questions exist.');
+      return;
+    }
+    if (codingCount > 0 && codSec < 300) {
+      alert('Coding Time must be at least 00:05:00 when coding questions exist.');
       return;
     }
 
@@ -332,8 +718,10 @@ function ReviewPage() {
         if (assessmentName) {
           payload.name = assessmentName;
           payload.display_name = assessmentName;
+          payload.role = assessmentName; // Ensure role matches the name
+        } else if (assessmentData.role) {
+          payload.role = assessmentData.role;
         }
-        if (assessmentData.role) payload.role = assessmentData.role;
         if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
 
         const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
@@ -385,7 +773,12 @@ function ReviewPage() {
           q.template_code != null;
 
         if (isCodingQuestion) {
-          codingQuestionIds.push(Number(id));
+          // Send object with overrides instead of just ID
+          codingQuestionIds.push({
+            id: Number(id),
+            difficulty: q.difficulty,
+            time_limit_ms: q.time_limit_ms
+          });
         } else {
           regularQuestionIds.push(Number(id));
         }
@@ -406,13 +799,23 @@ function ReviewPage() {
       if (assessmentName) {
         payload.name = assessmentName;
         payload.display_name = assessmentName;
+        payload.role = assessmentName; // Ensure role matches the name
+      } else if (assessmentData.role) {
+        payload.role = assessmentData.role;
       }
-      if (assessmentData.role) payload.role = assessmentData.role;
       if (assessmentData.experienceLevel) payload.experience_level = assessmentData.experienceLevel;
 
       // New fields
       payload.min_pass_percentage = Number(minPassPercentage) || 60;
       payload.total_time = timeLimit || formatHHMMSS(getTotalTimeSeconds());
+
+      // Split Assessment Fields
+      payload.objective_time_limit = objectiveTime;
+      payload.coding_time_limit = codingTime;
+      payload.has_objective_cutoff = hasObjectiveCutoff;
+      payload.min_objective_pass_percentage = Number(objPassPercentage) || 0;
+      payload.weightage_objective = Number(objWeight);
+      payload.weightage_coding = Number(codingWeight);
 
       const response = await axios.post(`${API_BASE_URL}/assessments/`, payload);
 
@@ -423,7 +826,6 @@ function ReviewPage() {
         try {
           localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
           localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
-          // Also clear CustomAssessment saved form data so the Custom Assessment page opens empty next time
           localStorage.removeItem(CUSTOM_ASSESSMENT_STORAGE_KEY);
         } catch {
           // ignore
@@ -445,9 +847,6 @@ function ReviewPage() {
 
 
 
-  const getTotalQuestions = () => {
-    return Object.values(questions).reduce((sum, qList) => sum + qList.length, 0);
-  };
 
 
 
@@ -477,15 +876,46 @@ function ReviewPage() {
     return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
   };
 
+  const parseSeconds = (timeStr) => {
+    if (!timeStr) return 0;
+    const parts = timeStr.split(':').map(Number);
+    if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + parts[2];
+    if (parts.length === 2) return parts[0] * 60 + parts[1];
+    return Number(timeStr) || 0;
+  };
+
   useEffect(() => {
     if (!isTimeEdited && !loading) {
-      const seconds = getTotalTimeSeconds();
-      setTimeLimit(formatHHMMSS(seconds));
+      let objSec = 0;
+      let codSec = 0;
+
+      Object.values(questions).forEach(qList => {
+        (qList || []).forEach(q => {
+          const s = getQuestionSeconds(q);
+          // Check if coding
+          const isCoding =
+            q.time_limit_ms != null ||
+            q.languages != null ||
+            q.mode != null ||
+            q.starter_code != null;
+
+          if (isCoding) codSec += s;
+          else objSec += s;
+        });
+      });
+
+      setObjectiveTime(formatHHMMSS(objSec));
+      setCodingTime(formatHHMMSS(codSec));
+      setTimeLimit(formatHHMMSS(objSec + codSec));
     }
   }, [questions, isTimeEdited, loading]);
 
   const handleRemoveQuestion = (topic, questionId) => {
     if (!window.confirm('Are you sure you want to remove this question?')) return;
+
+    // Track removed IDs
+    setRemovedQuestionIds(prev => new Set([...prev, questionId]));
+
     setQuestions(prev => {
       const list = prev[topic] || [];
       const newList = list.filter(q => q.id !== questionId);
@@ -555,17 +985,78 @@ function ReviewPage() {
       {/* Main Content */}
       <div className="page-container">
         <div className="review-wrapper">
-          <h3 className="page-title-centered">Review Assessment</h3>
+          <div className="view-assessment-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', marginBottom: '2rem' }}>
+            <button type="button" className="view-assessment-back-btn" onClick={handleBack}>
+              ← Back
+            </button>
+            <h3 className="page-title-centered" style={{ margin: 0 }}>Review Assessment</h3>
+          </div>
 
           {/* Assessment Summary & Configuration */}
           <div className="summary-section">
             <div className="summary-grid">
               <div className="summary-item">
                 <span className="summary-label">Role:</span>
-                <span className="summary-value">
-                  {assessmentData.role === 'other'
-                    ? assessmentData.customRole
-                    : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                <span className="summary-value" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {isEditingRole ? (
+                    <>
+                      <input
+                        type="text"
+                        value={editedRole}
+                        onChange={(e) => setEditedRole(e.target.value)}
+                        className="role-edit-input"
+                        autoFocus
+                        style={{
+                          padding: '4px 8px',
+                          borderRadius: '4px',
+                          border: '1px solid #d1d5db',
+                          fontSize: '0.9rem',
+                          fontWeight: '600',
+                          width: '180px'
+                        }}
+                      />
+                      <button
+                        onClick={handleUpdateRole}
+                        className="role-save-btn"
+                        style={{ color: '#10b981', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </button>
+                      <button
+                        onClick={() => { setIsEditingRole(false); setEditedRole(assessmentName); }}
+                        className="role-cancel-btn"
+                        style={{ color: '#ef4444', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                      >
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <span>
+                        {assessmentName ||
+                          assessmentData.roleLabel ||
+                          (assessmentData.role === 'other'
+                            ? assessmentData.customRole
+                            : assessmentData.role?.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())) ||
+                          'Untitled Assessment'}
+                      </span>
+                      <button
+                        onClick={() => setIsEditingRole(true)}
+                        className="role-edit-btn"
+                        style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '4px', color: '#6b7280', display: 'flex', alignItems: 'center' }}
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                        </svg>
+                      </button>
+                    </>
+                  )}
                 </span>
               </div>
               <div className="summary-item">
@@ -574,37 +1065,39 @@ function ReviewPage() {
                   {assessmentData.experienceLevel?.replace(/\b\w/g, l => l.toUpperCase())}
                 </span>
               </div>
-              <div className="summary-item">
-                <span className="summary-label">Total Questions:</span>
-                <span className="summary-value">
-                  {loading ? assessmentData.numberOfQuestions : getTotalQuestions()}
-                </span>
-              </div>
+              {objectiveCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Obj Questions:</span>
+                  <span className="summary-value">
+                    {objectiveCount}
+                  </span>
+                </div>
+              )}
+              {codingCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Coding Questions:</span>
+                  <span className="summary-value">
+                    {codingCount}
+                  </span>
+                </div>
+              )}
               <div className="summary-item">
                 <span className="summary-label">Time Limit (HH:MM:SS):</span>
 
-                <input
-                  type="text"
-                  className="summary-input"
-                  value={loading ? assessmentData.time : timeLimit}
-                  onChange={(e) => {
-                    // Auto-format logic from CodingReview
-                    let val = e.target.value.replace(/\D/g, '');
-                    if (val.length > 6) val = val.slice(0, 6);
-
-                    let formatted = val;
-                    if (val.length >= 5) {
-                      formatted = `${val.slice(0, 2)}:${val.slice(2, 4)}:${val.slice(4)}`;
-                    } else if (val.length >= 3) {
-                      formatted = `${val.slice(0, 2)}:${val.slice(2)}`;
-                    }
-
-                    setTimeLimit(formatted);
-                    setIsTimeEdited(true);
+                <div
+                  className="summary-value"
+                  style={{
+                    fontSize: '1.2rem',
+                    color: '#16a34a',
+                    fontWeight: '900',
+                    display: 'flex',
+                    alignItems: 'center',
+                    height: '36px'
                   }}
-                  placeholder="00:00:00"
-                  style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
-                />
+                  title="Total time is calculated automatically based on questions"
+                >
+                  {loading ? assessmentData.time : timeLimit}
+                </div>
               </div>
               <div className="summary-item">
                 <span className="summary-label">Min Pass %:</span>
@@ -628,6 +1121,109 @@ function ReviewPage() {
                   style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
                 />
               </div>
+
+              {objectiveCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Obj Time (HH:MM:SS):</span>
+                  <input
+                    type="text"
+                    className="summary-input"
+                    value={objectiveTime}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const formatted = formatInputTime(val);
+                      setObjectiveTime(formatted);
+                      setIsTimeEdited(true);
+                      // Update Total Time
+                      const objS = parseSeconds(formatted);
+                      const codS = parseSeconds(codingTime);
+                      setTimeLimit(formatHHMMSS(objS + codS));
+                    }}
+                    placeholder="00:00:00"
+                    maxLength={8}
+                    style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                  />
+                </div>
+              )}
+
+              {codingCount > 0 && (
+                <div className="summary-item">
+                  <span className="summary-label">Coding Time (HH:MM:SS):</span>
+                  <input
+                    type="text"
+                    className="summary-input"
+                    value={codingTime}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      const formatted = formatInputTime(val);
+                      setCodingTime(formatted);
+                      setIsTimeEdited(true);
+                      // Update Total Time
+                      const objS = parseSeconds(objectiveTime);
+                      const codS = parseSeconds(formatted);
+                      setTimeLimit(formatHHMMSS(objS + codS));
+                    }}
+                    placeholder="00:00:00"
+                    maxLength={8}
+                    style={{ padding: '6px 8px', fontSize: '0.9rem', width: '100%', height: '36px' }}
+                  />
+                </div>
+              )}
+
+              {(questions['Coding'] || []).length > 0 && (
+                <div className="summary-item config-row" style={{ gridColumn: '1 / -1', display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '10px', padding: '10px', background: '#f8f9fa', borderRadius: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={hasObjectiveCutoff}
+                        onChange={(e) => setHasObjectiveCutoff(e.target.checked)}
+                      />
+                      <strong>Enforce Objective Cutoff?</strong>
+                    </label>
+                    {hasObjectiveCutoff && (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <span>Min Obj Pass %:</span>
+                        <input
+                          type="number"
+                          value={objPassPercentage}
+                          onChange={(e) => {
+                            const val = e.target.value;
+                            const num = Number(val);
+                            if (num > 100) setObjPassPercentage(100);
+                            else if (num < 0) setObjPassPercentage(0);
+                            else setObjPassPercentage(val);
+                          }}
+                          style={{ width: '60px', padding: '4px' }}
+                        />
+                      </div>
+                    )}
+
+                    <div style={{ marginLeft: '40px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 'bold' }}>Coding Possible Points:</span>
+                      <span style={{ fontSize: '1.1rem', fontWeight: '900', color: '#007bff' }}>{totalCodingPoints}</span>
+                    </div>
+                  </div>
+
+                  <div style={{ display: 'flex', gap: '15px', alignItems: 'center', width: '100%' }}>
+                    <strong style={{ minWidth: '70px' }}>Weights:</strong>
+                    <span style={{ fontSize: '0.9rem' }}>Coding: {codingWeight}%</span>
+                    <input
+                      type="range"
+                      min="0"
+                      max="100"
+                      value={codingWeight}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setCodingWeight(val);
+                        setObjWeight(100 - val);
+                      }}
+                      style={{ flex: 1, cursor: 'pointer' }}
+                    />
+                    <span style={{ fontSize: '0.9rem' }}>Objective: {objWeight}%</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
@@ -658,7 +1254,7 @@ function ReviewPage() {
                       const enrichedQ = { ...q, _topic: topic };
                       if (topic === MANUAL_TOPIC_LABEL) {
                         manualQuestions.push(enrichedQ);
-                      } else {
+                      } else if (topic !== 'Coding') {
                         dbQuestions.push({ ...enrichedQ, skill: topic }); // Skill is topic for DB items
                       }
                     });
@@ -676,11 +1272,14 @@ function ReviewPage() {
 
                   const hasDbQuestions = dbQuestions.length > 0;
                   const hasManualQuestions = manualQuestions.length > 0;
+                  // Check if we have any coding questions (from the 'Coding' topic)
+                  const codingQs = questions['Coding'] || [];
+                  const hasCodingQuestions = codingQs.length > 0;
 
-                  if (!hasDbQuestions && !hasManualQuestions) {
+                  if (!hasDbQuestions && !hasManualQuestions && !hasCodingQuestions) {
                     return (
                       <div className="no-questions">
-                        <p>No questions available. Please ensure questions are generated in the database.</p>
+                        <p>No questions available. Please ensure questions are generated in the database or add them manually.</p>
                       </div>
                     );
                   }
@@ -693,14 +1292,14 @@ function ReviewPage() {
                       const newQuestions = { ...prev };
 
                       if (groupType === 'database') {
-                        // Remove all topics that are NOT MANUAL_TOPIC_LABEL
+                        // Remove all topics that are NOT MANUAL_TOPIC_LABEL AND NOT 'Coding'
                         Object.keys(newQuestions).forEach((t) => {
-                          if (t !== MANUAL_TOPIC_LABEL) {
+                          if (t !== MANUAL_TOPIC_LABEL && t !== 'Coding') {
                             delete newQuestions[t];
                           }
                         });
                         // Update topics list
-                        setTopics((prevTopics) => prevTopics.filter((t) => t === MANUAL_TOPIC_LABEL));
+                        setTopics((prevTopics) => prevTopics.filter((t) => t === MANUAL_TOPIC_LABEL || t === 'Coding'));
                       } else if (groupType === 'manual') {
                         // Remove questions from MANUAL_TOPIC_LABEL that match the assessment name
                         const currentManuals = newQuestions[MANUAL_TOPIC_LABEL] || [];
@@ -712,13 +1311,24 @@ function ReviewPage() {
                         } else {
                           newQuestions[MANUAL_TOPIC_LABEL] = keptManuals;
                         }
+
+                        // Track removed IDs
+                        const removedIds = currentManuals
+                          .filter(q => (q.assessment || 'Unknown Source') === groupKey)
+                          .map(q => q.id);
+                        setRemovedQuestionIds(prev => new Set([...prev, ...removedIds]));
+                      } else if (groupType === 'coding') {
+                        const removedIds = (newQuestions['Coding'] || []).map(q => q.id);
+                        setRemovedQuestionIds(prev => new Set([...prev, ...removedIds]));
+                        delete newQuestions['Coding'];
+                        setTopics((prevTopics) => prevTopics.filter((t) => t !== 'Coding'));
                       }
                       return newQuestions;
                     });
                   };
 
                   // Render Function for a list of questions
-                  const renderQuestionList = (list, startIndex = 0) => {
+                  const renderQuestionList = (list, startIndex = 0, isCoding = false) => {
                     return (
                       <div className="questions-list">
                         {list.map((question, idx) => {
@@ -747,9 +1357,47 @@ function ReviewPage() {
                                   alignItems: 'flex-start',
                                 }}
                               >
-                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline' }}>
+                                <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'baseline', flex: 1 }}>
                                   <span className="question-number">Q{globalIndex + 1}</span>
-                                  <span className="question-title">{question.title || question.question}</span>
+                                  <div style={{ flex: 1 }}>
+                                    <span className="question-title">{question.title || question.question}</span>
+                                    {/* Difficulty Editor for Questions */}
+                                    <div style={{ marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                      <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>Experience Level:</span>
+                                      <select
+                                        value={question.experience_level || question.difficulty || 'medium'}
+                                        onChange={(e) => {
+                                          const newLevel = e.target.value;
+                                          setQuestions(prev => {
+                                            const updatedQuestions = { ...prev };
+                                            const topic = question._topic || MANUAL_TOPIC_LABEL;
+                                            const list = updatedQuestions[topic] || [];
+                                            const updatedList = list.map(q =>
+                                              q.id === question.id ? { ...q, experience_level: newLevel, difficulty: newLevel } : q
+                                            );
+                                            updatedQuestions[topic] = updatedList;
+                                            return updatedQuestions;
+                                          });
+                                        }}
+                                        style={{
+                                          padding: '2px 6px',
+                                          fontSize: '0.85rem',
+                                          borderRadius: '4px',
+                                          borderColor: '#d1d5db',
+                                          cursor: 'pointer'
+                                        }}
+                                      >
+                                        <option value="entry">Entry</option>
+                                        <option value="mid">Mid</option>
+                                        <option value="senior">Senior</option>
+                                        <option value="expert">Expert</option>
+                                        {/* For backward compatibility with 'easy/medium/hard' tags if they exist */}
+                                        <option value="easy" hidden>Easy</option>
+                                        <option value="medium" hidden>Medium</option>
+                                        <option value="hard" hidden>Hard</option>
+                                      </select>
+                                    </div>
+                                  </div>
                                 </div>
                                 <button
                                   className="btn-remove-question"
@@ -772,7 +1420,16 @@ function ReviewPage() {
                               </div>
                               {(() => {
                                 const optionList = buildOptions(question);
-                                if (optionList.length === 0) return null;
+                                if (optionList.length === 0) {
+                                  if (isCoding && question.description) {
+                                    return (
+                                      <div className="question-options" style={{ color: '#4b5563', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                                        {question.description.slice(0, 150)}{question.description.length > 150 ? '...' : ''}
+                                      </div>
+                                    );
+                                  }
+                                  return null;
+                                }
 
                                 return (
                                   <div className="question-options">
@@ -806,6 +1463,39 @@ function ReviewPage() {
 
                   return (
                     <>
+                      {/* Coding Questions Section */}
+                      {hasCodingQuestions && (
+                        <div className="question-group-section" style={{ marginBottom: '2rem' }}>
+                          <div
+                            className="group-header"
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'space-between',
+                              alignItems: 'center',
+                              marginBottom: '1rem',
+                              borderBottom: '2px solid #e9ecef',
+                              paddingBottom: '0.5rem',
+                            }}
+                          >
+                            <h4 style={{ margin: 0, color: '#495057' }}>Coding Questions</h4>
+                            <button
+                              className="btn btn-outline-danger btn-sm"
+                              onClick={() => handleRemoveAll('coding', 'Coding Questions')}
+                            >
+                              Remove All
+                            </button>
+                          </div>
+                          {renderQuestionList(codingQs.map(q => ({ ...q, _topic: 'Coding' })), runningIndex, true)}
+                        </div>
+                      )}
+
+
+                      {(() => {
+                        // if (hasCodingQuestions) runningIndex += codingQs.length;
+                        return null;
+                      })()}
+
+
                       {/* Database Questions Section */}
                       {hasDbQuestions && (
                         <div className="question-group-section" style={{ marginBottom: '2rem' }}>
@@ -835,7 +1525,7 @@ function ReviewPage() {
                       {/* Manual/PDF Groups */}
 
                       {(() => {
-                        let currentIndex = hasDbQuestions ? dbQuestions.length : 0;
+                        let currentIndex = runningIndex + (hasDbQuestions ? dbQuestions.length : 0);
                         return Object.entries(manualGroups).map(([groupName, groupList]) => {
                           const element = (
                             <div key={groupName} className="question-group-section" style={{ marginBottom: '2rem' }}>
@@ -874,11 +1564,7 @@ function ReviewPage() {
             )}
           </div>
 
-          {/* Action Buttons */}
-          <div className="form-actions">
-            <button type="button" onClick={handleBack} className="btn btn-secondary">
-              Back
-            </button>
+          <div className="form-actions" style={{ marginTop: '2.5rem', borderTop: '2px solid #f1f5f9', paddingTop: '2rem' }}>
             <button type="button" onClick={handleCreateAssessment} className="btn btn-primary">
               Create Assessment
             </button>
@@ -887,19 +1573,51 @@ function ReviewPage() {
       </div>
 
       {/* Sticky Bottom Button - Create Custom Questions */}
-      <div className="sticky-bottom-button-container">
+      {/* Sticky Bottom Button Container */}
+      <div className="sticky-bottom-button-container" style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
         <button
           type="button"
           className="btn-create-custom-questions"
-          onClick={() => navigate('/manual-questions', { state: assessmentData })}
+          onClick={() => setShowCodingModal(true)}
+          style={{ backgroundColor: '#4f46e5' }} // Distinct color
+        >
+          + Add Coding Question
+        </button>
+        <button
+          type="button"
+          className="btn-create-custom-questions"
+          onClick={() => navigate('/manual-questions', { state: { ...getCurrentState(), fromReview: true } })}
         >
           Create Custom Questions
         </button>
       </div>
+
+      {/* Coding Question Modal */}
+      {showCodingModal && (
+        <CodingQuestionSelector
+          onClose={() => setShowCodingModal(false)}
+          onAdd={(selectedQuestions) => {
+            setQuestions(prev => {
+              const existing = prev['Coding'] || [];
+              // Avoid duplicates
+              const existingIds = new Set(existing.map(q => q.id));
+              const newUnique = selectedQuestions.filter(q => !existingIds.has(q.id));
+              return {
+                ...prev,
+                'Coding': [...existing, ...newUnique]
+              };
+            });
+            setTopics(prev => {
+              if (!prev.includes('Coding')) return [...prev, 'Coding'];
+              return prev;
+            });
+            setShowCodingModal(false);
+          }}
+          alreadySelectedIds={(questions['Coding'] || []).map(q => q.id)}
+        />
+      )}
     </div>
   );
 }
 
 export default ReviewPage;
-
-

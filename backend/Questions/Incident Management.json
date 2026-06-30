@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Incident Management", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Incident Management?",
+    "options": {
+      "A": "To find and punish the person who caused the error.",
+      "B": "To restore normal service operation as quickly as possible.",
+      "C": "To write new features for the application.",
+      "D": "To increase the marketing budget for the product."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Incident' is defined as any unplanned interruption to an IT service or a reduction in the quality of an IT service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it lasts longer than 1 hour",
+      "D": "Only if it affects the CEO"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'MTTR' typically stand for in the context of incident response?",
+    "options": {
+      "A": "Maximum Time to Reporting",
+      "B": "Mean Time to Resolve",
+      "C": "Minimum Time to Restart",
+      "D": "Main Terminal Traffic Route"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'On-Call' rotation?",
+    "options": {
+      "A": "A group of employees who only work on phones.",
+      "B": "A schedule that determines which engineer is responsible for responding to incidents outside of business hours.",
+      "C": "A way to rotate the physical location of the server.",
+      "D": "A list of customers who need to be called for sales."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a standard incident priority matrix, what two factors usually determine the priority?",
+    "options": {
+      "A": "Cost and Time",
+      "B": "Impact and Urgency",
+      "C": "Software and Hardware",
+      "D": "Size and Color"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Workaround' is a temporary way to restore service while a permanent fix is being developed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Java development",
+      "D": "Only for hardware failures"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Post-Mortem' or 'Post-Incident Review' (PIR)?",
+    "options": {
+      "A": "A funeral for a deleted server.",
+      "B": "A meeting and document used to analyze what happened during an incident and how to prevent it in the future.",
+      "C": "A manual for installing a new operating system.",
+      "D": "A list of all users who were active during a crash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common tool used for alerting and incident orchestration?",
+    "options": {
+      "A": "Photoshop",
+      "B": "PagerDuty",
+      "C": "Excel",
+      "D": "Spotify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Major Incident' usually requires a dedicated response team and frequent communication updates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it happens on a holiday",
+      "D": "Only for financial companies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for in service management?",
+    "options": {
+      "A": "System Level Access",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "Service Loss Assessment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of an 'Incident Commander'?",
+    "options": {
+      "A": "To write the code that fix the bug.",
+      "B": "To lead the response effort, coordinate communication, and make high-level decisions.",
+      "C": "To handle the company's social media account.",
+      "D": "To buy coffee for the engineering team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident Management is the same thing as Problem Management.",
+    "options": {
+      "A": "False (Incident is about restoring service; Problem is about finding the root cause).",
+      "B": "True",
+      "C": "Only for small startups",
+      "D": "Only if using the ITIL framework"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Escalation' in incident response?",
+    "options": {
+      "A": "The physical movement of a server to a higher floor.",
+      "B": "Moving an incident to a higher level of technical support or management when it cannot be resolved quickly.",
+      "C": "Increasing the price of the service during an outage.",
+      "D": "Deleting the logs to hide the error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Observability' help with during an incident?",
+    "options": {
+      "A": "Making the dashboard look pretty.",
+      "B": "Providing internal system state data (logs, metrics, traces) to help diagnose the root cause.",
+      "C": "Telling the customer that the system is down.",
+      "D": "Hiding the error messages from the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Blameless' culture encourages engineers to speak honestly about failures without fear of punishment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in non-profit organizations",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Status Page' used for?",
+    "options": {
+      "A": "To track the social status of employees.",
+      "B": "To publicly communicate the current health and availability of services to users.",
+      "C": "To list the names of all developers.",
+      "D": "To show the company's stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Trigger' for an incident?",
+    "options": {
+      "A": "An automated alert from a monitoring system.",
+      "B": "A customer reporting a bug.",
+      "C": "An error log appearing in the system.",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Resolving an incident always requires a code change.",
+    "options": {
+      "A": "False (It could involve a configuration change, a server restart, or a resource scale-up).",
+      "B": "True",
+      "C": "Only for software-as-a-service companies",
+      "D": "Only if the error is a Syntax Error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Runbook'?",
+    "options": {
+      "A": "A book about running marathons.",
+      "B": "A set of standardized, documented procedures to handle specific types of incidents or tasks.",
+      "C": "A log of all previous system errors.",
+      "D": "The source code of the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Monitoring' in the context of SRE?",
+    "options": {
+      "A": "Watching the screen for 8 hours.",
+      "B": "The process of collecting, processing, aggregating, and displaying real-time quantitative data about a system.",
+      "C": "Deleting old files from the server.",
+      "D": "Scanning the network for new hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Crisis' situation, regular change management processes are often bypassed to speed up the resolution.",
+    "options": {
+      "A": "True (Emergency Change Request)",
+      "B": "False",
+      "C": "Only for banking systems",
+      "D": "Only if the internet is down"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threshold' in alerting?",
+    "options": {
+      "A": "The physical entrance to the data center.",
+      "B": "A specific value (e.g., 90% CPU) that, when reached, triggers an alert.",
+      "C": "The total number of users in the system.",
+      "D": "The expiration date of an SSL certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Tier 1 Support' typically handle?",
+    "options": {
+      "A": "Rewriting the database kernel.",
+      "B": "Basic incident documentation and initial troubleshooting steps.",
+      "C": "Managing the company's cloud budget.",
+      "D": "Leading the post-mortem meeting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Alert Fatigue' happens when engineers receive too many low-priority alerts, causing them to ignore important ones.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large teams",
+      "D": "Only if the alerts are sent via SMS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'False Positive' in monitoring?",
+    "options": {
+      "A": "An alert that correctly identifies a problem.",
+      "B": "An alert that triggers when there is actually no problem occurring.",
+      "C": "A user reporting a feature request as a bug.",
+      "D": "A server that is running faster than usual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a priority level often assigned to an incident that makes the service completely unusable for all users?",
+    "options": {
+      "A": "P1 or Critical",
+      "B": "P4 or Low",
+      "C": "Minor",
+      "D": "Information"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE stands for 'Systems Resilience Engineering'.",
+    "options": {
+      "A": "False (It stands for Site Reliability Engineering).",
+      "B": "True",
+      "C": "Only in Europe",
+      "D": "Only for cloud companies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Change Management'?",
+    "options": {
+      "A": "Managing the coins in the office vending machine.",
+      "B": "The process of ensuring that changes to a system are implemented in a controlled and coordinated manner.",
+      "C": "Changing the office layout for better productivity.",
+      "D": "Updating the developer's job description."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Cause Analysis' (RCA)?",
+    "options": {
+      "A": "Finding out who to fire.",
+      "B": "The process of identifying the underlying cause of an incident to prevent it from happening again.",
+      "C": "Measuring the growth of physical trees around the data center.",
+      "D": "Analyzing the source code for spelling errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Communication with stakeholders is a key part of the Incident Management lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public companies",
+      "D": "Only if the outage lasts more than 24 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Level Indicator' (SLI)?",
+    "options": {
+      "A": "A light on the server that shows if it is on.",
+      "B": "A quantitative measure of some aspect of the level of service provided (e.g., latency or error rate).",
+      "C": "A document that lists all user passwords.",
+      "D": "A way to monitor the server room noise level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service Level Objective' (SLO)?",
+    "options": {
+      "A": "The name of the company's mission statement.",
+      "B": "A target value or range of values for a service level that is measured by an SLI.",
+      "C": "A tool used to restart the server.",
+      "D": "The number of lines of code in a service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every incident must have a corresponding Root Cause Analysis document.",
+    "options": {
+      "A": "False (Typically only Major or recurring incidents require a full RCA).",
+      "B": "True",
+      "C": "Only for government projects",
+      "D": "Only if using the Agile methodology"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Detection' in the incident lifecycle?",
+    "options": {
+      "A": "Finding a hacker in the system.",
+      "B": "The point at which the organization becomes aware of the incident.",
+      "C": "Deleting the error logs.",
+      "D": "The process of writing a fix for a bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Incident Categorization'?",
+    "options": {
+      "A": "Assigning a priority to an incident.",
+      "B": "Grouping incidents into types (e.g., Hardware, Software, Network) to help with routing and reporting.",
+      "C": "Alphabetizing the list of open incidents.",
+      "D": "Deleting incidents that are not important."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident resolution is defined as the point when the service is fully restored to its normal state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if no data was lost",
+      "D": "Only in the 'prod' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Logging'?",
+    "options": {
+      "A": "Chopping wood for the server room heater.",
+      "B": "Recording events that happen within a computer system or software application.",
+      "C": "A list of users who have logged in.",
+      "D": "A specialized way to compress video files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Error Budget' in SRE?",
+    "options": {
+      "A": "The amount of money you lose during an outage.",
+      "B": "The amount of unreliability a service is allowed to have before the team must stop new feature work and focus on stability.",
+      "C": "A specialized bank account for paying for bugs.",
+      "D": "The total number of bugs found by QA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Critical Incident' should always be resolved by the first person who sees it, even if they are not on call.",
+    "options": {
+      "A": "False (It should follow the established on-call and escalation procedures).",
+      "B": "True",
+      "C": "Only if it is a security breach",
+      "D": "Only if the person is a senior engineer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Investigation and Diagnosis'?",
+    "options": {
+      "A": "Interviewing the user about their day.",
+      "B": "The stage where the responder tries to understand what is wrong and how to fix it.",
+      "C": "Scanning the network for hardware updates.",
+      "D": "Hiring a private investigator to find a lost laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does it mean to 'Close' an incident?",
+    "options": {
+      "A": "Turning off the server.",
+      "B": "The final stage where the user confirms resolution and the ticket is officially finalized.",
+      "C": "Deleting all records of the incident.",
+      "D": "Shutting down the office for the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'IMOC' (Incident Manager On Call) is a role that oversees the incident response process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in medical software companies",
+      "D": "Only in version 2.0 of the framework"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in monitoring?",
+    "options": {
+      "A": "The weight of the data packets.",
+      "B": "The time it takes for a request to be processed.",
+      "C": "The physical length of the server cable.",
+      "D": "The number of users active at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Saturation' in system health monitoring?",
+    "options": {
+      "A": "The server room getting wet.",
+      "B": "A measure of how 'full' a resource is (e.g., 100% disk usage).",
+      "C": "The color intensity of the dashboard.",
+      "D": "The amount of code in a repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident Management is strictly for software bugs, not hardware failures.",
+    "options": {
+      "A": "False (It covers any unplanned interruption, including hardware, network, or power failures).",
+      "B": "True",
+      "C": "Only in cloud environments",
+      "D": "Only for non-technical users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Drafting' during an incident?",
+    "options": {
+      "A": "Drawing a map of the server room.",
+      "B": "Preparing communication updates for stakeholders.",
+      "C": "Writing the initial version of the code fix.",
+      "D": "Moving cold air through the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' often tracked for incident response performance?",
+    "options": {
+      "A": "Mean Time to Acknowledge (MTTA)",
+      "B": "Mean Time to Recovery (MTTR)",
+      "C": "Incidents per month",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: An incident is considered 'Resolved' as soon as the engineer thinks they fixed it.",
+    "options": {
+      "A": "False (Verification and often user confirmation are required).",
+      "B": "True",
+      "C": "Only for low-priority incidents",
+      "D": "Only if the boss says so"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboarding' used for in incident response?",
+    "options": {
+      "A": "Changing the background color of the laptop.",
+      "B": "Visualizing key system metrics in real-time to help identify and track incidents.",
+      "C": "Listing the names of all users in the system.",
+      "D": "Designing a new car dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alerting'?",
+    "options": {
+      "A": "Telling a joke to the team.",
+      "B": "The automated notification of humans when a system metric reaches a concerning level.",
+      "C": "A phone call from a salesperson.",
+      "D": "A way to backup the server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident Management is a 'Reactive' process, while SRE aims to be more 'Proactive'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database management",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Severity' levels in incident management?",
+    "options": {
+      "A": "To count how many times an engineer was angry.",
+      "B": "To define the level of business impact and the expected speed of response.",
+      "C": "To set the physical temperature of the CPU.",
+      "D": "To monitor the room's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triage' in incident management?",
+    "options": {
+      "A": "Taking a 3-hour break.",
+      "B": "The process of quickly assessing an incident to determine its priority and the best team to handle it.",
+      "C": "A specialized way to encrypt three files at once.",
+      "D": "Connecting three servers into a cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Root Cause' is always a single human error.",
+    "options": {
+      "A": "False (Root causes are often a combination of system design, process, and technical failures).",
+      "B": "True",
+      "C": "Only in small companies",
+      "D": "Only if the developer is new"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Availability'?",
+    "options": {
+      "A": "The total number of hours a developer works.",
+      "B": "The percentage of time that a service is operational and accessible to users.",
+      "C": "The price of the cloud service.",
+      "D": "The number of users who can log in at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Hotfix'?",
+    "options": {
+      "A": "Fixing the heater in the office.",
+      "B": "A quick, often emergency code change applied to a live system to resolve a critical incident.",
+      "C": "A specialized way to compress code.",
+      "D": "A way to increase the server's temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Availability' is often measured in 'nines' (e.g., 99.9% uptime).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google Services",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Golden Signals' in SRE?",
+    "options": {
+      "A": "The four key metrics to monitor: Latency, Traffic, Errors, and Saturation.",
+      "B": "The four best developers in the company.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The physical weight of the gold in the server room."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Downtime'?",
+    "options": {
+      "A": "The time spent sleeping.",
+      "B": "The period during which a system or service is unavailable to users.",
+      "C": "The time it takes to download a file.",
+      "D": "The number of users who have logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident responders should always prioritize fixing the bug over restoring service.",
+    "options": {
+      "A": "False (The priority is restoring service; the bug can often be investigated later).",
+      "B": "True",
+      "C": "Only if the bug is easy to find",
+      "D": "Only for open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Alert Policy'?",
+    "options": {
+      "A": "A law about how to use loud sounds.",
+      "B": "The set of rules that define when an alert should be sent and who should receive it.",
+      "C": "The password for the alert dashboard.",
+      "D": "A list of previous incidents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Tracing a drawing on multiple pieces of paper.",
+      "B": "A technique to follow the path of a single request through multiple microservices.",
+      "C": "Finding a lost server in a global network.",
+      "D": "Measuring the distance between two data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SRE team's primary responsibility is to ensure 100% uptime for all services at all costs.",
+    "options": {
+      "A": "False (They balance reliability with the need for product velocity using error budgets).",
+      "B": "True",
+      "C": "Only for banking services",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Reporting'?",
+    "options": {
+      "A": "A newspaper about server errors.",
+      "B": "The act of documenting and notifying relevant parties about the details of an incident.",
+      "C": "A way to monitor the server room temperature.",
+      "D": "Counting the number of lines of code in a fix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Health Checks'?",
+    "options": {
+      "A": "To give the developers a medical exam.",
+      "B": "To automatically verify if a service or instance is capable of handling traffic.",
+      "C": "To scan the system for hardware errors.",
+      "D": "To monitor the server room air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' helps prevent incidents caused by resource exhaustion as traffic grows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for physical data centers",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of an 'Error Budget' in SRE?",
+    "options": {
+      "A": "To provide a financial fund for buying replacement hardware.",
+      "B": "To balance the risk of innovation (feature velocity) with the need for service stability.",
+      "C": "To limit the total number of lines of code a developer can write in a week.",
+      "D": "To pay for external security audits after a major breach."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SLI (Service Level Indicator) is a target value for a service level, while an SLO (Service Level Objective) is the actual measurement.",
+    "options": {
+      "A": "True",
+      "B": "False (The SLI is the measurement; the SLO is the target).",
+      "C": "Only if the service is hosted on-premises",
+      "D": "Only if using the ITIL v4 framework"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Toil' in the context of Site Reliability Engineering?",
+    "options": {
+      "A": "The physical labor of moving server racks.",
+      "B": "Repetitive, manual, and automatable work that provides no long-term value to the service.",
+      "C": "The total number of hours an engineer spends in meetings.",
+      "D": "Complex architectural design work for a new product."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of 'Symptom-based Alerting'?",
+    "options": {
+      "A": "Alerting when a specific database query is slow.",
+      "B": "Alerting when the end-user HTTP 500 error rate exceeds 1%.",
+      "C": "Alerting when a single CPU core reaches 95% utilization.",
+      "D": "Alerting when a log file contains the word 'deprecated'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In incident response, what is the role of the 'Scribe' (or Documentation Lead)?",
+    "options": {
+      "A": "To write the code that fixes the incident.",
+      "B": "To maintain a chronological log of events, decisions, and data points during the response.",
+      "C": "To contact the legal department and shareholders.",
+      "D": "To manage the server's backup power supply."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a service has an SLO of 99.9% uptime, its monthly error budget is approximately 43 minutes of downtime.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 31-day months",
+      "D": "Only if the service is in a single region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cascading Failure'?",
+    "options": {
+      "A": "A failure that happens during a waterfall model project.",
+      "B": "A failure in one component that triggers failures in other dependent components, often worsening the situation.",
+      "C": "A database error caused by deleting a primary key.",
+      "D": "A scheduled power outage at the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE practice involves 'playing' through a disaster scenario to test response capabilities without a real outage?",
+    "options": {
+      "A": "GameDays / Wheel of Misfortune",
+      "B": "Unit Testing",
+      "C": "A/B Testing",
+      "D": "Capacity Planning"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'Black-box Monitoring' and 'White-box Monitoring'?",
+    "options": {
+      "A": "Black-box is for hardware; White-box is for software.",
+      "B": "Black-box tests external behavior (e.g., HTTP probes); White-box uses internal metrics (e.g., heap usage).",
+      "C": "Black-box is manual; White-box is automated.",
+      "D": "There is no functional difference in SRE."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Blameless' post-mortem focus is on identifying process and system improvements rather than pointing fingers at individuals.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-security incidents",
+      "D": "Only in startups with fewer than 10 employees"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Burn Rate' in the context of SLOs?",
+    "options": {
+      "A": "The speed at which the server hardware gets hot.",
+      "B": "The rate at which a service is consuming its allotted error budget.",
+      "C": "The frequency of engineers quitting the on-call rotation.",
+      "D": "The amount of money spent on cloud computing per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'Capacity Planning'?",
+    "options": {
+      "A": "To hire as many people as possible.",
+      "B": "To ensure that a service has enough resources (CPU, RAM, Disk) to handle current and future load.",
+      "C": "To fill every server rack in the data center to 100%.",
+      "D": "To increase the physical size of the office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code is most commonly used as an SLI for 'Error Rate' in a REST API?",
+    "options": {
+      "A": "200 OK",
+      "B": "5xx Server Errors",
+      "C": "3xx Redirections",
+      "D": "4xx Client Errors (always)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Load Shedding' is an SRE technique where a system intentionally drops low-priority traffic to protect its own stability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in networking hardware, not software",
+      "D": "Only if the database is in read-only mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' best used for during an incident investigation?",
+    "options": {
+      "A": "Finding out which developer checked in the last line of code.",
+      "B": "Identifying which microservice in a long chain is causing latency or errors.",
+      "C": "Drawing a map of the physical network cables.",
+      "D": "Monitoring the total number of users logged into the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of 'The Four Golden Signals' refers to the demand placed on a system (e.g., requests per second)?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mean Time to Detect' (MTTD) measures the time from the start of an incident until the first automated alert triggers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Prometheus",
+      "D": "Only for P1 incidents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Observability' vs 'Monitoring' in an SRE context?",
+    "options": {
+      "A": "They are the same concept with different names.",
+      "B": "Monitoring is about 'known unknowns'; Observability is about exploring 'unknown unknowns'.",
+      "C": "Observability is only for frontend; Monitoring is only for backend.",
+      "D": "Monitoring is for humans; Observability is for AI bots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In incident communication, what is a 'Internal Status Page' used for?",
+    "options": {
+      "A": "To tell customers about the outage.",
+      "B": "To coordinate information and updates among the responding engineering teams and executives.",
+      "C": "To host the company's employee handbook.",
+      "D": "To show the live feed from the data center cameras."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exponential Backoff' in a retry strategy?",
+    "options": {
+      "A": "Stopping all retries immediately after a failure.",
+      "B": "Increasing the wait time between successive retries to avoid overwhelming a failing service.",
+      "C": "Retrying every 1 second until the service is back up.",
+      "D": "Retrying only on weekends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should aim to spend no more than 50% of their time on 'toil' or operational work.",
+    "options": {
+      "A": "True (Google's recommendation to ensure time for engineering improvements).",
+      "B": "False (SREs should spend 100% of their time on toil).",
+      "C": "Only for junior SREs",
+      "D": "Only during the first year of a product's life"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a 'Proactive' incident management activity?",
+    "options": {
+      "A": "Responding to a P1 alert at 3 AM.",
+      "B": "Performing a disaster recovery drill to find weaknesses in the runbook.",
+      "C": "Fixing a bug after it caused a system crash.",
+      "D": "Writing a post-mortem for a recent outage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alert Suppression'?",
+    "options": {
+      "A": "Deleting the monitoring software.",
+      "B": "Temporarily silencing alerts for a known issue or during a maintenance window.",
+      "C": "Hiding alerts from the system administrator.",
+      "D": "Encrypting the alert messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Single Point of Failure' (SPOF) is a part of a system that, if it fails, will stop the entire system from working.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in hardware, not software",
+      "D": "Only if the system has no users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dark Launching'?",
+    "options": {
+      "A": "Launching a rocket at night.",
+      "B": "Releasing a feature to a small subset of users or running it in the background without a UI to test performance.",
+      "C": "Deleting a feature without telling the users.",
+      "D": "Launching a website on the dark web."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE role is responsible for the overall health of the entire platform, often spanning multiple service teams?",
+    "options": {
+      "A": "Service Owner",
+      "B": "Platform Engineer / SRE",
+      "C": "UX Designer",
+      "D": "Marketing Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SLO violation should automatically trigger a change in priority, shifting the team's focus from features to reliability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the CEO is notified",
+      "D": "Only if the error budget is 100% exhausted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Canary Deployment'?",
+    "options": {
+      "A": "A deployment that uses birds for communication.",
+      "B": "Rolling out a new version of software to a small percentage of servers/users to check for errors before full release.",
+      "C": "Moving a service from AWS to Azure.",
+      "D": "Deleting the oldest version of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to fix a bug.",
+      "B": "The average time a system or component functions between failures.",
+      "C": "The time it takes for an alert to be sent.",
+      "D": "The number of users who see an error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Blameless' post-mortem, it is acceptable to name the specific engineer who made a mistake as long as they are not fired.",
+    "options": {
+      "A": "False (Naming individuals is discouraged to maintain focus on systemic issues).",
+      "B": "True",
+      "C": "Only if they agree to it",
+      "D": "Only if they are the lead developer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jitter' in a retry policy?",
+    "options": {
+      "A": "The physical vibration of the server.",
+      "B": "Adding randomness to retry intervals to prevent 'thundering herd' problems.",
+      "C": "The percentage of packets lost in transit.",
+      "D": "The speed of the CPU clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a symptom of 'Over-alerting'?",
+    "options": {
+      "A": "Higher system availability.",
+      "B": "Engineers ignoring high-severity pages due to exhaustion.",
+      "C": "More accurate root cause analysis.",
+      "D": "Lower MTTR."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Health Check' endpoint should ideally test the connectivity to all dependent downstream services (e.g., database).",
+    "options": {
+      "A": "True",
+      "B": "False (A health check should only test the service itself to avoid 'failure cascading' during probes).",
+      "C": "Only for frontend services",
+      "D": "Only if using Kubernetes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triage' in the context of an incident?",
+    "options": {
+      "A": "Fixing the bug immediately.",
+      "B": "The rapid assessment of an incident's severity and impact to determine the appropriate response path.",
+      "C": "Writing a 50-page report on the incident.",
+      "D": "Deleting all the logs from the last hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Infrastructure as Code' (IaC) for incident management?",
+    "options": {
+      "A": "It makes the code more colorful.",
+      "B": "It allows for rapid, repeatable, and audited restoration of infrastructure in case of a major failure.",
+      "C": "It removes the need for any monitoring.",
+      "D": "It prevents any network errors from occurring."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Action Item' from a post-mortem must be completed before the incident can be considered 'Closed' in most systems.",
+    "options": {
+      "A": "False (The incident is closed when service is restored; post-mortem actions are tracked separately as follow-up work).",
+      "B": "True",
+      "C": "Only for P1 incidents",
+      "D": "Only if required by the legal department"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'MTTA'?",
+    "options": {
+      "A": "Maximum Time to Application",
+      "B": "Mean Time to Acknowledge (how long it takes for a human to respond to an alert).",
+      "C": "Minimum Time to Access",
+      "D": "Main Terminal Traffic Area"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Leading Indicator' of a potential incident?",
+    "options": {
+      "A": "The system crashing.",
+      "B": "An increase in 99th percentile latency over the last 10 minutes.",
+      "C": "A customer calling support to complain.",
+      "D": "The annual cloud bill being higher than expected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs use 'Chaos Engineering' to proactively break things in production to find hidden weaknesses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-financial systems",
+      "D": "Only for on-premises systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Saturation' in a system?",
+    "options": {
+      "A": "The server room getting too crowded.",
+      "B": "A measure of how full a system resource is (e.g., CPU, RAM, or network queue).",
+      "C": "The color intensity of the monitoring graphs.",
+      "D": "The number of lines of code in the fix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Traffic' SLI typically measure?",
+    "options": {
+      "A": "The number of cars in the data center parking lot.",
+      "B": "The volume of requests being handled by a service (e.g., requests per second).",
+      "C": "The speed of the physical fiber cables.",
+      "D": "The percentage of users who have a premium subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Workaround' should always be documented and tracked so it can be replaced by a permanent fix later.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for P4 incidents",
+      "D": "Only if the workaround is written in Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'On-Call Compensation'?",
+    "options": {
+      "A": "Telling the engineer they did a good job.",
+      "B": "Extra pay or time off given to engineers for being available outside of normal hours.",
+      "C": "A specialized way to encrypt the on-call schedule.",
+      "D": "The cost of the phone used by the on-call engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to collect and store 'Time-Series' metrics for SRE monitoring?",
+    "options": {
+      "A": "MySQL",
+      "B": "Prometheus",
+      "C": "Microsoft Word",
+      "D": "Photoshop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, the 'Customer' defines what reliability means for a service.",
+    "options": {
+      "A": "True",
+      "B": "False (The engineering team defines it based on what they can build).",
+      "C": "Only in B2B companies",
+      "D": "Only for mobile applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Failing' SLO state called?",
+    "options": {
+      "A": "The Danger Zone",
+      "B": "Error Budget Deficit / Exhaustion",
+      "C": "System Crash",
+      "D": "Critical Timeout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an incident, what is 'External Communication'?",
+    "options": {
+      "A": "Talking to the person sitting next to you.",
+      "B": "Providing updates to customers, partners, and the public about a service interruption.",
+      "C": "Sending an email to the HR department.",
+      "D": "Connecting the server to the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An incident responder's first priority is to find the person who caused the problem.",
+    "options": {
+      "A": "False (The priority is to restore service).",
+      "B": "True",
+      "C": "Only if the incident was caused by a security breach",
+      "D": "Only if the responder is a manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' data usually called?",
+    "options": {
+      "A": "Logs",
+      "B": "Spans",
+      "C": "Snapshots",
+      "D": "Alerts"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Service Level Agreement' (SLA) primarily?",
+    "options": {
+      "A": "A technical goal for engineers.",
+      "B": "A legal contract between a service provider and a customer outlining promised levels of service.",
+      "C": "A tool used to restart the server.",
+      "D": "The password for the admin dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SRE team 'owns' the reliability of the system, but the product team 'owns' the feature development.",
+    "options": {
+      "A": "True (This shared responsibility is key to the SRE model).",
+      "B": "False",
+      "C": "Only in European companies",
+      "D": "Only for legacy systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Orchestration'?",
+    "options": {
+      "A": "Playing music during a server outage.",
+      "B": "The automated coordination of people, tools, and processes to respond to an incident.",
+      "C": "Deleting old incident tickets.",
+      "D": "A specialized way to group containers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Toil Reduction'?",
+    "options": {
+      "A": "Hiring more people to do manual work.",
+      "B": "The practice of automating repetitive manual tasks to free up engineering time for high-value work.",
+      "C": "Reducing the temperature of the server room.",
+      "D": "Deleting code that is difficult to read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Post-Mortem' should be written as soon as possible after an incident while the details are fresh.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security incidents",
+      "D": "Only if the incident lasted more than 24 hours"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time to Recovery' (MTTR) a measure of?",
+    "options": {
+      "A": "How fast the network is.",
+      "B": "The average time it takes to restore service after an incident occurs.",
+      "C": "The frequency of incidents per month.",
+      "D": "The number of users who were affected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Alert Silo'?",
+    "options": {
+      "A": "A large building for storing server logs.",
+      "B": "A situation where different teams use separate monitoring tools and don't share incident data.",
+      "C": "A specialized type of high-speed alert.",
+      "D": "A way to backup the alerting configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident management and SRE are only necessary for large companies like Google or Amazon.",
+    "options": {
+      "A": "False (Reliability is important for any organization with digital services).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Root Cause' in a post-mortem?",
+    "options": {
+      "A": "Finding the first line of code ever written.",
+      "B": "The underlying technical or process reason why an incident occurred.",
+      "C": "The person who made the mistake.",
+      "D": "The name of the company's CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Incident Documentation'?",
+    "options": {
+      "A": "A book about server errors.",
+      "B": "The written record of an incident, including timeline, impact, resolution, and post-mortem.",
+      "C": "A way to monitor the server room temperature.",
+      "D": "Counting the number of lines of code in a fix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Health Check' should be as lightweight as possible to avoid putting extra load on the system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database health checks",
+      "D": "Only if using a load balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Closure'?",
+    "options": {
+      "A": "Turning off the internet.",
+      "B": "The formal end of an incident after resolution has been verified and stakeholders notified.",
+      "C": "Deleting all records of the incident.",
+      "D": "Shutting down the office for the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' for measuring on-call health?",
+    "options": {
+      "A": "Total number of pages received outside of working hours.",
+      "B": "The number of hours spent in meetings.",
+      "C": "The speed of the office Wi-Fi.",
+      "D": "The total number of users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Self-Healing' systems use automation to automatically detect and resolve common incidents without human intervention.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware failures",
+      "D": "Only in the year 2030"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Response'?",
+    "options": {
+      "A": "Answering a customer's email.",
+      "B": "The active process of addressing and managing an incident to restore service.",
+      "C": "Writing documentation for a new feature.",
+      "D": "Deleting old system logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every incident responder should have a clear role (e.g., Incident Commander, Scribe) during a major outage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in companies with over 1,000 employees",
+      "D": "Only for security incidents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of SRE, what is a 'Multi-Window, Multi-Burn-Rate Alert' intended to solve?",
+    "options": {
+      "A": "The physical heat generated by high-density server racks.",
+      "B": "The conflict between high precision (avoiding false positives) and high recall (detecting issues quickly) in SLO alerting.",
+      "C": "The cost of running multiple monitoring tools simultaneously.",
+      "D": "The delay between a database commit and its replication to a secondary region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a distributed system, a 'Split-Brain' scenario occurs when two parts of a cluster lose communication and both believe they are the leader, leading to data corruption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in asynchronous replication models",
+      "D": "Only if using the Raft consensus algorithm"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific phenomenon describes a situation where a system's recovery attempt actually triggers a new failure by overwhelming a dependency?",
+    "options": {
+      "A": "Heisenbug",
+      "B": "Thundering Herd / Feedback Loop",
+      "C": "Race Condition",
+      "D": "Deadlock"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Throttling' in the context of Google SRE practices?",
+    "options": {
+      "A": "Physically slowing down the CPU when it gets too hot.",
+      "B": "A client-side rejection of requests that occurs when the backend's rejection probability increases, preventing the network from becoming the bottleneck.",
+      "C": "Automatically reducing the price of an API when it is slow.",
+      "D": "The process of deleting non-priority logs during a P1 incident."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a post-mortem, what is the 'Five Whys' technique used to uncover?",
+    "options": {
+      "A": "The five people most responsible for the outage.",
+      "B": "The deep-seated systemic or process failures that led to the technical incident.",
+      "C": "The five minutes of highest latency during the crash.",
+      "D": "The five most expensive resources in the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Silverline' or 'Error Budget Policy' mandates that if a team exhausts its error budget, it must halt all new feature launches until the budget is replenished.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for consumer-facing apps",
+      "D": "Only in the first year of a service's life"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Byzantine Generals Problem' in distributed consensus?",
+    "options": {
+      "A": "A problem with managing developers in different time zones.",
+      "B": "The difficulty of reaching consensus in a network where components may fail and provide conflicting information.",
+      "C": "A database error where primary keys are duplicated across shards.",
+      "D": "A physical security threat to the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric describes the probability that a system will be functional at a specific point in time?",
+    "options": {
+      "A": "Durability",
+      "B": "Availability (Point-in-time)",
+      "C": "Reliability",
+      "D": "Maintainability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Chaos Mesh' or 'Gremlin' are tools used to perform fault injection to verify system resilience.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware failures",
+      "D": "Only in a disconnected staging environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Metastable Failure'?",
+    "options": {
+      "A": "A failure that only happens on Meta-owned servers.",
+      "B": "A failure state where a system remains in a failed state even after the initial trigger is removed, requiring a manual 'kick' to recover.",
+      "C": "An error that occurs when data is stored in the metadata.",
+      "D": "The time it takes for a server to change its state from idle to active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SRE, what is 'Tail Latency' (e.g., p99.9) usually caused by?",
+    "options": {
+      "A": "The average user's slow internet connection.",
+      "B": "Resource contention, garbage collection pauses, or head-of-line blocking in microservices.",
+      "C": "The size of the HTML file being sent.",
+      "D": "The number of comments in the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Workload Identity' is considered more reliable for incident recovery than using static long-lived credentials.",
+    "options": {
+      "A": "True (It reduces the risk of credential leakage and management overhead during a crisis).",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Wait Time' in a multi-burn rate alert policy protect against?",
+    "options": {
+      "A": "Alerting too quickly on a transient spike that resolves itself in seconds.",
+      "B": "The time it takes for the engineer to wake up.",
+      "C": "The delay in the cloud provider's billing system.",
+      "D": "The physical speed of light in fiber optics."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a valid 'Load Balancing' strategy to mitigate 'Hot Spots' in a distributed database?",
+    "options": {
+      "A": "Round Robin",
+      "B": "Consistent Hashing with Virtual Nodes",
+      "C": "Least Connections (standard)",
+      "D": "Fixed IP routing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MTBF' (Mean Time Between Failures) is a more critical metric for modern ephemeral cloud systems than for legacy hardware.",
+    "options": {
+      "A": "False (MTBF is less relevant when instances are expected to die; MTTR and availability are usually prioritized).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if the system is stateful"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Graceful Degradation'?",
+    "options": {
+      "A": "Deleting the database gracefully.",
+      "B": "The ability of a system to maintain limited functionality even when some components have failed.",
+      "C": "A server that takes 5 minutes to turn off.",
+      "D": "The aging process of server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Command' role in the ICS (Incident Command System) model specifically responsible for?",
+    "options": {
+      "A": "Fixing the bug.",
+      "B": "Managing objectives, strategy, and overall coordination of the response.",
+      "C": "Handling all external social media posts.",
+      "D": "Ordering food for the team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Deadlines' and 'Timeouts' should be propagated through a microservice call chain to prevent 'Orphaned' work.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using gRPC",
+      "D": "Only for non-idempotent requests"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Success Rate' SLI calculation for a typical web service?",
+    "options": {
+      "A": "Count of 2xx responses / Total requests.",
+      "B": "Count of non-5xx responses / Total requests.",
+      "C": "Total requests / Total errors.",
+      "D": "Total uptime hours / 720."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural pattern is used to isolate failures to a specific subset of users or data, preventing a 'Blast Radius' expansion?",
+    "options": {
+      "A": "Monolith",
+      "B": "Bulkheading / Cell-based Architecture",
+      "C": "Sidecar",
+      "D": "Service Mesh"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should treat 'Alerts' as a form of software bug that needs to be fixed if they trigger without a clear, actionable cause.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for P3 alerts",
+      "D": "Only in the 'dev' account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Shadowing' (Mirroring) primarily used for in reliability engineering?",
+    "options": {
+      "A": "To backup traffic for legal compliance.",
+      "B": "To test the performance and accuracy of a new version using real production data without impacting users.",
+      "C": "To reverse the direction of the network flow.",
+      "D": "To encrypt the traffic twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'The Four Golden Signals', what is 'Saturation' most likely to measure on a database node?",
+    "options": {
+      "A": "The number of tables in the schema.",
+      "B": "The length of the disk I/O queue or the percentage of used memory.",
+      "C": "The frequency of backups.",
+      "D": "The number of rows in the largest table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Liveness Probe' that checks the database connection can cause a 'Death Spiral' if the database experiences a momentary blip.",
+    "options": {
+      "A": "True (It may cause Kubernetes to restart all pods simultaneously, worsening the load on the database).",
+      "B": "False",
+      "C": "Only if using PostgreSQL",
+      "D": "Only in version 1.25+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Operational Load' vs. 'Toil'?",
+    "options": {
+      "A": "They are identical.",
+      "B": "Operational load is the total work required to run the service; Toil is the subset of that work that is manual and repetitive.",
+      "C": "Load is for CPUs; Toil is for humans.",
+      "D": "Toil is for senior engineers; Load is for junior engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Fail-Open' security policy during an incident?",
+    "options": {
+      "A": "Opening the windows of the data center.",
+      "B": "Allowing traffic to pass if a security check service is unavailable, prioritizing availability over security.",
+      "C": "Deleting the firewall rules.",
+      "D": "Telling everyone the administrator password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'Automation' is only beneficial if it completely removes the human from the loop.",
+    "options": {
+      "A": "False (Automation that assists humans or provides guardrails is also highly valuable).",
+      "B": "True",
+      "C": "Only in military-grade systems",
+      "D": "Only if written in Bash"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'MTTR' variability (Standard Deviation) important for?",
+    "options": {
+      "A": "Calculating the cloud bill.",
+      "B": "Understanding the predictability of response times; high variability indicates inconsistent documentation or tribal knowledge.",
+      "C": "Measuring the speed of the network switch.",
+      "D": "The number of users who saw the status page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role in a major incident is responsible for shield the technical responders from outside distractions (like executive requests)?",
+    "options": {
+      "A": "Incident Commander",
+      "B": "Operations Lead",
+      "C": "Liaison / Communications Lead",
+      "D": "Scribe"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Incident Retrospectives' should be published internally to foster a culture of learning and knowledge sharing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-technical employees",
+      "D": "Only if the outage lasted under 1 hour"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Consensus' in the context of high availability?",
+    "options": {
+      "A": "A meeting where everyone agrees on a new logo.",
+      "B": "The process of ensuring all nodes in a cluster agree on the same value or state (e.g., who the leader is).",
+      "C": "A specialized way to encrypt network protocols.",
+      "D": "The number of hours a cluster has been running."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SLO math, what is the 'Observation Window'?",
+    "options": {
+      "A": "A window in the data center wall.",
+      "B": "The period of time over which the SLI is aggregated to determine SLO compliance (e.g., rolling 30 days).",
+      "C": "The time it takes to look at a monitoring dashboard.",
+      "D": "The number of logs visible on one screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An incident is 'Mitigated' when the immediate impact is removed, even if the root cause is not yet fixed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a workaround",
+      "D": "Only for P1 incidents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Circuit Breaking' in microservices reliability?",
+    "options": {
+      "A": "A physical fuse in the server room.",
+      "B": "A pattern that stops requests to a failing downstream service to allow it time to recover and prevent upstream saturation.",
+      "C": "A way to turn off the internet for the whole cluster.",
+      "D": "An error that occurs when a service runs out of memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Shedding' threshold determined by?",
+    "options": {
+      "A": "The price of the cloud service.",
+      "B": "Saturation levels (e.g., request queue length) that indicate the system can no longer maintain its SLO.",
+      "C": "The number of users logged in.",
+      "D": "The time of day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Post-Mortems' should be written by the person who caused the incident for maximum accountability.",
+    "options": {
+      "A": "False (They should be a collaborative effort, often led by the primary responder).",
+      "B": "True",
+      "C": "Only if the person is a senior manager",
+      "D": "Only if using the 'blame-heavy' model"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Change Fatigue' in an engineering organization?",
+    "options": {
+      "A": "The physical tiredness of writing code.",
+      "B": "The stress and increased risk of error caused by a high frequency of system changes and deployments.",
+      "C": "The cost of changing the cloud provider.",
+      "D": "The time it takes to compile a large project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In incident communication, what is 'TL;DR' (Too Long; Didn't Read) used for?",
+    "options": {
+      "A": "A specialized encryption for long messages.",
+      "B": "A concise summary at the top of an incident update for executives and stakeholders.",
+      "C": "A way to backup short logs.",
+      "D": "A tool to monitor the server room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hedged Request' is sent to multiple backend instances to reduce the latency caused by 'tail' responders.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for POST requests",
+      "D": "Only in the year 2030"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Operational Excellence' in the context of AWS's Well-Architected Framework?",
+    "options": {
+      "A": "Having the fastest servers in the world.",
+      "B": "The ability to support development and run workloads effectively, gain insight into their operations, and continuously improve processes.",
+      "C": "Removing all developers from the project.",
+      "D": "Buying only one type of server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a symptom of an 'Unhealthy' On-Call rotation?",
+    "options": {
+      "A": "High frequency of alerts during sleeping hours.",
+      "B": "Lack of 'handover' meetings between shifts.",
+      "C": "No clear escalation path.",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Service level' should always be measured from the server's perspective rather than the user's.",
+    "options": {
+      "A": "False (The user's perspective - e.g., browser latency - is often more critical).",
+      "B": "True",
+      "C": "Only for database services",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' sampling rate?",
+    "options": {
+      "A": "The number of users who are traced.",
+      "B": "The percentage of requests for which trace data is actually collected and stored, used to manage overhead.",
+      "C": "The speed of the tracing tool.",
+      "D": "The number of traces per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTBF' (Mean Time Between Failures)?",
+    "options": {
+      "A": "The average time it takes to fix a bug.",
+      "B": "The average time a system or component functions between failures.",
+      "C": "The time it takes for an alert to be sent.",
+      "D": "The number of users who see an error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Major Incident' should always be resolved by the first person who sees it, even if they are not on call.",
+    "options": {
+      "A": "False (It should follow the established on-call and escalation procedures).",
+      "B": "True",
+      "C": "Only if it is a security breach",
+      "D": "Only if the person is a senior engineer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Investigation and Diagnosis'?",
+    "options": {
+      "A": "Interviewing the user about their day.",
+      "B": "The stage where the responder tries to understand what is wrong and how to fix it.",
+      "C": "Scanning the network for hardware updates.",
+      "D": "Hiring a private investigator to find a lost laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does it mean to 'Close' an incident?",
+    "options": {
+      "A": "Turning off the server.",
+      "B": "The final stage where the user confirms resolution and the ticket is officially finalized.",
+      "C": "Deleting all records of the incident.",
+      "D": "Shutting down the office for the day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'IMOC' (Incident Manager On Call) is a role that oversees the incident response process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in medical software companies",
+      "D": "Only in version 2.0 of the framework"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in monitoring?",
+    "options": {
+      "A": "The weight of the data packets.",
+      "B": "The time it takes for a request to be processed.",
+      "C": "The physical length of the server cable.",
+      "D": "The number of users active at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Saturation' in system health monitoring?",
+    "options": {
+      "A": "The server room getting wet.",
+      "B": "A measure of how 'full' a resource is (e.g., 100% disk usage).",
+      "C": "The color intensity of the dashboard.",
+      "D": "The amount of code in a repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident Management is strictly for software bugs, not hardware failures.",
+    "options": {
+      "A": "False (It covers any unplanned interruption, including hardware, network, or power failures).",
+      "B": "True",
+      "C": "Only in cloud environments",
+      "D": "Only for non-technical users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Drafting' during an incident?",
+    "options": {
+      "A": "Drawing a map of the server room.",
+      "B": "Preparing communication updates for stakeholders.",
+      "C": "Writing the initial version of the code fix.",
+      "D": "Moving cold air through the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' often tracked for incident response performance?",
+    "options": {
+      "A": "Mean Time to Acknowledge (MTTA)",
+      "B": "Mean Time to Recovery (MTTR)",
+      "C": "Incidents per month",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: An incident is considered 'Resolved' as soon as the engineer thinks they fixed it.",
+    "options": {
+      "A": "False (Verification and often user confirmation are required).",
+      "B": "True",
+      "C": "Only for low-priority incidents",
+      "D": "Only if the boss says so"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dashboarding' used for in incident response?",
+    "options": {
+      "A": "Changing the background color of the laptop.",
+      "B": "Visualizing key system metrics in real-time to help identify and track incidents.",
+      "C": "Listing the names of all users in the system.",
+      "D": "Designing a new car dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Alerting'?",
+    "options": {
+      "A": "Telling a joke to the team.",
+      "B": "The automated notification of humans when a system metric reaches a concerning level.",
+      "C": "A phone call from a salesperson.",
+      "D": "A way to backup the server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident Management is a 'Reactive' process, while SRE aims to be more 'Proactive'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database management",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Severity' levels in incident management?",
+    "options": {
+      "A": "To count how many times an engineer was angry.",
+      "B": "To define the level of business impact and the expected speed of response.",
+      "C": "To set the physical temperature of the CPU.",
+      "D": "To monitor the room's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triage' in incident management?",
+    "options": {
+      "A": "Taking a 3-hour break.",
+      "B": "The process of quickly assessing an incident to determine its priority and the best team to handle it.",
+      "C": "A specialized way to encrypt three files at once.",
+      "D": "Connecting three servers into a cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Root Cause' is always a single human error.",
+    "options": {
+      "A": "False (Root causes are often a combination of system design, process, and technical failures).",
+      "B": "True",
+      "C": "Only in small companies",
+      "D": "Only if the developer is new"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Availability'?",
+    "options": {
+      "A": "The total number of hours a developer works.",
+      "B": "The percentage of time that a service is operational and accessible to users.",
+      "C": "The price of the cloud service.",
+      "D": "The number of users who can log in at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Hotfix'?",
+    "options": {
+      "A": "Fixing the heater in the office.",
+      "B": "A quick, often emergency code change applied to a live system to resolve a critical incident.",
+      "C": "A specialized way to compress code.",
+      "D": "A way to increase the server's temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Availability' is often measured in 'nines' (e.g., 99.9% uptime).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google Services",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Golden Signals' in SRE?",
+    "options": {
+      "A": "The four key metrics to monitor: Latency, Traffic, Errors, and Saturation.",
+      "B": "The four best developers in the company.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The physical weight of the gold in the server room."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Downtime'?",
+    "options": {
+      "A": "The time spent sleeping.",
+      "B": "The period during which a system or service is unavailable to users.",
+      "C": "The time it takes to download a file.",
+      "D": "The number of users who have logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Incident responders should always prioritize fixing the bug over restoring service.",
+    "options": {
+      "A": "False (The priority is restoring service; the bug can often be investigated later).",
+      "B": "True",
+      "C": "Only if the bug is easy to find",
+      "D": "Only for open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Alert Policy'?",
+    "options": {
+      "A": "A law about how to use loud sounds.",
+      "B": "The set of rules that define when an alert should be sent and who should receive it.",
+      "C": "The password for the alert dashboard.",
+      "D": "A list of previous incidents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributed Tracing'?",
+    "options": {
+      "A": "Tracing a drawing on multiple pieces of paper.",
+      "B": "A technique to follow the path of a single request through multiple microservices.",
+      "C": "Finding a lost server in a global network.",
+      "D": "Measuring the distance between two data centers."
+    },
+    "answer": "B"
+  }
+  ]
+}

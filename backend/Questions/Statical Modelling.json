@@ -1,0 +1,1325 @@
+{
+  "skill": "Statistical Modeling",
+  "questions": [
+    {
+      "question": "What is the primary goal of statistical modeling?",
+      "options": {
+        "A": "To group data into clusters for storage optimization.",
+        "B": "To create a mathematical representation of the relationship between variables.",
+        "C": "To find and delete all outliers in a database automatically.",
+        "D": "To sort data in alphabetical or chronological order."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which measure of central tendency is calculated by adding all values and dividing by the total number of observations?",
+      "options": {
+        "A": "Median",
+        "B": "Mean",
+        "C": "Mode",
+        "D": "Variance"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'p-value' used for in hypothesis testing?",
+      "options": {
+        "A": "To determine the file size of the statistical report.",
+        "B": "To measure the evidence against a null hypothesis.",
+        "C": "To calculate the physical distance between data points.",
+        "D": "To name the independent variable in a model."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Normal Distribution', what percentage of data falls within one standard deviation of the mean?",
+      "options": {
+        "A": "Approximately 50%",
+        "B": "Approximately 68%",
+        "C": "Approximately 95%",
+        "D": "Approximately 99.7%"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Correlation' measure between two variables?",
+      "options": {
+        "A": "The exact cause of one variable changing based on the other.",
+        "B": "The strength and direction of a linear relationship.",
+        "C": "The total sum of both variables combined.",
+        "D": "The speed at which data is collected."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Null Hypothesis' ($H_0$)?",
+      "options": {
+        "A": "A hypothesis that predicts a very large effect.",
+        "B": "The assumption that there is no effect or relationship between variables.",
+        "C": "A hypothesis that is always true regardless of data.",
+        "D": "The final conclusion reached after an experiment."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which distribution is often used to model the number of events occurring in a fixed interval of time or space?",
+      "options": {
+        "A": "Normal Distribution",
+        "B": "Poisson Distribution",
+        "C": "Uniform Distribution",
+        "D": "Exponential Distribution"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Variance' in statistics?",
+      "options": {
+        "A": "The average value of the dataset.",
+        "B": "A measure of the spread or dispersion of a set of data points.",
+        "C": "The most frequently occurring value.",
+        "D": "The difference between the highest and lowest values."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Sample' in statistical modeling?",
+      "options": {
+        "A": "The entire group of individuals we want information about.",
+        "B": "A subset of the population used to make inferences about the whole.",
+        "C": "A piece of software used to generate random numbers.",
+        "D": "A database containing only text-based data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Standard Deviation' represent?",
+      "options": {
+        "A": "The total number of variables in the model.",
+        "B": "The square root of the variance.",
+        "C": "The difference between the mean and the mode.",
+        "D": "The sum of all squared errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which type of variable can take on any value within a range (e.g., height or weight)?",
+      "options": {
+        "A": "Discrete Variable",
+        "B": "Continuous Variable",
+        "C": "Categorical Variable",
+        "D": "Ordinal Variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Median'?",
+      "options": {
+        "A": "The average of all values.",
+        "B": "The middle value of a dataset when ordered from least to greatest.",
+        "C": "The value that appears most often.",
+        "D": "The range of the data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skewness' in a distribution?",
+      "options": {
+        "A": "The height of the distribution curve.",
+        "B": "A measure of the asymmetry of a distribution around its mean.",
+        "C": "The number of outliers in the data.",
+        "D": "The width of the standard deviation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Binomial Distribution', what are the two possible outcomes of a single trial?",
+      "options": {
+        "A": "High and Low",
+        "B": "Success and Failure",
+        "C": "Positive and Negative",
+        "D": "True and False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Inference' in statistics?",
+      "options": {
+        "A": "Calculating the exact mean of a population.",
+        "B": "Drawing conclusions about a population based on sample data.",
+        "C": "Deleting data that is not useful.",
+        "D": "Collecting data from every single individual in a population."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Outlier'?",
+      "options": {
+        "A": "A value that lies exactly on the mean.",
+        "B": "An observation that lies an abnormal distance from other values.",
+        "C": "The title of a statistical chart.",
+        "D": "A variable that is excluded from the model."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term refers to the probability of rejecting a null hypothesis when it is actually true?",
+      "options": {
+        "A": "Power",
+        "B": "Type I Error",
+        "C": "Type II Error",
+        "D": "Confidence Level"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Qualitative Data' also known as?",
+      "options": {
+        "A": "Numerical Data",
+        "B": "Categorical Data",
+        "C": "Continuous Data",
+        "D": "Discrete Data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart is best for showing the distribution of a continuous variable?",
+      "options": {
+        "A": "Pie Chart",
+        "B": "Histogram",
+        "C": "Bar Chart",
+        "D": "Scatter Plot"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Simple Random Sampling'?",
+      "options": {
+        "A": "Choosing only the people who are easy to reach.",
+        "B": "A method where every member of the population has an equal chance of selection.",
+        "C": "Sampling every 10th person on a list.",
+        "D": "Choosing only the people you like."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Variable' in statistical modeling?",
+      "options": {
+        "A": "A fixed constant that never changes.",
+        "B": "A characteristic or attribute that can take on different values.",
+        "C": "The name of the statistical software.",
+        "D": "A physical part of the computer's CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a 'Correlation Coefficient' of 0 indicate?",
+      "options": {
+        "A": "A perfect positive relationship.",
+        "B": "No linear relationship between the variables.",
+        "C": "A perfect negative relationship.",
+        "D": "The variables are identical."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Range' of a dataset?",
+      "options": {
+        "A": "The average of all values.",
+        "B": "The difference between the maximum and minimum values.",
+        "C": "The middle value of the data.",
+        "D": "The number of items in the dataset."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Quantitative Data'?",
+      "options": {
+        "A": "Data that describes qualities or characteristics.",
+        "B": "Data that can be measured and expressed as numbers.",
+        "C": "Data stored in text files only.",
+        "D": "Data that is always accurate."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which distribution is perfectly symmetrical and bell-shaped?",
+      "options": {
+        "A": "Uniform Distribution",
+        "B": "Normal Distribution",
+        "C": "Bernoulli Distribution",
+        "D": "Log-normal Distribution"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bias' in statistics?",
+      "options": {
+        "A": "A random error that averages to zero.",
+        "B": "A systematic error that results in an incorrect estimate.",
+        "C": "The speed of data processing.",
+        "D": "The use of a specific computer font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Mode'?",
+      "options": {
+        "A": "The average of the data.",
+        "B": "The most frequent value in a dataset.",
+        "C": "The difference between high and low values.",
+        "D": "The middle point of the data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Probability'?",
+      "options": {
+        "A": "A way to backup statistical data.",
+        "B": "A measure of the likelihood that an event will occur.",
+        "C": "The result of a mathematical division.",
+        "D": "A specialized software for engineers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the sum of all probabilities in a complete probability distribution?",
+      "options": {
+        "A": "0",
+        "B": "1",
+        "C": "100",
+        "D": "Infinity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Descriptive Statistics' used for?",
+      "options": {
+        "A": "Predicting the future of a business.",
+        "B": "Summarizing and organizing data to describe its main features.",
+        "C": "Proving that a theory is 100% correct.",
+        "D": "Hiring new statisticians for a project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term refers to data collected at a single point in time?",
+      "options": {
+        "A": "Time Series Data",
+        "B": "Cross-sectional Data",
+        "C": "Panel Data",
+        "D": "Longitudinal Data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Independent Variable'?",
+      "options": {
+        "A": "The outcome variable we want to predict.",
+        "B": "The variable that is manipulated or used to explain changes in another.",
+        "C": "A variable that has zero value.",
+        "D": "The error term in an equation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Dependent Variable'?",
+      "options": {
+        "A": "The variable used to predict an outcome.",
+        "B": "The outcome variable that is being measured or predicted.",
+        "C": "A constant that never changes.",
+        "D": "A variable that represents time."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Big Data' commonly characterized by?",
+      "options": {
+        "A": "Volume, Velocity, and Variety",
+        "B": "Height, Weight, and Age",
+        "C": "Cost, Speed, and Name",
+        "D": "Color, Size, and Shape"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Linear Regression'?",
+      "options": {
+        "A": "A method to group data points into categories.",
+        "B": "A model that describes the relationship between variables using a straight line.",
+        "C": "A way to count the number of rows in a table.",
+        "D": "A security scan for database files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Metadata'?",
+      "options": {
+        "A": "The actual data being analyzed.",
+        "B": "Data that provides information about other data.",
+        "C": "A specialized software for mathematicians.",
+        "D": "A high-security encryption method."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Cleaning'?",
+      "options": {
+        "A": "Physically dusting a server rack.",
+        "B": "The process of identifying and correcting errors in a dataset.",
+        "C": "Deleting all files older than one year.",
+        "D": "Writing a blog post about statistics."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sample Size' denoted by in most statistical formulas?",
+      "options": {
+        "A": "S",
+        "B": "n",
+        "C": "X",
+        "D": "Z"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Parameter' in statistics?",
+      "options": {
+        "A": "A characteristic of a population.",
+        "B": "A characteristic of a sample.",
+        "C": "A button on a computer keyboard.",
+        "D": "A bug in a software program."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Statistic'?",
+      "options": {
+        "A": "A characteristic of a population.",
+        "B": "A characteristic of a sample.",
+        "C": "A secret code for hackers.",
+        "D": "The number of users online."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Random Error'?",
+      "options": {
+        "A": "An error caused by a person's name.",
+        "B": "Unpredictable fluctuations in measurements.",
+        "C": "An error that always happens at the same time.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Multivariate Analysis'?",
+      "options": {
+        "A": "Analysis that only works in one country.",
+        "B": "Analysis involving more than two variables at once.",
+        "C": "A specialized software for university students.",
+        "D": "Analyzing a single variable 100 times."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Scatter Plot' used to see?",
+      "options": {
+        "A": "The average value of a single variable.",
+        "B": "The relationship between two continuous variables.",
+        "C": "The percentage of users in a category.",
+        "D": "The file size of an image."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Log Transformation' used for in modeling?",
+      "options": {
+        "A": "To count the number of logs in a fireplace.",
+        "B": "To handle skewed data and make it more normally distributed.",
+        "C": "To backup the source code.",
+        "D": "To increase the training speed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Central Limit Theorem' (CLT)?",
+      "options": {
+        "A": "A law about how many servers can be in one room.",
+        "B": "A theory stating that the distribution of sample means approaches normal as sample size increases.",
+        "C": "A way to count the number of users.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Degrees of Freedom'?",
+      "options": {
+        "A": "The amount of vacation days a statistician gets.",
+        "B": "The number of independent pieces of information used to estimate a statistic.",
+        "C": "The physical width of a computer monitor.",
+        "D": "A specialized software for historians."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Significance Level' ($alpha$)?",
+      "options": {
+        "A": "The volume level of a computer speaker.",
+        "B": "The probability threshold for rejecting the null hypothesis.",
+        "C": "The number of users currently online.",
+        "D": "The speed of the network connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Correlation' vs 'Causation'?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Correlation means variables move together; Causation means one changes the other.",
+        "C": "Causation is for beginners; Correlation for experts.",
+        "D": "Correlation is 100x faster than causation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Law of Large Numbers'?",
+      "options": {
+        "A": "A law about having many employees.",
+        "B": "As a sample size grows, its mean gets closer to the average of the whole population.",
+        "C": "A way to count the number of files.",
+        "D": "Hiring a mathematician to count."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Z-score'?",
+      "options": {
+        "A": "The final grade on a test.",
+        "B": "The number of standard deviations a data point is from the mean.",
+        "C": "The speed of the computer fan.",
+        "D": "A security password."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sampling Error'?",
+      "options": {
+        "A": "An error made by a sample software.",
+        "B": "The difference between a sample statistic and the true population parameter.",
+        "C": "A way to backup the storage layer.",
+        "D": "Deleting data by mistake."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Uniform Distribution'?",
+      "options": {
+        "A": "A distribution of school uniforms.",
+        "B": "A distribution where all outcomes are equally likely.",
+        "C": "A distribution that only works in winter.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Median' vs 'Mode'?",
+      "options": {
+        "A": "Median is the average; Mode is the middle.",
+        "B": "Median is the middle value; Mode is the most frequent value.",
+        "C": "They are the same thing.",
+        "D": "Median is 10x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Likelihood'?",
+      "options": {
+        "A": "The probability that the researcher likes the data.",
+        "B": "A function of the parameters of a statistical model, given specific observed data.",
+        "C": "A specialized software for psychologists.",
+        "D": "A way to name a database table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Expectation' (Expected Value)?",
+      "options": {
+        "A": "Hoping that the model works perfectly.",
+        "B": "The long-run average value of repetitions of the same experiment.",
+        "C": "The price of the software.",
+        "D": "A list of all users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bayes' Theorem' used for?",
+      "options": {
+        "A": "Predicting the weather perfectly.",
+        "B": "Updating the probability of a hypothesis as more evidence becomes available.",
+        "C": "Calculating the volume of a sphere.",
+        "D": "Hiring a new manager."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Standard Error'?",
+      "options": {
+        "A": "A mistake made by a standard person.",
+        "B": "The standard deviation of the sampling distribution of a statistic.",
+        "C": "The cost of a statistical license.",
+        "D": "A way to sort data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'R-squared'?",
+      "options": {
+        "A": "The square root of the mean.",
+        "B": "A measure of how well the regression line represents the data.",
+        "C": "The physical width of the monitor.",
+        "D": "The number of rows in the metadata."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hypothesis Testing'?",
+      "options": {
+        "A": "Testing a person's physical health.",
+        "B": "A method of statistical inference used to determine a property of a population.",
+        "C": "A specialized software for architects.",
+        "D": "A list of all project managers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Probability Density Function' (PDF)?",
+      "options": {
+        "A": "A file format for reading books.",
+        "B": "A function that describes the likelihood of a continuous random variable taking on a value.",
+        "C": "A specialized software for plumbers.",
+        "D": "Increasing the memory usage."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cumulative Distribution Function' (CDF)?",
+      "options": {
+        "A": "A way to calculate interest rates.",
+        "B": "The probability that a random variable will take a value less than or equal to x.",
+        "C": "A security scan of the database.",
+        "D": "A specialized software for librarians."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Correlation' range?",
+      "options": {
+        "A": "0 to 100",
+        "B": "-1 to 1",
+        "C": "-100 to 100",
+        "D": "0 to 1"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Continuous' vs 'Discrete' variable?",
+      "options": {
+        "A": "Continuous has gaps; Discrete does not.",
+        "B": "Continuous has no gaps (infinite values); Discrete has distinct gaps (countable values).",
+        "C": "They are identical in modern software.",
+        "D": "Discrete is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Confidence Interval'?",
+      "options": {
+        "A": "How confident the researcher is feeling.",
+        "B": "A range of values that is likely to contain a population parameter with a certain probability.",
+        "C": "A security firewall for data.",
+        "D": "A list of user passwords."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Null' vs 'Alternative' Hypothesis?",
+      "options": {
+        "A": "Null is the truth; Alternative is a lie.",
+        "B": "Null is 'no effect'; Alternative is 'some effect'.",
+        "C": "Alternative is 10x faster.",
+        "D": "Null is for images; Alternative for text."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Statistical' 'Significance'?",
+      "options": {
+        "A": "A result that is very important to the CEO.",
+        "B": "A result that is unlikely to have occurred by chance.",
+        "C": "A specialized software for architects.",
+        "D": "Recording the sound of the lab."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a 'Type II Error' represent in hypothesis testing?",
+      "options": {
+        "A": "Rejecting the null hypothesis when it is actually true.",
+        "B": "Failing to reject the null hypothesis when it is actually false.",
+        "C": "Accepting the alternative hypothesis when the data is missing.",
+        "D": "Calculating a p-value that is exactly equal to the significance level."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When would you typically use a 'One-way ANOVA' instead of a 'T-test'?",
+      "options": {
+        "A": "When the data is not normally distributed.",
+        "B": "When comparing the means of three or more independent groups.",
+        "C": "When the sample size is less than 5.",
+        "D": "When the independent variable is continuous and the dependent is categorical."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Power' of a statistical test?",
+      "options": {
+        "A": "The speed at which the computer executes the statistical model.",
+        "B": "The probability of correctly rejecting a false null hypothesis.",
+        "C": "The physical voltage required to run the data center.",
+        "D": "The number of parameters included in the final regression equation."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of probability, what are 'Mutually Exclusive' events?",
+      "options": {
+        "A": "Events that always happen at the exact same time.",
+        "B": "Events that cannot occur simultaneously.",
+        "C": "Events that are excluded from the research study for bias.",
+        "D": "Events that have a probability of exactly 0.5."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Chi-Square Test of Independence' used to evaluate?",
+      "options": {
+        "A": "The relationship between two continuous variables.",
+        "B": "Whether there is a significant association between two categorical variables.",
+        "C": "The difference between the means of two paired groups.",
+        "D": "The internal consistency of a survey questionnaire."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Multicollinearity' in a multiple regression model?",
+      "options": {
+        "A": "When the dependent variable is correlated with the error term.",
+        "B": "A situation where two or more independent variables are highly correlated with each other.",
+        "C": "When the model is run on multiple different datasets at once.",
+        "D": "A mathematical error that occurs when the intercept is zero."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a requirement for using 'Parametric Tests' like the T-test?",
+      "options": {
+        "A": "The data must be categorical.",
+        "B": "The data should follow a specific distribution, usually a normal distribution.",
+        "C": "The sample size must be exactly 100.",
+        "D": "The data must be collected in a single day."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Standard Error of the Mean' (SEM)?",
+      "options": {
+        "A": "The standard deviation of the population.",
+        "B": "The standard deviation of the sampling distribution of the mean.",
+        "C": "The total number of errors made during data entry.",
+        "D": "The difference between the highest and lowest sample means."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a 'Confidence Level' of 95% mean technically?",
+      "options": {
+        "A": "95% of the data points are within the confidence interval.",
+        "B": "If the experiment is repeated many times, 95% of the calculated intervals will contain the true population parameter.",
+        "C": "There is a 95% chance that the null hypothesis is true.",
+        "D": "The model is 95% accurate at predicting future outcomes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Homoscedasticity'?",
+      "options": {
+        "A": "When the data points are all identical.",
+        "B": "The assumption that the variance of error terms is constant across all levels of the independent variables.",
+        "C": "When the mean, median, and mode are all the same value.",
+        "D": "A technique used to handle missing data values."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which distribution is characterized by its 'Degrees of Freedom' and is used when the population standard deviation is unknown and the sample size is small?",
+      "options": {
+        "A": "Z-distribution",
+        "B": "T-distribution",
+        "C": "F-distribution",
+        "D": "Beta distribution"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Effect Size'?",
+      "options": {
+        "A": "The physical size of the printed statistical graph.",
+        "B": "A quantitative measure of the magnitude of a phenomenon or relationship.",
+        "C": "The number of people affected by a specific policy.",
+        "D": "The speed at which an independent variable affects the dependent variable."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Paired T-test' used for?",
+      "options": {
+        "A": "Comparing two completely independent groups of people.",
+        "B": "Comparing means from the same group at two different times (e.g., before and after).",
+        "C": "Comparing the variance of four different groups.",
+        "D": "Testing if a single sample mean is equal to a known constant."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Bayesian Statistics', what is the 'Prior Distribution'?",
+      "options": {
+        "A": "The distribution of the data after the experiment is finished.",
+        "B": "The representation of beliefs about a parameter before any data is observed.",
+        "C": "The average of all previous studies on the same topic.",
+        "D": "The distribution of the error terms in a linear model."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Non-parametric' statistics?",
+      "options": {
+        "A": "Statistics that do not use any numbers or math.",
+        "B": "A branch of statistics that does not assume the data fits a specific distribution (like normal).",
+        "C": "Statistics used only for very small populations.",
+        "D": "A high-speed method for calculating variances."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'F-statistic' in an ANOVA table measure?",
+      "options": {
+        "A": "The absolute difference between the largest and smallest group means.",
+        "B": "The ratio of the variance between groups to the variance within groups.",
+        "C": "The total number of samples used in the study.",
+        "D": "The probability that the alternative hypothesis is false."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Central Limit Theorem' primary implication?",
+      "options": {
+        "A": "All data in the world eventually becomes normally distributed.",
+        "B": "The sampling distribution of the mean will be nearly normal if the sample size is large enough.",
+        "C": "The mean of a sample is always exactly equal to the population mean.",
+        "D": "The standard deviation of a sample decreases as the mean increases."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Covariance'?",
+      "options": {
+        "A": "The square of the correlation coefficient.",
+        "B": "A measure of how much two random variables change together.",
+        "C": "A specialized software for managing group data.",
+        "D": "The process of deleting variables that are not useful."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which coefficient ranges from -1 to 1 and measures the linear relationship between two variables?",
+      "options": {
+        "A": "Variance",
+        "B": "Pearson Correlation Coefficient",
+        "C": "Standard Deviation",
+        "D": "Z-score"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Confounding Variable'?",
+      "options": {
+        "A": "A variable that is easy to understand and measure.",
+        "B": "An outside influence that changes the effect of a dependent and independent variable.",
+        "C": "The main outcome variable being studied.",
+        "D": "A variable with a constant value throughout the study."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Degrees of Freedom' ($df$) for a single sample T-test with $n$ observations?",
+      "options": {
+        "A": "$n$",
+        "B": "$n - 1$",
+        "C": "$n / 2$",
+        "D": "$n^2$"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Regression Analysis', what does the 'Intercept' ($\beta_0$) represent?",
+      "options": {
+        "A": "The rate of change of $y$ for every unit change in $x$.",
+        "B": "The expected value of the dependent variable when all independent variables are zero.",
+        "C": "The total amount of error in the model.",
+        "D": "The point where the regression line stops."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Multivariate' statistics?",
+      "options": {
+        "A": "Statistics involving more than one dependent variable simultaneously.",
+        "B": "Hiring a variety of different statisticians for one project.",
+        "C": "Statistics that only use multiple-choice questions.",
+        "D": "The process of running the same test 100 times."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Logit' in the context of Logistic Regression?",
+      "options": {
+        "A": "The logarithm of the independent variable.",
+        "B": "The natural log of the odds of an event occurring.",
+        "C": "A specialized tool for logging errors in the code.",
+        "D": "The total number of Successes divided by Failures."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'P-hacking' problem?",
+      "options": {
+        "A": "Hacking into a statistics server to steal data.",
+        "B": "The practice of manipulating data or analysis until a non-significant result becomes significant.",
+        "C": "Using a very high-speed computer to calculate p-values.",
+        "D": "A security feature that prevents unauthorized p-value calculations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Likert Scale' commonly used for in data collection?",
+      "options": {
+        "A": "Measuring the physical weight of participants.",
+        "B": "Measuring attitudes or opinions by asking people to rate their agreement level.",
+        "C": "Calculating the precise time taken for a task.",
+        "D": "A specialized lens for camera-based data ingestion."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cross-validation' used for in modeling?",
+      "options": {
+        "A": "Asking a colleague to check your math.",
+        "B": "Assessing how the results of a statistical analysis will generalize to an independent data set.",
+        "C": "Validating that the data was entered by a human.",
+        "D": "A way to backup the model on a secondary hard drive."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bayes’ Theorem' essentially used for?",
+      "options": {
+        "A": "Calculating the volume of a geometric shape.",
+        "B": "Updating the probability of a hypothesis as more evidence becomes available.",
+        "C": "Proving that the mean is always greater than the median.",
+        "D": "Determining the cost of a statistical software license."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which test would you use to compare the 'Medians' of two independent groups if the data is not normal?",
+      "options": {
+        "A": "Independent T-test",
+        "B": "Mann-Whitney U test",
+        "C": "Paired T-test",
+        "D": "Pearson Correlation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Internal Consistency' in reliability analysis?",
+      "options": {
+        "A": "The physical durability of a computer's internal components.",
+        "B": "How well different items on a test or survey that are intended to measure the same construct produce similar results.",
+        "C": "Ensuring that the data center is kept at a constant temperature.",
+        "D": "The speed at which data is transferred within a local network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Z-test'?",
+      "options": {
+        "A": "A test for data that only contains the letter Z.",
+        "B": "A hypothesis test where the sampling distribution of the test statistic can be approximated by a normal distribution.",
+        "C": "A specialized software for sleep researchers.",
+        "D": "A test performed at the end of a project (the last letter of the alphabet)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interaction Effect' in a factorial ANOVA?",
+      "options": {
+        "A": "The main effect of one variable alone.",
+        "B": "When the effect of one factor depends on the level of another factor.",
+        "C": "The time it takes for a user to interact with the software.",
+        "D": "A way to backup data in three lines."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sample Bias'?",
+      "options": {
+        "A": "A random error in a small sample.",
+        "B": "A systematic error where some members of the population are more likely to be included than others.",
+        "C": "The color of the physical sample being tested.",
+        "D": "The speed at which a sample is processed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Law of Parsimony' (Occam's Razor) in modeling?",
+      "options": {
+        "A": "The belief that complex models are always better.",
+        "B": "The idea that among competing hypotheses, the one with the fewest assumptions should be selected.",
+        "C": "A law about how many variables can be in one equation.",
+        "D": "A specialized software for cutting data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does a 'Residual Plot' help you detect?",
+      "options": {
+        "A": "The names of the outliers in the dataset.",
+        "B": "Patterns in the error terms that might violate model assumptions.",
+        "C": "The total number of rows in the metadata.",
+        "D": "The physical location of the server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Standardization' of data?",
+      "options": {
+        "A": "Making all the data act 'normally'.",
+        "B": "Rescaling data to have a mean of zero and a standard deviation of one.",
+        "C": "The process of deleting data that is considered unusual.",
+        "D": "Ensuring every researcher uses the same font."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Exploratory Data Analysis' (EDA)?",
+      "options": {
+        "A": "Finding a new planet using statistical methods.",
+        "B": "An approach to analyzing datasets to summarize their main characteristics, often with visual methods.",
+        "C": "Hiring a detective to find bugs in the model.",
+        "D": "A specialized software for geographical research."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Collinearity'?",
+      "options": {
+        "A": "When the data is stored in columns instead of rows.",
+        "B": "A high correlation between two independent variables in a regression model.",
+        "C": "The physical alignment of server racks in a row.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Degrees of Freedom' for a Chi-square Test of Independence with $R$ rows and $C$ columns?",
+      "options": {
+        "A": "$R + C$",
+        "B": "$(R - 1)(C - 1)$",
+        "C": "$R \times C$",
+        "D": "$R - C$"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Logistic Regression' primarily used for?",
+      "options": {
+        "A": "Predicting a continuous numerical value like height.",
+        "B": "Predicting the probability of a categorical dependent variable (usually binary).",
+        "C": "Grouping data into five distinct clusters.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Symmetry' in a distribution?",
+      "options": {
+        "A": "When the distribution has zero mean.",
+        "B": "When the left and right sides of the distribution are mirror images of each other.",
+        "C": "When the distribution only works for positive numbers.",
+        "D": "A specialized software for architects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Mode' of the following set: {1, 2, 2, 3, 4, 5}?",
+      "options": {
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "5"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Statistical Inference'?",
+      "options": {
+        "A": "Guessing the answer without looking at any data.",
+        "B": "Using data from a sample to make generalizations about a population.",
+        "C": "Deleting data after it has been used once.",
+        "D": "Hiring a professional mathematician to read the report."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Empirical Rule'?",
+      "options": {
+        "A": "A rule about how to manage employees.",
+        "B": "The 68-95-99.7 rule for the percentage of data within standard deviations of a normal mean.",
+        "C": "A specialized software for architects.",
+        "D": "A law about how much data can be stored."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Ordinal Data'?",
+      "options": {
+        "A": "Data that can only be stored in an ordinary database.",
+        "B": "Categorical data where the categories have a natural order (e.g., Low, Medium, High).",
+        "C": "Data that is always positive.",
+        "D": "A way to speed up the network connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interval Data'?",
+      "options": {
+        "A": "Data collected at exactly 1-hour intervals.",
+        "B": "Numerical data where the distance between values is meaningful, but there is no true zero point (e.g., Temperature in Celsius).",
+        "C": "A specialized software for librarians.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Ratio Data'?",
+      "options": {
+        "A": "The ratio of successes to failures.",
+        "B": "Numerical data with a true zero point, allowing for comparison of absolute magnitudes (e.g., Weight).",
+        "C": "A way to backup the storage layer.",
+        "D": "Hiring multiple people to read code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skewness' vs 'Kurtosis'?",
+      "options": {
+        "A": "Skewness is height; Kurtosis is width.",
+        "B": "Skewness is asymmetry; Kurtosis is 'tailedness' or peakedness.",
+        "C": "They are exactly the same thing.",
+        "D": "Kurtosis is for beginners; Skewness for experts."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Resampling'?",
+      "options": {
+        "A": "Buying a second sample of a product.",
+        "B": "Methods like bootstrapping or Jackknife that involve drawing repeated samples from the original data.",
+        "C": "A specialized software for musicians.",
+        "D": "A way to name a database table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Statistical Model' 'Robustness'?",
+      "options": {
+        "A": "The model being very physically strong.",
+        "B": "The degree to which a model remains accurate even when its assumptions are slightly violated.",
+        "C": "A specialized software for architects.",
+        "D": "A list of all project managers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Model' 'Underfitting'?",
+      "options": {
+        "A": "The model is too complex for the data.",
+        "B": "The model is too simple to capture the underlying structure of the data.",
+        "C": "The model fits the data perfectly.",
+        "D": "Hiring a smaller developer for the team."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Model' 'Overfitting'?",
+      "options": {
+        "A": "The model is too simple.",
+        "B": "The model is so complex it starts to capture the random noise in the data rather than just the signal.",
+        "C": "Hiring too many developers for one model.",
+        "D": "A security scan of the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bootstrapping' primarily used for?",
+      "options": {
+        "A": "Starting a computer from scratch.",
+        "B": "Estimating the distribution of a statistic (like the mean) by resampling the original dataset with replacement.",
+        "C": "A specialized software for footwear designers.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Power Analysis'?",
+      "options": {
+        "A": "Measuring the electricity used by the computer.",
+        "B": "Determining the sample size needed to detect an effect of a given size with a given degree of confidence.",
+        "C": "A way to speed up the network.",
+        "D": "Deleting data that is not powerful."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Post-hoc' testing in ANOVA?",
+      "options": {
+        "A": "Testing performed after a person has left the office.",
+        "B": "Additional tests performed after finding a significant ANOVA result to determine which specific groups differ.",
+        "C": "A specialized software for architects.",
+        "D": "A security scan of the database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bonferroni Correction'?",
+      "options": {
+        "A": "Correcting the grammar in a report.",
+        "B": "An adjustment made to p-values when several dependent or independent statistical tests are being performed simultaneously.",
+        "C": "A way to count the number of users.",
+        "D": "Hiring a manager named Bonferroni."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Levene’s Test' used to check?",
+      "options": {
+        "A": "If the data is normally distributed.",
+        "B": "The equality of variances for a variable calculated for two or more groups.",
+        "C": "The internet speed of the data center.",
+        "D": "A specialized software for poets."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cronbach’s Alpha'?",
+      "options": {
+        "A": "The first letter of the Greek alphabet.",
+        "B": "A measure of internal consistency or reliability of a set of scale or test items.",
+        "C": "A specialized tool for measuring distance.",
+        "D": "The speed of light in a vacuum."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ANOVA' 'Source' of 'Variation'?",
+      "options": {
+        "A": "Where the data was originally found.",
+        "B": "The component of the total variance that is attributed to a specific factor in the model.",
+        "C": "A specialized software for gardeners.",
+        "D": "A way to backup the storage layer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Factor' in the context of ANOVA?",
+      "options": {
+        "A": "A number that divides another number perfectly.",
+        "B": "An independent categorical variable used to define groups.",
+        "C": "A way to name a database table.",
+        "D": "A specialized software for mathematicians."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Level' in the context of ANOVA factors?",
+      "options": {
+        "A": "The floor of the building where the study took place.",
+        "B": "The specific categories within a factor (e.g., Group A, Group B).",
+        "C": "The brightness level of the computer monitor.",
+        "D": "A way to count the number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Interaction' vs 'Main Effect'?",
+      "options": {
+        "A": "They are exactly the same thing.",
+        "B": "Main effect is the impact of one factor alone; Interaction is the combined impact of factors.",
+        "C": "Interaction is 100x faster.",
+        "D": "Main effect is for text; Interaction for images."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Covariate'?",
+      "options": {
+        "A": "Hiring a person to help with data entry.",
+        "B": "A continuous independent variable that is not the main focus but is included to control its effect.",
+        "C": "A specialized software for biologists.",
+        "D": "Deleting data to save space."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Regression' toward the 'Mean'?",
+      "options": {
+        "A": "Being very mean to the data analysts.",
+        "B": "The tendency for extreme values to be followed by values closer to the average.",
+        "C": "A specialized software for psychologists.",
+        "D": "A way to backup the SQL code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Standard' 'Error' vs 'Standard' 'Deviation'?",
+      "options": {
+        "A": "They are identical terms.",
+        "B": "Deviation describes the data spread; Error describes the precision of an estimate.",
+        "C": "Deviation is for text; Error for images.",
+        "D": "Error is 100x faster."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Sampling' 'Distribution'?",
+      "options": {
+        "A": "Distributing samples of a product for free.",
+        "B": "The distribution of a statistic (like the mean) obtained from all possible samples of a fixed size.",
+        "C": "A specialized software for architects.",
+        "D": "A way to name a database table."
+      },
+      "answer": "B"
+    }
+  ]
+}

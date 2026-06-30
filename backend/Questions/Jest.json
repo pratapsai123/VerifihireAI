@@ -1,0 +1,2473 @@
+{
+  "skill": "Jest",
+  "questions": [
+    {
+      "question": "True or False: Jest is a JavaScript Testing Framework maintained by Meta (Facebook).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command is typically used to run Jest tests in a standard npm project?",
+      "options": {
+        "A": "npm start",
+        "B": "npm run test",
+        "C": "npm jest-run",
+        "D": "npm execute"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO matchers that can be used to check for equality in Jest.",
+      "options": {
+        "A": "toBe()",
+        "B": "toEqual()",
+        "C": "toExist()",
+        "D": "toCompare()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'describe' block is used to group related tests together.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is 'undefined'?",
+      "options": {
+        "A": "toBeNull()",
+        "B": "toBeUndefined()",
+        "C": "toBeDefined()",
+        "D": "toBeTruthy()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Jest can only be used with React applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to define an individual test case?",
+      "options": {
+        "A": "case()",
+        "B": "it()",
+        "C": "run()",
+        "D": "check()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods used for setup and teardown in Jest.",
+      "options": {
+        "A": "beforeEach()",
+        "B": "afterAll()",
+        "C": "startUp()",
+        "D": "cleanUp()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which matcher is the opposite of 'toBe()'?",
+      "options": {
+        "A": "not.toBe()",
+        "B": "toBeNot()",
+        "C": "isNot()",
+        "D": "toBe(false)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Jest automatically provides code coverage reports using the --coverage flag.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if an array contains a specific item?",
+      "options": {
+        "A": "toMatch()",
+        "B": "toContain()",
+        "C": "toHaveItem()",
+        "D": "toBeIn()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid ways to write a test in Jest.",
+      "options": {
+        "A": "test('name', () => {})",
+        "B": "it('name', () => {})",
+        "C": "spec('name', () => {})",
+        "D": "verify('name', () => {})"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'toBe' uses Object.is to test exact equality.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'expect()' function?",
+      "options": {
+        "A": "To start a test suite",
+        "B": "To define an assertion/expectation",
+        "C": "To mock a module",
+        "D": "To skip a test"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A failing test will stop the entire test suite from running by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher checks that a value is 'null' and nothing else?",
+      "options": {
+        "A": "toBeUndefined()",
+        "B": "toBeFalsy()",
+        "C": "toBeNull()",
+        "D": "toBe(0)"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Jest can be configured via a 'jest.config.js' file or within 'package.json'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is specifically designed to check if a value is greater than a specific number?",
+      "options": {
+        "A": "toBe()",
+        "B": "toNotBeSmall()",
+        "C": "toBeGreaterThan()",
+        "D": "toBeAbove()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO methods used to run code after tests have finished.",
+      "options": {
+        "A": "afterEach()",
+        "B": "afterAll()",
+        "C": "cleanUp()",
+        "D": "finish()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'it' function is an alias for the 'test' function in Jest.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag allows you to run tests related to changed files only (based on git)?",
+      "options": {
+        "A": "--onlyChanged",
+        "B": "--git",
+        "C": "-o",
+        "D": "--changed"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the result of using 'toBeDefined()' on a variable that is null?",
+      "options": {
+        "A": "The test fails",
+        "B": "The test passes",
+        "C": "It throws an error",
+        "D": "It returns undefined"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: By default, Jest runs all tests in parallel to provide a fast experience.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is 'falsy' (e.g., false, 0, or empty string)?",
+      "options": {
+        "A": "toBeFalse()",
+        "B": "toBeFalsy()",
+        "C": "not.toBeTruthy()",
+        "D": "All of the above"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO common file naming conventions Jest looks for by default.",
+      "options": {
+        "A": "app.spec.js",
+        "B": "app.test.js",
+        "C": "app.jest.js",
+        "D": "app.check.js"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which function allows you to group multiple related test cases into one block?",
+      "options": {
+        "A": "group()",
+        "B": "suite()",
+        "C": "describe()",
+        "D": "set()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'toEqual' ignores object keys that have 'undefined' values.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a string contains a specific substring?",
+      "options": {
+        "A": "toContain()",
+        "B": "toMatch()",
+        "C": "stringContaining()",
+        "D": "toBeString()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You must import 'describe' and 'it' from the '@jest/globals' package in every test file unless configured otherwise.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is NOT a built-in Jest matcher?",
+      "options": {
+        "A": "toBeLessThan()",
+        "B": "toBeGreaterThanOrEqual()",
+        "C": "toBeBetween()",
+        "D": "toBeInstanceOf()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO global functions provided by Jest for creating mocks.",
+      "options": {
+        "A": "jest.fn()",
+        "B": "jest.mock()",
+        "C": "jest.fake()",
+        "D": "jest.dummy()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Snapshots are stored as JSON files in a folder named '__snapshots__'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if an assertion in a 'beforeEach' block fails?",
+      "options": {
+        "A": "The current test fails",
+        "B": "The test is skipped",
+        "C": "The whole suite stops",
+        "D": "It retries the setup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is best for comparing two objects for deep equality?",
+      "options": {
+        "A": "toBe()",
+        "B": "toEqual()",
+        "C": "toMatchObject()",
+        "D": "toStrictEqual()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Jest supports asynchronous testing using async/await.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a number is less than or equal to a value?",
+      "options": {
+        "A": "toBeLessThan()",
+        "B": "toBeBelowOrEqual()",
+        "C": "toBeLessThanOrEqual()",
+        "D": "toBeLower()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO matchers used for checking Truthiness.",
+      "options": {
+        "A": "toBeTruthy()",
+        "B": "toBeFalsy()",
+        "C": "toBeTrue()",
+        "D": "toBeReal()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.resetModules()' clears the require cache.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a function throws an error when called?",
+      "options": {
+        "A": "toThrow()",
+        "B": "toError()",
+        "C": "toBeError()",
+        "D": "toCatch()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'test.only()'?",
+      "options": {
+        "A": "To run only that specific test and skip others in the file",
+        "B": "To mark a test as private",
+        "C": "To run the test in a single thread",
+        "D": "To ignore the test"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can run a single test file by passing its path to the jest command.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is 'NaN'?",
+      "options": {
+        "A": "toBeNaN()",
+        "B": "toBeNotANumber()",
+        "C": "toEqual(NaN)",
+        "D": "isNotANumber()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle async code in Jest.",
+      "options": {
+        "A": "Using the 'done' callback",
+        "B": "Returning a Promise",
+        "C": "Using 'setTimeout'",
+        "D": "Using 'wait()'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'toBe' and 'toEqual' are interchangeable for primitive types like strings and numbers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI option is used to update failing snapshots?",
+      "options": {
+        "A": "--updateSnapshot",
+        "B": "-u",
+        "C": "--newSnapshot",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: 'beforeAll' runs once per test file before any tests start.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if an object is an instance of a specific class?",
+      "options": {
+        "A": "toBeClass()",
+        "B": "toBeInstanceOf()",
+        "C": "toMatchClass()",
+        "D": "toEqualInstance()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO matchers used for numeric comparisons.",
+      "options": {
+        "A": "toBeGreaterThan()",
+        "B": "toBeLessThan()",
+        "C": "toBeHigher()",
+        "D": "toBeLower()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest was built on top of the Jasmine testing framework.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a mock function was called with specific arguments?",
+      "options": {
+        "A": "toHaveBeenCalledWith()",
+        "B": "toBeCalledWithArgs()",
+        "C": "toMatchArgs()",
+        "D": "toInvokeWith()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you identify a 'snapshot' test in Jest?",
+      "options": {
+        "A": "It uses .toMatchSnapshot()",
+        "B": "It uses .toBeSnapshot()",
+        "C": "It uses .saveSnapshot()",
+        "D": "It uses .expectSnapshot()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use regex inside '.toMatch()'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a promise eventually rejects?",
+      "options": {
+        "A": ".rejects",
+        "B": ".toReject()",
+        "C": ".catch()",
+        "D": ".toBeRejected()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to skip a test in Jest.",
+      "options": {
+        "A": "xtest()",
+        "B": "test.skip()",
+        "C": "test.ignore()",
+        "D": "test.omit()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Global variables in Jest (like 'expect') are available in the global scope by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher ensures a value is NOT null?",
+      "options": {
+        "A": "not.toBeNull()",
+        "B": "toBeNotNull()",
+        "C": "isNotNull()",
+        "D": "toBeDefined()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'expect.anything()' matcher match?",
+      "options": {
+        "A": "Everything except null or undefined",
+        "B": "Absolutely any value",
+        "C": "Only truthy values",
+        "D": "Only objects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.spyOn' can only be used on objects, not standalone functions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a mock function returned a specific value?",
+      "options": {
+        "A": "toHaveReturnedWith()",
+        "B": "toBeReturnedWith()",
+        "C": "toMatchReturn()",
+        "D": "toReturn(value)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to run Jest coverage reports.",
+      "options": {
+        "A": "jest --coverage",
+        "B": "Set 'collectCoverage' to true in config",
+        "C": "jest --report",
+        "D": "jest --stats"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest can test code that uses 'import' and 'export' without any additional tools like Babel.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher checks if a value is 'defined'?",
+      "options": {
+        "A": "toBeDefined()",
+        "B": "isDefined()",
+        "C": "not.toBeUndefined()",
+        "D": "Both A and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the default test timeout in Jest if not specified?",
+      "options": {
+        "A": "1000ms",
+        "B": "2000ms",
+        "C": "5000ms",
+        "D": "10000ms"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: A 'test' block cannot be nested inside another 'test' block.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify a specific property exists on an object?",
+      "options": {
+        "A": "toHaveProperty()",
+        "B": "toContainProperty()",
+        "C": "toMatchProperty()",
+        "D": "toBeProperty()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: By using 'it.each', you can run the same test multiple times with different data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method should be used to mock a function's implementation for only one specific call?",
+      "options": {
+        "A": "mockImplementation()",
+        "B": "mockReturnValueOnce()",
+        "C": "mockImplementationOnce()",
+        "D": "mockReturnThis()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: jest.spyOn() creates a mock function that tracks calls but still executes the original implementation by default.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle an asynchronous test that returns a promise.",
+      "options": {
+        "A": "Returning the promise from the test function",
+        "B": "Using the async/await syntax",
+        "C": "Calling jest.async() at the start of the test",
+        "D": "Using the .then() callback without returning"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary difference between 'toBe' and 'toStrictEqual'?",
+      "options": {
+        "A": "toBe checks for reference, toStrictEqual checks for object properties and types",
+        "B": "toStrictEqual ignores array sparseness",
+        "C": "toBe is faster for objects",
+        "D": "There is no difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: When using jest.mock('module'), Jest automatically hoists the call to the top of the file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify that a mock function was called with an object that contains at least specific properties?",
+      "options": {
+        "A": "toHaveBeenCalledWith(expect.objectContaining({...}))",
+        "B": "toMatchObject({...})",
+        "C": "toContainEntries({...})",
+        "D": "toBeCalledWith(expect.partial({...}))"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "If you want to mock a module but still use some of its actual implementations, which function do you use inside jest.mock?",
+      "options": {
+        "A": "jest.requireActual()",
+        "B": "jest.getOriginal()",
+        "C": "jest.useReal()",
+        "D": "jest.invokeOriginal()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to advance timers manually when using jest.useFakeTimers().",
+      "options": {
+        "A": "jest.runAllTimers()",
+        "B": "jest.advanceTimersByTime()",
+        "C": "jest.speedUp()",
+        "D": "jest.skipTime()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'done' callback in a test should be called even if an assertion fails.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Jest method allows you to mock the return value of a function for all future calls?",
+      "options": {
+        "A": "mockReturnValue()",
+        "B": "setReturn()",
+        "C": "valueOnce()",
+        "D": "jest.provideValue()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When testing a function that returns a Promise, which matcher is used to check the resolved value directly?",
+      "options": {
+        "A": "expect(promise).resolves.toBe(value)",
+        "B": "expect(promise).toResolve(value)",
+        "C": "expect(promise).await.toBe(value)",
+        "D": "expect(promise).then(value)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: snapshots are an effective way to test large data structures that change frequently.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods that reset the state of a mock function.",
+      "options": {
+        "A": "mockFn.mockClear()",
+        "B": "mockFn.mockReset()",
+        "C": "mockFn.mockDelete()",
+        "D": "mockFn.mockDestroy()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which configuration property in jest.config.js is used to point to a file that runs code to configure the testing environment before each test?",
+      "options": {
+        "A": "setupFilesAfterEnv",
+        "B": "preTestConfig",
+        "C": "envScript",
+        "D": "globalSetup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: By default, Jest captures 'console.log' statements and suppresses them from the terminal output unless the test fails.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher ensures a mock was called exactly three times?",
+      "options": {
+        "A": "toHaveBeenCalledTimes(3)",
+        "B": "toBeCalled(3)",
+        "C": "toInvokeCount(3)",
+        "D": "toMatchCalls(3)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'jest.clearAllMocks()' do?",
+      "options": {
+        "A": "Clears the 'calls' and 'instances' data for all mocks",
+        "B": "Removes all mock implementations and reverts to real ones",
+        "C": "Deletes the '__mocks__' folder",
+        "D": "Resets the modules registry"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO parameters usually passed to the 'it.each' table syntax.",
+      "options": {
+        "A": "A template string or array of arrays",
+        "B": "The test name string with %placeholders",
+        "C": "A JSON configuration object",
+        "D": "The number of retries"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: You can use 'expect.assertions(number)' to ensure a specific number of assertions are called during an asynchronous test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks that an object matches a subset of properties?",
+      "options": {
+        "A": "toMatchObject()",
+        "B": "toEqual()",
+        "C": "toBePartial()",
+        "D": "toIncludeObject()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'jest.requireMock('moduleName')'?",
+      "options": {
+        "A": "To force the return of a mocked version of a module",
+        "B": "To check if a module is currently mocked",
+        "C": "To create a manual mock in a test file",
+        "D": "To import the mock implementation of a class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Snapshot files should be committed to your version control system (e.g., Git).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method allows you to mock a function to return the value of 'this'?",
+      "options": {
+        "A": "mockReturnThis()",
+        "B": "mockThis()",
+        "C": "mockSelf()",
+        "D": "mockReturnContext()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO CLI flags that control how Jest handles worker processes.",
+      "options": {
+        "A": "--runInBand",
+        "B": "--maxWorkers",
+        "C": "--singleThread",
+        "D": "--noParallel"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.fn().mockImplementation(() => 42)' is equivalent to 'jest.fn(() => 42)'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is best for verifying that a function throws a specific error type (e.g., TypeError)?",
+      "options": {
+        "A": "toThrow(TypeError)",
+        "B": "toThrowErrorType('TypeError')",
+        "C": "toBeInstanceOf(TypeError)",
+        "D": "toEqualError(TypeError)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'moduleNameMapper' config option do?",
+      "options": {
+        "A": "Maps aliases (like @components) to actual file paths",
+        "B": "Renames files during testing",
+        "C": "Mocks all files in a specific directory",
+        "D": "Converts CSS imports to JS objects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.resetAllMocks()' not only clears the call history but also removes any custom implementations provided.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify a value is between 5 and 10 (inclusive)?",
+      "options": {
+        "A": "No single matcher exists; you must use two assertions",
+        "B": "toBeBetween(5, 10)",
+        "C": "toBeWithin(5, 10)",
+        "D": "toEqualRange(5, 10)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to test that a promise rejects with a specific message.",
+      "options": {
+        "A": "expect(promise).rejects.toThrow('Error Msg')",
+        "B": "try { await promise } catch (e) { expect(e).toBe('Error Msg') }",
+        "C": "expect(promise).toFailWith('Error Msg')",
+        "D": "expect(promise).catch('Error Msg')"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest supports 'inline snapshots' where the snapshot string is written directly into the test file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jest function is used to mock a module that is being imported by the file under test?",
+      "options": {
+        "A": "jest.spyOn()",
+        "B": "jest.mock()",
+        "C": "jest.fn()",
+        "D": "jest.setMock()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'jest.useFakeTimers()' function must be called after the timers (like setTimeout) are actually triggered in the code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO matchers that can be used to verify if a mock was called with specifically an object containing a 'user' property.",
+      "options": {
+        "A": "toHaveBeenCalledWith(expect.objectContaining({user: expect.any(String)}))",
+        "B": "toMatchObject({user: expect.anything()})",
+        "C": "toBeCalledWith(expect.partial({user: true}))",
+        "D": "toIncludeObject({user: 'name'})"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'jest.runOnlyPendingTimers()'?",
+      "options": {
+        "A": "It executes only the timers that are currently in the task queue",
+        "B": "It clears all timers without running them",
+        "C": "It skips all interval timers but runs timeouts",
+        "D": "It pauses all timers indefinitely"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is a specific type like String or Number without checking the exact value?",
+      "options": {
+        "A": "expect.any(Constructor)",
+        "B": "expect.type(String)",
+        "C": "toBeType(Number)",
+        "D": "expect.kindOf(Object)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.retryTimes(n)' allows you to rerun failed tests a specific number of times.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons why 'jest.spyOn()' is preferred over 'jest.fn()' when testing existing objects.",
+      "options": {
+        "A": "It allows you to track calls while keeping the original implementation",
+        "B": "It can be easily restored using mockRestore()",
+        "C": "It is significantly faster in execution",
+        "D": "It automatically mocks the entire module"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which CLI flag tells Jest to stop running tests after the first failure?",
+      "options": {
+        "A": "--exit",
+        "B": "--stop",
+        "C": "--bail",
+        "D": "-b"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: If a test file contains no 'expect' assertions but runs to completion, Jest will mark it as passed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'mockFn.mock.calls[0][1]' represent?",
+      "options": {
+        "A": "The second argument of the first call",
+        "B": "The first argument of the second call",
+        "C": "The return value of the first call",
+        "D": "The context (this) of the first call"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a mock function has returned a value at least once?",
+      "options": {
+        "A": "toHaveReturned()",
+        "B": "toBeReturned()",
+        "C": "toSucceed()",
+        "D": "toHaveBeenCalled()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid configuration keys for setting coverage requirements.",
+      "options": {
+        "A": "branches",
+        "B": "functions",
+        "C": "logicPaths",
+        "D": "codeDensity"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: You can use 'expect.hasAssertions()' to catch cases where an async test completes without hitting an assertion.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to define a mock implementation that returns a Promise.resolve(value)?",
+      "options": {
+        "A": "mockResolvedValue(value)",
+        "B": "mockPromise(value)",
+        "C": "mockSuccess(value)",
+        "D": "mockResolveOnce(value)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens when you run Jest with the '--no-cache' flag?",
+      "options": {
+        "A": "Jest bypasses the transform cache and re-compiles all files",
+        "B": "Jest deletes the node_modules folder",
+        "C": "Jest runs tests in a single thread",
+        "D": "Jest disables code coverage"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Manual mocks are defined by writing a module in a subdirectory named '__mocks__' next to the module.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify a string DOES NOT match a regex?",
+      "options": {
+        "A": "not.toMatch()",
+        "B": "toBeDifferent()",
+        "C": "toNotRegex()",
+        "D": "expect.noMatch()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods provided by Jest to deal with legacy timers.",
+      "options": {
+        "A": "jest.useFakeTimers({legacyFakeTimers: true})",
+        "B": "jest.runAllTicks()",
+        "C": "jest.fastForward()",
+        "D": "jest.clearLegacy()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.requireActual()' is used to bypass a mock and get the real module inside a mock definition.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to get the number of times a mock function was called?",
+      "options": {
+        "A": "mockFn.mock.calls.length",
+        "B": "mockFn.getCount()",
+        "C": "mockFn.calls()",
+        "D": "mockFn.instances.length"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which environment is the default for Jest (designed for web apps)?",
+      "options": {
+        "A": "jsdom",
+        "B": "node",
+        "C": "browser",
+        "D": "electron"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'it.only' in a file will skip all tests in all other files in the project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO properties available on the 'expect' object for asymmetric matching.",
+      "options": {
+        "A": "expect.stringContaining()",
+        "B": "expect.arrayContaining()",
+        "C": "expect.exactValue()",
+        "D": "expect.matches()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which Jest configuration option allows you to ignore specific files from being tested?",
+      "options": {
+        "A": "testPathIgnorePatterns",
+        "B": "excludeFiles",
+        "C": "ignoreTests",
+        "D": "skipMatch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'toMatchObject' will fail if the received object has extra properties not present in the expected object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to clear only the mock data but keep the mock implementation?",
+      "options": {
+        "A": "mockClear()",
+        "B": "mockReset()",
+        "C": "mockRestore()",
+        "D": "mockFlush()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 'expect([1, 2, 3]).toContain(1)'?",
+      "options": {
+        "A": "Pass",
+        "B": "Fail",
+        "C": "Error",
+        "D": "Undefined"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to test for an error being thrown in an async function.",
+      "options": {
+        "A": "expect(asyncFn()).rejects.toThrow()",
+        "B": "await expect(asyncFn()).rejects.toThrow()",
+        "C": "expect(asyncFn()).toThrow()",
+        "D": "try { await asyncFn() } catch(e) { expect(e).toBeDefined() }"
+      },
+      "answer": [
+        "B",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Jest's 'snapshot' files are readable plain-text files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method should be used to change the implementation of a mock for all future calls?",
+      "options": {
+        "A": "mockImplementation()",
+        "B": "setImplementation()",
+        "C": "changeMock()",
+        "D": "overrideFn()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the use of 'jest.setTimeout(number)'?",
+      "options": {
+        "A": "Sets the global timeout for all tests in the file",
+        "B": "Sets a delay before the test starts",
+        "C": "Mocks the setTimeout global function",
+        "D": "Limits how long a mock can stay active"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'toMatchSnapshot()' can accept an 'optional' object to handle property matchers (like checking for any date).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI command would you use to run tests specifically in one file named 'user.test.js'?",
+      "options": {
+        "A": "jest user.test.js",
+        "B": "jest --file=user.test.js",
+        "C": "jest -f user.test.js",
+        "D": "jest --run-only user.test.js"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO matchers that check if a number is inclusive of the limit.",
+      "options": {
+        "A": "toBeGreaterThanOrEqual()",
+        "B": "toBeLessThanOrEqual()",
+        "C": "toBeAtLeast()",
+        "D": "toBeAtMost()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.resetModules()' is useful when you want to test a module that has side effects when it is first imported.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jest configuration option allows you to define a custom path to a module that exports a 'transformer' for specific file types (e.g., .ts, .svg)?",
+      "options": {
+        "A": "moduleTransform",
+        "B": "transform",
+        "C": "fileLoader",
+        "D": "preprocess"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: jest.doMock() is not hoisted to the top of the file, allowing you to mock a module differently within the same test file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods required when creating a custom Jest reporter class.",
+      "options": {
+        "A": "onRunStart()",
+        "B": "onTestResult()",
+        "C": "handleReport()",
+        "D": "emitResult()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How can you mock a module that is a dependency of another dependency (deep mocking) when automatic mocking is disabled?",
+      "options": {
+        "A": "jest.mock('deep-dependency')",
+        "B": "jest.deepMock('deep-dependency')",
+        "C": "It is impossible in Jest",
+        "D": "By using a manual mock in the __mocks__ folder at the project root"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which global Jest object property allows you to access the metadata of all mock calls, including the 'this' context of each call?",
+      "options": {
+        "A": "mockFn.mock.instances",
+        "B": "mockFn.mock.contexts",
+        "C": "mockFn.mock.thisArg",
+        "D": "mockFn.mock.scopes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Jest's 'projects' configuration allows you to run multiple configurations (like Node and JSDOM) in the same test run.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When creating a custom matcher, which property must the returned object contain to support the '.not' modifier?",
+      "options": {
+        "A": "pass",
+        "B": "message",
+        "C": "negate",
+        "D": "inverse"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to mock an ES module (ESM) that uses 'export default' and 'export const' simultaneously.",
+      "options": {
+        "A": "jest.mock('module', () => ({ __esModule: true, default: mockFn, named: mockFn }))",
+        "B": "jest.spyOn(module, 'default')",
+        "C": "jest.mock('module', () => mockFn)",
+        "D": "jest.createMock('module')"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.isolateModules()' allows you to 'require' a module and ensure it gets a fresh state without affecting the global module cache for other tests.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag is used to identify potential memory leaks by forcing a garbage collection after every test?",
+      "options": {
+        "A": "--detectLeaks",
+        "B": "--logHeapUsage",
+        "C": "--gc",
+        "D": "--memoryLeak"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of 'globalSetup' and 'globalTeardown' files in Jest?",
+      "options": {
+        "A": "To run code once before the entire test suite and once after",
+        "B": "To define variables available in the global scope of every test file",
+        "C": "To configure Babel transforms",
+        "D": "To reset mocks between every test file"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Snapshot testing can be used to test serialized data that is not UI-related, such as Redux state or API responses.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to replace the implementation of a mock specifically for the next call only, after which it reverts to the default mock implementation?",
+      "options": {
+        "A": "mockImplementationOnce()",
+        "B": "mockNextImplementation()",
+        "C": "mockSingleUse()",
+        "D": "jest.overrideOnce()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO configuration options that help Jest resolve modules with custom extensions or non-standard paths.",
+      "options": {
+        "A": "moduleFileExtensions",
+        "B": "moduleDirectories",
+        "C": "resolvePath",
+        "D": "extensionMapper"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: jest.resetModules() will clear the local variable state inside a module that has already been required in the current test file.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal Jest variable is used to provide the 'this' context to custom matchers?",
+      "options": {
+        "A": "this.utils",
+        "B": "this.equals",
+        "C": "this.isNot",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What happens if you call 'jest.unmock('moduleName')' inside a 'describe' block?",
+      "options": {
+        "A": "It is hoisted to the top of the file, unmocking it for all tests in that file",
+        "B": "It only unmocks for that specific describe block",
+        "C": "It throws a syntax error",
+        "D": "It unmocks only for the next test"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods that can be used to advance 'Fake Timers' to a specific point in the future.",
+      "options": {
+        "A": "jest.advanceTimersByTime(ms)",
+        "B": "jest.advanceTimersToNextTimer()",
+        "C": "jest.jumpTo(ms)",
+        "D": "jest.elapse(ms)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest's Virtual File System (VFS) allows it to track file changes and only re-run necessary tests without scanning the physical disk repeatedly.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a mock function was called with at least one argument that matches a specific type?",
+      "options": {
+        "A": "toHaveBeenCalledWith(expect.any(Type))",
+        "B": "toBeCalledWith(expect.isType(Type))",
+        "C": "toMatchArgument(Type)",
+        "D": "toBeCalledWith(Type)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'maxWorkers' configuration default to if not specified?",
+      "options": {
+        "A": "The number of cores available on the machine minus one",
+        "B": "1",
+        "C": "Unlimited",
+        "&D": "50% of available cores"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Custom matchers must be registered using 'expect.extend()'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to mock a getter or setter property using jest.spyOn?",
+      "options": {
+        "A": "jest.spyOn(object, 'methodName', 'get')",
+        "B": "jest.spyOnProperty(object, 'propertyName')",
+        "C": "jest.mockGetter(object, 'propertyName')",
+        "D": "jest.spyOn(object, 'propertyName').mockGet()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties used to define a 'snapshotSerializer' in Jest configuration.",
+      "options": {
+        "A": "print",
+        "B": "test",
+        "C": "serialize",
+        "D": "format"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest uses 'Haste' to build a dependency graph of your project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function allows you to mock a module while still allowing specific exports to remain 'actual' (not mocked)?",
+      "options": {
+        "A": "jest.mock('mod', () => ({ ...jest.requireActual('mod'), mockedFn: jest.fn() }))",
+        "B": "jest.partialMock('mod', ['actualFn'])",
+        "C": "jest.spyOnModule('mod')",
+        "D": "jest.mock('mod').keep('actualFn')"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI option allows you to see how much time each individual test file took to execute?",
+      "options": {
+        "A": "--verbose",
+        "B": "--showConfig",
+        "C": "--debug",
+        "D": "--profile"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.requireActual' can be used outside of a 'jest.mock' factory function.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a mock was called with specific 'context' (this value)?",
+      "options": {
+        "A": "mockFn.mock.contexts[0]",
+        "B": "toHaveBeenCalledOn(object)",
+        "C": "toBeCalledWithContext(object)",
+        "D": "toMatchThis(object)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to improve Jest performance in a CI environment with many CPU cores.",
+      "options": {
+        "A": "Setting --maxWorkers to a specific value",
+        "B": "Enabling the 'shard' flag to split tests across multiple machines",
+        "C": "Running tests with --no-cache",
+        "D": "Running tests with --runInBand"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Jest can run tests against a remote browser using the 'jest-puppeteer' preset.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal Jest component is responsible for creating a map of all files and their dependencies to facilitate fast test execution?",
+      "options": {
+        "A": "HasteMap",
+        "B": "JestResolver",
+        "C": "DependencyGraph",
+        "D": "ModuleLoader"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'jest.mock' with a factory function allows you to access variables defined in the outer scope of the test file if they are prefixed with 'mock'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods provided by 'jest-environment-node' or 'jest-environment-jsdom' that can be overridden in a custom environment.",
+      "options": {
+        "A": "setup()",
+        "B": "teardown()",
+        "C": "initialize()",
+        "D": "destroy()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How does Jest handle 'circular dependencies' when using manual mocks in the __mocks__ directory?",
+      "options": {
+        "A": "It resolves them using the Haste dependency graph",
+        "B": "It throws a 'Circular Dependency' error",
+        "C": "It ignores the mock and uses the actual module",
+        "D": "It deadlocks the worker process"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration option allows you to run a script AFTER the test environment has been established but BEFORE the test code itself executes?",
+      "options": {
+        "A": "setupFilesAfterEnv",
+        "B": "setupFiles",
+        "C": "testResultsProcessor",
+        "D": "globalSetup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.runInBand' executes all tests serially in the current process rather than creating a worker pool.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When sharding tests across multiple machines, which CLI argument is used to specify the current machine index?",
+      "options": {
+        "A": "--shard=x/y",
+        "B": "--instance=x",
+        "C": "--split=x",
+        "D": "--node=x"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'jest.doMock()'.",
+      "options": {
+        "A": "It is not hoisted to the top of the file",
+        "B": "It works well with modules that have side effects",
+        "C": "It replaces jest.mock() globally",
+        "D": "It only works with ES6 imports"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which function would you use to mock a module that is required using a dynamic 'require()' call inside a method?",
+      "options": {
+        "A": "jest.mock()",
+        "B": "jest.doMock()",
+        "C": "jest.setMock()",
+        "D": "jest.lazyMock()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a custom matcher, 'this.isNot' is a boolean that indicates if the matcher was called with the '.not' prefix.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jest metadata property allows you to see the source code line that triggered a mock call?",
+      "options": {
+        "A": "mockFn.mock.calls",
+        "B": "mockFn.mock.stack",
+        "C": "There is no such property built-in",
+        "D": "mockFn.mock.source"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary difference between 'setupFiles' and 'setupFilesAfterEnv'?",
+      "options": {
+        "A": "setupFiles runs before the testing framework (Jest) is loaded in the environment",
+        "B": "setupFiles runs after the testing framework is loaded",
+        "C": "setupFiles is for Node only",
+        "D": "There is no functional difference"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid return properties for a 'transformer' in Jest.",
+      "options": {
+        "A": "code",
+        "B": "map",
+        "C": "ast",
+        "D": "output"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest.resetModules()' also clears the state of modules mocked via 'jest.mock()'.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is specifically designed to check if a mock was called with a specific 'this' context?",
+      "options": {
+        "A": "toBeCalledOn(target)",
+        "B": "toHaveBeenCalledOn(target)",
+        "C": "mockFn.mock.contexts",
+        "D": "None of the above; must check the contexts array manually"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which Jest configuration option points to a module that can transform the resulting test metadata before it's sent to reporters?",
+      "options": {
+        "A": "testResultsProcessor",
+        "B": "reporters",
+        "C": "coverageReporter",
+        "D": "resultMapper"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'expect.addSnapshotSerializer()' to customize how a specific object is printed in a snapshot within a single test file.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if a 'globalSetup' script fails (throws an error)?",
+      "options": {
+        "A": "The entire test run is aborted immediately",
+        "B": "The test run continues but skips globalTeardown",
+        "C": "Only tests relying on global state fail",
+        "D": "It retries the setup twice"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to optimize Jest for a repository with 10,000+ tests.",
+      "options": {
+        "A": "Enable --changedSince",
+        "B": "Use a custom 'testRunner' like jest-circus",
+        "C": "Disable coverage collection",
+        "D": "Use --runInBand"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Jest supports 'Dependency Injection' natively through its module mocking system.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to retrieve the actual module exports in a file where that same module is being mocked?",
+      "options": {
+        "A": "jest.requireActual()",
+        "B": "jest.getOriginal()",
+        "C": "jest.importActual()",
+        "D": "Both A and C are valid depending on the module system"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the role of the 'snapshotResolver' configuration?",
+      "options": {
+        "A": "It determines where snapshot files are stored and how they are named",
+        "B": "It automatically merges conflicting snapshots",
+        "C": "It converts snapshots to HTML",
+        "D": "It clears unused snapshots"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.mock' factory functions are not allowed to contain any references to variables defined outside the function except for 'jest'.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks that a value matches a provided asynchronous generator?",
+      "options": {
+        "A": "There is no such built-in matcher",
+        "B": "toMatchGenerator()",
+        "C": "toBeYielding()",
+        "D": "expect.asyncIterable()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO things that 'jest.clearAllTimers()' does.",
+      "options": {
+        "A": "Removes all scheduled timers from the queue",
+        "B": "Prevents any further timers from being scheduled",
+        "C": "Resets the fake timer clock to zero",
+        "D": "Executes all pending timers immediately"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'jest-circus' is the default test runner in modern versions of Jest (27+).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a custom reporter, which method is called after every individual test file is completed?",
+      "options": {
+        "A": "onTestFileResult()",
+        "B": "onTestResult()",
+        "C": "onRunComplete()",
+        "D": "afterTest()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CLI flag helps debug issues with 'moduleNameMapper' by printing the configuration and the resolved paths?",
+      "options": {
+        "A": "--showConfig",
+        "B": "--debug",
+        "C": "--trace",
+        "D": "--resolve"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'testEnvironmentOptions' config allows you to pass custom data to your environment constructor.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties provided by 'expect.extend''s context.",
+      "options": {
+        "A": "utils",
+        "B": "equals",
+        "C": "fail",
+        "D": "assert"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'fakeTimers: { enableGlobally: true }' configuration do?",
+      "options": {
+        "A": "Automatically calls useFakeTimers() for every test file",
+        "B": "Mocks the Date object but not setTimeout",
+        "C": "Enables timers for node_modules only",
+        "D": "Speeds up the CPU clock"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.spyOn' can be used to mock a non-existent method if you provide a mock implementation.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal Jest hook allows you to modify the environment global object before tests run?",
+      "options": {
+        "A": "setup()",
+        "B": "handleTestEvent()",
+        "C": "getVmContext()",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'dependencyExtractor' in the Jest config?",
+      "options": {
+        "A": "To provide a custom logic for identifying dependencies in a file for the Haste map",
+        "B": "To remove unused npm packages",
+        "C": "To extract CSS from JS files",
+        "D": "To speed up yarn install"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Jest snapshots can be used for 'Visual Regression Testing' of image files if a custom serializer is used.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jest function is used to define the name of a test suite?",
+      "options": {
+        "A": "test()",
+        "B": "it()",
+        "C": "describe()",
+        "D": "suite()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: The 'expect' object is global in Jest and does not need to be imported.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is 'falsy'?",
+      "options": {
+        "A": "toBeFalse()",
+        "B": "toBeFalsy()",
+        "C": "toBeNull()",
+        "D": "toBe(0)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid ways to run Jest in a project.",
+      "options": {
+        "A": "npx jest",
+        "B": "npm run test",
+        "C": "node jest.js",
+        "D": "jest --start"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which CLI flag runs tests in 'watch mode'?",
+      "options": {
+        "A": "--live",
+        "B": "--observe",
+        "C": "--watch",
+        "D": "--monitor"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'toBe' is preferred for comparing primitive values like numbers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks the length of an array or string?",
+      "options": {
+        "A": "toHaveLength()",
+        "B": "toBeLength()",
+        "C": "toMatchLength()",
+        "D": "lengthToBe()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to skip a test file or block.",
+      "options": {
+        "A": "describe.skip()",
+        "B": "it.skip()",
+        "C": "describe.ignore()",
+        "D": "it.omit()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the default test file extension Jest looks for?",
+      "options": {
+        "A": ".test.js",
+        "B": ".spec.js",
+        "C": ".check.js",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: 'jest --init' creates a basic configuration file for your project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a number is greater than another number?",
+      "options": {
+        "A": "toBeMore()",
+        "B": "toBeGreaterThan()",
+        "C": "toBeAbove()",
+        "D": "toBeHigh()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO ways to mark a test for skipping.",
+      "options": {
+        "A": "xtest()",
+        "B": "xit()",
+        "C": "skip()",
+        "D": "omit()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which command-line argument produces a code coverage report?",
+      "options": {
+        "A": "--report",
+        "B": "--stats",
+        "C": "--coverage",
+        "D": "--details"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Jest can run on the Windows operating system.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What function is used to teardown code after every test?",
+      "options": {
+        "A": "afterEach()",
+        "B": "afterAll()",
+        "C": "cleanUp()",
+        "D": "finish()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is strictly 'true'?",
+      "options": {
+        "A": "toBeTruthy()",
+        "B": "toBe(true)",
+        "C": "toEqual(true)",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO matchers for checking presence in an array.",
+      "options": {
+        "A": "toContain()",
+        "B": "expect.arrayContaining()",
+        "C": "toHaveElement()",
+        "D": "toBeInArray()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to mock the return value of an asynchronous function?",
+      "options": {
+        "A": "mockReturnValue()",
+        "B": "mockResolvedValue()",
+        "C": "mockPromise()",
+        "D": "mockAsyncReturn()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'jest.spyOn' can be used to track calls to a method without overwriting its logic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle an async test in Jest.",
+      "options": {
+        "A": "Returning a promise",
+        "B": "Using async/await",
+        "C": "Using the 'done' callback",
+        "D": "Using setImmediate()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which matcher checks that a mock function was called at least once?",
+      "options": {
+        "A": "toHaveBeenCalled()",
+        "B": "toBeCalled()",
+        "C": "toInvoke()",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you mock an ES6 module's default export?",
+      "options": {
+        "A": "jest.mock('module', () => ({ default: jest.fn() }))",
+        "B": "jest.mock('module', () => jest.fn())",
+        "C": "jest.spyOn('module', 'default')",
+        "D": "jest.fn('module')"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.useFakeTimers()' should be called before the code that sets the timers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is best for verifying that an object contains a subset of properties?",
+      "options": {
+        "A": "toMatchObject()",
+        "B": "toEqual()",
+        "C": "toBe()",
+        "D": "toContainProperties()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods that reset the call count of a mock function.",
+      "options": {
+        "A": "mockClear()",
+        "B": "mockReset()",
+        "C": "mockRestart()",
+        "D": "mockWipe()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which CLI flag tells Jest to bail after the first test failure?",
+      "options": {
+        "A": "--stop",
+        "B": "--exit",
+        "C": "--bail",
+        "D": "--fail-fast"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'expect.assertions(n)' is often used to ensure all catch blocks in async tests are reached.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'jest.requireActual()'?",
+      "options": {
+        "A": "To get the real module inside a mock factory",
+        "B": "To import a module without caching",
+        "C": "To bypass the __mocks__ folder",
+        "D": "To refresh a module"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO configuration keys for ignoring files.",
+      "options": {
+        "A": "testPathIgnorePatterns",
+        "B": "coveragePathIgnorePatterns",
+        "C": "excludeFiles",
+        "D": "skipMatch"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which matcher checks if a value is an instance of a specific class?",
+      "options": {
+        "A": "toBeInstanceOf()",
+        "B": "toEqualInstance()",
+        "C": "toMatchClass()",
+        "D": "isA()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Snapshot files should be updated using the '-u' flag when UI changes are intentional.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to mock a module that is not used in every test (non-hoisted)?",
+      "options": {
+        "A": "jest.mock()",
+        "B": "jest.doMock()",
+        "C": "jest.setMock()",
+        "D": "jest.localMock()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher checks that a value is 'null'?",
+      "options": {
+        "A": "toBeNull()",
+        "B": "toBe(null)",
+        "C": "toEqual(null)",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO methods for advancing time in fake timers.",
+      "options": {
+        "A": "jest.advanceTimersByTime()",
+        "B": "jest.runAllTimers()",
+        "C": "jest.skip()",
+        "D": "jest.wait()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property in a custom matcher's return object determines the error message shown to the user?",
+      "options": {
+        "A": "error",
+        "B": "message",
+        "C": "info",
+        "D": "reason"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A custom reporter must implement 'onRunComplete' to receive the final summary.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods needed for a custom snapshot serializer.",
+      "options": {
+        "A": "test",
+        "B": "print",
+        "C": "serialize",
+        "D": "format"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How can you specify a different 'testEnvironment' for a single test file?",
+      "options": {
+        "A": "Using a docblock: @jest-environment node",
+        "B": "Using jest.setEnvironment()",
+        "C": "Using the CLI flag --env",
+        "D": "It is not possible"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal mechanism does Jest use to perform module hoisting?",
+      "options": {
+        "A": "Babel plugin (babel-plugin-jest-hoist)",
+        "B": "Node.js core modifications",
+        "C": "Webpack loader",
+        "D": "Manual parsing"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'jest.isolateModules()' allows you to run modules in their own sandbox for a specific test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag detects asynchronous code that fails to exit, potentially causing memory leaks?",
+      "options": {
+        "A": "--detectOpenHandles",
+        "B": "--leaks",
+        "C": "--gc",
+        "D": "--check-exit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid configuration properties for 'moduleNameMapper'.",
+      "options": {
+        "A": "regex patterns for keys",
+        "B": "file paths for values",
+        "C": "logic functions",
+        "D": "json blobs"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'transformIgnorePatterns' config actually prevent?",
+      "options": {
+        "A": "Modules from being transpiled (e.g., by Babel)",
+        "B": "Files from being tested",
+        "C": "Mocks from being applied",
+        "D": "Reporters from running"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'globalSetup' must export an async function that returns a promise.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Jest object is used to provide cross-file data in a 'projects' setup?",
+      "options": {
+        "A": "globalConfig",
+        "B": "projectConfig",
+        "C": "runtimeConfig",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select TWO methods for creating a manual mock for a module named 'utils.js'.",
+      "options": {
+        "A": "Create __mocks__/utils.js",
+        "B": "Use jest.mock('utils', factory)",
+        "C": "Use jest.spyOn(utils)",
+        "D": "Rename file to utils.mock.js"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which matcher verifies a mock was called with 'undefined' specifically?",
+      "options": {
+        "A": "toHaveBeenCalledWith(undefined)",
+        "B": "toBeCalledWith(undefined)",
+        "C": "Both A and B",
+        "D": "Neither A nor B"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'jest.resetModules()' clears the 'require' cache.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which environment is recommended for testing React components that need a DOM?",
+      "options": {
+        "A": "jsdom",
+        "B": "node",
+        "C": "browser",
+        "D": "shadow-dom"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to use inline snapshots.",
+      "options": {
+        "A": "toMatchInlineSnapshot()",
+        "B": "toThrowInlineSnapshot()",
+        "C": "toBeInline()",
+        "D": "expect.inline()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

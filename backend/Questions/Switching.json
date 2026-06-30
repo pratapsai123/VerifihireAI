@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Switching", 
+  "questions": [
+    {
+    "question": "At which specific layer of the OSI model does a standard network switch primarily operate?",
+    "options": {
+      "A": "Layer 1 (Physical)",
+      "B": "Layer 2 (Data Link)",
+      "C": "Layer 3 (Network) strictly",
+      "D": "Layer 7 (Application) strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical function of a MAC Address Table (CAM table) in a switch?",
+    "options": {
+      "A": "To store the IP addresses of all connected routers.",
+      "B": "To map specific MAC addresses to the physical ports where they were masterfully discovered.",
+      "C": "A specialized software for designing network logos strictly.",
+      "D": "To increase the frame rate of the console output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A switch technically reduces 'Collision Domains' by providing dedicated bandwidth to each individual physical port.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical process occurs when a switch receives a frame for a destination MAC address that is masterfully not in its table?",
+    "options": {
+      "A": "Filtering",
+      "B": "Flooding (Unknown Unicast)",
+      "C": "Rebooting strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of a 'VLAN' (Virtual Local Area Network) in a switched environment?",
+    "options": {
+      "A": "To increase the physical weight of the hardware.",
+      "B": "To masterfully segment a single switch into multiple logical broadcast domains for better security and management.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To physically lock the server room door."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Full-Duplex' communication technically allows a switch port to masterfully send and receive data at the same time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves a switch masterfully learning a source MAC address by technically inspecting the header of an incoming frame?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Dynamic Learning / Address Acquisition",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Broadcast' frame technical address used by switches to masterfully send data to everyone on the local segment?",
+    "options": {
+      "A": "0.0.0.0",
+      "B": "FF:FF:FF:FF:FF:FF",
+      "C": "127.0.0.1 strictly",
+      "D": "To increase the size of the font on the CLI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Trunk Port' is technically designed to masterfully carry traffic for multiple VLANs across a single physical link.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of 'Frame Switching' vs 'Packet Routing'?",
+    "options": {
+      "A": "Hiring a person named Frame to watch the screen.",
+      "B": "Switching masterfully handles data based on Layer 2 MAC addresses, while routing technically uses Layer 3 IP addresses.",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe Switching benefits for 'Network Performance'? (Select all that apply)",
+    "options": {
+      "A": "Eliminating collisions in a micro-segmented technical environment",
+      "B": "Providing masterfully high-speed hardware-based forwarding via ASICs",
+      "C": "Buying physical snacks for the IT team",
+      "D": "Reducing unnecessary broadcast traffic via masterfully configured VLANs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is '802.1Q' masterfully used for in network switching?",
+    "options": {
+      "A": "A physical box for storing extra cables.",
+      "B": "The technical standard for masterfully tagging frames to identify which VLAN they belong to on a trunk link.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Access Port' is technically a switch port that masterfully belongs to only one VLAN and is used to connect end-user devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which technical task involves 'Clearing the MAC Table'?",
+    "options": {
+      "A": "Using a physical vacuum on the switch.",
+      "B": "The technical process of masterfully removing learned addresses to force the switch to re-learn the current network topology.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Broadcast Storm' technically?",
+    "options": {
+      "A": "A state where excessive broadcast traffic masterfully consumes all bandwidth, technically crashing the network.",
+      "B": "A physical thunderstorm near the data center.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Store-and-Forward' is a technical switching method that masterfully waits to receive the entire frame and checks for errors before forwarding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical component allows a switch to make forwarding decisions masterfully in hardware rather than software?",
+    "options": {
+      "A": "CPU",
+      "B": "ASIC (Application-Specific Integrated Circuit)",
+      "C": "RAM strictly",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cut-Through' switching technically designed to do?",
+    "options": {
+      "A": "To physically cut through the network cables.",
+      "B": "To masterfully forward a frame as soon as the destination MAC address is read, technicaly reducing latency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bridge' is technically an older, less efficient version of a masterfully modern multi-port switch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Port' 'Status' monitoring?",
+    "options": {
+      "A": "The technical measures of whether a physical port is masterfully 'Up/Up' or 'Down/Down' in the management console.",
+      "B": "A physical factor for calculating server heat.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Switching' types? (Select all that apply)",
+    "options": {
+      "A": "Unmanaged Switches",
+      "B": "Managed Layer 2 Switches",
+      "C": "The SQL query parser",
+      "D": "Layer 3 (Multi-layer) Switches"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Native' 'VLAN' significance on a Cisco trunk link?",
+    "options": {
+      "A": "Hiring a person named Native.",
+      "B": "The technical VLAN that masterfully handles all untagged traffic passing through a trunk port.",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Auto-MDIX' technically?",
+    "options": {
+      "A": "A technical feature that masterfully detects the required cable type and configures the port automatically.",
+      "B": "A physical tool for server maintenance.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Speed' settings between two connected switch ports will technically prevent the link from coming masterfully online.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Switching benefits for 'Reliability'? (Select all that apply)",
+    "options": {
+      "A": "Implementing Redundant physical links between switches",
+      "B": "Using EtherChannel to technically bundle ports for masterfully higher availability",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Configuring masterfully automated technical Spanning Tree for loop prevention"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Flat' 'Network' in switching terminology?",
+    "options": {
+      "A": "A network physically located on a single floor.",
+      "B": "A technical design masterfully lacking VLANs, where all devices are in a single large broadcast domain.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'CRC' (Cyclic Redundancy Check) error monitoring?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The technical measure of frames that masterfully arrive with corrupted data, often indicating a physical cable issue.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'MAC' 'Flood' is a technical attack that masterfully fills the CAM table with fake addresses to force the switch to act like a hub.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Switch' indicators? (Select all that apply)",
+    "options": {
+      "A": "Link LED Status",
+      "B": "Speed/Duplex LED",
+      "C": "The SQL query parser",
+      "D": "System Power LED"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Port' 'Security' logic on a switch?",
+    "options": {
+      "A": "Building a physical warehouse for data.",
+      "B": "A technical feature that masterfully limits the number of MAC addresses allowed on a single port to prevent unauthorized access.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'VLAN' 'Hopping' technically?",
+    "options": {
+      "A": "A technical security exploit where an attacker masterfully gains access to a VLAN they are not authorized to be on.",
+      "B": "Physically jumping between server racks.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Duplex' occur when one side is masterfully set to 'Half' and the other to 'Full', causing technical performance degradation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Segmented' switching Strategy? (Select all that apply)",
+    "options": {
+      "A": "Standardizing VLAN IDs for global consistency",
+      "B": "Consistency in result presentation",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing masterfully isolated technical traffic paths for different departments"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Frame' 'Filtering' significance?",
+    "options": {
+      "A": "A physical piece of jewelry for the network lead.",
+      "B": "The technical ability of a switch to masterfully drop a frame if the destination is on the same port it arrived on.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Switch' 'Uptime' monitoring?",
+    "options": {
+      "A": "The technical measures of how long a physical switch has masterfully been operational since its last reboot.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Tagging' is the technical process masterfully used by trunk ports to add a VLAN ID header to a frame.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Switch management methods? (Select all that apply)",
+    "options": {
+      "A": "CLI (Command Line Interface)",
+      "B": "Web-based GUI",
+      "C": "The number of security cameras in the office",
+      "D": "SNMP (Simple Network Management Protocol)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Forwarding' 'Rate'?",
+    "options": {
+      "A": "The technical speed at which a switch can masterfully process and move data from an input port to an output port.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Port' 'Utilization' percentage?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The technical measure of how much bandwidth on a masterfully monitored port is being used relative to its total capacity.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'MTU' settings on two connected switch ports can technically cause masterfully confusing 'Giant' or 'Baby Giant' frame errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Switching 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring VLAN database is technically consistent",
+      "B": "Validating the physical cabling matches the masterfully defined diagram",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if port security masterfully blocks unauthorized MACs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Layer' '3' 'Switch' significance?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "A technical device that masterfully combines the high speed of a switch with the routing technical capabilities of a router.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Interface' 'Error' log?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about packet drops, collisions, and physical interface failures.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Switching technically includes 'Loop Prevention' by masterfully utilizing protocols like STP to disable redundant paths.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Switching stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Network Architect",
+      "B": "Datacenter Engineer",
+      "C": "System Administrator",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Port' 'Mirroring' technically used for?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "To masterfully copy all traffic from one switch port to another for technical analysis or security monitoring (SPAN).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a faulty port?",
+    "options": {
+      "A": "The average technical duration from a link failure until the NOC masterfully flags the specific switch port as the root cause.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'VLAN' memberships occur when two switches are masterfully connected but have different technically configured 'Native' VLANs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Bandwidth' Strategy? (Select all that apply)",
+    "options": {
+      "A": "Standardizing 10Gbps uplinks for masterfully high-speed cores",
+      "B": "Consistency in result presentation",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Quality of Service' (QoS) for prioritized data flows masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Trunk' 'Link' significance in switching?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical link masterfully configured to carry traffic for multiple VLANs simultaneously using 802.1Q tagging.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'MAC' 'Table' 'Utilization'?",
+    "options": {
+      "A": "The percentage of technical CAM table capacity masterfully being used to store learned addresses.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Managed switches technically allow for masterfully fine-tuned control over VLANs, security, and performance compared to unmanaged hubs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Switching priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring high-speed technical Layer 2 connectivity",
+      "B": "Minimizing technical broadcast traffic",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical network topology documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Switch' 'Performance' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of latency, packet loss, and forwarding rates to masterfully optimize the switch fabric.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that a switching system masterfully remains stable and operational before an unplanned hardware failure.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when two switches in a stack masterfully run technically different firmware, potentially causing cluster errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' switching design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring management interfaces are accessible for diverse technical teams",
+      "B": "Conducting 'blind' port reviews to reduce bias in access control",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear port naming is a technical asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Data' 'Link' 'Layer' significance?",
+    "options": {
+      "A": "Technically providing node-to-node data transfer masterfully between two directly connected nodes on a local segment.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Port' 'Errors' per minute?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of the frequency of masterfully identified data errors on a specific switch interface.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Encapsulation' types on a trunk link can technically prevent two switches from masterfully passing VLAN traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically alerting when a physical uplink fails",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Triggering masterfully automated backups of the running-config"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'MAC' 'Address' 'Table' Aging?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical process where a switch masterfully removes an entry from the CAM table if it has not seen traffic from that MAC for a specific period.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) a VLAN fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a VLAN change being committed until 'Automated Connectivity Tests' masterfully confirm the fix is stable.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Isolation' occur when a private VLAN is masterfully configured incorrectly, technically preventing authorized servers from talking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Switching roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Network Engineer",
+      "B": "Datacenter Architect",
+      "C": "System Performance Expert",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Switching' 'Fabric' Analysis?",
+    "options": {
+      "A": "The technical evaluation of internal backplane bandwidth and buffer health to masterfully optimize data delivery.",
+      "B": "Building a physical warehouse for data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical protocol is masterfully used to prevent Layer 2 loops by electing a Root Bridge and placing redundant physical paths into a technical 'Blocking' state?",
+    "options": {
+      "A": "BGP",
+      "B": "Spanning Tree Protocol (STP / 802.1D)",
+      "C": "VTP strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid Spanning Tree Protocol' (RSTP / 802.1w) technically provides faster convergence than standard STP by masterfully using a proposal-and-agreement process rather than timers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'EtherChannel' (LACP/PAgP) in a high-bandwidth campus network?",
+    "options": {
+      "A": "To physically color-code the uplink fibers.",
+      "B": "To technically bundle multiple physical Ethernet links into a single logical channel to masterfully increase throughput and provide failover.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the console output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Cisco technical feature masterfully bypasses standard STP listening and learning states, allowing an access port to technically move directly to 'Forwarding'?",
+    "options": {
+      "A": "BPDU Guard",
+      "B": "PortFast",
+      "C": "Root Guard strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of a 'Layer 3 Switch' compared to a standard Layer 2 switch?",
+    "options": {
+      "A": "It has three physical power buttons.",
+      "B": "A device that masterfully uses hardware-based ASICs to technically perform inter-VLAN routing at wire speed.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VTP' (VLAN Trunking Protocol) is technically used to masterfully synchronize the VLAN database across multiple switches within the same management domain.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves analyzing 'BPDU' (Bridge Protocol Data Unit) frames to technically determine the Root Bridge in an STP topology?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Spanning Tree Convergence Orchestration",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'StackWise' technically used for in a Cisco access layer environment?",
+    "options": {
+      "A": "To stack physical paper reports on the router.",
+      "B": "A technology that masterfully connects multiple physical switches to act as a single logical technical entity with a shared management plane.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for resolving 'Mismatched' VLAN errors on a trunk? (Select all that apply)",
+    "options": {
+      "A": "Ensuring the 'Native VLAN' masterfully matches on both sides of the link",
+      "B": "Verifying the trunk encapsulation technically supports 802.1Q",
+      "C": "Buying physical snacks for the NOC team",
+      "D": "Disabling 'VTP Pruning' to masterfully force traffic across the link"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: 'Private VLANs' (PVLANs) technically allow a switch to masterfully isolate ports within the same subnet, such as 'Isolated' ports that cannot talk to each other.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multiple Spanning Tree' (MSTP / 802.1s) significance in a large-scale network?",
+    "options": {
+      "A": "Building a physical bridge in the office.",
+      "B": "A technical protocol that masterfully maps multiple VLANs into a single spanning tree instance to technically save CPU resources on the switch.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a Layer 2 broadcast storm?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The technical duration from a loop occurring until the 'Storm Control' or management platform masterfully flags the CPU spike.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'LACP' (Link Aggregation Control Protocol) to technically negotiate a bundle between two masterfully different vendor switches?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Vendor-Agnostic Bundle Orchestration / LACP Unification",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Duplex' settings on a link between two switches technically cause high collision rates and masterfully degraded throughput.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'VLAN' 'Pruning' technical benefits? (Select all that apply)",
+    "options": {
+      "A": "Technically restricting broadcast traffic from being sent to switches that masterfully have zero ports in that VLAN",
+      "B": "Consistency in maintenance result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Optimizing technical trunk bandwidth masterfully by reducing unnecessary flooding"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Path' redundancy significance in a 'VSS' (Virtual Switching System) environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical ability to masterfully use multi-chassis EtherChannel to eliminate the need for STP blocking states between core switches.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'TC' (Topology Change) Notification monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking how often the Spanning Tree masterfully re-calculates, identifying an unstable link causing technical reconvergence.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'VTP' 'Passwords' technically prevent a switch from masterfully receiving VLAN updates from its VTP Server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' switching framework handles 'Automated' 'MAC' 'Security' enforcement?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "NAC (Network Access Control) / 802.1X Authenticator Service",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'UDLD' (Unidirectional Link Detection) significance in switching orchestration?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "A technical feature that masterfully detects if a fiber link is technically only working in one direction to prevent STP loops.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Trunking' 'Protocol' (DTP)?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "A technical protocol masterfully used to automatically negotiate whether a link should technically become a trunk or an access port.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'MTU' settings on a switch stack member technically cause 'Giant' frame drops that masterfully disrupt internal stack communication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Switching' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Data Center Architect (Execution fabric analysis)",
+      "B": "Security Compliance Lead (Enforcing Private VLAN and MAC-filtering standards)",
+      "C": "Application Performance Lead (Metric and Latency consistency)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'QinQ' (802.1ad) significance in a Service Provider switching audit?",
+    "options": {
+      "A": "Setting up switches in a dark room.",
+      "B": "A technical process where a second VLAN tag is masterfully added to a frame (cause), allowing a provider to carry multiple customer VLANs through a single provider VLAN (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Dumb' switch loop?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long an unmanaged switch loop technically floods the network before a masterfully configured 'BPDU Guard' disables the uplink.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when an organization expects 'Zero Jitter' while technically utilizing a 'Half-Duplex' legacy hub for masterfully modern VoIP traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switch' 'Tuning' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying ports with technically high 'CRC' error rates automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technically adjusting 'QoS' weights based on masterfully tracked traffic patterns"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Switch' 'Resilience'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Uplink redundancy', 'STP stability', 'Power supply health', and 'MTTR for recent outages'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Stack' 'Failures' (MTSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational stability by measuring how long a switch stack remains technically operational before a masterfully flagged member disconnect occurs.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a lead promises 'Immediate Global Sync' while technically using 'VTP Client' mode on a switch with high link latency.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Analytics' for leads? (Select all that apply)",
+    "options": {
+      "A": "Identifying ports with the highest 'Un-used' technical capacity waste",
+      "B": "Predicting future 'Fiber' needs based on historical uplink growth in switch fabrics",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Security Blindspots' in unauthorized VLAN creation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Switch Template?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a port security rule is isolated from the visual dashboard, allowing for central masterfully updated updates without re-building monitoring tools.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Switching' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated firmware and manual CLI workarounds, which makes the logic technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns a high-throughput video job to a switch that technically has its 'Buffer' set to an entry-level size.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Switching' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Configuration Policy' (e.g. No Telnet) via automated compliance linters",
+      "B": "Accelerating 'User Onboarding' through standardized Port Templates",
+      "C": "Ensuring 'Systemic' integrity for global VLAN logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Switching' orchestration in a DevOps squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted VLAN Modules' and 'Port Templates' so local teams can manage their own connectivity without manual tickets.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'VTP' 'Revision' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'VLAN Database' changes, identifying unstable technical requirements or masterfully inconsistent manual updates.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in switching leadership refers to a manager giving a 'Troubleshooting Specialist' a local machine that is too slow to run modern network simulations masterfully.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Switching? (Select all that apply)",
+    "options": {
+      "A": "Identifying switches with the highest 'Backplane' utilization waste",
+      "B": "Predicting future market 'SDN Tooling' needs based on feature adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Switching Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in switch automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful configuration state (like a proven ACL hardening pattern) from one switch and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a VLAN fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a VLAN configuration fix being committed until 'Automated Tests' masterfully confirm the data path is safe again.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead enforces 1990 'Flat-VLAN' requirements for a 2026 'SDN-Native' fabric environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Switching' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Fabric Optimization",
+      "B": "Principal Switching Automation Architect",
+      "C": "Lead Regulatory Insight Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Switching squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Error Handlers', 'VTP Domains', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Switching' 'Consistency' 'Checks'?",
+    "options": {
+      "A": "The percentage of 'Audit' runs where the organization's technical port integrity was found to be 100% effective without manual repair.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a 'Full Stack Re-convergence' masterfully in exactly 5 seconds after a physical member replacement.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Switching? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unmapped ports) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead analysts",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Fabric?",
+    "options": {
+      "A": "Isolating switches on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' traffic masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Private VLAN (PVLAN) orchestration.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the switching baseline remains effective before a technical update breaks the architecture logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in switching leadership occurs when the remediation timeline for a 'loop' discovery is based on 'Fixed Dates' rather than 'Current Performance Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Ad-hoc' shadow switches"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Switching' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a business control (the CLI config block) is isolated from the 'What' (the policy intent), allowing for easy vendor migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Sensor' 'Failure' in switch monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated SNMP trap going 'Offline' until the 'Monitoring Platform' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead enforces 2010 'Signature-only' models to manage a 2026 'SDN-Edge' switching environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Switching' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Automation' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Modules, Switching Audits, Extended Events, and Secret Managers to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant switching control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one fabric performance simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for lead analysts",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Switching Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Network Engineering?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical switching expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Switching Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Switching?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major switching strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in switching leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a hyperscale spine-leaf fabric, how should a Principal Architect technically model 'Buffer Saturation' to predict the impact of incast congestion on micro-burst sensitive distributed storage traffic?",
+    "options": {
+      "A": "By assuming a flat 10% packet drop rate for every 1Gbps of oversubscription.",
+      "B": "By utilizing 'Erlang's Loss Formula' to model block probability and applying a stochastic model to the 'Virtual Output Queueing' (VOQ) efficiency relative to cell-based switch fabrics.",
+      "C": "By limiting the MTU to exactly 1500 bytes to prevent jumbo frame fragmentation strictly.",
+      "D": "By requiring a manual board-level signature for every change to the 'Explicit Congestion Notification' (ECN) thresholds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Fabric' 'Decoupling' refers to the technical practice of utilizing 'EVPN-VXLAN' overlays to ensure that a change in the physical Layer 2 spanning-tree topology (cause) does not systemically force a reconvergence event for the logical multi-tenant baseline (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Engineer to predict the 'FinOps ROI' of shifting from 'Traditional 3-Tier Architecture' to a 'Collapsing Core Spine-Leaf' model for a 10,000-node cluster?",
+    "options": {
+      "A": "Probabilistic Analysis of 'North-South' vs. 'East-West' traffic ratios and the technical amortization of non-blocking ASIC throughput.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'VLAN Arbitrage' during an international M&A involving the merger of a firm with 'Overlapping Subnets' and a firm with 'Strictly Unique Global VRFs'?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Broadcast Archetypes' into a unified 'Segmented Fabric' that technically satisfies the security isolation and compliance requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live MAC address table monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'MLAG' (Multi-chassis Link Aggregation) 'Splicing' and how does it technically enable 'Hitless' firmware upgrades in a critical core layer?",
+    "options": {
+      "A": "When an employee physically unplugs half the switch during an upgrade.",
+      "B": "A technical design pattern where two physical chassis are synchronized to masterfully act as a single logical LACP peer, allowing one switch to be technically reloaded while traffic continues via the dual-homed neighbor.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the show run output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Blocking' STP-based policy is technically applied to a 'Non-blocking' fabric, leading to systemic 'Bandwidth Stranding' where 50% of the fiber capacity is disabled by the protocol logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Switching' 'Chaos' (injecting 10% randomized 'Out-of-Order' frame delivery) to verify if the 'Application Data Access Layer' technically maintains 'State Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Fabric Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'TC' (Topology Change) 'Contagion' and its relation to 'TCN Propagation' in a large-scale enterprise campus?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flapping access port (cause) masterfully forces 100% of the switches in the domain to flush their MAC tables, resulting in systemic 'Unicast Flooding' and global latency spikes (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Fabric Engine' ROI calculations for a strategic shift to 'Merchant Silicon' (e.g., Broadcom Tomahawk) based switches? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Power-per-Gigabit' consumption by utilizing higher-density 400G ASICs",
+      "B": "Financial savings from 'Vendor Lock-in' reclamation due to the ability to run Open-Source NOS (SONiC)",
+      "C": "The value of 'Visibility Integrity' gained through 100% verified In-band Network Telemetry (INT)",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Infrastructure Leadership level ensures that 'Engineers' can flag 'Technical Debt in Core Fabric Oversubscription' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Multi-instance MSTP' design for a 500-switch infrastructure?",
+    "options": {
+      "A": "The physical weight of the 'Cisco CCIE' study guide.",
+      "B": "The ability to integrate contradictory technical signals (e.g., valid 'Bridge Priority' vs. anomalous 'Port-ID' mismatches in logs) into a cohesive 'Root Election' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'MAC' 'Sharding' logic during a high-throughput multi-tenant event?",
+    "options": {
+      "A": "Breaking a physical switch into pieces.",
+      "B": "The process of masterfully isolating 'High-Churn' MAC domains into dedicated VXLAN VNIs to ensure that 'Address Learning' spikes technically cannot impact 'Core' fabric stability.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Port Disabling' during a suspected 'MAC Spoofing' event targeting core server segments?",
+    "options": {
+      "A": "Waiting for the SOC to report a data breach.",
+      "B": "Immediately initiating a 'Violation Policy' and technically pinning the 'Authorized MAC' before the malicious payload masterfully enters the high-trust fabric.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a switching acquisition often result in 'Orchestration Rejection', where the acquired firm's IT staff finds ways to 'Side-load' unmanaged hubs to bypass parent firm's '802.1X-Native' guardrails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Switching' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Silicon-Photonics' and 'Quantum-Safe Fabric' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the NOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Platform Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Switch Fabric Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Fabric Strategy' itself (e.g., why we use L2 stretching for DR) is the cause of systemic failure, rather than just fixing a single 'Failed SFP'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Fabric Design?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'VTP Server' that technically has zero automated revision-lock monitoring.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Switching Ops occurs when a firm continues to rely on 'Static Trunking' models in 2026, despite modern business requirements necessitating 'Autonomous' EVPN fabrics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Switching' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Port Spend (RAROPS)",
+      "B": "Percentage of 'Business Critical' switches with 100% verified 'Configuration drift' coverage",
+      "C": "Velocity of 'Legacy Hub' retirement across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Hardware-to-Cloud-Switching' transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured 'Rack Admins' will block 'Virtual-Cloud-Fabric' adoption to protect their manual 'Cabling' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'VLAN Isolation' or 'Egress-ACL' policies.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CTO demands 'Zero Port Waste' while the Board only rewards the team for '100% Speed of Physical Server Rack Deployment'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'MAC Learning Patterns' with potential 'Kernel-level' data exfiltration attempts",
+      "B": "Automatically identifying 'Port Owner' gaps in real-time as a new VNI is provisioned",
+      "C": "Guaranteed to replace all human Lead Architects",
+      "D": "Analyzing global metadata to predict 'TC Flap' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Switching' 'Ecosystem' 'Architecture' (SEA) for an Architect?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Spine-Leaf Fabric, Multi-tenant Overlays, Bare-Metal Controllers, and Security Analytics into a single 'Unified Traffic Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Private VLAN' logic matches the parent company's 'Safety Standard' before fabric merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Regional Consistency' from a newly hired team that requires 12 months of 'Historic Baseline Mapping' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of logical isolation for Regulatory auditors",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are enforced during automated multi-region fabric sharding"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Switching Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Configuration Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in fabric convergence?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'ASIC vulnerability' release and the Lead officially flagging the total internal exposure count based on version scans.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Failover Readiness' to the board while the internal team is aware that 'Leaf B' is technically un-tested.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Switching' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Port Write' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Fabric Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Monitoring Sinks, CIM-tags, and RBAC to stabilize a new offshore project in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Switching architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed switching telemetry after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Platform Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw execution logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile fabric failure (e.g., data leak from PVLAN breakout) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in switching strategy refers to an organization promising 'Zero Latency' while utilizing a 'Low-Budget' manual sampling model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Switching' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Fabric Resilience",
+      "B": "Chief Metadata Architect",
+      "C": "Director of Telemetry Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Insight Uptime', 'MTTI for findings', 'Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Switching team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Audit-only' models to manage a 2026 'Cloud-Edge' environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Business Owner' intent analysis",
+      "B": "Keeping artifacts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade network topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Switching Platforms?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Traffic Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Switching' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g., competitor fine) and the Architect officially presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in switching auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Switching' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Traffic Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired circuit within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Switching' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Platform Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Network Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Switching' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Platform Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Switching Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Traffic Model' can be 'Lifted' from one product line (e.g., Corporate VPN) and applied to another (e.g., Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated data service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Configuration Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Switching' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for Infrastructure Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Traffic Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in switching operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new sharding vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Threat TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Switching' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' infrastructure culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic infrastructure shifts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits in Network Switching?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Switching' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named Switching.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'EVPN and AIOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through fabric process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Switching' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic account grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on sharding audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Switching' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

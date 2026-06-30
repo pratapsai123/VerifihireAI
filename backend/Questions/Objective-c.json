@@ -1,0 +1,1696 @@
+{ 
+  "skill": "Objective-c", 
+  "questions": [
+    {
+"question":"Objective-C is primarily used for which platform development?",
+"options":{
+"A":"iOS and macOS",
+"B":"Android",
+"C":"Windows kernel",
+"D":"Linux drivers"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Objective-C is a superset of the C programming language.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which company originally developed Objective-C?",
+"options":{
+"A":"Apple",
+"B":"Microsoft",
+"C":"Stepstone",
+"D":"Google"
+},
+"answer":"C"
+},
+{
+"question":"Which symbol is used to define Objective-C classes?",
+"options":{
+"A":"@interface",
+"B":"#class",
+"C":"class",
+"D":"interface"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Objective-C uses message passing instead of function calls for objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are Objective-C keywords? (Select all that apply)",
+"options":{
+"A":"@interface",
+"B":"@implementation",
+"C":"@end",
+"D":"compile"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which symbol is used to send a message to an object?",
+"options":{
+"A":"[]",
+"B":"()",
+"C":"{}",
+"D":"<>"
+},
+"answer":"A"
+},
+
+{
+"question":"Example of message passing syntax?",
+"options":{
+"A":"[object method]",
+"B":"object.method()",
+"C":"object->method()",
+"D":"method(object)"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C supports dynamic typing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines instance variables inside a class?",
+"options":{
+"A":"@interface",
+"B":"@property",
+"C":"@public",
+"D":"@private"
+},
+"answer":"B"
+},
+
+{
+"question":"Which keyword is used to implement class methods?",
+"options":{
+"A":"+",
+"B":"-",
+"C":"*",
+"D":"&"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword defines instance methods?",
+"options":{
+"A":"-",
+"B":"+",
+"C":"*",
+"D":"!"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Class methods are prefixed with '+'.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which root class does most Objective-C classes inherit from?",
+"options":{
+"A":"NSObject",
+"B":"NSBase",
+"C":"NSRoot",
+"D":"NSClass"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are Foundation framework classes? (Select all that apply)",
+"options":{
+"A":"NSString",
+"B":"NSArray",
+"C":"NSDictionary",
+"D":"NSPrinter"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: NSString represents immutable strings.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents mutable strings?",
+"options":{
+"A":"NSMutableString",
+"B":"NSString",
+"C":"StringBuffer",
+"D":"NSText"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class stores ordered collections?",
+"options":{
+"A":"NSArray",
+"B":"NSDictionary",
+"C":"NSSet",
+"D":"NSString"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class stores key-value pairs?",
+"options":{
+"A":"NSDictionary",
+"B":"NSArray",
+"C":"NSSet",
+"D":"NSText"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSArray is immutable by default.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class provides mutable arrays?",
+"options":{
+"A":"NSMutableArray",
+"B":"NSArray",
+"C":"Array",
+"D":"NSCollection"
+},
+"answer":"A"
+},
+
+{
+"question":"Which symbol imports frameworks in Objective-C?",
+"options":{
+"A":"#import",
+"B":"include",
+"C":"using",
+"D":"require"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: #import prevents duplicate header inclusion.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which data type represents boolean in Objective-C?",
+"options":{
+"A":"BOOL",
+"B":"bool",
+"C":"boolean",
+"D":"Boolean"
+},
+"answer":"A"
+},
+
+{
+"question":"Which values represent BOOL true/false?",
+"options":{
+"A":"YES/NO",
+"B":"1/0",
+"C":"True/False",
+"D":"On/Off"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: YES equals 1 in Objective-C.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents dates?",
+"options":{
+"A":"NSDate",
+"B":"NSTime",
+"C":"NSDateTime",
+"D":"NSCalendarDate"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class provides timers?",
+"options":{
+"A":"NSTimer",
+"B":"NSTime",
+"C":"NSClock",
+"D":"NSTick"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C supports categories for extending classes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which feature allows adding methods to existing classes?",
+"options":{
+"A":"Category",
+"B":"Protocol",
+"C":"Delegate",
+"D":"Extension"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature defines method requirements for classes?",
+"options":{
+"A":"Protocol",
+"B":"Category",
+"C":"Delegate",
+"D":"Class extension"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Protocols are similar to interfaces in other languages.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword declares a protocol?",
+"options":{
+"A":"@protocol",
+"B":"protocol",
+"C":"@interface",
+"D":"protocol:"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword ends a protocol declaration?",
+"options":{
+"A":"@end",
+"B":"@finish",
+"C":"end",
+"D":"protocolEnd"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Delegation is commonly implemented using protocols.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature enables memory management automatically?",
+"options":{
+"A":"ARC",
+"B":"GC",
+"C":"Manual Retain Release",
+"D":"Compiler GC"
+},
+"answer":"A"
+},
+
+{
+"question":"ARC stands for?",
+"options":{
+"A":"Automatic Reference Counting",
+"B":"Advanced Resource Control",
+"C":"Automatic Runtime Control",
+"D":"Application Resource Controller"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: ARC automatically inserts retain/release calls.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword creates weak references under ARC?",
+"options":{
+"A":"__weak",
+"B":"__strong",
+"C":"weak",
+"D":"retain"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword creates strong references?",
+"options":{
+"A":"__strong",
+"B":"__weak",
+"C":"retain",
+"D":"assign"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Strong references keep objects alive.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which method initializes an object?",
+"options":{
+"A":"init",
+"B":"start",
+"C":"newObject",
+"D":"create"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class method allocates memory for an object?",
+"options":{
+"A":"alloc",
+"B":"init",
+"C":"new",
+"D":"create"
+},
+"answer":"A"
+},
+
+{
+"question":"Typical Objective-C object creation pattern?",
+"options":{
+"A":"[[Class alloc] init]",
+"B":"new Class()",
+"C":"Class.create()",
+"D":"init Class"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C supports dynamic runtime features.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which library provides Objective-C runtime functions?",
+"options":{
+"A":"objc/runtime.h",
+"B":"runtime.h",
+"C":"objc.h",
+"D":"runtime_objc.h"
+},
+"answer":"A"
+},
+
+{
+"question":"Which runtime feature allows method swapping?",
+"options":{
+"A":"Method Swizzling",
+"B":"Method Injection",
+"C":"Method Override",
+"D":"Method Replacement"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Method swizzling changes method implementations at runtime.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which keyword declares properties in Objective-C?",
+"options":{
+"A":"@property",
+"B":"property",
+"C":"@var",
+"D":"@attribute"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: @property automatically generates getter and setter methods.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword synthesizes property accessors?",
+"options":{
+"A":"@synthesize",
+"B":"@property",
+"C":"@getter",
+"D":"@setter"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword dynamically resolves property methods at runtime?",
+"options":{
+"A":"@dynamic",
+"B":"@runtime",
+"C":"@resolve",
+"D":"@runtimeMethod"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: @dynamic tells the compiler not to generate getters and setters.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which property attribute indicates strong ownership?",
+"options":{
+"A":"strong",
+"B":"weak",
+"C":"assign",
+"D":"retain"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property attribute prevents retain cycles?",
+"options":{
+"A":"weak",
+"B":"strong",
+"C":"assign",
+"D":"retain"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: weak references do not increase reference count.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which property attribute is used for primitive types?",
+"options":{
+"A":"assign",
+"B":"strong",
+"C":"weak",
+"D":"retain"
+},
+"answer":"A"
+},
+
+{
+"question":"Which property attribute ensures thread-safe setter?",
+"options":{
+"A":"atomic",
+"B":"nonatomic",
+"C":"threadsafe",
+"D":"synchronized"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: nonatomic properties are faster than atomic.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which property attribute copies value instead of referencing?",
+"options":{
+"A":"copy",
+"B":"retain",
+"C":"assign",
+"D":"duplicate"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class represents sets?",
+"options":{
+"A":"NSSet",
+"B":"NSArray",
+"C":"NSDictionary",
+"D":"NSMutableArray"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSSet stores unordered unique elements.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class provides mutable sets?",
+"options":{
+"A":"NSMutableSet",
+"B":"NSSet",
+"C":"Set",
+"D":"NSCollection"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class manages application notifications?",
+"options":{
+"A":"NSNotificationCenter",
+"B":"NSNotifier",
+"C":"NSNotification",
+"D":"NSBroadcast"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSNotificationCenter is used for observer pattern.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which method registers observer for notifications?",
+"options":{
+"A":"addObserver",
+"B":"addListener",
+"C":"observe",
+"D":"registerObserver"
+},
+"answer":"A"
+},
+
+{
+"question":"Which method posts notifications?",
+"options":{
+"A":"postNotification",
+"B":"sendNotification",
+"C":"dispatchNotification",
+"D":"notifyAll"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Notifications allow loose coupling between objects.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature allows multiple classes to implement same interface?",
+"options":{
+"A":"Protocol",
+"B":"Category",
+"C":"Class Extension",
+"D":"Inheritance"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword adopts protocol in class declaration?",
+"options":{
+"A":"<>",
+"B":"[]",
+"C":"()",
+"D":"{}"
+},
+"answer":"A"
+},
+
+{
+"question":"Example syntax for protocol adoption?",
+"options":{
+"A":"@interface MyClass : NSObject <MyProtocol>",
+"B":"class MyClass implements Protocol",
+"C":"MyClass : Protocol",
+"D":"protocol MyClass"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Protocol methods can be optional.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which keyword marks optional protocol methods?",
+"options":{
+"A":"@optional",
+"B":"optional",
+"C":"@maybe",
+"D":"@skip"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword marks required protocol methods?",
+"options":{
+"A":"@required",
+"B":"required",
+"C":"@must",
+"D":"@force"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C supports multiple inheritance.",
+"options":{"A":"True","B":"False"},
+"answer":"B"
+},
+
+{
+"question":"Which mechanism replaces multiple inheritance in Objective-C?",
+"options":{
+"A":"Protocols",
+"B":"Categories",
+"C":"Extensions",
+"D":"Delegates"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C construct groups methods in implementation?",
+"options":{
+"A":"@implementation",
+"B":"@interface",
+"C":"@protocol",
+"D":"@class"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: @implementation provides method definitions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C keyword forward declares classes?",
+"options":{
+"A":"@class",
+"B":"class",
+"C":"forward",
+"D":"declare"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C macro logs messages to console?",
+"options":{
+"A":"NSLog",
+"B":"print",
+"C":"log",
+"D":"console.log"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSLog prints messages with timestamps.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which specifier prints integer in NSLog?",
+"options":{
+"A":"%d",
+"B":"%s",
+"C":"%f",
+"D":"%@"
+},
+"answer":"A"
+},
+
+{
+"question":"Which specifier prints Objective-C objects?",
+"options":{
+"A":"%@",
+"B":"%o",
+"C":"%x",
+"D":"%c"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: %@ calls object's description method.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class handles file management?",
+"options":{
+"A":"NSFileManager",
+"B":"NSFile",
+"C":"NSStorage",
+"D":"NSDisk"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class manages user defaults?",
+"options":{
+"A":"NSUserDefaults",
+"B":"NSUserSettings",
+"C":"NSPreferences",
+"D":"NSUserConfig"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSUserDefaults stores small persistent data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Objective-C framework provides basic data types and collections?",
+"options":{
+"A":"Foundation",
+"B":"UIKit",
+"C":"CoreData",
+"D":"CoreGraphics"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: UIKit is mainly used for building iOS user interfaces.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents application object in iOS?",
+"options":{
+"A":"UIApplication",
+"B":"NSApplication",
+"C":"AppController",
+"D":"UIApp"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class manages view hierarchy in iOS apps?",
+"options":{
+"A":"UIView",
+"B":"UIViewController",
+"C":"UIWindow",
+"D":"UIScreen"
+},
+"answer":"B"
+},
+
+{
+"question":"True or False: UIViewController controls views and handles user interactions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents screen content area?",
+"options":{
+"A":"UIWindow",
+"B":"UIView",
+"C":"UIScreen",
+"D":"UIViewController"
+},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are UIKit classes? (Select all that apply)",
+"options":{
+"A":"UIButton",
+"B":"UILabel",
+"C":"UITableView",
+"D":"NSTimer"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: UIButton is used to create tappable buttons.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class displays text labels?",
+"options":{
+"A":"UILabel",
+"B":"UITextView",
+"C":"UITextField",
+"D":"NSText"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class allows editable single-line text input?",
+"options":{
+"A":"UITextField",
+"B":"UITextView",
+"C":"UILabel",
+"D":"NSText"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: UITextView supports multiline text editing.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class manages table-based layouts?",
+"options":{
+"A":"UITableView",
+"B":"UICollectionView",
+"C":"UIView",
+"D":"UIStackView"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class displays grid-style layouts?",
+"options":{
+"A":"UICollectionView",
+"B":"UITableView",
+"C":"UIStackView",
+"D":"UIView"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: UICollectionView is more flexible than UITableView.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class schedules tasks in background threads?",
+"options":{
+"A":"NSOperationQueue",
+"B":"NSThread",
+"C":"GCD",
+"D":"NSQueue"
+},
+"answer":"A"
+},
+
+{
+"question":"Which Apple technology provides concurrency with blocks?",
+"options":{
+"A":"Grand Central Dispatch",
+"B":"CoreData",
+"C":"UIKit",
+"D":"NSRunLoop"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: GCD stands for Grand Central Dispatch.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which function dispatches tasks asynchronously?",
+"options":{
+"A":"dispatch_async",
+"B":"dispatch_sync",
+"C":"dispatch_start",
+"D":"dispatch_begin"
+},
+"answer":"A"
+},
+
+{
+"question":"Which function runs task synchronously?",
+"options":{
+"A":"dispatch_sync",
+"B":"dispatch_async",
+"C":"dispatch_wait",
+"D":"dispatch_hold"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: dispatch_async returns immediately.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature represents anonymous functions?",
+"options":{
+"A":"Blocks",
+"B":"Protocols",
+"C":"Categories",
+"D":"Delegates"
+},
+"answer":"A"
+},
+
+{
+"question":"Which syntax defines a block?",
+"options":{
+"A":"^",
+"B":"#",
+"C":"@",
+"D":"&"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Blocks capture variables from surrounding scope.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class is used for persistent storage in iOS?",
+"options":{
+"A":"CoreData",
+"B":"NSUserDefaults",
+"C":"SQLite",
+"D":"Realm"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Core Data is an ORM framework.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Core Data class manages object graph?",
+"options":{
+"A":"NSManagedObjectContext",
+"B":"NSManagedObject",
+"C":"NSPersistentStore",
+"D":"NSFetchRequest"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class represents Core Data entity objects?",
+"options":{
+"A":"NSManagedObject",
+"B":"NSObject",
+"C":"NSCoreObject",
+"D":"NSDataObject"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSManagedObject represents database records.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class executes fetch queries in Core Data?",
+"options":{
+"A":"NSFetchRequest",
+"B":"NSQuery",
+"C":"NSSelect",
+"D":"NSFetch"
+},
+"answer":"A"
+},
+
+{
+"question":"Which framework handles graphics and drawing?",
+"options":{
+"A":"CoreGraphics",
+"B":"UIKit",
+"C":"Foundation",
+"D":"QuartzCore"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CoreGraphics is also known as Quartz.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class handles animations in iOS?",
+"options":{
+"A":"UIView",
+"B":"CALayer",
+"C":"CAAnimation",
+"D":"AnimationView"
+},
+"answer":"C"
+},
+
+{
+"question":"Which framework provides low-level animation APIs?",
+"options":{
+"A":"QuartzCore",
+"B":"UIKit",
+"C":"Foundation",
+"D":"CoreText"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C can interoperate with Swift.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which bridging file enables Swift to access Objective-C code?",
+"options":{
+"A":"Bridging Header",
+"B":"Swift Header",
+"C":"ObjC Bridge",
+"D":"Header Bridge"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword exposes Objective-C APIs to Swift?",
+"options":{
+"A":"@objc",
+"B":"@swift",
+"C":"@interop",
+"D":"@expose"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C runtime allows dynamic method resolution.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Objective-C class is the base class for most objects?",
+"options":{"A":"NSObject","B":"NSBase","C":"NSRoot","D":"Object"},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSObject provides basic object behavior in Objective-C.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature allows runtime method replacement?",
+"options":{"A":"Method Swizzling","B":"Method Override","C":"Method Injection","D":"Dynamic Dispatch"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C runtime header provides runtime APIs?",
+"options":{"A":"objc/runtime.h","B":"runtime.h","C":"objc.h","D":"runtime_objc.h"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C runtime allows inspecting classes and methods at runtime.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C function gets class name at runtime?",
+"options":{"A":"class_getName","B":"getClassName","C":"runtime_className","D":"objc_getClassName"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C runtime function retrieves method list?",
+"options":{"A":"class_copyMethodList","B":"class_methods","C":"method_getList","D":"getMethodList"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C runtime supports dynamic method addition.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C function adds method at runtime?",
+"options":{"A":"class_addMethod","B":"method_add","C":"add_runtime_method","D":"addMethod"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C runtime function exchanges method implementations?",
+"options":{"A":"method_exchangeImplementations","B":"swapMethods","C":"methodReplace","D":"runtimeSwap"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Method swizzling is commonly used for debugging or analytics.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature allows extending class functionality without subclassing?",
+"options":{"A":"Category","B":"Protocol","C":"Inheritance","D":"Delegate"},
+"answer":"A"
+},
+
+{
+"question":"Which syntax declares category in Objective-C?",
+"options":{
+"A":"@interface ClassName (CategoryName)",
+"B":"class ClassName:Category",
+"C":"category ClassName",
+"D":"extend ClassName"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Categories cannot add instance variables.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C construct can add private methods?",
+"options":{"A":"Class Extension","B":"Category","C":"Protocol","D":"Delegate"},
+"answer":"A"
+},
+
+{
+"question":"Which syntax declares class extension?",
+"options":{
+"A":"@interface ClassName ()",
+"B":"class ClassName {}",
+"C":"@extension ClassName",
+"D":"extend ClassName"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Class extensions allow adding private properties.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C memory management existed before ARC?",
+"options":{
+"A":"Manual Retain Release",
+"B":"Automatic GC",
+"C":"Stack Memory",
+"D":"Reference Stack"
+},
+"answer":"A"
+},
+
+{
+"question":"Which methods were used in manual memory management? (Select all that apply)",
+"options":{
+"A":"retain",
+"B":"release",
+"C":"autorelease",
+"D":"destroy"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"True or False: ARC removed the need to manually call retain and release.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class manages autorelease pools?",
+"options":{
+"A":"NSAutoreleasePool",
+"B":"NSPool",
+"C":"NSMemoryPool",
+"D":"NSReleasePool"
+},
+"answer":"A"
+},
+
+{
+"question":"Which keyword is used in modern Objective-C for autorelease pool?",
+"options":{
+"A":"@autoreleasepool",
+"B":"@releasepool",
+"C":"@pool",
+"D":"@memorypool"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: @autoreleasepool improves memory management in loops.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C data type represents binary data?",
+"options":{
+"A":"NSData",
+"B":"NSBinary",
+"C":"NSBlob",
+"D":"NSDataObject"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class represents mutable binary data?",
+"options":{
+"A":"NSMutableData",
+"B":"NSData",
+"C":"NSDataBuffer",
+"D":"NSBinaryData"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSData stores immutable raw bytes.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class manages URLs?",
+"options":{
+"A":"NSURL",
+"B":"NSLink",
+"C":"NSWebURL",
+"D":"NSURLManager"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class handles HTTP requests?",
+"options":{
+"A":"NSURLSession",
+"B":"NSURLRequest",
+"C":"NSURLConnection",
+"D":"NSURLConnection"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSURLSession replaces NSURLConnection.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents HTTP request objects?",
+"options":{
+"A":"NSURLRequest",
+"B":"NSURLSession",
+"C":"NSURLTask",
+"D":"NSRequest"
+},
+"answer":"A"
+},
+
+{
+"question":"Which class performs network tasks?",
+"options":{
+"A":"NSURLSessionTask",
+"B":"NSURLRequest",
+"C":"NSURLTaskManager",
+"D":"NSURLJob"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSURLSession supports background downloads.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C framework manages device sensors?",
+"options":{
+"A":"CoreMotion",
+"B":"CoreGraphics",
+"C":"CoreData",
+"D":"CoreMedia"
+},
+"answer":"A"
+},
+
+{
+"question":"Which framework provides location services?",
+"options":{
+"A":"CoreLocation",
+"B":"MapKit",
+"C":"UIKit",
+"D":"Foundation"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: CoreLocation provides GPS functionality.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C framework handles audio playback?",
+"options":{
+"A":"AVFoundation",
+"B":"CoreAudio",
+"C":"MediaKit",
+"D":"SoundKit"
+},
+"answer":"A"
+},
+
+{
+"question":"Which framework handles camera and video capture?",
+"options":{
+"A":"AVFoundation",
+"B":"UIKit",
+"C":"CoreGraphics",
+"D":"MediaPlayer"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: AVFoundation is used for video recording.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature allows dynamic method dispatch?",
+"options":{
+"A":"Message Passing",
+"B":"Function Calls",
+"C":"Static Dispatch",
+"D":"Inline Execution"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C messaging uses objc_msgSend internally.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which Objective-C keyword is used to declare a class interface?",
+"options":{"A":"@interface","B":"@class","C":"class","D":"interface"},
+"answer":"A"
+},
+{
+"question":"True or False: Objective-C classes are implemented using @implementation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which keyword ends class implementation?",
+"options":{"A":"@end","B":"end","C":"@stop","D":"finish"},
+"answer":"A"
+},
+{
+"question":"Which Objective-C class represents numbers?",
+"options":{"A":"NSNumber","B":"NSValue","C":"NSNumberValue","D":"NSInt"},
+"answer":"A"
+},
+{
+"question":"True or False: NSNumber wraps primitive numeric values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class represents ranges?",
+"options":{"A":"NSRange","B":"NSInterval","C":"NSBound","D":"NSLimit"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class represents value objects?",
+"options":{"A":"NSValue","B":"NSNumber","C":"NSData","D":"NSObject"},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSValue can store structures like CGPoint.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class represents URLs?",
+"options":{"A":"NSURL","B":"NSLink","C":"NSWeb","D":"NSAddress"},
+"answer":"A"
+},
+
+{
+"question":"Which class loads remote data asynchronously?",
+"options":{"A":"NSURLSession","B":"NSURLLoader","C":"NSURLFetch","D":"NSURLHandler"},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSURLSession handles network data tasks.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents HTTP request configuration?",
+"options":{"A":"NSURLRequest","B":"NSURLSession","C":"NSURLTask","D":"NSRequest"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C framework manages application lifecycle?",
+"options":{"A":"UIKit","B":"Foundation","C":"CoreData","D":"Quartz"},
+"answer":"A"
+},
+
+{
+"question":"True or False: UIKit provides UI elements for iOS apps.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class represents images in UIKit?",
+"options":{"A":"UIImage","B":"NSImage","C":"UIImageView","D":"UIBitmap"},
+"answer":"A"
+},
+
+{
+"question":"Which class displays images on screen?",
+"options":{"A":"UIImageView","B":"UIImage","C":"UIView","D":"UILabel"},
+"answer":"A"
+},
+
+{
+"question":"True or False: UIImageView is a subclass of UIView.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class handles navigation between screens?",
+"options":{"A":"UINavigationController","B":"UIViewController","C":"UITabBarController","D":"UIScreen"},
+"answer":"A"
+},
+
+{
+"question":"Which controller manages tab-based navigation?",
+"options":{"A":"UITabBarController","B":"UIViewController","C":"UINavigationController","D":"UIStackView"},
+"answer":"A"
+},
+
+{
+"question":"True or False: UINavigationController manages stack-based navigation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which class manages device screen information?",
+"options":{"A":"UIScreen","B":"UIView","C":"UIWindow","D":"UIDevice"},
+"answer":"A"
+},
+
+{
+"question":"Which class provides device information?",
+"options":{"A":"UIDevice","B":"UIScreen","C":"UIHardware","D":"NSDevice"},
+"answer":"A"
+},
+
+{
+"question":"True or False: UIDevice provides battery and device model information.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C framework handles database-like storage?",
+"options":{"A":"CoreData","B":"Foundation","C":"UIKit","D":"QuartzCore"},
+"answer":"A"
+},
+
+{
+"question":"Which Core Data class manages persistent stores?",
+"options":{"A":"NSPersistentStoreCoordinator","B":"NSManagedObject","C":"NSFetchRequest","D":"NSContext"},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSPersistentStoreCoordinator connects Core Data to storage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C class schedules repeating tasks?",
+"options":{"A":"NSTimer","B":"NSClock","C":"NSTask","D":"NSDelay"},
+"answer":"A"
+},
+
+{
+"question":"Which method starts NSTimer?",
+"options":{"A":"scheduledTimerWithTimeInterval","B":"startTimer","C":"createTimer","D":"runTimer"},
+"answer":"A"
+},
+
+{
+"question":"True or False: NSTimer triggers events after specified intervals.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature enables background execution blocks?",
+"options":{"A":"Grand Central Dispatch","B":"CoreData","C":"Foundation","D":"UIKit"},
+"answer":"A"
+},
+
+{
+"question":"Which function queues task asynchronously?",
+"options":{"A":"dispatch_async","B":"dispatch_sync","C":"dispatch_now","D":"dispatch_execute"},
+"answer":"A"
+},
+
+{
+"question":"True or False: dispatch_async runs code on background queue.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C syntax represents blocks?",
+"options":{"A":"^","B":"#","C":"@","D":"&"},
+"answer":"A"
+},
+
+{
+"question":"Which Objective-C feature supports runtime messaging?",
+"options":{"A":"objc_msgSend","B":"method_call","C":"runtime_call","D":"objc_execute"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Objective-C messaging is resolved at runtime.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+  "question": "Which Objective-C feature allows objects to receive messages even if the method is determined at runtime?",
+  "options": {
+    "A": "Dynamic Messaging",
+    "B": "Static Dispatch",
+    "C": "Compile-time Binding",
+    "D": "Inline Execution"
+  },
+  "answer": "A"
+}
+  ]
+}

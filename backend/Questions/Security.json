@@ -1,0 +1,1804 @@
+{ 
+  "skill": "Security", 
+  "questions": [
+    {
+    "question": "Which of the following are considered 'Multi-Factor Authentication' (MFA) factors? (Select all that apply)",
+    "options": {
+      "A": "Something you know (e.g., a password).",
+      "B": "Something you have (e.g., a security token).",
+      "C": "Something you are (e.g., a fingerprint).",
+      "D": "Something you do (e.g., typing rhythm)."
+    },
+    "answer": ["A", "B", "C", "D"]
+  },
+  {
+    "question": "What does 'HTTPS' use to secure data in transit?",
+    "options": {
+      "A": "SSH",
+      "B": "TLS/SSL",
+      "C": "FTP",
+      "D": "SFTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Strong Password' should ideally contain a mix of uppercase letters, lowercase letters, numbers, and symbols.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common types of 'Malware'? (Select all that apply)",
+    "options": {
+      "A": "Viruses",
+      "B": "Worms",
+      "C": "Ransomware",
+      "D": "Cookies"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary goal of a 'Phishing' attack?",
+    "options": {
+      "A": "To crash a website's server.",
+      "B": "To trick users into revealing sensitive information like passwords.",
+      "C": "To speed up the internet connection.",
+      "D": "To update the user's operating system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should use the same password for all your online accounts to make them easier to remember.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are elements of the 'CIA Triad'? (Select all that apply)",
+    "options": {
+      "A": "Confidentiality",
+      "B": "Integrity",
+      "C": "Availability",
+      "D": "Authenticity"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Firewall' used for?",
+    "options": {
+      "A": "To clean a computer's physical hardware.",
+      "B": "To monitor and control incoming and outgoing network traffic.",
+      "C": "To increase the monitor's brightness.",
+      "D": "To store large amounts of data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Public Wi-Fi networks (like those in coffee shops) are generally more secure than private home networks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hashing is a reversible process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common hashing algorithms? (Select all that apply)",
+    "options": {
+      "A": "SHA-256",
+      "B": "MD5",
+      "C": "AES",
+      "D": "SHA-1"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary purpose of a VPN?",
+    "options": {
+      "A": "Increase internet speed",
+      "B": "Secure communication over public networks",
+      "C": "Block malware automatically",
+      "D": "Manage databases"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: HTTPS uses SSL/TLS to encrypt web traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of multi-factor authentication? (Select all that apply)",
+    "options": {
+      "A": "Password and OTP",
+      "B": "PIN and password",
+      "C": "Fingerprint and password",
+      "D": "Security question and password"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What type of attack floods a server with excessive traffic?",
+    "options": {
+      "A": "SQL Injection",
+      "B": "DoS Attack",
+      "C": "Phishing",
+      "D": "Brute Force"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Public keys must be kept secret.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are examples of malware? (Select all that apply)",
+    "options": {
+      "A": "Virus",
+      "B": "Worm",
+      "C": "Firewall",
+      "D": "Trojan"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of a digital certificate?",
+    "options": {
+      "A": "Encrypt files permanently",
+      "B": "Verify the identity of a website or entity",
+      "C": "Increase bandwidth",
+      "D": "Store passwords"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SQL Injection targets database-driven applications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are social engineering attacks? (Select all that apply)",
+    "options": {
+      "A": "Phishing",
+      "B": "Tailgating",
+      "C": "DDoS",
+      "D": "Pretexting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does XSS stand for?",
+    "options": {
+      "A": "Extended Secure Sockets",
+      "B": "Cross-Site Scripting",
+      "C": "Extra Secure Shell",
+      "D": "Cross Server Security"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A strong password should contain letters, numbers, and special characters.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is typically used for HTTPS?",
+    "options": {
+      "A": "80",
+      "B": "21",
+      "C": "443",
+      "D": "25"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following help prevent brute-force attacks? (Select all that apply)",
+    "options": {
+      "A": "Account lockout",
+      "B": "CAPTCHA",
+      "C": "Unlimited login attempts",
+      "D": "Rate limiting"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: A zero-day vulnerability is publicly known and patched.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of an Intrusion Detection System (IDS)?",
+    "options": {
+      "A": "Encrypt data",
+      "B": "Monitor network traffic for suspicious activity",
+      "C": "Block all traffic",
+      "D": "Manage databases"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of firewalls? (Select all that apply)",
+    "options": {
+      "A": "Packet-filtering",
+      "B": "Stateful inspection",
+      "C": "Proxy firewall",
+      "D": "SQL firewall"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Two-factor authentication improves security.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What attack attempts all possible password combinations?",
+    "options": {
+      "A": "Phishing",
+      "B": "Brute Force",
+      "C": "Sniffing",
+      "D": "Spoofing"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which of the following are examples of asymmetric encryption? (Select all that apply)",
+    "options": {
+      "A": "RSA",
+      "B": "ECC",
+      "C": "AES",
+      "D": "DSA"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does CSRF stand for?",
+    "options": {
+      "A": "Cross-Site Request Forgery",
+      "B": "Central Secure Routing Framework",
+      "C": "Cyber Secure Response Function",
+      "D": "Cross Server Routing File"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Digital signatures ensure integrity and authenticity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used for secure remote login?",
+    "options": {
+      "A": "FTP",
+      "B": "SSH",
+      "C": "Telnet",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are common authentication factors? (Select all that apply)",
+    "options": {
+      "A": "Something you know",
+      "B": "Something you have",
+      "C": "Something you are",
+      "D": "Something you guess"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "True or False: Ransomware encrypts victim data and demands payment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main goal of penetration testing?",
+    "options": {
+      "A": "Exploit systems permanently",
+      "B": "Identify vulnerabilities before attackers do",
+      "C": "Increase bandwidth",
+      "D": "Install antivirus"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are password best practices? (Select all that apply)",
+    "options": {
+      "A": "Use long passwords",
+      "B": "Reuse passwords everywhere",
+      "C": "Enable MFA",
+      "D": "Use password manager"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "True or False: Biometrics can be used for authentication.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer of the OSI model is responsible for encryption?",
+    "options": {
+      "A": "Application",
+      "B": "Presentation",
+      "C": "Transport",
+      "D": "Network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An IPS (Intrusion Prevention System) can actively block detected threats.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common types of malware delivery methods? (Select all that apply)",
+    "options": {
+      "A": "Email attachments",
+      "B": "Malicious websites",
+      "C": "USB drives",
+      "D": "Encrypted HTTPS traffic only"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of salting in password hashing?",
+    "options": {
+      "A": "Increase password length",
+      "B": "Prevent rainbow table attacks",
+      "C": "Encrypt passwords twice",
+      "D": "Store passwords in plaintext"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A man-in-the-middle attack intercepts communication between two parties.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of access control models? (Select all that apply)",
+    "options": {
+      "A": "DAC",
+      "B": "MAC",
+      "C": "RBAC",
+      "D": "TCP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Which attack exploits improper input validation in web applications?",
+    "options": {
+      "A": "SQL Injection",
+      "B": "DDoS",
+      "C": "ARP Poisoning",
+      "D": "Port Scanning"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Port 22 is commonly used for SSH.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of network attacks? (Select all that apply)",
+    "options": {
+      "A": "ARP spoofing",
+      "B": "DNS poisoning",
+      "C": "Shoulder surfing",
+      "D": "Session hijacking"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the primary function of antivirus software?",
+    "options": {
+      "A": "Speed up the system",
+      "B": "Detect and remove malicious software",
+      "C": "Encrypt network traffic",
+      "D": "Manage firewalls"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: TLS is the successor to SSL.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are indicators of a phishing email? (Select all that apply)",
+    "options": {
+      "A": "Urgent language",
+      "B": "Unknown sender",
+      "C": "Spelling errors",
+      "D": "Valid company domain"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does SIEM stand for?",
+    "options": {
+      "A": "Security Information and Event Management",
+      "B": "Secure Internet Email Module",
+      "C": "System Integrity Encryption Model",
+      "D": "Security Interface Exchange Mechanism"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Public Wi-Fi networks are generally secure for sensitive transactions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used to securely transfer files?",
+    "options": {
+      "A": "FTP",
+      "B": "SFTP",
+      "C": "HTTP",
+      "D": "Telnet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of social engineering? (Select all that apply)",
+    "options": {
+      "A": "Baiting",
+      "B": "Phishing",
+      "C": "Whaling",
+      "D": "Port scanning"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "True or False: Least privilege principle means giving users minimum access required.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a zero-trust security model?",
+    "options": {
+      "A": "Trust all internal traffic",
+      "B": "Never trust, always verify",
+      "C": "Disable all authentication",
+      "D": "Trust external traffic only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are examples of encryption in transit? (Select all that apply)",
+    "options": {
+      "A": "HTTPS",
+      "B": "TLS",
+      "C": "IPsec",
+      "D": "Plain HTTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A honeypot is used to attract attackers for monitoring.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which attack manipulates DNS records to redirect traffic?",
+    "options": {
+      "A": "DNS poisoning",
+      "B": "SQL injection",
+      "C": "Brute force",
+      "D": "XSS"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are common vulnerability assessment tools? (Select all that apply)",
+    "options": {
+      "A": "Nmap",
+      "B": "Nessus",
+      "C": "Metasploit",
+      "D": "Wireshark"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does DLP stand for?",
+    "options": {
+      "A": "Data Loss Prevention",
+      "B": "Distributed Login Protocol",
+      "C": "Dynamic Link Protection",
+      "D": "Data Logging Policy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: ARP spoofing can allow attackers to intercept network traffic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are secure coding practices? (Select all that apply)",
+    "options": {
+      "A": "Input validation",
+      "B": "Parameterized queries",
+      "C": "Hardcoding passwords",
+      "D": "Output encoding"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a brute-force attack primarily targeting?",
+    "options": {
+      "A": "Passwords",
+      "B": "Firewalls",
+      "C": "Hardware",
+      "D": "Bandwidth"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Patch management helps reduce security vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common logging best practices? (Select all that apply)",
+    "options": {
+      "A": "Log authentication events",
+      "B": "Log sensitive data like passwords",
+      "C": "Centralized log storage",
+      "D": "Regular log review"
+    },
+    "answer": ["A", "C", "D"]
+  },
+  {
+    "question": "What is the purpose of IPsec?",
+    "options": {
+      "A": "Encrypt IP traffic",
+      "B": "Block malware",
+      "C": "Increase CPU speed",
+      "D": "Manage DNS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Session hijacking allows attackers to take over active sessions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of ransomware? (Select all that apply)",
+    "options": {
+      "A": "Encrypts data",
+      "B": "Demands payment",
+      "C": "Deletes antivirus automatically always",
+      "D": "Spreads via phishing emails"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Tokenization replaces sensitive data with non-sensitive equivalents.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of Public Key Infrastructure (PKI)? (Select all that apply)",
+    "options": {
+      "A": "Certificate Authority (CA)",
+      "B": "Registration Authority (RA)",
+      "C": "Digital Certificates",
+      "D": "Load Balancer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the main purpose of a security policy?",
+    "options": {
+      "A": "Increase network speed",
+      "B": "Define rules and guidelines for security",
+      "C": "Replace antivirus software",
+      "D": "Encrypt passwords"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Buffer overflow attacks exploit memory management vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common types of penetration testing? (Select all that apply)",
+    "options": {
+      "A": "Black box",
+      "B": "White box",
+      "C": "Gray box",
+      "D": "Blue box"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "Which security principle ensures data is not altered without authorization?",
+    "options": {
+      "A": "Confidentiality",
+      "B": "Integrity",
+      "C": "Availability",
+      "D": "Non-repudiation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Digital forensics involves collecting and analyzing digital evidence.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cloud security controls? (Select all that apply)",
+    "options": {
+      "A": "Encryption at rest",
+      "B": "IAM policies",
+      "C": "Network segmentation",
+      "D": "Public file sharing without control"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary goal of risk management in cybersecurity?",
+    "options": {
+      "A": "Eliminate all risks completely",
+      "B": "Identify and mitigate potential risks",
+      "C": "Increase system performance",
+      "D": "Remove all users"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A rootkit is designed to hide malicious activity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are examples of physical security controls? (Select all that apply)",
+    "options": {
+      "A": "Security guards",
+      "B": "Biometric access",
+      "C": "Firewalls",
+      "D": "CCTV cameras"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does CVE stand for?",
+    "options": {
+      "A": "Common Vulnerabilities and Exposures",
+      "B": "Cyber Validation Engine",
+      "C": "Critical Virus Evaluation",
+      "D": "Common Virus Entry"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data encryption at rest protects stored data from unauthorized access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which attack involves modifying data during transmission?",
+    "options": {
+      "A": "Replay attack",
+      "B": "Man-in-the-middle",
+      "C": "Phishing",
+      "D": "Brute force"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are secure network protocols? (Select all that apply)",
+    "options": {
+      "A": "HTTPS",
+      "B": "SSH",
+      "C": "Telnet",
+      "D": "SFTP"
+    },
+    "answer": ["A", "B", "D"]
+  },
+
+  {
+    "question": "True or False: A vulnerability scanner actively exploits vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a Web Application Firewall (WAF)?",
+    "options": {
+      "A": "Monitor and filter HTTP traffic",
+      "B": "Encrypt hard drives",
+      "C": "Increase RAM",
+      "D": "Manage routers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of insider threats? (Select all that apply)",
+    "options": {
+      "A": "Disgruntled employee leaking data",
+      "B": "Accidental data exposure",
+      "C": "External hacker",
+      "D": "Misconfigured permissions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: Security awareness training helps reduce human-related risks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of network segmentation?",
+    "options": {
+      "A": "Increase attack surface",
+      "B": "Limit spread of attacks",
+      "C": "Reduce encryption",
+      "D": "Disable firewalls"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which of the following are characteristics of advanced persistent threats (APTs)? (Select all that apply)",
+    "options": {
+      "A": "Long-term presence",
+      "B": "Targeted attack",
+      "C": "Random scanning only",
+      "D": "Stealthy behavior"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a replay attack?",
+    "options": {
+      "A": "Reusing captured network data to gain access",
+      "B": "Rebooting a system repeatedly",
+      "C": "Reinstalling software",
+      "D": "Repeating login attempts manually"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Non-repudiation ensures a sender cannot deny sending a message.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of endpoint security measures? (Select all that apply)",
+    "options": {
+      "A": "Antivirus",
+      "B": "Endpoint Detection and Response (EDR)",
+      "C": "Disk encryption",
+      "D": "Open ports for all services"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary goal of incident response?",
+    "options": {
+      "A": "Ignore threats",
+      "B": "Contain and remediate security incidents",
+      "C": "Increase vulnerabilities",
+      "D": "Disable logging"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Principle of least privilege reduces the attack surface.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common authentication protocols? (Select all that apply)",
+    "options": {
+      "A": "Kerberos",
+      "B": "OAuth",
+      "C": "SAML",
+      "D": "FTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of data classification?",
+    "options": {
+      "A": "Increase storage space",
+      "B": "Categorize data based on sensitivity",
+      "C": "Delete old files",
+      "D": "Compress databases"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A backdoor provides unauthorized access to a system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cryptographic attacks? (Select all that apply)",
+    "options": {
+      "A": "Brute-force attack",
+      "B": "Birthday attack",
+      "C": "Side-channel attack",
+      "D": "Load balancing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a sandbox in cybersecurity?",
+    "options": {
+      "A": "Increase network speed",
+      "B": "Test suspicious code in isolation",
+      "C": "Encrypt backups",
+      "D": "Monitor employees"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Data masking hides original data with modified content.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are components of an incident response plan? (Select all that apply)",
+    "options": {
+      "A": "Preparation",
+      "B": "Detection and Analysis",
+      "C": "Containment and Eradication",
+      "D": "Ignore and Restart"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does EDR stand for?",
+    "options": {
+      "A": "Endpoint Detection and Response",
+      "B": "Encrypted Data Routing",
+      "C": "External Device Regulation",
+      "D": "Enhanced Data Recovery"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Security through obscurity alone is sufficient protection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which of the following are examples of compliance standards? (Select all that apply)",
+    "options": {
+      "A": "ISO 27001",
+      "B": "PCI-DSS",
+      "C": "GDPR",
+      "D": "HTTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of multi-layered security (defense in depth)?",
+    "options": {
+      "A": "Reduce costs only",
+      "B": "Provide multiple security controls",
+      "C": "Eliminate need for firewalls",
+      "D": "Disable encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cross-Site Scripting (XSS) executes malicious scripts in a victim's browser.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of log monitoring tools? (Select all that apply)",
+    "options": {
+      "A": "Splunk",
+      "B": "ELK Stack",
+      "C": "Wireshark",
+      "D": "SIEM systems"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is privilege escalation?",
+    "options": {
+      "A": "Increasing system RAM",
+      "B": "Gaining higher access rights than permitted",
+      "C": "Logging out users",
+      "D": "Blocking traffic"
+    },
+    "answer": "B"
+  },
+
+  {
+    "question": "True or False: Secure boot ensures only trusted software runs during startup.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common wireless security protocols? (Select all that apply)",
+    "options": {
+      "A": "WPA2",
+      "B": "WPA3",
+      "C": "WEP",
+      "D": "FTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the main risk of using outdated software?",
+    "options": {
+      "A": "Improved performance",
+      "B": "Exposure to known vulnerabilities",
+      "C": "Better compatibility",
+      "D": "Faster boot time"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Encryption keys should be stored securely and rotated periodically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of secure APIs? (Select all that apply)",
+    "options": {
+      "A": "Authentication and authorization",
+      "B": "Rate limiting",
+      "C": "Input validation",
+      "D": "Exposing sensitive data publicly"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is threat modeling?",
+    "options": {
+      "A": "Designing malware",
+      "B": "Identifying potential threats during system design",
+      "C": "Blocking all ports",
+      "D": "Testing hardware speed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Hardcoding credentials in source code is a secure practice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are types of security testing? (Select all that apply)",
+    "options": {
+      "A": "Static testing",
+      "B": "Dynamic testing",
+      "C": "Fuzz testing",
+      "D": "Color testing"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is lateral movement in cybersecurity?",
+    "options": {
+      "A": "Switching networks",
+      "B": "Moving within a network after initial compromise",
+      "C": "Upgrading hardware",
+      "D": "Closing ports"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Security audits evaluate compliance and effectiveness of security controls.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A security patch fixes a known vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common password attacks? (Select all that apply)",
+    "options": {
+      "A": "Dictionary attack",
+      "B": "Brute force attack",
+      "C": "Rainbow table attack",
+      "D": "Port forwarding"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a security token?",
+    "options": {
+      "A": "Increase bandwidth",
+      "B": "Provide authentication credentials",
+      "C": "Store logs",
+      "D": "Replace firewall"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SQL Injection can be prevented using parameterized queries.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cryptographic hash properties? (Select all that apply)",
+    "options": {
+      "A": "Deterministic",
+      "B": "Fixed output length",
+      "C": "Collision resistant",
+      "D": "Reversible"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does MFA stand for?",
+    "options": {
+      "A": "Multi-Factor Authentication",
+      "B": "Main Firewall Access",
+      "C": "Managed File Access",
+      "D": "Multi-File Authorization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An air-gapped system is isolated from unsecured networks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of DoS attacks? (Select all that apply)",
+    "options": {
+      "A": "SYN flood",
+      "B": "Ping of Death",
+      "C": "Smurf attack",
+      "D": "SQL injection"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of rate limiting?",
+    "options": {
+      "A": "Increase attack speed",
+      "B": "Limit number of requests to prevent abuse",
+      "C": "Encrypt traffic",
+      "D": "Monitor hardware"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Endpoint encryption protects data on lost or stolen devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Confidentiality ensures that data is accessible only to authorized users.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are symmetric encryption algorithms? (Select all that apply)",
+    "options": { "A": "AES", "B": "DES", "C": "RSA", "D": "Blowfish" },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does CIA triad stand for?",
+    "options": {
+      "A": "Confidentiality, Integrity, Availability",
+      "B": "Control, Inspection, Access",
+      "C": "Cyber, Internet, Access",
+      "D": "Confidentiality, Inspection, Authorization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Hashing is used to verify data integrity.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of malware? (Select all that apply)",
+    "options": { "A": "Virus", "B": "Worm", "C": "Firewall", "D": "Trojan" },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is phishing primarily used for?",
+    "options": {
+      "A": "Improving encryption",
+      "B": "Stealing sensitive information",
+      "C": "Increasing bandwidth",
+      "D": "Optimizing databases"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: HTTPS encrypts data in transit.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are authentication factors? (Select all that apply)",
+    "options": {
+      "A": "Something you know",
+      "B": "Something you have",
+      "C": "Something you are",
+      "D": "Something you delete"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What type of attack floods a network with excessive traffic?",
+    "options": {
+      "A": "SQL Injection",
+      "B": "DDoS",
+      "C": "XSS",
+      "D": "Brute Force"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A firewall filters network traffic based on rules.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A digital signature provides authentication and integrity.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common types of social engineering? (Select all that apply)",
+    "options": {
+      "A": "Phishing",
+      "B": "Pretexting",
+      "C": "Baiting",
+      "D": "Port scanning"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the main purpose of a VPN?",
+    "options": {
+      "A": "Increase CPU speed",
+      "B": "Secure communication over public networks",
+      "C": "Delete malware",
+      "D": "Improve RAM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Zero-day vulnerabilities are unknown to vendors.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of secure protocols? (Select all that apply)",
+    "options": {
+      "A": "HTTPS",
+      "B": "SSH",
+      "C": "SFTP",
+      "D": "Telnet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What does RBAC stand for?",
+    "options": {
+      "A": "Role-Based Access Control",
+      "B": "Remote Backup Access Control",
+      "C": "Random Binary Access Code",
+      "D": "Restricted Bandwidth Access Channel"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Encryption at rest protects stored data.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of penetration testing? (Select all that apply)",
+    "options": {
+      "A": "Black box",
+      "B": "White box",
+      "C": "Gray box",
+      "D": "Green box"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What attack involves capturing and reusing authentication data?",
+    "options": {
+      "A": "Replay attack",
+      "B": "SQL Injection",
+      "C": "XSS",
+      "D": "Brute force"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Security patches fix known vulnerabilities.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are password security best practices? (Select all that apply)",
+    "options": {
+      "A": "Use long passwords",
+      "B": "Enable MFA",
+      "C": "Reuse passwords everywhere",
+      "D": "Use password manager"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is privilege escalation?",
+    "options": {
+      "A": "Gaining higher permissions than authorized",
+      "B": "Deleting user accounts",
+      "C": "Encrypting traffic",
+      "D": "Increasing RAM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: IDS can actively block malicious traffic.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are examples of insider threats? (Select all that apply)",
+    "options": {
+      "A": "Disgruntled employee",
+      "B": "Accidental data leak",
+      "C": "External hacker",
+      "D": "Misconfigured access"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does SIEM stand for?",
+    "options": {
+      "A": "Security Information and Event Management",
+      "B": "Secure Internet Email Model",
+      "C": "System Integrated Encryption Mechanism",
+      "D": "Security Internal Execution Module"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: A honeypot is used to attract attackers.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of ransomware? (Select all that apply)",
+    "options": {
+      "A": "Encrypts files",
+      "B": "Demands payment",
+      "C": "Deletes OS always",
+      "D": "Spreads via phishing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of network segmentation?",
+    "options": {
+      "A": "Limit attack spread",
+      "B": "Increase attack surface",
+      "C": "Disable firewall",
+      "D": "Reduce encryption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Public keys must be kept secret.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are examples of endpoint security? (Select all that apply)",
+    "options": {
+      "A": "Antivirus",
+      "B": "Disk encryption",
+      "C": "EDR",
+      "D": "Open ports"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is the purpose of salting passwords?",
+    "options": {
+      "A": "Prevent rainbow table attacks",
+      "B": "Increase internet speed",
+      "C": "Encrypt emails",
+      "D": "Compress files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: XSS executes malicious scripts in a user’s browser.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are cloud security controls? (Select all that apply)",
+    "options": {
+      "A": "IAM policies",
+      "B": "Encryption at rest",
+      "C": "Public sharing without restriction",
+      "D": "Network security groups"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is threat modeling?",
+    "options": {
+      "A": "Identifying potential threats during design",
+      "B": "Designing malware",
+      "C": "Increasing storage",
+      "D": "Blocking ports"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Hardcoding credentials is secure practice.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "B"
+  },
+
+  {
+    "question": "Which of the following are cryptographic attacks? (Select all that apply)",
+    "options": {
+      "A": "Brute force",
+      "B": "Birthday attack",
+      "C": "Side-channel attack",
+      "D": "Firewall rule"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is lateral movement?",
+    "options": {
+      "A": "Moving within network after compromise",
+      "B": "Switching WiFi",
+      "C": "Closing ports",
+      "D": "Installing antivirus"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Secure boot ensures only trusted software loads.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are wireless security protocols? (Select all that apply)",
+    "options": {
+      "A": "WPA2",
+      "B": "WPA3",
+      "C": "WEP",
+      "D": "FTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is defense in depth?",
+    "options": {
+      "A": "Multiple layers of security",
+      "B": "Single firewall protection",
+      "C": "No encryption",
+      "D": "Disable logging"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A vulnerability is a weakness that can be exploited by a threat.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of network security devices? (Select all that apply)",
+    "options": {
+      "A": "Firewall",
+      "B": "IDS",
+      "C": "IPS",
+      "D": "Spreadsheet"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary goal of availability in the CIA triad?",
+    "options": {
+      "A": "Prevent unauthorized changes",
+      "B": "Ensure systems are accessible when needed",
+      "C": "Encrypt passwords",
+      "D": "Block phishing emails"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Data integrity ensures data remains accurate and unaltered.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are types of malware? (Select all that apply)",
+    "options": {
+      "A": "Spyware",
+      "B": "Adware",
+      "C": "Rootkit",
+      "D": "Load balancer"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of two-factor authentication?",
+    "options": {
+      "A": "Reduce password length",
+      "B": "Add an extra layer of security",
+      "C": "Disable encryption",
+      "D": "Increase login speed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Brute-force attacks try many possible password combinations.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of encryption in transit? (Select all that apply)",
+    "options": {
+      "A": "TLS",
+      "B": "HTTPS",
+      "C": "IPsec",
+      "D": "Plain HTTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a man-in-the-middle attack?",
+    "options": {
+      "A": "Intercepting communication between two parties",
+      "B": "Deleting database tables",
+      "C": "Installing antivirus",
+      "D": "Upgrading hardware"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Logging and monitoring help detect suspicious activities.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are secure coding practices? (Select all that apply)",
+    "options": {
+      "A": "Input validation",
+      "B": "Output encoding",
+      "C": "Parameterized queries",
+      "D": "Hardcoding passwords"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of a certificate authority (CA)?",
+    "options": {
+      "A": "Issue digital certificates",
+      "B": "Block malware",
+      "C": "Store passwords",
+      "D": "Increase bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data backup helps recover from ransomware attacks.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of multi-factor authentication methods? (Select all that apply)",
+    "options": {
+      "A": "Password + OTP",
+      "B": "Password + Fingerprint",
+      "C": "Password only",
+      "D": "Smart card + PIN"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the purpose of patch management?",
+    "options": {
+      "A": "Fix vulnerabilities",
+      "B": "Delete logs",
+      "C": "Disable firewall",
+      "D": "Increase malware"
+    },
+    "answer": "A"
+  },
+
+  {
+    "question": "True or False: Encryption keys should be protected securely.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of authentication protocols? (Select all that apply)",
+    "options": {
+      "A": "Kerberos",
+      "B": "OAuth",
+      "C": "SAML",
+      "D": "FTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a buffer overflow attack?",
+    "options": {
+      "A": "Exploiting memory handling flaws",
+      "B": "Flooding network traffic",
+      "C": "Deleting backups",
+      "D": "Changing firewall rules"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Least privilege means giving users only necessary access.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of physical security controls? (Select all that apply)",
+    "options": {
+      "A": "CCTV",
+      "B": "Security guards",
+      "C": "Biometric locks",
+      "D": "SQL query"
+    },
+    "answer": ["A", "B", "C"]
+  },
+
+  {
+    "question": "What is the main goal of incident response?",
+    "options": {
+      "A": "Contain and remediate incidents",
+      "B": "Ignore threats",
+      "C": "Increase vulnerabilities",
+      "D": "Disable security"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Digital forensics analyzes electronic evidence.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of advanced persistent threats (APTs)? (Select all that apply)",
+    "options": {
+      "A": "Long-term presence",
+      "B": "Targeted attack",
+      "C": "Random spam only",
+      "D": "Stealthy behavior"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is data masking?",
+    "options": {
+      "A": "Hiding sensitive data with modified values",
+      "B": "Deleting data permanently",
+      "C": "Encrypting network packets",
+      "D": "Blocking ports"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Security awareness training reduces human-related risks.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+
+  {
+    "question": "Which of the following are examples of compliance standards? (Select all that apply)",
+    "options": {
+      "A": "ISO 27001",
+      "B": "PCI-DSS",
+      "C": "GDPR",
+      "D": "SMTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is tokenization used for?",
+    "options": {
+      "A": "Replacing sensitive data with non-sensitive tokens",
+      "B": "Increasing CPU performance",
+      "C": "Deleting malware",
+      "D": "Speeding up internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Secure APIs should implement authentication and rate limiting.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are examples of cryptographic hash algorithms? (Select all that apply)",
+    "options": {
+      "A": "SHA-256",
+      "B": "MD5",
+      "C": "RSA",
+      "D": "SHA-1"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is defense in depth?",
+    "options": {
+      "A": "Multiple layers of security controls",
+      "B": "Single firewall protection",
+      "C": "No encryption",
+      "D": "Disabling logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Non-repudiation prevents a sender from denying their actions.",
+    "options": { "A": "True", "B": "False" },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,1953 @@
+{ 
+  "skill": "PHP", 
+  "questions": [
+    {
+    "question": "What does PHP stand for?",
+    "options": {
+      "A": "Private Home Page",
+      "B": "Personal Hypertext Processor",
+      "C": "PHP: Hypertext Preprocessor",
+      "D": "Programmable Home Page"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which character is used to start a variable in PHP?",
+    "options": {
+      "A": "&",
+      "B": "$",
+      "C": "!",
+      "D": "#"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you write 'Hello World' in PHP?",
+    "options": {
+      "A": "Document.Write('Hello World');",
+      "B": "echo 'Hello World';",
+      "C": "print_line('Hello World');",
+      "D": "response.write('Hello World');"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PHP statements must end with a semicolon (;).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is the correct way to create a function in PHP?",
+    "options": {
+      "A": "new_function myFunction()",
+      "B": "function myFunction()",
+      "C": "create myFunction()",
+      "D": "def myFunction():"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create an array in PHP?",
+    "options": {
+      "A": "$cars = array('Volvo', 'BMW', 'Toyota');",
+      "B": "$cars = ['Volvo', 'BMW', 'Toyota'];",
+      "C": "Both A and B",
+      "D": "$cars = list('Volvo', 'BMW', 'Toyota');"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used for string concatenation in PHP?",
+    "options": {
+      "A": "+",
+      "B": ".",
+      "C": "&",
+      "D": "concat()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default file extension for PHP files?",
+    "options": {
+      "A": ".html",
+      "B": ".php",
+      "C": ".xml",
+      "D": ".ph"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you write a single-line comment in PHP?",
+    "options": {
+      "A": "// This is a comment",
+      "B": "# This is also a comment",
+      "C": "/* This is a comment */",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which superglobal variable holds information about headers, paths, and script locations?",
+    "options": {
+      "A": "$_GET",
+      "B": "$_SESSION",
+      "C": "$_SERVER",
+      "D": "$_GLOBALS"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: PHP is a case-sensitive language for variable names.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to get the length of a string?",
+    "options": {
+      "A": "len()",
+      "B": "str_length()",
+      "C": "strlen()",
+      "D": "count()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you start a PHP session?",
+    "options": {
+      "A": "session_begin();",
+      "B": "session_start();",
+      "C": "start_session();",
+      "D": "begin_session();"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loop is used to iterate through each key/value pair in an array?",
+    "options": {
+      "A": "for",
+      "B": "while",
+      "C": "foreach",
+      "D": "do...while"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the correct way to include a file 'header.php'?",
+    "options": {
+      "A": "include 'header.php';",
+      "B": "require 'header.php';",
+      "C": "Both A and B",
+      "D": "import 'header.php';"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function is used to count the number of elements in an array?",
+    "options": {
+      "A": "count()",
+      "B": "sizeof()",
+      "C": "Both A and B",
+      "D": "length()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you define a constant in PHP?",
+    "options": {
+      "A": "define('CONSTANT_NAME', 'value');",
+      "B": "const CONSTANT_NAME = 'value';",
+      "C": "Both A and B",
+      "D": "$constant = 'value';"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which superglobal is used to collect data after submitting an HTML form with method='post'?",
+    "options": {
+      "A": "$_GET",
+      "B": "$_REQUEST",
+      "C": "$_POST",
+      "D": "$_FORM"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: PHP can be embedded directly into HTML.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to remove whitespace from the beginning and end of a string?",
+    "options": {
+      "A": "strip()",
+      "B": "trim()",
+      "C": "clean()",
+      "D": "cut()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the '===' operator do?",
+    "options": {
+      "A": "Checks if two values are equal.",
+      "B": "Checks if two values are equal and of the same type.",
+      "C": "Assigns a value to three variables.",
+      "D": "Checks if a value is null."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you round a float up to the nearest integer?",
+    "options": {
+      "A": "round()",
+      "B": "floor()",
+      "C": "ceil()",
+      "D": "top()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: PHP 8 introduced the Match expression as a better alternative to Switch.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to redirect a user to a different page?",
+    "options": {
+      "A": "header('Location: page.php');",
+      "B": "redirect('page.php');",
+      "C": "go('page.php');",
+      "D": "window.location('page.php');"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'die()' function?",
+    "options": {
+      "A": "Restarts the server.",
+      "B": "Prints a message and exits the current script.",
+      "C": "Deletes a file.",
+      "D": "Clears the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you check if a variable is an array?",
+    "options": {
+      "A": "is_arr()",
+      "B": "is_array()",
+      "C": "check_array()",
+      "D": "type_array()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which built-in function sorts an array in ascending order?",
+    "options": {
+      "A": "asort()",
+      "B": "sort()",
+      "C": "rsort()",
+      "D": "ksort()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PHP tag is used for 'short echo'?",
+    "options": {
+      "A": "<?php echo $var; ?>",
+      "B": "<?= $var ?>",
+      "C": "<? $var ?>",
+      "D": "<% echo $var %>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A variable defined inside a function is globally accessible.",
+    "options": {
+      "A": "False (It is local to the function).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you find the data type of a variable?",
+    "options": {
+      "A": "gettype()",
+      "B": "var_dump()",
+      "C": "Both A and B",
+      "D": "typeof()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of 5 % 2 in PHP?",
+    "options": {
+      "A": "2.5",
+      "B": "2",
+      "C": "1",
+      "D": "0"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function converts a string to all lowercase?",
+    "options": {
+      "A": "str_lower()",
+      "B": "strtolower()",
+      "C": "lower()",
+      "D": "case_lower()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you delete a variable in PHP?",
+    "options": {
+      "A": "delete($var);",
+      "B": "unset($var);",
+      "C": "remove($var);",
+      "D": "$var = null;"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function checks if a specific value exists in an array?",
+    "options": {
+      "A": "in_array()",
+      "B": "array_search()",
+      "C": "has_value()",
+      "D": "exists()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Single quotes (') in PHP do not parse variables, while double quotes (\") do.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you get the current timestamp in PHP?",
+    "options": {
+      "A": "time()",
+      "B": "now()",
+      "C": "get_time()",
+      "D": "timestamp()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to turn a string into an array (splitting by a delimiter)?",
+    "options": {
+      "A": "split()",
+      "B": "explode()",
+      "C": "implode()",
+      "D": "divide()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the opposite of 'explode()'? (Joining array elements into a string)",
+    "options": {
+      "A": "join()",
+      "B": "implode()",
+      "C": "Both A and B",
+      "D": "combine()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which superglobal contains files uploaded via a form?",
+    "options": {
+      "A": "$_FILES",
+      "B": "$_POST",
+      "C": "$_UPLOAD",
+      "D": "$_REQUEST"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'static' keyword do to a local variable inside a function?",
+    "options": {
+      "A": "Makes it accessible globally.",
+      "B": "Preserves its value even after the function finishes execution.",
+      "C": "Prevents it from being modified.",
+      "D": "Turns it into a constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to check if a constant is defined?",
+    "options": {
+      "A": "defined()",
+      "B": "is_defined()",
+      "C": "const_exists()",
+      "D": "has_const()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In PHP, 'NULL' is case-insensitive.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What character is used for escaping special characters in a string?",
+    "options": {
+      "A": "/",
+      "B": "\\",
+      "C": "%",
+      "D": "$"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to filter a variable with a specific filter (like email validation)?",
+    "options": {
+      "A": "filter_var()",
+      "B": "validate()",
+      "C": "check()",
+      "D": "sanitize()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you get the number of key/value pairs in an associative array?",
+    "options": {
+      "A": "length()",
+      "B": "count()",
+      "C": "sizeof()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: PHP script blocks can be placed anywhere in the document.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used for 'exponentiation' (power)?",
+    "options": {
+      "A": "^",
+      "B": "**",
+      "C": "pow()",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "How do you write a multi-line comment?",
+    "options": {
+      "A": "/* comment */",
+      "B": "// comment",
+      "C": "# comment",
+      "D": ""
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the correct way to end a PHP script?",
+    "options": {
+      "A": "?>",
+      "B": "</php>",
+      "C": "exit;",
+      "D": "stop;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function returns the absolute value of a number?",
+    "options": {
+      "A": "abs()",
+      "B": "absolute()",
+      "C": "pos()",
+      "D": "math_abs()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: $x++ and ++$x always result in the same value in an assignment.",
+    "options": {
+      "A": "False",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to find the position of the first occurrence of a substring in a string?",
+    "options": {
+      "A": "strpos()",
+      "B": "search()",
+      "C": "find()",
+      "D": "locate()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'var_dump()' do?",
+    "options": {
+      "A": "Prints the structure and value of one or more variables.",
+      "B": "Deletes the variable from memory.",
+      "C": "Converts a variable to a string.",
+      "D": "Logs the variable to a file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a formatted string?",
+    "options": {
+      "A": "printf()",
+      "B": "sprintf()",
+      "C": "Both A and B",
+      "D": "format()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you check if a variable has been set and is not NULL?",
+    "options": {
+      "A": "isset()",
+      "B": "is_set()",
+      "C": "check()",
+      "D": "exists()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which logical operator represents 'AND' in PHP?",
+    "options": {
+      "A": "&&",
+      "B": "and",
+      "C": "Both A and B",
+      "D": "&"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you get the version of the current PHP installation?",
+    "options": {
+      "A": "phpversion()",
+      "B": "version()",
+      "C": "php_info()",
+      "D": "info()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP can run on both Apache and Nginx web servers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function replaces some characters with some other characters in a string?",
+    "options": {
+      "A": "str_replace()",
+      "B": "replace()",
+      "C": "swap()",
+      "D": "change()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the index of the first element in a PHP array?",
+    "options": {
+      "A": "1",
+      "B": "0",
+      "C": "-1",
+      "D": "A"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you add a value to the end of an array?",
+    "options": {
+      "A": "$arr[] = $value;",
+      "B": "array_push($arr, $value);",
+      "C": "Both A and B",
+      "D": "add($arr, $value);"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: PHP is an interpreted language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which built-in function creates a new unique ID based on the current time?",
+    "options": {
+      "A": "id()",
+      "B": "uniqid()",
+      "C": "random_id()",
+      "D": "guid()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to stop the current iteration of a loop and move to the next one?",
+    "options": {
+      "A": "stop",
+      "B": "continue",
+      "C": "skip",
+      "D": "next"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access a variable '$x' from within a function if it was defined outside?",
+    "options": {
+      "A": "global $x;",
+      "B": "$GLOBALS['x']",
+      "C": "Both A and B",
+      "D": "$this->x"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of a 'Constructor' in a PHP class?",
+    "options": {
+      "A": "To destroy an object when it is no longer needed.",
+      "B": "To initialize object properties when an object is created.",
+      "C": "To create a static copy of the class.",
+      "D": "To prevent the class from being inherited."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to inherit a class in PHP?",
+    "options": {
+      "A": "extends",
+      "B": "implements",
+      "C": "inherits",
+      "D": "using"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'public', 'protected', and 'private' visibility?",
+    "options": {
+      "A": "Public is accessible anywhere; Protected is accessible in class and subclasses; Private is only in the class itself.",
+      "B": "Public is only in the class; Private is everywhere.",
+      "C": "There is no difference in PHP 8.",
+      "D": "Protected is the same as Public."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to access static properties or methods within the same class?",
+    "options": {
+      "A": "$this->",
+      "B": "self::",
+      "C": "static::",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: An abstract class can be instantiated.",
+    "options": {
+      "A": "False (It can only be inherited).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Interface' in PHP?",
+    "options": {
+      "A": "A class that can only contain static methods.",
+      "B": "A blueprint that forces classes to implement specific methods without defining their body.",
+      "C": "A way to connect to a database.",
+      "D": "A tool for UI design."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which magic method is called when an object is treated as a string?",
+    "options": {
+      "A": "__invoke()",
+      "B": "__toString()",
+      "C": "__get()",
+      "D": "__call()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you handle exceptions in PHP?",
+    "options": {
+      "A": "try...catch blocks",
+      "B": "if...else error checks",
+      "C": "error_report() function",
+      "D": "die() statements"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'final' keyword do when applied to a class method?",
+    "options": {
+      "A": "Prevents the method from being overridden in subclasses.",
+      "B": "Prevents the class from being instantiated.",
+      "C": "Forces the method to be static.",
+      "D": "Automatically deletes the method after use."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to check if a file exists?",
+    "options": {
+      "A": "file_exists()",
+      "B": "is_file()",
+      "C": "Both A and B",
+      "D": "exists()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Traits' in PHP?",
+    "options": {
+      "A": "To implement multiple inheritance by horizontal composition of methods.",
+      "B": "To define the data types of variables.",
+      "C": "To create private database connections.",
+      "D": "To replace interfaces."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function parses a JSON string into a PHP variable (array or object)?",
+    "options": {
+      "A": "json_encode()",
+      "B": "json_decode()",
+      "C": "json_parse()",
+      "D": "unserialize()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a cookie in PHP?",
+    "options": {
+      "A": "setcookie()",
+      "B": "make_cookie()",
+      "C": "$_COOKIE['name'] = 'val';",
+      "D": "session_cookie()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which regex function is used to search for a pattern in a string?",
+    "options": {
+      "A": "preg_match()",
+      "B": "str_match()",
+      "C": "regex_search()",
+      "D": "match_pattern()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'PDO' in PHP?",
+    "options": {
+      "A": "PHP Data Objects (A consistent interface for accessing databases).",
+      "B": "PHP Default Output.",
+      "C": "Private Data Operator.",
+      "D": "PHP Database Optimizer."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prepared statements are the best defense against SQL Injection.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is called when trying to call a non-existent method on an object?",
+    "options": {
+      "A": "__call()",
+      "B": "__get()",
+      "C": "__set()",
+      "D": "__invoke()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of 'password_hash()'?",
+    "options": {
+      "A": "An MD5 string.",
+      "B": "A secure one-way hash using a strong algorithm (like BCrypt).",
+      "C": "An encrypted plain-text string.",
+      "D": "A base64 encoded string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which superglobal holds information about the uploaded file's temporary name on the server?",
+    "options": {
+      "A": "$_FILES['file']['name']",
+      "B": "$_FILES['file']['tmp_name']",
+      "C": "$_FILES['file']['path']",
+      "D": "$_FILES['file']['size']"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Namespacing' in PHP?",
+    "options": {
+      "A": "A way to encapsulate items to avoid name collisions between classes or functions.",
+      "B": "A way to name variables with spaces.",
+      "C": "A method to organize file folders.",
+      "D": "A feature for cloud storage."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function reads an entire file into a string?",
+    "options": {
+      "A": "file_get_contents()",
+      "B": "read_file()",
+      "C": "fopen()",
+      "D": "file_read()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Dependency Injection' help with?",
+    "options": {
+      "A": "Reducing coupling between classes and making them easier to test.",
+      "B": "Connecting to multiple databases.",
+      "C": "Encrypting the source code.",
+      "D": "Improving the performance of the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is executed when an object is destroyed or the script ends?",
+    "options": {
+      "A": "__stop()",
+      "B": "__destruct()",
+      "C": "__end()",
+      "D": "__kill()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you upload a file from a temporary location to its final destination?",
+    "options": {
+      "A": "move_uploaded_file()",
+      "B": "upload_file()",
+      "C": "save_file()",
+      "D": "copy()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8 introduced Attributes (Annotations) using the #[ ] syntax.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to access a parent's constructor within a child class?",
+    "options": {
+      "A": "super->__construct()",
+      "B": "parent::__construct()",
+      "C": "this->parent->__construct()",
+      "D": "base->__construct()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Type Hinting' in PHP?",
+    "options": {
+      "A": "Specifying the expected data type of an argument in a function declaration.",
+      "B": "A tooltip in the IDE.",
+      "C": "Automatically converting strings to integers.",
+      "D": "A way to comment on variable types."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to strip HTML and PHP tags from a string?",
+    "options": {
+      "A": "strip_tags()",
+      "B": "clean_html()",
+      "C": "remove_tags()",
+      "D": "sanitize_string()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Null Coalescing Operator' in PHP?",
+    "options": {
+      "A": "??",
+      "B": "?:",
+      "C": "||",
+      "D": "??"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to trigger a user-defined error condition?",
+    "options": {
+      "A": "trigger_error()",
+      "B": "throw_error()",
+      "C": "make_error()",
+      "D": "error_log()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Anonymous functions (Closures) can access variables from the outside scope using the 'use' keyword.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function outputs a string and then terminates the script?",
+    "options": {
+      "A": "exit()",
+      "B": "die()",
+      "C": "Both A and B",
+      "D": "stop()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'clone' keyword do?",
+    "options": {
+      "A": "Creates a shallow copy of an object.",
+      "B": "Creates a new class.",
+      "C": "Deletes an object.",
+      "D": "Renames an object."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function gets the content of the output buffer and deletes the buffer?",
+    "options": {
+      "A": "ob_get_clean()",
+      "B": "ob_flush()",
+      "C": "ob_start()",
+      "D": "ob_end()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you define an anonymous class in PHP?",
+    "options": {
+      "A": "$obj = new class { ... };",
+      "B": "$obj = class { ... };",
+      "C": "$obj = anonymous class { ... };",
+      "D": "$obj = new { ... };"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'autoloading' in PHP?",
+    "options": {
+      "A": "To automatically include the file defining a class when it's needed.",
+      "B": "To automatically update the database.",
+      "C": "To load the page without refreshing.",
+      "D": "To download files from a server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a directory?",
+    "options": {
+      "A": "mkdir()",
+      "B": "create_dir()",
+      "C": "new_folder()",
+      "D": "dir_create()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Composer' in the PHP ecosystem?",
+    "options": {
+      "A": "A dependency manager for PHP libraries.",
+      "B": "A web server for PHP.",
+      "C": "A debugger for PHP code.",
+      "D": "A database for PHP apps."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is called when an object is invoked as a function?",
+    "options": {
+      "A": "__invoke()",
+      "B": "__call()",
+      "C": "__toString()",
+      "D": "__get()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you check if a class exists?",
+    "options": {
+      "A": "class_exists()",
+      "B": "is_class()",
+      "C": "has_class()",
+      "D": "check_class()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'strict_types=1' do in PHP?",
+    "options": {
+      "A": "Forces PHP to use strict type checking for function arguments and return values.",
+      "B": "Prevents the use of dynamic variables.",
+      "C": "Disables error reporting.",
+      "D": "Enables strict database connections."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function returns the basename of a path (the filename)?",
+    "options": {
+      "A": "basename()",
+      "B": "path_info()",
+      "C": "filename()",
+      "D": "get_file()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the use of the 'yield' keyword?",
+    "options": {
+      "A": "To create a generator function, allowing you to iterate over data without creating a large array in memory.",
+      "B": "To stop the script for a few seconds.",
+      "C": "To return multiple values from a function at once.",
+      "D": "To wait for a database response."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function sets the error reporting level for the current script?",
+    "options": {
+      "A": "error_reporting()",
+      "B": "set_error()",
+      "C": "report_level()",
+      "D": "ini_set('errors')"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.1 introduced Enums.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'unserialize()' do?",
+    "options": {
+      "A": "Converts a stored string back into a PHP variable.",
+      "B": "Deletes a serialized file.",
+      "C": "Converts an array to a string.",
+      "D": "Decrypts a string."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to change the owner of a file?",
+    "options": {
+      "A": "chown()",
+      "B": "chmod()",
+      "C": "change_owner()",
+      "D": "set_owner()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Fluent Interface' in PHP?",
+    "options": {
+      "A": "A design pattern where methods return '$this', allowing method chaining.",
+      "B": "A way to write PHP in different languages.",
+      "C": "A fast database connection.",
+      "D": "A specific type of API."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function clears the file status cache?",
+    "options": {
+      "A": "clearstatcache()",
+      "B": "cache_clear()",
+      "C": "reset_file()",
+      "D": "flush_cache()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.2 allows for 'Readonly' classes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method handles data serialization?",
+    "options": {
+      "A": "__serialize()",
+      "B": "__sleep()",
+      "C": "Both A and B",
+      "D": "__save()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you define a union type in a PHP 8 function signature?",
+    "options": {
+      "A": "function foo(int|string $val)",
+      "B": "function foo(int or string $val)",
+      "C": "function foo(int/string $val)",
+      "D": "function foo(union(int, string) $val)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function calculates the MD5 hash of a file?",
+    "options": {
+      "A": "md5_file()",
+      "B": "hash_file()",
+      "C": "file_md5()",
+      "D": "check_md5()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'finally' block in exception handling?",
+    "options": {
+      "A": "To execute code regardless of whether an exception was thrown or caught.",
+      "B": "To stop the script after a catch.",
+      "C": "To throw a new exception.",
+      "D": "To log the final result."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you prevent 'Cross-Site Request Forgery' (CSRF)?",
+    "options": {
+      "A": "By using unique, non-predictable tokens for every form submission.",
+      "B": "By using HTTPS only.",
+      "C": "By disabling cookies.",
+      "D": "By using POST instead of GET."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is called when 'isset()' or 'empty()' is used on an inaccessible property?",
+    "options": {
+      "A": "__isset()",
+      "B": "__check()",
+      "C": "__get()",
+      "D": "__exists()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Late Static Binding' in PHP?",
+    "options": {
+      "A": "A feature that allows you to reference the called class in a static context using the 'static::' keyword.",
+      "B": "A way to load classes slowly.",
+      "C": "A method to bind variables later.",
+      "D": "A database optimization."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function creates a unique filename with a given prefix?",
+    "options": {
+      "A": "tempnam()",
+      "B": "uniq_file()",
+      "C": "tmp_file()",
+      "D": "make_temp()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Reflection API' in PHP?",
+    "options": {
+      "A": "To inspect the internal structure of classes, methods, and properties at runtime.",
+      "B": "To create mirror copies of the database.",
+      "C": "To reverse the order of strings.",
+      "D": "To improve server security."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to change the permissions of a file?",
+    "options": {
+      "A": "chmod()",
+      "B": "chown()",
+      "C": "perm()",
+      "D": "set_perm()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.0 introduced the 'Constructor Property Promotion' feature.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which superglobal is used to access cookie data?",
+    "options": {
+      "A": "$_COOKIE",
+      "B": "$_SESSION",
+      "C": "$_GET",
+      "D": "$_REQUEST"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'opcache' do?",
+    "options": {
+      "A": "Stores precompiled script bytecode in shared memory, significantly speeding up PHP execution.",
+      "B": "Caches database queries.",
+      "C": "Compresses images on the fly.",
+      "D": "Backs up PHP files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to get the last modified time of a file?",
+    "options": {
+      "A": "filemtime()",
+      "B": "file_modified()",
+      "C": "get_time()",
+      "D": "mtime()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Polyfilling' in the context of PHP?",
+    "options": {
+      "A": "Providing code that brings newer PHP features to older versions.",
+      "B": "Filling the database with sample data.",
+      "C": "A method of memory management.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to parse a URL and return its components?",
+    "options": {
+      "A": "parse_url()",
+      "B": "get_url()",
+      "C": "split_url()",
+      "D": "url_info()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Zend Engine'?",
+    "options": {
+      "A": "The open-source scripting engine that interprets and executes PHP code.",
+      "B": "A framework for building PHP websites.",
+      "C": "A database driver for MySQL.",
+      "D": "A specialized web server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Garbage Collection' in PHP and how is it triggered?",
+    "options": {
+      "A": "A background process that frees memory by cleaning up unreachable objects with circular references.",
+      "B": "A manual command to delete temporary files.",
+      "C": "An automatic task that restarts the server.",
+      "D": "A tool to optimize SQL queries."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PHP 8.1 feature allows you to execute code in parallel or handle asynchronous tasks efficiently?",
+    "options": {
+      "A": "Fibers",
+      "B": "Parallel threads",
+      "C": "Async/Await (built-in)",
+      "D": "Multi-processing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Service Locator' pattern and why is it often considered an anti-pattern?",
+    "options": {
+      "A": "It hides class dependencies, making the code harder to maintain and test compared to Dependency Injection.",
+      "B": "It is a way to find database services.",
+      "C": "It is a pattern for locating physical servers.",
+      "D": "It is a tool for finding PHP files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of PHP performance, what is 'Just-In-Time' (JIT) compilation?",
+    "options": {
+      "A": "Compiling parts of the code into machine code at runtime to skip interpretation for hot paths.",
+      "B": "Compiling code only when the user visits the site.",
+      "C": "A feature that automatically fixes syntax errors.",
+      "D": "A tool to speed up database connections."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PHP function allows you to call a callback with an array of parameters?",
+    "options": {
+      "A": "call_user_func_array()",
+      "B": "invoke_callback()",
+      "C": "run_func()",
+      "D": "apply_params()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Type Variance' (Covariance and Contravariance) in PHP inheritance?",
+    "options": {
+      "A": "The ability of a child class to return a more specific type (Covariance) or accept a less specific type (Contravariance) than its parent.",
+      "B": "A method of variable naming.",
+      "C": "A database scaling technique.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you implement the 'Strategy Pattern' in PHP?",
+    "options": {
+      "A": "By defining an interface for a family of algorithms and encapsulating each one in a separate class.",
+      "B": "By using many if-else statements.",
+      "C": "By creating a static class for all logic.",
+      "D": "By using global variables."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is used to control which properties should be included when an object is serialized using 'var_export'?",
+    "options": {
+      "A": "__set_state()",
+      "B": "__export()",
+      "C": "__sleep()",
+      "D": "__debugInfo()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'weak references' and 'strong references'?",
+    "options": {
+      "A": "Weak references do not prevent the object from being garbage collected.",
+      "B": "Weak references are for strings only.",
+      "C": "Strong references are deprecated in PHP 8.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal PHP structure represents a variable?",
+    "options": {
+      "A": "zval",
+      "B": "php_var",
+      "C": "vnode",
+      "D": "mem_block"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dead Code Elimination' in the PHP Optimizer?",
+    "options": {
+      "A": "Removing code that will never be executed from the compiled bytecode.",
+      "B": "Deleting old PHP files.",
+      "C": "Removing comments automatically.",
+      "D": "Fixing bugs in logic."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.4 (latest) supports property hooks (get/set syntax) within the class definition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which design pattern is 'Composer' primarily built upon for its plugin system?",
+    "options": {
+      "A": "Observer Pattern",
+      "B": "Factory Pattern",
+      "C": "Singleton Pattern",
+      "D": "Proxy Pattern"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you protect against 'Timing Attacks' when comparing password hashes?",
+    "options": {
+      "A": "By using the hash_equals() function, which takes the same amount of time regardless of whether the strings match.",
+      "B": "By using a fast server.",
+      "C": "By adding a sleep() timer.",
+      "D": "By hashing the strings again."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memoization' and how can it be implemented in PHP?",
+    "options": {
+      "A": "An optimization technique where you store the results of expensive function calls and return the cached result when the same inputs occur again.",
+      "B": "A way to memorize code patterns.",
+      "C": "A database indexing method.",
+      "D": "None of the above."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which PHP function allows you to change the memory limit dynamically for a specific script?",
+    "options": {
+      "A": "ini_set('memory_limit', '512M');",
+      "B": "set_memory(512);",
+      "C": "memory_allocate(512);",
+      "D": "limit_mem(512);"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP's PDO uses 'emulated' prepared statements by default for some drivers, which should be disabled for maximum security.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Liskov Substitution Principle' in PHP OOP?",
+    "options": {
+      "A": "Objects of a superclass should be replaceable with objects of its subclasses without breaking the application.",
+      "B": "A way to replace classes with functions.",
+      "C": "A method of variable substitution.",
+      "D": "A database query principle."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a socket connection in PHP?",
+    "options": {
+      "A": "fsockopen()",
+      "B": "socket_create()",
+      "C": "Both A and B",
+      "D": "connect()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'var_dump()' function?",
+    "options": {
+      "A": "To display structured information about one or more variables, including their type and value.",
+      "B": "To delete a variable from the server's memory.",
+      "C": "To convert an array into a comma-separated string.",
+      "D": "To log errors to a specific text file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is the correct way to start a PHP block?",
+    "options": {
+      "A": "<script php>",
+      "B": "<?php",
+      "C": "<?",
+      "D": "<&"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In PHP, variable names are case-sensitive, but function names are not.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to check if a file is uploaded via HTTP POST?",
+    "options": {
+      "A": "is_uploaded_file()",
+      "B": "check_file()",
+      "C": "post_file_exists()",
+      "D": "is_post()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default port for a PHP built-in web server?",
+    "options": {
+      "A": "80",
+      "B": "8080",
+      "C": "8000",
+      "D": "443"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which character is used to separate statements in PHP?",
+    "options": {
+      "A": "Period (.)",
+      "B": "Comma (,)",
+      "C": "Semicolon (;)",
+      "D": "Colon (:)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you define a string that spans multiple lines while preserving formatting?",
+    "options": {
+      "A": "Using HEREDOC syntax (<<<EOD).",
+      "B": "Using the multi_line() function.",
+      "C": "By wrapping text in <pre> tags.",
+      "D": "By using three double quotes (\"\"\")."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator is used to check if two variables have the same value AND type?",
+    "options": {
+      "A": "==",
+      "B": "===",
+      "C": "!=",
+      "D": "!=="
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of 'echo 10 + \"5\";' in PHP?",
+    "options": {
+      "A": "15",
+      "B": "105",
+      "C": "Error",
+      "D": "10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which superglobal is used to access data sent via the URL query string?",
+    "options": {
+      "A": "$_POST",
+      "B": "$_GET",
+      "C": "$_REQUEST",
+      "D": "$_URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: $this is a reserved keyword in PHP used to refer to the current object instance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to get the number of elements in an array?",
+    "options": {
+      "A": "count()",
+      "B": "len()",
+      "C": "size()",
+      "D": "length()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you declare a constant that cannot be changed during script execution?",
+    "options": {
+      "A": "define('NAME', 'value');",
+      "B": "const NAME = 'value';",
+      "C": "Both A and B",
+      "D": "static $NAME = 'value';"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function is used to turn a string into all uppercase characters?",
+    "options": {
+      "A": "strtoupper()",
+      "B": "to_upper()",
+      "C": "uccase()",
+      "D": "upper()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'exit()' function?",
+    "options": {
+      "A": "To terminate the current script execution.",
+      "B": "To log out the current user.",
+      "C": "To close a database connection.",
+      "D": "To restart the web server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which symbol is used for the logical 'NOT' operator?",
+    "options": {
+      "A": "!",
+      "B": "~",
+      "C": "not",
+      "D": "^"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between 'require' and 'include'?",
+    "options": {
+      "A": "Require produces a fatal error if the file is missing; Include only produces a warning.",
+      "B": "Include is for HTML; Require is for PHP.",
+      "C": "Require is faster than Include.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to prevent a class from being inherited by other classes?",
+    "options": {
+      "A": "static",
+      "B": "final",
+      "C": "private",
+      "D": "abstract"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Type Hinting' in PHP?",
+    "options": {
+      "A": "Specifying the data type of function arguments and return values.",
+      "B": "A tooltip in the code editor.",
+      "C": "Automatically converting strings to numbers.",
+      "D": "A way to comment on variables."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is triggered when an object is treated as a function?",
+    "options": {
+      "A": "__call()",
+      "B": "__invoke()",
+      "C": "__toString()",
+      "D": "__construct()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a property in a PHP 8.1+ class that can only be written to once?",
+    "options": {
+      "A": "public readonly string $prop;",
+      "B": "public static $prop;",
+      "C": "private const $prop;",
+      "D": "public final $prop;"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A Trait can be instantiated just like a class.",
+    "options": {
+      "A": "False (Traits are for code reuse across classes and cannot be instantiated).",
+      "B": "True"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a hash of a password for secure storage?",
+    "options": {
+      "A": "md5()",
+      "B": "password_hash()",
+      "C": "sha1()",
+      "D": "crypt_pass()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'self' keyword refer to in a class method?",
+    "options": {
+      "A": "The current class itself (used for static members).",
+      "B": "The current object instance.",
+      "C": "The parent class.",
+      "D": "A global variable."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which header is required to send JSON data from a PHP script?",
+    "options": {
+      "A": "header('Content-Type: application/json');",
+      "B": "header('Format: json');",
+      "C": "header('Type: text/json');",
+      "D": "header('Data: json');"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'autoloading' (spl_autoload_register)?",
+    "options": {
+      "A": "To automatically include the file defining a class when that class is first referenced.",
+      "B": "To update the database automatically.",
+      "C": "To load the page without refreshing.",
+      "D": "To download libraries from the web."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to execute a callback function for every element in an array?",
+    "options": {
+      "A": "array_map()",
+      "B": "array_walk()",
+      "C": "Both A and B",
+      "D": "array_execute()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How do you catch multiple types of exceptions in a single catch block?",
+    "options": {
+      "A": "catch (ExceptionType1 | ExceptionType2 $e)",
+      "B": "catch (ExceptionType1, ExceptionType2 $e)",
+      "C": "catch (ExceptionType1 and ExceptionType2 $e)",
+      "D": "catch (ExceptionType1 / ExceptionType2 $e)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Closure' in PHP?",
+    "options": {
+      "A": "An anonymous function that can capture variables from the surrounding scope.",
+      "B": "A function that terminates the script.",
+      "C": "A way to close a database connection.",
+      "D": "A private class."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to change the current directory?",
+    "options": {
+      "A": "chdir()",
+      "B": "set_dir()",
+      "C": "move_to()",
+      "D": "dir_change()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.0 introduced Named Arguments, allowing you to pass values by name instead of position.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the Null Coalescing Assignment operator introduced in PHP 7.4?",
+    "options": {
+      "A": "??=",
+      "B": "?:=",
+      "C": "||=",
+      "D": "???"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Just-In-Time' (JIT) compiler introduced in PHP 8.0?",
+    "options": {
+      "A": "An optimization that compiles parts of the bytecode into machine code at runtime.",
+      "B": "A tool that fixes syntax errors as you type.",
+      "C": "A feature that connects to databases faster.",
+      "D": "A new way to write loops."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you achieve 'Late Static Binding' in PHP?",
+    "options": {
+      "A": "By using the 'static::' keyword instead of 'self::'.",
+      "B": "By defining functions at the end of the script.",
+      "C": "By using global variables.",
+      "D": "By using the 'bind' keyword."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'WeakMaps' in PHP 8.0?",
+    "options": {
+      "A": "To associate data with objects without preventing those objects from being garbage collected.",
+      "B": "To create arrays with low memory footprints.",
+      "C": "To store encrypted passwords.",
+      "D": "To map variables to different namespaces."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In PHP 8.1+, what are 'Fibers' used for?",
+    "options": {
+      "A": "Implementing lightweight, cooperative concurrency (green threads).",
+      "B": "Increasing the speed of string parsing.",
+      "C": "Protecting against XSS attacks.",
+      "D": "Managing file system permissions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which magic method is called when an object is serialized using the 'serialize()' function?",
+    "options": {
+      "A": "__serialize()",
+      "B": "__sleep()",
+      "C": "Both A and B",
+      "D": "__save()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Constructor Property Promotion' in PHP 8?",
+    "options": {
+      "A": "Declaring and initializing class properties directly in the constructor signature.",
+      "B": "Promoting a local variable to a class property.",
+      "C": "Making all constructor arguments public by default.",
+      "D": "Using the 'new' keyword inside a class."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: PHP 8.2 allows for 'Readonly' classes, making all properties within that class readonly automatically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal Zend Engine structure represents a PHP variable?",
+    "options": {
+      "A": "zval",
+      "B": "pvar",
+      "C": "node",
+      "D": "vbox"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Covariance' in PHP OOP return types?",
+    "options": {
+      "A": "Allowing a child method to return a more specific type than the parent method.",
+      "B": "Forcing all return types to be the same.",
+      "C": "Returning multiple types from one function.",
+      "D": "Mapping types to a database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'readonly' modifier prevent in PHP 8.1+ properties?",
+    "options": {
+      "A": "Modification after initialization.",
+      "B": "Reading the value from outside the class.",
+      "C": "The property from being static.",
+      "D": "The property from being used in a trait."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of using 'Intersection Types' (e.g., Iterator & Countable)?",
+    "options": {
+      "A": "The passed object must implement both specified interfaces.",
+      "B": "The object can implement either of the interfaces.",
+      "C": "The two interfaces are merged into a new one.",
+      "D": "It creates a multi-threaded process."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you implement the 'Singleton Pattern' safely in PHP?",
+    "options": {
+      "A": "Private constructor, private clone, and a static method to return the single instance.",
+      "B": "By making the class static.",
+      "C": "Using global variables only.",
+      "D": "By using the 'final' keyword on all methods."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Attributes' (#[ ]) introduced in PHP 8.0?",
+    "options": {
+      "A": "To add structured, machine-readable metadata to declarations in code.",
+      "B": "To define the CSS style of the page.",
+      "C": "To create new database tables.",
+      "D": "To replace all PHP comments."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function allows you to get the memory usage of the current PHP script?",
+    "options": {
+      "A": "memory_get_usage()",
+      "B": "get_mem()",
+      "C": "sys_memory()",
+      "D": "check_usage()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In PHP 8.3+, you can define constants within a class and mark them as 'final' to prevent overriding.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Zend OpCache' and how does it improve performance?",
+    "options": {
+      "A": "It stores precompiled script bytecode in shared memory to avoid parsing code on every request.",
+      "B": "It caches database results.",
+      "C": "It compresses the HTML output.",
+      "D": "It speeds up file uploads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'ReflectionClass' in PHP?",
+    "options": {
+      "A": "To inspect the metadata and structure of a class at runtime.",
+      "B": "To create a duplicate of a class.",
+      "C": "To reverse the inheritance tree.",
+      "D": "To encrypt the class source code."
+    },
+    "answer": "A"
+  }
+  ]
+}

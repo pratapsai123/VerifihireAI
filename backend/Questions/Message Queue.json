@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Message Queue", 
+  "questions": [
+    {
+    "question": "In message queuing, what is the 'Producer'?",
+    "options": {
+      "A": "The database where messages are stored permanently.",
+      "B": "The component that creates and sends messages to the queue.",
+      "C": "The user interface that displays the messages.",
+      "D": "The network cable connecting two servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Message Queue allows for asynchronous communication between different parts of a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Java",
+      "D": "Only for local network traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'FIFO' stand for in the context of a message queue?",
+    "options": {
+      "A": "Fast Input Fast Output",
+      "B": "First In First Out",
+      "C": "Fixed Internal File Object",
+      "D": "Formal Identification for Operations"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for retrieving and processing messages from the queue?",
+    "options": {
+      "A": "Producer",
+      "B": "Broker",
+      "C": "Consumer",
+      "D": "Publisher"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Once a consumer processes a message in a standard queue, that message is typically removed from the queue.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the message is over 1MB",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of using a Message Queue for time-consuming tasks?",
+    "options": {
+      "A": "It makes the task run instantly without any CPU usage.",
+      "B": "It allows the application to remain responsive by offloading tasks to the background.",
+      "C": "It automatically fixes code errors in the task.",
+      "D": "It deletes the task if it takes more than 5 seconds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a widely used open-source message broker?",
+    "options": {
+      "A": "RabbitMQ",
+      "B": "Apache Kafka",
+      "C": "Amazon SQS",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Message queues require both the producer and consumer to be online at the exact same time.",
+    "options": {
+      "A": "True",
+      "B": "False (The queue acts as a buffer allowing decoupled timing)",
+      "C": "Only for Redis-based queues",
+      "D": "Only in production environments"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Message Broker'?",
+    "options": {
+      "A": "A person who sells server hardware.",
+      "B": "The software that manages the storage and routing of messages from producers to consumers.",
+      "C": "A specialized web browser for viewing logs.",
+      "D": "A tool that breaks messages into smaller encrypted parts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decoupling' in a message-driven architecture?",
+    "options": {
+      "A": "Removing the power cables from the server.",
+      "B": "Ensuring that the sender of a message doesn't need to know the details of the receiver.",
+      "C": "Formatting the code to remove pairs of brackets.",
+      "D": "Splitting a database into two separate files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Point-to-Point' messaging ensures that only one consumer processes a specific message.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using HTTP/2",
+      "D": "Only for encrypted messages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a consumer is slower than the producer in a high-traffic system?",
+    "options": {
+      "A": "The producer stops working automatically.",
+      "B": "Messages accumulate in the queue, creating a backlog.",
+      "C": "The computer restarts to clear the memory.",
+      "D": "The messages are converted into text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Pub/Sub' messaging, what does 'Pub' stand for?",
+    "options": {
+      "A": "Public",
+      "B": "Publish",
+      "C": "Protocol",
+      "D": "Primary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Redis can be used as a simple message queue.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise version",
+      "D": "Only for storing strings, not objects"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Topic' in the context of Pub/Sub messaging?",
+    "options": {
+      "A": "The subject line of an email.",
+      "B": "A category or channel used to group related messages.",
+      "C": "The name of the database table.",
+      "D": "A specific programming language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scalability' as it relates to Message Queues?",
+    "options": {
+      "A": "The weight of the server hardware.",
+      "B": "The ability to add more consumers to handle a larger volume of messages.",
+      "C": "The resolution of the monitoring dashboard.",
+      "D": "The number of lines of code in the broker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most message queues support persistent storage to survive a server restart.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a cloud-based queue",
+      "D": "Only for messages under 1KB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Message Durability' mean?",
+    "options": {
+      "A": "The message is written in a language that is easy to read.",
+      "B": "The message is saved to disk so it isn't lost if the broker crashes.",
+      "C": "The message will never expire.",
+      "D": "The message can only be deleted by an administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a cloud-native message queue service from AWS?",
+    "options": {
+      "A": "SQS (Simple Queue Service)",
+      "B": "SNS (Simple Notification Service)",
+      "C": "MSK (Managed Streaming for Kafka)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Apache Kafka is often used for real-time data streaming and log aggregation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only on Linux servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Payload' of a message?",
+    "options": {
+      "A": "The cost of sending the message over the network.",
+      "B": "The actual data or content contained within the message.",
+      "C": "The metadata like timestamps and IDs.",
+      "D": "The physical size of the message in millimeters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Pub/Sub', what is the role of a 'Subscriber'?",
+    "options": {
+      "A": "To pay for the messaging service monthly.",
+      "B": "To express interest in one or more topics and receive corresponding messages.",
+      "C": "To write messages to the database.",
+      "D": "To monitor the uptime of the producer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single message queue can have multiple producers sending messages simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are on the same server",
+      "D": "Only if they use the same password"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Acknowledgment' (Ack) in MQ terminology?",
+    "options": {
+      "A": "The producer thanking the broker for receiving the message.",
+      "B": "A signal sent by a consumer to the broker that a message has been successfully processed.",
+      "C": "A legal contract between developers.",
+      "D": "The time it takes for a message to reach the queue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a consumer fails to send an Acknowledgment (Ack)?",
+    "options": {
+      "A": "The message is deleted automatically.",
+      "B": "The broker may re-queue the message for another attempt.",
+      "C": "The producer is notified to stop sending data.",
+      "D": "The entire queue is paused."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Message queues are always strictly FIFO and cannot prioritize messages.",
+    "options": {
+      "A": "False (Many queues support priority levels for messages)",
+      "B": "True (It is a technical limitation of all brokers)",
+      "C": "True, but only in RabbitMQ",
+      "D": "False, but only if the queue is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Dead Letter Queue' (DLQ)?",
+    "options": {
+      "A": "A queue for messages that were sent to the wrong IP address.",
+      "B": "A specialized queue for messages that cannot be delivered or processed successfully after several attempts.",
+      "C": "A backup of all deleted messages.",
+      "D": "A queue used only for administrative alerts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is commonly used for messaging with RabbitMQ?",
+    "options": {
+      "A": "AMQP (Advanced Message Queuing Protocol)",
+      "B": "HTTP/3",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Microsoft Azure Service Bus is a cloud messaging service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 11 users",
+      "D": "Only for C# applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latency' in the context of messaging?",
+    "options": {
+      "A": "The total number of messages in the queue.",
+      "B": "The time delay between a message being produced and it being consumed.",
+      "C": "The physical distance between servers.",
+      "D": "The font size of the log messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput'?",
+    "options": {
+      "A": "The thickness of the network cables.",
+      "B": "The number of messages a system can process in a given amount of time.",
+      "C": "The percentage of messages that contain errors.",
+      "D": "The total storage capacity of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a message queue can improve 'Fault Tolerance' by ensuring tasks aren't lost if a worker service goes down.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the worker is on a virtual machine",
+      "D": "Only for financial data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Kafka, what is a 'Partition'?",
+    "options": {
+      "A": "A physical divider in the server room.",
+      "B": "A division of a topic that allows for parallel processing across different consumers.",
+      "C": "The part of the hard drive where Kafka is installed.",
+      "D": "A way to split a single message into two parts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Balancing' in MQ?",
+    "options": {
+      "A": "Measuring the weight of the servers.",
+      "B": "Distributing messages across multiple consumers to ensure no single consumer is overwhelmed.",
+      "C": "Resetting the server electricity.",
+      "D": "Deleting older messages to save space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: RabbitMQ 'Exchanges' determine how a message is routed to one or more queues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Fanout exchanges",
+      "D": "Only in version 4.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Fanout' exchange in RabbitMQ?",
+    "options": {
+      "A": "An exchange that turns on the server's cooling fans.",
+      "B": "An exchange that routes a message to every queue that is bound to it.",
+      "C": "An exchange that only works during the summer.",
+      "D": "An exchange that deletes messages after 1 minute."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword describes a system that handles messages in order, one by one?",
+    "options": {
+      "A": "Parallel",
+      "B": "Sequential",
+      "C": "Random",
+      "D": "Burst"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard Amazon SQS 'Standard Queues' guarantee that a message is delivered exactly once and in the correct order.",
+    "options": {
+      "A": "False (Standard queues guarantee 'at-least-once' delivery; FIFO queues guarantee order).",
+      "B": "True",
+      "C": "Only if using the Java SDK",
+      "D": "Only if the message is under 256KB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message TTL' (Time To Live)?",
+    "options": {
+      "A": "The time it takes for a developer to write a message.",
+      "B": "The period of time a message remains in the queue before being automatically deleted or moved.",
+      "C": "The total lifespan of the server hardware.",
+      "D": "The duration of the user's login session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RabbitMQ, what is a 'Binding'?",
+    "options": {
+      "A": "The physical rope used to tie cables together.",
+      "B": "The link or rule that connects an exchange to a queue.",
+      "C": "The process of compiling the code.",
+      "D": "A security setting that locks the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: gRPC can be used for messaging, but it is typically synchronous (Request-Response) unlike traditional MQs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Python",
+      "D": "Only on mobile devices"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backpressure'?",
+    "options": {
+      "A": "Pushing the server back into the rack.",
+      "B": "A mechanism for a slow consumer to signal the producer to slow down message production.",
+      "C": "The pressure inside a water-cooled server.",
+      "D": "The force required to click the 'Send' button."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a messaging system is often called 'Middleware'?",
+    "options": {
+      "A": "The front-end website.",
+      "B": "The message broker.",
+      "C": "The user's computer.",
+      "D": "The mobile app."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a Message Queue can make your system more complex than a direct API call.",
+    "options": {
+      "A": "True (It adds a new infrastructure component to manage)",
+      "B": "False (It always simplifies the system)",
+      "C": "Only if using Kafka",
+      "D": "Only on Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Versioning'?",
+    "options": {
+      "A": "The version of the MQ software being used.",
+      "B": "A way to handle changes in the structure of the message payload over time.",
+      "C": "Counting how many times a message has been read.",
+      "D": "Changing the color of the message icon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Batching' in message production?",
+    "options": {
+      "A": "Sending messages only on Fridays.",
+      "B": "Grouping multiple messages into a single network request to improve efficiency.",
+      "C": "Deleting messages in batches of 10.",
+      "D": "Compressing the database logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: WebSockets are a type of message queue.",
+    "options": {
+      "A": "False (WebSockets are a bi-directional communication protocol, not a queuing system).",
+      "B": "True",
+      "C": "Only in HTML5",
+      "D": "Only if using the Socket.io library"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Kafka, what is a 'Producer Group'?",
+    "options": {
+      "A": "There is no such term; Kafka uses 'Consumer Groups'.",
+      "B": "A group of producers who share the same password.",
+      "C": "A way to send messages to multiple topics at once.",
+      "D": "A team of developers who write producer code."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'At-Least-Once' delivery guarantee?",
+    "options": {
+      "A": "The message will be delivered exactly one time.",
+      "B": "The message is guaranteed to reach the consumer, but might be delivered more than once.",
+      "C": "The message might be lost but won't be duplicated.",
+      "D": "The message is only delivered if the consumer is online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ActiveMQ is a popular open-source message broker from the Apache Foundation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for C++ apps",
+      "D": "Only for mainframe computers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Offset' in Apache Kafka?",
+    "options": {
+      "A": "To set the starting time of the server.",
+      "B": "A unique identifier for a message within a partition that tracks consumer progress.",
+      "C": "To calculate the size of the message in bits.",
+      "D": "To move the message to a different server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Routing Key' in RabbitMQ?",
+    "options": {
+      "A": "A physical key used to open the server room.",
+      "B": "A string used by an exchange to decide how to route a message to a queue.",
+      "C": "The password for the API.",
+      "D": "The name of the network router."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Pub/Sub model, a single publisher can have zero subscribers.",
+    "options": {
+      "A": "True (The messages are simply discarded by the broker)",
+      "B": "False (The broker will throw an error)",
+      "C": "Only if using AWS SNS",
+      "D": "Only in the 'test' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Consumer Group' in Kafka?",
+    "options": {
+      "A": "To group users by their age.",
+      "B": "To allow a pool of consumers to divide the work of consuming messages from a topic.",
+      "C": "To create a chat room for developers.",
+      "D": "To delete messages after they are read by everyone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compaction' in a log-based message queue like Kafka?",
+    "options": {
+      "A": "Compressing messages using ZIP.",
+      "B": "Ensuring that the log only retains the last known value for each message key.",
+      "C": "Deleting messages that are more than 1 hour old.",
+      "D": "Reducing the font size of the database records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NATS is a high-performance, cloud-native messaging system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local networks",
+      "D": "Only for Ruby on Rails apps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Horizontal Scaling' in a messaging system?",
+    "options": {
+      "A": "Buying a wider computer monitor.",
+      "B": "Adding more broker nodes to a cluster to handle more load.",
+      "C": "Stretching the network cables.",
+      "D": "Increasing the RAM on a single server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-Copy' in high-performance brokers like Kafka?",
+    "options": {
+      "A": "Deleting all copies of a message.",
+      "B": "A technique to move data from disk to network without copying it into application memory.",
+      "C": "Preventing anyone from copying the source code.",
+      "D": "Sending a message with zero data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Stomp is a simple text-oriented messaging protocol.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java",
+      "D": "Only for mobile apps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Ordering'?",
+    "options": {
+      "A": "Buying messages from an online store.",
+      "B": "Ensuring that messages are processed in the same order they were sent.",
+      "C": "Arranging messages by their color.",
+      "D": "Choosing which message to delete first."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which company originally created Apache Kafka?",
+    "options": {
+      "A": "Google",
+      "B": "Facebook",
+      "C": "LinkedIn",
+      "D": "Microsoft"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A message queue can act as a 'Buffer' during traffic spikes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for images",
+      "D": "Only for HTTP/1.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Poison Message'?",
+    "options": {
+      "A": "A message that contains a computer virus.",
+      "B": "A message that causes a consumer to crash or fail repeatedly.",
+      "C": "A message that is sent to a competitor.",
+      "D": "A message that is intentionally deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RabbitMQ, what is the 'Management UI'?",
+    "options": {
+      "A": "A game where you manage a rabbit farm.",
+      "B": "A web-based dashboard used to monitor and manage queues, exchanges, and connections.",
+      "C": "A command-line tool for admins only.",
+      "D": "The source code of the broker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Amazon MQ is a managed message broker service for RabbitMQ and ActiveMQ.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for RabbitMQ, not ActiveMQ",
+      "D": "Only for Government accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in message processing?",
+    "options": {
+      "A": "The ability to process the same message multiple times with the same result.",
+      "B": "The ability to send messages to multiple topics.",
+      "C": "The speed of the message broker.",
+      "D": "The number of users who can access the queue."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens during a 'Consumer Group Rebalance' in Apache Kafka?",
+    "options": {
+      "A": "The broker deletes all messages to clear the cache.",
+      "B": "Kafka redistributes the partitions of a topic among the available consumers in the group.",
+      "C": "The producers are paused until the consumers finish their backlog.",
+      "D": "The system automatically increases the RAM of the consumer nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RabbitMQ, a message can be routed to multiple queues simultaneously if the exchange type is set to 'Fanout'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the queues are on the same disk",
+      "D": "Only if the message is under 128KB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of a 'Visibility Timeout' in Amazon SQS?",
+    "options": {
+      "A": "To set the time an admin can view the queue in the dashboard.",
+      "B": "To prevent other consumers from processing a message while one consumer is already working on it.",
+      "C": "To determine how long a message is visible in the logs.",
+      "D": "To set the expiration date of the user's access key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which messaging pattern is best suited for notifying multiple independent services about a single event?",
+    "options": {
+      "A": "Point-to-Point",
+      "B": "Request-Response",
+      "C": "Publish-Subscribe (Pub/Sub)",
+      "D": "Remote Procedure Call (RPC)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Exclusive Consumer' mean in a messaging system?",
+    "options": {
+      "A": "A consumer that only accepts encrypted messages.",
+      "B": "A setting that ensures only one specific consumer can read from a queue, even if others are connected.",
+      "C": "A consumer that costs more to run in the cloud.",
+      "D": "A consumer that deletes the queue after reading all messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Compacted Topic' in Kafka ensures that only the latest message for a specific key is retained.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for numeric keys",
+      "D": "Only if the topic is less than 1GB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In RabbitMQ, what is the role of a 'Direct Exchange'?",
+    "options": {
+      "A": "It routes messages based on an exact match between the routing key and the queue binding key.",
+      "B": "It sends messages directly to the database without a queue.",
+      "C": "It bypasses the broker entirely for faster speed.",
+      "D": "It only allows one producer at a time."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Prefetch' count used for?",
+    "options": {
+      "A": "To count how many messages are in the database.",
+      "B": "To limit the number of unacknowledged messages a consumer can have at one time.",
+      "C": "To predict the next message the user will type.",
+      "D": "To set the font size of the message text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Persistent' message in RabbitMQ is guaranteed to be saved even if the queue itself is 'Transient'.",
+    "options": {
+      "A": "False (The queue must also be durable for the message to survive a restart).",
+      "B": "True",
+      "C": "Only if using the Java client",
+      "D": "True, but only on Linux servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Zookeeper' (or Metadata Quorum in newer versions) in a Kafka cluster?",
+    "options": {
+      "A": "To feed the servers.",
+      "B": "To manage cluster state, elect leaders, and store configuration metadata.",
+      "C": "To encrypt the payload of the messages.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Short Polling' vs 'Long Polling' in SQS?",
+    "options": {
+      "A": "Short polling is for small messages; long is for large ones.",
+      "B": "Long polling waits for a message to arrive before responding, reducing empty responses and costs.",
+      "C": "Short polling uses more CPU but less RAM.",
+      "D": "There is no functional difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Side-Effect' of poor idempotency in message processing?",
+    "options": {
+      "A": "The server becomes too fast.",
+      "B": "Duplicate records are created in the database if a message is delivered twice.",
+      "C": "The message color changes to red.",
+      "D": "The network connection is disconnected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Work Queue' model, multiple consumers compete to process messages from a single queue.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Redis",
+      "D": "Only for non-priority messages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Message Header' typically used for in an MQ system?",
+    "options": {
+      "A": "To store high-resolution images.",
+      "B": "To store metadata like message type, version, or correlation IDs for tracking.",
+      "C": "To store the entire message payload.",
+      "D": "To list the names of all users in the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what is 'Retention Policy'?",
+    "options": {
+      "A": "The amount of money the developer is paid.",
+      "B": "The rules that determine how long messages are kept on disk before being deleted (by time or size).",
+      "C": "A policy that prevents users from leaving the website.",
+      "D": "The percentage of messages that are encrypted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Correlation ID'?",
+    "options": {
+      "A": "To link a request message with its corresponding response message in an asynchronous flow.",
+      "B": "To identify if two users have the same name.",
+      "C": "To correlate the server speed with the network speed.",
+      "D": "To count the total number of errors in the system."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Standard SQS queues provide 'Best-effort ordering', which means messages might arrive in a different order than sent.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for batch requests",
+      "D": "Only if the message contains JSON"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Replication Factor' in Kafka?",
+    "options": {
+      "A": "The number of times a message is duplicated within a single partition file.",
+      "B": "The number of copies of a partition maintained across different brokers for high availability.",
+      "C": "The speed at which messages are copied to the backup server.",
+      "D": "The number of producers allowed to send to a topic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Negative Acknowledgment' (Nack) tell the broker?",
+    "options": {
+      "A": "The consumer has finished and wants more data.",
+      "B": "The consumer failed to process the message and it should be re-queued or moved to a DLQ.",
+      "C": "The producer should stop sending messages.",
+      "D": "The server is running out of disk space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RabbitMQ, what is a 'Topic Exchange' used for?",
+    "options": {
+      "A": "Routing messages based on wildcard patterns in the routing key (e.g., 'stock.*').",
+      "B": "Routing messages only to the oldest queue.",
+      "C": "Deleting messages that don't have a title.",
+      "D": "Sending messages to a random queue."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Cluster' of message brokers provides both high availability and increased throughput.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Kafka",
+      "D": "Only if all brokers are in the same building"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'At-Most-Once' delivery guarantee?",
+    "options": {
+      "A": "The message will definitely be delivered once.",
+      "B": "The message is delivered once or not at all (no retries if it fails).",
+      "C": "The message will be delivered at least five times.",
+      "D": "The message can only be read by one person."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Leader' of a partition in Kafka?",
+    "options": {
+      "A": "The most expensive broker in the cluster.",
+      "B": "The broker responsible for all reads and writes for that specific partition.",
+      "C": "The developer who created the topic.",
+      "D": "The server that has the most RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: RabbitMQ supports 'Publisher Confirms' to ensure a message safely reached the broker.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Fanout exchanges",
+      "D": "Only if using SSL"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Poison Message Handling'?",
+    "options": {
+      "A": "Deleting messages that contain the word 'poison'.",
+      "B": "Detecting messages that repeatedly cause consumer failure and moving them to a DLQ to prevent infinite loops.",
+      "C": "Encrypting messages so they can't be read.",
+      "D": "Sending an alert to the security team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of MQ, what is 'Throughput' optimized by?",
+    "options": {
+      "A": "Adding more descriptive titles to messages.",
+      "B": "Batching multiple messages and using asynchronous processing.",
+      "C": "Decreasing the number of consumers.",
+      "D": "Formatting the payload as XML instead of JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Horizontal Scaling' for consumers?",
+    "options": {
+      "A": "Stretching the monitor to see more logs.",
+      "B": "Adding more instances of a consumer service to share the message load.",
+      "C": "Upgrading the CPU on a single consumer node.",
+      "D": "Increasing the size of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Apache ActiveMQ supports both 'Queue' and 'Topic' destinations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for JMS-based applications",
+      "D": "Only on Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Message Selector'?",
+    "options": {
+      "A": "A person who chooses which messages to read.",
+      "B": "A filter applied by a consumer to only receive messages that match certain criteria or headers.",
+      "C": "A tool to select the color of the UI dashboard.",
+      "D": "A way to select which broker to connect to."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-Sync Replicas' (ISR) in Kafka?",
+    "options": {
+      "A": "Replicas that have the exact same hardware as the leader.",
+      "B": "The set of follower replicas that are fully caught up with the leader partition.",
+      "C": "Replicas that are currently being backed up.",
+      "D": "A list of all brokers currently online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Header Exchange' in RabbitMQ uses the routing key to determine where to send messages.",
+    "options": {
+      "A": "False (It uses message attributes/headers instead of a routing key).",
+      "B": "True",
+      "C": "Only if the routing key is null",
+      "D": "Only for XML messages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Delayed Queues'?",
+    "options": {
+      "A": "To make the application run slower.",
+      "B": "To schedule a message to be processed only after a certain amount of time has passed.",
+      "C": "To store messages that failed due to network lag.",
+      "D": "To monitor the latency of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Persistent' connections in messaging protocols like AMQP?",
+    "options": {
+      "A": "It saves electricity.",
+      "B": "It reduces the overhead of repeatedly opening and closing network sockets.",
+      "C": "It prevents the user from logging out.",
+      "D": "It makes the database faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kafka 'Producers' choose which partition to send a message to, often based on a key hash.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 0.8",
+      "D": "Only if using the Go SDK"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Exactly-Once' processing (Eos)?",
+    "options": {
+      "A": "Ensuring a message is only delivered to the broker once.",
+      "B": "The strongest guarantee where a message is processed exactly once even if a system failure occurs.",
+      "C": "Processing only one message every minute.",
+      "D": "Deleting a message immediately after reading it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consumer Lag'?",
+    "options": {
+      "A": "The time it takes for a consumer to log in.",
+      "B": "The difference between the latest message produced and the last message processed by a consumer.",
+      "C": "A physical delay in the computer mouse.",
+      "D": "The time it takes to delete a message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Amazon SQS FIFO queues support 'Message Deduplication' to prevent duplicate sends.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for binary data",
+      "D": "Only if using the AWS Console"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fan-In' architecture?",
+    "options": {
+      "A": "Sending messages to a specific fan cooling the server.",
+      "B": "Multiple producers or queues sending messages into a single downstream service or queue.",
+      "C": "Rotating the server fans inward to save space.",
+      "D": "Multiple consumers reading from the same partition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of an 'Offset Commit' in Kafka?",
+    "options": {
+      "A": "To tell the broker how many partitions exist.",
+      "B": "To record the point up to which a consumer has successfully read and processed messages.",
+      "C": "To set the expiration date of a message.",
+      "D": "To move the message to a different hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NATS Streaming (Stan) is the newer, recommended version of the NATS protocol.",
+    "options": {
+      "A": "False (NATS JetStream is the modern replacement for NATS Streaming).",
+      "B": "True",
+      "C": "Only for Kubernetes users",
+      "D": "Only in the 'stable' branch"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Serialization'?",
+    "options": {
+      "A": "Adding a serial number to every message.",
+      "B": "Converting an in-memory object into a byte format (JSON, Avro, Protobuf) for transmission over the network.",
+      "C": "Sorting messages by date.",
+      "D": "Sending messages one by one in a series."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RabbitMQ, what happens if a message is sent to an exchange with no bound queues?",
+    "options": {
+      "A": "The broker crashes.",
+      "B": "The message is lost (or returned to the producer if 'mandatory' is set).",
+      "C": "The broker creates a new queue automatically.",
+      "D": "The message is stored in the database forever."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kafka 'Topics' are immutable and messages cannot be deleted or changed once written.",
+    "options": {
+      "A": "True (They are append-only logs).",
+      "B": "False",
+      "C": "Only if using SSL",
+      "D": "Only on Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pull' vs 'Push' consumption?",
+    "options": {
+      "A": "Pull is for heavy messages; push is for light ones.",
+      "B": "Push means the broker sends messages to the consumer; Pull means the consumer requests them.",
+      "C": "Pull uses more bandwidth than push.",
+      "D": "There is no difference in modern MQs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Message Grouping' (or Message Group ID)?",
+    "options": {
+      "A": "To group team members who use the MQ.",
+      "B": "To ensure that all messages belonging to the same group are processed by the same consumer in order.",
+      "C": "To group messages by their file size.",
+      "D": "To send a single message to multiple groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Amazon SQS is a fully managed service, meaning you don't need to install or maintain broker software.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQS FIFO",
+      "D": "Only if using the root AWS account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Size' in message production?",
+    "options": {
+      "A": "The physical dimensions of the server.",
+      "B": "The maximum number of messages sent in a single network request to improve efficiency.",
+      "C": "The total number of developers in a batch.",
+      "D": "The number of messages deleted at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Broker' in a RabbitMQ cluster responsible for?",
+    "options": {
+      "A": "Selling access to the API.",
+      "B": "Accepting messages from producers, routing them, and delivering them to consumers.",
+      "C": "Providing documentation for the developers.",
+      "D": "Monitoring the office internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Multiple Consumers' on a single Kafka partition will speed up message processing for that partition.",
+    "options": {
+      "A": "False (Only one consumer in a group can read from a single partition at a time).",
+      "B": "True",
+      "C": "Only if using Kafka version 3.0+",
+      "D": "Only for public topics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Acknowledgment Timeout'?",
+    "options": {
+      "A": "The time a producer waits for a 'thank you' email.",
+      "B": "The time the broker waits for an Ack from a consumer before assuming it failed and re-delivering the message.",
+      "C": "The time it takes to write an Ack to the database.",
+      "D": "The total time a user is allowed to stay logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what is a 'Replica'?",
+    "options": {
+      "A": "A fake version of the broker used for testing.",
+      "B": "A copy of a partition stored on a different broker for fault tolerance.",
+      "C": "A duplicate message sent by a bug.",
+      "D": "A person who copies the documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: AMQP is the only protocol supported by RabbitMQ.",
+    "options": {
+      "A": "False (RabbitMQ also supports STOMP, MQTT, and HTTP via plugins).",
+      "B": "True",
+      "C": "Only for local connections",
+      "D": "Only in the 'Lite' version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Segments' in Kafka?",
+    "options": {
+      "A": "Segments of the user login history.",
+      "B": "The physical files on disk that make up a partition's log.",
+      "C": "Segments of the code that handle logging.",
+      "D": "The different sections of the terminal output."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Message Redelivery'?",
+    "options": {
+      "A": "Sending a message to a second office location.",
+      "B": "The broker sending a message again because it was never acknowledged or failed processing.",
+      "C": "Sending a message twice on purpose for backup.",
+      "D": "Re-typing a message after it was deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: NATS 'Core' provides at-most-once delivery by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for encrypted topics",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pre-fetching' in the context of MQ consumers?",
+    "options": {
+      "A": "Fetching messages before the user clicks 'Start'.",
+      "B": "A consumer pulling a batch of messages into its local memory buffer to reduce network round-trips.",
+      "C": "Deleting messages before they are processed.",
+      "D": "Predicting the user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Queue Purging'?",
+    "options": {
+      "A": "Deleting only the oldest message.",
+      "B": "The process of removing all messages from a queue without deleting the queue itself.",
+      "C": "Deleting the entire broker server.",
+      "D": "Cleaning the dust off the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kafka is better than RabbitMQ for all possible use cases.",
+    "options": {
+      "A": "False (RabbitMQ is often better for complex routing and simple task queuing; Kafka excels at high-throughput streaming).",
+      "B": "True",
+      "C": "Only for companies with over 1,000 employees",
+      "D": "Only for Python-based applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Filtering'?",
+    "options": {
+      "A": "Selecting messages by their color.",
+      "B": "A mechanism where subscribers only receive a subset of messages based on specific attributes.",
+      "C": "Removing messages that contain bad words.",
+      "D": "Cleaning the air filters on the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In MQ, what does 'Elasticity' mean?",
+    "options": {
+      "A": "The server cables are made of rubber.",
+      "B": "The ability of the messaging system to automatically expand or contract resources based on current demand.",
+      "C": "The ability to stretch the message payload to a larger size.",
+      "D": "The flexibility of the developer's work schedule."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most message brokers allow you to set different permissions for different users (Read/Write/Configure).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Amazon SQS",
+      "D": "Only if using SSL"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Auto-Delete' for a queue in RabbitMQ?",
+    "options": {
+      "A": "The queue is deleted when the server reaches 90% CPU.",
+      "B": "The queue is automatically deleted when the last consumer disconnects.",
+      "C": "The queue is deleted if it hasn't been used for 1 minute.",
+      "D": "The producer deletes the queue after sending one message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Broker-side Filtering'?",
+    "options": {
+      "A": "The broker cleaning the office.",
+      "B": "The broker performing message filtering before sending messages to consumers, saving bandwidth.",
+      "C": "The developer filtering the broker's logs.",
+      "D": "The broker deleting all messages at midnight."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using an 'Opaque' message ID is better for security than using a predictable sequential ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local networks",
+      "D": "Only if using Kafka"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backpressure Strategy'?",
+    "options": {
+      "A": "Pushing the server back into the rack.",
+      "B": "Specific logic (like Drop-Oldest or Buffer) used when a producer is sending faster than consumers can process.",
+      "C": "A way to measure the air pressure in the server room.",
+      "D": "The force required to click 'Delete'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what is a 'Broker'?",
+    "options": {
+      "A": "A person who sells Kafka licenses.",
+      "B": "An individual server in the Kafka cluster that stores data and serves clients.",
+      "C": "The part of the code that handles network errors.",
+      "D": "A database for storing user names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In distributed messaging, what is the 'Split-Brain' scenario?",
+    "options": {
+      "A": "When a message is split into two parts to bypass network limits.",
+      "B": "A failure where a cluster divides into two groups, each believing they are the leader.",
+      "C": "A database error where primary keys are duplicated across two tables.",
+      "D": "A security attack where an intruder takes over exactly half of the server nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Enabling 'Transactional Writes' in Kafka allows a producer to send a batch of messages to multiple partitions atomically.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the replication factor is 1",
+      "D": "Only for non-persistent topics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mechanism does RabbitMQ use to handle 'Quorum Queues' for high consistency?",
+    "options": {
+      "A": "The Paxos algorithm",
+      "B": "The Raft consensus algorithm",
+      "C": "Standard Master-Slave replication",
+      "D": "Round-robin database mirroring"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of the 'Idempotent Producer' in Kafka?",
+    "options": {
+      "A": "To compress messages before they reach the broker.",
+      "B": "To ensure that retry attempts do NOT result in duplicate messages in the log.",
+      "C": "To automatically delete messages after they are read by one consumer.",
+      "D": "To encrypt the message payload using a rotating key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Exactly-Once Semantics' (EOS) actually guarantee in a streaming context?",
+    "options": {
+      "A": "The message is physically delivered only once over the wire.",
+      "B": "The effect of processing a message is reflected exactly once in the downstream state.",
+      "C": "The producer is forbidden from sending the same message twice.",
+      "D": "The network connection will never drop during a transfer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Linearizable' consistency model, a read is guaranteed to return the most recent committed write.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in local network environments",
+      "D": "Only if using Apache ActiveMQ"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Two-Phase Commit' (2PC) protocol used for in MQ systems?",
+    "options": {
+      "A": "To speed up the network handshake.",
+      "B": "To coordinate a transaction between a message broker and an external database.",
+      "C": "To ensure two different producers can send to the same queue.",
+      "D": "To double-check the password of the administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what happens if the 'min.insync.replicas' requirement is not met during a write?",
+    "options": {
+      "A": "The broker accepts the write but logs a warning.",
+      "B": "The broker throws a 'NotEnoughReplicasException' and rejects the write.",
+      "C": "The broker automatically creates a new replica on a different drive.",
+      "D": "The producer is permanently banned from the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Message Replay' is a feature inherent to Kafka but is not natively supported by standard RabbitMQ queues.",
+    "options": {
+      "A": "True (Standard queues delete messages on Ack; Kafka logs are persistent).",
+      "B": "False",
+      "C": "Only in RabbitMQ version 2.0",
+      "D": "Only if using the MQTT plugin"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Consumer Group Sticky Assignment' strategy intended to solve?",
+    "options": {
+      "A": "To keep the user's session active for 24 hours.",
+      "B": "To minimize partition movement during rebalances while maintaining a balanced distribution.",
+      "C": "To ensure messages with 'sticky' headers are prioritized.",
+      "D": "To prevent the server from overheating by limiting CPU usage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a drawback of using 'Global Ordering' across all partitions in a large MQ cluster?",
+    "options": {
+      "A": "The messages become too large for the network.",
+      "B": "It severely limits horizontal scalability and throughput.",
+      "C": "It makes the database impossible to backup.",
+      "D": "It requires all producers to be on the same physical server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Poison Pill' pattern in consumer development?",
+    "options": {
+      "A": "Sending a message that deletes the entire database.",
+      "B": "A special message sent to a consumer to signal it to shut down or stop processing.",
+      "C": "A bug that causes the broker to crash when it receives a null value.",
+      "D": "A high-priority message that bypasses the queue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SQS, the 'ChangeMessageVisibility' API can be used to extend the processing time for a specific message.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for FIFO queues",
+      "D": "Only if the message is under 64KB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Jitter' in the context of MQ retry strategies?",
+    "options": {
+      "A": "The physical vibration of the server rack.",
+      "B": "Adding randomness to the delay between retries to prevent a thundering herd effect.",
+      "C": "The percentage of lost packets in the network.",
+      "D": "A high-speed mode for sending small messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a RabbitMQ cluster, what does 'Pause Minority' strategy do during a network partition?",
+    "options": {
+      "A": "It pauses the smallest queue to save space.",
+      "B": "Nodes that find themselves in a minority partition stop to avoid data inconsistency.",
+      "C": "It pauses all producers until the network is fixed.",
+      "D": "It forces all consumers to log out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backlog Eviction' policy?",
+    "options": {
+      "A": "Hiring a person to clean the data center.",
+      "B": "The rules for deleting old messages when the queue reaches its maximum capacity.",
+      "C": "A law that prevents old servers from being used.",
+      "D": "Automatically moving messages to a backup database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Side-Loading' in MQ refers to putting the message payload in external storage and only sending a reference in the queue.",
+    "options": {
+      "A": "True (Often called the 'Claim Check' pattern)",
+      "B": "False",
+      "C": "Only for AWS S3 integrations",
+      "D": "Only for messages over 100MB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Zombie Fencing' problem in Kafka?",
+    "options": {
+      "A": "Messages being sent after a consumer has already finished.",
+      "B": "An old producer instance continuing to send data after being replaced, causing inconsistency.",
+      "C": "Deleting messages that have no consumer.",
+      "D": "A cluster where all nodes have crashed but appear online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'Transaction Coordinator' in a distributed messaging system?",
+    "options": {
+      "A": "To handle the billing of API transactions.",
+      "B": "An internal module that manages the state of transactions and ensures atomicity across partitions.",
+      "C": "The person who reviews the system logs.",
+      "D": "A script that validates the syntax of JSON payloads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these factors most affects the 'End-to-End Latency' in a producer-consumer flow?",
+    "options": {
+      "A": "The font size of the dashboard.",
+      "B": "Broker processing time, network transit, and consumer processing duration.",
+      "C": "The color of the Ethernet cables.",
+      "D": "The number of lines of code in the Producer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Stateless' consumer is generally easier to scale horizontally than a 'Stateful' one.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Docker",
+      "D": "Only for RabbitMQ"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Write Ahead Logging' (WAL) in the context of message brokers?",
+    "options": {
+      "A": "Logging the time the developer arrived at work.",
+      "B": "Recording changes to a persistent log before they are applied to the main data structures.",
+      "C": "Writing the documentation before the code.",
+      "D": "A way to predict future messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what is the 'High Watermark'?",
+    "options": {
+      "A": "The physical level of the cooling water in the server room.",
+      "B": "The offset of the last message that has been successfully replicated to all In-Sync Replicas.",
+      "C": "The maximum number of messages a topic can hold.",
+      "D": "The point where the broker will automatically restart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary risk of 'Auto-Acknowledgment' in a high-reliability system?",
+    "options": {
+      "A": "It makes the network too fast for the server.",
+      "B": "Messages are marked as done as soon as they are received, risking data loss if the consumer crashes during processing.",
+      "C": "It increases the cost of the cloud hosting.",
+      "D": "It prevents the developer from debugging the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Message Deduplication' in SQS FIFO queues is based on a 'Deduplication ID' valid for a 5-minute window.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for standard queues",
+      "D": "Only for binary payloads"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Consumer Group Co-partitioning'?",
+    "options": {
+      "A": "Splitting a single consumer into two parts.",
+      "B": "Ensuring that related data from two different topics is stored in partitions with the same ID for efficient joining.",
+      "C": "Allowing two consumers to read from the same partition at once.",
+      "D": "A way to divide the cloud bill between two teams."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Caching' in a message broker?",
+    "options": {
+      "A": "Caching the fact that a message or resource does NOT exist to avoid expensive lookups.",
+      "B": "Deleting the cache every hour.",
+      "C": "Caching only the errors produced by the broker.",
+      "D": "Storing messages that are marked for deletion."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Kafka configuration controls the tradeoff between latency and throughput for a producer?",
+    "options": {
+      "A": "retries",
+      "B": "linger.ms",
+      "C": "max.block.ms",
+      "D": "buffer.memory"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: RabbitMQ 'Lazy Queues' keep the majority of messages on disk rather than in RAM to handle massive backlogs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise version",
+      "D": "Only if using the C++ client"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Thundering Herd' problem in consumer groups?",
+    "options": {
+      "A": "When all consumers crash at the same time.",
+      "B": "When a large number of consumers all attempt to reconnect or rebalance simultaneously, overwhelming the broker.",
+      "C": "When a topic has too many partitions.",
+      "D": "When the producer sends messages faster than the network can handle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Pulsar, what is 'Tiered Storage'?",
+    "options": {
+      "A": "Storing servers on different floors of a building.",
+      "B": "Moving older message data from expensive local disks to cheaper long-term storage like S3.",
+      "C": "A database for storing different user roles.",
+      "D": "A way to encrypt messages twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Producer Flow Control' is a mechanism where the broker can block a producer's socket if it is sending too much data.",
+    "options": {
+      "A": "True (Common in RabbitMQ)",
+      "B": "False",
+      "C": "Only for Kafka",
+      "D": "Only if using HTTP/1.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Cleaning' (Compaction) cleaner threads' role?",
+    "options": {
+      "A": "To delete logs that contain profanity.",
+      "B": "To merge log segments and discard duplicate keys, keeping only the latest state.",
+      "C": "To reformat the logs into a pretty JSON format.",
+      "D": "To scan logs for security threats."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Acks=all' setting in Kafka producer guarantee?",
+    "options": {
+      "A": "The message is accepted by all brokers in the cluster.",
+      "B": "The leader and all In-Sync Replicas have acknowledged the write.",
+      "C": "Every consumer in the group has read the message.",
+      "D": "The message is physically printed on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural pattern is used to bridge two different messaging systems (e.g., RabbitMQ to Kafka)?",
+    "options": {
+      "A": "Load Balancer",
+      "B": "Messaging Bridge",
+      "C": "API Gateway",
+      "D": "Reverse Proxy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Kafka 'Streams' is a library for building stateful stream processing applications on top of Kafka.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java, not Scala",
+      "D": "Only if using the Confluent platform"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message TTL' (Time to Live) vs 'Queue TTL'?",
+    "options": {
+      "A": "There is no difference.",
+      "B": "Message TTL expires individual items; Queue TTL deletes the entire queue if it is unused for a period.",
+      "C": "Message TTL is for producers; Queue TTL is for consumers.",
+      "D": "Message TTL is for text; Queue TTL is for binary data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'SASL' in MQ security?",
+    "options": {
+      "A": "A specialized script for deleting logs.",
+      "B": "A framework for providing authentication and data security in network protocols.",
+      "C": "A tool to measure the air pressure in the server room.",
+      "D": "A way to compress message headers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Kafka, a 'Controller' broker is the one node that handles all administrative tasks for the cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in clusters larger than 10 nodes",
+      "D": "Only if using KRaft mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Exactly-Once Processing' vs 'Exactly-Once Delivery'?",
+    "options": {
+      "A": "Processing relates to the logic; Delivery relates to the transport.",
+      "B": "They are the same thing.",
+      "C": "Delivery is for producers; Processing is for the broker.",
+      "D": "Processing is for binary data; Delivery is for strings."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hot-Standby' in high availability messaging?",
+    "options": {
+      "A": "A server that is kept at a high temperature.",
+      "B": "A redundant broker that is running and ready to take over instantly if the primary fails.",
+      "C": "A person who is ready to work on the weekend.",
+      "D": "A backup of the database on an SSD."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is natively used for low-latency, lightweight IoT messaging?",
+    "options": {
+      "A": "HTTP/2",
+      "B": "MQTT",
+      "C": "SOAP",
+      "D": "FTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'In-Memory' queues are always faster but risk data loss if the system crashes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Python",
+      "D": "Only if the RAM is DDR4"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Consumer Group Offset Management' in modern Kafka?",
+    "options": {
+      "A": "Storing offsets in a specialized internal topic (__consumer_offsets).",
+      "B": "Writing offsets to a text file on the user's desktop.",
+      "C": "Storing offsets in the browser's cookies.",
+      "D": "The producer keeping track of where the consumer is."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Shadowing' in advanced MQ configurations?",
+    "options": {
+      "A": "Hiding the message from the administrator.",
+      "B": "Creating a secondary queue that receives a copy of all messages for auditing or testing.",
+      "C": "Deleting a message but keeping a shadow of its ID.",
+      "D": "A security attack where messages are intercepted but not deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In RabbitMQ, what is a 'Topic' wildcard '*' vs '#'?",
+    "options": {
+      "A": "* matches exactly one word; # matches zero or more words.",
+      "B": "# matches exactly one word; * matches zero or more words.",
+      "C": "* is for text; # is for numbers.",
+      "D": "There is no difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Producer Retries' can lead to out-of-order messages if 'max.in.flight.requests.per.connection' is greater than 1 without idempotency.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for very large messages",
+      "D": "Only in RabbitMQ"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput-Latency Tradeoff' in batching?",
+    "options": {
+      "A": "Higher batch sizes increase throughput but also increase the latency of individual messages.",
+      "B": "Higher batch sizes decrease throughput and increase latency.",
+      "C": "Batching has no effect on latency.",
+      "D": "Higher batch sizes decrease both throughput and latency."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backoff' strategy during a consumer failure?",
+    "options": {
+      "A": "Deleting the consumer instance.",
+      "B": "Wait periods (exponential or constant) between successive retry attempts.",
+      "C": "A way to push the broker into a different rack.",
+      "D": "Sending a message to the producer to stop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what is 'End-to-End Compression'?",
+    "options": {
+      "A": "Compressing the producer's source code.",
+      "B": "The producer compresses the data, and it remains compressed through the broker until the consumer decompresses it.",
+      "C": "Compressing the network cables.",
+      "D": "A tool to compress the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Partition Key' ensures that all messages with the same key are sent to the same partition, preserving relative order.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the default partitioner",
+      "D": "Only for integer keys"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Message Enrichment' in a messaging pipeline?",
+    "options": {
+      "A": "Sending messages to a bank.",
+      "B": "Adding additional data to a message payload (e.g., from a database) before it reaches the final consumer.",
+      "C": "Increasing the price of the messaging service.",
+      "D": "Adding more descriptive words to the title."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Queue Mirroring' (Classic Mirrored Queues) in legacy RabbitMQ?",
+    "options": {
+      "A": "Holding a mirror up to the server to see the back.",
+      "B": "Replicating a queue's contents across multiple nodes for high availability.",
+      "C": "Creating a second queue with a different name.",
+      "D": "A way to reverse the order of messages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Nack with Requeue' can cause an infinite loop if the consumer always fails on that specific message.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the consumer is written in C#",
+      "D": "Only if the queue is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Client-side Load Balancing' in Kafka?",
+    "options": {
+      "A": "The broker telling the client which server to use.",
+      "B": "The consumer group protocol where clients coordinate among themselves to assign partitions.",
+      "C": "The user buying a more powerful laptop.",
+      "D": "Dividing the work between two different web browsers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consumer Group Lag' monitoring primarily used for?",
+    "options": {
+      "A": "To see if the developer is working slowly.",
+      "B": "To detect when consumers are failing to keep up with the production rate and trigger scaling.",
+      "C": "To measure the physical delay in the keyboard.",
+      "D": "To see the time it takes for a message to reach the broker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Zero-Copy' data transfer uses the 'sendfile' system call to bypass the application's user-space buffer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Windows",
+      "D": "Only for small messages"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cluster Quorum' and why is it odd-numbered?",
+    "options": {
+      "A": "A list of people who run the cluster.",
+      "B": "The minimum number of nodes required to make decisions; odd numbers prevent tie votes in split-brain scenarios.",
+      "C": "The total number of messages in the cluster.",
+      "D": "A way to count the servers by skipping every second one."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Compaction' scenario?",
+    "options": {
+      "A": "A message log for 'User Profile Updates' where only the latest state is needed.",
+      "B": "A log of all bank transactions where every entry is required.",
+      "C": "A queue of text messages where every message must be delivered.",
+      "D": "A backup of all system logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Persistent' messages are written to disk, which significantly increases the write latency compared to 'Transient' messages.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SSDs",
+      "D": "Only on high-traffic topics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ephemeral' queue in RabbitMQ?",
+    "options": {
+      "A": "A queue that is encrypted.",
+      "B": "A temporary queue that is deleted once the connection is closed.",
+      "C": "A queue that only stores high-priority messages.",
+      "D": "A queue that is stored in the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In distributed messaging, what is 'At-Least-Once' vs 'At-Most-Once'?",
+    "options": {
+      "A": "At-Least-Once ensures no loss; At-Most-Once ensures no duplicates.",
+      "B": "They are the same thing.",
+      "C": "One is for binary; one is for text.",
+      "D": "At-Least-Once is for producers; At-Most-Once is for consumers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Broker' role in a Kafka cluster?",
+    "options": {
+      "A": "To sell Kafka licenses.",
+      "B": "To store partition data and serve client requests.",
+      "C": "To write the documentation for the API.",
+      "D": "To monitor the electricity of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages the 'Routing' in a RabbitMQ setup?",
+    "options": {
+      "A": "The Queue",
+      "B": "The Exchange",
+      "C": "The Producer",
+      "D": "The Network Router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dead Letter Queues' are essential for building resilient systems that handle malformed messages gracefully.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial apps",
+      "D": "Only in Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rebalance Storm' in Kafka?",
+    "options": {
+      "A": "A weather event that affects the server room.",
+      "B": "A situation where rapid rebalances occur repeatedly, causing severe performance degradation.",
+      "C": "Deleting all partitions at once.",
+      "D": "When the producer sends too many messages during a rebalance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Offset' in a Kafka Partition?",
+    "options": {
+      "A": "The physical size of the message.",
+      "B": "A sequential ID given to each message within a partition.",
+      "C": "The time the message was created.",
+      "D": "The distance between the broker and consumer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Message Correlation' is primarily used to implement Request-Response logic over an asynchronous messaging system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SOAP messages",
+      "D": "Only if using Java"
+    },
+    "answer": "A"
+  }
+  ]
+}

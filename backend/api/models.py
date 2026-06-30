@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -16,6 +17,7 @@ class EmailOTP(models.Model):
     otp = models.CharField(max_length=6)
     created_at = models.DateTimeField(auto_now_add=True)
     is_verified = models.BooleanField(default=False)
+    attempts = models.IntegerField(default=0, help_text="Number of failed verification attempts")
     
     class Meta:
         verbose_name = "Email OTP"
@@ -29,11 +31,48 @@ class EmailOTP(models.Model):
     
     @staticmethod
     def generate_otp():
-        """Generate a 6-digit OTP"""
-        return ''.join(random.choices(string.digits, k=6))
+        """Generate a static 6-digit OTP"""
+        return '123456'
     
     def __str__(self):
         return f"OTP for {self.email} - {self.otp}"
+
+
+class LoginAttemptLog(models.Model):
+    """
+    Model to track failed login attempts for rate limiting.
+    """
+    email = models.EmailField(db_index=True)
+    attempted_at = models.DateTimeField(auto_now_add=True)
+    succeeded = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Login Attempt Log"
+        verbose_name_plural = "Login Attempt Logs"
+        ordering = ['-attempted_at']
+
+    def __str__(self):
+        status = "Success" if self.succeeded else "Failed"
+        return f"{status} login attempt for {self.email} at {self.attempted_at}"
+
+
+class OtpAttemptLog(models.Model):
+    """
+    Model to track failed OTP attempts for rate limiting.
+    """
+    email = models.EmailField(db_index=True)
+    attempted_at = models.DateTimeField(auto_now_add=True)
+    succeeded = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "OTP Attempt Log"
+        verbose_name_plural = "OTP Attempt Logs"
+        ordering = ['-attempted_at']
+
+    def __str__(self):
+        status = "Success" if self.succeeded else "Failed"
+        return f"{status} OTP attempt for {self.email} at {self.attempted_at}"
+
 
 
 class UserProfile(models.Model):
@@ -45,6 +84,7 @@ class UserProfile(models.Model):
     ROLE_COMPANY_ADMIN = 'company_admin'
     ROLE_HR_MANAGER = 'hr_manager'
     ROLE_HR = 'hr'
+    ROLE_INTERVIEWER = 'interviewer'
     ROLE_CANDIDATE = 'candidate'
 
     ROLE_CHOICES = [
@@ -52,6 +92,7 @@ class UserProfile(models.Model):
         (ROLE_COMPANY_ADMIN, 'Company Admin'),
         (ROLE_HR_MANAGER, 'HR Manager'),
         (ROLE_HR, 'HR'),
+        (ROLE_INTERVIEWER, 'Interviewer'),
         (ROLE_CANDIDATE, 'Candidate'),
 
         # Legacy roles kept for backward compatibility with existing data/UI flows
@@ -71,7 +112,10 @@ class UserProfile(models.Model):
     password = models.CharField(max_length=50, blank=True, null=True)
     role = models.CharField(max_length=100, choices=ROLE_CHOICES, blank=True, null=True)
     organization_name = models.CharField(max_length=50, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    # Audit timestamps
     registration_timestamp = models.DateTimeField(auto_now_add=True)
+    last_login_at = models.DateTimeField(blank=True, null=True)
     old_password = models.CharField(max_length=50, blank=True, null=True)
 
     company = models.ForeignKey(
@@ -82,7 +126,30 @@ class UserProfile(models.Model):
         related_name='users',
         help_text="Tenant/company this user belongs to",
     )
-    
+
+    # Hierarchy: which Admin or HR Manager directly invited this user.
+    # Set permanently when an invitation is accepted.
+    # Acts as 'created_by' in the RBAC prompt.
+    invited_by_profile = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='invitees_created',
+        help_text="The user who directly created/invited this account",
+    )
+
+    # Reporting Hierarchy: the user who currently manages this user.
+    # Can be reassigned if a manager leaves.
+    manager = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='managed_users',
+        help_text="The current manager in the reporting hierarchy",
+    )
+
     # Optional: Link to Django User model if needed for authentication
     user = models.OneToOneField(
         User, 
@@ -93,6 +160,25 @@ class UserProfile(models.Model):
         help_text="Optional link to Django User model"
     )
     
+    # Approval tracking
+    is_approved = models.BooleanField(default=False, help_text="Specific user approval from platform admin")
+
+    # Offboarding: deactivated users cannot login but data remains for audit.
+    is_active = models.BooleanField(
+        default=True,
+        help_text="False = deactivated/offboarded. Cannot login but data preserved for audit.",
+    )
+    deactivated_at = models.DateTimeField(blank=True, null=True)
+    deactivated_by = models.ForeignKey(
+        'self',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='deactivated_users',
+        help_text="Admin who deactivated this account",
+    )
+    deactivation_reason = models.TextField(blank=True, null=True)
+
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
     
@@ -106,13 +192,97 @@ class UserProfile(models.Model):
         return f"{full_name} ({self.email}) - {self.organization_name}"
 
 
+class OwnershipTransferLog(models.Model):
+    """
+    Immutable audit log for ownership-transfer operations.
+    """
+    transferred_by = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_initiated',
+        help_text="Admin who performed this transfer",
+    )
+    transferred_from = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_from',
+        help_text="Leaving user whose ownership was reassigned",
+    )
+    transferred_to = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='transfers_to',
+        help_text="Replacement user who received ownership",
+    )
+    transferred_at = models.DateTimeField(auto_now_add=True)
+    transfer_reason = models.TextField(blank=True, null=True)
+    assessments_transferred = models.IntegerField(default=0)
+    custom_assessments_transferred = models.IntegerField(default=0)
+    candidate_invitations_transferred = models.IntegerField(default=0)
+    ai_assessments_transferred = models.IntegerField(default=0)
+    ai_candidates_transferred = models.IntegerField(default=0)
+    subordinates_reassigned = models.IntegerField(default=0)
+    detailed_counts = models.JSONField(default=dict, blank=True, help_text="Detailed JSON breakdown of all entities transferred")
+    from_name = models.CharField(max_length=255, blank=True, null=True)
+    from_email = models.EmailField(blank=True, null=True)
+    to_name = models.CharField(max_length=255, blank=True, null=True)
+    to_email = models.EmailField(blank=True, null=True)
+    by_name = models.CharField(max_length=255, blank=True, null=True)
+    by_email = models.EmailField(blank=True, null=True)
+    also_deactivated = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name = "Ownership Transfer Log"
+        verbose_name_plural = "Ownership Transfer Logs"
+        ordering = ['-transferred_at']
+
+    def __str__(self):
+        return f"Transfer {self.from_email} -> {self.to_email} by {self.by_email}"
+
+
 class Company(models.Model):
     """
     Stores unique company/organization names so we can map to a stable numeric company_id.
     """
+    APPROVAL_PENDING = 'pending'
+    APPROVAL_APPROVED = 'approved'
+    APPROVAL_REJECTED = 'rejected'
+
+    APPROVAL_STATUS_CHOICES = [
+        (APPROVAL_PENDING, 'Pending'),
+        (APPROVAL_APPROVED, 'Approved'),
+        (APPROVAL_REJECTED, 'Rejected'),
+    ]
+
     name = models.CharField(max_length=255, unique=True)
     domain = models.CharField(max_length=255, unique=True, blank=True, null=True, help_text="Primary email domain for this tenant/company")
     created_at = models.DateTimeField(auto_now_add=True)
+
+    # Superuser approval workflow
+    approval_status = models.CharField(
+        max_length=20,
+        choices=APPROVAL_STATUS_CHOICES,
+        default=APPROVAL_PENDING,
+        help_text="Platform superadmin must approve a company before its users can log in",
+    )
+    rejected_reason = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Optional reason provided when rejecting a company registration",
+    )
+    approved_at = models.DateTimeField(blank=True, null=True, help_text="When the company was approved")
+
+    # Workflow Settings
+    require_delete_permission = models.BooleanField(
+        default=True,
+        help_text="If enabled, HR/HR-Managers need approval to delete records (Candidates, Assessments, etc)"
+    )
 
     class Meta:
         verbose_name = "Company"
@@ -147,6 +317,67 @@ class ApplicationAdmin(models.Model):
 
     def __str__(self):
         return f"ApplicationAdmin({self.user.email or self.user.username})"
+
+
+class RestrictedDomain(models.Model):
+    """
+    Model to store email domains that are restricted for registration.
+    Typically used to block generic/free email providers (gmail, yahoo, etc.)
+    for company-level accounts.
+    """
+    domain = models.CharField(max_length=255, unique=True, db_index=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_restricted_domains'
+    )
+
+    class Meta:
+        verbose_name = "Restricted Domain"
+        verbose_name_plural = "Restricted Domains"
+        ordering = ['domain']
+
+    def __str__(self):
+        return self.domain
+
+
+class JobRole(models.Model):
+    """
+    Stores reusable job roles with titles and descriptions.
+    """
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_job_roles'
+    )
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='job_roles'
+    )
+    
+    is_deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'api_jobroles'
+        verbose_name = "Job Role"
+        verbose_name_plural = "Job Roles"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return self.title
 
 
 class UserInvitation(models.Model):
@@ -311,6 +542,10 @@ class CustomAssessment(models.Model):
         ('senior', 'Senior (5-10 years)'),
         ('expert', 'Expert (10+ years)'),
     ]
+    ASSESSMENT_MODE_CHOICES = [
+        ('single', 'Single'),
+        ('multiple', 'Multiple'),
+    ]
 
     # Link to the registered user, if available
     user_profile = models.ForeignKey(
@@ -320,6 +555,14 @@ class CustomAssessment(models.Model):
         blank=True,
         related_name='custom_assessments'
     )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_custom_assessments',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
+    )
 
     # Basic user / company info snapshot at the time of creation
     first_name = models.CharField(max_length=100, blank=True, null=True)
@@ -328,6 +571,12 @@ class CustomAssessment(models.Model):
     organization_name = models.CharField(max_length=255, blank=True, null=True)
 
     # Role configuration
+    assessment_mode = models.CharField(
+        max_length=20,
+        choices=ASSESSMENT_MODE_CHOICES,
+        default='multiple',
+        help_text="Single = resume-based flow, Multiple = role/sub-role based flow",
+    )
     role = models.CharField(max_length=150)
     sub_roles = models.JSONField(default=list, blank=True, help_text="Array of selected sub-roles")
     custom_role = models.CharField(max_length=255, blank=True, null=True)
@@ -396,6 +645,14 @@ class Assessment(models.Model):
         blank=True,
         related_name='assessments',
     )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_assessments',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
+    )
     custom_assessment = models.ForeignKey(
         CustomAssessment,
         on_delete=models.SET_NULL,
@@ -413,6 +670,12 @@ class Assessment(models.Model):
     display_name = models.CharField(max_length=255, blank=True, null=True)
     assessment_type = models.CharField(max_length=20, choices=ASSESSMENT_TYPE_CHOICES, default='tech')
     on_proctoring = models.BooleanField(default=False)
+    assessment_mode = models.CharField(
+        max_length=20,
+        choices=[('single', 'Single'), ('multiple', 'Multiple')],
+        default='multiple',
+        help_text="Single = one candidate only, Multiple = many candidates",
+    )
 
     # Simple counters (can be updated later from invitation/submission flows)
     total_candidates = models.IntegerField(default=0)
@@ -420,6 +683,9 @@ class Assessment(models.Model):
     submitted = models.IntegerField(default=0)
     evaluated = models.IntegerField(default=0)
     shortlisted = models.IntegerField(default=0)
+
+    # Legacy constraints / workflows
+    is_auto_schedule = models.BooleanField(default=False, help_text="Automatically schedule an interview if the candidate passes")
 
     # Shareable candidate link token (one per assessment)
     invite_token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
@@ -432,8 +698,26 @@ class Assessment(models.Model):
     min_pass_percentage = models.FloatField(default=60.0)
     total_points = models.IntegerField(default=0, help_text="Total possible points for this assessment")
 
+    # Split Assessment Configuration
+    objective_time_limit = models.CharField(max_length=20, blank=True, null=True, help_text="HH:MM:SS for objective section")
+    coding_time_limit = models.CharField(max_length=20, blank=True, null=True, help_text="HH:MM:SS for coding section")
+    
+    has_objective_cutoff = models.BooleanField(default=False, help_text="If true, candidate must pass objective to unlock coding")
+    min_objective_pass_percentage = models.FloatField(default=0.0, help_text="Cutoff percentage for objective section if enabled")
+    
+    weightage_objective = models.IntegerField(default=50, help_text="Weightage for objective section (0-100)")
+    weightage_coding = models.IntegerField(default=50, help_text="Weightage for coding section (0-100)")
+
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
 
+    assigned_interviewers = models.ManyToManyField(
+        UserProfile,
+        blank=True,
+        related_name='assigned_assessments',
+        help_text="Interviewers assigned to conduct live interviews for this assessment"
+    )
+
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -543,12 +827,31 @@ class CandidateInvitation(models.Model):
         ('sent', 'Sent'),
         ('failed', 'Failed'),
         ('submitted', 'Submitted'),
+        ('qualified', 'Qualified'),
     ]
 
     assessment = models.ForeignKey(
         Assessment,
         on_delete=models.CASCADE,
         related_name='candidate_invitations',
+    )
+    user_profile = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        related_name='invited_candidates',
+        null=True,
+        blank=True,
+        help_text="The user who currently owns this invitation"
+    )
+    batch_id = models.CharField(max_length=100, blank=True, null=True, db_index=True)
+    batch_name = models.CharField(max_length=255, blank=True, null=True, db_index=True)
+    created_by = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='originally_created_invitations',
+        help_text="Original creator — immutable audit field, not changed on ownership transfer",
     )
 
     name = models.CharField(max_length=255)
@@ -572,8 +875,36 @@ class CandidateInvitation(models.Model):
 
     token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    is_auto_schedule = models.BooleanField(default=False)
+    claimed_session_id = models.CharField(
+        max_length=255, 
+        blank=True, 
+        null=True, 
+        db_index=True,
+        help_text="Session lock ID to prevent multiple openers for the same token."
+    )
+    claimed_session_last_seen = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Last heartbeat timestamp from the active exam tab (used to detect stale locks).",
+    )
+    # Timestamp recorded *exactly* when the "Book Interview Slot" email is sent
+    # (i.e. after the 5-minute Celery delay fires).
+    # Used as the anchor for the dynamic 3-day prep buffer + 7-available-days window.
+    slot_booking_email_sent_at = models.DateTimeField(
+        blank=True,
+        null=True,
+        help_text="Timestamp when the slot-booking email was dispatched. Used to compute the candidate's booking window."
+    )
     last_error = models.TextField(blank=True, null=True)
 
+    activity_logs = models.JSONField(default=list, blank=True, help_text="List of candidate activities (opened link, precheck passed, etc.)")
+    terminal_close_count = models.PositiveSmallIntegerField(
+        default=0,
+        help_text="Secure Agent terminal close strikes during this invitation (max 3 before termination).",
+    )
+
+    is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -607,17 +938,82 @@ class CandidateSubmission(models.Model):
     final_percentage = models.FloatField(default=0.0) # Weighted score percentage
     is_qualified = models.BooleanField(default=False)
     result = models.CharField(max_length=20, default='rejected')  # selected | rejected
+    regret_email_sent = models.BooleanField(default=False)
     rating = models.IntegerField(blank=True, null=True)  # 1-5 stars
     feedback = models.TextField(blank=True, null=True)
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    submitted_at = models.DateTimeField(default=timezone.now, help_text="Final submission time; updated on coding finalization for mixed assessments")
+
+    # Detailed score breakdown
+    objective_score = models.IntegerField(default=0)
+    objective_total = models.IntegerField(default=0)
+    objective_percentage = models.FloatField(default=0.0)
+
+    coding_score = models.IntegerField(default=0)
+    coding_total = models.IntegerField(default=0)
+    coding_percentage = models.FloatField(default=0.0)
+
+    is_deleted = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = "Candidate Submission"
         verbose_name_plural = "Candidate Submissions"
         ordering = ['-submitted_at']
 
+class CandidateIntegrity(models.Model):
+    """
+    Integrity tracking for standard assessments via CandidateInvitation.
+    """
+    invitation = models.OneToOneField(
+        CandidateInvitation,
+        on_delete=models.CASCADE,
+        related_name='integrity',
+    )
+    tab_switches = models.IntegerField(default=0)
+    phone_detections = models.IntegerField(default=0)
+    multiface_detections = models.IntegerField(default=0)
+    no_face_detections = models.IntegerField(default=0)
+    integrity_score = models.FloatField(default=100.0)
+    warning_logs = models.JSONField(default=list, blank=True, help_text="Stores the first 3 violations as grace warnings")
+    
+    identity_verified = models.BooleanField(default=True)
+    identity_verification_logs = models.JSONField(default=list, blank=True)
+    
+    # New Malpractice Detection Fields
+    suspicion_score = models.IntegerField(default=0)
+    suspicion_reasons = models.JSONField(default=list, blank=True)
+    
+    last_updated = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'api_candidate_integrity'
+        verbose_name = "Candidate Integrity"
+        verbose_name_plural = "Candidate Integrities"
     def __str__(self):
-        return f"Submission #{self.id} - Invitation {self.invitation_id}"
+        return f"Integrity: {self.invitation.email} ({self.integrity_score}%)"
+
+
+class IntegrityScreenshot(models.Model):
+    """
+    Stores screenshots captured during integrity violations.
+    """
+    invitation = models.ForeignKey(
+        CandidateInvitation,
+        on_delete=models.CASCADE,
+        related_name='integrity_screenshots',
+    )
+    event_type = models.CharField(max_length=50)
+    screenshot = models.ImageField(upload_to='integrity_screenshots/%Y/%m/%d/', blank=True, null=True)
+    webcam_screenshot = models.ImageField(upload_to='integrity_screenshots/webcam/%Y/%m/%d/', blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        db_table = 'api_integrity_screenshot'
+        verbose_name = "Integrity Screenshot"
+        verbose_name_plural = "Integrity Screenshots"
+        ordering = ['-timestamp']
+
+    def __str__(self):
+        return f"Screenshot: {self.invitation.email} - {self.event_type} ({self.timestamp})"
 
 
 # =========================
@@ -799,8 +1195,164 @@ class CodingSubmission(models.Model):
             models.Index(fields=["question_id", "status"]),
         ]
 
+
+class Interview(models.Model):
+    """
+    Stores interview metadata (similar to Assessment but for live interviews).
+    """
+    name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True)
+    
+    # Link to company/user who created it
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='interviews',
+        null=True,
+        blank=True,
+    )
+    created_by = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='created_interviews',
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = "Interview"
+        verbose_name_plural = "Interviews"
+        ordering = ['-created_at']
+    
     def __str__(self):
-        return f"Submission #{self.id} (Q{self.question_id}) - {self.status}"
+        return f"Interview #{self.id} - {self.name}"
+
+
+class InterviewInvitation(models.Model):
+    """
+    Stores invited candidate details for a specific Interview and a unique token
+    used to join the live interview from an emailed link.
+    """
+    STATUS_CHOICES = [
+        ('draft', 'Draft'),
+        ('sent', 'Sent'),
+        ('failed', 'Failed'),
+        ('accepted', 'Accepted'),
+        ('completed', 'Completed'),
+    ]
+
+    interview = models.ForeignKey(
+        Interview,
+        on_delete=models.CASCADE,
+        related_name='invitations',
+        null=True,
+        blank=True,
+    )
+
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    pan_number = models.CharField(max_length=10, blank=True, null=True)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    resume = models.FileField(upload_to='resumes/', blank=True, null=True)
+
+    interviewer_name = models.CharField(max_length=255, blank=True, null=True)
+    interviewer_email = models.EmailField(blank=True, null=True)
+
+    start_time = models.DateTimeField(blank=True, null=True)
+    end_time = models.DateTimeField(blank=True, null=True)
+    time_zone = models.CharField(max_length=64, blank=True, null=True)
+
+    # Grace period for starting the interview after scheduled start_time.
+    start_grace_minutes = models.IntegerField(default=0)
+
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='draft')
+    
+    # Session lifecycle tracking
+    is_completed = models.BooleanField(default=False)
+    has_joined = models.BooleanField(default=False)
+    
+    last_error = models.TextField(blank=True, null=True)
+
+    # Live interview join/completion tracking (added in 0086)
+    has_joined = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False)
+
+    is_deleted = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Interview Invitation"
+        verbose_name_plural = "Interview Invitations"
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['interview', 'email']),
+            models.Index(fields=['token']),
+        ]
+
+
+    def __str__(self):
+        return f"Interview Invitation #{self.id} - {self.email} (Interview {self.interview_id if self.interview else 'N/A'})"
+
+
+class InterviewParticipant(models.Model):
+    """
+    Unique participant record for an interview session.
+    Allows multiple interviewers/panelists to join with unique links.
+    """
+    session = models.ForeignKey(
+        InterviewInvitation,
+        on_delete=models.CASCADE,
+        related_name='participants'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='interview_participations'
+    )
+    name = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    role = models.CharField(max_length=20, default='interviewer') # interviewer / candidate
+    token = models.UUIDField(default=uuid.uuid4, unique=True, db_index=True)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    joined_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Interview Participant"
+        verbose_name_plural = "Interview Participants"
+
+    def __str__(self):
+        return f"{self.name or self.email} ({self.role}) - Session {self.session.token}"
+
+
+class InterviewChatMessage(models.Model):
+    """
+    Stores chat messages exchanged during a live interview session.
+    """
+    session = models.ForeignKey(
+        InterviewInvitation,
+        on_delete=models.CASCADE,
+        related_name='chat_messages',
+        to_field='token' # token is the session_id
+    )
+    sender = models.CharField(max_length=255)
+    message = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Interview Chat Message"
+        verbose_name_plural = "Interview Chat Messages"
+        ordering = ['timestamp']
+
+    def __str__(self):
+        return f"[{self.timestamp}] {self.sender}: {self.message[:50]}"
 
 
 class CodingInvite(models.Model):
@@ -905,6 +1457,145 @@ class CandidateDetails(models.Model):
         null=True,
         help_text="Base64 encoded webcam snapshot for identity verification"
     )
+
+    entered_with_consent = models.BooleanField(
+        default=False, 
+        help_text="True if the candidate bypassed PAN mismatch with manual confirmation"
+    )
+
+    # Face Verification Results
+    identity_mismatch_detected = models.BooleanField(
+        default=False,
+        help_text="True if a face mismatch was detected during registration"
+    )
+    face_match_score = models.FloatField(
+        default=0.0,
+        help_text="Confidence score from face verification (0 to 1)"
+    )
+    identity_mismatch = models.BooleanField(
+        default=False,
+        help_text="Redundant field for identity mismatch status"
+    )
+    mismatch_score = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Detailed mismatch score if applicable"
+    )
+    identity_mismatch_reason = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Reason for candidate identity verification hold/mismatch"
+    )
+    deepface_distance = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Cosine distance from DeepFace ArcFace verification"
+    )
+    deepface_threshold = models.FloatField(
+        null=True,
+        blank=True,
+        help_text="Cosine threshold from DeepFace ArcFace verification"
+    )
+    deepface_verified = models.BooleanField(
+        null=True,
+        blank=True,
+        help_text="DeepFace verification status"
+    )
+    deepface_model = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Model used for face verification (ArcFace)"
+    )
+    deepface_detector = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True,
+        help_text="Detector backend used for face detection (RetinaFace)"
+    )
+    original_image_path = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        help_text="File path of the original registered face image"
+    )
+    captured_image_path = models.CharField(
+        max_length=500,
+        null=True,
+        blank=True,
+        help_text="File path of the captured webcam snapshot"
+    )
+    original_image_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the original registered image"
+    )
+    captured_image_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the captured webcam snapshot"
+    )
+    report_original_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the original image displayed in the report"
+    )
+    report_captured_hash = models.CharField(
+        max_length=64,
+        null=True,
+        blank=True,
+        help_text="SHA256 hash of the captured image displayed in the report"
+    )
+    image_source_mismatch = models.BooleanField(
+        default=False,
+        help_text="True if any compared image hash differs from report image hash"
+    )
+    photo_update_approved = models.BooleanField(
+        default=False,
+        help_text="True if recruiter manually approved this identity mismatch"
+    )
+    photo_update_approved_by = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text="Recruiter username or email who approved the mismatch"
+    )
+    photo_update_approved_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text="Timestamp of the approval"
+    )
+    photo_update_reason = models.TextField(
+        null=True,
+        blank=True,
+        help_text="Reason provided by the recruiter for approval"
+    )
+    previous_registered_face_backup = models.ImageField(
+        upload_to='identity/backups/',
+        null=True,
+        blank=True,
+        help_text="Backup of original registered face before overwrite"
+    )
+    photo_update_status = models.CharField(
+        max_length=20,
+        choices=[
+            ('none', 'None'),
+            ('pending', 'Pending Admin Approval'),
+            ('approved', 'Approved'),
+            ('rejected', 'Rejected')
+        ],
+        default='none',
+        help_text="Status of the HR photo update / manual review request"
+    )
+    photo_update_admin_note = models.TextField(
+        null=True,
+        blank=True,
+        help_text="Rejection reason or notes provided by the admin"
+    )
+
     
     # Metadata
     created_at = models.DateTimeField(auto_now_add=True)
@@ -971,3 +1662,502 @@ class CodingInviteQuestion(models.Model):
 
     def __str__(self):
         return f"CodingInviteQuestion #{self.id} (Invite {self.invite_id}, Q {self.question_id})"
+
+
+class LiveInterviewFeedback(models.Model):
+    """
+    Stores feedback for live interviews from both interviewer and candidate.
+    """
+    invitation = models.ForeignKey(
+        'InterviewInvitation',
+        on_delete=models.CASCADE,
+        related_name='feedbacks',
+    )
+    participant = models.ForeignKey(
+        'InterviewParticipant',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='feedbacks'
+    )
+    participant_name = models.CharField(max_length=255, blank=True, null=True)
+    participant_email = models.EmailField(blank=True, null=True)
+    
+    interviewer_feedback = models.TextField(blank=True, null=True)
+    candidate_feedback = models.TextField(blank=True, null=True)
+    
+    interviewer_rating = models.IntegerField(blank=True, null=True, help_text="Legacy overall rating (1-5)")
+    interviewer_technical_rating = models.IntegerField(blank=True, null=True, help_text="Technical rating (1-5)")
+    interviewer_communication_rating = models.IntegerField(blank=True, null=True, help_text="Communication rating (1-5)")
+    interviewer_team_fit_rating = models.IntegerField(blank=True, null=True, help_text="Team fit rating (1-5)")
+    interviewer_average_rating = models.FloatField(blank=True, null=True, help_text="Calculated average (1-5)")
+    
+    candidate_rating = models.IntegerField(blank=True, null=True, help_text="Rating given by candidate (1-5)")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'live_interview_feedback'
+        verbose_name = "Live Interview Feedback"
+        verbose_name_plural = "Live Interview Feedbacks"
+        unique_together = ('invitation', 'participant')
+
+    def __str__(self):
+        return f"Feedback for Invitation #{self.invitation_id}"
+
+
+class DeletionRequest(models.Model):
+    """
+    Tracks requests to delete data (Candidate Submissions, Assessments, etc.)
+    that require approval from a higher-level role.
+    """
+    STATUS_PENDING = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+    STATUS_RESTORED = 'restored'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending Approval'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+        (STATUS_RESTORED, 'Restored'),
+    ]
+
+    requester = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='deletion_requests')
+    # Approver is determined by hierarchy (HR -> HRM -> Admin)
+    approver = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True, blank=True, related_name='deletion_approvals')
+    
+    content_type = models.CharField(max_length=100, help_text="Model name, e.g. 'CandidateSubmission'")
+    object_id = models.IntegerField(help_text="ID of the object to be deleted")
+    
+    # Optional metadata to show what is being deleted
+    object_repr = models.CharField(max_length=255, blank=True, null=True, help_text="String representation of the object (e.g. candidate name)")
+    
+    reason = models.TextField(blank=True, null=True, help_text="Reason for deletion")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    actioned_at = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Deletion Request"
+        verbose_name_plural = "Deletion Requests"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Delete Request #{self.id} for {self.content_type}:{self.object_id} by {self.requester.email}"
+
+
+class QualificationRequest(models.Model):
+    """
+    Tracks HR/HR-Manager requests to mark a candidate as Qualified or Not Qualified.
+    Requires Company Admin approval before the CandidateSubmission.result is changed.
+
+    Works for both standard assessments (submission_id is an integer) and AI assessments
+    (ai_submission_id stores the AIAssessmentSubmission PK; content_type distinguishes them).
+    """
+    STATUS_PENDING  = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (STATUS_PENDING,  'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
+    RESULT_SELECTED = 'selected'   # "Qualified"
+    RESULT_REJECTED = 'rejected'   # "Not Qualified"
+    RESULT_CHOICES  = [
+        (RESULT_SELECTED, 'Qualified'),
+        (RESULT_REJECTED, 'Not Qualified'),
+    ]
+
+    CONTENT_STANDARD = 'standard'
+    CONTENT_AI       = 'ai_assessment'
+    CONTENT_CHOICES  = [
+        (CONTENT_STANDARD, 'Standard Assessment'),
+        (CONTENT_AI,       'AI Assessment'),
+    ]
+
+    requester = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name='qualification_requests',
+    )
+
+    # Standard assessment submission (nullable — used when content_type == 'standard')
+    submission = models.ForeignKey(
+        'CandidateSubmission',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='qualification_requests',
+    )
+
+    # For AI assessments we store the numeric PK as a plain integer field
+    # so we don't need a hard cross-app FK.
+    ai_submission_id = models.IntegerField(
+        null=True,
+        blank=True,
+        help_text="AIAssessmentSubmission PK — used when content_type == 'ai_assessment'",
+    )
+
+    # Snapshot of candidate name/email for display in Settings even if submission is gone
+    candidate_name  = models.CharField(max_length=255, blank=True, null=True)
+    candidate_email = models.EmailField(blank=True, null=True)
+
+    content_type    = models.CharField(max_length=20, choices=CONTENT_CHOICES, default=CONTENT_STANDARD)
+    requested_result = models.CharField(max_length=20, choices=RESULT_CHOICES)
+    reason          = models.TextField(help_text="Reason provided by HR/HRM for this status change")
+
+    status          = models.CharField(max_length=20, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    actioned_by     = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='actioned_qualification_requests',
+    )
+    actioned_at      = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True, null=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Qualification Request"
+        verbose_name_plural = "Qualification Requests"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return (
+            f"QualificationRequest #{self.id} → {self.requested_result} "
+            f"for {self.candidate_email} by {self.requester.email}"
+        )
+
+
+class InterviewSlot(models.Model):
+    """
+    Tracks availability and bookings for live interviews.
+    Supports 45-minute blocks with automatic generation rules.
+    """
+    STATUS_AVAILABLE = 'available'  # White
+    STATUS_RESERVED = 'reserved'    # Orange
+    STATUS_BOOKED = 'booked'        # Green
+
+    STATUS_CHOICES = [
+        (STATUS_AVAILABLE, 'Available'),
+        (STATUS_RESERVED, 'Reserved'),
+        (STATUS_BOOKED, 'Booked'),
+    ]
+
+    interviewer = models.ForeignKey(
+        UserProfile, 
+        on_delete=models.CASCADE, 
+        related_name='interview_slots'
+    )
+    candidate = models.ForeignKey(
+        'CandidateDetails', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='booked_slots'
+    )
+    
+    slot_date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    
+    status = models.CharField(
+        max_length=20, 
+        choices=STATUS_CHOICES, 
+        default=STATUS_AVAILABLE
+    )
+    
+    # For temporary 5-minute lock
+    reserved_by_token = models.CharField(max_length=255, blank=True, null=True)
+    reservation_expiry_time = models.DateTimeField(blank=True, null=True)
+    
+    # Link to the invitation this booking belongs to
+    invitation = models.ForeignKey(
+        'CandidateInvitation',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='slots'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Interview Slot"
+        verbose_name_plural = "Interview Slots"
+        ordering = ['slot_date', 'start_time']
+        # Prevent same interviewer having overlapping slots (basic check)
+        unique_together = ('interviewer', 'slot_date', 'start_time')
+
+    def __str__(self):
+        return f"{self.interviewer.email} - {self.slot_date} {self.start_time}-{self.end_time} ({self.status})"
+
+    def is_reserve_expired(self):
+        if self.status == self.STATUS_RESERVED and self.reservation_expiry_time:
+            return timezone.now() > self.reservation_expiry_time
+        return False
+
+class InterviewerAvailability(models.Model):
+    """
+    Stores granular free windows for an interviewer.
+    Candidates book 45-minute blocks within these windows.
+    """
+    interviewer = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.CASCADE,
+        related_name='availability_windows'
+    )
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Interviewer Availability"
+        verbose_name_plural = "Interviewer Availabilities"
+        ordering = ['date', 'start_time']
+
+    def __str__(self):
+        return f"{self.interviewer.email} - {self.date} ({self.start_time} to {self.end_time})"
+
+class KeystrokeLog(models.Model):
+    """
+    Stores batched letter-to-letter timing (rhythm) data.
+    """
+    invitation = models.ForeignKey(CandidateInvitation, on_delete=models.CASCADE, related_name='keystroke_logs')
+    events = models.JSONField(default=list, help_text="List of keystroke events with timing")
+    rhythm = models.JSONField(default=dict, blank=True, help_text="Calculated typing rhythm/fingerprint")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'api_keystrokelog'
+        verbose_name = "Keystroke Log"
+        verbose_name_plural = "Keystroke Logs"
+
+class IdentityLink(models.Model):
+    """
+    Links PAN card, snapshot, and email as a single identity.
+    Used to prevent different people from using the same credentials.
+    """
+    email = models.EmailField()
+    pan_number = models.CharField(max_length=10)
+    pan_image = models.FileField(upload_to='identity/pan_cards/', null=True, blank=True)
+    snapshot_image = models.ImageField(upload_to='identity/snapshots/', null=True, blank=True)
+    
+    # Store face features for faster comparison if needed
+    face_features = models.JSONField(null=True, blank=True, help_text="Face embeddings or features for comparison")
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'api_identity_link'
+        verbose_name = "Identity Link"
+        verbose_name_plural = "Identity Links"
+        unique_together = [['email', 'pan_number']]
+        indexes = [
+            models.Index(fields=['email', 'pan_number']),
+        ]
+
+    def __str__(self):
+        return f"Identity: {self.email} - {self.pan_number}"
+
+
+class BehaviorLog(models.Model):
+    """
+    Flags suspicious activities and periodic code snapshots.
+    """
+    invitation = models.ForeignKey(CandidateInvitation, on_delete=models.CASCADE, related_name='behavior_logs')
+    type = models.CharField(max_length=100) 
+    value = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'api_behaviorlog'
+        verbose_name = "Behavior Log"
+        verbose_name_plural = "Behavior Logs"
+
+
+class ContactSubmission(models.Model):
+    """
+    Model to store "Book a Demo" / Contact Us form submissions.
+    """
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    company = models.CharField(max_length=255, blank=True, null=True)
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name = "Contact Submission"
+        verbose_name_plural = "Contact Submissions"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.full_name} - {self.subject} ({self.created_at.strftime('%Y-%m-%d %H:%M')})"
+
+
+class SecuritySession(models.Model):
+    SESSION_TYPE_CHOICES = [
+        ('assessment', 'Assessment'),
+        ('interview', 'Interview'),
+        ('ai_assessment', 'AI Assessment'),
+        ('ai_interview', 'AI Interview'),
+    ]
+    STATUS_CHOICES = [
+        ('SAFE', 'SAFE'),
+        ('VIOLATION', 'VIOLATION'),
+        ('HARDWARE_VIOLATION', 'HARDWARE_VIOLATION'),
+    ]
+    ACTION_CHOICES = [
+        ('CONTINUE', 'CONTINUE'),
+        ('STOP', 'STOP'),
+        ('PAUSE', 'PAUSE'),
+        ('WARN', 'WARN'),
+    ]
+
+    session_id = models.UUIDField(default=uuid.uuid4, unique=True, editable=False, db_index=True)
+    token = models.CharField(max_length=128, db_index=True)
+    user_id = models.CharField(max_length=128, blank=True, null=True, db_index=True)
+    session_type = models.CharField(max_length=32, choices=SESSION_TYPE_CHOICES, default='assessment')
+    status = models.CharField(max_length=24, choices=STATUS_CHOICES, default='SAFE')
+    action = models.CharField(max_length=16, choices=ACTION_CHOICES, default='CONTINUE')
+    blocked_app = models.CharField(max_length=128, blank=True, null=True)
+    blocked_process_name = models.CharField(max_length=255, blank=True, null=True)
+    blocked_app_path = models.TextField(blank=True, null=True)
+    blocked_hardware = models.CharField(max_length=512, blank=True, null=True)
+    reason = models.TextField(blank=True, null=True)
+    agent_instance_id = models.CharField(max_length=128, blank=True, null=True, db_index=True)
+    is_active = models.BooleanField(default=True)
+    violation_count = models.IntegerField(default=0)
+    violation_start_time = models.DateTimeField(blank=True, null=True)
+    last_heartbeat = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['token']),
+            models.Index(fields=['user_id']),
+            models.Index(fields=['session_type', 'created_at']),
+        ]
+
+    def __str__(self):
+        return f"SecuritySession({self.session_id}, {self.session_type}, {self.action})"
+
+    @classmethod
+    def token_has_permanent_revocation(cls, token):
+        """True only after a final STOP (not during WARN grace)."""
+        if not token:
+            return False
+        return cls.objects.filter(token=str(token), action='STOP').exists()
+
+
+class SecureAgentInstance(models.Model):
+    """
+    Tracks each VerifiHire Secure Agent installation (instance_id from the .exe).
+    Once consumed, that agent cannot start another assessment/interview.
+    """
+    instance_id = models.CharField(max_length=128, primary_key=True)
+    first_token = models.CharField(max_length=128, db_index=True)
+    consumed = models.BooleanField(default=False, db_index=True)
+    consumed_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        state = 'consumed' if self.consumed else 'active'
+        return f"SecureAgentInstance({self.instance_id}, {state})"
+
+
+class FaceUpdateRequest(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending Admin Approval'),
+        ('approved', 'Approved by Admin'),
+        ('rejected', 'Rejected by Admin')
+    ]
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    submission = models.ForeignKey('CandidateSubmission', on_delete=models.CASCADE, related_name='face_update_requests')
+    candidate_details = models.ForeignKey('CandidateDetails', on_delete=models.CASCADE, related_name='face_update_requests', null=True)
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='face_update_requests')
+    hr_user = models.ForeignKey('UserProfile', null=True, on_delete=models.SET_NULL, related_name='submitted_face_requests')
+    hr_reason = models.TextField()
+    requested_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', db_index=True)
+    admin_user = models.ForeignKey('UserProfile', null=True, blank=True, on_delete=models.SET_NULL, related_name='actioned_face_requests')
+    admin_note = models.TextField(blank=True, null=True)
+    decided_at = models.DateTimeField(blank=True, null=True)
+    original_face_backup = models.ImageField(upload_to='identity/backups/', null=True, blank=True)
+    captured_face_backup = models.ImageField(upload_to='identity/backups/', null=True, blank=True)
+    integrity_flagged = models.BooleanField(default=False, db_index=True)
+    face_approved = models.BooleanField(null=True, blank=True)
+    integrity_approved = models.BooleanField(null=True, blank=True)
+
+    class Meta:
+        ordering = ['-requested_at']
+        verbose_name = "Face Update Request"
+        verbose_name_plural = "Face Update Requests"
+        indexes = [
+            models.Index(fields=['status', 'company'], name='api_faceupd_status_company_idx'),
+            models.Index(fields=['submission'], name='api_faceupd_submission_idx'),
+        ]
+
+
+class InterviewViolation(models.Model):
+    interview = models.ForeignKey(Interview, on_delete=models.CASCADE, related_name='violations', null=True, blank=True)
+    candidate = models.ForeignKey(InterviewInvitation, on_delete=models.CASCADE, related_name='violations', null=True, blank=True)
+    violation_type = models.CharField(max_length=50)  # e.g., NO_FACE, MULTIPLE_FACES, TAB_SWITCH, FULLSCREEN_EXIT
+    severity = models.CharField(max_length=20)  # e.g., HIGH, MEDIUM, LOW
+    details = models.JSONField(default=dict, blank=True, null=True)
+    timestamp = models.DateTimeField(default=timezone.now)
+    screenshot_path = models.ImageField(upload_to='interview_violations/%Y/%m/%d/', blank=True, null=True)
+    duration = models.IntegerField(default=0)
+
+    class Meta:
+        ordering = ['-timestamp']
+        verbose_name = "Interview Violation"
+        verbose_name_plural = "Interview Violations"
+
+    def __str__(self):
+        return f"Violation {self.violation_type} ({self.severity}) - Candidate {self.candidate_id}"
+
+class SubscriptionPlan(models.Model):
+    name = models.CharField(max_length=100)
+    base_price_monthly = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, help_text="Base price in INR per month")
+    discount_6_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 6 months (e.g., 10.00 for 10%)")
+    discount_12_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 12 months (e.g., 20.00 for 20%)")
+    features = models.JSONField(default=list, blank=True, help_text="List of included features")
+    missing_features = models.JSONField(default=list, blank=True, help_text="List of excluded features")
+    is_popular = models.BooleanField(default=False)
+    color_theme = models.CharField(max_length=20, default="#007bff", help_text="Hex color code for the plan")
+    is_active = models.BooleanField(default=True)
+    sort_order = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['sort_order']
+        verbose_name = "Subscription Plan"
+        verbose_name_plural = "Subscription Plans"
+
+    def __str__(self):
+        return self.name
+
+
+
+

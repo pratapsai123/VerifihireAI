@@ -1,0 +1,2016 @@
+{
+  "skill": "RSpec",
+  "questions": [
+    {
+      "question": "Which command is used to initialize a Ruby project with the RSpec directory structure and configuration files?",
+      "options": {
+        "A": "rspec install",
+        "B": "rspec --init",
+        "C": "ruby rspec --setup",
+        "D": "bundle add rspec"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In RSpec, which block is used to group together related sets of tests for a specific class or method?",
+      "options": {
+        "A": "group",
+        "B": "context",
+        "C": "describe",
+        "D": "test_set"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which matcher is used to check for literal equality, similar to the '==' operator in Ruby?",
+      "options": {
+        "A": "be",
+        "B": "eq",
+        "C": "equal",
+        "D": "match"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: RSpec test files should traditionally end with the suffix '_spec.rb' to be automatically discovered.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'it' block in an RSpec file?",
+      "options": {
+        "A": "To define a global variable.",
+        "B": "To describe a specific individual test case or requirement.",
+        "C": "To initialize the Ruby class being tested.",
+        "D": "To import external libraries."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher would you use to verify that a collection contains a specific item?",
+      "options": {
+        "A": "include",
+        "B": "has",
+        "C": "contain",
+        "D": "member"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid RSpec boolean matchers?",
+      "options": {
+        "A": "be_true",
+        "B": "be_truthy",
+        "C": "be_falsey",
+        "D": "be_nil"
+      },
+      "answer": [
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What does the 'pending' keyword do inside an 'it' block?",
+      "options": {
+        "A": "It crashes the test suite.",
+        "B": "It marks the test as passing regardless of the result.",
+        "C": "It indicates that the test is not yet implemented and should be skipped for now.",
+        "D": "It runs the test in a separate thread."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: The 'expect' syntax is the modern standard for RSpec assertions, replacing the older 'should' syntax.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you run only the tests located in the 'spec/models' folder?",
+      "options": {
+        "A": "rspec spec/models",
+        "B": "ruby spec/models",
+        "C": "rspec --only models",
+        "D": "bundle exec test models"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary difference between 'let' and 'let!' in RSpec?",
+      "options": {
+        "A": "let! is thread-safe, while let is not.",
+        "B": "let is lazy-evaluated, while let! is invoked immediately before each test case.",
+        "C": "let! can only be used with strings.",
+        "D": "let! deletes the variable after the test finishes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is executed once before the entire set of tests in a 'describe' block runs?",
+      "options": {
+        "A": "before(:each)",
+        "B": "before(:all)",
+        "C": "before(:suite)",
+        "D": "around"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does the 'subject' keyword help in writing cleaner RSpec tests?",
+      "options": {
+        "A": "It allows you to define a default object for the entire describe block to use in expectations.",
+        "B": "It replaces the 'describe' keyword.",
+        "C": "It automatically mocks all database calls.",
+        "D": "It converts Ruby code into JavaScript."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'subject { described_class.new }' is a common pattern to automatically instantiate the class being tested.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a method call raises a specific error?",
+      "options": {
+        "A": "throw_error",
+        "B": "raise_error",
+        "C": "catch_exception",
+        "D": "fail_with"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'context' block in RSpec?",
+      "options": {
+        "A": "To define the database connection.",
+        "B": "To group tests based on a specific state or scenario (e.g., 'when user is logged in').",
+        "C": "To provide a help menu for the test suite.",
+        "D": "To import helper modules."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which are valid ways to use the 'around' hook?",
+      "options": {
+        "A": "around { |example| example.run }",
+        "B": "around { puts 'test started' }",
+        "C": "around(:each) { |e| e.run }",
+        "D": "around { subject.save }"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What does 'expect { some_action }.to change(Counter, :count).by(1)' do?",
+      "options": {
+        "A": "It increments the Counter by 1 manually.",
+        "B": "It verifies that executing 'some_action' increases the Counter.count value by exactly 1.",
+        "C": "It renames the count column in the database.",
+        "D": "It checks if the Counter class exists."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Predicate matchers allow you to call methods ending in '?' like 'be_empty' for 'empty?'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec configuration file allows you to set global formatting and color options?",
+      "options": {
+        "A": "rspec.rb",
+        "B": ".rspec",
+        "C": "spec_helper.rb",
+        "D": "config.yml"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In RSpec, what is the primary difference between a 'double' and an 'instance_double'?",
+      "options": {
+        "A": "instance_double is faster to initialize.",
+        "B": "instance_double verifies that the methods being stubbed actually exist on the real class (verifying double).",
+        "C": "double can only be used with strings.",
+        "D": "There is no functional difference."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you define a method stub that returns a specific value using the modern RSpec syntax?",
+      "options": {
+        "A": "allow(obj).to receive(:method).and_return(value)",
+        "B": "obj.stub(:method, value)",
+        "C": "expect(obj).to have_method(value)",
+        "D": "obj.should_receive(:method).with(value)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of an RSpec 'Spy'?",
+      "options": {
+        "A": "To encrypt the test results.",
+        "B": "To record interactions with an object so you can verify they happened after the fact.",
+        "C": "To search for hidden files in the project.",
+        "D": "To monitor CPU usage during tests."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'expect_any_instance_of(Class)' is generally considered a 'code smell' and should be avoided in favor of dependency injection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to create a 'Partial Double' in RSpec?",
+      "options": {
+        "A": "Adding an expectation or stub to a real, existing object.",
+        "B": "Using the 'partial' keyword.",
+        "C": "Only mocking half of the class methods.",
+        "D": "Combining a Mock and a Stub into one variable."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a custom matcher in RSpec?",
+      "options": {
+        "A": "Using the RSpec::Matchers.define DSL.",
+        "B": "By creating a new Ruby Gem.",
+        "C": "By editing the RSpec source code.",
+        "D": "Using the 'set_matcher' command in spec_helper.rb."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid ways to constrain a message expectation to specific arguments?",
+      "options": {
+        "A": "with(1, 2, 3)",
+        "B": "with(kind_of(String))",
+        "C": "with(hash_including(:a => 1))",
+        "D": "only_if(1, 2, 3)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "What is 'Shared Examples' used for in RSpec?",
+      "options": {
+        "A": "To send test results to other team members.",
+        "B": "To define a set of reusable tests that can be applied to multiple classes or modules.",
+        "C": "To run tests on multiple computers at once.",
+        "D": "To share database connections between tests."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'aggregate_failures' allows a test to continue running even after one expectation fails, reporting all failures at the end.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In RSpec, what does 'expect(obj).to receive(:method).exactly(3).times' verify?",
+      "options": {
+        "A": "That the method is called at least 3 times.",
+        "B": "That the method is called exactly 3 times during the execution of the test.",
+        "C": "That the method contains 3 lines of code.",
+        "D": "That the method returns the number 3."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RSpec matcher is used to check if a value is 'nil'?",
+      "options": {
+        "A": "be_nil",
+        "B": "is_null",
+        "C": "eq(nil)",
+        "D": "be_empty"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In RSpec, the 'be_truthy' matcher will pass if the actual value is 'true' or any object except 'false' or 'nil'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command-line flag allows you to see the documentation-style output (names of groups and examples) when running tests?",
+      "options": {
+        "A": "--format doc",
+        "B": "--style documentation",
+        "C": "-f d",
+        "D": "--verbose"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary function of 'spec_helper.rb'?",
+      "options": {
+        "A": "To store the application's business logic.",
+        "B": "To configure RSpec settings and load common helper modules for all test files.",
+        "C": "To act as a database migration file.",
+        "D": "To install Ruby gems."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher checks if a numeric value is greater than another value?",
+      "options": {
+        "A": "be >",
+        "B": "be_greater_than",
+        "C": "gt",
+        "D": "is_more"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec allows you to skip a test by changing 'it' to 'xit' or 'pending'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a string matches a specific Regular Expression?",
+      "options": {
+        "A": "match",
+        "B": "regex",
+        "C": "include",
+        "D": "satisfy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'describe ClassName do' block represent in an RSpec file?",
+      "options": {
+        "A": "The instantiation of a new object.",
+        "B": "A top-level container for all tests related to that specific class.",
+        "C": "A loop that runs the class methods.",
+        "D": "A way to import the class from the source folder."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you run RSpec tests in a specific order instead of the default random order?",
+      "options": {
+        "A": "--order defined",
+        "B": "--sequence",
+        "C": "--sort alpha",
+        "D": "--no-random"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'be_empty' matcher can be used on both Strings and Arrays.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to check if an object is an instance of a specific class?",
+      "options": {
+        "6": "is_a",
+        "A": "be_a",
+        "C": "kind_of",
+        "D": "be_an_instance_of"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid RSpec matchers for range comparisons?",
+      "options": {
+        "A": "be_between(min, max)",
+        "B": "cover(val)",
+        "C": "is_within(min, max)",
+        "D": "be_around(val)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the effect of running 'rspec --fail-fast'?",
+      "options": {
+        "A": "It skips all tests and reports success.",
+        "B": "It stops the entire test suite execution as soon as the first test fails.",
+        "C": "It speeds up the tests by using more CPU.",
+        "D": "It only runs tests that are expected to fail."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use 'expect { ... }.not_to' to verify that an action does NOT happen.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if an array has a specific size?",
+      "options": {
+        "A": "have_size",
+        "B": "have_attributes",
+        "C": "count",
+        "D": "have_exactly"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec CLI option is used to run only the tests that failed in the previous run?",
+      "options": {
+        "A": "--only-failures",
+        "B": "--retry",
+        "C": "--last-failed",
+        "D": "--lf"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'described_class' helper in RSpec?",
+      "options": {
+        "A": "To create a mock of the current class.",
+        "B": "To reference the class passed to the outermost 'describe' block without hardcoding its name.",
+        "C": "To list all methods in the class.",
+        "D": "To verify the class syntax."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: RSpec expectations can be written inside 'before' hooks.",
+      "options": {
+        "A": "False (Expectations belong in 'it' blocks; 'before' is for setup).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check for object identity (checking if two variables point to the same object in memory)?",
+      "options": {
+        "A": "eq",
+        "B": "be",
+        "C": "equal",
+        "D": "identity"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'expect(val).to be <= 10' check?",
+      "options": {
+        "A": "If val is less than or equal to 10.",
+        "B": "If val is greater than 10.",
+        "C": "If val is exactly 10.",
+        "D": "If val is a negative number."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec can be used to test non-Rails Ruby projects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command allows you to run a single test by its line number (e.g., line 25 of user_spec.rb)?",
+      "options": {
+        "A": "rspec spec/user_spec.rb:25",
+        "B": "rspec --line 25 spec/user_spec.rb",
+        "C": "ruby spec/user_spec.rb -l 25",
+        "D": "rspec spec/user_spec.rb --at 25"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a hash contains specific keys or values?",
+      "options": {
+        "A": "include",
+        "B": "have_key",
+        "C": "match",
+        "D": "contain_hash"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of '.rspec' file in a project root?",
+      "options": {
+        "A": "To store the database credentials for testing.",
+        "B": "To define default CLI arguments that should always be used when running rspec.",
+        "C": "To list the gems needed for RSpec.",
+        "D": "To hide specific folders from the test runner."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'be_nil' matcher is equivalent to 'eq(nil)'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is within a certain delta of another value (useful for floats)?",
+      "options": {
+        "A": "be_within(delta).of(value)",
+        "B": "be_close_to(value)",
+        "C": "approx(value)",
+        "D": "eq_delta(value)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a test that you plan to write later (a placeholder)?",
+      "options": {
+        "A": "it 'does something' (without a do...end block)",
+        "B": "it 'does something' do end",
+        "C": "it 'does something' { skip }",
+        "D": "todo 'does something'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec's 'change' matcher can be used with numeric values only.",
+      "options": {
+        "A": "False (It can monitor changes in any object state, like string length or array contents).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that an object has certain attributes with specific values?",
+      "options": {
+        "A": "have_attributes",
+        "B": "be_configured_with",
+        "C": "eq_attributes",
+        "D": "match_params"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec CLI option shows you the slowest examples in your suite?",
+      "options": {
+        "A": "--profile",
+        "B": "--slow",
+        "C": "--durations",
+        "D": "--bench"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'subject' in a test requires you to explicitly call 'it { is_expected.to ... }' to use one-liner syntax.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if an object responds to a specific method name?",
+      "options": {
+        "A": "respond_to",
+        "B": "have_method",
+        "C": "be_callable",
+        "D": "can_execute"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'rspec --init' command create besides the .rspec file?",
+      "options": {
+        "A": "A folder named 'spec' and a file named 'spec_helper.rb'.",
+        "B": "A Gemfile.",
+        "C": "A database.yml file.",
+        "D": "A sample test file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'be_falsey' matcher passes if the value is 'nil'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a collection includes all of the specified elements?",
+      "options": {
+        "A": "include",
+        "B": "contain_exactly",
+        "C": "be_superset_of",
+        "D": "match_array"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword is used to skip the rest of the tests in a specific 'it' block during execution based on a condition?",
+      "options": {
+        "A": "skip",
+        "B": "break",
+        "C": "next",
+        "D": "ignore"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec automatically clears the database between tests by default.",
+      "options": {
+        "A": "False (This usually requires a tool like DatabaseCleaner or Rails transaction tests).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify that a value is an instance of a class or a subclass of it?",
+      "options": {
+        "A": "be_a",
+        "B": "be_an_instance_of",
+        "C": "eq_class",
+        "D": "match_type"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you run tests that are tagged with ':focus'?",
+      "options": {
+        "A": "rspec --tag focus",
+        "B": "rspec --only-focus",
+        "C": "rspec -f",
+        "D": "rspec run:focus"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'be' matcher without any arguments checks for truthiness.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher compares two arrays regardless of the order of their elements?",
+      "options": {
+        "A": "match_array",
+        "B": "eq",
+        "C": "contain",
+        "D": "sort_match"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'rspec --dry-run' do?",
+      "options": {
+        "A": "It formats the code but doesn't run tests.",
+        "B": "It loads the suite and prints the test names without actually executing the code inside them.",
+        "C": "It runs the tests using a mock database.",
+        "D": "It checks for syntax errors in the spec files only."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: RSpec's 'expect' syntax requires a block when using the 'change' or 'raise_error' matchers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a float is 'NaN' (Not a Number)?",
+      "options": {
+        "A": "be_nan",
+        "B": "is_nan",
+        "C": "eq(NaN)",
+        "D": "be_invalid_float"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a constant within an RSpec file that is available to all examples in a group?",
+      "options": {
+        "A": "Inside the 'describe' block but outside the 'it' blocks.",
+        "B": "Inside a 'before' block.",
+        "C": "Using the 'set' keyword.",
+        "D": "Inside the 'it' block."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The '.rspec-local' file is intended to be ignored by Git for user-specific RSpec configurations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to check if a number is even?",
+      "options": {
+        "A": "be_even",
+        "B": "is_even",
+        "C": "eq_even",
+        "D": "match_even"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the command to see the RSpec version installed?",
+      "options": {
+        "A": "rspec --version",
+        "B": "rspec -v",
+        "C": "ruby -rspec -v",
+        "D": "gem check rspec"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Every RSpec file must require 'spec_helper' at the top to function.",
+      "options": {
+        "A": "False (Technically it doesn't have to if you use --require in .rspec, but it is best practice).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is the inverse of 'include' for collections?",
+      "options": {
+        "A": "exclude",
+        "B": "not_include",
+        "C": "avoid",
+        "D": "miss"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec flag helps identify which random seed was used for a specific run?",
+      "options": {
+        "A": "--seed",
+        "B": "--random-seed",
+        "C": "-s",
+        "D": "--id"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'be_kind_of' matcher is an alias for 'be_a'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value is 'start_with' another string?",
+      "options": {
+        "A": "start_with",
+        "B": "begin_with",
+        "C": "prefix_with",
+        "D": "match_start"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default port RSpec uses when running web-based specs (like with Capybara)?",
+      "options": {
+        "A": "9887",
+        "B": "3000",
+        "C": "8080",
+        "D": "It doesn't use a port unless configured."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: You can apply tags to 'describe' blocks as well as 'it' blocks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to include a set of 'shared_examples' into a specific describe block?",
+      "options": {
+        "A": "include_examples",
+        "B": "it_behaves_like",
+        "C": "use_shared",
+        "D": "run_common_tests"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'double' and 'instance_double' in RSpec?",
+      "options": {
+        "A": "instance_double is faster to load.",
+        "B": "instance_double verifies that the methods being stubbed actually exist on the real class.",
+        "C": "double can only be used for strings.",
+        "D": "There is no functional difference."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to define a memoized helper method that is lazily evaluated?",
+      "options": {
+        "A": "def",
+        "B": "set",
+        "C": "let",
+        "D": "var"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: The 'subject' defined in a parent 'describe' block is inherited by all nested 'context' blocks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec hook runs exactly once before the entire test suite starts?",
+      "options": {
+        "A": "before(:all)",
+        "B": "before(:suite)",
+        "C": "before(:each)",
+        "D": "before(:global)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you check if a collection has exactly 3 elements using a built-in matcher?",
+      "options": {
+        "A": "expect(collection.size).to eq(3)",
+        "B": "expect(collection).to have_attributes(size: 3)",
+        "C": "expect(collection).to have_exactly(3).items",
+        "D": "expect(collection.count).to be(3)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'allow_any_instance_of(User).to receive(:save).and_return(false)' do?",
+      "options": {
+        "A": "It prevents any User object from being saved to the database during the test.",
+        "B": "It mocks the save method for every instance of the User class to return false.",
+        "C": "It deletes the save method from the User class.",
+        "D": "It only affects the next User object created."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid ways to trigger a shared example group?",
+      "options": {
+        "A": "it_behaves_like 'name'",
+        "B": "include_examples 'name'",
+        "C": "it_should_behave_like 'name'",
+        "D": "execute_shared 'name'"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'let!' variables are initialized even if they are never referenced in the test code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a value is within a certain range (inclusive)?",
+      "options": {
+        "A": "be_between(min, max)",
+        "B": "include(min..max)",
+        "C": "cover(min, max)",
+        "D": "is_inside(min, max)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'shared_context' in RSpec?",
+      "options": {
+        "A": "To share instance variables between different Ruby files.",
+        "B": "To bundle together 'let' declarations and hooks to be reused across multiple spec files.",
+        "C": "To keep the test database open between tests.",
+        "D": "To synchronize tests running in parallel."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RSpec matcher verifies that an object's attribute changed after a block of code was executed?",
+      "options": {
+        "A": "change",
+        "B": "update",
+        "C": "modify",
+        "D": "switch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'describe' block, the first argument can be a String or a Class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect { subject.call }.to raise_error(StandardError)' verify?",
+      "options": {
+        "A": "That the code executes successfully without errors.",
+        "B": "That the code raises a StandardError (or a subclass of it).",
+        "C": "That the code logs an error to the console.",
+        "D": "That the code returns a StandardError object."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which keyword allows you to define a named subject to improve test readability?",
+      "options": {
+        "A": "subject(:user) { User.new }",
+        "B": "set_subject(:user) { User.new }",
+        "C": "let(:subject) { User.new }",
+        "D": "define_subject(:user)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid RSpec hooks?",
+      "options": {
+        "A": "before",
+        "B": "after",
+        "C": "around",
+        "D": "during"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: 'allow(obj).to receive(:msg)' will cause the test to fail if ':msg' is never called.",
+      "options": {
+        "A": "False (That is the behavior of 'expect(...).to receive'; 'allow' is for optional stubs).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you verify that an array contains specific elements, ignoring the order in which they appear?",
+      "options": {
+        "A": "expect(array).to eq(expected_array)",
+        "B": "expect(array).to match_array(expected_array)",
+        "C": "expect(array).to include_all(expected_array)",
+        "D": "expect(array).to be(expected_array)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'described_class' helper?",
+      "options": {
+        "A": "It returns the class passed to the outermost 'describe' block.",
+        "B": "It returns a string name of the test file.",
+        "C": "It creates a mock of the class being tested.",
+        "D": "It lists all classes currently loaded in the Ruby VM."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec 'context' and 'describe' are technically aliases, but 'context' is conventionally used for state-based grouping.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a boolean method (like 'admin?') returns true?",
+      "options": {
+        "A": "be_admin",
+        "B": "is_admin",
+        "C": "have_admin",
+        "D": "check_admin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default output format of RSpec?",
+      "options": {
+        "A": "Documentation",
+        "B": "Progress (dots)",
+        "C": "JSON",
+        "D": "HTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which RSpec flag is used to only run tests that match a specific string in their description?",
+      "options": {
+        "A": "-e",
+        "B": "-g",
+        "C": "-f",
+        "D": "-match"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'expect(obj).to receive(:method).and_call_original' allows you to mock a method but still execute its real implementation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec matcher is used to verify that an object has a set of expected attributes?",
+      "options": {
+        "A": "have_attributes",
+        "B": "be_like",
+        "C": "match_params",
+        "D": "include_data"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if a test in a 'shared_example' group fails?",
+      "options": {
+        "A": "The entire describe block that included it fails.",
+        "B": "The failure is reported at the line where 'it_behaves_like' was called.",
+        "C": "The failure is ignored.",
+        "D": "The shared example is automatically removed from the suite."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to record the results of a test and provide a summary at the end?",
+      "options": {
+        "A": "Reporter",
+        "B": "Collector",
+        "C": "Summarizer",
+        "D": "Logger"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'expect' without a block for the 'change' matcher.",
+      "options": {
+        "A": "False (The code that causes the change must be wrapped in a block { }).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a numeric value is within a certain delta of another value?",
+      "options": {
+        "A": "be_within",
+        "B": "be_near",
+        "C": "be_close",
+        "D": "approx"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you run tests and stop immediately after the first failure?",
+      "options": {
+        "A": "--fail-fast",
+        "B": "-x",
+        "C": "--stop-on-error",
+        "D": "--immediate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec 'let' variables are thread-safe by default.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher ensures that a string contains a specific substring?",
+      "options": {
+        "A": "include",
+        "B": "match",
+        "C": "contain",
+        "D": "have"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'RSpec.configure'?",
+      "options": {
+        "A": "To set global configuration options like color, format, and helper inclusion.",
+        "B": "To install the RSpec gem.",
+        "C": "To create the spec folder.",
+        "D": "To compile Ruby code."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that an object is an instance of a specific class or its subclasses?",
+      "options": {
+        "A": "be_a",
+        "B": "be_an_instance_of",
+        "C": "is_exactly",
+        "D": "match_class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can tag individual tests with metadata to filter their execution.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyword is used to skip a test and mark it as 'pending'?",
+      "options": {
+        "A": "xit",
+        "B": "skip",
+        "C": "pending",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "How do you run tests and see the values of local variables when a failure occurs?",
+      "options": {
+        "A": "--show-locals",
+        "B": "-v",
+        "C": "--debug",
+        "D": "--trace"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'expect(obj).to receive(:method)' must be defined before the method is actually called in the code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a block of code throws a specific symbol?",
+      "options": {
+        "A": "throw_symbol",
+        "B": "catch_symbol",
+        "C": "raise_symbol",
+        "D": "emit_symbol"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the '.rspec' file?",
+      "options": {
+        "A": "To provide default command-line flags for every rspec command.",
+        "B": "To store the user's secret keys.",
+        "C": "To list the Ruby version.",
+        "D": "To exclude certain gems from the test."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'be_nil' matcher is equivalent to 'eq(nil)'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method allows you to run a block of code and verify that a value changed from X to Y?",
+      "options": {
+        "A": "expect { ... }.to change(obj, :attr).from(X).to(Y)",
+        "B": "expect { ... }.to update(obj, :attr).to(Y)",
+        "C": "expect { ... }.to switch(obj, :attr).from(X)",
+        "D": "expect { ... }.to be_different(obj, :attr)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec flag is used to re-run only the tests that failed in the last run?",
+      "options": {
+        "A": "--only-failures",
+        "B": "--lf",
+        "C": "--retry",
+        "D": "--failed"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'expect_any_instance_of' is recommended for mocking objects in RSpec 3+.",
+      "options": {
+        "A": "False (It is discouraged; verifying doubles or dependency injection is preferred).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a hash contains a specific subset of key-value pairs?",
+      "options": {
+        "A": "include",
+        "B": "match",
+        "C": "have_key",
+        "D": "be_part_of"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'rspec --init' command generate?",
+      "options": {
+        "A": "The .rspec and spec/spec_helper.rb files.",
+        "B": "The Gemfile.",
+        "C": "The entire app structure.",
+        "D": "A sample model and controller."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Predicate matchers (like be_empty) work by calling the corresponding method (like empty?) on the object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec matcher verifies that a value is an instance of exactly that class and not a subclass?",
+      "options": {
+        "A": "be_an_instance_of",
+        "B": "be_a",
+        "C": "kind_of",
+        "D": "match_exact_class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 'expect(10).to be > 5'?",
+      "options": {
+        "A": "Passed",
+        "B": "Failed",
+        "C": "Error",
+        "D": "Pending"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'expect' with a block to check for truthiness of a value.",
+      "options": {
+        "A": "False (Blocks are for actions/changes/errors; values use expect(val)).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that an object 'responds_to' a specific method?",
+      "options": {
+        "A": "respond_to",
+        "B": "have_method",
+        "C": "be_callable",
+        "D": "can_be_called"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'it { is_expected.to ... }'?",
+      "options": {
+        "A": "It is a one-liner expectation that targets the defined subject.",
+        "B": "It is a way to skip a test.",
+        "C": "It creates a new subject.",
+        "D": "It describes the entire class."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can nest 'describe' blocks as deeply as needed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if two objects have the same attributes and values (logical equality)?",
+      "options": {
+        "A": "eq",
+        "B": "be",
+        "C": "equal",
+        "D": "is"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you run RSpec tests in a random order to find hidden dependencies?",
+      "options": {
+        "A": "--order random",
+        "B": "--shuffle",
+        "C": "--mix",
+        "D": "--randomize"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'around' hook requires calling 'example.run' to proceed with the test.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the critical advantage of 'instance_double' over a generic 'double' in RSpec?",
+      "options": {
+        "A": "It automatically connects to the test database to verify records.",
+        "B": "It verifies that any methods being stubbed actually exist on the real class, preventing stale tests.",
+        "C": "It is the only double type that supports the 'and_return' method.",
+        "D": "It runs 50% faster than a standard double by bypassing the Ruby object model."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does a 'Spy' differ from a traditional 'Mock' in the RSpec lifecycle?",
+      "options": {
+        "A": "A Spy can only be used with Rails controllers.",
+        "B": "A Spy allows you to verify interactions after the code under test has executed (post-verification).",
+        "C": "A Spy does not allow you to define return values for stubbed methods.",
+        "D": "A Spy requires the real object to be instantiated in the system."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'aggregate_failures' block in a spec?",
+      "options": {
+        "A": "To group multiple test files into a single report.",
+        "B": "To allow a test to continue running even after an expectation fails, reporting all errors at the end.",
+        "C": "To sum the execution time of all tests in a describe block.",
+        "D": "To combine multiple database transactions into a single commit."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to create a 'Verifying Double' for a class itself (to stub class-level methods)?",
+      "options": {
+        "A": "instance_double",
+        "B": "class_double",
+        "C": "object_double",
+        "D": "module_double"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens when you use 'and_wrap_original' while stubbing a method?",
+      "options": {
+        "A": "It deletes the original method and replaces it with a block.",
+        "B": "It allows you to intercept the call, add logic, and optionally call the original implementation.",
+        "C": "It prevents the method from being called more than once.",
+        "D": "It forces the method to run in a separate thread."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In an 'around(:each)' hook, what must you do to ensure the actual test code is executed?",
+      "options": {
+        "A": "Call 'example.run' within the block.",
+        "B": "Use the 'super' keyword.",
+        "C": "Return 'true' at the end of the block.",
+        "D": "The test runs automatically; the block is just for cleanup."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When is 'shared_context' preferred over 'shared_examples'?",
+      "options": {
+        "A": "When the goal is to share setup code, variables (let), and hooks rather than actual test cases.",
+        "B": "When you need to run tests in parallel.",
+        "C": "When testing private methods.",
+        "D": "When you want to hide the test results from the console."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec DSL method is used to define a completely custom matcher (e.g., 'expect(user).to be_admin')?",
+      "options": {
+        "A": "RSpec::Matchers.define",
+        "B": "RSpec.new_matcher",
+        "C": "matcher_config",
+        "D": "define_expectation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(Class).to receive(:new).and_return(stub_obj)' achieve?",
+      "options": {
+        "A": "It renames the Class in the Ruby namespace.",
+        "B": "It intercepts object instantiation and returns a controlled stub instead of a real instance.",
+        "C": "It verifies that the Class has a constructor.",
+        "D": "It prevents the Class from being instantiated more than once."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid 'Verifying Double' types in RSpec?",
+      "options": {
+        "A": "instance_double",
+        "B": "class_double",
+        "C": "object_double",
+        "D": "verified_stub"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Using 'expect_any_instance_of' is recommended for testing in modern RSpec suites.",
+      "options": {
+        "A": "False (It is considered a 'code smell' that can lead to fragile tests; dependency injection is preferred).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'as_stubbed_const' when using 'class_double'?",
+      "options": {
+        "A": "It prevents the class from being modified later in the test.",
+        "B": "It replaces the real class constant with the double for the duration of the test.",
+        "C": "It makes the double accessible globally across all spec files.",
+        "D": "It forces the constant to be a String."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which matcher allows you to define a complex custom expectation using a simple Ruby block that returns a boolean?",
+      "options": {
+        "A": "match",
+        "B": "satisfy",
+        "C": "be_true_for",
+        "D": "validate_with"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In RSpec-Mocks, what is a 'Partial Double'?",
+      "options": {
+        "A": "A double that only implements half of a class's methods.",
+        "B": "A real object that has had one or more methods stubbed or mocked.",
+        "C": "An object that can only be used in 'describe' blocks.",
+        "D": "A double that is shared between two different tests."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'aggregate_failures' can be enabled globally in the 'spec_helper.rb' configuration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a method was called with specific arguments after the fact using a Spy?",
+      "options": {
+        "A": "have_received",
+        "B": "was_called_with",
+        "C": "did_receive",
+        "D": "check_interaction"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 'expect(obj).to receive(:msg).at_least(:once)'?",
+      "options": {
+        "A": "The test passes only if the message is called exactly one time.",
+        "B": "The test passes if the message is called one or more times.",
+        "C": "The test fails if the message is called more than once.",
+        "D": "The message is ignored during the first call."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Custom matchers defined with 'RSpec::Matchers.define' automatically support 'failure_message' and 'failure_message_when_negated' customization.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec component is responsible for isolating tests by preventing real network requests?",
+      "options": {
+        "A": "RSpec-Mocks (usually in combination with WebMock or VCR).",
+        "B": "RSpec-Expectations.",
+        "C": "RSpec-Core.",
+        "D": "RSpec-Rails-Network."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens when you call 'and_call_original' on a stubbed method?",
+      "options": {
+        "A": "It throws an error because stubs cannot call real code.",
+        "B": "It allows the mock to record the call but still execute the real underlying implementation.",
+        "C": "It restarts the Ruby VM.",
+        "D": "It resets the object to its default state."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between 'instance_double' and 'object_double' in RSpec?",
+      "options": {
+        "A": "instance_double takes a class name, whereas object_double takes a specific existing object to verify its interface.",
+        "B": "object_double is only for Rails ActiveRecord objects.",
+        "C": "instance_double allows for private method stubbing, while object_double does not.",
+        "D": "There is no difference; they are aliases for the same method."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to replace a real constant with a double for the duration of a test case?",
+      "options": {
+        "A": "stub_const('MyClass', double_obj)",
+        "B": "set_const('MyClass', double_obj)",
+        "C": "allow(MyClass).to be(double_obj)",
+        "D": "replace_const('MyClass', double_obj)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Verifying Double' (like instance_double) will raise an error at load time if the real class has not been loaded yet.",
+      "options": {
+        "A": "True (Unless specifically configured to allow missing constants).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher allows you to verify that a method was called with arguments that satisfy a specific regex?",
+      "options": {
+        "A": "expect(obj).to receive(:msg).with(/pattern/)",
+        "B": "expect(obj).to receive(:msg).matching(/pattern/)",
+        "C": "expect(obj).to receive(:msg).with(regex: /pattern/)",
+        "D": "expect(obj).to receive(:msg).containing(/pattern/)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(obj).to receive(:msg).and_wrap_original' allow you to do?",
+      "options": {
+        "A": "It allows you to call the original implementation within a block while still treating it as a mock.",
+        "B": "It prevents the original method from being called.",
+        "C": "It renames the original method to 'original_msg'.",
+        "D": "It creates a permanent wrapper for the method across all tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you verify that a method was NOT called after the code has already executed using a Spy?",
+      "options": {
+        "A": "expect(spy_obj).not_to have_received(:msg)",
+        "B": "expect(spy_obj).to receive(:msg).never",
+        "C": "allow(spy_obj).not_to receive(:msg)",
+        "D": "expect(spy_obj).to_not have_been_called(:msg)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select ALL that apply: Which of the following are valid argument matchers in RSpec-Mocks?",
+      "options": {
+        "A": "anything",
+        "B": "kind_of(Class)",
+        "C": "hash_including(:key)",
+        "D": "instance_of(Class)"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'RSpec::Matchers.define_negated_matcher'?",
+      "options": {
+        "A": "To create a matcher that is the logical opposite of an existing one (e.g., 'exclude' from 'include').",
+        "B": "To delete an existing matcher from the suite.",
+        "C": "To create a matcher that always fails.",
+        "D": "To prevent 'not_to' from being used with a specific matcher."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In RSpec 3, 'allow' and 'expect' on the same method of the same object in the same test is a supported pattern.",
+      "options": {
+        "A": "True (The expectation takes precedence).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to verify that a block yielded a specific value to the caller?",
+      "options": {
+        "A": "expect { |b| obj.do_something(&b) }.to yield_with_args(1, 2)",
+        "B": "expect(obj).to yield_control.with(1, 2)",
+        "C": "expect(obj.do_something).to yield(1, 2)",
+        "D": "expect { obj.do_something }.to return_yield(1, 2)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(obj).to receive(:msg).ordered' verify?",
+      "options": {
+        "A": "That ':msg' is called in a specific sequence relative to other '.ordered' calls.",
+        "B": "That the arguments are passed in alphabetical order.",
+        "C": "That the test runs in alphabetical order.",
+        "D": "That the results are sorted before being checked."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration option in 'spec_helper' prevents stubs on non-existent methods when using real objects (Partial Doubles)?",
+      "options": {
+        "A": "config.mock_with :rspec { |m| m.verify_partial_doubles = true }",
+        "B": "config.strict_stubs = true",
+        "C": "config.verify_interface = true",
+        "D": "config.disable_monkey_patching!"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'stub_model' is a feature of the core RSpec-Mocks gem.",
+      "options": {
+        "A": "False (It is part of the rspec-rails gem).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of 'expect(obj).to receive(:msg).and_invoke(-> { 'result' })'?",
+      "options": {
+        "A": "It executes the provided lambda whenever ':msg' is called.",
+        "B": "It immediately executes the lambda during test setup.",
+        "C": "It only works if ':msg' is a private method.",
+        "D": "It creates a background thread for the lambda."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that an object 'has_key?' in a Ruby-like predicate fashion?",
+      "options": {
+        "A": "have_key",
+        "B": "include_key",
+        "C": "be_key",
+        "D": "has_key"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary use case for 'RSpec::Mocks.with_temporary_scope'?",
+      "options": {
+        "A": "To define mocks and stubs outside of a standard RSpec example (e.g., in a standalone script).",
+        "B": "To increase the speed of the test suite.",
+        "C": "To create a temporary database connection.",
+        "D": "To isolate 'before(:all)' hooks."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec Spies require the use of 'allow' to define the methods they can record.",
+      "options": {
+        "A": "True (Unless created via 'spy('name')', which allows all messages).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which argument matcher matches any object that responds to a specific method?",
+      "options": {
+        "A": "respond_to(:method_name)",
+        "B": "duck_type(:method_name)",
+        "C": "satisfy(:method_name)",
+        "D": "have_method(:method_name)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you configure RSpec to treat warnings as errors during the test run?",
+      "options": {
+        "A": "config.raise_errors_for_deprecations!",
+        "B": "config.warnings_as_errors = true",
+        "C": "config.strict_warnings = true",
+        "D": "config.fail_on_warning = true"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(obj).to receive(:msg).twice' verify?",
+      "options": {
+        "A": "That the method is called exactly two times.",
+        "B": "That the method is called at least two times.",
+        "C": "That the method is called in two different threads.",
+        "D": "That the method is called twice in a row."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'instance_double' can verify the presence of private methods if the 'verify_private_methods' flag is set.",
+      "options": {
+        "A": "False (Verifying doubles only check the public interface).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method allows you to test that a certain block of code takes less than a specific amount of time?",
+      "options": {
+        "A": "There is no built-in RSpec matcher for execution time; you must use a custom matcher or benchmark.",
+        "B": "expect { code }.to take_less_than(1.second)",
+        "C": "expect { code }.to run_within(1).second",
+        "D": "expect { code }.to perform_under(1).second"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'expect(...).to receive(:msg).with(no_args)'?",
+      "options": {
+        "A": "It ensures the method is called with exactly zero arguments.",
+        "B": "It ignores any arguments passed to the method.",
+        "C": "It passes a 'nil' argument to the method.",
+        "D": "It checks if the method exists but doesn't care about calls."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec's 'change' matcher is susceptible to false positives if the initial and final values are the same object with different internal states.",
+      "options": {
+        "A": "True (Unless 'by' or 'from/to' is used to clarify the expectation).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher is used to verify that a collection is sorted?",
+      "options": {
+        "A": "RSpec has no built-in 'be_sorted' matcher; you must define it or use 'expect(arr).to eq(arr.sort)'.",
+        "B": "be_sorted",
+        "C": "is_ordered",
+        "D": "match_sort_order"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you specify that a mock should return different values on consecutive calls?",
+      "options": {
+        "A": "allow(obj).to receive(:msg).and_return(1, 2, 3)",
+        "B": "allow(obj).to receive(:msg).with_sequence(1, 2, 3)",
+        "C": "allow(obj).to receive(:msg).and_yield(1).and_yield(2)",
+        "D": "allow(obj).to receive(:msg).multiple([1, 2, 3])"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'expect_any_instance_of' with argument matchers like 'with(1, 2, 3)'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which RSpec configuration prevents the 'should' syntax from being used at all?",
+      "options": {
+        "A": "config.expect_with :rspec { |c| c.syntax = :expect }",
+        "B": "config.disable_should!",
+        "C": "config.syntax = :modern",
+        "D": "config.remove_legacy_matchers!"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the effect of 'allow(obj).to receive_messages(a: 1, b: 2)'?",
+      "options": {
+        "A": "It stubs multiple methods (a and b) at once with their respective return values.",
+        "B": "It sends a hash of messages to the object.",
+        "C": "It creates a new double with those methods.",
+        "D": "It verifies that those messages are sent in order."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'shared_examples' can be defined in any file as long as it is loaded before use.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if an object has a certain 'attribute' using 'has_attribute?' or similar logic?",
+      "options": {
+        "A": "have_attribute",
+        "B": "be_attributed_with",
+        "C": "match_attribute",
+        "D": "be_configured_with"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'rspec --bisect' command do?",
+      "options": {
+        "A": "It automatically identifies the minimal set of tests that trigger a failure caused by order-dependency.",
+        "B": "It splits the test suite into two equal parts for parallel execution.",
+        "C": "It checks for syntax errors in spec files.",
+        "D": "It converts 'should' syntax to 'expect' syntax."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In RSpec, 'double' is an alias for 'RSpec::Mocks::Double.new'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which argument matcher is used to match a hash that includes only certain keys, regardless of other keys present?",
+      "options": {
+        "A": "hash_including(:key)",
+        "B": "include_hash(:key)",
+        "C": "match_hash(:key)",
+        "D": "has_key(:key)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'config.expose_dsl_globally = false' in RSpec configuration?",
+      "options": {
+        "A": "It prevents RSpec methods like 'describe' and 'it' from being added to the top-level main object.",
+        "B": "It disables the use of RSpec in the console.",
+        "C": "It hides the test results from the global reporter.",
+        "D": "It prevents different gem versions from clashing."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'around' hooks are executed before 'before' hooks.",
+      "options": {
+        "A": "True (The 'around' hook starts first and wraps all other hooks and the example).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher would you use to verify that a value is 'approximately' equal to another within a percentage range?",
+      "options": {
+        "A": "RSpec has no percentage-based built-in matcher; 'be_within' uses absolute delta.",
+        "B": "be_around(5).percent",
+        "C": "be_within(5).percent_of(100)",
+        "D": "match_precision(5)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(obj).to receive(:msg).and_raise('error')' do?",
+      "options": {
+        "A": "It causes the object to raise a RuntimeError with the message 'error' when ':msg' is called.",
+        "B": "It fails the test immediately with the message 'error'.",
+        "C": "It logs 'error' to the STDERR.",
+        "D": "It catches any error named 'error' from the object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'subject' in RSpec is strictly required to be an instance of a class.",
+      "options": {
+        "A": "False (It can be any object, including a hash, array, or even a symbol).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag tells RSpec to load files in a specific order every time to ensure reproducibility?",
+      "options": {
+        "A": "--seed <number>",
+        "B": "--order <number>",
+        "C": "--repeat <number>",
+        "D": "--sort <number>"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'RSpec::Mocks.configuration.allow_message_expectations_on_nil' setting?",
+      "options": {
+        "A": "To permit or forbid the mocking of methods on the 'nil' object.",
+        "B": "To allow 'nil' to be passed as an argument to a mock.",
+        "C": "To prevent 'nil' from being returned by a stub.",
+        "D": "To verify that 'nil' exists in the database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'expect' in a 'before(:all)' block is generally permitted.",
+      "options": {
+        "A": "False (Expectations are only valid inside examples; they may cause undefined behavior in before(:all)).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher checks if a value satisfies a given block?",
+      "options": {
+        "A": "satisfy { |v| v > 0 }",
+        "B": "be_true_for { |v| v > 0 }",
+        "C": "validate_with { |v| v > 0 }",
+        "D": "match_block { |v| v > 0 }"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'expect(array).to contain_exactly(1, 2, 3)' do?",
+      "options": {
+        "A": "It checks that the array has those exact elements in any order.",
+        "B": "It checks that the array has those exact elements in that specific order.",
+        "C": "It checks that the array contains at least those elements.",
+        "D": "It checks that the array has exactly 3 elements."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: RSpec 'let' variables are shared across different 'it' blocks without being re-evaluated.",
+      "options": {
+        "A": "False (They are memoized within one test but reset for every new test).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which matcher verifies that a float is positive infinity?",
+      "options": {
+        "A": "be_infinite",
+        "B": "is_inf",
+        "C": "eq(Float::INFINITY)",
+        "D": "be_max_float"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you define a custom RSpec formatter for use in your project?",
+      "options": {
+        "A": "By creating a class that inherits from 'RSpec::Core::Formatters::BaseFormatter' and implementing the required notifications.",
+        "B": "By editing the 'rspec-core' gem source.",
+        "C": "By setting 'config.formatter = :custom_class'.",
+        "D": "By using the 'set_format' CLI flag."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if a 'shared_example' is called with 'it_behaves_like' and no examples are actually defined in it?",
+      "options": {
+        "A": "The suite runs successfully, and the call is essentially a no-op.",
+        "B": "RSpec raises a 'MissingExamplesError'.",
+        "C": "The test is marked as pending.",
+        "D": "The suite fails with a 'EmptySharedGroup' warning."
+      },
+      "answer": "A"
+    }
+  ]
+}

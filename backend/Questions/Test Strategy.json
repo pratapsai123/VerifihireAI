@@ -1,0 +1,1893 @@
+{ 
+  "skill": "Test Strategy", 
+  "questions": [
+{
+    "question": "What is the primary purpose of a Test Strategy document?",
+    "options": {
+      "A": "To list every single bug found during the project.",
+      "B": "To define the high-level approach, objective, and methods for testing a software product.",
+      "C": "To keep track of the physical inventory of the server room.",
+      "D": "To automatically write the source code for the developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Test Strategy is typically a static document that should never change once the project begins.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Black-box' testing?",
+    "options": {
+      "A": "Testing the software with full knowledge of the internal code and logic.",
+      "B": "Testing the software's functionality without any knowledge of its internal structure or code.",
+      "C": "Testing the physical strength of the black computer cases.",
+      "D": "A specialized tool for measuring the darkness of a monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scope' in a Test Plan?",
+    "options": {
+      "A": "A telescope used to look at distant server towers.",
+      "B": "The definition of what features will be tested and what features will NOT be tested.",
+      "C": "A specialized software for architects.",
+      "D": "The frame rate of the testing dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are typical components of a Test Strategy? (Select all that apply)",
+    "options": {
+      "A": "Test levels (Unit, Integration, System)",
+      "B": "Roles and Responsibilities",
+      "C": "Testing Tools to be used",
+      "D": "The personal lunch schedules of the HR team"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'QA' stand for in software development?",
+    "options": {
+      "A": "Query Analysis",
+      "B": "Quality Assurance",
+      "C": "Quick Assessment",
+      "D": "Quantum Architecture"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The primary goal of testing is to prove that the software has zero defects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of testing is performed to ensure that a recent code change has not broken existing functionality?",
+    "options": {
+      "A": "Smoke Testing",
+      "B": "Regression Testing",
+      "C": "Unit Testing",
+      "D": "Stress Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Entry Criteria' in a test plan?",
+    "options": {
+      "A": "The physical door used by the testers to enter the office.",
+      "B": "The set of conditions that must be met before testing can officially begin.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'White-box' testing requires the tester to have access to the source code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following defines 'Exit Criteria'?",
+    "options": {
+      "A": "The emergency exit route in the office building.",
+      "B": "The predefined set of conditions that must be achieved to conclude a testing phase.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are considered 'Functional' testing types? (Select all that apply)",
+    "options": {
+      "A": "Unit Testing",
+      "B": "System Testing",
+      "C": "User Acceptance Testing (UAT)",
+      "D": "Security Vulnerability Scanning"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Test Environment'?",
+    "options": {
+      "A": "The physical weather outside the data center.",
+      "B": "The specific hardware and software configuration where the testing will be executed.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Test cases should be created based on the requirements and design specifications.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Bug Report'?",
+    "options": {
+      "A": "To tell a story about insects in the garden.",
+      "B": "To document a failure, including how to reproduce it and its impact on the system.",
+      "C": "A security scan for network firewalls.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Non-Functional' testing type?",
+    "options": {
+      "A": "Integration Testing",
+      "B": "Performance Testing",
+      "C": "Smoke Testing",
+      "D": "Sanity Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated testing is always better and more cost-effective than manual testing for every project.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ad-hoc' testing?",
+    "options": {
+      "A": "Testing performed using a strict physical checklist.",
+      "B": "Unstructured, informal testing performed without a predefined plan or test cases.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test Coverage'?",
+    "options": {
+      "A": "The amount of insurance the testing team has.",
+      "B": "A metric that describes the degree to which the requirements or code have been exercised by the tests.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Testing' involves analyzing code or documentation without actually executing the program.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'V-Model' in software testing?",
+    "options": {
+      "A": "A model used to design physical V-shaped server racks.",
+      "B": "A framework that demonstrates the relationship between each phase of development and its corresponding testing phase.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Sanity Testing'? (Select all that apply)",
+    "options": {
+      "A": "Brief, narrow testing to verify a specific bug fix works",
+      "B": "A subset of regression testing",
+      "C": "Testing the mental health of the developer",
+      "D": "A quick check to ensure the system is stable enough for deep testing"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Equivalence Partitioning'?",
+    "options": {
+      "A": "Partitioning physical hard drives into equal sizes.",
+      "B": "A test design technique that divides input data into ranges that are expected to behave the same way.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Boundary Value Analysis (BVA) focuses on testing the edges of input ranges rather than the middle values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Test Suite'?",
+    "options": {
+      "A": "A luxury hotel room for the testing team.",
+      "B": "A collection of related test cases grouped together for execution.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass Rate'?",
+    "options": {
+      "A": "The rate at which people pass the office hallway.",
+      "B": "The percentage of successfully executed tests compared to the total number of tests run.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' occurs when the test environment uses production data without proper anonymization, violating privacy rules.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Environmental' factors in test planning? (Select all that apply)",
+    "options": {
+      "A": "Network bandwidth requirements",
+      "B": "Operating system versions",
+      "C": "The color of the server racks",
+      "D": "Access to 3rd party API keys"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Acceptance Testing'?",
+    "options": {
+      "A": "Testing if the developer accepts a cup of coffee.",
+      "B": "A formal testing phase where the system is checked against business requirements to decide if it's ready for release.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Requirement Traceability Matrix' (RTM)?",
+    "options": {
+      "A": "A document that maps and traces user requirements with test cases.",
+      "B": "A physical matrix made of paper requirements.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Test Case' must always have an Expected Result defined before it is executed.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common testing 'Deliverables'? (Select all that apply)",
+    "options": {
+      "A": "Test Plan",
+      "B": "Test Summary Report",
+      "C": "Bug Reports",
+      "D": "The source code of the application"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Exploratory Testing'?",
+    "options": {
+      "A": "Testing while exploring a physical cave.",
+      "B": "Simultaneous learning, test design, and test execution where the tester follows their intuition and findings.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect Leakage'?",
+    "options": {
+      "A": "When liquid leaks out of a defective computer.",
+      "B": "A metric that identifies the number of bugs found by customers after the software was released.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Unit Testing' is primarily the responsibility of the Quality Assurance team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compatibility Testing'?",
+    "options": {
+      "A": "Testing if two people are compatible for marriage.",
+      "B": "Ensuring the software works across different browsers, devices, and operating systems.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated Regression' testing? (Select all that apply)",
+    "options": {
+      "A": "Using scripts to repeatedly run tests on core features",
+      "B": "Reducing manual labor for repetitive tasks",
+      "C": "Guaranteed to find 100% of all new bugs",
+      "D": "Speeds up the feedback loop in CI/CD"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Test Data Management'?",
+    "options": {
+      "A": "Managing a list of a person's favorite movies.",
+      "B": "The process of creating, maintaining, and protecting the data required for testing.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a bug is introduced until it is flagged by a test.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when testing is done on high-performance machines but the users actually use low-powered mobile devices.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Identity' and access testing steps? (Select all that apply)",
+    "options": {
+      "A": "Verifying that a guest cannot access the admin dashboard",
+      "B": "Testing the 'Forgot Password' email flow",
+      "C": "Checking the physical weight of the office IDs",
+      "D": "Validating multi-factor authentication (MFA)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Error Guessing'?",
+    "options": {
+      "A": "Guessing the number of errors on a physical page.",
+      "B": "A technique where the tester uses their experience to predict where defects are likely to occur.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test Cycle Time'?",
+    "options": {
+      "A": "The time it takes to ride a bicycle around the office.",
+      "B": "The total duration required to complete all planned testing for a specific release or build.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the business expects results in 1 hour but the test suite takes 10 hours to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' Test Planning? (Select all that apply)",
+    "options": {
+      "A": "Deciding which tools will be used for the next year",
+      "B": "Aligning quality goals with business risk",
+      "C": "Buying physical snack for the developers",
+      "D": "Determining the training needs for the QA team"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Isolation' in testing?",
+    "options": {
+      "A": "Isolating a person name Logical.",
+      "B": "Testing specific parts of the system by 'mocking' or 'stubbing' out other parts to ensure failures are accurately traced.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass/Fail Trend'?",
+    "options": {
+      "A": "A visual representation of how test results are changing over time (e.g., across different builds).",
+      "B": "Analyzing if the testers are wearing trendy clothes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' occurs when the test reports contain too little information to actually fix the bug.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Test Governance stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Test Manager",
+      "B": "Release Manager",
+      "C": "Product Owner",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Smoke Testing' primarily for?",
+    "options": {
+      "A": "Testing if the server room is on fire.",
+      "B": "A quick check of the core functionality to ensure the build is stable enough for deeper testing.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Bug Fix Rate'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The speed at which the development team resolves reported defects.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when developers think 'Done' means 'Code Written' but QA thinks 'Done' means 'Verified in Staging'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Test Execution benefits? (Select all that apply)",
+    "options": {
+      "A": "Instant failure alerts in CI/CD",
+      "B": "Consistency in test steps",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduced manual execution time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in automated testing?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to reuse test logic or components across different test levels or projects.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric representing the average duration the system runs successfully before a failure occur.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test times out because the environment is slower than expected.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Test Architecture components? (Select all that apply)",
+    "options": {
+      "A": "Centralized Test Management Tool",
+      "B": "Standardized Environment Configs",
+      "C": "Shared Object Repository",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap'?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of templates or scripts used to quickly initialize a new automation project.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Artifact' 'Retention'?",
+    "options": {
+      "A": "Retaining ancient artifacts in the office.",
+      "B": "The process of saving test logs, videos, and evidence for a specific duration for audit and compliance.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a testing tool is forced to interact with a system using a legacy communication method it does not support.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting'? (Select all that apply)",
+    "options": {
+      "A": "Instant dashboards for release health",
+      "B": "Consolidating data from multiple test runs",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual spreadsheet tracking"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in test design?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring technical interaction details are hidden from the high-level test script to facilitate easier maintenance.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Fix' (MTTF)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The average duration from when a bug is reported until the verified fix is deployed.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' occurs when a test suite works for 10 tests but crashes the reporting server when running 10,000 tests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Quality' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "CTO / Head of Engineering",
+      "B": "Compliance Officer",
+      "C": "Product Manager",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical objective of 'Risk-Based Testing' (RBT)?",
+    "options": {
+      "A": "To test every possible line of code regardless of its business value.",
+      "B": "To prioritize testing efforts based on the probability of failure and the impact of that failure on the business.",
+      "C": "To eliminate the need for manual testers by using AI to predict risks.",
+      "D": "To ensure the server room has a physical fire suppression system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shift-Left' testing refers to moving testing activities earlier in the SDLC, such as performing unit tests and static analysis during the coding phase.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is a key outcome of a 'Defect Triage' meeting?",
+    "options": {
+      "A": "Deciding which physical office snacks to buy for the week.",
+      "B": "Evaluating, prioritizing, and assigning identified bugs to developers for remediation.",
+      "C": "Automatically rewriting the code to fix the bugs discussed.",
+      "D": "Calculating the total electricity cost of the testing lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Orthogonal Array Testing' (OAT) used for?",
+    "options": {
+      "A": "Testing physical server rack alignments.",
+      "B": "A statistical technique used to test complex systems with many input combinations using a minimal number of test cases.",
+      "C": "A specialized software for architects to design data centers.",
+      "D": "Measuring the frame rate of UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Automation Candidate' criteria? (Select all that apply)",
+    "options": {
+      "A": "High volume, repetitive tests",
+      "B": "Tests that are prone to human error",
+      "C": "Business-critical regression paths",
+      "D": "UI features that change every 24 hours"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Shift-Right' testing involves performing testing activities in the production environment, such as A/B testing or canary deployments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Test Design' technique is used to find defects at the boundaries of input ranges?",
+    "options": {
+      "A": "Equivalence Partitioning",
+      "B": "Boundary Value Analysis (BVA)",
+      "C": "Cause-Effect Graphing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Staging Environment' in a professional test strategy?",
+    "options": {
+      "A": "To act as a physical stage for company presentations.",
+      "B": "To provide an exact replica of production for final validation before a release.",
+      "C": "A security scan of the database.",
+      "D": "To increase the frame rate of the video reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Mutation Testing' logic? (Select all that apply)",
+    "options": {
+      "A": "Modifying the application code slightly to see if existing tests fail",
+      "B": "Measuring the quality of the test suite itself",
+      "C": "Checking for physical mutations in the server hardware",
+      "D": "Identifying gaps where code is executed but not effectively 'asserted'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in testing occur when developers assume 'Agile' means they don't need to document any test plans.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Decision Table Testing' specifically designed to handle?",
+    "options": {
+      "A": "Testing the physical durability of office tables.",
+      "B": "Systems with complex business logic rules where different combinations of conditions result in different actions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font in reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Reporting' metric identifies how many new bugs are being introduced as a result of fixing old bugs?",
+    "options": {
+      "A": "Defect Density",
+      "B": "Re-open Rate (or Regression Rate)",
+      "C": "Pass Rate",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test Data Anonymization'?",
+    "options": {
+      "A": "Deleting all test data so it is anonymous.",
+      "B": "The process of replacing PII (Personally Identifiable Information) in production data with realistic but fake data for safe testing.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Static Analysis' tools can find logical bugs in an application without ever running the code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' Test Planning strategies? (Select all that apply)",
+    "options": {
+      "A": "Model-Based Testing",
+      "B": "Fuzzing (Randomized Input Testing)",
+      "C": "Pairwise Testing",
+      "D": "Hiring a professional actor to read logs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Gray-box' Testing?",
+    "options": {
+      "A": "Testing software in a gray-colored room.",
+      "B": "A combination of white-box and black-box testing where the tester has partial knowledge of the internal structures.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR) in a QA context?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a bug is assigned to a developer until the fix is verified and closed by QA.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in testing refers to a conflict where the business requires a 24-hour turnaround for hotfixes, but the regression suite takes 48 hours to execute.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves simulating thousands of concurrent users to find bottlenecks?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Load Testing",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backward Compatibility' testing logic?",
+    "options": {
+      "A": "Testing a person walking backward in the office.",
+      "B": "Ensuring that the new version of the software still works correctly with data and interfaces from previous versions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test Orchestration' in a CI/CD pipeline?",
+    "options": {
+      "A": "Managing the automated sequence, parallelism, and environmental triggers for various test suites.",
+      "B": "Hiring a person named Orchestration.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test script polls for an element much faster than the frontend can render it, leading to redundant failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Accessibility' auditing? (Select all that apply)",
+    "options": {
+      "A": "Checking for valid ARIA roles in the DOM",
+      "B": "Verifying WCAG color contrast standards automatically",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Identifying missing alternative text for images"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Environment' 'Drift' and how does it impact a test strategy?",
+    "options": {
+      "A": "When a server physically drifts across the data center floor.",
+      "B": "The slow divergence in configuration between the test and production environments, leading to 'False Passes' in testing.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Coverage' logic?",
+    "options": {
+      "A": "Traceability of a person named Coverage.",
+      "B": "A metric track tracking the percentage of defined business requirements that are mapped to at least one passing test case.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a test suite produces so much log data that it consumes the entire disk space of the CI runner.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Test Management tools? (Select all that apply)",
+    "options": {
+      "A": "Zephyr",
+      "B": "TestRail",
+      "C": "Xray",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Seeding'?",
+    "options": {
+      "A": "Planting physical seeds in the office garden.",
+      "B": "Intentionally introducing known defects into a system to evaluate the effectiveness of the testing team and tools.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Parallel' 'Test' 'Execution'?",
+    "options": {
+      "A": "Running multiple test cases simultaneously on different nodes to reduce total execution time.",
+      "B": "Executing a person in a parallel dimension.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' refers to a strategy that uses a high-performance SSD for test results but a low-speed tape drive for the application database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant failure notifications via Slack/Email",
+      "B": "Consistent metric presentation for stakeholders",
+      "C": "Guaranteed to replace all QA managers",
+      "D": "Historical trend analysis of release health"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Heuristic' Testing?",
+    "options": {
+      "A": "Testing with actual radioactive atoms.",
+      "B": "An experience-based testing approach that uses common rules of thumb to find usability and logic issues.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for critical defects?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a critical failure occurring in an automated run and the notification being delivered to the team.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a testing tool attempt to use HTTP/2 headers to test a legacy server that only supports HTTP/1.0.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Environment' 'Provisioning'? (Select all that apply)",
+    "options": {
+      "A": "Spinning up a clean database for every test run",
+      "B": "Using Docker to ensure consistent runtime environments",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Tearing down infrastructure after a test suite completes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Combinatorial' Testing?",
+    "options": {
+      "A": "Finding all possible combinations of a person's clothes.",
+      "B": "A strategy that tests specific combinations of input parameters to find 'Interaction Defects' efficiently.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Service' 'Virtualization'?",
+    "options": {
+      "A": "Mocking or simulating external services (APIs) that are unavailable or too costly to use during testing.",
+      "B": "Hiring a person named Virtualization.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in a test strategy refer to a global timeout that is set to 30 seconds for all tests, even if some services consistently respond in 60 seconds.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Quality' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Defining 'No-Go' criteria for production releases",
+      "B": "Standardizing testing tools across an enterprise",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Aligning test coverage with corporate risk appetite"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in a testing database?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that the data used by one test thread (e.g., 'User A') does not interfere with the data used by another parallel thread ('User B').",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Regression' 'Failures' (MTBRF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of system stability before a previously fixed bug reappears in the code.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the automation script is using a v2 API while the application has migrated to v3.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Quality' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Quality Officer (CQO)",
+      "B": "Principal SDET",
+      "C": "Head of Release Management",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Fault' 'Tolerance' testing?",
+    "options": {
+      "A": "Testing a person's tolerance for faults.",
+      "B": "Ensuring the system can handle unexpected errors or component failures gracefully without a total crash.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Test' 'Execution' 'Saturation'?",
+    "options": {
+      "A": "When the volume of tests is so high that the CI/CD pipeline becomes the primary bottleneck for software delivery.",
+      "B": "When the server is full of water.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a global 'Implicit Wait' conflicts with a specific 'Explicit Wait', causing the script to wait double the intended time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Scanning code for PII exposure",
+      "B": "Enforcing standard 'Header' security across APIs",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Identifying 'Stale' libraries in the build manifest"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Maintainability' score?",
+    "options": {
+      "A": "Hiring a person to maintain the office.",
+      "B": "The ease with which an automation framework can be updated to support new features without a significant rewrite of old tests.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' 'Degradation'?",
+    "options": {
+      "A": "A metric identifying a steady decrease in successful test completions over several build cycles, indicating declining stability.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when trying to run 100 tests simultaneously on a machine with only 2 CPU cores, causing timing-based failures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Test' 'Data' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Golden Dataset snapshots",
+      "B": "Backdoor API data injection",
+      "C": "In-memory data mocks",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Quality' for a software release?",
+    "options": {
+      "A": "A weighted score including test pass rate, performance score, and remaining 'Open' defect count.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an environment issue?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a 'Blocked' test run until the underlying infrastructure issue is resolved.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a researcher expects a 2024 automated build to complete on hardware from the year 2000 in under 5 minutes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Visual' 'Baseline' 'Management'? (Select all that apply)",
+    "options": {
+      "A": "Updating the 'known-good' image after a deliberate UI redesign",
+      "B": "Ignoring specific dynamic UI regions during comparison",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Enforcing design system consistency across pages"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' orchestration?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The automated initialization of a standardized test environment, reporting tool, and baseline test suite for a new project.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Automation' 'Script' 'Bugs' (MTBSB)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A reliability metric representing how long the automation team's code runs before a script-level bug causes a test failure.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when an automated test fails because it cannot access a protected folder to write a failure screenshot.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the 'Top 5 flakiest tests' over a 30-day period",
+      "B": "Predicting release delays based on current 'Sanity' failure trends",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Analyzing failure patterns to identify common root causes"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in a testing framework migration?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ease with which business logic (e.g., Page Objects) can be moved from an old tool (Selenium) to a new tool (Playwright).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a 'Critical' quality gate failure and the point at which the code is verified as 'Ready for Prod' again.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a web tool is forced to interact with a system that has partially migrated to gRPC without an updated library.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Governance' requirements",
+      "B": "Ensuring E2E scripts cover all regulatory edge cases",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Compliance' if environments lack security"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a modular test design?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring technical interaction details are hidden from the high-level test script to facilitate maintenance.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an application flake?",
+    "options": {
+      "A": "The average duration between the first inconsistent test result and the point where it is officially flagged for investigation.",
+      "B": "The time it takes for a team to have lunch.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when the automation script is using a 2024 library version that is incompatible with the 2018 application framework.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When defining a 'Quality Gate' for a high-frequency microservices deployment, which strategic metric provides the most reliable indicator of 'Release Readiness'?",
+    "options": {
+      "A": "The total count of test cases executed in the sprint.",
+      "B": "A combination of 'Change Failure Rate' (CFR) and 'Mean Time to Recovery' (MTTR) observed during the staging rollout.",
+      "C": "The number of lines of code written by the most senior developer.",
+      "D": "The physical temperature of the server cluster during peak load."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Zero Trust' testing architecture, internal microservices are tested under the assumption that the internal network is compromised, requiring mutual TLS and explicit authorization verification in every test case.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Strangler Fig' pattern strategy for testing a legacy migration project?",
+    "options": {
+      "A": "Stopping all legacy testing and focusing only on the new system features.",
+      "B": "Incrementally replacing legacy functionality with new microservices and using 'Parallel Testing' to compare the output of both systems until the old one is retired.",
+      "C": "Hiring a professional actor to represent the legacy system in meetings.",
+      "D": "Deleting the legacy source code once the new UI is designed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical challenge of 'Distributed State Management' in a global E2E test strategy?",
+    "options": {
+      "A": "The lack of available RAM on the local tester's laptop.",
+      "B": "Ensuring data consistency and synchronization across multiple independent microservice databases when a single user journey spans multiple regions.",
+      "C": "A specialized software for architects to design data centers.",
+      "D": "To increase the frame rate of the reporting dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Quality Planning', what is the 'Pesticide Paradox' and how is it technically mitigated?",
+    "options": {
+      "A": "When physical bugs in the office become immune to cleaning supplies.",
+      "B": "The phenomenon where a static set of tests loses its effectiveness over time; it is mitigated by regular 'Test Case Mutation' and exploratory sessions.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the size of the font on the bug reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAGA Pattern' testing in microservices requires verifying that 'Compensating Transactions' successfully roll back data across all services if a distributed transaction fails mid-way.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Expert' metric is most effective for measuring the 'Technical Debt' of an automated testing framework?",
+    "options": {
+      "A": "Total number of Python scripts in the repo.",
+      "B": "The 'Flakiness Ratio'—the percentage of test failures caused by infrastructure or script synchronization issues rather than application bugs.",
+      "C": "The font size of the pass rate on the executive dashboard.",
+      "D": "The number of hours the QA team works overtime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'Consumer-Driven Contract' (CDC) testing in a decoupled service architecture?",
+    "options": {
+      "A": "To allow consumers to physically sign a contract at the office.",
+      "B": "To ensure that changes in a 'Producer' service do not break the specific expectations defined by its 'Consumer' services without requiring a full E2E run.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Risk-Based Testing' (RBT) calculation variables? (Select all that apply)",
+    "options": {
+      "A": "Probability of failure (Complexity + Churn)",
+      "B": "Impact of failure (Financial + Regulatory + Reputation)",
+      "C": "Historical defect density of the component",
+      "D": "The brand of the developer's keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Kernel' 'Architectures' in testing occur when a performance test is executed on an x86_64 cloud instance while the actual production environment utilizes ARM64-based processors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaos Engineering' in the context of high-level test planning?",
+    "options": {
+      "A": "Letting the testing team do whatever they want without a plan.",
+      "B": "The disciplined practice of injecting controlled failures (e.g., network latency, pod termination) into production to verify system resilience.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Test' 'Sharding' orchestration?",
+    "options": {
+      "A": "Splitting a single monolithic test suite into smaller, independent 'shards' that run in parallel across multiple CI nodes to achieve sub-10 minute feedback.",
+      "B": "Breaking a physical server into pieces.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' strategy helps mitigate 'Flakiness' in asynchronous UI testing for Single Page Applications (SPAs)?",
+    "options": {
+      "A": "Replacing all waits with hard Thread.sleep(10000) calls.",
+      "B": "Implementing 'Event-driven synchronization' where the test tool polls internal framework state (e.g., React/Vue) before performing actions.",
+      "C": "Using only physical hardware for testing.",
+      "D": "Deleting the CSS files to make the UI simpler."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Linearizability' testing in distributed databases ensures that the system behaves as if every operation happened instantaneously at some point between its invocation and completion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Blue-Green' vs 'Canary' testing strategies? (Select all that apply)",
+    "options": {
+      "A": "Blue-Green switches traffic at the router level between two identical environments.",
+      "B": "Canary deployments test a new feature on a small percentage (e.g., 5%) of real users first.",
+      "C": "Blue-Green requires a physical bird in the office.",
+      "D": "Canary testing is part of a 'Shift-Right' strategy."
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Mutation' 'Testing' score and why is it superior to 'Code Coverage'?",
+    "options": {
+      "A": "It measures the speed of the CPU during a test run.",
+      "B": "It measures the percentage of 'mutants' (code changes) that your tests can actually catch, proving the effectiveness of the assertions, not just the execution.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' (MTRS) after a vulnerability is found in testing?",
+    "options": {
+      "A": "The average time it takes for a team to have a lunch break.",
+      "B": "A metric representing the average duration from a security test failure (e.g., DAST) until the verified patch is deployed.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Consistency' 'Models' occur when a tester assumes 'Read-after-Write' consistency in a test plan for a system built on an 'Eventually Consistent' NoSQL database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Non-Functional' testing categories? (Select all that apply)",
+    "options": {
+      "A": "Resilience / Chaos testing",
+      "B": "Observability / Traceability auditing",
+      "C": "Data Privacy (GDPR/PII) verification",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Orthogonal' 'Array' 'Testing' (OAT) efficiency?",
+    "options": {
+      "A": "The ratio of defects found to the physical size of the testing team.",
+      "B": "The ability to cover all pairwise interactions of input parameters with significantly fewer test cases than a full combinatorial approach.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic' planning, what is the 'Shift-Left' impact on 'Total Cost of Quality' (TCoQ)?",
+    "options": {
+      "A": "It reduces the TCoQ by identifying and fixing defects in the requirement or design phase, where they are 10-100x cheaper to resolve than in production.",
+      "B": "It increases the cost because developers are slow at testing.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in testing occurs when the release gate requires '100% Pass Rate' for a suite containing 10% known flaky tests that are out of scope for the current sprint.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Test' 'Data' 'Generation' (TDM) complexities? (Select all that apply)",
+    "options": {
+      "A": "Maintaining referential integrity across 50+ microservice databases",
+      "B": "Masking PII data while preserving its statistical distribution",
+      "C": "Hiring 100 junior developers to type in data",
+      "D": "Synthesizing 'Edge Case' data that rarely occurs in production"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Backward' 'Compatibility' logic for API testing?",
+    "options": {
+      "A": "Walking backward while testing.",
+      "B": "The automated verification that a new API version does not break existing clients by running the old version's test suite against the new version's endpoints.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' 'Index' (RTI)?",
+    "options": {
+      "A": "A percentage representing how many functional requirements have at least one passing test case and one verified automated script.",
+      "B": "The rate at which physical office furniture is changed.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a global CI/CD timeout is set to 5 minutes, while the performance test suite is designed to run for 60 minutes to observe memory leaks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero' 'Trust' 'Testing' principles? (Select all that apply)",
+    "options": {
+      "A": "Never Trust, Always Verify (Every internal call is an attack vector)",
+      "B": "Explicitly testing 'Least Privilege' at the API layer",
+      "C": "Testing with 'Assume Breach' mindset",
+      "D": "Giving all testers root access for convenience"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Quality' 'Debt'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "The estimated man-hours required to bring 'Ad-hoc' or legacy tests up to the organization's current automation and coverage standards.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Escaped' 'Defects' (MTBED)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of production stability before a customer-reported bug is found.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' in testing occurs when 'Quality' logs are stored in a silo that only developers can access, preventing testers from performing root-cause analysis.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Quality' 'Governance' 'Frameworks'? (Select all that apply)",
+    "options": {
+      "A": "TMMi (Test Maturity Model integration)",
+      "B": "ISTQB (Strategic management level)",
+      "C": "ISO/IEC 29119 (Software Testing standard)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Architecture' 'Verification' 'Testing'?",
+    "options": {
+      "A": "Verifying the physical architecture of the office.",
+      "B": "Using tools (like ArchUnit) to automatically enforce that the code follows defined architectural rules, such as 'Layer A cannot call Layer C'.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Synthetic' 'Monitoring' strategy?",
+    "options": {
+      "A": "Using real-world E2E scripts to 'test' production features on a regular schedule (e.g., every 5 mins) to proactively identify outages.",
+      "B": "Hiring a person named Synthetic.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when an automated testing tool is granted 'Full Admin' rights for a test suite that is supposed to verify 'Restricted User' workflows.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Triage' (ART)? (Select all that apply)",
+    "options": {
+      "A": "Using machine learning to automatically categorize bugs by severity",
+      "B": "Automatically assigning bugs to the developer who last touched the affected file",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Prioritizing the re-run of tests in areas with the highest 'Code Churn'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in cross-platform test strategies?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to share the same 'High-level' test logic across Web, Android, and iOS using a common abstraction layer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Feature' 'Traceability' 'Logic'?",
+    "options": {
+      "A": "Traceability of a person named Feature.",
+      "B": "Mapping specific technical test results back to business-level features to provide a 'Capability Health' dashboard for stakeholders.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a testing framework (like Playwright) polls for an element every 10ms while the backend API has a 2-second P99 response time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant availability of 'Time-to-Market' delay risk data",
+      "B": "Consistency in Quality ROI presentation for the Board of Directors",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Reduction in manual spreadsheet tracking for multi-national teams"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a test framework architecture?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing test components (like Page Objects or Screenplays) so that technical selector changes do not require changes to the high-level business test logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Quality' (MTRQ) gate?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a 'Quality Gate' failure and the verified fix being merged, which identifies bottlenecks in the development loop.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an engineering team expects a 2024 AI model to be fully tested on hardware from the year 2010 in under 1 hour.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategy' 'Quality' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Technology Officer (CTO)",
+      "B": "Lead Quality Architect",
+      "C": "Head of Release Engineering",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Quality' 'Bootstrap' orchestration for new business units?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of pre-configured testing tools, CI pipelines, and reporting templates used to rapidly establish high quality standards for a new team.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'Release' 'Confidence' 'Score'?",
+    "options": {
+      "A": "A weighted score that includes automated pass rate, manual UAT feedback, and remaining 'High' severity technical debt.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occur when an enterprise testing suite is set to 'DEBUG' level in production-like staging, leading to millions in excess cloud logging costs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Analytics' in testing? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Hotspots' in the code that have the highest failure frequency",
+      "B": "Predicting software release dates based on 'Bug Burn-down' trends",
+      "C": "Guaranteed to replace all human project managers",
+      "D": "Analyzing test run history to identify 'Stable' vs. 'Flaky' tests"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in a cloud test environment?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Using multi-tenant logic or database schema isolation to ensure that different test teams do not overwrite each other's data.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a quality regression?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an automated test failure and the initial notification being received by the on-call engineer.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a 2024 test tool attempts to use gRPC to verify a legacy mainframe system that only supports SOAP/XML.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Blocking deployments if critical security vulnerabilities are found",
+      "B": "Enforcing 90% unit test coverage as a hard gate",
+      "C": "Guaranteed to replace all manual auditors",
+      "D": "Identifying 'Stale' third-party libraries in the build manifest"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' significance in testing tool migration?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which automation logic (like Page Objects) can be reused when moving from an old framework (Selenium) to a new one (Cypress).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a high-priority bug?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between the code commit that introduced the bug and the point where it is officially identified as a defect by a test or reviewer.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in test strategy occur when the business expects 'Instant Regression Testing' while utilizing a legacy manual testing process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategy' 'Quality' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Quality Architect",
+      "B": "Continuous Testing Lead",
+      "C": "External Compliance Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Strategy' 'Bootstrap' complexity for multi-region teams?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical difficulty of standardizing a test strategy across global teams with different timezones, toolsets, and local regulatory requirements.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Releases' (MTBR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the frequency of successfully verified software releases to production.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated test expects an 'Instant' response from a system that is currently performing a 'Large Batch Data Integration'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Strategy' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Real-time visibility into 'Quality Attrition' trends",
+      "B": "Consistency in Quality ROI presentation for the executive team",
+      "C": "Guaranteed to replace all human QA managers",
+      "D": "Reduction in manual administrative work for SDETs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a 'Screenplay' pattern?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring the 'How' of testing (technical implementation) is separated from the 'What' (business tasks), improving test readability and reuse.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) by bug priority?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "A metric track tracking how much faster 'Critical' blockers are resolved compared to 'Low' priority UI defects.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a test strategy requires 100 parallel workers but the underlying test environment only supports 5 simultaneous DB connections.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Verification' 'Gates'? (Select all that apply)",
+    "options": {
+      "A": "Automatically failing a build if PII is detected in test logs",
+      "B": "Verifying that all API endpoints meet mandatory encryption standards",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Blocking deployments if the SBOM (Software Bill of Materials) contains insecure licenses"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' 'Fidelity' in test refactoring?",
+    "options": {
+      "A": "The fidelity of a person name Code.",
+      "B": "How accurately the intended business logic of a test is preserved when moving from a legacy manual test script to a modern automated one.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) an anomaly in production?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the first signal of an unusual system behavior until it is officially identified as a quality regression by the SRE team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in a test strategy environment occur when a 'Third-party' API used for testing is running a newer version than the one supported by the production system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategy' 'Quality' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Quality Engineering Director",
+      "B": "Principal SDET",
+      "C": "Director of DevOps / Platform Engineering",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Quality' 'Ecosystem' 'Orchestration'?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of all testing tools, environments, data, and cultural practices to ensure a seamless continuous delivery pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  }
+  ]
+}

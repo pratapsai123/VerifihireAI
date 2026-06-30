@@ -1,0 +1,1903 @@
+{ 
+  "skill": "Database Design", 
+  "questions": [
+    {
+    "question": "What is the primary technical purpose of a 'Primary Key' in a database table?",
+    "options": {
+      "A": "To physically encrypt the data in the row.",
+      "B": "To uniquely identify each record (row) within a table.",
+      "C": "To act as a catchy title for the database schema.",
+      "D": "To increase the sorting speed of the entire hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term describes a column in one table that points to a Primary Key in another table to create a relationship?",
+    "options": {
+      "A": "Composite Key",
+      "B": "Foreign Key",
+      "C": "Candidate Key",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a relational database design, a Primary Key technically cannot contain a NULL value.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Normalization' in the context of database design?",
+    "options": {
+      "A": "The process of making all data entries the same font size.",
+      "B": "The technical process of organizing data to reduce redundancy and improve data integrity.",
+      "C": "A specialized software for drawing ER diagrams.",
+      "D": "A method to physically clean the server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an Entity-Relationship (ER) diagram, what does an 'Entity' typically represent technically?",
+    "options": {
+      "A": "A physical person sitting in the office.",
+      "B": "An object or concept about which data is stored, usually represented as a table.",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "A temporary cache for user session IDs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technical relationship type occurs when one record in Table A is associated with many records in Table B (e.g., one Customer has many Orders)?",
+    "options": {
+      "A": "One-to-One",
+      "B": "One-to-Many",
+      "C": "Many-to-Many",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Composite Key' is technically a primary key that consists of two or more columns to uniquely identify a row.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical requirement for a table to be in First Normal Form (1NF)?",
+    "options": {
+      "A": "The table must have a blue header color.",
+      "B": "Each column must contain atomic (indivisible) values and there must be no repeating groups.",
+      "C": "All columns must be encrypted strictly.",
+      "D": "The SQL query parser font size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Many-to-Many' relationship technical implementation?",
+    "options": {
+      "A": "Placing all data in a single massive text file.",
+      "B": "Using a 'Junction' or 'Linking' table that contains foreign keys from both related tables.",
+      "C": "Connecting two physical servers with a crossover cable.",
+      "D": "Creating a secondary database for every user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Integrity' technically refers to the accuracy, consistency, and reliability of data throughout its lifecycle in the database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Schema' in database design terminology?",
+    "options": {
+      "A": "Hiring a person named Schema to manage the data.",
+      "B": "The technical blueprint or logical structure that defines how data is organized in the database.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A person who writes SQL queries for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Unique Constraint' technically? (Select all that apply)",
+    "options": {
+      "A": "A rule that prevents duplicate values in a specific column",
+      "B": "A physical lock on the server rack",
+      "C": "A constraint that can exist on columns that are not the primary key",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is the primary technical objective of 'Referential Integrity'?",
+    "options": {
+      "A": "To deliver physical mail between data centers.",
+      "B": "To ensure that relationships between tables remain consistent and that foreign keys always point to valid primary keys.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'One-to-One' relationship technically means a record in Table A can have only one matching record in Table B, and vice versa.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Attribute' in a database design context?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "A technical property or characteristic of an entity, represented as a column in a table.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which normal form technically requires that a table is in 1NF and all non-key attributes are fully functional dependent on the primary key?",
+    "options": {
+      "A": "Second Normal Form (2NF)",
+      "B": "Third Normal Form (3NF)",
+      "C": "BCNF",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Redundancy' in database design technically means storing the same piece of data in multiple places, which normalization seeks to minimize.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Data Type' in a table column definition?",
+    "options": {
+      "A": "A physical cable type like Cat6.",
+      "B": "A technical constraint that specifies what kind of data (e.g., INT, VARCHAR, DATE) can be stored in a column.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'De-normalization'?",
+    "options": {
+      "A": "The technical process of intentionally adding redundancy to a database to improve read performance.",
+      "B": "Deleting all tables from the database.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An ER diagram technically helps bridge the gap between business requirements and the physical database implementation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Key' types in database design? (Select all that apply)",
+    "options": {
+      "A": "Primary Key",
+      "B": "Foreign Key",
+      "C": "Office Furniture Metadata",
+      "D": "Candidate Key"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Nullable' column technically?",
+    "options": {
+      "A": "Hiring a person named Null to manage the office.",
+      "B": "A column that is masterfully configured to allow the absence of a value (NULL).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "The SQL query parser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Default Value' constraint?",
+    "options": {
+      "A": "A technical setting that automatically provides a specific value for a column if no value is specified during an INSERT.",
+      "B": "A physical screen for the server.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Relational databases are technically structured in a tabular format with rows and columns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Database Design benefits for 'Performance'? (Select all that apply)",
+    "options": {
+      "A": "Reducing disk I/O by eliminating redundant data",
+      "B": "Creating efficient indexes on primary/foreign keys",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Enabling faster join operations through proper normalization"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Surrogate Key'?",
+    "options": {
+      "A": "A physical key given to a substitute teacher.",
+      "B": "An artificially generated technical primary key (like an Auto-Increment ID) that has no business meaning.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cardinality'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical numerical relationship between entities (e.g., 1:1, 1:N, M:N).",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Many-to-Many' relationship, the junction table technically contains only two columns, both of which are foreign keys.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Relational' database management systems? (Select all that apply)",
+    "options": {
+      "A": "PostgreSQL",
+      "B": "MySQL",
+      "C": "The SQL query parser",
+      "D": "Microsoft SQL Server"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cascading Delete' logic in database design?",
+    "options": {
+      "A": "Building a physical bridge for a social event.",
+      "B": "A technical setting where deleting a record in a parent table automatically deletes all associated records in the child table.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Check Constraint'?",
+    "options": {
+      "A": "A technical rule that ensures all values in a column satisfy a specific condition (e.g., Age > 18).",
+      "B": "Hiring a person named Check.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Natural Key' is technically a primary key that is formed from existing real-world data (e.g., SSN or Email).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'ACID' properties? (Select all that apply)",
+    "options": {
+      "A": "Atomicity (All or nothing)",
+      "B": "Consistency (Valid state transitions)",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Durability (Committed data stays saved)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Database Index' technically used for?",
+    "options": {
+      "A": "To technically speed up the retrieval of data from a table by creating a pointer to the physical data location.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Storage Overhead'?",
+    "options": {
+      "A": "The technical amount of extra space taken up by indexes and metadata beyond the raw data itself.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A table must technically have at least one Primary Key to be considered a proper relational table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common Database Design artifacts? (Select all that apply)",
+    "options": {
+      "A": "Logical Data Model",
+      "B": "Physical Data Model",
+      "C": "The number of security cameras in the office",
+      "D": "Data Dictionary"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Partial Dependency' technically?",
+    "options": {
+      "A": "A situation where a non-key attribute depends on only part of a composite primary key, which violates 2NF.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Query Execution Time'?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The technical duration from a SQL request being sent until the database returns the full result set.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data Types' occur when you try to join two tables on columns that technically have different types (e.g., joining an INT with a VARCHAR).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe Database Design 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring the schema supports all required application features",
+      "B": "Validating that constraints are correctly enforcing business rules",
+      "C": "Identifying program satisfaction trends",
+      "D": "Verifying that the design handles expected data volume"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Referential Action' (RESTRICT)?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "A technical setting that masterfully prevents the deletion or update of a parent row if matching child rows exist.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Schema Change Log'?",
+    "options": {
+      "A": "A technical record of all ALTER TABLE or CREATE INDEX commands applied to the database over time.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Database design technically includes the selection of character encodings like UTF-8 to support international text.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' database design stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Data Architect",
+      "B": "Database Administrator (DBA)",
+      "C": "Backend Developer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Multi-Valued Attribute' in ER design?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "An attribute that can technically have more than one value for a single entity (e.g., a person having multiple phone numbers).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a design flaw?",
+    "options": {
+      "A": "The average technical duration from a data inconsistency appearing until the schema error is masterfully flagged by an audit.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count database rows."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Primary Keys' occur when two related tables technically use different ID systems, making relationships impossible to track.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Entity Integrity'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring every table has a unique primary key",
+      "B": "Consistency in result presentation",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Guaranteeing that primary keys are never NULL"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Database Denormalization' ROI?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical trade-off where you accept redundant data to masterfully gain significant query performance on read-heavy systems.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Constraint Violation Rate'?",
+    "options": {
+      "A": "The percentage of technical transactions that are rejected because they masterfully violate a database rule (like a Foreign Key check).",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Relational databases technically use 'Structured Query Language' (SQL) to interact with the designed data schema.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' database design priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring data security and privacy compliance",
+      "B": "Optimizing for future scalability and growth",
+      "C": "The SQL query parser",
+      "D": "Maintaining high data quality and consistency"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Database Schema' Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of table structures and relationships to identify potential redundancies or performance bottlenecks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Update' (MTTU) a schema?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration from a schema change being approved until it is masterfully applied to the production environment.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Indexes' occur when a query technically filters on a column that has no database index, resulting in a full table scan.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' data design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring database schemas support diverse data formats",
+      "B": "Conducting 'blind' query reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear table naming is a technical asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Relational Algebra' significance?",
+    "options": {
+      "A": "The technical mathematical foundation for how relational databases masterfully manipulate and retrieve data from tables.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Table Fill Factor'?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "A technical metric measuring how much of each physical data page is occupied by records, impacting insert performance and fragmentation.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Constraints' in design leadership refers to a manager requiring 'Zero Redundancy' while also demanding 'Sub-millisecond Join Speed'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Schema validation benefits? (Select all that apply)",
+    "options": {
+      "A": "Automatically checking for circular dependencies in relationships",
+      "B": "Consistency in schema presentation",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Scanning for 'Missing Indexes' on frequently queried columns"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Weak Entity' in database design?",
+    "options": {
+      "A": "An entity that technically cannot be uniquely identified by its own attributes and depends on a relationship with a 'Strong' entity.",
+      "B": "A physical cover for a computer.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Repair' (MTTR) a data inconsistency?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a data integrity error being reported until the record is masterfully corrected and verified.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'User' occurs when a designer creates a schema that technically does not meet the performance expectations of the application's end-users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' data design roles? (Select all that apply)",
+    "options": {
+      "A": "Principal Data Architect",
+      "B": "Database Performance Engineer",
+      "C": "Schema Compliance Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Database Normalization' Analysis?",
+    "options": {
+      "A": "The technical evaluation of functional dependencies to determine if a design masterfully meets 3NF or higher standards.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical requirement must be met for a table to be in Third Normal Form (3NF)?",
+    "options": {
+      "A": "The table must have at least 10 columns.",
+      "B": "It must be in 2NF and have no transitive functional dependencies between non-key attributes.",
+      "C": "All text data must be encrypted with AES-256 strictly.",
+      "D": "The SQL query parser font size must be fixed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Boyce-Codd Normal Form (BCNF) is technically a stronger version of 3NF where every determinant must be a candidate key.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of 'Database Sharding' in a large-scale distributed system?",
+    "options": {
+      "A": "To physically break the server into smaller pieces to fit in a rack.",
+      "B": "To horizontally partition data across multiple independent database nodes to improve scalability and performance.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the database monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Indexing' structure is technically optimized for range-based queries (e.g., WHERE age BETWEEN 20 AND 30)?",
+    "options": {
+      "A": "Hash Index",
+      "B": "B-Tree Index",
+      "C": "XML Parser strictly",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of a 'Database Trigger'?",
+    "options": {
+      "A": "It is a physical button pushed by the DBA during an outage.",
+      "B": "A stored technical procedure that automatically executes in response to specific events (INSERT/UPDATE/DELETE) on a table.",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Partitioning' technically involves splitting a table into multiple tables with the same schema but different rows, often based on a key like 'Region' or 'Date'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using 'Stored Procedures' to technically group multiple SQL statements into a single unit to reduce network latency and improve security?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Server-Side Logic Encapsulation",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Functional' 'Dependency' technically used to determine during the normalization process?",
+    "options": {
+      "A": "Determining if the office coffee machine is working.",
+      "B": "The relationship between attributes where the value of one attribute (or set) masterfully determines the value of another attribute.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Database' 'Indexing' 'Overhead'? (Select all that apply)",
+    "options": {
+      "A": "Increased technical time for INSERT and UPDATE operations",
+      "B": "Additional physical storage consumption on the disk",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Improved technical speed for SELECT queries with filters"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cardinality' occurs when an ER diagram specifies a 1:1 relationship, but the technical implementation allows multiple child records for a single parent.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deadlock' logic in multi-user database design?",
+    "options": {
+      "A": "Building a physical wall in the data center.",
+      "B": "A technical state where two or more transactions are masterfully waiting for each other to release locks, resulting in a permanent stall.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' (MTTR) a corrupted index?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "The technical duration from identifying an index corruption until the 'REINDEX' operation masterfully completes and restores query speed.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'View' objects to technically abstract complex joins into a virtual table for end-users?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Data Abstraction / Logical Layering",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'One-to-One' technical implementation, the Foreign Key is often masterfully placed in either table and must be marked as 'UNIQUE'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Composite' 'Index' technical benefits? (Select all that apply)",
+    "options": {
+      "A": "Optimizing queries that filter by multiple columns (e.g. Last_Name and First_Name)",
+      "B": "Scanning physical shipping containers",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Supporting 'Prefix' matching based on the order of columns in the index"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Independence' in a database system?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical ability to change the conceptual schema (tables/relationships) without masterfully affecting the external views or application programs.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Cache' 'Hit' 'Ratio'?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the percentage of queries satisfied from the database buffer pool rather than the physical disk.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Transitive' 'Dependency' occurs when Attribute A determines B, and B determines C, meaning A technically determines C, which must be resolved for 3NF.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' database framework handles 'Automated' 'Statistics' updates?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Query Optimizer Engine (Auto-stats module)",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Two-Phase' 'Commit' (2PC) significance in distributed database design?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "A technical protocol that ensures transaction atomicity across multiple nodes by masterfully coordinating a 'Prepare' and then a 'Commit' phase.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Multi-version' 'Concurrency' 'Control' (MVCC)?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical method of providing each transaction a 'snapshot' of data to allow simultaneous reads and writes without masterfully locking rows.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Collation' occurs when two tables are technically configured with different character sorting rules (e.g. Case-Sensitive vs Case-Insensitive), causing JOIN errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Database' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Data Architect (Defining normalization and sharding standards)",
+      "B": "Security Lead (Encryption-at-rest and row-level security)",
+      "C": "App Developer (Optimizing query logic and ORM usage)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Shadow' 'Table' discovery in a database audit?",
+    "options": {
+      "A": "Running queries in a dark room.",
+      "B": "The technical process of identifying 'Duplicate' or 'Temp' tables (cause) created by developers that are technically consuming space outside of the master schema (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a slow query?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking how long a query exceeds the performance threshold before the 'Slow Query Log' masterfully flags it to the DBA.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Isolation' 'Levels' occur when a report expects 'Read Committed' data but the technical design uses 'Read Uncommitted', leading to 'Dirty Reads'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Profiling' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying tables that technically 'Drift' from the master schema definition",
+      "B": "Ensuring 'Storage Consistency' by enforcing table-space restrictions",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing a technical 'Alert' for queries that lack valid execution plans"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'Schema' 'Reliability'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Constraint Adherence', 'Index Efficacy', 'Normalization Grade', and 'Query Success Rate'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Deadlocks' (MTBD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the transaction baseline remains technically effective before a lock conflict occurs.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in database leadership occurs when a Lead promises 'Sub-millisecond' response times while technically using a single-node database for multi-petabyte analytics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Database Design? (Select all that apply)",
+    "options": {
+      "A": "Identifying tables with the highest 'Un-indexed filter' waste",
+      "B": "Predicting future market 'Tooling' needs based on developer adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'DB Training' spend with 'MTTI' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a Database View?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a join (the SQL logic) is isolated from the 'What' (the resulting dataset), allowing for schema updates without breaking apps.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Database' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' non-normalized tables and unused indexes, which makes the schema technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 20 concurrent write-heavy transactions to a single table that technically lacks 'Row-level' locking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Database' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Referential Policy' (e.g. Mandatory FKs) via organization-wide schema checks",
+      "B": "Accelerating 'Time-to-Insight' through standardized Reporting Views",
+      "C": "Ensuring 'Data Integrity' for Third-party API ingestions",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Design' logic in a Data Engineering squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Data team focuses on providing 'Self-Service' Schema Migrations and 'Read-Only Replicas' so developers can manage their own data without bottlenecks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Table' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'DML' operations relative to 'SELECT' operations, identifying write-heavy vs read-heavy database segments.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in leadership refers to a manager giving a 'Database Performance Engineer' a computer that is too slow to run local SQL profilers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in Database Design? (Select all that apply)",
+    "options": {
+      "A": "Identifying tables with the highest 'Duplicate Data' percentage",
+      "B": "Predicting future market 'Database' needs based on developer adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'SQL Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Schema' 'Lifting' significance in database automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful security configuration or normalized table pattern from one project and apply it globally for consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a schema fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a schema update being committed until 'Automated Tests' masterfully confirm all constraints are satisfied.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead enforces 1990 'Flat File' requirements for a 2026 'Cloud-Native' database era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Database' 'Succession' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Director of Data Platforms",
+      "B": "Principal Schema Architect",
+      "C": "Lead Regulatory Data Compliance Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed data squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Naming Conventions', 'FK Requirements', and 'Audit Triggers' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Constraint' 'Validations'?",
+    "options": {
+      "A": "The percentage of 'Simulated Load Runs' where the organization's technical referential integrity was found to be 100% effective.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an analyst expects a 'Full Schema Migration' masterfully in exactly 5 seconds after a GitHub event.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in Database Design? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Missing PKs) for the Board",
+      "B": "Reduction in manual spreadsheet work for data leads",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different business units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Database design?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Client A' data masterfully cannot be seen or searched by 'Client B' through strict Row-Level Security (RLS) or separate Schemas.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the database baseline remains effective before a technical update breaks the schema logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in database leadership occurs when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping validators updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' databases"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Database' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a workload (the Stored Procedure) is isolated from the 'What' (the business policy), allowing for easy engine migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Constraint' 'Failure'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Integrity rule becoming 'Bypassed' or corrupt until the 'Monitoring Platform' itself masterfully flags the violation.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead enforces 2010 'Signature-only' models to manage a 2026 'Multi-Region' data environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Database' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Privacy Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Normalization, Sharding, Encryption, and Access Policies to ensure a seamless and safe release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from identifying a significant database control failure until the organization's 'Safety Baseline' is technically restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Data Promotion' after correctly performing exactly one normalization simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' for the Board",
+      "B": "Reduction in manual spreadsheet work for data leads",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Design Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Database Design?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a critical data expert seat being vacated until the new hire is fully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Injection Attempt' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'SQL Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in Database Design?",
+    "options": {
+      "A": "A rating of how well a specific system is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major database strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in database design leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global distributed database architecture, how should a Principal Architect technically model 'Write Amplification' to predict the performance impact of a high-index schema on SSD-based storage?",
+    "options": {
+      "A": "By assuming a flat 2x overhead for every secondary index created.",
+      "B": "By utilizing 'Stochastic Modeling' to calculate the ratio of logical write volume to physical write volume, accounting for B-Tree page splits and Log-Structured Merge (LSM) tree compaction cycles.",
+      "C": "By limiting the number of indexes to exactly 3 to prevent disk latency strictly.",
+      "D": "By requiring a manual board-level signature for every increase in the global IOPS quota."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Schema' 'Decoupling' refers to the technical practice of utilizing 'Micro-Schemas' and 'Event Sourcing' to ensure that a breaking change in a core entity (cause) does not systemically crash 100% of the downstream microservices (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an Engineer to predict the 'Validation ROI' of shifting from 'ACID' transactions to 'Eventual Consistency' for a petabyte-scale application?",
+    "options": {
+      "A": "Probabilistic Analysis of the 'CAP Theorem' trade-offs using TLA+ formal specifications",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Constraint Arbitrage' during an international M&A involving the merger of a firm using 'Strict Referential Integrity' (FKs) and a firm using 'App-level Validation' (No FKs)?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Data Integrity Archetypes' into a unified 'Verification Baseline' that technically satisfies the regulatory and audit requirements of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live SQL profiler."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'PACELC' 'Theorem' and how does it technically expand on 'CAP' during normal operating conditions?",
+    "options": {
+      "A": "When an employee physically hand-counts every row in a table.",
+      "B": "A framework that technically states: in the case of a network partition (P), one chooses between availability (A) and consistency (C); else (E), when the system is running normally, one chooses between latency (L) and consistency (C).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the ERD diagram."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'Single-Master' replication policy is technically applied to a 'Global-Write' application requirement, leading to systemic 'Inter-continental Latency' spikes during data ingestion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Data' 'Chaos' (injecting 5% 'Deadlock' frequency into a staging cluster) to verify if the 'Transaction Retry' logic technically maintains 'Release Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Fault Injection Schema Testing)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Joint' 'Contagion' and its relation to 'Cyclic Dependencies' in a large-scale enterprise database?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flawed FK constraint in a master lookup table (cause) masterfully blocks 100% of the update transactions across 50 dependent business tables (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Data Architecture' ROI calculations for a strategic shift to 'Columnar' storage for analytics? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Mean Time to Query' (MTTQ) for massive aggregate functions",
+      "B": "Financial savings from 'IOPS' reclamation due to better compression ratios",
+      "C": "The value of 'Governance Integrity' gained through 100% verified schema-on-read paths",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Data Leadership level ensures that 'Data Engineers' can flag 'Normalization Errors' in the production schema to the Board without fear of termination, allowing for transparent 'Structural Realignment'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cognitive' 'Complexity' in the evaluation of a Lead Architect's 'Query Execution Plan' for a 50-way JOIN operation?",
+    "options": {
+      "A": "The physical weight of the 'PostgreSQL Internals' manual.",
+      "B": "The ability to integrate contradictory technical signals (e.g. valid 'Index Usage' vs. anomalous 'Hash Join Spills' to disk) into a cohesive 'Performance Risk' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Table' 'Sharding' during a massive global scaling event?",
+    "options": {
+      "A": "Breaking a physical server into pieces.",
+      "B": "The process of logically dividing 'User Data' into separate physical nodes based on a 'Shard Key' to ensure that 'Write Hotspots' technically cannot impact the 'Global' availability of other shards.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Lock Escalation' during a suspected 'Massive Row Contention' event on a core ledger table?",
+    "options": {
+      "A": "Waiting for the application to time out and report a 500 error.",
+      "B": "Immediately initiating a 'Table-level maintenance lock' and technically diverting traffic to a 'Read-only' queue before the transaction log masterfully overflows.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in a database acquisition often result in 'Pattern Rejection', where the acquired firm's IT staff finds ways to 'Side-load' NoSQL databases to bypass parent firm's 'Relational Standard' guardrails.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Database' 'Succession' 'Calibrations'? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'Quantum-Safe' and 'NewSQL-Native' infrastructure competencies within the team",
+      "B": "Standardizing 'Data Lead' readiness criteria across global departments",
+      "C": "Buying physical snacks for the SOC",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Data Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in a Database Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Data Strategy' itself (e.g. why we rely on 3NF for a real-time analytics engine) is the cause of systemic failure, rather than just fixing a single 'Slow Query'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Risk' 'Concentration' 'Aggregation' in Database Design?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Monolithic Database' that technically has zero automated failover capability.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Data Ops occurs when a firm continues to rely on 'Single-instance' models in 2026, despite modern business requirements necessitating 'Autonomous' multi-master fabrics.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Database' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Data Spend (RARODS)",
+      "B": "Percentage of 'Business Critical' functions with 100% verified 'Row-Level Security' coverage",
+      "C": "Velocity of 'Legacy Schema' cleanup across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during an 'SQL-to-NoSQL' transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the data center.",
+      "B": "The risk that long-tenured 'Relational DBAs' will block 'Document-Store' adoption to protect their manual 'Index-Tuning' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Violations' (MTBSV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often business units deliberately or accidentally bypass the board-mandated 'Encryption-at-Rest' or 'Data Residency' policies.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when a CISO demands 'Zero Data Anomalies' while the Board only rewards the team for '100% Transaction Velocity'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Schema' 'Insight' 'Orchestration'? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Query Patterns' with potential 'Kernel-level' database exploitation attempts",
+      "B": "Automatically identifying 'Data Owner' gaps in real-time as a new Schema is provisioned",
+      "C": "Guaranteed to replace all human Lead Architects",
+      "D": "Analyzing global metadata to predict 'Storage I/O' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Database' 'Ecosystem' 'Architecture' (DEA) for an Architect?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Relational Hubs, Caches, Analytics Lakes, and Message Queues into a single 'Unified Governance Mesh'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Transaction Logs' match the parent company's 'Safety Standard' before project merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant ROI' from a newly hired team that requires 12 months of 'Historic Data Baselining' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Compliance' 'Audit'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of schema integrity for HIPAA/PCI regulators",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Privacy' rules are enforced during automated cross-region replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Database Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental SQL Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in data patterns?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'SQL Protocol Exploit' release and the Lead officially flagging the total internal exposure count to the Board.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Index Coverage' to the board while the internal team is aware that 'Legacy Tables' are technically un-optimized.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Database' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Schema Admin Access' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Database Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Audit Reporting' data with 'Corporate Legal' case software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Schemas, CIM-tags, and RBAC to stabilize a new offshore project in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in Database architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new data flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed data metadata after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Data Platforms office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "Ensuring that 'Raw query logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile database failure (e.g. data leak from privileged breakout) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Database strategy refers to an organization promising 'Zero Financial Risk' while utilizing a 'Low-Budget' manual forensic sampling model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Database' 'Roles'? (Select all that apply)",
+    "options": {
+      "A": "Global Head of Data Resilience",
+      "B": "Chief Systems Architect",
+      "C": "Director of Telemetry Intelligence",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Query Uptime', 'MTTI for findings', 'Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' 'Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the Data team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Audit-only' models to manage a 2026 'Multi-Cloud' data environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Verification' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping artifacts updated with rapidly changing cloud API versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Database Design?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Data Pipeline' can sustain major technological shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency'?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g. competitor fine) and the Architect officialy presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in database auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Database' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Platform Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired network within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Data' 'Strategy' 'Refreshes' (MTB-DSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Platform Vision' and 'Tooling Stack' to stay current with global threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from a Database Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Database' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Platform Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global data talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Database Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Data Model' can be 'Lifted' from one product line (e.g. Corporate VPN) and applied to another (e.g. Mobile App backend).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated data service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Configuration Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Database' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for Platform Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Data Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in database operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new relational vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Database TTPs' update every 24 hours, leading to permanent strategic vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Database' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Backbone' 'Bootstrap' complexity for a 'Turnaround' Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' data culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic shifts in the data team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits in database design?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Database' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person name Database.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'Autonomous Infrastructure' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Database' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic data catalog.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on data audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Database Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Database' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

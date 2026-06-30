@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Compliance", 
+  "questions": [
+    {
+    "question": "What does the 'Compliance' function primarily ensure in an organization?",
+    "options": {
+      "A": "That employees are working exactly 8 hours a day.",
+      "B": "That the organization adheres to relevant laws, regulations, and internal policies.",
+      "C": "That the company is using the most expensive software available.",
+      "D": "That all data is deleted every 30 days regardless of its importance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR (General Data Protection Regulation) is a regulation that applies to the protection of personal data for individuals within the European Union.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the company is headquartered in Europe",
+      "D": "Only for government-owned data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which compliance framework specifically targets the security of credit card transactions?",
+    "options": {
+      "A": "HIPAA",
+      "B": "PCI DSS",
+      "C": "SOC 2",
+      "D": "FERPA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In compliance terminology, what is 'PII'?",
+    "options": {
+      "A": "Public Internet Information",
+      "B": "Personally Identifiable Information",
+      "C": "Private Internal Interaction",
+      "D": "Permanent Integrated Identity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary focus of the HIPAA regulation?",
+    "options": {
+      "A": "The protection of financial records.",
+      "B": "The privacy and security of protected health information (PHI).",
+      "C": "The safety of physical office buildings.",
+      "D": "The encryption of video game data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal Audit' is conducted by a third-party firm to provide an official certification.",
+    "options": {
+      "A": "False (Internal audits are conducted by the organization's own staff or hired consultants for internal review).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if requested by the government"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Compliance Policy'?",
+    "options": {
+      "A": "A high-level document that outlines the organization's requirements and expectations for behavior.",
+      "B": "A step-by-step instruction manual for fixing a server.",
+      "C": "A list of all employee salaries.",
+      "D": "A technical script that automates backups."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SOC 2 'Trust Services Criteria' focuses on preventing unauthorized access to the system?",
+    "options": {
+      "A": "Availability",
+      "B": "Security",
+      "C": "Confidentiality",
+      "D": "Processing Integrity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ISO 27001 is an international standard for managing information security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for software companies",
+      "D": "Only in the United States"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Due Diligence' mean in a compliance context?",
+    "options": {
+      "A": "Paying all taxes before the deadline.",
+      "B": "Taking reasonable steps to ensure requirements are met and risks are managed.",
+      "C": "Completing all tasks as fast as possible.",
+      "D": "Asking the CEO for permission for every action."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PHI' under HIPAA?",
+    "options": {
+      "A": "Private Home Information",
+      "B": "Protected Health Information",
+      "C": "Personal Hardware Identifier",
+      "D": "Public Health Index"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common penalty for non-compliance with major regulations like GDPR?",
+    "options": {
+      "A": "A verbal warning from the internet provider.",
+      "B": "Significant financial fines and reputational damage.",
+      "C": "Mandatory deletion of the company's website.",
+      "D": "Temporary loss of electricity at the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Compliance and Security are exactly the same thing.",
+    "options": {
+      "A": "False (Security is the practice of protecting assets; Compliance is proving you meet specific requirements).",
+      "B": "True",
+      "C": "Only if using the cloud",
+      "D": "Only for banking applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Data Protection Officer' (DPO)?",
+    "options": {
+      "A": "To repair broken hard drives.",
+      "B": "To oversee an organization's data protection strategy and ensure compliance with GDPR.",
+      "C": "To write the code for database encryption.",
+      "D": "To monitor the physical security guards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Control' policy designed to do?",
+    "options": {
+      "A": "To limit the speed of the internet.",
+      "B": "To ensure that only authorized individuals can access specific systems or data.",
+      "C": "To give everyone in the company administrator rights.",
+      "D": "To track the number of keys on a keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under GDPR, individuals have the 'Right to be Forgotten,' meaning they can request their data be deleted.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they have been a customer for 5 years",
+      "D": "Only for social media accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Whistleblowing' in an organizational context?",
+    "options": {
+      "A": "Using a whistle to signal a fire drill.",
+      "B": "Reporting illegal or unethical activity within an organization.",
+      "C": "Blogging about the company's new products.",
+      "D": "Leaking secret source code to a competitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'Data Minimization'?",
+    "options": {
+      "A": "Compressing all files to the smallest possible size.",
+      "B": "Collecting and keeping only the data that is strictly necessary for a specific purpose.",
+      "C": "Deleting data as soon as it is 24 hours old.",
+      "D": "Using the smallest font possible in privacy notices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Self-Certification' is always enough to prove compliance with federal laws.",
+    "options": {
+      "A": "False (Many regulations require independent third-party audits or validation).",
+      "B": "True",
+      "C": "Only for small businesses",
+      "D": "Only for non-financial data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Gap Analysis' in compliance?",
+    "options": {
+      "A": "Measuring the distance between two servers.",
+      "B": "Comparing current practices against regulatory requirements to identify missing controls.",
+      "C": "Calculating the time between security breaches.",
+      "D": "Finding typos in the employee handbook."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Governance' refer to?",
+    "options": {
+      "A": "The process of electing a CEO.",
+      "B": "The system of rules, practices, and processes by which an organization is directed and controlled.",
+      "C": "A government agency that visits the office.",
+      "D": "Writing code for government websites."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: HIPAA applies only to doctors and hospitals.",
+    "options": {
+      "A": "False (It also applies to health plans and 'Business Associates' who handle health data).",
+      "B": "True",
+      "C": "Only for public health institutions",
+      "D": "Only in the United States"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption's' role in compliance?",
+    "options": {
+      "A": "To make the data impossible to find.",
+      "B": "A common 'technical control' used to protect sensitive data and meet regulatory requirements.",
+      "C": "To bypass the need for a privacy policy.",
+      "D": "To speed up the server's data processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulatory act was created to improve the accuracy of corporate disclosures and prevent accounting fraud?",
+    "options": {
+      "A": "GDPR",
+      "B": "Sarbanes-Oxley Act (SOX)",
+      "C": "The Privacy Act",
+      "D": "The Clean Air Act"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Privacy by Design' means that data protection should be integrated into systems from the very beginning of the development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Compliance Audit'?",
+    "options": {
+      "A": "A meeting to discuss new marketing ideas.",
+      "B": "A formal review to determine if an organization is following specific rules or standards.",
+      "C": "A test to see how fast an employee can type.",
+      "D": "A scan for hardware errors on the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-Disclosure Agreement' (NDA)?",
+    "options": {
+      "A": "A contract where you agree not to tell anyone your password.",
+      "B": "A legal contract that prevents parties from sharing confidential information.",
+      "C": "A way to hide your identity online.",
+      "D": "A database field that is empty."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Breach' always involves a hacker stealing information.",
+    "options": {
+      "A": "False (Breaches can also occur through accidental disclosure or lost hardware).",
+      "B": "True",
+      "C": "Only if more than 10,000 records are taken",
+      "D": "Only if the data was encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow IT' in a compliance context?",
+    "options": {
+      "A": "Using dark mode in the code editor.",
+      "B": "The use of systems or software without explicit approval from the IT or Compliance departments.",
+      "C": "IT support provided at night.",
+      "D": "Encrypting the server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of a 'Physical Control'?",
+    "options": {
+      "A": "Password requirements",
+      "B": "Locked doors and security cameras",
+      "C": "Firewall rules",
+      "D": "Privacy training"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Compliance training for employees is usually a one-time event during onboarding.",
+    "options": {
+      "A": "False (It should be ongoing and updated regularly to reflect new risks and laws).",
+      "B": "True",
+      "C": "Only for senior management",
+      "D": "Only if required by the insurance company"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Record Retention'?",
+    "options": {
+      "A": "Winning a world record for coding.",
+      "B": "The practice of keeping data for a specific period to meet legal or business requirements.",
+      "C": "Deleting all records at the end of every month.",
+      "D": "A way to store data on magnetic tapes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SLA' stand for in a vendor contract?",
+    "options": {
+      "A": "Security Labeling Agreement",
+      "B": "Service Level Agreement",
+      "C": "Software Lifecycle Authorization",
+      "D": "Storage Limit Allocation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under most privacy laws, 'Consent' must be freely given and easy to withdraw.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is a minor",
+      "D": "Only for biometric data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary goal of 'Risk Management'?",
+    "options": {
+      "A": "To eliminate all risks completely.",
+      "B": "To identify, assess, and control threats to an organization's assets and earnings.",
+      "C": "To ignore risks until they become problems.",
+      "D": "To increase the number of insurance policies the company has."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Business Continuity Plan' (BCP)?",
+    "options": {
+      "A": "A plan to hire more employees.",
+      "B": "A roadmap for how a company will continue operating during and after a disaster.",
+      "C": "A spreadsheet showing the company's profit.",
+      "D": "A document describing the company's history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Compliance policies apply to all employees, regardless of their rank.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for those who handle data",
+      "D": "Only for IT staff"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Principle of Least Privilege'?",
+    "options": {
+      "A": "Giving every user administrative access for convenience.",
+      "B": "Ensuring users have only the minimum access level needed to perform their job functions.",
+      "C": "A law that gives special rights to small businesses.",
+      "D": "A way to encrypt passwords using simple numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework is often used for managing 'Service Organizations' and focuses on non-financial reporting?",
+    "options": {
+      "A": "SOC 2",
+      "B": "SOX",
+      "C": "FERPA",
+      "D": "COPPA"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'De-identification' is the process of removing identifiers from a dataset so the data can no longer be linked to an individual.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for medical records",
+      "D": "Only for financial data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Regulatory Body'?",
+    "options": {
+      "A": "A type of fitness equipment.",
+      "B": "A government agency or authority responsible for exercising autonomous authority over some area of human activity.",
+      "C": "A specialized part of the computer's CPU.",
+      "D": "A team within the company that writes code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Conflict of Interest'?",
+    "options": {
+      "A": "A disagreement between two developers about code style.",
+      "B": "A situation where an individual has competing professional or personal interests that could influence their decisions.",
+      "C": "When a computer has two different operating systems installed.",
+      "D": "A bug in the scheduling software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Companies are required by law to report significant data breaches to authorities within a specific timeframe.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the breach was caused by an internal employee",
+      "D": "Only if the breach happened on a weekend"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Evidence' in the context of an audit?",
+    "options": {
+      "A": "A person's opinion about a policy.",
+      "B": "Information used to determine if an organization is meeting its compliance goals (e.g., logs, screenshots, signed policies).",
+      "C": "The name of the auditing firm.",
+      "D": "A high-speed internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Third-Party Risk Management' (TPRM)?",
+    "options": {
+      "A": "Hiring a third developer for a team.",
+      "B": "The process of analyzing and controlling risks presented by vendors and partners.",
+      "C": "Counting the number of servers in a data center.",
+      "D": "A specialized type of encryption for external emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: HIPAA prevents you from ever sharing your own medical records with anyone.",
+    "options": {
+      "A": "False (It regulates how *covered entities* share your data; you have control over your own records).",
+      "B": "True",
+      "C": "Only for patients over the age of 18",
+      "D": "Only in California"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Code of Conduct'?",
+    "options": {
+      "A": "A specialized programming language.",
+      "B": "A set of rules outlining the social norms, religious rules, and responsibilities of an individual or organization.",
+      "C": "A way to format source code for better readability.",
+      "D": "The password for the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulation protects the privacy of student education records?",
+    "options": {
+      "A": "GDPR",
+      "B": "FERPA",
+      "C": "COPPA",
+      "D": "HIPAA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Encryption at Rest' refers to protecting data while it is stored on a disk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud databases",
+      "D": "Only if the computer is turned off"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Standard Operating Procedure' (SOP)?",
+    "options": {
+      "A": "A high-level company mission statement.",
+      "B": "A set of step-by-step instructions compiled to help workers carry out complex routine operations.",
+      "C": "A list of all previous system errors.",
+      "D": "A way to measure the performance of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Identity Management'?",
+    "options": {
+      "A": "Finding a lost passport.",
+      "B": "The security discipline that enables the right individuals to access the right resources at the right times for the right reasons.",
+      "C": "Telling everyone in the company your real name.",
+      "D": "Scanning a driver's license at the front desk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PCI DSS compliance is only required for online stores, not physical ones.",
+    "options": {
+      "A": "False (It applies to any entity that stores, processes, or transmits cardholder data).",
+      "B": "True",
+      "C": "Only if using a mobile card reader",
+      "D": "Only if the store is in the United States"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Cloud Security Alliance' (CSA)?",
+    "options": {
+      "A": "A team of developers who work at AWS.",
+      "B": "A non-profit organization that promotes best practices for security in cloud computing.",
+      "C": "A government agency that regulates cloud prices.",
+      "D": "A type of encryption for cloud storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Audit Logging'?",
+    "options": {
+      "A": "Recording the arrival and departure times of employees.",
+      "B": "The chronological record of system activities used to monitor security and compliance.",
+      "C": "Writing a blog about the auditing process.",
+      "D": "Printing the results of an audit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR applies to any organization in the world if they process data belonging to EU citizens.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the organization has an office in the EU",
+      "D": "Only if using the Euro currency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Internal Control'?",
+    "options": {
+      "A": "Controlling the internal temperature of a laptop.",
+      "B": "A process for assuring an organization's objectives in operational effectiveness and efficiency, reliable financial reporting, and compliance.",
+      "C": "A way to monitor the server's CPU speed.",
+      "D": "The password for the administrator account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Regulatory Risk'?",
+    "options": {
+      "A": "A server breaking due to old age.",
+      "B": "The risk of facing legal or regulatory sanctions and financial loss for failing to comply with laws.",
+      "C": "The risk of a developer quitting the project.",
+      "D": "The risk of a website being slow during peak hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Scan' is used to identify known security weaknesses in a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web applications",
+      "D": "Only if the scan is performed manually"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multi-Factor Authentication' (MFA)?",
+    "options": {
+      "A": "Using two different passwords for the same account.",
+      "B": "A security system that requires more than one method of authentication from independent categories of credentials.",
+      "C": "Telling two people your password for backup.",
+      "D": "Using two different web browsers at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Compliance Framework'?",
+    "options": {
+      "A": "A physical frame for a server rack.",
+      "B": "A structured set of guidelines and best practices that organizations use to manage their compliance and risk.",
+      "C": "A specialized programming language for security audits.",
+      "D": "A database of all past regulatory fines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: All data stored in the cloud is automatically HIPAA compliant.",
+    "options": {
+      "A": "False (The customer must configure the cloud environment and follow specific rules to achieve compliance).",
+      "B": "True",
+      "C": "Only if using AWS or Azure",
+      "D": "Only in the 'standard' cloud tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Classification'?",
+    "options": {
+      "A": "The speed at which data is sent.",
+      "B": "The process of organizing data by relevant categories (e.g., Public, Internal, Confidential) to protect it properly.",
+      "C": "The history of data updates.",
+      "D": "A way to measure the size of a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compliance Monitoring'?",
+    "options": {
+      "A": "Watching a video about compliance rules.",
+      "B": "The continuous process of ensuring that controls are in place and working effectively over time.",
+      "C": "Monitoring the internet speed of the compliance officer.",
+      "D": "Counting the number of times a policy was opened."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Corrective Action' is taken after a non-compliance issue is found to fix the problem and prevent it from recurring.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial errors",
+      "D": "Only in government audits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Legal Hold'?",
+    "options": {
+      "A": "A physical lock on a courthouse door.",
+      "B": "A process that preserves all forms of relevant information when litigation is reasonably anticipated.",
+      "C": "Telling a lawyer to wait for 5 minutes.",
+      "D": "A specialized type of encryption for legal documents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a primary focus of 'Privacy' in GRC?",
+    "options": {
+      "A": "Making sure the servers are hidden from view.",
+      "B": "Protecting individuals' rights regarding their personal information and how it is collected and used.",
+      "C": "Ensuring only the CEO can see the company's profits.",
+      "D": "Monitoring the employee's personal emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a SOC 2 Type II audit, what is the primary factor that distinguishes it from a Type I audit?",
+    "options": {
+      "A": "Type II includes financial records; Type I does not.",
+      "B": "Type II evaluates the operational effectiveness of controls over a period of time (usually 6-12 months).",
+      "C": "Type II is only for public companies; Type I is for private.",
+      "D": "Type II requires the use of a physical auditor on-site for 48 hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under GDPR Article 33, a data controller must notify the supervisory authority of a personal data breach within 72 hours of becoming aware of it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the breach affects more than 1,000,000 users",
+      "D": "Only if the data was unencrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Residual Risk' in the context of a risk assessment?",
+    "options": {
+      "A": "The total risk present before any controls are applied.",
+      "B": "The risk remaining after security controls and mitigation strategies have been implemented.",
+      "C": "The risk associated with a project that has been cancelled.",
+      "D": "The financial cost of a successful cyberattack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Under the HIPAA Omnibus Rule, who shares the same level of liability as 'Covered Entities' for data protection?",
+    "options": {
+      "A": "Individual patients.",
+      "B": "Business Associates (and their subcontractors).",
+      "C": "Hardware manufacturers.",
+      "D": "State government employees only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of a 'FedRAMP' authorization for a cloud service provider?",
+    "options": {
+      "A": "To provide free internet to government employees.",
+      "B": "To ensure a standardized approach to security assessment, authorization, and continuous monitoring for cloud products used by the U.S. government.",
+      "C": "To encrypt all personal emails sent from government servers.",
+      "D": "To monitor the CPU usage of federal data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Qualitative Risk Assessment' uses numerical values and mathematical formulas to calculate the exact monetary loss of a risk.",
+    "options": {
+      "A": "False (That is a Quantitative Risk Assessment; Qualitative uses subjective rankings like Low, Medium, High).",
+      "B": "True",
+      "C": "Only in the ISO 31000 standard",
+      "D": "Only if using AI-driven tools"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which GDPR principle prohibits the collection of personal data for one purpose and then using it for a completely unrelated secondary purpose?",
+    "options": {
+      "A": "Data Minimization",
+      "B": "Purpose Limitation",
+      "C": "Storage Limitation",
+      "D": "Accountability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Safe Harbor' or 'Privacy Shield' replacement for EU-US data transfers that was recently invalidated by the 'Schrems II' ruling?",
+    "options": {
+      "A": "The EU-US Data Privacy Framework",
+      "B": "Standard Contractual Clauses (SCCs)",
+      "C": "Binding Corporate Rules (BCRs)",
+      "D": "None of the above (SCCs are the mechanism, but the framework itself was invalidated)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Zero Trust' architecture, the system assumes that the 'Internal Network' is already compromised.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using a 4096-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Control Gap' in a GRC audit?",
+    "options": {
+      "A": "The distance between two network switches.",
+      "B": "A discrepancy between a regulatory requirement and the actual implementation of a control.",
+      "C": "The time it takes for an admin to respond to a ticket.",
+      "D": "A physical hole in the server room wall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which document is legally required in many jurisdictions to inform users about the data an organization collects and how it is used?",
+    "options": {
+      "A": "User manual",
+      "B": "Privacy Impact Assessment (PIA)",
+      "C": "Privacy Policy / Privacy Notice",
+      "D": "Code of Conduct"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Data Residency' refers to the legal requirement that data must be stored within the geographical borders of a specific country.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in the United States"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inherent Risk'?",
+    "options": {
+      "A": "Risk that is inherited from a parent company.",
+      "B": "The level of risk that exists before any security controls or mitigation actions are taken.",
+      "C": "Risk that only applies to hardware.",
+      "D": "The percentage of employees who fail a background check."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of GRC, what is a 'Compensating Control'?",
+    "options": {
+      "A": "A control that pays employees for working overtime.",
+      "B": "An alternative control put in place when a primary security requirement cannot be met, providing equivalent protection.",
+      "C": "A control that is only active during a disaster.",
+      "D": "A way to automatically delete old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR applies to 'Anonymous Data' where individuals cannot be identified even with additional information.",
+    "options": {
+      "A": "False (GDPR does not apply to truly anonymous data).",
+      "B": "True",
+      "C": "Only if the data is stored in the EU",
+      "D": "Only if the data is used for marketing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'COBIT' framework?",
+    "options": {
+      "A": "To encrypt financial transactions.",
+      "B": "To provide a comprehensive framework for the governance and management of enterprise IT.",
+      "C": "To monitor the temperature of the CPU.",
+      "D": "To manage the payroll of developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HIPAA rule requires covered entities to use 'Technical Safeguards' like encryption and access controls?",
+    "options": {
+      "A": "Privacy Rule",
+      "B": "Security Rule",
+      "C": "Breach Notification Rule",
+      "D": "Enforcement Rule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Third-Party Risk' includes the risk that a vendor's own subcontractors might mishandle your data.",
+    "options": {
+      "A": "True (often called Fourth-Party Risk).",
+      "B": "False",
+      "C": "Only if using SaaS",
+      "D": "Only if the contract is under $10,000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Continuous Compliance'?",
+    "options": {
+      "A": "Taking an audit once every month.",
+      "B": "The process of monitoring and maintaining compliance posture in real-time through automation and constant testing.",
+      "C": "A law that requires 24/7 security guards.",
+      "D": "Deleting all code after it is compiled."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between a 'Regulation' and a 'Standard' in compliance?",
+    "options": {
+      "A": "Standards are mandatory laws; Regulations are optional guidelines.",
+      "B": "Regulations are mandatory laws imposed by governments; Standards are best-practice guidelines often adopted voluntarily (e.g., ISO).",
+      "C": "They are the same thing.",
+      "D": "Regulations only apply to the cloud; Standards apply to on-premises hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under PCI DSS, storing the full contents of the magnetic stripe or CVV2/CVC2 code after authorization is strictly prohibited.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for transactions over $100",
+      "D": "Only if the database is unencrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Qualified Security Assessor' (QSA)?",
+    "options": {
+      "A": "A person who fixes hardware errors.",
+      "B": "An individual certified by the PCI Security Standards Council to perform on-site PCI DSS assessments.",
+      "C": "A lawyer who specializes in GDPR.",
+      "D": "A tool that automatically scans for vulnerabilities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'FISMA' act primarily concerned with?",
+    "options": {
+      "A": "Securing the financial markets.",
+      "B": "Defining security standards for federal agencies to protect government information and assets.",
+      "C": "Protecting the privacy of children online.",
+      "D": "Regulating the internet speed in the U.S."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under GDPR, 'Pseudonymization' is the same as 'Anonymization'.",
+    "options": {
+      "A": "False (Pseudonymization is reversible with a key; Anonymization is permanent).",
+      "B": "True",
+      "C": "Only for medical records",
+      "D": "Only if using SHA-256"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Attestation of Compliance' (AOC)?",
+    "options": {
+      "A": "A test a developer takes to get hired.",
+      "B": "A declaration by an organization that they have met the requirements of a specific standard (commonly used in PCI DSS).",
+      "C": "A backup of all signed policies.",
+      "D": "A way to encrypt the results of an audit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which TRUSTe criteria in SOC 2 focuses on whether the system is available for operation and use as committed?",
+    "options": {
+      "A": "Security",
+      "B": "Availability",
+      "C": "Confidentiality",
+      "D": "Privacy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Risk Register', every identified risk must have a corresponding mitigation plan.",
+    "options": {
+      "A": "True (even if the plan is to 'accept' the risk).",
+      "B": "False",
+      "C": "Only for high-priority risks",
+      "D": "Only if the company has over 50 employees"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Right to Data Portability' under GDPR?",
+    "options": {
+      "A": "The right to move a physical server to another building.",
+      "B": "The right for a user to receive their personal data in a structured, commonly used format to transfer it to another provider.",
+      "C": "The right to delete all data once a year.",
+      "D": "The right to use the internet for free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "The principle that data is subject to the laws and governance of the nation where it is physically located.",
+      "C": "A specialized way to encrypt government data.",
+      "D": "A database field that stores the user's country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Processor' under GDPR is the entity that determines the purposes and means of processing personal data.",
+    "options": {
+      "A": "False (That is the Data Controller; the Processor only acts on behalf of the Controller).",
+      "B": "True",
+      "C": "Only if the processor is a cloud company",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of an 'Ethics Committee' in a GRC context?",
+    "options": {
+      "A": "To write the application code.",
+      "B": "To review and provide guidance on complex moral or legal dilemmas within the organization.",
+      "C": "To monitor the physical security guards.",
+      "D": "To manage the company's marketing budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulatory framework is focused on 'Information Security Management Systems' (ISMS)?",
+    "options": {
+      "A": "SOC 2",
+      "B": "ISO 27001",
+      "C": "NIST CSF",
+      "D": "HIPAA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Organizations can 'Accept' a risk if the cost of mitigation is higher than the potential loss.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for low-priority risks",
+      "D": "Only if the CEO signs off on it"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Privacy Impact Assessment' (PIA)?",
+    "options": {
+      "A": "A test to see how fast an employee can type.",
+      "B": "A process used to identify and minimize the privacy risks of a new project or system.",
+      "C": "A scan for hardware errors on the server.",
+      "D": "A database of all past privacy breaches."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Master Service Agreement' (MSA)?",
+    "options": {
+      "A": "A contract for a master's degree.",
+      "B": "A contract that outlines the foundational terms and conditions for all future transactions between two parties.",
+      "C": "A specialized way to encrypt JSON files.",
+      "D": "A way to monitor the server's uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Standard HIPAA compliance covers all data protection for any US citizen regardless of the data type.",
+    "options": {
+      "A": "False (It specifically covers 'Protected Health Information').",
+      "B": "True",
+      "C": "Only for data stored in the cloud",
+      "D": "Only for citizens over the age of 65"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Segregation of Duties' (SoD) intended to prevent?",
+    "options": {
+      "A": "Employees from being lonely.",
+      "B": "Fraud and error by ensuring no single person has control over all parts of a critical transaction.",
+      "C": "The database from being too large.",
+      "D": "Two developers from writing code for the same feature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'RACI' stand for in a governance context?",
+    "options": {
+      "A": "Responsible, Accountable, Consulted, and Informed",
+      "B": "Risk, Assessment, Control, and Integrity",
+      "C": "Regulatory, Authorization, Compliance, and Identity",
+      "D": "Resource, Access, Cost, and Infrastructure"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Under GDPR, 'Sensitive Data' (like race or religion) requires a higher level of protection and explicit consent for processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for EU citizens living abroad",
+      "D": "Only for political organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Litigation Hold'?",
+    "options": {
+      "A": "A physical lock on a server rack.",
+      "B": "A requirement to preserve all data that may be relevant to a legal case.",
+      "C": "Telling a lawyer they cannot enter the data center.",
+      "D": "A specialized type of encryption for legal documents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Whistleblower Hotline'?",
+    "options": {
+      "A": "To provide customer support.",
+      "B": "To allow anonymous reporting of potential misconduct or policy violations.",
+      "C": "To update the system configuration remotely.",
+      "D": "To monitor the server room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An organization can be SOC 2 compliant even if it fails one of the trust services criteria.",
+    "options": {
+      "A": "False (Compliance requires meeting all applicable criteria).",
+      "B": "True",
+      "C": "Only if the failure is in 'Availability'",
+      "D": "Only for small businesses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Policy Exception' management?",
+    "options": {
+      "A": "Deleting all policies that are difficult to follow.",
+      "B": "The formal process for approving and tracking instances where a company policy cannot be met.",
+      "C": "A specialized way to encrypt private policies.",
+      "D": "Counting the number of times a policy was ignored."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulation in the US regulates the way financial institutions handle the private information of individuals?",
+    "options": {
+      "A": "GDPR",
+      "B": "Gramm-Leach-Bliley Act (GLBA)",
+      "C": "HIPAA",
+      "D": "SOX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cloud Shared Responsibility' means the provider is legally responsible for any data breach that occurs on their platform.",
+    "options": {
+      "A": "False (Responsibility is split; the customer is usually responsible for security 'in' the cloud).",
+      "B": "True",
+      "C": "Only for SaaS applications",
+      "D": "Only in the European Union"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Business Impact Analysis' (BIA)?",
+    "options": {
+      "A": "Measuring the distance between two business units.",
+      "B": "A systematic process to determine and evaluate the potential effects of an interruption to critical business operations.",
+      "C": "A scan for financial errors in the quarterly report.",
+      "D": "The process of hiring a new CFO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SOC 2, what is 'Processing Integrity'?",
+    "options": {
+      "A": "The speed at which data is processed.",
+      "B": "Ensuring that system processing is complete, valid, accurate, timely, and authorized.",
+      "C": "A way to measure the CPU performance.",
+      "D": "The encryption level of the processing logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Management' program includes regular scanning, patching, and verification of fixes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internal networks",
+      "D": "Only if using Windows"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mandatory Access Control' (MAC)?",
+    "options": {
+      "A": "Giving every user a Mac computer.",
+      "B": "A type of access control in which the system (not the user) determines access based on security levels and labels.",
+      "C": "The password for the building's front door.",
+      "D": "A specialized way to encrypt network cards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Conflict Minerals' compliance (relevant for GRC in tech manufacturing)?",
+    "options": {
+      "A": "Minerals that are difficult to mine.",
+      "B": "Ensuring that certain raw materials (like tin or gold) used in products are not sourced from conflict regions.",
+      "C": "A specialized type of hardware audit.",
+      "D": "A database of all mineral types used in the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Compliance frameworks often require 'Independent' testing, meaning the person testing the control cannot be the one who designed it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large corporations",
+      "D": "Only if the company is listed on the stock market"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Compliance Dashboard'?",
+    "options": {
+      "A": "A physical board in the office with posters.",
+      "B": "A visual representation of an organization's real-time compliance status and key metrics.",
+      "C": "A way to monitor the server room temperature.",
+      "D": "A specialized type of search engine for laws."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GRC, what is a 'Finding'?",
+    "options": {
+      "A": "Finding a lost laptop.",
+      "B": "An issue or observation identified during an audit where a control is not operating as expected.",
+      "C": "A new law that has been discovered.",
+      "D": "A person who is selected to lead the compliance team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Data stored in a 'Backup' should be subject to the same classification and protection rules as the original data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud backups",
+      "D": "Only if the backup is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Electronic Discovery' (eDiscovery)?",
+    "options": {
+      "A": "Finding a new website on the internet.",
+      "B": "The process of identifying, collecting, and producing electronically stored information (ESI) in response to a request for production in a lawsuit.",
+      "C": "Searching for a bug in the code.",
+      "D": "A specialized way to backup the server logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Sox 404' specifically relate to?",
+    "options": {
+      "A": "Web page not found errors.",
+      "B": "The requirement for management and external auditors to report on the adequacy of internal controls for financial reporting.",
+      "C": "A specialized way to encrypt bank accounts.",
+      "D": "A tool to monitor the internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR allows for the 'Profiling' of users as long as it is done for purely commercial reasons without any oversight.",
+    "options": {
+      "A": "False (Profiling is strictly regulated and users often have the right to opt-out or request human intervention).",
+      "B": "True",
+      "C": "Only for social media companies",
+      "D": "Only in the first 30 days of data collection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit Trails'?",
+    "options": {
+      "A": "Walking trails for auditors to exercise.",
+      "B": "Records that provide a chronological documentary evidence of the sequence of activities that have affected at any time a specific operation.",
+      "C": "Writing a blog about the auditing process.",
+      "D": "Printing the results of an audit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Board of Directors' role in governance?",
+    "options": {
+      "A": "To write the application code.",
+      "B": "To provide high-level oversight and ensure the organization is following its strategic goals and ethical standards.",
+      "C": "To monitor the physical security guards.",
+      "D": "To manage the daily social media accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Corrective Action Plan' (CAP) is required after an audit to address any non-compliance findings.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the company is fined",
+      "D": "Only if required by the insurance company"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Access Certification'?",
+    "options": {
+      "A": "Getting a driver's license.",
+      "B": "The periodic review of user access rights to ensure that only the correct people still have access to specific resources.",
+      "C": "Telling everyone your password.",
+      "D": "Scanning a badge at the front desk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In GRC, what is a 'Control Framework'?",
+    "options": {
+      "A": "A physical frame for a server rack.",
+      "B": "A structured set of guidelines that help organizations implement and manage internal controls.",
+      "C": "A specialized programming language for security audits.",
+      "D": "A database of all past regulatory fines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR requires a 'Legal Basis' (e.g., Contractual Necessity, Legitimate Interest) for every type of data processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for sensitive data",
+      "D": "Only for non-EU citizens"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Portability'?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "The ability to move data from one provider to another in a standard format.",
+      "C": "The history of data updates.",
+      "D": "A way to measure the size of a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compliance Monitoring'?",
+    "options": {
+      "A": "Watching a video about compliance rules.",
+      "B": "The continuous process of ensuring that controls are in place and working effectively over time.",
+      "C": "Monitoring the internet speed of the compliance officer.",
+      "D": "Counting the number of times a policy was opened."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Business Continuity' is focused on restoring systems after a crash, whereas 'Disaster Recovery' is focused on keeping the business running during the crash.",
+    "options": {
+      "A": "False (BC is about the business processes; DR is specifically about the IT infrastructure).",
+      "B": "True",
+      "C": "Only for financial errors",
+      "D": "Only in government audits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in the context of compliance?",
+    "options": {
+      "A": "Cleaning the physical hard drives.",
+      "B": "The process of identifying and fixing or removing incorrect, incomplete, or duplicate data.",
+      "C": "Deleting data after 5 years.",
+      "D": "A specialized type of encryption for databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a primary focus of 'Integrity' in GRC?",
+    "options": {
+      "A": "Ensuring the data is always hidden from view.",
+      "B": "Ensuring the accuracy, completeness, and validity of data and systems.",
+      "C": "Ensuring only the CEO can see the company's profits.",
+      "D": "Monitoring the employee's personal emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a SOC 2 Type I and a SOC 2 Type II report?",
+    "options": {
+      "A": "Type I is for small companies; Type II is for large corporations.",
+      "B": "Type I reports on the design of controls at a point in time; Type II reports on the operational effectiveness of controls over a period.",
+      "C": "Type I is mandatory by law; Type II is voluntary.",
+      "D": "Type I focuses on financial audits; Type II focuses on security audits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to GDPR, a 'Data Controller' determines the purpose and means of processing personal data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the controller is based in the EU",
+      "D": "Only if they use cloud storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which risk assessment methodology focuses on organizational risk and assets rather than just technical vulnerabilities?",
+    "options": {
+      "A": "CVSS",
+      "B": "OCTAVE",
+      "C": "OWASP Top 10",
+      "D": "DREAD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Under GDPR, within how many hours must a data breach be reported to the supervisory authority after becoming aware of it?",
+    "options": {
+      "A": "24 hours",
+      "B": "48 hours",
+      "C": "72 hours",
+      "D": "7 days"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Business Associate Agreement' (BAA) in the context of HIPAA?",
+    "options": {
+      "A": "A contract between two doctors to share office space.",
+      "B": "A legal contract that requires a vendor to protect PHI according to HIPAA standards.",
+      "C": "A manual for medical billing procedures.",
+      "D": "An agreement to share employee health insurance costs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Quantitative Risk Assessment', the 'Annualized Loss Expectancy' (ALE) is calculated as SLE x ARO.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in financial industries",
+      "D": "Only if the risk is high"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Data Residency' specifically refer to?",
+    "options": {
+      "A": "The speed at which data is transferred between continents.",
+      "B": "The physical or geographic location where data is stored.",
+      "C": "The type of hard drive used to store database files.",
+      "D": "The number of backups kept in a local office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Technical Safeguard' required by the HIPAA Security Rule?",
+    "options": {
+      "A": "Background checks for all employees.",
+      "B": "Access controls and encryption for electronic PHI (ePHI).",
+      "C": "Locked file cabinets for paper records.",
+      "D": "Fire extinguishers in the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Right to Portability' under GDPR allows individuals to request their data in a machine-readable format to move to another service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government data",
+      "D": "Only for social media accounts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'FedRAMP' for cloud service providers?",
+    "options": {
+      "A": "To provide free internet to federal buildings.",
+      "B": "To ensure a standardized approach to security assessment and authorization for cloud products used by the U.S. government.",
+      "C": "To create a government-only version of AWS.",
+      "D": "To monitor the carbon footprint of data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SOC 2, what does the 'Confidentiality' criteria primarily address?",
+    "options": {
+      "A": "Ensuring the system is always online.",
+      "B": "The protection of data that is restricted to a specific set of users or organizations.",
+      "C": "The accuracy of the data being processed.",
+      "D": "The physical security of the server racks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Privacy Impact Assessment' (PIA) should be conducted whenever a new system that handles personal data is being developed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for companies with over 500 employees",
+      "D": "Only if the data is stored in the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of the NIST Cybersecurity Framework (CSF) describes the desired cybersecurity outcomes?",
+    "options": {
+      "A": "Framework Implementation Tiers",
+      "B": "Framework Core",
+      "C": "Framework Profiles",
+      "D": "Framework Guidelines"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Data Processor' responsible for under GDPR?",
+    "options": {
+      "A": "Determining why data is collected.",
+      "B": "Processing data only on behalf of and according to the instructions of the Data Controller.",
+      "C": "Paying the fines for data breaches.",
+      "D": "Managing the company's marketing strategy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PCI DSS compliance levels (1 through 4) are determined by the annual volume of transactions processed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for online businesses",
+      "D": "Only in the North American region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Internal Controls' in the Sarbanes-Oxley (SOX) Act?",
+    "options": {
+      "A": "To control the temperature of the office.",
+      "B": "To ensure the reliability of financial reporting and prevent corporate fraud.",
+      "C": "To manage the internal HR department.",
+      "D": "To monitor the company's internal Wi-Fi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Risk Transference'?",
+    "options": {
+      "A": "Installing a firewall.",
+      "B": "Purchasing cyber insurance.",
+      "C": "Ignoring the risk because it is unlikely.",
+      "D": "Shutting down the service to eliminate the risk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under HIPAA, 'De-identification' requires the removal of 18 specific identifiers to ensure data cannot be linked to an individual.",
+    "options": {
+      "A": "True (Safe Harbor method)",
+      "B": "False",
+      "C": "Only for research studies",
+      "D": "Only for patients over 65"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The speed of data transfer.",
+      "B": "The principle that data is subject to the laws of the country where it is physically located.",
+      "C": "The ability of a user to delete their own data.",
+      "D": "The encryption level of government data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which GRC concept refers to the risk remaining after all security controls have been applied?",
+    "options": {
+      "A": "Inherent Risk",
+      "B": "Residual Risk",
+      "C": "Total Risk",
+      "D": "Control Risk"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: ISO 27001 requires the creation of a 'Statement of Applicability' (SoA) to list which controls are implemented.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the company is not yet certified",
+      "D": "Only for cloud-based organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Schrems II' ruling primarily concerned with?",
+    "options": {
+      "A": "Medical data sharing.",
+      "B": "The invalidation of the EU-U.S. Privacy Shield for data transfers.",
+      "C": "The use of cookies on websites.",
+      "D": "The right to be forgotten."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an audit, what is 'Evidence of Operation'?",
+    "options": {
+      "A": "A written policy describing a process.",
+      "B": "Actual records (logs, screenshots, meeting minutes) proving a control was performed correctly.",
+      "C": "The auditor's physical ID badge.",
+      "D": "The company's mission statement."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Availability' in SOC 2 means the system must be accessible 100% of the time without any downtime.",
+    "options": {
+      "A": "False (It means the system is available for operation as committed or agreed upon).",
+      "B": "True",
+      "C": "Only for banking services",
+      "D": "Only if using the Google Cloud platform"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of control is an 'Audit Trail' considered?",
+    "options": {
+      "A": "Preventive Control",
+      "B": "Detective Control",
+      "C": "Corrective Control",
+      "D": "Directive Control"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Compliance Dashboard'?",
+    "options": {
+      "A": "To change the settings of a firewall.",
+      "B": "To provide real-time visualization of an organization's compliance status across different frameworks.",
+      "C": "To track employee vacation days.",
+      "D": "To monitor the server room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under GDPR, a 'Data Protection Officer' (DPO) is mandatory for all organizations regardless of size or data type.",
+    "options": {
+      "A": "False (It is mandatory only for certain public bodies or organizations processing large amounts of sensitive data).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only for organizations with over 250 employees"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' compliance monitoring involve?",
+    "options": {
+      "A": "Checking if the company's logo is correctly displayed.",
+      "B": "Tracking performance metrics (like uptime) against agreed-upon targets in a contract.",
+      "C": "Measuring the distance between data centers.",
+      "D": "Telling the provider when to update their software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which NIST SP 800 series document provides a 'Risk Management Framework' (RMF)?",
+    "options": {
+      "A": "NIST SP 800-53",
+      "B": "NIST SP 800-37",
+      "C": "NIST SP 800-30",
+      "D": "NIST SP 800-61"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Business Continuity' focuses on maintaining operations during a disruption, while 'Disaster Recovery' focuses on restoring IT systems after a disruption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial institutions",
+      "D": "Only for cloud-native companies"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Separation of Duties' (SoD) in a compliance context?",
+    "options": {
+      "A": "Employees working in different buildings.",
+      "B": "Ensuring no single individual has total control over a critical process to prevent fraud.",
+      "C": "Splitting the IT team into two groups.",
+      "D": "Having different passwords for every website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulation in California is often called the 'US version of GDPR'?",
+    "options": {
+      "A": "HIPAA",
+      "B": "CCPA / CPRA",
+      "C": "SOX",
+      "D": "GLBA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Corrective Action Plan' (CAP) is developed after an audit finding to address the root cause of an issue.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for high-risk findings",
+      "D": "Only if requested by the CEO"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit Exhaustion'?",
+    "options": {
+      "A": "The physical tiredness of an auditor.",
+      "B": "The strain put on an organization by undergoing too many overlapping audits simultaneously.",
+      "C": "A system error caused by too many log files.",
+      "D": "The expiration of an audit certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Third-Party Risk Management' (TPRM) address?",
+    "options": {
+      "A": "The risk of a third developer joining a project.",
+      "B": "The cybersecurity and compliance risks posed by external vendors and partners.",
+      "C": "The risk of the third server in a rack failing.",
+      "D": "The cost of using a third-party internet provider."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Under PCI DSS, storing the full contents of the magnetic stripe or CVV code is allowed if it is encrypted.",
+    "options": {
+      "A": "False (Storing sensitive authentication data after authorization is strictly prohibited).",
+      "B": "True",
+      "C": "Only if using a hardware security module",
+      "D": "Only for recurring billing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'SOC 3' report?",
+    "options": {
+      "A": "A more detailed version of a SOC 2 report.",
+      "B": "A shortened, public-facing version of a SOC 2 report that can be shared freely without an NDA.",
+      "C": "A report specifically for financial accuracy.",
+      "D": "A report for physical security only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a key focus of the ISO 27001 'Continuous Improvement' (PDCA) cycle?",
+    "options": {
+      "A": "Buying new hardware every year.",
+      "B": "Plan, Do, Check, Act",
+      "C": "Primary, Duplicate, Cloud, Archive",
+      "D": "Protection, Detection, Correction, Awareness"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Anonymization' is a reversible process that allows the re-identification of individuals using a key.",
+    "options": {
+      "A": "False (Anonymization should be irreversible; reversible is called Pseudonymization).",
+      "B": "True",
+      "C": "Only in the medical industry",
+      "D": "Only if using 256-bit encryption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of a 'Whistleblower Policy'?",
+    "options": {
+      "A": "To provide customer support.",
+      "B": "To encourage and protect employees who report illegal or unethical behavior within the organization.",
+      "C": "To update the system configuration files.",
+      "D": "To monitor the data center's air quality."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which COBIT component describes the outcomes expected from IT processes?",
+    "options": {
+      "A": "Framework",
+      "B": "Process Descriptions",
+      "C": "Control Objectives",
+      "D": "Management Guidelines"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A 'Vulnerability Management' program includes regular scanning and a process for remediation and patching.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web applications",
+      "D": "Only if using open-source software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Key Risk Indicator' (KRI)?",
+    "options": {
+      "A": "A physical key that is broken.",
+      "B": "A metric used to provide an early signal of increasing risk exposure in a specific area.",
+      "C": "The time it takes to decrypt a file.",
+      "D": "The number of users who have administrative access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an audit, what does 'Inquiry' refer to?",
+    "options": {
+      "A": "Searching the internet for answers.",
+      "B": "Interviewing employees to understand how a process or control works.",
+      "C": "Telling the auditor to wait for an answer.",
+      "D": "Writing a formal letter to the government."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Border Data Transfer' under GDPR requires specific legal mechanisms like Standard Contractual Clauses (SCCs).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for transfers to the United States",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Governance Committee'?",
+    "options": {
+      "A": "To write the application source code.",
+      "B": "To provide oversight and direction for an organization's GRC initiatives.",
+      "C": "To monitor the physical security guards.",
+      "D": "To manage the cloud provider's billing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulatory framework is focused on 'Electronic Records and Signatures' for the FDA?",
+    "options": {
+      "A": "HIPAA",
+      "B": "21 CFR Part 11",
+      "C": "GDPR",
+      "D": "SOX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shadow IT' is a significant compliance risk because it bypasses standard security and governance controls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in small companies",
+      "D": "Only if using open-source tools"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Evidence Re-use' in compliance?",
+    "options": {
+      "A": "Printing the same document twice.",
+      "B": "Using the same set of proof (e.g., a backup log) to satisfy requirements for multiple different compliance frameworks.",
+      "C": "Deleting evidence and then restoring it.",
+      "D": "A way to backup the audit results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of GRC, what is a 'Policy Exception'?",
+    "options": {
+      "A": "Deleting a policy that is no longer useful.",
+      "B": "A formally approved and documented instance where a standard policy cannot be met.",
+      "C": "A law that only applies to certain industries.",
+      "D": "A bug in the policy management software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SOC 2 compliance is a one-time certification that never expires.",
+    "options": {
+      "A": "False (Reports typically cover a specific period and must be renewed annually to remain current).",
+      "B": "True",
+      "C": "Only for the 'Security' criteria",
+      "D": "Only if the company doesn't change its software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Control Maturity'?",
+    "options": {
+      "A": "The age of the person who designed the control.",
+      "B": "A measure of how well a control is defined, implemented, and managed (often on a 1-5 scale).",
+      "C": "The number of years a control has been in place.",
+      "D": "The encryption level of the control metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which GDPR right allows a person to object to their data being used for direct marketing?",
+    "options": {
+      "A": "Right of Access",
+      "B": "Right to Object",
+      "C": "Right to Erasure",
+      "D": "Right to Rectification"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Shared Responsibility Model' in cloud computing means the provider is responsible for everything up to the application level.",
+    "options": {
+      "A": "False (The customer is usually responsible for the data and application configuration).",
+      "B": "True",
+      "C": "Only in IaaS",
+      "D": "Only in SaaS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Compliance Artifact'?",
+    "options": {
+      "A": "An ancient document found in a data center.",
+      "B": "Any piece of documentation or proof (logs, policies, reports) used to demonstrate compliance during an audit.",
+      "C": "A specialized type of computer hardware.",
+      "D": "A previous version of the company logo."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which framework focuses on 'Continuous Monitoring' (ConMon) for federal IT systems?",
+    "options": {
+      "A": "ISO 27001",
+      "B": "FedRAMP",
+      "C": "PCI DSS",
+      "D": "SOC 2"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In GRC, 'Avoidance' is a risk treatment strategy where the organization stops the activity that creates the risk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for low-priority risks",
+      "D": "Only if the cost is over $1,000,000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Attestation' in a professional audit context?",
+    "options": {
+      "A": "A developer taking a coding test.",
+      "B": "A formal validation or confirmation by an independent third party that an organization's claims are accurate.",
+      "C": "A way to backup the audit logs.",
+      "D": "A specialized encryption for audit reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the NIST CSF, which category involves identifying the assets that need protection?",
+    "options": {
+      "A": "Protect",
+      "B": "Identify",
+      "C": "Detect",
+      "D": "Respond"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Corrective Control' is used to minimize the impact of an event after it has occurred.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial errors",
+      "D": "Only in physical security"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing'?",
+    "options": {
+      "A": "Cleaning the physical server racks.",
+      "B": "The process of identifying and removing or correcting personal information from a dataset.",
+      "C": "Deleting data after 5 years.",
+      "D": "A specialized way to encrypt database files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which regulatory body enforces HIPAA in the United States?",
+    "options": {
+      "A": "FBI",
+      "B": "Office for Civil Rights (OCR)",
+      "C": "Department of Defense (DoD)",
+      "D": "Internal Revenue Service (IRS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SOC 2, 'Confidentiality' and 'Privacy' are identical criteria.",
+    "options": {
+      "A": "False (Confidentiality is about restricted data; Privacy is specifically about personal information).",
+      "B": "True",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using cloud storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Audit Scope'?",
+    "options": {
+      "A": "A tool used by auditors to see tiny details.",
+      "B": "The definition of which systems, data, and processes will be examined during an audit.",
+      "C": "The physical location of the auditor's office.",
+      "D": "The number of hours an auditor works per day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a primary goal of 'Compliance Automation'?",
+    "options": {
+      "A": "To remove all humans from the company.",
+      "B": "To reduce manual effort, increase accuracy, and enable continuous oversight of compliance status.",
+      "C": "To automatically pay all regulatory fines.",
+      "D": "To write the company's privacy policy using AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: GDPR 'Fines' can reach up to 4% of a company's total global annual turnover.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for companies based in the EU",
+      "D": "Only for breaches involving more than 10,000 users"
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,2024 @@
+{
+  "skill": "DOM",
+  "questions": [
+    {
+      "question": "Which method is used to select a single element by its unique ID attribute?",
+      "options": {
+        "A": "document.getElementsByName()",
+        "B": "document.getElementById()",
+        "C": "document.querySelectorID()",
+        "D": "document.getElementByTagName()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The DOM represents the document as a tree of objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to select multiple elements at once.",
+      "options": {
+        "A": "getElementsByClassName()",
+        "B": "querySelectorAll()",
+        "C": "getElementById()",
+        "D": "querySelector()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property is used to change the text content of an element, ignoring any HTML tags?",
+      "options": {
+        "A": "innerHTML",
+        "B": "textContent",
+        "C": "src",
+        "D": "value"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you create a new element node in the DOM?",
+      "options": {
+        "A": "document.createElement()",
+        "B": "document.makeElement()",
+        "C": "document.newTag()",
+        "D": "document.appendChild()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'window' object is a child of the 'document' object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to attach a function to be called when a specific event occurs on an element?",
+      "options": {
+        "A": "addEventListener()",
+        "B": "attachEvent()",
+        "C": "listenTo()",
+        "D": "onEvent()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties used to navigate to a neighboring node.",
+      "options": {
+        "A": "nextSibling",
+        "B": "previousSibling",
+        "C": "parentNode",
+        "D": "firstChild"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property allows you to get or set the HTML content inside an element, including tags?",
+      "options": {
+        "A": "outerHTML",
+        "B": "innerHTML",
+        "C": "innerText",
+        "D": "contentHTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'document.querySelector()' returns the first element that matches a specified CSS selector.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to add a node as the last child of a parent node?",
+      "options": {
+        "A": "prepend()",
+        "B": "appendChild()",
+        "C": "insertAfter()",
+        "D": "pushNode()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO properties commonly used to change the visual style of an element via JavaScript.",
+      "options": {
+        "A": "style",
+        "B": "classList",
+        "C": "visible",
+        "D": "cssText"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'target' property of an event object represent?",
+      "options": {
+        "A": "The element that triggered the event.",
+        "B": "The element where the event listener is attached.",
+        "C": "The parent of the element that was clicked.",
+        "D": "The window object."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'getElementsByTagName' returns a static array that does not update when the DOM changes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to remove an attribute from an element?",
+      "options": {
+        "A": "deleteAttribute()",
+        "B": "removeAttribute()",
+        "C": "clearAttribute()",
+        "D": "getAttribute(null)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid values for the 'type' of a DOM node.",
+      "options": {
+        "A": "ELEMENT_NODE",
+        "B": "TEXT_NODE",
+        "C": "OBJECT_NODE",
+        "D": "TAG_NODE"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: You can use the 'value' property to get the input from a text field.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to access the parent of a given node?",
+      "options": {
+        "A": "superNode",
+        "B": "parentNode",
+        "C": "ownerElement",
+        "D": "rootNode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'event.preventDefault()'?",
+      "options": {
+        "A": "To stop the event from bubbling up.",
+        "B": "To cancel the default action belonging to the event (e.g., following a link).",
+        "C": "To remove the event listener.",
+        "D": "To hide the element."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: IDs in an HTML document should be unique.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method returns a NodeList of all elements that match a specific CSS selector?",
+      "options": {
+        "A": "document.querySelectorAll()",
+        "B": "document.getElements()",
+        "C": "document.findNodes()",
+        "D": "document.selectNodes()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'firstChild' property always returns an element node.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used to get or set the value of an input field?",
+      "options": {
+        "A": "content",
+        "B": "value",
+        "C": "text",
+        "D": "val"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO methods used to modify the classes on an element's classList.",
+      "options": {
+        "A": "add()",
+        "B": "remove()",
+        "C": "insert()",
+        "D": "delete()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to remove a child node from the DOM?",
+      "options": {
+        "A": "removeChild()",
+        "B": "deleteChild()",
+        "C": "dropNode()",
+        "D": "detach()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'document.body' provides a direct reference to the <body> element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property returns the direct parent element of a node?",
+      "options": {
+        "A": "parentElement",
+        "B": "rootElement",
+        "C": "ownerElement",
+        "D": "superElement"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO event types related to mouse interactions.",
+      "options": {
+        "A": "click",
+        "B": "mouseover",
+        "C": "keydown",
+        "D": "submit"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the result of 'document.getElementById()' if no element is found?",
+      "options": {
+        "A": "undefined",
+        "B": "null",
+        "C": "false",
+        "D": "empty string"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Attributes like 'src' or 'href' can be accessed directly as properties of an element object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method allows you to insert a node before a reference node as a child of a specified parent?",
+      "options": {
+        "A": "insertBefore()",
+        "B": "prepend()",
+        "C": "pushBefore()",
+        "D": "attachBefore()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return information about an element's dimensions.",
+      "options": {
+        "A": "offsetWidth",
+        "B": "offsetHeight",
+        "C": "clientWidth",
+        "D": "scrollLeft"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property is used to check if an element has any child nodes?",
+      "options": {
+        "A": "hasChildNodes()",
+        "B": "isParent",
+        "C": "childCount",
+        "D": "hasChildren"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Text inside an HTML element is considered a separate node in the DOM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which selector method returns a 'live' HTMLCollection of elements?",
+      "options": {
+        "A": "getElementsByClassName()",
+        "B": "querySelectorAll()",
+        "C": "querySelector()",
+        "D": "getElementById()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for managing element attributes.",
+      "options": {
+        "A": "setAttribute()",
+        "B": "getAttribute()",
+        "C": "findAttribute()",
+        "D": "createAttribute()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'className' property is used to get or set the full class string of an element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property returns the first child element node, ignoring text or comment nodes?",
+      "options": {
+        "A": "firstElementChild",
+        "B": "firstChild",
+        "C": "primaryChild",
+        "D": "topNode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'event.stopPropagation()' do?",
+      "options": {
+        "A": "Prevents the event from reaching further nodes in the bubbling/capturing phase.",
+        "B": "Prevents the default browser action.",
+        "C": "Deletes the event object.",
+        "D": "Stops the script from running."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Adding an event listener using 'onclick' as a property allows only one function to be attached at a time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method returns a NodeList of elements with a specific 'name' attribute?",
+      "options": {
+        "A": "document.getElementsByName()",
+        "B": "document.getElements()",
+        "C": "document.findByName()",
+        "D": "document.queryName()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the siblings of an element node.",
+      "options": {
+        "A": "nextElementSibling",
+        "B": "previousElementSibling",
+        "C": "sideNode",
+        "D": "neighborNode"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property is used to change the background color of an element using the style object?",
+      "options": {
+        "A": "style.backgroundColor",
+        "B": "style.bg",
+        "C": "style.colorBackground",
+        "D": "style.background-color"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'document.createElement('DIV')' and 'document.createElement('div')' create the same element type.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to check if an element contains a specific class?",
+      "options": {
+        "A": "classList.contains()",
+        "B": "classList.has()",
+        "C": "classList.includes()",
+        "D": "classList.test()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods to add text to the DOM.",
+      "options": {
+        "A": "document.createTextNode()",
+        "B": "element.append()",
+        "C": "element.addString()",
+        "D": "element.putText()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'id' property of an element return?",
+      "options": {
+        "A": "The value of the id attribute as a string.",
+        "B": "A numeric identifier for the node.",
+        "C": "The index of the element in the document.",
+        "D": "A reference to the CSS style."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'element.children' returns only element nodes, excluding text nodes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to determine the tag name of an element (e.g., 'DIV')?",
+      "options": {
+        "A": "tagName",
+        "B": "type",
+        "C": "label",
+        "D": "name"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for changing the order of elements in the DOM.",
+      "options": {
+        "A": "appendChild()",
+        "B": "insertBefore()",
+        "C": "swap()",
+        "D": "reorder()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'load' event on the window object fires when the entire page, including images and stylesheets, has finished loading.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to see if an element matches a given CSS selector string?",
+      "options": {
+        "A": "matches()",
+        "B": "testSelector()",
+        "C": "is()",
+        "D": "check()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the result of '1 === 1' in the context of a DOM Boolean attribute?",
+      "options": {
+        "A": "It is unrelated; Boolean attributes are usually present or absent.",
+        "B": "It turns the attribute off.",
+        "C": "It sets the attribute to '1'.",
+        "D": "It deletes the node."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'document.documentElement' refers to the <html> element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to toggle a class on or off?",
+      "options": {
+        "A": "classList.toggle()",
+        "B": "classList.switch()",
+        "C": "classList.flip()",
+        "D": "classList.change()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the child nodes of an element.",
+      "options": {
+        "A": "childNodes",
+        "B": "children",
+        "C": "nodes",
+        "D": "descendants"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'document.head' is a shortcut to the <head> element.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to set the text that appears as a tooltip when hovering over an element?",
+      "options": {
+        "A": "title",
+        "B": "alt",
+        "C": "tooltip",
+        "D": "hint"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'element.focus()'?",
+      "options": {
+        "A": "To set the input focus to the specified element.",
+        "B": "To highlight the element in the browser.",
+        "C": "To zoom into the element.",
+        "D": "To make the element visible."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: NodeLists returned by 'querySelectorAll' are not 'live' and do not update automatically.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to get the HTML of an element including the element itself?",
+      "options": {
+        "A": "outerHTML",
+        "B": "innerHTML",
+        "C": "wrapHTML",
+        "D": "totalHTML"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid event phases in the DOM event model.",
+      "options": {
+        "A": "Capturing",
+        "B": "Bubbling",
+        "C": "Routing",
+        "D": "Broadcasting"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: 'window.alert()' is technically a method of the window object, not the document object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to set the CSS class of an element as a single string?",
+      "options": {
+        "A": "className",
+        "B": "class",
+        "C": "styleClass",
+        "D": "cssClass"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'document.title' get or set?",
+      "options": {
+        "A": "The text of the <title> tag in the <head>.",
+        "B": "The first <h1> tag in the document.",
+        "C": "The name of the HTML file.",
+        "D": "The tooltip of the body."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'click' event can be triggered programmatically using 'element.click()'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Event Delegation' in the DOM?",
+      "options": {
+        "A": "Attaching a single event listener to a parent element to manage events for all of its children.",
+        "B": "Moving an event from one element to another manually.",
+        "C": "Delegating the script execution to a Web Worker.",
+        "D": "Automatically deleting events after they fire once."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'closest()' method searches up the DOM tree for the nearest ancestor that matches a specific CSS selector.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which object is used to create a 'virtual' DOM subtree that can be appended to the document all at once to improve performance?",
+      "options": {
+        "A": "DocumentFragment",
+        "B": "ShadowRoot",
+        "C": "VirtualNode",
+        "D": "TemplateElement"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the dimensions of an element including its border and padding.",
+      "options": {
+        "A": "offsetWidth",
+        "B": "offsetHeight",
+        "C": "clientWidth",
+        "D": "scrollHeight"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the difference between 'mouseenter' and 'mouseover'?",
+      "options": {
+        "A": "'mouseenter' does not bubble, while 'mouseover' does.",
+        "B": "'mouseover' does not bubble, while 'mouseenter' does.",
+        "C": "'mouseenter' triggers only on click.",
+        "D": "They are identical in behavior."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'element.getBoundingClientRect()' returns an object providing the size and position of an element relative to the viewport.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to programmatically trigger a custom event that you have created?",
+      "options": {
+        "A": "dispatchEvent()",
+        "B": "triggerEvent()",
+        "C": "fireEvent()",
+        "D": "emit()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using 'DocumentFragment'.",
+      "options": {
+        "A": "It minimizes reflows and repaints in the browser.",
+        "B": "It does not exist in the main DOM tree until appended.",
+        "C": "It automatically styles the children.",
+        "D": "It prevents events from bubbling."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which property allows you to see the actual computed CSS styles of an element after all stylesheets have been applied?",
+      "options": {
+        "A": "window.getComputedStyle(element)",
+        "B": "element.style",
+        "C": "element.currentStyle",
+        "D": "document.styles(element)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'DOMContentLoaded' event fires only after all images and subframes have finished loading.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to insert a string of HTML at a specific position relative to the element (e.g., 'afterbegin', 'beforeend')?",
+      "options": {
+        "A": "insertAdjacentHTML()",
+        "B": "insertHTML()",
+        "C": "appendHTML()",
+        "D": "setHTML()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to check if an element is currently hidden via CSS.",
+      "options": {
+        "A": "Checking if getComputedStyle(el).display === 'none'",
+        "B": "Checking if el.offsetParent === null",
+        "C": "Checking if el.hidden === true",
+        "D": "Checking if el.style.visibility === 'hidden'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'activeElement' property of the document object?",
+      "options": {
+        "A": "The element that currently has focus.",
+        "B": "The element that was last clicked.",
+        "C": "The first child of the body.",
+        "D": "The element currently being animated."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'element.getAttribute('class')' and 'element.className' always return the exact same string value.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to access 'data-*' attributes on an element as a camelCased object?",
+      "options": {
+        "A": "dataset",
+        "B": "dataAttributes",
+        "C": "dataMap",
+        "D": "customData"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the scroll position of an element.",
+      "options": {
+        "A": "scrollTop",
+        "B": "scrollLeft",
+        "C": "scrollX",
+        "D": "scrollY"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does setting 'element.innerHTML = \"\"' do?",
+      "options": {
+        "A": "Removes all child nodes and text from the element.",
+        "B": "Deletes the element from the DOM.",
+        "C": "Hides the element.",
+        "D": "Resets the element's CSS classes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'capture' phase of an event happens before the 'bubbling' phase.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to scroll an element into the visible area of the browser window?",
+      "options": {
+        "A": "scrollIntoView()",
+        "B": "moveToView()",
+        "C": "focusView()",
+        "D": "scrollToElement()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO types of 'MutationRecord' attributes tracked by a MutationObserver.",
+      "options": {
+        "A": "childList",
+        "B": "attributes",
+        "C": "eventListeners",
+        "D": "computedStyles"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'live' NodeList?",
+      "options": {
+        "A": "A collection that updates automatically when the document structure changes.",
+        "B": "A collection that can only be used once.",
+        "C": "A collection stored in local storage.",
+        "D": "A collection that triggers animations."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'replaceChild()' returns the node that was replaced.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to get the horizontal and vertical distance of an element from its 'offsetParent'?",
+      "options": {
+        "A": "offsetLeft / offsetTop",
+        "B": "clientX / clientY",
+        "C": "pageX / pageY",
+        "D": "x / y"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties used to identify which key was pressed during a keyboard event.",
+      "options": {
+        "A": "key",
+        "B": "code",
+        "C": "value",
+        "D": "char"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to clone a DOM node?",
+      "options": {
+        "A": "cloneNode()",
+        "B": "copyNode()",
+        "C": "duplicate()",
+        "D": "replicate()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'cloneNode(true)' performs a deep clone, copying the node and all of its descendants.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface allows you to watch for changes being made to the DOM tree?",
+      "options": {
+        "A": "MutationObserver",
+        "B": "DOMWatcher",
+        "C": "ChangeDetector",
+        "D": "StructureListener"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid values for the 'position' argument in 'insertAdjacentElement()'.",
+      "options": {
+        "A": "beforebegin",
+        "B": "afterend",
+        "C": "insidebegin",
+        "D": "endchild"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'matches()' method?",
+      "options": {
+        "A": "To check if an element would be selected by a given CSS selector string.",
+        "B": "To compare two different nodes.",
+        "C": "To find all sibling elements.",
+        "D": "To validate a form input."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'input' event fires every time the value of an <input> or <textarea> element changes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property of the Event object returns the element whose event listener triggered the event?",
+      "options": {
+        "A": "currentTarget",
+        "B": "target",
+        "C": "srcElement",
+        "D": "delegateTarget"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'change' event fires immediately as the user types in a text input field.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to stop a MutationObserver from further observing any DOM changes?",
+      "options": {
+        "A": "disconnect()",
+        "B": "stop()",
+        "C": "unobserve()",
+        "D": "terminate()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the height of an element, including the vertical padding but excluding borders and margins.",
+      "options": {
+        "A": "clientHeight",
+        "B": "innerHeight",
+        "C": "scrollHeight",
+        "D": "offsetHeight"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'passive: true' option in addEventListener?",
+      "options": {
+        "A": "It tells the browser that the listener will never call preventDefault(), allowing for smoother scrolling.",
+        "B": "It prevents the event from bubbling.",
+        "C": "It makes the event trigger only once.",
+        "D": "It runs the listener in a background thread."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A DocumentFragment is not part of the active document's render tree, meaning changes to it do not cause reflows.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to get the next sibling of an element, specifically ignoring text and comment nodes?",
+      "options": {
+        "A": "nextElementSibling",
+        "B": "nextSibling",
+        "C": "followingElement",
+        "D": "adjacentElement"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to create custom events with data payloads.",
+      "options": {
+        "A": "new CustomEvent()",
+        "B": "new Event()",
+        "C": "document.createEvent()",
+        "D": "element.initEvent()"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "Which property of a MutationRecord indicates the node that was added or removed?",
+      "options": {
+        "A": "addedNodes / removedNodes",
+        "B": "targetNodes",
+        "C": "changedNodes",
+        "D": "mutationTarget"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'submit' event is fired on the <form> element, even if the submit was triggered by clicking a button inside it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to remove all observation records from a MutationObserver's queue and return them?",
+      "options": {
+        "A": "takeRecords()",
+        "B": "flush()",
+        "C": "getPending()",
+        "D": "popMutation()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid values for the 'subtree' option in MutationObserverInit.",
+      "options": {
+        "A": "true",
+        "B": "false",
+        "C": "1",
+        "D": "recursive"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'event.isTrusted' indicate?",
+      "options": {
+        "A": "True if the event was generated by a user action, false if by a script.",
+        "B": "True if the event is secure (HTTPS).",
+        "C": "True if the event listener is valid.",
+        "D": "True if the event has been prevented."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'window.getSelection()' returns a Selection object representing the range of text selected by the user.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to set or get the 'tab order' of an element?",
+      "options": {
+        "A": "tabIndex",
+        "B": "focusIndex",
+        "C": "order",
+        "D": "navigationOrder"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO attributes that can be checked on a 'KeyboardEvent' to see if a modifier key was held.",
+      "options": {
+        "A": "shiftKey",
+        "B": "ctrlKey",
+        "C": "altKey",
+        "D": "metaKey"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to check if a specific node is a descendant of another node?",
+      "options": {
+        "A": "contains()",
+        "B": "isInside()",
+        "C": "hasNode()",
+        "D": "includes()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'wheel' event is the same as the 'scroll' event.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property returns the absolute distance of an element from the left edge of its offsetParent?",
+      "options": {
+        "A": "offsetLeft",
+        "B": "clientLeft",
+        "C": "scrollLeft",
+        "D": "posX"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that return the scrollable dimensions of an element.",
+      "options": {
+        "A": "scrollHeight",
+        "B": "scrollWidth",
+        "C": "offsetHeight",
+        "D": "offsetWidth"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the function of the 'nodeValue' property for an Element node?",
+      "options": {
+        "A": "It returns null (use textContent or attributes instead).",
+        "B": "It returns the inner HTML.",
+        "C": "It returns the tag name.",
+        "D": "It returns the attribute list."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'once: true' in addEventListener will automatically remove the listener after it is called for the first time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property is used to access the Document object associated with an <iframe>?",
+      "options": {
+        "A": "contentDocument",
+        "B": "innerDocument",
+        "C": "frameDocument",
+        "D": "subDocument"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to get the width of the browser viewport.",
+      "options": {
+        "A": "window.innerWidth",
+        "B": "document.documentElement.clientWidth",
+        "C": "window.outerWidth",
+        "D": "document.body.offsetWidth"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to scroll a specific element to the top of its container?",
+      "options": {
+        "A": "element.scrollTo(0, 0)",
+        "B": "element.scrollIntoView(true)",
+        "C": "element.top()",
+        "D": "element.scrollTop = 0"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Custom events bubble by default.",
+      "options": {
+        "A": "False (you must set bubbles: true in the options).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to read the text that has been 'cut' or 'copied' to the clipboard in a paste event?",
+      "options": {
+        "A": "event.clipboardData",
+        "B": "event.dataTransfer",
+        "C": "event.textValue",
+        "D": "window.clipboard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for moving an existing element to a new location in the DOM.",
+      "options": {
+        "A": "appendChild()",
+        "B": "append()",
+        "C": "copyTo()",
+        "D": "clone()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'rel=noopener' when opening a link in a new window via JS or HTML?",
+      "options": {
+        "A": "It prevents the new page from accessing the window.opener property, improving security and performance.",
+        "B": "It makes the page load faster.",
+        "C": "It hides the URL of the referring page.",
+        "D": "It allows the new page to share cookies."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'document.write()' is generally considered a bad practice in modern web development.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method on the classList object allows you to replace an old class with a new one?",
+      "options": {
+        "A": "replace()",
+        "B": "swap()",
+        "C": "switch()",
+        "D": "change()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO event listeners that do not bubble.",
+      "options": {
+        "A": "focus",
+        "B": "blur",
+        "C": "click",
+        "D": "change"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: The 'DOMContentLoaded' event is triggered on the 'document' object.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method returns a Boolean indicating if an element has a specific attribute?",
+      "options": {
+        "A": "hasAttribute()",
+        "B": "containsAttribute()",
+        "C": "attributeExists()",
+        "D": "isSet()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of 'attributeOldValue' in a MutationObserver configuration?",
+      "options": {
+        "A": "It records the value of the attribute before it was changed in the MutationRecord.",
+        "B": "It prevents the attribute from being changed.",
+        "C": "It restores the old value automatically.",
+        "D": "It logs the change to the console."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'element.remove()' is a relatively modern method that removes the element directly from the DOM without needing to reference the parent.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of Web Components, what is a 'Shadow Root'?",
+      "options": {
+        "A": "An isolated DOM subtree that is attached to an element but hidden from main document selectors.",
+        "B": "The root node of a DocumentFragment.",
+        "C": "A hidden metadata property of every HTML element.",
+        "D": "The backup DOM used when the main DOM fails to render."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: CSS styles defined inside a Shadow Root 'leak out' and affect elements in the main document (Light DOM).",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to attach a Shadow DOM to an element?",
+      "options": {
+        "A": "element.attachShadow({mode: 'open'})",
+        "B": "element.createShadow()",
+        "C": "document.initShadow(element)",
+        "D": "element.setShadowRoot()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'modes' for a Shadow Root.",
+      "options": {
+        "A": "open",
+        "B": "closed",
+        "C": "hidden",
+        "D": "protected"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Layout Thrashing' in DOM performance?",
+      "options": {
+        "A": "A cycle of interleaved DOM writes and reads that forces the browser to recalculate layout repeatedly.",
+        "B": "When the CSS takes too long to download.",
+        "C": "When an element is deleted and re-added too quickly.",
+        "D": "A bug where the browser window shakes during resize."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Selection' API can handle multiple non-contiguous ranges of selected text in most modern browsers.",
+      "options": {
+        "A": "False (Most browsers only support a single range).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method of the Range object is used to move the contents of the range into a DocumentFragment?",
+      "options": {
+        "A": "extractContents()",
+        "B": "cloneContents()",
+        "C": "deleteContents()",
+        "D": "moveContents()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO events specifically related to the Shadow DOM 'slot' mechanism.",
+      "options": {
+        "A": "slotchange",
+        "B": "onSlotUpdate (non-standard)",
+        "C": "change",
+        "D": "input"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'composedPath()' method of an Event return?",
+      "options": {
+        "A": "The path of nodes the event will bubble through, even across Shadow DOM boundaries.",
+        "B": "The URL path of the script that triggered the event.",
+        "C": "A list of all CSS selectors matching the target.",
+        "D": "The file path of the HTML document."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Elements inside a 'closed' shadow root cannot be accessed from the outside via the 'shadowRoot' property.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which API allows you to create a high-performance 'TreeWalker' to filter and navigate specific types of nodes?",
+      "options": {
+        "A": "document.createTreeWalker()",
+        "B": "document.getNodeWalker()",
+        "C": "new NodeIterator()",
+        "D": "element.walk()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO lifecycle callbacks used in a standard Custom Element (Web Component).",
+      "options": {
+        "A": "connectedCallback",
+        "B": "attributeChangedCallback",
+        "C": "onMount",
+        "D": "renderCallback"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'NodeIterator' interface?",
+      "options": {
+        "A": "To step through a list of nodes one by one based on a filter.",
+        "B": "To convert a NodeList into an Array.",
+        "C": "To automatically delete nodes.",
+        "D": "To speed up CSS selection."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Range' object can span across multiple different elements in the DOM.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CSS pseudo-class is used to style the 'host' element from within a Shadow DOM?",
+      "options": {
+        "A": ":host",
+        "B": "::shadow-host",
+        "C": ":parent",
+        "D": ":root"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties that force a synchronous 'reflow' when accessed.",
+      "options": {
+        "A": "offsetHeight",
+        "B": "getBoundingClientRect()",
+        "C": "innerHTML",
+        "D": "classList"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'slot' element used for in Web Components?",
+      "options": {
+        "A": "To act as a placeholder for content passed from the Light DOM into the Shadow DOM.",
+        "B": "To create a variable in CSS.",
+        "C": "To store hidden data.",
+        "D": "To link an external script."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'CustomEvent' detail properties are restricted to strings only.",
+      "options": {
+        "A": "False (They can be any JavaScript object).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to define a new Custom Element in the browser?",
+      "options": {
+        "A": "customElements.define()",
+        "B": "window.registerElement()",
+        "C": "document.newComponent()",
+        "D": "browser.defineTag()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO conditions that must be met for a valid Custom Element name.",
+      "options": {
+        "A": "It must contain a hyphen (-).",
+        "B": "It must not be a single word.",
+        "C": "It must be uppercase.",
+        "D": "It must start with 'web-'."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which method is used to observe when an element enters or exits the browser viewport or intersects with another element?",
+      "options": {
+        "A": "IntersectionObserver",
+        "B": "ViewportListener",
+        "C": "VisibilityApi",
+        "D": "MutationObserver"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'adoptedStyleSheets' property allows a Shadow Root to share constructed stylesheets with other components, improving memory efficiency.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Range method is used to check if a specific point (node and offset) is contained within the current range?",
+      "options": {
+        "A": "isPointInRange()",
+        "B": "containsPoint()",
+        "C": "checkBoundary()",
+        "D": "pointInSelection()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods provided by the 'CustomElementRegistry' to manage component registration.",
+      "options": {
+        "A": "define()",
+        "B": "whenDefined()",
+        "C": "getRegistry()",
+        "D": "initComponent()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary role of 'attributeChangedCallback' in a Custom Element?",
+      "options": {
+        "A": "To react when specific observed attributes are added, removed, or changed.",
+        "B": "To update the element's CSS classes automatically.",
+        "C": "To handle click events on attributes.",
+        "D": "To validate the entire HTML structure."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A Shadow Host's '::slotted()' pseudo-element can select and style nested children of a slotted element.",
+      "options": {
+        "A": "False (It can only select the direct slotted element itself).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property of a Shadow Root determines if internal elements can be accessed via the host's .shadowRoot property?",
+      "options": {
+        "A": "mode",
+        "B": "access",
+        "C": "visibility",
+        "D": "scope"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to create a new CSSStyleSheet object programmatically for use with adoptedStyleSheets.",
+      "options": {
+        "A": "new CSSStyleSheet()",
+        "B": "document.createStyleSheet()",
+        "C": "element.initStyles()",
+        "D": "stylesheet.parse()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'forced reflow' (or synchronous layout) bottleneck?",
+      "options": {
+        "A": "Accessing a layout-dependent property (like offsetHeight) immediately after modifying the DOM.",
+        "B": "Using too many event listeners.",
+        "C": "Loading a script at the bottom of the page.",
+        "D": "Animating elements using CSS transforms."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Range.surroundContents()' method will fail if the range contains non-text nodes that are only partially selected.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to find the 'Shadow Host' from within a Shadow Root in modern browsers?",
+      "options": {
+        "A": "shadowRoot.host",
+        "B": "shadowRoot.parentElement",
+        "C": "shadowRoot.owner",
+        "D": "shadowRoot.getRootNode()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO options available in the 'IntersectionObserver' constructor to tune detection logic.",
+      "options": {
+        "A": "threshold",
+        "B": "rootMargin",
+        "C": "sensitivity",
+        "D": "frameRate"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'Selection.collapse()' method do?",
+      "options": {
+        "A": "Sets the selection to a single point (caret), removing any highlight.",
+        "B": "Deletes the selected text.",
+        "C": "Hides the selection from the user.",
+        "D": "Merges multiple ranges into one."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Document.createNodeIterator' is more memory-efficient than 'querySelectorAll' for very large documents because it does not create a full static list.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows you to check if a specific element is currently 'slotted' into a Shadow DOM?",
+      "options": {
+        "A": "assignedSlot",
+        "B": "parentSlot",
+        "C": "activeSlot",
+        "D": "hostSlot"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for determining the distance between two DOM nodes in the tree hierarchy.",
+      "options": {
+        "A": "compareDocumentPosition()",
+        "B": "contains()",
+        "C": "getDistance()",
+        "D": "isPrecededBy()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Tree Shaking' in the context of DOM-heavy Web Components?",
+      "options": {
+        "A": "Removing unused components and their associated DOM templates during a build process.",
+        "B": "Deleting empty nodes from the DOM.",
+        "C": "Updating only the nodes that changed.",
+        "D": "Optimizing the CSS selector engine."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'ShadowRoot' is a subclass of 'DocumentFragment'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which interface is used to create a performant 'ResizeObserver' to monitor element size changes without polling?",
+      "options": {
+        "A": "ResizeObserver",
+        "B": "DimensionListener",
+        "C": "BoundsObserver",
+        "D": "MutationObserver"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO behaviors of a 'closed' shadow root.",
+      "options": {
+        "A": "element.shadowRoot returns null.",
+        "B": "Events can still bubble out of it if 'composed: true' is set.",
+        "C": "It is completely invisible to the browser's developer tools.",
+        "D": "It prevents CSS variables from entering the root."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you style elements based on whether a slot is empty using CSS?",
+      "options": {
+        "A": "slot:empty { ... }",
+        "B": "::slotted(:empty) { ... }",
+        "C": "slot:not([name]) { ... }",
+        "D": "None (You must handle this via the 'slotchange' event in JS)."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Selection.containsNode()' method can check if a node is only partially included in a selection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to get the character offset of a range relative to the start of its container?",
+      "options": {
+        "A": "startOffset",
+        "B": "getOffset()",
+        "C": "charIndex",
+        "D": "selectionStart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods used to programmatically modify a Range object.",
+      "options": {
+        "A": "setStart()",
+        "B": "setEnd()",
+        "C": "moveStart()",
+        "D": "shiftEnd()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'composed: true' do in a CustomEvent initialization?",
+      "options": {
+        "A": "Allows the event to cross the boundary from Shadow DOM into the Light DOM.",
+        "B": "Combines multiple events into one.",
+        "C": "Automatically prevents default behavior.",
+        "D": "Makes the event visible to MutationObservers."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Custom Elements can extend existing built-in elements like <button> or <input> by using the 'extends' option in 'customElements.define'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property of a ResizeObserverEntry provides the content box size of the observed element?",
+      "options": {
+        "A": "contentBoxSize",
+        "B": "borderBoxSize",
+        "C": "clientRect",
+        "D": "size"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to optimize 'Paint' operations in the DOM.",
+      "options": {
+        "A": "Using 'will-change' to promote an element to its own layer.",
+        "B": "Using CSS transforms instead of top/left for animations.",
+        "C": "Adding more nodes to the document fragment.",
+        "D": "Changing colors frequently."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Slotted' element?",
+      "options": {
+        "A": "An element from the Light DOM that is projected into a <slot> inside the Shadow DOM.",
+        "B": "An element with a 'data-slot' attribute.",
+        "C": "An element that has been removed from the DOM.",
+        "D": "A style rule that applies only to inputs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Document.caretPositionFromPoint' (or caretRangeFromPoint) can be used to determine exactly where in a text node a user clicked.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to prevent an observer from tracking any further intersections?",
+      "options": {
+        "A": "unobserve()",
+        "B": "stop()",
+        "C": "disconnect()",
+        "D": "terminate()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Select TWO states of a node in the 'compareDocumentPosition' bitmask.",
+      "options": {
+        "A": "DOCUMENT_POSITION_PRECEDING",
+        "B": "DOCUMENT_POSITION_CONTAINED_BY",
+        "C": "DOCUMENT_POSITION_ADJACENT",
+        "D": "DOCUMENT_POSITION_ROOT"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the function of the 'StaticRange' API?",
+      "options": {
+        "A": "To provide a lightweight range object that does not update automatically when the DOM changes.",
+        "B": "To lock a range so it cannot be modified.",
+        "C": "To create a range that only works for images.",
+        "D": "To store a range in a database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'disconnectedCallback' is triggered when an element is moved from one parent to another within the same document.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property allows a developer to access the Light DOM children of a Shadow Host from within its class?",
+      "options": {
+        "A": "this.childNodes",
+        "B": "this.shadowRoot.children",
+        "C": "this.slottedNodes",
+        "D": "this.innerHTML"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for cleaning up 'Selection' ranges.",
+      "options": {
+        "A": "removeAllRanges()",
+        "B": "empty()",
+        "C": "clear()",
+        "D": "deleteSelection()"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'NodeFilter' interface in a TreeWalker?",
+      "options": {
+        "A": "To specify which types of nodes should be accepted or rejected during navigation.",
+        "B": "To delete unwanted nodes from the document.",
+        "C": "To change the node names.",
+        "D": "To sort nodes alphabetically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Range' object created with 'document.createRange()' is initially 'collapsed' at the start of the document.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which event is fired on the 'window' object when the user changes the text selection?",
+      "options": {
+        "A": "selectionchange",
+        "B": "onSelect",
+        "C": "rangeUpdate",
+        "D": "textSelect"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons to use 'Shadow DOM' for a widget library.",
+      "options": {
+        "A": "Encapsulation of styles (preventing conflicts).",
+        "B": "DOM structure isolation (preventing external scripts from accidental manipulation).",
+        "C": "Faster network downloads.",
+        "D": "Better support for older browsers (IE11)."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'root' option in an IntersectionObserver used for?",
+      "options": {
+        "A": "To define the element that acts as the viewport for checking visibility.",
+        "B": "To specify the body of the document.",
+        "C": "To identify the shadow host.",
+        "D": "To restart the observer."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Element.scrollTo' can accept a 'behavior: smooth' option for animated scrolling.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to remove a custom element's definition (available in recent specs)?",
+      "options": {
+        "A": "None (definitions are generally permanent for the page lifecycle).",
+        "B": "customElements.undefine()",
+        "C": "customElements.remove()",
+        "D": "window.unregister()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties of a 'MutationRecord' that specifically help track attribute changes.",
+      "options": {
+        "A": "attributeName",
+        "B": "oldValue",
+        "C": "newValue",
+        "D": "attributeType"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'activeElement' inside a Shadow DOM?",
+      "options": {
+        "A": "The element that has focus within that specific shadow root.",
+        "B": "The shadow host itself.",
+        "C": "The first input tag.",
+        "D": "Always the body element."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'composedPath' of an event includes the window and document objects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which constant is used with TreeWalker to show only comment nodes?",
+      "options": {
+        "A": "NodeFilter.SHOW_COMMENT",
+        "B": "NodeFilter.COMMENT_NODE",
+        "C": "NodeFilter.SHOW_HIDDEN",
+        "D": "NodeFilter.FILTER_COMMENT"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO constraints of the 'Shadow DOM' mechanism.",
+      "options": {
+        "A": "Not all HTML elements can host a Shadow Root (e.g., <img>, <textarea>).",
+        "B": "You can only have one Shadow Root per host.",
+        "C": "Shadow Roots cannot contain <script> tags.",
+        "D": "Shadow Roots must be connected to the body immediately."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

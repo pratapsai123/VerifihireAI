@@ -1,0 +1,4195 @@
+{
+  "skill": "Visual Studio",
+  "questions": [
+    {
+      "question": "Which window in Visual Studio is used to manage files and projects within a solution?",
+      "options": {
+        "A": "Team Explorer",
+        "B": "Solution Explorer",
+        "C": "Properties Window",
+        "D": "Output Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio and Visual Studio Code are the exact same application.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only on Windows",
+        "D": "Only on macOS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default keyboard shortcut to build a solution in Visual Studio?",
+      "options": {
+        "A": "Ctrl + S",
+        "B": "Ctrl + Shift + B",
+        "C": "Ctrl + F5",
+        "D": "Alt + F4"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function key is used to start debugging (Run with Debugging)?",
+      "options": {
+        "A": "F1",
+        "B": "F12",
+        "C": "F5",
+        "D": "F9"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: A 'Solution' in Visual Studio can contain multiple 'Projects'.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if they are the same language",
+        "D": "Only in the Enterprise version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'IntelliSense' in Visual Studio?",
+      "options": {
+        "A": "A tool that scans for viruses in the code.",
+        "B": "A code-completion aid that includes a list of members, parameter info, and quick info.",
+        "C": "An AI that writes the entire program for you.",
+        "D": "A hardware monitor for CPU temperature."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window displays errors, warnings, and messages generated during a build?",
+      "options": {
+        "A": "Toolbox",
+        "B": "Error List",
+        "C": "Class View",
+        "D": "Object Browser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use Visual Studio to develop mobile applications using Xamarin or MAUI.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only on Android",
+        "D": "Only with a separate license"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of a 'Breakpoint'?",
+      "options": {
+        "A": "To terminate the program immediately.",
+        "B": "To pause code execution at a specific line so you can inspect variables.",
+        "C": "To skip a section of code during execution.",
+        "D": "To format the source code automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to start a program *without* debugging?",
+      "options": {
+        "A": "F5",
+        "B": "Ctrl + F5",
+        "C": "Shift + F5",
+        "D": "F11"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports Git version control natively.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only through extensions",
+        "D": "Only for C# projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window allows you to drag and drop UI controls (like buttons) onto a Windows Form?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Toolbox",
+        "C": "Properties",
+        "D": "Server Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Clean Solution' command do?",
+      "options": {
+        "A": "Deletes the source code files.",
+        "B": "Removes all intermediate files and previous build output.",
+        "C": "Fixes all syntax errors automatically.",
+        "D": "Reinstalls the Visual Studio IDE."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio is only available for Windows operating systems.",
+      "options": {
+        "A": "True",
+        "B": "False (There is a version for macOS)",
+        "C": "Only the Community version is Windows-only",
+        "D": "True, but it runs in a browser on Linux"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to comment out a selected block of code?",
+      "options": {
+        "A": "Ctrl + C",
+        "B": "Ctrl + K, Ctrl + C",
+        "C": "Ctrl + Alt + C",
+        "D": "Ctrl + /"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Immediate Window' during debugging?",
+      "options": {
+        "A": "To send an email to the team immediately.",
+        "B": "To evaluate expressions, execute statements, and print variable values.",
+        "C": "To close the application instantly.",
+        "D": "To show the real-time CPU usage."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio Community edition is free for individual developers and small teams.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for students",
+        "D": "Only for 30 days"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows you to see how many times a method is referenced in your code directly above the method name?",
+      "options": {
+        "A": "IntelliSense",
+        "B": "CodeLens",
+        "C": "Live Share",
+        "D": "Peek Definition"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the shortcut to 'Step Over' a line of code during debugging?",
+      "options": {
+        "A": "F11",
+        "B": "F10",
+        "C": "Shift + F11",
+        "D": "F5"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can change the theme of Visual Studio (e.g., from Light to Dark).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Pro version",
+        "D": "Only by editing the Registry"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which file extension is used for a Visual Studio Solution file?",
+      "options": {
+        "A": ".csproj",
+        "B": ".sln",
+        "C": ".config",
+        "D": ".exe"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'NuGet' in Visual Studio?",
+      "options": {
+        "A": "To create unit tests.",
+        "B": "To manage and download third-party libraries and packages.",
+        "C": "To optimize the database.",
+        "D": "To translate code into different languages."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can be used to write Python code.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only with a paid subscription",
+        "D": "Only on Linux"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window shows the hierarchy of objects and members in your project?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Class View",
+        "C": "Properties Window",
+        "D": "Task List"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the shortcut to 'Step Into' a function during debugging?",
+      "options": {
+        "A": "F10",
+        "B": "F11",
+        "C": "F12",
+        "D": "Shift + F5"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can have multiple versions of Visual Studio installed on the same computer.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if they are the same year",
+        "D": "Only if one is a Preview version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Installer' used for?",
+      "options": {
+        "A": "To install the final software on the user's PC.",
+        "B": "To manage workloads, components, and updates for the IDE itself.",
+        "C": "To create setup.exe files for your projects.",
+        "D": "To download documentation from Microsoft."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window is used to change settings for a selected UI element or file?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Properties Window",
+        "C": "Output Window",
+        "D": "Diagnostics Hub"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can debug a program that is running on a remote server using Visual Studio.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if the server is Windows 7",
+        "D": "Only if using the Express version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Live Share' in Visual Studio?",
+      "options": {
+        "A": "A tool to stream your screen on Twitch.",
+        "B": "A feature for real-time collaborative coding and debugging with others.",
+        "C": "A way to share your cloud subscription with friends.",
+        "D": "A social network for developers inside the IDE."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut opens the 'Quick Find' search bar?",
+      "options": {
+        "A": "Ctrl + S",
+        "B": "Ctrl + F",
+        "C": "Ctrl + H",
+        "D": "Ctrl + Q"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Output Window' shows the text output from console.log or Debug.WriteLine statements.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in Release mode",
+        "D": "Only if a printer is connected"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps you find all instances of a variable or method in the entire solution?",
+      "options": {
+        "A": "Peek Definition",
+        "B": "Find All References",
+        "C": "Go to Implementation",
+        "D": "IntelliCode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Toolbox' used for?",
+      "options": {
+        "A": "To fix hardware issues on the computer.",
+        "B": "To access various components and controls for UI design.",
+        "C": "To manage different versions of the .NET framework.",
+        "D": "To store physical tools used by the developer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can be used to develop games with the Unity engine.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only with the Game Dev license",
+        "D": "Only for 2D games"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default shortcut to 'Toggle Breakpoint' on a line?",
+      "options": {
+        "A": "F5",
+        "B": "F9",
+        "C": "F12",
+        "D": "Ctrl + B"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Quick Actions and Refactorings' (the light bulb icon) provide?",
+      "options": {
+        "A": "A list of recently opened files.",
+        "B": "Suggestions to fix code errors or improve code structure.",
+        "C": "A way to turn on the computer's physical light.",
+        "D": "A link to the Microsoft support website."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You must always have a Solution file to open a single code file in Visual Studio.",
+      "options": {
+        "A": "False (You can open individual files or 'Open Folder')",
+        "B": "True",
+        "C": "True, but only for C#",
+        "D": "False, but you cannot edit them"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window shows the call stack of the current thread during debugging?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Call Stack Window",
+        "C": "Immediate Window",
+        "D": "Autos Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hot Reload'?",
+      "options": {
+        "A": "When the server overheats.",
+        "B": "A feature to apply code changes to a running app without needing to restart it.",
+        "C": "A way to quickly reload the IDE settings.",
+        "D": "A tool to delete the cache files instantly."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports C++ development.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise version",
+        "D": "Only on Linux"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which shortcut is used to 'Go to Definition' of a variable or function?",
+      "options": {
+        "A": "F5",
+        "B": "F12",
+        "C": "Ctrl + D",
+        "D": "Alt + G"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'IntelliCode'?",
+      "options": {
+        "A": "A security scanner.",
+        "B": "AI-assisted IntelliSense that provides recommendations based on common patterns in open-source code.",
+        "C": "A tool to encrypt the source code.",
+        "D": "A feature to translate code to other languages."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use Visual Studio to manage SQL Server databases.",
+      "options": {
+        "A": "True (via SQL Server Data Tools)",
+        "B": "False",
+        "C": "Only if the database is on the same machine",
+        "D": "Only with a separate subscription"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Watch Window' used for?",
+      "options": {
+        "A": "To keep track of the time while coding.",
+        "B": "To monitor the values of specific variables as the code executes.",
+        "C": "To watch video tutorials from Microsoft.",
+        "D": "To monitor the computer's fan speed."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window allows you to view the 'Properties' of a project (like target framework)?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Project Property Pages",
+        "C": "Command Window",
+        "D": "Team Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio provides built-in tools for Unit Testing.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for NUnit",
+        "D": "Only in the paid versions"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Diagnostic Tools' window?",
+      "options": {
+        "A": "To check if the keyboard is working correctly.",
+        "B": "To monitor CPU and Memory usage of your application during debugging.",
+        "C": "To report IDE bugs to Microsoft.",
+        "D": "To fix broken DLL files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to 'Format Document'?",
+      "options": {
+        "A": "Ctrl + F",
+        "B": "Ctrl + K, Ctrl + D",
+        "C": "Ctrl + Shift + F",
+        "D": "Alt + Shift + F"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can write JavaScript and TypeScript in Visual Studio.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in Visual Studio Code",
+        "D": "Only for Windows 11 apps"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Call Hierarchy' window?",
+      "options": {
+        "A": "A list of all phone calls made to Microsoft support.",
+        "B": "A tool to see all calls to and from a selected method.",
+        "C": "A list of all team leads in the company.",
+        "D": "A way to see the order of class inheritance."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Task List' used for in Visual Studio?",
+      "options": {
+        "A": "To see the computer's background tasks.",
+        "B": "To track TODO comments and other shortcuts in your code.",
+        "C": "To manage the developers' daily schedules.",
+        "D": "To list all completed build operations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can publish your application directly to Azure from Visual Studio.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using Docker",
+        "D": "Only with an Enterprise license"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window allows you to search for all classes and members in the .NET libraries?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Object Browser",
+        "C": "Class View",
+        "D": "Output Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Peek Definition' feature?",
+      "options": {
+        "A": "It shows a preview of a definition in an inline window without switching files.",
+        "B": "It shows the definition of a word in a dictionary.",
+        "C": "It identifies hidden files in the solution.",
+        "D": "It reveals encrypted variables."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Visual Studio includes a built-in emulator for Android development.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only on AMD processors",
+        "D": "Only for Google Pixel devices"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Autos' window used for during debugging?",
+      "options": {
+        "A": "To automatically fix bugs.",
+        "B": "To see variables used in the current and previous line of code automatically.",
+        "C": "To monitor car-related APIs.",
+        "D": "To restart the computer automatically on error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut opens the 'Solution Explorer' if it is closed?",
+      "options": {
+        "A": "Ctrl + S",
+        "B": "Ctrl + Alt + L",
+        "C": "Ctrl + Shift + S",
+        "D": "Alt + F1"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports Docker containerization.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux containers",
+        "D": "Only with a separate Docker subscription"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Cleanup' in Visual Studio?",
+      "options": {
+        "A": "Deleting old projects from the hard drive.",
+        "B": "Applying a set of formatting and style rules to your code automatically.",
+        "C": "A tool that removes viruses from the solution.",
+        "D": "A way to minify the compiled EXE file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to 'pin' frequently used files to the top of the editor tab well?",
+      "options": {
+        "A": "Fast Files",
+        "B": "Pinned Tabs",
+        "C": "Sticky Files",
+        "D": "Quick Tabs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can customize keyboard shortcuts in Visual Studio.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for the F-keys",
+        "D": "Only in the Pro version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature provides suggestions for variable names and code snippets as you type?",
+      "options": {
+        "A": "Code Map",
+        "B": "IntelliSense",
+        "C": "Snippets",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the purpose of 'Any CPU' in the build configuration?",
+      "options": {
+        "A": "The program will only run on 64-bit processors.",
+        "B": "The program will run on both 32-bit and 64-bit processors based on the host OS.",
+        "C": "The program can run without a CPU.",
+        "D": "The program will run on any computer in the world."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio 2022 is a 64-bit application.",
+      "options": {
+        "A": "True",
+        "B": "False (It is still 32-bit)",
+        "C": "True, but only the Enterprise edition",
+        "D": "False, it is 128-bit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Conditional Breakpoint' used for in Visual Studio?",
+      "options": {
+        "A": "To pause execution only when the server is under high load.",
+        "B": "To pause execution only when a specific boolean expression evaluates to true.",
+        "C": "To automatically fix a bug when a specific condition is met.",
+        "D": "To skip over a block of code if a variable is null."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio allows you to debug JavaScript code running inside a Google Chrome or Microsoft Edge browser window.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise version",
+        "D": "Only if the browser is installed on a different machine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature in Visual Studio provides a visual representation of the relationships between classes and methods in your code?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Code Map",
+        "C": "Object Browser",
+        "D": "Resource View"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you run only a specific subset of unit tests in the 'Test Explorer' window?",
+      "options": {
+        "A": "By deleting all other test files temporarily.",
+        "B": "By using filters or traits (like [TestCategory]) to group and run specific tests.",
+        "C": "By renaming the tests you want to run to start with 'Run_'.",
+        "D": "Visual Studio only allows running all tests in a solution at once."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the '.editorconfig' file in a Visual Studio project?",
+      "options": {
+        "A": "To store the user's personal IDE theme preferences.",
+        "B": "To enforce consistent coding styles (like indentation and naming conventions) across the team.",
+        "C": "To configure the database connection strings for production.",
+        "D": "To list the DLL dependencies for the compiler."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Data Tips' feature allows you to see the value of a variable during debugging by hovering your mouse over it.",
+      "options": {
+        "A": "False",
+        "B": "True",
+        "C": "Only if the 'Immediate Window' is open",
+        "D": "Only for primitive types like int and string"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Extract Interface' refactoring tool do?",
+      "options": {
+        "A": "It creates a new UI for the application.",
+        "B": "It generates a new interface based on the existing members of a class.",
+        "C": "It converts a class into a database table schema.",
+        "D": "It moves all private methods to a separate file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window would you use to view and manage your Git branches and commit history?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Git Repository Window",
+        "C": "Team Explorer (Legacy) / Git Changes",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Visual Studio can automatically generate a 'Sequence Diagram' from an existing block of code.",
+      "options": {
+        "A": "True (via specific architecture tools)",
+        "B": "False",
+        "C": "Only for C++ projects",
+        "D": "Only if the code is written in Python"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'Locals' window during a debug session?",
+      "options": {
+        "A": "To see a list of all files stored on the local hard drive.",
+        "B": "To display variables that are in the scope of the current method automatically.",
+        "C": "To track the physical location of the developer.",
+        "D": "To manage local database connections."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool allows you to search for and install extensions to add new features to Visual Studio?",
+      "options": {
+        "A": "NuGet Package Manager",
+        "B": "Manage Extensions dialog",
+        "C": "Visual Studio Installer",
+        "D": "Windows Update"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use the 'Run to Cursor' command to execute code up to a specific line without setting a permanent breakpoint.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in C#",
+        "D": "Only if debugging a console app"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Symbol Server' setting allow Visual Studio to do?",
+      "options": {
+        "A": "Download mathematical symbols for use in code comments.",
+        "B": "Download debug information (.pdb files) for third-party or system libraries to enable deeper debugging.",
+        "C": "Connect to a central database of emojis.",
+        "D": "Translate the IDE interface into different languages."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you handle a 'Merge Conflict' within Visual Studio?",
+      "options": {
+        "A": "Visual Studio cannot handle conflicts; you must use the command line.",
+        "B": "Using the built-in 'Merge Editor' to compare side-by-side versions and select changes.",
+        "C": "By deleting the branch and starting over.",
+        "D": "By clicking 'Accept All' to let the server decide."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Exception Settings' window allows you to tell Visual Studio to break the execution when a specific type of exception is *thrown*, even if it is caught in a try-catch block.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for NullReferenceExceptions",
+        "D": "Only in Release mode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Project Dependencies' in the solution settings?",
+      "options": {
+        "A": "To list the names of the developers working on the project.",
+        "B": "To define the order in which projects are built within the solution.",
+        "C": "To calculate the total cost of the software license.",
+        "D": "To check if the computer has enough RAM to run the projects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to 'Find in Files' (search through the entire solution)?",
+      "options": {
+        "A": "Ctrl + F",
+        "B": "Ctrl + Shift + F",
+        "C": "Ctrl + H",
+        "D": "Alt + F"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio 'Profiles' allow you to export and import your personalized IDE settings, such as fonts and colors.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for the Enterprise edition",
+        "D": "Only via a third-party plugin"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Edit and Continue' feature do?",
+      "options": {
+        "A": "It allows you to edit your code while the app is paused in the debugger and continue execution without restarting.",
+        "B": "It allows you to edit the UI while the user is using the app.",
+        "C": "It allows two people to edit the same file at the same time.",
+        "D": "It automatically corrects typos as you type."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window is used to view the properties of the physical assembly or executable file generated after a build?",
+      "options": {
+        "A": "Output Window",
+        "B": "Solution Explorer (Right-click Project > Properties)",
+        "C": "Properties Window",
+        "D": "Object Browser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use 'Regex' (Regular Expressions) in the Visual Studio Find and Replace dialog.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the 'Pro' version",
+        "D": "Only for JavaScript files"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Command Window' used for in the IDE?",
+      "options": {
+        "A": "To run Windows CMD commands like 'dir' or 'ipconfig'.",
+        "B": "To execute Visual Studio internal commands and IDE-specific tasks via text.",
+        "C": "To type chat messages to other team members.",
+        "D": "To restart the computer."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature helps you visualize the flow of execution through complex asynchronous code?",
+      "options": {
+        "A": "Call Stack",
+        "B": "Parallel Tasks Window",
+        "C": "Immediate Window",
+        "D": "Threads Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can set a 'Tracepoint' to log a message to the Output window without pausing the execution of the program.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if you use Console.WriteLine in code",
+        "D": "Only for C++"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the difference between 'Build' and 'Rebuild'?",
+      "options": {
+        "A": "Build compiles only changed files; Rebuild cleans the solution and compiles all files from scratch.",
+        "B": "Rebuild is only for mobile apps; Build is for desktop.",
+        "C": "Build is faster but produces more bugs.",
+        "D": "There is no difference between the two commands."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window displays the 'Output' from external tools like the TypeScript compiler or NuGet?",
+      "options": {
+        "A": "Error List",
+        "B": "Output Window",
+        "C": "Task List",
+        "D": "Server Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio includes a built-in 'Performance Profiler' to analyze code bottlenecks.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise edition",
+        "D": "Only for .NET Framework, not .NET Core"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio SDK' used for?",
+      "options": {
+        "A": "To build games for the Xbox console.",
+        "B": "To create custom extensions and plugins for the Visual Studio IDE.",
+        "C": "To develop applications for the Android operating system.",
+        "D": "To manage the cloud infrastructure of the company."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you view 'Hidden' or 'All' files in the Solution Explorer that are not part of the project?",
+      "options": {
+        "A": "Press Ctrl + H.",
+        "B": "Click the 'Show All Files' icon at the top of Solution Explorer.",
+        "C": "You must open the folder in Windows Explorer.",
+        "D": "Hidden files can only be viewed in the 'Properties' window."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Multi-targetting', allowing one project to be built for multiple versions of .NET simultaneously.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for web projects",
+        "D": "Only if using the command line"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Sync' command do in the Git Changes window?",
+      "options": {
+        "A": "It restarts the local server.",
+        "B": "It performs both a Pull (Fetch + Merge) and a Push to the remote repository.",
+        "C": "It synchronizes the IDE settings with the cloud.",
+        "D": "It updates the NuGet packages to the latest version."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to see the definition of a class in a floating window *above* your current code line?",
+      "options": {
+        "A": "Go to Definition",
+        "B": "Peek Definition",
+        "C": "Quick Info",
+        "D": "Code Definition Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can drag a tab out of the main Visual Studio window to place it on a second monitor.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for C# files",
+        "D": "Only if using the Pro version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Metrics' in Visual Studio?",
+      "options": {
+        "A": "A tool that measures how much the software costs to maintain.",
+        "B": "An analysis tool that calculates complexity, maintainability, and line counts of your code.",
+        "C": "A feature that counts the number of times a user clicks a button.",
+        "D": "A way to see the file size of the compiled EXE."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut toggles the visibility of the 'Toolbox' window?",
+      "options": {
+        "A": "Ctrl + Alt + X",
+        "B": "Ctrl + T",
+        "C": "Alt + T",
+        "D": "Ctrl + Shift + B"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'IntelliCode' to learn your own specific coding patterns and suggest them back to you.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if you share your code with Microsoft",
+        "D": "Only for enterprise teams"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Object Browser'?",
+      "options": {
+        "A": "To view 3D objects for game design.",
+        "B": "To examine the namespaces, classes, and members available in your project and referenced libraries.",
+        "C": "To find items on the internet.",
+        "D": "To manage SQL database tables."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you 'Attach to Process' in Visual Studio?",
+      "options": {
+        "A": "By dragging the solution file onto a running app.",
+        "B": "Via the Debug menu > Attach to Process, to debug an app already running outside the IDE.",
+        "C": "It is done automatically when you press F5.",
+        "D": "By writing the process ID in the App.config file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Solution Folders' create actual physical folders on your hard drive.",
+      "options": {
+        "A": "False (They are logical groupings within the .sln file only)",
+        "B": "True",
+        "C": "True, but only in C++",
+        "D": "False, they are used to hide files from the compiler"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Dev Essentials' program?",
+      "options": {
+        "A": "A mandatory training course for all developers.",
+        "B": "A free program providing tools, cloud credits, and training to developers.",
+        "C": "A specialized version of the IDE for Linux.",
+        "D": "A hardware kit with a keyboard and mouse."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window is used to view the memory consumption of individual objects in a .NET app?",
+      "options": {
+        "A": "Diagnostic Tools > Memory Usage",
+        "B": "Immediate Window",
+        "C": "Output Window",
+        "D": "Task List"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use the 'Quick Launch' (Ctrl + Q) to find IDE settings as well as files.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in VS 2022",
+        "D": "Only for searching filenames"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'App.config' or 'Web.config' files?",
+      "options": {
+        "A": "To store the application's compiled binary data.",
+        "B": "To store application-wide settings and configuration in XML format.",
+        "C": "To provide the source code for the main entry point.",
+        "D": "To manage the user's desktop wallpaper."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to 'Step Out' of a function during debugging?",
+      "options": {
+        "A": "F11",
+        "B": "Shift + F11",
+        "C": "Ctrl + F11",
+        "D": "F10"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports the creation of Dockerfiles automatically through the 'Add Docker Support' command.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux based solutions",
+        "D": "Only in the Enterprise edition"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Show Definition' (Shift+F12) command do?",
+      "options": {
+        "A": "It opens a dictionary.",
+        "B": "It lists all references of the selected symbol in the solution.",
+        "C": "It shows the source code of the current file.",
+        "D": "It identifies the encrypted parts of the code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to 'stash' your Git changes temporarily without committing them?",
+      "options": {
+        "A": "Shelve",
+        "B": "Git Stash",
+        "C": "Snapshot",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Visual Studio can be used to develop Mac applications using .NET MAUI.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if the Mac is connected via network",
+        "D": "Only for iPhone apps"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Cleanup' in the context of a project's context menu?",
+      "options": {
+        "A": "Deleting all the comments in the code.",
+        "B": "Applying a set of formatting and code style rules to the entire file or project.",
+        "C": "A tool that removes the 'bin' and 'obj' folders.",
+        "D": "An antivirus scan for the source code."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool provides information about which lines of code are executed during a test run?",
+      "options": {
+        "A": "Test Explorer",
+        "B": "Code Coverage",
+        "C": "IntelliTrace",
+        "D": "Live Share"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Subword Navigation' (moving the cursor between parts of a CamelCase word).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only via extensions",
+        "D": "Only in the 'Preview' version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'Server Explorer' window?",
+      "options": {
+        "A": "To browse the web within Visual Studio.",
+        "B": "To manage connections to database servers and cloud resources like Azure.",
+        "C": "To see which other developers are online.",
+        "D": "To monitor the temperature of the server room."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to quickly navigate to any file, type, or member by typing its name?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Go To All (Ctrl + T or Ctrl + ,)",
+        "C": "IntelliSense",
+        "D": "Quick Launch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Solution User Options' (.suo) file should be committed to Git.",
+      "options": {
+        "A": "False (It contains user-specific state and should be ignored)",
+        "B": "True",
+        "C": "True, but only for team projects",
+        "D": "Only if the solution is encrypted"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Live Unit Testing' in Visual Studio?",
+      "options": {
+        "A": "A tool that runs tests on the production server.",
+        "B": "A feature that automatically runs affected unit tests in the background as you type code.",
+        "C": "A way to stream your unit tests to a live audience.",
+        "D": "A test that measures the 'liveness' of the network connection."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window allows you to view the hierarchy of class inheritance for a selected type?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Class Hierarchy window",
+        "C": "Object Browser",
+        "D": "Property Pages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can 'Pin' a debug value so it remains visible even after the mouse moves away from the variable.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for primitive types",
+        "D": "Only in the 'Immediate Window'"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Command Prompt'?",
+      "options": {
+        "A": "A chat tool for developers.",
+        "B": "A shell that has the proper environment variables set to run developer tools like MSBuild or csc.",
+        "C": "A way to send commands to Microsoft support.",
+        "D": "A specialized tool for hacking the IDE."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to see the history of your clipboard and paste previous items?",
+      "options": {
+        "A": "Clipboard Ring (Ctrl + Shift + V)",
+        "B": "History Paste",
+        "C": "Sticky Notes",
+        "D": "IntelliPaste"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Visual Studio supports the editing of XAML files with a visual 'Designer' view.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the 'Enterprise' edition",
+        "D": "Only for WPF projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'IntelliTrace'?",
+      "options": {
+        "A": "A tool that draws pictures of the code.",
+        "B": "A historical debugging feature that allows you to see the state of the app at previous points in time.",
+        "C": "A feature that predicts the next line of code.",
+        "D": "A database for tracking bug reports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to create a 'Package' (VSIX) to share your Visual Studio extension?",
+      "options": {
+        "A": "NuGet",
+        "B": "Visual Studio SDK",
+        "C": "MSBuild",
+        "D": "Windows Installer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can set 'Function Breakpoints' to break execution whenever a specific function is called, regardless of where it is in the source code.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for internal project functions",
+        "D": "Only in C++"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Resource View' window used for?",
+      "options": {
+        "A": "To see the server's CPU and RAM.",
+        "B": "To manage non-code assets like icons, cursors, and dialog boxes in C++ projects.",
+        "C": "To view a list of all human resources in the company.",
+        "D": "To monitor the network traffic."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature provides a list of all the 'TODO' comments in your solution?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Task List",
+        "C": "Error List",
+        "D": "Call Stack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use Visual Studio to write and debug code that runs on Linux using WSL (Windows Subsystem for Linux).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the 'Preview' version",
+        "D": "Only for Python code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the 'Global Config' file in MSBuild architecture?",
+      "options": {
+        "A": "To store the user's personal desktop wallpaper settings.",
+        "B": "To provide a way to define properties and items that apply to every build on a machine.",
+        "C": "To act as a backup for the Solution (.sln) file.",
+        "D": "To list all the names of the developers allowed to run a build."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio's 'Static Code Analysis' can detect security vulnerabilities like SQL Injection directly in the source code.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Community edition",
+        "D": "Only if the database is currently connected"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of 'VSIX' development, what is the 'Synchronous Auto-load' policy?",
+      "options": {
+        "A": "A feature that makes extensions load faster by using more CPU.",
+        "B": "A deprecated practice that blocks the UI thread until an extension is loaded.",
+        "C": "A method to automatically update all extensions at midnight.",
+        "D": "A way to synchronize extensions across multiple computers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool in Visual Studio would you use to analyze a '.dmp' (Memory Dump) file from a production crash?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Visual Studio Debugger (via Open File)",
+        "C": "NuGet Package Manager",
+        "D": "Server Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'IntelliTrace' can record every single call to the .NET CLR, allowing you to debug 'backward' in time.",
+      "options": {
+        "A": "True (Only in Enterprise edition)",
+        "B": "False",
+        "C": "True (In all editions since 2019)",
+        "D": "Only for C++ unmanaged code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'Code Map' feature in architectural analysis?",
+      "options": {
+        "A": "To show the GPS coordinates of the data center.",
+        "B": "To visually represent dependencies and call paths across large codebases.",
+        "C": "To create a 3D model of the class structure for printing.",
+        "D": "To identify which lines of code were written by an AI."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'Reference Trimming' in the build process improve application performance?",
+      "options": {
+        "A": "By deleting all the comments from the source code.",
+        "B": "By removing unused assemblies and types from the final output binary.",
+        "C": "By compressing the images stored in the project folder.",
+        "D": "By reducing the font size of the code in the editor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Remote Debugging' for applications running on a Linux container via SSH.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Python, not C#",
+        "D": "Only in the 'Preview' version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Private Assemblies' in the .NET build ecosystem?",
+      "options": {
+        "A": "Assemblies that are encrypted so only the admin can read them.",
+        "B": "Assemblies that are deployed in the same directory as the application to avoid version conflicts.",
+        "C": "Assemblies that are stored on a private physical server.",
+        "D": "Assemblies that are hidden from the 'Solution Explorer'."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window allows you to inspect the 'IL' (Intermediate Language) of a compiled .NET assembly?",
+      "options": {
+        "A": "Output Window",
+        "B": "IL Disassembler (ildasm.exe) via External Tools",
+        "C": "Properties Window",
+        "D": "Object Browser"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'VSPackage' is the primary architectural unit for creating deep integrations into the Visual Studio IDE.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UI themes",
+        "D": "Only for database connectors"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Heap Profiling' in the Diagnostic Tools window?",
+      "options": {
+        "A": "A tool to measure the height of the physical server rack.",
+        "B": "Analyzing the memory allocation of objects to find memory leaks.",
+        "C": "A method to clean up a messy codebase.",
+        "D": "A tool that counts the number of files in the project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'MSBuild' property is used to specify the output path for compiled binaries?",
+      "options": {
+        "A": "<DestinationPath>",
+        "B": "<OutputPath>",
+        "C": "<BinaryFolder>",
+        "D": "<TargetDir>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can perform 'Fuzz Testing' on web APIs using specific extensions.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for C++ code",
+        "D": "Only if using Docker"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Command Table' (.vsct) file used for?",
+      "options": {
+        "A": "To store a list of all SQL tables in the database.",
+        "B": "To define the placement, look, and feel of menus and toolbars in an extension.",
+        "C": "To log all commands typed into the 'Immediate Window'.",
+        "D": "To set the keyboard shortcuts for Windows 11."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In advanced debugging, what does 'Just My Code' (JMC) do?",
+      "options": {
+        "A": "It prevents other team members from seeing your code.",
+        "B": "It restricts the debugger from stepping into system, framework, or third-party libraries.",
+        "C": "It only allows the program to run on the developer's machine.",
+        "D": "It identifies code that was written by the user versus an AI."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use the 'Solution Filter' (.slnf) to open only a specific subset of projects in a large solution to improve performance.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise version",
+        "D": "Only if using the command line"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'MEF' (Managed Extensibility Framework) used for in Visual Studio?",
+      "options": {
+        "A": "To manage the server's cloud electricity usage.",
+        "B": "To allow the IDE to discover and load extension components without a central registry.",
+        "C": "To encrypt the communication between the client and server.",
+        "D": "To manage different versions of the .NET framework."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which feature allows you to 'Profile' the energy consumption of your application for mobile devices?",
+      "options": {
+        "A": "Diagnostic Tools",
+        "B": "Energy Consumption Profiler",
+        "C": "Task List",
+        "D": "Resource View"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can generate 'Unit Test' stubs automatically from existing code using IntelliTest.",
+      "options": {
+        "A": "True (Enterprise only)",
+        "B": "False",
+        "C": "True (All editions)",
+        "D": "Only for C++"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Target Framework Moniker' (TFM)?",
+      "options": {
+        "A": "A unique name for a specific server instance.",
+        "B": "A standardized string used to identify the version of .NET the project is targeting (e.g., net8.0).",
+        "C": "The name of the project's primary developer.",
+        "D": "The encryption key for the solution file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which shortcut is used to open the 'Call Stack' window during a debug session?",
+      "options": {
+        "A": "Ctrl + Alt + L",
+        "B": "Ctrl + Alt + C",
+        "C": "Ctrl + Alt + S",
+        "D": "Ctrl + Shift + C"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can set a 'Data Breakpoint' that pauses execution when the value of a specific memory address changes.",
+      "options": {
+        "A": "True (Mainly for C++ and .NET Core 3+)",
+        "B": "False",
+        "C": "Only for global variables",
+        "D": "Only in Release mode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Shell' (Isolated or Integrated)?",
+      "options": {
+        "A": "A physical case for the server hardware.",
+        "B": "A way to build your own application using the Visual Studio IDE as a base.",
+        "C": "A specialized terminal for running Linux commands.",
+        "D": "The part of the IDE that handles file saves."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Threads' window, what does 'Freezing' a thread do?",
+      "options": {
+        "A": "It stops the computer's CPU entirely.",
+        "B": "It prevents a specific thread from executing while you debug other parts of the application.",
+        "C": "It deletes the thread from memory.",
+        "D": "It saves the thread's state to a file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use 'Custom Debugger Visualizers' to create your own way of viewing complex data types during debugging.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Pro version",
+        "D": "Only for strings and arrays"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Source Link' in Visual Studio?",
+      "options": {
+        "A": "A way to link two different projects together.",
+        "B": "A technology that allows the debugger to download source code for NuGet packages from Git.",
+        "C": "A tool to search for source code on the internet.",
+        "D": "A database of all user commits."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which MSBuild 'Task' is used to copy files from one location to another?",
+      "options": {
+        "A": "<Move>",
+        "B": "<Copy>",
+        "C": "<Transfer>",
+        "D": "<Sync>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio Enterprise allows you to perform 'Time Travel Debugging' on unmanaged code.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Preview version",
+        "D": "Only for C# code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Telemetry' and can it be disabled?",
+      "options": {
+        "A": "A feature to measure network speed; cannot be disabled.",
+        "B": "Usage data sent to Microsoft to improve the IDE; it can be disabled in settings.",
+        "C": "A tool to monitor team member activity; can only be disabled by the admin.",
+        "D": "A database of all user passwords; cannot be disabled."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Performance Profiler', what does 'Hot Path' analysis identify?",
+      "options": {
+        "A": "The physical path the developer takes to work.",
+        "B": "The sequence of function calls that consumes the most CPU time.",
+        "C": "A list of files that are frequently edited.",
+        "D": "The fastest route to the production server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Live Unit Testing' for both MSTest, xUnit, and nUnit frameworks.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for MSTest",
+        "D": "Only for .NET Framework projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Architecture Explorer' window?",
+      "options": {
+        "A": "To find hidden files in the solution.",
+        "B": "To explore and visualize the structural composition of the codebase.",
+        "C": "To search for server room blueprints.",
+        "D": "To manage the cloud billing of the projects."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which tool would you use to 'Sign' your assembly with a strong name (SNK file)?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Project Properties > Signing tab",
+        "C": "NuGet Manager",
+        "D": "Server Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can 'Attach to Process' and debug a process running inside a Docker container.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if the container is Linux",
+        "D": "Only in the Pro version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Application Insights' integration in Visual Studio used for?",
+      "options": {
+        "A": "To see what other developers are typing.",
+        "B": "To monitor application performance and usage patterns in production.",
+        "C": "To find bugs in the IDE itself.",
+        "D": "To manage the user's social media accounts."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MSBuild, what is the 'Condition' attribute used for?",
+      "options": {
+        "A": "To check if the computer is turned on.",
+        "B": "To execute a task or set a property only if a specific expression is true.",
+        "C": "To determine the font color of the build log.",
+        "D": "To limit the build speed to 50%."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can debug 'Transact-SQL' (T-SQL) stored procedures directly.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for local databases",
+        "D": "Only for the Enterprise version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Map' dependency validation?",
+      "options": {
+        "A": "A tool that checks if the code follows a specific diagram.",
+        "B": "A feature to ensure that code changes do not violate architectural constraints.",
+        "C": "A way to validate the GPS location of the code.",
+        "D": "A test that checks if the map is drawing correctly."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window shows the 'GCRoot' (Garbage Collector Root) of an object in memory?",
+      "options": {
+        "A": "Memory Usage Window",
+        "B": "Object Browser",
+        "C": "Solution Explorer",
+        "D": "Immediate Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: You can use 'GitHub Copilot' inside Visual Studio to generate code suggestions.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in Visual Studio Code",
+        "D": "Only for open source projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Service Provider' pattern in extensibility?",
+      "options": {
+        "A": "A company that sells cloud services.",
+        "B": "A mechanism for extensions to request core services from the IDE (like IVsOutputWindow).",
+        "C": "A way to provide customer support to users.",
+        "D": "A database of all available extensions."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Diagnostic Tools', what does the 'Events' tab show?",
+      "options": {
+        "A": "A calendar of upcoming company events.",
+        "B": "A timeline of events like breakpoints, exceptions, and GC collections.",
+        "C": "A list of all users who logged in.",
+        "D": "The history of all build errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Collaborative Debugging' where multiple people can step through the same code execution simultaneously via Live Share.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for the Pro version",
+        "D": "Only if they are on the same network"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Native Code Debugging' in a .NET project?",
+      "options": {
+        "A": "Debugging code that only works in the user's home country.",
+        "B": "Allowing the debugger to step into unmanaged C++ code called by .NET via P/Invoke.",
+        "C": "Debugging code written in a local language.",
+        "D": "A way to debug the hardware motherboard."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'MSBuild' item is used to include source files in a project?",
+      "options": {
+        "A": "<File>",
+        "B": "<Compile>",
+        "C": "<Source>",
+        "D": "<Script>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio Enterprise includes a 'Dependency Validation' project template.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in VS 2017",
+        "D": "Only for C++ code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Parallel Stacks' window?",
+      "options": {
+        "A": "To see the stacks of two different applications at once.",
+        "B": "To visualize the relationship between threads and their call stacks in a multi-threaded app.",
+        "C": "To stack projects on top of each other.",
+        "D": "To monitor the parallel execution of the build server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In extensibility, what is a 'DTE' (Development Tools Environment) object?",
+      "options": {
+        "A": "A tool to measure the IDE temperature.",
+        "B": "The top-level automation object used to programmatically control the Visual Studio IDE.",
+        "C": "A database for storing developer profiles.",
+        "D": "A way to reset the IDE settings."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can 'Pin' a specific tab in the 'Error List' to keep only certain errors visible.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise version",
+        "D": "Only for compiler warnings"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Mixed Mode Debugging'?",
+      "options": {
+        "A": "Debugging code that is written in both English and Spanish.",
+        "B": "Debugging an application that contains both managed (.NET) and unmanaged (C++) code simultaneously.",
+        "C": "Debugging code on both a local and a remote server at the same time.",
+        "D": "A way to debug both the frontend and backend in one window."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window allows you to view and edit 'Resources' (like localized strings) in a .resx file?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Managed Resource Editor",
+        "C": "Object Browser",
+        "D": "Properties Window"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can generate 'Code Metrics' for an entire solution at once.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise edition",
+        "D": "Only for C# projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'Object ID' feature in debugging?",
+      "options": {
+        "A": "To give the object a name in the database.",
+        "B": "To track a specific object instance across different scopes and time in the debugger (e.g., $1).",
+        "C": "To identify the physical hard drive ID where the object is stored.",
+        "D": "To encrypt the object's properties."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Diagnostic Tools', what does the 'Memory Usage' snapshot capture?",
+      "options": {
+        "A": "A screenshot of the RAM sticks.",
+        "B": "A breakdown of all objects on the managed heap at a specific moment in time.",
+        "C": "A list of all users who used the application.",
+        "D": "The history of all memory allocation errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'GitHub Actions' integration for CI/CD natively from the Publish dialog.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Azure projects",
+        "D": "Only in the Pro version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'IntelliCode Whole Line Completions'?",
+      "options": {
+        "A": "A tool that predicts the next file to open.",
+        "B": "An AI feature that suggests the entire next line of code based on context.",
+        "C": "A way to complete the whole build in one second.",
+        "D": "A feature that identifies hidden lines in the solution."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'MSBuild' property defines the target OS of the build?",
+      "options": {
+        "A": "<TargetOS>",
+        "B": "<RuntimeIdentifier> (RID)",
+        "C": "<SystemType>",
+        "D": "<Platform>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio can be used to debug code running on an 'Arduino' board using specific extensions.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for the Enterprise version",
+        "D": "Only for ARM-based boards"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'Code Coverage' window?",
+      "options": {
+        "A": "To see how much code is covered by the IDE window.",
+        "B": "To show the percentage of code lines executed by unit tests.",
+        "C": "To identify code that is covered by a password.",
+        "D": "To measure the size of the code files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Diagnostic Tools', what does 'GC' indicate on the timeline?",
+      "options": {
+        "A": "Global Configuration.",
+        "B": "Garbage Collection event.",
+        "C": "Great Code rating.",
+        "D": "General Command."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Live Unit Testing' for C++ code.",
+      "options": {
+        "A": "False (Only for .NET code)",
+        "B": "True",
+        "C": "Only in the Pro version",
+        "D": "Only for C++20"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Visual Studio Host Process' (vshost.exe)?",
+      "options": {
+        "A": "A person who hosts the Visual Studio tutorials.",
+        "B": "A feature that speeds up debugging by keeping the application domain ready (deprecated in newer versions).",
+        "C": "A specialized terminal for running host commands.",
+        "D": "The part of the IDE that handles network requests."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which window shows the 'Disassembly' of the current method during a debug session?",
+      "options": {
+        "A": "Output Window",
+        "B": "Disassembly Window",
+        "C": "Immediate Window",
+        "D": "Solution Explorer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can use 'Docker Compose' to debug multi-container applications in Visual Studio.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux containers",
+        "D": "Only in the Enterprise version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Code Metrics' maintainability index?",
+      "options": {
+        "A": "A score from 0-100 indicating how easy it is to maintain the code.",
+        "B": "The total number of maintainers assigned to the project.",
+        "C": "A database of all user edits.",
+        "D": "The cost of maintaining the server per month."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'MSBuild' item is used to include non-code files like images in the project output?",
+      "options": {
+        "A": "<File>",
+        "B": "<Content>",
+        "C": "<Asset>",
+        "D": "<Resource>"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Visual Studio supports 'Parallel Builds' to speed up the compilation of large solutions.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the Enterprise version",
+        "D": "Only for C# projects"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is Microsoft Visual Studio primarily used for?",
+      "options": {
+        "A": "Software development IDE",
+        "B": "Database server",
+        "C": "Operating system",
+        "D": "Web browser"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which languages are supported by Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "C#",
+        "B": "C++",
+        "C": "Python",
+        "D": "HTML"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio is an Integrated Development Environment (IDE).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which company develops Visual Studio?",
+      "options": {
+        "A": "Microsoft",
+        "B": "Google",
+        "C": "Apple",
+        "D": "Oracle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which components are part of Visual Studio IDE? (Select all that apply)",
+      "options": {
+        "A": "Code Editor",
+        "B": "Debugger",
+        "C": "Compiler",
+        "D": "Version Control"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports IntelliSense for code suggestions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps detect syntax errors while coding?",
+      "options": {
+        "A": "IntelliSense",
+        "B": "Task Manager",
+        "C": "Scheduler",
+        "D": "Package Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which project types can be created in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Console Applications",
+        "B": "Web Applications",
+        "C": "Mobile Apps",
+        "D": "Desktop Apps"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports debugging tools.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which key runs a program in Visual Studio?",
+      "options": {
+        "A": "F5",
+        "B": "F1",
+        "C": "F3",
+        "D": "F9"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging actions are available in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Step Into",
+        "B": "Step Over",
+        "C": "Step Out",
+        "D": "Continue"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Breakpoints pause program execution for debugging.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window shows errors and warnings?",
+      "options": {
+        "A": "Error List",
+        "B": "Output Window",
+        "C": "Toolbox",
+        "D": "Solution Explorer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio windows help manage project structure? (Select all that apply)",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Server Explorer",
+        "C": "Team Explorer",
+        "D": "Toolbox"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Solution Explorer displays files and folders in a project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is used to design UI in Windows Forms?",
+      "options": {
+        "A": "Form Designer",
+        "B": "Code Designer",
+        "C": "UI Console",
+        "D": "Layout Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which UI technologies are supported by Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "WinForms",
+        "B": "WPF",
+        "C": "ASP.NET",
+        "D": "MAUI"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports drag-and-drop UI design.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps manage NuGet packages?",
+      "options": {
+        "A": "NuGet Package Manager",
+        "B": "Extension Manager",
+        "C": "Plugin Loader",
+        "D": "Dependency Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tasks can NuGet perform? (Select all that apply)",
+      "options": {
+        "A": "Install packages",
+        "B": "Update packages",
+        "C": "Remove packages",
+        "D": "Manage dependencies"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: NuGet packages add external libraries to projects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which menu creates new projects?",
+      "options": {
+        "A": "File → New Project",
+        "B": "Edit → Project",
+        "C": "Build → New",
+        "D": "Run → Project"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which build actions exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Build",
+        "B": "Rebuild",
+        "C": "Clean",
+        "D": "Publish"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Build compiles the code into executable format.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature integrates Git in Visual Studio?",
+      "options": {
+        "A": "Git Changes",
+        "B": "Code Merge",
+        "C": "Commit Tool",
+        "D": "Repository Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Git operations can Visual Studio perform? (Select all that apply)",
+      "options": {
+        "A": "Commit",
+        "B": "Push",
+        "C": "Pull",
+        "D": "Branch"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio has built-in Git support.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which panel shows program output during execution?",
+      "options": {
+        "A": "Output Window",
+        "B": "Console Window",
+        "C": "Execution Panel",
+        "D": "Debug Panel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tools assist in debugging? (Select all that apply)",
+      "options": {
+        "A": "Watch Window",
+        "B": "Immediate Window",
+        "C": "Call Stack",
+        "D": "Locals Window"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Watch window tracks variable values during debugging.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature suggests code automatically?",
+      "options": {
+        "A": "IntelliSense",
+        "B": "AutoFix",
+        "C": "CodeSuggest",
+        "D": "PredictCode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which IntelliSense features exist? (Select all that apply)",
+      "options": {
+        "A": "Auto-completion",
+        "B": "Parameter info",
+        "C": "Quick info",
+        "D": "Error highlighting"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: IntelliSense increases coding productivity.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature allows installing additional tools and extensions?",
+      "options": {
+        "A": "Extension Manager",
+        "B": "Plugin Loader",
+        "C": "Tool Installer",
+        "D": "Addon Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which types of extensions can be installed in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Themes",
+        "B": "Language support",
+        "C": "Productivity tools",
+        "D": "Debugging tools"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio Marketplace provides extensions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which key sets a breakpoint in Visual Studio?",
+      "options": {
+        "A": "F9",
+        "B": "F2",
+        "C": "F8",
+        "D": "F10"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging windows help inspect program state? (Select all that apply)",
+      "options": {
+        "A": "Watch",
+        "B": "Locals",
+        "C": "Autos",
+        "D": "Call Stack"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Breakpoints stop execution at a specific line.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature formats code automatically?",
+      "options": {
+        "A": "Code Formatting",
+        "B": "Auto Build",
+        "C": "Syntax Runner",
+        "D": "Editor Engine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio features help improve code quality? (Select all that apply)",
+      "options": {
+        "A": "Code Analysis",
+        "B": "Refactoring",
+        "C": "Static Analysis",
+        "D": "Code Metrics"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Refactoring improves code structure without changing behavior.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command renames variables safely across project?",
+      "options": {
+        "A": "Rename Refactor",
+        "B": "Replace",
+        "C": "Edit Rename",
+        "D": "Rename All"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which refactoring options exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Rename",
+        "B": "Extract Method",
+        "C": "Inline Variable",
+        "D": "Move Type"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Extract Method creates a new method from selected code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window manages project dependencies?",
+      "options": {
+        "A": "NuGet Package Manager",
+        "B": "Dependency Viewer",
+        "C": "Project Tools",
+        "D": "Library Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tasks can be performed in Package Manager Console? (Select all that apply)",
+      "options": {
+        "A": "Install package",
+        "B": "Update package",
+        "C": "Remove package",
+        "D": "Restore packages"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: NuGet helps manage third-party libraries.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio window displays running tasks?",
+      "options": {
+        "A": "Task List",
+        "B": "Output",
+        "C": "Progress Window",
+        "D": "Monitor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tasks can Task List track? (Select all that apply)",
+      "options": {
+        "A": "TODO comments",
+        "B": "User tasks",
+        "C": "Shortcuts",
+        "D": "Errors"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: TODO comments appear automatically in Task List.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio component builds and compiles projects?",
+      "options": {
+        "A": "Build System",
+        "B": "Compiler Engine",
+        "C": "Execution Tool",
+        "D": "Build Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which build outputs can Visual Studio produce? (Select all that apply)",
+      "options": {
+        "A": "DLL",
+        "B": "EXE",
+        "C": "NuGet Package",
+        "D": "Installer"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Rebuild performs clean and build operations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature integrates Azure development?",
+      "options": {
+        "A": "Azure Tools",
+        "B": "Cloud Studio",
+        "C": "Azure Manager",
+        "D": "Cloud Console"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Azure operations can Visual Studio perform? (Select all that apply)",
+      "options": {
+        "A": "Deploy web apps",
+        "B": "Manage cloud resources",
+        "C": "Publish services",
+        "D": "Monitor applications"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports cloud development with Azure.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature provides graphical debugging visualization?",
+      "options": {
+        "A": "Diagnostic Tools",
+        "B": "Graph Debugger",
+        "C": "Debug Monitor",
+        "D": "Runtime Viewer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which diagnostic tools exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Memory Usage",
+        "B": "CPU Usage",
+        "C": "Network Usage",
+        "D": "Events"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Diagnostic tools help analyze application performance.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool helps profile application performance?",
+      "options": {
+        "A": "Performance Profiler",
+        "B": "Code Scanner",
+        "C": "Analyzer",
+        "D": "Speed Monitor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which profiling metrics can Visual Studio track? (Select all that apply)",
+      "options": {
+        "A": "CPU usage",
+        "B": "Memory allocation",
+        "C": "Execution time",
+        "D": "Thread activity"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Performance profiler helps identify bottlenecks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window displays toolbox controls for UI design?",
+      "options": {
+        "A": "Toolbox",
+        "B": "UI Controls",
+        "C": "Designer Window",
+        "D": "Widget Panel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which UI elements can Toolbox contain? (Select all that apply)",
+      "options": {
+        "A": "Buttons",
+        "B": "TextBoxes",
+        "C": "Labels",
+        "D": "Panels"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Toolbox items can be dragged onto forms.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio window shows the structure of the current solution?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Project Window",
+        "C": "Structure Panel",
+        "D": "Solution Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tasks can be done in Solution Explorer? (Select all that apply)",
+      "options": {
+        "A": "Add files",
+        "B": "Remove files",
+        "C": "Rename files",
+        "D": "Organize folders"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Solution Explorer displays all projects within a solution.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps developers collaborate with teams in Visual Studio?",
+      "options": {
+        "A": "Team Explorer",
+        "B": "Project Viewer",
+        "C": "Code Hub",
+        "D": "Team Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operations can Team Explorer perform? (Select all that apply)",
+      "options": {
+        "A": "Clone repositories",
+        "B": "Commit code",
+        "C": "Push changes",
+        "D": "Pull updates"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Team Explorer integrates Git and Azure DevOps.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command starts debugging without stopping at breakpoints?",
+      "options": {
+        "A": "Ctrl + F5",
+        "B": "F5",
+        "C": "Shift + F5",
+        "D": "F9"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging shortcuts exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "F5 - Start Debugging",
+        "B": "F10 - Step Over",
+        "C": "F11 - Step Into",
+        "D": "Shift + F5 - Stop Debugging"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Step Over executes a method without entering it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature analyzes code quality?",
+      "options": {
+        "A": "Code Analysis",
+        "B": "Syntax Checker",
+        "C": "Code Guard",
+        "D": "Quality Engine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which code metrics can Visual Studio calculate? (Select all that apply)",
+      "options": {
+        "A": "Maintainability Index",
+        "B": "Cyclomatic Complexity",
+        "C": "Lines of Code",
+        "D": "Class Coupling"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code metrics help measure maintainability of software.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window allows evaluating expressions during debugging?",
+      "options": {
+        "A": "Immediate Window",
+        "B": "Expression Panel",
+        "C": "Debug Console",
+        "D": "Output Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging information can be inspected in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Variables",
+        "B": "Call stack",
+        "C": "Threads",
+        "D": "Memory"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Immediate Window allows executing code during debugging.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature highlights syntax errors while typing?",
+      "options": {
+        "A": "Syntax Highlighting",
+        "B": "Error Scanner",
+        "C": "Code Validator",
+        "D": "Syntax Guard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which editor features exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Syntax highlighting",
+        "B": "Code folding",
+        "C": "Auto indentation",
+        "D": "Bracket matching"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code folding hides blocks of code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command formats entire document?",
+      "options": {
+        "A": "Ctrl + K, Ctrl + D",
+        "B": "Ctrl + Shift + F",
+        "C": "Ctrl + Alt + D",
+        "D": "Shift + F10"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyboard shortcuts improve productivity in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Ctrl + Space",
+        "B": "Ctrl + .",
+        "C": "Ctrl + K + C",
+        "D": "Ctrl + K + U"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Ctrl + K + C comments selected code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is used for database development in Visual Studio?",
+      "options": {
+        "A": "SQL Server Object Explorer",
+        "B": "Database Manager",
+        "C": "Data Tools",
+        "D": "SQL Explorer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which database operations can be performed in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Create tables",
+        "B": "Write queries",
+        "C": "Execute stored procedures",
+        "D": "Manage connections"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio integrates SQL Server tools.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature publishes applications?",
+      "options": {
+        "A": "Publish Wizard",
+        "B": "Deploy Manager",
+        "C": "Release Tool",
+        "D": "Build Publisher"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which publish targets are supported? (Select all that apply)",
+      "options": {
+        "A": "Azure",
+        "B": "Folder",
+        "C": "FTP",
+        "D": "Docker"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports containerized deployments.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature manages external libraries in .NET projects?",
+      "options": {
+        "A": "NuGet",
+        "B": "Package Hub",
+        "C": "Library Manager",
+        "D": "Dependency Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which NuGet operations exist? (Select all that apply)",
+      "options": {
+        "A": "Install",
+        "B": "Update",
+        "C": "Restore",
+        "D": "Remove"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: NuGet helps manage project dependencies.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window shows runtime messages during debugging?",
+      "options": {
+        "A": "Output Window",
+        "B": "Console Panel",
+        "C": "Runtime Window",
+        "D": "Debug Console"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which information can Output Window display? (Select all that apply)",
+      "options": {
+        "A": "Build logs",
+        "B": "Debug messages",
+        "C": "Program output",
+        "D": "Deployment logs"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Output Window helps track program execution details.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio window shows the structure of the current solution?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Project Window",
+        "C": "Structure Panel",
+        "D": "Solution Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tasks can be done in Solution Explorer? (Select all that apply)",
+      "options": {
+        "A": "Add files",
+        "B": "Remove files",
+        "C": "Rename files",
+        "D": "Organize folders"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Solution Explorer displays all projects within a solution.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps developers collaborate with teams in Visual Studio?",
+      "options": {
+        "A": "Team Explorer",
+        "B": "Project Viewer",
+        "C": "Code Hub",
+        "D": "Team Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operations can Team Explorer perform? (Select all that apply)",
+      "options": {
+        "A": "Clone repositories",
+        "B": "Commit code",
+        "C": "Push changes",
+        "D": "Pull updates"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Team Explorer integrates Git and Azure DevOps.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command starts debugging without stopping at breakpoints?",
+      "options": {
+        "A": "Ctrl + F5",
+        "B": "F5",
+        "C": "Shift + F5",
+        "D": "F9"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging shortcuts exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "F5 - Start Debugging",
+        "B": "F10 - Step Over",
+        "C": "F11 - Step Into",
+        "D": "Shift + F5 - Stop Debugging"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Step Over executes a method without entering it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature analyzes code quality?",
+      "options": {
+        "A": "Code Analysis",
+        "B": "Syntax Checker",
+        "C": "Code Guard",
+        "D": "Quality Engine"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which code metrics can Visual Studio calculate? (Select all that apply)",
+      "options": {
+        "A": "Maintainability Index",
+        "B": "Cyclomatic Complexity",
+        "C": "Lines of Code",
+        "D": "Class Coupling"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code metrics help measure maintainability of software.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window allows evaluating expressions during debugging?",
+      "options": {
+        "A": "Immediate Window",
+        "B": "Expression Panel",
+        "C": "Debug Console",
+        "D": "Output Window"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging information can be inspected in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Variables",
+        "B": "Call stack",
+        "C": "Threads",
+        "D": "Memory"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Immediate Window allows executing code during debugging.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature highlights syntax errors while typing?",
+      "options": {
+        "A": "Syntax Highlighting",
+        "B": "Error Scanner",
+        "C": "Code Validator",
+        "D": "Syntax Guard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which editor features exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Syntax highlighting",
+        "B": "Code folding",
+        "C": "Auto indentation",
+        "D": "Bracket matching"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code folding hides blocks of code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command formats entire document?",
+      "options": {
+        "A": "Ctrl + K, Ctrl + D",
+        "B": "Ctrl + Shift + F",
+        "C": "Ctrl + Alt + D",
+        "D": "Shift + F10"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which keyboard shortcuts improve productivity in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Ctrl + Space",
+        "B": "Ctrl + .",
+        "C": "Ctrl + K + C",
+        "D": "Ctrl + K + U"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Ctrl + K + C comments selected code.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which tool is used for database development in Visual Studio?",
+      "options": {
+        "A": "SQL Server Object Explorer",
+        "B": "Database Manager",
+        "C": "Data Tools",
+        "D": "SQL Explorer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which database operations can be performed in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Create tables",
+        "B": "Write queries",
+        "C": "Execute stored procedures",
+        "D": "Manage connections"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio integrates SQL Server tools.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature publishes applications?",
+      "options": {
+        "A": "Publish Wizard",
+        "B": "Deploy Manager",
+        "C": "Release Tool",
+        "D": "Build Publisher"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which publish targets are supported? (Select all that apply)",
+      "options": {
+        "A": "Azure",
+        "B": "Folder",
+        "C": "FTP",
+        "D": "Docker"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio supports containerized deployments.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature manages external libraries in .NET projects?",
+      "options": {
+        "A": "NuGet",
+        "B": "Package Hub",
+        "C": "Library Manager",
+        "D": "Dependency Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which NuGet operations exist? (Select all that apply)",
+      "options": {
+        "A": "Install",
+        "B": "Update",
+        "C": "Restore",
+        "D": "Remove"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: NuGet helps manage project dependencies.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which window shows runtime messages during debugging?",
+      "options": {
+        "A": "Output Window",
+        "B": "Console Panel",
+        "C": "Runtime Window",
+        "D": "Debug Console"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which information can Output Window display? (Select all that apply)",
+      "options": {
+        "A": "Build logs",
+        "B": "Debug messages",
+        "C": "Program output",
+        "D": "Deployment logs"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Output Window helps track program execution details.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature shows the list of all files in a project?",
+      "options": {
+        "A": "Solution Explorer",
+        "B": "Project Panel",
+        "C": "File Browser",
+        "D": "Workspace Viewer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which operations can be done from Solution Explorer? (Select all that apply)",
+      "options": {
+        "A": "Add new file",
+        "B": "Rename file",
+        "C": "Delete file",
+        "D": "Open file"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Solution Explorer organizes files in hierarchical structure.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool helps locate text in a project?",
+      "options": {
+        "A": "Find in Files",
+        "B": "Search Window",
+        "C": "Text Finder",
+        "D": "Code Search"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which search options exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Find",
+        "B": "Replace",
+        "C": "Find in Files",
+        "D": "Replace in Files"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Replace in Files updates text across multiple files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature helps preview code changes before applying them?",
+      "options": {
+        "A": "Preview Changes",
+        "B": "Code Review",
+        "C": "Diff Viewer",
+        "D": "Preview Panel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which version control actions exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Commit",
+        "B": "Push",
+        "C": "Pull",
+        "D": "Merge"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio has built-in Git integration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool analyzes memory usage?",
+      "options": {
+        "A": "Memory Profiler",
+        "B": "Heap Monitor",
+        "C": "Memory Viewer",
+        "D": "Memory Analyzer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which diagnostic metrics can be monitored? (Select all that apply)",
+      "options": {
+        "A": "CPU Usage",
+        "B": "Memory Usage",
+        "C": "Network Usage",
+        "D": "Events"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Diagnostic tools help detect performance issues.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool monitors running threads?",
+      "options": {
+        "A": "Threads Window",
+        "B": "Thread Manager",
+        "C": "Runtime Viewer",
+        "D": "Thread Inspector"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which debugging data can be inspected? (Select all that apply)",
+      "options": {
+        "A": "Variables",
+        "B": "Threads",
+        "C": "Call stack",
+        "D": "Memory"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Call Stack shows function execution path.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool manages project references?",
+      "options": {
+        "A": "Reference Manager",
+        "B": "Dependency Viewer",
+        "C": "Library Manager",
+        "D": "Assembly Tool"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which reference types exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Project reference",
+        "B": "Assembly reference",
+        "C": "NuGet package",
+        "D": "COM reference"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Reference Manager manages dependencies between projects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows remote collaborative coding?",
+      "options": {
+        "A": "Live Share",
+        "B": "Team Coding",
+        "C": "Shared Code",
+        "D": "Code Sync"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Live Share capabilities exist? (Select all that apply)",
+      "options": {
+        "A": "Shared debugging",
+        "B": "Shared terminal",
+        "C": "Shared server",
+        "D": "Shared editor"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Live Share enables real-time collaboration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature automatically suggests best coding patterns?",
+      "options": {
+        "A": "IntelliCode",
+        "B": "AutoCode",
+        "C": "Smart Code",
+        "D": "Predict Code"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which AI-assisted features exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "IntelliCode suggestions",
+        "B": "Code completion",
+        "C": "Refactoring suggestions",
+        "D": "Error prediction"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: IntelliCode uses AI to improve code suggestions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool tracks code references above methods?",
+      "options": {
+        "A": "CodeLens",
+        "B": "Reference Viewer",
+        "C": "Code Tracker",
+        "D": "Method Insights"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CodeLens information is displayed? (Select all that apply)",
+      "options": {
+        "A": "References",
+        "B": "Authors",
+        "C": "Test status",
+        "D": "Changes"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: CodeLens appears above method definitions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature reduces startup time for large projects?",
+      "options": {
+        "A": "Lightweight Solution Load",
+        "B": "Fast Launch",
+        "C": "Quick Load",
+        "D": "Smart Startup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which productivity tools exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Code snippets",
+        "B": "IntelliSense",
+        "C": "Live Share",
+        "D": "CodeLens"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code snippets allow inserting reusable code templates.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature shows recently opened projects?",
+      "options": {
+        "A": "Start Window",
+        "B": "Project Dashboard",
+        "C": "Workspace Viewer",
+        "D": "Recent Panel"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which items appear in the Start Window? (Select all that apply)",
+      "options": {
+        "A": "Recent projects",
+        "B": "Clone repository",
+        "C": "Open project",
+        "D": "Create new project"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Start Window appears when Visual Studio launches.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool manages installed workloads?",
+      "options": {
+        "A": "Visual Studio Installer",
+        "B": "Extension Manager",
+        "C": "Package Installer",
+        "D": "Tool Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which workloads can be installed with Visual Studio? (Select all that apply)",
+      "options": {
+        "A": ".NET desktop development",
+        "B": "ASP.NET and web development",
+        "C": "Mobile development",
+        "D": "Game development"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Workloads install related tools and SDKs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio tool helps create graphical user interfaces?",
+      "options": {
+        "A": "Designer",
+        "B": "UI Builder",
+        "C": "Layout Manager",
+        "D": "Form Creator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which UI technologies support designers in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Windows Forms",
+        "B": "WPF",
+        "C": "ASP.NET Web Forms",
+        "D": "MAUI"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Designers support drag-and-drop UI building.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature highlights syntax automatically?",
+      "options": {
+        "A": "Syntax Highlighting",
+        "B": "Auto Code",
+        "C": "Syntax Builder",
+        "D": "Editor Mode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which editor features improve coding experience? (Select all that apply)",
+      "options": {
+        "A": "Auto indentation",
+        "B": "Bracket matching",
+        "C": "Code folding",
+        "D": "Syntax highlighting"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Code folding hides code blocks temporarily.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command builds the solution in Visual Studio?",
+      "options": {
+        "A": "Build Solution",
+        "B": "Run Build",
+        "C": "Compile All",
+        "D": "Execute Build"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which build operations exist in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Build",
+        "B": "Rebuild",
+        "C": "Clean",
+        "D": "Publish"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Clean removes compiled files from the build folder.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature helps locate errors in code quickly?",
+      "options": {
+        "A": "Error List",
+        "B": "Debug Panel",
+        "C": "Issue Viewer",
+        "D": "Error Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which types of messages appear in Error List? (Select all that apply)",
+      "options": {
+        "A": "Errors",
+        "B": "Warnings",
+        "C": "Messages",
+        "D": "Suggestions"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "question": "True or False: Error List updates automatically after building a project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature allows publishing apps to servers?",
+      "options": {
+        "A": "Publish Wizard",
+        "B": "Deploy Tool",
+        "C": "Release Manager",
+        "D": "Publish Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which publish targets are supported? (Select all that apply)",
+      "options": {
+        "A": "Azure",
+        "B": "Folder",
+        "C": "FTP",
+        "D": "Docker"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio can deploy applications to cloud platforms.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio component integrates container development?",
+      "options": {
+        "A": "Docker Tools",
+        "B": "Container Manager",
+        "C": "Cloud Builder",
+        "D": "Image Studio"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Docker features are supported in Visual Studio? (Select all that apply)",
+      "options": {
+        "A": "Container debugging",
+        "B": "Dockerfile support",
+        "C": "Docker Compose",
+        "D": "Image building"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Visual Studio can build and run Docker containers.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio window shows program execution output?",
+      "options": {
+        "A": "Output Window",
+        "B": "Console Panel",
+        "C": "Runtime Viewer",
+        "D": "Execution Log"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which information appears in Output Window? (Select all that apply)",
+      "options": {
+        "A": "Build logs",
+        "B": "Debug output",
+        "C": "Program output",
+        "D": "Deployment logs"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Output Window helps monitor runtime logs.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature helps monitor performance issues?",
+      "options": {
+        "A": "Performance Profiler",
+        "B": "Speed Analyzer",
+        "C": "Runtime Profiler",
+        "D": "Execution Monitor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which performance metrics can be analyzed? (Select all that apply)",
+      "options": {
+        "A": "CPU usage",
+        "B": "Memory allocation",
+        "C": "Execution time",
+        "D": "Thread activity"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Performance Profiler helps identify bottlenecks.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature displays references and authors above methods?",
+      "options": {
+        "A": "CodeLens",
+        "B": "Reference Panel",
+        "C": "Code Tracker",
+        "D": "Method Viewer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which information can CodeLens show? (Select all that apply)",
+      "options": {
+        "A": "References",
+        "B": "Authors",
+        "C": "Test status",
+        "D": "Recent changes"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: CodeLens appears above method definitions in the editor.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio feature helps developers collaborate remotely?",
+      "options": {
+        "A": "Live Share",
+        "B": "Remote Code",
+        "C": "Team Coding",
+        "D": "Shared Editor"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Live Share capabilities are available? (Select all that apply)",
+      "options": {
+        "A": "Shared debugging",
+        "B": "Shared terminal",
+        "C": "Shared servers",
+        "D": "Shared editing"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    },
+    {
+      "question": "True or False: Live Share allows multiple developers to edit the same project simultaneously.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Visual Studio AI feature enhances IntelliSense suggestions?",
+      "options": {
+        "A": "IntelliCode",
+        "B": "SmartSense",
+        "C": "CodePredict",
+        "D": "AutoSense"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which IntelliCode capabilities exist? (Select all that apply)",
+      "options": {
+        "A": "AI code suggestions",
+        "B": "Context-aware completions",
+        "C": "Automatic refactoring suggestions",
+        "D": "Improved IntelliSense ranking"
+      },
+      "answer": [
+        "A",
+        "B",
+        "C",
+        "D"
+      ]
+    }
+  ]
+}

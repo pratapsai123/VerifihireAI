@@ -1,0 +1,2015 @@
+{ 
+  "skill": "Research", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of conducting research?",
+    "options": {
+      "A": "To prove that the researcher is smarter than their peers.",
+      "B": "To systematically investigate and increase the stock of knowledge.",
+      "C": "To delete old data from a library to make more physical space.",
+      "D": "To ensure that every book in the world has the same cover design."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of research focuses on gathering non-numerical data like feelings or experiences?",
+    "options": {
+      "A": "Quantitative Research",
+      "B": "Qualitative Research",
+      "C": "Binary Research",
+      "D": "Mathematical Research"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Hypothesis' in the context of a research study?",
+    "options": {
+      "A": "The final result or conclusion of the entire project.",
+      "B": "A testable statement or prediction about the relationship between variables.",
+      "C": "A specialized software tool used for data entry.",
+      "D": "The list of participants who refused to join the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered 'Primary Data'?",
+    "options": {
+      "A": "Data collected by the researcher specifically for their own study.",
+      "B": "Data found in an old textbook written 50 years ago.",
+      "C": "A summary of a news article found on a website.",
+      "D": "Information shared by a friend about a movie they saw."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Informed Consent' mean in research ethics?",
+    "options": {
+      "A": "The researcher telling the participants what to say during an interview.",
+      "B": "Ensuring participants understand the study and voluntarily agree to participate.",
+      "C": "Charging participants a fee to be included in the final report.",
+      "D": "Hiring a lawyer to sign all the research documents."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of a 'Likert Scale'?",
+    "options": {
+      "A": "Measuring the exact weight of an object in kilograms.",
+      "B": "A rating scale from 'Strongly Disagree' to 'Strongly Agree'.",
+      "C": "Counting the number of cars that pass a specific point.",
+      "D": "Identifying the color of a participant's eyes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Literature Review'?",
+    "options": {
+      "A": "Checking a book for spelling and grammar mistakes.",
+      "B": "A comprehensive summary of previous research on a specific topic.",
+      "C": "Writing a fictional story based on a research finding.",
+      "D": "Deleting all old books from a university database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an experiment, which variable is manipulated by the researcher?",
+    "options": {
+      "A": "Dependent Variable",
+      "B": "Independent Variable",
+      "C": "Control Variable",
+      "D": "Outcome Variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Plagiarism'?",
+    "options": {
+      "A": "The process of printing a research paper in a high-quality font.",
+      "B": "Using someone else's work or ideas without giving them proper credit.",
+      "C": "Sharing your research data with a colleague for free.",
+      "D": "Translating a research paper into a different language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common tool for collecting survey data?",
+    "options": {
+      "A": "Adobe Photoshop",
+      "B": "Google Forms",
+      "C": "Windows Media Player",
+      "D": "Calculator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sample Size' in research?",
+    "options": {
+      "A": "The physical dimensions of the paper used for the report.",
+      "B": "The number of individuals or observations included in a study.",
+      "C": "The amount of memory used by the statistical software.",
+      "D": "The age of the lead researcher on the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main goal of 'Descriptive Research'?",
+    "options": {
+      "A": "To prove that one variable causes another to change.",
+      "B": "To provide an accurate portrayal of a situation or group.",
+      "C": "To predict the exact future of the stock market.",
+      "D": "To describe the physical appearance of the research lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Quantitative Research' primarily deal with?",
+    "options": {
+      "A": "Stories and narratives from individual people.",
+      "B": "Numerical data and statistical analysis.",
+      "C": "Hand-drawn illustrations and artistic paintings.",
+      "D": "The internal thoughts of the researcher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Abstract' in a research paper?",
+    "options": {
+      "A": "A type of modern art included in the appendix.",
+      "B": "A brief summary of the entire research study.",
+      "C": "A list of all the books used by the researcher.",
+      "D": "A secret code used to access the online database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Peer-Reviewed' journal?",
+    "options": {
+      "A": "A journal that is only read by students.",
+      "B": "A publication where articles are evaluated by experts in the field before being accepted.",
+      "C": "A journal where all the authors are friends with the editor.",
+      "D": "A magazine that only publishes beautiful photographs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which sampling method gives every person in a population an equal chance of being selected?",
+    "options": {
+      "A": "Convenience Sampling",
+      "B": "Simple Random Sampling",
+      "C": "Snowball Sampling",
+      "D": "Judgmental Sampling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Secondary Data'?",
+    "options": {
+      "A": "Data that is only 50% accurate.",
+      "B": "Information that was already collected by someone else for a different purpose.",
+      "C": "Data that the researcher collected by hand in the field.",
+      "D": "The second half of a very long dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Case Study'?",
+    "options": {
+      "A": "A physical suitcase used to carry research equipment.",
+      "B": "An in-depth investigation of a single person, group, or event.",
+      "C": "A study that only lasts for exactly 24 hours.",
+      "D": "A way to backup data on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Research Design'?",
+    "options": {
+      "A": "The logo created for the research project.",
+      "B": "The overall plan or strategy used to conduct the study.",
+      "C": "The physical layout of the tables in the library.",
+      "D": "Choosing the best color for the final report cover."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term refers to the consistency of a research measurement?",
+    "options": {
+      "A": "Validity",
+      "B": "Reliability",
+      "C": "Ethics",
+      "D": "Probability"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Validity' in research refer to?",
+    "options": {
+      "A": "How expensive the research study was to perform.",
+      "B": "Whether the tool actually measures what it claims to measure.",
+      "C": "The number of pages in the final research document.",
+      "D": "The speed at which the researcher can type."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Open-ended Question'?",
+    "options": {
+      "A": "A question that only has 'Yes' or 'No' as an answer.",
+      "B": "A question that allows participants to answer in their own words.",
+      "C": "A question that is never finished by the researcher.",
+      "D": "A question that everyone in the world already knows the answer to."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias' in research?",
+    "options": {
+      "A": "A way to organize files alphabetically.",
+      "B": "A systematic error that leads to an unfair or incorrect result.",
+      "C": "The name of the lead statistician on the team.",
+      "D": "A specialized software for measuring time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Anonymity' in research?",
+    "options": {
+      "A": "Ensuring the researcher's name is not on the report.",
+      "B": "Ensuring that the identity of the participants is unknown, even to the researcher.",
+      "C": "Hiring people with zero experience to do the research.",
+      "D": "Deleting the entire project after it is finished."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Pilot Study'?",
+    "options": {
+      "A": "A research project about airplanes and pilots.",
+      "B": "A small-scale preliminary study conducted before the main research.",
+      "C": "A study performed while flying in a helicopter.",
+      "D": "A study that is only used to train new employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triangulation' in research?",
+    "options": {
+      "A": "Using a triangle-shaped tool to measure data.",
+      "B": "Using multiple methods or sources to study the same phenomenon.",
+      "C": "Deleting data from three different sources to avoid bias.",
+      "D": "Hiring three researchers from three different countries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section of a research paper explains how the study was conducted?",
+    "options": {
+      "A": "Introduction",
+      "B": "Methodology",
+      "C": "Results",
+      "D": "Conclusion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Population' in a research context?",
+    "options": {
+      "A": "The number of books in the library.",
+      "B": "The total group of people or objects being studied.",
+      "C": "The amount of money the research team has.",
+      "D": "The number of computers in the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Citation'?",
+    "options": {
+      "A": "A physical ticket given for a research error.",
+      "B": "Formally acknowledging the source of information used in a paper.",
+      "C": "Giving a speech about your research finding.",
+      "D": "Asking a colleague to sign your document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Qualitative' data analysis usually called?",
+    "options": {
+      "A": "Regression Analysis",
+      "B": "Thematic Analysis",
+      "C": "Binary Calculation",
+      "D": "Integer Mapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Longitudinal Study'?",
+    "options": {
+      "A": "A study of how tall people are.",
+      "B": "A research study that follows the same participants over a long period.",
+      "C": "A study that only looks at data from one day.",
+      "D": "A study performed at the earth's equator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-sectional Research'?",
+    "options": {
+      "A": "Research performed in a physical cross-shape room.",
+      "B": "Analyzing data from a population at one specific point in time.",
+      "C": "Research that compares people from 100 different countries.",
+      "D": "Deleting data that doesn't cross a certain threshold."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deductive Reasoning'?",
+    "options": {
+      "A": "Starting with an observation and forming a theory.",
+      "B": "Starting with a theory and testing it through observation.",
+      "C": "Hiring a detective to solve a research problem.",
+      "D": "Using a calculator to subtract numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inductive Reasoning'?",
+    "options": {
+      "A": "Using a magnet to collect data.",
+      "B": "Developing a general theory based on specific observations.",
+      "C": "Starting with a 100-page theory before looking at data.",
+      "D": "A specialized software for engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Confidentiality' in research?",
+    "options": {
+      "A": "Keeping the researcher's salary a secret.",
+      "B": "Ensuring participant information is not shared publicly.",
+      "C": "Ensuring the research paper is never published.",
+      "D": "Hiring a private security guard for the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Problem Statement'?",
+    "options": {
+      "A": "A list of all the bugs in the research software.",
+      "B": "A clear description of the issue or question the research aims to address.",
+      "C": "A complaint letter written by a participant.",
+      "D": "The last sentence of the research paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Research'?",
+    "options": {
+      "A": "Research about actors and movie sets.",
+      "B": "Research conducted by practitioners to solve immediate problems in their work.",
+      "C": "Research that is performed very quickly.",
+      "D": "Deleting data while the project is in progress."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Analysis'?",
+    "options": {
+      "A": "Analyzing how happy (content) the researchers are.",
+      "B": "A technique for making inferences by systematically identifying characteristics of messages.",
+      "C": "Checking the table of contents in a book.",
+      "D": "Increasing the file size of a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Mixed Methods' approach?",
+    "options": {
+      "A": "Mixing two different types of ink in a printer.",
+      "B": "Combining both qualitative and quantitative research methods in one study.",
+      "C": "Hiring two different companies to do the same research.",
+      "D": "Using two different programming languages in one script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Interview'?",
+    "options": {
+      "A": "A person viewing their own data in private.",
+      "B": "A conversation where questions are asked to elicit information.",
+      "C": "A specialized software for recording audio.",
+      "D": "A way to backup participant names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Focus Group'?",
+    "options": {
+      "A": "A group of people who wear glasses to see better.",
+      "B": "A small group of people discussed a specific topic led by a moderator.",
+      "C": "The lead research team in a large company.",
+      "D": "A group of computers connected to the same server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ethnography'?",
+    "options": {
+      "A": "The study of rocks and stones.",
+      "B": "The scientific description of the customs of individual peoples and cultures.",
+      "C": "Designing a new font for a research paper.",
+      "D": "A specialized software for drawing graphs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Experimental Research'?",
+    "options": {
+      "A": "Research where the scientist guesses the answer.",
+      "B": "A study where variables are controlled and outcomes are measured to find cause-and-effect.",
+      "C": "Research that has never been done before in history.",
+      "D": "Deleting data to see what happens to the result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Observation' as a data collection method?",
+    "options": {
+      "A": "Recording the sound of a person speaking.",
+      "B": "Systematically watching and recording behavior as it occurs.",
+      "C": "Hiring a person to read a book and take notes.",
+      "D": "A specialized software for blind users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Variable'?",
+    "options": {
+      "A": "A constant number that never changes.",
+      "B": "Any factor, trait, or condition that can exist in differing amounts or types.",
+      "C": "The name of the research company.",
+      "D": "A specialized tool for cleaning keyboards."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Correlation' in simple terms?",
+    "options": {
+      "A": "One variable causing another to change.",
+      "B": "The degree to which two things move in relation to each other.",
+      "C": "The total sum of all participants' ages.",
+      "D": "The speed of the network data flow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Empirical Evidence'?",
+    "options": {
+      "A": "Information received from a king or emperor.",
+      "B": "Information acquired by observation or experimentation.",
+      "C": "A theory that has zero supporting data.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Applied Research'?",
+    "options": {
+      "A": "Research where participants have to apply for a job.",
+      "B": "Research designed to solve practical problems of the modern world.",
+      "C": "A study that only uses math applications.",
+      "D": "Hiring a person to apply a digital filter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Basic Research'?",
+    "options": {
+      "A": "Research that is very simple and easy to do.",
+      "B": "Research driven by curiosity and aimed at expanding knowledge without an immediate practical goal.",
+      "C": "Research that only uses the word 'Basic' in the title.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling Frame'?",
+    "options": {
+      "A": "The physical frame around a printed photo.",
+      "B": "A list of the items or people forming a population from which a sample is taken.",
+      "C": "The speed of a computer processor.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct Validity'?",
+    "options": {
+      "A": "How strong the physical building of the lab is.",
+      "B": "How well a test measures the concept it was intended to measure.",
+      "C": "How long it takes to build a new research tool.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Null Hypothesis' example?",
+    "options": {
+      "A": "There is a massive difference between Group A and Group B.",
+      "B": "There is no difference between Group A and Group B.",
+      "C": "Group A is 100 times better than Group B.",
+      "D": "The model is failing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Research Ethics'?",
+    "options": {
+      "A": "Ensuring the research project makes a lot of money.",
+      "B": "Guidelines and rules for conducting research responsibly and safely.",
+      "C": "The specific font used for the ethics report.",
+      "D": "Hiring an ethicist to sign off on the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Questionnaire'?",
+    "options": {
+      "A": "A person who asks too many questions.",
+      "B": "A set of printed or written questions with a choice of answers devised for a survey.",
+      "C": "A specialized software for lawyers.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Probability Sampling'?",
+    "options": {
+      "A": "Sampling based on a person's name.",
+      "B": "Techniques where every member of a population has a known, non-zero chance of being selected.",
+      "C": "Guessing the answer without any data.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-probability Sampling'?",
+    "options": {
+      "A": "Sampling where the chance of selection is unknown.",
+      "B": "Sampling that is 100% accurate.",
+      "C": "Hiring a mathematician to count.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fieldwork'?",
+    "options": {
+      "A": "Planting seeds in a physical field.",
+      "B": "Data collection that takes place in a natural setting rather than a lab.",
+      "C": "Working on a farm to earn money for research.",
+      "D": "Writing a blog post about nature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Research Objective'?",
+    "options": {
+      "A": "The person who is viewing the research project.",
+      "B": "Clear statement of what the researcher aims to achieve.",
+      "C": "A physical lens used in a microscope.",
+      "D": "The last sentence of the conclusion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Visualization'?",
+    "options": {
+      "A": "Closing your eyes to imagine data.",
+      "B": "The graphical representation of information and data.",
+      "C": "A way to hide data from other people.",
+      "D": "Increasing the brightness of a computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Causality'?",
+    "options": {
+      "A": "Two things happening at the same time by chance.",
+      "B": "The relationship between an event and a second event, where the second is caused by the first.",
+      "C": "A way to name a database table.",
+      "D": "Recording the sound of the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Grant' in research?",
+    "options": {
+      "A": "A person named Grant who works on the team.",
+      "B": "A financial award given by an organization for a specific research project.",
+      "C": "A security certificate for a SQL database.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Measurement Error'?",
+    "options": {
+      "A": "A mistake made in a 100-page book.",
+      "B": "The difference between a measured value of a quantity and its true value.",
+      "C": "Hiring a person to use a scale incorrectly.",
+      "D": "A software bug that deletes files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Mining'?",
+    "options": {
+      "A": "Digging for physical coal in a mine.",
+      "B": "Exploring large datasets to find patterns or relationships.",
+      "C": "A specialized software for architects.",
+      "D": "Deleting data after it has been used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Descriptive Statistics'?",
+    "options": {
+      "A": "Statistics used to predict the future.",
+      "B": "Techniques used to summarize or describe the main features of a dataset.",
+      "C": "Hiring a librarian to organize files.",
+      "D": "Increasing the file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bibliography'?",
+    "options": {
+      "A": "A type of ancient religious book.",
+      "B": "A list of books and articles used or referred to in a research paper.",
+      "C": "A secret password for a database.",
+      "D": "The history of the researcher's life."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Scientific Method'?",
+    "options": {
+      "A": "A method used only by famous scientists.",
+      "B": "Systematic way of seeking knowledge through observation, hypothesis, and testing.",
+      "C": "A specialized software for architects.",
+      "D": "Counting the number of atoms in a molecule."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical difference between 'Probability Sampling' and 'Non-probability Sampling'?",
+    "options": {
+      "A": "Probability sampling is only used in qualitative research.",
+      "B": "In probability sampling, the chance of any member of the population being selected is known and non-zero.",
+      "C": "Non-probability sampling requires a larger computer database to execute.",
+      "D": "Probability sampling is much faster and cheaper to perform in the field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Internal Validity' in a research experiment?",
+    "options": {
+      "A": "The degree to which the results can be generalized to the real world.",
+      "B": "The extent to which the observed results represent the truth in the population being studied, free from systematic error.",
+      "C": "The physical safety of the research equipment inside the laboratory.",
+      "D": "The number of participants who successfully completed the entire study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Type I Error' in statistical hypothesis testing?",
+    "options": {
+      "A": "Failing to reject the null hypothesis when it is actually false.",
+      "B": "Rejecting the null hypothesis when it is actually true (a false positive).",
+      "C": "Accepting the alternative hypothesis when the data is missing or corrupted.",
+      "D": "Making a calculation error during the initial data entry phase."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowball Sampling' typically used for?",
+    "options": {
+      "A": "Choosing participants based on their physical proximity to the researcher.",
+      "B": "Reaching hidden or hard-to-reach populations where current participants recruit future ones.",
+      "C": "Predicting the likelihood of snow during a winter research study.",
+      "D": "Deleting participants who do not meet the minimum age requirement."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Scale Development', what is 'Cronbach’s Alpha' used to measure?",
+    "options": {
+      "A": "The physical weight of the printed survey forms.",
+      "B": "The internal consistency or reliability of a set of scale items.",
+      "C": "The alphabetical order of the names of the participants.",
+      "D": "The speed at which participants can finish a questionnaire."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hawthorne Effect' in research?",
+    "options": {
+      "A": "A situation where the researcher becomes bored with the project.",
+      "B": "The tendency of participants to modify their behavior because they know they are being observed.",
+      "C": "The effect of physical noise on the accuracy of data collection.",
+      "D": "A mathematical error that occurs in 3D scatter plots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which research design involves observing subjects in their natural environment without any intervention?",
+    "options": {
+      "A": "Experimental Design",
+      "B": "Naturalistic Observation",
+      "C": "Laboratory Simulation",
+      "D": "Double-blind Trial"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Validity' primarily concerned with?",
+    "options": {
+      "A": "The internal consistency of the research questions.",
+      "B": "The generalizability of the research findings to other settings or populations.",
+      "C": "The security of the data from external hackers.",
+      "D": "The cost of hiring external consultants for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Double-Blind' study?",
+    "options": {
+      "A": "To increase the vision of the researchers through technology.",
+      "B": "To prevent bias by ensuring neither the participants nor the researchers know who is in the control group.",
+      "C": "To record the audio of an interview twice to ensure accuracy.",
+      "D": "To allow two different researchers to analyze the data simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded Theory' in qualitative research?",
+    "options": {
+      "A": "A theory that is only studied in a basement or ground floor.",
+      "B": "An inductive methodology that involves generating a theory from the data itself.",
+      "C": "A rule stating that researchers must stay on the ground while collecting data.",
+      "D": "Hiring a professional detective to verify participant stories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systematic Sampling'?",
+    "options": {
+      "A": "Selecting participants randomly using a lottery system.",
+      "B": "Selecting every 'n-th' individual from a sampling frame.",
+      "C": "Selecting participants who are the most systematic and organized.",
+      "D": "Deleting all participants who have the same first name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Quantitative Research', what is a 'Confounding Variable'?",
+    "options": {
+      "A": "A variable that is very easy for the researcher to explain.",
+      "B": "An outside influence that changes the relationship between the independent and dependent variables.",
+      "C": "The variable that is manipulated by the researcher.",
+      "D": "A constant that never changes throughout the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Face Validity'?",
+    "options": {
+      "A": "Checking the facial expressions of participants during an interview.",
+      "B": "The degree to which a procedure, especially a test, appears effective in terms of its stated aims.",
+      "C": "Ensuring the researcher's face is visible in all photographs.",
+      "D": "A specialized software for recognizing faces in video data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stratified Sampling'?",
+    "options": {
+      "A": "Sampling only people who live in tall buildings.",
+      "B": "Dividing the population into subgroups (strata) and then taking a random sample from each.",
+      "C": "Sampling people who are the most tired during a study.",
+      "D": "Choosing participants based on their social media follower count."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standard Error' in statistics?",
+    "options": {
+      "A": "A mistake made by a standard researcher during data entry.",
+      "B": "An estimate of the standard deviation of the sampling distribution.",
+      "C": "The total number of errors allowed in a research paper.",
+      "D": "The difference between the highest and lowest values in a sample."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Longitudinal' research method?",
+    "options": {
+      "A": "A one-time survey sent to 1,000 people.",
+      "B": "A cohort study that tracks the same group of people over several years.",
+      "C": "A focus group discussion lasting two hours.",
+      "D": "A cross-sectional analysis of census data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content Validity'?",
+    "options": {
+      "A": "How happy or content the participants are with the study.",
+      "B": "The extent to which a measure represents all facets of a given construct.",
+      "C": "Checking the table of contents in the final research report.",
+      "D": "The amount of space the research data takes up on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Qualitative Research', what is 'Saturation'?",
+    "options": {
+      "A": "The point where the data files are too large to open on a phone.",
+      "B": "The point at which no new information or themes are observed in the data.",
+      "C": "Increasing the color saturation of the interview videos.",
+      "D": "The number of hours the researcher spent in the field."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Quasi-experimental Design'?",
+    "options": {
+      "A": "An experiment that has zero scientific value.",
+      "B": "A study that involves an intervention but lacks random assignment to groups.",
+      "C": "A study that only lasts for exactly 15 minutes.",
+      "D": "Hiring a team of actors to pretend to be participants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Validity'?",
+    "options": {
+      "A": "Protecting the environment while conducting research.",
+      "B": "The extent to which research findings can be applied to real-life settings.",
+      "C": "Hiring a biologist to check the lab for insects.",
+      "D": "A way to backup data in the cloud automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is 'Secondary Analysis'?",
+    "options": {
+      "A": "Analyzing data you collected yourself for the second time.",
+      "B": "Re-analyzing data that was originally collected for a different research project.",
+      "C": "Hiring a second person to check your statistics.",
+      "D": "The second chapter of the results section in a paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Research Question' vs a 'Hypothesis'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "The question is what the study aims to answer; the hypothesis is a predicted answer.",
+      "C": "The hypothesis is for beginners; the question is for experts.",
+      "D": "A question is for qualitative research; a hypothesis for quantitative only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Convergent Validity'?",
+    "options": {
+      "A": "How two researchers have the same opinion.",
+      "B": "The degree to which two measures of constructs that theoretically should be related, are in fact related.",
+      "C": "The speed at which the research data is moving through a local network.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Divergent Validity'?",
+    "options": {
+      "A": "A research study performed in a moving vehicle.",
+      "B": "Testing whether constructs that should have no relationship do, in fact, not have any relationship.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a person to find bugs in the research code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Analysis', what is 'Inter-coder Reliability'?",
+    "options": {
+      "A": "The speed of the network connection between two computers.",
+      "B": "The extent to which two or more independent coders agree on the coding of content.",
+      "C": "Two researchers agreeing on what color to paint the office.",
+      "D": "Hiring a programmer to write the final research report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Meta-analysis'?",
+    "options": {
+      "A": "Analyzing data while wearing a virtual reality headset.",
+      "B": "A statistical technique that combines results from multiple independent studies on the same topic.",
+      "C": "A secret password used by account administrators.",
+      "D": "A way to count the number of characters in a research paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Empirical Rule' (68-95-99.7) used for?",
+    "options": {
+      "A": "To measure the speed of light during a physics study.",
+      "B": "To describe the distribution of data in a normal distribution.",
+      "C": "A specialized tool for architects.",
+      "D": "A list of all users who have accessed a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an 'Experimental' Group?",
+    "options": {
+      "A": "The group that is left alone to act as a baseline.",
+      "B": "The group that receives the treatment or intervention being studied.",
+      "C": "The group of researchers who manage the project budget.",
+      "D": "The group of participants who quit the study early."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Construct' in a research context?",
+    "options": {
+      "A": "Building a physical structure for a lab.",
+      "B": "An abstract idea or theoretical concept (like intelligence or motivation) being measured.",
+      "C": "A security certificate for a SQL database.",
+      "D": "The last sentence of the conclusion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Deviation' vs 'Variance'?",
+    "options": {
+      "A": "They are identical terms in statistics.",
+      "B": "Variance is the average of squared differences; Standard Deviation is the square root of Variance.",
+      "C": "Variance is for text; Standard Deviation is for images.",
+      "D": "Standard Deviation is much more expensive to calculate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Z-score' of a data point?",
+    "options": {
+      "A": "The final grade on a research test.",
+      "B": "The number of standard deviations a value is from the mean.",
+      "C": "The speed of the computer cooling fan.",
+      "D": "A security password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operationalization'?",
+    "options": {
+      "A": "Hiring a professional operator for the research equipment.",
+      "B": "Defining variables into measurable factors.",
+      "C": "Increasing the brightness of the computer screen.",
+      "D": "Deleting any data that is not 100% accurate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Sampling', what is 'Response Rate'?",
+    "options": {
+      "A": "The speed at which a participant types an answer.",
+      "B": "The percentage of people contacted who actually complete the study.",
+      "C": "The time it takes for a researcher to say 'hello'.",
+      "D": "A way to backup data on a physical USB drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cluster Sampling'?",
+    "options": {
+      "A": "Sampling only people who live in one house.",
+      "B": "Dividing the population into groups (clusters) and randomly selecting whole clusters to study.",
+      "C": "A way to name a database table.",
+      "D": "Increasing the volume of an audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Convenience Sampling'?",
+    "options": {
+      "A": "Sampling based on a person's name.",
+      "B": "Selecting participants based on their easy availability and proximity.",
+      "C": "Guessing the answer without any data.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Theoretical Framework'?",
+    "options": {
+      "A": "The physical frame around a printed photo.",
+      "B": "The structure that holds or supports a theory of a research study.",
+      "C": "A way to backup the SQL code.",
+      "D": "Hiring local developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Objectivity'?",
+    "options": {
+      "A": "Collecting physical objects to study.",
+      "B": "Minimizing personal bias and remaining neutral.",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours the researcher was online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subjectivity'?",
+    "options": {
+      "A": "Identifying the name of the subject.",
+      "B": "Data influenced by personal feelings, interpretations, or prejudice.",
+      "C": "Counting the number of nouns.",
+      "D": "Identifying the gender of the author."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Methods' research?",
+    "options": {
+      "A": "Hiring two different companies to work together.",
+      "B": "Integrating both qualitative and quantitative data within a single study.",
+      "C": "A security scan of the trash directory.",
+      "D": "A specialized software for gardeners."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phenomenology'?",
+    "options": {
+      "A": "The study of physical phenomena like gravity.",
+      "B": "An approach to qualitative research which focuses on the study of an individual's lived experiences.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action Research'?",
+    "options": {
+      "A": "Research designed to be very fast.",
+      "B": "A reflective process of progressive problem solving led by individuals working in teams.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Case-Control Study'?",
+    "options": {
+      "A": "A study where researchers control the case of the font.",
+      "B": "Comparing people with a condition (cases) to those without (controls) to find causes.",
+      "C": "A specialized software for chemists.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Correlation' vs 'Causation'?",
+    "options": {
+      "A": "Hiring a person who is an expert in many languages.",
+      "B": "Correlation is a relationship between variables; causation is when one variable triggers another.",
+      "C": "A dictionary that contains every word in the world.",
+      "D": "A type of robot that can speak out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ordinal' vs 'Nominal' data?",
+    "options": {
+      "A": "Nominal has a rank; Ordinal does not.",
+      "B": "Nominal is for named categories; Ordinal is for categories with a natural order.",
+      "C": "Nominal is for beginners; Ordinal for experts.",
+      "D": "Ordinal is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling' 'Error'?",
+    "options": {
+      "A": "The assumption that everyone is a hero.",
+      "B": "The discrepancy between the sample results and the true population results.",
+      "C": "A security scan of the database.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Significance Level' ($alpha$)?",
+    "options": {
+      "A": "The volume level of a computer speaker.",
+      "B": "The probability of rejecting the null hypothesis when it is true.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Debriefing'?",
+    "options": {
+      "A": "Removing a participant's clothes before a study.",
+      "B": "Explaining the true purpose of the study to participants after it is finished.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Peer Review' 'Process'?",
+    "options": {
+      "A": "Hiring multiple people to enter data.",
+      "B": "Evaluating a researcher's work by other experts in the same field.",
+      "C": "A specialized software for accountants.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content' 'Analysis'?",
+    "options": {
+      "A": "Analyzing how happy the researchers are.",
+      "B": "The systematic, objective, and quantitative description of the manifest content of communication.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded' 'Theory'?",
+    "options": {
+      "A": "Hiring a person named Theory.",
+      "B": "A research method that operates almost in reverse from traditional research and appears to be contradictions to other methods.",
+      "C": "A specialized software for psychologists.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Bias' 'Social' 'Desirability'?",
+    "options": {
+      "A": "Folding a piece of paper.",
+      "B": "A tendency of respondents to answer questions in a manner that will be viewed favorably by others.",
+      "C": "A way to backup the SQL schema.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ordinary' 'Least' 'Squares'?",
+    "options": {
+      "A": "A measure of how determined the developer is.",
+      "B": "A method for estimating the unknown parameters in a linear regression model.",
+      "C": "A way to count the number of users.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Null' 'Hypothesis'?",
+    "options": {
+      "A": "A measure of the developer's salary.",
+      "B": "A general statement or default position that there is no relationship between two measured phenomena.",
+      "C": "The price of the software.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is the 'Likert' 'Scale'?",
+    "options": {
+      "A": "The probability that the researcher likes the data.",
+      "B": "A psychometric scale commonly involved in research that employs questionnaires.",
+      "C": "A list of all variables in a Python script.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data' 'Cleaning'?",
+    "options": {
+      "A": "Choosing a university degree.",
+      "B": "The process of detecting and correcting (or removing) corrupt or inaccurate records from a record set.",
+      "C": "Deleting data to save space.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pilot' 'Testing'?",
+    "options": {
+      "A": "Calculating the average age of the models.",
+      "B": "A small-scale trial, where a few examinees take the test and comment on the mechanics of the test.",
+      "C": "Deleting the models to save memory.",
+      "D": "A security firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Variable'?",
+    "options": {
+      "A": "How sad the model is when it makes a mistake.",
+      "B": "Any characteristic, number, or quantity that can be measured or counted.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meta-analysis'?",
+    "options": {
+      "A": "Hiring a person to use a scale.",
+      "B": "A statistical analysis that combines the results of multiple scientific studies.",
+      "C": "A security scan for computer viruses.",
+      "D": "Deleting data that is considered unusual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling' 'Frame'?",
+    "options": {
+      "A": "A person who is an expert in many languages.",
+      "B": "A list of the actual cases from which your sample will be drawn.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triangulation'?",
+    "options": {
+      "A": "A distribution of logs in a fireplace.",
+      "B": "Using more than one method to collect data on the same topic.",
+      "C": "A specialized tool for measuring heat.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action' 'Research'?",
+    "options": {
+      "A": "Measuring the influence of a famous person.",
+      "B": "Research that is initiated to solve an immediate problem or a progressive form of reflective inquiry.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Ethnography'?",
+    "options": {
+      "A": "The car driving itself in a race.",
+      "B": "The systematic study of people and cultures.",
+      "C": "The process of deleting non-numeric data.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Participant' 'Observation'?",
+    "options": {
+      "A": "When the developer works from home.",
+      "B": "A type of data collection method typically used in qualitative research.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thematic' 'Analysis'?",
+    "options": {
+      "A": "Being very polite to the data.",
+      "B": "A method of analyzing qualitative data that involves identifying, analyzing and reporting patterns (themes) within data.",
+      "C": "The importance of the y-intercept.",
+      "D": "The number of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Case' 'Study'?",
+    "options": {
+      "A": "Calculating the price of a computer.",
+      "B": "A research method involving an up-close, in-depth, and detailed examination of a particular case.",
+      "C": "A security scan of the database.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Abstract'?",
+    "options": {
+      "A": "The entrance to the kitchen.",
+      "B": "A brief summary of a research article, thesis, review, conference proceeding, or any in-depth analysis of a particular subject.",
+      "C": "The speed of the network bandwidth.",
+      "D": "A specialized software for chefs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reliability'?",
+    "options": {
+      "A": "A person who is very strong.",
+      "B": "The overall consistency of a measure.",
+      "C": "A list of all the employees.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which philosophical branch in research methodology deals with the nature of reality and whether it exists independently of human knowledge?",
+    "options": {
+      "A": "Axiology",
+      "B": "Ontology",
+      "C": "Epistemology",
+      "D": "Phenomenology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of 'Propensity Score Matching' in observational research designs?",
+    "options": {
+      "A": "To increase the standard deviation of the treatment effect across all subgroups.",
+      "B": "To reduce selection bias by equating groups based on the probability of receiving a treatment.",
+      "C": "To ensure that every participant in the study receives the same monetary compensation.",
+      "D": "To automatically generate a null hypothesis for complex multivariate datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Factor Analysis', what does the 'Kaiser-Meyer-Olkin' (KMO) measure specifically evaluate?",
+    "options": {
+      "A": "The physical speed of the data ingestion into the statistical software.",
+      "B": "The sampling adequacy and the proportion of variance among variables that might be common variance.",
+      "C": "The ethical compliance of the data collection methods used in the field.",
+      "D": "The number of individual researchers required to code a qualitative transcript."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific phenomenon occurs when a statistical relationship between two variables is actually caused by a third, unmeasured variable?",
+    "options": {
+      "A": "Internal Consistency Error",
+      "B": "Spurious Correlation",
+      "C": "Convergent Validity Failure",
+      "D": "Measurement Attrition"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Counterfactual' framework primarily used for in advanced causal inference?",
+    "options": {
+      "A": "To find spelling mistakes in a research manuscript.",
+      "B": "To estimate what would have happened to a participant if they had received a different treatment.",
+      "C": "To backup research data across multiple cloud regions simultaneously.",
+      "D": "To count the number of times a hypothesis was proven incorrect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Experimental Design', what is the purpose of 'Blocking'?",
+    "options": {
+      "A": "Preventing unauthorized researchers from accessing the laboratory.",
+      "B": "Arranging experimental units in groups that are similar to reduce known sources of variation.",
+      "C": "Stopping the study immediately if the results are not significant.",
+      "D": "Filtering out participants who have negative attitudes toward the study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Epistemological Relativism'?",
+    "options": {
+      "A": "The belief that all scientific facts are determined by the laws of physics.",
+      "B": "The view that knowledge is not absolute but is relative to the observer's context and culture.",
+      "C": "The process of relating different statistical models to each other for comparison.",
+      "D": "A mathematical formula used to calculate the speed of social change."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Statistical Power' (1 - β) indicate about a research study?",
+    "options": {
+      "A": "The probability that the researcher will be promoted after the study.",
+      "B": "The probability of correctly rejecting the null hypothesis when it is truly false.",
+      "C": "The physical voltage required to run the statistical servers.",
+      "D": "The total number of parameters used in a structural equation model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ecological Fallacy' in data interpretation?",
+    "options": {
+      "A": "Failing to protect the environment while conducting field research.",
+      "B": "Inappropriately inferring individual-level characteristics from group-level data.",
+      "C": "Using only organic materials to build a research laboratory.",
+      "D": "Assuming that all animals in an ecosystem behave exactly like humans."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which approach is used in 'Grounded Theory' to ensure findings are closely tied to the data through constant comparison?",
+    "options": {
+      "A": "Linear Regression Modeling",
+      "B": "Theoretical Sampling and Coding",
+      "C": "Randomized Control Trials",
+      "D": "Hierarchical Cluster Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Instrumental Variables' (IV) estimation, what must be true about the 'Instrument'?",
+    "options": {
+      "A": "It must be a physical musical instrument used during data collection.",
+      "B": "It must be correlated with the endogenous regressor but uncorrelated with the error term.",
+      "C": "It must be the same as the dependent variable used in the study.",
+      "D": "It must be a software tool designed for high-speed calculation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attrition Bias' in a longitudinal research study?",
+    "options": {
+      "A": "Bias caused by choosing participants who are too similar.",
+      "B": "Bias resulting from certain types of participants dropping out of the study over time.",
+      "C": "The physical wear and tear on the research equipment.",
+      "D": "A systematic error in the way the researcher asks questions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of an 'Institutional Review Board' (IRB)?",
+    "options": {
+      "A": "To review the financial budget and profit margins of a university.",
+      "B": "To ensure that research involving human subjects follows ethical guidelines and protects participants.",
+      "C": "To choose the best logo design for a research institution.",
+      "D": "To manage the physical maintenance of the research buildings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Multi-collinearity' in multiple regression?",
+    "options": {
+      "A": "When the dependent variable is zero, making the model fail.",
+      "B": "A high correlation between independent variables that makes coefficient estimates unstable.",
+      "C": "When the model is run on multiple different datasets at once.",
+      "D": "A mathematical error that occurs when the intercept is zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Member Checking' in qualitative research?",
+    "options": {
+      "A": "Checking the ID cards of research team members.",
+      "B": "Returning to participants to verify that the researcher's interpretations are accurate.",
+      "C": "Paying participants a membership fee to join the study.",
+      "D": "Counting the total number of members in a focus group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bonferroni Correction' used for?",
+    "options": {
+      "A": "To correct the grammar in a 100-page research paper.",
+      "B": "To adjust p-values when performing multiple statistical tests to reduce Type I errors.",
+      "C": "To backup the system's BIOS settings during analysis.",
+      "D": "To increase the speed of the data transfer between research nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bayesian Statistics', what is 'Likelihood'?",
+    "options": {
+      "A": "The probability that the researcher likes the participants.",
+      "B": "The probability of the observed data given a specific set of parameters.",
+      "C": "A specialized software for measuring time delay.",
+      "D": "The feeling of certainty a researcher has about a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Criterial Validity' specifically assessing?",
+    "options": {
+      "A": "The cost of the research study.",
+      "B": "How well one measure predicts an outcome based on a different, established measure.",
+      "C": "The physical durability of the research laboratory.",
+      "D": "The number of citations a research paper receives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Cronbach’s Alpha' score of 0.95 usually suggest?",
+    "options": {
+      "A": "The scale is 95% inaccurate.",
+      "B": "High internal consistency, though potentially indicating redundant items.",
+      "C": "The research team has 95 members.",
+      "D": "The p-value is exactly 0.05."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-Parametric' test for comparing three or more groups?",
+    "options": {
+      "A": "One-way ANOVA",
+      "B": "Kruskal-Wallis Test",
+      "C": "Paired T-test",
+      "D": "Pearson Correlation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hermeneutics' in the context of interpretive research?",
+    "options": {
+      "A": "The study of microscopic organisms in a lab.",
+      "B": "The theory and methodology of interpretation, especially of texts and human actions.",
+      "C": "A specialized software for drawing graphs.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Axiology' concerned with in a research paradigm?",
+    "options": {
+      "A": "The speed of light in a vacuum.",
+      "B": "The role of values and ethics in the research process.",
+      "C": "The number of project managers on a team.",
+      "D": "The physical width of a computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs in a 'Stepwise Regression'?",
+    "options": {
+      "A": "The researcher manually walks through the data one step at a time.",
+      "B": "Variables are added or removed from the model based on their statistical significance.",
+      "C": "The computer increases its power usage in steps.",
+      "D": "The data is sorted by the date it was collected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deductive' vs 'Inductive' logic flow?",
+    "options": {
+      "A": "Deductive starts with data; Inductive starts with a theory.",
+      "B": "Deductive starts with a theory; Inductive starts with observations/data.",
+      "C": "They are exactly the same thing in modern science.",
+      "D": "Inductive is 100x faster than deductive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Measurement Attrition' in a survey study?",
+    "options": {
+      "A": "The error made when measuring the weight of paper.",
+      "B": "The loss of participants from a study over time, which can bias results.",
+      "C": "Hiring a person to use a scale incorrectly.",
+      "D": "Deleting data that is considered unusual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Validity' 'Generalizability'?",
+    "options": {
+      "A": "The ability to generalize results to a specific person.",
+      "B": "The extent to which study findings can be applied to other people, places, and times.",
+      "C": "A way to name a database table.",
+      "D": "Increasing the volume of an audio file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Positivism'?",
+    "options": {
+      "A": "Being very happy while doing research.",
+      "B": "The belief that knowledge should be based on empirical observation and scientific proof.",
+      "C": "A specialized software for architects.",
+      "D": "Recording the sound of the lab 24/7."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Constructivist' paradigm?",
+    "options": {
+      "A": "Building a physical structure for a lab.",
+      "B": "The belief that reality is socially constructed and subjective.",
+      "C": "A specialized software for gardeners.",
+      "D": "Hiring a contractor to fix the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pragmatism' in research philosophy?",
+    "options": {
+      "A": "Doing research as cheaply as possible.",
+      "B": "An approach that evaluates theories based on their practical application and results.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Double-Blind' 'Trial'?",
+    "options": {
+      "A": "A trial where participants wear two blindfolds.",
+      "B": "A study where neither the participant nor the experimenter knows who is in the treatment group.",
+      "C": "A security scan of the database.",
+      "D": "A specialized software for chemists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard' 'Error' vs 'Standard' 'Deviation'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Deviation measures data spread; Error measures the precision of the sample mean estimate.",
+      "C": "Error is for beginners; Deviation for experts.",
+      "D": "Deviation is for text; Error for images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Confounding'?",
+    "options": {
+      "A": "When the researcher is confused by the data.",
+      "B": "When an extraneous variable correlates with both the dependent and independent variables.",
+      "C": "A way to name a database table.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal' 'Consistency' 'Reliability'?",
+    "options": {
+      "A": "How often the researchers have lunch together.",
+      "B": "A measure of how well the items on a test measure the same construct.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded' 'Theory' 'Coding'?",
+    "options": {
+      "A": "Writing computer code for a research study.",
+      "B": "The process of categorizing qualitative data into themes or concepts.",
+      "C": "A specialized software for historians.",
+      "D": "Deleting code that does not work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stratified' 'Random' 'Sampling'?",
+    "options": {
+      "A": "Sampling people who live on different floors.",
+      "B": "Dividing a population into subgroups and sampling from each to ensure representation.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for accountants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thematic' 'Analysis' 'Inductive'?",
+    "options": {
+      "A": "Analyzing themes in a movie.",
+      "B": "Identifying themes from the data without trying to fit them into a pre-existing framework.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Reflexivity'?",
+    "options": {
+      "A": "The speed of a researcher's physical reflexes.",
+      "B": "The researcher's awareness of their own influence on the research process.",
+      "C": "A specialized software for biologists.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Meta-analysis' 'Effect' 'Size'?",
+    "options": {
+      "A": "The size of a printed photo.",
+      "B": "A standardized measure used to combine results from different studies.",
+      "C": "A security scan of the trash directory.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quasi-experiment' 'Non-random'?",
+    "options": {
+      "A": "An experiment that only happens once.",
+      "B": "An empirical study used to estimate causal impact without random assignment.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action' 'Research' 'Cycle'?",
+    "options": {
+      "A": "Riding a bicycle to collect data.",
+      "B": "An iterative process of planning, acting, observing, and reflecting.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phenomenological' 'Reduction'?",
+    "options": {
+      "A": "Reducing the number of participants.",
+      "B": "The process of setting aside biases to see the 'essence' of an experience.",
+      "C": "A specialized software for chemists.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triangulation' 'Methodological'?",
+    "options": {
+      "A": "Hiring a person who is an expert in many languages.",
+      "B": "Using more than one research method to examine a single phenomenon.",
+      "C": "A dictionary that contains every word in the world.",
+      "D": "A type of robot that can speak out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-sectional' vs 'Longitudinal'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Cross-sectional looks at one point in time; Longitudinal follows participants over time.",
+      "C": "Longitudinal is 100x faster than cross-sectional.",
+      "D": "Cross-sectional is for beginners; Longitudinal for experts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Type' 'I' 'Error' 'Significance'?",
+    "options": {
+      "A": "The significance of a researcher's name.",
+      "B": "The probability of rejecting the null hypothesis when it is true (False Positive).",
+      "C": "A security scan of the database.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal' 'Validity' 'Threat'?",
+    "options": {
+      "A": "A threat made by a research participant.",
+      "B": "A factor that provides an alternative explanation for the research findings.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'External' 'Validity' 'Constraint'?",
+    "options": {
+      "A": "A physical constraint like a locked door.",
+      "B": "Factors that limit the ability to generalize study results to other groups.",
+      "C": "A security scan for computer viruses.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sampling' 'Bias' 'Selection'?",
+    "options": {
+      "A": "Hiring multiple people to enter data.",
+      "B": "When the group selected for the study is not representative of the population.",
+      "C": "A specialized software for accountants.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grounded' 'Theory' 'Saturation'?",
+    "options": {
+      "A": "Making a theory very wet.",
+      "B": "The point in data collection when no new information or insights are being discovered.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cronbach's' 'Alpha' 'Reliability'?",
+    "options": {
+      "A": "Hiring a person named Alpha.",
+      "B": "A measure of how closely related a set of items are as a group.",
+      "C": "A specialized software for psychologists.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Construct' 'Validity'?",
+    "options": {
+      "A": "Folding a piece of paper.",
+      "B": "The degree to which a test measures what it claims to be measuring.",
+      "C": "A way to backup the SQL schema.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Factor' 'Analysis'?",
+    "options": {
+      "A": "A measure of how determined the developer is.",
+      "B": "A statistical method used to describe variability among observed, correlated variables.",
+      "C": "A way to count the number of users.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression' 'Coefficient'?",
+    "options": {
+      "A": "A measure of the developer's salary.",
+      "B": "A value that represents the rate of change of one variable relative to another.",
+      "C": "The price of the software.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Ordinal' 'Data'?",
+    "options": {
+      "A": "The probability that the researcher likes the data.",
+      "B": "A type of categorical data with an order or rank.",
+      "C": "A list of all variables in a Python script.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Measurement' 'Reliability'?",
+    "options": {
+      "A": "Choosing a university degree.",
+      "B": "The degree to which an assessment tool produces stable and consistent results.",
+      "C": "Deleting data to save space.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Thematic' 'Coding'?",
+    "options": {
+      "A": "Calculating the average age of the models.",
+      "B": "The process of identifying and labeling themes in qualitative data.",
+      "C": "Deleting the models to save memory.",
+      "D": "A security firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Population' 'Validity'?",
+    "options": {
+      "A": "How sad the model is when it makes a mistake.",
+      "B": "A type of external validity which describes how well the sample can be generalized to a population.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed-Methods' 'Triangulation'?",
+    "options": {
+      "A": "Hiring a person to use a scale.",
+      "B": "Validating findings by using both qualitative and quantitative data collection techniques.",
+      "C": "A security scan for computer viruses.",
+      "D": "Deleting data that is considered unusual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Participant' 'Observation' 'Ethnography'?",
+    "options": {
+      "A": "A person who is an expert in many languages.",
+      "B": "When a researcher immerses themselves in a group to observe behavior from the inside.",
+      "C": "A way to speed up the network.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phenomenological' 'Study'?",
+    "options": {
+      "A": "A distribution of logs in a fireplace.",
+      "B": "A research approach that describes the meaning for several individuals of their lived experiences of a concept.",
+      "C": "A specialized tool for measuring heat.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Content' 'Analysis' 'Quantitative'?",
+    "options": {
+      "A": "Measuring the influence of a famous person.",
+      "B": "Transforming qualitative data into quantitative data by counting instances of specific categories.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Reflexivity' 'Bias'?",
+    "options": {
+      "A": "The car driving itself in a race.",
+      "B": "The risk of the researcher's background and belief system biasing the study.",
+      "C": "The process of deleting non-numeric data.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Case' 'Selection' 'Bias'?",
+    "options": {
+      "A": "When the developer works from home.",
+      "B": "When the cases selected for a study are not representative of the broader population.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Theoretical' 'Saturation'?",
+    "options": {
+      "A": "Being very polite to the data.",
+      "B": "The point at which no new insights are obtained from the data during analysis.",
+      "C": "The importance of the y-intercept.",
+      "D": "The number of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Action' 'Research' 'Intervention'?",
+    "options": {
+      "A": "Calculating the price of a computer.",
+      "B": "The specific change or action taken by a researcher to solve a practical problem.",
+      "C": "A security scan of the database.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Credibility'?",
+    "options": {
+      "A": "The entrance to the kitchen.",
+      "B": "The degree to which research findings are believable and trustworthy.",
+      "C": "The speed of the network bandwidth.",
+      "D": "A specialized software for chefs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ontology' vs 'Epistemology'?",
+    "options": {
+      "A": "A person who is very strong.",
+      "B": "Ontology is the study of reality; Epistemology is the study of knowledge.",
+      "C": "A list of all the employees.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Statistical' 'Reliability'?",
+    "options": {
+      "A": "Mixing two different types of milk.",
+      "B": "The consistency of a measure across different samples or repetitions.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Research', what is 'Construct' 'Validation'?",
+    "options": {
+      "A": "When two researchers have the same opinion.",
+      "B": "The ongoing process of gathering evidence to support the interpretation of a measure.",
+      "C": "A specialized software for architects.",
+      "D": "The speed of light in a vacuum."
+    },
+    "answer": "B"
+  }
+  ]
+}

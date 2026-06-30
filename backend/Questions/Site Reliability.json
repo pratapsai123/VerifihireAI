@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Site Reliability", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Site Reliability Engineering (SRE)?",
+    "options": {
+      "A": "To ensure 100% uptime at any cost.",
+      "B": "To bridge the gap between development and operations by applying software engineering principles to infrastructure.",
+      "C": "To write the application's UI code.",
+      "D": "To replace all human employees with AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is one of the 'Four Golden Signals' of monitoring in SRE?",
+    "options": {
+      "A": "Latency",
+      "B": "Color",
+      "C": "Price",
+      "D": "Location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLI' stand for in SRE?",
+    "options": {
+      "A": "System Level Integration",
+      "B": "Service Level Indicator",
+      "C": "Software Logic Interface",
+      "D": "Standard Level Information"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Error Budget' is the amount of allowed unreliability a service can have before the team must stop new feature work.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit companies",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Toil' in SRE terminology?",
+    "options": {
+      "A": "Work that is creative and long-term.",
+      "B": "Repetitive, manual, and automatable work that provides no long-term value.",
+      "C": "The physical process of building a server.",
+      "D": "A specialized software for spreadsheets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main purpose of a 'Post-Mortem' after an incident?",
+    "options": {
+      "A": "To find out who made the mistake and punish them.",
+      "B": "To document the root cause and identify actions to prevent the incident from happening again.",
+      "C": "To calculate the financial loss of the company.",
+      "D": "To delete all system logs related to the error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Blameless' culture encourages engineers to report mistakes without fear of retribution.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for senior managers",
+      "D": "Only in small startups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for?",
+    "options": {
+      "A": "System Level Access",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "Security Layer Audit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SRE, 'Availability' is often measured by which metric?",
+    "options": {
+      "A": "The speed of the network.",
+      "B": "The percentage of time a system is functional and reachable.",
+      "C": "The number of lines of code written.",
+      "D": "The physical weight of the hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal measures the 'demand' being placed on a system, such as HTTP requests per second?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTTR'?",
+    "options": {
+      "A": "Maximum Time To Reset",
+      "B": "Mean Time To Repair (or Resolve)",
+      "C": "Manual Tool To Restore",
+      "D": "Mean Traffic To Router"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to SRE principles, 100% reliability is almost always the wrong target for a service.",
+    "options": {
+      "A": "True (Because it limits the pace of innovation and is prohibitively expensive).",
+      "B": "False",
+      "C": "Only for non-commercial apps",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Saturation' in the context of the Golden Signals?",
+    "options": {
+      "A": "The amount of data stored on a disk.",
+      "B": "A measure of how 'full' your service is, or how much resource overhead is left.",
+      "C": "The color intensity of the monitoring dashboard.",
+      "D": "The number of users currently logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role in SRE is responsible for coordinating the response during a major incident?",
+    "options": {
+      "A": "Project Manager",
+      "B": "Incident Commander",
+      "C": "Legal Counsel",
+      "D": "Human Resources"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Observability' in an SRE context?",
+    "options": {
+      "A": "Watching the servers through a camera.",
+      "B": "The ability to understand the internal state of a system based on its external outputs (logs, metrics, traces).",
+      "C": "A specialized tool for drawing diagrams.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'SLO' (Service Level Objective) is a target value or range of values for a service level that is measured by an SLI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if defined in a contract",
+      "D": "Only for database resources"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Change Management' intended to reduce?",
+    "options": {
+      "A": "The salary of the employees.",
+      "B": "The risk of downtime caused by new code deployments or infrastructure updates.",
+      "C": "The amount of coffee consumed by the team.",
+      "D": "The physical size of the office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common SRE practice to test system resilience by intentionally causing failures?",
+    "options": {
+      "A": "Agile Development",
+      "B": "Chaos Engineering",
+      "C": "Waterfall Planning",
+      "D": "Unit Testing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'MTBF' stand for?",
+    "options": {
+      "A": "Maximum Time Between Failures",
+      "B": "Mean Time Between Failures",
+      "C": "Minimum Time Before Fix",
+      "D": "Monthly Total Base Frequency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automation is a core value of SRE to reduce 'Toil' and human error.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large enterprises",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Planning'?",
+    "options": {
+      "A": "Planning the size of the office cafeteria.",
+      "B": "The process of determining the resources required to meet future demand on a service.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Latency'?",
+    "options": {
+      "A": "A server using 50% of its RAM.",
+      "B": "The time it takes for a web page to load (e.g., 200ms).",
+      "C": "A database reaching 1TB in size.",
+      "D": "The number of servers in a rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, the 'On-call' rotation should be designed to prevent burnout among team members.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only during business hours",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Alerting Threshold'?",
+    "options": {
+      "A": "The door to the server room.",
+      "B": "A specific value that, when crossed, triggers a notification to an engineer.",
+      "C": "The price of the monitoring software.",
+      "D": "The number of pixels on a dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Cause Analysis' (RCA)?",
+    "options": {
+      "A": "Analyzing the roots of plants near the data center.",
+      "B": "A method of problem-solving used for identifying the fundamental causes of faults or problems.",
+      "C": "Calculating the total number of users.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should spend at least 50% of their time on project work rather than operational toil.",
+    "options": {
+      "A": "True (Google's SRE guideline).",
+      "B": "False",
+      "C": "Only if they are senior engineers",
+      "D": "Only if the system is stable"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canary Deployment'?",
+    "options": {
+      "A": "Buying birds for the office.",
+      "B": "Releasing a new version of software to a small subset of users before rolling it out to everyone.",
+      "C": "A way to encrypt network signals.",
+      "D": "To monitor the daily cost of the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Self-healing' systems?",
+    "options": {
+      "A": "A server that repairs its own physical casing.",
+      "B": "A system that can automatically detect and resolve common failures (e.g., restarting a crashed process).",
+      "C": "A specialized way to encrypt data.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Metrics are numerical data points used to track the health of a system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CPU usage",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' primarily used for?",
+    "options": {
+      "A": "To track the location of employees.",
+      "B": "To follow a single request as it travels through multiple microservices to find performance bottlenecks.",
+      "C": "To find a lost file on a hard drive.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'High Availability' (HA)?",
+    "options": {
+      "A": "A server that is located on a high mountain.",
+      "B": "A system design that ensures a high level of operational performance and uptime, usually through redundancy.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a senior engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SLOs should be set based on what the business and users actually need, not just what the system is currently capable of.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if the system is old"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Alert Fatigue'?",
+    "options": {
+      "A": "When the server fans make too much noise.",
+      "B": "When engineers are overwhelmed by too many non-actionable or low-priority alerts, leading them to ignore important ones.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The time spent in meetings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal identifies if a service is 'down' vs 'up'?",
+    "options": {
+      "A": "Availability",
+      "B": "Saturation",
+      "C": "Throughput",
+      "D": "Traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Incident Response is the process of managing an unplanned interruption to an IT service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware failures",
+      "D": "Only if it lasts over 1 hour"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The ability of a system to measurement weight.",
+      "B": "The ability of a system to handle increased load by adding resources.",
+      "C": "To backup the system configuration.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Redundancy' in an SRE context?",
+    "options": {
+      "A": "Having too many engineers.",
+      "B": "The duplication of critical components to increase reliability and provide failover options.",
+      "C": "Deleting old system logs.",
+      "D": "Hiring junior developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Toil can be completely eliminated in any system.",
+    "options": {
+      "A": "False (Some manual work is usually inevitable, but SRE aims to minimize it).",
+      "B": "True",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using AI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Health Check'?",
+    "options": {
+      "A": "A medical exam for an engineer.",
+      "B": "An automated test to verify that a service is functioning correctly.",
+      "C": "A tool used for measuring network speed.",
+      "D": "The brand name of a popular monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal measures the percentage of requests that fail?",
+    "options": {
+      "A": "Latency",
+      "B": "Errors",
+      "C": "Traffic",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE is often described as 'what happens when you ask a software engineer to design an operations function.'",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only at Microsoft",
+      "D": "Only for startups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Rollback'?",
+    "options": {
+      "A": "Rotating a server on the floor.",
+      "B": "The process of returning a system to its previous stable state after a failed update.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "Hiring a new DevOps manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning'?",
+    "options": {
+      "A": "Deleting old servers.",
+      "B": "The process of setting up and making infrastructure available for use.",
+      "C": "A tool to delete old monitor logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a blameless post-mortem, you should identify individuals by name when they made a mistake.",
+    "options": {
+      "A": "False (The focus is on system failures and processes, not individual mistakes).",
+      "B": "True",
+      "C": "Only for security breaches",
+      "D": "Only in the first draft"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "The time spent cleaning the data center.",
+      "B": "The average time it takes for a team to become aware of an incident after it starts.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The speed of the download connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Traffic'?",
+    "options": {
+      "A": "Cars on a highway.",
+      "B": "The number of queries handled by a database per second.",
+      "C": "The weight of a network cable.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SLOs are a key tool for negotiating the trade-off between reliability and velocity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Disaster Recovery' (DR)?",
+    "options": {
+      "A": "Fixing a server after it catches fire.",
+      "B": "A set of policies and procedures to enable the recovery of infrastructure after a natural or human-induced disaster.",
+      "C": "A tool to monitor the daily growth of the log server.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Uptime'?",
+    "options": {
+      "A": "How long it takes to boot a computer.",
+      "B": "The measure of time a system is functional and available for users.",
+      "C": "The price of the cloud service.",
+      "D": "The number of engineers working at night."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dashboard' provides a real-time visual overview of system metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for managers",
+      "D": "Only if using Grafana"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Service Discovery'?",
+    "options": {
+      "A": "To find a new cloud provider.",
+      "B": "To automatically detect and track the locations of network services and their instances.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE metric measures how well a system is performing its tasks within the expected time?",
+    "options": {
+      "A": "Latency",
+      "B": "Traffic",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE is only applicable to large-scale distributed systems.",
+    "options": {
+      "A": "False (The principles can be applied to systems of almost any size).",
+      "B": "True",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Escalation Policy'?",
+    "options": {
+      "A": "A set of stairs in the data center.",
+      "B": "A defined set of steps and contacts to follow when an incident is not resolved within a specific timeframe.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput' in an SRE context?",
+    "options": {
+      "A": "The delay in processing a request.",
+      "B": "The volume of work a system processes over a specific time (e.g., transactions per minute).",
+      "C": "The physical speed of light in a fiber cable.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'Project Work' should aim to improve reliability or efficiency through engineering.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Management'?",
+    "options": {
+      "A": "Naming the servers after famous incidents.",
+      "B": "The process of responding to, resolving, and documenting service disruptions.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal identifies if a system's resources (like CPU or Memory) are fully utilized?",
+    "options": {
+      "A": "Latency",
+      "B": "Saturation",
+      "C": "Traffic",
+      "D": "Errors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE teams should actively work to automate away manual, repetitive tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Monitoring'?",
+    "options": {
+      "A": "Watching a server rack physically.",
+      "B": "The ongoing collection, analysis, and visualization of system data to track health and performance.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Site Reliability Engineer'?",
+    "options": {
+      "A": "To write application code all day.",
+      "B": "To ensure that systems are reliable, scalable, and efficient through software engineering and operations.",
+      "C": "To handle all of the company's financial accounting.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SLAs are usually customer-facing legal agreements with financial penalties.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banks",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Automation' in an SRE context?",
+    "options": {
+      "A": "Using robots to clean the server room.",
+      "B": "The use of software to perform tasks that would otherwise require manual effort.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal identifies the rate of request failures in a system?",
+    "options": {
+      "A": "Latency",
+      "B": "Errors",
+      "C": "Traffic",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'On-call' means being available 24/7 to resolve critical issues.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for junior engineers",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time to Repair' (MTTR) a measure of?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "The average time it takes to fix a broken service once an incident is reported.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If a service has a 30-day availability SLO of 99.9%, approximately how much total downtime is allowed in that 'Error Budget' window?",
+    "options": {
+      "A": "8.77 hours",
+      "B": "43.2 minutes",
+      "C": "10.5 minutes",
+      "D": "1.2 hours"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical purpose of 'Canarying' a new release?",
+    "options": {
+      "A": "To test the UI color palette on mobile devices.",
+      "B": "To detect regressions or performance issues on a small percentage of production traffic before a full rollout.",
+      "C": "To provide a specialized 'beta' version for premium customers only.",
+      "D": "To ensure the server hardware is physically compatible with the new code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SRE 'Error Budget' should be shared between both the Development and Operations/SRE teams to align their incentives.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Kubernetes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of the 'Four Golden Signals', how is 'Saturation' typically measured for a CPU-bound service?",
+    "options": {
+      "A": "By the amount of free disk space remaining.",
+      "B": "By the length of the CPU run queue or the percentage of CPU utilization.",
+      "C": "By the number of HTTP 500 errors per second.",
+      "D": "By the physical temperature of the CPU core."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'Blackbox' and 'Whitebox' monitoring?",
+    "options": {
+      "A": "Blackbox is for hardware; Whitebox is for software.",
+      "B": "Blackbox tests the system from the outside (like a user); Whitebox uses internal logs and metrics to see the system state.",
+      "C": "Whitebox is only for security audits.",
+      "D": "Blackbox monitoring is always manual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE practice involves a 'GameDay' exercise?",
+    "options": {
+      "A": "A competitive coding tournament for the team.",
+      "B": "A staged rehearsal where teams practice responding to a simulated system failure in a controlled environment.",
+      "C": "Calculating the total cost of server electricity.",
+      "D": "Hiring new engineers through a hackathon."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Level Objective' (SLO) should be stricter than the 'Service Level Agreement' (SLA) to provide a safety margin.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking applications",
+      "D": "Only if the SLA has no financial penalties"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Mean Time to Acknowledge' (MTTA) measure in the incident lifecycle?",
+    "options": {
+      "A": "The time it takes to fix the bug.",
+      "B": "The time elapsed between an alert being triggered and a human responding to it.",
+      "C": "The time it takes for the customer to report the issue.",
+      "D": "The duration of the post-mortem meeting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Blue-Green' deployment, what is the 'Green' environment?",
+    "options": {
+      "A": "The environment currently serving 100% of live traffic.",
+      "B": "The new version of the application that is ready for testing but not yet receiving public traffic.",
+      "C": "A specialized environment for environment-friendly servers.",
+      "D": "The database backup environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Operational Load' in SRE?",
+    "options": {
+      "A": "The weight of the servers in the rack.",
+      "B": "The total amount of time spent on manual tasks, tickets, and on-call responses vs. engineering projects.",
+      "C": "The electrical power consumed by the data center.",
+      "D": "The number of users logged into the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Structured Logging' (e.g., JSON logs) is preferred in SRE because it allows for easier automated parsing and analysis compared to plain text.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for security events",
+      "D": "Only if using the ELK stack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Action Item' in the context of an SRE Post-Mortem?",
+    "options": {
+      "A": "A list of people who should be fired.",
+      "B": "A specific, measurable task intended to fix a root cause or improve the system's resilience identified during the incident review.",
+      "C": "A manual way to restart a server.",
+      "D": "The physical movement of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Availability' calculation based on requests?",
+    "options": {
+      "A": "(Total Requests / Successful Requests) * 100",
+      "B": "(Successful Requests / Total Requests) * 100",
+      "C": "Total Requests - Error Requests",
+      "D": "(Uptime / Downtime) * 100"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Baggage' in Distributed Tracing?",
+    "options": {
+      "A": "To store old monitoring data.",
+      "B": "To pass key-value pairs (context) across service boundaries alongside a Trace ID.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The size of the data packet being traced."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Chaos Engineering' should ideally be performed in production to ensure the results are accurate for the real user environment.",
+    "options": {
+      "A": "True (If the team has sufficient maturity and 'Blast Radius' controls).",
+      "B": "False",
+      "C": "Only for non-profit companies",
+      "D": "Only if the developers are on vacation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dark Launching'?",
+    "options": {
+      "A": "Launching a server at night.",
+      "B": "Deploying new code to production but keeping it hidden from users (e.g., via feature flags) to test performance without user impact.",
+      "C": "Encrypting the source code before deployment.",
+      "D": "Turning off the monitoring dashboard during an update."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal in the 'Four Golden Signals' would capture a 'slow' database query that isn't failing but is impacting performance?",
+    "options": {
+      "A": "Traffic",
+      "B": "Latency",
+      "C": "Errors",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'Automation' is only about writing scripts to deploy code.",
+    "options": {
+      "A": "False (It includes automating incident response, provisioning, testing, and even policy enforcement).",
+      "B": "True",
+      "C": "Only for senior engineers",
+      "D": "Only if using Terraform"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Runbook' (or Playbook)?",
+    "options": {
+      "A": "A novel about the history of the internet.",
+      "B": "A set of documented procedures for a technician or SRE to follow when responding to a specific alert or operational task.",
+      "C": "A specialized way to name VM folders.",
+      "D": "A tool to track the time spent running in the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Incident Burn Rate'?",
+    "options": {
+      "A": "How fast the server room is heating up.",
+      "B": "The rate at which a service is consuming its allowed Error Budget.",
+      "C": "The speed of the network upload during an error.",
+      "D": "The number of incidents resolved per hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Blameless' Post-Mortems?",
+    "options": {
+      "A": "It makes it easier to hide mistakes.",
+      "B": "It focuses the team on fixing the underlying process or system defect rather than finger-pointing.",
+      "C": "It reduces the salary of the team.",
+      "D": "It removes the need for any documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SLO of '99.9% availability' is always better for a business than an SLO of '99.5%'.",
+    "options": {
+      "A": "False (Higher availability often comes with significantly higher costs and slower development speed; the 'best' SLO depends on user needs).",
+      "B": "True",
+      "C": "Only if the company is a bank",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Blast Radius' in SRE?",
+    "options": {
+      "A": "The physical area affected by a server explosion.",
+      "B": "The potential impact or scope of a failure (e.g., how many users or services are affected by a single component failing).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The number of servers in a single rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Load Shedding'?",
+    "options": {
+      "A": "Moving servers to a different building.",
+      "B": "Intentionally dropping low-priority requests to protect the core functionality of a system when it is overwhelmed.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should act as 'Gatekeepers' and manually approve every single code change to ensure reliability.",
+    "options": {
+      "A": "False (SREs should build automated systems and policies that allow developers to deploy safely themselves).",
+      "B": "True",
+      "C": "Only for non-production environments",
+      "D": "Only if the change is over 100 lines of code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Load Testing'?",
+    "options": {
+      "A": "Hiring people from different countries to test a site.",
+      "B": "Using multiple machines to generate high volumes of traffic to test if a system can scale to meet demand.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these identifies a 'Critical' incident according to standard SRE severity levels?",
+    "options": {
+      "A": "A minor typo on a help page.",
+      "B": "Complete loss of service for all users in a major region.",
+      "C": "A single user having a slow connection.",
+      "D": "A background log file being too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Availability metrics should only be calculated during 'business hours'.",
+    "options": {
+      "A": "False (Modern global services are expected to be available 24/7, and SLOs usually reflect this).",
+      "B": "True",
+      "C": "Only for internal tools",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Graceful Degradation'?",
+    "options": {
+      "A": "Turning off the power slowly.",
+      "B": "Designing a system so that if one part fails, the rest of the system still works, perhaps with reduced features (e.g., showing cached data).",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MTBF' used for in reliability engineering?",
+    "options": {
+      "A": "To measure the speed of the CPU.",
+      "B": "To predict the average time between the start of one failure and the start of the next.",
+      "C": "To backup the system BIOS.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, an 'Incident' is any event that is not part of the standard operation of a service and causes an interruption to the quality of that service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for hardware failures",
+      "D": "Only if it lasts over 10 minutes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Feature Flagging' (or Feature Toggles)?",
+    "options": {
+      "A": "Placing physical flags on servers.",
+      "B": "A technique that allows developers to turn features on or off in a running application without redeploying code.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "Calculating the monthly cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cascading Failure'?",
+    "options": {
+      "A": "A failure in a physical waterfall cooling system.",
+      "B": "A failure in one component that triggers a series of failures in other related components, often crashing the entire system.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs use 'Synthetic Monitoring' to simulate user behavior and proactively find issues before real users do.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Circuit Breaker' in software architecture?",
+    "options": {
+      "A": "A physical switch in the electrical room.",
+      "B": "A design pattern used to detect failures and encapsulate the logic of preventing a failure from constantly recurring (e.g., stopping calls to a failing DB).",
+      "C": "A tool to delete old log files.",
+      "D": "To monitor the daily growth of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a role during a Post-Mortem meeting?",
+    "options": {
+      "A": "Facilitator",
+      "B": "Scribe",
+      "C": "Technical Lead",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' involves both scaling up (vertical) and scaling out (horizontal) infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Aggregation'?",
+    "options": {
+      "A": "Deleting all logs once a week.",
+      "B": "The process of collecting logs from many different sources and storing them in one searchable location.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'Scribe' during an incident?",
+    "options": {
+      "A": "To fix the code during the outage.",
+      "B": "To record the timeline of events, decisions, and actions taken during the incident for later review.",
+      "C": "To handle communication with the press.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: High 'Cardinality' in metrics can lead to high storage costs and slow query performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for text logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backoff and Retry' logic?",
+    "options": {
+      "A": "A way to backup the whole server.",
+      "B": "A strategy where a service waits for a period of time before retrying a failed request, often increasing the wait time with each attempt.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regression Testing'?",
+    "options": {
+      "A": "Testing a system after it has been deleted.",
+      "B": "Re-running functional and non-functional tests to ensure that previously developed and tested software still performs after a change.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should prioritize fixing the 'Noisy' alerts that trigger most frequently, even if they aren't critical.",
+    "options": {
+      "A": "True (To reduce alert fatigue and clear the way for important notifications).",
+      "B": "False",
+      "C": "Only for senior engineers",
+      "D": "Only in production"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Mean Time to Recovery' (MTTR) a measure of?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "The average time it takes to restore a service after a failure has been detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which signal measures the percentage of CPU or RAM being used by a service?",
+    "options": {
+      "A": "Latency",
+      "B": "Saturation",
+      "C": "Traffic",
+      "D": "Errors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'On-call' duties should ideally be rotated so that no single person is always responsible.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in large companies",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Retrospective'?",
+    "options": {
+      "A": "A meeting to decide who to hire next.",
+      "B": "An analysis of an incident to determine what went well, what went wrong, and how to improve in the future.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of a 'Service Map' in observability?",
+    "options": {
+      "A": "To provide a physical map of the data center.",
+      "B": "To visualize the connections and dependencies between different services in a microservices architecture.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SLAs' are usually customer-facing legal documents, while 'SLOs' are internal technical goals.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redundancy' in a data center context?",
+    "options": {
+      "A": "Deleting all duplicate data.",
+      "B": "The provision of additional or duplicate systems, equipment, and resources to ensure continuity during a failure.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Throughput'?",
+    "options": {
+      "A": "The delay in processing a request.",
+      "B": "The amount of data or number of requests successfully processed by a system in a given time.",
+      "C": "The physical speed of light in a cable.",
+      "D": "The number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Health Check' endpoint (like /health) should return a 200 OK status if the service is ready to receive traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Provisioning' in a cloud infrastructure context?",
+    "options": {
+      "A": "Deleting old servers.",
+      "B": "The process of setting up and making infrastructure resources available to an application.",
+      "C": "A tool to delete old monitor logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a sign of 'Alert Fatigue'?",
+    "options": {
+      "A": "Engineers ignoring alert emails because there are too many.",
+      "B": "A server rack being moved to a different room.",
+      "C": "A laptop running out of battery.",
+      "D": "The internet bill being too high."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE teams should actively work to automate away manual, repetitive 'Toil'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Site Reliability Engineer' compared to a developer?",
+    "options": {
+      "A": "Ensuring the system is stable and scalable while developers focus on new features.",
+      "B": "Writing all the code for the front-end UI.",
+      "C": "Handling all of the company's financial accounting.",
+      "D": "Monitoring the physical power usage of the server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SRE metric would you use to calculate how long it takes to 'fix' a problem after it's reported?",
+    "options": {
+      "A": "MTTD",
+      "B": "MTTR",
+      "C": "SLA",
+      "D": "MTBF"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE is a specific set of practices that can be applied to any DevOps environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only at Google",
+      "D": "Only for cloud-native apps"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Tracing' and why is it important for SRE?",
+    "options": {
+      "A": "Tracking physical location of server racks.",
+      "B": "Tracing requests through multiple services to find where latency or errors are introduced in microservices.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autoscaling' in a cloud infrastructure?",
+    "options": {
+      "A": "Measuring the weight of the servers automatically.",
+      "B": "A system that automatically adjusts the number of compute resources based on real-time demand.",
+      "C": "Automatically updating the server's firmware.",
+      "D": "Calculating the monthly cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Effective SRE requires a culture of transparency and shared responsibility.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for remote teams",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Level Indicator' (SLI) primarily used for?",
+    "options": {
+      "A": "To measure the height of the server rack.",
+      "B": "To provide a quantitative measure of the level of service being provided (e.g., success rate).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of an enterprise dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cascading failures' can be prevented by using 'Circuit Breakers' and proper time-outs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaos Engineering' hypothesis testing?",
+    "options": {
+      "A": "Guessing when a server might fail.",
+      "B": "Formulating a theory about how a system will react to a failure and then testing it to see if the hypothesis holds true.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to measure the 'Saturation' of a database disk?",
+    "options": {
+      "A": "Disk I/O Wait time",
+      "B": "Number of users",
+      "C": "The color of the disk",
+      "D": "The speed of the network"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "An SRE team is implementing 'Multi-window, Multi-burn-rate' alerting. What is the primary advantage of this approach over single-threshold SLO alerting?",
+    "options": {
+      "A": "It allows the team to delete old logs automatically to save costs.",
+      "B": "It identifies severe outages almost immediately (short window) while also flagging slow budget consumption (long window) without excessive 'flap' or false positives.",
+      "C": "It ensures that the CPU utilization never exceeds 80% on any host.",
+      "D": "It requires fewer monitoring agents to be installed on the servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Distributed Systems', why is 'Jitter' added to exponential backoff algorithms for retries?",
+    "options": {
+      "A": "To make the application UI feel more dynamic to the user.",
+      "B": "To prevent the 'Thundering Herd' problem where all failed clients retry at the exact same time, potentially re-crashing the service.",
+      "C": "To encrypt the retry packets with a random key.",
+      "D": "To increase the total number of retries allowed per second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: According to the 'Blameless Post-Mortem' philosophy, the 'Root Cause' is usually a single human error that can be identified and corrected with better training.",
+    "options": {
+      "A": "False (Root causes are typically complex system failures, process defects, or 'Unknown Unknowns'; human error is viewed as a symptom, not the cause).",
+      "B": "True",
+      "C": "Only for security-related incidents",
+      "D": "Only if the incident caused a financial loss over $1 million"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Disaster Recovery' strategy involves keeping a minimal version of the environment running (usually just the database) to allow for faster restoration than 'Backup and Restore'?",
+    "options": {
+      "A": "Hot Standby",
+      "B": "Pilot Light",
+      "C": "Warm Standby",
+      "D": "Multi-site Active-Active"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Concurrency Limiting' and how does it improve system reliability?",
+    "options": {
+      "A": "It automatically increases the RAM of a server based on user count.",
+      "B": "It dynamically adjusts the number of allowed concurrent requests based on measured latency and throughput to prevent a system from entering a 'collapsed' state.",
+      "C": "A specialized way to encrypt database connections.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In SRE, what is 'Counterfactual Thinking' during an incident analysis?",
+    "options": {
+      "A": "Ignoring the facts of the incident to protect a team member.",
+      "B": "A cognitive tool exploring 'what could have happened' if specific variables were different, helping to identify missed safety nets and latent risks.",
+      "C": "A way to calculate the cost of an incident based on imaginary users.",
+      "D": "The process of deleting logs that contradict the official report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched Timeouts' in a microservices chain (e.g., a frontend timeout of 5s and a backend timeout of 10s) can lead to 'Ghost Requests' that consume resources despite the user having already disconnected.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python-based services",
+      "D": "Only if using a 10Gbps fiber link"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Rule of Three' in the context of SRE automation?",
+    "options": {
+      "A": "Always hire three engineers for every server.",
+      "B": "Perform a task manually twice, but automate it the third time you have to do it.",
+      "C": "Always have three redundant data centers.",
+      "D": "Encrypt the database password three times."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific SRE metric measures the 'Reliability' of a system by looking at the probability that it will perform its intended function without failure for a specified time period?",
+    "options": {
+      "A": "MTTR",
+      "B": "Survival Probability / Reliability Function",
+      "C": "Latency Quantiles",
+      "D": "Throughput"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Load Shedding' should prioritize dropping 'Health Check' probes so that real user traffic has more room during a spike.",
+    "options": {
+      "A": "False (Dropping health checks may cause load balancers to mark healthy servers as down, worsening the outage; health checks should be prioritized).",
+      "B": "True",
+      "C": "Only if using AWS ELB",
+      "D": "Only for non-production clusters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Incident Command System' (ICS), what is the primary role of the 'Operations Lead'?",
+    "options": {
+      "A": "To handle communications with external stakeholders.",
+      "B": "To direct and coordinate the technical response and mitigation steps to resolve the incident.",
+      "C": "To document the timeline in the incident log.",
+      "D": "To monitor the legal compliance of the company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Risk Stack' approach in SRE?",
+    "options": {
+      "A": "Stacking server racks in order of their cost.",
+      "B": "A method of prioritizing reliability work by analyzing the cumulative risk of various failure modes (Probability x Impact).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Level Agreements' (SLAs) are typically considered 'Product-level' requirements, while 'Service Level Objectives' (SLOs) are 'Infrastructure-level' requirements.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if the company is a bank"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Tracing' clock-skew and how is it handled?",
+    "options": {
+      "A": "When the server clocks run too fast.",
+      "B": "The difference in system time between servers which can cause child spans to appear to start before their parents; handled by parent-child offset algorithms.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "The process of moving servers to a different time zone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which SRE principle is violated if an 'On-call' engineer receives an alert for a situation they have no power or 'Runbook' to resolve?",
+    "options": {
+      "A": "Automation",
+      "B": "Actionability",
+      "C": "Transparency",
+      "D": "Efficiency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Active-Active' multi-region setup, 'Data Consistency' (CAP Theorem) often forces a trade-off where the system must choose between Availability and Partition Tolerance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Service Mesh' impact on SRE toil?",
+    "options": {
+      "A": "It increases toil by making networking more complex.",
+      "B": "It reduces toil by providing standardized, out-of-the-box observability (metrics/traces) and traffic control (retries/circuit breaking) without application code changes.",
+      "C": "It removes the need for any monitoring agents.",
+      "D": "It encrypts the physical server hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical distribution is most commonly used to model the 'Time Between Failures' for complex systems in SRE?",
+    "options": {
+      "A": "Normal Distribution",
+      "B": "Exponential Distribution / Weibull Distribution",
+      "C": "Binomial Distribution",
+      "D": "Linear Distribution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Error Budget' should be calculated using a rolling window (e.g., last 28 days) rather than a fixed calendar month to provide continuous visibility into reliability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for February",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Deadlines' or 'Tied-outs' in the context of SRE request management?",
+    "options": {
+      "A": "The date the project must be finished.",
+      "B": "Propagating a request's remaining time-to-live through a microservices chain so downstream services don't start work on a request that has already timed out at the edge.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Post-Mortem' analysis, what is 'Hindsight Bias'?",
+    "options": {
+      "A": "The ability to see the server rack from the back.",
+      "B": "The tendency to see events as more predictable after they have occurred, often leading to unfair blame of the engineers involved.",
+      "C": "Calculating the total number of users.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'gRPC' communication in a microservices observability stack?",
+    "options": {
+      "A": "80",
+      "B": "50051",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SREs should use 'Probabilistic Sampling' in high-traffic tracing systems to capture 100% of errors but only 1% of successful requests to manage storage costs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'SLO Error Budget Policy'?",
+    "options": {
+      "A": "To list the names of all services.",
+      "B": "To define the mandatory organizational response (e.g., freezing feature releases) when a service violates its SLO and exhausts its budget.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon occurs when a system is so overloaded that the resources used to handle errors/retries prevent any successful work from being done?",
+    "options": {
+      "A": "Latency Bloat",
+      "B": "Livelock / Metastable Failure",
+      "C": "Bandwidth Exhaustion",
+      "D": "MAC Table Flapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE teams should actively work to implement 'Chaos Mesh' or 'AWS Fault Injection Simulator' to test their 'Zero Trust' network assumptions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Operational Readiness Review' (ORR)?",
+    "options": {
+      "A": "Checking if the office is ready for a party.",
+      "B": "A rigorous technical assessment of a new service to ensure it meets SRE standards for observability, scalability, and resilience before it is allowed into production.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of an SRE 'Error Budget' dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'MTTD' (Mean Time to Detect) is usually improved by better monitoring, while 'MTTR' (Mean Time to Repair) is improved by better automation and runbooks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'SRE Engagement Model' for new teams?",
+    "options": {
+      "A": "How SREs get married.",
+      "B": "A defined framework for how SREs partner with development teams, ranging from full ownership to advisory roles.",
+      "C": "A tool to delete old VTP passwords.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'NTP' used for SRE clock synchronization across nodes?",
+    "options": {
+      "A": "80",
+      "B": "123",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Canary' should ideally be deployed to a specific geographic region where users have the lowest tolerance for errors.",
+    "options": {
+      "A": "False (Canaries should be deployed to a diverse subset of users or a region with 'typical' behavior to ensure the sample is representative).",
+      "B": "True",
+      "C": "Only for mobile applications",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Systems' observability 'Context Propagation'?",
+    "options": {
+      "A": "Moving the context to a different server.",
+      "B": "The act of passing metadata (like Trace IDs) across network boundaries to correlate logs and metrics across a complex microservice flow.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a service dashboard indicates that the Error Budget has been fully exhausted for the current window?",
+    "options": {
+      "A": "Alert / Budget Exhausted",
+      "B": "Warn",
+      "C": "OK",
+      "D": "Pending"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Service Level Objective' (SLO) can be defined as '99.9% of requests must complete in less than 200ms'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Management' 'Handover' process?",
+    "options": {
+      "A": "Giving a physical hand to someone.",
+      "B": "The structured transfer of information and responsibility when a new Incident Commander or on-call engineer takes over during a long-running outage.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps used by SRE monitoring tools?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An SRE team should aim to automate only the tasks that take more than 10 hours per week.",
+    "options": {
+      "A": "False (Even small, frequent tasks should be automated if they contribute to toil or human error).",
+      "B": "True",
+      "C": "Only for junior engineers",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Operational Load' 'Debt' in SRE?",
+    "options": {
+      "A": "Financial debt from buying servers.",
+      "B": "The accumulation of manual, repetitive work that occurs when engineering improvements are neglected in favor of temporary operational fixes.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to calculate the 'Success Rate' of a service?",
+    "options": {
+      "A": "(Successful Requests / Total Requests) * 100",
+      "B": "(Uptime / Total Time) * 100",
+      "C": "Total Requests - Errors",
+      "D": "Number of users logged out"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE is only applicable to large-scale web services.",
+    "options": {
+      "A": "False (The principles of SRE can be applied to any system where reliability is a priority).",
+      "B": "True",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Capacity Management' 'Thresholding'?",
+    "options": {
+      "A": "Setting the price of a server.",
+      "B": "Defining specific resource utilization levels (e.g., 70% CPU) that trigger automated scaling or manual review to prevent saturation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for secure web management (HTTPS) of an SRE dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'MTTD' (Mean Time to Detect) is usually improved by better monitoring, while 'MTTR' (Mean Time to Repair) is improved by better automation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Retrospective' and why is it important?",
+    "options": {
+      "A": "A meeting to decide who to hire.",
+      "B": "An analysis of an incident to identify root causes and preventive measures to avoid future occurrences.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS' (encrypted web traffic)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE is a specific set of practices that can be applied to any DevOps environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Chaos Engineering' 'Blast Radius'?",
+    "options": {
+      "A": "The physical area affected by a server explosion.",
+      "B": "The set of users, services, or components potentially impacted by a chaos experiment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'NTP'?",
+    "options": {
+      "A": "80",
+      "B": "123",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SLOs should be set based on what the business and users actually need.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Tracing' and why is it important for SRE?",
+    "options": {
+      "A": "Tracking physical location of server racks.",
+      "B": "Correlating logs and metrics across microservices to find performance bottlenecks.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a service dashboard indicates that the Error Budget is at risk?",
+    "options": {
+      "A": "Warn / Budget at Risk",
+      "B": "Alert",
+      "C": "OK",
+      "D": "Resolved"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE teams should actively work to automate away manual, repetitive toil.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Incident Management' 'Blamelessness'?",
+    "options": {
+      "A": "Naming the servers after famous blameless people.",
+      "B": "The practice of focusing on process and system failure rather than individual error during incident analysis.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In SRE, 'MTTR' is usually improved by better automation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Error Budget' 'Exhaustion'?",
+    "options": {
+      "A": "The budget is completely used up.",
+      "B": "A state where the allowed downtime for a service has been reached, requiring immediate prioritization of reliability over features.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the duration for which a service is unavailable?",
+    "options": {
+      "A": "Downtime",
+      "B": "Latency",
+      "C": "Throughput",
+      "D": "Error rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SLOs should be strictly technical and not involve business stakeholders.",
+    "options": {
+      "A": "False (SLOs are a bridge between technical reliability and business needs; stakeholders must be involved to define acceptable trade-offs).",
+      "B": "True",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Toil' reduction strategy?",
+    "options": {
+      "A": "Hiring more people to do the toil.",
+      "B": "Systematically identifying and automating manual operational tasks to free up time for engineering projects.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based management (HTTPS) of an SRE dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Level Objective' (SLO) should be stricter than the 'Service Level Agreement' (SLA).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Canarying' and why is it used?",
+    "options": {
+      "A": "Buying birds for the office.",
+      "B": "Releasing code to a small group of users to test for bugs before a full release.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SRE is a specific set of practices that can be applied to any DevOps environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Tracing' and why is it important?",
+    "options": {
+      "A": "Tracking physical location of server racks.",
+      "B": "Correlating logs and metrics across microservices to find performance bottlenecks.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a service dashboard indicates that the Error Budget is exhausted?",
+    "options": {
+      "A": "Alert / Budget Exhausted",
+      "B": "Warn",
+      "C": "OK",
+      "D": "Resolved"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SRE teams should actively work to automate away manual, repetitive toil.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,2005 @@
+{
+  "skill": "Switches",
+  "questions": [
+    {
+      "question": "What is the primary function of a network switch in a local area network (LAN)?",
+      "options": {
+        "A": "To connect multiple networks across different geographic locations.",
+        "B": "To receive, process, and forward data to the specific destination device using MAC addresses.",
+        "C": "To provide a wireless signal for mobile devices.",
+        "D": "To act as a physical battery for the server rack."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which unique identifier does a switch use to build its forwarding table?",
+      "options": {
+        "A": "IP Address",
+        "B": "MAC Address",
+        "C": "User ID",
+        "D": "Domain Name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A standard Layer 2 switch makes forwarding decisions based on IP addresses.",
+      "options": {
+        "A": "False (Layer 2 switches use MAC addresses; Layer 3 switches use IP addresses).",
+        "B": "True",
+        "C": "Only if connected to the internet",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'VLAN' stand for in networking?",
+      "options": {
+        "A": "Virtual Local Area Network",
+        "B": "Variable Logic Access Node",
+        "C": "Verified Local Area Network",
+        "D": "Visual Loopback Access Network"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Broadcast Domain'?",
+      "options": {
+        "A": "The physical location of a radio station.",
+        "B": "A logical division of a computer network in which all nodes can reach each other by broadcast at the data link layer.",
+        "C": "The list of websites a user can visit.",
+        "D": "A specialized tool for cleaning switch ports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a benefit of using VLANs on a switch?",
+      "options": {
+        "A": "It makes the physical switch look more attractive.",
+        "B": "It improves security and reduces network congestion by logically separating departments.",
+        "C": "It removes the need for physical cables.",
+        "D": "It doubles the speed of the hardware."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: An 'Unmanaged' switch allows for advanced configuration like VLANs and Port Mirroring.",
+      "options": {
+        "A": "False (Unmanaged switches are 'plug-and-play' with no configuration options).",
+        "B": "True",
+        "C": "Only if using a web browser",
+        "D": "Only for enterprise brands"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Full-Duplex' communication in a switch port?",
+      "options": {
+        "A": "Communication where only one device can send at a time.",
+        "B": "Simultaneous two-way communication where devices can send and receive data at the same time.",
+        "C": "A way to backup data to a cloud bucket.",
+        "D": "A specialized way to compress network files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component of a switch stores the mapping between MAC addresses and physical ports?",
+      "options": {
+        "A": "The Power Supply",
+        "B": "MAC Address Table (or CAM Table)",
+        "C": "The Fan Controller",
+        "D": "The Screen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Layer 3' switch can perform routing functions similar to a router.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for IPv6",
+        "D": "Only if it has no VLANs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'PoE' (Power over Ethernet)?",
+      "options": {
+        "A": "A way to send internet over power lines.",
+        "B": "A technology that allows network cables to carry electrical power to devices like IP phones and cameras.",
+        "C": "A specialized battery for laptops.",
+        "D": "A tool to update the switch firmware."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of 'Spanning Tree Protocol' (STP)?",
+      "options": {
+        "A": "To plant trees in the data center.",
+        "B": "To prevent network loops by disabling redundant paths in a switched network.",
+        "C": "To increase the internet speed.",
+        "D": "To monitor the room temperature."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Port' is the physical point of connection on a switch for a network cable.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if it is fiber optic",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens when a switch receives a frame for a MAC address that is NOT in its MAC table?",
+      "options": {
+        "A": "It deletes the frame immediately.",
+        "B": "It floods the frame out of all ports except the one it arrived on (Unknown Unicast Flooding).",
+        "C": "It restarts the entire switch.",
+        "D": "It asks the administrator for the address."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port type is typically used to connect two switches together to carry traffic for multiple VLANs?",
+      "options": {
+        "A": "Access Port",
+        "B": "Trunk Port",
+        "C": "Console Port",
+        "D": "USB Port"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Port Security' can be used to limit the number of MAC addresses allowed on a single switch port.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for wireless connections",
+        "D": "Only if using a software firewall"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Latency' in a switch?",
+      "options": {
+        "A": "The weight of the physical switch hardware.",
+        "B": "The time delay between a frame entering a switch port and exiting another.",
+        "C": "The total number of users on the network.",
+        "D": "The history of all previous network errors."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a common 'Managed' switch configuration interface?",
+      "options": {
+        "A": "Command Line Interface (CLI)",
+        "B": "Web-based GUI",
+        "C": "SNMP",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: In a 'Star' topology, all devices are connected to a central switch.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in home networks",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Bandwidth'?",
+      "options": {
+        "A": "The physical width of the network cable.",
+        "B": "The maximum rate of data transfer across a network path.",
+        "C": "The price of the switch.",
+        "D": "The number of people who work in IT."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for initial configuration of a switch via a physical serial cable?",
+      "options": {
+        "A": "Ethernet Port",
+        "B": "Console Port",
+        "C": "SFP Port",
+        "D": "Power Port"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Collision Domain' is a network segment where data packets can collide with one another.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for fiber optics",
+        "D": "Only if the switch is off"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of an 'Access Port'?",
+      "options": {
+        "A": "To carry traffic for all VLANs.",
+        "B": "To connect end-user devices (like PCs or printers) to a single specific VLAN.",
+        "C": "To encrypt the physical server rack.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a common 'Switching Method'?",
+      "options": {
+        "A": "Store-and-Forward",
+        "B": "Cut-Through",
+        "C": "Fragment-Free",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: A 'Default Gateway' is usually required for a switch to communicate with devices on a different network subnet.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Layer 2 switches",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is an 'SFP' (Small Form-factor Pluggable) module used for?",
+      "options": {
+        "A": "To backup the switch logs.",
+        "B": "To provide interchangeable interfaces for different types of network connections (like Fiber or Copper).",
+        "C": "A specialized way to name VM folders.",
+        "D": "The newest version of the hypervisor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'LACP' stand for in the context of switch link aggregation?",
+      "options": {
+        "A": "Link Aggregation Control Protocol",
+        "B": "Logical Access Connection Path",
+        "C": "Local Area Connection Port",
+        "D": "Layered Access Control Point"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Hub' is smarter than a 'Switch' because it sends data to all ports simultaneously.",
+      "options": {
+        "A": "False (Hubs are 'dumb' devices that cause collisions; switches are 'intelligent' because they target specific ports).",
+        "B": "True",
+        "C": "Only in gaming networks",
+        "D": "Only if using 100Mbps"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Mirroring' (or SPAN)?",
+      "options": {
+        "A": "A physical mirror used to see the back of the switch.",
+        "B": "A method of copying network traffic from one or more ports to another port for monitoring and analysis.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which OSI layer is associated with standard Layer 2 switches?",
+      "options": {
+        "A": "Layer 1 (Physical)",
+        "B": "Layer 2 (Data Link)",
+        "C": "Layer 3 (Network)",
+        "D": "Layer 4 (Transport)"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Cascading' switches involves connecting them in a series to expand the number of available ports.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-root users",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Throughput'?",
+      "options": {
+        "A": "The time it takes to reboot the switch.",
+        "B": "The actual amount of data successfully transferred across the switch in a given time.",
+        "C": "The physical speed of light in a cable.",
+        "D": "The number of users currently active."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a common 'Cisco' switch series used in enterprises?",
+      "options": {
+        "A": "Catalyst",
+        "B": "Explorer",
+        "C": "Pathfinder",
+        "D": "Commander"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Each port on a switch is its own separate collision domain.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for fiber optics",
+        "D": "Only if using half-duplex"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN Tagging' (802.1Q)?",
+      "options": {
+        "A": "Naming the switch ports with stickers.",
+        "B": "The process of adding a small header to a frame to identify which VLAN it belongs to as it travels across a trunk link.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which device is used to connect multiple VLANs together so they can communicate?",
+      "options": {
+        "A": "Layer 2 Switch",
+        "B": "Router or Layer 3 Switch",
+        "C": "Network Hub",
+        "D": "Access Point"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'MAC Address' is a 48-bit physical address that is globally unique to every network interface card.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for laptops",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Backplane' speed?",
+      "options": {
+        "A": "The speed of the wind behind the data center.",
+        "B": "The internal data transfer capacity of the switch's hardware architecture.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port setting is used to prevent unauthorized users from unplugging a server and plugging in their own laptop?",
+      "options": {
+        "A": "Port Speed",
+        "B": "Port Security (Sticky MAC)",
+        "C": "Duplex Mode",
+        "D": "VLAN ID"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Stacking' allows multiple physical switches to be managed as a single logical unit.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-profit organizations",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Broadcast Storm'?",
+      "options": {
+        "A": "A physical weather event in the server room.",
+        "B": "A condition where broadcast traffic builds up uncontrollably, usually due to a network loop, crashing the network.",
+        "C": "A way to send files to all users at once.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port configuration allows a device to negotiate its own speed and duplex settings with the switch?",
+      "options": {
+        "A": "Fixed Speed",
+        "B": "Auto-Negotiation",
+        "C": "Manual Override",
+        "D": "Static Mode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Standard RJ-45 Ethernet cables are limited to a distance of 100 meters (approx. 328 feet).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Cat6",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Quality of Service' (QoS) on a switch?",
+      "options": {
+        "A": "Checking the physical quality of the switch plastic.",
+        "B": "Prioritizing certain types of traffic (like Voice or Video) to ensure reliable performance during congestion.",
+        "C": "A specialized way to encrypt network traffic.",
+        "D": "The total number of hours the switch has been on."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these describes 'North-South' traffic?",
+      "options": {
+        "A": "Traffic between a data center and the internet.",
+        "B": "Traffic between two servers in the same data center.",
+        "C": "Traffic sent between two different countries only.",
+        "D": "The migration of birds in the winter."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Core' switch is typically the highest-capacity switch in a large network, sitting at the center of the hierarchy.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for AWS",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Loopback' testing?",
+      "options": {
+        "A": "Walking in a circle around the switch.",
+        "B": "Sending a signal out and receiving it back to verify that a port or cable is functioning correctly.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is associated with 'SSH' management of a switch?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'Fiber Optic' cables allows for much longer distances and higher speeds than Copper cables.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-profit organizations",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN Hopping'?",
+      "options": {
+        "A": "Jumping over a physical switch rack.",
+        "B": "An attack where a user tries to access a different VLAN than the one they are assigned to.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is commonly used on a switch to view the current MAC address table?",
+      "options": {
+        "A": "show mac address-table",
+        "B": "list all macs",
+        "C": "display addresses",
+        "D": "mac-view"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Power over Ethernet (PoE) can be used to power a physical desktop computer.",
+      "options": {
+        "A": "False (Standard PoE does not provide enough wattage for a PC; it is for low-power devices like phones).",
+        "B": "True",
+        "C": "Only if using Cat7",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Switch Port Density'?",
+      "options": {
+        "A": "The weight of the switch.",
+        "B": "The number of ports available on a single switch hardware unit.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the switch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for web-based management (HTTP) of a switch?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Loop' occurs when there are multiple active paths between two switches, causing frames to circulate endlessly.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in version 1.0",
+        "D": "Only for non-production environments"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'EtherChannel'?",
+      "options": {
+        "A": "A television channel about networking.",
+        "B": "A technology that allows multiple physical Ethernet links to be combined into one logical link for more bandwidth and redundancy.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Status' on a switch port indicates that it is currently active and passing traffic?",
+      "options": {
+        "A": "Up/Up",
+        "B": "Down/Down",
+        "C": "Administratively Down",
+        "D": "Stale"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Standard switches work at the 'Data Link' layer (Layer 2) of the OSI model.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UDP traffic",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Aggregation'?",
+      "options": {
+        "A": "Cleaning the switch ports.",
+        "B": "Combining multiple physical ports into one logical port to increase throughput.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the firewall."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is associated with 'Telnet'?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Using 'VLANs' can help isolate guest Wi-Fi traffic from the internal corporate network.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Switch Fabric'?",
+      "options": {
+        "A": "The cloth used to cover the server racks.",
+        "B": "The internal hardware and software architecture that allows data to be moved between ports within a switch.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for secure web management (HTTPS) of a switch?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'VLAN ID' is a numerical value used to identify a specific VLAN.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for proxy users",
+        "D": "Only if the certificate is expired"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Congestion'?",
+      "options": {
+        "A": "When the server room is too crowded.",
+        "B": "A condition where data traffic exceeds the capacity of the network, leading to delays and dropped packets.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "The password for a network administrator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'Port' is associated with standard unencrypted web traffic?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "53"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Spanning Tree Protocol (STP), which state is responsible for a port being able to populate the MAC address table but NOT yet forward user data frames?",
+      "options": {
+        "A": "Blocking",
+        "B": "Listening",
+        "C": "Learning",
+        "D": "Forwarding"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary function of a 'Switched Virtual Interface' (SVI) on a Layer 3 switch?",
+      "options": {
+        "A": "To create a physical bridge between two racks.",
+        "B": "To provide a logical Layer 3 interface for a VLAN to allow for inter-VLAN routing.",
+        "C": "To encrypt the console port traffic.",
+        "D": "To act as a backup for the physical power supply."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In VTP (VLAN Trunking Protocol), a switch in 'Transparent' mode does not participate in the VTP domain but still forwards VTP advertisements to other switches.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if it is the VTP Server",
+        "D": "Only if using version 3.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which 'EtherChannel' hashing algorithm is generally preferred to ensure the most even distribution of traffic across physical links in a server-to-switch connection?",
+      "options": {
+        "A": "Source MAC",
+        "B": "Destination MAC",
+        "C": "Source-and-Destination IP",
+        "D": "Source Port"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the specific purpose of 'BPDU Guard' in an STP-enabled network?",
+      "options": {
+        "A": "To speed up the convergence of the Root Bridge.",
+        "B": "To automatically shut down a PortFast-enabled port if it receives a Bridge Protocol Data Unit (BPDU), preventing unauthorized switches from being added.",
+        "C": "To encrypt the management traffic.",
+        "D": "To monitor the daily growth of the MAC table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'DHCP Snooping' works by designating switch ports as either 'Trusted' or 'Untrusted' to prevent rogue DHCP servers from assigning IP addresses.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for IPv6",
+        "D": "Only if using a Layer 3 switch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does a 'Root Bridge' election in STP primarily use to determine the winner if all switches have the same default priority?",
+      "options": {
+        "A": "The highest IP address.",
+        "B": "The lowest MAC address.",
+        "C": "The physical number of ports.",
+        "D": "The brand of the switch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Dynamic ARP Inspection' (DAI), which database is used to verify that an ARP response is legitimate and not a spoofing attempt?",
+      "options": {
+        "A": "The MAC address table",
+        "B": "The DHCP Snooping binding table",
+        "C": "The Routing table",
+        "D": "The VLAN database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'Private VLANs' (PVLANs) allows you to isolate ports within the same VLAN so they can only communicate with the Promiscuous port (Gateway).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in cloud-based switches",
+        "D": "Only if using fiber optics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Native VLAN' used for on an 802.1Q trunk link?",
+      "options": {
+        "A": "To carry only encrypted traffic.",
+        "B": "To handle untagged traffic that arrives on the trunk port.",
+        "C": "To provide a password for the trunk link.",
+        "D": "To monitor the temperature of the SFP modules."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which EtherChannel protocol is an industry standard (IEEE 802.3ad) rather than a Cisco proprietary protocol?",
+      "options": {
+        "A": "PAgP (Port Aggregation Protocol)",
+        "B": "LACP (Link Aggregation Control Protocol)",
+        "C": "STP",
+        "D": "VTP"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Layer 3' switch can route traffic between VLANs faster than a traditional router because it uses specialized hardware (ASICs) for packet forwarding.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UDP traffic",
+        "D": "Only if the router is virtualized"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Cost' of an STP path calculated based on?",
+      "options": {
+        "A": "The monthly price of the switch.",
+        "B": "The bandwidth (speed) of the links along the path to the Root Bridge.",
+        "C": "The number of users on the network.",
+        "D": "The physical length of the Ethernet cables."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if two switches on a trunk link have a 'Native VLAN Mismatch'?",
+      "options": {
+        "A": "The physical link will break.",
+        "B": "Traffic from the native VLANs may leak into the wrong VLAN on the other side, and STP may block the port.",
+        "C": "The switches will restart automatically.",
+        "D": "The internet speed will be divided by two."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'PortFast' should only be enabled on ports connected to end-devices (like PCs or Servers), never on ports connected to other switches.",
+      "options": {
+        "A": "True (To prevent loops).",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using 10Gbps links"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which VTP mode allows an administrator to add, delete, and rename VLANs that are then synchronized to all other switches in the domain?",
+      "options": {
+        "A": "Client",
+        "B": "Server",
+        "C": "Transparent",
+        "D": "Off"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Default' STP Priority for a Cisco switch?",
+      "options": {
+        "A": "1",
+        "B": "32768",
+        "C": "65535",
+        "D": "0"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: An EtherChannel link remains active as long as at least one physical link in the bundle is functioning.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using PAgP",
+        "D": "Only if the bundle has 8 links"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN Pruning' in a VTP environment?",
+      "options": {
+        "A": "Deleting all VLANs on the switch.",
+        "B": "A feature that limits broadcast traffic by not sending frames for a specific VLAN to a switch that doesn't have any active ports in that VLAN.",
+        "C": "Encrypting the VLAN ID.",
+        "D": "Monitoring the growth of the VLAN database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for SSH management of a switch to ensure encrypted communication?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "443"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Rapid Spanning Tree Protocol' (RSTP / 802.1w) provides much faster convergence than the original 802.1D STP.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for fiber links",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MSTP' (Multiple Spanning Tree Protocol) primarily used for?",
+      "options": {
+        "A": "To plant multiple trees in one pot.",
+        "B": "To group multiple VLANs into a single spanning tree instance to save switch CPU resources.",
+        "C": "To encrypt all network packets.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port state in RSTP replaces the 'Listening' and 'Blocking' states of the original STP?",
+      "options": {
+        "A": "Discarding",
+        "B": "Learning",
+        "C": "Forwarding",
+        "D": "Stalling"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A Layer 3 switch can be configured with a 'Routed Port', which acts like a physical router interface without any VLAN association.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for IPv6",
+        "D": "Only on the console port"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Root Guard' used for in an STP environment?",
+      "options": {
+        "A": "To build a wall around the Root Bridge.",
+        "B": "To prevent a specific port from ever becoming a Root Port, ensuring the Root Bridge remains in the preferred location.",
+        "C": "To encrypt the BPDU frames.",
+        "D": "To monitor the temperature of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to configure an IP address on a VLAN interface (SVI) for management or routing?",
+      "options": {
+        "A": "ip address x.x.x.x",
+        "B": "vlan set address x.x.x.x",
+        "C": "interface address x.x.x.x",
+        "D": "set management-ip x.x.x.x"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In LACP, a port can be in either 'Active' or 'Passive' mode to negotiate an EtherChannel bundle.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using fiber optics",
+        "D": "Only if the switch is in VTP Server mode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Unidirectional Link Detection' (UDLD) used for?",
+      "options": {
+        "A": "To speed up the internet in one direction.",
+        "B": "To detect and disable a physical link where traffic can flow in only one direction (common with fiber issues) to prevent STP loops.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'BPDU' type is used by STP to communicate topology changes throughout the network?",
+      "options": {
+        "A": "Hello BPDU",
+        "B": "TCN (Topology Change Notification) BPDU",
+        "C": "Root BPDU",
+        "D": "Error BPDU"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can combine links of different speeds (e.g., 1Gbps and 10Gbps) into a single EtherChannel bundle.",
+      "options": {
+        "A": "False (All links in an EtherChannel must have the same speed and duplex settings).",
+        "B": "True",
+        "C": "Only if using LACP",
+        "D": "Only if using Cat7 cables"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of the 'Revision Number' in VTP?",
+      "options": {
+        "A": "To track the version of the switch hardware.",
+        "B": "To determine which VTP advertisement is more recent; a switch will only update its database if the incoming revision number is higher.",
+        "C": "To encrypt the VTP password.",
+        "D": "To monitor the daily cost of the cloud."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a risk of a 'VTP Revision Mismatch'?",
+      "options": {
+        "A": "The switch will physically melt.",
+        "B": "Connecting a switch with a higher revision number can overwrite and delete the entire VLAN database of the production network.",
+        "C": "The internet bill will double.",
+        "D": "The switch will automatically delete its own firmware."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Port Security' violation can be configured to put the port into an 'error-disabled' state, requiring manual intervention to fix.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-root users",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Loop Guard' primarily intended to prevent?",
+      "options": {
+        "A": "A user from walking in a circle in the data center.",
+        "B": "Loops caused by a port that stops receiving BPDUs (e.g., due to a software failure) but continues to forward data.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The process of moving servers to a different floor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port type on a Root Bridge is ALWAYS in a 'Forwarding' state in a stable STP network?",
+      "options": {
+        "A": "Root Port",
+        "B": "Designated Port",
+        "C": "Non-Designated Port",
+        "D": "Blocked Port"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'VLAN Pruning' is only available in VTP Server and Client modes, not Transparent mode.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in version 3.0",
+        "D": "Only for non-encrypted logs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'VTP Password' used for?",
+      "options": {
+        "A": "To log in to the switch CLI.",
+        "B": "To authenticate VTP advertisements and ensure only authorized switches can synchronize VLAN data.",
+        "C": "A specialized way to encrypt network traffic.",
+        "D": "To monitor the daily growth of the VLAN database."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific EtherChannel mode is associated with Cisco's proprietary PAgP protocol?",
+      "options": {
+        "A": "Active / Passive",
+        "B": "Desirable / Auto",
+        "C": "On / Off",
+        "D": "Forward / Listen"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using the 'show spanning-tree' command allows you to see which switch in the network is currently the Root Bridge.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Cisco Nexus switches",
+        "D": "Only if the admin is root"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Error-Disable Recovery'?",
+      "options": {
+        "A": "To delete all system errors.",
+        "B": "A feature that allows a switch to automatically re-enable a port that was shut down due to a security violation after a specific timeout.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is responsible for 'routing' between two SVIs on the same Layer 3 switch?",
+      "options": {
+        "A": "The MAC address table",
+        "B": "The Routing Engine / ASIC",
+        "C": "The Console cable",
+        "D": "The VLAN database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Port Mirroring' (SPAN) can negatively impact switch performance if the volume of traffic being mirrored is extremely high.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for legacy switches",
+        "D": "Only if using fiber optics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN Access Control List' (VACL) used for?",
+      "options": {
+        "A": "Naming the VLANs.",
+        "B": "Filtering traffic within a VLAN (intra-VLAN) based on IP or MAC addresses, similar to a firewall rule.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for Telnet management of a switch (though it is discouraged due to lack of encryption)?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: In RSTP, an 'Edge Port' is a port that connects to an end-user device and can transition directly to the Forwarding state.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for database servers",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Security' 'Maximum' setting?",
+      "options": {
+        "A": "The maximum speed of the port.",
+        "B": "The maximum number of concurrent MAC addresses allowed to learn on that specific port.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the firewall."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for SNMP traffic used by monitoring tools to poll the switch?",
+      "options": {
+        "A": "161",
+        "B": "162",
+        "C": "80",
+        "D": "22"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Stacking' multiple switches together provides a unified management interface and shared backplane bandwidth.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Cisco firewalls",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'DTP' (Dynamic Trunking Protocol) primarily used for?",
+      "options": {
+        "A": "To backup the trunk configuration.",
+        "B": "To automatically negotiate whether a link between two Cisco switches should become a trunk or an access port.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which EtherChannel mode should you use if you want the switch to actively try to negotiate a bundle with the other side using LACP?",
+      "options": {
+        "A": "On",
+        "B": "Active",
+        "C": "Passive",
+        "D": "Desirable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: You can disable STP on a per-VLAN basis, but this is highly dangerous and not recommended without careful design.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in the year 2026",
+        "D": "Only for fiber links"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP Pruning' effectiveness in a large network?",
+      "options": {
+        "A": "It is identical to deleting a VLAN.",
+        "B": "It significantly reduces unnecessary broadcast traffic across trunk links, saving bandwidth.",
+        "C": "It only works for hardware firewalls.",
+        "D": "It is only for cloud-native apps."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command-line interface command on a Cisco switch would you use to save the current configuration to permanent memory?",
+      "options": {
+        "A": "write memory",
+        "B": "copy running-config startup-config",
+        "C": "save all",
+        "D": "Both A and B are common."
+      },
+      "answer": "D"
+    },
+    {
+      "question": "True or False: Standard switches can identify 'Malicious MAC Addresses' by observing traffic patterns even without advanced security features.",
+      "options": {
+        "A": "False (Standard Layer 2 switches are 'dumb' regarding security and need specific features like port security or DAI).",
+        "B": "True",
+        "C": "Only if using a proxy",
+        "D": "Only if the certificate is expired"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Administrative Distance' (AD) in a Layer 3 switch?",
+      "options": {
+        "A": "The physical distance between routers.",
+        "B": "A value used by routers to select the best path when there are two or more different routes to the same destination from different routing protocols.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "The password for a network administrator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of an enterprise switch?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Loop' on a switch can cause the MAC address table to constantly 'flap' as the same MAC is seen on different ports.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a hub"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'System Priority' in an LACP configuration used for?",
+      "options": {
+        "A": "To choose which switch decides which ports are active in a bundle if there are more than 8 ports.",
+        "B": "To encrypt the LACP frames.",
+        "C": "A tool to delete old logs.",
+        "D": "To monitor the daily growth of the hard drive."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which port is associated with 'NTP' (Network Time Protocol) used for switch clock synchronization?",
+      "options": {
+        "A": "80",
+        "B": "123",
+        "C": "443",
+        "D": "53"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a 'Stack', the 'Master' switch handles all management and control plane functions for the entire group.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if the admin is root",
+        "D": "Only in version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN' ID 1 used for on most switches?",
+      "options": {
+        "A": "A special ID for VIP users.",
+        "B": "The default VLAN for all ports and often used for control traffic (like STP/CDP) out of the box.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Status' on a switch port indicates that it has been administratively shut down?",
+      "options": {
+        "A": "Down/Down",
+        "B": "Admin Down / Disabled",
+        "C": "Up/Down",
+        "D": "Flapping"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Standard switches work at the 'Data Link' layer (Layer 2) of the OSI model.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UDP traffic",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP Pruning' primarily used for?",
+      "options": {
+        "A": "Deleting old VTP passwords.",
+        "B": "To stop unnecessary broadcast/multicast traffic from traveling across trunk links where the target VLAN isn't active.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is associated with 'HTTPS' (encrypted web traffic)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A Layer 3 switch can be configured with an 'IP Route' to direct traffic between subnets manually.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using a virtual server",
+        "D": "Only for non-encrypted traffic"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a Cisco Nexus environment, what is the primary technical function of the 'vPC Peer-Keepalive' link?",
+      "options": {
+        "A": "To synchronize the MAC address tables between the two peer switches.",
+        "B": "To provide a secondary path for data traffic if the Peer-Link fails.",
+        "C": "To act as a Layer 3 out-of-band monitoring link to detect a split-brain scenario if the Peer-Link goes down.",
+        "D": "To carry the control plane heartbeats for the Spanning Tree Protocol."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which specific STP mechanism ensures that a port does not move to the Forwarding state if it receives a BPDU with a superior Bridge ID on a port where it shouldn't, protecting the Root Bridge placement?",
+      "options": {
+        "A": "BPDU Guard",
+        "B": "Root Guard",
+        "C": "Loop Guard",
+        "D": "TCN Filtering"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In RSTP (802.1w), the 'Proposal/Agreement' handshake allows for immediate transition to the Forwarding state on point-to-point links without relying on traditional timers.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if the Bridge Priority is set to 0",
+        "D": "Only in half-duplex environments"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of 'MAB' (MAC Authentication Bypass) in an 802.1X enabled switch network?",
+      "options": {
+        "A": "To bypass the firewall for specific IP addresses.",
+        "B": "To allow devices that do not support 802.1X supplicants (like printers or cameras) to authenticate based on their MAC address.",
+        "C": "To encrypt the MAC addresses in the CAM table.",
+        "D": "To increase the speed of the RADIUS server response."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a Cisco StackWise architecture, what happens to the data plane if the 'Stack Master' fails?",
+      "options": {
+        "A": "The entire stack reboots and all data traffic stops.",
+        "B": "The standby member takes over the management role immediately, and the data plane continues to forward traffic using NSF/SSO (Non-Stop Forwarding).",
+        "C": "Only the physical ports on the Master switch stop working.",
+        "D": "The stack converts into separate unmanaged switches."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'MSTP' (802.1s) allows you to map multiple VLANs to a single spanning-tree instance, but all switches in the same MST Region must have identical VLAN-to-Instance mappings.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using VTP version 3",
+        "D": "Only for voice VLANs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific EtherChannel protocol uses 'Marker Packets' to ensure all frames in a flow are received before a path change to prevent out-of-order delivery?",
+      "options": {
+        "A": "PAgP",
+        "B": "LACP",
+        "C": "Static On",
+        "D": "STP"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary architectural purpose of a 'Virtual Switching System' (VSS)?",
+      "options": {
+        "A": "To create a virtual switch inside a hypervisor.",
+        "B": "To combine two physical chassis-based switches into a single logical entity with a unified control plane.",
+        "C": "To backup the switch configuration to the cloud.",
+        "D": "To allow a switch to act as a wireless access point."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using 'Private VLANs' (PVLANs), an 'Isolated' port can communicate with 'Community' ports within the same primary VLAN.",
+      "options": {
+        "A": "False (Isolated ports can only communicate with Promiscuous ports).",
+        "B": "True",
+        "C": "Only if using a Layer 3 SVI",
+        "D": "Only if they share the same physical switch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which BGP feature is commonly used in 'Data Center Spine-Leaf' architectures to allow for equal-cost multi-pathing (ECMP) across the switch fabric?",
+      "options": {
+        "A": "Route Reflection",
+        "B": "BGP Multi-path / Maximum-paths",
+        "C": "AS-Path Prepending",
+        "D": "Communities"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the technical impact of a 'TC' (Topology Change) flag being set in an STP BPDU?",
+      "options": {
+        "A": "It forces all switches to reboot.",
+        "B": "It instructs switches to shorten their MAC address aging timer (e.g., from 300 seconds to 15 seconds) to quickly clear stale entries.",
+        "C": "It doubles the bandwidth of the trunk links.",
+        "D": "It disables all PortFast enabled ports."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In Cisco's SD-Access, the 'Control Plane' is based on LISP (Locator/ID Separation Protocol) to track endpoint locations in the fabric.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for wireless clients",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'STP Diameter' refer to in a network design?",
+      "options": {
+        "A": "The physical thickness of the switch chassis.",
+        "B": "The maximum number of switch 'hops' between any two points in the network, which influences timer calculations.",
+        "C": "The total number of ports in a stack.",
+        "D": "The size of the MAC address table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port must be allowed through a management ACL for a switch to be managed via 'SNMPv3' with privacy (encryption)?",
+      "options": {
+        "A": "UDP 161",
+        "B": "TCP 22",
+        "C": "UDP 162",
+        "D": "TCP 443"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Loop Guard' failure occurs when a point-to-point link stops receiving BPDUs, and it places the port into a 'loop-inconsistent' state to prevent a loop.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only in RSTP mode",
+        "D": "Only for fiber optic links"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the role of the 'VXLAN Network Identifier' (VNI) in a Layer 2 over Layer 3 overlay?",
+      "options": {
+        "A": "To identify the physical switch hardware.",
+        "B": "To provide a 24-bit identifier that maps a Layer 2 VLAN to a specific virtual segment in the fabric, allowing up to 16 million segments.",
+        "C": "To encrypt the VTP database.",
+        "D": "To monitor the temperature of the SFP modules."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which switch mechanism prevents 'MAC Table Flooding' attacks by limiting the total number of unique MACs learned on a port?",
+      "options": {
+        "A": "DHCP Snooping",
+        "B": "Port Security with Maximum Limit",
+        "C": "Dynamic ARP Inspection",
+        "D": "BPDU Guard"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a 'Spine-Leaf' architecture, Leaf switches never connect directly to other Leaf switches.",
+      "options": {
+        "A": "True (They only connect to Spine switches to ensure predictable latency).",
+        "B": "False",
+        "C": "Only if using OSPF",
+        "D": "Only for storage networks"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Anycast Gateway' in the context of EVPN-VXLAN?",
+      "options": {
+        "A": "A gateway that only works for a single user.",
+        "B": "A configuration where the same IP and MAC address act as the default gateway on all leaf switches simultaneously to optimize traffic flow.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "To monitor the daily growth of the routing table."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'BPDU' field is used to determine the 'Root Path Cost' for a switch?",
+      "options": {
+        "A": "Bridge ID",
+        "B": "Root Path Cost",
+        "C": "Port ID",
+        "D": "Hello Time"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'LACP Fast' (1-second) timers are recommended for all EtherChannel links to ensure the fastest possible sub-second failover detection.",
+      "options": {
+        "A": "False (While it speeds up detection, it increases CPU load and can cause instability; standard 30-second timers are the default).",
+        "B": "True",
+        "C": "Only for fiber links",
+        "D": "Only if using Cisco Nexus"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of a 'Designated Router' (DR) in an IGMP-snooping enabled switch environment?",
+      "options": {
+        "A": "To route all user traffic.",
+        "B": "To act as the querier that periodically asks devices which multicast groups they want to join, allowing the switch to prune ports.",
+        "C": "To encrypt the multicast stream.",
+        "D": "To monitor the temperature of the server room."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific phenomenon occurs when 'UDLD' detects a unidirectional link on an fiber port?",
+      "options": {
+        "A": "Latency Bloat",
+        "B": "Port Shutdown / Err-disable",
+        "C": "Bandwidth Exhaustion",
+        "D": "MAC Table Flapping"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Using '802.1X' authentication requires a 'Supplicant' on the end-device, an 'Authenticator' (the switch), and an 'Authentication Server' (RADIUS).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for wireless connections",
+        "D": "Only in version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP version 3' primary improvement over version 2?",
+      "options": {
+        "A": "It is much faster.",
+        "B": "It supports Extended VLANs (1006-4094), MST instances, and provides better protection against accidental database overwrites.",
+        "C": "It removes the need for passwords.",
+        "D": "It works over the internet."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port must be open for 'TACACS+' to communicate between a switch and an identity server?",
+      "options": {
+        "A": "UDP 1812",
+        "B": "TCP 49",
+        "C": "TCP 443",
+        "D": "UDP 161"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Cut-through' switching starts forwarding a frame before the entire frame has been received, which lowers latency but can propagate corrupted frames.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the function of the 'System ID Extension' in a Bridge ID?",
+      "options": {
+        "A": "To increase the MAC address size.",
+        "B": "To allow the VLAN ID to be included in the Bridge Priority field, enabling Per-VLAN Spanning Tree (PVST).",
+        "C": "To encrypt the switch name.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Rule' in DHCP Snooping prevents a client from acting as a fake DHCP server?",
+      "options": {
+        "A": "Trust rule (Ports facing clients are 'untrusted' and DHCP server packets are dropped).",
+        "B": "Binding rule",
+        "C": "Priority rule",
+        "D": "Encryption rule"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'VSS' cluster, the two switches are connected by a special link called the 'Virtual Switch Link' (VSL).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using version 1.0",
+        "D": "Only for Cisco Catalyst 2960"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'QinQ' (802.1ad) tunneling primarily used for?",
+      "options": {
+        "A": "To play video games over a switch.",
+        "B": "To allow service providers to carry multiple customer VLANs over a single provider VLAN by 'double-tagging' the frames.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'RADIUS' authentication traffic?",
+      "options": {
+        "A": "UDP 1812",
+        "B": "TCP 49",
+        "C": "TCP 443",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Port Security' Sticky MAC addresses are lost when the switch reboots unless the configuration is saved to the startup-config.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Cisco Nexus",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Storm Control' action 'Trap' used for?",
+      "options": {
+        "A": "To physically trap an attacker in the building.",
+        "B": "To send an SNMP alert to the management station when traffic exceeds the configured threshold.",
+        "C": "To encrypt the switch ports.",
+        "D": "To monitor the daily growth of the hard drive."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port state in STP is the first to be reached after a physical link comes up on a non-PortFast port?",
+      "options": {
+        "A": "Listening",
+        "B": "Blocking",
+        "C": "Learning",
+        "D": "Discarding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'MACsec' (802.1AE) provides point-to-point encryption at Layer 2 between two switches or a switch and a host.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of a 'SD-Access' Fabric Edge node?",
+      "options": {
+        "A": "To route all internet traffic.",
+        "B": "To identify and authenticate endpoints and encapsulate their traffic into the VXLAN fabric.",
+        "C": "To encrypt the physical server hardware.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'NetFlow' or 'IPFIX' data exports from a switch?",
+      "options": {
+        "A": "UDP 2055 / 9995",
+        "B": "TCP 443",
+        "C": "UDP 161",
+        "D": "TCP 80"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'Private VLANs' requires the primary VLAN to be in 'Community' mode for all associated secondary VLANs.",
+      "options": {
+        "A": "False (The Primary VLAN is simply the container; secondary VLANs are either Community or Isolated).",
+        "B": "True",
+        "C": "Only in version 1.0",
+        "D": "Only for non-production environments"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP Pruning' and why does it improve performance?",
+      "options": {
+        "A": "Deleting old VTP passwords.",
+        "B": "It prevents broadcast/multicast traffic from being sent to switches that don't need it, saving bandwidth on trunk links.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily cost of the firewall."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for secure shell (SSH) access?",
+      "options": {
+        "A": "22",
+        "B": "23",
+        "C": "80",
+        "D": "443"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'MSTP' allows for load balancing of VLANs by assigning different VLAN ranges to different MST instances with different Root Bridges.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'Dynamic Trunking Protocol' (DTP) 'No-negotiate' command?",
+      "options": {
+        "A": "To stop the switch from talking to the admin.",
+        "B": "To disable DTP entirely on a port to prevent security risks and speed up link initialization.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+      "options": {
+        "A": "TCP 443",
+        "B": "TCP 9443",
+        "C": "TCP 80",
+        "D": "TCP 22"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'SR-IOV' is primarily used to provide direct network hardware access to VMs, but it often prevents the use of Live Migration.",
+      "options": {
+        "A": "True (because the hardware state is tied to a specific physical device).",
+        "B": "False",
+        "C": "Only if using a proxy",
+        "D": "Only if the certificate is expired"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dynamic RAM' in Hyper-V?",
+      "options": {
+        "A": "RAM that expands physically.",
+        "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand, ranging between a minimum and maximum value.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "The password for a network administrator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'CPU' extension is used to improve the performance of nested virtualization by managing virtual-to-physical memory mappings across layers?",
+      "options": {
+        "A": "Intel EPT / AMD RVI",
+        "B": "AES-NI",
+        "C": "AVX",
+        "D": "SSE2"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if the physical data store runs out of actual space while VMs are trying to write data.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Virtual Machine Monitor' (VMM)?",
+      "options": {
+        "A": "A physical screen for the VM.",
+        "B": "The component of the hypervisor that manages the execution of a single VM, handling its CPU instructions and memory access.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic between sites?",
+      "options": {
+        "A": "TCP 31031 / 44046",
+        "B": "TCP 443",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor using 'Hypercalls'.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UDP traffic",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Storage vMotion' I/O Mirroring?",
+      "options": {
+        "A": "Mirroring the physical disks.",
+        "B": "The process where write operations are mirrored to both the source and destination disks during a migration to ensure data consistency.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the firewall."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is used for 'SSH' management of a Linux-based hypervisor?",
+      "options": {
+        "A": "TCP 22",
+        "B": "UDP 22",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Security' violation action 'Shutdown'?",
+      "options": {
+        "A": "Turning off the entire switch.",
+        "B": "Disabling the specific port immediately and moving it to an error-disabled state when a violation occurs.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'HTTP' management of a switch?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Root Bridge' in STP is selected based on the switch with the lowest Bridge ID (Priority + MAC Address).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+      "options": {
+        "A": "Naming the VLANs.",
+        "B": "Filtering traffic within a VLAN (intra-VLAN) before it is routed or bridged, providing Layer 2 and Layer 3 security.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'BPDU Filter' stops a port from sending or receiving BPDUs, essentially disabling STP on that port, which is generally dangerous.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'EtherChannel' load balancing 'Hashing'?",
+      "options": {
+        "A": "A physical tool for fixing cables.",
+        "B": "An algorithm that determines which physical link in a bundle to use for a specific packet based on fields like IP or MAC address.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the switch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+      "options": {
+        "A": "22",
+        "B": "23",
+        "C": "80",
+        "D": "443"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is enabled by default on most Cisco switch ports.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP version 3' Hidden Password?",
+      "options": {
+        "A": "A password that the admin can't see.",
+        "B": "A feature where the password is not stored in plain text in the configuration file, improving security.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+      "options": {
+        "A": "161",
+        "B": "162",
+        "C": "80",
+        "D": "443"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Layer 2' loop can occur if multiple physical links are connected between two switches without EtherChannel or STP enabled.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Security' violation action 'Restrict'?",
+      "options": {
+        "A": "Turning off the entire switch.",
+        "B": "Dropping packets from the unauthorized MAC address and incrementing the violation counter, but keeping the port operational for authorized MACs.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Rapid PVST+' is a Cisco implementation that combines RSTP with PVST+ to provide fast convergence for every VLAN.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    }
+  ]
+}

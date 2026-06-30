@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Header from '../components/Header';
-import '../styles/CustomAssessment.css';
 
-// Django API base URL - Update this to match your Django backend
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
+import '../styles/CustomAssessment.css';
 
 // LocalStorage key for custom assessment form data
 const CUSTOM_ASSESSMENT_STORAGE_KEY = 'customAssessmentFormData';
 const DRAFT_CUSTOM_ASSESSMENT_ID_KEY = 'draftCustomAssessmentId';
+const REVIEW_STATE_STORAGE_KEY = 'reviewAssessmentState';
 
 function CustomAssessment() {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const resumeSectionRef = useRef(null);
+  const [uploadMode, setUploadMode] = useState('jd'); // 'resume' or 'jd' — default to 'jd' (Multiple)
   const [formData, setFormData] = useState({
     resume: null,
     role: '',
@@ -95,7 +96,9 @@ function CustomAssessment() {
       'Kubernetes Specialist',
       'Docker Specialist',
       'CI/CD Engineer',
-      'Infrastructure Engineer'
+      'Infrastructure Engineer',
+      'Practices',
+      'Operations'
     ],
     'cloud-engineer': [
       'AWS Cloud Engineer',
@@ -103,7 +106,24 @@ function CustomAssessment() {
       'GCP Cloud Engineer',
       'Multi-cloud Engineer',
       'Cloud Architect',
-      'Cloud Security Engineer'
+      'Cloud Security Engineer',
+      'Architecture'
+    ],
+    'system-administrator': [
+      'Linux Systems Administrator',
+      'Windows Server Administrator',
+      'Cloud Systems Administrator (AWS/Azure)',
+      'Infrastructure Operations Specialist',
+      'Systems / Network Administrator'
+    ],
+    'site-reliability-engineer': [
+      'Production SRE',
+      'Platform SRE',
+      'Cloud SRE',
+      'Observability / Monitoring SRE',
+      'Automation / Tooling SRE',
+      'Performance & Capacity SRE',
+      'Security-Focused SRE'
     ],
     'data-engineer': [
       'ETL Developer',
@@ -137,6 +157,12 @@ function CustomAssessment() {
       'SQL Analyst',
       'BI Analyst'
     ],
+    'business-intelligence-analyst': [
+      'Data Analyst (BI-focused)',
+      'Power BI Analyst',
+      'Tableau BI Analyst',
+      'BI Developer'
+    ],
     'qa-engineer': [
       'Manual QA Engineer',
       'Automation QA Engineer',
@@ -151,6 +177,13 @@ function CustomAssessment() {
       'Playwright Automation Engineer',
       'API Automation Engineer',
       'Mobile Automation Engineer'
+    ],
+    'quality-assurance-lead': [
+      'Automation QA Lead',
+      'Manual QA Lead',
+      'SDET Lead',
+      'QA Technical Lead',
+      'Test Lead'
     ],
     'security-engineer': [
       'Application Security Engineer',
@@ -167,6 +200,13 @@ function CustomAssessment() {
       'Security Operations Engineer',
       'Vulnerability Assessment Engineer'
     ],
+    'information-security-analyst': [
+      'SOC Analyst – Tier 1',
+      'Security Analyst / Cybersecurity Analyst',
+      'Cloud Security Analyst',
+      'Vulnerability Management Analyst',
+      'Incident Response Analyst'
+    ],
     'database-administrator': [
       'MySQL DBA',
       'PostgreSQL DBA',
@@ -182,6 +222,13 @@ function CustomAssessment() {
       'ETL Developer',
       'Data Warehouse Developer'
     ],
+    'network-engineer': [
+      'Network Support Engineer / NOC Engineer',
+      'Cloud Network Engineer',
+      'Network Security Engineer',
+      'SD-WAN Engineer',
+      'Network Automation Engineer'
+    ],
     'ui-ux-designer': [
       'UI Designer',
       'UX Designer',
@@ -195,8 +242,21 @@ function CustomAssessment() {
       'Product Manager (B2B)',
       'Product Manager (B2C)',
       'Product Manager (Mobile)',
-      'Product Manager (SaaS)',
-      'Product Owner'
+      'Product Manager (SaaS)'
+    ],
+    'technical-product-manager': [
+      'Platform Technical Product Manager',
+      'API / Integration Technical Product Manager',
+      'Data / Analytics Technical Product Manager',
+      'AI / ML Technical Product Manager',
+      'Cloud / Infrastructure Technical Product Manager'
+    ],
+    'product-owner': [
+      'Technical Product Owner',
+      'Lead / Group Product Owner',
+      'Agile / Scrum Product Owner',
+      'Platform Product Owner',
+      'Data Product Owner'
     ],
     'technical-lead': [
       'Frontend Tech Lead',
@@ -239,9 +299,48 @@ function CustomAssessment() {
     'project-manager': [
       'IT Project Manager',
       'Agile Project Manager',
-      'Scrum Master',
-      'Program Manager',
-      'Technical Project Manager'
+      'Program Manager'
+    ],
+    'technical-project-manager': [
+      'Software Implementation Project Manager',
+      'Infrastructure / Cloud Project Manager',
+      'Data / AI Project Manager',
+      'Cybersecurity Project Manager',
+      'ERP / CRM Implementation Project Manager'
+    ],
+    'scrum-master': [
+      'Senior Scrum Master',
+      'Agile Scrum Master',
+      'Technical Scrum Master',
+      'SAFe Scrum Master',
+      'Release Train Engineer (RTE)',
+      'Associate / Junior Scrum Master'
+    ],
+    'support-engineer': [
+      'Technical Support Engineer',
+      'Application Support Engineer',
+      'Product Support Engineer',
+      'Cloud Support Engineer',
+      'Production Support Engineer',
+      'Network Support Engineer'
+    ],
+    'technical-writer': [
+      'API / Developer Documentation Writer',
+      'Product Documentation Writer',
+      'Software / Engineering Technical Writer',
+      'Cloud / DevOps Technical Writer',
+      'Senior Technical Writer'
+    ],
+    // New roles
+    'ai-engineering': [
+      'Core AI'
+    ],
+    'data-ai': [
+      'Data Engineering',
+      'Governance'
+    ],
+    'finops': [
+      'Cost Management'
     ]
   };
 
@@ -250,19 +349,21 @@ function CustomAssessment() {
     return role && roleSubRoles[role] && roleSubRoles[role].length > 0;
   };
 
+  const isSingleMode = uploadMode === 'resume';
+  const isMultipleMode = uploadMode === 'jd';
+
   // Save form data to localStorage
-  const saveFormDataToLocalStorage = () => {
+  const saveFormDataToLocalStorage = useCallback(() => {
     try {
       const dataToSave = {
+        uploadMode,
         formData: {
-          // Save all formData except the File object (can't serialize)
           role: formData.role,
           subRoles: formData.subRoles,
           customRole: formData.customRole,
           experienceLevel: formData.experienceLevel,
           numberOfQuestions: formData.numberOfQuestions,
           time: formData.time,
-          // Note: resume File object is not saved, only fileName is saved separately
         },
         resumeFileName,
         extractedSkills,
@@ -273,13 +374,30 @@ function CustomAssessment() {
         removedSkills,
         weights,
         autoTime,
-        timestamp: new Date().toISOString(), // Track when data was saved
+        timestamp: new Date().toISOString(),
       };
       localStorage.setItem(CUSTOM_ASSESSMENT_STORAGE_KEY, JSON.stringify(dataToSave));
     } catch (error) {
       console.error('Error saving form data to localStorage:', error);
     }
-  };
+  }, [
+    formData.role,
+    formData.subRoles,
+    formData.customRole,
+    formData.experienceLevel,
+    formData.numberOfQuestions,
+    formData.time,
+    uploadMode,
+    resumeFileName,
+    extractedSkills,
+    suggestedSkills,
+    commonSkills,
+    questionDistribution,
+    manualDistribution,
+    removedSkills,
+    weights,
+    autoTime
+  ]);
 
   // Load form data from localStorage
   const loadFormDataFromLocalStorage = () => {
@@ -296,6 +414,8 @@ function CustomAssessment() {
             resume: null, // File object cannot be restored
           }));
         }
+
+        // Do NOT restore uploadMode from localStorage — always use the default ('jd' = Multiple)
 
         // Restore other state
         if (parsed.resumeFileName) setResumeFileName(parsed.resumeFileName);
@@ -447,6 +567,22 @@ function CustomAssessment() {
     'Cloud Architect': ['Cloud Architecture', 'AWS', 'Azure', 'GCP', 'Scalability', 'Security', 'Cost Optimization', 'Design Patterns'],
     'Cloud Security Engineer': ['Cloud Security', 'AWS Security', 'Azure Security', 'IAM', 'Encryption', 'Compliance', 'Security Best Practices'],
 
+    // System Administrator sub-roles
+    'Linux Systems Administrator': ['Linux', 'Bash', 'Shell Scripting', 'System Administration', 'Networking', 'Security'],
+    'Windows Server Administrator': ['Windows Server', 'Active Directory', 'PowerShell', 'System Administration', 'Networking'],
+    'Cloud Systems Administrator (AWS/Azure)': ['AWS', 'Azure', 'Cloud Computing', 'System Administration', 'Virtualization', 'Infrastructure'],
+    'Infrastructure Operations Specialist': ['IT Infrastructure', 'Operations', 'Monitoring', 'Incident Management', 'System Administration', 'Troubleshooting'],
+    'Systems / Network Administrator': ['System Administration', 'Network Administration', 'Networking', 'Firewalls', 'Routing', 'Switches'],
+
+    // Site Reliability Engineer sub-roles
+    'Production SRE': ['Site Reliability', 'Operations', 'Incident Management', 'Linux', 'Troubleshooting', 'Automation'],
+    'Platform SRE': ['Platform Engineering', 'Kubernetes', 'Docker', 'Infrastructure as Code', 'Terraform', 'CI/CD'],
+    'Cloud SRE': ['AWS', 'Azure', 'GCP', 'Cloud Infrastructure', 'Site Reliability', 'Cloud Networking'],
+    'Observability / Monitoring SRE': ['Observability', 'Datadog', 'Prometheus', 'Grafana', 'ELK Stack', 'Monitoring'],
+    'Automation / Tooling SRE': ['Python', 'Go', 'Bash', 'Automation', 'Tooling', 'CI/CD'],
+    'Performance & Capacity SRE': ['Performance Testing', 'Capacity Planning', 'Load Testing', 'Optimization', 'Scalability'],
+    'Security-Focused SRE': ['Security', 'DevSecOps', 'Compliance', 'IAM', 'Network Security', 'Vulnerability Management'],
+
     // Data Engineer sub-roles
     'ETL Developer': ['ETL', 'Python', 'SQL', 'Data Pipeline', 'Apache Airflow', 'Data Warehouse', 'ETL Tools'],
     'Big Data Engineer': ['Hadoop', 'Spark', 'Kafka', 'Big Data', 'Scala', 'Python', 'Data Pipeline', 'Distributed Systems'],
@@ -479,6 +615,12 @@ function CustomAssessment() {
     'SQL Analyst': ['SQL', 'Database', 'Data Analysis', 'Query Optimization', 'ETL', 'Reporting', 'Excel'],
     'BI Analyst': ['Business Intelligence', 'Tableau', 'Power BI', 'SQL', 'Data Analysis', 'Data Visualization', 'Reporting'],
 
+    // Business Intelligence Analyst sub-roles
+    'Data Analyst (BI-focused)': ['Data Analysis', 'Business Intelligence', 'SQL', 'Data Visualization', 'Reporting', 'Excel'],
+    'Power BI Analyst': ['Power BI', 'DAX', 'Data Visualization', 'SQL', 'Data Modeling', 'Power Query'],
+    'Tableau BI Analyst': ['Tableau', 'Data Visualization', 'SQL', 'Dashboarding', 'Data Analytics', 'Calculated Fields'],
+    'BI Developer': ['Business Intelligence', 'ETL', 'SQL', 'Data Warehouse', 'Power BI', 'Tableau', 'Data Modeling'],
+
     // QA Engineer sub-roles
     'Manual QA Engineer': ['Manual Testing', 'Bug Tracking', 'Test Planning', 'JIRA', 'Agile', 'Scrum'],
     'Automation QA Engineer': ['Test Automation', 'Selenium', 'Python', 'Java', 'Test Framework', 'CI/CD', 'Git'],
@@ -494,6 +636,13 @@ function CustomAssessment() {
     'API Automation Engineer': ['API Testing', 'Postman', 'REST Assured', 'Test Automation', 'CI/CD', 'Git'],
     'Mobile Automation Engineer': ['Appium', 'Mobile Testing', 'Test Automation', 'iOS', 'Android', 'CI/CD'],
 
+    // Quality Assurance Lead sub-roles
+    'Automation QA Lead': ['QA Leadership', 'Test Automation', 'Strategy', 'Selenium', 'CI/CD', 'Mentoring'],
+    'Manual QA Lead': ['QA Leadership', 'Manual Testing', 'Test Planning', 'Test Strategy', 'JIRA', 'Agile'],
+    'SDET Lead': ['SDET', 'Test Automation', 'Software Engineering', 'CI/CD', 'Leadership', 'Architecture'],
+    'QA Technical Lead': ['QA Leadership', 'Technical Testing', 'Performance Testing', 'Security Testing', 'Test Architecture'],
+    'Test Lead': ['Test Leadership', 'Test Planning', 'Resource Management', 'Risk Management', 'Agile', 'Reporting'],
+
     // Security Engineer sub-roles
     'Application Security Engineer': ['Application Security', 'OWASP', 'Security Testing', 'Code Review', 'Vulnerability Assessment'],
     'Network Security Engineer': ['Network Security', 'Firewall', 'VPN', 'IDS/IPS', 'Network Monitoring', 'Security Protocols'],
@@ -506,6 +655,13 @@ function CustomAssessment() {
     'Incident Response Engineer': ['Incident Response', 'Forensics', 'Security Tools', 'Threat Analysis', 'Crisis Management'],
     'Security Operations Engineer': ['Security Operations', 'SIEM', 'Automation', 'Security Tools', 'Monitoring', 'Incident Response'],
     'Vulnerability Assessment Engineer': ['Vulnerability Assessment', 'Security Scanning', 'Penetration Testing', 'Risk Analysis'],
+
+    // Information Security Analyst sub-roles
+    'SOC Analyst – Tier 1': ['SOC', 'SIEM', 'Log Analysis', 'Incident Triage', 'Network Security', 'Monitoring'],
+    'Security Analyst / Cybersecurity Analyst': ['Cybersecurity', 'Threat Analysis', 'Security Operations', 'Vulnerability Assessment', 'Incident Response'],
+    'Cloud Security Analyst': ['Cloud Security', 'AWS Security', 'Azure Security', 'IAM', 'Compliance', 'Security Audits'],
+    'Vulnerability Management Analyst': ['Vulnerability Management', 'Qualys', 'Tenable', 'Security Patching', 'Risk Assessment'],
+    'Incident Response Analyst': ['Incident Response', 'Digital Forensics', 'Malware Analysis', 'Threat Hunting', 'Communication'],
 
     // Database Administrator sub-roles
     'MySQL DBA': ['MySQL', 'Database Administration', 'SQL', 'Performance Tuning', 'Backup & Recovery', 'Replication'],
@@ -521,6 +677,13 @@ function CustomAssessment() {
     'Database Designer': ['Database Design', 'ER Modeling', 'Normalization', 'SQL', 'Database Architecture'],
     'Data Warehouse Developer': ['Data Warehouse', 'ETL', 'SQL', 'Dimensional Modeling', 'BI', 'Data Integration'],
 
+    // Network Engineer sub-roles
+    'Network Support Engineer / NOC Engineer': ['Network Support', 'NOC', 'Troubleshooting', 'Cisco', 'Routing', 'Switching'],
+    'Cloud Network Engineer': ['Cloud Networking', 'AWS Networking', 'Azure Networking', 'VPC', 'VPN', 'BGP'],
+    'Network Security Engineer': ['Network Security', 'Firewalls', 'VPN', 'Palo Alto', 'Cisco ASA', 'IDS/IPS'],
+    'SD-WAN Engineer': ['SD-WAN', 'Network Architecture', 'Cisco Viptela', 'Silver Peak', 'Routing', 'BGP'],
+    'Network Automation Engineer': ['Network Automation', 'Python', 'Ansible', 'Netmiko', 'APIs', 'CI/CD'],
+
     // UI/UX Designer sub-roles
     'UI Designer': ['UI Design', 'Figma', 'Adobe XD', 'Sketch', 'Design Systems', 'Prototyping', 'Visual Design'],
     'UX Designer': ['UX Design', 'User Research', 'Wireframing', 'Prototyping', 'Usability Testing', 'Figma', 'Adobe XD'],
@@ -530,12 +693,24 @@ function CustomAssessment() {
     'Design Systems Designer': ['Design Systems', 'Component Libraries', 'Figma', 'Design Tokens', 'UI Design'],
 
     // Product Manager sub-roles
-    'Technical Product Manager': ['Product Management', 'Technical Skills', 'Agile', 'Scrum', 'Roadmap', 'Stakeholder Management'],
     'Product Manager (B2B)': ['Product Management', 'B2B', 'Enterprise Software', 'Agile', 'Scrum', 'Stakeholder Management'],
     'Product Manager (B2C)': ['Product Management', 'B2C', 'User Experience', 'Agile', 'Scrum', 'Analytics'],
     'Product Manager (Mobile)': ['Product Management', 'Mobile Apps', 'iOS', 'Android', 'Agile', 'Scrum', 'Analytics'],
     'Product Manager (SaaS)': ['Product Management', 'SaaS', 'Cloud', 'Agile', 'Scrum', 'Stakeholder Management'],
-    'Product Owner': ['Product Owner', 'Agile', 'Scrum', 'Backlog Management', 'Stakeholder Management', 'Requirements'],
+
+    // Technical Product Manager sub-roles
+    'Platform Technical Product Manager': ['Technical Product Management', 'Platform Engineering', 'Microservices', 'Agile', 'Architecture'],
+    'API / Integration Technical Product Manager': ['Technical Product Management', 'API Design', 'Integrations', 'REST', 'Agile'],
+    'Data / Analytics Technical Product Manager': ['Technical Product Management', 'Data Engineering', 'Big Data', 'Analytics', 'Agile'],
+    'AI / ML Technical Product Manager': ['Technical Product Management', 'AI', 'Machine Learning', 'Data Science', 'Agile'],
+    'Cloud / Infrastructure Technical Product Manager': ['Technical Product Management', 'Cloud Infrastructure', 'AWS', 'Azure', 'Agile'],
+
+    // Product Owner sub-roles
+    'Technical Product Owner': ['Technical Product Owner', 'Agile', 'Scrum', 'Technical Requirements', 'Architecture', 'Stakeholder Management'],
+    'Lead / Group Product Owner': ['Product Leadership', 'Agile', 'Scrum', 'Stakeholder Management', 'Vision', 'Strategy'],
+    'Agile / Scrum Product Owner': ['Agile', 'Scrum', 'Backlog Management', 'User Stories', 'Sprint Planning', 'Stakeholder Management'],
+    'Platform Product Owner': ['Platform Product Owner', 'Platform Engineering', 'APIs', 'Infrastructure', 'Agile', 'Stakeholder Management'],
+    'Data Product Owner': ['Data Product Owner', 'Data Analytics', 'Business Intelligence', 'Data Engineering', 'Agile', 'Stakeholder Management'],
 
     // Technical Lead sub-roles
     'Frontend Tech Lead': ['Frontend', 'React', 'Angular', 'Vue.js', 'Leadership', 'Architecture', 'Code Review', 'Mentoring'],
@@ -575,15 +750,74 @@ function CustomAssessment() {
     // Project Manager sub-roles
     'IT Project Manager': ['Project Management', 'Agile', 'Scrum', 'Stakeholder Management', 'Risk Management', 'Budget Management'],
     'Agile Project Manager': ['Project Management', 'Agile', 'Scrum', 'Kanban', 'Team Management', 'Stakeholder Management'],
-    'Scrum Master': ['Scrum', 'Agile', 'Scrum Master', 'Team Facilitation', 'Sprint Planning', 'Retrospectives'],
     'Program Manager': ['Program Management', 'Project Management', 'Stakeholder Management', 'Strategy', 'Risk Management'],
-    'Technical Project Manager': ['Project Management', 'Technical Skills', 'Agile', 'Scrum', 'Stakeholder Management', 'Risk Management']
+
+    // Technical Project Manager sub-roles
+    'Software Implementation Project Manager': ['Technical Project Management', 'SDLC', 'Agile', 'Software Implementation', 'Stakeholder Management'],
+    'Infrastructure / Cloud Project Manager': ['Technical Project Management', 'Cloud Infrastructure', 'AWS', 'Azure', 'Migration'],
+    'Data / AI Project Manager': ['Technical Project Management', 'Data Engineering', 'Machine Learning', 'Big Data', 'Analytics'],
+    'Cybersecurity Project Manager': ['Technical Project Management', 'Cybersecurity', 'Compliance', 'Security Audits', 'Risk Management'],
+    'ERP / CRM Implementation Project Manager': ['Technical Project Management', 'ERP', 'CRM', 'Salesforce', 'SAP', 'Implementation'],
+
+    // Scrum Master sub-roles
+    'Senior Scrum Master': ['Scrum Master Leadership', 'Agile Coaching', 'Team Facilitation', 'Sprint Planning', 'Retrospectives', 'Metrics'],
+    'Agile Scrum Master': ['Scrum', 'Agile', 'Kanban', 'Team Facilitation', 'Sprint Planning', 'Retrospectives'],
+    'Technical Scrum Master': ['Scrum Master', 'Technical Background', 'Agile', 'Team Facilitation', 'SDLC', 'Engineering Practices'],
+    'SAFe Scrum Master': ['SAFe', 'Scaled Agile', 'PI Planning', 'Scrum', 'Release Train', 'Agile Coaching'],
+    'Release Train Engineer (RTE)': ['RTE', 'SAFe', 'Release Management', 'Program Increment', 'Agile Coaching', 'Stakeholder Management'],
+    'Associate / Junior Scrum Master': ['Scrum basics', 'Agile', 'Team Support', 'Facilitation', 'Sprint Tracking'],
+
+    // Support Engineer sub-roles
+    'Technical Support Engineer': ['Technical Support', 'Troubleshooting', 'Customer Service', 'Linux', 'Windows', 'Networking'],
+    'Application Support Engineer': ['Application Support', 'SQL', 'Log Analysis', 'Troubleshooting', 'ITIL', 'Customer Service'],
+    'Product Support Engineer': ['Product Support', 'Troubleshooting', 'JIRA', 'SAAS', 'Customer Success', 'Technical Writing'],
+    'Cloud Support Engineer': ['Cloud Support', 'AWS', 'Azure', 'Linux', 'Troubleshooting', 'Networking'],
+    'Production Support Engineer (L1 / L2 / L3)': ['Production Support', 'Incident Management', 'Monitoring', 'Linux', 'SQL', 'Troubleshooting'],
+    'Network Support Engineer': ['Network Support', 'Troubleshooting', 'Cisco', 'Routing', 'Switching', 'Firewalls'],
+
+    // Technical Writer sub-roles
+    'API / Developer Documentation Writer': ['API Documentation', 'Technical Writing', 'REST', 'Postman', 'Swagger / OpenAPI', 'Markdown'],
+    'Product Documentation Writer': ['User Guides', 'Technical Writing', 'Product Documentation', 'Release Notes', 'Confluence', 'UX Writing'],
+    'Software / Engineering Technical Writer': ['Technical Writing', 'Software Documentation', 'Markdown', 'Git', 'Agile', 'SDLC'],
+    'Cloud / DevOps Technical Writer': ['Cloud Documentation', 'AWS', 'Azure', 'GCP', 'DevOps', 'CI/CD', 'Technical Writing'],
+    'Senior Technical Writer': ['Technical Writing Leadership', 'Documentation Strategy', 'Information Architecture', 'Mentoring', 'Style Guides', 'API Documentation'],
+
+    // AI Engineering sub-roles
+    'Core AI': ['LLMs', 'Generative AI', 'Prompt Engineering', 'AI Agents', 'Fine-tuning Techniques', 'Model Evaluation', 'Model Monitoring', 'AI Safety', 'Feature Engineering'],
+
+    // Cloud Engineer (Architecture) sub-roles
+    'Architecture': ['System Design', 'Scalability Design', 'Infrastructure as Code', 'Reliability Engineering', 'Observability', 'Security Engineering'],
+
+    // DevOps sub-roles
+    'Practices': ['GitOps', 'Workflow Orchestration', 'Troubleshooting'],
+    'Operations': ['Incident Management', 'Performance Optimization'],
+
+    // Data & AI sub-roles
+    'Data Engineering': ['Data Pipelines Design', 'Data Quality Management'],
+    'Governance': ['Data Governance'],
+
+    // FinOps sub-roles
+    'Cost Management': ['FinOps']
   }), []);
 
   useEffect(() => {
     // Load saved form data from localStorage
     loadFormDataFromLocalStorage();
+    // Ensure page starts from top when opened from dashboard/navigation.
+    // Since window body is overflow: hidden, we scroll the custom .app-scroll element.
+    const scrollContainer = document.querySelector('.app-scroll');
+    if (scrollContainer) {
+      scrollContainer.scrollTop = 0;
+    }
+    const scrollTimer = setTimeout(() => {
+      const scrollContainer = document.querySelector('.app-scroll');
+      if (scrollContainer) {
+        scrollContainer.scrollTop = 0;
+      }
+    }, 100);
+    return () => clearTimeout(scrollTimer);
   }, []);
+
 
   // Handle browser tab/window close with unsaved changes warning
   useEffect(() => {
@@ -656,6 +890,28 @@ function CustomAssessment() {
     }
   }, [formData.numberOfQuestions]);
 
+  // Auto-save form data to localStorage whenever important state changes
+  useEffect(() => {
+    saveFormDataToLocalStorage();
+  }, [
+    formData.role,
+    formData.subRoles,
+    formData.customRole,
+    formData.experienceLevel,
+    formData.numberOfQuestions,
+    formData.time,
+    resumeFileName,
+    extractedSkills,
+    suggestedSkills,
+    commonSkills,
+    questionDistribution,
+    manualDistribution,
+    removedSkills,
+    weights,
+    autoTime,
+    saveFormDataToLocalStorage
+  ]);
+
   // Calculate question distribution per skill
   useEffect(() => {
     const totalQuestions = parseInt(formData.numberOfQuestions);
@@ -685,28 +941,6 @@ function CustomAssessment() {
       (skill) => !commonSkills.some((common) => normalize(common) === normalize(skill))
     );
 
-    // Percent allocations (customizable)
-    let totalWeight = (weights.common || 0) + (weights.role || 0) + (weights.resume || 0);
-    if (totalWeight === 0) {
-      totalWeight = 100;
-    }
-    // Normalize to sum to 1 so allocation still works even if user sums to e.g. 98 or 105.
-    const effectiveCommon = (weights.common || 0) / totalWeight;
-    const effectiveRole = (weights.role || 0) / totalWeight;
-
-    let commonQuestionsTotal = Math.round(totalQuestions * effectiveCommon);
-    let roleQuestionsTotal = Math.round(totalQuestions * effectiveRole);
-    let resumeQuestionsTotal = totalQuestions - commonQuestionsTotal - roleQuestionsTotal;
-
-    // Adjust for rounding errors to ensure sum matches totalQuestions
-    if (resumeQuestionsTotal < 0) {
-      resumeQuestionsTotal = 0;
-    }
-    const adjustDelta = totalQuestions - (commonQuestionsTotal + roleQuestionsTotal + resumeQuestionsTotal);
-    if (adjustDelta !== 0) {
-      commonQuestionsTotal += adjustDelta;
-    }
-
     // Allocation helper
     const allocateQuestions = (skills, total) => {
       if (!skills || skills.length === 0 || total <= 0) return;
@@ -720,9 +954,53 @@ function CustomAssessment() {
       });
     };
 
-    allocateQuestions(commonSkills, commonQuestionsTotal);
-    allocateQuestions(roleOnlySkills, roleQuestionsTotal);
-    allocateQuestions(resumeOnlySkills, resumeQuestionsTotal);
+    if (isMultipleMode) {
+      // In multiple mode, allocation should come only from role/sub-role skills.
+      allocateQuestions(suggestedSkills, totalQuestions);
+    } else {
+      // In single mode, distribute by buckets. 
+      // We use inclusive pools for Role and Resume weights as per user request to ensure
+      // common skills are not excluded when weight is shifted to Role or Resume sliders.
+      const buckets = [
+        { skills: commonSkills, weight: weights.common || 0 },
+        { skills: suggestedSkills, weight: weights.role || 0 },
+        { skills: extractedSkills, weight: weights.resume || 0 },
+      ].filter((bucket) => bucket.skills.length > 0);
+
+      if (buckets.length === 0) {
+        setQuestionDistribution({});
+        return;
+      }
+
+      let totalWeight = buckets.reduce((sum, bucket) => sum + bucket.weight, 0);
+      if (totalWeight === 0) {
+        totalWeight = buckets.length;
+        buckets.forEach((bucket) => {
+          bucket.weight = 1;
+        });
+      }
+
+      const allocations = buckets.map((bucket, index) => {
+        const exact = (totalQuestions * bucket.weight) / totalWeight;
+        const floored = Math.floor(exact);
+        return { ...bucket, floored, exact, index };
+      });
+
+      let remaining = totalQuestions - allocations.reduce((sum, bucket) => sum + bucket.floored, 0);
+
+      allocations
+        .sort((a, b) => (b.exact - b.floored) - (a.exact - a.floored))
+        .forEach((bucket) => {
+          if (remaining > 0) {
+            bucket.floored += 1;
+            remaining -= 1;
+          }
+        });
+
+      allocations.forEach((bucket) => {
+        allocateQuestions(bucket.skills, bucket.floored);
+      });
+    }
 
     // Apply manual overrides and filter removed skills
     const finalDistribution = {};
@@ -735,7 +1013,7 @@ function CustomAssessment() {
     });
 
     setQuestionDistribution(finalDistribution);
-  }, [formData.numberOfQuestions, commonSkills, extractedSkills, suggestedSkills, manualDistribution, removedSkills, weights]);
+  }, [formData.numberOfQuestions, commonSkills, extractedSkills, suggestedSkills, manualDistribution, removedSkills, weights, isMultipleMode]);
 
 
   // Extract skills from resume using API
@@ -751,13 +1029,18 @@ function CustomAssessment() {
       // Call API to extract skills
       const response = await axios.post(`${API_BASE_URL}/extract-skills/`, formData, {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          // 'Content-Type': 'multipart/form-data',
         },
       });
 
       // Set extracted skills from API response
       if (response.data && response.data.skills) {
         setExtractedSkills(response.data.skills);
+
+        // Save extracted name to localStorage for other pages
+        if (response.data.name) {
+          localStorage.setItem('recentCandidateName', response.data.name);
+        }
       } else {
         setExtractedSkills([]);
       }
@@ -774,12 +1057,39 @@ function CustomAssessment() {
       }
     } finally {
       setIsExtractingSkills(false);
+      // Ensure we save the newly extracted skills immediately
+      saveFormDataToLocalStorage();
     }
   };
 
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
+      const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      const allowedExtensions = ['.pdf', '.doc', '.docx'];
+      const fileExt = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+
+      if (!allowedTypes.includes(file.type) && !allowedExtensions.includes(fileExt)) {
+        setErrors({ ...errors, resume: 'Invalid file format. Only PDF, DOC, and DOCX are allowed.' });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        setErrors({ ...errors, resume: 'File size exceeds 10MB limit.' });
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+
+      // CLEAR stale storage data when a NEW resume is uploaded to ensure a fresh assessment context.
+      // This prevents the "same review questions" issue reported by users.
+      try {
+        localStorage.removeItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY);
+        localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+      } catch (err) {
+        console.error('Error clearing stale assessment storage:', err);
+      }
+
       setFormData({ ...formData, resume: file });
       setResumeFileName(file.name);
       setErrors({ ...errors, resume: '' });
@@ -801,6 +1111,13 @@ function CustomAssessment() {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const clearAllSkills = () => {
+    setExtractedSkills([]);
+    setRemovedSkills([]);
+    setManualDistribution({});
+    setQuestionDistribution({});
   };
 
   const handleRemoveSkill = (skillToRemove) => {
@@ -846,12 +1163,31 @@ function CustomAssessment() {
   };
 
   const handleWeightChange = (name, value) => {
-    const num = Math.max(0, Math.min(100, parseInt(value) || 0));
+    if (value === '') {
+      setWeights((prev) => ({ ...prev, [name]: '' }));
+      return;
+    }
+    const num = Math.max(0, Math.min(100, parseInt(value, 10) || 0));
     setWeights((prev) => ({ ...prev, [name]: num }));
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+    if (name === 'numberOfQuestions') {
+      if (value === '') {
+        setFormData({ ...formData, [name]: '' });
+      } else {
+        const num = parseInt(value, 10);
+        if (isNaN(num) || num < 1 || num > 150) {
+          // Reject invalid or huge numbers (max 150 to prevent overflow/time calculation issues)
+          return;
+        }
+        setFormData({ ...formData, [name]: String(num) });
+      }
+      setErrors({ ...errors, [name]: '' });
+      return;
+    }
 
     // If role is changed, clear subRole and customRole
     if (name === 'role') {
@@ -890,66 +1226,6 @@ function CustomAssessment() {
     setSuggestedSkills([]);
   };
 
-  const handleTimeChange = (e) => {
-    let value = e.target.value;
-
-    // Remove any non-digit and non-colon characters
-    value = value.replace(/[^\d:]/g, '');
-
-    // Auto-format as user types (HH:MM:SS)
-    // Split by colons to handle existing format
-    const parts = value.split(':');
-
-    if (parts.length === 1) {
-      // No colons yet - user is typing digits
-      if (value.length <= 2) {
-        // Just hours (0-23)
-        setFormData({ ...formData, time: value });
-      } else if (value.length === 3) {
-        // Add first colon: HH:M
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2) });
-      } else if (value.length === 4) {
-        // HH:MM
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2) });
-      } else if (value.length === 5) {
-        // Add second colon: HH:MM:S
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2, 4) + ':' + value.slice(4) });
-      } else {
-        // HH:MM:SS
-        setFormData({ ...formData, time: value.slice(0, 2) + ':' + value.slice(2, 4) + ':' + value.slice(4, 6) });
-      }
-    } else if (parts.length === 2) {
-      // Has one colon (HH:MM)
-      if (parts[1].length <= 2) {
-        setFormData({ ...formData, time: value });
-      } else if (parts[1].length === 3) {
-        // Add second colon: HH:MM:S
-        setFormData({ ...formData, time: parts[0] + ':' + parts[1].slice(0, 2) + ':' + parts[1].slice(2) });
-      } else {
-        // HH:MM:SS
-        setFormData({ ...formData, time: parts[0] + ':' + parts[1].slice(0, 2) + ':' + parts[1].slice(2, 4) });
-      }
-    } else if (parts.length === 3) {
-      // Already has both colons (HH:MM:SS)
-      // Limit each part: HH (0-23), MM (0-59), SS (0-59)
-      let hours = parts[0].slice(0, 2);
-      let minutes = parts[1].slice(0, 2);
-      let seconds = parts[2].slice(0, 2);
-
-      // Validate hours (0-23)
-      if (hours.length === 2 && parseInt(hours) > 23) {
-        hours = '23';
-      }
-
-      setFormData({ ...formData, time: `${hours}:${minutes}:${seconds}` });
-    } else {
-      // Too many colons, keep only first 3 parts
-      setFormData({ ...formData, time: parts.slice(0, 3).join(':') });
-    }
-
-    setErrors({ ...errors, time: '' });
-  };
-
   const formatSecondsToHHMMSS = (totalSeconds) => {
     const hrs = Math.floor(totalSeconds / 3600);
     const mins = Math.floor((totalSeconds % 3600) / 60);
@@ -960,17 +1236,18 @@ function CustomAssessment() {
 
   const validateTimeFormat = (timeString) => {
     // Validate HH:MM:SS format
+    if (!timeString) return false;
+    const trimmed = timeString.trim();
     const timeRegex = /^([0-1]?[0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$/;
-    return timeRegex.test(timeString);
+    return timeRegex.test(trimmed);
   };
 
   const validateForm = () => {
     const newErrors = {};
     const missingFields = [];
 
-    // Check if resume exists OR if resumeFileName exists (for restored data from localStorage)
-    // If extractedSkills exist, it means resume was already processed
-    if (!formData.resume && !resumeFileName && extractedSkills.length === 0) {
+    // In Single mode, resume upload is mandatory.
+    if (isSingleMode && !formData.resume && !resumeFileName && extractedSkills.length === 0) {
       newErrors.resume = 'Please upload a resume';
       missingFields.push('Resume');
     }
@@ -1007,10 +1284,12 @@ function CustomAssessment() {
       missingFields.push('Time');
     }
 
-    const weightSum = (weights.common || 0) + (weights.role || 0) + (weights.resume || 0);
-    if (weightSum !== 100) {
-      newErrors.weights = 'Percentages must add up to 100.';
-      missingFields.push('Percentages (must add up to 100)');
+    if (isSingleMode) {
+      const weightSum = (weights.common || 0) + (weights.role || 0) + (weights.resume || 0);
+      if (weightSum !== 100) {
+        newErrors.weights = 'Percentages must add up to 100.';
+        missingFields.push('Percentages (must add up to 100)');
+      }
     }
 
     const totalQuestions = parseInt(formData.numberOfQuestions) || 0;
@@ -1056,15 +1335,40 @@ function CustomAssessment() {
         apiParams.difficulty = difficulty;
       }
 
-      const response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+      let response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
         params: apiParams
       });
 
+      // Retry without difficulty filter when strict filter returns no questions
+      if (difficulty && response.data && response.data.count === 0) {
+        delete apiParams.difficulty;
+        response = await axios.get(`${API_BASE_URL}/questions/by-skills/`, {
+          params: apiParams
+        });
+      }
+
       const missingSkills = [];
+      const summaryRows = [];
+      let totalRequested = 0;
+      let totalAvailableUsed = 0;
+      let totalSkipped = 0;
       if (response.data && response.data.questions_by_topic) {
         allSkills.forEach(skill => {
           const availableCount = (response.data.questions_by_topic[skill] || []).length;
           const requiredCount = questionDistribution[skill] || 0;
+          const skippedCount = Math.max(requiredCount - availableCount, 0);
+          const usedCount = Math.min(requiredCount, availableCount);
+
+          totalRequested += requiredCount;
+          totalAvailableUsed += usedCount;
+          totalSkipped += skippedCount;
+
+          summaryRows.push({
+            skill,
+            requested: requiredCount,
+            available: availableCount,
+            skipped: skippedCount,
+          });
 
           if (requiredCount > 0 && availableCount < requiredCount) {
             missingSkills.push({
@@ -1079,7 +1383,11 @@ function CustomAssessment() {
 
       return {
         valid: missingSkills.length === 0,
-        missing: missingSkills
+        missing: missingSkills,
+        summaryRows,
+        totalRequested,
+        totalAvailableUsed,
+        totalSkipped,
       };
     } catch (error) {
       console.error('Error validating questions:', error);
@@ -1087,6 +1395,13 @@ function CustomAssessment() {
     } finally {
       setIsValidatingQuestions(false);
     }
+  };
+
+  const getRoleLabel = () => {
+    if (!formData.role) return '';
+    if (formData.role === 'other') return formData.customRole || '';
+    const option = document.querySelector(`#role option[value="${formData.role}"]`);
+    return option ? option.textContent : formData.role;
   };
 
   // Handle cancel/navigation with unsaved changes check
@@ -1136,32 +1451,51 @@ function CustomAssessment() {
       // ignore
     }
 
-    // If we have a draft id, verify it actually exists in the backend DB before reusing it.
+    // If we have a draft id, attempt to update the existing record with the current payload.
+    // This ensures that any changes to role, distribution, or weights are correctly reflected
+    // in the review page even if the user refreshes or navigates back and forth.
     if (draftId) {
       try {
-        await axios.get(`${API_BASE_URL}/custom-assessments/${draftId}/`);
-        return draftId;
-      } catch (err) {
-        // Stale/invalid draft id or backend unavailable — don't trust it.
-        clearDraft();
-      }
-    }
-
-    // Create a new CustomAssessment record
-    try {
-      const saveResponse = await axios.post(`${API_BASE_URL}/custom-assessments/`, payload);
-      const newId = saveResponse?.data?.id;
-      if (newId) {
+        await axios.patch(`${API_BASE_URL}/custom-assessments/${draftId}/`, payload);
+        // Clear stale review state because the configuration has changed. 
+        // This forces ReviewPage to re-fetch questions next time it's loaded.
         try {
-          localStorage.setItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY, String(newId));
+          localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
         } catch {
           // ignore
         }
-        return newId;
+        return draftId;
+      } catch (err) {
+        // If the draft ID was not found (e.g. backend was reset), clear it and move to creation.
+        if (err.response?.status === 404) {
+          clearDraft();
+          draftId = null;
+        } else {
+          // If it's a network error or other server error, we still return the draftId to allow
+          // the flow to continue if possible, or fail gracefully later.
+          return draftId;
+        }
       }
-    } catch (error) {
-      console.error('Error saving custom assessment:', error);
-      clearDraft();
+    }
+
+    // Create a new CustomAssessment record if no valid draftId exists
+    if (!draftId) {
+      try {
+        const saveResponse = await axios.post(`${API_BASE_URL}/custom-assessments/`, payload);
+        const newId = saveResponse?.data?.id;
+        if (newId) {
+          try {
+            localStorage.setItem(DRAFT_CUSTOM_ASSESSMENT_ID_KEY, String(newId));
+            // Also clear review state for new assessment records
+            localStorage.removeItem(REVIEW_STATE_STORAGE_KEY);
+          } catch {
+            // ignore
+          }
+          return newId;
+        }
+      } catch (error) {
+        console.error('Error saving custom assessment:', error);
+      }
     }
 
     return null;
@@ -1182,8 +1516,13 @@ function CustomAssessment() {
     // Validate question availability first
     const questionValidation = await validateQuestionAvailability();
 
-    if (!questionValidation.valid && questionValidation.missing.length > 0) {
-      // Show error modal with missing questions
+    if (questionValidation.error) {
+      alert('Unable to validate question availability right now. Please try again.');
+      return;
+    }
+
+    // Always show question availability summary modal.
+    if (questionValidation.summaryRows && questionValidation.summaryRows.length > 0) {
       setMissingQuestionsData(questionValidation);
       setShowQuestionValidationModal(true);
       return;
@@ -1214,6 +1553,7 @@ function CustomAssessment() {
         organization_name: userData.organization_name || '',
       },
       assessment: {
+        assessment_mode: isSingleMode ? 'single' : 'multiple',
         role: formData.role,
         sub_roles: formData.subRoles || [],
         custom_role: formData.customRole || '',
@@ -1249,6 +1589,7 @@ function CustomAssessment() {
       autoTime,
       resumeFileName,
       role: formData.role,
+      roleLabel: getRoleLabel(),
       subRoles: formData.subRoles,
       customRole: formData.customRole,
       experienceLevel: formData.experienceLevel,
@@ -1294,6 +1635,7 @@ function CustomAssessment() {
         organization_name: userData.organization_name || '',
       },
       assessment: {
+        assessment_mode: isSingleMode ? 'single' : 'multiple',
         role: formData.role,
         sub_roles: formData.subRoles || [],
         custom_role: formData.customRole || '',
@@ -1329,6 +1671,7 @@ function CustomAssessment() {
       autoTime,
       resumeFileName,
       role: formData.role,
+      roleLabel: getRoleLabel(),
       subRoles: formData.subRoles,
       customRole: formData.customRole,
       experienceLevel: formData.experienceLevel,
@@ -1344,79 +1687,207 @@ function CustomAssessment() {
     navigate('/review-assessment', { state: assessmentData });
   };
 
+  const handleSkipToManual = async () => {
+    // Collect user from localStorage for payload
+    let userData = {
+      first_name: '',
+      last_name: '',
+      email: '',
+      organization_name: '',
+    };
+    try {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        userData = JSON.parse(storedUser);
+      }
+    } catch {
+      // ignore parse errors
+    }
+
+    // Prepare payload for a minimal custom assessment draft
+    const payload = {
+      user: {
+        first_name: userData.first_name || '',
+        last_name: userData.last_name || '',
+        email: userData.email || 'guest@manual.creation',
+        organization_name: userData.organization_name || '',
+      },
+      assessment: {
+        assessment_mode: isSingleMode ? 'single' : 'multiple',
+        role: formData.role || 'Untitled Assessment',
+        experience_level: formData.experienceLevel || 'mid',
+        number_of_questions: 10,
+        time: '00:30:00',
+        sub_roles: [],
+      },
+    };
+
+    const savedAssessmentId = await resolveCustomAssessmentId(payload);
+
+    // Prepare minimal assessment data to pass to manual pages
+    const skipAssessmentData = {
+      ...formData,
+      role: formData.role || 'Untitled Assessment',
+      experienceLevel: formData.experienceLevel || 'mid',
+      customAssessmentId: savedAssessmentId || null,
+      fromSkip: true,
+    };
+
+    navigate('/manual-questions', { state: skipAssessmentData });
+  };
+
   return (
     <div className="custom-assessment-container">
-      {/* Header */}
-      <Header />
 
       {/* Main Content */}
       <div className="page-container">
         <div className="form-wrapper">
-          <h1 className="page-title">Custom Assessment</h1>
-          <p className="page-subtitle">Create a custom assessment by uploading a resume and configuring the assessment parameters.</p>
+          <div className="assessment-header">
+            <div className="assessment-mode-toggle">
+              <button
+                type="button"
+                className={`custom-skip-btn ${uploadMode === 'resume' ? 'active-mode' : ''}`}
+                onClick={() => {
+                  setUploadMode('resume');
+                  clearAllSkills();
+                  if (resumeSectionRef.current) {
+                    resumeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="12" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Single
+              </button>
+              <button
+                type="button"
+                className={`custom-skip-btn ${uploadMode === 'jd' ? 'active-mode' : ''}`}
+                onClick={() => {
+                  setUploadMode('jd');
+                  clearAllSkills();
+                  setFormData((prev) => ({ ...prev, resume: null }));
+                  setResumeFileName('');
+                  if (fileInputRef.current) {
+                    fileInputRef.current.value = '';
+                  }
+                  if (resumeSectionRef.current) {
+                    resumeSectionRef.current.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="9" cy="7" r="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                Multiple
+              </button>
+            </div>
+            <div className="assessment-title-block">
+              <h1 className="page-title">Custom Assessment</h1>
+              <p className="page-subtitle">
+                {isSingleMode
+                  ? 'Create a custom assessment by uploading a resume and configuring the assessment parameters.'
+                  : 'Create a custom assessment for multiple candidates using role and sub-role based skills.'}
+              </p>
+            </div>
+            <div className="header-actions-container">
+              <button
+                type="button"
+                className="custom-skip-btn header-back-btn"
+                onClick={() => handleCancel('/dashboard')}
+                aria-label="Back to dashboard"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                Back
+              </button>
+              <button
+                type="button"
+                className="custom-skip-btn header-skip-btn"
+                onClick={handleSkipToManual}
+                aria-label="Skip to creating custom questions"
+              >
+                Skip
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <form className="assessment-form">
-            {/* Upload Resume */}
-            <div className="form-group">
-              <label htmlFor="resume" className="form-label">
-                Upload Resume <span className="required">*</span>
-              </label>
-              <div className="file-upload-container">
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-                  className="file-input"
-                />
-                {!resumeFileName ? (
-                  <label htmlFor="resume" className="file-upload-label">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                      <path d="M14 2v6h6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                      <path d="M16 13H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                      <path d="M16 17H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                      <path d="M10 9H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                    </svg>
-                    <span>Choose file or drag it here</span>
-                  </label>
-                ) : (
-                  <div className="file-uploaded-container">
-                    <div className="file-uploaded-info">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        <path d="M14 2v6h6" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                        <path d="M9 12l2 2 4-4" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                      </svg>
-                      <span className="file-name-uploaded">{resumeFileName}</span>
-                    </div>
-                    <div className="file-actions">
-                      <button
-                        type="button"
-                        onClick={handleReuploadResume}
-                        className="btn-file-action btn-reupload"
-                      >
-                        Reupload
-                      </button>
-                      <button
-                        type="button"
-                        onClick={handleRemoveResume}
-                        className="btn-file-action btn-remove"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
+            {isMultipleMode && (
+              <div className="mode-info-banner">
+                Multiple mode uses role and sub-role skills directly. Resume or JD upload is not required.
               </div>
-              {errors.resume && <span className="error-message">{errors.resume}</span>}
-              <p className="form-hint">Accepted formats: PDF, DOC, DOCX (Max 10MB)</p>
-            </div>
+            )}
+            {/* Upload Resume - Single mode only */}
+            {isSingleMode && (
+              <div className="form-group">
+                <label htmlFor="upload-file" className="form-label">
+                  Upload Resume <span className="required">*</span>
+                </label>
+                <div className="file-upload-container" ref={resumeSectionRef}>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    id="upload-file"
+                    name="upload-file"
+                    accept=".pdf,.doc,.docx"
+                    onChange={handleFileChange}
+                    className="file-input"
+                  />
+                  {!resumeFileName ? (
+                    <label htmlFor="upload-file" className="file-upload-label">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M14 2v6h6" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M16 13H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M16 17H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        <path d="M10 9H8" stroke="#2563eb" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                      </svg>
+                      <span>Choose resume or drag it here</span>
+                    </label>
+                  ) : (
+                    <div className="file-uploaded-container">
+                      <div className="file-uploaded-info">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                          <path d="M14 2v6h6" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                          <path d="M9 12l2 2 4-4" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+                        </svg>
+                        <span className="file-name-uploaded">{resumeFileName}</span>
+                      </div>
+                      <div className="file-actions">
+                        <button
+                          type="button"
+                          onClick={handleReuploadResume}
+                          className="btn-file-action btn-reupload"
+                        >
+                          Reupload
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleRemoveResume}
+                          className="btn-file-action btn-remove"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                {errors.resume && <span className="error-message">{errors.resume}</span>}
+                <p className="form-hint">Accepted formats: PDF, DOC, DOCX (Max 10MB)</p>
+              </div>
+            )}
 
-            {/* Skills Field - Only show when resume is uploaded */}
-            {resumeFileName && (
+            {/* Skills Field - Show only in single mode when resume is uploaded */}
+            {isSingleMode && resumeFileName && (
               <div className="form-group">
                 <label className="form-label">
                   Skills Found in Resume
@@ -1426,7 +1897,8 @@ function CustomAssessment() {
                     <div className="spinner"></div>
                     <span>Extracting skills from resume...</span>
                   </div>
-                ) : extractedSkills.length > 0 ? (
+                ) : null}
+                {!isExtractingSkills && extractedSkills.length > 0 && (
                   <div className="skills-container">
                     <div className="skills-tags">
                       {extractedSkills.map((skill, index) => (
@@ -1446,13 +1918,11 @@ function CustomAssessment() {
                         </span>
                       ))}
                     </div>
-                    {extractedSkills.length > 0 && (
-                      <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.625rem' }}>
-                        Click the × button on any skill to remove it
-                      </p>
-                    )}
+                    <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.625rem' }}>
+                      Click the × button on any skill to remove it
+                    </p>
                   </div>
-                ) : null}
+                )}
               </div>
             )}
 
@@ -1476,7 +1946,7 @@ function CustomAssessment() {
                   <option value="full-stack-developer">Full Stack Developer</option>
                   <option value="mobile-developer">Mobile Developer (iOS/Android)</option>
                 </optgroup>
-                <optgroup label="DevOps & Infrastructure">
+                <optgroup label="DevOps &amp; Infrastructure">
                   <option value="devops-engineer">DevOps Engineer</option>
                   <option value="cloud-engineer">Cloud Engineer</option>
                   <option value="system-administrator">System Administrator</option>
@@ -1507,6 +1977,7 @@ function CustomAssessment() {
                 <optgroup label="Design & Product">
                   <option value="ui-ux-designer">UI/UX Designer</option>
                   <option value="product-manager">Product Manager</option>
+                  <option value="technical-product-manager">Technical Product Manager</option>
                   <option value="product-owner">Product Owner</option>
                 </optgroup>
                 <optgroup label="Leadership & Architecture">
@@ -1521,6 +1992,15 @@ function CustomAssessment() {
                   <option value="project-manager">Project Manager</option>
                   <option value="technical-project-manager">Technical Project Manager</option>
                 </optgroup>
+                <optgroup label="AI Engineering">
+                  <option value="ai-engineering">AI Engineering</option>
+                </optgroup>
+                <optgroup label="Data &amp; AI">
+                  <option value="data-ai">Data &amp; AI</option>
+                </optgroup>
+                <optgroup label="FinOps">
+                  <option value="finops">FinOps</option>
+                </optgroup>
                 <optgroup label="Other">
                   <option value="support-engineer">Support Engineer</option>
                   <option value="technical-writer">Technical Writer</option>
@@ -1532,23 +2012,21 @@ function CustomAssessment() {
               {/* Sub-Role Selection - Show when role has sub-roles */}
               {hasSubRoles(formData.role) && (
                 <div style={{ marginTop: '0.75rem' }}>
-                  <label className="form-label">
+                  <label className="form-label" style={{ marginBottom: '0.5rem' }}>
                     Sub-Roles <span className="required">*</span>
                   </label>
-                  <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '0.5rem', flexWrap: 'wrap' }}>
+                  <div className="subrole-actions">
                     <button
                       type="button"
                       onClick={handleSelectAllSubRoles}
-                      className="btn btn-secondary"
-                      style={{ padding: '0.35rem 0.75rem' }}
+                      className="btn btn-secondary btn-compact"
                     >
                       Select all
                     </button>
                     <button
                       type="button"
                       onClick={handleClearSubRoles}
-                      className="btn btn-secondary"
-                      style={{ padding: '0.35rem 0.75rem' }}
+                      className="btn btn-secondary btn-compact"
                     >
                       Clear
                     </button>
@@ -1569,8 +2047,8 @@ function CustomAssessment() {
 
                   {/* Suggested Skills based on Sub-Roles */}
                   {suggestedSkills.length > 0 && (
-                    <div style={{ marginTop: '1rem' }}>
-                      <label className="form-label" style={{ marginBottom: '0.5rem', display: 'block' }}>
+                    <div className="skill-section">
+                      <label className="form-label section-label">
                         Suggested Skills for {formData.subRoles && formData.subRoles.length > 0 ? formData.subRoles.join(', ') : 'selected sub-roles'}
                       </label>
                       <div className="skills-container">
@@ -1581,7 +2059,7 @@ function CustomAssessment() {
                             </span>
                           ))}
                         </div>
-                        <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.625rem' }}>
+                        <p className="form-hint section-hint">
                           These are suggested skills for the selected sub-roles. Skills extracted from resume are shown above.
                         </p>
                       </div>
@@ -1590,8 +2068,8 @@ function CustomAssessment() {
 
                   {/* Common Skills - Skills that match between resume and suggested */}
                   {commonSkills.length > 0 && (
-                    <div style={{ marginTop: '1rem' }}>
-                      <label className="form-label" style={{ marginBottom: '0.5rem', display: 'block', color: '#059669', fontWeight: '600' }}>
+                    <div className="skill-section">
+                      <label className="form-label section-label common-label">
                         ✓ Common Skills ({commonSkills.length})
                       </label>
                       <div className="skills-container">
@@ -1602,7 +2080,7 @@ function CustomAssessment() {
                             </span>
                           ))}
                         </div>
-                        <p className="form-hint" style={{ marginTop: '0.5rem', fontSize: '0.625rem' }}>
+                        <p className="form-hint section-hint">
                           These skills are found in both the resume and the suggested skills for the selected sub-roles.
                         </p>
                       </div>
@@ -1613,7 +2091,7 @@ function CustomAssessment() {
 
               {/* Custom Role Input - Show when "Other" is selected */}
               {formData.role === 'other' && (
-                <div style={{ marginTop: '0.75rem' }}>
+                <div className="mt-sm">
                   <label htmlFor="customRole" className="form-label">
                     Enter Role Name <span className="required">*</span>
                   </label>
@@ -1643,7 +2121,7 @@ function CustomAssessment() {
                 onChange={handleInputChange}
                 className={`form-select ${errors.experienceLevel ? 'error' : ''}`}
               >
-                <option value="">Select experience level</option>
+                <option value="" disabled hidden>Select experience level</option>
                 <option value="entry">Entry Level (0-2 years)</option>
                 <option value="mid">Mid Level (2-5 years)</option>
                 <option value="senior">Senior Level (5-10 years)</option>
@@ -1652,54 +2130,56 @@ function CustomAssessment() {
               {errors.experienceLevel && <span className="error-message">{errors.experienceLevel}</span>}
             </div>
 
-            {/* Adjust Percentages */}
-            <div className="form-group">
-              <label className="form-label">Adjust Percentages (must add up to 100)</label>
-              <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Common (%)</span>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={weights.common}
-                    onChange={(e) => handleWeightChange('common', e.target.value)}
-                    className="form-input"
-                  />
+            {/* Adjust Percentages - Single mode only */}
+            {isSingleMode && (
+              <div className="form-group">
+                <label className="form-label">Adjust Percentages (must add up to 100)</label>
+                <div className="weights-grid">
+                  <div className="weight-item">
+                    <span className="weight-label">Common (%)</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={weights.common}
+                      onChange={(e) => handleWeightChange('common', e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="weight-item">
+                    <span className="weight-label">Role (%)</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={weights.role}
+                      onChange={(e) => handleWeightChange('role', e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
+                  <div className="weight-item">
+                    <span className="weight-label">Resume (%)</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="100"
+                      value={weights.resume}
+                      onChange={(e) => handleWeightChange('resume', e.target.value)}
+                      className="form-input"
+                    />
+                  </div>
                 </div>
-                <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Role (%)</span>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={weights.role}
-                    onChange={(e) => handleWeightChange('role', e.target.value)}
-                    className="form-input"
-                  />
-                </div>
-                <div style={{ flex: '1 1 150px' }}>
-                  <span style={{ fontSize: '0.75rem', color: '#374151' }}>Resume (%)</span>
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={weights.resume}
-                    onChange={(e) => handleWeightChange('resume', e.target.value)}
-                    className="form-input"
-                  />
-                </div>
-              </div>
-              <p className="form-hint" style={{ marginTop: '0.5rem' }}>
-                Default: 70 / 15 / 15. If sum is 0, the default 70 / 15 / 15 is used automatically.
-              </p>
-              {((weights.common || 0) + (weights.role || 0) + (weights.resume || 0)) !== 100 && (
-                <p className="error-message" style={{ marginTop: '0.25rem' }}>
-                  Current sum is {(weights.common || 0) + (weights.role || 0) + (weights.resume || 0)}. We’ll normalize automatically, but please adjust to 100 for clarity.
+                <p className="form-hint" style={{ marginTop: '0.5rem' }}>
+                  Default: 70 / 15 / 15. If sum is 0, the default 70 / 15 / 15 is used automatically.
                 </p>
-              )}
-              {errors.weights && <span className="error-message">{errors.weights}</span>}
-            </div>
+                {((weights.common || 0) + (weights.role || 0) + (weights.resume || 0)) !== 100 && (
+                  <p className="error-message" style={{ marginTop: '0.25rem' }}>
+                    Current sum is {(weights.common || 0) + (weights.role || 0) + (weights.resume || 0)}. We’ll normalize automatically, but please adjust to 100 for clarity.
+                  </p>
+                )}
+                {errors.weights && <span className="error-message">{errors.weights}</span>}
+              </div>
+            )}
 
             {/* Number of Questions */}
             <div className="form-group">
@@ -1716,6 +2196,7 @@ function CustomAssessment() {
                 placeholder="Enter number of questions"
                 className={`form-input ${errors.numberOfQuestions ? 'error' : ''}`}
               />
+              <p className="form-hint" style={{ marginTop: '0.5rem' }}>Allow questions upto 0 to 150</p>
               {errors.numberOfQuestions && <span className="error-message">{errors.numberOfQuestions}</span>}
 
               {/* Question Distribution Breakdown */}
@@ -1786,24 +2267,35 @@ function CustomAssessment() {
                               </span>
                             </div>
                           )}
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', marginTop: '0.5rem' }}>
-                            <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Common Skills ({weights.common}%):</span>
-                            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#059669' }}>
-                              {commonTotal} {commonTotal === 1 ? 'question' : 'questions'}
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                            <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Role Skills ({weights.role}%):</span>
-                            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#16a34a' }}>
-                              {roleTotal} {roleTotal === 1 ? 'question' : 'questions'}
-                            </span>
-                          </div>
-                          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Resume Skills ({weights.resume}%):</span>
-                            <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#2563eb' }}>
-                              {resumeTotal} {resumeTotal === 1 ? 'question' : 'questions'}
-                            </span>
-                          </div>
+                          {isMultipleMode ? (
+                            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', marginTop: '0.5rem' }}>
+                              <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Role/Sub-Role Skills:</span>
+                              <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#16a34a' }}>
+                                {allocatedTotal} {allocatedTotal === 1 ? 'question' : 'questions'}
+                              </span>
+                            </div>
+                          ) : (
+                            <>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', marginTop: '0.5rem' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Common Skills ({weights.common}%):</span>
+                                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#059669' }}>
+                                  {commonTotal} {commonTotal === 1 ? 'question' : 'questions'}
+                                </span>
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Role Skills ({weights.role}%):</span>
+                                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#16a34a' }}>
+                                  {roleTotal} {roleTotal === 1 ? 'question' : 'questions'}
+                                </span>
+                              </div>
+                              <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                                <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>Resume Skills ({weights.resume}%):</span>
+                                <span style={{ fontSize: '0.75rem', fontWeight: '600', color: '#2563eb' }}>
+                                  {resumeTotal} {resumeTotal === 1 ? 'question' : 'questions'}
+                                </span>
+                              </div>
+                            </>
+                          )}
                         </>
                       );
                     })()}
@@ -1812,14 +2304,12 @@ function CustomAssessment() {
                   {/* Skills with question counts */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                     {Object.entries(questionDistribution)
-                      .sort((a, b) => b[1] - a[1]) // Sort by question count descending
+                      .sort((a, b) => a[0].localeCompare(b[0])) // Sort alphabetically for stability
                       .map(([skill, count]) => {
                         const normalizedSkill = skill.toLowerCase().trim();
                         const isCommonSkill = commonSkills.some(cs => cs.toLowerCase().trim() === normalizedSkill);
                         const isRoleSkill = suggestedSkills.some(rs => rs.toLowerCase().trim() === normalizedSkill);
                         const borderColor = isCommonSkill ? '#fcd34d' : isRoleSkill ? '#86efac' : '#bfdbfe';
-                        const bgColor = isCommonSkill ? '#fef3c7' : isRoleSkill ? '#f0fdf4' : '#eff6ff';
-                        const textColor = isCommonSkill ? '#92400e' : isRoleSkill ? '#166534' : '#1e40af';
                         return (
                           <div
                             key={skill}
@@ -1835,45 +2325,36 @@ function CustomAssessment() {
                           >
                             <span style={{ fontSize: '0.75rem', fontWeight: '500', flex: 1 }}>{skill}</span>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                              <input
-                                type="number"
-                                min="0"
-                                value={count || 0}
-                                onChange={(e) => handleUpdateSkillQuestions(skill, e.target.value)}
-                                style={{
-                                  width: '60px',
-                                  padding: '0.25rem 0.5rem',
-                                  fontSize: '0.625rem',
-                                  fontWeight: '600',
-                                  textAlign: 'center',
-                                  border: `1px solid ${borderColor}`,
-                                  borderRadius: '0.25rem',
-                                  backgroundColor: bgColor,
-                                  color: textColor,
-                                }}
-                              />
+                              <div className={`qty-button-container ${isCommonSkill ? 'common' : isRoleSkill ? 'role' : 'resume'}`}>
+                                <button
+                                  type="button"
+                                  className="qty-btn"
+                                  onClick={() => handleUpdateSkillQuestions(skill, Math.max(0, (count || 0) - 1))}
+                                  disabled={(count || 0) <= 0}
+                                  title="Decrease"
+                                >
+                                  -
+                                </button>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  value={count || 0}
+                                  onChange={(e) => handleUpdateSkillQuestions(skill, e.target.value)}
+                                  className="qty-input-field"
+                                />
+                                <button
+                                  type="button"
+                                  className="qty-btn"
+                                  onClick={() => handleUpdateSkillQuestions(skill, (count || 0) + 1)}
+                                  title="Increase"
+                                >
+                                  +
+                                </button>
+                              </div>
                               <button
                                 type="button"
                                 onClick={() => handleRemoveSkillFromDistribution(skill)}
-                                style={{
-                                  padding: '0.25rem 0.5rem',
-                                  backgroundColor: '#fee2e2',
-                                  color: '#dc2626',
-                                  border: '1px solid #fca5a5',
-                                  borderRadius: '0.25rem',
-                                  cursor: 'pointer',
-                                  fontSize: '0.625rem',
-                                  fontWeight: '600',
-                                  transition: 'all 0.2s'
-                                }}
-                                onMouseEnter={(e) => {
-                                  e.target.style.backgroundColor = '#fecaca';
-                                  e.target.style.borderColor = '#f87171';
-                                }}
-                                onMouseLeave={(e) => {
-                                  e.target.style.backgroundColor = '#fee2e2';
-                                  e.target.style.borderColor = '#fca5a5';
-                                }}
+                                className="skill-distribution-remove-btn"
                                 title="Remove this skill"
                               >
                                 ×
@@ -1885,8 +2366,9 @@ function CustomAssessment() {
                   </div>
 
                   <p className="form-hint" style={{ marginTop: '0.75rem', fontSize: '0.75rem' }}>
-                    Questions are distributed based on the selected percentages: Common (yellow), Role (green), Resume (blue).
-                    You can edit question counts for each skill or remove skills. Questions from removed/zero-count skills are automatically redistributed to common skills.
+                    {isMultipleMode
+                      ? 'Questions are distributed using role and sub-role skills only. You can edit question counts for each skill or remove skills.'
+                      : 'Questions are distributed based on selected percentages. Note: "Role" and "Resume" pools include shared common skills. You can edit counts below or remove skills to redistribute questions.'}
                   </p>
 
                   {/* Removed skills with restore option */}
@@ -1926,17 +2408,21 @@ function CustomAssessment() {
                 type="text"
                 id="time"
                 name="time"
-                value={formData.time}
-                onChange={handleTimeChange}
-                placeholder="HH:MM:SS (e.g., 01:30:00)"
-                maxLength="8"
-                className={`form-input ${errors.time ? 'error' : ''}`}
+                value={formData.time || autoTime || '00:00:00'}
+                readOnly
+                placeholder="HH:MM:SS"
+                className="form-input"
+                title="Auto-calculated based on number of questions (2 minutes/question)"
+                onFocus={(e) => e.target.blur()}
+                onMouseDown={(e) => e.preventDefault()}
+                style={{ cursor: 'not-allowed', caretColor: 'transparent' }}
               />
               {errors.time && <span className="error-message">{errors.time}</span>}
-              <p className="form-hint">
-                Format: Hours:Minutes:Seconds (e.g., 01:30:00). Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
+              <p className="form-hint" style={{ paddingLeft: '0.7rem' }}>
+                Auto-calculated at 2 minutes per question: {autoTime || '00:00:00'}.
               </p>
             </div>
+
 
             {/* Action Buttons */}
             <div className="form-actions">
@@ -1962,7 +2448,7 @@ function CustomAssessment() {
           <div className="modal-backdrop" onClick={() => setShowQuestionValidationModal(false)} />
           <div className="modal-content">
             <div className="modal-header">
-              <h2 className="modal-title">Insufficient Questions Available</h2>
+              <h2 className="modal-title">Question Availability Summary</h2>
               <button
                 onClick={() => setShowQuestionValidationModal(false)}
                 className="modal-close-btn"
@@ -1974,54 +2460,60 @@ function CustomAssessment() {
             </div>
             <div className="modal-body">
               <p style={{ marginBottom: '1rem', color: '#6b7280' }}>
-                The following skills do not have enough questions in the database to meet your requirements:
+                Review the availability of questions in the database for your selected skills before proceeding to the final review.
               </p>
               <div style={{ marginBottom: '1.5rem' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                   <thead>
                     <tr style={{ borderBottom: '2px solid #e5e7eb' }}>
                       <th style={{ padding: '0.75rem', textAlign: 'left', fontWeight: '600', color: '#374151' }}>Skill</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '600', color: '#374151' }}>Required</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '600', color: '#374151' }}>Requested</th>
                       <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '600', color: '#374151' }}>Available</th>
-                      <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '600', color: '#374151' }}>Missing</th>
+                      <th style={{ padding: '0.75rem', textAlign: 'center', fontWeight: '600', color: '#374151' }}>Skipped</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {missingQuestionsData.missing.map((item, index) => (
-                      <tr key={index} style={{ borderBottom: '1px solid #e5e7eb' }}>
+                    {(missingQuestionsData.summaryRows || []).map((item, index) => (
+                      <tr
+                        key={index}
+                        style={{
+                          borderBottom: '1px solid #e5e7eb',
+                          backgroundColor: item.skipped > 0 ? '#fff7ed' : 'transparent',
+                        }}
+                      >
                         <td style={{ padding: '0.75rem', fontWeight: '500', color: '#1f2937' }}>{item.skill}</td>
-                        <td style={{ padding: '0.75rem', textAlign: 'center', color: '#1f2937' }}>{item.required}</td>
+                        <td style={{ padding: '0.75rem', textAlign: 'center', color: '#1f2937' }}>{item.requested}</td>
                         <td style={{ padding: '0.75rem', textAlign: 'center', color: '#059669' }}>{item.available}</td>
-                        <td style={{ padding: '0.75rem', textAlign: 'center', color: '#dc2626', fontWeight: '600' }}>{item.missing}</td>
+                        <td style={{ padding: '0.75rem', textAlign: 'center', color: item.skipped > 0 ? '#dc2626' : '#6b7280', fontWeight: '600' }}>{item.skipped}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <div style={{ padding: '1rem', backgroundColor: '#fef3c7', border: '1px solid #fcd34d', borderRadius: '0.5rem', marginBottom: '1.5rem' }}>
-                <p style={{ margin: 0, fontSize: '0.75rem', color: '#92400e' }}>
-                  <strong>Options:</strong>
-                </p>
-                <ul style={{ margin: '0.5rem 0 0 1.5rem', padding: 0, fontSize: '0.75rem', color: '#92400e' }}>
-                  <li>Remove or reduce questions for skills with insufficient questions</li>
-                  <li>Add other skills that have questions available in the database</li>
-                  <li>Proceed anyway (only available questions will be shown)</li>
-                </ul>
-              </div>
+              {missingQuestionsData.totalSkipped > 0 && (
+                <div style={{ padding: '1rem', backgroundColor: '#fff7ed', border: '1px solid #fdba74', borderRadius: '0.5rem', marginBottom: '1.5rem' }}>
+                  <p style={{ margin: 0, fontSize: '0.75rem', color: '#9a3412' }}>
+                    <strong>Some questions will be skipped</strong>
+                  </p>
+                  <p style={{ margin: '0.35rem 0 0', fontSize: '0.75rem', color: '#c2410c' }}>
+                    The database has fewer questions than requested for some skills. You can still proceed, but only the available {missingQuestionsData.totalAvailableUsed} questions will be used.
+                  </p>
+                </div>
+              )}
               <div style={{ display: 'flex', gap: '1rem', justifyContent: 'flex-end' }}>
                 <button
                   onClick={() => setShowQuestionValidationModal(false)}
                   className="btn btn-secondary"
                   style={{ padding: '0.75rem 1.5rem' }}
                 >
-                  Stay & Adjust
+                  Back & Adjust
                 </button>
                 <button
                   onClick={handleProceedAnyway}
                   className="btn btn-primary"
                   style={{ padding: '0.75rem 1.5rem' }}
                 >
-                  Proceed Anyway
+                  Confirm & Proceed
                 </button>
               </div>
             </div>
@@ -2076,5 +2568,3 @@ function CustomAssessment() {
 }
 
 export default CustomAssessment;
-
-

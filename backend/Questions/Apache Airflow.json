@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Apache Airflow", 
+  "questions": [
+    {
+    "question": "What does the acronym 'DAG' stand for in Apache Airflow?",
+    "options": {
+      "A": "Data Analysis Group",
+      "B": "Directed Acyclic Graph",
+      "C": "Dynamic Application Gateway",
+      "D": "Distributed Archive Generator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Airflow component is responsible for monitoring DAGs and triggering task instances whose dependencies have been met?",
+    "options": {
+      "A": "Web Server",
+      "B": "Scheduler",
+      "C": "Worker",
+      "D": "Metadata Database"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of an 'Operator' in an Airflow DAG?",
+    "options": {
+      "A": "To act as a human manager for the pipeline.",
+      "B": "A template for a single task that defines what actually gets done (e.g., running a Bash command).",
+      "C": "To encrypt the physical hard drive.",
+      "D": "To increase the internet speed of the worker node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific UI view in Airflow allows you to see the dependencies between tasks in a visual flowchart format?",
+    "options": {
+      "A": "Tree View",
+      "B": "Graph View",
+      "C": "Gantt View",
+      "D": "Code View"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Airflow, a 'Task Instance' represents a specific run of a task for a particular DAG run.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for PythonOperators",
+      "D": "Only if using the LocalExecutor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which directory does Airflow typically look in to find your DAG definition files by default?",
+    "options": {
+      "A": "/etc/airflow",
+      "B": "$AIRFLOW_HOME/dags",
+      "C": "/var/log/airflow",
+      "D": "/usr/bin/airflow"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'Metadata Database' in Airflow?",
+    "options": {
+      "A": "To store the actual data being processed by the pipeline.",
+      "B": "To store the state of tasks, DAGs, variables, and user configurations.",
+      "C": "To act as a backup for the source code.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Operator would you use to execute a simple shell script in an Airflow workflow?",
+    "options": {
+      "A": "PythonOperator",
+      "B": "BashOperator",
+      "C": "SqlOperator",
+      "D": "EmailOperator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DAG definition, what does the 'schedule_interval' parameter define?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "How often the DAG should be triggered (e.g., daily, hourly, or via cron).",
+      "C": "The time it takes for a task to timeout.",
+      "D": "The number of retries allowed for a task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Airflow is primarily a 'Data Streaming' engine, similar to Apache Flink.",
+    "options": {
+      "A": "False (Airflow is an orchestrator for batch workflows, not a stream processor).",
+      "B": "True",
+      "C": "Only for small datasets",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Sensor' in Airflow?",
+    "options": {
+      "A": "A physical hardware device to measure rack heat.",
+      "B": "A special type of Operator that waits for a certain condition to be met before proceeding.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "A tool used for deleting old logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Airflow component provides the browser-based user interface for managing and monitoring workflows?",
+    "options": {
+      "A": "Scheduler",
+      "B": "Web Server",
+      "C": "Executor",
+      "D": "Flower"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'start_date' in a DAG definition is the date from which the Airflow scheduler will begin backfilling and scheduling tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for dynamic DAGs",
+      "D": "Only if using the SequentialExecutor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Airflow UI, what color typically represents a 'Success' state for a task instance?",
+    "options": {
+      "A": "Red",
+      "B": "Green",
+      "C": "Yellow",
+      "D": "Blue"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'XComs' (Cross-communications) in Airflow?",
+    "options": {
+      "A": "To encrypt communications between servers.",
+      "B": "To allow tasks to exchange small amounts of data or metadata with each other.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Airflow Executor is the simplest one, running tasks one at a time and requiring no external database (using SQLite)?",
+    "options": {
+      "A": "LocalExecutor",
+      "B": "SequentialExecutor",
+      "C": "CeleryExecutor",
+      "D": "KubernetesExecutor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Airflow DAGs are written in standard Python code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for version 1.x",
+      "D": "Only if using YAML files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Backfilling' mean in Airflow?",
+    "options": {
+      "A": "Deleting the oldest records in a database.",
+      "B": "Running a DAG for a specified period in the past that was not previously executed.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Operator is used when you want to run a custom function defined in your Python script?",
+    "options": {
+      "A": "BashOperator",
+      "B": "PythonOperator",
+      "C": "EmailOperator",
+      "D": "TriggerDagRunOperator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Airflow, what is a 'Hook' used for?",
+    "options": {
+      "A": "To physically hang servers in a rack.",
+      "B": "To provide a high-level interface to external platforms and databases (e.g., S3, Postgres).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a data engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Acyclic' graph in Airflow means that tasks cannot have circular dependencies (e.g., Task A cannot depend on Task B if Task B depends on Task A).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is associated with the Airflow Web Server UI by default?",
+    "options": {
+      "A": "80",
+      "B": "8080",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Catchup' in an Airflow DAG configuration?",
+    "options": {
+      "A": "The system catching up with the latest OS patches.",
+      "B": "A feature that determines whether Airflow should run all past DAG runs that weren't executed since the start_date.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Airflow command-line command is used to initialize the metadata database?",
+    "options": {
+      "A": "airflow run db",
+      "B": "airflow db init",
+      "C": "airflow start database",
+      "D": "airflow metadata sync"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Variables in Airflow can be used to store configuration values like API keys or environment names.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for local testing",
+      "D": "Only if encrypted with AES"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'Executor' in Airflow architecture?",
+    "options": {
+      "A": "To write the Python code for the DAG.",
+      "B": "To define the mechanism by which tasks actually get run (e.g., locally or on a worker cluster).",
+      "C": "To act as a physical hardware firewall.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Airflow UI, which view shows a list of all DAGs and their toggle switches to enable or disable them?",
+    "options": {
+      "A": "Task Instances View",
+      "B": "DAGs View (Main Dashboard)",
+      "C": "Audit Log",
+      "D": "Admin Menu"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multiple tasks in an Airflow DAG can run in parallel if the dependencies allow and the Executor has available slots.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for BashOperators",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Pool' feature in Airflow used for?",
+    "options": {
+      "A": "A physical swimming pool for employees.",
+      "B": "To limit the number of concurrent tasks running against a specific resource (e.g., to avoid hitting database limits).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Operator is used to send a custom message to an email address upon task completion or failure?",
+    "options": {
+      "A": "PythonOperator",
+      "B": "EmailOperator",
+      "C": "SmtpHook",
+      "D": "SlackOperator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Airflow supports 'Trigger Rules', which allow you to define when a task should run based on the success or failure of its upstream tasks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for version 2.x",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Execution Date' in an Airflow task instance context?",
+    "options": {
+      "A": "The current wall-clock time the task starts.",
+      "B": "The logical date and time for which the DAG is running (usually the start of the schedule interval).",
+      "C": "The date the task was first written by the developer.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages the 'Connections' (credentials) to external systems in Airflow?",
+    "options": {
+      "A": "Scheduler",
+      "B": "Admin / Connections UI",
+      "C": "BashOperator",
+      "D": "XCom"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Airflow is suitable for tasks that require extremely low latency (sub-second) execution.",
+    "options": {
+      "A": "False (Airflow has overhead for scheduling and is designed for high-latency batch processing).",
+      "B": "True",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the CPU is at 5% load"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Task' in Airflow?",
+    "options": {
+      "A": "The physical hardware of the computer.",
+      "B": "An instance of an Operator that performs a specific unit of work.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active DAGs' currently managed by the scheduler?",
+    "options": {
+      "A": "DAG Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Airflow can be deployed using Docker containers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Task Dependency'?",
+    "options": {
+      "A": "The relationship defining the order in which tasks must be executed.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Operator would you use to trigger another DAG run from within a DAG?",
+    "options": {
+      "A": "ExternalTaskSensor",
+      "B": "TriggerDagRunOperator",
+      "C": "BranchPythonOperator",
+      "D": "ShortCircuitOperator"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a built-in monitoring dashboard for Apache Airflow performance.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for Airflow worker nodes?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using separate network segments to ensure that high-volume Airflow tasks don't interfere with other corporate traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a virtualized Airflow setup?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is common in Airflow worker virtualization to maximize task throughput.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Storage' integration in Airflow?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "The ability to use hooks and operators to read/write data to services like S3 or Google Cloud Storage.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for Airflow storage backend?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide higher bandwidth for Airflow workers running heavy data processing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for secure Airflow task execution?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying granular security rules to ensure Airflow workers can only access the specific databases or APIs required for their tasks.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a DAG run?",
+    "options": {
+      "A": "Success / Fail percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 2' is a common strategy managed by Airflow pipelines for tracking data history.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The requirement that data is subject to the laws of the country where it is located, affecting where Airflow workers are deployed.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' task execution time?",
+    "options": {
+      "A": "Mean execution time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in an Airflow task ensures that re-running it doesn't create duplicate data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in an Airflow pipeline?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The automated process of creating unique, non-business keys for a target database table.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server' targeted by Airflow?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' is more secure than ETL because data transformations happen inside the database.",
+    "options": {
+      "A": "False (Security depends on implementation, but both can be secured).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an Airflow workflow?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and removing errors from data during the transformation phase.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' for Airflow?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the native way Airflow handles workflows.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Airflow Scheduler'?",
+    "options": {
+      "A": "The process that monitors tasks and triggers DAG runs.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Running Tasks' in Airflow?",
+    "options": {
+      "A": "Task Instance Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a one-time process for Airflow installations.",
+    "options": {
+      "A": "False (It is continuous).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Task Logging'?",
+    "options": {
+      "A": "The process of recording the output and errors of Airflow tasks for debugging.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is important for Airflow pipeline development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DAG Integrity'?",
+    "options": {
+      "A": "Ensuring the DAG code is syntactically correct and logical (e.g., no cycles).",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Scheduler Heartbeat'?",
+    "options": {
+      "A": "Heartbeat Frequency",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary architectural benefit of using the 'KubernetesExecutor' over the 'CeleryExecutor' in a highly fluctuating workload environment?",
+    "options": {
+      "A": "It is easier to configure on a single local machine.",
+      "B": "It spins up a new pod for every single task instance, allowing for precise resource isolation and auto-scaling to zero when no tasks are running.",
+      "C": "It requires a permanent cluster of worker nodes that are always powered on.",
+      "D": "It eliminates the need for a Metadata Database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Airflow 2.x, what is the 'TaskFlow API' and how does it change DAG development?",
+    "options": {
+      "A": "It is a graphical drag-and-drop tool for building DAGs.",
+      "B": "It uses Python decorators (like @task) to simplify task creation and automatically handles XCom data passing between tasks.",
+      "C": "It converts all Python code into Bash scripts for faster execution.",
+      "D": "It is used only for connecting to legacy mainframe databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When configuring a Sensor, what is the 'reschedule' mode and why is it preferred over 'poke' mode for long-running waits?",
+    "options": {
+      "A": "Poke mode is faster because it never stops checking.",
+      "B": "Reschedule mode releases the worker slot between checks, allowing other tasks to run, whereas poke mode holds the slot occupied for the entire duration.",
+      "C": "Reschedule mode is only for the SequentialExecutor.",
+      "D": "Poke mode automatically encrypts the file being sensed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic DAG Generation' allows you to create multiple DAG objects in a single Python file using a loop, which is useful for processing hundreds of similar tables.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using YAML sidecar files",
+      "D": "Only in Airflow 1.10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of a 'Custom XCom Backend' in an enterprise Airflow deployment?",
+    "options": {
+      "A": "To change the color of the XCom UI.",
+      "B": "To store large task outputs in external storage like S3 or GCS instead of the Metadata Database, preventing database bloat.",
+      "C": "To act as a physical hardware firewall for the worker.",
+      "D": "To monitor the temperature of the PostgreSQL server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Airflow feature would you use to implement 'Conditional Logic', where only one branch of tasks is executed based on the result of a previous task?",
+    "options": {
+      "A": "PythonOperator",
+      "B": "BranchPythonOperator",
+      "C": "ShortCircuitOperator",
+      "D": "ExternalTaskSensor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'ShortCircuitOperator' is used to stop the entire DAG execution immediately if a specific condition is not met.",
+    "options": {
+      "A": "False (It only skips the downstream tasks connected to it; the DAG remains active).",
+      "B": "True",
+      "C": "Only if using the CeleryExecutor",
+      "D": "Only if the task is in a 'Failed' state"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a CeleryExecutor setup, what is the role of the 'Broker' (like Redis or RabbitMQ)?",
+    "options": {
+      "A": "To store the task logs.",
+      "B": "To act as a message queue that delivers task commands from the Scheduler to the available Workers.",
+      "C": "To encrypt the metadata database passwords.",
+      "D": "To host the Airflow Web UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SLA Miss' monitoring in Airflow used for?",
+    "options": {
+      "A": "To track when a task fails due to a network error.",
+      "B": "To alert administrators when a task or DAG takes longer to complete than a pre-defined expected duration.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The total number of users logged into the portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'SubDAGs' is the modern, recommended way to organize complex workflows in Airflow 2.0+.",
+    "options": {
+      "A": "False (Task Groups are preferred over SubDAGs due to better performance and UI integration).",
+      "B": "True",
+      "C": "Only for non-production environments",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific environment variable must be set to ensure Airflow uses a specific database backend like PostgreSQL instead of the default SQLite?",
+    "options": {
+      "A": "AIRFLOW_DB_TYPE",
+      "B": "AIRFLOW__DATABASE__SQL_ALCHEMY_CONN",
+      "C": "SQLALCHEMY_DATABASE_URI",
+      "D": "AIRFLOW_METADATA_URL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Dependency Decoupling' mean when using the 'ExternalTaskSensor'?",
+    "options": {
+      "A": "Removing all tasks from a DAG.",
+      "B": "Allowing a task in 'DAG B' to wait for the successful completion of a specific task or DAG run in 'DAG A'.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring two different teams for one DAG."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Airflow 'Pools' allow you to limit the parallelism of specific types of tasks across all running DAGs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for PythonOperators",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Jinja Templating' in Airflow Operators?",
+    "options": {
+      "A": "To create physical templates for server racks.",
+      "B": "To dynamically inject variables (like execution_date or task_id) into operator parameters at runtime.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command would you use to 'test' a single task instance locally without running the entire DAG or needing the Scheduler active?",
+    "options": {
+      "A": "airflow dags backfill",
+      "B": "airflow tasks test [dag_id] [task_id] [execution_date]",
+      "C": "airflow run task",
+      "D": "airflow db shell"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'LocalExecutor' is capable of running multiple tasks in parallel on a single machine using Python multiprocessing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Bash scripts",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Zombie Task' detection in Airflow?",
+    "options": {
+      "A": "A security scan for literal malware.",
+      "B": "The process where the Scheduler identifies tasks that are 'running' in the database but have no corresponding active process/heartbeat.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Airflow, what is the 'Triggerer' component used for?",
+    "options": {
+      "A": "To physically trigger a power switch.",
+      "B": "To run 'Deferrable Operators' (async tasks) efficiently, allowing Airflow to wait for external events without occupying worker slots.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Default Args' in a DAG file allows you to apply parameters (like owner, retries, and start_date) to all operators within that DAG automatically.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for EmailOperators",
+      "D": "Only if encrypted with AES"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Connection' ID in an Airflow Hook?",
+    "options": {
+      "A": "To name the physical cable.",
+      "B": "To look up encrypted credentials and connection parameters (host, port, login) stored in the Metadata Database.",
+      "C": "To act as a firewall for the cloud.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts in a virtualized Airflow stack?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a built-in Airflow tool for storing and querying task-level execution logs.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for Airflow executors?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 network segmentation to separate worker node traffic from the management control plane.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Task Duration' distribution across a specific DAG?",
+    "options": {
+      "A": "dag.task_duration",
+      "B": "system_cpu_usage",
+      "C": "network_packets_sent",
+      "D": "disk_space_free"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' in a virtualized Airflow worker can cause the guest OS to swap memory to disk, leading to massive task latency.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) impact on Airflow log storage?",
+    "options": {
+      "A": "Measuring the weight of the logs.",
+      "B": "Automatically moving Airflow log volumes between datastores based on observed I/O latency to ensure smooth log writing.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' encrypted management of the Airflow dashboard?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' protects the availability of the Airflow Metadata Database if it is hosted on a VM.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in a virtualized Airflow cluster?",
+    "options": {
+      "A": "The largest number of workers allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT) on a worker node.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides high performance for Airflow workers but can disable Live Migration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in a virtual machine environment?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the memory assigned to a VM based on task demand.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used for hardware-assisted virtualization of memory mappings?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk for Airflow logs can cause a host crash if the physical storage runs out.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of virtual machines.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows Airflow workers to communicate with the hypervisor via Hypercalls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring physical disks.",
+      "B": "A process where write operations are mirrored to both source and destination during a live migration.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of Airflow nodes?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface policy that disables a port when an unauthorized MAC address is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is selected based on the lowest Bridge ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN before it reaches the router.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' effectively disables Spanning Tree on a specific port.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "The algorithm used to determine which physical link in a bundle to use for traffic.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent unauthorized VLAN access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A security feature where the VTP password is not stored in plain text.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' network loop can be caused by redundant links without STP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' restrict action?",
+    "options": {
+      "A": "Turning off the switch.",
+      "B": "Dropping unauthorized packets and incrementing a counter while the port stays up.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides fast Spanning Tree convergence on a per-VLAN basis.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in an Airflow task?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where running a task multiple times with the same input has the same effect as running it once.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an Airflow job?",
+    "options": {
+      "A": "Success / Fail percentage",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving testing to the start of the DAG development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for Airflow pipelines?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to a data pipeline.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a DAG repository?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for Airflow installations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Airflow Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's Airflow resources and DAG standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a DAG pipeline?",
+    "options": {
+      "A": "The time from DAG code commit to successful production deployment.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for secure data orchestration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' impact in a BashOperator?",
+    "options": {
+      "A": "The resource overhead required to fork a child process to execute the bash command.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an Airflow CI pipeline?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' can be used for long-term storage of Airflow performance metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Airflow Scheduler configuration parameter directly controls the interval at which the 'DagFileProcessorManager' refreshes the list of files in the DAGs folder, impacting CPU usage for large-scale deployments?",
+    "options": {
+      "A": "scheduler_heartbeat_sec",
+      "B": "dag_dir_list_interval",
+      "C": "min_file_process_interval",
+      "D": "parsing_processes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Airflow 2.2+, what is the primary technical advantage of 'Deferrable Operators' (using the Triggerer) over traditional 'Reschedule' Sensors?",
+    "options": {
+      "A": "They allow for higher precision timing (millisecond level).",
+      "B": "They use Python's asyncio to wait for external events without occupying a worker slot or a full process, enabling thousands of concurrent waits on a single Triggerer instance.",
+      "C": "They automatically encrypt the data being polled.",
+      "D": "They eliminate the need for the Metadata Database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When implementing a 'Custom XCom Backend', the 'serialize_value' and 'deserialize_value' methods allow you to offload task return values to S3/GCS while storing only the URI in the Airflow database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the KubernetesExecutor",
+      "D": "Only if using the TaskFlow API"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When tuning the 'CeleryExecutor', what is the impact of setting 'worker_concurrency' higher than the number of physical CPU cores on a worker node?",
+    "options": {
+      "A": "It speeds up CPU-bound tasks like data compression.",
+      "B": "It can lead to excessive context switching and memory starvation, but is effective for I/O-bound tasks that spend time waiting for external APIs.",
+      "C": "It automatically increases the network bandwidth.",
+      "D": "It forces tasks to run in a single-threaded mode for safety."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific mechanism in the 'KubernetesPodOperator' allows a task to be scheduled only on specific nodes with high-performance SSDs or GPUs?",
+    "options": {
+      "A": "Node Affinity / Taints and Tolerations",
+      "B": "DAG Tags",
+      "C": "XCom Push",
+      "D": "Task Groups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary risk of using 'Dynamic DAGs' that query a database at the top level of the Python file (outside of an operator)?",
+    "options": {
+      "A": "It makes the DAG UI icons disappear.",
+      "B": "It causes high database load and scheduler latency because the code is executed every time the scheduler parses the file (every few seconds).",
+      "C": "It encrypts the source code automatically.",
+      "D": "It prevents the DAG from being backed up."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Smart Sensors' feature introduced in Airflow 2.0 has been deprecated in favor of 'Deferrable Operators'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS Managed Airflow (MWAA)",
+      "D": "Only if using version 2.5+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'Multi-tenant' Airflow environment, how can you ensure that users in 'Team A' can only see and trigger DAGs belonging to their own team in the UI?",
+    "options": {
+      "A": "By using different passwords for the database.",
+      "B": "Implementing DAG-level Access Control (RBAC) by associating specific DAGs with custom Roles in the Airflow Security Manager.",
+      "C": "Naming the DAGs with a secret prefix.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific table in the Airflow Metadata Database stores the 'XCom' data, and why should it be cleared periodically for high-volume pipelines?",
+    "options": {
+      "A": "dag_run; to clear old run history.",
+      "B": "xcom; to prevent the database size from exploding and slowing down scheduler queries.",
+      "C": "task_instance; to reset task states.",
+      "D": "log; to save disk space on the web server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DAG Serialization' improves Web Server performance by reading DAG definitions from the database instead of parsing the Python files directly for every page load.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the LocalExecutor",
+      "D": "Only in version 1.10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Cluster Policy' in an Airflow configuration file (airflow_local_settings.py)?",
+    "options": {
+      "A": "To define the physical location of the server rack.",
+      "B": "To programmatically mutate or validate all tasks/DAGs at parse time (e.g., enforcing a 'timeout' or 'retry' policy on all tasks).",
+      "C": "To act as a secondary firewall.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using the 'KubernetesExecutor', what happens to a task if the corresponding pod is evicted by the Kubernetes control plane due to resource pressure?",
+    "options": {
+      "A": "The task is marked as 'Success' automatically.",
+      "B": "Airflow detects the pod failure via the API server and marks the task as 'Failed' or 'Upstream Failed', allowing for standard retry logic.",
+      "C": "The whole Airflow database is deleted.",
+      "D": "The encryption keys are rotated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a specialized Airflow Plugin for distributed task tracing across different cloud providers.",
+    "options": {
+      "A": "False (Mimir is a metrics storage backend).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for Airflow database traffic?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using a dedicated network segment to ensure that sensitive database communication is isolated from the worker nodes and the public internet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management in a virtualized Airflow infrastructure?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' on Airflow worker hosts can lead to task failure if multiple heavy 'PythonOperators' contend for RAM simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' used for in a high-availability Airflow setup?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "Migrating the virtual disk files of a running Airflow Metadata DB or Web Server between storage arrays without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic for Airflow log storage performance?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' (Link Aggregation) can increase the reliability of the connection between the Airflow Scheduler and the Metadata Database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for Airflow?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Implementing zero-trust policies where each worker node can only access the specific database or API endpoints required by the tasks it is running.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in an Airflow Prometheus sink?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is often used in pipelines orchestrated by Airflow to maintain a clean history of sensitive security role changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in a global Airflow deployment?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal requirement that data processed by Airflow must stay within the borders of the country where it originated.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'Records Rejected' by a quality check task in an Airflow pipeline?",
+    "options": {
+      "A": "Rejection Rate",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a core requirement for reliable Airflow tasks to handle retries after infrastructure failure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in an Airflow workflow?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique, non-identifying primary keys for database records to protect privacy and improve performance.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures leverage the target system's processing power for transformations, often triggered by Airflow.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an Airflow transformation task?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of identifying and removing errors or sensitive information from a dataset during processing.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the primary use case for Apache Airflow.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Airflow Monitor' in an SRE context?",
+    "options": {
+      "A": "A dashboard providing visibility into the health of the scheduler, webserver, and database.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Consumers' in a Celery-backed Airflow cluster?",
+    "options": {
+      "A": "Consumer Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' for Airflow includes keeping Python providers and dependencies updated.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Governance' for Airflow?",
+    "options": {
+      "A": "A framework for managing Airflow roles, permissions, and pipeline compliance standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is critical for ensuring security within Airflow DAG development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for Airflow code?",
+    "options": {
+      "A": "The automated analysis of DAG Python files for syntax errors or security flaws before they are deployed.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a DAG failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves testing a running Airflow environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in an Airflow context?",
+    "options": {
+      "A": "A structured process for managing database credentials and API keys used by Airflow tasks.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for Airflow worker images.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' for an Airflow cluster?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means finding bugs earlier in the DAG development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating security threats to an Airflow installation.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for a reliable Airflow infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption'?",
+    "options": {
+      "A": "The process of encoding data so that only authorized parties can access it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active VPN Users' for remote Airflow management?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in Airflow cluster security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "Identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between an Airflow worker and a remote database.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for the Airflow Web UI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "Sending emails to induce individuals to reveal sensitive Airflow credentials.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of the Airflow Web Server?",
+    "options": {
+      "A": "Uptime %",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Airflow is a leading tool for data orchestration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into a system.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Failed Tasks' in Airflow?",
+    "options": {
+      "A": "Task Fail Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Airflow manages task dependencies via DAGs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Batch Workflow'?",
+    "options": {
+      "A": "A sequence of data tasks that run as a group.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'DAG Run Duration'?",
+    "options": {
+      "A": "Run Time",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Airflow is highly extensible via custom operators.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Task Instance'?",
+    "options": {
+      "A": "A specific run of a task in a DAG.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the metadata DB."
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,1901 @@
+{ 
+  "skill": "Bug Tracking", 
+  "questions": [
+    {
+    "question": "What is the primary goal of bug tracking in software development?",
+    "options": {
+      "A": "To keep a historical record of all developers' mistakes for public shaming.",
+      "B": "To identify, document, and manage the resolution of software defects efficiently.",
+      "C": "To automatically rewrite the code to fix errors without human intervention.",
+      "D": "To increase the total number of lines in the project documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bug' is another term for a requested new feature that has not been built yet.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are essential components of a good bug report? (Select all that apply)",
+    "options": {
+      "A": "Steps to reproduce the issue",
+      "B": "Expected result vs. Actual result",
+      "C": "Screenshots or video recordings",
+      "D": "The developer's home address"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In bug tracking, what does 'Severity' typically measure?",
+    "options": {
+      "A": "How quickly the business wants the bug to be fixed.",
+      "B": "The technical impact of the bug on the system's functionality.",
+      "C": "The number of hours a developer spent working on the feature.",
+      "D": "The physical temperature of the server when the bug occurs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Priority' indicate in a bug tracking system?",
+    "options": {
+      "A": "The alphabetical order of the bug's title.",
+      "B": "The order in which the bug should be fixed based on business needs.",
+      "C": "The seniority level of the person who found the bug.",
+      "D": "The file size of the bug report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The status 'Fixed' means the bug has been permanently removed from the production environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular tool used for bug tracking and project management?",
+    "options": {
+      "A": "Spotify",
+      "B": "Jira",
+      "C": "WhatsApp",
+      "D": "Netflix"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Steps to Reproduce' section used for?",
+    "options": {
+      "A": "To describe the weather when the bug was found.",
+      "B": "To provide clear, numbered instructions so a developer can see the bug for themselves.",
+      "C": "To list the names of all users who complained about the bug.",
+      "D": "To show the code that needs to be deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status indicates that a bug has been identified but work has not yet started on it?",
+    "options": {
+      "A": "In Progress",
+      "B": "New (or Open)",
+      "C": "Resolved",
+      "D": "Verified"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Regression Testing' is performed to ensure that a bug fix didn't break other existing features.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'Deferred' status mean for a bug?",
+    "options": {
+      "A": "The bug has been fixed but not yet tested.",
+      "B": "The bug is acknowledged but won't be fixed in the current release.",
+      "C": "The bug report has been deleted by the administrator.",
+      "D": "The bug is so severe that the project is cancelled."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Bug Categories'? (Select all that apply)",
+    "options": {
+      "A": "Functional",
+      "B": "UI/UX",
+      "C": "Performance",
+      "D": "Holiday"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Actual Result' in a bug report?",
+    "options": {
+      "A": "What the user wanted to happen.",
+      "B": "What the system actually did when the bug occurred.",
+      "C": "The total cost of the software license.",
+      "D": "The number of users who saw the error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Duplicate' bug report should be closed to keep the tracking system clean.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Who is typically responsible for 'Verifying' that a bug is fixed?",
+    "options": {
+      "A": "The CEO",
+      "B": "The QA/Tester",
+      "C": "The Marketing Team",
+      "D": "The Customer Support agent"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Showstopper' bug?",
+    "options": {
+      "A": "A bug that looks visually impressive.",
+      "B": "A critical defect that prevents the software from being released or used.",
+      "C": "A bug found during a live demo.",
+      "D": "A specialized tool for stopping servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a symptom of a 'UI Bug'? (Select all that apply)",
+    "options": {
+      "A": "Misaligned buttons",
+      "B": "Overlapping text",
+      "C": "Incorrect font colors",
+      "D": "Database connection timeout"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Every bug must have a unique 'ID' for tracking purposes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the status 'WONTFIX' mean?",
+    "options": {
+      "A": "The developer doesn't know how to fix it.",
+      "B": "The decision was made not to fix the bug (e.g., it's a minor edge case).",
+      "C": "The bug fixed itself automatically.",
+      "D": "Hiring a new manager to fix the bug."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which field identifies the version of the software where the bug was found?",
+    "options": {
+      "A": "Fix Version",
+      "B": "Detected in Version (or Build ID)",
+      "C": "Project Name",
+      "D": "Summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Expected Result' in a bug report?",
+    "options": {
+      "A": "The error message shown to the user.",
+      "B": "The correct behavior of the system as per the requirements.",
+      "C": "The name of the person who found the bug.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A bug can be 'Reopened' if it was marked as fixed but the issue still persists.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe the 'Assignee' of a bug?",
+    "options": {
+      "A": "The person who reported the bug.",
+      "B": "The person currently responsible for fixing or investigating the bug.",
+      "C": "The person who wrote the original feature 5 years ago.",
+      "D": "The person who pays for the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Labels' (or Tags) in bug tracking?",
+    "options": {
+      "A": "To make the bug report look more colorful.",
+      "B": "To categorize bugs for easier searching and reporting (e.g., #security, #frontend).",
+      "C": "To store the user's password securely.",
+      "D": "To count the number of pixels in a screenshot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bug Reporting', what is an 'Attachment'?",
+    "options": {
+      "A": "An emotional connection to a piece of code.",
+      "B": "A file, such as a log or image, uploaded to provide more context.",
+      "C": "A specialized software for architects.",
+      "D": "A way to delete old reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A bug tracking system is only used by testers, never by developers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Priority' levels in a standard system? (Select all that apply)",
+    "options": {
+      "A": "Critical",
+      "B": "High",
+      "C": "Low",
+      "D": "Blue"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Triage' mean in bug tracking?",
+    "options": {
+      "A": "Deleting all bugs found on a Friday.",
+      "B": "The process of reviewing new bugs to determine their validity, severity, and priority.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status means that a developer has finished working on a fix and it is ready for testing?",
+    "options": {
+      "A": "Open",
+      "B": "Resolved (or Fixed)",
+      "C": "In Progress",
+      "D": "Closed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cosmetic' bug usually has high severity but low priority.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Bug Life Cycle'?",
+    "options": {
+      "A": "How long a physical insect lives in a laboratory.",
+      "B": "The set of stages a bug goes through from initial discovery to final closure.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component helps a developer understand the environment where the bug occurred? (Select all that apply)",
+    "options": {
+      "A": "Operating System (e.g., Windows 11)",
+      "B": "Browser version (e.g., Chrome 120)",
+      "C": "Device type (e.g., iPhone 15)",
+      "D": "The user's favorite food"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Summary' field for in a bug report?",
+    "options": {
+      "A": "A 10-page essay about the bug.",
+      "B": "A brief, clear title that summarizes the core issue.",
+      "C": "The total number of hours worked.",
+      "D": "A hidden password for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Automated bug tracking is generally more efficient than using a manual spreadsheet.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status indicates a bug is currently being fixed by a developer?",
+    "options": {
+      "A": "Verified",
+      "B": "In Progress",
+      "C": "To Do",
+      "D": "Deferred"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Cause Analysis' (RCA)?",
+    "options": {
+      "A": "Analyzing the roots of a tree near the office.",
+      "B": "The process of identifying why a bug occurred in the first place to prevent it from happening again.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If a tester cannot reproduce a bug using the provided steps, the bug might be marked as 'Works for Me' or 'Cannot Reproduce'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Severity' levels? (Select all that apply)",
+    "options": {
+      "A": "Blocker",
+      "B": "Major",
+      "C": "Trivial",
+      "D": "Fast"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Bug Leakage'?",
+    "options": {
+      "A": "When liquid spills on the computer.",
+      "B": "When a bug that should have been caught during testing is found by the end-user in production.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Patch'?",
+    "options": {
+      "A": "A small piece of fabric for a developer's jacket.",
+      "B": "A quick code fix released to resolve a specific bug or security hole.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Public bug tracking allows users outside the company to report issues.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status is final and means the bug is resolved and verified?",
+    "options": {
+      "A": "Open",
+      "B": "Closed",
+      "C": "Fixed",
+      "D": "In Review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Smoke Testing'?",
+    "options": {
+      "A": "Checking if the computer is literally on fire.",
+      "B": "Basic testing to ensure the most critical functions of the application work after a new build.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Feature Request' should always be tracked in the same category as a 'Critical Bug'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Bug Tracking' tools? (Select all that apply)",
+    "options": {
+      "A": "Bugzilla",
+      "B": "Mantis BT",
+      "C": "GitHub Issues",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Sanity Testing'?",
+    "options": {
+      "A": "Testing the mental health of the testers.",
+      "B": "Subset of regression testing to verify that a specific bug fix works as expected.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Bug Density'?",
+    "options": {
+      "A": "The physical weight of the bug report.",
+      "B": "The number of bugs found per 1,000 lines of code or per module.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Screen Recording' is often better than just screenshots for complex intermittent bugs.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status indicates that more information is needed from the person who reported the bug?",
+    "options": {
+      "A": "Resolved",
+      "B": "Need Info (or Feedback)",
+      "C": "Closed",
+      "D": "Validated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ad-hoc Testing'?",
+    "options": {
+      "A": "Testing performed only in a laboratory.",
+      "B": "Unplanned, informal testing performed without a specific test case or script.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A bug tracking system helps in estimating the release date of the software.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Unit Testing'? (Select all that apply)",
+    "options": {
+      "A": "Testing individual components of code",
+      "B": "Usually performed by developers",
+      "C": "Testing the entire application at once",
+      "D": "Helps find bugs early in the cycle"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Workaround'?",
+    "options": {
+      "A": "Walking around the office to find a developer.",
+      "B": "A temporary way to bypass a bug while waiting for a permanent fix.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Web Testing', what is a 'Console Log'?",
+    "options": {
+      "A": "A physical log of wood used for a bonfire.",
+      "B": "A record of errors and messages generated by the browser's JavaScript engine.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Severity' and 'Priority' mean exactly the same thing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Exploratory Testing'? (Select all that apply)",
+    "options": {
+      "A": "Simultaneous learning, test design, and execution",
+      "B": "Highly dependent on the tester's skill and experience",
+      "C": "Requires a 500-page manual to start",
+      "D": "Great for finding edge-case bugs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Bug Retesting'?",
+    "options": {
+      "A": "Testing a physical bug again.",
+      "B": "The process of verifying that a specific bug has truly been fixed after a developer submits a solution.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is an 'Edge Case'?",
+    "options": {
+      "A": "A bug that occurs only on the edge of the screen.",
+      "B": "A problem or situation that occurs only at an extreme operating parameter.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Minor' bug should always have 'High' priority.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status indicates that a bug is not actually a defect but intended behavior?",
+    "options": {
+      "A": "Fixed",
+      "B": "Not a Bug (or By Design)",
+      "C": "Reopened",
+      "D": "In Review"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Integration Testing'?",
+    "options": {
+      "A": "Testing the integrity of the employees.",
+      "B": "Testing how different modules or services work together.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Clearer bug reports lead to faster bug fixes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Bug' tracking statuses? (Select all that apply)",
+    "options": {
+      "A": "In QA",
+      "B": "Awaiting Deployment",
+      "C": "On Hold",
+      "D": "Vacation"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Bug Bounty' program?",
+    "options": {
+      "A": "A program for hunting physical insects for money.",
+      "B": "A deal offered by websites and software developers where individuals can receive recognition and compensation for reporting bugs.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Hotfix'?",
+    "options": {
+      "A": "Fixing a bug on a physically hot server.",
+      "B": "A critical fix that is pushed to production immediately outside the normal release cycle.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Retesting' and 'Regression Testing' are exactly the same.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary objective of a 'Bug Triage' meeting?",
+    "options": {
+      "A": "To assign blame to the developer who introduced the defect.",
+      "B": "To evaluate new bugs and decide on their priority and resolution order based on business impact.",
+      "C": "To rewrite the project requirements from scratch.",
+      "D": "To install the latest updates for the bug tracking software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'High Severity' bug can sometimes have a 'Low Priority' if it occurs in a feature that is rarely used by customers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are common reasons for a developer to mark a bug as 'Cannot Reproduce'? (Select all that apply)",
+    "options": {
+      "A": "Missing environment details (e.g., browser or OS version)",
+      "B": "Intermittent issues caused by race conditions",
+      "C": "Vague or incomplete reproduction steps",
+      "D": "The bug was found on a Friday afternoon"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'Defect Aging' refer to in bug tracking metrics?",
+    "options": {
+      "A": "The age of the person who reported the bug.",
+      "B": "The total time a bug remains in the system from the moment it is opened until it is closed.",
+      "C": "How long the software has been in the market before the first bug was found.",
+      "D": "The process of a bug becoming irrelevant because the feature was deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Bug Report', what is the technical purpose of a 'Log File' attachment?",
+    "options": {
+      "A": "To provide a visual design of the software UI.",
+      "B": "To provide a chronological record of system events and errors that occurred leading up to the bug.",
+      "C": "To store the user's encrypted password.",
+      "D": "To list the contact information of all project stakeholders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect Rejection Rate' is a metric that measures how many bugs reported by QA were later marked as 'Invalid' or 'Not a Bug' by developers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which status transition is typically used when a fix is found to be ineffective after retesting?",
+    "options": {
+      "A": "Fixed -> Closed",
+      "B": "Resolved -> Reopened",
+      "C": "New -> Deferred",
+      "D": "Verified -> In Progress"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Environment Isolation' in the context of bug reproduction?",
+    "options": {
+      "A": "Moving the server to a cold room to prevent overheating.",
+      "B": "Ensuring the bug is tested in a clean, controlled environment that mirrors production without interference from other tasks.",
+      "C": "Locking the tester in a room until the bug is fixed.",
+      "D": "Using a different programming language to see if the bug still exists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are metrics used to measure the quality of a testing cycle? (Select all that apply)",
+    "options": {
+      "A": "Defect Density",
+      "B": "Defect Leakage Rate",
+      "C": "Mean Time to Repair (MTTR)",
+      "D": "The number of lines of code written per day"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: A 'Boundary Value' bug usually occurs when the system fails to handle inputs exactly at the edge of a permitted range.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Regression' bug?",
+    "options": {
+      "A": "A bug that was found in an older version of the software.",
+      "B": "A new defect introduced into a feature that was previously working correctly after a code change.",
+      "C": "A bug that only occurs on outdated operating systems.",
+      "D": "A bug that resolves itself without any developer intervention."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool feature allows team members to be notified of bug updates without being the assignee or reporter?",
+    "options": {
+      "A": "Developer Mode",
+      "B": "Watching (or Following)",
+      "C": "Admin Console",
+      "D": "History Tab"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Bug Reporter' during the retesting phase?",
+    "options": {
+      "A": "To write the new code for the fix.",
+      "B": "To verify that the specific steps that caused the bug no longer result in a defect.",
+      "C": "To delete the bug report once the developer says it is fixed.",
+      "D": "To increase the priority of all other pending bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect Density' is calculated by dividing the total number of bugs by the size of the software (e.g., Lines of Code).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of an 'Intermittent Bug'? (Select all that apply)",
+    "options": {
+      "A": "It does not occur every time the reproduction steps are followed",
+      "B": "It is often related to timing or race conditions",
+      "C": "It is the easiest type of bug to fix",
+      "D": "It can be caused by fluctuating network speeds"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does a 'Resolution' field value of 'Fixed' technically imply?",
+    "options": {
+      "A": "The bug report has been read by the manager.",
+      "B": "A code change has been implemented to address the defect.",
+      "C": "The user has agreed to stop using the feature.",
+      "D": "The server has been restarted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Bug Tracking', what is a 'Blocked' status used for?",
+    "options": {
+      "A": "When a developer is on vacation.",
+      "B": "When a bug cannot be fixed or tested until another issue is resolved first.",
+      "C": "When the bug tracking software is undergoing maintenance.",
+      "D": "When the reporter decides the bug is no longer important."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using a 'Bug Template' ensures that all reporters provide the necessary information in a consistent format.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Severity' level is typically assigned to a bug that causes the entire application to crash without a workaround?",
+    "options": {
+      "A": "Trivial",
+      "B": "Critical (or Blocker)",
+      "C": "Minor",
+      "D": "Cosmetic"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Defect Spoilage'?",
+    "options": {
+      "A": "When a bug report becomes physically dirty.",
+      "B": "The cost or impact of bugs that were not found in the phase where they were introduced.",
+      "C": "The process of a developer forgetting how a feature works.",
+      "D": "A specialized tool for measuring database speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which field in a bug tracking system helps link a defect to a specific functional area of the software?",
+    "options": {
+      "A": "Priority",
+      "B": "Component (or Module)",
+      "C": "Summary",
+      "D": "Assignee"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect Clustering' is the principle that a small number of modules usually contain the majority of the bugs found.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes 'Bug Baselining'?",
+    "options": {
+      "A": "Painting a line at the base of the server.",
+      "B": "Establishing a set of known defects at a specific point in time to track progress against a release.",
+      "C": "Assigning the same priority to every bug.",
+      "D": "Deleting all old bugs to start a new project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Comments' in a bug lifecycle?",
+    "options": {
+      "A": "To store the developer's personal notes that no one else can see.",
+      "B": "To facilitate communication between testers and developers regarding the bug's status or reproduction.",
+      "C": "To list the names of all users who have viewed the bug.",
+      "D": "To increase the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do 'Workflows' prevent process errors in bug tracking?",
+    "options": {
+      "A": "By automatically fixing the code errors.",
+      "B": "By enforcing specific status sequences (e.g., a bug cannot be 'Closed' until it has been 'Verified').",
+      "C": "By deleting bugs that have been open for too long.",
+      "D": "By requiring developers to change their passwords daily."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Fix Version' represents the version of the software where the fix is expected to be released.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common 'Resolution' types for closing a bug? (Select all that apply)",
+    "options": {
+      "A": "Fixed",
+      "B": "Duplicate",
+      "C": "Works for Me",
+      "D": "Pending"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect Seeding'?",
+    "options": {
+      "A": "Planting physical seeds in the office garden.",
+      "B": "Intentionally introducing known bugs into a system to test the effectiveness of the QA team's bug detection process.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latency' in the context of bug fixing?",
+    "options": {
+      "A": "The speed of the network connection.",
+      "B": "The time delay between when a bug is reported and when the developer begins working on it.",
+      "C": "The time it takes for a bug to crash the system.",
+      "D": "The delay in the tester's mouse clicks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Kanban' bug tracking board, work-in-progress (WIP) limits help prevent developers from being overwhelmed with too many active bug fixes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated Bug Tracking' integration? (Select all that apply)",
+    "options": {
+      "A": "CI/CD pipelines creating bugs for failed builds",
+      "B": "Crash reporting tools automatically opening tickets",
+      "C": "Jira syncing with GitHub issues",
+      "D": "A robot physically typing on a keyboard"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Zero Bug Policy'?",
+    "options": {
+      "A": "A policy that forbids developers from making any mistakes.",
+      "B": "A development strategy where fixing bugs is prioritized over building new features until the backlog is empty.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Rollback' in the context of a failed bug fix?",
+    "options": {
+      "A": "Rolling a physical ball across the floor.",
+      "B": "Reverting the software to a previous stable state because a new fix caused severe regression issues.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Root Cause' and 'Symptom' of a bug are the same thing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'Functional Bug'? (Select all that apply)",
+    "options": {
+      "A": "Calculation error in a shopping cart",
+      "B": "Broken 'Submit' button",
+      "C": "Incorrect data being saved to the database",
+      "D": "The loading spinner being slightly off-center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Bug Bash'?",
+    "options": {
+      "A": "A party to celebrate a software release.",
+      "B": "An event where all team members (not just QA) spend a period of time exclusively looking for bugs in a product.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'Cumulative Flow Diagram' used for in bug tracking?",
+    "options": {
+      "A": "Measuring the flow of water in a pipe.",
+      "B": "Visualizing the distribution of bugs across different statuses (New, Open, Fixed) over time to identify bottlenecks.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Deferred' bug will eventually be fixed in a future release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are typical 'Environmental' factors that should be recorded in a bug report? (Select all that apply)",
+    "options": {
+      "A": "User Roles/Permissions",
+      "B": "Network type (Wi-Fi vs 5G)",
+      "C": "Database type and version",
+      "D": "The brand of the tester's headphones"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect Masking'?",
+    "options": {
+      "A": "Putting a physical mask on the computer.",
+      "B": "When one bug prevents another bug from being discovered or reproduced.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Management', what is a 'Defect Backlog'?",
+    "options": {
+      "A": "A list of developers who are behind on their work.",
+      "B": "A prioritized list of all known defects that are currently waiting to be addressed.",
+      "C": "A security scan of the database.",
+      "D": "A way to count the number of characters in a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rejection Rate' can be used to identify if the QA team needs more training on writing clear bug reports.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Sanity Testing' versus 'Regression Testing'?",
+    "options": {
+      "A": "Sanity is performed on the whole system; Regression on one feature.",
+      "B": "Sanity checks that a specific fix works; Regression checks that the fix didn't break anything else.",
+      "C": "Regression is for beginners; Sanity for experts.",
+      "D": "Regression is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bug Convergence'?",
+    "options": {
+      "A": "When two bugs merge into one giant bug.",
+      "B": "The point in a project where the rate of finding new bugs is lower than the rate of fixing them.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is a 'Heisenbug'?",
+    "options": {
+      "A": "A bug named after a famous scientist.",
+      "B": "A bug that seems to disappear or change its behavior when you attempt to study or reproduce it.",
+      "C": "A security scan for computer viruses.",
+      "D": "The total number of pixels in a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Bug tracking tools often allow for 'Private' bugs that are only visible to a specific security team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Defect' metrics? (Select all that apply)",
+    "options": {
+      "A": "Defect Removal Efficiency (DRE)",
+      "B": "Defect Leakage Rate",
+      "C": "Weighted Defect Count",
+      "D": "The number of hours the CEO worked"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Impact Analysis' in bug tracking?",
+    "options": {
+      "A": "Measuring the physical impact of a server falling.",
+      "B": "Evaluating how a bug fix will affect other parts of the system to determine the scope of regression testing.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Coldfix'?",
+    "options": {
+      "A": "Fixing a bug on a frozen server.",
+      "B": "A fix that is included in the next regularly scheduled release rather than being pushed immediately.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bug Severity' is usually determined by the QA team, while 'Bug Priority' is determined by the Product Manager.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Post-Release' bug sources? (Select all that apply)",
+    "options": {
+      "A": "Customer Support tickets",
+      "B": "User Reviews (App Store/Play Store)",
+      "C": "Internal Telemetry/Logging",
+      "D": "The developer's private diary"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect Prevention'?",
+    "options": {
+      "A": "Hiring a person to stand in front of the bug.",
+      "B": "Using techniques like code reviews and automated testing to stop bugs from being introduced in the first place.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Detect' (MTTD)?",
+    "options": {
+      "A": "The average time it takes to detect a developer's mood.",
+      "B": "The average time it takes to discover a bug from the moment it was introduced into the system.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Critical' severity bug should always be fixed before a 'Major' severity bug, regardless of priority.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'Automated Retesting'? (Select all that apply)",
+    "options": {
+      "A": "Using scripts to verify a bug fix",
+      "B": "Integrating bug tracking with test automation frameworks",
+      "C": "Automatically closing a bug if the script passes",
+      "D": "Hiring 100 extra junior testers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Legacy Bug'?",
+    "options": {
+      "A": "A bug that was left behind by a developer who quit.",
+      "B": "A defect that exists in an old, unmaintained version of the software that is still in use.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Risk-Based Testing'?",
+    "options": {
+      "A": "Testing only the features that are very risky to build.",
+      "B": "Prioritizing testing effort on the features or bugs that have the highest probability of failure and the greatest impact.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect Leakage' refers to bugs that were found by the customer but were already known by the QA team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Root Cause' categories? (Select all that apply)",
+    "options": {
+      "A": "Requirement Misinterpretation",
+      "B": "Coding Error",
+      "C": "Environment Configuration Issue",
+      "D": "The weather condition"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect Distribution'? ",
+    "options": {
+      "A": "Distributing physical bugs to different offices.",
+      "B": "Analyzing where bugs are located across different modules, components, or versions of the software.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Service Level Agreement' (SLA) for bug fixes?",
+    "options": {
+      "A": "A physical agreement to fix every bug in 1 minute.",
+      "B": "A contract defining the maximum time allowed to fix bugs based on their severity (e.g., 24 hours for Critical).",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environment' occurs when a bug found in 'Staging' cannot be reproduced in 'Production' because the configurations are different.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Defect' management 'Best Practices'? (Select all that apply)",
+    "options": {
+      "A": "Involving developers in triage",
+      "B": "Using clear, descriptive summaries",
+      "C": "Attaching relevant logs and screenshots",
+      "D": "Granting admin access to all users"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Bug' 'Regression' 'Testing' 'Efficiency'?",
+    "options": {
+      "A": "The speed at which a person can find a bug.",
+      "B": "A measure of how many regression bugs are caught by automated tests versus manual testing.",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Aging' 'Alerting'?",
+    "options": {
+      "A": "An alarm that sounds when a bug gets old.",
+      "B": "Automated notifications sent when a bug remains in a certain status longer than the allowed SLA.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Every 'Resolved' bug should be 'Closed' automatically by the bug tracking system after 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which advanced defect classification methodology categorizes bugs by 'Trigger', 'Type', and 'Source' to provide a deeper understanding of the development process maturity?",
+    "options": {
+      "A": "Six Sigma Defect Mapping",
+      "B": "Orthogonal Defect Classification (ODC)",
+      "C": "Pareto Priority Matrix",
+      "D": "Root Cause Taxonomy (RCT)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Bug Saturation' scenario, the rate of finding new defects increases exponentially despite increased testing effort, indicating a fundamentally unstable codebase.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Defect Removal Efficiency' (DRE) metric used in high-level project governance? (Select all that apply)",
+    "options": {
+      "A": "It is the percentage of defects found internally before release versus total defects found (Internal + External).",
+      "B": "A DRE of 100% is practically impossible in large-scale software systems.",
+      "C": "It is calculated as: [Defects found in a stage / (Defects found in stage + Defects missed and found later)] * 100.",
+      "D": "It measures the physical speed at which a developer clicks the 'Fix' button."
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical risk of a 'Defect Deferred' strategy during the final stages of a project lifecycle?",
+    "options": {
+      "A": "The bug tracking tool will run out of storage space.",
+      "B": "The accumulation of 'Technical Debt' which may lead to catastrophic failures or much higher fix costs in future releases.",
+      "C": "The server hardware will physically degrade.",
+      "D": "The project manager will lose their administrative permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reliability Engineering', which model is used to predict the number of remaining defects in a system based on the arrival rate of new bugs over time?",
+    "options": {
+      "A": "Gantt Estimation Model",
+      "B": "Software Reliability Growth Model (SRGM)",
+      "C": "Linear Regression Model",
+      "D": "Binary Search Defect Model"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Zero-Day' vulnerability is a type of bug that has been known to the developer for exactly zero days before a patch was released.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which advanced 'Triage' strategy is used to handle an unmanageable volume of bugs by prioritizing only those that align with critical 'Business Drivers'?",
+    "options": {
+      "A": "Bug Bankruptcy",
+      "B": "Risk-Based Triage",
+      "C": "First-In-First-Out (FIFO) Triage",
+      "D": "Alphabetical Triage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latent Defect' vs 'Patent Defect' in professional QA terminology?",
+    "options": {
+      "A": "Latent defects are visible to the user; Patent defects are hidden in the code.",
+      "B": "Patent defects are obvious and easily discovered; Latent defects are hidden and may only appear under specific, rare conditions.",
+      "C": "Latent defects are only found in mobile apps.",
+      "D": "Patent defects are protected by international law."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Defect' metrics are essential for calculating the 'Quality Cost' of a software project? (Select all that apply)",
+    "options": {
+      "A": "Cost of Prevention (e.g., training, reviews)",
+      "B": "Cost of Appraisal (e.g., testing effort)",
+      "C": "Cost of Failure (e.g., bug fixing, support, lost reputation)",
+      "D": "The price of the office coffee machine"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Defect Clustering' suggests that 80% of software defects are usually found in 20% of the system's modules (Pareto Principle).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Post-Mortem' analysis technique uses the '5 Whys' to drill down into the human and process failures behind a critical bug?",
+    "options": {
+      "A": "Statistical Process Control",
+      "B": "Root Cause Analysis (RCA)",
+      "C": "Agile Retrospective",
+      "D": "Six Sigma DMAIC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical significance of a 'Race Condition' bug in a multi-threaded application?",
+    "options": {
+      "A": "Two developers racing to fix the same bug.",
+      "B": "An intermittent defect where the system output depends on the sequence or timing of uncontrollable events, often leading to data corruption.",
+      "C": "A specialized tool for measuring CPU speed.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the 'Defect Rejection Rate' (DRR) as a measure of QA-Dev collaboration efficiency?",
+    "options": {
+      "A": "The speed at which a developer rejects a bug.",
+      "B": "The percentage of defects reported by QA that are closed as 'Invalid', 'Works as Intended', or 'Duplicate'.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Bug' 'Taxonomy' occurs when the QA team and the Development team use different definitions for 'Severity' and 'Priority', leading to friction during triage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Defect' injection 'Phase' identifiers in ODC? (Select all that apply)",
+    "options": {
+      "A": "Requirements Phase",
+      "B": "Design Phase",
+      "C": "Coding Phase",
+      "D": "Holiday Phase"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Age' 'Profiling' used for in project management?",
+    "options": {
+      "A": "To see if the bug is old enough to vote.",
+      "B": "Identifying bottlenecks in the bug-fix pipeline by analyzing the time spent in each status (e.g., 'Awaiting Info' vs. 'In Progress').",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reliability', what is the 'Mean Time To Recover' (MTTR) significance after a critical bug fix fails?",
+    "options": {
+      "A": "The time it takes for a developer to wake up.",
+      "B": "The average time required to troubleshoot and restore a system to full functionality after a defect-related failure.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Bug' 'Dependencies' occur when a fix for Bug A cannot be verified because Bug B is still open and blocking the workflow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Defect' 'Monitoring' tools for production environments? (Select all that apply)",
+    "options": {
+      "A": "Sentry (Error Tracking)",
+      "B": "New Relic (APM)",
+      "C": "Splunk (Log Analysis)",
+      "D": "Microsoft Paint"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Bug' 'Regression' 'Density'?",
+    "options": {
+      "A": "The weight of a regression bug report.",
+      "B": "The number of regression bugs found per unit of testing effort, indicating the stability of the latest build.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Project Governance', what is 'Defect' 'Escalation' 'Policy'?",
+    "options": {
+      "A": "A policy for climbing the stairs during a fire.",
+      "B": "A defined process for involving senior management when a critical bug remains unresolved past its SLA.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Shadow' 'Bugs' are defects that exist in the code but cannot be triggered by a user until a specific dependent feature is enabled.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Root' 'Cause' 'Identification' using AI? (Select all that apply)",
+    "options": {
+      "A": "Clustering similar logs to identify a common error pattern",
+      "B": "Analyzing code commits to suggest which change likely caused the bug",
+      "C": "Automatically writing the fix and pushing it to production",
+      "D": "Guaranteed to find 100% of all logical bugs"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Technical' 'Debt' 'Interest' in the context of unaddressed bugs?",
+    "options": {
+      "A": "The cash reward for finding a bug.",
+      "B": "The increasing cost and effort required to add new features because existing bugs make the code harder to work with.",
+      "C": "A specialized software for historians.",
+      "D": "A security scan of the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Turnaround' 'Time'?",
+    "options": {
+      "A": "The time it takes to turn the computer around.",
+      "B": "The total duration from the time a developer is assigned a bug until the fix is submitted for retesting.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Bug' 'State' occurs when the bug tracking tool says an issue is 'Fixed' but the source control system has no record of a merged fix.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Defect' 'Lifecycle' 'Anti-patterns'? (Select all that apply)",
+    "options": {
+      "A": "QA closing bugs without retesting",
+      "B": "Developers 'ping-ponging' a bug back to QA without a clear reason",
+      "C": "Reopening bugs for unrelated issues",
+      "D": "Maintaining clear reproduction steps"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Escape' 'Analysis'?",
+    "options": {
+      "A": "Analyzing how a bug escaped from a physical box.",
+      "B": "The process of investigating why a bug was not caught during the internal testing phase and how it reached the customer.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Stop-Ship' criteria in bug tracking?",
+    "options": {
+      "A": "Stopping a physical ship at a port.",
+      "B": "A predefined list of critical bug statuses or types that legally or operationally prevent a software release.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bug' 'Entropy' refers to the gradual degradation of a bug report's accuracy as the software evolves and the reproduction steps no longer apply.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero-Trust' 'Bug' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Verifying a fix in multiple different environments",
+      "B": "Requiring a peer reviewer to sign off on the fix before QA retests",
+      "C": "Automatically closing a bug if the developer says it's fixed",
+      "D": "Independent verification by a separate QA team"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Memory' 'Leak' 'Bug' 'Detection' strategy?",
+    "options": {
+      "A": "Wiping the physical memory of the computer.",
+      "B": "Long-duration soak testing combined with heap analysis to find objects that are allocated but never released.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Reliability' 'Prediction'?",
+    "options": {
+      "A": "Predicting if the developer is reliable.",
+      "B": "Using historical data to estimate the time until the next failure occurs in a production environment.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Build' 'IDs' occur when a tester verifies a bug fix on a version of the software that does not actually contain the code change.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'JQL' 'Bug' 'Search' 'Parameters'? (Select all that apply)",
+    "options": {
+      "A": "issueFunction in subtasksOf()",
+      "B": "status WAS 'In Progress' AFTER '2023-01-01'",
+      "C": "created < -7d",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Pruning' in a long-term project?",
+    "options": {
+      "A": "Cutting branches off a physical tree.",
+      "B": "Periodically reviewing and closing very old, low-priority bugs that are no longer relevant or reproducible.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Discovery' 'Rate'?",
+    "options": {
+      "A": "The speed at which a person discovers a bug.",
+      "B": "The number of defects found per hour of testing, used to track the efficiency of the test team and the stability of the build.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Severity' occurs when a bug that crashes the system is marked as 'Low' because the UI looks fine.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Post-Mortem' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Blameless environment",
+      "B": "Focusing on process improvements",
+      "C": "Assigning blame to the junior developer",
+      "D": "Documenting actionable follow-up items"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Defect' 'Aggregation' 'Heatmap'?",
+    "options": {
+      "A": "A physical map of the office temperature.",
+      "B": "A visual report showing which modules or geographical regions have the highest density of reported bugs.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The predicted elapsed time between inherent failures of a software system during normal operation.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bug' 'Regression' 'Suite' is a collection of test cases specifically designed to verify that previously fixed bugs do not reappear.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Automated' 'Bug' 'Triage' 'Factors'? (Select all that apply)",
+    "options": {
+      "A": "Keyword matching in summaries",
+      "B": "Sentiment analysis of user comments",
+      "C": "Historical priority of similar issues",
+      "D": "The color of the bug report"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Legacy' 'Code' 'Bug' 'Risk'?",
+    "options": {
+      "A": "A risk that the developer will become a legend.",
+      "B": "The high probability of introducing new bugs when modifying old code that lacks documentation or automated tests.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Aging' 'Bucket'?",
+    "options": {
+      "A": "A physical bucket for old bugs.",
+      "B": "Grouping defects by how long they have been open (e.g., 0-30 days, 31-60 days) to identify long-standing issues.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Test' 'Data' occurs when a bug fix is verified using a different dataset than the one that originally triggered the defect.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Exploratory' 'Testing' 'Session' 'Logs'? (Select all that apply)",
+    "options": {
+      "A": "A record of what was tested during an unplanned session",
+      "B": "Identifying potential bug areas for future formal testing",
+      "C": "Guaranteed to replace all automated tests",
+      "D": "Documenting anomalies found during the session"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Root' 'Cause' 'Taxonomy' (RCT)?",
+    "options": {
+      "A": "A specialized tool for measuring light.",
+      "B": "A standardized hierarchy of error categories used to identify systemic failures in the development process.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Leakage' 'Ratio'?",
+    "options": {
+      "A": "The ratio of liquid leaking from a server.",
+      "B": "The percentage of defects discovered by the customer compared to those discovered during the internal testing phase.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bug' 'Bankruptcy' is a strategic decision to close all existing low-priority bugs to allow the team to focus on new development and critical defects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Static' 'Analysis' 'Bug' 'Detection'? (Select all that apply)",
+    "options": {
+      "A": "Finding bugs without executing the code",
+      "B": "Identifying potential security vulnerabilities and coding standard violations",
+      "C": "Testing the software while it is running on a server",
+      "D": "Integrating with IDEs to provide real-time feedback"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Bug' 'Saturation' 'Point'?",
+    "options": {
+      "A": "The point where the developer becomes saturated with coffee.",
+      "B": "The stage in testing where the rate of finding new bugs flattens out, indicating the software is reaching a stable state.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Bypass' 'Verification'?",
+    "options": {
+      "A": "Bypassing a physical security guard.",
+      "B": "Ensuring that a workaround provided for a bug is temporary and does not remain in the production code indefinitely.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Defect' 'Mapping' is the process of correlating defects to specific requirements to ensure full requirement coverage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Regression' 'Suite' 'Maintenance'? (Select all that apply)",
+    "options": {
+      "A": "Updating test scripts when UI elements change",
+      "B": "Removing tests for deprecated features",
+      "C": "Adding new tests for every critical bug fix",
+      "D": "Hiring 100 extra manual testers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Clustering' 'Hypothesis'?",
+    "options": {
+      "A": "A hypothesis about physical clusters of grapes.",
+      "B": "The observation that if you find one bug in a module, you are likely to find many more in that same area.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Density' 'Benchmarking'?",
+    "options": {
+      "A": "Benchmarking the physical weight of a bug.",
+      "B": "Comparing the current project's defect density against industry standards or previous company projects to assess quality.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bug' 'Regression' 'Testing' is only necessary for major releases and can be skipped for minor hotfixes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Defect' 'Triage' 'Metrics'? (Select all that apply)",
+    "options": {
+      "A": "Triage Speed (Time from open to priority assignment)",
+      "B": "Accuracy of Triage (Rate of priority changes)",
+      "C": "Number of stakeholders in the meeting",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Defect' 'Spoilage' 'Cost'?",
+    "options": {
+      "A": "The cost of food that spoiled in the office fridge.",
+      "B": "The mathematical increase in the cost of fixing a bug the longer it remains in the system (e.g., $10 during design, $1000 in production).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'Rollforward' fix strategy?",
+    "options": {
+      "A": "Rolling a physical ball forward.",
+      "B": "Choosing to apply a new fix to a failing production system rather than reverting to a previous version.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Software' 'Reliability' 'Growth' 'Models' (SRGM) use the 'Time Between Failures' to estimate when the software will reach a required level of stability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Defect' 'Analysis' 'Limitations'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in identifying subtle UI/UX issues",
+      "B": "Potential for high false-positive rates in static scanners",
+      "C": "Replacing the need for human judgment entirely",
+      "D": "Requiring significant setup and configuration effort"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Defect' 'Latent' 'Risk' 'Assessment'?",
+    "options": {
+      "A": "Assessing the risk of a person being late.",
+      "B": "Evaluating the probability and impact of undiscovered bugs that still exist in the code after testing is complete.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Defect' 'Priority' 'Inflation'?",
+    "options": {
+      "A": "When the price of bugs goes up due to inflation.",
+      "B": "The tendency for reporters to mark every bug as 'High Priority' to ensure it gets fixed quickly, regardless of actual impact.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Bug' 'Scope' occurs when a bug reported for a specific module is actually caused by a fundamental flaw in a shared library or framework.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero-Bug' 'Release' 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Release is only allowed if there are zero open 'Critical' or 'Major' bugs",
+      "B": "Every single bug must be fixed, including cosmetic ones, before release",
+      "C": "Formal sign-off from both QA and Product owners",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Defect' 'Resolution' 'Efficiency' (DRE) vs 'Defect Removal Efficiency'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Defect Removal Efficiency (DRE) looks at stages of the SDLC; Defect Resolution Efficiency focuses on the speed and accuracy of the fix process.",
+      "C": "DRE is for experts; Resolution Efficiency for beginners.",
+      "D": "Resolution Efficiency is 100x faster."
+    },
+    "answer": "B"
+  }
+  ]
+}

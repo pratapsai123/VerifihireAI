@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
 
 function ForgotPassword() {
   const navigate = useNavigate();
@@ -21,10 +20,10 @@ function ForgotPassword() {
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [passwordError, setPasswordError] = useState('');
+  const [fieldErrors, setFieldErrors] = useState({});
   const [otpExpiresAtMs, setOtpExpiresAtMs] = useState(null);
   const [otpExpired, setOtpExpired] = useState(false);
-  const [otpRemainingSeconds, setOtpRemainingSeconds] = useState(null);
+
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{6,12}$/;
   const passwordRequirements = [
     { id: 'length', label: '6-12 characters', test: (pwd) => pwd.length >= 6 && pwd.length <= 12 },
@@ -34,16 +33,42 @@ function ForgotPassword() {
     { id: 'special', label: 'At least one special character', test: (pwd) => /[^A-Za-z0-9]/.test(pwd) },
   ];
 
+  const passwordRequirementStatuses = passwordRequirements.map(req => ({
+    ...req,
+    met: req.test(newPassword),
+  }));
+  const unmetPasswordRequirements = passwordRequirementStatuses.filter(req => !req.met);
+  const showPasswordHelper = (newPasswordFocused || newPassword.length > 0);
+
+  useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Initialize AOS
+    if (window.AOS) {
+      window.AOS.init({
+        duration: 800,
+        once: true,
+        offset: 50,
+      });
+    }
+  }, []);
+
   const handleSendOtp = async () => {
     if (!email) {
       setError('Please enter your email.');
       return;
     }
-    setLoading(true);
     setError('');
     setSuccess('');
+    setFieldErrors({});
+
+    setLoading(true);
     try {
-      const res = await axios.post(`${API_BASE_URL}/send-otp/`, { email });
+      const res = await axios.post(`${API_BASE_URL}/send-otp/`, {
+        email,
+        context: 'forgot_password'
+      });
       setSuccess(res.data.message || 'OTP sent to your email.');
       if (res.data.otp) {
         setSuccess(`OTP sent! Your OTP is: ${res.data.otp} (for development)`);
@@ -51,12 +76,11 @@ function ForgotPassword() {
       const expiresIn = Number(res.data?.expires_in) || 120;
       setOtpExpiresAtMs(Date.now() + expiresIn * 1000);
       setOtpExpired(false);
-      setOtpRemainingSeconds(expiresIn);
       setOtp('');
       setStep('otp');
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error || 'Failed to send OTP.');
+        setFieldErrors(prev => ({ ...prev, email: err.response.data.error || err.response.data.email?.[0] || 'Failed to send OTP.' }));
       } else {
         setError('Unable to connect to server. Please try again.');
       }
@@ -67,11 +91,11 @@ function ForgotPassword() {
 
   const handleVerifyOtp = async () => {
     if (otpExpired || (otpExpiresAtMs && Date.now() >= otpExpiresAtMs)) {
-      setError('OTP has expired. Please resend OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'OTP has expired. Please resend OTP.' }));
       return;
     }
     if (!otp || otp.length !== 6) {
-      setError('Enter a valid 6-digit OTP.');
+      setFieldErrors(prev => ({ ...prev, otp: 'Enter a valid 6-digit OTP.' }));
       return;
     }
     setLoading(true);
@@ -85,7 +109,7 @@ function ForgotPassword() {
       setStep('reset');
     } catch (err) {
       if (err.response) {
-        setError(err.response.data.error || 'Invalid OTP. Please try again.');
+        setFieldErrors(prev => ({ ...prev, otp: err.response.data.error || 'Invalid OTP. Please try again.' }));
       } else {
         setError('Unable to connect to server. Please try again.');
       }
@@ -96,26 +120,20 @@ function ForgotPassword() {
 
   const handleResetPassword = async () => {
     setError('');
-    setPasswordError('');
+    setFieldErrors({});
     setSuccess('');
 
-    // Password strength validation
     if (!passwordRegex.test(newPassword)) {
-      setPasswordError('Password must be 6-12 characters and include uppercase, lowercase, number, and special character.');
+      setFieldErrors(prev => ({ ...prev, newPassword: 'Password must be 6-12 characters and include uppercase, lowercase, number, and special character.' }));
       return;
     }
 
-    if (!newPassword || !confirmPassword) {
-      setError('Please fill both password fields.');
-      return;
-    }
     if (newPassword !== confirmPassword) {
-      setPasswordError('Passwords do not match.');
+      setFieldErrors(prev => ({ ...prev, confirmPassword: 'Passwords do not match.' }));
       return;
     }
+
     setLoading(true);
-    setError('');
-    setSuccess('');
     try {
       const res = await axios.post(`${API_BASE_URL}/reset-password/`, {
         email,
@@ -129,343 +147,261 @@ function ForgotPassword() {
       if (err.response) {
         setError(err.response.data.error || 'Failed to reset password.');
       } else {
-        setError('Unable to connect to server. Please try again.');
+        setError('Unable to connect to server.');
       }
     } finally {
       setLoading(false);
     }
   };
 
-  const passwordRequirementStatuses = passwordRequirements.map(req => ({
-    ...req,
-    met: req.test(newPassword),
-  }));
-  const unmetPasswordRequirements = passwordRequirementStatuses.filter(req => !req.met);
-  const showPasswordHelper = (newPasswordFocused || newPassword.length > 0);
-
-  const renderEmailStep = () => (
-    <>
-      <div className={`auth-input-icon-wrapper ${emailFocused || email ? 'focused has-value' : ''}`}>
-        <i className="fas fa-envelope auth-input-icon"></i>
-        <label className="auth-floating-label">Email *</label>
-        <input
-          type="email"
-          className="auth-input-with-icon"
-          placeholder="Email *"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          onFocus={() => setEmailFocused(true)}
-          onBlur={() => setEmailFocused(false)}
-          required
-          maxLength={100}
-          disabled={loading}
-        />
-      </div>
-      <button
-        type="button"
-        className="auth-primary-btn"
-        onClick={handleSendOtp}
-        disabled={loading || !email}
-      >
-        {loading ? 'Sending OTP...' : 'Send OTP'}
-      </button>
-    </>
-  );
-
-  const renderOtpStep = () => (
-    <>
-      <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`}>
-        <i className="fas fa-key auth-input-icon"></i>
-        <label className="auth-floating-label">Enter OTP *</label>
-        <input
-          type="text"
-          className="auth-input-with-icon"
-          placeholder="Enter OTP *"
-          value={otp}
-          maxLength={6}
-          onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
-          onFocus={() => setOtpFocused(true)}
-          onBlur={() => setOtpFocused(false)}
-          required
-          disabled={loading}
-          style={{ letterSpacing: '6px', textAlign: 'center' }}
-        />
-      </div>
-      <OtpCountdown
-        expiresAtMs={otpExpiresAtMs}
-        onExpire={() => setOtpExpired(true)}
-        onRemainingSecondsChange={setOtpRemainingSeconds}
-      />
-      <div style={{ display: 'flex', gap: '0.5rem' }}>
-        <button
-          type="button"
-          className="auth-primary-btn"
-          onClick={handleVerifyOtp}
-          disabled={loading || otp.length !== 6 || otpExpired}
-          style={{ flex: 1 }}
-        >
-          {loading ? 'Verifying...' : 'Verify OTP'}
-        </button>
-        <button
-          type="button"
-          className="auth-secondary-btn"
-          onClick={handleSendOtp}
-          disabled={loading || (otpRemainingSeconds !== null && otpRemainingSeconds > 0)}
-          style={{ flex: 1 }}
-        >
-          Resend OTP
-        </button>
-      </div>
-    </>
-  );
-
-  const renderResetStep = () => (
-    <>
-      {passwordError && (
-        <div className="auth-error-message">{passwordError}</div>
-      )}
-      <div className={`auth-input-icon-wrapper ${newPasswordFocused || newPassword ? 'focused has-value' : ''}`}>
-        <i className="fas fa-lock auth-input-icon"></i>
-        <label className="auth-floating-label">New Password *</label>
-        <div style={{ position: 'relative' }}>
-          <input
-            type={showNewPassword ? "text" : "password"}
-            className="auth-input-with-icon"
-            placeholder="New Password *"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-            minLength={6}
-            maxLength={12}
-            onFocus={() => setNewPasswordFocused(true)}
-            onBlur={() => setNewPasswordFocused(false)}
-            required
-            disabled={loading}
-            style={{ paddingRight: '45px' }}
-          />
-          <button
-            type="button"
-            onClick={() => setShowNewPassword(!showNewPassword)}
-            disabled={loading}
-            style={{
-              position: 'absolute',
-              right: '12px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              color: '#666',
-              fontSize: '18px',
-              padding: '5px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: loading ? 0.5 : 1
-            }}
-            aria-label={showNewPassword ? "Hide password" : "Show password"}
-          >
-            <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-          </button>
-        </div>
-      </div>
-      {showPasswordHelper && (
-        <div style={{
-          marginTop: '0.5rem',
-          marginBottom: '1rem',
-          border: '1px solid #e2e8f0',
-          borderRadius: '8px',
-          padding: '0.75rem',
-          backgroundColor: '#f8fafc'
-        }}>
-          {unmetPasswordRequirements.length > 0 ? (
-            <>
-              <div style={{ color: '#e53e3e', fontWeight: 600, fontSize: '0.9rem', marginBottom: '0.25rem' }}>
-                Password must include:
-              </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                {passwordRequirementStatuses.map((req) => (
-                  <div
-                    key={req.id}
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.35rem',
-                      color: req.met ? '#16a34a' : '#e53e3e',
-                      fontSize: '0.85rem',
-                      textDecoration: req.met ? 'line-through' : 'none',
-                      opacity: req.met ? 0.6 : 1,
-                      transition: 'all 0.2s ease'
-                    }}
-                  >
-                    <span style={{ fontWeight: 700 }}>{req.met ? '✓' : '•'}</span>
-                    <span>{req.label}</span>
-                  </div>
-                ))}
-              </div>
-            </>
-          ) : (
-            <div style={{ color: '#16a34a', fontWeight: 600, fontSize: '0.9rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <span>✓</span>
-              <span>All password requirements met</span>
-            </div>
-          )}
-        </div>
-      )}
-      <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`}>
-        <i className="fas fa-lock auth-input-icon"></i>
-        <label className="auth-floating-label">Confirm Password *</label>
-        <div style={{ position: 'relative' }}>
-          <input
-            type={showConfirmPassword ? "text" : "password"}
-            className="auth-input-with-icon"
-            placeholder="Confirm Password *"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            minLength={6}
-            maxLength={12}
-            onFocus={() => setConfirmPasswordFocused(true)}
-            onBlur={() => setConfirmPasswordFocused(false)}
-            required
-            disabled={loading}
-            style={{ paddingRight: '45px' }}
-          />
-          <button
-            type="button"
-            onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            disabled={loading}
-            style={{
-              position: 'absolute',
-              right: '12px',
-              top: '50%',
-              transform: 'translateY(-50%)',
-              background: 'none',
-              border: 'none',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              color: '#666',
-              fontSize: '18px',
-              padding: '5px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              opacity: loading ? 0.5 : 1
-            }}
-            aria-label={showConfirmPassword ? "Hide password" : "Show password"}
-          >
-            <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
-          </button>
-        </div>
-      </div>
-
-      {/* Explicit Password Mismatch Error */}
-      {confirmPassword && newPassword !== confirmPassword && (
-        <div style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.5rem', marginBottom: '0.75rem' }}>
-          Passwords do not match
-        </div>
-      )}
-
-      <button
-        type="button"
-        className="auth-primary-btn"
-        onClick={handleResetPassword}
-        disabled={
-          loading ||
-          !newPassword ||
-          !confirmPassword ||
-          newPassword !== confirmPassword ||
-          !passwordRegex.test(newPassword)
-        }
-        title={
-          !newPassword || !confirmPassword ? "Please fill both password fields" :
-            newPassword !== confirmPassword ? "Passwords do not match" :
-              !passwordRegex.test(newPassword) ? "Password requirements not met" : ""
-        }
-        style={{
-          opacity: (loading || !newPassword || !confirmPassword || newPassword !== confirmPassword || !passwordRegex.test(newPassword)) ? 0.6 : 1,
-          cursor: (loading || !newPassword || !confirmPassword || newPassword !== confirmPassword || !passwordRegex.test(newPassword)) ? 'not-allowed' : 'pointer'
-        }}
-      >
-        {loading ? 'Resetting...' : 'Reset Password'}
-      </button>
-    </>
-  );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (step === 'email') {
+      handleSendOtp();
+    } else if (step === 'otp') {
+      handleVerifyOtp();
+    } else if (step === 'reset') {
+      handleResetPassword();
+    }
+  };
 
   return (
-    <>
-      <main className="auth-page signup-page-enhanced">
-        <div className="container auth-container" style={{ position: 'relative', zIndex: 1 }}>
-          <div
-            className="auth-card"
-            style={{
-              position: 'relative',
-              padding: '0.5rem 1.25rem',
-            }}
-          >
-            <div className="auth-logo-wrapper">
-              <div style={{
-                maxWidth: '450px',
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <img
-                  src="/auth-logo-v7.png"
-                  alt="VerifiHireAI Logo"
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain',
-                    filter: 'brightness(0.85) contrast(1.2) sepia(0.2) saturate(1.3)'
-                  }}
-                />
-              </div>
-            </div>
-
-            <div className="auth-content-wrapper">
-              <h2 style={{ textAlign: 'center', marginBottom: '0.25rem', fontWeight: '600', color: 'var(--gray-900)' }}>Forgot Password</h2>
-              <p style={{ textAlign: 'center', marginBottom: '1rem', color: 'var(--gray-600)', fontSize: '0.9rem', lineHeight: '1.4' }}>
-                Enter your email, verify with OTP, and set a new password.
-              </p>
-              <h3
-                className="auth-column-title"
-                style={{ textAlign: 'center', marginBottom: '0.5rem' }}
-              >
-                {step === 'email' ? 'Send OTP' : step === 'otp' ? 'Verify OTP' : 'Reset Password'}
-              </h3>
-
-              <form className="auth-form" onSubmit={(e) => e.preventDefault()}>
-                {error && <div className="auth-error-message">{error}</div>}
-                {success && <div className="auth-success-message">{success}</div>}
-
-                {step === 'email' && renderEmailStep()}
-                {step === 'otp' && renderOtpStep()}
-                {step === 'reset' && renderResetStep()}
-
-                <div style={{ marginTop: '20px', textAlign: 'center' }}>
-                  <p style={{ color: '#666', fontSize: '14px' }}>
-                    Remembered your password?{' '}
-                    <Link
-                      to="/login"
-                      style={{
-                        color: '#7c3aed',
-                        textDecoration: 'none',
-                        fontWeight: '600',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      Login here
-                    </Link>
-                  </p>
-                </div>
-              </form>
+    <div className="auth-split-page">
+      {/* Left Side: Branding and Reset Intro */}
+      <div className="auth-left-side">
+        <div className="left-branded-header" data-aos="fade-down">
+          <div className="brand-logo-group">
+            <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+            <div className="brand-text-container">
+              <span className="brand-name-text">VerifiHireAI</span>
+              <p className="brand-tagline">Trust in Every Hire</p>
             </div>
           </div>
         </div>
-      </main>
-    </>
+
+        <div className="left-intro-content" data-aos="fade-right" style={{ marginTop: '0.5rem' }}>
+          <h1 className="left-intro-title">Reset Your Password</h1>
+          <p className="left-intro-subtitle">
+            Secure your account with OTP verification.<br />
+            Follow the steps to regain access.
+          </p>
+          <div className="left-intro-image-wrapper">
+            <img
+              src="/reset-password-illustration.png"
+              alt="Security Illustration"
+              className="left-intro-image"
+            //  #   style={{ maxWidth: '420px' }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Right Side: Stepper and Form */}
+      <div className="auth-right-side">
+        <div className="forgot-password-card" data-aos="fade-up">
+          <h2 style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '1.5rem', fontWeight: '700', color: '#1e293b' }}>Forgot Password</h2>
+
+          {/* Stepper */}
+          <div className="auth-stepper">
+            <div className={`step-item ${step === 'email' ? 'active' : ''}`}>Step 1</div>
+            <div className="step-separator">→</div>
+            <div className={`step-item ${step === 'otp' ? 'active' : ''}`}>Step 2</div>
+            <div className="step-separator">→</div>
+            <div className={`step-item ${step === 'reset' ? 'active' : ''}`}>Done</div>
+          </div>
+
+          <p style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#64748b', fontSize: '0.9rem' }}>
+            {step === 'email'
+              ? 'Enter your email address to receive an OTP'
+              : step === 'otp'
+                ? `Enter the 6-digit OTP sent to your email`
+                : 'Set a strong new password for your account'}
+          </p>
+
+          <form className="auth-form" onSubmit={handleSubmit}>
+
+            {success && <div className="auth-success-message" style={{ marginBottom: '1.5rem' }}>{success}</div>}
+
+            {step === 'email' && (
+              <>
+                <div className={`auth-input-icon-wrapper ${emailFocused || email ? 'focused has-value' : ''}`}>
+                  <i className="fas fa-envelope auth-input-icon"></i>
+                  <input
+                    type="email"
+                    className="auth-input-with-icon"
+                    placeholder="Email Address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    onFocus={() => setEmailFocused(true)}
+                    onBlur={() => setEmailFocused(false)}
+                    required
+                    disabled={loading}
+                  />
+                  <label className="auth-floating-label">Email Address</label>
+                </div>
+                {fieldErrors.email && (
+                  <div className="field-error-text">{fieldErrors.email}</div>
+                )}
+                <p style={{ fontSize: '0.8rem', color: '#94a3b8', marginBottom: '1.5rem', textAlign: 'left' }}>
+                  We will send a 6-digit OTP to your email
+                </p>
+                <button type="submit" className="auth-primary-btn" disabled={loading || !email} style={{ width: '100%', padding: '0.875rem' }}>
+                  {loading ? 'Sending...' : 'Send OTP'}
+                </button>
+                {error && <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{error}</div>}
+              </>
+            )}
+
+            {step === 'otp' && (
+              <>
+                <div className={`auth-input-icon-wrapper ${otpFocused || otp ? 'focused has-value' : ''}`}>
+                  <i className="fas fa-key auth-input-icon"></i>
+                  <input
+                    type="text"
+                    className="auth-input-with-icon"
+                    placeholder="6-digit OTP"
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 6))}
+                    onFocus={() => setOtpFocused(true)}
+                    onBlur={() => setOtpFocused(false)}
+                    maxLength={6}
+                    required
+                    disabled={loading}
+                    style={{ textAlign: 'center', fontSize: '1.25rem', letterSpacing: '4px' }}
+                  />
+                  <label className="auth-floating-label">Enter OTP</label>
+                </div>
+                {fieldErrors.otp && (
+                  <div className="field-error-text" style={{ textAlign: 'center' }}>{fieldErrors.otp}</div>
+                )}
+                <OtpCountdown expiresAtMs={otpExpiresAtMs} onExpire={() => setOtpExpired(true)} />
+
+                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                  <button type="submit" className="auth-primary-btn" disabled={loading || otp.length !== 6 || otpExpired} style={{ flex: 2, padding: '0.875rem' }}>
+                    {loading ? 'Verifying...' : 'Verify OTP'}
+                  </button>
+                  <button type="button" onClick={handleSendOtp} disabled={loading || (otpExpiresAtMs && Date.now() < otpExpiresAtMs && !otpExpired)} className="auth-secondary-btn" style={{ flex: 1, fontSize: '0.8rem' }}>
+                    Resend
+                  </button>
+                </div>
+                {error && <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{error}</div>}
+              </>
+            )}
+
+            {step === 'reset' && (
+              <>
+                <div className={`auth-input-icon-wrapper ${newPasswordFocused || newPassword ? 'focused has-value' : ''}`}>
+                  <i className="fas fa-lock auth-input-icon"></i>
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    className="auth-input-with-icon"
+                    placeholder="New Password"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    onFocus={() => setNewPasswordFocused(true)}
+                    onBlur={() => setNewPasswordFocused(false)}
+                    required
+                    disabled={loading}
+                    style={{ paddingRight: '2.5rem' }}
+                  />
+                  <label className="auth-floating-label">New Password</label>
+                  <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+                    <i className={showNewPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                  </button>
+                </div>
+                {fieldErrors.newPassword && <div className="field-error-text">{fieldErrors.newPassword}</div>}
+
+                {showPasswordHelper && unmetPasswordRequirements.length > 0 && (
+                  <div className="password-requirements-box" style={{
+                    marginBottom: '1rem',
+                    border: '1px solid #f1f5f9',
+                    borderRadius: '12px',
+                    padding: '0.875rem',
+                    backgroundColor: '#f8fafc'
+                  }}>
+                    <div style={{ color: '#64748b', fontWeight: 600, fontSize: '0.8rem', marginBottom: '0.5rem' }}>
+                      Password must include:
+                    </div>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '0.35rem' }}>
+                      {unmetPasswordRequirements.map((req) => (
+                        <div key={req.id} style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.4rem',
+                          color: '#94a3b8',
+                          fontSize: '0.7rem',
+                        }}>
+                          <i className="fas fa-circle" style={{ fontSize: '0.5rem' }}></i>
+                          <span>{req.label}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <div className={`auth-input-icon-wrapper ${confirmPasswordFocused || confirmPassword ? 'focused has-value' : ''}`}>
+                  <i className="fas fa-lock auth-input-icon"></i>
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    className="auth-input-with-icon"
+                    placeholder="Confirm Password"
+                    value={confirmPassword}
+                    onChange={(e) => {
+                      setConfirmPassword(e.target.value);
+                      if (fieldErrors.confirmPassword) {
+                        setFieldErrors(prev => {
+                          const newState = { ...prev };
+                          delete newState.confirmPassword;
+                          return newState;
+                        });
+                      }
+                    }}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      setFieldErrors(prev => ({
+                        ...prev,
+                        confirmPassword: 'Copy and paste is not allowed. Please re-enter your password manually.'
+                      }));
+                    }}
+                    onCopy={(e) => e.preventDefault()}
+                    onCut={(e) => e.preventDefault()}
+                    onFocus={() => setConfirmPasswordFocused(true)}
+                    onBlur={() => setConfirmPasswordFocused(false)}
+                    required
+                    disabled={loading}
+                    style={{ paddingRight: '2.5rem' }}
+                  />
+                  <label className="auth-floating-label">Confirm Password</label>
+                  <button type="button" onClick={() => setShowConfirmPassword(!showConfirmPassword)} className="password-toggle-btn" style={{ position: 'absolute', right: '0.75rem', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#94a3b8' }}>
+                    <i className={showConfirmPassword ? "fas fa-eye-slash" : "fas fa-eye"}></i>
+                  </button>
+                </div>
+                {(fieldErrors.confirmPassword || (confirmPassword && newPassword !== confirmPassword)) && (
+                  <div className="field-error-text" style={{ color: '#e53e3e', fontSize: '0.8rem', marginTop: '-0.75rem', marginBottom: '1rem' }}>
+                    {fieldErrors.confirmPassword || 'Passwords do not match'}
+                  </div>
+                )}
+
+                <button type="submit" className="auth-primary-btn" disabled={loading || !newPassword || newPassword !== confirmPassword} style={{ width: '100%', padding: '0.875rem', marginTop: '1rem' }}>
+                  {loading ? 'Resetting...' : 'Reset Password'}
+                </button>
+                {error && <div className="field-error-text" style={{ marginTop: '0.75rem', textAlign: 'center', marginBottom: 0 }}>{error}</div>}
+              </>
+            )}
+
+            <div style={{ marginTop: '2.5rem', textAlign: 'center' }}>
+              <p style={{ color: '#64748b', fontSize: '0.9rem' }}>
+                Remembered your password?{' '}
+                <Link to="/login" style={{ color: '#7c3aed', fontWeight: '600' }}>
+                  Login here
+                </Link>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export default ForgotPassword;
-
-

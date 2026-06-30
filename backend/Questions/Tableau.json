@@ -1,0 +1,2056 @@
+{
+  "skill": "Tableau",
+  "questions": [
+    {
+      "question": "What is Tableau primarily used for?",
+      "options": {
+        "A": "Database management",
+        "B": "Data visualization and analytics",
+        "C": "Backend development",
+        "D": "ETL automation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau can connect to both live data sources and extracted data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which file extension is used for Tableau packaged workbooks?",
+      "options": {
+        "A": ".twb",
+        "B": ".tds",
+        "C": ".twbx",
+        "D": ".hyper"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which TWO are Tableau products?",
+      "options": {
+        "A": "Tableau Desktop",
+        "B": "Tableau Server",
+        "C": "Tableau Studio",
+        "D": "Tableau Code"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a Tableau extract (.hyper) do?",
+      "options": {
+        "A": "Stores metadata only",
+        "B": "Creates a snapshot of data for faster performance",
+        "C": "Publishes dashboards",
+        "D": "Encrypts the workbook"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Dimensions are qualitative data in Tableau.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which shelf is used to control data aggregation across columns?",
+      "options": {
+        "A": "Rows",
+        "B": "Columns",
+        "C": "Pages",
+        "D": "Filters"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO are continuous data types?",
+      "options": {
+        "A": "Date",
+        "B": "String",
+        "C": "Number",
+        "D": "Boolean"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a calculated field in Tableau?",
+      "options": {
+        "A": "A new column created using formulas",
+        "B": "A filter",
+        "C": "A dashboard object",
+        "D": "A parameter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Measures are aggregated by default in Tableau.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for showing trends over time?",
+      "options": {
+        "A": "Bar chart",
+        "B": "Line chart",
+        "C": "Pie chart",
+        "D": "Scatter plot"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau features help improve dashboard performance?",
+      "options": {
+        "A": "Using extracts",
+        "B": "Reducing filters",
+        "C": "Adding more sheets",
+        "D": "Using context filters"
+      },
+      "answer": [
+        "A",
+        "D"
+      ]
+    },
+    {
+      "question": "What does the Pages shelf allow you to do?",
+      "options": {
+        "A": "Create dashboards",
+        "B": "Animate data over a dimension",
+        "C": "Add filters",
+        "D": "Join tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports custom SQL queries.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which file type stores only connection information?",
+      "options": {
+        "A": ".twbx",
+        "B": ".tds",
+        "C": ".twb",
+        "D": ".hyper"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO are types of joins supported in Tableau?",
+      "options": {
+        "A": "Left Join",
+        "B": "Right Join",
+        "C": "Inner Join",
+        "D": "Circular Join"
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    },
+    {
+      "question": "What is a dashboard in Tableau?",
+      "options": {
+        "A": "A single worksheet",
+        "B": "A collection of worksheets",
+        "C": "A data source",
+        "D": "A calculation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Parameters can accept user input.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for correlation analysis?",
+      "options": {
+        "A": "Line chart",
+        "B": "Pie chart",
+        "C": "Scatter plot",
+        "D": "Tree map"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which TWO are Tableau filter types?",
+      "options": {
+        "A": "Extract filter",
+        "B": "Context filter",
+        "C": "Visual filter",
+        "D": "System filter"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does blending data mean in Tableau?",
+      "options": {
+        "A": "Combining data from multiple sources",
+        "B": "Joining tables physically",
+        "C": "Cleaning data",
+        "D": "Publishing dashboards"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Data blending happens at worksheet level.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which function is used for conditional logic?",
+      "options": {
+        "A": "IF",
+        "B": "CASE",
+        "C": "IIF",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which TWO charts show part-to-whole relationships?",
+      "options": {
+        "A": "Pie chart",
+        "B": "Tree map",
+        "C": "Line chart",
+        "D": "Scatter plot"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is Tableau Server used for?",
+      "options": {
+        "A": "Data cleaning",
+        "B": "Sharing and collaboration",
+        "C": "Writing SQL",
+        "D": "ETL processing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Dashboards can contain parameters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which shelf controls color encoding?",
+      "options": {
+        "A": "Rows",
+        "B": "Columns",
+        "C": "Marks",
+        "D": "Pages"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which TWO are aggregation functions?",
+      "options": {
+        "A": "SUM",
+        "B": "AVG",
+        "C": "GROUP",
+        "D": "MERGE"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a story in Tableau?",
+      "options": {
+        "A": "A dashboard animation",
+        "B": "A sequence of sheets and dashboards",
+        "C": "A calculated field",
+        "D": "A data extract"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Prep is used for data preparation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for hierarchical data?",
+      "options": {
+        "A": "Tree map",
+        "B": "Scatter plot",
+        "C": "Line chart",
+        "D": "Histogram"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO are date levels in Tableau?",
+      "options": {
+        "A": "Year",
+        "B": "Quarter",
+        "C": "Weekday",
+        "D": "Decimal"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Show Me feature do?",
+      "options": {
+        "A": "Shows data sources",
+        "B": "Suggests suitable visualizations",
+        "C": "Publishes dashboards",
+        "D": "Cleans data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports geographic mapping.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for distribution analysis?",
+      "options": {
+        "A": "Histogram",
+        "B": "Pie chart",
+        "C": "Tree map",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO are Tableau deployment options?",
+      "options": {
+        "A": "Tableau Server",
+        "B": "Tableau Online",
+        "C": "Tableau Cloud IDE",
+        "D": "Tableau VM"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a context filter?",
+      "options": {
+        "A": "A filter applied after all others",
+        "B": "A filter that creates a temporary dataset",
+        "C": "A visual filter",
+        "D": "A dashboard filter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Dual-axis charts can combine two measures.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for showing rankings?",
+      "options": {
+        "A": "Bar chart",
+        "B": "Line chart",
+        "C": "Map",
+        "D": "Scatter plot"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support interactivity?",
+      "options": {
+        "A": "Filters",
+        "B": "Actions",
+        "C": "Extracts",
+        "D": "Joins"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use to store metadata?",
+      "options": {
+        "A": "Workbook",
+        "B": "Data source",
+        "C": "Repository",
+        "D": "Dashboard"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports R and Python integration.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for showing proportions over time?",
+      "options": {
+        "A": "Stacked bar chart",
+        "B": "Scatter plot",
+        "C": "Histogram",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of a Tableau extract refresh?",
+      "options": {
+        "A": "To redesign dashboards",
+        "B": "To update extract data with latest source data",
+        "C": "To publish workbooks",
+        "D": "To clean metadata"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau extracts can be scheduled on Tableau Server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows users to drill down into data?",
+      "options": {
+        "A": "Highlighting",
+        "B": "Hierarchies",
+        "C": "Blending",
+        "D": "Story points"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO are valid Tableau calculation types?",
+      "options": {
+        "A": "Row-level calculations",
+        "B": "Aggregate calculations",
+        "C": "Server-side calculations",
+        "D": "Client-only calculations"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Level of Detail (LOD) expression FIXED do?",
+      "options": {
+        "A": "Ignores all filters",
+        "B": "Computes at a specified dimension level",
+        "C": "Aggregates only measures",
+        "D": "Locks dashboard layout"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: FIXED LOD expressions are evaluated before dimension filters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for showing density distribution?",
+      "options": {
+        "A": "Histogram",
+        "B": "Box plot",
+        "C": "Heat map",
+        "D": "Scatter plot"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO actions can be added to Tableau dashboards?",
+      "options": {
+        "A": "Filter actions",
+        "B": "Highlight actions",
+        "C": "Refresh actions",
+        "D": "Compile actions"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Marks card control?",
+      "options": {
+        "A": "Data connections",
+        "B": "Visual encoding like color, size, shape",
+        "C": "Dashboard layout",
+        "D": "Extract refresh"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A Tableau workbook can contain multiple dashboards.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau object is used to pass dynamic values to calculations?",
+      "options": {
+        "A": "Filter",
+        "B": "Parameter",
+        "C": "Set",
+        "D": "Group"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO data types support geographic roles?",
+      "options": {
+        "A": "Country",
+        "B": "City",
+        "C": "Boolean",
+        "D": "Float"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a Tableau Set?",
+      "options": {
+        "A": "A custom SQL query",
+        "B": "A subset of data based on conditions",
+        "C": "A calculated field",
+        "D": "A dashboard container"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Sets can be dynamic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for comparing categories?",
+      "options": {
+        "A": "Bar chart",
+        "B": "Line chart",
+        "C": "Scatter plot",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support data security?",
+      "options": {
+        "A": "Row-level security",
+        "B": "User filters",
+        "C": "Calculated fields",
+        "D": "Trend lines"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use to handle large datasets efficiently?",
+      "options": {
+        "A": "Hyper engine",
+        "B": "Java VM",
+        "C": "Cache only",
+        "D": "External APIs"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tableau can connect directly to cloud data sources like Snowflake.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows combining multiple measures in a single view?",
+      "options": {
+        "A": "Measure Names and Measure Values",
+        "B": "Blending",
+        "C": "Parameters",
+        "D": "Sets"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO charts support dual-axis?",
+      "options": {
+        "A": "Bar chart",
+        "B": "Line chart",
+        "C": "Pie chart",
+        "D": "Text table"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is Tableau Public mainly used for?",
+      "options": {
+        "A": "Private enterprise analytics",
+        "B": "Free public data sharing",
+        "C": "ETL processing",
+        "D": "On-prem deployment"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Workbooks published to Tableau Public are publicly accessible.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which calculation handles NULL values?",
+      "options": {
+        "A": "IFNULL",
+        "B": "ZN",
+        "C": "ISNULL",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which TWO Tableau features help reduce clutter?",
+      "options": {
+        "A": "Tooltips",
+        "B": "Highlighting",
+        "C": "Annotations",
+        "D": "Dashboard containers"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a floating object in a dashboard do?",
+      "options": {
+        "A": "Automatically resizes",
+        "B": "Overlays other objects",
+        "C": "Anchors to grid only",
+        "D": "Refreshes data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Dashboard actions can filter across multiple sheets.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best shows outliers?",
+      "options": {
+        "A": "Box plot",
+        "B": "Line chart",
+        "C": "Tree map",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO options control dashboard sizing?",
+      "options": {
+        "A": "Fixed",
+        "B": "Automatic",
+        "C": "Responsive-only",
+        "D": "Manual-code"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Describe feature do?",
+      "options": {
+        "A": "Shows calculation logic",
+        "B": "Displays field metadata",
+        "C": "Publishes data",
+        "D": "Creates joins"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports storytelling for data narratives.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO features improve visual clarity?",
+      "options": {
+        "A": "Formatting",
+        "B": "Reference lines",
+        "C": "Joins",
+        "D": "Extract refresh"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the main purpose of reference lines?",
+      "options": {
+        "A": "Compare values against benchmarks",
+        "B": "Clean data",
+        "C": "Join tables",
+        "D": "Create extracts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tableau supports custom color palettes.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does Tableau use to optimize query performance for extracts?",
+      "options": {
+        "A": "Hyper engine",
+        "B": "MySQL engine",
+        "C": "In-memory cache only",
+        "D": "Java compiler"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tableau can blend more than two data sources in a single worksheet.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows sorting based on a calculated field?",
+      "options": {
+        "A": "Manual sort",
+        "B": "Nested sort",
+        "C": "Sort by field",
+        "D": "Quick sort"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which TWO Tableau objects can be used to limit data shown in a view?",
+      "options": {
+        "A": "Filters",
+        "B": "Sets",
+        "C": "Dashboards",
+        "D": "Stories"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a data relationship do in Tableau?",
+      "options": {
+        "A": "Physically joins tables",
+        "B": "Logically connects tables at query time",
+        "C": "Blends data sources",
+        "D": "Creates extracts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Relationships replace joins in Tableau data modeling.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart best represents part-to-whole with many categories?",
+      "options": {
+        "A": "Pie chart",
+        "B": "Tree map",
+        "C": "Line chart",
+        "D": "Histogram"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO options are valid LOD expressions?",
+      "options": {
+        "A": "FIXED",
+        "B": "INCLUDE",
+        "C": "EXCLUDE",
+        "D": "GROUPED"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the INCLUDE LOD expression do?",
+      "options": {
+        "A": "Ignores all dimensions",
+        "B": "Adds extra dimensions to the level of detail",
+        "C": "Locks calculation to one level",
+        "D": "Filters data permanently"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: INCLUDE and EXCLUDE LODs respect dimension filters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows users to highlight related data across views?",
+      "options": {
+        "A": "Actions",
+        "B": "Highlighting",
+        "C": "Blending",
+        "D": "Extracts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO types of Tableau licenses exist?",
+      "options": {
+        "A": "Creator",
+        "B": "Explorer",
+        "C": "Developer",
+        "D": "Viewer"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is Tableau Viewer primarily used for?",
+      "options": {
+        "A": "Creating dashboards",
+        "B": "Viewing and interacting with content",
+        "C": "Building data sources",
+        "D": "Writing calculations"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Explorer can create new data sources.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which chart best shows change over time across categories?",
+      "options": {
+        "A": "Stacked area chart",
+        "B": "Histogram",
+        "C": "Scatter plot",
+        "D": "Tree map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau calculations are table calculations?",
+      "options": {
+        "A": "RUNNING_SUM",
+        "B": "WINDOW_AVG",
+        "C": "SUM",
+        "D": "AVG"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a table calculation depend on?",
+      "options": {
+        "A": "Data source only",
+        "B": "Visualization structure",
+        "C": "Server configuration",
+        "D": "Extract type"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Table calculations are computed after aggregation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows comparing current values to previous periods?",
+      "options": {
+        "A": "Quick table calculations",
+        "B": "Parameters",
+        "C": "Joins",
+        "D": "Groups"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO charts support geographic analysis?",
+      "options": {
+        "A": "Map",
+        "B": "Filled map",
+        "C": "Line chart",
+        "D": "Histogram"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use latitude and longitude for?",
+      "options": {
+        "A": "Sorting data",
+        "B": "Geographic mapping",
+        "C": "Blending sources",
+        "D": "Extract refresh"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Custom geocoding is supported in Tableau.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows grouping multiple values into one category?",
+      "options": {
+        "A": "Set",
+        "B": "Group",
+        "C": "Parameter",
+        "D": "Filter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO features support comparison against targets?",
+      "options": {
+        "A": "Reference lines",
+        "B": "Reference bands",
+        "C": "Joins",
+        "D": "Extracts"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau Prep primarily help with?",
+      "options": {
+        "A": "Data visualization",
+        "B": "Data preparation and cleaning",
+        "C": "Dashboard publishing",
+        "D": "Server administration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Prep outputs can be published to Tableau Server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for showing frequency distribution?",
+      "options": {
+        "A": "Histogram",
+        "B": "Tree map",
+        "C": "Scatter plot",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO features help with drill-down analysis?",
+      "options": {
+        "A": "Hierarchies",
+        "B": "Actions",
+        "C": "Extracts",
+        "D": "Joins"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use for caching query results?",
+      "options": {
+        "A": "Memory cache",
+        "B": "Disk cache",
+        "C": "Cloud cache",
+        "D": "Browser cache"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tableau dashboards can be embedded in web applications.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which feature allows exporting dashboards as images or PDFs?",
+      "options": {
+        "A": "Share",
+        "B": "Download",
+        "C": "Publish",
+        "D": "Extract"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau features improve usability?",
+      "options": {
+        "A": "Tooltips",
+        "B": "Dashboard actions",
+        "C": "Joins",
+        "D": "Relationships"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the main benefit of using parameters?",
+      "options": {
+        "A": "Static calculations",
+        "B": "Dynamic user input control",
+        "C": "Faster extracts",
+        "D": "Automatic joins"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau allows custom number formatting.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does Tableau use to manage metadata for published content?",
+      "options": {
+        "A": "Workbook cache",
+        "B": "Repository database",
+        "C": "Hyper engine",
+        "D": "File system"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Server supports role-based access control.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows filtering one dashboard using another?",
+      "options": {
+        "A": "Filter shelf",
+        "B": "Dashboard filter action",
+        "C": "Context filter",
+        "D": "Quick filter"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau objects can be used as dashboard filters?",
+      "options": {
+        "A": "Sheets",
+        "B": "Legends",
+        "C": "Stories",
+        "D": "Extracts"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau's performance recording help identify?",
+      "options": {
+        "A": "Visualization colors",
+        "B": "Slow queries and rendering issues",
+        "C": "User permissions",
+        "D": "Data accuracy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau performance recording captures query execution time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for comparing distributions across categories?",
+      "options": {
+        "A": "Histogram",
+        "B": "Box plot",
+        "C": "Line chart",
+        "D": "Map"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau features help reduce load time?",
+      "options": {
+        "A": "Using extracts",
+        "B": "Reducing marks",
+        "C": "Adding more filters",
+        "D": "Using complex calculations"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use to render visualizations?",
+      "options": {
+        "A": "HTML only",
+        "B": "VizQL engine",
+        "C": "SQL compiler",
+        "D": "Python engine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: VizQL translates drag-and-drop actions into database queries.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows conditional formatting?",
+      "options": {
+        "A": "Calculated fields",
+        "B": "Color marks",
+        "C": "Reference lines",
+        "D": "Parameters"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau calculations can be used for ranking?",
+      "options": {
+        "A": "RANK",
+        "B": "INDEX",
+        "C": "SUM",
+        "D": "AVG"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the INDEX() function return?",
+      "options": {
+        "A": "Row number in the partition",
+        "B": "Rank based on value",
+        "C": "Sum of values",
+        "D": "Average of values"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: INDEX() is a table calculation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best represents cumulative totals?",
+      "options": {
+        "A": "Stacked bar chart",
+        "B": "Running total line chart",
+        "C": "Scatter plot",
+        "D": "Pie chart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau features support time-series analysis?",
+      "options": {
+        "A": "Date hierarchies",
+        "B": "Quick table calculations",
+        "C": "Joins",
+        "D": "Groups"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use parameters for in calculations?",
+      "options": {
+        "A": "Fixed values only",
+        "B": "Dynamic user-driven logic",
+        "C": "Data extraction",
+        "D": "Publishing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Parameters can be referenced in calculated fields.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best shows contribution to total over time?",
+      "options": {
+        "A": "Stacked area chart",
+        "B": "Histogram",
+        "C": "Map",
+        "D": "Scatter plot"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support drill-through navigation?",
+      "options": {
+        "A": "Dashboard actions",
+        "B": "URL actions",
+        "C": "Extract filters",
+        "D": "Relationships"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use URL actions for?",
+      "options": {
+        "A": "Refresh data",
+        "B": "Navigate to external resources",
+        "C": "Create extracts",
+        "D": "Join tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: URL actions can pass field values as parameters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows highlighting related marks across views?",
+      "options": {
+        "A": "Highlight actions",
+        "B": "Filter actions",
+        "C": "Parameters",
+        "D": "Extracts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support storytelling?",
+      "options": {
+        "A": "Story points",
+        "B": "Annotations",
+        "C": "Joins",
+        "D": "Extracts"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use annotations for?",
+      "options": {
+        "A": "Explain insights directly on views",
+        "B": "Clean data",
+        "C": "Join tables",
+        "D": "Refresh extracts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Annotations can be attached to specific data points.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for identifying clusters?",
+      "options": {
+        "A": "Scatter plot",
+        "B": "Histogram",
+        "C": "Tree map",
+        "D": "Line chart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support advanced analytics?",
+      "options": {
+        "A": "Clustering",
+        "B": "Trend lines",
+        "C": "Joins",
+        "D": "Extract refresh"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau clustering help identify?",
+      "options": {
+        "A": "Outliers",
+        "B": "Natural groupings in data",
+        "C": "Missing values",
+        "D": "Data types"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Trend lines can be added to scatter plots.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows forecasting future values?",
+      "options": {
+        "A": "Trend lines",
+        "B": "Forecast",
+        "C": "Clustering",
+        "D": "Sets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO requirements are needed for forecasting?",
+      "options": {
+        "A": "Date field",
+        "B": "Measure",
+        "C": "String dimension",
+        "D": "Boolean field"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: Forecasting is available only for time-based data.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows exporting underlying data?",
+      "options": {
+        "A": "Download data",
+        "B": "Publish",
+        "C": "Extract refresh",
+        "D": "Share"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features help with audit and governance?",
+      "options": {
+        "A": "Data lineage",
+        "B": "Permissions",
+        "C": "Marks",
+        "D": "Filters"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau data lineage show?",
+      "options": {
+        "A": "Visual styles",
+        "B": "Flow of data from source to dashboard",
+        "C": "User activity only",
+        "D": "Extract schedules"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports data cataloging features.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does Tableau use to store published workbooks and data sources?",
+      "options": {
+        "A": "File system only",
+        "B": "Repository and file store",
+        "C": "Hyper engine",
+        "D": "Browser cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau allows scheduling extract refreshes on Tableau Cloud.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature enables row-level security?",
+      "options": {
+        "A": "Parameters",
+        "B": "User filters",
+        "C": "Groups",
+        "D": "Sets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which TWO Tableau objects support user interaction?",
+      "options": {
+        "A": "Filters",
+        "B": "Actions",
+        "C": "Extracts",
+        "D": "Relationships"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use relationships for?",
+      "options": {
+        "A": "Physical joins",
+        "B": "Logical data modeling",
+        "C": "Data blending",
+        "D": "Extract creation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Relationships preserve table grain until query time.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best shows variance from a baseline?",
+      "options": {
+        "A": "Diverging bar chart",
+        "B": "Pie chart",
+        "C": "Histogram",
+        "D": "Map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau calculations are conditional?",
+      "options": {
+        "A": "IF",
+        "B": "CASE",
+        "C": "SUM",
+        "D": "AVG"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the EXCLUDE LOD expression do?",
+      "options": {
+        "A": "Adds dimensions to view",
+        "B": "Removes dimensions from aggregation",
+        "C": "Ignores all filters",
+        "D": "Fixes calculation level permanently"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: EXCLUDE LOD expressions respect context filters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature supports trend comparison across time periods?",
+      "options": {
+        "A": "Quick table calculations",
+        "B": "Joins",
+        "C": "Groups",
+        "D": "Extracts"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau objects can be added to tooltips?",
+      "options": {
+        "A": "Fields",
+        "B": "Visualizations",
+        "C": "Extracts",
+        "D": "Joins"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a highlight action do?",
+      "options": {
+        "A": "Filters data",
+        "B": "Emphasizes related marks",
+        "C": "Changes calculations",
+        "D": "Refreshes extracts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Highlight actions do not remove data from the view.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best represents flow between categories?",
+      "options": {
+        "A": "Sankey diagram",
+        "B": "Pie chart",
+        "C": "Histogram",
+        "D": "Bar chart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features help improve accessibility?",
+      "options": {
+        "A": "Color legends",
+        "B": "Tooltips",
+        "C": "Joins",
+        "D": "Extracts"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau use color legends for?",
+      "options": {
+        "A": "Sorting data",
+        "B": "Explaining color encoding",
+        "C": "Filtering extracts",
+        "D": "Refreshing dashboards"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports keyboard navigation for dashboards.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows comparing actual vs target?",
+      "options": {
+        "A": "Reference lines",
+        "B": "Trend lines",
+        "C": "Sets",
+        "D": "Groups"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO features support advanced calculations?",
+      "options": {
+        "A": "LOD expressions",
+        "B": "Table calculations",
+        "C": "Joins",
+        "D": "Extracts"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the WINDOW_SUM function do?",
+      "options": {
+        "A": "Aggregates data at source",
+        "B": "Calculates sum across a window of data",
+        "C": "Counts rows only",
+        "D": "Removes nulls"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: WINDOW_SUM is evaluated after aggregation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart best shows distribution and median together?",
+      "options": {
+        "A": "Box plot",
+        "B": "Line chart",
+        "C": "Map",
+        "D": "Tree map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features help with dashboard navigation?",
+      "options": {
+        "A": "Buttons",
+        "B": "Actions",
+        "C": "Extracts",
+        "D": "Relationships"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a dashboard button do?",
+      "options": {
+        "A": "Triggers navigation or actions",
+        "B": "Refreshes data automatically",
+        "C": "Creates extracts",
+        "D": "Formats calculations"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Dashboard buttons can trigger URL actions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows viewing data freshness?",
+      "options": {
+        "A": "Extract refresh history",
+        "B": "Tooltips",
+        "C": "Marks card",
+        "D": "Show Me"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features assist in governance?",
+      "options": {
+        "A": "Permissions",
+        "B": "Certification",
+        "C": "Joins",
+        "D": "Groups"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau certification indicate?",
+      "options": {
+        "A": "Data accuracy and trust",
+        "B": "Extract size",
+        "C": "Dashboard speed",
+        "D": "User activity"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Certified data sources appear with a badge in Tableau.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is best for KPI monitoring?",
+      "options": {
+        "A": "Text table",
+        "B": "Scatter plot",
+        "C": "Histogram",
+        "D": "Tree map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support enterprise scalability?",
+      "options": {
+        "A": "Tableau Server",
+        "B": "Tableau Cloud",
+        "C": "Tableau Public",
+        "D": "Tableau Reader"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau Reader allow?",
+      "options": {
+        "A": "Create dashboards",
+        "B": "View and interact with packaged workbooks",
+        "C": "Publish to server",
+        "D": "Edit data sources"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Reader requires an internet connection.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Tableau feature supports embedding analytics?",
+      "options": {
+        "A": "JavaScript API",
+        "B": "Hyper API",
+        "C": "Prep Builder",
+        "D": "Viz Extensions"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO APIs are provided by Tableau?",
+      "options": {
+        "A": "REST API",
+        "B": "JavaScript API",
+        "C": "SQL API",
+        "D": "CSS API"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does Tableau REST API allow?",
+      "options": {
+        "A": "Automate server tasks",
+        "B": "Build dashboards",
+        "C": "Write calculations",
+        "D": "Create joins"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Tableau REST API can be used to manage users and projects.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does Tableau Prep primarily help with?",
+      "options": {
+        "A": "Dashboard visualization",
+        "B": "Data cleaning and preparation",
+        "C": "Publishing workbooks",
+        "D": "User management"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau Prep outputs can be published directly to Tableau Server or Cloud.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau chart type is best for showing correlation between two measures?",
+      "options": {
+        "A": "Scatter plot",
+        "B": "Bar chart",
+        "C": "Tree map",
+        "D": "Heat map"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO fields can be placed on the Marks card?",
+      "options": {
+        "A": "Color",
+        "B": "Size",
+        "C": "Extract",
+        "D": "Relationship"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Data Pane display?",
+      "options": {
+        "A": "Visualizations only",
+        "B": "Fields and metadata",
+        "C": "Dashboards",
+        "D": "Server users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Discrete fields in Tableau are displayed as blue pills.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which Tableau feature allows combining data from multiple sources without joins?",
+      "options": {
+        "A": "Data blending",
+        "B": "Relationships",
+        "C": "Extracts",
+        "D": "Sets"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO objects can be used to filter a dashboard?",
+      "options": {
+        "A": "Filter actions",
+        "B": "Quick filters",
+        "C": "Joins",
+        "D": "Calculated fields"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does a context filter do?",
+      "options": {
+        "A": "Executes last",
+        "B": "Creates a temporary subset for other filters",
+        "C": "Removes null values",
+        "D": "Formats charts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Context filters are evaluated before dimension filters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which chart is most suitable for hierarchical data?",
+      "options": {
+        "A": "Tree map",
+        "B": "Line chart",
+        "C": "Scatter plot",
+        "D": "Histogram"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau features support performance optimization?",
+      "options": {
+        "A": "Extracts",
+        "B": "Context filters",
+        "C": "Custom shapes",
+        "D": "Tooltips"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the Show Me panel do?",
+      "options": {
+        "A": "Displays server status",
+        "B": "Suggests appropriate visualizations",
+        "C": "Creates calculations",
+        "D": "Manages permissions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Tableau supports geocoding for custom locations.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which TWO Tableau objects help segment data?",
+      "options": {
+        "A": "Sets",
+        "B": "Groups",
+        "C": "Extracts",
+        "D": "Relationships"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which TWO statements about Tableau Order of Operations are TRUE?",
+      "options": {
+        "A": "Context filters are applied before FIXED Level of Detail (LOD) expressions.",
+        "B": "EXCLUDE LOD expressions are evaluated after dimension filters.",
+        "C": "Table calculations are computed after aggregation and filters.",
+        "D": "Data source filters are evaluated after extract filters."
+      },
+      "answer": [
+        "A",
+        "C"
+      ]
+    }
+  ]
+}

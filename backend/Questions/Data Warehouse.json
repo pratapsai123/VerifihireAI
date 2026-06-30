@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Data Warehouse", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of a Data Warehouse?",
+    "options": {
+      "A": "To handle real-time transactional processing for web applications.",
+      "B": "To act as a central repository for integrated data from one or more disparate sources for reporting and analysis.",
+      "C": "To provide physical storage for server hardware.",
+      "D": "To host social media images for public users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In data modeling, what is a 'Fact Table'?",
+    "options": {
+      "A": "A table containing descriptive attributes like customer names.",
+      "B": "A central table in a schema that contains quantitative measures or metrics for analysis.",
+      "C": "A table used only for storing system logs.",
+      "D": "A temporary table used for data cleaning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main difference between 'OLTP' and 'OLAP'?",
+    "options": {
+      "A": "OLTP is for historical analysis; OLAP is for day-to-day transactions.",
+      "B": "OLTP is designed for fast transactional processing; OLAP is designed for complex analytical queries.",
+      "C": "OLTP only works with cloud databases; OLAP only works on-premises.",
+      "D": "There is no difference; they are interchangeable terms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which schema consists of one central fact table connected to multiple non-normalized dimension tables?",
+    "options": {
+      "A": "Snowflake Schema",
+      "B": "Star Schema",
+      "C": "Relational Schema",
+      "D": "Network Schema"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'E' in 'ETL' stand for?",
+    "options": {
+      "A": "Encrypt",
+      "B": "Extract",
+      "C": "Evaluate",
+      "D": "Extend"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Dimension Table' contains the textual or descriptive attributes of the data (e.g., product names, dates, or locations).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in NoSQL databases",
+      "D": "Only for financial data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Data Mart'?",
+    "options": {
+      "A": "A large grocery store for data scientists.",
+      "B": "A subset of a data warehouse focused on a specific functional area or department (e.g., Marketing or Sales).",
+      "C": "The physical location where servers are sold.",
+      "D": "A tool used for deleting old database records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Snowflake Schema', how are dimension tables organized?",
+    "options": {
+      "A": "They are completely flat and non-normalized.",
+      "B": "They are normalized into multiple related tables.",
+      "C": "They are stored in a different physical building.",
+      "D": "They only contain numerical data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Granularity' in the context of data warehousing?",
+    "options": {
+      "A": "The physical weight of the storage disk.",
+      "B": "The level of detail or summarization of the units of data in the warehouse.",
+      "C": "The speed of the network connection.",
+      "D": "The number of users allowed to access the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Staging Area' is an intermediate storage area used for data processing before it is loaded into the warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for small datasets",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metadata' in a data warehouse?",
+    "options": {
+      "A": "Data that is made of physical metal.",
+      "B": "Data that provides information about other data (e.g., source, definition, and structure).",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The newest version of the SQL language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Schema' used in data modeling for a warehouse?",
+    "options": {
+      "A": "Galaxy Schema",
+      "B": "Circle Schema",
+      "C": "Triangle Schema",
+      "D": "Random Schema"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Data in a data warehouse is usually 'Non-Volatile', meaning it is not changed or deleted once it is entered.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for temporary tables",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' (or Data Cleansing)?",
+    "options": {
+      "A": "Cleaning the physical server rack.",
+      "B": "The process of identifying and fixing errors, inconsistencies, and duplicates in data.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Hiring a person to manually type data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Key' uniquely identifies a row in a dimension table and is often a simple integer generated by the system?",
+    "options": {
+      "A": "Foreign Key",
+      "B": "Surrogate Key",
+      "C": "Natural Key",
+      "D": "Composite Key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Drill-down' is a technique used in reporting to move from summarized data to more detailed data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile reports",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Load' process in ETL?",
+    "options": {
+      "A": "To extract data from the source.",
+      "B": "To physically carry the server.",
+      "C": "To write the transformed data into the target data warehouse.",
+      "D": "To encrypt the database password."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Star Schema, a Fact table usually contains many of which type of keys?",
+    "options": {
+      "A": "Primary Keys only",
+      "B": "Foreign Keys that point to Dimension tables",
+      "C": "Textual keys",
+      "D": "Encrypted keys"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Slowly Changing Dimension' (SCD)?",
+    "options": {
+      "A": "A dimension that moves physically on the disk.",
+      "B": "A technique used to manage and track historical data changes in dimension tables over time.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "A bug that makes the database slow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Warehouse' is typically 'Subject-Oriented', meaning it is organized around major subjects like customers or products.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for e-commerce sites",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Slicing' in OLAP operations?",
+    "options": {
+      "A": "Cutting the server in half.",
+      "B": "Selecting a single dimension from a data cube to create a new sub-cube.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The salary of a data architect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard secure web access (HTTPS) for data warehouse management consoles?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Lake' typically stores data in its raw, native format (structured and unstructured), while a Data Warehouse stores structured data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Denormalization' in a Data Warehouse context?",
+    "options": {
+      "A": "Making the database schema as complex as possible.",
+      "B": "The process of combining tables to reduce the number of joins and improve query performance.",
+      "C": "A specialized way to name VM folders.",
+      "D": "Deleting the database backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an ETL job?",
+    "options": {
+      "A": "(Rows Loaded / Rows Extracted) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a popular open-source tool used for modeling Star Schemas in Snowflake.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation in a data center containing a warehouse?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 segmentation to ensure database traffic is logically separated from general office traffic.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'PostgreSQL' used as a data warehouse backend?",
+    "options": {
+      "A": "5432",
+      "B": "3306",
+      "C": "1433",
+      "D": "1521"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a recommended practice for mission-critical Data Warehouse servers to save on hardware costs.",
+    "options": {
+      "A": "False (Data warehouses are memory-intensive; overcommitting can lead to severe performance degradation).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of moving data from source systems into the data warehouse.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Database Connections' currently active?",
+    "options": {
+      "A": "Connection Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can provide increased bandwidth for high-speed data loading into a warehouse.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' for a secure database cluster?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Enforcing granular security rules for individual database nodes to prevent lateral movement of threats.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Query Execution Time'?",
+    "options": {
+      "A": "Duration / Latency",
+      "B": "Throughput",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 1' overwrites existing data with new data, thus not keeping any historical history.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer names",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty' in a global data warehouse?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the laws and regulations of the country where it is physically stored.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Availability' of the data warehouse?",
+    "options": {
+      "A": "Uptime percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in an ETL job means that running the same job twice with the same data won't result in duplicate records.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating a unique, non-meaningful ID for a record to replace a natural key.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' (Extract, Load, Transform) performs data transformation within the target data warehouse itself.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in an ETL pipeline?",
+    "options": {
+      "A": "Wiping the hard drive physically.",
+      "B": "The process of detecting and removing errors and inconsistencies from a data set.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the common way to load massive amounts of data into a warehouse on a scheduled interval.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "A collection of processes and policies to manage the availability, usability, integrity, and security of data.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Records Processed' by an ETL worker?",
+    "options": {
+      "A": "Throughput / Row Count",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a critical process for securing the data warehouse infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's software tools and compliance.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is important for securing the warehouse development lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for database code?",
+    "options": {
+      "A": "The automated analysis of SQL scripts or stored procedures for bugs or security flaws without executing them.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a data quality failure?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involve testing a live data warehouse environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' in a warehouse context?",
+    "options": {
+      "A": "A structured process for managing database passwords, API keys, and other sensitive information used by ETL tools.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning for data loading tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+    "options": {
+      "A": "A model where security duties are split between the cloud provider and the customer.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' performed on the warehouse cluster?",
+    "options": {
+      "A": "Remediation Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means finding bugs earlier in the warehouse lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "Identifying and evaluating security threats to a system or organization.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for a reliable data infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption'?",
+    "options": {
+      "A": "The process of encoding data so that only authorized parties can access it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active VPN Users' managing the warehouse?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in data center security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical advantage of a 'Slowly Changing Dimension (SCD) Type 2' over Type 1?",
+    "options": {
+      "A": "It is faster to update and requires less storage space.",
+      "B": "It preserves full historical accuracy by creating a new record with a unique surrogate key and effective dates whenever an attribute changes.",
+      "C": "It automatically deletes old data to comply with GDPR.",
+      "D": "It only works for numerical data types like currency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which storage format is generally preferred for a Data Warehouse performing heavy analytical aggregations (e.g., SUM, AVG) across millions of rows?",
+    "options": {
+      "A": "Row-based storage (e.g., standard PostgreSQL/MySQL tables).",
+      "B": "Columnar storage (e.g., Parquet, ORC, or Redshift/Snowflake internals).",
+      "C": "Key-Value storage (e.g., Redis).",
+      "D": "Graph-based storage (e.g., Neo4j)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific purpose of a 'Materialized View' in a data warehouse environment?",
+    "options": {
+      "A": "To provide a physical drawing of the database schema.",
+      "B": "To pre-compute and physically store the results of a complex query to drastically improve read performance.",
+      "C": "To encrypt the connection between the warehouse and the BI tool.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Snowflake Schema', the dimension tables are fully normalized, which reduces data redundancy but increases the number of joins required for queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native warehouses",
+      "D": "Only if using 10Gbps fiber"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which technique is used to improve query performance by dividing a large table into smaller, more manageable pieces based on a specific column like 'transaction_date'?",
+    "options": {
+      "A": "Indexing",
+      "B": "Partitioning",
+      "C": "Encryption",
+      "D": "Normalization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'SCD Type 3', how is historical data typically tracked?",
+    "options": {
+      "A": "By adding a new row for every change.",
+      "B": "By adding a new column to the existing row to store the 'previous' value of an attribute.",
+      "C": "By moving the data to a separate 'History' table.",
+      "D": "By deleting the old data and replacing it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Late Arriving Data' in a data warehouse, and why is it a challenge for Fact tables?",
+    "options": {
+      "A": "Data that arrives after the office is closed.",
+      "B": "Data that arrives out of chronological order, requiring the warehouse to update historical records or handle missing dimension keys.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool specifically designed to automate the generation of Surrogate Keys in Snowflake.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'vCenter' management heartbeat, which must be monitored if the warehouse is virtualized?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SCD Type 4' and how does it differ from Type 2?",
+    "options": {
+      "A": "Type 4 uses a separate 'History' table to store changes, keeping the primary dimension table clean and small.",
+      "B": "Type 4 overwrites all data instantly.",
+      "C": "Type 4 is only used for non-textual data.",
+      "D": "There is no such thing as SCD Type 4."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary benefit of 'Compression' in a columnar data warehouse?",
+    "options": {
+      "A": "It makes the database icons smaller in the UI.",
+      "B": "It significantly reduces disk I/O because similar data types in columns compress very efficiently, allowing more data to be read in fewer cycles.",
+      "C": "It increases the physical speed of the CPU.",
+      "D": "It prevents unauthorized users from reading the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bridge Tables' are used in dimensional modeling to resolve many-to-many relationships between facts and dimensions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' encrypted management of a cloud data warehouse like BigQuery or Snowflake?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for a database tier?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using network segmentation to ensure that the warehouse database is on a logically separate network from the web application and external users.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is safe for high-performance OLAP workloads that rely heavily on in-memory aggregations.",
+    "options": {
+      "A": "False (OLAP workloads are highly sensitive to RAM availability; swapping will cause queries to stall).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in development environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) impact on database performance?",
+    "options": {
+      "A": "Measuring the weight of the server.",
+      "B": "Automatically balancing VM storage based on space and I/O latency to prevent a warehouse node from being bottlenecked by a slow disk array.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vSphere Web Client' access to manage database hosts?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) can improve warehouse data loading speeds but may limit the ability to perform a live migration (vMotion).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in the context of a virtualized database server?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts memory assignment to the VM based on real-time OS demand.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is essential for efficient virtual-to-physical memory translation in a warehouse hypervisor?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' database disk can cause an immediate system outage if the underlying physical storage pool becomes 100% full.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The specific component of the hypervisor responsible for managing execution and resource isolation of a virtual database node.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' for disaster recovery of a data warehouse?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' requires the Guest OS to be modified to use hypercalls for interacting with the hardware.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' mirroring mechanism?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A process that mirrors write operations to both source and destination during migration to ensure data integrity during a live move.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' remote management of a warehouse server?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An interface policy that puts a port in an error-disabled state if an unauthorized device attempts to connect.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is the logical center of the network, selected based on the lowest priority value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Applying security filters to traffic flowing within a specific VLAN segment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet'?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' prevents a port from sending or receiving BPDUs, effectively disabling Spanning Tree on that specific port.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing algorithm?",
+    "options": {
+      "A": "A physical tool for cables.",
+      "B": "The logic used to determine which physical link in a bundle carries a specific packet based on source/destination addresses.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) should be disabled on access ports to prevent unauthorized VLAN access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A configuration where the VTP password is not displayed in the running configuration file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that disables a database network instantly if STP is not configured.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' restrict action?",
+    "options": {
+      "A": "Turning off the switch.",
+      "B": "An action that drops unauthorized traffic and increments a counter without shutting down the physical port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' is a Cisco feature that creates a separate Spanning Tree instance for every VLAN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in a data loading task?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where a task can be run multiple times with the same input without changing the final state of the warehouse.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an ETL pipeline?",
+    "options": {
+      "A": "(Records Succeeded / Total Records) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security validation earlier in the data warehouse development process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' for a data warehouse?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to sensitive data storage.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for warehouse schema changes?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for database platforms.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's data assets and compliance policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a data pipeline?",
+    "options": {
+      "A": "The time from code commit to data being available in production.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern warehouse management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' in database scripting?",
+    "options": {
+      "A": "A child process created to execute a command block.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a nightly load?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed for long-term storage of analytics metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation for sensitive data?",
+    "options": {
+      "A": "Using Layer 2 segmentation to protect specific data segments.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that repeating a data load does not cause duplicates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' traceability?",
+    "options": {
+      "A": "The ability to follow data from its source through all warehouse transformations.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' query time?",
+    "options": {
+      "A": "Mean Query Duration",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find data issues earlier in the pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of getting data into the warehouse.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Users'?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in data center security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Massively Parallel Processing (MPP) data warehouse, what is the primary technical cause of a 'Data Skew' performance bottleneck during a large JOIN operation?",
+    "options": {
+      "A": "The leader node is physically too far from the compute nodes.",
+      "B": "An uneven distribution of the join key values causes one compute node to process significantly more data than others, delaying the entire query.",
+      "C": "The database is using too much compression.",
+      "D": "The network switch is running at half-duplex."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific role of a 'Bloom Filter' in optimizing distributed join performance in modern warehouses like Snowflake or Presto?",
+    "options": {
+      "A": "To encrypt the data rows before they are shuffled.",
+      "B": "A space-efficient probabilistic structure sent from the smaller table's nodes to the larger table's nodes to filter out non-matching rows before they are sent over the network.",
+      "C": "To physically clean the server's air intake.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Cluster-Key' or 'Sorting' strategy, the goal is to physically co-locate rows with similar values to improve 'Data Skipping' (Pruning) efficiency during range-based queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using 100Gbps network links"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which concurrency control mechanism allows a data warehouse to maintain high read performance while large batch writes are occurring by providing a consistent 'snapshot' of the data?",
+    "options": {
+      "A": "Pessimistic Locking",
+      "B": "MVCC (Multi-Version Concurrency Control)",
+      "C": "Two-Phase Locking (2PL)",
+      "D": "Single-Threaded Execution"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When modeling for a 'Multi-tenant' SaaS data warehouse, what is the technical trade-off of using a 'Shared Table with TenantID' approach versus 'Separate Databases per Tenant'?",
+    "options": {
+      "A": "Shared tables are always more secure.",
+      "B": "Shared tables provide easier management and global analytics but risk 'noisy neighbor' resource contention and potential data leakage if the 'TenantID' filter is missed.",
+      "C": "Separate databases eliminate the need for backups.",
+      "D": "Shared tables require physical hardware isolation for every user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' in the context of a data warehouse reading from an external Data Lake (e.g., via Athena or Spectrum)?",
+    "options": {
+      "A": "Manually pushing the server into the rack.",
+      "B": "The ability to push filtering logic (WHERE clauses) down to the storage layer, so only relevant data blocks are read and transferred over the network.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Late-Arriving Dimensions' are handled by creating a 'placeholder' or 'inferring' a dimension record with a temporary key until the actual descriptive data arrives.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial data",
+      "D": "Only in version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Dimensional Modeling', what is a 'Junk Dimension'?",
+    "options": {
+      "A": "A dimension table that contains data that is no longer useful.",
+      "B": "A single dimension table that combines multiple low-cardinality flags and indicators (like 'Yes/No' statuses) to avoid bloating the fact table with foreign keys.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The salary of a junior data entry clerk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on an execution plan indicates that the data warehouse is performing a 'Broadcast Join'?",
+    "options": {
+      "A": "Table Scan",
+      "B": "The system copies the entire small table to every node in the cluster to join with local partitions of the large table.",
+      "C": "Index Seek",
+      "D": "Task Pending"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is an automated data warehouse modeling tool that generates Kimball-compliant Star Schemas from raw JSON.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical function of 'Micro-partitions' in a modern cloud data warehouse like Snowflake?",
+    "options": {
+      "A": "To divide the database into different countries.",
+      "B": "To automatically divide data into small, immutable, columnar files that track metadata (min/max values) to enable extremely efficient pruning during queries.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for 'vCenter' management heartbeats that ensure the availability of virtualized warehouse nodes?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is considered a high-risk configuration for Data Warehouse workloads because analytical queries often require large, contiguous blocks of RAM for sorting.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) latency-based placement policy?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "A feature that automatically migrates VM disks (like warehouse data volumes) to different datastores if storage I/O latency exceeds a specific threshold.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard 'HTTPS' encrypted management of a warehouse control plane?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' (VCHA) uses a three-node cluster (Active, Passive, Witness) to protect the management layer of the database cluster.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in a virtualized database environment?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID that enables Virtual Guest Tagging (VGT), allowing a VM to manage its own 802.1Q tags for complex network segregation.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) improves performance for warehouse ingestion nodes but often disables the ability to perform a live migration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' management in a virtualized data center?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "The ability of the hypervisor to adjust the memory assigned to a VM based on real-time task demand and system availability.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is required for hardware-assisted virtualization of memory pages to reduce warehouse query latency?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX-512",
+      "D": "SSE4.2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can lead to an abrupt warehouse crash if the physical underlying storage array reaches 100% capacity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The specific component of the hypervisor responsible for managing the execution and hardware isolation of a virtual machine.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic in a DR scenario?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' generally provides better performance than full emulation because the Guest OS uses 'Hypercalls' to communicate with the host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "A mechanism that mirrors write operations to both source and destination during a migration to ensure data consistency without downtime.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' remote management of a warehouse server?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Disabling the specific port immediately when an unauthorized MAC address is detected.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management of a network device?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in a spanning-tree topology is determined by the lowest Bridge ID (Priority + MAC).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN (intra-VLAN) to enhance security and isolation of sensitive data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access (which should be audited for warehouse security)?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' prevents a port from sending or receiving Spanning Tree messages, which can cause network loops if used on connected switches.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' load balancing 'Hashing'?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "The algorithm used to select a specific physical link in a bundle to ensure consistent traffic distribution.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent 'VLAN Hopping' security attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' security feature 'Hidden Password'?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A feature that prevents the VTP password from being stored in plain text in the configuration file.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that disables the entire data warehouse network infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Restrict'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "An action that drops packets from unauthorized sources and increments a counter without disabling the port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides a faster Spanning Tree convergence time than the legacy 802.1D standard.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in a data platform context?",
+    "options": {
+      "A": "A physical tool for fixing servers.",
+      "B": "The property where an operation results in the same final state regardless of how many times it is executed with the same input.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a warehouse build?",
+    "options": {
+      "A": "(Success Count / Total Count) * 100",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security validation to the end of the warehouse lifecycle.",
+    "options": {
+      "A": "False (It means moving it earlier).",
+      "B": "True",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling' in a warehouse environment?",
+    "options": {
+      "A": "Identifying and evaluating potential security threats to sensitive data assets.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for schema changes?",
+    "options": {
+      "A": "PR Count",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process for data warehouse systems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tooling Governance' for a data team?",
+    "options": {
+      "A": "A framework for managing an organization's software tools and compliance standards.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a data pipeline?",
+    "options": {
+      "A": "The time from code commit to data availability in production.",
+      "B": "The number of users.",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern warehouse architecture.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Subshell' in shell scripting for warehouse automation?",
+    "options": {
+      "A": "A child process environment created to execute commands.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a CI/CD job?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a tool designed for long-term storage of analytics metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation?",
+    "options": {
+      "A": "Using Layer 2 isolation to improve security and performance.",
+      "B": "Naming the virtual cables after colors.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' ensures that repeating an action has the same result as doing it once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Lineage' traceability?",
+    "options": {
+      "A": "The ability to follow data from its source to its destination through all transformations.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' query time?",
+    "options": {
+      "A": "Mean Execution Duration",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' helps find data bugs earlier in the pipeline lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The process of bringing data into a warehouse from sources.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Users' in a warehouse?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in data center security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between points to protect warehouse traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  }
+  ]
+}

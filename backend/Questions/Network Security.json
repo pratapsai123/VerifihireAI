@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Network Security", 
+  "questions": [
+    {
+    "question": "What is the primary function of a Firewall in a network?",
+    "options": {
+      "A": "To increase the speed of the internet connection.",
+      "B": "To monitor and control incoming and outgoing network traffic based on predetermined security rules.",
+      "C": "To store backup copies of all user emails.",
+      "D": "To provide physical cooling for the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the acronym 'VPN' stand for?",
+    "options": {
+      "A": "Virtual Private Network",
+      "B": "Verified Protocol Node",
+      "C": "Visual Processing Number",
+      "D": "Variable Path Network"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Denial of Service' (DoS) attack aims to make a machine or network resource unavailable to its intended users.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optic cables",
+      "D": "Only if the target is a web server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which protocol is used to secure communication over a computer network and is widely used on the internet for secure web browsing?",
+    "options": {
+      "A": "HTTP",
+      "B": "HTTPS (Hypertext Transfer Protocol Secure)",
+      "C": "FTP",
+      "D": "Telnet"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "A method of catching physical fish using high-tech sensors.",
+      "B": "The fraudulent practice of sending emails purporting to be from reputable companies to induce individuals to reveal personal information.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The process of moving servers to a different building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of networking, what is an 'IP Address'?",
+    "options": {
+      "A": "A unique string of numbers separated by periods that identifies each computer using the Internet Protocol to communicate.",
+      "B": "The physical location of the server rack.",
+      "C": "The serial number of the computer's motherboard.",
+      "D": "The password used to log in to the Wi-Fi."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Malware is a broad term for any software intentionally designed to cause damage to a computer, server, client, or computer network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows computers",
+      "D": "Only if downloaded from the dark web"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of an 'Intrusion Detection System' (IDS)?",
+    "options": {
+      "A": "To block all traffic from the internet automatically.",
+      "B": "To monitor network or system activities for malicious activity or policy violations.",
+      "C": "To encrypt the physical hard drives.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with unencrypted web traffic (HTTP)?",
+    "options": {
+      "A": "443",
+      "B": "80",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Brute Force' attacks involve attempting every possible combination of characters to crack a password.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption'?",
+    "options": {
+      "A": "The process of deleting data permanently.",
+      "B": "The process of converting information or data into a code, especially to prevent unauthorized access.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common wireless security protocol?",
+    "options": {
+      "A": "WPA2 / WPA3",
+      "B": "HTTP",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'DMZ' (Demilitarized Zone) is a physical or logical subnetwork that contains and exposes an organization's external-facing services to an untrusted network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government networks",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Trojan Horse' in cybersecurity?",
+    "options": {
+      "A": "A physical wooden horse delivered to an office.",
+      "B": "A type of malware that is often disguised as legitimate software.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used for secure remote login to a server over a network?",
+    "options": {
+      "A": "Telnet",
+      "B": "SSH (Secure Shell)",
+      "C": "HTTP",
+      "D": "SNMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multi-Factor Authentication' (MFA) requires at least two pieces of evidence to verify a user's identity.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial apps",
+      "D": "Only if using a mobile phone"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Botnet'?",
+    "options": {
+      "A": "A net used for catching robots.",
+      "B": "A network of private computers infected with malicious software and controlled as a group without the owners' knowledge.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Hashing' a password?",
+    "options": {
+      "A": "To compress the password to save space.",
+      "B": "To transform the password into a fixed-length string of characters that is difficult to reverse, ensuring it isn't stored in plain text.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Social Engineering is the use of deception to manipulate individuals into divulging confidential or personal information.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ransomware'?",
+    "options": {
+      "A": "A type of malware that threatens to publish the victim's data or perpetually block access to it unless a ransom is paid.",
+      "B": "A software used to calculate the price of a server.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which layer of the OSI model is primarily responsible for routing data packets across different networks?",
+    "options": {
+      "A": "Data Link Layer",
+      "B": "Network Layer",
+      "C": "Transport Layer",
+      "D": "Application Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'admin' as a default username is a common security risk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only if the password is long"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Zero-Day' vulnerability?",
+    "options": {
+      "A": "A vulnerability that was discovered zero days ago.",
+      "B": "A security flaw in software that is unknown to the vendor and has no patch available.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to scan a network for open ports and active services?",
+    "options": {
+      "A": "Nmap",
+      "B": "Microsoft Word",
+      "C": "Adobe Reader",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Symmetric Encryption' uses the same key for both encryption and decryption.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spyware'?",
+    "options": {
+      "A": "A physical camera in the server room.",
+      "B": "Software that enables a user to obtain covert information about another's computer activities by transmitting data covertly from their hard drive.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of using a 'Guest Network' for Wi-Fi?",
+    "options": {
+      "A": "It isolates guest devices from the main corporate or home network, protecting internal data.",
+      "B": "It makes the internet speed faster for guests.",
+      "C": "It backups all guest phone data automatically.",
+      "D": "It makes the office look more professional."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: An 'Air-Gapped' computer is one that is physically isolated from unsecured networks, such as the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government servers",
+      "D": "Only if the server is in the basement"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spoofing'?",
+    "options": {
+      "A": "Deleting all duplicate logs.",
+      "B": "The act of disguising a communication from an unknown source as being from a known, trusted source.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Patching' software refers to applying updates to fix security vulnerabilities or improve performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows computers",
+      "D": "Only if the software is over 1 year old"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption in Transit'?",
+    "options": {
+      "A": "Moving a physical hard drive in a truck.",
+      "B": "Protecting data while it is moving through a network (e.g., between a user's browser and a server).",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption at Rest'?",
+    "options": {
+      "A": "Turning off the server at night.",
+      "B": "Protecting data while it is stored on a physical device, such as a hard drive or cloud storage.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Man-in-the-Middle' (MitM) attack involves an attacker intercepting communication between two parties without their knowledge.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unencrypted traffic",
+      "D": "Only if using public Wi-Fi"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'MAC Address'?",
+    "options": {
+      "A": "The address of the Apple headquarters.",
+      "B": "A unique identifier assigned to a network interface controller (NIC) for use as a network address in communications within a network segment.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The password used to access a Mac computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is considered a 'Strong Password' practice?",
+    "options": {
+      "A": "Using 'password123'.",
+      "B": "Using your birthdate.",
+      "C": "Using a combination of uppercase letters, lowercase letters, numbers, and symbols.",
+      "D": "Sharing your password with your coworkers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Whitelisting' is a security practice that allows only specific, pre-approved entities (like IP addresses) to access a network or service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for internal apps",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shoulder Surfing'?",
+    "options": {
+      "A": "Surfing the internet using a laptop on your shoulder.",
+      "B": "Watching over someone's shoulder to see their password or other sensitive information.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the OSI model deals with the physical transmission of data bits over a medium?",
+    "options": {
+      "A": "Physical Layer",
+      "B": "Network Layer",
+      "C": "Transport Layer",
+      "D": "Session Layer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Worm' is a type of malware that can replicate itself and spread to other computers automatically through a network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity and Access Management' (IAM)?",
+    "options": {
+      "A": "Hiding the data in a literal safe.",
+      "B": "A framework of policies and technologies for ensuring that the right users have the appropriate access to technology resources.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Proxy Server' primarily used for?",
+    "options": {
+      "A": "To act as an intermediary for requests from clients seeking resources from other servers, often providing anonymity or filtering.",
+      "B": "To increase the physical storage of the data center.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: DNS (Domain Name System) translates human-readable domain names (like google.com) into numerical IP addresses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for .com domains",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Packet Sniffing'?",
+    "options": {
+      "A": "Cleaning the network cables.",
+      "B": "The act of capturing and inspecting data packets as they travel across a network.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a firewall log usually indicates that a connection attempt was blocked?",
+    "options": {
+      "A": "Accepted / Allow",
+      "B": "Denied / Drop / Reject",
+      "C": "Established",
+      "D": "Active"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Public Wi-Fi' network is generally considered more secure than a private home network.",
+    "options": {
+      "A": "False (Public networks are often unencrypted and susceptible to sniffing attacks).",
+      "B": "True",
+      "C": "Only for airport Wi-Fi",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tailgating' in the context of physical network security?",
+    "options": {
+      "A": "Following closely behind someone to enter a restricted area without proper authorization.",
+      "B": "Waiting behind a server physically.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Packets Dropped' by a network interface?",
+    "options": {
+      "A": "Throughput",
+      "B": "Drop Count / Error Count",
+      "C": "Latency",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'HTTPS' uses SSL/TLS to provide encrypted communication and secure identification of a network web server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Keylogger'?",
+    "options": {
+      "A": "A tool used to log physical keys to the office.",
+      "B": "A type of surveillance software that has the capability to record every keystroke you make to a log file.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard unencrypted 'Email' (SMTP) sending?",
+    "options": {
+      "A": "25",
+      "B": "80",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Port Forwarding' is a process where a firewall directs an external request to a specific internal device or service.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by eliminating potential vulnerabilities and reducing the attack surface.",
+      "B": "Making the network cables physically harder.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to check the 'Signal Strength' of a Wi-Fi network?",
+    "options": {
+      "A": "Throughput",
+      "B": "RSSI (Received Signal Strength Indicator)",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal IP Address' is only reachable within a local private network and not directly from the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Vulnerability Scanner'?",
+    "options": {
+      "A": "A tool used to automatically identify security flaws in a network or system.",
+      "B": "A physical scanner for paper documents.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'FTP'?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Least Privilege' means providing users only the minimum level of access or permissions needed to perform their job.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for managers",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The principle that data is subject to the laws and regulations of the country where it is physically located.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage on a firewall?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Network security is a critical part of building a reliable enterprise infrastructure.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banks",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Analysis'?",
+    "options": {
+      "A": "The process of intercepting and examining messages in order to deduce information from patterns in communication.",
+      "B": "Calculating the weight of data packets.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'DNS'?",
+    "options": {
+      "A": "53",
+      "B": "80",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Social Engineering' often targets the 'human element' of security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Segmentation'?",
+    "options": {
+      "A": "Dividing a computer network into smaller sub-networks to improve performance and security.",
+      "B": "Cutting the physical cables into smaller pieces.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Connections per Second' on a network device?",
+    "options": {
+      "A": "Throughput / CPS",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between a 'Stateful' firewall and a 'Stateless' firewall?",
+    "options": {
+      "A": "Stateful firewalls are only for hardware; Stateless are for software.",
+      "B": "Stateful firewalls track the state of active connections and context of traffic flows, whereas Stateless firewalls filter packets based on individual header information (ACLs).",
+      "C": "Stateless firewalls are more secure because they don't store data.",
+      "D": "Stateful firewalls only work with IPv6."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific mechanism allows an Intrusion Prevention System (IPS) to go beyond an Intrusion Detection System (IDS)?",
+    "options": {
+      "A": "The IPS can encrypt the incoming data.",
+      "B": "The IPS is placed in-line with network traffic and can actively block or drop malicious packets in real-time.",
+      "C": "The IPS only monitors the server temperature.",
+      "D": "The IPS requires a manual reboot to stop an attack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Public Key Infrastructure (PKI), the 'Certificate Authority' (CA) is responsible for verifying identities and issuing digital certificates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for self-signed certificates",
+      "D": "Only if using RSA encryption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Perfect Forward Secrecy' (PFS) in a secure key exchange?",
+    "options": {
+      "A": "To ensure the same key is used forever.",
+      "B": "To ensure that if a long-term private key is compromised, it cannot be used to decrypt past sessions because unique session keys were used.",
+      "C": "To backup all encryption keys to the cloud.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific VPN protocol operates at the 'Network' layer (Layer 3) and is commonly used for site-to-site tunnels?",
+    "options": {
+      "A": "SSL/TLS",
+      "B": "IPsec",
+      "C": "HTTP",
+      "D": "SSH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Network Access Control' (NAC), what is 'Post-Admission' monitoring?",
+    "options": {
+      "A": "Checking a user's ID at the front door.",
+      "B": "Continuously checking a device's security posture (e.g., antivirus status) even after it has been granted access to the network.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Deep Packet Inspection' (DPI) allows a network device to examine the data part (payload) of a packet, not just the headers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unencrypted traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Honey Pot' in network security strategy?",
+    "options": {
+      "A": "A jar of honey kept in the breakroom.",
+      "B": "A decoy system or network designed to lure cyberattackers away from legitimate targets and study their methods.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific attack involves flooding a DNS server with requests to make it unable to respond to legitimate domain name resolution queries?",
+    "options": {
+      "A": "DNS Spoofing",
+      "B": "DNS Amplification / DDoS",
+      "C": "SQL Injection",
+      "D": "Phishing"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Split Tunneling' in a VPN allows a user to access the corporate network while simultaneously sending other traffic directly to the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile users",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'A' stand for in the 'CIA Triad' of security?",
+    "options": {
+      "A": "Authentication",
+      "B": "Availability",
+      "C": "Authorization",
+      "D": "Accounting"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technology is used to map a private IP address to a public IP address to allow internal devices to communicate on the internet?",
+    "options": {
+      "A": "DHCP",
+      "B": "NAT (Network Address Translation)",
+      "C": "VLAN",
+      "D": "BGP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Reverse Proxy' is used to protect web servers by acting as a gateway between the server and the internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'ARP Spoofing' (ARP Poisoning)?",
+    "options": {
+      "A": "Naming the servers after ARP.",
+      "B": "An attack where a malicious actor sends falsified ARP messages over a local area network to link their MAC address with the IP of a legitimate server.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard secure remote access over the web (HTTPS) for a firewall dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VLAN Hopping' is a security exploit where an attacker on one VLAN gains unauthorized access to traffic on other VLANs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Cisco switches",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sandboxing' in an advanced malware protection context?",
+    "options": {
+      "A": "Playing in a literal sandbox.",
+      "B": "Executing suspicious files in an isolated virtual environment to observe their behavior without risking the production system.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Asymmetric Encryption', which key is used by a sender to encrypt a message intended for a specific receiver?",
+    "options": {
+      "A": "The Sender's Private Key",
+      "B": "The Receiver's Public Key",
+      "C": "The Receiver's Private Key",
+      "D": "A shared secret key"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Loss Prevention' (DLP) tools are designed to detect and prevent unauthorized transmission of sensitive data outside the corporate network.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for email traffic",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lateral Movement' in a cyberattack?",
+    "options": {
+      "A": "Moving a server physically to the side.",
+      "B": "The process by which an attacker moves from an initially compromised host to other systems within the same network.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is typically used for unencrypted 'Telnet' access (which should be disabled for security)?",
+    "options": {
+      "A": "21",
+      "B": "23",
+      "C": "22",
+      "D": "25"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MAC Filtering' is considered a highly effective security measure for enterprise-grade wireless networks.",
+    "options": {
+      "A": "False (MAC addresses can be easily spoofed; it is a weak security measure on its own).",
+      "B": "True",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Egress Filtering' on a firewall?",
+    "options": {
+      "A": "Filtering the air coming out of the server.",
+      "B": "The practice of monitoring and restricting outbound traffic from your internal network to the internet.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is used by network devices to send event notifications and log data to a central management server?",
+    "options": {
+      "A": "HTTP",
+      "B": "Syslog",
+      "C": "FTP",
+      "D": "SMTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'TLS 1.3' is more secure and faster than its predecessor TLS 1.2 because it removes legacy cryptographic algorithms and reduces the handshake overhead.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google Chrome",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Micro-segmentation'?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Applying granular security policies at the individual workload or service level to prevent lateral movement.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a network interface indicates that a 'Duplex Mismatch' might be occurring?",
+    "options": {
+      "A": "High collision counts and late collisions.",
+      "B": "Throughput is too high.",
+      "C": "The color of the dashboard is green.",
+      "D": "The number of users is zero."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'WPA3' provides better protection against brute-force password cracking attempts than WPA2.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for personal networks",
+      "D": "Only in version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' on a network switch used for?",
+    "options": {
+      "A": "To secure the physical port with a lock.",
+      "B": "To restrict input to an interface by limiting and identifying the MAC addresses of the stations allowed to access the port.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'SNMP' used for network management and monitoring?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Anycast' routing can be used to improve the availability and security of DNS services by routing traffic to the nearest healthy server node.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'BGP Hijacking'?",
+    "options": {
+      "A": "Staling a literal router.",
+      "B": "When an attacker maliciously reroutes internet traffic by announcing false IP prefix information in the Border Gateway Protocol.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Concurrent Sessions' on a stateful firewall?",
+    "options": {
+      "A": "Throughput",
+      "B": "Session Count / Table Size",
+      "C": "Latency",
+      "D": "Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a network security term used to describe a firewall rule that can be applied multiple times without side effects.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Certificate Pinning' in a mobile application?",
+    "options": {
+      "A": "Pinning a physical certificate to a board.",
+      "B": "Hardcoding the server's public key or certificate into the app to prevent attackers from using forged certificates.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard unencrypted 'FTP'?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mimir' is a security-focused tool for identifying zero-day threats in network traffic.",
+    "options": {
+      "A": "False (Mimir is a long-term storage backend for metrics).",
+      "B": "True",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation for network security?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 isolation to logically separate groups of devices so they cannot communicate without a router.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a common security feature that prevents DDoS attacks.",
+    "options": {
+      "A": "False (Memory overcommit is a resource management feature; not a security tool).",
+      "B": "True",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control' (NAC)?",
+    "options": {
+      "A": "Locking the front door of the data center.",
+      "B": "A solution that ensures only authorized and compliant devices can connect to the network.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' storage traffic, which should be isolated for security?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can be used to increase network bandwidth and reliability for security appliances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in a secure network design?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining granular security rules for individual workloads to limit the blast radius of an attack.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a Prometheus monitoring stack for security?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common method for tracking the history of firewall rule changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal requirement that data is subject to the laws of the country in which it is physically located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Packet Loss Rate' on a network link?",
+    "options": {
+      "A": "Drop Percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' in network automation ensures that re-applying a firewall config doesn't break existing connections.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a security database?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating system-generated keys to protect the privacy of real IDs in a database.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures can use database-level security to restrict sensitive data access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in a secure network environment?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of automatically removing or masking sensitive data from logs and files.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' of security logs is common for compliance reporting.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Monitor'?",
+    "options": {
+      "A": "A physical screen for the server.",
+      "B": "A tool or dashboard that provides real-time visibility into security events across the network.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a security scan?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process of discovering and remediating flaws.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Governance'?",
+    "options": {
+      "A": "A framework for managing an organization's network resources and security policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern network infrastructure management.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for firewall rules?",
+    "options": {
+      "A": "The automated analysis of firewall configurations to find security flaws or redundant rules.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a network breach?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves testing a live network security appliance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' for network devices?",
+    "options": {
+      "A": "A structured process for managing passwords and keys for switches, routers, and firewalls.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which mechanism is used in BGP (Border Gateway Protocol) security to allow network operators to cryptographically verify that an AS is authorized to announce a specific IP prefix?",
+    "options": {
+      "A": "BGP-SEC",
+      "B": "RPKI (Resource Public Key Infrastructure)",
+      "C": "IPsec VTIs",
+      "D": "BGP Community Tags"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Zero Trust' architecture, what is the primary purpose of the 'Policy Decision Point' (PDP)?",
+    "options": {
+      "A": "To physically route the data packets to the destination.",
+      "B": "To evaluate access requests against defined security policies and decide whether to grant access to a resource.",
+      "C": "To act as a backup for the main firewall hardware.",
+      "D": "To encrypt the traffic between two internal servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'TLS Inspection' (Break-and-Inspect) involves the security appliance acting as a proxy that terminates the client's SSL connection and establishes a new one with the server to inspect encrypted payloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-banking traffic",
+      "D": "Only if using TLS 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical challenge of implementing 'MTLS' (Mutual TLS) at scale in a large microservices environment?",
+    "options": {
+      "A": "It requires manual password entry for every service.",
+      "B": "The complexity of automated certificate issuance, distribution, and rotation for thousands of short-lived service identities.",
+      "C": "It only works with Java-based services.",
+      "D": "It increases the physical size of the data packets by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which packet analysis tool would you use to identify 'TCP Retransmissions' and 'Window Full' errors that indicate network congestion or a potential DoS attack?",
+    "options": {
+      "A": "Wireshark / tcpdump",
+      "B": "Nmap",
+      "C": "Ping",
+      "D": "Traceroute"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a Software-Defined Perimeter (SDP) architecture, what is 'Single Packet Authorization' (SPA)?",
+    "options": {
+      "A": "A way to send data using only one packet.",
+      "B": "A security method that uses a single, cryptographically signed packet to 'knock' on a hidden port to request access before the firewall opens a connection.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Perfect Forward Secrecy' (PFS) ensures that if a server's long-term private key is leaked in the future, it cannot be used to decrypt historical traffic captures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AES-256",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Status' on a Cisco switch port indicates that 'BPDU Guard' has disabled the port because it received a Spanning Tree packet on an Access port?",
+    "options": {
+      "A": "Err-disabled",
+      "B": "Shutdown",
+      "C": "Blocked",
+      "D": "Listen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of an 'HSM' (Hardware Security Module) in a secure network hierarchy?",
+    "options": {
+      "A": "To provide physical cooling for the routers.",
+      "B": "A dedicated physical device that safeguards and manages digital keys for strong authentication and provides crypto-processing.",
+      "C": "To act as a secondary network switch.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Domain Fronting' is a technique used by attackers (and some privacy tools) to hide the true destination of a connection by using a different domain in the SNI header than in the HTTP Host header.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does a 'TCP Half-Open' (SYN Flood) attack specifically target on a server?",
+    "options": {
+      "A": "The physical power supply.",
+      "B": "The connection queue (backlog) of the operating system, filling it with incomplete handshakes so legitimate users cannot connect.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The newest version of the firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'IKE' (Internet Key Exchange) protocol used in IPsec VPNs?",
+    "options": {
+      "A": "UDP 500",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'IPS evasion' techniques like 'Fragmentation' involve breaking an attack payload into smaller pieces to bypass signature-based detection systems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unencrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical difference between 'Tunnel Mode' and 'Transport Mode' in IPsec?",
+    "options": {
+      "A": "Tunnel mode is only for files; Transport is for data.",
+      "B": "Tunnel mode encrypts the entire IP packet (including the original header); Transport mode only encrypts the payload of the IP packet.",
+      "C": "Tunnel mode is always faster.",
+      "D": "Transport mode requires a physical cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Jitter' on a network path, which is critical for the stability of secure VOIP or video tunnels?",
+    "options": {
+      "A": "Variation in packet delay (ms).",
+      "B": "Total Throughput.",
+      "C": "CPU Utilization.",
+      "D": "Memory Usage."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'OCSP Stapling' improves privacy and performance by having the web server provide the certificate revocation status to the client, rather than the client contacting the CA directly.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for self-signed certificates",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DACL' (Discretionary Access Control List) in a network policy context?",
+    "options": {
+      "A": "A physical list of who can enter the room.",
+      "B": "A set of permissions that allows the owner of a resource to decide who can access that specific resource.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the TSDB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Advanced Persistent Threat' (APT) analysis, what is the 'Command and Control' (C2) phase?",
+    "options": {
+      "A": "The phase where the attacker physically enters the building.",
+      "B": "The stage where the compromised system communicates with an external server controlled by the attacker to receive instructions or exfiltrate data.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Network Steganography' is the practice of hiding data within legitimate network traffic protocols (like embedding data in TCP timestamps or DNS queries).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only in virtualized environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'SIEM' (Security Information and Event Management) system in network security?",
+    "options": {
+      "A": "To block traffic at the perimeter.",
+      "B": "To collect, aggregate, and analyze log data from multiple sources to provide real-time security alerts and historical analysis.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stateful Packet Inspection' (SPI) firewalls are capable of tracking the sequence numbers of TCP packets to prevent session hijacking.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' segmentation 'Isolating'?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using Layer 2 isolation to ensure that different network segments cannot communicate without passing through a Layer 3 gateway or firewall.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' management?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Memory Overcommit' is a feature of virtualization that allows more RAM to be assigned than is physically present, but it does not provide security isolation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'IAM' policies?",
+    "options": {
+      "A": "Moving a physical hard drive.",
+      "B": "Granular permissions defined in the cloud to control which users and services can access specific network resources and APIs.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'iSCSI' traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 80",
+      "C": "UDP 500",
+      "D": "TCP 443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'LACP' can be used to increase bandwidth for high-performance security appliances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' using 'Security Groups'?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Defining firewall-like rules at the individual instance level to enforce zero trust within a single subnet.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active time series' in a Prometheus monitoring stack?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics",
+      "C": "node_active_series",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'SCD Type 4' is a common method for tracking the history of firewall rule changes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for customer data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "Naming the database after a president.",
+      "B": "The legal requirement that data is subject to the laws of the country where it is physically located.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of an automated security scan?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Success rate",
+      "C": "Throughput",
+      "D": "Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Idempotency' is a goal for network configuration management to ensure that re-running a script doesn't cause errors.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Surrogate Key' generation in a security context?",
+    "options": {
+      "A": "Naming the servers after keys.",
+      "B": "The process of creating unique, non-identifying keys for records in a database to protect real data.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+    "options": {
+      "A": "1433",
+      "B": "3306",
+      "C": "5432",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'ELT' architectures can use database-level security to restrict sensitive data access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Scrubbing' in network security?",
+    "options": {
+      "A": "Wiping the hard drive.",
+      "B": "The process of removing sensitive data from logs and communications.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Batch Processing' of security logs is common for large-scale compliance auditing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security Monitor' architecture?",
+    "options": {
+      "A": "A physical screen for the server.",
+      "B": "A system that provides continuous oversight of network traffic and security events.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Success Rate' of a security scan?",
+    "options": {
+      "A": "Pass / Fail percentage",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Vulnerability Management' is a continuous process.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Governance' framework?",
+    "options": {
+      "A": "A structured approach to managing an organization's network resources and security policies.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DevSecOps is a key part of modern software development.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Analysis' for security rules?",
+    "options": {
+      "A": "The automated analysis of security configurations without executing them.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Time to Detect' a security breach?",
+    "options": {
+      "A": "MTTD (Mean Time To Detect)",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Analysis' involves testing a live system.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secrets Management' for security devices?",
+    "options": {
+      "A": "A structured process for managing passwords and keys for network hardware.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Container Security' includes image scanning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+    "options": {
+      "A": "A model where both the provider and the customer have security duties.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Unauthorized Access Attempts'?",
+    "options": {
+      "A": "Attempt Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Shift-Left' security means moving security testing earlier in the lifecycle.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Modeling'?",
+    "options": {
+      "A": "The process of identifying and evaluating potential security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network security is essential for protecting sensitive information.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Encryption'?",
+    "options": {
+      "A": "The process of encoding data so that only authorized parties can read it.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active VPN Users'?",
+    "options": {
+      "A": "User Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Firewalls are a primary defense in network security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Access Control'?",
+    "options": {
+      "A": "The process of identifying and evaluating network security threats.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: VPNs encrypt data between two points.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Network Hardening'?",
+    "options": {
+      "A": "The process of securing a network by reducing its attack surface.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+    "options": {
+      "A": "Drop Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: SSL/TLS provides encryption for web traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "The fraudulent practice of sending emails to induce individuals to reveal personal info.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  }
+  ]
+}

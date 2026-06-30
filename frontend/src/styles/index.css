@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  /* Main Colors */
+  --navy-primary: #0A192F;
+  /* Deep Navy - Sidebar/Header */
+  --navy-secondary: #112240;
+  /* Lighter Navy */
+  --blue-accent: #4F46E5;
+  /* Balanced Indigo - Primary Brand Color */
+  --blue-secondary: #3730A3;
+  /* Deeper Indigo for contrast */
+
+  /* Backgrounds */
+  --bg-main: #FFFFFF;
+  /* Light Blueish Gray - Main Background */
+  --bg-white: #FFFFFF;
+  /* Cards */
+
+  /* Text Colors */
+  --text-main: #2B3674;
+  /* Primary Text */
+  --text-secondary: #A3AED0;
+  /* Secondary/Muted Text */
+  --text-on-dark: #FFFFFF;
+  /* Text on Navy backgrounds */
+
+  /* Status Colors */
+  --status-success: #05CD99;
+  --status-warning: #FFB547;
+  --status-error: #EE5D50;
+
+  /* Shadows */
+  --shadow-sm: 0px 2px 4px rgba(112, 144, 176, 0.12);
+  --shadow-lg: 0px 18px 40px rgba(112, 144, 176, 0.12);
+
+  /* Spacing */
+  --radius-lg: 20px;
+  --radius-md: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: 'DM Sans', sans-serif;
+  /* Clean, modern sans-serif */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Poppins', sans-serif;
+  /* More character for headings */
+  color: var(--text-main);
+  margin: 0;
+}
+
+/* Hide default browser password reveal icons to prevent "double eye" issue */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none !important;
+}
+
+input::-webkit-contacts-auto-fill-button,
+input::-webkit-credentials-auto-fill-button {
+  visibility: hidden !important;
+  display: none !important;
+  pointer-events: none !important;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+/* -- Global Back Button -- */
+.global-btn-back { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.55rem 1.1rem 0.55rem 0.85rem; background: #f1f5f9; border: 1.5px solid #cbd5e1; border-radius: 9px; color: #334155; font-size: 0.8125rem; font-weight: 700; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; }
+.global-btn-back svg { color: #64748b; transition: transform 0.18s ease; }
+.global-btn-back:hover { background: #e2e8f0; border-color: #94a3b8; color: #0f172a; }
+.global-btn-back:hover svg { transform: translateX(-2px); color: #1e40af; }
+.global-btn-back:active { background: #cbd5e1; transform: scale(0.97); }

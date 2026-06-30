@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Transformers", 
+  "questions": [
+    {
+    "question": "What is the primary innovation introduced by the Transformer architecture compared to RNNs?",
+    "options": {
+      "A": "The use of physical gears in the processor.",
+      "B": "The Self-Attention mechanism, which allows for parallel processing of sequences.",
+      "C": "The ability to delete data while training.",
+      "D": "A requirement for manual translation by human experts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which famous research paper introduced the Transformer model?",
+    "options": {
+      "A": "Deep Learning for Beginners",
+      "B": "Attention is All You Need",
+      "C": "The Future of GPT",
+      "D": "Neural Networks Explained"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are the two main components of the original Transformer architecture?",
+    "options": {
+      "A": "The Input and the Output",
+      "B": "The Encoder and the Decoder",
+      "C": "The CPU and the GPU",
+      "D": "The Text and the Image"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Transformer, what is the purpose of 'Positional Encoding'?",
+    "options": {
+      "A": "To keep track of the server's physical location.",
+      "B": "To provide the model with information about the order of tokens in a sequence.",
+      "C": "To encrypt the user's password.",
+      "D": "To increase the brightness of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism allows a Transformer to weigh the importance of different words in a sentence relative to each other?",
+    "options": {
+      "A": "Binary Search",
+      "B": "Self-Attention",
+      "C": "Data Compression",
+      "D": "Random Sampling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'GPT' stand for?",
+    "options": {
+      "A": "General Processing Tool",
+      "B": "Generative Pre-trained Transformer",
+      "C": "Global Protocol Template",
+      "D": "Grid Power Technology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'BERT' stand for?",
+    "options": {
+      "A": "Binary Encoding Real-time Task",
+      "B": "Bidirectional Encoder Representations from Transformers",
+      "C": "Basic Electronic Reporting Tool",
+      "D": "Bulk Encryption Reporting Template"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which company originally developed the Transformer architecture?",
+    "options": {
+      "A": "Apple",
+      "B": "Google",
+      "C": "Microsoft",
+      "D": "Tesla"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Token' in the context of Transformers?",
+    "options": {
+      "A": "A physical coin used to pay for API usage.",
+      "B": "A small unit of text, such as a word or a sub-word.",
+      "C": "A high-security encryption key.",
+      "D": "A type of computer hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular library for using pre-trained Transformer models?",
+    "options": {
+      "A": "Django",
+      "B": "Hugging Face Transformers",
+      "C": "Flask",
+      "D": "Matplotlib"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Multi-Head Attention' layer?",
+    "options": {
+      "A": "To run the model on multiple different computers at once.",
+      "B": "To allow the model to jointly attend to information from different representation subspaces.",
+      "C": "To count the number of users connected to the AI.",
+      "D": "To increase the physical cooling of the GPU chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-training' in the context of Transformers?",
+    "options": {
+      "A": "Exercising before writing code.",
+      "B": "Training a model on a massive dataset before fine-tuning it for a specific task.",
+      "C": "Deleting the dataset before the final training starts.",
+      "D": "Setting up the computer hardware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component follows the Attention layer in a Transformer block?",
+    "options": {
+      "A": "The Input Layer",
+      "B": "Feed-Forward Neural Network",
+      "C": "The Word Processor",
+      "D": "The Storage Drive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fine-tuning'?",
+    "options": {
+      "A": "Repairing the physical components of the server.",
+      "B": "Adjusting a pre-trained model on a smaller, task-specific dataset.",
+      "C": "Hiring a new developer for the project.",
+      "D": "Changing the color of the user interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' used for in the Attention mechanism?",
+    "options": {
+      "A": "To make the computer case softer.",
+      "B": "To convert attention scores into a probability distribution that sums to 1.",
+      "C": "To delete zero-value tokens from memory.",
+      "D": "To increase the training speed by 100%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Query, Key, and Value' vectors used for?",
+    "options": {
+      "A": "To manage the database passwords.",
+      "B": "To calculate the attention weights for each token.",
+      "C": "To count the number of epochs.",
+      "D": "To backup the model weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Transformer model is 'Encoder-only'?",
+    "options": {
+      "A": "GPT-3",
+      "B": "BERT",
+      "C": "T5",
+      "D": "LLaMA"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Transformer model is 'Decoder-only'?",
+    "options": {
+      "A": "BERT",
+      "B": "GPT",
+      "C": "RoBERTa",
+      "D": "ALBERT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'T' in BERT and GPT stand for?",
+    "options": {
+      "A": "Technology",
+      "B": "Transformer",
+      "C": "Template",
+      "D": "Task"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised Learning'?",
+    "options": {
+      "A": "Learning without any computer software.",
+      "B": "A form of learning where the data itself provides the labels (e.g., predicting the next word).",
+      "C": "Learning by watching a human teacher.",
+      "D": "Deleting data that is hard to learn."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word Embedding'?",
+    "options": {
+      "A": "Printing words on a piece of paper.",
+      "B": "The numerical representation of words as dense vectors.",
+      "C": "Writing words in a secret code.",
+      "D": "Using a very small font size for text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Layer Normalization' in a Transformer?",
+    "options": {
+      "A": "Ensuring every floor of the office is clean.",
+      "B": "A technique to stabilize the hidden state dynamics and reduce training time.",
+      "C": "A way to count the number of layers.",
+      "D": "A security scan for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Context Window'?",
+    "options": {
+      "A": "A physical window in the server room.",
+      "B": "The maximum number of tokens a model can process at once.",
+      "C": "The size of the computer screen.",
+      "D": "The amount of time the model is online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Pre-training' task for BERT?",
+    "options": {
+      "A": "Predicting the stock market.",
+      "B": "Masked Language Modeling (MLM).",
+      "C": "Sorting files by date.",
+      "D": "Recording the user's voice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which task involves translating one language to another using a Transformer?",
+    "options": {
+      "A": "Sentiment Analysis",
+      "B": "Machine Translation",
+      "C": "Object Detection",
+      "D": "Folder Organization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention Masking'?",
+    "options": {
+      "A": "Wearing a physical mask while using AI.",
+      "B": "Preventing certain tokens from being attended to (e.g., padding tokens).",
+      "C": "A way to hide the model's source code.",
+      "D": "A security feature for passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transfer Learning' in Transformers?",
+    "options": {
+      "A": "Moving a model from a USB drive to a cloud.",
+      "B": "Applying a model trained on one task to a different but related task.",
+      "C": "Teaching a model to walk like a human.",
+      "D": "Sending data between two different companies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Transformer architecture is designed to handle both encoding and decoding (e.g., T5)?",
+    "options": {
+      "A": "Encoder-only",
+      "B": "Encoder-Decoder",
+      "C": "Decoder-only",
+      "D": "Unidirectional-only"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Residual Connection' (or Skip Connection)?",
+    "options": {
+      "A": "A connection to a backup battery.",
+      "B": "A mechanism that adds the input of a layer to its output to help gradients flow.",
+      "C": "A way to skip the training process.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dropout' used for in Transformer training?",
+    "options": {
+      "A": "To drop the model into a recycling bin.",
+      "B": "To prevent overfitting by randomly setting some activations to zero.",
+      "C": "To increase the training time.",
+      "D": "To reduce the internet bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which part of the Transformer generates the output one token at a time?",
+    "options": {
+      "A": "The Encoder",
+      "B": "The Decoder",
+      "C": "The Hard Drive",
+      "D": "The Input Embedding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BPE' (Byte Pair Encoding)?",
+    "options": {
+      "A": "A type of physical battery.",
+      "B": "A subword tokenization method used by many Transformer models.",
+      "C": "A way to encrypt text files.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Pre-trained' imply?",
+    "options": {
+      "A": "The model was trained before the internet was invented.",
+      "B": "The model has already been trained on a large dataset and is ready for use or fine-tuning.",
+      "C": "The model is very smart.",
+      "D": "The model is zero words long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequence-to-Sequence' (Seq2Seq)?",
+    "options": {
+      "A": "Ordering numbers from 1 to 10.",
+      "B": "A task that maps an input sequence to an output sequence (like translation).",
+      "C": "A way to backup files in order.",
+      "D": "A specific type of GPU cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Head' in Multi-Head Attention?",
+    "options": {
+      "A": "The most important token.",
+      "B": "A single attention mechanism working in parallel with others.",
+      "C": "The top layer of the network.",
+      "D": "The CPU of the computer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parameter Count' in a Transformer model?",
+    "options": {
+      "A": "The number of users on a platform.",
+      "B": "The total number of learnable weights and biases in the model.",
+      "C": "The number of pages in the model's manual.",
+      "D": "The physical weight of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-shot Learning'?",
+    "options": {
+      "A": "A model that never works.",
+      "B": "The ability of a model to perform a task it was not explicitly trained for.",
+      "C": "Training with zero data points.",
+      "D": "A model with only one neuron."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prompting'?",
+    "options": {
+      "A": "Fixing an engine quickly.",
+      "B": "Providing input text to an LLM to guide its output.",
+      "C": "Designing a new computer chip.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which activation function is most commonly used in the feed-forward layers of the original Transformer?",
+    "options": {
+      "A": "Sigmoid",
+      "B": "ReLU",
+      "C": "Tanh",
+      "D": "Linear"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Attention'?",
+    "options": {
+      "A": "Being angry at the model's output.",
+      "B": "An attention layer where the queries come from the decoder and keys/values come from the encoder.",
+      "C": "Mixing two different neural networks.",
+      "D": "A mechanism for skipping certain layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Scaling' a Transformer typically involve?",
+    "options": {
+      "A": "Weighing the computer hardware.",
+      "B": "Increasing the number of layers, hidden units, and parameters.",
+      "C": "Changing the color of the icons.",
+      "D": "Using a larger font size for reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inference'?",
+    "options": {
+      "A": "Training the model from scratch.",
+      "B": "Using a trained model to make a prediction on new data.",
+      "C": "Designing the model architecture.",
+      "D": "Collecting data for a project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention Weight'?",
+    "options": {
+      "A": "The physical weight of the brain.",
+      "B": "A numerical value representing how much 'attention' one token should pay to another.",
+      "C": "The price of the AI software.",
+      "D": "The number of hours spent training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subword' tokenization?",
+    "options": {
+      "A": "Deleting parts of a word.",
+      "B": "Breaking words into smaller units to handle rare words and improve vocabulary efficiency.",
+      "C": "Adding letters to a word.",
+      "D": "Translating words into binary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Masking' in a Decoder-only model (like GPT)?",
+    "options": {
+      "A": "Hiding the AI's identity.",
+      "B": "Ensuring tokens can only look at previous tokens and not future ones.",
+      "C": "A security scan of the logs.",
+      "D": "A way to encrypt data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Large Language Model' (LLM)?",
+    "options": {
+      "A": "A model that speaks a very loud language.",
+      "B": "A Transformer-based model with billions of parameters trained on vast amounts of text.",
+      "C": "A model used by only large companies.",
+      "D": "A specialized software for linguistics."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in the Transformer handles the element-wise transformations?",
+    "options": {
+      "A": "Self-Attention",
+      "B": "Feed-Forward Network",
+      "C": "Input Embedding",
+      "D": "Output Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dimension' (d_model) of a Transformer?",
+    "options": {
+      "A": "The physical height of the server rack.",
+      "B": "The size of the hidden vector representations throughout the model.",
+      "C": "The number of pages in the documentation.",
+      "D": "The width of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Beam Search'?",
+    "options": {
+      "A": "Searching for files with a laser.",
+      "B": "A decoding technique that explores multiple possible next tokens to find the best overall sequence.",
+      "C": "A type of data compression.",
+      "D": "A way to count characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cosine Similarity' often used for in Transformer evaluations?",
+    "options": {
+      "A": "To measure the heat of the GPU.",
+      "B": "To calculate the similarity between two vector embeddings.",
+      "C": "To count the number of words.",
+      "D": "To increase the training speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-modal' Transformer?",
+    "options": {
+      "A": "A model that uses multiple different CPUs.",
+      "B": "A model that can process different types of data, such as text and images.",
+      "C": "A model used by many different countries.",
+      "D": "A model that is very expensive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'T5' (Text-to-Text Transfer Transformer)?",
+    "options": {
+      "A": "A model that only works with five words.",
+      "B": "A unified framework that treats every NLP task as a text-to-text problem.",
+      "C": "A type of robot from the future.",
+      "D": "A way to backup text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention Head' 'Redundancy'?",
+    "options": {
+      "A": "Having too many heads on a robot.",
+      "B": "The finding that many attention heads can be pruned without losing much accuracy.",
+      "C": "A bug in the attention mechanism.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Embedding Layer'?",
+    "options": {
+      "A": "A layer of plastic protecting the hardware.",
+      "B": "The first layer of the model that converts token IDs into vectors.",
+      "C": "The final layer that produces the text.",
+      "D": "A security scan for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contextual' Word Representation?",
+    "options": {
+      "A": "A word representation that never changes.",
+      "B": "A representation where the meaning of a word depends on its surrounding words.",
+      "C": "A way to hide word meanings.",
+      "D": "A dictionary of all words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RoBERTa'?",
+    "options": {
+      "A": "A famous female scientist.",
+      "B": "A robustly optimized version of BERT.",
+      "C": "A robot that can write code.",
+      "D": "A security certificate for AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Few-shot prompting'?",
+    "options": {
+      "A": "Training a model with only one layer.",
+      "B": "Providing a few examples in the input prompt to help the model understand the task.",
+      "C": "A model that only works for five minutes.",
+      "D": "Hiring a few developers to work on a model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' 'Temperature'?",
+    "options": {
+      "A": "The physical heat of the server.",
+      "B": "A parameter used to control the randomness of the model's predictions.",
+      "C": "The duration of the training session.",
+      "D": "The number of neurons in the hidden layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Position Embedding' vs 'Positional Encoding'?",
+    "options": {
+      "A": "They are identical in modern models.",
+      "B": "Encoding is usually fixed (sines), while Embedding is learned during training.",
+      "C": "Encoding is for images; Embedding is for text.",
+      "D": "One is much faster than the other."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bilingual' BERT (mBERT)?",
+    "options": {
+      "A": "A BERT model that speaks two languages only.",
+      "B": "A BERT model pre-trained on text from 100+ languages.",
+      "C": "A model that can translate code into English.",
+      "D": "A security protocol for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distillation' (e.g., DistilBERT)?",
+    "options": {
+      "A": "Purifying the code to remove bugs.",
+      "B": "A process of training a smaller model to mimic a larger, more complex model.",
+      "C": "Turning a neural network into a chip.",
+      "D": "Hiding the model from competitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' integration with Transformers?",
+    "options": {
+      "A": "Drawing a chart of the researcher's knowledge.",
+      "B": "Enhancing Transformer models with structured real-world knowledge.",
+      "C": "A way to translate code into images.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autoregressive' model?",
+    "options": {
+      "A": "A model that drives a car.",
+      "B": "A model that predicts the next value in a sequence based on previous values.",
+      "C": "A model that is 100% accurate.",
+      "D": "A model that has zero input layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unidirectional' Attention?",
+    "options": {
+      "A": "Attention that only works on one word.",
+      "B": "Attention where tokens only attend to previous tokens (used in GPT).",
+      "C": "Attention that only works in one direction in the data center.",
+      "D": "A way to count the number of tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bidirectional' Attention?",
+    "options": {
+      "A": "Attention where tokens can attend to both previous and future tokens (used in BERT).",
+      "B": "Two models from different countries talking.",
+      "C": "A model that has zero hidden layers.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Output Logits'?",
+    "options": {
+      "A": "The raw, unnormalized scores produced by the final layer before Softmax.",
+      "B": "The final probability distribution.",
+      "C": "The user's password.",
+      "D": "The size of the output file."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical reason for scaling the dot product of Query and Key by the square root of the dimension (d_k)?",
+    "options": {
+      "A": "To compress the attention matrix and save VRAM usage.",
+      "B": "To prevent the dot product from becoming too large, which would result in extremely small gradients from the Softmax function.",
+      "C": "To ensure the attention weights are always positive integers.",
+      "D": "To normalize the input embeddings to have a mean of zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific architectural bottleneck does the 'Reformer' model address using Locality-Sensitive Hashing (LSH)?",
+    "options": {
+      "A": "The vanishing gradient problem in deep encoders.",
+      "B": "The discrepancy between teacher forcing and inference.",
+      "C": "The O(n^2) complexity of the standard self-attention mechanism.",
+      "D": "The lack of support for multi-modal data."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Layer Normalization' (LayerNorm) specifically normalizing in a Transformer block?",
+    "options": {
+      "A": "The weights across the entire batch dimension.",
+      "B": "The activations across the features for each individual training example.",
+      "C": "The learning rate for each specific attention head.",
+      "D": "The total number of parameters in the feed-forward network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Pre-training', what does the 'Next Sentence Prediction' (NSP) task in BERT help the model understand?",
+    "options": {
+      "A": "How to translate sentences into different languages.",
+      "B": "The relationship and coherence between two sentences.",
+      "C": "The emotional tone or sentiment of a paragraph.",
+      "D": "The exact grammatical role of every word in a sequence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main advantage of 'GELU' (Gaussian Error Linear Unit) over standard 'ReLU' in models like BERT?",
+    "options": {
+      "A": "It is 10x faster to compute on a CPU.",
+      "B": "It is a smoother non-linear activation that provides better gradients near zero.",
+      "C": "It automatically prunes zero-value weights during training.",
+      "D": "It forces all negative inputs to be exactly -1."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'ALICE' (or ALBERT) reduce the parameter count of a standard BERT model?",
+    "options": {
+      "A": "By deleting every second layer of the network.",
+      "B": "Through factorized embedding parameterization and cross-layer parameter sharing.",
+      "C": "By using 8-bit quantization during the training phase.",
+      "D": "By restricting the vocabulary to only 1,000 words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Exposure Bias' problem in Transformer-based text generation?",
+    "options": {
+      "A": "The model being exposed to offensive content in the dataset.",
+      "B": "The accumulation of errors during inference because the model is never exposed to its own mistakes during training.",
+      "C": "A security risk where the model exposes user passwords.",
+      "D": "A bias toward using only shorter words in generated summaries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Relative Positional Encodings' as used in models like T5?",
+    "options": {
+      "A": "To track the user's location relative to the server.",
+      "B": "To allow the model to focus on the distance between tokens rather than their absolute index positions.",
+      "C": "To rotate the word embeddings by a specific degree.",
+      "D": "To ensure the model only processes tokens from left to right."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Long-former' or 'BigBird' models, what is 'Global Attention'?",
+    "options": {
+      "A": "Attention that is shared across all models in the world.",
+      "B": "Designated tokens (like [CLS]) that attend to all other tokens to capture global context while others use local windows.",
+      "C": "A way to increase the internet bandwidth during model training.",
+      "D": "The ability of the model to translate into every language at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Label Smoothing' accomplish during the training of a Transformer?",
+    "options": {
+      "A": "It makes the labels easier to read for human evaluators.",
+      "B": "It prevents the model from becoming too confident in its predictions, acting as a regularizer.",
+      "C": "It deletes labels that are identified as outliers.",
+      "D": "It changes all multi-class labels into a single binary label."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mechanism is used in 'Cross-Attention' to align the Encoder and Decoder?",
+    "options": {
+      "A": "The Query comes from the encoder; Key and Value from the decoder.",
+      "B": "The Query comes from the decoder; Key and Value from the encoder.",
+      "C": "The Encoder and Decoder share the exact same Query vector.",
+      "D": "Cross-Attention does not use Queries or Keys."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bottleneck Layer' in a factorized Transformer embedding layer?",
+    "options": {
+      "A": "A layer that slows down the network to prevent overheating.",
+      "B": "A smaller dimension used to project words before mapping them to the larger hidden dimension.",
+      "C": "The very last layer of the decoder block.",
+      "D": "A security layer used to stop malicious prompts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient Clipping' used for in large-scale Transformer training?",
+    "options": {
+      "A": "To remove small gradients to save memory.",
+      "B": "To cap the maximum norm of gradients to prevent them from exploding.",
+      "C": "To ensure every weight update is a positive number.",
+      "D": "To cut the training time in half."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a key feature of the 'RoBERTa' model?",
+    "options": {
+      "A": "It uses a smaller vocabulary than BERT.",
+      "B": "It was trained with larger batches and for more steps while removing the NSP task.",
+      "C": "It is an encoder-only model designed specifically for mobile phones.",
+      "D": "It introduces a new convolutional layer before the attention block."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subword Tokenization' (e.g., WordPiece) designed to prevent?",
+    "options": {
+      "A": "The model from using too much electricity.",
+      "B": "The 'Out-of-Vocabulary' (OOV) problem by breaking unknown words into meaningful sub-units.",
+      "C": "The model from generating sentences that are too long.",
+      "D": "The deletion of punctuation marks from the source text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Auto-regressive' decoding, what does 'Top-K Sampling' do?",
+    "options": {
+      "A": "It picks the top K words from the whole internet.",
+      "B": "It restricts the next token selection to the K most likely candidates from the probability distribution.",
+      "C": "It multiplies the probability of the top word by K.",
+      "D": "It deletes the K least likely words from the vocabulary permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Distillation' in the context of Transformers?",
+    "options": {
+      "A": "Purifying the training data to remove noise.",
+      "B": "Training a smaller 'student' model to mimic the output distribution of a larger 'teacher' model.",
+      "C": "Hiding the model's logic from competitors.",
+      "D": "Turning a neural network into a hardware chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'FFN' (Feed-Forward Network) within a Transformer block?",
+    "options": {
+      "A": "To process different tokens in the sequence sequentially.",
+      "B": "To apply non-linear transformations to each position independently and identically.",
+      "C": "To calculate the attention weights between different heads.",
+      "D": "To reduce the dimensionality of the hidden states."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Symmetry Breaking' mean in Transformer weight initialization?",
+    "options": {
+      "A": "Breaking the physical symmetry of the GPU racks.",
+      "B": "Ensuring weights are initialized to different values so neurons learn different features.",
+      "C": "Making the encoder and decoder different sizes.",
+      "D": "Using negative numbers for all bias terms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-modal' training?",
+    "options": {
+      "A": "Training the model in multiple different countries.",
+      "B": "Training a model on different types of data (e.g., text and images) simultaneously.",
+      "C": "Using multiple different programming languages in one script.",
+      "D": "A model that can only work in one specific mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific purpose of the '[CLS]' token in BERT?",
+    "options": {
+      "A": "To Clear Last Sentence data from the memory.",
+      "B": "To provide an aggregate sequence representation for classification tasks.",
+      "C": "To indicate the start of a translation task.",
+      "D": "To encrypt the final output of the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Weight Tying'?",
+    "options": {
+      "A": "Tying the physical power cables of the cluster together.",
+      "B": "Sharing the same weight matrix between the input embedding and the output linear layer.",
+      "C": "Locking the weights so they cannot be updated during training.",
+      "D": "A way to backup weights on a cloud server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prompt Tuning'?",
+    "options": {
+      "A": "Writing very polite prompts to the AI.",
+      "B": "Keeping the model weights frozen and only learning a task-specific vector (soft prompt) in the input space.",
+      "C": "Manually editing the model's code to change its personality.",
+      "D": "Increasing the speed of the prompt response."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'LoRA' (Low-Rank Adaptation)?",
+    "options": {
+      "A": "A new brand of high-performance GPUs.",
+      "B": "A parameter-efficient fine-tuning method that adds small, trainable rank-decomposition matrices to Transformer layers.",
+      "C": "A way to decrease the learning rate for mobile devices.",
+      "D": "A specialized software for audio transcription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'FlashAttention'?",
+    "options": {
+      "A": "It makes the computer screen flash when an error occurs.",
+      "B": "It optimizes GPU memory usage (IO-aware) to make attention much faster and memory-efficient.",
+      "C": "It allows the model to process data in 'flash' time (nanoseconds).",
+      "D": "It automatically generates high-quality images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the term 'Billion-parameter model' refer to?",
+    "options": {
+      "A": "A model that costs one billion dollars to train.",
+      "B": "A model with a total count of learnable weights and biases exceeding one billion.",
+      "C": "A model that can process one billion words per second.",
+      "D": "A model used by one billion people."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Precision Training'?",
+    "options": {
+      "A": "Mixing different languages in the training dataset.",
+      "B": "Using both 16-bit (FP16) and 32-bit (FP32) floating-point types to speed up training and save memory.",
+      "C": "Training on both GPUs and CPUs at the same time.",
+      "D": "Using two different brands of GPUs in one cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Causal' Language Model?",
+    "options": {
+      "A": "A model that only predicts events that have a clear cause.",
+      "B": "A model that predicts the next token based only on previous tokens, without looking at the future.",
+      "C": "A model that has no accuracy and works by chance.",
+      "D": "A model used for identifying the cause of software bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Top-P Sampling' (also known as Nucleus Sampling)?",
+    "options": {
+      "A": "Picking the top 'P' most expensive words from the vocabulary.",
+      "B": "Sampling from the smallest set of tokens whose cumulative probability exceeds the threshold P.",
+      "C": "A way to ensure the model only uses the top 100 words.",
+      "D": "Deleting tokens that have a probability of exactly zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' 'Scaling Factor'?",
+    "options": {
+      "A": "A way to scale the resolution of an image.",
+      "B": "Dividing the dot product by the square root of the dimension to maintain stable variance in the Softmax layer.",
+      "C": "Increasing the learning rate by 10% every epoch.",
+      "D": "The number of neurons in the hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific layer handles the skip-connection addition in a Transformer block?",
+    "options": {
+      "A": "The Attention layer.",
+      "B": "The Add & Norm layer.",
+      "C": "The Feed-Forward layer.",
+      "D": "The Output layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Position Embedding' (learned) vs 'Position Encoding' (fixed)?",
+    "options": {
+      "A": "They are the exact same thing.",
+      "B": "Encoding uses predefined math functions (like sines); Embedding learns unique vectors during training.",
+      "C": "Embedding is only for images; Encoding for text.",
+      "D": "Encoding is 100x faster than Embedding."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Lingual' Pre-training (XLM)?",
+    "options": {
+      "A": "Translating all training data into English.",
+      "B": "Training a model on text from multiple languages simultaneously using a shared vocabulary.",
+      "C": "Two models from different countries talking to each other.",
+      "D": "A model that has zero accuracy in English."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BERT' 'MLM' (Masked Language Modeling) objective?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A task where 15% of tokens are hidden and the model predicts them using context from both sides.",
+      "C": "A model that has zero output layer.",
+      "D": "A model that is used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPT' 'Causal' 'Masking'?",
+    "options": {
+      "A": "A model that can only decode images.",
+      "B": "A triangular mask that prevents tokens from 'looking ahead' at future tokens during training.",
+      "C": "A model that has zero input layer.",
+      "D": "A model used by students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Perplexity' in the evaluation of Transformers?",
+    "options": {
+      "A": "The level of confusion in the research team.",
+      "B": "A metric that measures how well the model predicts the next token (lower is better).",
+      "C": "The total file size of the model.",
+      "D": "The number of attention heads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checkpointing' in training?",
+    "options": {
+      "A": "Checking the model's grades.",
+      "B": "Saving the model weights at regular intervals so training can be resumed if it fails.",
+      "C": "Deleting the model after every epoch.",
+      "D": "A security check for the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Vanishing Gradient' 'Solution'?",
+    "options": {
+      "A": "The model becoming too colorful.",
+      "B": "Using Residual (Skip) Connections and Layer Normalization to ensure gradients can flow back.",
+      "C": "A problem with too much data.",
+      "D": "A bug in the pooling layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-Shot' 'Prompting'?",
+    "options": {
+      "A": "A model that has zero accuracy.",
+      "B": "Giving the model a task description without any previous examples in the prompt.",
+      "C": "A prompt that has zero words.",
+      "D": "A way to restart the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble' 'Method' 'Bagging'?",
+    "options": {
+      "A": "Putting the computer in a bag.",
+      "B": "A technique where multiple versions of a model are trained on different data subsets and averaged.",
+      "C": "Hiring a group of developers to work together.",
+      "D": "Using only one very complex model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Initialization' 'Xavier' (Glorot)?",
+    "options": {
+      "A": "Initializing weights to the exact value of PI.",
+      "B": "An initialization designed to keep the variance of activations and gradients the same across layers.",
+      "C": "Initializing all weights to exactly zero.",
+      "D": "Naming the model after its inventor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Accumulation'?",
+    "options": {
+      "A": "Increasing the batch size to infinity.",
+      "B": "Summing gradients over multiple small steps before updating weights to simulate a larger batch size.",
+      "C": "A bug where gradients get stuck.",
+      "D": "A way to speed up the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Decoder' only model (e.g., GPT)?",
+    "options": {
+      "A": "A model that can only decode images.",
+      "B": "An architecture designed for generative tasks where output is produced token-by-token.",
+      "C": "A model that has zero input layer.",
+      "D": "A model used by students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'BERT' 'Large' vs 'Base'?",
+    "options": {
+      "A": "The large model has more layers and a larger hidden dimension.",
+      "B": "The large model is for images; base for text.",
+      "C": "Base is much faster and more accurate.",
+      "D": "Large is only used by large companies."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Token' 'Embeddings' vs 'Token' 'IDs'?",
+    "options": {
+      "A": "IDs are text; Embeddings are numbers.",
+      "B": "IDs are integers representing words; Embeddings are the learned vectors for those IDs.",
+      "C": "Embeddings are for images; IDs for text.",
+      "D": "There is no difference between them."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Layer' 'Stacking'?",
+    "options": {
+      "A": "Stacking servers on top of each other.",
+      "B": "Placing multiple identical Transformer blocks on top of each other to increase model depth.",
+      "C": "A way to name the different layers.",
+      "D": "Hiring multiple layers of managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' 'Logits'?",
+    "options": {
+      "A": "The raw scores before they are turned into probabilities by the Softmax function.",
+      "B": "The final probability distribution.",
+      "C": "The user's login password.",
+      "D": "The number of tokens in a sequence."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Vocabulary' 'Size' 'Trade-off'?",
+    "options": {
+      "A": "The physical size of the dictionary book.",
+      "B": "Large vocabularies capture more words but increase model size and memory usage.",
+      "C": "The number of users who can speak.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contextual' 'Word' 'Embeddings'?",
+    "options": {
+      "A": "Embeddings that never change.",
+      "B": "Representations where the same word (e.g., 'bank') has a different vector depending on surrounding words.",
+      "C": "A way to hide word meanings.",
+      "D": "A dictionary of all words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Head' 'Dimension'?",
+    "options": {
+      "A": "The physical height of a robot head.",
+      "B": "The size of the vector representation within a single attention head (usually d_model / n_heads).",
+      "C": "The number of pages in the model's manual.",
+      "D": "The width of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-context' 'Learning'?",
+    "options": {
+      "A": "Learning inside a specific room.",
+      "B": "The model's ability to learn how to solve a task just from the examples provided in the input prompt.",
+      "C": "A way to backup the model source code.",
+      "D": "A specialized software for teachers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Entropy'?",
+    "options": {
+      "A": "The model being bored.",
+      "B": "A measure of how 'spread out' or 'focused' the attention weights are across a sequence.",
+      "C": "A bug in the attention mechanism.",
+      "D": "The physical heat of the attention layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Positional' 'Bias' in local attention?",
+    "options": {
+      "A": "Biasing the model toward users in specific locations.",
+      "B": "A mechanism that penalizes attention between tokens that are far apart.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A way to skip position info."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Efficiency' 'Linear Attention'?",
+    "options": {
+      "A": "Attention that is only for linear functions.",
+      "B": "Modifying the attention calculation to scale linearly O(N) with sequence length instead of O(N^2).",
+      "C": "Attention that is 100% accurate.",
+      "D": "Attention used only by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Rollout'?",
+    "options": {
+      "A": "Rolling the server down a hill.",
+      "B": "A technique to visualize and interpret how information flows across layers in a Transformer.",
+      "C": "A way to name the different layers.",
+      "D": "A list of best AI developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Byte-Level' BPE?",
+    "options": {
+      "A": "A type of physical battery.",
+      "B": "Tokenization that operates on bytes rather than characters to better handle rare words and emojis.",
+      "C": "A way to encrypt text files.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequence' 'Bucketing' in training?",
+    "options": {
+      "A": "Putting the sequences in a physical bucket.",
+      "B": "Grouping sequences of similar lengths together to minimize padding and save computation.",
+      "C": "Deleting user data.",
+      "D": "A way to name user groups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Parallelism' in Transformers?",
+    "options": {
+      "A": "Running two different models at once.",
+      "B": "Splitting a single model across multiple GPUs when it is too large to fit in one.",
+      "C": "A list of all the developers.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction' 'Tuning'?",
+    "options": {
+      "A": "Fine-tuning the model specifically to follow human-given instructions.",
+      "B": "Tuning the hardware for the model.",
+      "C": "A specialized software for music.",
+      "D": "Changing the color of the instructions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Attention' 'Head' 'Pruning'?",
+    "options": {
+      "A": "Cutting down trees in a lab.",
+      "B": "Removing unimportant attention heads to make the model faster.",
+      "C": "Increasing the number of layers.",
+      "D": "Hiring fewer developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' 'Saturation'?",
+    "options": {
+      "A": "The model becoming too colorful.",
+      "B": "When the inputs to Softmax are so large that the output becomes nearly binary, resulting in near-zero gradients.",
+      "C": "A problem with having too much data.",
+      "D": "A specific bug in the pooling layer code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decoder' 'Masking' 'Causal'?",
+    "options": {
+      "A": "A mask used to hide the decoder brand.",
+      "B": "Ensuring the decoder cannot attend to future tokens, preserving the causality of text generation.",
+      "C": "A way to hide certain users from the model.",
+      "D": "A type of data encryption for text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Head' 'Query' Projection?",
+    "options": {
+      "A": "Projecting a movie onto a screen.",
+      "B": "The linear transformation that maps hidden states to multiple sets of queries for parallel attention heads.",
+      "C": "A list of all the queries in the database.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Depth' vs 'Width'?",
+    "options": {
+      "A": "Depth is the number of layers; width is the size of the hidden vectors.",
+      "B": "Width is the number of layers; depth is the size of the vectors.",
+      "C": "They are the exact same thing.",
+      "D": "One is for text; the other for images."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Position-wise' 'Feed-Forward' 'Intermediate' Dimension?",
+    "options": {
+      "A": "The dimension of a physical box.",
+      "B": "The inner layer dimension of the FFN, which is typically larger than the model dimension (d_model).",
+      "C": "The number of tokens in a sequence.",
+      "D": "The width of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Encoder' representation?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A set of contextualized vectors where each token has information about every other token in the sequence.",
+      "C": "A model that has zero output layer.",
+      "D": "A model used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific hardware bottleneck does 'FlashAttention' address to achieve a 2-4x speedup in Transformer training?",
+    "options": {
+      "A": "The lack of floating-point precision in older GPU cores.",
+      "B": "The high cost of transferring the large $N \times N$ attention matrix between GPU High Bandwidth Memory (HBM) and on-chip SRAM.",
+      "C": "The slow clock speed of the CPU during the data-loading phase.",
+      "D": "The physical overheating of the GPU when processing sequences longer than 512 tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical motivation behind the 'Mixture of Experts' (MoE) architecture used in models like Mixtral or Switch Transformer?",
+    "options": {
+      "A": "To ensure that 100% of the model parameters are active for every single token processed.",
+      "B": "To increase total parameter count while keeping the computational cost per token constant by activating only a subset of 'experts'.",
+      "C": "To allow the model to be trained using only CPU resources.",
+      "D": "To replace the self-attention layer with a series of small linear regressions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Rotary Positional Embeddings' (RoPE), how is the positional information encoded into the query and key vectors?",
+    "options": {
+      "A": "By adding a fixed sinusoidal vector to the embeddings before the first layer.",
+      "B": "By applying a rotation matrix to the vectors in the complex plane based on their absolute position.",
+      "C": "By concatenating a one-hot encoded position vector to the end of the embedding.",
+      "D": "By deleting the attention weights for tokens that are more than 128 positions apart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Softmax Linearization' technique used in models like the Performer?",
+    "options": {
+      "A": "Replacing the Softmax function with a simple division by the total number of tokens.",
+      "B": "Approximating the Softmax kernel using random Fourier features to allow Query-Key multiplication in $O(N)$ time.",
+      "C": "Removing all non-linear activation functions from the Transformer block.",
+      "D": "Scaling the output of the Softmax layer by a constant factor of 0.5."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Lipschitz Constant' of a self-attention layer help determine in terms of model stability?",
+    "options": {
+      "A": "The maximum number of tokens the model can generate per second.",
+      "B": "The sensitivity of the output representation to small perturbations in the input embeddings.",
+      "C": "The total amount of VRAM required to store the attention weights.",
+      "D": "The number of unique languages the model can translate simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific issue does 'Weight Decay' (L2 Regularization) help prevent in the context of large Transformer optimization?",
+    "options": {
+      "A": "It prevents the weights from becoming exactly zero.",
+      "B": "It prevents weights from growing excessively large, which would otherwise lead to numerical instability and over-saturation of activations.",
+      "C": "It speeds up the data ingestion process from the hard drive.",
+      "D": "It ensures the model remains compatible with 8-bit quantization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Rank Deficiency' in the context of the Attention matrix?",
+    "options": {
+      "A": "When the model is ranked too low in a benchmarking competition.",
+      "B": "When the attention matrix cannot represent a full set of independent relationships, often occurring in deep layers (over-smoothing).",
+      "C": "When a GPU has fewer than 1000 CUDA cores available.",
+      "D": "When the vocabulary size is smaller than the hidden dimension size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning from Human Feedback' (RLHF), what is the primary role of the 'Reward Model'?",
+    "options": {
+      "A": "To provide the user with a physical prize for correct prompts.",
+      "B": "To predict the scalar preference score a human would give to a specific model-generated response.",
+      "C": "To automatically delete model outputs that are less than 10 words long.",
+      "D": "To increase the learning rate when the model generates a high-quality summary."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'KV Cache' (Key-Value Cache) specifically used for during the inference of an LLM?",
+    "options": {
+      "A": "To store the user's password securely on the cloud.",
+      "B": "To store the keys and values of previous tokens so they don't need to be recomputed for every new token generated.",
+      "C": "To encrypt the final output of the model before it is sent to the user.",
+      "D": "To cache the gradients of the model to speed up future training sessions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of 'QLoRA' compared to standard LoRA?",
+    "options": {
+      "A": "To make the model 10x larger and more accurate.",
+      "B": "To fine-tune models on consumer hardware by using 4-bit quantization for the base model while maintaining gradients.",
+      "C": "To ensure the model only works on Quantum computers.",
+      "D": "To replace the Transformer architecture with a purely linear model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Multi-Query Attention' (MQA)?",
+    "options": {
+      "A": "A system where 100 users can query the model at once.",
+      "B": "An optimization where all attention heads share the same Key and Value projections to reduce memory bandwidth during inference.",
+      "C": "A way to run multiple search queries on Google using the Transformer encoder.",
+      "D": "A model that has zero query vectors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Grouped-Query Attention' (GQA) relative to standard MHA and MQA?",
+    "options": {
+      "A": "It is exactly the same as Multi-Head Attention.",
+      "B": "A middle ground that groups query heads together to share a single Key/Value head, balancing speed and quality.",
+      "C": "A way to group different models into a single ensemble.",
+      "D": "A security feature that groups user requests by their IP address."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what does 'Per-token Loss Weighting' address during pre-training?",
+    "options": {
+      "A": "The cost of tokens in an API.",
+      "B": "The fact that some tokens (like rare words) are harder to predict and provide more signal than common tokens (like commas).",
+      "C": "The physical weight of the server racks.",
+      "D": "The number of tokens processed per second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Chain-of-Thought' (CoT) prompting fundamentally leveraging in Transformers?",
+    "options": {
+      "A": "A physical chain that connects GPUs together.",
+      "B": "The model's ability to use its own generated intermediate reasoning steps as context for the final answer.",
+      "C": "A specialized 'thought' layer that is added to the Decoder block.",
+      "D": "A way to translate text into a series of images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific architectural component is modified in 'Vision Transformers' (ViT) to handle spatial inductive bias?",
+    "options": {
+      "A": "The Softmax function is replaced with a 2D Gaussian distribution.",
+      "B": "Images are divided into fixed-size patches which are then embedded as a sequence.",
+      "C": "The learning rate is scaled by the number of pixels in the input image.",
+      "D": "A 3D convolutional layer is added at the end of the Decoder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Information Bottleneck' theory as applied to Transformer layers?",
+    "options": {
+      "A": "The idea that the internet is too slow to train large models.",
+      "B": "The concept that layers gradually compress input data to retain only the most relevant features for the target task.",
+      "C": "A layer with only one neuron that slows down the network.",
+      "D": "A security vulnerability where data is leaked through the attention weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Direct Preference Optimization' (DPO) an alternative to?",
+    "options": {
+      "A": "Fine-tuning the model on a single CPU.",
+      "B": "The complex RLHF pipeline (PPO) for aligning models with human preferences.",
+      "C": "A way to optimize the direct electricity usage of the data center.",
+      "D": "Using any Transformer architecture at all."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Quantization', what is the purpose of 'Calibration Data'?",
+    "options": {
+      "A": "To find out the name of the model's inventor.",
+      "B": "A small dataset used to determine the optimal dynamic range for scaling weights and activations to lower precision.",
+      "C": "To calibrate the physical cooling fan of the GPU.",
+      "D": "To delete inaccurate data points from the test set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Activation Beaconing' or 'Context Compression' designed to extend?",
+    "options": {
+      "A": "The battery life of a laptop using AI.",
+      "B": "The effective context window of a model without exponentially increasing the memory cost of self-attention.",
+      "C": "The total duration of a training session.",
+      "D": "The number of users who can use the model for free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what does 'Over-smoothing' refer to in very deep architectures?",
+    "options": {
+      "A": "Making the user interface too smooth to use.",
+      "B": "When token representations across layers become increasingly similar, leading to a loss of discriminative power.",
+      "C": "Using too many Gaussian filters on the input images.",
+      "D": "A bug that causes the Softmax output to be exactly 1.0 for every token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of using 'SwiGLU' activation (used in LLaMA) instead of standard ReLU?",
+    "options": {
+      "A": "It is much cheaper to license for commercial use.",
+      "B": "It combines the benefits of Gated Linear Units with the Swish activation for better optimization and performance.",
+      "C": "It automatically corrects grammatical errors in the input.",
+      "D": "It forces the model to use exactly 50% less VRAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Triton' in the context of high-performance Transformer implementation?",
+    "options": {
+      "A": "A moon of Neptune where data centers are built.",
+      "B": "An open-source programming language and compiler from OpenAI for writing high-performance GPU kernels.",
+      "C": "A specialized robot used for cleaning server racks.",
+      "D": "A way to translate Python code into Latin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parallel Context Window' processing?",
+    "options": {
+      "A": "Opening two browser windows at once.",
+      "B": "Splitting a very long input sequence across multiple GPUs and aggregating the attention results.",
+      "C": "A way to use the GPU and CPU for the same task.",
+      "D": "A security feature that hides the context window from the OS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sparse Attention'?",
+    "options": {
+      "A": "Attention that only works on a small number of words.",
+      "B": "An optimization where tokens only attend to a subset of other tokens (e.g., local windows or random blocks).",
+      "C": "A model that has zero accuracy.",
+      "D": "Attention that is only used for image classification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Speculative Decoding' used for in LLM inference?",
+    "options": {
+      "A": "Guessing the next word based on the stock market.",
+      "B": "Using a small, fast 'draft' model to predict tokens and a large 'target' model to verify them in parallel.",
+      "C": "A way to increase the internet bandwidth.",
+      "D": "Deleting tokens that the model is not 100% sure about."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DeepSpeed'?",
+    "options": {
+      "A": "A racing game about AI.",
+      "B": "A Microsoft library designed to optimize large-scale Transformer training through ZeRO (Zero Redundancy Optimizer).",
+      "C": "The speed at which the model generates text.",
+      "D": "A specialized hardware chip for deep learning."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ZeRO' (Zero Redundancy Optimizer) Stage 3?",
+    "options": {
+      "A": "A model with zero parameters.",
+      "B": "A technique that partitions model weights, gradients, and optimizer states across all GPUs in a cluster.",
+      "C": "A security scan that finds zero bugs.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Sink' in long-context Transformers?",
+    "options": {
+      "A": "Where the data goes when it is deleted.",
+      "B": "The observation that initial tokens (like [BOS]) often receive disproportionately high attention scores, helping stability.",
+      "C": "A bug in the attention mechanism.",
+      "D": "A way to decrease the cooling of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ALiBi' (Attention with Linear Biases)?",
+    "options": {
+      "A": "A legal excuse for a model error.",
+      "B": "A positional embedding alternative that adds a linear penalty to attention scores based on distance.",
+      "C": "A way to hide the model's source code.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gated Linear Unit' (GLU) in Transformers?",
+    "options": {
+      "A": "A physical gate at the data center.",
+      "B": "A layer that uses an element-wise product of two linear transformations, one of which is passed through a sigmoid.",
+      "C": "A security bridge for data.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sliding Window Attention'?",
+    "options": {
+      "A": "A physical window that slides in the server room.",
+      "B": "An attention mechanism where each token only attends to a fixed number of tokens in its immediate neighborhood.",
+      "C": "A way to count the number of tokens.",
+      "D": "A security feature for passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Heads' 'Diversity'?",
+    "options": {
+      "A": "Having heads of different colors.",
+      "B": "A measurement or regularization to ensure different attention heads focus on different aspects of the input.",
+      "C": "A bug in the multi-head mechanism.",
+      "D": "The number of authors of the paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Scaling Law'?",
+    "options": {
+      "A": "A law about the weight of the hardware.",
+      "B": "Empirical observations that model performance scales predictably with compute, data size, and parameter count.",
+      "C": "A law about the number of colors in a logo.",
+      "D": "The number of pages in the model's documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hessian-based' Optimization in Transformers?",
+    "options": {
+      "A": "Using the German military history to train AI.",
+      "B": "Optimization methods that use second-order derivative information to navigate the loss landscape.",
+      "C": "A way to increase the training time.",
+      "D": "A security scan of the logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parameter-Efficient Fine-Tuning' (PEFT)?",
+    "options": {
+      "A": "Training a model with zero parameters.",
+      "B": "Techniques to adapt large models by only updating a tiny fraction of the parameters.",
+      "C": "A way to make the model 10x larger.",
+      "D": "A specialized software for teachers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adapter' in Transformer fine-tuning?",
+    "options": {
+      "A": "A physical plug for the GPU.",
+      "B": "Small bottleneck layers inserted into Transformer blocks that are trained while original weights are frozen.",
+      "C": "A way to backup the model source code.",
+      "D": "A list of best AI developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instruction' 'Data' 'Contamination'?",
+    "options": {
+      "A": "Spilling coffee on the computer.",
+      "B": "When test set data is accidentally included in the training set, leading to falsely high performance scores.",
+      "C": "A bug in the internet connection.",
+      "D": "Deleting the model by mistake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Weight' 'Visualisation'?",
+    "options": {
+      "A": "Looking at the weight of the hardware.",
+      "B": "Plotting heatmaps of attention scores to understand which parts of a sentence the model is focusing on.",
+      "C": "A way to name the different layers.",
+      "D": "A list of software bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'MoE' 'Router'?",
+    "options": {
+      "A": "A network device for the office.",
+      "B": "The component that decides which experts should process a given token in a Mixture of Experts model.",
+      "C": "A way to backup the model.",
+      "D": "A security firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Latent' 'Attention'?",
+    "options": {
+      "A": "Attention that only works at night.",
+      "B": "Performing attention in a compressed latent space to reduce the sequence length $N$.",
+      "C": "A way to hide the model's logic.",
+      "D": "A dictionary of all words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Flash-Decoding'?",
+    "options": {
+      "A": "Decoding text in a flash.",
+      "B": "An extension of FlashAttention that parallelizes the attention calculation across the keys/values dimension for faster generation.",
+      "C": "A way to increase the monitor brightness.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'PagedAttention' used for in systems like vLLM?",
+    "options": {
+      "A": "Reading a book one page at a time.",
+      "B": "Managing KV cache memory by partitioning it into pages to reduce fragmentation and waste.",
+      "C": "A way to count the number of pages in a document.",
+      "D": "A specialized software for librarians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RMSNorm' (Root Mean Square Layer Normalization)?",
+    "options": {
+      "A": "Normalizing the model using a radio signal.",
+      "B": "A simplified version of LayerNorm that only scales by the root mean square, reducing computational overhead.",
+      "C": "A way to count the number of layers.",
+      "D": "A security scan for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Head' 'Specialisation'?",
+    "options": {
+      "A": "Hiring a specialist for each head.",
+      "B": "The observation that different heads naturally learn to focus on specific linguistic features like syntax or coreference.",
+      "C": "A bug in the attention mechanism.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantization' 'Error' in LLMs?",
+    "options": {
+      "A": "A math error made by a human.",
+      "B": "The loss in accuracy or 'drift' that occurs when rounding weights from 32-bit to 4-bit or 8-bit.",
+      "C": "The price of the software.",
+      "D": "The number of hours training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Encoder' only 'Bidirectional' context?",
+    "options": {
+      "A": "A model that can only encode images.",
+      "B": "A representation where every token can see every other token in the sequence (e.g., BERT).",
+      "C": "A model that has zero output layer.",
+      "D": "A model used by robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' 'Log-sum-exp' trick?",
+    "options": {
+      "A": "A magic trick for developers.",
+      "B": "A numerical stability technique to calculate Softmax without causing overflow or underflow.",
+      "C": "A way to compress text data.",
+      "D": "A way to backup the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Scaling' '1/sqrt(dk)' formula?",
+    "options": {
+      "A": "A formula for the speed of light.",
+      "B": "The scaling factor used to keep the variance of the dot products at 1 for stable gradients.",
+      "C": "A way to calculate the internet speed.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Head' 'Attention' 'Concatenation'?",
+    "options": {
+      "A": "Adding all attention heads together.",
+      "B": "The final step where all head outputs are joined and projected back to the model dimension.",
+      "C": "A list of all users.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Feed-Forward' 'Ratio'?",
+    "options": {
+      "A": "The ratio of text to images.",
+      "B": "The expansion factor (usually 4x) between the model dimension and the FFN intermediate dimension.",
+      "C": "The number of layers in the model.",
+      "D": "The width of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Mechanism' 'Permutation Invariance'?",
+    "options": {
+      "A": "The model not caring about its own name.",
+      "B": "The fact that self-attention treats the input as a 'bag of tokens' unless positional information is added.",
+      "C": "A bug in the attention mechanism.",
+      "D": "A security firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sparse' 'MoE' 'Gating' 'Load Balancing'?",
+    "options": {
+      "A": "Balancing the weight of the server.",
+      "B": "An objective added to training to ensure that all experts are used equally and prevent one expert from becoming a bottleneck.",
+      "C": "A list of best developers.",
+      "D": "A way to name GPU cores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decoder' 'Auto-regression' 'Sampling'?",
+    "options": {
+      "A": "Sampling a car.",
+      "B": "The process of generating text token-by-token where each new token is used as input for the next step.",
+      "C": "A way to backup data.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Training' 'Warmup'?",
+    "options": {
+      "A": "Turning on the computer heater.",
+      "B": "Starting with a very low learning rate and increasing it to prevent early instability in deep layers.",
+      "C": "A physical exercise for the developer.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Fine-tuning' 'Layer Freezing'?",
+    "options": {
+      "A": "Putting the GPU in a freezer.",
+      "B": "Keeping some layers constant while only training others to save time and prevent forgetting.",
+      "C": "A way to stop the training process.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sequence' 'Length' 'Quadratic' 'Cost'?",
+    "options": {
+      "A": "The price of the sequence.",
+      "B": "The fact that standard attention memory and time grow with the square of the input sequence length ($N^2$).",
+      "C": "The weight of the computer hardware.",
+      "D": "The number of pixels in a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Positional' 'Encoding' 'Extrapolation'?",
+    "options": {
+      "A": "Predicting the location of the user.",
+      "B": "The ability of a model to handle sequence lengths longer than those seen during training.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A way to skip position info."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Tokenization' 'In-vocabulary'?",
+    "options": {
+      "A": "Words inside a physical book.",
+      "B": "The condition where all words in a text can be perfectly represented by the model's fixed dictionary.",
+      "C": "Hiring a few developers.",
+      "D": "A specialized software for teachers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Attention' 'Head' 'Query-Key' alignment?",
+    "options": {
+      "A": "Aligning the query to the key physically.",
+      "B": "Calculating how well a query vector matches a key vector to determine the attention weight.",
+      "C": "A bug in the attention mechanism.",
+      "D": "The temperature of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Optimizer' 'AdamW'?",
+    "options": {
+      "A": "A person named Adam.",
+      "B": "A modified version of the Adam optimizer that handles weight decay more effectively for Transformer models.",
+      "C": "A way to count the number of layers.",
+      "D": "A security scan for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Inference' 'Static' vs 'Dynamic' batching?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Static uses fixed batch sizes; Dynamic combines multiple user requests into one batch on-the-fly to maximize GPU usage.",
+      "C": "Static is for text; Dynamic for images.",
+      "D": "Dynamic is 100x slower."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'KV' 'Cache' 'Fragmentation'?",
+    "options": {
+      "A": "The hardware physically breaking.",
+      "B": "Wasted GPU memory that occurs when KV cache is not allocated in contiguous blocks.",
+      "C": "A security certificate.",
+      "D": "A way to name the different layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Activation' 'Sparsity'?",
+    "options": {
+      "A": "When the model has zero activations.",
+      "B": "The property where many activations in a layer are zero, which can be exploited for computational efficiency.",
+      "C": "A bug in the ReLU function.",
+      "D": "A list of best AI developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Layer' 'Pruning'?",
+    "options": {
+      "A": "Cutting down trees in a lab.",
+      "B": "Deleting entire layers of a pre-trained Transformer to create a faster, smaller version.",
+      "C": "Increasing the number of layers.",
+      "D": "Hiring fewer developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-attention' 'Diagonal' 'Bias'?",
+    "options": {
+      "A": "Biasing the model toward diagonal lines.",
+      "B": "Ensuring that tokens always pay at least some minimum amount of attention to themselves.",
+      "C": "A bug in the attention mechanism.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Training' 'Learning Rate Decay'?",
+    "options": {
+      "A": "The model forgetting the learning rate.",
+      "B": "Gradually reducing the learning rate over time to help the model converge to a stable minimum.",
+      "C": "A way to speed up the network.",
+      "D": "Deleting the model after training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Tokenization' 'Normalization'?",
+    "options": {
+      "A": "Printing the tokens on paper.",
+      "B": "Cleaning and standardizing input text (e.g., removing extra whitespace) before the tokenization step.",
+      "C": "A way to count the number of tokens.",
+      "D": "A security certificate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transformer' 'Parallel' 'Decoding'?",
+    "options": {
+      "A": "Generating all tokens at the same time.",
+      "B": "Experimental techniques to generate multiple tokens in parallel to bypass the auto-regressive bottleneck.",
+      "C": "A way to backup data.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  }
+  ]
+}

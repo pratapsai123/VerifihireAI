@@ -1,0 +1,1996 @@
+{ 
+  "skill": "SQL Server", 
+  "questions": [
+    {
+    "question": "Which SQL Server keyword is used to retrieve unique values from a column?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "DISTINCT",
+      "C": "GROUP BY",
+      "D": "SINGLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the correct T-SQL syntax to add a new record to the 'Employees' table?",
+    "options": {
+      "A": "ADD INTO Employees VALUES (...)",
+      "B": "INSERT INTO Employees VALUES (...)",
+      "C": "UPDATE Employees SET (...)",
+      "D": "PUT Employees (...)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type is most appropriate for storing a person's date of birth in SQL Server?",
+    "options": {
+      "A": "DATETIME2",
+      "B": "TIMESTAMP",
+      "C": "DATE",
+      "D": "VARCHAR(10)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which clause is used to filter the results of a query based on a specific condition?",
+    "options": {
+      "A": "HAVING",
+      "B": "FILTER",
+      "C": "WHERE",
+      "D": "ORDER BY"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In SQL Server, what does the primary key (PK) ensure?",
+    "options": {
+      "A": "That the column can contain NULL values.",
+      "B": "That the data is automatically encrypted.",
+      "C": "The uniqueness and non-nullability of a record identifier.",
+      "D": "The speed of full-text search operations."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to remove all records from a table without logging individual row deletions?",
+    "options": {
+      "A": "DELETE FROM table",
+      "B": "DROP TABLE table",
+      "C": "TRUNCATE TABLE table",
+      "D": "REMOVE table"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'ORDER BY' clause?",
+    "options": {
+      "A": "To group rows with the same values.",
+      "B": "To sort the result set in ascending or descending order.",
+      "C": "To limit the number of rows returned.",
+      "D": "To join two different tables together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is NOT a valid SQL Server numeric data type?",
+    "options": {
+      "A": "INT",
+      "B": "DECIMAL",
+      "C": "BOOLEAN",
+      "D": "MONEY"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which JOIN returns all rows from the left table and matched rows from the right table?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "LEFT JOIN",
+      "C": "RIGHT JOIN",
+      "D": "FULL OUTER JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to count the total number of rows in a table?",
+    "options": {
+      "A": "SUM()",
+      "B": "TOTAL()",
+      "C": "COUNT()",
+      "D": "NUMBER()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the default sort order of the 'ORDER BY' clause?",
+    "options": {
+      "A": "Descending (DESC)",
+      "B": "Alphabetical only",
+      "C": "Ascending (ASC)",
+      "D": "Random"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which SQL Server constraint is used to link two tables together?",
+    "options": {
+      "A": "PRIMARY KEY",
+      "B": "UNIQUE",
+      "C": "CHECK",
+      "D": "FOREIGN KEY"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command is used to modify data that already exists in a table?",
+    "options": {
+      "A": "INSERT",
+      "B": "UPDATE",
+      "C": "ALTER",
+      "D": "CHANGE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'GETDATE()' function return in SQL Server?",
+    "options": {
+      "A": "The current system time and date.",
+      "B": "The date the database was created.",
+      "C": "The user's login date.",
+      "D": "A random date."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which clause is used to group rows that have the same values into summary rows?",
+    "options": {
+      "A": "ORDER BY",
+      "B": "SORT BY",
+      "C": "GROUP BY",
+      "D": "HAVING"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which SQL operator is used to search for a specified pattern in a column?",
+    "options": {
+      "A": "MATCH",
+      "B": "LIKE",
+      "C": "CONTAINS",
+      "D": "SEARCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In T-SQL, which wildcard represents zero or more characters in a LIKE clause?",
+    "options": {
+      "A": "_",
+      "B": "*",
+      "C": "%",
+      "D": "?"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of a 'SELECT *' statement?",
+    "options": {
+      "A": "It selects all columns from a table.",
+      "B": "It counts all rows in a table.",
+      "C": "It deletes all data from a table.",
+      "D": "It selects all tables in a database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to delete a specific row from a table?",
+    "options": {
+      "A": "TRUNCATE",
+      "B": "REMOVE",
+      "C": "DELETE",
+      "D": "DROP"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'NULL' represent in SQL Server?",
+    "options": {
+      "A": "A value of zero.",
+      "B": "A space character.",
+      "C": "Unknown or missing data.",
+      "D": "An empty string."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which JOIN returns only the rows where there is a match in both tables?",
+    "options": {
+      "A": "LEFT JOIN",
+      "B": "INNER JOIN",
+      "C": "OUTER JOIN",
+      "D": "CROSS JOIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to select values within a specific range?",
+    "options": {
+      "A": "AMONG",
+      "B": "WITHIN",
+      "C": "BETWEEN",
+      "D": "IN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which clause is used to filter groups provided by a GROUP BY clause?",
+    "options": {
+      "A": "WHERE",
+      "B": "HAVING",
+      "C": "FILTER",
+      "D": "WHEN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'AS' keyword in a SELECT statement?",
+    "options": {
+      "A": "To sort the data.",
+      "B": "To create a permanent table.",
+      "C": "To provide an alias for a column or table.",
+      "D": "To filter null values."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to remove a table and all its data from the database?",
+    "options": {
+      "A": "DELETE TABLE",
+      "B": "TRUNCATE TABLE",
+      "C": "DROP TABLE",
+      "D": "REMOVE TABLE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which data type is used for large text values in SQL Server?",
+    "options": {
+      "A": "VARCHAR(MAX)",
+      "B": "INT",
+      "C": "FLOAT",
+      "D": "SMALLINT"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you select the top 10 records from a table named 'Orders'?",
+    "options": {
+      "A": "SELECT TOP 10 * FROM Orders",
+      "B": "SELECT * FROM Orders LIMIT 10",
+      "C": "SELECT FIRST 10 * FROM Orders",
+      "D": "GET 10 FROM Orders"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to calculate the average value of a numeric column?",
+    "options": {
+      "A": "SUM()",
+      "B": "AVG()",
+      "C": "MEAN()",
+      "D": "COUNT()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which constraint ensures that a column cannot have a NULL value?",
+    "options": {
+      "A": "UNIQUE",
+      "B": "PRIMARY KEY",
+      "C": "NOT NULL",
+      "D": "CHECK"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In T-SQL, how do you specify a comment on a single line?",
+    "options": {
+      "A": "// Comment",
+      "B": "-- Comment",
+      "C": "/* Comment */",
+      "D": "# Comment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to add a new column to an existing table?",
+    "options": {
+      "A": "UPDATE TABLE",
+      "B": "CHANGE TABLE",
+      "C": "ALTER TABLE",
+      "D": "EXTEND TABLE"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which JOIN returns all rows from the right table and matched rows from the left table?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "LEFT JOIN",
+      "C": "RIGHT JOIN",
+      "D": "FULL OUTER JOIN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the result of 1 / 0 in SQL Server?",
+    "options": {
+      "A": "0",
+      "B": "NULL",
+      "C": "An error (Divide by zero error)",
+      "D": "Infinity"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used to combine the result-set of two or more SELECT statements?",
+    "options": {
+      "A": "JOIN",
+      "B": "UNION",
+      "C": "PLUS",
+      "D": "MERGE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the smallest value in a column?",
+    "options": {
+      "A": "SMALL()",
+      "B": "MIN()",
+      "C": "LOW()",
+      "D": "LEAST()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the largest value in a column?",
+    "options": {
+      "A": "MAX()",
+      "B": "HIGH()",
+      "C": "TOP()",
+      "D": "LARGE()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does ACID stand for in database management?",
+    "options": {
+      "A": "Access, Control, Integrity, Data",
+      "B": "Atomicity, Consistency, Isolation, Durability",
+      "C": "Archive, Copy, Index, Delete",
+      "D": "Auto, Create, Input, Drop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which clause is used to specify multiple values in a WHERE clause?",
+    "options": {
+      "A": "OR",
+      "B": "BETWEEN",
+      "C": "IN",
+      "D": "ANY"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary function of an INDEX in SQL Server?",
+    "options": {
+      "A": "To encrypt data.",
+      "B": "To improve the speed of data retrieval.",
+      "C": "To prevent duplicate data.",
+      "D": "To back up the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type is used to store strings with a fixed length?",
+    "options": {
+      "A": "VARCHAR",
+      "B": "TEXT",
+      "C": "CHAR",
+      "D": "STRING"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which data type is used for storing currency values?",
+    "options": {
+      "A": "MONEY",
+      "B": "FLOAT",
+      "C": "INT",
+      "D": "BIT"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default schema for a user in a SQL Server database?",
+    "options": {
+      "A": "guest",
+      "B": "sys",
+      "C": "dbo",
+      "D": "admin"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to create a new database?",
+    "options": {
+      "A": "NEW DATABASE",
+      "B": "CREATE DATABASE",
+      "C": "ADD DATABASE",
+      "D": "MAKE DATABASE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you select all columns from a table named 'Products'?",
+    "options": {
+      "A": "GET ALL FROM Products",
+      "B": "SELECT * FROM Products",
+      "C": "SELECT ALL FROM Products",
+      "D": "LIST Products"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for inequality in SQL Server?",
+    "options": {
+      "A": "!=",
+      "B": "<>",
+      "C": "Both A and B",
+      "D": "NOT"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the T-SQL keyword to find rows with no data in a specific column?",
+    "options": {
+      "A": "IS EMPTY",
+      "B": "IS NULL",
+      "C": "== NULL",
+      "D": "IS MISSING"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert all characters in a string to uppercase?",
+    "options": {
+      "A": "UPPER()",
+      "B": "CAPS()",
+      "C": "TOUPPER()",
+      "D": "BIG()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to convert all characters in a string to lowercase?",
+    "options": {
+      "A": "SMALL()",
+      "B": "LOWER()",
+      "C": "TOLOWER()",
+      "D": "MIN()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the current database user's name?",
+    "options": {
+      "A": "USER_NAME()",
+      "B": "CURRENT_USER",
+      "C": "WHOAMI",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "Which command is used to rename a table?",
+    "options": {
+      "A": "RENAME TABLE",
+      "B": "sp_rename",
+      "C": "ALTER TABLE RENAME",
+      "D": "CHANGE NAME"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to change the data type of a column in an ALTER TABLE statement?",
+    "options": {
+      "A": "MODIFY",
+      "B": "ALTER COLUMN",
+      "C": "CHANGE TYPE",
+      "D": "CONVERT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'CHECK' constraint?",
+    "options": {
+      "A": "To check if a table exists.",
+      "B": "To ensure that values in a column meet a specific condition.",
+      "C": "To check for duplicate rows.",
+      "D": "To verify user permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JOIN returns all rows when there is a match in either the left or right table?",
+    "options": {
+      "A": "LEFT JOIN",
+      "B": "RIGHT JOIN",
+      "C": "FULL JOIN",
+      "D": "CROSS JOIN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used to combine two strings in SQL Server?",
+    "options": {
+      "A": "+",
+      "B": "&&",
+      "C": ".",
+      "D": "CONCAT_SYM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you calculate the number of days between two dates?",
+    "options": {
+      "A": "DATEDIFF()",
+      "B": "DATE_SUB()",
+      "C": "DATE_DIFF()",
+      "D": "SUBTRACT()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to remove leading and trailing spaces from a string?",
+    "options": {
+      "A": "CLEAN()",
+      "B": "STRIP()",
+      "C": "TRIM()",
+      "D": "REMOVE()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'IDENTITY' property do for a column?",
+    "options": {
+      "A": "It makes the column a primary key.",
+      "B": "It automatically generates a unique numeric value for new rows.",
+      "C": "It encrypts the column data.",
+      "D": "It identifies the column as a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which data type is used for true/false values in SQL Server?",
+    "options": {
+      "A": "BOOLEAN",
+      "B": "LOGIC",
+      "C": "BIT",
+      "D": "BINARY"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to save a transaction?",
+    "options": {
+      "A": "SAVE",
+      "B": "COMMIT",
+      "C": "APPLY",
+      "D": "STORE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to undo a transaction that has not been committed?",
+    "options": {
+      "A": "UNDO",
+      "B": "REVERT",
+      "C": "ROLLBACK",
+      "D": "CANCEL"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'DISTINCT' keyword?",
+    "options": {
+      "A": "To sort the data.",
+      "B": "To filter null values.",
+      "C": "To return only different (unique) values.",
+      "D": "To group similar data."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which function returns the total sum of a numeric column?",
+    "options": {
+      "A": "TOTAL()",
+      "B": "ADD()",
+      "C": "SUM()",
+      "D": "COUNT()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which clause is used to limit the results in a query in SQL Server 2012+?",
+    "options": {
+      "A": "OFFSET...FETCH",
+      "B": "LIMIT",
+      "C": "STOP AT",
+      "D": "BREAK"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which SQL statement is used to create a new table?",
+    "options": {
+      "A": "NEW TABLE",
+      "B": "CREATE TABLE",
+      "C": "ADD TABLE",
+      "D": "GENERATE TABLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to search for values in a list?",
+    "options": {
+      "A": "LIST",
+      "B": "AMONG",
+      "C": "IN",
+      "D": "WITHIN"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between a Clustered Index and a Non-Clustered Index?",
+    "options": {
+      "A": "A clustered index stores the actual data rows at the leaf level; a non-clustered index contains pointers to the data.",
+      "B": "A table can have up to 250 clustered indexes but only one non-clustered index.",
+      "C": "Clustered indexes are used for text columns, while non-clustered are for numeric columns.",
+      "D": "Non-clustered indexes physically reorder the data on the disk."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which T-SQL statement is used to define a Common Table Expression (CTE)?",
+    "options": {
+      "A": "CREATE CTE",
+      "B": "DECLARE",
+      "C": "WITH",
+      "D": "USING"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'RAISERROR' statement in a stored procedure?",
+    "options": {
+      "A": "To automatically repair corrupted database pages.",
+      "B": "To generate a custom error message and set the system error state for the session.",
+      "C": "To prevent users from executing any further SELECT statements.",
+      "D": "To increase the priority of a running transaction."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you return a specific value from a Stored Procedure to a calling program?",
+    "options": {
+      "A": "Using the OUTPUT keyword on a parameter.",
+      "B": "Using the RETURN statement for integer status codes.",
+      "C": "Using a SELECT statement at the end of the procedure.",
+      "D": "All of the above."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'VIEW' in SQL Server?",
+    "options": {
+      "A": "A physical copy of a table used for high-speed reporting.",
+      "B": "A virtual table that consists of a stored query which executes when the view is called.",
+      "C": "A specialized tool for designing database schemas graphically.",
+      "D": "A temporary storage area in RAM for large result sets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function replaces a NULL value with a specific alternative, but allows for more than two arguments?",
+    "options": {
+      "A": "ISNULL()",
+      "B": "COALESCE()",
+      "C": "NULLIF()",
+      "D": "IFNULL()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which isolation level is most effective at preventing 'Dirty Reads' but allows 'Non-repeatable Reads'?",
+    "options": {
+      "A": "READ UNCOMMITTED",
+      "B": "READ COMMITTED",
+      "C": "REPEATABLE READ",
+      "D": "SERIALIZABLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'CROSS APPLY' operator?",
+    "options": {
+      "A": "It joins two tables based on a shared primary key only.",
+      "B": "It joins a table to a table-valued function, acting similarly to an INNER JOIN.",
+      "C": "It creates a cross-product of all rows regardless of criteria.",
+      "D": "It is used to combine the results of two different databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In T-SQL, what does the 'SCHEMABINDING' option do when creating a View or Function?",
+    "options": {
+      "A": "It encrypts the source code of the object.",
+      "B": "It prevents the underlying tables from being modified in a way that would break the object.",
+      "C": "It binds the object to a specific user login.",
+      "D": "It allows the object to be used across different SQL Server instances."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Fill Factor' in an index used for?",
+    "options": {
+      "A": "To determine how many indexes can exist on a single table.",
+      "B": "To specify the percentage of space on each leaf-level page to be filled with data, leaving room for growth.",
+      "C": "To set the speed of the hard drive during a scan.",
+      "D": "To calculate the total number of rows in a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to manually trigger the collection of statistics for a specific table?",
+    "options": {
+      "A": "COLLECT STATISTICS",
+      "B": "UPDATE STATISTICS",
+      "C": "REFRESH STATS",
+      "D": "ALTER STATISTICS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Table-Valued Parameter' (TVP)?",
+    "options": {
+      "A": "To allow a single column to store an entire table.",
+      "B": "To pass multiple rows of data into a stored procedure or function as a single parameter.",
+      "C": "To create a temporary link between two remote servers.",
+      "D": "To bypass the 1024-column limit of a standard table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which T-SQL statement is used to handle exceptions and errors in a block of code?",
+    "options": {
+      "A": "ON ERROR GOTO",
+      "B": "TRY...CATCH",
+      "C": "IF ERROR...THEN",
+      "D": "CHECK...EXCEPT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'INSTEAD OF' trigger used for?",
+    "options": {
+      "A": "To execute a task after a row has been successfully inserted.",
+      "B": "To override the standard action of an INSERT, UPDATE, or DELETE statement with custom logic.",
+      "C": "To prevent any triggers from firing on a specific table.",
+      "D": "To automatically delete logs when they get too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'IDENTITY_INSERT' setting used for?",
+    "options": {
+      "A": "To automatically generate new IDs for a table.",
+      "B": "To allow explicit values to be inserted into the identity column of a table.",
+      "C": "To encrypt the identity column.",
+      "D": "To change the starting value (seed) of an identity column."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to return the last identity value generated in any table in the current session?",
+    "options": {
+      "A": "@@IDENTITY",
+      "B": "SCOPE_IDENTITY()",
+      "C": "IDENT_CURRENT()",
+      "D": "LAST_VALUE()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Index Fragmentation'?",
+    "options": {
+      "A": "When an index is split into two different databases.",
+      "B": "When the logical ordering of pages in an index doesn't match the physical ordering on disk.",
+      "C": "When a table has too many non-clustered indexes.",
+      "D": "When the primary key is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which constraint is used to ensure that all values in a column are unique but allows for one NULL value?",
+    "options": {
+      "A": "PRIMARY KEY",
+      "B": "UNIQUE",
+      "C": "NOT NULL",
+      "D": "CHECK"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'MERGE' statement?",
+    "options": {
+      "A": "To combine two different databases into one.",
+      "B": "To perform INSERT, UPDATE, or DELETE operations on a target table based on the results of a join with a source table.",
+      "C": "To physically merge two data files on the hard drive.",
+      "D": "To combine two columns into a single string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which built-in function returns the number of rows affected by the last T-SQL statement?",
+    "options": {
+      "A": "COUNT_ROWS()",
+      "B": "@@ROWCOUNT",
+      "C": "ROW_NUMBER()",
+      "D": "@@AFFECTED"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Deterministic' function?",
+    "options": {
+      "A": "A function that returns a different result every time it is called.",
+      "B": "A function that always returns the same result for a specific set of input values.",
+      "C": "A function that only works on numeric data.",
+      "D": "A function used specifically for database security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to return only the rows that exist in the first query but not in the second query?",
+    "options": {
+      "A": "NOT IN",
+      "B": "EXCEPT",
+      "C": "MINUS",
+      "D": "DIFFERENCE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator returns only the rows that are common to both queries?",
+    "options": {
+      "A": "INNER JOIN",
+      "B": "INTERSECT",
+      "C": "BOTH",
+      "D": "UNION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Global Temporary Table' prefix in SQL Server?",
+    "options": {
+      "A": "#Table",
+      "B": "##Table",
+      "C": "@Table",
+      "D": "$Table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between a Scalar function and a Table-Valued function?",
+    "options": {
+      "A": "A scalar function returns a single value; a table-valued function returns a result set.",
+      "B": "Scalar functions are faster than table-valued functions.",
+      "C": "Scalar functions can only be used in the WHERE clause.",
+      "D": "Table-valued functions cannot be used in a SELECT statement."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which system stored procedure is used to view the dependencies of a table?",
+    "options": {
+      "A": "sp_help",
+      "B": "sp_depends",
+      "C": "sp_who",
+      "D": "sp_monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'SET NOCOUNT ON'?",
+    "options": {
+      "A": "To prevent the database from counting the total rows in a table.",
+      "B": "To stop SQL Server from sending the 'n rows affected' message back to the client after a statement.",
+      "C": "To disable the identity column increments.",
+      "D": "To hide data from users who do not have permissions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which T-SQL function is used to find the starting position of a substring within a string?",
+    "options": {
+      "A": "INDEXOF()",
+      "B": "CHARINDEX()",
+      "C": "SUBSTRING()",
+      "D": "FIND()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Indexed View'?",
+    "options": {
+      "A": "A view that has a non-clustered index only.",
+      "B": "A view with a unique clustered index, which results in the result set being physically stored on disk.",
+      "C": "A view used to index PDF files stored in the database.",
+      "D": "A view that can only be queried by using an index name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phantom Read' in transaction isolation?",
+    "options": {
+      "A": "Reading data that was never written.",
+      "B": "When a transaction re-executes a query and finds new rows added by another committed transaction.",
+      "C": "Reading data from a deleted table.",
+      "D": "When the server returns an empty result set unexpectedly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which clause is used to handle 'Paging' in SQL Server 2012 and later?",
+    "options": {
+      "A": "LIMIT / OFFSET",
+      "B": "OFFSET / FETCH NEXT",
+      "C": "TOP / SKIP",
+      "D": "PAGE / SIZE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lock Escalation'?",
+    "options": {
+      "A": "When a user increases their access level.",
+      "B": "When SQL Server converts many fine-grained locks (like row locks) into a single coarse-grained lock (like a table lock).",
+      "C": "When a transaction is promoted to a global level.",
+      "D": "When a database is upgraded to a newer version."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the name of the current database?",
+    "options": {
+      "A": "DB_NAME()",
+      "B": "CURRENT_DB",
+      "C": "SCHEMA_NAME()",
+      "D": "DATABASE_ID()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SARGability' (Search ARgument-able) in a query?",
+    "options": {
+      "A": "The ability of a query to use an index effectively because of how the WHERE clause is written.",
+      "B": "The ability to search for arguments in a stored procedure.",
+      "C": "A security feature that prevents SQL injection.",
+      "D": "The speed of the network between the client and server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the difference between DATETIME and DATETIME2?",
+    "options": {
+      "A": "DATETIME2 has a larger date range and higher precision than DATETIME.",
+      "B": "DATETIME is only for dates, while DATETIME2 includes time.",
+      "C": "DATETIME2 is a legacy type being replaced by DATETIME.",
+      "D": "DATETIME2 requires less storage space but has less precision."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'RECOMPILE' hint in a stored procedure?",
+    "options": {
+      "A": "To fix syntax errors in the procedure.",
+      "B": "To force SQL Server to generate a new execution plan every time the procedure is run.",
+      "C": "To update the statistics of the tables used in the procedure.",
+      "D": "To encrypt the procedure code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which system view contains information about all the columns in the database?",
+    "options": {
+      "A": "sys.tables",
+      "B": "sys.columns",
+      "C": "sys.all_data",
+      "D": "sys.objects"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'OUTPUT' clause do in an INSERT or UPDATE statement?",
+    "options": {
+      "A": "It prints the data to the console.",
+      "B": "It returns information about each row affected by the statement (useful for logging or returning generated IDs).",
+      "C": "It sends the data to a backup file.",
+      "D": "It converts the result set to XML."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Recursive CTE'?",
+    "options": {
+      "A": "A CTE that calls itself, useful for querying hierarchical data like org charts.",
+      "B": "A CTE that runs in a loop until the server is stopped.",
+      "C": "A CTE that can only be used within a trigger.",
+      "D": "A CTE that uses a random number generator."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which T-SQL command is used to change the configuration settings of the SQL Server instance?",
+    "options": {
+      "A": "sp_helpconfig",
+      "B": "sp_configure",
+      "C": "ALTER SERVER",
+      "D": "SET CONFIG"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Sparse Column'?",
+    "options": {
+      "A": "A column that only allows numeric values.",
+      "B": "An ordinary column that has an optimized storage for null values, saving disk space.",
+      "C": "A column that is hidden from SELECT * statements.",
+      "D": "A column used specifically for full-text indexing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'FILESTREAM' feature used for?",
+    "options": {
+      "A": "To stream video files to the web browser.",
+      "B": "To store large unstructured data (like documents or images) on the file system while maintaining database consistency.",
+      "C": "To speed up the download of database backups.",
+      "D": "To monitor the network traffic of the SQL Server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to return a random number in SQL Server?",
+    "options": {
+      "A": "RANDOM()",
+      "B": "RAND()",
+      "C": "NEWID()",
+      "D": "GETRAND()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'GOTO' in T-SQL?",
+    "options": {
+      "A": "To open a specific database.",
+      "B": "To alter the execution flow by jumping to a specific labeled line of code.",
+      "C": "To go to the next record in a cursor.",
+      "D": "To connect to a remote server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bulk Insert'?",
+    "options": {
+      "A": "Inserting data one row at a time in a large loop.",
+      "B": "A method to import data from a flat file into a SQL Server table efficiently.",
+      "C": "A way to duplicate a table multiple times.",
+      "D": "A process of increasing the table size manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which system procedure is used to terminate a specific user process or session?",
+    "options": {
+      "A": "STOP",
+      "B": "KILL",
+      "C": "TERMINATE",
+      "D": "DROP SESSION"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Collation' in SQL Server?",
+    "options": {
+      "A": "A method of compressing data on disk.",
+      "B": "A set of rules that determine how data is sorted and compared (case-sensitivity, accent-sensitivity).",
+      "C": "A tool for managing multiple SQL instances.",
+      "D": "A type of database backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to rebuild an index to reduce fragmentation?",
+    "options": {
+      "A": "UPDATE INDEX",
+      "B": "ALTER INDEX ... REBUILD",
+      "C": "REPAIR INDEX",
+      "D": "RESTORE INDEX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Query Store' feature?",
+    "options": {
+      "A": "An online marketplace for pre-written SQL queries.",
+      "B": "A feature that automatically captures query history, execution plans, and runtime statistics for performance troubleshooting.",
+      "C": "A place to store saved queries in SQL Server Management Studio.",
+      "D": "A database that stores all deleted records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to verify if a subquery returns any rows?",
+    "options": {
+      "A": "ANY",
+      "B": "EXISTS",
+      "C": "SOME",
+      "D": "CONTAINS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dirty Read'?",
+    "options": {
+      "A": "Reading data that is corrupted.",
+      "B": "Reading data that has been modified by another transaction but not yet committed.",
+      "C": "Reading data from a backup file.",
+      "D": "When a query returns data that the user is not allowed to see."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Computed Column'?",
+    "options": {
+      "A": "A column that counts the total number of rows.",
+      "B": "A virtual column whose values are derived from an expression involving other columns in the same table.",
+      "C": "A column that only accepts the results of mathematical equations.",
+      "D": "A column that is calculated by the client application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert a value to a specified data type, providing more control over formatting?",
+    "options": {
+      "A": "CAST()",
+      "B": "CONVERT()",
+      "C": "CHANGE()",
+      "D": "TRANSFORM()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Transaction Savepoints'?",
+    "options": {
+      "A": "To save the database to a backup disk.",
+      "B": "To allow a transaction to be partially rolled back to a specific point without cancelling the entire transaction.",
+      "C": "To mark a transaction as 'completed' without committing.",
+      "D": "To increase the speed of small transactions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Row-Level Security' (RLS)?",
+    "options": {
+      "A": "Locking a row so no one can edit it.",
+      "B": "A feature that allows you to control access to specific rows in a table based on the user's identity.",
+      "C": "A method to encrypt individual rows.",
+      "D": "A tool that counts how many rows a user has accessed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which system view is best for monitoring currently active user sessions?",
+    "options": {
+      "A": "sys.databases",
+      "B": "sys.dm_exec_sessions",
+      "C": "sys.dm_tran_locks",
+      "D": "sys.server_principals"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database Mail'?",
+    "options": {
+      "A": "An inbox for database administrators.",
+      "B": "An enterprise solution for sending email messages from the SQL Server Database Engine.",
+      "C": "A feature to send database tables via attachment.",
+      "D": "A method to receive SQL queries via email."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to create a synonym for a database object?",
+    "options": {
+      "A": "CREATE ALIAS",
+      "B": "CREATE SYNONYM",
+      "C": "ADD NICKNAME",
+      "D": "SET SYNONYM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Temporal Tables'?",
+    "options": {
+      "A": "Tables that are automatically deleted after 24 hours.",
+      "B": "System-versioned tables that keep a full history of data changes, allowing you to query data as it was at any point in time.",
+      "C": "Tables used for storing timezone data.",
+      "D": "Tables that are only stored in RAM temporarily."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to find the length of a string in bytes?",
+    "options": {
+      "A": "LEN()",
+      "B": "DATALENGTH()",
+      "C": "BYTESIZE()",
+      "D": "STRINGSIZE()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Recursive Query' in SQL?",
+    "options": {
+      "A": "A query that repeats until the user cancels it.",
+      "B": "A query that refers back to its own output, typically achieved using a CTE.",
+      "C": "A query that connects to multiple databases sequentially.",
+      "D": "A query that uses more than 10 JOINs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which hint forces the query optimizer to use a specific index?",
+    "options": {
+      "A": "WITH (INDEX = IndexName)",
+      "B": "USE INDEX IndexName",
+      "C": "FORCE IndexName",
+      "D": "INDEX_ONLY(IndexName)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic SQL'?",
+    "options": {
+      "A": "SQL that executes much faster than regular SQL.",
+      "B": "SQL code that is generated as a string and executed at runtime.",
+      "C": "SQL that can only be used in triggers.",
+      "D": "SQL that automatically changes table names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to view the graphical execution plan in SSMS?",
+    "options": {
+      "A": "Ctrl+E",
+      "B": "Ctrl+M",
+      "C": "Ctrl+L",
+      "D": "Ctrl+Shift+X"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Extended Events' (XEvents)?",
+    "options": {
+      "A": "A set of long-running holiday events in the SQL community.",
+      "B": "A lightweight performance monitoring system that replaces the old SQL Trace/Profiler.",
+      "C": "A feature to add extra columns to existing events.",
+      "D": "A method to extend the database schema dynamically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns a unique identifier (GUID)?",
+    "options": {
+      "A": "RANDID()",
+      "B": "NEWID()",
+      "C": "GEN_ID()",
+      "D": "UNIQUEID()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does an 'Index Seek' operator in an execution plan generally indicate compared to an 'Index Scan'?",
+    "options": {
+      "A": "The engine is reading every single page in the index from start to finish.",
+      "B": "The query is navigating the B-Tree structure to find specific rows efficiently.",
+      "C": "The index is corrupted and the engine is bypassing it to read the heap.",
+      "D": "The table does not have a primary key defined, forcing a scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of performance tuning, what is 'Parameter Sniffing'?",
+    "options": {
+      "A": "A security feature that hides procedure parameters from unauthorized network traffic.",
+      "B": "When SQL Server creates an execution plan based on the parameters passed during the first compilation.",
+      "C": "The process of searching for specific text parameters within a large binary log file.",
+      "D": "An error where parameters are lost during a database mirroring failover event."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does the 'OPTIMIZE FOR UNKNOWN' query hint affect execution plan generation?",
+    "options": {
+      "A": "It forces the query optimizer to ignore all existing statistics and use a nested loop join.",
+      "B": "It tells the optimizer to use statistical averages instead of specific parameter values to avoid sniffing issues.",
+      "C": "It disables the query plan cache entirely for that specific T-SQL statement.",
+      "D": "It converts the query into a temporary view to simplify the join logic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Deadlock' in SQL Server architecture?",
+    "options": {
+      "A": "A state where the server hardware reaches 100% CPU usage and stops responding.",
+      "B": "When two or more tasks permanently block each other because each task has a lock the other needs.",
+      "C": "A query that takes longer than the configured 'remote query timeout' value.",
+      "D": "A database file that has been marked as 'Offline' due to a disk failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which window function would you use to calculate a running total in a result set?",
+    "options": {
+      "A": "RUNNING_SUM() with a PARTITION clause.",
+      "B": "SUM(Col) OVER (ORDER BY Col ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW).",
+      "C": "TOTAL(Col) OVER (PARTITION BY Col) with a cumulative flag.",
+      "D": "CUMULATIVE_SUM(Col) using the Windowing API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of the Transaction Log (LDF) file?",
+    "options": {
+      "A": "To store the metadata and HTML templates for the front-end reporting services.",
+      "B": "To record all database modifications to ensure ACID compliance and facilitate recovery.",
+      "C": "To act as a temporary cache for frequently accessed SELECT queries.",
+      "D": "To store high-resolution images and binary objects larger than 8KB."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV (Dynamic Management View) is most effective for identifying high-CPU consuming queries across the entire instance?",
+    "options": {
+      "A": "sys.dm_exec_query_stats",
+      "B": "sys.dm_db_index_usage_stats",
+      "C": "sys.dm_tran_active_transactions",
+      "D": "sys.dm_os_wait_stats"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Columnstore Index' in SQL Server?",
+    "options": {
+      "A": "To provide a way to index more than 249 columns on a single table.",
+      "B": "To store and query large data sets using column-based data compression and processing.",
+      "C": "To physically reorder rows based on the alphabetical order of the first column.",
+      "D": "To encrypt specific columns for GDPR compliance without affecting performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which isolation level uses row versioning to allow readers to access data without being blocked by writers?",
+    "options": {
+      "A": "READ COMMITTED",
+      "B": "READ COMMITTED SNAPSHOT",
+      "C": "SERIALIZABLE",
+      "D": "REPEATABLE READ"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Livelock' condition?",
+    "options": {
+      "A": "A query that runs infinitely without consuming any CPU resources.",
+      "B": "When a request is repeatedly denied a lock because other overlapping locks are being granted.",
+      "C": "When the SQL Browser service stops responding to client requests.",
+      "D": "A database that is in the middle of a continuous log shipping restoration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Key Lookup' operator in an execution plan signify?",
+    "options": {
+      "A": "The engine is finding a primary key that was missing.",
+      "B": "The engine is retrieving additional columns from the clustered index that were not in the non-clustered index.",
+      "C": "A foreign key constraint is being validated.",
+      "D": "The query is searching for a unique key in a non-indexed table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which system stored procedure is used to identify the causes of blocking and locking in real-time?",
+    "options": {
+      "A": "sp_help",
+      "B": "sp_who2",
+      "C": "sp_lock",
+      "D": "sp_monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Join' in SQL Server 2017+?",
+    "options": {
+      "A": "A join that automatically updates table statistics before executing.",
+      "B": "A feature that chooses between a Hash Join and a Nested Loop Join at runtime based on row counts.",
+      "C": "A join that uses machine learning to predict user behavior.",
+      "D": "A join that works across different SQL Server versions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Incremental Statistics'?",
+    "options": {
+      "A": "To update statistics one row at a time as data is inserted.",
+      "B": "To allow statistics to be updated at the partition level for very large partitioned tables.",
+      "C": "To decrease the frequency of statistics updates to save CPU.",
+      "D": "To calculate the percentage of null values in an index."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which T-SQL hint forces the query to use exactly one CPU core?",
+    "options": {
+      "A": "OPTION (SINGLE_CORE)",
+      "B": "OPTION (MAXDOP 1)",
+      "C": "OPTION (FORCE_SERIAL)",
+      "D": "OPTION (MIN_PARALLELISM 0)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Grant' in the context of query execution?",
+    "options": {
+      "A": "The total amount of physical RAM installed on the server.",
+      "B": "The workspace memory allocated for sort and hash operations during a query.",
+      "C": "A license required to run SQL Server with more than 64GB of RAM.",
+      "D": "The memory used by the operating system for disk caching."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV tracks the accumulated 'Wait Stats' since the server was last restarted?",
+    "options": {
+      "A": "sys.dm_os_wait_stats",
+      "B": "sys.dm_exec_sessions",
+      "C": "sys.dm_db_index_operational_stats",
+      "D": "sys.dm_os_performance_counters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lock Partitioning'?",
+    "options": {
+      "A": "Dividing a table into partitions to avoid row-level locks.",
+      "B": "A feature for high-end systems that splits the lock manager into multiple stripes to reduce contention.",
+      "C": "Setting different lock types for different users.",
+      "D": "Physically locking a hard drive partition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Ghost Cleanup' process?",
+    "options": {
+      "A": "A tool that deletes inactive user accounts.",
+      "B": "A background task that physically removes rows that were logically deleted from an index.",
+      "C": "A feature that removes temporary tables after a crash.",
+      "D": "A process that identifies 'hidden' SQL injection scripts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In T-SQL, what does 'FORCESEEK' do when used as a table hint?",
+    "options": {
+      "A": "It forces the query to use a Full Table Scan.",
+      "B": "It forces the query optimizer to use an Index Seek operation for that table.",
+      "C": "It prevents the query from using any indexes.",
+      "D": "It forces the database to seek for the nearest available backup."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Resource Governor'?",
+    "options": {
+      "A": "To automatically purchase more cloud resources as needed.",
+      "B": "To manage and limit CPU, Memory, and I/O consumption by different workloads.",
+      "C": "To govern the legal compliance of data storage.",
+      "D": "To monitor the temperature of the server CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used in execution plans for queries involving the 'DISTINCT' keyword when no suitable index exists?",
+    "options": {
+      "A": "Nested Loops",
+      "B": "Hash Aggregate",
+      "C": "Index Seek",
+      "D": "Table Spool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'In-Memory OLTP' (Hekaton)?",
+    "options": {
+      "A": "A way to run SQL Server entirely on a USB thumb drive.",
+      "B": "A memory-optimized engine integrated into SQL Server for high-concurrency transaction processing.",
+      "C": "A caching tool for SSD drives.",
+      "D": "A feature that stores query results in the user's browser cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log Sequence Number' (LSN)?",
+    "options": {
+      "A": "The serial number of the SQL Server software license.",
+      "B": "A unique identifier assigned to every record in the transaction log.",
+      "C": "The number of users currently logged into the server.",
+      "D": "A code used to encrypt database backups."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV is best for seeing the text of a currently executing SQL statement?",
+    "options": {
+      "A": "sys.dm_exec_sql_text",
+      "B": "sys.dm_os_schedulers",
+      "C": "sys.dm_db_partition_stats",
+      "D": "sys.dm_exec_requests"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'MAXDOP' stand for?",
+    "options": {
+      "A": "Maximum Data Operations Per-second.",
+      "B": "Maximum Degree of Parallelism.",
+      "C": "Minimum Access Disk Output Protocol.",
+      "D": "Maximum Database Output Priority."
+    },
+    "answer": "B"
+  },
+  {
+    "level": "Hard",
+    "question": "What is a 'Trivial Plan'?",
+    "options": {
+      "A": "A plan generated for a query that is so simple that only one viable execution path exists.",
+      "B": "An incorrect execution plan caused by missing statistics.",
+      "C": "A plan that is only used for temporary tables.",
+      "D": "A security plan used for guest users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do 'Filtered Indexes' help performance?",
+    "options": {
+      "A": "They remove bad data from the database.",
+      "B": "They index only a subset of rows, saving space and improving maintenance and query speed.",
+      "C": "They automatically filter out SQL injection attempts.",
+      "D": "They allow indexes to be used by multiple different databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dirty Page' in buffer management?",
+    "options": {
+      "A": "A page that contains illegal characters.",
+      "B": "A data page that has been modified in memory but not yet written to disk.",
+      "C": "A page that has been corrupted by a hardware failure.",
+      "D": "A page that belongs to a deleted table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Page Split' in an index?",
+    "options": {
+      "A": "When an index is divided into two for load balancing.",
+      "B": "When an 8KB page is full and must be split into two pages to accommodate new data.",
+      "C": "When a query result set is too large to fit in one page.",
+      "D": "A method to compress data by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV identifies missing indexes that could improve performance?",
+    "options": {
+      "A": "sys.dm_db_missing_index_details",
+      "B": "sys.dm_os_performance_counters",
+      "C": "sys.dm_exec_query_plan",
+      "D": "sys.dm_tran_locks"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Indirect Checkpoints'?",
+    "options": {
+      "A": "To check user permissions indirectly through roles.",
+      "B": "To provide a target recovery time for a database by managing dirty page flushing more granularly.",
+      "C": "To verify the integrity of secondary data files.",
+      "D": "To scan the network for unauthorized SQL connections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Implicit Conversion' and why is it a performance risk?",
+    "options": {
+      "A": "It converts users to admins automatically; it is a security risk.",
+      "B": "When types don't match in a join/filter, SQL converts them, often preventing index usage (SARGability).",
+      "C": "It is the process of converting SQL to XML; it is CPU intensive.",
+      "D": "It happens when a database is upgraded; it risks data loss."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Spinlock'?",
+    "options": {
+      "A": "A type of deadlock that happens in the storage engine.",
+      "B": "A lightweight synchronization object used to protect shared data structures in memory.",
+      "C": "A query that loops until the server is restarted.",
+      "D": "A tool used to rotate log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which T-SQL statement is used to capture a detailed trace of instance activity using Extended Events?",
+    "options": {
+      "A": "CREATE EVENT SESSION",
+      "B": "START PROFILER",
+      "C": "ENABLE TRACE",
+      "D": "SET LOGGING ON"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cost Threshold for Parallelism'?",
+    "options": {
+      "A": "The financial cost of running a SQL Server in the cloud.",
+      "B": "The estimated execution cost a query must exceed before a parallel plan is considered.",
+      "C": "The maximum number of users allowed on a parallel server.",
+      "D": "The minimum speed required for the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Instant File Initialization'?",
+    "options": {
+      "A": "A feature that allows SQL Server to start in under 1 second.",
+      "B": "Allows SQL Server to skip zeroing out disk space when growing data files, speeding up file growth.",
+      "C": "A method to initialize variables instantly in T-SQL.",
+      "D": "A way to format a new hard drive from within SSMS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an execution plan, what does 'Parallelism (Gather Streams)' indicate?",
+    "options": {
+      "A": "The query is being split into multiple threads for processing.",
+      "B": "Multiple parallel threads are being merged into a single serial thread for the final output.",
+      "C": "The database is gathering data from multiple remote servers.",
+      "D": "The server is running low on available threads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV is used to analyze internal memory allocations in SQL Server?",
+    "options": {
+      "A": "sys.dm_os_memory_clerks",
+      "B": "sys.dm_exec_sessions",
+      "C": "sys.dm_db_file_space_usage",
+      "D": "sys.dm_os_schedulers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Non-SARGable' query?",
+    "options": {
+      "A": "A query that has a syntax error in the WHERE clause.",
+      "B": "A query where the engine cannot use an index seek because of an operator or function on the column.",
+      "C": "A query that doesn't return any rows.",
+      "D": "A query that is too long to be stored in the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Table Spool' operator in an execution plan?",
+    "options": {
+      "A": "An operator that deletes temporary tables.",
+      "B": "An operator that saves an intermediate result set into TempDB to be reused within the same query.",
+      "C": "A physical device used for database tape backups.",
+      "D": "A tool that counts the number of pages in a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Plan Regression'?",
+    "options": {
+      "A": "When a query plan is manually moved to an older version.",
+      "B": "When a query performs worse after a new execution plan is generated (often due to stale statistics).",
+      "C": "When a database is rolled back to a previous state.",
+      "D": "When the server hardware is downgraded."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy Writer' background process?",
+    "options": {
+      "A": "A developer who doesn't write documentation.",
+      "B": "A system process that flushes old pages from the buffer cache to disk when memory pressure occurs.",
+      "C": "A tool that formats SQL code slowly.",
+      "D": "A process that backs up the database at a low priority."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Residual Predicate'?",
+    "options": {
+      "A": "A part of a query that is ignored by the engine.",
+      "B": "A filter condition that cannot be pushed into an index seek and must be evaluated on the resulting rows.",
+      "C": "A security rule that applies to deleted users.",
+      "D": "The remaining part of a query after it has been minified."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which T-SQL hint is used to force a specific Join order?",
+    "options": {
+      "A": "OPTION (FORCE JOIN)",
+      "B": "OPTION (FORCE ORDER)",
+      "C": "OPTION (MATCH ORDER)",
+      "D": "OPTION (STRICT JOIN)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lock Escalation Threshold'?",
+    "options": {
+      "A": "The time limit before a lock is released.",
+      "B": "The number of locks (typically 5,000) reached on a single object before SQL Server escalates to a table lock.",
+      "C": "The maximum number of users allowed to lock a table.",
+      "D": "The percentage of memory used by the lock manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Buffer Pool Extension'?",
+    "options": {
+      "A": "Adding more physical RAM to the server.",
+      "B": "A feature that allows using a non-volatile disk (like an SSD) as an extension of the SQL Server buffer pool.",
+      "C": "Increasing the number of simultaneous user connections.",
+      "D": "A tool to compress the data in the RAM cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'VLF' (Virtual Log File)?",
+    "options": {
+      "A": "A backup of the transaction log stored in the cloud.",
+      "B": "A logical segment within the physical transaction log file.",
+      "C": "A temporary file used for sorting data.",
+      "D": "A log file that is only stored in memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to clear the entire Query Plan Cache for the instance?",
+    "options": {
+      "A": "DBCC FREEPROCCACHE",
+      "B": "DBCC CLEARDATACACHE",
+      "C": "ALTER SYSTEM RESET CACHE",
+      "D": "SP_FLUSH_PLANS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Statistics Histogram'?",
+    "options": {
+      "A": "A chart showing the history of the database size.",
+      "B": "A set of values in the statistics object that shows the data distribution for the first column.",
+      "C": "A list of all users who have queried the table.",
+      "D": "A log of all index rebuild operations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Estimated Number of Rows' in an execution plan?",
+    "options": {
+      "A": "The exact number of rows the query will return.",
+      "B": "A prediction made by the optimizer based on available statistics to decide the best execution path.",
+      "C": "The total number of rows in the table.",
+      "D": "A random number used for performance testing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV shows the currently active locks in the entire SQL instance?",
+    "options": {
+      "A": "sys.dm_tran_locks",
+      "B": "sys.dm_exec_sessions",
+      "C": "sys.dm_os_waiting_tasks",
+      "D": "sys.dm_db_index_usage_stats"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Turing-Complete' in the context of T-SQL?",
+    "options": {
+      "A": "SQL Server's ability to run on any operating system.",
+      "B": "The fact that T-SQL contains enough control flow logic to solve any computational problem.",
+      "C": "A performance metric developed by Alan Turing.",
+      "D": "The encryption standard used by SQL Server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sort Warning' in Extended Events?",
+    "options": {
+      "A": "A warning that the result set is not sorted.",
+      "B": "An alert that a sort operation has spilled from memory into TempDB, significantly slowing performance.",
+      "C": "A notification that an ORDER BY clause is missing.",
+      "D": "A warning that the sort column is too wide."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-Clustered Columnstore Index' used for?",
+    "options": {
+      "A": "To provide high-speed transactional row lookups.",
+      "B": "To allow real-time analytics on transactional tables without creating a separate data warehouse.",
+      "C": "To encrypt non-clustered indexes.",
+      "D": "To sort the data on the disk more efficiently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Governor Cost Limit'?",
+    "options": {
+      "A": "The maximum price of a SQL Server license.",
+      "B": "A setting to prevent the execution of queries that the optimizer estimates will exceed a certain time threshold.",
+      "C": "The total number of rows a single query can return.",
+      "D": "The maximum CPU temperature allowed during a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-Update Statistics Async'?",
+    "options": {
+      "A": "A feature that updates statistics every hour automatically.",
+      "B": "A setting that allows a query to execute with old statistics while a background thread updates them.",
+      "C": "A method to update statistics using a separate database server.",
+      "D": "An error that prevents statistics from being updated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Symmetric Encryption' mean in SQL Server?",
+    "options": {
+      "A": "Using two different keys for encryption and decryption.",
+      "B": "Using the same key for both encryption and decryption.",
+      "C": "Encryption that works on all servers equally.",
+      "D": "A method to encrypt data in a symmetrical table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transparent Data Encryption' (TDE)?",
+    "options": {
+      "A": "Encryption that makes the data visible to everyone.",
+      "B": "Encryption of the entire database files at rest without requiring application-level code changes.",
+      "C": "A method to encrypt only the data sent over the network.",
+      "D": "A feature that removes encryption from the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DMV is best for analyzing TempDB space usage by internal objects?",
+    "options": {
+      "A": "sys.dm_db_file_space_usage",
+      "B": "sys.dm_exec_query_stats",
+      "C": "sys.dm_os_sys_info",
+      "D": "sys.dm_db_index_usage_stats"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cardinality' in database design?",
+    "options": {
+      "A": "The total number of tables in a database.",
+      "B": "The measure of the uniqueness of data values in a specific column.",
+      "C": "The speed of the database server.",
+      "D": "The number of users who can access a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database Snapshot' primarily used for?",
+    "options": {
+      "A": "To take a physical photograph of the server hardware.",
+      "B": "To create a read-only, point-in-time view of a database for reporting or recovery.",
+      "C": "To back up the database to a secondary cloud provider.",
+      "D": "To monitor the real-time activity of a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hash Match' operator?",
+    "options": {
+      "A": "A security feature that hashes passwords.",
+      "B": "A join or aggregation operator that builds a hash table in memory to process large result sets.",
+      "C": "An operator used to compare two identical tables.",
+      "D": "A tool to find duplicate records in a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Nested Loops' join?",
+    "options": {
+      "A": "A join that runs in a loop until the data is found.",
+      "B": "A join operator that iterates through each row of the outer table and searches for a match in the inner table.",
+      "C": "A join that connects more than three tables.",
+      "D": "A join used only for small numeric columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bitmap Filter' in execution plans?",
+    "options": {
+      "A": "A tool to filter images stored in the database.",
+      "B": "An optimization used in parallel queries to eliminate rows that won't qualify for a join early in the process.",
+      "C": "A security filter that blocks certain IP addresses.",
+      "D": "A way to view the database schema as a bitmap image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Batch Mode' execution?",
+    "options": {
+      "A": "Running multiple SQL scripts one after another.",
+      "B": "Processing a set of rows together (vectorized) rather than row-by-row to optimize CPU cache usage.",
+      "C": "A feature for executing queries at night.",
+      "D": "A method to insert data in batches of 1,000."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Wait Type' PAGELATCH_EX?",
+    "options": {
+      "A": "An error that a page is missing from the database.",
+      "B": "Contention on a data page in memory, often related to high-concurrency inserts on an identity column.",
+      "C": "A warning that the server is out of disk space.",
+      "D": "A process that flushes old data to the transaction log."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'External Pushdown' in PolyBase?",
+    "options": {
+      "A": "Pushing data from the cloud to the local server.",
+      "B": "Delegating the execution of a query filter or join to the external data source (like Hadoop or Oracle) to reduce data transfer.",
+      "C": "A method to push security rules to all users.",
+      "D": "Pushing a database backup to an offsite location."
+    },
+    "answer": "B"
+  }
+  ]
+}

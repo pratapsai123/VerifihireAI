@@ -1,0 +1,2003 @@
+{
+  "skill": "MapReduce",
+  "questions": [
+    {
+      "question": "What are the two primary phases of a MapReduce job?",
+      "options": {
+        "A": "Input and Output",
+        "B": "Map and Reduce",
+        "C": "Shuffle and Sort",
+        "D": "Split and Combine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following best describes the Map phase?",
+      "options": {
+        "A": "Aggregating data into a final result",
+        "B": "Processing input records and generating intermediate key-value pairs",
+        "C": "Sorting all data in the cluster",
+        "D": "Deleting unnecessary files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary input to a Mapper function?",
+      "options": {
+        "A": "A single value",
+        "B": "A key-value pair",
+        "C": "A database table",
+        "D": "A list of strings"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is responsible for dividing the input data into smaller 'splits' for Mappers?",
+      "options": {
+        "A": "Reducer",
+        "B": "InputFormat",
+        "C": "OutputFormat",
+        "D": "JobTracker"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens during the 'Shuffle and Sort' phase?",
+      "options": {
+        "A": "Data is deleted from the disk",
+        "B": "Intermediate data is transferred from Mappers to the appropriate Reducers based on keys",
+        "C": "The job is terminated",
+        "D": "The NameNode is updated"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the Reducer phase?",
+      "options": {
+        "A": "To create more key-value pairs",
+        "B": "To aggregate or summarize the intermediate values associated with the same key",
+        "C": "To split the data into smaller chunks",
+        "D": "To monitor the health of the cluster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MapReduce, data is always processed as what format?",
+      "options": {
+        "A": "Text only",
+        "B": "Key-Value pairs",
+        "C": "Binary arrays",
+        "D": "JSON objects"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Combiner' often called?",
+      "options": {
+        "A": "A mini-Reducer",
+        "B": "A Master Mapper",
+        "C": "A Data Loader",
+        "D": "A Splitter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Where is the intermediate data from the Mapper stored?",
+      "options": {
+        "A": "In HDFS",
+        "B": "On the local disk of the Mapper's node",
+        "C": "In the NameNode's RAM",
+        "D": "On the Reducer's node directly"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function is used to decide which Reducer a specific key-value pair should go to?",
+      "options": {
+        "A": "Mapper",
+        "B": "Partitioner",
+        "C": "Combiner",
+        "D": "InputFormat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default Partitioner used in Hadoop MapReduce?",
+      "options": {
+        "A": "TotalOrderPartitioner",
+        "B": "HashPartitioner",
+        "C": "KeyFieldBasedPartitioner",
+        "D": "RandomPartitioner"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is an example of a 'Map-only' job?",
+      "options": {
+        "A": "Word count",
+        "B": "Data filtering/cleaning",
+        "C": "Calculating average temperature",
+        "D": "Sorting a billion records"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Hadoop 1.x, which daemon was responsible for managing MapReduce jobs?",
+      "options": {
+        "A": "ResourceManager",
+        "B": "JobTracker",
+        "C": "NodeManager",
+        "D": "NameNode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which MapReduce component runs on each worker node to manage individual tasks in Hadoop 1.x?",
+      "options": {
+        "A": "TaskTracker",
+        "B": "DataNode",
+        "C": "Secondary NameNode",
+        "D": "JobTracker"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Locality' in the context of MapReduce?",
+      "options": {
+        "A": "Storing data in the same country",
+        "B": "Running the Map task on the same node where the data block is stored",
+        "C": "Encrypting data for local users",
+        "D": "Limiting data access to local administrators"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Can a MapReduce job have zero Reducers?",
+      "options": {
+        "A": "Yes",
+        "B": "No"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Speculative Execution' do in MapReduce?",
+      "options": {
+        "A": "Predicts the next job the user will run",
+        "B": "Runs a duplicate copy of a slow task on another node to finish faster",
+        "C": "Executes code without data to test for errors",
+        "D": "Deletes data that it speculates is no longer needed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the output of the Shuffle phase?",
+      "options": {
+        "A": "A single merged file on HDFS",
+        "B": "A sorted list of values for each key, passed to the Reducer",
+        "C": "A printout to the console",
+        "D": "Input splits for the Mapper"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class would you override to define your own mapping logic?",
+      "options": {
+        "A": "Reducer",
+        "B": "Mapper",
+        "C": "Partitioner",
+        "D": "Driver"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method in the Mapper class is called once for every key-value pair in the input split?",
+      "options": {
+        "A": "setup()",
+        "B": "map()",
+        "C": "cleanup()",
+        "D": "run()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'Driver' class in a MapReduce program?",
+      "options": {
+        "A": "To process the data",
+        "B": "To configure and submit the job to the cluster",
+        "C": "To sort the keys",
+        "D": "To manage the NameNode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is true about MapReduce scalability?",
+      "options": {
+        "A": "It can only run on a single machine",
+        "B": "It scales horizontally by adding more commodity servers to the cluster",
+        "C": "It requires a supercomputer to scale",
+        "D": "It can only handle small datasets"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Slot' in Hadoop 1.x MapReduce?",
+      "options": {
+        "A": "A physical USB port",
+        "B": "A fixed capacity unit for running a single Map or Reduce task",
+        "C": "A storage disk",
+        "D": "A time interval"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which interface must all keys implement in MapReduce to allow sorting?",
+      "options": {
+        "A": "Writable",
+        "B": "WritableComparable",
+        "C": "Serializable",
+        "D": "Cloneable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the default InputFormat for MapReduce?",
+      "options": {
+        "A": "KeyValueInputFormat",
+        "B": "TextInputFormat",
+        "C": "SequenceFileInputFormat",
+        "D": "NLineInputFormat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In TextInputFormat, what is the 'Key' provided to the Mapper?",
+      "options": {
+        "A": "The content of the line",
+        "B": "The byte offset of the line from the start of the file",
+        "C": "The line number",
+        "D": "The filename"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In TextInputFormat, what is the 'Value' provided to the Mapper?",
+      "options": {
+        "A": "The byte offset",
+        "B": "The content of the line as Text",
+        "C": "The length of the line",
+        "D": "The hash of the line"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'cleanup()' method in Mapper or Reducer?",
+      "options": {
+        "A": "To delete input files",
+        "B": "To perform tasks at the end of the task, such as closing database connections",
+        "C": "To clear the RAM",
+        "D": "To restart the job"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component is responsible for reading data from HDFS and providing it to the InputFormat?",
+      "options": {
+        "A": "RecordReader",
+        "B": "OutputCommitter",
+        "C": "TaskTracker",
+        "D": "JobTracker"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Where are the final results of a MapReduce job stored?",
+      "options": {
+        "A": "On the local disk of the Reducer",
+        "B": "In HDFS",
+        "C": "In a temporary cache",
+        "D": "On the user's desktop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Skewness' in MapReduce?",
+      "options": {
+        "A": "When data is perfectly balanced",
+        "B": "When one Reducer receives significantly more data than others, causing a bottleneck",
+        "C": "A type of encryption",
+        "D": "A sorting algorithm"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'job.setNumReduceTasks(0)' command do?",
+      "options": {
+        "A": "Runs 10 Reducers",
+        "B": "Configures a Map-only job with no Reduce phase",
+        "C": "Deletes the job",
+        "D": "Forces the job to fail"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is NOT a standard Writable type in Hadoop?",
+      "options": {
+        "A": "IntWritable",
+        "B": "Text",
+        "C": "LongWritable",
+        "D": "StringWritable"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is the relationship between Input Splits and HDFS Blocks?",
+      "options": {
+        "A": "They are always the same size",
+        "B": "An Input Split is a logical representation, whereas an HDFS Block is a physical chunk of data",
+        "C": "One split always contains exactly 10 blocks",
+        "D": "There is no relationship"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary language used for writing native MapReduce programs?",
+      "options": {
+        "A": "Python",
+        "B": "Java",
+        "C": "C++",
+        "D": "Ruby"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which configuration property is used to set the number of Reducers for a job?",
+      "options": {
+        "A": "mapred.reduce.tasks",
+        "B": "mapreduce.job.reduces",
+        "C": "hadoop.reducer.count",
+        "D": "job.reducers"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In MapReduce, what does the 'Task' refer to?",
+      "options": {
+        "A": "A whole MapReduce job",
+        "B": "A single unit of work (one Mapper or one Reducer instance)",
+        "C": "A hardware server",
+        "D": "A line of code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Spilling' in MapReduce?",
+      "options": {
+        "A": "Losing data during transfer",
+        "B": "Writing the contents of the Mapper's memory buffer to disk when it reaches a certain threshold",
+        "C": "Deleting old logs",
+        "D": "Sending data to the wrong node"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the function of 'SequenceFileInputFormat'?",
+      "options": {
+        "A": "Reading standard text files",
+        "B": "Reading Hadoop-specific binary files containing key-value pairs",
+        "C": "Reading image files",
+        "D": "Reading SQL databases"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Cache' in MapReduce?",
+      "options": {
+        "A": "A way to speed up the internet",
+        "B": "A mechanism to distribute small-to-medium files (like side-data or libraries) to all worker nodes",
+        "C": "A temporary folder for user files",
+        "D": "An encrypted storage area"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to pass parameters from the Driver to Mappers and Reducers?",
+      "options": {
+        "A": "Using global variables",
+        "B": "Using the Configuration object",
+        "C": "Writing to a text file",
+        "D": "Passing via the command line only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MapReduce, the 'Key' in the Reducer's input is:",
+      "options": {
+        "A": "Always an integer",
+        "B": "A unique key from the Mapper, and the 'Value' is an Iterator of all values associated with that key",
+        "C": "The line number of the original file",
+        "D": "A random number generated by Hadoop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Counter' feature used for?",
+      "options": {
+        "A": "To count the number of nodes in the cluster",
+        "B": "To gather statistics about the job (e.g., number of corrupted records)",
+        "C": "To count the amount of money spent on cloud services",
+        "D": "To count the lines of code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command is used to run a MapReduce JAR file from the command line?",
+      "options": {
+        "A": "hadoop jar <jarfile> <classname> <args>",
+        "B": "run jar <jarfile>",
+        "C": "java -jar <jarfile>",
+        "D": "mapreduce start <jarfile>"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which phase comes immediately after the Map phase?",
+      "options": {
+        "A": "Reduce phase",
+        "B": "Shuffle and Sort phase",
+        "C": "Input phase",
+        "D": "Output phase"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Is the output of a Mapper sorted?",
+      "options": {
+        "A": "Yes, by key, within each partition before being sent to the Reducer",
+        "B": "No, it is in random order",
+        "C": "Only if the user manually sorts it",
+        "D": "Only in Hadoop 3.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a benefit of the Combiner?",
+      "options": {
+        "A": "It removes the need for a Reducer",
+        "B": "It reduces the amount of data transferred over the network by performing local aggregation",
+        "C": "It encrypts the data",
+        "D": "It increases the number of Mappers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if a Mapper task fails during execution?",
+      "options": {
+        "A": "The whole job fails immediately",
+        "B": "The TaskTracker/NodeManager reports the failure and the job master reschedules the task on another node",
+        "C": "The data from that Mapper is ignored",
+        "D": "The NameNode restarts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which InputFormat is useful for processing an entire file as a single record?",
+      "options": {
+        "A": "TextInputFormat",
+        "B": "WholeFileInputFormat (custom)",
+        "C": "KeyValueInputFormat",
+        "D": "SequenceFileInputFormat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of MapReduce, what is 'Partitioning'?",
+      "options": {
+        "A": "Dividing the hard drive into sectors",
+        "B": "The process of determining which Reducer instance will handle a specific key-value pair",
+        "C": "A way to backup data",
+        "D": "Splitting a file into blocks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary drawback of MapReduce compared to Spark?",
+      "options": {
+        "A": "It is not as secure",
+        "B": "It relies heavily on disk I/O for intermediate data, making it slower for iterative algorithms",
+        "C": "It cannot run on Linux",
+        "D": "It doesn't support Java"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'JobConf' or 'Job' object used for?",
+      "options": {
+        "A": "To store the data results",
+        "B": "To define the Mapper, Reducer, and other job-specific configurations",
+        "C": "To manage the server hardware",
+        "D": "To write log files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which component manages resources in Hadoop 2.x MapReduce (YARN)?",
+      "options": {
+        "A": "JobTracker",
+        "B": "ResourceManager",
+        "C": "TaskTracker",
+        "D": "Secondary NameNode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Task Attempt'?",
+      "options": {
+        "A": "A user's attempt to write code",
+        "B": "An actual instance of a task running on a node (there can be multiple attempts if one fails)",
+        "C": "A network connection test",
+        "D": "A type of database query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Can the Mapper and Reducer use different Key/Value types?",
+      "options": {
+        "A": "No, they must be identical",
+        "B": "Yes, as long as the Mapper's output types match the Reducer's input types",
+        "C": "Only in Python",
+        "D": "Only for numeric data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'MapReduce Web UI' primarily used for?",
+      "options": {
+        "A": "Writing code in the browser",
+        "B": "Monitoring job progress, logs, and success/failure status",
+        "C": "Downloading the Hadoop source code",
+        "D": "Managing user email accounts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which function allows you to use MapReduce with languages other than Java (like Python)?",
+      "options": {
+        "A": "Hadoop Streaming",
+        "B": "Hadoop Pipes",
+        "C": "Hadoop Bridge",
+        "D": "Both A and B"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Hadoop Streaming'?",
+      "options": {
+        "A": "Streaming video on Hadoop",
+        "B": "A utility that allows you to create and run Map/Reduce jobs with any executable as the mapper and/or the reducer",
+        "C": "A way to speed up the network",
+        "D": "A real-time data processing library"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a key advantage of MapReduce?",
+      "options": {
+        "A": "High-speed real-time processing",
+        "B": "Ability to process petabytes of unstructured data across thousands of nodes",
+        "C": "Simplified UI design",
+        "D": "Low memory usage"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens to the intermediate files after the MapReduce job completes?",
+      "options": {
+        "A": "They are kept forever",
+        "B": "They are automatically cleaned up by the framework",
+        "C": "They are moved to the Trash directory",
+        "D": "They are converted into final output"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Sort' phase in the Reducer?",
+      "options": {
+        "A": "Sorting the input files",
+        "B": "Merging and sorting the different shuffle files received from various mappers",
+        "C": "Sorting the final output",
+        "D": "Sorting the names of the nodes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which part of MapReduce is responsible for writing the final key-value pairs to HDFS?",
+      "options": {
+        "A": "RecordWriter",
+        "B": "InputSplit",
+        "C": "TaskTracker",
+        "D": "Partitioner"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In MapReduce, what is 'Fault Tolerance'?",
+      "options": {
+        "A": "The ability to prevent all errors",
+        "B": "The ability of the system to recover from a task or node failure and complete the job",
+        "C": "Encrypting the data blocks",
+        "D": "Checking the user's login"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Aggressive Speculation'?",
+      "options": {
+        "A": "Running tasks before the job starts",
+        "B": "A configuration that triggers speculative execution more frequently",
+        "C": "A type of sorting algorithm",
+        "D": "A way to delete data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is a 'Map-Side' optimization?",
+      "options": {
+        "A": "Using more Reducers",
+        "B": "Using a Combiner",
+        "C": "Sorting the final output",
+        "D": "Increasing the HDFS block size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Partitioner' if there is only one Reducer?",
+      "options": {
+        "A": "It sorts the data",
+        "B": "It has no effect, as all data will go to the single Reducer",
+        "C": "It splits the data into two",
+        "D": "It encrypts the keys"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'Circular Buffer' in the Map phase?",
+      "options": {
+        "A": "To store final output in HDFS",
+        "B": "To hold Mapper output in memory before spilling it to the local disk",
+        "C": "To keep track of active users",
+        "D": "To cache data for the Reducer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which configuration property defines the size of the Mapper's memory buffer?",
+      "options": {
+        "A": "mapreduce.task.io.sort.mb",
+        "B": "mapred.buffer.size",
+        "C": "hadoop.map.memory.limit",
+        "D": "dfs.block.size"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'Partitioner' use to determine the destination Reducer by default?",
+      "options": {
+        "A": "The value of the record",
+        "B": "The hash code of the key",
+        "C": "The size of the record",
+        "D": "The line number"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When does the 'Reduce' phase actually start in a typical MapReduce job?",
+      "options": {
+        "A": "After all Map tasks are 100% complete",
+        "B": "As soon as individual Map tasks complete (copying phase begins)",
+        "C": "Before the Map phase starts",
+        "D": "Only after the data is stored in HDFS"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Secondary Sorting' in MapReduce?",
+      "options": {
+        "A": "Sorting the data twice for security",
+        "B": "A technique to sort the values associated with a key before they reach the Reducer",
+        "C": "Sorting by the size of the file",
+        "D": "Sorting the nodes by CPU speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'JobTracker' in Hadoop 1.x during a failure?",
+      "options": {
+        "A": "It restarts the whole cluster",
+        "B": "It reschedules failed tasks on different TaskTrackers",
+        "C": "It deletes the corrupted data",
+        "D": "It notifies the user via email"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Zero-copy' in the context of MapReduce shuffling?",
+      "options": {
+        "A": "To prevent data replication",
+        "B": "To move data directly from the network buffer to the application memory to reduce CPU overhead",
+        "C": "To avoid using any RAM",
+        "D": "To speed up HDFS writes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method should be used to provide a custom grouping logic for keys in the Reducer?",
+      "options": {
+        "A": "setPartitionerClass",
+        "B": "setGroupingComparatorClass",
+        "C": "setSortComparatorClass",
+        "D": "setCombinerClass"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the impact of setting too many Reducers for a small dataset?",
+      "options": {
+        "A": "The job finishes instantly",
+        "B": "Significant overhead and many small output files, reducing overall efficiency",
+        "C": "Data corruption",
+        "D": "The Map phase slows down"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property controls the 'spill threshold' of the Map output buffer (default 0.80)?",
+      "options": {
+        "A": "mapreduce.map.sort.spill.percent",
+        "B": "mapred.spill.limit",
+        "C": "io.sort.record.percent",
+        "D": "mapreduce.buffer.spill"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Composite Key'?",
+      "options": {
+        "A": "A key made of multiple data fields, used for advanced sorting or partitioning",
+        "B": "An encrypted key",
+        "C": "A key that only contains numbers",
+        "D": "The filename combined with the date"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component manages 'Task Attempts' and resource requests in YARN?",
+      "options": {
+        "A": "NodeManager",
+        "B": "ApplicationMaster",
+        "C": "ResourceManager",
+        "D": "HistoryServer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the difference between 'Combiner' and 'Reducer'?",
+      "options": {
+        "A": "The Combiner only runs on the Mapper node to reduce network traffic",
+        "B": "The Reducer runs before the Mapper",
+        "C": "The Combiner is mandatory; the Reducer is optional",
+        "D": "There is no difference in their logic or location"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Map-Side Join'?",
+      "options": {
+        "A": "Joining data after the Reduce phase",
+        "B": "Performing the join in the Mapper, requiring data to be partitioned and sorted identically at the source",
+        "C": "Joining two HDFS clusters",
+        "D": "A join that uses a SQL database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When would you use 'Reduce-Side Join' instead of Map-Side Join?",
+      "options": {
+        "A": "When the datasets are small",
+        "B": "When the input datasets are not sorted or partitioned by the join key",
+        "C": "When you want to avoid using Reducers",
+        "D": "When the network is very fast"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class is used to write results to a database instead of HDFS?",
+      "options": {
+        "A": "TextOutputFormat",
+        "B": "DBOutputFormat",
+        "C": "SequenceFileOutputFormat",
+        "D": "SQLOutputFormat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RawComparator' used for in Hadoop?",
+      "options": {
+        "A": "To compare data without deserializing it into objects, improving performance",
+        "B": "To compare the speed of two nodes",
+        "C": "To find raw data in HDFS",
+        "D": "To decrypt data"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'job.waitForCompletion(true)' method do?",
+      "options": {
+        "A": "Starts the job and exits",
+        "B": "Submits the job and polls for progress until it finishes, printing progress to the console",
+        "C": "Waits for the user to press a key",
+        "D": "Stops the job if it takes too long"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Lazy Output' feature in MapReduce?",
+      "options": {
+        "A": "The job takes a long time to finish",
+        "B": "It ensures that an output file is only created if a record is actually written",
+        "C": "The output is only saved if the user approves it",
+        "D": "It skips the Reduce phase"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you pass a large lookup table (e.g., 50MB) to all Mappers efficiently?",
+      "options": {
+        "A": "Hardcode it in the Mapper class",
+        "B": "Using the Distributed Cache",
+        "C": "Storing it in a static variable",
+        "D": "Reading it from a database in every map() call"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ChainMapper' used for?",
+      "options": {
+        "A": "To link multiple HDFS clusters",
+        "B": "To run a sequence of Mappers one after another within a single Map task",
+        "C": "To encrypt the data chain",
+        "D": "To count the number of mappers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which configuration determines the maximum number of 'Task Attempts' before a job is failed?",
+      "options": {
+        "A": "mapreduce.map.maxattempts",
+        "B": "hadoop.task.retry.limit",
+        "C": "yarn.resourcemanager.max-attempts",
+        "D": "mapred.job.retries"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Total Order Partitioning'?",
+      "options": {
+        "A": "Sorting data within a single reducer",
+        "B": "Ensuring that the final output across all reducer files is globally sorted",
+        "C": "Sorting data by file size",
+        "D": "A way to name output files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'IdentityMapper'?",
+      "options": {
+        "A": "A mapper that identifies the user",
+        "B": "A default mapper that simply passes input key-value pairs to the output without modification",
+        "C": "A mapper that checks for duplicate IDs",
+        "D": "A security tool"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which interface is used to define custom Counters in Java?",
+      "options": {
+        "A": "java.util.Counter",
+        "B": "A Java Enum",
+        "C": "hadoop.mapreduce.Counter",
+        "D": "Both B and C"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "In YARN, which component is responsible for monitoring the resource usage (CPU, RAM) of a specific node?",
+      "options": {
+        "A": "ResourceManager",
+        "B": "NodeManager",
+        "C": "ApplicationMaster",
+        "D": "TimelineServer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Merge Sort' do in the Reduce phase?",
+      "options": {
+        "A": "It sorts the files on the local disk",
+        "B": "It combines the sorted segments from various mappers into a single sorted stream for the Reducer",
+        "C": "It deletes the Map output",
+        "D": "It merges HDFS blocks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you handle 'Multiple Inputs' with different formats in a single MapReduce job?",
+      "options": {
+        "A": "You cannot; use two jobs",
+        "B": "Use the MultipleInputs class to specify different InputFormats and Mappers for each path",
+        "C": "Merge the files manually first",
+        "D": "Convert all files to CSV"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Speculative Execution' triggered by?",
+      "options": {
+        "A": "Task failure",
+        "B": "A task running significantly slower than the average task in the same category",
+        "C": "A manual command from the admin",
+        "D": "High network traffic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'OutputCommitter' used for?",
+      "options": {
+        "A": "To verify the user's identity",
+        "B": "To manage the final promotion of temporary task output to the final HDFS location",
+        "C": "To delete old jobs",
+        "D": "To compress the output"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which class would you use to read data from a binary SequenceFile?",
+      "options": {
+        "A": "TextInputFormat",
+        "B": "SequenceFileInputFormat",
+        "C": "BinaryInputFormat",
+        "D": "ObjectInputFormat"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Job In-memory Sort'?",
+      "options": {
+        "A": "Sorting data in the Driver's RAM",
+        "B": "Sorting map output in a buffer before it is spilled to disk",
+        "C": "Sorting HDFS metadata",
+        "D": "A type of database join"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In MapReduce, what does 'Aggregation' typically refer to?",
+      "options": {
+        "A": "Splitting files",
+        "B": "Summarizing data in the Reducer (e.g., sum, count, min, max)",
+        "C": "Collecting logs",
+        "D": "Grouping nodes by rack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the consequence of a Mapper emitting too many small key-value pairs?",
+      "options": {
+        "A": "The job will crash",
+        "B": "Excessive pressure on the Shuffle phase and memory, leading to potential GC issues",
+        "C": "The Reducer will be too fast",
+        "D": "HDFS will run out of space"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'mapreduce.job.jvm.numtasks' property?",
+      "options": {
+        "A": "To limit the number of Mappers",
+        "B": "To reuse the same JVM for multiple tasks within the same job to reduce startup overhead",
+        "C": "To set the memory for the JVM",
+        "D": "To count the number of tasks"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'setup()' method in a Reducer do?",
+      "options": {
+        "A": "It is called once for every key",
+        "B": "It is called once at the start of the Reduce task for initialization (e.g., loading a dictionary)",
+        "C": "It sets up the HDFS connection",
+        "D": "It starts the shuffle"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you debug a failing MapReduce job on a remote cluster?",
+      "options": {
+        "A": "By checking the task logs via the YARN Web UI or 'yarn logs' command",
+        "B": "By visiting the server physically",
+        "C": "By restarting the NameNode",
+        "D": "You cannot debug it"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'RecordReader' responsibility?",
+      "options": {
+        "A": "To write data to HDFS",
+        "B": "To take a byte-oriented view of the input split and present a record-oriented view to the Mapper",
+        "C": "To count the number of records",
+        "D": "To sort the records"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hadoop Pipes'?",
+      "options": {
+        "A": "A plumbing tool for Hadoop",
+        "B": "A C++ API for MapReduce using sockets to communicate with the task effort",
+        "C": "A way to stream data from a database",
+        "D": "A network cable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'MapReduce History Server'?",
+      "options": {
+        "A": "A server that tracks the history of Hadoop developers",
+        "B": "A daemon that stores and serves the job history and logs for completed MapReduce applications",
+        "C": "A backup for the NameNode",
+        "D": "A database of user passwords"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Shuffle' phase, what is the 'Copy' step?",
+      "options": {
+        "A": "Copying files from the user's PC",
+        "B": "The process where Reducers fetch their specific partitions of map output from various Mapper nodes over HTTP",
+        "C": "Backing up the data in HDFS",
+        "D": "Copying the code to the workers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if the 'Partitioner' returns an index larger than the number of Reducers?",
+      "options": {
+        "A": "It is automatically corrected",
+        "B": "An IllegalStateException or similar error occurs, failing the task",
+        "C": "The data is deleted",
+        "D": "A new Reducer is created"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bloom Filter' used for in MapReduce joins?",
+      "options": {
+        "A": "To encrypt the join keys",
+        "B": "To quickly check if a key exists in a dataset before performing an expensive join/shuffle",
+        "C": "To sort the data",
+        "D": "To visualize the output"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property is used to specify the 'Jar' file to use for a job in the Driver?",
+      "options": {
+        "A": "job.setJarByClass(MyClass.class)",
+        "B": "job.addJar(\"file.jar\")",
+        "C": "hadoop.jar.path",
+        "D": "config.setJar(\"path\")"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Map-Side Aggregation'?",
+      "options": {
+        "A": "Using a Combiner to perform early aggregation on the Mapper node",
+        "B": "Sorting data in the mapper",
+        "C": "Deleting data in the mapper",
+        "D": "Sending data directly to HDFS from the mapper"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Text' class in Hadoop preferred over 'String'?",
+      "options": {
+        "A": "It is easier to read",
+        "B": "It is mutable and more memory-efficient for serialization in MapReduce",
+        "C": "It supports more languages",
+        "D": "It is encrypted by default"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Split Slop'?",
+      "options": {
+        "A": "A network delay",
+        "B": "A configuration (default 1.1) that allows a split to be slightly larger than the block size to avoid tiny residual splits",
+        "C": "A way to delete splits",
+        "D": "A error in the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you set a custom Partitioner in a MapReduce job?",
+      "options": {
+        "A": "job.setPartitionerClass(MyPartitioner.class)",
+        "B": "job.usePartitioner(MyPartitioner)",
+        "C": "config.set(\"partitioner\", \"MyPartitioner\")",
+        "D": "It is set automatically"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'NullWritable' represent?",
+      "options": {
+        "A": "An error in the data",
+        "B": "A zero-length Writable used when the key or value is not needed in the output",
+        "C": "A deleted record",
+        "D": "A blank space"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dynamic Partitioning' in MapReduce output?",
+      "options": {
+        "A": "Creating output directories at runtime based on the data keys",
+        "B": "Changing the number of Reducers during the job",
+        "C": "A way to sort data",
+        "D": "A network protocol"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'MapReduce AppMaster'?",
+      "options": {
+        "A": "The person who runs the job",
+        "B": "A YARN container that manages the execution of a single MapReduce job",
+        "C": "The master node of the cluster",
+        "D": "A backup for the NameNode"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of the following is an 'Expensive' operation in MapReduce?",
+      "options": {
+        "A": "Mapper processing in-memory",
+        "B": "Network shuffling and disk spilling",
+        "C": "Defining a configuration variable",
+        "D": "Printing to the console"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hadoop Archive' (HAR)?",
+      "options": {
+        "A": "A backup system",
+        "B": "A tool that packs small files into a larger HDFS block to reduce NameNode memory usage",
+        "C": "A list of old jobs",
+        "D": "A compressed folder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'mapreduce.map.speculative' = true do?",
+      "options": {
+        "A": "It deletes slow tasks",
+        "B": "It enables speculative execution for Map tasks",
+        "C": "It predicts the job output",
+        "D": "It speeds up the CPU"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'DistributedCache.addCacheFile()' used for?",
+      "options": {
+        "A": "To cache files in the user's browser",
+        "B": "To make a file from HDFS available on the local disk of all worker nodes for the job",
+        "C": "To backup files",
+        "D": "To encrypt files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'TaskID' in MapReduce?",
+      "options": {
+        "A": "A unique identifier for a specific map or reduce task in a job",
+        "B": "The user's ID",
+        "C": "The node's ID",
+        "D": "The software version"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Sort-Merge' algorithm used for in the Reducer?",
+      "options": {
+        "A": "To sort the HDFS blocks",
+        "B": "To efficiently merge and sort multiple streams of key-value pairs from different Mappers",
+        "C": "To sort the user list",
+        "D": "To speed up the network"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the consequence of not using 'Writable' for your custom keys/values?",
+      "options": {
+        "A": "The job will be slow",
+        "B": "Hadoop will not be able to serialize/deserialize your data for network transfer",
+        "C": "The data will be encrypted",
+        "D": "There is no consequence"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'NLineInputFormat'?",
+      "options": {
+        "A": "An InputFormat that ensures each Mapper receives exactly N lines of input",
+        "B": "A way to read lines in reverse",
+        "C": "A way to skip lines",
+        "D": "An encrypted input format"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How can you run multiple MapReduce jobs in a sequence?",
+      "options": {
+        "A": "By manually starting the next job when the first one finishes",
+        "B": "Using JobControl class or workflow tools like Oozie or Airflow",
+        "C": "By putting all code in one Mapper",
+        "D": "Hadoop only supports single jobs"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'mapreduce.reduce.shuffle.input.buffer.percent' control?",
+      "options": {
+        "A": "The speed of the reducer",
+        "B": "The percentage of the reducer's heap memory dedicated to holding the shuffled map outputs",
+        "C": "The amount of disk space used for shuffles",
+        "D": "The number of reducers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Side Data' in MapReduce?",
+      "options": {
+        "A": "Data that is not important",
+        "B": "Extra read-only data (like a configuration file) needed by the tasks to process the main data",
+        "C": "Data on the second hard drive",
+        "D": "A backup copy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens when the 'Mapper' emits a key-value pair?",
+      "options": {
+        "A": "It is written to HDFS instantly",
+        "B": "It is written to an in-memory buffer and later spilled to the local disk",
+        "C": "It is sent to the Reducer immediately",
+        "D": "It is deleted after the next line"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'JVM Reuse'?",
+      "options": {
+        "A": "Running the same code twice",
+        "B": "Using the same JVM process to run multiple tasks sequentially to avoid the cost of JVM startup",
+        "C": "Sharing memory between different nodes",
+        "D": "A way to recycle RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a valid 'OutputFormat'?",
+      "options": {
+        "A": "TextOutputFormat",
+        "B": "SequenceFileOutputFormat",
+        "C": "MultipleTextOutputFormat",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Data Locality Optimization'?",
+      "options": {
+        "A": "Running tasks on nodes that have the data to minimize network transfer",
+        "B": "Storing data in local folders",
+        "C": "Only allowing local users to run jobs",
+        "D": "A network speed limit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary technical reason why a 'Combiner' cannot be used if the Reduce logic is not commutative and associative (e.g., calculating an average)?",
+      "options": {
+        "A": "Combiners do not support floating point numbers.",
+        "B": "The framework does not guarantee how many times a Combiner will run, which would mathematically skew non-associative results.",
+        "C": "Combiners only work with integer keys.",
+        "D": "The Reducer would run out of memory."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the 'Shuffle' phase, what is the role of the 'In-memory Merge' thread on the Reducer side?",
+      "options": {
+        "A": "To compress the map output segments.",
+        "B": "To merge map outputs fetched into RAM before they are spilled to the Reducer's local disk.",
+        "C": "To sort the keys alphabetically.",
+        "D": "To verify the checksum of the data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Partial Sorting' in MapReduce and how does it relate to the framework's architecture?",
+      "options": {
+        "A": "Sorting only the first 100 records.",
+        "B": "The default behavior where MapReduce only guarantees that the records within a single partition are sorted by key.",
+        "C": "A way to skip the shuffle phase.",
+        "D": "Sorting data by value instead of key."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When implementing a 'Secondary Sort', why is a 'Grouping Comparator' strictly necessary?",
+      "options": {
+        "A": "To define which Reducer the composite key goes to.",
+        "B": "To ensure that all records with the same primary key (but different secondary keys) are treated as part of the same group in the reduce() method.",
+        "C": "To encrypt the composite key.",
+        "D": "To increase the number of mappers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'Speculative Execution' handle the output of the 'losing' task attempt?",
+      "options": {
+        "A": "It merges it with the winning task's output.",
+        "B": "The framework kills the losing task and discards its partial output to ensure data consistency.",
+        "C": "It saves it to a hidden folder.",
+        "D": "It throws an error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Map-Side Spill' merge-factor (io.sort.factor) used for?",
+      "options": {
+        "A": "The number of mappers to run in parallel.",
+        "B": "The number of sorted spill streams to merge at once into a single output file on the local disk.",
+        "C": "The replication factor of the map output.",
+        "D": "The percentage of RAM used for sorting."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'OutputCommitter' method is responsible for moving the task output from the temporary task attempt directory to the final output directory?",
+      "options": {
+        "A": "setupJob()",
+        "B": "commitTask()",
+        "C": "cleanupJob()",
+        "D": "abortTask()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Data Locality', what is a 'Rack-local' task compared to a 'Node-local' task?",
+      "options": {
+        "A": "A task running on a different continent.",
+        "B": "A task running on a node in the same rack as the data, but not on the node containing the data itself.",
+        "C": "A task that uses a local hard drive.",
+        "D": "There is no difference."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Distributed Cache' symlink feature?",
+      "options": {
+        "A": "A way to connect two clusters.",
+        "B": "Allowing the cached file to be accessed via a short name (alias) in the task's working directory rather than the full HDFS path.",
+        "C": "A security feature.",
+        "D": "A way to delete the cache."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if a 'Reducer' crashes after the job is 90% complete?",
+      "options": {
+        "A": "The whole job is restarted from the Map phase.",
+        "B": "Only the failed Reduce task is rescheduled; it must re-fetch the necessary map outputs from the mappers.",
+        "C": "The job is marked as 'Partial Success'.",
+        "D": "The remaining Reducers take over its work automatically."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'CompositeInputFormat' used for in MapReduce?",
+      "options": {
+        "A": "To process multiple file formats at once.",
+        "B": "To perform efficient Map-side joins on pre-partitioned and pre-sorted datasets.",
+        "C": "To merge small files.",
+        "D": "To encrypt multiple inputs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does the 'Partitioner' affect 'Reduce-side Skew'?",
+      "options": {
+        "A": "A poorly implemented partitioner can send an unequal number of keys to different reducers, causing bottlenecks.",
+        "B": "It has no effect on skew.",
+        "C": "It automatically balances the load.",
+        "D": "It deletes skewed data."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Speculative Execution' 'Data Bias' risk?",
+      "options": {
+        "A": "Speculative tasks might result in duplicate data in HDFS.",
+        "B": "It may favor small tasks over large ones.",
+        "C": "It can waste significant cluster resources if slow tasks are actually waiting on external resources (like a database) rather than being CPU-bound.",
+        "D": "There is no risk."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which internal structure does 'HashPartitioner' use to determine the reducer index?",
+      "options": {
+        "A": "(key.hashCode() & Integer.MAX_VALUE) % numReduceTasks",
+        "B": "key.length() % numReduceTasks",
+        "C": "random.nextInt() % numReduceTasks",
+        "D": "key.toString().length() % numReduceTasks"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MapReduce Counter' limit 'mapreduce.job.counters.limit' (default 120) designed to protect?",
+      "options": {
+        "A": "The JobHistory server memory.",
+        "B": "The ApplicationMaster and ResourceManager memory from being overwhelmed by an excessive number of user-defined counters.",
+        "C": "The number of mappers.",
+        "D": "The number of users."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Zero-Reducer' job output behavior?",
+      "options": {
+        "A": "No output is generated.",
+        "B": "The output of each Mapper is written directly to HDFS as the final output.",
+        "C": "The output is stored in the cache.",
+        "D": "The output is sent to the NameNode."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'Task Logs', what is the 'Syslog' vs 'Stdout'?",
+      "options": {
+        "A": "Stdout captures standard print statements; Syslog is used by the Log4j framework for internal Hadoop logging.",
+        "B": "They are the same.",
+        "C": "Syslog is for the user; Stdout is for the admin.",
+        "D": "Stdout is only for errors."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Job Staging' in YARN?",
+      "options": {
+        "A": "Running the job in a test environment.",
+        "B": "The process where the client uploads the job JAR, configuration, and split info to HDFS so the AppMaster can access them.",
+        "C": "A way to pause the job.",
+        "D": "Storing the final results."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'mapreduce.task.timeout' (default 10 mins) represent?",
+      "options": {
+        "A": "The total time a job can run.",
+        "B": "The maximum time a task can go without reporting progress or reading/writing data before being killed.",
+        "C": "The network connection timeout.",
+        "D": "The time a user can be idle."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you implement 'Global Sorting' across all reducers in a large dataset?",
+      "options": {
+        "A": "By using only one Reducer (not scalable).",
+        "B": "By using TotalOrderPartitioner with a pre-generated sampler file that defines key ranges for each reducer.",
+        "C": "By using a SQL join.",
+        "D": "Hadoop cannot do global sorting."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Map-side Combine' vs 'Reducer' output requirement?",
+      "options": {
+        "A": "The Combiner's output key-value types must match the Mapper's output (and Reducer's input) types.",
+        "B": "They must be different.",
+        "C": "Combiners must only output strings.",
+        "D": "There is no requirement."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'RecordReader' 'getPos()' method used for?",
+      "options": {
+        "A": "To find the GPS location of the node.",
+        "B": "To report the current byte offset within the split to calculate the job progress percentage.",
+        "C": "To find the end of the file.",
+        "D": "To sort the records."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hadoop Streaming' 'key.field.separator' parameter?",
+      "options": {
+        "A": "The character used to separate files.",
+        "B": "The delimiter used to separate the key and value in the text output of the mapper/reducer scripts.",
+        "C": "The end-of-line character.",
+        "D": "A security key."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens in the 'Shuffle' phase if the Reducer's RAM is 100% full while fetching map outputs?",
+      "options": {
+        "A": "The reducer crashes.",
+        "B": "The framework spills the fetched map outputs to the local disk and continues the merge on-disk.",
+        "C": "The mappers stop sending data.",
+        "D": "The data is deleted."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy RecordReader'?",
+      "options": {
+        "A": "A reader that skips records.",
+        "B": "A custom implementation that only opens the underlying file/resource when the first record is requested.",
+        "C": "A reader that is slow.",
+        "D": "A default reader."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In 'MultipleOutputs', what does 'generateUniqueReplacement' do?",
+      "options": {
+        "A": "It creates a unique ID for the user.",
+        "B": "It appends a unique identifier to the filename to avoid collisions when multiple tasks write to the same output folder.",
+        "C": "It renames the mapper.",
+        "D": "It replaces null values."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'JobHistory' (.jhist) file format?",
+      "options": {
+        "A": "XML",
+        "B": "JSON-based event log containing all job and task execution metrics and events.",
+        "C": "Binary",
+        "D": "CSV"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Short-circuit' MapReduce execution (LocalJobRunner)?",
+      "options": {
+        "A": "Running MapReduce in a single JVM for small-scale testing or debugging without a full YARN cluster.",
+        "B": "Bypassing the shuffle phase.",
+        "C": "A way to finish the job faster.",
+        "D": "Running only the Reducer."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Mapper-side Filter'?",
+      "options": {
+        "A": "Deleting files.",
+        "B": "Applying logic in the map() method to discard irrelevant records early, reducing network and shuffle overhead.",
+        "C": "A network firewall.",
+        "D": "A way to sort data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How does 'MapReduce' handle heterogeneous hardware (nodes with different CPU speeds)?",
+      "options": {
+        "A": "It ignores the speed difference.",
+        "B": "Via 'Speculative Execution', which identifies and mitigates the impact of slow tasks on weaker hardware.",
+        "C": "It only uses the fastest nodes.",
+        "D": "It slows down the fast nodes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SequenceFile' 'Block Compression' vs 'Record Compression'?",
+      "options": {
+        "A": "Record compression compresses each KV pair; Block compression groups multiple records into a block before compressing (more efficient).",
+        "B": "They are the same.",
+        "C": "Block compression is only for images.",
+        "D": "Record compression is mandatory."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'ApplicationMaster' 'Liveness' check?",
+      "options": {
+        "A": "The user checking the UI.",
+        "B": "The ResourceManager periodically receiving heartbeats from the AppMaster to ensure the job manager is still running.",
+        "C": "A software license check.",
+        "D": "A hardware test."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Map-side Sort' 'io.sort.record.percent'?",
+      "options": {
+        "A": "The percentage of memory for record metadata (keys, offsets) vs the actual record data in the circular buffer.",
+        "B": "The speed of sorting.",
+        "C": "The number of records to sort.",
+        "D": "The percentage of CPU for sorting."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Shuffle' 'Keep-Alive' connection?",
+      "options": {
+        "A": "An HTTP persistent connection used by Reducers to fetch multiple map outputs from a single mapper node without re-establishing TCP connections.",
+        "B": "A way to keep the node on.",
+        "C": "A heartbeat signal.",
+        "D": "A user session."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'DistributedCache' 'Read-only' constraint?",
+      "options": {
+        "A": "Files in the distributed cache cannot be modified by the tasks; they are for reference only.",
+        "B": "The cache can only be read once.",
+        "C": "The admin can only read the cache.",
+        "D": "The files are encrypted."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Speculative Execution' 'Resource Overhead'?",
+      "options": {
+        "A": "It uses more RAM.",
+        "B": "It effectively doubles the cluster resource consumption for the speculative tasks, which can be detrimental in high-utilization clusters.",
+        "C": "It requires a faster network.",
+        "D": "It has no overhead."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mapper-side Grouping'?",
+      "options": {
+        "A": "A feature only available in Spark.",
+        "B": "Using a Combiner to perform local 'grouping' and aggregation within the Mapper's spill file.",
+        "C": "Sorting data.",
+        "D": "Deleting data."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Task Committing' phase 'Wait Time'?",
+      "options": {
+        "A": "The time a user waits.",
+        "B": "The delay when many tasks attempt to commit their output to a single HDFS directory at the same time, causing NameNode contention.",
+        "C": "A network delay.",
+        "D": "The time to encrypt files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'RecordReader' 'Line-boundary' handling in TextInputFormat?",
+      "options": {
+        "A": "It only reads the first line.",
+        "B": "The logic where a RecordReader reads into the next block to ensure that a line split across two blocks is fully processed by one mapper.",
+        "C": "It ignores the last line.",
+        "D": "It throws an error on long lines."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hadoop Pipes' 'Task Execution'?",
+      "options": {
+        "A": "Running C++ binaries as mappers/reducers via a socket-based protocol.",
+        "B": "Connecting mappers with pipes.",
+        "C": "A way to stream data from HDFS.",
+        "D": "A security layer."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Map-side Partitioning'?",
+      "options": {
+        "A": "Splitting a file into parts.",
+        "B": "Determining the target reducer for each KV pair within the Mapper's sorting buffer before spilling to disk.",
+        "C": "A way to backup the mapper.",
+        "D": "A network protocol."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Shuffle' 'Parallel Fetches'?",
+      "options": {
+        "A": "A reducer fetching map outputs from multiple mappers simultaneously (default 5 threads).",
+        "B": "Two users running a job.",
+        "C": "A mapper sending data to two reducers.",
+        "D": "A network speed limit."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Task Attempt ID' vs 'Task ID'?",
+      "options": {
+        "A": "Task ID is the logical task; Task Attempt ID is the specific instance (e.g., attempt_202603031000_0001_m_000000_0).",
+        "B": "They are the same.",
+        "C": "Attempt ID is for the admin.",
+        "D": "Task ID is for the software version."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Configuration.getPropsWithPrefix()' used for?",
+      "options": {
+        "A": "To get user passwords.",
+        "B": "To extract a subset of configuration properties that share a common prefix for custom logic.",
+        "C": "To find files in HDFS.",
+        "D": "To rename the job."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Reducer' 'Pre-merge'?",
+      "options": {
+        "A": "Merging data before the mappers finish.",
+        "B": "The background process of merging multiple map output files on the reducer node as they are being fetched to save disk space and future IO.",
+        "C": "A way to skip the shuffle.",
+        "D": "Sorting the user list."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'TaskTracker' 'Slot' management (Legacy)?",
+      "options": {
+        "A": "Allocating fixed CPU/RAM slices for Map or Reduce tasks regardless of actual demand.",
+        "B": "Managing USB slots.",
+        "C": "A time-sharing system.",
+        "D": "A way to limit users."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'OutputCommitter' 'Abort' logic?",
+      "options": {
+        "A": "Stopping the job manually.",
+        "B": "Deleting the temporary output directory when a task or job fails to prevent junk data in HDFS.",
+        "C": "Restarting the cluster.",
+        "D": "Logging the error."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'MapReduce Job' 'Uber Task'?",
+      "options": {
+        "A": "A very large job.",
+        "B": "A small job that runs entirely within the ApplicationMaster's JVM (no remote containers) to save startup latency.",
+        "C": "A job that uses a taxi database.",
+        "D": "A job with 1000 reducers."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'InputSplit' 'Location' metadata used for?",
+      "options": {
+        "A": "To find the file in HDFS.",
+        "B": "To provide the list of nodes containing the data blocks, enabling YARN to achieve data locality.",
+        "C": "To track the user's location.",
+        "D": "To find the backup server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Partitioner' 'Skew' mitigation?",
+      "options": {
+        "A": "Using a random number in the key to force even distribution (Salting).",
+        "B": "Increasing the number of mappers.",
+        "C": "Deleting the skewed data.",
+        "D": "It happens automatically."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MultipleOutputs' 'BaseFileName'?",
+      "options": {
+        "A": "The name of the mapper.",
+        "B": "The custom prefix given to files written by a specific reducer to differentiate output types (e.g., 'errors-r-00000').",
+        "C": "The HDFS folder name.",
+        "D": "The user's name."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Mapper' 'Context.write()' vs 'Reducer' 'Context.write()'?",
+      "options": {
+        "A": "Mapper write triggers the shuffle; Reducer write triggers the final HDFS storage via OutputFormat.",
+        "B": "They are identical.",
+        "C": "Mapper write is for logs; Reducer write is for data.",
+        "D": "Mapper write only works for strings."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'SequenceFile' 'Metadata' block?",
+      "options": {
+        "A": "A block at the start of the file that stores user-defined metadata as KV pairs.",
+        "B": "A list of HDFS nodes.",
+        "C": "A security certificate.",
+        "D": "The file size info."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Task Attempt' 'Zombie' prevention?",
+      "options": {
+        "A": "Using heartbeats and timeouts to ensure that stranded task attempts from failed nodes are eventually cleared by the master.",
+        "B": "A virus scanner.",
+        "C": "Manual cleanup by the admin.",
+        "D": "Restarting the rack."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MapReduce' 'Data Flow' isolation?",
+      "options": {
+        "A": "Mappers cannot talk to each other; Reducers cannot talk to each other; they only communicate via the Shuffle phase.",
+        "B": "Mappers share RAM.",
+        "C": "Reducers share a network card.",
+        "D": "A security firewall."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Job Staging' 'Security'?",
+      "options": {
+        "A": "Setting 700 permissions on the job staging directory in HDFS so only the user and job master can access it.",
+        "B": "Encrypting the source code.",
+        "C": "A password on the JAR file.",
+        "D": "Using a hardware key."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Partitioner' 'Custom' logic use-case?",
+      "options": {
+        "A": "To send all records for a specific customer ID to the same reducer for logical grouping.",
+        "B": "To sort the keys.",
+        "C": "To count the rows.",
+        "D": "To speed up the network."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'WritableComparable' 'CompareTo()' method performance impact?",
+      "options": {
+        "A": "It is called billions of times during the shuffle/sort; poor implementation can drastically slow down the entire job.",
+        "B": "It has no impact.",
+        "C": "It is only called once per job.",
+        "D": "It is only used for debugging."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Secondary Sorting' 'Custom Sort Comparator'?",
+      "options": {
+        "A": "A class that defines the sort order within a reducer, allowing you to sort by the secondary part of a composite key.",
+        "B": "A way to sort the file list.",
+        "C": "A tool to sort by file size.",
+        "D": "A way to sort the mappers."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MapReduce' 'Data Serializer' custom implementation?",
+      "options": {
+        "A": "Using Avro or Protobuf instead of Writable for more flexible and efficient cross-language data representation.",
+        "B": "Writing data as JSON.",
+        "C": "A way to encrypt data.",
+        "D": "A way to compress logs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Reducer' 'Max Map Output' threshold?",
+      "options": {
+        "A": "The limit on how much data a reducer can fetch from a single mapper.",
+        "B": "The percentage of reducer RAM that a single map output can occupy before being forced to disk.",
+        "C": "The number of mappers in a job.",
+        "D": "The final output file size."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Task Completion' 'Status Message'?",
+      "options": {
+        "A": "A text string updated by the task (e.g., 'Processing record 5000') and displayed on the Web UI.",
+        "B": "An email sent to the user.",
+        "C": "A green light on the server.",
+        "D": "A log entry in HDFS."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Speculative Execution' 'Threshold'?",
+      "options": {
+        "A": "The amount of data a task must process before it can be considered for speculation (to avoid speculatively running very short tasks).",
+        "B": "The number of nodes in the cluster.",
+        "C": "The user's credit limit.",
+        "D": "The network bandwidth."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Combiner' 'Null' output risk?",
+      "options": {
+        "A": "A combiner emitting null can cause a NullPointerException in the subsequent Reducer phase.",
+        "B": "There is no risk.",
+        "C": "Null values are ignored.",
+        "D": "Null values are encrypted."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'MapReduce' 'Shuffle' 'Data Checksum'?",
+      "options": {
+        "A": "Verifying data integrity during transfer from mappers to reducers to detect network bit flips.",
+        "B": "A security signature.",
+        "C": "A way to count records.",
+        "D": "A way to sort keys."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'JVM Container' 'Pre-warming' (YARN)?",
+      "options": {
+        "A": "Keeping a set of containers ready and warm to minimize the launch time for MapReduce tasks.",
+        "B": "A hardware heater.",
+        "C": "Running a test job first.",
+        "D": "Setting the RAM to 100%."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'InputFormat' 'IsSplitable()' method?",
+      "options": {
+        "A": "A boolean check to see if a file can be divided into multiple mappers (e.g., false for GZIP compressed files).",
+        "B": "A tool to split files manually.",
+        "C": "A way to delete files.",
+        "D": "A check for file corruption."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Partitioner' 'TotalOrder' 'Sampling'?",
+      "options": {
+        "A": "Scanning a small percentage of the input data to estimate the distribution of keys and build range boundaries for global sorting.",
+        "B": "A way to pick random mappers.",
+        "C": "A security audit.",
+        "D": "A network speed test."
+      },
+      "answer": "A"
+    }
+  ]
+}

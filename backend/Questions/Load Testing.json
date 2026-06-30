@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Load Testing", 
+  "questions": [
+    {
+    "question": "What is the primary objective of Load Testing?",
+    "options": {
+      "A": "To verify that the application's UI colors are correct.",
+      "B": "To determine how a system behaves under a specific expected load (number of concurrent users).",
+      "C": "To find security vulnerabilities in the source code.",
+      "D": "To check if the server is physically plugged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In performance testing, what does 'Throughput' measure?",
+    "options": {
+      "A": "The amount of time a single user spends on a page.",
+      "B": "The number of transactions or requests processed by the system per unit of time.",
+      "C": "The physical weight of the data packets.",
+      "D": "The number of lines of code in the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Response Time' is the total time it takes from the moment a user sends a request until they receive the full response.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of test is used to determine the 'breaking point' of a system by pushing it beyond its expected capacity?",
+    "options": {
+      "A": "Load Test",
+      "B": "Stress Test",
+      "C": "Unit Test",
+      "D": "Smoke Test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Concurrent User' in load testing terminology?",
+    "options": {
+      "A": "A user who is currently logged out.",
+      "B": "A user who is actively interacting with the system at the exact same time as others.",
+      "C": "The person who designed the test cases.",
+      "D": "A specialized software for spreadsheets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific testing type checks for performance issues, like memory leaks, over a long duration of time?",
+    "options": {
+      "A": "Spike Test",
+      "B": "Soak (Endurance) Test",
+      "C": "Unit Test",
+      "D": "Static Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Spike Test' evaluates how a system reacts to a sudden, massive increase in user traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for e-commerce sites",
+      "D": "Only in production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Latency' represent in a network request?",
+    "options": {
+      "A": "The number of users currently active.",
+      "B": "The time delay before a transfer of data begins following an instruction for its transfer.",
+      "C": "The size of the hard drive on the server.",
+      "D": "The annual cost of the cloud subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular open-source tool used for performance and load testing?",
+    "options": {
+      "A": "Apache JMeter",
+      "B": "Adobe Photoshop",
+      "C": "Microsoft Word",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Load testing should ideally be performed in an environment that is identical or as close as possible to the production environment.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-commercial software",
+      "D": "Only if using 10Gbps networking"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Virtual User' (VU) in load testing tools?",
+    "options": {
+      "A": "A person using a VR headset.",
+      "B": "A script that simulates the behavior of a real user interacting with the application.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Think Time' in a load testing script?",
+    "options": {
+      "A": "The time it takes for the CPU to process a query.",
+      "B": "The simulated delay between user actions to mimic real human behavior.",
+      "C": "The duration of the post-mortem meeting.",
+      "D": "The time the SRE spends thinking about a fix."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability Testing' is performed to see if the system can handle more load by adding more hardware resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database migrations",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric would you monitor to see if the server's memory is becoming exhausted during a test?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "RAM/Memory Usage",
+      "C": "Network Latency",
+      "D": "HTTP Error Rate"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Baseline Testing'?",
+    "options": {
+      "A": "Testing only the bottom floor of a data center.",
+      "B": "Running a test with a normal load to establish a performance benchmark for comparison with future tests.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The final test before a project is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Ramp-up' time in a test plan?",
+    "options": {
+      "A": "The time it takes for the server to overheat.",
+      "B": "The period during which the number of virtual users is gradually increased until it reaches the target load.",
+      "C": "The physical time spent walking up a ramp to the server room.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Bottleneck' is a point in the infrastructure where the flow of data is restricted, causing performance degradation.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if the CPU is under 50% load"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for in a performance testing context?",
+    "options": {
+      "A": "System Level Analysis",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "Software License Arrangement"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code generally indicates a 'Server-side Error' during a load test?",
+    "options": {
+      "A": "200 OK",
+      "B": "500 Internal Server Error",
+      "C": "404 Not Found",
+      "D": "301 Moved Permanently"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Load testing can help identify database deadlocks that only occur when many users access the data at once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if the network is slow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Load Generator'?",
+    "options": {
+      "A": "To provide physical electricity to the building.",
+      "B": "A machine or service that executes virtual user scripts to create traffic against the target system.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Client-side' performance metric?",
+    "options": {
+      "A": "Database Query Time",
+      "B": "Time to Interactive (TTI)",
+      "C": "Server CPU Usage",
+      "D": "Disk I/O Wait"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bandwidth' is the maximum theoretical capacity of a network, while 'Throughput' is the actual data moved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Correlation' in load testing script development?",
+    "options": {
+      "A": "The relationship between two IT managers.",
+      "B": "The process of capturing dynamic values (like Session IDs) from a server response and passing them into subsequent requests.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which load testing tool is specifically known for using JavaScript and being developer-friendly?",
+    "options": {
+      "A": "JMeter",
+      "B": "k6",
+      "C": "LoadRunner",
+      "D": "Gatling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Failover Testing' checks if the system performance remains acceptable when one server in a cluster fails.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Error Rate' in a load test report?",
+    "options": {
+      "A": "The percentage of virtual users who forgot their passwords.",
+      "B": "The percentage of requests that resulted in an error compared to the total number of requests sent.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The speed of the download connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that a server is overwhelmed and cannot handle more incoming requests?",
+    "options": {
+      "A": "503 Service Unavailable",
+      "B": "200 OK",
+      "C": "401 Unauthorized",
+      "D": "304 Not Modified"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Distributed Load Testing' involves using multiple load generators to simulate a high volume of traffic that a single machine cannot produce.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government agencies",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Reliability' in the context of performance?",
+    "options": {
+      "A": "The speed of the internet bandwidth.",
+      "B": "The ability of a system to perform its required functions under stated conditions for a specified period.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool uses the 'Scala' language for writing performance test scripts?",
+    "options": {
+      "A": "JMeter",
+      "B": "Gatling",
+      "C": "k6",
+      "D": "Locust"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Capacity Planning' is the process of predicting future resource requirements based on current performance trends.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in public WiFi"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Parameterization' in a test script?",
+    "options": {
+      "A": "Measuring the perimeter of the server room.",
+      "B": "Using a data file (like a CSV) to provide different inputs (e.g., usernames/passwords) for each virtual user.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Infrastructure' bottleneck?",
+    "options": {
+      "A": "Slow database queries",
+      "B": "Insufficient CPU cores",
+      "C": "Network bandwidth saturation",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You should only start load testing after the application is 100% complete and in production.",
+    "options": {
+      "A": "False (Early 'Shift-left' performance testing helps find issues before they become expensive to fix).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the team is over 50 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Transaction' in a load test?",
+    "options": {
+      "A": "Paying for the software.",
+      "B": "A sequence of related user actions that are measured as a single unit (e.g., 'Login' or 'Checkout').",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with standard unencrypted web traffic being tested?",
+    "options": {
+      "A": "22",
+      "B": "80",
+      "C": "443",
+      "D": "53"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Average Response Time' is calculated by dividing the sum of all response times by the total number of requests.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only if the test is over 1 hour"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Performance Degradation'?",
+    "options": {
+      "A": "When the system becomes physically smaller.",
+      "B": "A gradual decrease in system speed or responsiveness as load increases or resources are consumed.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is '90th Percentile' response time?",
+    "options": {
+      "A": "The average response time plus 10%.",
+      "B": "The value below which 90% of the data points fall (useful for identifying the experience of the majority of users).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Browser-based' load testing tools provide more realistic UI performance metrics than protocol-based tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Workload Model'?",
+    "options": {
+      "A": "A physical model of the office building.",
+      "B": "A definition of the types of users, the actions they perform, and the frequency of those actions during a test.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of hours a server has been on."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which load testing tool is written in Python and uses a 'code-first' approach?",
+    "options": {
+      "A": "JMeter",
+      "B": "Locust",
+      "C": "LoadRunner",
+      "D": "k6"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Warm-up' period is often used at the start of a test to allow the application cache to populate and the system to reach a steady state.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Saturation'?",
+    "options": {
+      "A": "When the server room is flooded with water.",
+      "B": "When a hardware resource (like CPU or Disk I/O) has reached its maximum capacity and cannot process more work.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS' (encrypted web traffic) often targeted in tests?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' is the measure of how well a system responds to more load by adding hardware resources.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Leak'?",
+    "options": {
+      "A": "A physical hole in the RAM module.",
+      "B": "A failure in a program to release discarded memory, causing performance to decrease and eventually crashing the application.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Endurance Testing'?",
+    "options": {
+      "A": "Testing how fast a server can run.",
+      "B": "Running a constant load over a long period (e.g., 24 hours) to identify issues like memory leaks or disk space depletion.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The final test before a project is deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Network Bandwidth' is a common bottleneck when performing load testing from a single machine against a high-traffic site.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if using 10Gbps networking"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Assertion' in a test script?",
+    "options": {
+      "A": "Deleting all duplicate logs.",
+      "B": "A check to verify that the server response is correct (e.g., checking for specific text or a 200 status code).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Requests per Second' (RPS)?",
+    "options": {
+      "A": "Latency",
+      "B": "Throughput / Traffic",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scenario' is a set of steps that simulate a real-world user journey during a performance test.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Distribution'?",
+    "options": {
+      "A": "Sharing the weight of the servers.",
+      "B": "The process of spreading virtual user traffic across multiple load generators to avoid overwhelming a single testing machine.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of an enterprise dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Stress Testing' is essentially testing the system's ability to recover from a crash after being pushed to its limit.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Standard Deviation' in a performance report used for?",
+    "options": {
+      "A": "Measuring the length of the cables.",
+      "B": "Identifying how much response times vary from the average (higher deviation means less consistent performance).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to check the 'Response Time' of a database query?",
+    "options": {
+      "A": "Latency / Execution Time",
+      "B": "Number of users",
+      "C": "The color of the query",
+      "D": "The size of the disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Virtual Machine' performance can be impacted by other VMs running on the same physical host ('Noisy Neighbor' effect).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Regression Testing' in performance engineering?",
+    "options": {
+      "A": "Testing a system after it has been deleted.",
+      "B": "Ensuring that code changes haven't negatively impacted the system's performance benchmarks.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for standard 'HTTP' communication?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Performance tests should be automated and part of the CI/CD pipeline.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bandwidth' limit in testing?",
+    "options": {
+      "A": "Measuring the physical width of the cable.",
+      "B": "The maximum amount of data that can be sent or received per second by the load generator.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Load testing only measures the backend performance, not the frontend rendering time.",
+    "options": {
+      "A": "False (Protocol-based tools focus on the backend, but browser-based tools measure both).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scalability'?",
+    "options": {
+      "A": "The ability of a system to measure weight.",
+      "B": "The ability of a system to handle increased load by adding resources.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In distributed load testing, what is the primary role of the 'Controller' or 'Master' node?",
+    "options": {
+      "A": "To generate the actual network traffic.",
+      "B": "To orchestrate worker nodes, distribute the test script, and aggregate results for reporting.",
+      "C": "To act as a secondary database for the target application.",
+      "D": "To restart the physical servers if they crash during the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technique is used to extract a CSRF token from an HTTP response header and reuse it in a subsequent POST request?",
+    "options": {
+      "A": "Parameterization",
+      "B": "Correlation",
+      "C": "Hardcoding",
+      "D": "Serialization"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Little’s Law' calculation (L = λW) can be used to predict the number of concurrent users needed to achieve a target throughput based on average response time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python-based testing tools",
+      "D": "Only if the CPU utilization is below 10%"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In JMeter, which element is used to control the frequency and timing of requests, ensuring the test doesn't overwhelm the target too quickly?",
+    "options": {
+      "A": "Thread Group",
+      "B": "Timer",
+      "C": "Listener",
+      "D": "Sampler"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Step Load' pattern involve during a performance test?",
+    "options": {
+      "A": "Increasing the number of users at a constant rate throughout the test.",
+      "B": "Increasing user load in discrete increments or 'steps' and holding each level for a duration to observe system stability.",
+      "C": "Running the maximum load immediately at start-up.",
+      "D": "Physically walking up steps in a data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' indicates that a system is suffering from 'Thread Starvation' during a load test?",
+    "options": {
+      "A": "High CPU usage but low throughput.",
+      "B": "Low CPU usage but high response times and a growing request queue.",
+      "C": "Decreasing disk space.",
+      "D": "High network bandwidth availability."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Regular Expression Extractor' is a common method for performing correlation in protocol-based load testing tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between 'Pacing' and 'Think Time'?",
+    "options": {
+      "A": "Pacing is for users; Think Time is for servers.",
+      "B": "Think Time is the delay between actions in a script; Pacing is the delay between complete iterations of a script for a single virtual user.",
+      "C": "Pacing only works in JMeter.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In k6, what is a 'Threshold' used for?",
+    "options": {
+      "A": "To set the physical limit of the server rack.",
+      "B": "To define pass/fail criteria for a test based on performance metrics (e.g., p95 response time must be < 500ms).",
+      "C": "To encrypt the test results.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Soak Test', the primary goal is to identify resource leaks, such as memory leaks or database connection exhaustion, over an extended period.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'I/O Wait' percentage indicate during a load test on a database server?",
+    "options": {
+      "A": "The time the CPU is idle because it is waiting for disk or network operations to complete.",
+      "B": "The number of users waiting to log in.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The percentage of failed transactions."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which JMeter component allows you to execute specific requests only if a certain condition is met (e.g., if the previous login was successful)?",
+    "options": {
+      "A": "Loop Controller",
+      "B": "If Controller",
+      "C": "Once Only Controller",
+      "D": "Transaction Controller"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ramp-down' time is used to observe how a system recovers its resources as the user load gradually decreases.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Connection Pooling' and why is it monitored during load testing?",
+    "options": {
+      "A": "Putting all the servers in a swimming pool.",
+      "B": "A cache of database connections maintained so that connections can be reused; monitoring ensures the pool isn't exhausted under load.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a performance chart, what does a 'knee' or 'hockey stick' curve in response time usually signify?",
+    "options": {
+      "A": "The system is performing better than expected.",
+      "B": "A saturation point where the system has reached its capacity and response times are starting to increase exponentially.",
+      "C": "A network cable has been unplugged.",
+      "D": "The test has finished successfully."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Sampler' in JMeter is most commonly used for testing RESTful APIs?",
+    "options": {
+      "A": "FTP Request",
+      "B": "HTTP Request",
+      "C": "JDBC Request",
+      "D": "SMTP Sampler"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'IP Spoofing' in load testing refers to making requests appear as if they are coming from multiple different IP addresses to bypass load balancer session persistence.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for IPv6",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Parameterization' risk in a performance test?",
+    "options": {
+      "A": "Running out of disk space on the load generator.",
+      "B": "Using the same record (e.g., the same UserID) for all virtual users, which might cause artificial database locks that wouldn't happen in reality.",
+      "C": "Encrypting the CSV file incorrectly.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the best indicator of 'User Experience' consistency during a load test?",
+    "options": {
+      "A": "Average Response Time",
+      "B": "Standard Deviation and Percentiles (e.g., p95, p99)",
+      "C": "Total Throughput",
+      "D": "Number of active threads"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Null Hypothesis' in performance testing often assumes that a code change has NOT negatively impacted system performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'CSV Data Set Config' in JMeter?",
+    "options": {
+      "A": "To convert the test report into a CSV file.",
+      "B": "To read external data from a CSV file and use it to parameterize virtual user requests.",
+      "C": "To encrypt the database connection string.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Stress Testing', what is 'Self-Healing' observation?",
+    "options": {
+      "A": "A server repairing its own physical chassis.",
+      "B": "Observing if the system can automatically recover and return to normal performance levels after the extreme stress load is removed.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Browser-based' load testing (like Playwright or Selenium-based tools) requires significantly more memory and CPU per virtual user than protocol-based tools.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cache Warming' in the context of performance testing?",
+    "options": {
+      "A": "Turning up the heater in the server room.",
+      "B": "Pre-loading the application or database cache with data before the actual test starts to ensure results reflect steady-state performance.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JMeter 'Listener' is most useful for identifying the specific request that caused an assertion failure during a test run?",
+    "options": {
+      "A": "Aggregate Report",
+      "B": "View Results Tree",
+      "C": "Graph Results",
+      "D": "Summary Report"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Latency' and 'TTFB' (Time to First Byte) are generally synonymous in the context of measuring network performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic links",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Contention' during a load test?",
+    "options": {
+      "A": "IT staff arguing over server names.",
+      "B": "A situation where multiple processes or virtual users compete for the same limited resource (like a database row lock or CPU time), leading to delays.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In k6, what does the 'Stages' option allow you to configure?",
+    "options": {
+      "A": "The physical stages of code deployment.",
+      "B": "A sequence of target VU counts and durations to create complex ramp-up and ramp-down load profiles.",
+      "C": "The encryption levels for each request.",
+      "D": "The number of people who can view the test report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Response Assertion' in JMeter can be used to check if the response body contains a specific string of text.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for XML responses",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Correlation' in microservices performance testing?",
+    "options": {
+      "A": "Linking two IT managers' accounts.",
+      "B": "Passing a unique header (like a TraceID) through all microservices to correlate performance metrics across the entire request path.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' code indicates that a client has sent too many requests in a given amount of time (Rate Limiting)?",
+    "options": {
+      "A": "401 Unauthorized",
+      "B": "429 Too Many Requests",
+      "C": "500 Internal Error",
+      "D": "403 Forbidden"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Wait Time' in a performance script is essential to simulate real-world 'Think Time' and prevent unrealistic request rates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database tests",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Head-of-Line Blocking' in the context of network performance?",
+    "options": {
+      "A": "A physical blockage in a server rack.",
+      "B": "A performance issue where a single slow request blocks subsequent requests in a queue or connection, common in HTTP/1.1.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JMeter controller is used to ensure a specific set of requests (like a 'Logout' or 'Cleanup' step) runs only once at the end of a thread's execution?",
+    "options": {
+      "A": "Once Only Controller",
+      "B": "Loop Controller",
+      "C": "While Controller",
+      "D": "Runtime Controller"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Soak Test' is often used specifically to detect 'Zombie' processes that don't terminate correctly after use.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput Controller' in JMeter used for?",
+    "options": {
+      "A": "To increase the internet speed of the generator.",
+      "B": "To control how often a specific request or branch of the script is executed relative to the total number of iterations.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a percentile chart, what does 'p99' represent?",
+    "options": {
+      "A": "The average response time for 99% of users.",
+      "B": "The response time value that 99% of all requests are equal to or faster than (captures the experience of almost all users).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The number of users logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Headless' browser mode in load testing reduces the resource consumption of the load generator compared to a full GUI browser.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cold Start' in the context of Serverless (Lambda) performance testing?",
+    "options": {
+      "A": "Restarting a server in a literal cold room.",
+      "B": "The latency overhead that occurs when a serverless function is invoked for the first time or after being idle, as the environment must be initialized.",
+      "C": "A specialized way to encrypt source code.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active Connections' to a web server during a test?",
+    "options": {
+      "A": "Throughput",
+      "B": "Concurrency / Connections",
+      "C": "Response Time",
+      "D": "Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In JMeter, 'User Defined Variables' (UDVs) are typically used for global configurations like the server hostname or port number.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Balancing Affinity' (Sticky Sessions) impact on performance testing?",
+    "options": {
+      "A": "It makes the servers look more attractive.",
+      "B": "It ensures a user stays on the same backend server; during tests, this must be managed (e.g., via IP spoofing) to ensure load is evenly distributed across the cluster.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'HTTPS' traffic being simulated in an API load test?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Data' in a test script refers to values that change with every request, such as a timestamp or a unique transaction ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Garbage Collection' (GC) impact on Java-based applications under load?",
+    "options": {
+      "A": "Cleaning the office after a test.",
+      "B": "Frequent or long GC pauses can cause sudden spikes in response time and temporary system unresponsiveness.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JMeter 'Pre-Processor' is commonly used to generate random values or modify a request before it is sent to the server?",
+    "options": {
+      "A": "User Parameters",
+      "B": "BeanShell PreProcessor",
+      "C": "Regular Expression Extractor",
+      "D": "HTTP Header Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bandwidth Throttling' can be used in a test to simulate how an application performs for users with slow 3G or 4G connections.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Response Body Data' extraction used for?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To capture data from a previous server response and use it to validate the system state or pass it to a future request.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of failed transactions in a load test report?",
+    "options": {
+      "A": "Error Rate",
+      "B": "Latency",
+      "C": "Throughput",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Warm-up' is only necessary for Java applications and not for .NET or Go applications.",
+    "options": {
+      "A": "False (All systems benefit from populating caches and reaching a steady state before measurement begins).",
+      "B": "True",
+      "C": "Only for mobile applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Load Generation' orchestration?",
+    "options": {
+      "A": "Playing music across multiple servers.",
+      "B": "The process of managing multiple machines to simultaneously execute a load test to achieve massive scale.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Assertions' are used to verify that the server response is functionally correct, not just that it arrived.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Think Time' and why is it important?",
+    "options": {
+      "A": "The time an engineer spends thinking.",
+      "B": "Simulating the pause a real user takes between actions to ensure the request rate per user is realistic.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Requests per Second' (RPS)?",
+    "options": {
+      "A": "Throughput",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Performance tests should ideally be run in an environment identical to production.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing' 'Baseline'?",
+    "options": {
+      "A": "Naming the servers after famous baselines.",
+      "B": "A reference point established by running a test under normal conditions to compare future results against.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' response time?",
+    "options": {
+      "A": "Mean Response Time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Load testing can help identify memory leaks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stress Testing' 'Breaking Point'?",
+    "options": {
+      "A": "The point where the servers physically break.",
+      "B": "The load level at which the system fails to respond correctly or crashes.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is a measure of transactions per second.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Soak Testing' duration?",
+    "options": {
+      "A": "A few minutes.",
+      "B": "Extended periods (hours or days) to monitor system stability over time.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Virtual Users'?",
+    "options": {
+      "A": "Threads / VU Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Spike Testing' checks the system's reaction to sudden bursts of traffic.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Load Testing' 'Ramp-up'?",
+    "options": {
+      "A": "The process of gradually increasing the load.",
+      "B": "The process of turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "A load generator is failing to scale beyond a certain point, showing 'Cannot assign requested address' errors. What is the most likely root cause in the Linux TCP/IP stack?",
+    "options": {
+      "A": "The CPU has entered thermal throttling.",
+      "B": "Ephemeral port exhaustion due to a high number of connections in the TIME_WAIT state.",
+      "C": "The JVM heap size is set too low for the JMeter process.",
+      "D": "The network switch is dropping Jumbo frames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JMeter, why is it considered a best practice to use 'JSR223 Sampler' with 'Groovy' and 'Cache compiled script if available' enabled?",
+    "options": {
+      "A": "It automatically encrypts the payload for security compliance.",
+      "B": "It provides significantly better performance than BeanShell by compiling the script into bytecode once, reducing CPU overhead per request.",
+      "C": "It is the only way to connect to a PostgreSQL database.",
+      "D": "It allows the script to run on mobile devices without modification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Metastable' failure, a system remains in a failed or degraded state even after the initial trigger (overload) is removed, often requiring a total restart to recover.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for serverless functions",
+      "D": "Only if the database is in a different region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Garbage Collection' log metric is the most critical to monitor during a long-duration Soak Test to identify a potential memory leak?",
+    "options": {
+      "A": "Total count of minor collections.",
+      "B": "The trend of 'Heap usage after Full GC'; if it increases consistently over time, a leak is likely.",
+      "C": "The time taken for the initial boot-up.",
+      "D": "The number of threads in the WAITING state."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Coordinated Omission' problem in load testing tools, and how does it skew results?",
+    "options": {
+      "A": "When the administrator forgets to start the monitoring tools.",
+      "B": "When a tool waits for a slow request to finish before sending the next one, effectively ignoring the latency 'wait time' that real users would experience in a queue.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of deleting duplicate data points in a report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Queuing Theory', what happens to response times as a resource (like a CPU) approaches 100% utilization?",
+    "options": {
+      "A": "They decrease because the CPU is working faster.",
+      "B": "They increase linearly with the load.",
+      "C": "They increase exponentially as the wait time in the queue approaches infinity.",
+      "D": "They stay constant until the system crashes."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Using 'Distributed Testing' across multiple cloud regions is necessary to identify 'Global Latency' issues caused by CDN configuration or BGP routing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Kernel' parameter should be tuned on a Linux load generator to allow for more than 65,000 concurrent TCP connections?",
+    "options": {
+      "A": "net.ipv4.ip_local_port_range",
+      "B": "fs.file-max (Maximum file descriptors)",
+      "C": "net.ipv4.tcp_tw_reuse",
+      "D": "Both A and B are required."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the primary risk of using 'Static Data' (the same credentials for all users) during a high-concurrency database load test?",
+    "options": {
+      "A": "It will exceed the bandwidth of the network card.",
+      "B": "It creates 'Hot Spots' and artificial row-level locking in the database that would not occur with unique users, leading to unrealistic bottlenecks.",
+      "C": "It encrypts the database logs incorrectly.",
+      "D": "It forces the CPU to use more L2 cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a p99.9 latency measurement, what does 'The Long Tail' refer to?",
+    "options": {
+      "A": "The physical length of the fiber optic cables.",
+      "B": "The small number of requests that experience significantly higher latency than the average, often caused by background tasks like GC or disk indexing.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users currently logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Adaptive Retries' with token buckets can prevent a system from entering a 'Retry Storm' by limiting the total number of retries a client can send relative to successful requests.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP-based services",
+      "D": "Only if the server is in the US-East region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to capture and analyze the 'Network Round Trip Time' (RTT) at the packet level during a performance degradation incident?",
+    "options": {
+      "A": "JMeter",
+      "B": "Wireshark / tcpdump",
+      "C": "Grafana",
+      "D": "Postman"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In k6, what is the 'Init' context vs the 'VU' context in a script?",
+    "options": {
+      "A": "Init is for Windows; VU is for Linux.",
+      "B": "Init runs once per worker to load files/configs; VU context runs repeatedly inside the loop for every virtual user.",
+      "C": "Init is used only for encryption keys.",
+      "D": "There is no difference in execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Micro-bursting' refers to short-lived spikes in traffic (milliseconds) that can saturate network buffers and cause packet loss even if the 'Average' utilization appears low.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 100Gbps links",
+      "D": "Only in virtualized environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical purpose of 'Asynchronous I/O' (Non-blocking) in a high-performance web server like Nginx or Node.js?",
+    "options": {
+      "A": "To make the source code easier to read.",
+      "B": "To allow a single thread to handle thousands of concurrent connections by not waiting for disk/network operations to finish before moving to the next task.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a server during a load test indicates that the 'Context Switching' rate is too high?",
+    "options": {
+      "A": "High System CPU percentage relative to User CPU.",
+      "B": "Low disk I/O utilization.",
+      "C": "The memory usage is constant.",
+      "D": "The number of open files is decreasing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Spike Test', the 'Recovery Time' is the duration it takes for the system to return to baseline performance after the traffic surge subsides.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using a load balancer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Connection Leak' and how is it detected in a Soak Test?",
+    "options": {
+      "A": "Water leaking into the server rack.",
+      "B": "When an application fails to close database or socket connections; detected by seeing a constant linear increase in 'Open File Descriptors' or 'Established Connections'.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In JMeter, what is the role of the 'HTTP Cache Manager' element?",
+    "options": {
+      "A": "To store the user's password.",
+      "B": "To simulate browser caching behavior by not downloading static assets if they haven't changed, making the test more realistic for repeat users.",
+      "C": "To encrypt the database connection string.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical approach is used to generate 'Random' think times that follow a realistic human distribution (e.g., more users take 2s than 20s)?",
+    "options": {
+      "A": "Linear distribution.",
+      "B": "Gaussian (Normal) distribution or Poisson distribution.",
+      "C": "A simple 'if' statement.",
+      "D": "Binary search."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'TCP_NODELAY' on a socket disables Nagle's algorithm, which can reduce latency for small, frequent packets but increase network overhead.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Heap Dump' analysis allow a performance engineer to identify?",
+    "options": {
+      "A": "The physical weight of the RAM.",
+      "B": "The specific objects in memory that are causing a leak or consuming excessive space, preventing OOM errors.",
+      "C": "The history of all previous data deletions.",
+      "D": "The password for the server BIOS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the JMeter Remote engine (Slave) to receive commands from the Controller?",
+    "options": {
+      "A": "80",
+      "B": "1099 (RMI registry default)",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Horizontal Pod Autoscaling' (HPA) in Kubernetes should be tested under load to ensure the 'Cool-down' period doesn't cause flapping during minor traffic fluctuations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python-based pods",
+      "D": "Only if the pods use local storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Load Testing' clock drift impact?",
+    "options": {
+      "A": "When the servers physically move.",
+      "B": "The discrepancy in time between load generators which can make aggregating results and correlating logs across machines difficult.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the rate of 'Hard Page Faults' in a Linux environment under load?",
+    "options": {
+      "A": "Memory Swapping (si/so in vmstat)",
+      "B": "CPU Load Average",
+      "C": "The color of the dashboard",
+      "D": "The number of pixels on a screen"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Load Balancer' can become a bottleneck if its 'Maximum Concurrent Connections' limit is reached, regardless of how many backend servers are available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Sharding' impact on performance testing complexity?",
+    "options": {
+      "A": "It makes the database physically smaller.",
+      "B": "It increases complexity because test data must be carefully distributed across all shards to ensure the load is balanced and the 'Shard Key' logic is correctly exercised.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of a performance testing dashboard?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Mesh' sidecars (like Envoy) can add a measurable latency overhead that must be accounted for during performance modeling.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Istio",
+      "D": "Only if the sidecar is in a different pod"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Throughput' vs 'Goodput'?",
+    "options": {
+      "A": "Throughput is for files; Goodput is for folders.",
+      "B": "Throughput is total bits sent; Goodput is the rate of 'useful' bits delivered (excluding retransmissions and protocol overhead).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a new visualization team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which JMeter 'Post-Processor' is best for extracting values from a JSON response without using complex regular expressions?",
+    "options": {
+      "A": "Regular Expression Extractor",
+      "B": "JSON JMESPath Extractor",
+      "C": "Boundary Extractor",
+      "D": "XPath Extractor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Performance Model', the 'Service Time' is the time spent actually processing a request, excluding any time spent waiting in a queue.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TCP Slow Start' and why does it affect initial load test results?",
+    "options": {
+      "A": "The server booting slowly.",
+      "B": "An algorithm that gradually increases the congestion window for new connections; it can cause early requests to appear slower than subsequent ones.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Context Switches' per second on a Linux host?",
+    "options": {
+      "A": "cs (in vmstat)",
+      "B": "cpu_utilization",
+      "C": "load_avg",
+      "D": "mem_used"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Jumbo Frames' can improve performance for large data transfers between a load generator and a server, provided every hop in the network path supports MTU 9000.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if using version 10.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Garbage Collection' Stop-the-World pause?",
+    "options": {
+      "A": "Stopping the literal planet.",
+      "B": "A period where the JVM halts all application threads to perform memory cleanup, causing a total freeze in response time.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Transformation' should you use to convert raw epoch timestamps in a test report into a human-readable ISO 8601 format?",
+    "options": {
+      "A": "Data Formatter",
+      "B": "Filter by name",
+      "C": "Organize fields",
+      "D": "Sort by"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Redline Test', the goal is to find the exact point where the system can no longer meet its SLAs, even if it hasn't crashed yet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the server is in US-West"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Exponential Backoff' with 'Full Jitter'?",
+    "options": {
+      "A": "A way to back up the data center.",
+      "B": "A retry strategy that waits a random amount of time between 0 and the current exponential cap to ensure maximum distribution of retry traffic.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Connection Pooling' limits can be a major cause of 504 Gateway Timeout errors during a high-load test.",
+    "options": {
+      "A": "True (When all available connections are in use, new requests are queued until they time out).",
+      "B": "False",
+      "C": "Only for Python apps",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Synthetic Transaction Monitoring' vs 'Load Testing'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Synthetic monitoring is ongoing low-volume testing in production; Load testing is high-volume testing in a dedicated environment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of 'Active' memory vs 'Buffer/Cache' memory on a Linux server?",
+    "options": {
+      "A": "free -m",
+      "B": "system_cpu_load",
+      "C": "node_disk_usage",
+      "D": "netstat -i"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Performance 'Baselining' should be performed after every major code release to track architectural regressions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Database Locking' contention?",
+    "options": {
+      "A": "Locking the physical server room.",
+      "B": "When multiple transactions wait for the same database row or table lock, causing throughput to drop even if CPU is low.",
+      "C": "A specialized way to encrypt profiling data.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'vCenter'?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Thread Dump' analysis can identify 'Deadlocks' where two threads are waiting for each other, causing the application to hang.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Denial of Service' (DDoS) simulation testing?",
+    "options": {
+      "A": "Naming the servers after famous hackers.",
+      "B": "A specialized stress test to evaluate if infrastructure (like a WAF or ISP) can withstand a malicious massive-scale attack.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Resource Saturation' is often the primary cause of a 'Hockey Stick' latency curve.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cold Start' in Serverless?",
+    "options": {
+      "A": "The time spent cleaning the server.",
+      "B": "The latency introduced when a serverless function is initialized from scratch.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Requests per Second'?",
+    "options": {
+      "A": "Throughput / RPS",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Correlation' is used to handle dynamic values in a script.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pacing' strategy?",
+    "options": {
+      "A": "Hiring more people.",
+      "B": "A mechanism to control the delay between iterations of a virtual user script to achieve a specific target throughput.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Soak Testing' checks for memory leaks over time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Stress Testing' limit?",
+    "options": {
+      "A": "Finding the breaking point of the system.",
+      "B": "Turning off the server.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'HTTPS'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Little's Law' relates concurrency, throughput, and response time.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Think Time' realism?",
+    "options": {
+      "A": "The time spent thinking by engineers.",
+      "B": "Simulating real human delays between actions to ensure the load pattern is accurate.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a dashboard indicates a connection error?",
+    "options": {
+      "A": "Timeout / Connection Failed",
+      "B": "OK",
+      "C": "Firing",
+      "D": "Normal"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Load generators must be monitored during a test to ensure they aren't the bottleneck.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Testing' synchronization?",
+    "options": {
+      "A": "Naming the servers after famous people.",
+      "B": "Ensuring all load generators start and stop at the same time and use the same test parameters.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTP'?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Throughput' is a critical KPI for performance testing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Baseline' comparison?",
+    "options": {
+      "A": "Comparing results against a previous stable run.",
+      "B": "Deleting the oldest results.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Open File Descriptors'?",
+    "options": {
+      "A": "lsof | wc -l",
+      "B": "cpu_load",
+      "C": "mem_free",
+      "D": "net_stat"
+    },
+    "answer": "A"
+  }
+  ]
+}

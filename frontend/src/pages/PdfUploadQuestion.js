@@ -3,64 +3,26 @@ import { flushSync } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
+import { API_BASE_URL } from '../apiConfig';
+import { SHARED_ROLES, STORAGE_KEYS } from '../utils/assessmentConstants';
 import '../styles/PdfUploadQuestion.css';
-
-// Django API base URL
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 function PdfUploadQuestion() {
   const navigate = useNavigate();
   const location = useLocation();
-  const assessmentContext = location.state || null;
+  // State preservation: Use location.state or fallback to a dedicated storage key if available
+  const assessmentContext = location.state || (window.location.hash.includes('review') ? null : JSON.parse(localStorage.getItem('temp_assessment_context')));
 
-  const assessmentOptions = [
-    'Python',
-    'Java',
-    'Java Full Stack',
-    'Python Full Stack',
-    'JavaScript',
-    'TypeScript',
-    'Frontend Development',
-    'Backend Development',
-    'Full Stack (MERN)',
-    'Full Stack (MEAN)',
-    'React',
-    'Angular',
-    'Vue.js',
-    'Node.js',
-    '.NET',
-    'C#',
-    'C++',
-    'Go',
-    'PHP',
-    'Ruby on Rails',
-    'Mobile Development',
-    'Android',
-    'iOS',
-    'React Native',
-    'Flutter',
-    'DevOps',
-    'AWS',
-    'Azure',
-    'GCP',
-    'Kubernetes',
-    'Data Engineering',
-    'Data Science',
-    'Machine Learning',
-    'AI / GenAI',
-    'Cyber Security',
-    'QA Manual',
-    'QA Automation',
-    'Salesforce',
-    'SAP',
-    'Power BI',
-    'Tableau',
-    'UI/UX Design',
-    'Product Management',
-    'Business Analyst',
-  ];
+  // Persist context to handle refreshes
+  React.useEffect(() => {
+    if (location.state) {
+      localStorage.setItem('temp_assessment_context', JSON.stringify(location.state));
+    }
+  }, [location.state]);
 
-  const [assessmentName, setAssessmentName] = useState('');
+  const assessmentOptions = SHARED_ROLES;
+
+  const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
   const [experienceLevel, setExperienceLevel] = useState('');
   const [topicSkill, setTopicSkill] = useState(''); // optional default topic if missing in PDF
   const [file, setFile] = useState(null);
@@ -69,7 +31,10 @@ function PdfUploadQuestion() {
   const [isParsing, setIsParsing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
-  const canParse = Boolean(file) && Boolean(assessmentContext?.customAssessmentId);
+  const caid = assessmentContext?.customAssessmentId ||
+    assessmentContext?.id ||
+    localStorage.getItem(STORAGE_KEYS.DRAFT_ID);
+  const canParse = Boolean(file) && Boolean(caid);
 
   const stats = useMemo(() => {
     const counts = { MCQ: 0, MSQ: 0, TF: 0, UNKNOWN: 0 };
@@ -131,7 +96,7 @@ function PdfUploadQuestion() {
   };
 
   const handleParse = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
       return;
@@ -182,8 +147,12 @@ function PdfUploadQuestion() {
     }
   };
 
+  const handleViewSample = () => {
+    window.open(`${API_BASE_URL}/questions/sample-pdf/`, '_blank');
+  };
+
   const handleSave = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    if (!caid) {
       // eslint-disable-next-line no-alert
       alert('Custom assessment ID not found. Please go back to Review page and try again.');
       return;
@@ -210,13 +179,13 @@ function PdfUploadQuestion() {
     }
 
     const payload = {
-      custom_assessment_id: assessmentContext.customAssessmentId,
+      custom_assessment_id: caid,
       user_email: userEmail,
       organization_name: organizationName,
       questions: parsedQuestions.map((q) => ({
         assessment: q.assessment || assessmentName,
         // Topic is required by backend for saving; if missing in the document, fallback safely.
-        topic: q.topic || topicSkill || assessmentName || 'Custom Questions',
+        topic: (q.topic || topicSkill || assessmentName || 'Custom Questions').trim() || 'General',
         question_type: q.question_type,
         experience_level: experienceLevel,
         question: q.question,
@@ -241,7 +210,7 @@ function PdfUploadQuestion() {
           ? `Saved ${created} questions. Some failed to save:\n\n${errors.slice(0, 20).join('\n')}${errors.length > 20 ? '\n...more' : ''}`
           : `Saved ${created} questions successfully.`
       );
-      navigate('/review-assessment', { state: assessmentContext });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, onlyManual: false } });
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Save error:', error);
@@ -272,6 +241,13 @@ function PdfUploadQuestion() {
             </button>
             <h1 className="pdfq-title">PDF Uploading</h1>
             <div className="pdfq-actions">
+              <button
+                type="button"
+                className="pdfq-btn pdfq-btn-secondary"
+                onClick={handleViewSample}
+              >
+                View Sample PDF
+              </button>
               <button
                 type="button"
                 className="pdfq-btn pdfq-btn-secondary"
@@ -321,7 +297,7 @@ function PdfUploadQuestion() {
                   value={experienceLevel}
                   onChange={(e) => setExperienceLevel(e.target.value)}
                 >
-                  <option value="">Select experience level</option>
+                  <option value="" disabled hidden>Select experience level</option>
                   <option value="entry">Entry Level (0-2 years)</option>
                   <option value="mid">Mid Level (2-5 years)</option>
                   <option value="senior">Senior Level (5-10 years)</option>

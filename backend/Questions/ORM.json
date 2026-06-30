@@ -1,0 +1,2125 @@
+{
+  "skill": "ORM",
+  "questions": [
+    {
+      "question": "What is the primary purpose of an ORM (Object-Relational Mapping)?",
+      "options": {
+        "A": "To convert SQL databases into NoSQL databases",
+        "B": "To allow developers to interact with a database using object-oriented programming instead of raw SQL",
+        "C": "To compress data stored on a hard drive",
+        "D": "To manage the server's network traffic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'Impedance Mismatch' refer to in the context of ORMs?",
+      "options": {
+        "A": "The difference in electrical voltage between servers",
+        "B": "The philosophical and structural conflict between the relational model (tables) and the object model (classes)",
+        "C": "A slow internet connection between the app and the DB",
+        "D": "Incompatibility between different versions of SQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In an ORM, what does a 'Class' typically represent in the database?",
+      "options": {
+        "A": "A Row",
+        "B": "A Table",
+        "C": "A Column",
+        "D": "A Database Schema"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In an ORM, what does an 'Instance' of a class (an Object) typically represent?",
+      "options": {
+        "A": "A Table",
+        "B": "A single Row (Record) in a table",
+        "C": "A Column header",
+        "D": "A SQL query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Loading' in an ORM framework?",
+      "options": {
+        "A": "A technique where data is only fetched from the database at the moment it is actually accessed in the code",
+        "B": "A bug where the database fails to respond",
+        "C": "Loading data without using any RAM",
+        "D": "Loading all related tables immediately upon query"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Eager Loading'?",
+      "options": {
+        "A": "Fetching related data (e.g., a user and their posts) in a single initial query to avoid multiple database hits",
+        "B": "Loading data before the user logs in",
+        "C": "A faster way to delete data",
+        "D": "A background task that predicts user behavior"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'N+1 Query Problem'?",
+      "options": {
+        "A": "A performance issue where one query is executed for a parent list, and then N additional queries are executed for each child",
+        "B": "A mathematical formula for database growth",
+        "C": "A security vulnerability in SQL injection",
+        "D": "A limit on the number of users in a database"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which term describes the process of automatically synchronizing changes in an object back to the database?",
+      "options": {
+        "A": "Manual Sync",
+        "B": "Dirty Checking (or Persistent Context Management)",
+        "C": "Row Versioning",
+        "D": "Static Mapping"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Migration' in an ORM environment?",
+      "options": {
+        "A": "Moving the server to a new city",
+        "B": "Version control for database schemas, allowing you to update or rollback table structures programmatically",
+        "C": "Transferring data from Excel to SQL",
+        "D": "Deleting old users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mapping strategy is used for 'One-to-Many' relationships?",
+      "options": {
+        "A": "A single column in the parent table",
+        "B": "A Foreign Key in the 'Many' side table pointing to the 'One' side",
+        "C": "A join table only",
+        "D": "Merging both tables into one"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of a 'Join Table' (or Link Table)?",
+      "options": {
+        "A": "To make the database look bigger",
+        "B": "To facilitate 'Many-to-Many' relationships between two entities",
+        "C": "To store backup data",
+        "D": "To speed up primary key lookups"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cascading' in an ORM context (e.g., Cascade Delete)?",
+      "options": {
+        "A": "An animation style for UI",
+        "B": "A feature where an operation on a parent object is automatically applied to its related child objects",
+        "C": "A type of database indexing",
+        "D": "A way to merge two databases"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which ORM is widely used in the Node.js/Express ecosystem for SQL databases?",
+      "options": {
+        "A": "Hibernate",
+        "B": "Sequelize",
+        "C": "Entity Framework",
+        "D": "Django ORM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Mongoose (MongoDB ODM), what is a 'Schema'?",
+      "options": {
+        "A": "The actual database instance",
+        "B": "A blueprint that defines the structure of documents within a collection",
+        "C": "A type of middleware",
+        "D": "A tool for data visualization"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Hydration' mean in ORM terminology?",
+      "options": {
+        "A": "Adding water to the server room",
+        "B": "The process of populating a fresh object instance with data returned from a database row",
+        "C": "Deleting old objects from memory",
+        "D": "Encrypting the database connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a 'Data Mapper' pattern characteristic?",
+      "options": {
+        "A": "The object itself contains the logic to save itself (e.g., user.save())",
+        "B": "The object is a simple data container, and a separate service handles the database logic",
+        "C": "There is no database involved",
+        "D": "All data is stored in text files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is an 'Active Record' pattern characteristic?",
+      "options": {
+        "A": "Objects carry both data and behavior, including database access methods (e.g., Model.create())",
+        "B": "The database is read-only",
+        "C": "Data is mapped to XML files",
+        "D": "The object is disconnected from the database"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is an 'Identity Map' used for in an ORM?",
+      "options": {
+        "A": "To track user login IDs",
+        "B": "To ensure that each database record is loaded only once per session, maintaining object consistency",
+        "C": "To generate random primary keys",
+        "D": "To visualize table relationships"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence'?",
+      "options": {
+        "A": "Using only one database for everything",
+        "B": "Using different data storage technologies (SQL, NoSQL, Graph) for different needs within the same application",
+        "C": "Translating database queries into multiple languages",
+        "D": "A database that speaks human languages"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Unit of Work' in an ORM context?",
+      "options": {
+        "A": "A single row in a table",
+        "B": "A pattern that tracks all changes to objects during a business transaction and coordinates the writing out of these changes",
+        "C": "The time it takes to run a query",
+        "D": "A specific CPU core"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Many-to-Many' relationship, why is a junction table required?",
+      "options": {
+        "A": "To encrypt the data",
+        "B": "Because relational databases cannot store arrays of IDs directly in a single column effectively",
+        "C": "To speed up the server's RAM",
+        "D": "To prevent duplicate users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'First-Level Caching' in an ORM?",
+      "options": {
+        "A": "Caching data on the user's hard drive",
+        "B": "A session-level cache that ensures the same object is not fetched twice from the DB in a single transaction",
+        "C": "Caching CSS files on the server",
+        "D": "Storing the entire database in RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Second-Level Caching'?",
+      "options": {
+        "A": "Caching that persists across different sessions or even different server restarts",
+        "B": "The cache inside the browser",
+        "C": "A backup of the database",
+        "D": "Caching only images"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which term describes a mapping where a subclass is stored in the same table as the parent class?",
+      "options": {
+        "A": "Table-per-class",
+        "B": "Single Table Inheritance",
+        "C": "Joined Table Inheritance",
+        "ed": "Fragmented Table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Discriminator Column' used for in Single Table Inheritance?",
+      "options": {
+        "A": "To store the primary key",
+        "B": "To identify which subclass a specific row belongs to",
+        "C": "To count the number of rows",
+        "D": "To hide data from certain users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optimistic Locking'?",
+      "options": {
+        "A": "Locking a row so no one else can read it",
+        "B": "A strategy that assumes conflicts are rare and checks for version changes before saving",
+        "C": "Hoping the database doesn't crash",
+        "D": "Locking the entire database during a move"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Pessimistic Locking'?",
+      "options": {
+        "A": "Assuming the database will always fail",
+        "B": "Explicitly locking a database record at the start of a transaction to prevent others from editing it",
+        "C": "Encryption of all data",
+        "D": "Setting all fields to read-only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'ACID' stand for in database transactions?",
+      "options": {
+        "A": "Atomicity, Consistency, Isolation, Durability",
+        "B": "Access, Control, Identity, Data",
+        "C": "Array, Column, Index, Document",
+        "D": "Always, Connected, Integrated, Distributed"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which ACID property ensures that all parts of a transaction succeed or none of them do?",
+      "options": {
+        "A": "Durability",
+        "B": "Atomicity",
+        "C": "Isolation",
+        "D": "Consistency"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Batch Processing' in an ORM?",
+      "options": {
+        "A": "Updating one row at a time",
+        "B": "Grouping multiple SQL statements into a single network call to improve performance",
+        "C": "Processing data only on weekends",
+        "D": "Converting SQL to JSON"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method is used to remove a managed object from the ORM session so it's no longer tracked?",
+      "options": {
+        "A": "delete()",
+        "B": "detach() (or evict)",
+        "C": "clear()",
+        "D": "remove()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Soft Delete'?",
+      "options": {
+        "A": "Deleting data very slowly",
+        "B": "Marking a record as 'deleted' in a column (like is_deleted) without actually removing the row",
+        "C": "Clearing the cache only",
+        "D": "Deleting data from the frontend only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Compound Primary Key'?",
+      "options": {
+        "A": "A primary key that is encrypted",
+        "B": "A primary key composed of two or more columns",
+        "C": "A primary key that changes every day",
+        "D": "A foreign key that acts as a primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'One-to-One' relationship, where is the foreign key usually placed?",
+      "options": {
+        "A": "In both tables",
+        "B": "In either table, but usually the one that 'owns' the relationship",
+        "C": "In a separate junction table",
+        "D": "It is not required"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Database Indexing'?",
+      "options": {
+        "A": "To make the database file size smaller",
+        "B": "To significantly speed up data retrieval operations on a table",
+        "C": "To prevent unauthorized access",
+        "D": "To organize columns alphabetically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens during a 'Dirty Read'?",
+      "options": {
+        "A": "The database returns an error",
+        "B": "A transaction reads data that has been modified by another transaction but not yet committed",
+        "C": "The data is unencrypted",
+        "D": "The data contains special characters"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Phantom Read' in transaction isolation?",
+      "options": {
+        "A": "When a row disappears during a read",
+        "B": "When a transaction re-runs a query and finds new 'phantom' rows added by another committed transaction",
+        "C": "Reading data from a deleted table",
+        "D": "An error in the ORM mapping"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which isolation level is the most restrictive but prevents all read phenomena?",
+      "options": {
+        "A": "Read Committed",
+        "B": "Serializable",
+        "C": "Repeatable Read",
+        "D": "Read Uncommitted"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object-Graph Mapping' (OGM)?",
+      "options": {
+        "A": "Mapping objects to a relational database",
+        "B": "Mapping objects to a Graph Database (like Neo4j)",
+        "C": "Mapping objects to CSS",
+        "D": "Visualizing the class hierarchy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Active Record' pattern's main criticism in large systems?",
+      "options": {
+        "A": "It is too fast",
+        "B": "It violates the Single Responsibility Principle by mixing data and database logic",
+        "C": "It only works with SQL",
+        "D": "It requires too much RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Fluent API' in ORM configuration?",
+      "options": {
+        "A": "An API that speaks multiple languages",
+        "B": "A way to configure mappings using method chaining (e.g., .HasKey().Property())",
+        "C": "An API used for translating data",
+        "D": "A high-speed network protocol"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Shadow Property' in some ORMs?",
+      "options": {
+        "A": "A property that is hidden from the user",
+        "B": "A property that exists in the database but not in the physical entity class",
+        "C": "A property used for encryption",
+        "D": "A backup of a property"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which strategy maps each class to its own table, including inherited properties?",
+      "options": {
+        "A": "Single Table",
+        "B": "Table-per-concrete-class",
+        "C": "Mapped Superclass",
+        "D": "Junction Table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Connection Pooling'?",
+      "options": {
+        "A": "A group of servers sharing a pool",
+        "B": "Maintaining a cache of database connections to be reused, reducing the overhead of opening new ones",
+        "C": "Connecting multiple databases together",
+        "D": "A place where data goes to die"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Mongoose, what is a 'Virtual'?",
+      "options": {
+        "A": "A document that doesn't exist",
+        "B": "A property that can be get and set but is not persisted to MongoDB",
+        "C": "A remote server",
+        "D": "A type of database index"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Repository Pattern'?",
+      "options": {
+        "A": "Storing code in GitHub",
+        "B": "An abstraction layer between the domain logic and data mapping layers",
+        "C": "A list of all tables",
+        "D": "A way to delete data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Self-Referencing' relationship?",
+      "options": {
+        "A": "A table that is its own primary key",
+        "B": "A relationship where a table has a foreign key pointing back to its own primary key (e.g., Manager ID)",
+        "C": "A loop in the code",
+        "D": "A database that backups itself"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema Validation' in an ORM?",
+      "options": {
+        "A": "Checking the database for viruses",
+        "B": "Ensuring the incoming data matches the defined structure before attempting to save",
+        "C": "Comparing two databases",
+        "D": "Validating the user's password"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Denormalization'?",
+      "options": {
+        "A": "Fixing a broken database",
+        "B": "Intentionally adding redundant data to a database to improve read performance",
+        "C": "Deleting all indexes",
+        "D": "Converting SQL to NoSQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term describes the 'Parent' of all objects in a specific ORM session?",
+      "options": {
+        "A": "Manager",
+        "B": "Persistence Context",
+        "C": "Database Driver",
+        "D": "Root Node"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Auto-Increment'?",
+      "options": {
+        "A": "A server that grows automatically",
+        "B": "A database feature that automatically generates a unique numeric ID for each new row",
+        "C": "Adding 1 to every variable",
+        "D": "Automatically updating the app version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'UUID' and why use it over an integer ID?",
+      "options": {
+        "A": "Universal User ID; for security",
+        "B": "Universally Unique Identifier; to generate unique IDs without database coordination",
+        "C": "Unique Unit ID; for speed",
+        "D": "User Unit ID; for smaller file size"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is a 'Hook'?",
+      "options": {
+        "A": "A tool for UI design",
+        "B": "Functions that are called before or after a database operation (lifecycle events)",
+        "C": "A way to connect to a different API",
+        "D": "A physical connector for servers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bulk Update'?",
+      "options": {
+        "A": "Updating the server's weight",
+        "B": "Updating multiple records at once with a single command",
+        "C": "Deleting large amounts of data",
+        "D": "Changing the database name"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Field Mapping'?",
+      "options": {
+        "A": "Creating a map of a farm",
+        "B": "Defining how a class property corresponds to a specific database column",
+        "C": "Naming the database fields",
+        "D": "Searching for data in a field"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Embedded Object' in ORM?",
+      "options": {
+        "A": "An object inside a physical machine",
+        "B": "An object whose data is stored in the same table as the parent object rather than a separate table",
+        "C": "An object that is encrypted",
+        "D": "A backup object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Raw Query' support?",
+      "options": {
+        "A": "Searching for raw meat",
+        "B": "The ability to execute standard SQL strings directly when the ORM's abstraction is insufficient",
+        "C": "A query that hasn't been edited",
+        "D": "Connecting to a database without a password"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Seeding'?",
+      "options": {
+        "A": "Planting seeds in a garden",
+        "B": "The initial process of populating a database with an initial set of data",
+        "C": "Growing the database size",
+        "D": "Deleting temporary data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Eager Loading's' main disadvantage?",
+      "options": {
+        "A": "It is too slow to write",
+        "B": "It can lead to massive, inefficient 'Cartesian Product' results if not managed correctly",
+        "C": "It only works with one table",
+        "D": "It uses no RAM"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which property defines the 'other side' of a relationship in many ORMs?",
+      "options": {
+        "A": "mappedBy",
+        "B": "linkTo",
+        "C": "owner",
+        "D": "childOf"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Database Sharding'?",
+      "options": {
+        "A": "Breaking a database into smaller pieces",
+        "B": "Splitting a large database across multiple servers to improve scalability",
+        "C": "Combining two databases",
+        "D": "Deleting old data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Read Replica'?",
+      "options": {
+        "A": "A copy of a database used only for read-only queries to reduce load on the main DB",
+        "B": "A person who reads the data",
+        "C": "A backup that is never used",
+        "D": "A database that only stores text"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Write-Through' caching?",
+      "options": {
+        "A": "Updating the cache and the database simultaneously",
+        "B": "Writing data only to the cache",
+        "C": "Writing data to a file first",
+        "D": "Deleting the cache after writing"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the context of ORM, what is a 'Proxy Object'?",
+      "options": {
+        "A": "A security server",
+        "B": "A placeholder object used for lazy loading that triggers a DB hit only when accessed",
+        "C": "A fake user",
+        "D": "A backup of the main object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Inverse Side' of a relationship?",
+      "options": {
+        "A": "The side that doesn't exist",
+        "B": "The non-owning side of a bidirectional relationship",
+        "C": "The side that is encrypted",
+        "D": "The side with the primary key"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Collection Mapping'?",
+      "options": {
+        "A": "Mapping a list of objects to a relationship (like many-to-many)",
+        "B": "A map of all database collections",
+        "C": "Collecting data from users",
+        "D": "A way to delete collections"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Query Language' in ORM (e.g., HQL, JPQL)?",
+      "options": {
+        "A": "An object-oriented query language tailored for the ORM instead of specific SQL dialects",
+        "B": "A language for asking questions",
+        "C": "The language the database is written in",
+        "D": "A tool for translating SQL"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Metadata' in ORM?",
+      "options": {
+        "A": "Data about the database server",
+        "B": "The configuration data (annotations, XML, or JSON) that defines how classes map to tables",
+        "C": "Data about the users",
+        "D": "The size of the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unidirectional' relationship?",
+      "options": {
+        "A": "A relationship that only goes one way",
+        "B": "A relationship where only one entity knows about the other",
+        "C": "A relationship that is always true",
+        "D": "A relationship that changes direction"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Bidirectional' relationship?",
+      "options": {
+        "A": "A relationship where both entities have properties referring to each other",
+        "B": "A relationship between two servers",
+        "C": "A relationship that is both SQL and NoSQL",
+        "D": "A relationship that repeats"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Mongoose, what is the 'Model' compared to the 'Schema'?",
+      "options": {
+        "A": "The Model is the blueprint; the Schema is the actual data",
+        "B": "The Schema is the blueprint; the Model is a constructor compiled from the Schema used to interact with the database",
+        "C": "They are exactly the same thing",
+        "D": "The Model is for SQL; the Schema is for NoSQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Mongoose method is used to replace an entire document while bypassing validation by default?",
+      "options": {
+        "A": "update()",
+        "B": "findOneAndReplace()",
+        "C": "replaceOne()",
+        "D": "save()"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In Sequelize, what does the 'sync({ force: true })' option do?",
+      "options": {
+        "A": "Updates only new columns",
+        "B": "Drops all existing tables and recreates them from scratch",
+        "C": "Backs up the database",
+        "D": "Syncs the database with the cloud"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Middleware' (or Hooks) in Mongoose?",
+      "options": {
+        "A": "Software that sits between the server and the browser",
+        "B": "Functions which are passed control during execution of asynchronous functions (e.g., pre-save, post-remove)",
+        "C": "A way to connect to multiple databases",
+        "D": "A tool for rendering HTML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Sequelize method is used to find a record or create it if it doesn't exist?",
+      "options": {
+        "A": "findOrCreate()",
+        "B": "upsert()",
+        "C": "searchAndInsert()",
+        "D": "getOrPut()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Validation' in an ORM context?",
+      "options": {
+        "A": "Checking if the database is online",
+        "B": "Rules defined at the application level to ensure data integrity before it reaches the database",
+        "C": "A security check for hackers",
+        "D": "Formatting the data for display"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Mongoose feature allows you to join documents from different collections?",
+      "options": {
+        "A": "Join()",
+        "B": "populate()",
+        "C": "merge()",
+        "D": "lookup()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is an 'Instance Method' in Mongoose?",
+      "options": {
+        "A": "A method that runs on the entire collection",
+        "B": "A custom function available on a specific document instance",
+        "C": "A way to delete the database",
+        "D": "A method for the schema only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Static Method' in Mongoose?",
+      "options": {
+        "A": "A method that cannot be changed",
+        "B": "A custom function added to the Model itself for logic involving the whole collection",
+        "C": "A method for CSS styling",
+        "D": "A background task"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, how do you define a One-to-Many relationship?",
+      "options": {
+        "A": "Model.hasOne()",
+        "B": "Model.hasMany()",
+        "C": "Model.belongsTo()",
+        "D": "Model.belongsToMany()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'DataType' in Sequelize models?",
+      "options": {
+        "A": "To name the table",
+        "B": "To define the SQL data type (e.g., STRING, INTEGER, BOOLEAN) for a column",
+        "C": "To set the port number",
+        "D": "To encrypt the fields"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Lean' queries do in Mongoose?",
+      "options": {
+        "A": "Speeds up queries by returning plain JavaScript objects instead of full Mongoose documents",
+        "B": "Deletes unnecessary data",
+        "C": "Compresses the database",
+        "D": "Limits results to 5 rows"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dirty Checking' in Hibernate or other JPA providers?",
+      "options": {
+        "A": "Checking the database for corruption",
+        "B": "Automatically detecting changes to a persistent object and updating the DB during flush",
+        "C": "Filtering spam data",
+        "D": "Checking for SQL injection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is an 'Alias' (as) used for in associations?",
+      "options": {
+        "A": "To hide the table name",
+        "B": "To give the associated model a different name when accessing it in the result",
+        "C": "To rename the primary key",
+        "D": "To create a backup table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Concurrency Control' in ORMs?",
+      "options": {
+        "A": "Managing multiple users logging in",
+        "B": "Techniques to manage simultaneous access to the same data (Optimistic/Pessimistic locking)",
+        "C": "Controlling CPU speed",
+        "D": "Limiting the number of tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Mongoose schema type is used for unique identifiers?",
+      "options": {
+        "A": "String",
+        "B": "mongoose.Schema.Types.ObjectId",
+        "C": "Number",
+        "D": "Buffer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Circular Dependency' in ORM associations?",
+      "options": {
+        "A": "A loop where two models refer to each other, which can cause issues during initialization",
+        "B": "A database that is round",
+        "C": "A repetitive query",
+        "D": "A type of database backup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In Mongoose, what does 'required: true' do in a Schema?",
+      "options": {
+        "A": "Forces the user to login",
+        "B": "Ensures the document cannot be saved without a value for that specific path",
+        "C": "Encrypts the field",
+        "D": "Speeds up the query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Attribute Aliasing' in Sequelize?",
+      "options": {
+        "A": "Naming a user",
+        "B": "Mapping a database column name to a different property name in the object",
+        "C": "Deleting an attribute",
+        "D": "Creating a random attribute"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Migration'?",
+      "options": {
+        "A": "Moving data from one computer to another",
+        "B": "A set of files that describe how the database schema changes over time",
+        "C": "Deleting old database files",
+        "D": "Upgrading the SQL version"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Hibernate, what is the 'Session' object?",
+      "options": {
+        "A": "The time a user spends on the site",
+        "B": "A single-threaded, short-lived object representing a conversation between the app and the DB",
+        "C": "A global variable",
+        "D": "A database table"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'JPA' (Java Persistence API)?",
+      "options": {
+        "A": "A type of JavaScript library",
+        "B": "A Java specification that describes how to manage relational data in applications",
+        "C": "A database server",
+        "D": "A tool for UI design"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Mongoose, what is the purpose of 'discriminators'?",
+      "options": {
+        "A": "To prevent certain users from logging in",
+        "B": "A schema inheritance mechanism that allows multiple models with overlapping schemas on top of the same collection",
+        "C": "To filter search results",
+        "D": "To delete duplicate data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Reflection' in some ORMs?",
+      "options": {
+        "A": "Mirroring the database to a backup",
+        "B": "Automatically discovering the database schema and creating objects based on it at runtime",
+        "C": "A psychological theory",
+        "D": "A way to encrypt passwords"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Active Record' pattern's 'Save' method characteristic?",
+      "options": {
+        "A": "You must call a separate service to save",
+        "B": "The object itself has a save() method (e.g., myUser.save())",
+        "C": "Saving is automatic every 5 seconds",
+        "D": "Saving only happens when the app closes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Naming Convention' in ORMs?",
+      "options": {
+        "A": "Rules for naming users",
+        "B": "Standard patterns for mapping class names to table names (e.g., User class to 'users' table)",
+        "C": "A convention for developers",
+        "D": "A list of database names"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Transaction Rollback'?",
+      "options": {
+        "A": "Deleting the last transaction",
+        "B": "Reverting the database to its state before a transaction started if an error occurs",
+        "C": "Moving data to a previous version",
+        "D": "Closing the database connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which Sequelize option prevents the 'createdAt' and 'updatedAt' columns from being created?",
+      "options": {
+        "A": "noTime: true",
+        "B": "timestamps: false",
+        "C": "date: none",
+        "D": "deleteTime: true"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Mongoose, what is 'Aggregation'?",
+      "options": {
+        "A": "Grouping users by age",
+        "B": "A powerful framework for data processing that passes documents through a multi-stage pipeline",
+        "C": "Deleting documents in bulk",
+        "D": "Encrypting the collection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'SQL Injection' and how do ORMs help prevent it?",
+      "options": {
+        "A": "Injecting code into the UI; ORMs block CSS",
+        "B": "A vulnerability where malicious SQL is executed; ORMs use parameterized queries by default",
+        "C": "A way to speed up SQL; ORMs provide more memory",
+        "D": "Deleting the database; ORMs provide backups"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Connection Leak'?",
+      "options": {
+        "A": "When the internet is slow",
+        "B": "Failing to close database connections, eventually leading to a 'too many connections' error",
+        "C": "A security breach",
+        "D": "Data being lost during transfer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Soft Delete' vs 'Hard Delete'?",
+      "options": {
+        "A": "Deleting text vs deleting images",
+        "B": "Setting a flag (isDeleted) vs permanently removing the row from the table",
+        "C": "Deleting from cache vs deleting from disk",
+        "D": "Deleting one row vs deleting all rows"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'Literal'?",
+      "options": {
+        "A": "A string of text",
+        "B": "A way to pass raw SQL expressions directly into a query (e.g., sequelize.literal('NOW()'))",
+        "C": "A type of data",
+        "D": "A background task"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Auto-mapping'?",
+      "options": {
+        "A": "A car that drives itself",
+        "B": "When an ORM automatically assumes property names match column names without manual config",
+        "C": "Creating a map of the database",
+        "D": "Automatically updating the code"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence' strategy?",
+      "options": {
+        "A": "Using only SQL",
+        "B": "The concept of using different database technologies for different data requirements in one app",
+        "C": "Translating queries to many languages",
+        "D": "A database that works on all operating systems"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Hibernate, what is the 'Second Level Cache'?",
+      "options": {
+        "A": "A cache that lives across sessions, often using providers like Ehcache or Redis",
+        "B": "The browser cache",
+        "C": "A backup of the primary cache",
+        "D": "Caching on the user's phone"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'L1 Cache'?",
+      "options": {
+        "A": "Level 1 cache; session-level cache in ORMs (like Hibernate's Session)",
+        "B": "The primary database",
+        "C": "A cache for images",
+        "D": "A CPU-only cache"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Proxying' in Lazy Loading?",
+      "options": {
+        "A": "Using a separate server for data",
+        "B": "Creating a placeholder object that only fetches data when a getter is called",
+        "C": "Encrypting the object",
+        "D": "A fake database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optimistic Concurrency'?",
+      "options": {
+        "A": "Assuming all users are nice",
+        "B": "A pattern where you check if a record has changed before updating it (usually via a version column)",
+        "C": "Allowing everyone to write at once",
+        "D": "Hoping the database doesn't lock"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Pessimistic Concurrency'?",
+      "options": {
+        "A": "Assuming everyone is a hacker",
+        "B": "Explicitly locking a row until a transaction is finished so no one else can touch it",
+        "C": "Deleting data before reading it",
+        "D": "A setting that disables the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Compound Index'?",
+      "options": {
+        "A": "A very large index",
+        "B": "An index that is based on multiple columns in a table",
+        "C": "A backup of an index",
+        "D": "A list of table names"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'Paranoid' mode?",
+      "options": {
+        "A": "A security setting",
+        "B": "A feature that enables soft deletes (adding a deletedAt column)",
+        "C": "A mode for testing hackers",
+        "D": "A way to hide data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Metadata Mapping'?",
+      "options": {
+        "A": "Mapping users to data",
+        "B": "The use of XML, JSON, or annotations to tell the ORM how to map objects to the database",
+        "C": "Mapping the size of the database",
+        "D": "A way to rename tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Unit of Work' pattern?",
+      "options": {
+        "A": "One hour of coding",
+        "B": "A pattern that maintains a list of objects affected by a business transaction and coordinates the writing out of changes",
+        "C": "A specific database row",
+        "D": "A tool for project management"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Identity Map'?",
+      "options": {
+        "A": "A map of user IDs",
+        "B": "A cache that ensures that each database record is loaded only once in a single session",
+        "C": "A way to identify the database server",
+        "D": "A security feature"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Data Mapper' vs 'Active Record'?",
+      "options": {
+        "A": "Two different databases",
+        "B": "Separating domain objects from database logic (Data Mapper) vs combining them (Active Record)",
+        "C": "JavaScript vs Python",
+        "D": "Encryption vs compression"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'Transaction'?",
+      "options": {
+        "A": "A user login",
+        "B": "An environment used to ensure multiple queries either all succeed or all fail together",
+        "C": "A payment",
+        "D": "A way to transfer data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Eager Loading' via 'Include'?",
+      "options": {
+        "A": "Loading data before the user asks",
+        "B": "The Sequelize way of performing a JOIN to fetch associated models (e.g., User.findAll({ include: [Post] }))",
+        "C": "A way to include external libraries",
+        "D": "Loading images only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Schema Sync'?",
+      "options": {
+        "A": "Comparing two schemas",
+        "B": "Automatically updating the database tables to match the ORM model definitions",
+        "C": "Syncing the database to the cloud",
+        "D": "Deleting old schemas"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object Identifier' (OID)?",
+      "options": {
+        "A": "A username",
+        "B": "A unique internal ID used by an ORM to keep track of a persistent object",
+        "C": "The primary key of a table",
+        "D": "A type of data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Multi-tenancy' in an ORM context?",
+      "options": {
+        "A": "Having multiple developers work on one database",
+        "B": "A software architecture where a single instance of an application serves multiple customers (tenants), keeping their data isolated",
+        "C": "Storing data in multiple different languages",
+        "D": "Allowing a user to have multiple accounts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database First' development?",
+      "options": {
+        "A": "Writing SQL code before any other code",
+        "B": "A workflow where the database schema is created first, and the ORM generates the classes based on the existing tables",
+        "C": "Choosing a database before a programming language",
+        "D": "Running the database on the fastest server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Code First' development?",
+      "options": {
+        "A": "Writing the entire app without a database",
+        "B": "A workflow where the developer defines classes and relationships in code, and the ORM generates the database schema automatically",
+        "C": "Using a code editor instead of a GUI",
+        "D": "Deleting the database and starting over"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Table-per-Hierarchy' (TPH) inheritance pattern?",
+      "options": {
+        "A": "Creating a separate table for every single class",
+        "B": "Storing an entire class hierarchy in a single table using a discriminator column",
+        "C": "Removing all tables and using a flat file",
+        "D": "A way to backup the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Table-per-Type' (TPT) inheritance pattern?",
+      "options": {
+        "A": "Merging all data types into one column",
+        "B": "Storing properties of a base class in one table and properties of subclasses in separate, related tables",
+        "C": "Using only one data type per table",
+        "D": "Naming tables after data types"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which ORM pattern is best for large-scale enterprise apps with complex domain logic and separate data teams?",
+      "options": {
+        "A": "Active Record",
+        "B": "Data Mapper",
+        "C": "Hardcoded SQL",
+        "D": "JSON files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Transaction'?",
+      "options": {
+        "A": "A transaction that is shared with all users",
+        "B": "A transaction that spans across multiple physical databases or microservices",
+        "C": "A transaction that takes a long time",
+        "D": "A way to send money via the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Two-Phase Commit' (2PC)?",
+      "options": {
+        "A": "Confirming a password twice",
+        "B": "A protocol used to coordinate a distributed transaction so that all participating nodes either commit or abort",
+        "C": "A database that saves data twice",
+        "D": "A way to speed up SQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hydration Performance'?",
+      "options": {
+        "A": "How fast the server can cool down",
+        "B": "The efficiency and speed at which an ORM converts raw query results into rich object instances",
+        "C": "The size of the data transfer",
+        "D": "The number of users connected"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Explosion of Joins'?",
+      "options": {
+        "A": "A database error that deletes tables",
+        "B": "A performance issue caused by fetching too many related entities at once using Eager Loading",
+        "C": "When a junction table gets too large",
+        "D": "A type of database attack"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Hibernate, what does 'evict' do to an object?",
+      "options": {
+        "A": "Deletes it from the database",
+        "B": "Removes it from the first-level cache (session), stopping it from being tracked",
+        "C": "Encrypts the object's data",
+        "D": "Moves it to the second-level cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query Plan Caching'?",
+      "options": {
+        "A": "Caching the results of a search",
+        "B": "Storing the optimized execution plan for a SQL query to reuse it for similar subsequent requests",
+        "C": "A way to hide queries from hackers",
+        "D": "Deleting slow queries"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Row Versioning' used for?",
+      "options": {
+        "A": "To keep track of how many rows are in a table",
+        "B": "To implement Optimistic Concurrency by checking a version number or timestamp before an update",
+        "C": "To name each row",
+        "D": "To undo a deletion"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Auditing' in an ORM context?",
+      "options": {
+        "A": "Checking the database for financial errors",
+        "B": "Automatically tracking who created or modified a record and when it happened",
+        "C": "A performance review of the code",
+        "D": "Logging out the user"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Natural Key'?",
+      "options": {
+        "A": "A key made of wood",
+        "B": "A primary key that is a real-world attribute (like Social Security Number or Email)",
+        "C": "A primary key that is automatically generated",
+        "D": "A key used for encryption"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Surrogate Key'?",
+      "options": {
+        "A": "A key that is used temporarily",
+        "B": "An artificially generated primary key (like an Auto-increment ID or UUID) with no business meaning",
+        "C": "A key that replaces a broken key",
+        "D": "A key used in NoSQL only"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Shallow Loading'?",
+      "options": {
+        "A": "Loading only the primary key of an object",
+        "B": "Loading an object without its related associations (the opposite of deep/eager loading)",
+        "C": "Loading data from a local file",
+        "D": "A fast way to delete data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence' and its impact on ORMs?",
+      "options": {
+        "A": "It requires using multiple ORMs to handle different storage types (e.g., SQL + MongoDB)",
+        "B": "It simplifies the database into one table",
+        "C": "It removes the need for ORMs",
+        "D": "It only works with one language"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Transaction Isolation'?",
+      "options": {
+        "A": "Putting the database in a safe place",
+        "B": "Defining how changes made by one transaction are visible to other concurrent transactions",
+        "C": "Deleting a transaction immediately",
+        "D": "Allowing only one transaction per day"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'Op' used for?",
+      "options": {
+        "A": "Operator (used to define complex search criteria like [Op.gt] or [Op.like])",
+        "B": "Operation (used to start the server)",
+        "C": "Option (used to set the port)",
+        "D": "Optimization (used to speed up queries)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Object Relational Impedance Mismatch' and why does it exist?",
+      "options": {
+        "A": "Because SQL is faster than objects",
+        "B": "Because data in objects is hierarchical and interconnected, while relational data is flat and tabular",
+        "C": "Because databases are old and objects are new",
+        "D": "Because of slow internet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Flyweight' pattern in ORMs?",
+      "options": {
+        "A": "Reducing the weight of the server",
+        "B": "Using sharing to support large numbers of fine-grained objects efficiently",
+        "C": "Deleting small objects",
+        "D": "A faster way to upload data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Dirty Checking' frequency?",
+      "options": {
+        "A": "How often the developer checks the code",
+        "B": "How often the ORM compares the state of an object to the original snapshot to see if updates are needed",
+        "C": "The time it takes to run a query",
+        "D": "The number of errors found"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Normalization'?",
+      "options": {
+        "A": "Making a database act like a human",
+        "B": "The process of organizing data to minimize redundancy and dependency (1NF, 2NF, 3NF)",
+        "C": "Deleting unusual data",
+        "D": "Converting NoSQL to SQL"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Implicit Transaction'?",
+      "options": {
+        "A": "A transaction that is hidden",
+        "B": "When the ORM automatically wraps a single save or update operation in a transaction without the developer asking",
+        "C": "A transaction that doesn't use SQL",
+        "D": "A way to delete data automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Explicit Transaction'?",
+      "options": {
+        "A": "A transaction that contains bad words",
+        "B": "When a developer manually begins, commits, or rolls back a group of database operations",
+        "C": "A transaction that is displayed on the screen",
+        "D": "A transaction with only one query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Connection Leak' prevention?",
+      "options": {
+        "A": "Checking the cables",
+        "B": "Ensuring database connections are returned to the pool using 'finally' blocks or context managers",
+        "C": "Using a VPN",
+        "D": "Turning off the server at night"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query DSL'?",
+      "options": {
+        "A": "A type of internet connection",
+        "B": "Domain Specific Language; a way to write queries using a specific syntax provided by the ORM (e.g., QueryDSL or Criteria API)",
+        "C": "A language for designing databases",
+        "D": "A tool for compressing queries"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Projection' in a database query?",
+      "options": {
+        "A": "Projecting the database onto a screen",
+        "B": "Selecting only a specific subset of columns from a table instead of the entire row",
+        "C": "Predicting the future size of the database",
+        "D": "A type of database join"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'upsert'?",
+      "options": {
+        "A": "Deleting a row and inserting a new one",
+        "B": "A combination of Update and Insert; it updates a record if it exists, otherwise it creates a new one",
+        "C": "A way to upload files",
+        "D": "A slow database query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cold Start' in the context of ORMs?",
+      "options": {
+        "A": "Running the server in the winter",
+        "B": "The delay when an application first starts up and the ORM has to initialize mappings and connection pools",
+        "C": "A failed database connection",
+        "D": "A way to reset the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'N+1 Query' fixing via 'Subquery'?",
+      "options": {
+        "A": "Deleting the N rows",
+        "B": "An optimization where the related data is fetched using a single subquery in the main SQL statement",
+        "C": "Using only one query for everything",
+        "D": "A manual way to count rows"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Portability'?",
+      "options": {
+        "A": "Carrying a database on a laptop",
+        "B": "The ability of an ORM to switch between different SQL dialects (e.g., MySQL to PostgreSQL) without changing the code",
+        "C": "Moving a database to the cloud",
+        "D": "A database that works on mobile"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object State: Transient'?",
+      "options": {
+        "A": "An object that is moving",
+        "B": "An object that has been created but is not yet associated with an ORM session or database row",
+        "C": "An object that is about to be deleted",
+        "D": "A temporary variable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object State: Persistent'?",
+      "options": {
+        "A": "An object that never gives up",
+        "B": "An object that is currently associated with an ORM session and has a corresponding row in the database",
+        "C": "An object stored on a hard drive",
+        "D": "A global constant"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object State: Detached'?",
+      "options": {
+        "A": "An object that has been deleted",
+        "B": "An object that was previously persistent but its session has been closed",
+        "C": "An object that is not connected to the internet",
+        "D": "A copy of an object"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Hydration' overhead?",
+      "options": {
+        "A": "The cost of buying water for the office",
+        "B": "The CPU and memory cost incurred when converting large numbers of database rows into objects",
+        "C": "The size of the database",
+        "D": "The time it takes to connect to the DB"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'L2 Cache Eviction Policy'?",
+      "options": {
+        "A": "Rules for kicking out users",
+        "B": "Strategies like LRU (Least Recently Used) to decide which data to remove from the cache when it becomes full",
+        "C": "Deleting old database rows",
+        "D": "Moving data to a different server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Transactional Caching'?",
+      "options": {
+        "A": "Caching only payment data",
+        "B": "A cache that is aware of transaction boundaries and ensures that uncommitted data is not shared",
+        "C": "A cache that costs money",
+        "D": "A way to speed up transactions"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Materialized Path' for tree structures?",
+      "options": {
+        "A": "A path made of physical materials",
+        "B": "A way to represent hierarchical data in a flat table by storing the full path of IDs (e.g., /1/5/22/)",
+        "C": "A type of database join",
+        "D": "A way to organize files in a folder"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is the 'through' property used for?",
+      "options": {
+        "A": "To skip a row",
+        "B": "To define the name of the join table in a many-to-many relationship",
+        "C": "To search through a table",
+        "D": "To connect to a proxy"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Pooling' starvation?",
+      "options": {
+        "A": "The database being hungry",
+        "B": "A condition where all connections are in use, and new requests are waiting indefinitely",
+        "C": "Deleting too many connections",
+        "D": "A slow database query"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query Throttling'?",
+      "options": {
+        "A": "Speeding up queries",
+        "B": "Intentionally limiting the number of queries a user or application can perform to protect database health",
+        "C": "Deleting slow queries",
+        "D": "Naming queries"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Object-Oriented Database' vs ORM?",
+      "options": {
+        "A": "Two types of CSS",
+        "B": "A database that stores objects natively vs an ORM which acts as a bridge to a relational database",
+        "C": "Java vs Python",
+        "D": "Encryption vs Compression"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Distributed Locking'?",
+      "options": {
+        "A": "Locking a door from far away",
+        "B": "A mechanism to ensure that only one process in a distributed system can access a resource at a time",
+        "C": "Locking the entire internet",
+        "D": "A type of database backup"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Entity Lifecycle'?",
+      "options": {
+        "A": "The time a user spends in an app",
+        "B": "The various states an object goes through from creation to deletion (Transient -> Persistent -> Detached -> Deleted)",
+        "C": "The history of the database",
+        "D": "A tool for project management"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Mongoose, what is the 'Lean' option?",
+      "options": {
+        "A": "Deleting unnecessary data",
+        "B": "Returning plain JSON objects instead of Mongoose Documents to save on memory and CPU",
+        "C": "A faster way to update data",
+        "D": "A mode for testing hackers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Reflection'?",
+      "options": {
+        "A": "A backup of the database",
+        "B": "The process where an ORM reads the existing database schema to determine its mapping configuration",
+        "C": "A psychological theory",
+        "D": "A way to hide data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Transaction Propagation'?",
+      "options": {
+        "A": "Sharing a transaction with other users",
+        "B": "Defining how a transaction behaves when a transactional method is called within another transactional method",
+        "C": "A way to speed up transactions",
+        "D": "Deleting a transaction"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'ORM Overhead'?",
+      "options": {
+        "A": "The cost of buying the ORM software",
+        "B": "The extra performance cost (CPU/Memory) compared to writing raw, optimized SQL",
+        "C": "The size of the database",
+        "D": "The number of tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary difference between an ORM and an ODM?",
+      "options": {
+        "A": "ORMs are for mobile; ODMs are for web",
+        "B": "ORMs map to Relational (SQL) databases; ODMs map to Document (NoSQL) databases",
+        "C": "ORMs are faster than ODMs",
+        "D": "ODMs do not support relationships"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which modern ORM uses a custom schema language and generates a type-safe client automatically?",
+      "options": {
+        "A": "Sequelize",
+        "B": "Prisma",
+        "C": "TypeORM",
+        "D": "Mongoose"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Type Safety' in the context of modern ORMs?",
+      "options": {
+        "A": "Ensuring the computer doesn't catch a virus",
+        "B": "Ensuring that the code only allows operations on data types defined in the database schema",
+        "C": "A password protection feature",
+        "D": "Checking the user's typing speed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Document' database, what is 'Embedding' vs 'Referencing'?",
+      "options": {
+        "A": "Storing data in the same document vs storing it in a separate collection with an ID link",
+        "B": "Two ways to delete data",
+        "C": "Naming the database vs naming the table",
+        "D": "Encryption vs Compression"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Schema Drift'?",
+      "options": {
+        "A": "When the database moves to a different server",
+        "B": "When the database schema in production becomes different from the schema defined in the application code",
+        "C": "A way to backup the database",
+        "D": "Deleting old columns"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Active Record' pattern's primary disadvantage for Unit Testing?",
+      "options": {
+        "A": "It is too slow",
+        "B": "It is difficult to test logic without a live database connection because the model is tightly coupled to the DB",
+        "C": "It only works with Java",
+        "D": "It requires too many files"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Circular Reference' in ORM associations?",
+      "options": {
+        "A": "A table that only has one row",
+        "B": "When Table A refers to Table B, and Table B refers back to Table A, which can cause infinite loops during serialization",
+        "C": "A database backup loop",
+        "D": "A type of database join"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Prisma, what is the 'introspection' feature?",
+      "options": {
+        "A": "A psychological tool for developers",
+        "B": "Connecting to an existing database and automatically generating a Prisma schema based on it",
+        "C": "Deleting the database",
+        "D": "Renaming tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Soft Delete' and why is it used?",
+      "options": {
+        "A": "Deleting data very carefully",
+        "B": "Marking a row as deleted (usually via a timestamp) without actually removing it from the disk to allow for recovery or auditing",
+        "C": "Deleting only text data",
+        "D": "A way to clear the cache"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Hydration' refer to when an ORM executes a query?",
+      "options": {
+        "A": "Checking the server's temperature",
+        "B": "The process of taking raw SQL row data and turning it into a rich JavaScript/Java/C# object",
+        "C": "Cleaning the database",
+        "D": "Converting JSON to XML"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which mapping strategy allows multiple classes to share the same table but differentiate via a 'type' column?",
+      "options": {
+        "A": "Joined Table",
+        "B": "Single Table Inheritance",
+        "C": "Table per class",
+        "D": "NoSQL embedding"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Query Profiling' in an ORM?",
+      "options": {
+        "A": "Setting up a user profile",
+        "B": "Analyzing the generated SQL of an ORM to identify performance bottlenecks and slow queries",
+        "C": "Naming the database",
+        "D": "Deleting unused indexes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Transaction Isolation Levels'?",
+      "options": {
+        "A": "To keep the database on a separate network",
+        "B": "To define how changes made by one transaction are visible to others",
+        "C": "To limit the number of users",
+        "D": "To encrypt the connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which isolation level is most likely to cause a 'Dirty Read'?",
+      "options": {
+        "A": "Serializable",
+        "B": "Read Uncommitted",
+        "C": "Repeatable Read",
+        "D": "Read Committed"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Cascading Deletes'?",
+      "options": {
+        "A": "Deleting files in alphabetical order",
+        "B": "Automatically deleting child records when the parent record is deleted to maintain referential integrity",
+        "C": "A way to delete the cache",
+        "D": "Deleting the database in parts"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In NoSQL, what does 'Denormalization' mean?",
+      "options": {
+        "A": "Fixing a broken database",
+        "B": "Duplicate data across multiple documents to optimize for faster reads (avoiding joins)",
+        "C": "Converting to SQL",
+        "D": "Deleting all indexes"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Repository Pattern'?",
+      "options": {
+        "A": "Storing code on GitHub",
+        "B": "An abstraction layer that mediates between the domain and data mapping layers using a collection-like interface",
+        "C": "A list of all database servers",
+        "D": "A way to name variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence'?",
+      "options": {
+        "A": "A database that speaks many languages",
+        "B": "Using different types of databases (SQL, NoSQL, Graph) within the same application for different data needs",
+        "C": "Translating queries into many languages",
+        "D": "A database that works on all operating systems"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Lazy Loading' in an ORM?",
+      "options": {
+        "A": "A bug in the code",
+        "B": "Deferring the initialization of an object or its related data until it is actually needed",
+        "C": "Loading data only on the weekend",
+        "D": "Using low power mode on the server"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'N+1 Query Problem'?",
+      "options": {
+        "A": "A mathematical formula for server growth",
+        "B": "A performance issue where the application makes one query to fetch N records and then N additional queries for related data",
+        "C": "A limit on the number of users",
+        "D": "A way to name variables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In Sequelize, what is 'Upsert'?",
+      "options": {
+        "A": "A way to upload files",
+        "B": "An operation that either updates an existing record or inserts a new one if it doesn't exist",
+        "C": "A slow query",
+        "D": "A type of database join"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Migration'?",
+      "options": {
+        "A": "Moving the computer to a new office",
+        "B": "Version control for your database schema, allowing you to update or rollback table structures",
+        "C": "Transferring data from Excel",
+        "D": "Deleting old users"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Eager Loading'?",
+      "options": {
+        "A": "Loading data before the user logs in",
+        "B": "Fetching an object and all its specified related associations in a single database query",
+        "C": "Loading only the images",
+        "D": "A way to speed up the internet"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Connection Pooling'?",
+      "options": {
+        "A": "Keeping a group of database connections open to be reused, improving performance",
+        "B": "Connecting multiple databases together",
+        "C": "A place where data is stored temporarily",
+        "D": "A group of servers"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Unit of Work' pattern?",
+      "options": {
+        "A": "A way to measure developer productivity",
+        "B": "Tracking all changes made during a transaction and committing them all at once at the end",
+        "C": "A single row in a database",
+        "D": "A specific type of hardware"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In TypeORM, what is a 'Subscriber'?",
+      "options": {
+        "A": "A person who pays for the app",
+        "B": "A class that listens to specific entity events (insert, update, remove) and performs logic",
+        "C": "A way to connect to social media",
+        "D": "A list of email addresses"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Identity Map'?",
+      "options": {
+        "A": "A map of user IDs",
+        "B": "A cache that ensures each database record is only loaded once per session, ensuring object consistency",
+        "C": "A security feature",
+        "D": "A way to name tables"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which SQL dialect does an ORM convert your code into?",
+      "options": {
+        "A": "The one specified in the configuration (e.g., PostgreSQL, MySQL, SQLite)",
+        "B": "Only standard SQL-92",
+        "C": "Only NoSQL",
+        "D": "It doesn't use SQL"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Optimistic Locking'?",
+      "options": {
+        "A": "Hoping the database doesn't crash",
+        "B": "Checking if a record has been modified by someone else before saving, usually via a version column",
+        "C": "Locking the database for everyone else",
+        "D": "A way to speed up the CPU"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Normalization'?",
+      "options": {
+        "A": "Making the database act normal",
+        "B": "Structuring a relational database in accordance with a series of normal forms to reduce redundancy",
+        "C": "Deleting unusual data",
+        "D": "A way to backup the database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Polyglot Persistence' in modern system architecture?",
+      "options": {
+        "A": "Using a single database for all types of data",
+        "B": "Using different data storage technologies (SQL, NoSQL, Graph) for different needs within the same application",
+        "C": "Translating database queries into multiple programming languages",
+        "D": "Encrypted storage for sensitive user data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of ORMs, what is 'Object-Graph Mapping' (OGM)?",
+      "options": {
+        "A": "Mapping objects to a Relational Database",
+        "B": "Mapping objects to a Graph Database (like Neo4j)",
+        "C": "Mapping objects to CSS layout grids",
+        "D": "A way to visualize table relationships in a GUI"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Sharding'?",
+      "options": {
+        "A": "Backing up a database to a secondary server",
+        "B": "Horizontal partitioning of data across multiple database instances to improve scalability",
+        "C": "Combining two small databases into one large one",
+        "D": "Deleting old or unused data automatically"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of 'Read Replicas' in a database cluster managed by an ORM?",
+      "options": {
+        "A": "To create a backup in case the main database fails",
+        "B": "To offload read-only queries from the primary database to improve performance",
+        "C": "To store the database's log files",
+        "D": "To verify the integrity of every write operation"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'ACID' stand for in the context of database transactions?",
+      "options": {
+        "A": "Atomicity, Consistency, Isolation, Durability",
+        "B": "Access, Control, Identity, Data",
+        "C": "Array, Column, Index, Document",
+        "D": "Always, Connected, Integrated, Distributed"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which isolation level prevents 'Dirty Reads' but allows 'Non-Repeatable Reads'?",
+      "options": {
+        "A": "Read Uncommitted",
+        "B": "Read Committed",
+        "C": "Repeatable Read",
+        "D": "Serializable"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary benefit of 'UUID' over 'Auto-incrementing Integer' for Primary Keys in distributed systems?",
+      "options": {
+        "A": "They take up less space in the database",
+        "B": "They can be generated locally without needing a central database to coordinate unique values",
+        "C": "They are easier for humans to read and remember",
+        "D": "They make the database search operations much faster"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Database Denormalization'?",
+      "options": {
+        "A": "The process of removing redundant data to optimize storage",
+        "B": "The process of adding redundant data to improve read performance by avoiding complex joins",
+        "C": "Fixing errors in a database schema",
+        "D": "Converting a NoSQL database into a SQL database"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Repository Pattern'?",
+      "options": {
+        "A": "A pattern that mixes domain logic with database access code",
+        "B": "An abstraction layer that mediates between the domain and data mapping layers using a collection-like interface",
+        "C": "A way to store Git repositories inside a SQL database",
+        "D": "A specific type of database indexing"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is 'Optimistic Concurrency Control' in an ORM?",
+      "options": {
+        "A": "Locking a database row until a transaction is finished so no one else can read it",
+        "B": "Allowing multiple users to edit the same data but checking for version conflicts at the time of saving",
+        "C": "Hoping that the database server does not crash during high traffic",
+        "D": "Automatically updating all related tables whenever a single row is modified"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'ACID' property ensures that a transaction remains committed even in the event of a system failure or power loss?",
+      "options": {
+        "A": "Atomicity",
+        "B": "Durability",
+        "C": "Isolation",
+        "&D": "Consistency"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a 'Microservices' architecture, why is a 'Distributed Transaction' generally avoided in favor of 'Eventual Consistency'?",
+      "options": {
+        "A": "Because distributed transactions are too fast for most networks",
+        "B": "Because they introduce tight coupling and significant latency across services",
+        "C": "Because modern databases do not support the SQL standard",
+        "D": "Because they require all services to be written in the same language"
+      },
+      "answer": "B"
+    }
+  ]
+}

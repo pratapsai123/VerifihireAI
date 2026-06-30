@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Regression", 
+  "questions": [
+    {
+    "question": "In a simple linear regression model, what does the 'independent variable' represent?",
+    "options": {
+      "A": "The outcome we are trying to predict.",
+      "B": "The variable used to predict the value of another variable.",
+      "C": "The error term in the equation.",
+      "D": "The slope of the regression line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of regression analysis?",
+    "options": {
+      "A": "To group data into similar clusters.",
+      "B": "To estimate the relationship between variables and predict continuous outcomes.",
+      "C": "To find the most frequent value in a dataset.",
+      "D": "To sort data in alphabetical order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the equation $y = mx + b$, what does 'b' represent?",
+    "options": {
+      "A": "The dependent variable.",
+      "B": "The slope.",
+      "C": "The y-intercept.",
+      "D": "The independent variable."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Residual' in regression?",
+    "options": {
+      "A": "The total sum of all independent variables.",
+      "B": "The difference between the observed value and the predicted value.",
+      "C": "The square root of the slope.",
+      "D": "The average value of the dependent variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common metric used to evaluate regression models?",
+    "options": {
+      "A": "Accuracy Score",
+      "B": "Mean Squared Error (MSE)",
+      "C": "F1-Score",
+      "D": "Confusion Matrix"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What kind of relationship does a 'Linear Regression' model assume between variables?",
+    "options": {
+      "A": "A circular relationship.",
+      "B": "A straight-line relationship.",
+      "C": "No relationship at all.",
+      "D": "A random relationship."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a regression context, what is 'Correlation'?",
+    "options": {
+      "A": "The process of deleting outliers.",
+      "B": "A statistical measure of the strength and direction of a relationship between two variables.",
+      "C": "The exact same thing as causation.",
+      "D": "The speed at which the model trains."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a correlation coefficient of +1 indicate?",
+    "options": {
+      "A": "No relationship between the variables.",
+      "B": "A perfect positive linear relationship.",
+      "C": "A perfect negative linear relationship.",
+      "D": "All values in the dataset are equal to 1."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If the slope of a regression line is negative, what happens to 'y' as 'x' increases?",
+    "options": {
+      "A": "y increases.",
+      "B": "y decreases.",
+      "C": "y stays the same.",
+      "D": "y becomes zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Simple Linear Regression'?",
+    "options": {
+      "A": "Regression with hundreds of independent variables.",
+      "B": "Regression with only one independent variable and one dependent variable.",
+      "C": "Regression used only for very small numbers.",
+      "D": "A regression model that does not use any math."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term refers to the variable we are trying to predict in a regression model?",
+    "options": {
+      "A": "Predictor variable",
+      "B": "Dependent variable",
+      "C": "Control variable",
+      "D": "Fixed variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Line of Best Fit'?",
+    "options": {
+      "A": "A line that connects every single data point exactly.",
+      "B": "The line that minimizes the sum of the squared residuals.",
+      "C": "The vertical line at the center of the graph.",
+      "D": "A line that only passes through the origin (0,0)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'R-squared' (Coefficient of Determination) represent?",
+    "options": {
+      "A": "The number of rows in the dataset.",
+      "B": "The proportion of variance in the dependent variable explained by the model.",
+      "C": "The square of the error term.",
+      "D": "The distance between the first and last data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these graphs is most commonly used to visualize data for regression?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Scatter Plot",
+      "C": "Box Plot",
+      "D": "Radar Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overfitting' in a regression model?",
+    "options": {
+      "A": "The model is too simple to capture the relationship.",
+      "B": "The model fits the training data too closely and fails to generalize to new data.",
+      "C": "The model has been deleted from the server.",
+      "D": "The model uses only one data point."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multiple Linear Regression'?",
+    "options": {
+      "A": "Running the same regression 100 times.",
+      "B": "Regression that uses two or more independent variables to predict an outcome.",
+      "C": "Regression used for calculating interest rates only.",
+      "D": "A model with multiple output variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of regression, what is an 'Outlier'?",
+    "options": {
+      "A": "A variable that is outside the computer's memory.",
+      "B": "A data point that differs significantly from other observations.",
+      "C": "The title of the graph.",
+      "D": "A variable with a value of zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Mean Absolute Error' (MAE)?",
+    "options": {
+      "A": "The error made by a mean person.",
+      "B": "The average of the absolute differences between predictions and actual values.",
+      "C": "The square root of the y-intercept.",
+      "D": "The total number of errors in the code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these symbols usually represents the error term in a regression equation?",
+    "options": {
+      "A": "$\beta$ (Beta)",
+      "B": "$epsilon$ (Epsilon)",
+      "C": "$Sigma$ (Sigma)",
+      "D": "$pi$ (Pi)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Extrapolation' in regression?",
+    "options": {
+      "A": "Cleaning the data.",
+      "B": "Predicting values outside the range of the observed data.",
+      "C": "Predicting values inside the observed data range.",
+      "D": "Deleting the independent variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interpolation'?",
+    "options": {
+      "A": "Talking to data points through a translator.",
+      "B": "Estimating values within the range of the observed data points.",
+      "C": "Deleting the y-intercept.",
+      "D": "Calculating the slope by hand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a correlation coefficient of 0 imply?",
+    "options": {
+      "A": "A perfect relationship.",
+      "B": "No linear relationship between variables.",
+      "C": "The data is all positive.",
+      "D": "The data is all negative."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the equation $y = \beta_0 + \beta_1x$, what is $\beta_1$?",
+    "options": {
+      "A": "The intercept.",
+      "B": "The slope (coefficient).",
+      "C": "The error term.",
+      "D": "The input data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which software library is most popular for regression in Python?",
+    "options": {
+      "A": "Django",
+      "B": "Scikit-Learn",
+      "C": "Flask",
+      "D": "BeautifulSoup"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Standardization' in regression?",
+    "options": {
+      "A": "To make the data act 'normal'.",
+      "B": "To scale features to have a mean of 0 and a standard deviation of 1.",
+      "C": "To remove all text from the dataset.",
+      "D": "To increase the training time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Least Squares' regression?",
+    "options": {
+      "A": "Regression that uses the fewest number of squares.",
+      "B": "A method to find the best-fit line by minimizing the sum of the squares of the vertical deviations.",
+      "C": "Regression used for calculating area.",
+      "D": "A way to draw boxes around data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a 'categorical' variable?",
+    "options": {
+      "A": "Height in centimeters",
+      "B": "Color (Red, Blue, Green)",
+      "C": "Weight in kilograms",
+      "D": "Temperature in Celsius"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In regression, what is 'Homoscedasticity'?",
+    "options": {
+      "A": "When the error term has a constant variance.",
+      "B": "When the error term changes randomly.",
+      "C": "When the slope is zero.",
+      "D": "When all data points are the same."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Multicollinearity'?",
+    "options": {
+      "A": "Having multiple regression models at once.",
+      "B": "When two or more independent variables are highly correlated with each other.",
+      "C": "When the dependent variable is zero.",
+      "D": "A type of visualization tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Independent Variable' also known as?",
+    "options": {
+      "A": "Outcome variable",
+      "B": "Predictor or Explanatory variable",
+      "C": "Response variable",
+      "D": "Target variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "If $R^2 = 0.85$, what does this mean?",
+    "options": {
+      "A": "85% of the data points are wrong.",
+      "B": "85% of the variation in $y$ is explained by the model.",
+      "C": "The slope is exactly 0.85.",
+      "D": "The model is 85% accurate at classification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Underfitting'?",
+    "options": {
+      "A": "The model is too complex.",
+      "B": "The model is too simple to capture the underlying trend of the data.",
+      "C": "The model fits the data perfectly.",
+      "D": "Hiring a smaller developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a correlation coefficient of -1 indicate?",
+    "options": {
+      "A": "No relationship.",
+      "B": "A perfect negative linear relationship.",
+      "C": "All data is negative.",
+      "D": "The model is 100% incorrect."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is NOT a type of regression?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Polynomial Regression",
+      "C": "Standard Deviation Regression",
+      "D": "Ridge Regression"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What happens to the intercept if you add a constant to every $y$ value?",
+    "options": {
+      "A": "It stays the same.",
+      "B": "It increases by that constant.",
+      "C": "It becomes zero.",
+      "D": "It doubles."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the range of values for a correlation coefficient?",
+    "options": {
+      "A": "0 to 100",
+      "B": "-1 to +1",
+      "C": "-100 to 100",
+      "D": "0 to 1"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Root Mean Squared Error' (RMSE)?",
+    "options": {
+      "A": "The square of the MAE.",
+      "B": "The square root of the average of squared differences between prediction and actual.",
+      "C": "The error made by a plant's root.",
+      "D": "The total sum of errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which assumption is necessary for Linear Regression?",
+    "options": {
+      "A": "The data must be circular.",
+      "B": "The relationship between x and y must be linear.",
+      "C": "The x variable must be a text string.",
+      "D": "The data must be secret."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Dependent Variable' also known as?",
+    "options": {
+      "A": "Predictor variable",
+      "B": "Response or Target variable",
+      "C": "Explanatory variable",
+      "D": "Input variable"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Polynomial Regression'?",
+    "options": {
+      "A": "Regression with many names.",
+      "B": "Regression where the relationship between $x$ and $y$ is modeled as an nth degree polynomial.",
+      "C": "Regression used for counting parrots.",
+      "D": "A model that never uses a slope."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In regression, what is a 'Feature'?",
+    "options": {
+      "A": "The end of a movie.",
+      "B": "An individual measurable property or characteristic of a phenomenon (an independent variable).",
+      "C": "The price of the software.",
+      "D": "A bug in the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Logarithmic Transformation'?",
+    "options": {
+      "A": "Cutting down trees to make logs.",
+      "B": "Applying a log function to data to handle non-linear relationships or skewed data.",
+      "C": "A way to backup the code.",
+      "D": "Calculating the slope using base 10 only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Error Term' in a regression model intended to capture?",
+    "options": {
+      "A": "All the mistakes the researcher made.",
+      "B": "The variation in $y$ that cannot be explained by the independent variables.",
+      "C": "The name of the user.",
+      "D": "The color of the scatter plot points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is less sensitive to outliers?",
+    "options": {
+      "A": "MSE",
+      "B": "MAE",
+      "C": "RMSE",
+      "D": "R-squared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Steep Slope' indicate in regression?",
+    "options": {
+      "A": "A large change in $y$ for a small change in $x$.",
+      "B": "No relationship.",
+      "C": "A flat line.",
+      "D": "The graph is hard to read."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'intercept' of a line?",
+    "options": {
+      "A": "The point where the line crosses the y-axis.",
+      "B": "The length of the line.",
+      "C": "The end of the dataset.",
+      "D": "A security check."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "If you double the independent variable in $y = 5x + 10$, what happens to the slope?",
+    "options": {
+      "A": "It doubles.",
+      "B": "It stays exactly 5.",
+      "C": "It becomes 10.",
+      "D": "It becomes zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias' in a regression model?",
+    "options": {
+      "A": "Being angry at the data.",
+      "B": "The error introduced by approximating a real-life problem with a simplified model.",
+      "C": "The speed of the network.",
+      "D": "The number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Variance' in a regression model?",
+    "options": {
+      "A": "The variation in the model's prediction for different training sets.",
+      "B": "The color of the line.",
+      "C": "The name of the intercept.",
+      "D": "A way to sort data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a predictor for 'Housing Price' in a regression task?",
+    "options": {
+      "A": "The price of the house.",
+      "B": "The square footage of the house.",
+      "C": "The date the model was built.",
+      "D": "The font used in the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Target' in regression?",
+    "options": {
+      "A": "The independent variable.",
+      "B": "The dependent variable (outcome).",
+      "C": "A store where you buy data.",
+      "D": "The error term."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Coefficient' in regression?",
+    "options": {
+      "A": "The user's password.",
+      "B": "A numerical value that represents the weight of an independent variable.",
+      "C": "The title of the graph.",
+      "D": "The number of data points."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Squared Error' (MSE) strictly measuring?",
+    "options": {
+      "A": "The absolute average of the errors.",
+      "B": "The average of the squares of the errors.",
+      "C": "The sum of the errors.",
+      "D": "The square root of the slope."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes a 'Positive Relationship'?",
+    "options": {
+      "A": "Both variables decrease together.",
+      "B": "As one variable increases, the other also increases.",
+      "C": "Variables move in opposite directions.",
+      "D": "The data is happy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Relationship'?",
+    "options": {
+      "A": "One variable increases as the other decreases.",
+      "B": "Both variables are negative numbers.",
+      "C": "The model is failing.",
+      "D": "Zero correlation."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dataset' splitting?",
+    "options": {
+      "A": "Dividing data into training and testing sets.",
+      "B": "Deleting half the data.",
+      "C": "Sharing data with a friend.",
+      "D": "Breaking a physical hard drive."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'Testing Set'?",
+    "options": {
+      "A": "To train the model.",
+      "B": "To evaluate the model's performance on unseen data.",
+      "C": "To find outliers.",
+      "D": "To increase the budget."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Training Set'?",
+    "options": {
+      "A": "The set of data used to teach the model.",
+      "B": "A set of dumbbells for the developer.",
+      "C": "The set of data used for final evaluation.",
+      "D": "A way to sort files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In $y = mx + b$, if $m = 0$, what does the line look like?",
+    "options": {
+      "A": "Vertical.",
+      "B": "Horizontal.",
+      "C": "Diagonal.",
+      "D": "It is not a line."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log-Log' regression?",
+    "options": {
+      "A": "A model used for forestry.",
+      "B": "A model where both independent and dependent variables are log-transformed.",
+      "C": "A model that runs twice as slow.",
+      "D": "A way to backup the code twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Non-linear Regression'?",
+    "options": {
+      "A": "Regression that is not linear.",
+      "B": "A model where the data is fit to a curve rather than a straight line.",
+      "C": "A model that uses zero variables.",
+      "D": "A model used only for text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prediction'?",
+    "options": {
+      "A": "Guessing the future with zero data.",
+      "B": "Using the regression model to estimate the value of the dependent variable for a given input.",
+      "C": "Writing the data by hand.",
+      "D": "Deleting the outcome variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scaling' in preprocessing?",
+    "options": {
+      "A": "Weighing the computer.",
+      "B": "Adjusting the range of features so they are comparable.",
+      "C": "Increasing the font size.",
+      "D": "Climbing a ladder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Engineering'?",
+    "options": {
+      "A": "Fixing a physical engine.",
+      "B": "Creating new features or modifying existing ones to improve model performance.",
+      "C": "Building a new computer.",
+      "D": "Hiring an engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'continuous' variable?",
+    "options": {
+      "A": "Number of children",
+      "B": "Exact house price in dollars",
+      "C": "Country of origin",
+      "D": "True/False status"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stepwise Regression'?",
+    "options": {
+      "A": "Regression performed while walking up steps.",
+      "B": "A method of adding or removing independent variables based on their statistical significance.",
+      "C": "A model with only two steps.",
+      "D": "A way to backup data in stages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary purpose of 'Lasso Regression' (L1 Regularization) compared to standard OLS?",
+    "options": {
+      "A": "To ensure the intercept is always a positive integer.",
+      "B": "To perform feature selection by shrinking some coefficients to exactly zero.",
+      "C": "To increase the training speed on small datasets.",
+      "D": "To allow for non-linear relationships without using polynomials."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Heteroscedasticity' in a residual plot?",
+    "options": {
+      "A": "The residuals are perfectly aligned on a horizontal line.",
+      "B": "The variance of the residuals changes systematically as the predicted values increase.",
+      "C": "The residuals follow a perfectly normal bell-curve distribution.",
+      "D": "The residuals are all equal to the y-intercept of the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Adjusted R-squared' metric account for that standard R-squared does not?",
+    "options": {
+      "A": "The total number of rows in the testing dataset.",
+      "B": "The number of predictors in the model, penalizing unnecessary complexity.",
+      "C": "The physical units of the independent variables.",
+      "D": "The amount of time taken to train the regression model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Ridge Regression' (L2 Regularization), what is the effect of the 'Alpha' (or Lambda) parameter?",
+    "options": {
+      "A": "It represents the learning rate of the gradient descent.",
+      "B": "It controls the penalty strength applied to the magnitude of the coefficients.",
+      "C": "It determines the degree of the polynomial being used.",
+      "D": "It identifies the number of outliers to be removed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multicollinearity' and why is it a problem in Multiple Linear Regression?",
+    "options": {
+      "A": "It is when the dependent variable is zero, making the model fail.",
+      "B": "It is high correlation between independent variables, making coefficient estimates unstable.",
+      "C": "It is when the model is trained on multiple computers at the same time.",
+      "D": "It is the process of using multiple error terms in a single equation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which statistical test is commonly used to check for 'Autocorrelation' in residuals?",
+    "options": {
+      "A": "The T-Test",
+      "B": "The Durbin-Watson Test",
+      "C": "The ANOVA Table",
+      "D": "The Chi-Square Test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Variance Inflation Factor' (VIF) used to detect?",
+    "options": {
+      "A": "Underfitting in the model structure.",
+      "B": "Multicollinearity among independent variables.",
+      "C": "The presence of extreme outliers in the target variable.",
+      "D": "The speed of the convergence in stochastic gradient descent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of OLS, what does the 'Gauss-Markov Theorem' state?",
+    "options": {
+      "A": "That every regression model must have a normal distribution.",
+      "B": "That OLS is the Best Linear Unbiased Estimator (BLUE) under certain conditions.",
+      "C": "That the y-intercept must always be calculated before the slope.",
+      "D": "That the number of features must be less than the number of observations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens in 'Elastic Net Regression'?",
+    "options": {
+      "A": "The model stretches to fit non-linear data automatically.",
+      "B": "It combines both L1 (Lasso) and L2 (Ridge) regularization penalties.",
+      "C": "It deletes variables that have negative coefficients.",
+      "D": "It uses a neural network to calculate the regression slope."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Dummy Variable' used for in regression analysis?",
+    "options": {
+      "A": "To represent a variable that has zero information value.",
+      "B": "To represent categorical data as numerical input (0 or 1).",
+      "C": "To act as a placeholder while the real data is being collected.",
+      "D": "To increase the variance of the error term."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a classic sign of 'Overfitting' in regression?",
+    "options": {
+      "A": "Low R-squared on the training set and low R-squared on the test set.",
+      "B": "High R-squared on the training set and significantly lower R-squared on the test set.",
+      "C": "A high Mean Absolute Error across all data splits.",
+      "D": "The regression line is perfectly horizontal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Multiple Linear Regression, what does a 'Partial Correlation' measure?",
+    "options": {
+      "A": "The correlation between half of the training data and the test data.",
+      "B": "The relationship between two variables while controlling for the effect of others.",
+      "C": "The correlation between the slope and the intercept.",
+      "D": "The error rate of a model that has only finished half its training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Bias-Variance Trade-off'?",
+    "options": {
+      "A": "The choice between using a laptop or a desktop for training.",
+      "B": "The struggle to minimize both error from simple assumptions and error from high sensitivity to data.",
+      "C": "The decision to use either R-squared or MSE as the primary metric.",
+      "D": "The difference in accuracy between training and validation data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In regression diagnostics, what is 'Cook's Distance' used to identify?",
+    "options": {
+      "A": "The distance between the server and the analyst's office.",
+      "B": "Highly influential data points that significantly change the model when removed.",
+      "C": "The total length of the best-fit line.",
+      "D": "The time it takes for a query to return a result."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standard Error of the Estimate'?",
+    "options": {
+      "A": "The total number of mistakes made in the spreadsheet.",
+      "B": "A measure of the accuracy of predictions, representing the standard deviation of the residuals.",
+      "C": "The average weight of the independent variables.",
+      "D": "The maximum possible error allowed by the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Q-Q Plot' (Quantile-Quantile) help you determine about a regression model?",
+    "options": {
+      "A": "Whether the independent variables are correlated.",
+      "B": "Whether the residuals are normally distributed.",
+      "C": "The optimal number of layers in a polynomial model.",
+      "D": "The speed of the data processing pipeline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interaction Effect' in a multiple regression model?",
+    "options": {
+      "A": "When the analyst interacts with the computer to change parameters.",
+      "B": "When the effect of one independent variable depends on the level of another independent variable.",
+      "C": "The process of merging two datasets together.",
+      "D": "The correlation between the error term and the y-intercept."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is commonly used to estimate the coefficients of a linear regression model by minimizing the sum of squared differences?",
+    "options": {
+      "A": "K-Nearest Neighbors",
+      "B": "Ordinary Least Squares (OLS)",
+      "C": "Decision Tree Regression",
+      "D": "Principal Component Analysis"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Log-Linear' regression?",
+    "options": {
+      "A": "A model used specifically for counting logs in a forest.",
+      "B": "A model where the dependent variable is log-transformed but independent variables are linear.",
+      "C": "A model where both x and y are squared.",
+      "D": "A model that only works on binary data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Coefficient of 0' for a predictor in a regression model imply?",
+    "options": {
+      "A": "The predictor is perfectly correlated with the target.",
+      "B": "The predictor has no linear relationship with the dependent variable in that model.",
+      "C": "The model has crashed and needs to be restarted.",
+      "D": "The data for that predictor is missing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Stochastic Gradient Descent' (SGD) for regression, what does 'Stochastic' refer to?",
+    "options": {
+      "A": "The model is 100% accurate.",
+      "B": "The weights are updated using only one randomly selected data point at a time.",
+      "C": "The training is performed in a vacuum.",
+      "D": "The model uses zero mathematical equations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Box-Cox Transformation' used for?",
+    "options": {
+      "A": "To draw a box around a scatter plot.",
+      "B": "To transform non-normally distributed data into a normal distribution.",
+      "C": "To calculate the price of a software license.",
+      "D": "To count the number of variables in a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Null Hypothesis' in the context of a regression coefficient T-test?",
+    "options": {
+      "A": "The coefficient is equal to 1.",
+      "B": "The coefficient is equal to 0 (no effect).",
+      "C": "The coefficient is a positive number.",
+      "D": "The coefficient is a random string of text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stepwise Regression'?",
+    "options": {
+      "A": "Regression performed while walking up stairs.",
+      "B": "An automated process of selecting independent variables based on their statistical significance.",
+      "C": "A model that only has two steps: Start and Finish.",
+      "D": "A way to backup the model in stages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'F-statistic' used to evaluate in Multiple Regression?",
+    "options": {
+      "A": "The significance of a single predictor.",
+      "B": "The overall significance of the model as a whole.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The number of users online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'Robust Regression'?",
+    "options": {
+      "A": "It requires the computer to be physically strong.",
+      "B": "It is designed to be less sensitive to outliers than OLS.",
+      "C": "It is only used for images and videos.",
+      "D": "It uses a larger font size for its reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Orthogonal Regression'?",
+    "options": {
+      "A": "Regression used specifically for bird watching.",
+      "B": "A method that accounts for measurement errors in both the independent and dependent variables.",
+      "C": "A model where the slope is always exactly 45 degrees.",
+      "D": "A way to encrypt the regression coefficients."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Polynomial degree' in regression?",
+    "options": {
+      "A": "The temperature of the CPU while training.",
+      "B": "The highest power to which an independent variable is raised in the equation.",
+      "C": "The number of people who have a degree in the data team.",
+      "D": "The width of the computer screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric is the 'Square root of the variance of the error term'?",
+    "options": {
+      "A": "R-squared",
+      "B": "Standard Error of the Estimate",
+      "C": "Mean Absolute Error",
+      "D": "Coefficient of Variation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Gradient Descent', what happens if the 'Learning Rate' is too high?",
+    "options": {
+      "A": "The model trains too slowly.",
+      "B": "The algorithm may overshoot the minimum and fail to converge.",
+      "C": "The computer screen turns bright red.",
+      "D": "The intercept becomes a negative number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Partial Least Squares' (PLS) regression?",
+    "options": {
+      "A": "A model where only half the squares are used.",
+      "B": "A technique that reduces predictors to a smaller set of uncorrelated components to perform regression.",
+      "C": "A way to backup data in three lines.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Breusch-Pagan Test' used for?",
+    "options": {
+      "A": "Testing the internet speed of the data center.",
+      "B": "Testing for the presence of heteroscedasticity in a linear regression model.",
+      "C": "A specialized software for architects.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'VIF value of 10' generally indicate?",
+    "options": {
+      "A": "The model is perfectly accurate.",
+      "B": "High multicollinearity that may require addressing.",
+      "C": "The dataset has exactly 10 rows.",
+      "D": "The slope is very shallow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-Validation' in regression?",
+    "options": {
+      "A": "Asking a friend to double-check your math.",
+      "B": "A technique to assess model performance by splitting data into multiple folds and iterating.",
+      "C": "Deleting the model after every epoch.",
+      "D": "A security check for the source code repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Residual Sum of Squares' (RSS)?",
+    "options": {
+      "A": "The sum of all the outcome variables.",
+      "B": "The sum of the squares of the differences between actual and predicted values.",
+      "C": "The sum of the slopes in a multiple regression.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Explained Sum of Squares' (ESS)?",
+    "options": {
+      "A": "The total amount of data that makes sense.",
+      "B": "The variation explained by the regression model.",
+      "C": "The variation that the model failed to capture.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Normal Equations' method?",
+    "options": {
+      "A": "Writing equations that look normal.",
+      "B": "An analytical way to solve for regression coefficients without using iterative optimization.",
+      "C": "A way to name a database table.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'regularization' technique?",
+    "options": {
+      "A": "Polynomial expansion",
+      "B": "L2 Regularization (Ridge)",
+      "C": "Data augmentation",
+      "D": "One-hot encoding"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Intercept' term in Multiple Regression?",
+    "options": {
+      "A": "The weight of the first independent variable.",
+      "B": "The predicted value of $y$ when all independent variables are zero.",
+      "C": "A security firewall for data.",
+      "D": "The number of features in the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Coefficient of Variation'?",
+    "options": {
+      "A": "A measure of how fast the model changes.",
+      "B": "The ratio of the standard deviation to the mean.",
+      "C": "A measure of the model's accuracy.",
+      "D": "The price of the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Shrinkage' in the context of regularization?",
+    "options": {
+      "A": "The physical size of the hard drive decreasing.",
+      "B": "The process of reducing the magnitude of coefficients toward zero.",
+      "C": "Hiring fewer developers.",
+      "D": "Deleting data to save space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mallow’s Cp' used for?",
+    "options": {
+      "A": "Calculating the price of a computer.",
+      "B": "Assessing the fit of a regression model and assisting in model selection.",
+      "C": "A specialized software for architects.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Quantile Regression'?",
+    "options": {
+      "A": "Regression that only uses quantities.",
+      "B": "A type of regression that estimates the conditional median or other quantiles of the target variable.",
+      "C": "A model that runs 10x slower.",
+      "D": "Hiring a mathematician."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Isotonic Regression'?",
+    "options": {
+      "A": "Regression used for sports drinks.",
+      "B": "A non-parametric regression that fits a non-decreasing function to the data.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for plumbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Leverage' in regression diagnostics?",
+    "options": {
+      "A": "Using a physical lever to move the server.",
+      "B": "A measure of how far an independent variable's values are from the other observations.",
+      "C": "The weight of the data analyst's computer.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'P-value < 0.05' for a coefficient generally mean?",
+    "options": {
+      "A": "The predictor is not important.",
+      "B": "The predictor is statistically significant.",
+      "C": "The model is 95% wrong.",
+      "D": "The training is complete."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Forward Selection'?",
+    "options": {
+      "A": "Selecting a developer who is very fast.",
+      "B": "Starting with an empty model and adding variables one by one based on significance.",
+      "C": "A way to move the computer forward.",
+      "D": "Deleting data from the future."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backward Elimination'?",
+    "options": {
+      "A": "Eliminating developers who work slowly.",
+      "B": "Starting with all variables and removing the least significant ones one by one.",
+      "C": "Deleting data from the past.",
+      "D": "A security bridge for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weighting' in Weighted Least Squares (WLS)?",
+    "options": {
+      "A": "Weighing the computer on a scale.",
+      "B": "Assigning different levels of importance to data points based on their variance.",
+      "C": "A way to speed up the network.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spline Regression'?",
+    "options": {
+      "A": "Regression used specifically for doctors.",
+      "B": "Fitting smooth curves to segments of the data using knots.",
+      "C": "A way to backup the SQL code.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Theil-Sen Estimator'?",
+    "options": {
+      "A": "A person who works in the office.",
+      "B": "A robust regression method that chooses the median slope among all lines through pairs of points.",
+      "C": "A way to name a database table.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Huber Loss'?",
+    "options": {
+      "A": "A loss function that is less sensitive to outliers than MSE but more sensitive than MAE.",
+      "B": "The financial loss of the company.",
+      "C": "A bug in the SQL query logic.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Total Sum of Squares' (TSS)?",
+    "options": {
+      "A": "The sum of all the $x$ variables.",
+      "B": "The total variation in the dependent variable around its mean.",
+      "C": "The sum of the error term squared.",
+      "D": "The number of rows in the table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mean Squared Logarithmic Error' (MSLE)?",
+    "options": {
+      "A": "The error made by a person who loves logs.",
+      "B": "A variant of MSE used when you care more about relative than absolute differences.",
+      "C": "A way to backup the code.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prediction Interval'?",
+    "options": {
+      "A": "The time spent waiting for a prediction.",
+      "B": "The range within which a future individual observation is expected to fall with a certain probability.",
+      "C": "The gap between two data points.",
+      "D": "The number of users online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Confidence Interval' for a coefficient?",
+    "options": {
+      "A": "The level of confidence the developer has.",
+      "B": "The range of values that is likely to contain the true population parameter.",
+      "C": "The price of the software.",
+      "D": "A way to sort data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ANOVA' table in regression?",
+    "options": {
+      "A": "A table for people to sit at.",
+      "B": "A table that breaks down the total variance into components attributable to different sources.",
+      "C": "A way to backup the storage layer.",
+      "D": "A specialized software for chemists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Standardized Coefficient'?",
+    "options": {
+      "A": "A coefficient that is very professional.",
+      "B": "A coefficient calculated after independent and dependent variables have been standardized to a common scale.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Degrees of Freedom' in regression?",
+    "options": {
+      "A": "The amount of vacation days a developer gets.",
+      "B": "The number of values in the final calculation of a statistic that are free to vary.",
+      "C": "The physical width of the monitor.",
+      "D": "A specialized software for historians."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Endogeneity'?",
+    "options": {
+      "A": "The end of a project.",
+      "B": "When an independent variable is correlated with the error term.",
+      "C": "A bug in the code.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exogeneity'?",
+    "options": {
+      "A": "When an independent variable is not correlated with the error term.",
+      "B": "The exit of a building.",
+      "C": "A security bridge for data.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'K-fold Cross-Validation'?",
+    "options": {
+      "A": "Folding a piece of paper K times.",
+      "B": "Splitting the data into K equal parts and using each as a test set once.",
+      "C": "Hiring K different developers.",
+      "D": "Deleting K rows of data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Omitted Variable Bias'?",
+    "options": {
+      "A": "Being biased against variables that are too long.",
+      "B": "Bias that occurs when a relevant variable is left out of the model.",
+      "C": "A specialized software for novelists.",
+      "D": "A bug in the internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parity Plot'?",
+    "options": {
+      "A": "A plot for people to have a party on.",
+      "B": "A scatter plot of actual values vs. predicted values.",
+      "C": "A list of all user passwords.",
+      "D": "A security firewall for data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Over-parameterization'?",
+    "options": {
+      "A": "Using too many parameters for the computer to handle.",
+      "B": "When a model has more parameters than there are data points to fit them.",
+      "C": "Hiring too many project managers.",
+      "D": "Increasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Residual Plot' used for?",
+    "options": {
+      "A": "To find where the residuals live.",
+      "B": "To visually check the assumptions of linearity and homoscedasticity.",
+      "C": "A way to count the number of users.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Tikhonov Regularization', what is the primary consequence of choosing an excessively large regularization parameter ($lambda$)?",
+    "options": {
+      "A": "The model will exhibit high bias and suffer from significant underfitting.",
+      "B": "The model will perfectly interpolate all training data points.",
+      "C": "The variance of the coefficient estimates will increase exponentially.",
+      "D": "The intercept term will automatically be forced to zero regardless of the data."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes the 'Irreducible Error' ($sigma^2$) in a regression model?",
+    "options": {
+      "A": "Error that can be removed by using a more complex polynomial model.",
+      "B": "The variance of the model predictions across different training sets.",
+      "C": "Noise inherent in the data-generating process that cannot be eliminated by any model.",
+      "D": "Error introduced by the specific choice of the gradient descent optimizer."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When utilizing 'Quantile Regression' with $\tau = 0.5$, which specific objective function is being minimized?",
+    "options": {
+      "A": "The sum of squared residuals ($L2$ loss).",
+      "B": "The Mean Absolute Percentage Error (MAPE).",
+      "C": "The sum of absolute residuals ($L1$ loss), effectively estimating the conditional median.",
+      "D": "The Log-likelihood of a Gaussian distribution."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In Generalized Linear Models (GLMs), what is the function of the 'Link Function'?",
+    "options": {
+      "A": "To connect the computer to the external database server.",
+      "B": "To ensure the model coefficients are always positive integers.",
+      "C": "To map the linear predictor to the mean of the response variable's distribution.",
+      "D": "To calculate the correlation between two different independent variables."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which issue is 'Durbin-Watson' statistic specifically intended to diagnose in time-series regression?",
+    "options": {
+      "A": "Multicollinearity between lagged predictors.",
+      "B": "The presence of outliers in the dependent variable.",
+      "C": "Presence of first-order serial correlation in the residuals.",
+      "D": "Violation of the homoscedasticity assumption in large samples."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary technical motivation for using 'Negative Binomial Regression' instead of 'Poisson Regression' for count data?",
+    "options": {
+      "A": "To increase the training speed on datasets with millions of rows.",
+      "B": "To handle cases where the dependent variable contains only negative integers.",
+      "C": "To account for overdispersion, where the variance exceeds the mean.",
+      "D": "To allow the model to predict continuous values instead of integers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Bayesian Linear Regression', what does the 'Posterior Distribution' represent?",
+    "options": {
+      "A": "The distribution of the data before any evidence is observed.",
+      "B": "The probability of the data given a fixed set of model parameters.",
+      "C": "The updated probability distribution of the model parameters after seeing the data.",
+      "D": "The ranking of the model compared to other algorithms in a benchmark."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Curse of Dimensionality' in the context of high-dimensional regression?",
+    "options": {
+      "A": "A bug that occurs when the number of observations is exactly 1,000.",
+      "B": "The physical weight of the server increasing as features are added.",
+      "C": "The phenomenon where data points become sparse in high-dimensional space, leading to overfitting.",
+      "D": "A legal restriction on the number of variables a researcher can use."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Weighted Least Squares' (WLS), how should the weights ($w_i$) be chosen to achieve the minimum variance estimator?",
+    "options": {
+      "A": "Weights should be proportional to the values of the independent variable.",
+      "B": "All weights should be set to 1, effectively becoming OLS.",
+      "C": "Weights should be inversely proportional to the variance of the error term for each observation.",
+      "D": "Weights should be assigned randomly to ensure a balanced model."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Hat Matrix' ($H$) used for in regression diagnostics?",
+    "options": {
+      "A": "To provide a stylish logo for the final report.",
+      "B": "To calculate the total sum of squares of the target variable.",
+      "C": "To map the observed values to the predicted values and identify high-leverage points.",
+      "D": "To encrypt the regression weights for secure cloud storage."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is true about 'Kernel Ridge Regression' (KRR)?",
+    "options": {
+      "A": "It is a classification algorithm that does not support continuous values.",
+      "B": "It uses a linear function to prune the most unimportant features.",
+      "C": "It combines Ridge regression with the kernel trick to model complex non-linear relationships.",
+      "D": "It requires the dataset to be sorted by the y-intercept before training."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a 'Lowess' (Locally Weighted Scatterplot Smoothing) regression, what is the 'Bandwidth' parameter controlling?",
+    "options": {
+      "A": "The internet speed required to run the model in the cloud.",
+      "B": "The number of bits used to represent the y-intercept.",
+      "C": "The fraction of the data used to compute each local fit, determining smoothness.",
+      "D": "The distance between the server and the local data analyst."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which criteria for model selection uses a penalty term of $k cdot ln(n)$ to favor simpler models more strongly in large datasets?",
+    "options": {
+      "A": "Adjusted R-squared",
+      "B": "Akaike Information Criterion (AIC)",
+      "C": "Bayesian Information Criterion (BIC)",
+      "D": "Mean Squared Error (MSE)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Partial Regression Plot' (Added Variable Plot) used to visualize?",
+    "options": {
+      "A": "The total number of missing values in the dataset.",
+      "B": "The correlation between the error term and the intercept.",
+      "C": "The marginal relationship between a predictor and the response after removing other effects.",
+      "D": "The time it takes for each fold of cross-validation to complete."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Lasso Regression', why does the solution often result in sparse coefficients?",
+    "options": {
+      "A": "Because the L2 norm has a spherical constraint.",
+      "B": "Because the model randomly deletes variables to save memory.",
+      "C": "Because the L1 norm constraint has 'corners' on the axes where the penalty is non-differentiable.",
+      "D": "Because the intercept is always forced to be a negative number."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Condition Number' of a matrix $X^TX$ indicative of in regression?",
+    "options": {
+      "A": "The total number of rows in the training set.",
+      "B": "The temperature of the GPU during the matrix inversion process.",
+      "C": "The degree of multicollinearity and potential numerical instability of the estimates.",
+      "D": "The number of outliers that have been identified by the software."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which technique is used to correct for 'Endogeneity' by using an external variable correlated with the predictor but not the error?",
+    "options": {
+      "A": "Principal Component Regression (PCR)",
+      "B": "Backward Variable Elimination",
+      "C": "Instrumental Variables (IV) Regression",
+      "D": "Stochastic Gradient Descent (SGD)"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Influence' of an observation determined by in regression?",
+    "options": {
+      "A": "The name of the user who entered the data point.",
+      "B": "The price of the software license used for the analysis.",
+      "C": "The combination of the observation's leverage and its residual magnitude.",
+      "D": "The total number of decimal places in the target value."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Spline Regression', what are 'Knots'?",
+    "options": {
+      "A": "Tied pieces of physical string used for data measurement.",
+      "B": "Errors in the code that cause the model to stop running.",
+      "C": "The specific points where the different polynomial segments join together.",
+      "D": "The highest values in the independent variable's range."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What occurs in 'Isotonic Regression' when the monotonicity constraint is violated in the raw data?",
+    "options": {
+      "A": "The model fails and throws a runtime error.",
+      "B": "The model uses a neural network to fix the slope.",
+      "C": "The algorithm averages the non-monotonic points to maintain a non-decreasing fit.",
+      "D": "The model deletes the violating points from the dataset."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'White's Test' used for in regression diagnostics?",
+    "options": {
+      "A": "To check if the researcher's name is in the database.",
+      "B": "To measure the speed of the data transfer between nodes.",
+      "C": "To test for heteroscedasticity without assuming a specific functional form.",
+      "D": "To verify that all predictors are written in English."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Support Vector Regression' (SVR), what is the 'Epsilon-insensitive' zone?",
+    "options": {
+      "A": "A zone where the computer ignores all input data.",
+      "B": "A security layer that prevents data from leaking to other users.",
+      "C": "A margin within which errors are not penalized in the loss function.",
+      "D": "The area on the graph where the y-intercept is calculated."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of the following is a 'Non-parametric' regression approach?",
+    "options": {
+      "A": "Simple Linear Regression",
+      "B": "Ridge Regression",
+      "C": "Gaussian Process Regression",
+      "D": "Polynomial Regression"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Orthogonal Distance Regression' (ODR) particularly useful for?",
+    "options": {
+      "A": "Calculating the distance between two different data centers.",
+      "B": "Identifying the author of a specific line of code.",
+      "C": "Modeling data where measurement errors exist in both $X$ and $Y$ variables.",
+      "D": "Translating regression coefficients into a different programming language."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Akaike Information Criterion' (AIC) primarily used to evaluate?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "The physical size of the training dataset in gigabytes.",
+      "C": "The relative quality of statistical models for a given set of data.",
+      "D": "The number of users who have accessed the model results."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Colinearity' in high-dimensional spaces called when it affects all variables?",
+    "options": {
+      "A": "The final result of the model.",
+      "B": "A bug in the SQL query logic.",
+      "C": "Over-parameterization.",
+      "D": "Data encryption."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Bootstrapping'?",
+    "options": {
+      "A": "Putting on boots before starting the computer.",
+      "B": "A way to backup the code using a physical device.",
+      "C": "Resampling with replacement to estimate the distribution of a statistic.",
+      "D": "A specialized software for managing shoes."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Log-Likelihood' used for in MLE (Maximum Likelihood Estimation)?",
+    "options": {
+      "A": "To count the number of logs in a fireplace.",
+      "B": "To measure the speed of the training session.",
+      "C": "To find the parameter values that make the observed data most probable.",
+      "D": "To show a graph of the most frequent errors."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Tobit Regression' (Censored Regression)?",
+    "options": {
+      "A": "Regression used specifically for counting frogs.",
+      "B": "A model used when the model is 100% accurate.",
+      "C": "A model designed to estimate relationships when the dependent variable is left- or right-censored.",
+      "D": "A way to hide data from the AccountAdmin role."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Generalized Additive Models' (GAM)?",
+    "options": {
+      "A": "Models used specifically for simple addition math problems.",
+      "B": "A way to add more servers to a cluster physically.",
+      "C": "Models where the response is modeled as a sum of smooth functions of the predictors.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Time Series', what is 'Cointegration'?",
+    "options": {
+      "A": "When two coins are integrated into one.",
+      "B": "A way to speed up the network latency.",
+      "C": "When a linear combination of non-stationary series is stationary.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Cox Proportional Hazards' regression?",
+    "options": {
+      "A": "Regression used for predicting the weather.",
+      "B": "A model that predicts the number of bugs in code.",
+      "C": "A regression model for survival analysis to investigate the effect of several variables on time-to-event.",
+      "D": "A specialized software for psychologists."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Huber's M-estimator'?",
+    "options": {
+      "A": "A person who manages a hub.",
+      "B": "A specialized tool for cleaning monitors.",
+      "C": "A robust regression estimator that uses a loss function which is less sensitive to outliers than squared error.",
+      "D": "A way to backup the SQL code."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Ordinary' 'Least' 'Squares' 'Invertibility'?",
+    "options": {
+      "A": "Inverting the computer monitor.",
+      "B": "The requirement that the matrix $X^TX$ must be non-singular to solve for coefficients.",
+      "C": "The data center being built upside down.",
+      "D": "A list of all users who have accessed the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Principal' 'Component' 'Regression' (PCR)?",
+    "options": {
+      "A": "Regression performed by the school principal.",
+      "B": "A specialized software for managing parts.",
+      "C": "A regression technique based on principal component analysis (PCA) to handle multicollinearity.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Theil-Sen' 'Regression' 'Robustness'?",
+    "options": {
+      "A": "The physical durability of the data analyst.",
+      "B": "The process of deleting non-numeric data.",
+      "C": "A method that is highly resistant to outliers, with a breakdown point of about 29%.",
+      "D": "A way to encrypt the target variable."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'GLM', what is the 'Dispersion' 'Parameter'?",
+    "options": {
+      "A": "How fast the developer is working.",
+      "B": "The distance between the server and the user.",
+      "C": "A parameter that relates the variance of the response to its mean.",
+      "D": "The number of rows in the metadata layer."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Breusch-Godfrey' 'Test'?",
+    "options": {
+      "A": "Testing the internet speed.",
+      "B": "A security scan of the database.",
+      "C": "A test for higher-order serial correlation in the residuals of a regression model.",
+      "D": "A specialized software for poets."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Quantile' 'Regression' 'Sparsity' 'Constraint'?",
+    "options": {
+      "A": "Hiring fewer people for the team.",
+      "B": "Deleting data to save space.",
+      "C": "Using regularization to produce sparse solutions in quantile estimation.",
+      "D": "Increasing the number of variables."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Jackknife' 'Resampling'?",
+    "options": {
+      "A": "A dangerous tool for developers.",
+      "B": "A way to name a database table.",
+      "C": "A method of estimating bias and variance by systematically leaving out one observation at a time.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Weighted' 'Least' 'Squares' 'Heteroscedasticity' correction?",
+    "options": {
+      "A": "Using a physical scale to weigh the data.",
+      "B": "A list of all users in a specific role.",
+      "C": "Using weights to equalize the variance across observations.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Multivariate' 'Regression'?",
+    "options": {
+      "A": "Regression that only works in one country.",
+      "B": "Regression performed while walking.",
+      "C": "A regression model with multiple dependent (target) variables.",
+      "D": "A specialized software for university students."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'High-dimensional' 'Regression', what is 'Elastic' 'Net' 'Alpha'?",
+    "options": {
+      "A": "The first letter of the model name.",
+      "B": "The weight of the physical server.",
+      "C": "The parameter that balances the L1 and L2 penalties.",
+      "D": "The number of project managers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Partial' 'Least' 'Squares' (PLS) 'Factor'?",
+    "options": {
+      "A": "A factor that only works at night.",
+      "B": "A list of all variables in a script.",
+      "C": "The latent variables (components) extracted to maximize covariance between X and Y.",
+      "D": "A security firewall for the cloud."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'T-distribution' used for in regression?",
+    "options": {
+      "A": "Making tea for the analysts.",
+      "B": "A specialized tool for measuring distance.",
+      "C": "Testing the significance of regression coefficients when the population variance is unknown.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Cross-Validation' 'Folds'?",
+    "options": {
+      "A": "Folding a piece of paper.",
+      "B": "A way to backup the SQL schema.",
+      "C": "The number of partitions into which the dataset is divided during the validation process.",
+      "D": "A list of all users."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Ordinary' 'Least' 'Squares' 'Residual' 'Sum'?",
+    "options": {
+      "A": "The sum of all the outcome variables.",
+      "B": "The average weight of the independent variables.",
+      "C": "The total value of the differences between actual and predicted values squared.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Coefficient' 'of' 'Determination' (R2)?",
+    "options": {
+      "A": "A measure of how determined the developer is.",
+      "B": "A way to backup the storage layer.",
+      "C": "The proportion of the variance in the dependent variable that is predictable from the independent variables.",
+      "D": "The physical width of the monitor."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Standardized' 'Residual'?",
+    "options": {
+      "A": "A residual that is very polite.",
+      "B": "The price of the software.",
+      "C": "A residual divided by an estimate of its standard deviation.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Bayesian' 'Regression', what is the 'Likelihood' 'Function'?",
+    "options": {
+      "A": "The probability that the researcher likes the data.",
+      "B": "A list of all variables in a Python script.",
+      "C": "The probability of the observed data given the model parameters.",
+      "D": "A security scan of the database."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Polynomial' 'Regression' 'Degree' 'Selection'?",
+    "options": {
+      "A": "Choosing a university degree.",
+      "B": "Deleting data to save space.",
+      "C": "Choosing the highest power in the model to avoid over- or under-fitting.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Model' 'Averaging' 'Ensemble'?",
+    "options": {
+      "A": "Calculating the average age of the models.",
+      "B": "Deleting the models to save memory.",
+      "C": "Combining the predictions of multiple regression models to improve overall performance.",
+      "D": "A security firewall."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Mean' 'Squared' 'Error' 'Sensitivity'?",
+    "options": {
+      "A": "How sad the model is when it makes a mistake.",
+      "B": "A specialized tool for measuring distance.",
+      "C": "The fact that MSE is highly sensitive to large outliers because of the squaring term.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Feature' 'Scaling' 'Min-Max'?",
+    "options": {
+      "A": "Hiring a person to use a scale.",
+      "B": "A security scan for computer viruses.",
+      "C": "A technique to scale data features into a specific range, typically [0, 1].",
+      "D": "Deleting data that is considered unusual."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Stochastic' 'Gradient' 'Descent' 'Learning' 'Rate'?",
+    "options": {
+      "A": "A person who is an expert in many languages.",
+      "B": "A way to speed up the network.",
+      "C": "A hyperparameter that determines the step size at each iteration while moving toward a minimum of a loss function.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Log-Normal' 'Distribution' in regression?",
+    "options": {
+      "A": "A distribution of logs in a fireplace.",
+      "B": "A specialized tool for measuring heat.",
+      "C": "A continuous probability distribution of a random variable whose logarithm is normally distributed.",
+      "D": "A security bridge for data."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Influence' 'Measure' 'DFBETAS'?",
+    "options": {
+      "A": "Measuring the influence of a famous person.",
+      "B": "A way to backup the SQL code.",
+      "C": "A diagnostic that measures how much an individual observation affects each regression coefficient.",
+      "D": "A list of all project managers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Autocorrelation'?",
+    "options": {
+      "A": "The car driving itself in a race.",
+      "B": "The process of deleting non-numeric data.",
+      "C": "The correlation of a variable with itself at different points in time.",
+      "D": "A security certificate for digital photos."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Ordinary' 'Least' 'Squares' 'Assumption' 'Independence'?",
+    "options": {
+      "A": "When the developer works from home.",
+      "B": "The assumption that the observations in the dataset are independent of each other.",
+      "C": "A specialized software for psychologists.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interaction' 'Term' 'Significance'?",
+    "options": {
+      "A": "Being very polite to the data.",
+      "B": "The importance of the y-intercept.",
+      "C": "Whether the combined effect of two variables is statistically different from zero.",
+      "D": "The number of project managers."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Generalized' 'Least' 'Squares' (GLS) 'Variance'?",
+    "options": {
+      "A": "Calculating the price of a computer.",
+      "B": "A security scan of the database.",
+      "C": "A technique to estimate parameters in a linear model when there is a certain degree of correlation between residuals.",
+      "D": "A list of all users."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Cook’s' 'Distance' 'Threshold'?",
+    "options": {
+      "A": "The entrance to the kitchen.",
+      "B": "The speed of the network bandwidth.",
+      "C": "A value (often $4/n$) used to identify highly influential data points.",
+      "D": "A specialized software for chefs."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Robust' 'Regression' 'M-estimator'?",
+    "options": {
+      "A": "A person who is very strong.",
+      "B": "A list of all the employees.",
+      "C": "An estimator designed to be less sensitive to outliers than OLS.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Elastic' 'Net' 'Regularization' 'Mixing'?",
+    "options": {
+      "A": "Mixing two different types of coffee.",
+      "B": "A security firewall for the cloud.",
+      "C": "Combining L1 and L2 penalties to enjoy the benefits of both feature selection and coefficient stability.",
+      "D": "A specialized software for chemists."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Partial' 'Correlation' 'Coefficient'?",
+    "options": {
+      "A": "A coefficient that only works for half the data.",
+      "B": "A list of all user passwords.",
+      "C": "A measure of the linear relationship between two variables after excluding the effect of one or more other variables.",
+      "D": "A security scan for the database."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Standard' 'Error' 'of' 'the' 'Coefficient'?",
+    "options": {
+      "A": "A mistake made by a standard developer.",
+      "B": "The price of the software license.",
+      "C": "An estimate of the standard deviation of the coefficient estimate.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Logarithmic' 'Likelihood' 'Gradient'?",
+    "options": {
+      "A": "The color of the gradient on a graph.",
+      "B": "The speed of the training data loading.",
+      "C": "The vector of first-order partial derivatives of the log-likelihood function with respect to the parameters.",
+      "D": "A list of all user passwords."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Regression', what is 'Bias' 'Reduction' 'Technique'?",
+    "options": {
+      "A": "Hiring a person who is not biased.",
+      "B": "A security firewall for digital photos.",
+      "C": "Methods like bootstrapping or using more flexible model forms to reduce the error from simplistic assumptions.",
+      "D": "Deleting data that is not accurate."
+    },
+    "answer": "C"
+  }
+  ]
+}

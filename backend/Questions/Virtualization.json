@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Virtualization", 
+  "questions": [
+    {
+    "question": "What is the primary function of a 'Hypervisor'?",
+    "options": {
+      "A": "To increase the physical clock speed of the CPU.",
+      "B": "To allow multiple operating systems to share the same physical hardware resources.",
+      "C": "To act as a physical cooling fan for the server.",
+      "D": "To encrypt the computer's keyboard input."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of Hypervisor runs directly on the system's physical hardware (Bare Metal)?",
+    "options": {
+      "A": "Type 1 Hypervisor",
+      "B": "Type 2 Hypervisor",
+      "C": "Software Hypervisor",
+      "D": "Virtual Hypervisor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A Type 2 Hypervisor runs as an application on top of an existing operating system (like Windows or macOS).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux users",
+      "D": "Only if using a 64-bit CPU"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'VM' stand for in virtualization?",
+    "options": {
+      "A": "Variable Memory",
+      "B": "Virtual Machine",
+      "C": "Verified Module",
+      "D": "Visual Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In virtualization, what is the 'Host OS'?",
+    "options": {
+      "A": "The operating system running inside a virtual machine.",
+      "B": "The primary operating system installed directly on the physical hardware that manages the hypervisor.",
+      "C": "A specialized software for hosting websites.",
+      "D": "The cloud provider's login screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In virtualization, what is the 'Guest OS'?",
+    "options": {
+      "A": "The operating system of the physical server.",
+      "B": "The operating system installed and running inside a virtual machine.",
+      "C": "A temporary OS used for server reboots.",
+      "D": "The administrator's local desktop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Virtualization allows you to run a Linux virtual machine on a physical Windows computer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a Type 1 hypervisor",
+      "D": "Only if the hardware is from the same manufacturer"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Snapshot' in the context of virtual machines?",
+    "options": {
+      "A": "A physical photo of the server rack.",
+      "B": "A record of the state of a virtual machine at a specific point in time, allowing you to revert back to it later.",
+      "C": "A way to increase the disk space of a VM.",
+      "D": "A specialized tool for cleaning monitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for simulating physical hardware for a virtual machine?",
+    "options": {
+      "A": "The Power Supply",
+      "B": "The Hypervisor",
+      "C": "The Network Switch",
+      "D": "The Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A virtual machine has its own virtual CPU, RAM, and hard drive that are mapped to the physical hardware.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Type 2 hypervisors",
+      "D": "Only if the VM is turned off"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common Type 1 (Bare Metal) hypervisor used in data centers?",
+    "options": {
+      "A": "VMware Workstation",
+      "B": "VMware ESXi",
+      "C": "Oracle VirtualBox",
+      "D": "Microsoft Paint"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Server Consolidation' using virtualization?",
+    "options": {
+      "A": "Making the servers physically larger.",
+      "B": "Reducing costs by running multiple virtual servers on a single physical server, improving hardware utilization.",
+      "C": "Eliminating the need for an internet connection.",
+      "D": "Making the server room more colorful."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Type 2 hypervisors are typically used by individual developers or for testing rather than for enterprise production workloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Apple hardware",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens to the Guest OS if the Host hardware fails?",
+    "options": {
+      "A": "It continues running on the backup battery.",
+      "B": "The Guest OS (Virtual Machine) will stop running until the hardware is fixed or the VM is moved.",
+      "C": "It automatically converts into a physical server.",
+      "D": "Nothing, VMs are immune to hardware failure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'vRAM'?",
+    "options": {
+      "A": "Virtual Reality Animation Module.",
+      "B": "Virtual Random Access Memory allocated to a virtual machine.",
+      "C": "The physical RAM inside a video card.",
+      "D": "A way to measure the weight of the memory sticks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can change the amount of RAM or CPU cores allocated to a VM after it has been created.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Linux VMs",
+      "D": "Only if the VM has a public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a popular 'Open Source' Type 2 hypervisor?",
+    "options": {
+      "A": "VMware vSphere",
+      "B": "Oracle VM VirtualBox",
+      "C": "Microsoft Hyper-V Server",
+      "D": "Adobe Acrobat"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Virtual Disk' (e.g., .vmdk or .vhdx)?",
+    "options": {
+      "A": "A physical CD-ROM.",
+      "B": "A file on the host system that acts as the hard drive for the virtual machine.",
+      "C": "A specialized way to encrypt cloud storage.",
+      "D": "A tool to update the server's firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of 'Guest Additions' or 'VM Tools'?",
+    "options": {
+      "A": "To add guest users to the network.",
+      "B": "A set of drivers and utilities that improve the performance and integration of the Guest OS (e.g., smoother mouse, shared folders).",
+      "C": "To backup the server BIOS.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Virtualization and Cloud Computing are the exact same thing.",
+    "options": {
+      "A": "False (Virtualization is a technology that makes cloud computing possible; cloud computing is a service model).",
+      "B": "True",
+      "C": "Only for AWS",
+      "D": "Only for non-technical users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Provisioning' in virtualization?",
+    "options": {
+      "A": "Deleting a virtual machine.",
+      "B": "The process of setting up and configuring a virtual machine with its required resources.",
+      "C": "A way to backup the whole server rack.",
+      "D": "The physical process of shipping a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Encapsulation' in a VM context?",
+    "options": {
+      "A": "Putting the server in a box.",
+      "B": "The ability to store an entire virtual machine (OS, apps, data) as a small set of files.",
+      "C": "Encrypting the server's network traffic.",
+      "D": "Hiding the IP address from the internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Type 1 hypervisor is generally more efficient than a Type 2 hypervisor because there is no overhead from a Host OS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows hosts",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Template' in virtualization?",
+    "options": {
+      "A": "A ruler for measuring server width.",
+      "B": "A master image of a pre-configured VM used to quickly create new, identical virtual machines.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'vCPU' stand for?",
+    "options": {
+      "A": "Variable Central Processing Unit",
+      "B": "Virtual Central Processing Unit",
+      "C": "Verified Core Processor Unit",
+      "D": "Visual Computer Processing Unit"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most modern CPUs have built-in features (like Intel VT-x or AMD-V) to improve virtualization performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in gaming CPUs",
+      "D": "Only if the CPU has more than 8 cores"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'Virtual Networking' in a hypervisor?",
+    "options": {
+      "A": "To increase the physical internet speed.",
+      "B": "To allow VMs to communicate with each other and the outside world using virtual switches and adapters.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'VM Portability'?",
+    "options": {
+      "A": "Making the server physically lighter.",
+      "B": "The ability to move a virtual machine from one physical server to another by simply moving its files.",
+      "C": "It removes the need for any network cables.",
+      "D": "It makes the OS free to use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multiple virtual machines running on the same host are logically isolated from each other for security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a firewall VM",
+      "D": "Only if they have different IP addresses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Over-commitment' (or Over-provisioning) of resources?",
+    "options": {
+      "A": "Hiring too many IT staff.",
+      "B": "Allocating more virtual resources (like RAM) to VMs than is physically available on the host, assuming not all VMs will use them at once.",
+      "C": "A way to backup the power grid.",
+      "D": "Building a data center that is too large."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a Type 2 hypervisor commonly used on macOS?",
+    "options": {
+      "A": "VMware Fusion / Parallels Desktop",
+      "B": "Microsoft Hyper-V Server",
+      "C": "Citrix Hypervisor",
+      "D": "Google Chrome"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using 'Snapshots' is a valid replacement for a full backup strategy.",
+    "options": {
+      "A": "False (Snapshots are for short-term recovery; they depend on the original disk and can slow down performance if kept too long).",
+      "B": "True",
+      "C": "Only for non-production VMs",
+      "D": "Only if stored on a separate disk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Bridged' network adapter setting in a VM?",
+    "options": {
+      "A": "The VM connects to a virtual bridge across a river.",
+      "B": "The VM appears as a unique device on the same physical network as the host, receiving its own IP from the DHCP server.",
+      "C": "The VM is hidden behind the host's IP address.",
+      "D": "The VM has no network access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NAT' (Network Address Translation) mode in a VM network setting?",
+    "options": {
+      "A": "The VM is connected to a physical phone line.",
+      "B": "The VM shares the host's IP address to access the internet, essentially sitting behind the host's 'firewall'.",
+      "C": "The VM is used only for internal testing.",
+      "D": "A way to measure the weight of the data packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A virtual machine can run an older version of an operating system than the Host hardware would normally support.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 95",
+      "D": "Only if using a floppy disk drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Management Console' for a Type 1 hypervisor used for?",
+    "options": {
+      "A": "To play video games on the server.",
+      "B": "To provide a centralized interface for creating, managing, and monitoring all VMs on one or more hosts.",
+      "C": "To write documentation for the team.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a major provider of enterprise-grade virtualization software?",
+    "options": {
+      "A": "VMware",
+      "B": "Microsoft (Hyper-V)",
+      "C": "Citrix",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You must install a Guest OS from scratch for every VM, or you can use a pre-built virtual appliance.",
+    "options": {
+      "A": "True (Both are possible; appliances are ready-to-run VMs with apps already installed).",
+      "B": "False",
+      "C": "Only for database VMs",
+      "D": "Only for paid software"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Allocation'?",
+    "options": {
+      "A": "Giving names to the servers.",
+      "B": "The process of assigning specific amounts of CPU, RAM, and storage to a virtual machine.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The total number of users on the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware Independence' in virtualization?",
+    "options": {
+      "A": "Buying servers from only one brand.",
+      "B": "The ability of a VM to run on any physical host with a compatible hypervisor, regardless of the physical hardware manufacturer.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous hardware changes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Host-only' network, VMs can communicate with the Host and other VMs on the same host, but NOT with the outside internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the firewall is off",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary disadvantage of Type 2 hypervisors for production use?",
+    "options": {
+      "A": "They are too expensive.",
+      "B": "Performance overhead because the hardware must pass through the Host OS first.",
+      "C": "They only work on Linux.",
+      "D": "They require a specialized monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which term describes a pre-configured virtual machine image that includes a specific application and operating system ready to deploy?",
+    "options": {
+      "A": "Virtual Appliance",
+      "B": "Physical Server",
+      "C": "Hard Drive",
+      "D": "Software Patch"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Virtualization reduces the physical 'footprint' of a data center by allowing fewer physical servers to do more work.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native companies",
+      "D": "Only for large enterprises"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Thin Provisioning' of a virtual disk?",
+    "options": {
+      "A": "Making the physical disk thinner.",
+      "B": "A method where the virtual disk file only consumes physical space on the host as data is actually written to it, rather than allocating the full size upfront.",
+      "C": "A specialized tool for drawing disks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Virtual Disk' format used by Microsoft Hyper-V?",
+    "options": {
+      "A": ".iso",
+      "B": ".vhdx",
+      "C": ".zip",
+      "D": ".exe"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A hypervisor can be used to run multiple versions of the same operating system (e.g., Windows 10 and Windows 11) on one machine simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for enterprise users",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Live Migration' (e.g., vMotion)?",
+    "options": {
+      "A": "Moving a physical server while it is plugged in.",
+      "B": "Moving a running virtual machine from one physical host to another with zero downtime to the user.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based management of many hypervisors?",
+    "options": {
+      "A": "80 / 443",
+      "B": "22",
+      "C": "3389",
+      "D": "53"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Virtual Switch' works similarly to a physical network switch by directing traffic between VMs and physical ports.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'High Availability' (HA) in a virtualization cluster?",
+    "options": {
+      "A": "Servers located in high-altitude mountains.",
+      "B": "A feature that automatically restarts VMs on other healthy hosts if a physical host fails.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of 'Intel VT-x' or 'AMD-V'?",
+    "options": {
+      "A": "To make the CPU physically smaller.",
+      "B": "Hardware-assisted virtualization features that allow the hypervisor to run VMs more efficiently and securely.",
+      "C": "To encrypt the system BIOS.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Paravirtualization' requires the Guest OS to be modified to be aware that it is running on a hypervisor.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guest VMs",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Pooling' in a virtualization environment?",
+    "options": {
+      "A": "Putting all the servers in a physical swimming pool to cool them.",
+      "B": "Grouping the physical resources of multiple hosts into a single pool that can be shared dynamically by all VMs.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Virtual Disk' format used by VMware?",
+    "options": {
+      "A": ".vmdk",
+      "B": ".docx",
+      "C": ".mp3",
+      "D": ".jpg"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Locked' VM cannot be moved or modified until it is unlocked by an administrator.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only if using encryption"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' (or Memory Ballooning)?",
+    "options": {
+      "A": "RAM that physically expands.",
+      "B": "A feature that allows the hypervisor to reclaim unused RAM from one VM and give it to another VM that needs it.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'CPU Pinning'?",
+    "options": {
+      "A": "Using a physical pin to reset the server.",
+      "B": "Restricting a specific virtual CPU to run only on a specific physical CPU core to improve performance for sensitive tasks.",
+      "C": "A specialized tool for cleaning server hardware.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Virtualization is only for servers; it cannot be used for desktop computers.",
+    "options": {
+      "A": "False (Desktop Virtualization, or VDI, is a common enterprise technology).",
+      "B": "True",
+      "C": "Only in version 1.0",
+      "D": "Only if using a physical server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Virtual Bridge'?",
+    "options": {
+      "A": "To connect two physical buildings.",
+      "B": "To connect virtual network segments together within the hypervisor.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Disk Provisioning' type that allocates all space at the time of creation?",
+    "options": {
+      "A": "Thick Provisioning",
+      "B": "Thin Provisioning",
+      "C": "Virtual Provisioning",
+      "D": "Static Provisioning"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Clone' is an identical copy of an existing virtual machine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database VMs",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'OVF' (Open Virtualization Format)?",
+    "options": {
+      "A": "To encrypt virtual disks.",
+      "B": "An open standard for packaging and distributing virtual appliances to ensure they can be imported into different hypervisors.",
+      "C": "To increase the internet speed of the platform.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'RDP' to access a Windows VM through a network?",
+    "options": {
+      "A": "22",
+      "B": "3389",
+      "C": "443",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Virtualization can help reduce 'Energy Consumption' in a data center.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' tagging on a virtual switch used for?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "To logically separate traffic for different VMs or departments on the same physical link.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical requirement for 'Live Migration' (e.g., vMotion) to work between two physical hosts?",
+    "options": {
+      "A": "The hosts must have the exact same amount of RAM.",
+      "B": "Both hosts must have access to the same shared storage (SAN/NAS) where the VM files reside.",
+      "C": "The physical servers must be from different manufacturers for redundancy.",
+      "D": "The VM must be turned off during the migration process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which virtualization feature automatically balances the workload across a cluster of hosts by moving VMs to hosts with more available resources?",
+    "options": {
+      "A": "High Availability (HA)",
+      "B": "Distributed Resource Scheduler (DRS)",
+      "C": "Fault Tolerance (FT)",
+      "D": "Storage vMotion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Nested Virtualization' allows you to run a hypervisor (like ESXi or Hyper-V) inside a virtual machine that is already running on a hypervisor.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only if using a 32-bit architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Ballooning' in a hypervisor used for?",
+    "options": {
+      "A": "To increase the physical size of the RAM sticks.",
+      "B": "To reclaim unused memory from a guest OS so it can be allocated to other virtual machines on the same host.",
+      "C": "To encrypt the memory contents of a VM.",
+      "D": "To monitor the temperature of the memory controller."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component of a virtual network allows a single virtual switch to span across multiple physical hosts, simplifying network management?",
+    "options": {
+      "A": "Standard Virtual Switch (vSwitch)",
+      "B": "Distributed Virtual Switch (vDS)",
+      "C": "Physical Core Switch",
+      "D": "Virtual Bridge"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Fixed-size' virtual disk, the full amount of space is allocated on the host's physical storage at the time the disk is created.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SSD storage",
+      "D": "Only in cloud-based virtualization"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Raw Device Mapping' (RDM) in VMware?",
+    "options": {
+      "A": "To map a physical keyboard to a VM.",
+      "B": "To allow a virtual machine to directly access and use a physical storage LUN without a virtual disk file.",
+      "C": "To encrypt the BIOS of the server.",
+      "D": "To monitor the growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'CPU' feature must be enabled in the BIOS/UEFI to allow for hardware-accelerated virtualization?",
+    "options": {
+      "A": "Hyper-Threading",
+      "B": "Intel VT-x or AMD-V",
+      "C": "Turbo Boost",
+      "D": "L3 Cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Storage vMotion' allows you to move a virtual machine's files from one storage array to another while the VM is running.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the VM is in 'Suspended' mode",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Promiscuous Mode' on a virtual switch port group used for?",
+    "options": {
+      "A": "To increase the internet speed of all VMs.",
+      "B": "To allow a VM (like a network sniffer) to see all traffic passing through the virtual switch, not just traffic destined for itself.",
+      "C": "To encrypt all packets on the switch.",
+      "D": "To backup the switch configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which virtualization technology uses a 'Software-Defined Storage' approach to group local server disks into a shared cluster-wide data store?",
+    "options": {
+      "A": "NFS",
+      "B": "vSAN (Virtual SAN)",
+      "C": "iSCSI",
+      "D": "RAID 10"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Cold Migration' involves moving a virtual machine that is powered off or suspended.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a 10Gbps network",
+      "D": "Only for Windows guests"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a 'Full Clone' and a 'Linked Clone'?",
+    "options": {
+      "A": "Full Clones are faster to create.",
+      "B": "Full Clones are independent copies; Linked Clones share a base virtual disk with the parent and use a delta disk for changes.",
+      "C": "Linked Clones are more secure.",
+      "D": "Full Clones require a separate license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'CPU Ready' time indicate in a virtualization performance monitor?",
+    "options": {
+      "A": "The CPU is ready to be overclocked.",
+      "B": "The amount of time a VM is ready to run but is waiting for the hypervisor to provide physical CPU resources.",
+      "C": "The time it takes for the OS to boot.",
+      "D": "The percentage of CPU used by the hypervisor kernel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Fault Tolerance' (FT) provides zero downtime by keeping a secondary 'shadow' copy of a VM in lockstep execution on a different host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for single-vCPU VMs",
+      "D": "Only if using local storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Virtual Machine Hardware Version'?",
+    "options": {
+      "A": "the brand of the physical server.",
+      "B": "A version number that determines the virtual hardware features and limits supported by the hypervisor for that specific VM.",
+      "C": "The version of the Guest OS installed.",
+      "D": "The physical age of the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which networking protocol allows a hypervisor to access block-level storage over a standard Ethernet network?",
+    "options": {
+      "A": "HTTP",
+      "B": "iSCSI",
+      "C": "FTP",
+      "D": "SNMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Paravirtualization' provides better performance than full virtualization because the guest OS is 'aware' of the hypervisor and uses optimized calls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 95",
+      "D": "Only if using an IDE drive"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Resource Pools' in an enterprise virtualization cluster?",
+    "options": {
+      "A": "To group physical servers by their brand.",
+      "B": "To provide a way to hierarchically manage and guarantee CPU and Memory for specific departments or applications.",
+      "C": "To act as a physical water cooling system.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transparent Page Sharing' (TPS)?",
+    "options": {
+      "A": "Sharing computer screens with colleagues.",
+      "B": "A memory optimization technique where the hypervisor identifies identical memory pages across VMs and stores only one copy to save RAM.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily stock price."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You must install the 'VMware Tools' or 'Hyper-V Integration Services' to enable high-resolution video and optimized network drivers in the guest OS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux guests",
+      "D": "Only if the host has no internet"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which disk format is 'Expandable' and only takes up space on the physical drive as data is written inside the VM?",
+    "options": {
+      "A": "Thick Provisioned",
+      "B": "Thin Provisioned",
+      "C": "Static Disk",
+      "D": "Raw Disk"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a High Availability (HA) cluster, what is the 'Admission Control' policy?",
+    "options": {
+      "A": "A policy that determines who can enter the data center.",
+      "B": "A setting that ensures the cluster always has enough spare capacity to restart VMs if one or more hosts fail.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The password for the cluster administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Virtual Appliance' is usually delivered as an OVF or OVA file for easy import.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for firewall applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NUMA' (Non-Uniform Memory Access) awareness in a hypervisor important for?",
+    "options": {
+      "A": "Measuring the weight of the servers.",
+      "B": "Ensuring a VM's vCPUs and memory are allocated from the same physical socket to maximize performance and minimize latency.",
+      "C": "Encrypting the system BIOS.",
+      "D": "Monitoring the daily growth of the forest."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to manage multiple VMware ESXi hosts from a single interface?",
+    "options": {
+      "A": "ESXi Shell",
+      "B": "vCenter Server",
+      "C": "Workstation Pro",
+      "D": "Host Client"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Memory' in Hyper-V allows the amount of RAM assigned to a VM to increase or decrease automatically based on demand.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows 7",
+      "D": "Only if using a 1Gbps connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'I/O Virtualization' (SR-IOV) primarily used for?",
+    "options": {
+      "A": "To make the network cables look colorful.",
+      "B": "To allow a VM to bypass the hypervisor and communicate directly with a physical network adapter for high performance.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Virtual Disk' format used by the KVM (Linux) hypervisor?",
+    "options": {
+      "A": ".vhdx",
+      "B": "qcow2",
+      "C": ".vmdk",
+      "D": ".zip"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Hypervisor' can be configured to 'Cap' or limit the maximum amount of CPU cycles a VM can consume, regardless of host availability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of 'Storage DRS' (SDRS)?",
+    "options": {
+      "A": "To increase the speed of the hard drive.",
+      "B": "To balance VM disk placement across multiple storage data stores based on space usage and I/O latency.",
+      "C": "To encrypt the storage connection.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Port Group' type on a VMware virtual switch?",
+    "options": {
+      "A": "Management Network",
+      "B": "Virtual Machine Network",
+      "C": "VMkernel (for vMotion/Storage)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: In a 'Type 1' hypervisor, the Management Console is often accessed via a web browser or a remote client rather than a local desktop.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only for SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NIC Teaming' on a physical host used for in a virtualization environment?",
+    "options": {
+      "A": "Giving names to network adapters.",
+      "B": "Grouping multiple physical network cards together for redundancy and increased bandwidth for virtual switches.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "Hiring a team of network engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which virtualization feature allows a VM to continue running even if its storage connection is temporarily lost?",
+    "options": {
+      "A": "Storage vMotion",
+      "B": "APD (All Paths Down) / PDL (Permanent Device Loss) handling",
+      "C": "Memory Ballooning",
+      "D": "CPU Pinning"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Snapshot' also captures the contents of the virtual machine's RAM if the VM is running when the snapshot is taken.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if 'Include Memory' is selected",
+      "D": "Only for Windows guest VMs"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'VLAN Trunking' on a virtual switch?",
+    "options": {
+      "A": "Connecting a virtual switch to a physical tree trunk.",
+      "B": "Allowing multiple VLANs to pass through a single virtual or physical network link.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a risk of keeping 'Snapshots' for too long?",
+    "options": {
+      "A": "The VM will become physically smaller.",
+      "B": "Performance degradation and excessive disk space consumption as the delta files grow.",
+      "C": "The internet bill will double.",
+      "D": "The VM will delete all user emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Virtual Switch' does not learn MAC addresses like a physical switch does.",
+    "options": {
+      "A": "False (It maintains a MAC address table just like a physical switch to route traffic correctly).",
+      "B": "True",
+      "C": "Only in the cloud",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Anti-Affinity' rules in a VM cluster?",
+    "options": {
+      "A": "Naming the servers after things you dislike.",
+      "B": "Rules that ensure specific VMs (like two redundant domain controllers) never run on the same physical host.",
+      "C": "A specialized way to encrypt user data.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which virtualization tool is used to convert a physical server into a virtual machine?",
+    "options": {
+      "A": "V2V (Virtual to Virtual)",
+      "B": "P2V (Physical to Virtual) Converter",
+      "C": "S2V (Server to Virtual)",
+      "D": "Disk Defragmenter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Data Store' is a logical container that hides the specifics of physical storage and provides a uniform model for storing VM files.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for NFS storage",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Oversubscription' of CPU in virtualization?",
+    "options": {
+      "A": "Buying too many CPUs.",
+      "B": "Assigning more total virtual CPUs (vCPUs) to VMs than there are physical cores on the host server.",
+      "C": "A specialized tool for drawing CPUs.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for management of a Proxmox VE hypervisor via a web browser?",
+    "options": {
+      "A": "80",
+      "B": "8006",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Virtualization' can allow a single 32-bit Guest OS to run on a 64-bit Host OS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a Type 2 hypervisor",
+      "D": "Only if the guest is Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Overcommit' in a hypervisor?",
+    "options": {
+      "A": "RAM that physically expands.",
+      "B": "The ability of a hypervisor to allow the total memory assigned to VMs to be greater than the physical memory on the host.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon occurs when a VM consumes so many resources that it negatively impacts the performance of other VMs on the same host?",
+    "options": {
+      "A": "Latency Bloat",
+      "B": "Noisy Neighbor",
+      "C": "Bandwidth Exhaustion",
+      "D": "Resource Leak"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Host-Only' virtual network allows a VM to reach the public internet through the host's physical network adapter.",
+    "options": {
+      "A": "False (Host-Only networks are strictly for communication between the host and VMs).",
+      "B": "True",
+      "C": "Only for mobile devices",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Para-virtualized' SCSI driver used for?",
+    "options": {
+      "A": "Restarting a server during the night.",
+      "B": "A high-performance virtual storage driver that reduces CPU overhead for disk operations within a VM.",
+      "C": "A specialized way to encrypt BGP updates.",
+      "D": "To monitor the daily growth of the routing table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for translating the Guest OS's memory requests into physical RAM addresses?",
+    "options": {
+      "A": "The BIOS",
+      "B": "The MMU (Memory Management Unit) of the CPU / Hypervisor",
+      "C": "The Network Card",
+      "D": "The Hard Drive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Full Backup' of a VM involves copying all its virtual disk files, configuration files, and snapshot data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Heartbeat' in a virtualization cluster?",
+    "options": {
+      "A": "To play music for the servers.",
+      "B": "A signal sent between hosts in a cluster to verify that they are still alive and functioning.",
+      "C": "To encrypt the physical server hardware.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which virtualization feature allows you to 'undo' a failed software update in a VM in seconds?",
+    "options": {
+      "A": "Clone",
+      "B": "Snapshot Revert",
+      "C": "Live Migration",
+      "D": "Backup Restore"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'CPU Passthrough' allows a VM to see the exact physical model and features of the host CPU, which is often required for specific software licenses.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the accounts have the same credit card",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation in a virtual switch?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "Using VLAN IDs to logically separate traffic from different VMs so they cannot communicate without a router.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Disk' type is best for a high-performance database VM that needs guaranteed low latency?",
+    "options": {
+      "A": "Thin Provisioned",
+      "B": "Thick Provisioned Eager Zeroed",
+      "C": "Linked Clone",
+      "D": "Virtual Disk"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Template' cannot be powered on; it must be converted back to a VM first.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows templates",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hardware Virtualization' (HVM)?",
+    "options": {
+      "A": "Using a physical screwdriver to fix a server.",
+      "B": "Virtualization that relies on the physical CPU's built-in virtualization extensions (like VT-x) to run guest OSs.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for VNC (Virtual Network Computing) to remotely access a VM's console?",
+    "options": {
+      "A": "5900",
+      "B": "3389",
+      "C": "22",
+      "D": "80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Virtualization' can allow multiple VMs to share the same physical IP address of the Host.",
+    "options": {
+      "A": "True (via NAT).",
+      "B": "False",
+      "C": "Only in version 1.0",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DirectPath I/O'?",
+    "options": {
+      "A": "Walking directly to the server rack.",
+      "B": "A feature that allows a VM to directly access a physical PCIe device (like a GPU or NIC) for near-native performance.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of physical RAM currently being used by the hypervisor to support all VMs?",
+    "options": {
+      "A": "Host Memory Usage",
+      "B": "Guest Memory Usage",
+      "C": "vRAM Limit",
+      "D": "Memory Ballooning Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can migrate a VM between two hosts that have different physical CPU architectures (e.g., Intel and AMD) using Live Migration.",
+    "options": {
+      "A": "False (Live Migration generally requires compatible CPU architectures to ensure instructions remain valid).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VMware HA' (High Availability) failover?",
+    "options": {
+      "A": "The process of manually restarting a VM.",
+      "B": "The automated process where a cluster restarts VMs from a failed host on other available hosts.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Virtual CPU' allocation strategy?",
+    "options": {
+      "A": "1-to-1 mapping to physical cores",
+      "B": "Oversubscription (more vCPUs than physical cores)",
+      "C": "CPU Reservations (guaranteed cycles)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Bridged' network adapter allows a VM to receive its own unique IP address from the physical network's DHCP server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for guest users",
+      "D": "Only if using the 'stable' release"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific CPU hardware feature allows the hypervisor to offload the mapping of guest physical memory to host physical memory, significantly reducing the overhead of memory virtualization?",
+    "options": {
+      "A": "Hyper-Threading (HTT)",
+      "B": "Second Level Address Translation (SLAT) / EPT / RVI",
+      "C": "AES-NI",
+      "D": "Turbo Boost"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a high-performance environment, what is the primary architectural advantage of 'SR-IOV' (Single Root I/O Virtualization) over standard virtual switches?",
+    "options": {
+      "A": "It allows VMs to share the same virtual MAC address.",
+      "B": "It allows a physical PCIe device to appear as multiple separate logical devices, letting VMs bypass the hypervisor stack for near-native I/O throughput.",
+      "C": "It encrypts all traffic at the hardware level.",
+      "D": "It automatically increases the MTU to 9000 for all packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: During a 'Live Migration' (vMotion), the VM's execution is momentarily 'stunned' while the final memory bitmap and device state are transferred to the destination host.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using 1Gbps networking",
+      "D": "Only for VMs with more than 128GB of RAM"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'vCPU-to-pCore' oversubscription ratio impact on applications sensitive to timing and jitter (e.g., VoIP or high-frequency trading)?",
+    "options": {
+      "A": "It has no impact due to hyper-threading.",
+      "B": "It introduces 'CPU Ready' latency and context-switching overhead, which can cause significant performance degradation even if total CPU usage is low.",
+      "C": "It increases the network bandwidth for those applications.",
+      "D": "It automatically prioritizes those applications via the hypervisor scheduler."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific scenario triggers a 'Split-Brain' condition in a high-availability virtualization cluster?",
+    "options": {
+      "A": "When a VM has two separate virtual hard drives.",
+      "B": "When the heartbeat network fails between nodes, causing both sides to believe they are the sole survivors and attempt to start the same VMs simultaneously.",
+      "C": "When the CPU and RAM usage both hit 100%.",
+      "D": "When an admin logs in from two different locations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Ballooning' is considered a 'hard' memory reclamation technique because it forces the Guest OS to use its own paging mechanism to free up physical host RAM.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows Server guests",
+      "D": "Only if using NVMe storage"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NUMA spanning' and why is it generally discouraged for high-performance virtual machines?",
+    "options": {
+      "A": "It refers to spanning a VM across multiple physical racks.",
+      "B": "It occurs when a VM's resources are drawn from multiple physical CPU sockets, leading to increased latency as the CPU accesses memory controlled by a different socket.",
+      "C": "It is a method for backing up memory to disk.",
+      "D": "It is a way to increase the clock speed of the virtual CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which disk format is required for 'Fault Tolerance' (FT) in VMware to ensure the secondary VM can maintain an identical state to the primary?",
+    "options": {
+      "A": "Thin Provisioned",
+      "B": "Thick Provision Eager Zeroed",
+      "C": "Linked Clone",
+      "D": "Compressed VHDX"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Container-on-VM' architecture, the hypervisor provides the security isolation boundary, while the container engine provides the application packaging and deployment efficiency.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Docker Swarm",
+      "D": "Only if the VM is running Linux"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Gratuitous ARP' packets during a Live Migration process?",
+    "options": {
+      "A": "To encrypt the VM's network traffic.",
+      "B": "To inform the physical network switches that the VM's MAC address has moved to a new physical switch port, updating the SAT (Source Address Table).",
+      "C": "To request a new IP address from the DHCP server.",
+      "D": "To monitor the health of the vMotion network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Instruction Set' extension is required for a hypervisor to support 'Nested Virtualization' on Intel hardware?",
+    "options": {
+      "A": "VT-d",
+      "B": "VMX (Virtual Machine Extensions)",
+      "C": "SSE4.2",
+      "D": "AVX-512"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Storage I/O Control' (SIOC) allows an administrator to prioritize storage bandwidth for specific VMs when the shared data store experiences high latency/congestion.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber channel storage",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Paravirtualized' networking (e.g., VMXNET3) vs. 'Emulated' networking (e.g., E1000)?",
+    "options": {
+      "A": "Emulated is faster because it mimics real hardware.",
+      "B": "Paravirtualized drivers are designed specifically for virtual environments and use a simplified API to reduce CPU overhead compared to mimicking a physical NIC.",
+      "C": "Emulated drivers require no configuration in the Guest OS.",
+      "D": "There is no performance difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Software-Defined Data Center' (SDDC), what is the role of a 'Distributed Firewall'?",
+    "options": {
+      "A": "To block hackers from entering the physical building.",
+      "B": "To apply security rules at the virtual NIC (vNIC) level of every VM, allowing for granular micro-segmentation that travels with the VM during migration.",
+      "C": "To encrypt the physical router logs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Hot-Add' of CPU and RAM to a running VM is universally supported by all Guest Operating Systems once enabled in the hypervisor settings.",
+    "options": {
+      "A": "False (The Guest OS must also support hot-plugging; many older versions or specific editions do not).",
+      "B": "True",
+      "C": "Only for Linux kernels above 5.0",
+      "D": "Only if the VM is in a 'Restricted' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which metric is the most accurate indicator that a host has 'Overcommitted' memory to the point where VM performance is actively suffering?",
+    "options": {
+      "A": "Active Memory usage",
+      "B": "Memory Swap Rate (Hard Page Faults in the hypervisor)",
+      "C": "Ballooning amount",
+      "D": "Total vRAM allocated"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'VTEP' (VXLAN Tunnel End Point) in a virtualized network overlay?",
+    "options": {
+      "A": "To restart the virtual switch.",
+      "B": "To encapsulate and de-encapsulate Layer 2 frames into Layer 3 UDP packets, allowing virtual networks to span across physical Layer 3 boundaries.",
+      "C": "To encrypt the BIOS communication.",
+      "D": "To monitor the temperature of the NIC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Snapshots' hierarchy (multiple snapshots on one VM) creates a chain of delta files; deleting a snapshot in the middle of the chain requires 'consolidation' of data into the parent disk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for VMware Fusion",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'IOPS Limit' on a virtual disk intended to prevent?",
+    "options": {
+      "A": "The disk from spinning too fast.",
+      "B": "The 'Noisy Neighbor' problem, where one VM consumes all available storage throughput and starves other VMs on the same data store.",
+      "C": "A specialized hacker attack on server fans.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'BGP' feature allows a virtualized edge appliance to maintain network sessions during a hypervisor host failure when using HA?",
+    "options": {
+      "A": "Graceful Restart / NSF (Non-Stop Forwarding)",
+      "B": "Path Prepending",
+      "C": "Route Refresh",
+      "D": "Community Tagging"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In 'Full Virtualization', the hypervisor must perform binary translation to intercept and emulate privileged instructions from the Guest OS.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 32-bit guests",
+      "D": "Only if using the ARM architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Working Set' of a virtual machine's memory?",
+    "options": {
+      "A": "The total amount of memory assigned to the VM.",
+      "B": "The actual amount of memory the VM has actively touched or modified within a recent time window.",
+      "C": "The memory used by the hypervisor to run.",
+      "D": "A tool to delete old memory logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific port is used for 'vMotion' traffic in a VMware environment?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 8000",
+      "C": "UDP 500",
+      "D": "TCP 902"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Virtual Machine Queue' (VMQ) allows a physical NIC to deliver network packets directly to a VM's memory space, reducing CPU overhead on the hypervisor.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Hyper-V",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Transparent Page Sharing' (TPS) security risk (e.g., side-channel attacks)?",
+    "options": {
+      "A": "It allows a user to see another user's screen.",
+      "B": "An attacker could potentially use timing analysis of memory access to infer data from other VMs sharing the same physical memory page.",
+      "C": "It makes the firewall rules easier to bypass.",
+      "D": "It deletes the system logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'stunning' a VM during a snapshot consolidation process?",
+    "options": {
+      "A": "The Guest OS",
+      "B": "The Hypervisor Kernel / VMM (Virtual Machine Monitor)",
+      "C": "The Storage Controller",
+      "D": "The Management Console"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Raw Device Mapping' (RDM) is mandatory for virtualizing applications that require a physical hardware serial number (SCSI Pass-through).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of an 'LUN' (Logical Unit Number) in virtualization storage?",
+    "options": {
+      "A": "To name the physical server racks.",
+      "B": "To uniquely identify a slice or portion of physical storage on a SAN that is presented to the hypervisor as a disk.",
+      "C": "To encrypt the routing table.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which protocol is associated with 'NFS' (Network File System) storage commonly used for virtual machine data stores?",
+    "options": {
+      "A": "TCP/UDP 2049",
+      "B": "TCP 445",
+      "C": "UDP 161",
+      "D": "TCP 80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Locked' memory page in a Guest OS cannot be reclaimed by the hypervisor using Memory Ballooning.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CPU Affinity' and why is it used?",
+    "options": {
+      "A": "The CPU's favorite operating system.",
+      "B": "A setting that binds a virtual CPU to a specific physical core to prevent context switching and improve performance for cache-sensitive workloads.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Instruction' extension allows the CPU to perform hardware-accelerated encryption (like AES) for virtual disk encryption?",
+    "options": {
+      "A": "Intel AES-NI",
+      "B": "AMD-V",
+      "C": "Intel VT-x",
+      "D": "SSE3"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In an 'Active-Active' storage cluster, a VM can read and write to the same virtual disk from two different hosts simultaneously without a specialized clustered file system.",
+    "options": {
+      "A": "False (A clustered file system like VMFS is required to manage distributed locking and prevent data corruption).",
+      "B": "True",
+      "C": "Only if using fiber optics",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' tagging on a virtual switch (VST) mode?",
+    "options": {
+      "A": "Naming the network cables after colors.",
+      "B": "A configuration where the virtual switch handles all VLAN tagging/untagging, so the Guest OS remains unaware of the VLAN structure.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'NFC' (Network File Copy) traffic during a VMware Cold Migration?",
+    "options": {
+      "A": "902",
+      "B": "443",
+      "C": "80",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Virtual Machine Extensions' (VMX) must be enabled in the BIOS for 64-bit Guest Operating Systems to run on most 64-bit hypervisors.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Resource Entitlement' in a virtualization scheduler?",
+    "options": {
+      "A": "The physical weight of the servers.",
+      "B": "The calculated amount of resources a VM is allowed to use based on its shares, reservations, and limits relative to other VMs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Rule' type in DRS ensures that two specific VMs (like an App server and its DB) are always kept on the same physical host to reduce latency?",
+    "options": {
+      "A": "Anti-Affinity Rule",
+      "B": "Affinity Rule",
+      "C": "Priority Rule",
+      "D": "Logging Rule"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Optimization' is the Microsoft Hyper-V equivalent of VMware DRS for balancing VM workloads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using SCVMM",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Swapping' at the hypervisor level?",
+    "options": {
+      "A": "Swapping the physical RAM sticks.",
+      "B": "A last-resort reclamation technique where the hypervisor writes VM memory pages directly to a swap file on disk when physical RAM is exhausted.",
+      "C": "A tool to delete old log files.",
+      "D": "To monitor the daily growth of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'RDP' (Remote Desktop Protocol)?",
+    "options": {
+      "A": "80",
+      "B": "3389",
+      "C": "22",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Web Application Firewall' (WAF) can be virtualized and deployed as a 'Virtual Appliance' to protect a cluster of web server VMs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted web traffic",
+      "D": "Only if using a physical server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage Latency' and why is it a critical metric for virtualization health?",
+    "options": {
+      "A": "The time it takes to buy a new hard drive.",
+      "B": "The delay in reading or writing to the data store; high latency causes 'Guest OS' lag and can lead to application crashes or VM unresponsiveness.",
+      "C": "A specialized way to encrypt the rule base.",
+      "D": "Hiring a new storage manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the amount of CPU time the hypervisor is spending on 'Overhead' tasks rather than running the Guest OS?",
+    "options": {
+      "A": "CPU Ready",
+      "B": "CPU Costop",
+      "C": "CPU System / Overhead",
+      "D": "CPU Wait"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'Virtualization' can allow a single physical network card to appear as hundreds of separate virtual network adapters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'DirectPath I/O' (Passthrough)?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To allow a VM direct access to a physical PCIe device, bypassing the hypervisor to achieve near-zero latency for specialized hardware like GPUs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'iSCSI' storage traffic?",
+    "options": {
+      "A": "TCP 3260",
+      "B": "TCP 443",
+      "C": "UDP 500",
+      "D": "TCP 80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Memory Mirroring' in a hypervisor provides a backup of the Guest OS's RAM in real-time to prevent data loss from a single memory stick failure.",
+    "options": {
+      "A": "True (at the hardware/hypervisor coordination level).",
+      "B": "False",
+      "C": "Only for NAT traffic",
+      "D": "Only in 'Standard' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-Segmentation' in the context of an SDDC (Software-Defined Data Center)?",
+    "options": {
+      "A": "Dividing the network into tiny physical parts.",
+      "B": "The ability to apply firewall rules to each individual VM, isolating them from other VMs in the same subnet to prevent lateral attack movement.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used to improve the performance of virtualized graphics and 3D rendering?",
+    "options": {
+      "A": "VT-d / IOMMU",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Storage vMotion' can be performed even if the destination data store has a different block size than the source.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Switch Tagging' (VST)?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "A method where the virtual switch handles VLAN tagging for the VMs, so the Guest OS doesn't need a VLAN-aware driver.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' can cause the Guest OS to start swapping memory to its own virtual disk if the Guest OS becomes RAM-starved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) I/O Metric and why is it used?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "A feature that monitors storage latency and automatically moves VM disks (Storage vMotion) to less congested data stores to maintain performance.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' (encrypted web management)?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' (VCHA) uses a three-node cluster (Active, Passive, Witness) to protect the management layer of the virtualization stack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a VM to see and manage its own VLAN tags (Trunking).",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' is primarily used to provide direct network hardware access to VMs, but it often prevents the use of Live Migration.",
+    "options": {
+      "A": "True (because the hardware state is tied to a specific physical device).",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in Hyper-V?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand, ranging between a minimum and maximum value.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used to improve the performance of nested virtualization by managing virtual-to-physical memory mappings across layers?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if the physical data store runs out of actual space while VMs are trying to write data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of a single VM, handling its CPU instructions and memory access.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic between sites?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor using 'Hypercalls'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "The process where write operations are mirrored to both the source and destination disks during a migration to ensure data consistency.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of a Linux-based hypervisor?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  }
+  ]
+}

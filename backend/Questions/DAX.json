@@ -1,0 +1,1905 @@
+{ 
+  "skill": "DAX", 
+  "questions": [
+    {
+    "question": "What does DAX stand for?",
+    "options": {
+      "A": "Data Analytics Extension",
+      "B": "Data Analysis Expressions",
+      "C": "Digital Analysis eXchange",
+      "D": "Database Automation X-script"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DAX is the formula language used in both Microsoft Power BI and Excel Power Pivot.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are 'Aggregation' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "SUM",
+      "B": "AVERAGE",
+      "C": "MIN",
+      "D": "FILTER"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In a DAX formula, what does the use of square brackets usually indicate (e.g., [Total Sales])?",
+    "options": {
+      "A": "A reference to a physical server.",
+      "B": "A reference to a column or a measure.",
+      "C": "A comment that is ignored by the engine.",
+      "D": "A specialized text-to-speech command."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Calculated Column' and a 'Measure' in DAX?",
+    "options": {
+      "A": "Measures are calculated at data load; Columns are calculated at report runtime.",
+      "B": "Calculated Columns are evaluated for each row; Measures are calculated based on the current filter context in a report.",
+      "C": "Columns can only store numbers; Measures can store text.",
+      "D": "Measures increase the physical file size significantly more than columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DAX is a 'case-sensitive' language, meaning 'SUM' and 'sum' are treated as different functions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used for string concatenation (joining two pieces of text) in DAX?",
+    "options": {
+      "A": "+",
+      "B": "&",
+      "C": "*",
+      "D": "/"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the result of the 'COUNTROWS' function in DAX?",
+    "options": {
+      "A": "The sum of all values in a specific column.",
+      "B": "The number of rows in the specified table.",
+      "C": "The number of unique values in a column.",
+      "D": "The number of errors found in the dataset."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to change the filter context of a calculation?",
+    "options": {
+      "A": "SUMX",
+      "B": "CALCULATE",
+      "C": "FORMAT",
+      "D": "LOOKUPVALUE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'DIVIDE' function is generally safer than the '/' operator because it handles division-by-zero errors automatically.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Logical' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "IF",
+      "B": "AND",
+      "C": "OR",
+      "D": "RELATED"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'DISTINCTCOUNT' function do?",
+    "options": {
+      "A": "Counts every row in a table including duplicates.",
+      "B": "Counts the number of unique values in a column.",
+      "C": "Sums only the unique values in a column.",
+      "D": "Deletes duplicate rows from the data model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a DAX formula, what are single quotes used for (e.g., 'Sales Table'[Amount])?",
+    "options": {
+      "A": "To indicate the start of a comment.",
+      "B": "To enclose table names, especially those containing spaces.",
+      "C": "To define a constant string value.",
+      "D": "To mark a measure as 'Private'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DAX 'Time Intelligence' functions require a dedicated Date Table (Calendar Table) to work correctly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to find the total sales for the previous year?",
+    "options": {
+      "A": "NEXTYEAR",
+      "B": "SAMEPERIODLASTYEAR",
+      "C": "YEARBEFORE",
+      "D": "LASTDATE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Filter Context' in DAX?",
+    "options": {
+      "A": "The physical air filter on the database server.",
+      "B": "The set of filters applied to a report (via slicers, visuals, or rows) that defines which data is being calculated.",
+      "C": "A specialized software for cleaning data.",
+      "D": "The number of hours a developer spent writing code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to perform a row-by-row calculation across a table (an 'iterator')?",
+    "options": {
+      "A": "SUM",
+      "B": "SUMX",
+      "C": "TOTALYTD",
+      "D": "ALL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'RELATED' function is used to fetch a value from a table on the 'one' side of a relationship into the 'many' side.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid DAX 'Comparison' operators? (Select all that apply)",
+    "options": {
+      "A": "==",
+      "B": "<>",
+      "C": ">=",
+      "D": "IN"
+    },
+    "answer": ["B", "C", "D"]
+  },
+  {
+    "question": "What is the purpose of the 'ALL' function?",
+    "options": {
+      "A": "To select all columns in a table.",
+      "B": "To remove all filters from a table or column within a calculation.",
+      "C": "To find the maximum value in all rows.",
+      "D": "To increase the speed of a query by 100%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns a table of unique values from a column?",
+    "options": {
+      "A": "DISTINCT",
+      "B": "VALUES",
+      "C": "UNIQUE",
+      "D": "TABLE.DISTINCT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DAX measures can be reused within other DAX measures.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to find a value in another table based on a matching key (similar to VLOOKUP)?",
+    "options": {
+      "A": "FINDVALUE",
+      "B": "LOOKUPVALUE",
+      "C": "MATCH",
+      "D": "SEARCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'YEAR' function return when given a date?",
+    "options": {
+      "A": "The total number of days in that year.",
+      "B": "A four-digit integer representing the year of the date.",
+      "C": "A text string saying 'Year'.",
+      "D": "The current year according to the computer clock."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Row Context' in DAX?",
+    "options": {
+      "A": "The ability to see the data in a physical row.",
+      "B": "The concept that refers to the 'current row' being processed, such as in a calculated column or an iterator.",
+      "C": "A security scan of the database rows.",
+      "D": "Hiring a new manager for the data rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MAX' and 'MAXX' do exactly the same thing in every scenario.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Time Intelligence' functions? (Select all that apply)",
+    "options": {
+      "A": "DATESYTD",
+      "B": "DATEADD",
+      "C": "CLOSINGBALANCEMONTH",
+      "D": "TIME.NOW"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the function 'FORMAT' return?",
+    "options": {
+      "A": "A number formatted as a decimal.",
+      "B": "A text string formatted according to a specific pattern.",
+      "C": "The physical format of the hard drive.",
+      "D": "A boolean value (True/False)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to calculate the 'Year-to-Date' total of a measure?",
+    "options": {
+      "A": "SUM.YTD",
+      "B": "TOTALYTD",
+      "C": "YEAR.TOTAL",
+      "D": "CALCULATE.YTD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'CALCULATE' with 'FILTER' is a common pattern to apply complex conditions to a measure.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which operator represents 'Not Equal To' in DAX?",
+    "options": {
+      "A": "!=",
+      "B": "<>",
+      "C": "NOT",
+      "D": "~="
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'BLANK()' function return?",
+    "options": {
+      "A": "A zero value.",
+      "B": "A null or empty value in DAX.",
+      "C": "A text string with a space.",
+      "D": "An error message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the largest value in a column or the largest value between two scalar expressions?",
+    "options": {
+      "A": "MAX",
+      "B": "HIGHEST",
+      "C": "TOP",
+      "D": "LARGE"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can add comments to your DAX code using '//' for single lines.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Mathematical' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "ROUND",
+      "B": "ABS",
+      "C": "DIVIDE",
+      "D": "UPPER"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the result of '10 + BLANK()' in a DAX calculation?",
+    "options": {
+      "A": "An error.",
+      "B": "10.",
+      "C": "BLANK.",
+      "D": "0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to filter a table and return only rows that meet a specific condition?",
+    "options": {
+      "A": "SELECT",
+      "B": "FILTER",
+      "C": "WHERE",
+      "D": "LIMIT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Calculated Columns are better for high-cardinality data than measures because they use less memory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function returns the last day of the month for a specified date?",
+    "options": {
+      "A": "LASTDAY",
+      "B": "EOMONTH",
+      "C": "ENDOFMONTH",
+      "D": "MONTH.END"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Scalar' value in DAX?",
+    "options": {
+      "A": "A whole table of data.",
+      "B": "A single value (like a single number or string).",
+      "C": "A specialized tool for measuring light.",
+      "D": "The size of the database server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function calculates the average of a column, including text and non-numeric values (as 0)?",
+    "options": {
+      "A": "AVERAGE",
+      "B": "AVERAGEA",
+      "C": "AVERAGEX",
+      "D": "MEAN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SUMX' requires two arguments: a table and an expression.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Information' functions? (Select all that apply)",
+    "options": {
+      "A": "ISBLANK",
+      "B": "ISERROR",
+      "C": "ISFILTERED",
+      "D": "ISUPPER"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'HASONEVALUE' check for?",
+    "options": {
+      "A": "If the database is currently running.",
+      "B": "If the filter context for a column has been filtered down to only one unique value.",
+      "C": "If a user has typed a value in a slicer.",
+      "D": "If the calculation results in a number higher than 1."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In DAX, what is 'Context Transition'?",
+    "options": {
+      "A": "Changing the color of the report UI.",
+      "B": "The process where row context is converted into filter context, typically using the CALCULATE function.",
+      "C": "A specialized security bridge for data.",
+      "D": "Moving data from one table to another."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'USERELATIONSHIP' function allows you to use an inactive relationship for a specific calculation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function converts a text string that represents a number to a number?",
+    "options": {
+      "A": "STRING.TO.NUMBER",
+      "B": "VALUE",
+      "C": "CONVERT",
+      "D": "CAST"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the DAX function for finding the 'Today's' date?",
+    "options": {
+      "A": "NOW()",
+      "B": "TODAY()",
+      "C": "DATE.TODAY()",
+      "D": "CURRENTDATE()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'MINX' function do?",
+    "options": {
+      "A": "Returns the minimum value in a column ignoring filters.",
+      "B": "Evaluates an expression for each row of a table and returns the smallest resulting value.",
+      "C": "Counts the number of minimum values.",
+      "D": "Finds the smallest text string alphabetically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'COUNT' only counts columns that contain numbers, dates, or strings.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'DAX' accurately? (Select all that apply)",
+    "options": {
+      "A": "It is a functional language",
+      "B": "It is based on Excel formulas",
+      "C": "It is exactly the same as SQL",
+      "D": "It works on columns and tables"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What does 'DATESMTD' return?",
+    "options": {
+      "A": "The number of days in the current month.",
+      "B": "A table of dates for the Month-to-Date period.",
+      "C": "The sum of sales for the current month.",
+      "D": "The current date and time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function checks if a value is an error and returns a custom result if it is?",
+    "options": {
+      "A": "ISERROR",
+      "B": "IFERROR",
+      "C": "ERROR.HANDLE",
+      "D": "TRY.CATCH"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Star Schema' is the recommended data model for optimizing DAX performance.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function returns a table with the top N rows of the specified table?",
+    "options": {
+      "A": "FIRSTN",
+      "B": "TOPN",
+      "C": "LIMIT",
+      "D": "RANKN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Measure' 'Home' 'Table'?",
+    "options": {
+      "A": "A physical table where measures are stored in the office.",
+      "B": "The table in the data model where a measure is visually organized (though it can reference any table).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function would you use to calculate the rank of a value in a list of values?",
+    "options": {
+      "A": "RANK",
+      "B": "RANKX",
+      "C": "POSITION",
+      "D": "ORDER"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M' (Power Query language) and 'DAX' are the same thing.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Text' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "LEFT",
+      "B": "MID",
+      "C": "SUBSTITUTE",
+      "D": "PIVOT"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the purpose of 'SELECTEDVALUE'?",
+    "options": {
+      "A": "To select a favorite value in the database.",
+      "B": "Returns the value when the context for a column has been filtered to one distinct value only; otherwise returns an alternate result.",
+      "C": "To increase the frame rate of a video.",
+      "D": "Hiring a new manager for the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'DAX' 'Studio'?",
+    "options": {
+      "A": "A music studio for data scientists.",
+      "B": "A third-party tool used to write, query, and optimize DAX code.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'ADDCOLUMNS' function adds calculated columns to an existing table or table expression.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function returns a date that is a specified number of months before or after the start date?",
+    "options": {
+      "A": "DATEADD",
+      "B": "EDATE",
+      "C": "MONTHADD",
+      "D": "CALENDAR"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Filter' 'Migration' (or Filter Propagation)?",
+    "options": {
+      "A": "Moving physical filters to a new location.",
+      "B": "How filters applied to one table travel through relationships to other tables in the data model.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function provides the sum of a column after removing all filters on that column's table?",
+    "options": {
+      "A": "SUM",
+      "B": "CALCULATE(SUM(Column), ALL(Table))",
+      "C": "SUMX",
+      "D": "TOTAL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: DAX 'Variables' (VAR) can help improve performance and readability of complex formulas.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens during a 'Context Transition' in DAX?",
+    "options": {
+      "A": "The formula engine switches from 32-bit to 64-bit processing.",
+      "B": "An existing Row Context is transformed into an equivalent Filter Context by the CALCULATE function.",
+      "C": "Data is moved from a dimension table to a fact table during report runtime.",
+      "D": "The user switches from a bar chart visual to a line chart visual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'SUMX' function can only iterate over a physical table that exists in the data model.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following functions are 'Table-Valued' functions (they return a table instead of a single value)? (Select all that apply)",
+    "options": {
+      "A": "FILTER",
+      "B": "ALL",
+      "C": "VALUES",
+      "D": "SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical difference between 'VALUES' and 'DISTINCT' when a relationship has 'Missing Members'?",
+    "options": {
+      "A": "VALUES includes a blank row to account for orphaned records in a relationship; DISTINCT does not.",
+      "B": "DISTINCT is faster because it ignores the blank row.",
+      "C": "VALUES only works on columns; DISTINCT only works on tables.",
+      "D": "There is no difference; they are aliases for the same internal engine call."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific DAX function is required to enable 'Bi-directional' cross-filtering in a specific measure without changing the model-wide relationship settings?",
+    "options": {
+      "A": "CROSSJOIN",
+      "B": "CROSSFILTER",
+      "C": "RELATEDTABLE",
+      "D": "USERELATIONSHIP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In DAX, 'Variables' (VAR) are evaluated once, and their value remains constant for the rest of the measure's execution.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function would you use to calculate a 'Rolling 12-Month' total?",
+    "options": {
+      "A": "TOTALYTD",
+      "B": "DATESINPERIOD",
+      "C": "DATEADD",
+      "D": "PARALLELPERIOD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'KEEPFILTERS' function achieve when used inside CALCULATE?",
+    "options": {
+      "A": "It prevents the measure from being deleted by other users.",
+      "B": "It ensures that the new filter context is intersected with the existing one rather than overwriting it.",
+      "C": "It locks the slicers on a report page so they cannot be changed.",
+      "D": "It forces the engine to ignore all relationships in the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DAX iterator is used to find the 'Top' item based on a specific expression for every row in a grouping? (Select all that apply)",
+    "options": {
+      "A": "TOPN",
+      "B": "RANKX",
+      "C": "SAMPLE",
+      "D": "FIRSTNONBLANK"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "True or False: The 'RELATED' function can fetch data from the 'many' side of a relationship to the 'one' side without using an aggregator.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'EARLIER' in DAX?",
+    "options": {
+      "A": "To return a value from a previous date in the calendar.",
+      "B": "To refer to a previous Row Context in a nested iteration.",
+      "C": "To speed up a query by running it earlier in the process.",
+      "D": "To sort a table in ascending order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'CALCULATETABLE' differ from 'CALCULATE'?",
+    "options": {
+      "A": "CALCULATETABLE only works in Excel; CALCULATE is for Power BI.",
+      "B": "CALCULATE returns a scalar value; CALCULATETABLE returns a table.",
+      "C": "CALCULATETABLE is 10x slower than CALCULATE.",
+      "D": "CALCULATETABLE cannot accept multiple filter arguments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Set' functions in DAX for comparing tables? (Select all that apply)",
+    "options": {
+      "A": "EXCEPT",
+      "B": "INTERSECT",
+      "C": "UNION",
+      "D": "JOIN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the role of 'TREATAS' in modern DAX?",
+    "options": {
+      "A": "To treat a number as a text string for formatting.",
+      "B": "To apply filters from a table or result set to unrelated columns in the model (Virtual Relationship).",
+      "C": "A specialized security bridge for data transfers.",
+      "D": "To increase the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Time Intelligence', what does 'PARALLELPERIOD' do that 'DATEADD' does not?",
+    "options": {
+      "A": "DATEADD is for days; PARALLELPERIOD is only for years.",
+      "B": "PARALLELPERIOD returns a full period (e.g., a whole month) regardless of the specific day in the filter context.",
+      "C": "PARALLELPERIOD is 100x faster than DATEADD.",
+      "D": "PARALLELPERIOD only works with active relationships."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'COUNT' on a column is internally identical to using 'COUNTROWS' on a table filtered to only non-blank values in that column.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to handle 'Many-to-Many' relationships via a bridge table in a DAX measure?",
+    "options": {
+      "A": "RELATEDTABLE",
+      "B": "CROSSFILTER",
+      "C": "CALCULATE",
+      "D": "USERELATIONSHIP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'SELECTEDVALUE(Table[Column], \"Multiple\")' return if the column has three distinct values in the current filter context?",
+    "options": {
+      "A": "An error.",
+      "B": "\"Multiple\"",
+      "C": "The first value alphabetically.",
+      "D": "BLANK"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following functions can modify the 'Auto-Exist' behavior in DAX? (Select all that apply)",
+    "options": {
+      "A": "ALL",
+      "B": "ALLEXCEPT",
+      "C": "ALLSELECTED",
+      "D": "SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Expanded Tables' logic in the DAX engine?",
+    "options": {
+      "A": "Tables that physically grow on the hard drive.",
+      "B": "The concept that a table includes all columns from itself plus all columns from tables on the 'one' side of its relationships.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters in a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the significance of the 'VertiPaq' engine?",
+    "options": {
+      "A": "It is a specialized music player for data.",
+      "B": "It is the in-memory columnar database engine that powers DAX queries and data compression.",
+      "C": "A security certificate for a database.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SUM' is actually a shorthand for 'SUMX' iterating over a single column in the current context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Information' functions that help debug context? (Select all that apply)",
+    "options": {
+      "A": "ISINSCOPE",
+      "B": "ISCROSSFILTERED",
+      "C": "HASONEFILTER",
+      "D": "ISNUMBER"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'ALLSELECTED' do that 'ALL' does not?",
+    "options": {
+      "A": "ALLSELECTED only removes filters applied within the visual, preserving external slicers.",
+      "B": "ALLSELECTED removes all filters including slicers.",
+      "C": "ALLSELECTED is only for text data.",
+      "D": "ALLSELECTED is 100x slower."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'DAX', what does the 'IN' operator do?",
+    "options": {
+      "A": "Checks if the computer is turned in.",
+      "B": "Allows checking if a scalar value exists within a list or a table of values.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should always use 'CALCULATE' inside a calculated column to ensure row context is transitioned into filter context.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which DAX function is specifically designed to create a virtual 'Date Table' on the fly? (Select all that apply)",
+    "options": {
+      "A": "CALENDAR",
+      "B": "CALENDARAUTO",
+      "C": "GENERATE",
+      "D": "DATETABLE.CREATE"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Filter Propagation' direction?",
+    "options": {
+      "A": "Moving physical filters to a new location.",
+      "B": "The flow of filters from one table to another through relationships (One-way vs. Both-ways).",
+      "C": "A specialized software for architects.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is a 'Virtual Relationship'?",
+    "options": {
+      "A": "A relationship between two AI characters.",
+      "B": "A relationship created within a measure using logic (like TREATAS or FILTER) rather than physical links in the model.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'DIVIDE' provides a significant performance boost over the '/' operator for every calculation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Iterator' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "AVERAGEX",
+      "B": "CONCATENATEX",
+      "C": "PRODUCTX",
+      "D": "SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'DAX Performance Analyzer' used for?",
+    "options": {
+      "A": "Analyzing the physical performance of the CPU.",
+      "B": "An internal tool in Power BI to measure the time it takes to refresh visuals and identify slow DAX measures.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a band to play during report refresh."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the purpose of the 'SWITCH' function?",
+    "options": {
+      "A": "To switch the power off on the server.",
+      "B": "To evaluate an expression against a list of values and return one of multiple possible result expressions (Nested IF alternative).",
+      "C": "A security certificate for a database.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'LOOKUPVALUE' function requires a physical relationship between the two tables to work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Set' operation functions? (Select all that apply)",
+    "options": {
+      "A": "NATURALINNERJOIN",
+      "B": "CROSSJOIN",
+      "C": "GENERATE",
+      "D": "SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Dimensional Modeling' significance for DAX?",
+    "options": {
+      "A": "Using 3D models for charts.",
+      "B": "The structure of using Stars and Snowflakes to ensure DAX functions perform efficiently and filter context propagates correctly.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a person named Dimensional."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Lazy Evaluation'?",
+    "options": {
+      "A": "A formula engine that takes a long time to start.",
+      "B": "The principle where expressions are only calculated if they are actually needed for the final result.",
+      "C": "A specialized software for poets.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAMEPERIODLASTYEAR' is equivalent to 'DATEADD(Dates, -1, YEAR)'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'DAX Variables' scope? (Select all that apply)",
+    "options": {
+      "A": "Local to the specific measure they are defined in",
+      "B": "Defined before the 'RETURN' statement",
+      "C": "Can be accessed by other measures in the same table",
+      "D": "Evaluated in the context they are defined"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Cardinality' in the context of DAX optimization?",
+    "options": {
+      "A": "The number of cardinals in the church.",
+      "B": "The number of unique values in a column; high cardinality can negatively impact performance and compression.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the 'Row-Level Security' (RLS) 'Static' filtering?",
+    "options": {
+      "A": "Filtering a row so it doesn't move.",
+      "B": "Creating fixed roles and applying DAX filters (e.g., [Region] = \"North\") to control data access for different users.",
+      "C": "A way to count the number of users.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'M-Query' (Power Query) is used for data transformation, whereas 'DAX' is used for data modeling and analytical calculations.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Iterative' calculations? (Select all that apply)",
+    "options": {
+      "A": "Going through a table row by row",
+      "B": "Using functions like SUMX or MAXX",
+      "C": "Usually slower than standard aggregators on very large tables",
+      "D": "Requires a 100-core CPU"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Context' 'Drift'?",
+    "options": {
+      "A": "The physical drifting of a car.",
+      "B": "When the intended filter context of a measure changes unexpectedly due to relationships or visual interactions.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'DirectQuery' 'DAX' limitation?",
+    "options": {
+      "A": "Measures are 100x faster in DirectQuery.",
+      "B": "Certain complex DAX functions are not supported or must be translated to SQL, which can limit calculation complexity.",
+      "C": "DAX is not used at all in DirectQuery.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'USERPRINCIPALNAME()' is commonly used in Dynamic RLS to capture the login email of the current user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Statistical' DAX functions? (Select all that apply)",
+    "options": {
+      "A": "STDEV.P",
+      "B": "MEDIAN",
+      "C": "VAR.S",
+      "D": "CALCULATE"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Measure' 'Branching'?",
+    "options": {
+      "A": "Putting a measure on a physical tree branch.",
+      "B": "The practice of building complex measures by referencing multiple simple base measures (e.g., [Profit] = [Sales] - [Cost]).",
+      "C": "A security scan of the database.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Ambiguous Relationship'?",
+    "options": {
+      "A": "A relationship that is very shy.",
+      "B": "When there are multiple paths between two tables in the data model, making it unclear how filters should propagate.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'FILTER(ALL(Table), ...)' inside CALCULATE is the correct way to ignore all external filters and apply a specific one.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Parent-Child' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "PATH",
+      "B": "PATHITEM",
+      "C": "PATHLENGTH",
+      "D": "SQLJOIN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'DAX' 'Optimization' 'Query' 'Folding'?",
+    "options": {
+      "A": "Folding a query on a piece of paper.",
+      "B": "Pushing calculation logic from DAX back into the SQL source or Power Query to reduce the load on the report engine.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Measure' 'Format' 'String'?",
+    "options": {
+      "A": "A string used to tie the measure to the server.",
+      "B": "A specific property of a measure that determines how the value is displayed (e.g., Currency, Percentage, Scientific).",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MAX' can work on both numbers and text (alphabetical ranking).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Calculated Tables'? (Select all that apply)",
+    "options": {
+      "A": "Created using DAX logic",
+      "B": "Calculated once during data refresh",
+      "C": "Increases the model file size",
+      "D": "Created using only Excel formulas"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Context' 'Transition' 'Performance' 'Impact'?",
+    "options": {
+      "A": "How fast the colors change on the screen.",
+      "B": "The overhead added to calculations because the engine must rebuild the filter context for every row of an iteration.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Non-Visual' 'Filter'?",
+    "options": {
+      "A": "A filter you can't see with your eyes.",
+      "B": "Filters applied in the DAX code or model properties that affect calculations without being visible to the end-user.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'KEEPFILTERS' function is only useful when used inside a CALCULATE or CALCULATETABLE function.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Filter' 'Functions'? (Select all that apply)",
+    "options": {
+      "A": "REMOVEFILTERS",
+      "B": "SELECTEDMEASURE",
+      "C": "CALCULATE",
+      "D": "SUM"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Filter' 'Restoration' in ALLSELECTED?",
+    "options": {
+      "A": "Restoring a physical air filter.",
+      "B": "The process where DAX attempts to recover the filters that were present in the last 'shadow' context of a visual.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Total' 'Sales' 'MTD' logic?",
+    "options": {
+      "A": "Sales made on a Monday, Tuesday, and December.",
+      "B": "A time-intelligence calculation that aggregates sales from the first day of the current month to the current date.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'GENERATE' and 'CROSSJOIN' both produce a Cartesian product of two tables, but 'GENERATE' allows for row-by-row correlation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'DAX' 'Error' 'Handling' patterns? (Select all that apply)",
+    "options": {
+      "A": "Using DIVIDE to avoid zero errors",
+      "B": "Using IFERROR to catch syntax bugs",
+      "C": "Using ISERROR with an IF statement",
+      "D": "Using TRY/CATCH blocks"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Row' 'Context' 'Recursion'?",
+    "options": {
+      "A": "A row that never ends.",
+      "B": "When an iterator (like SUMX) is used inside another iterator, creating multiple layers of Row Context.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Expanded' 'Table' 'Filtering'?",
+    "options": {
+      "A": "Filtering an accordion.",
+      "B": "When a filter on a table automatically filters its related tables on the 'one' side due to the expanded table internal structure.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VALUES' returns the blank row in a relationship, while 'DISTINCT' ignores it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the DAX engine, what is the primary technical difference between the 'Formula Engine' (FE) and the 'Storage Engine' (SE)?",
+    "options": {
+      "A": "The FE handles simple aggregations; the SE handles complex logic like IF and SWITCH.",
+      "B": "The FE is single-threaded and handles complex logic/request parsing; the SE is multi-threaded and performs high-speed data retrieval.",
+      "C": "The FE is responsible for data compression; the SE is responsible for rendering visuals.",
+      "D": "The SE only works with SQL sources, while the FE only works with in-memory data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Many-to-Many' relationship implemented via a bridge table, DAX 'Expanded Table' filtering does not automatically propagate filters from the Fact table to the Dimension table.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Shadow Filter Context' when using the ALLSELECTED function? (Select all that apply)",
+    "options": {
+      "A": "It tracks the filters active in the last 'stable' context before an iterator started.",
+      "B": "It is used to restore filters for visual-level totals.",
+      "C": "It resides entirely within the Storage Engine to optimize speed.",
+      "D": "It can be manually manipulated using the TREATAS function."
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is the 'Auto-Exist' behavior in DAX and why can it lead to unexpected results in multi-column filtering?",
+    "options": {
+      "A": "It automatically deletes columns that have no data to save RAM.",
+      "B": "It optimizes filters by intersecting existing values in the same table, which can accidentally remove valid row combinations.",
+      "C": "It is a security feature that hides columns from unauthorized users.",
+      "D": "It forces all relationships to become bi-directional by default."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'CALCULATE' inside an iterator like 'AVERAGEX', what specific performance risk is introduced?",
+    "options": {
+      "A": "The Storage Engine is bypassed entirely, forcing the Formula Engine to calculate every row (CallbackDataID).",
+      "B": "The data model is physically rewritten on the disk.",
+      "C": "The relationship cardinality is automatically changed to Many-to-Many.",
+      "D": "The memory limit of the report is halved."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'TREATAS' function is generally more performant than 'INTERSECT' or 'FILTER' for creating virtual relationships because it maps values directly into the data model columns.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Non-Visual' filters that can impact a DAX measure's outcome? (Select all that apply)",
+    "options": {
+      "A": "Row-Level Security (RLS) filters",
+      "B": "Calculated Table filters",
+      "C": "Filters applied in the 'Query' section of the Performance Analyzer",
+      "D": "Report-level filters in the filter pane"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the technical impact of 'Materialization' in a DAX query?",
+    "options": {
+      "A": "Converting a measure into a physical column in the source SQL database.",
+      "B": "The engine generating a large temporary table in memory to process a query, which can lead to high RAM consumption.",
+      "C": "A specialized software bridge for data transfers.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Relationship' theory, what defines a 'Weak' (Limited) relationship in DAX?",
+    "options": {
+      "A": "A relationship between two tables in different source groups (e.g., SQL and Excel).",
+      "B": "A relationship that only has 10 rows of data.",
+      "C": "A relationship that uses a 'Many-to-One' cardinality.",
+      "D": "A relationship where the 'One' side is a calculated column."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Expanded Tables' include columns from all tables that are reachable through a chain of One-to-Many relationships, but only in the 'Many to One' direction.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific DAX function can be used to prevent 'Context Transition' from occurring inside a CALCULATE expression?",
+    "options": {
+      "A": "KEEPFILTERS",
+      "B": "IGNOREContext (Theoretical)",
+      "C": "REMOVEFILTERS",
+      "D": "There is no direct function; you must avoid using CALCULATE or avoid Row Context."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Density' in the context of VertiPaq storage engine optimization?",
+    "options": {
+      "A": "The physical weight of the server rack.",
+      "B": "The ratio of unique values to the total number of rows in a column.",
+      "C": "A security scan of the database.",
+      "D": "The number of measures per table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In advanced DAX, what is a 'Dynamic Format String' used for?",
+    "options": {
+      "A": "To change the color of the text in a measure.",
+      "B": "To use DAX logic to change how a value is displayed (e.g., switching between 'K' and 'M' based on value size).",
+      "C": "A security certificate for a database.",
+      "D": "To increase the frame rate of a visual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'NATURALINNERJOIN' requires the two tables to have a physical relationship defined in the model to work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'Grouping' functions in DAX? (Select all that apply)",
+    "options": {
+      "A": "SUMMARIZE",
+      "B": "SUMMARIZECOLUMNS",
+      "C": "GROUPBY",
+      "D": "AGGREGATE"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary difference between 'SUMMARIZE' and 'SUMMARIZECOLUMNS' regarding performance?",
+    "options": {
+      "A": "SUMMARIZECOLUMNS is optimized for the Formula Engine and generally faster, but it cannot be used in a Row Context (like calculated columns).",
+      "B": "SUMMARIZE is 100x faster for text data.",
+      "C": "SUMMARIZECOLUMNS only works with SQL Server.",
+      "D": "There is no performance difference."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lineage' (Data Origin) in DAX and why is it critical for the 'TREATAS' function?",
+    "options": {
+      "A": "The list of developers who worked on the code.",
+      "B": "The internal metadata that links a table or column to its original source column in the data model.",
+      "C": "A specialized software for historians.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'REMOVEFILTERS' function is exactly the same as 'ALL' when used as a filter argument in CALCULATE.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are metrics tracked in 'DAX Studio' to identify performance bottlenecks? (Select all that apply)",
+    "options": {
+      "A": "FE Duration (ms)",
+      "B": "SE Duration (ms)",
+      "C": "SE CPU (ms)",
+      "D": "Total Number of Pixels"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Eager Evaluation' in the context of DAX variables?",
+    "options": {
+      "A": "Variables being calculated before they are even defined.",
+      "B": "When a VAR is calculated at the moment of definition, regardless of whether it is used in the 'RETURN' block.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'BI', what is 'Calculation Groups' significance for DAX?",
+    "options": {
+      "A": "Hiring a group of people to do calculations.",
+      "B": "A feature that allows the same logic (like YTD or YoY) to be applied to multiple measures without creating new measures for each.",
+      "C": "A security scan of the database.",
+      "D": "A list of project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ISINSCOPE' is the preferred function for handling hierarchy-level totals because it only returns true when a column is the specific 'active' level in a visual.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Storage Engine' specific query languages? (Select all that apply)",
+    "options": {
+      "A": "xmSQL",
+      "B": "MDX",
+      "C": "SQL (DirectQuery)",
+      "D": "DAX (Internal)"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is 'Dictionary Encoding' in the VertiPaq engine?",
+    "options": {
+      "A": "Translating the code into different languages.",
+      "B": "Replacing data values (strings, dates) with integer pointers to a separate unique value table to save memory.",
+      "C": "A security scan for computer viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Measure' 'Recursion' 'Depth' limit?",
+    "options": {
+      "A": "There is no limit.",
+      "B": "The engine has a limit (usually 50-100 levels) of nested measure references before it throws a stack overflow error.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional mathematician to read the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SELECTEDMEASURE' can only be used inside a Calculation Group's 'Calculation Item'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Semiconsist' behavior in DAX relationships?",
+    "options": {
+      "A": "The engine allows some rows to be missing from the One-side of a relationship.",
+      "B": "When a table has a partial index created.",
+      "C": "A way to count the number of users.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Filter' 'State' 'Leakage'?",
+    "options": {
+      "A": "When the database physically leaks data on the floor.",
+      "B": "When a filter applied to a temporary table inside a measure accidentally affects unrelated parts of the calculation logic.",
+      "C": "A specialized software for poets.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the 'Userelationship' function restricted to?",
+    "options": {
+      "A": "It can only be used 5 times per measure.",
+      "B": "It can only activate a relationship that already exists in the model but is marked as 'Inactive'.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'GENERATEALL' function is identical to 'GENERATE' except that it preserves rows from the first table even if the second table returns no results (Left Join behavior).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'DirectQuery' optimization techniques? (Select all that apply)",
+    "options": {
+      "A": "Aggregations (Pre-calculated tables)",
+      "B": "Referential Integrity (Assume RI setting)",
+      "C": "Query Reduction settings",
+      "D": "Increasing the size of the font"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Storage Engine' 'Callback'?",
+    "options": {
+      "A": "Calling a customer back on the phone.",
+      "B": "A performance bottleneck where the Storage Engine has to ask the Formula Engine to calculate a specific value row-by-row during retrieval.",
+      "C": "A security bridge for data transfers.",
+      "D": "The frame rate of the visual."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the significance of the 'Segment' size (usually 1 million rows)?",
+    "options": {
+      "A": "It is the maximum size of a bar chart.",
+      "B": "It is the unit of data that the Storage Engine processes in parallel.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VAR' in DAX can store whole tables, not just single values.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'DAX' 'Strict' 'Evaluation'? (Select all that apply)",
+    "options": {
+      "A": "Logic that forces specific error checking",
+      "B": "The engine's approach to determining the order of operations in complex CALCULATE chains",
+      "C": "A way to backup the SQL code",
+      "D": "Ensuring data types match perfectly"
+    },
+    "answer": ["B", "D"]
+  },
+  {
+    "question": "What is 'Row' 'Context' 'Shadowing'?",
+    "options": {
+      "A": "Drawing a shadow on the table.",
+      "B": "When a new Row Context (from a nested iterator) hides a previous Row Context that uses the same table name.",
+      "C": "A specialized software for architects.",
+      "D": "The speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculation' 'Item' 'Precedence'?",
+    "options": {
+      "A": "Hiring a person named Precedence.",
+      "B": "A setting in Calculation Groups that determines which logic is applied first when multiple groups overlap.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'CALENDARAUTO' can only work if there is at least one date column in the model that is not a calculated column.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Storage' 'Engine' 'Encoding' types? (Select all that apply)",
+    "options": {
+      "A": "Value Encoding (for numbers)",
+      "B": "Hash Encoding (for strings)",
+      "C": "RLE (Run Length Encoding)",
+      "D": "Psychic Encoding"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Expanded' 'Table' 'Filtering' 'Side-effect'?",
+    "options": {
+      "A": "Hiring an extra developer.",
+      "B": "The fact that filtering a dimension automatically filters the fact table, but also all other dimensions related to that fact table on the 'one' side.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the 'Selectedmeasureformatstring' function used for?",
+    "options": {
+      "A": "To measure the physical width of a string.",
+      "B": "To dynamically retrieve or modify the display format of the currently selected measure in a Calculation Group.",
+      "C": "A security certificate.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'LOOKUPVALUE' is generally faster than 'RELATED' because it doesn't require a physical relationship.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'DAX' 'Storage Engine' 'Parallelism'? (Select all that apply)",
+    "options": {
+      "A": "Multiple CPU cores processing different segments of a column simultaneously",
+      "B": "Running two measures in the same visual at once",
+      "C": "Distributing a query across multiple physical servers",
+      "D": "Processing 100 Excel files at the same time"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Non-Active' 'Filter' 'Propagation'?",
+    "options": {
+      "A": "When a filter doesn't move.",
+      "B": "How inactive relationships can be utilized via USERELATIONSHIP to change the flow of data calculation.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the 'Cobegin'/'Coend' segment in a query plan?",
+    "options": {
+      "A": "The start and end of a lunch break.",
+      "B": "The indicators in a query plan that show which Storage Engine requests are being executed in parallel.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'CALCULATE' is the only function in DAX that can perform context transition.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Time' 'Intelligence' 'Scenarios'? (Select all that apply)",
+    "options": {
+      "A": "Custom 4-4-5 Calendars",
+      "B": "Non-standard fiscal years starting mid-month",
+      "C": "Weeks-based comparisons (ISO-weeks)",
+      "D": "The number of hours the CEO worked"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Virtual' 'Aggregation'?",
+    "options": {
+      "A": "Aggregating data in a video game.",
+      "B": "Performing complex aggregations over a virtual table created within a measure (e.g., SUMX(SUMMARIZE(...))).",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is the 'Row' 'Context' 'Override'?",
+    "options": {
+      "A": "Driving over a row of data.",
+      "B": "Using CALCULATE to deliberately overwrite existing row context with a specific filter context.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Types' in a relationship (e.g., Integer to String) will prevent the relationship from being used in DAX.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'DAX' 'Optimizer' 'Rules'? (Select all that apply)",
+    "options": {
+      "A": "Filter pushdown to Storage Engine",
+      "B": "Measure inline expansion",
+      "C": "Common sub-expression elimination",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Query' 'Materialization' 'Threshold'?",
+    "options": {
+      "A": "The number of rows that can fit in a room.",
+      "B": "The point at which the DAX engine decides to stop processing in-memory and start writing intermediate tables to the temporary cache.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a new manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'DAX', what is 'Semi-additive' measure logic?",
+    "options": {
+      "A": "A measure that is only half-calculated.",
+      "B": "A measure that can be aggregated across some dimensions (like Region) but not others (like Time, e.g., Inventory levels).",
+      "C": "A specialized software for poets.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'NATURALLEFTOUTERJOIN' allows joining two tables with no physical relationship as long as they have columns with the same name and data type.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Storage Engine' 'Cache' 'Hit'? (Select all that apply)",
+    "options": {
+      "A": "When a query result is retrieved from a previous run stored in memory",
+      "B": "Significantly reducing query duration to near 0ms",
+      "C": "Automatically deleting the database",
+      "D": "Skipping the Formula Engine processing entirely"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Virtual' 'Relationship' 'Cardinality'?",
+    "options": {
+      "A": "The number of cardinals in a virtual world.",
+      "B": "The inherent relationship type (1:1, 1:N) maintained when using TREATAS to link unrelated columns.",
+      "C": "A specialized software for architects.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Shadow' 'Context' 'Reset'?",
+    "options": {
+      "A": "Turning off the light on the server.",
+      "B": "The internal behavior of ALLSELECTED where it clears the specific filter context of the visual to calculate grand totals.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VAR' variables are evaluated in the filter context where the measure is called, not where the variable is defined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'DAX' 'Storage Engine' 'Column' 'Scan'? (Select all that apply)",
+    "options": {
+      "A": "Highly optimized for columnar storage",
+      "B": "Ignores all data except the specific columns requested",
+      "C": "Always scans the entire table row-by-row",
+      "D": "Leverages CPU-level optimizations like SIMD"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Metric' 'Ambiguity' in a Star Schema?",
+    "options": {
+      "A": "When a metric doesn't know its own name.",
+      "B": "When multiple Fact tables share the same Dimension, and a measure doesn't specify which Fact table to aggregate from.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Measure' 'Auto-Inline'?",
+    "options": {
+      "A": "Putting a measure in a physical line.",
+      "B": "The DAX optimizer's behavior of replacing a measure reference with its raw definition to allow for better formula simplification.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'UNION' in DAX will automatically remove duplicate rows between the two tables being joined.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Storage Engine' 'Aggregator' types? (Select all that apply)",
+    "options": {
+      "A": "Sum",
+      "B": "Count",
+      "C": "Min/Max",
+      "D": "Median"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Row' 'Context' 'Propagation' through relationships?",
+    "options": {
+      "A": "Row Context does not propagate through relationships naturally; only Filter Context does.",
+      "B": "Row context moves automatically from One to Many.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'DAX', what is the 'Userelationship' 'Dependency' 'Chain'?",
+    "options": {
+      "A": "A physical chain for the server.",
+      "B": "The risk of creating circular dependencies when using multiple inactive relationships in a single calculation.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'TREATAS' is the only function in DAX that can create a virtual relationship.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe 'DAX' 'Storage Engine' 'Sorting' 'Efficiency'? (Select all that apply)",
+    "options": {
+      "A": "Data is sorted during model refresh to maximize RLE compression",
+      "B": "Sort order can significantly impact the size of the .pbix file",
+      "C": "DAX sorts every column alphabetically by default",
+      "D": "Sort by Column settings affect relationship performance"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Measure' 'Canonical' 'Optimization'?",
+    "options": {
+      "A": "Ensuring a measure uses a physical canon.",
+      "B": "Simplifying DAX expressions into their most efficient mathematical form before they are sent to the storage engine.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  }
+  ]
+}

@@ -1,0 +1,1901 @@
+{ 
+  "skill": "GDRA", 
+  "questions": [
+    {
+    "question": "What is Ghidra primarily used for in the cybersecurity industry?",
+    "options": {
+      "A": "Editing digital photos and videos.",
+      "B": "Reverse engineering and software analysis of compiled binaries.",
+      "C": "Managing a physical server's cooling system.",
+      "D": "Automatically writing business emails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra was originally developed and released as open-source software by the National Security Agency (NSA).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which window in Ghidra's CodeBrowser displays the high-level C-like representation of the assembly code?",
+    "options": {
+      "A": "Program Tree",
+      "B": "Listing View",
+      "C": "Decompiler",
+      "D": "Console"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'Listing' window in Ghidra show?",
+    "options": {
+      "A": "A list of all the developers who worked on the software.",
+      "B": "The assembly instructions, memory addresses, and byte values of the binary.",
+      "C": "A specialized map of the data center.",
+      "D": "The physical weight of the hardware device."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these file formats can Ghidra typically analyze? (Select all that apply)",
+    "options": {
+      "A": "Windows Executables (.exe / .dll)",
+      "B": "Linux ELF files",
+      "C": "MacOS Mach-O files",
+      "D": "Raw JPEG images"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "In Ghidra, what is a 'Project'?",
+    "options": {
+      "A": "A physical box containing server parts.",
+      "B": "A container that organizes the programs, data, and versions being analyzed.",
+      "C": "A specialized software for project managers.",
+      "D": "The final stage of a performance test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra requires a specialized hardware license key to run.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens when you 'Auto-Analyze' a binary in Ghidra for the first time?",
+    "options": {
+      "A": "Ghidra deletes the binary for security.",
+      "B": "Ghidra runs scripts to identify functions, data types, and cross-references automatically.",
+      "C": "Ghidra opens a chat window with the original developer.",
+      "D": "The computer's screen brightness increases by 50%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which view in Ghidra shows the hierarchical structure of a program, including headers and sections?",
+    "options": {
+      "A": "Decompiler",
+      "B": "Program Tree",
+      "C": "Functions View",
+      "D": "Data Type Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra can be used to analyze malware samples in a safe, controlled environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Disassembly' in the context of Ghidra?",
+    "options": {
+      "A": "Physically taking a computer apart.",
+      "B": "Converting machine code (binary) into human-readable assembly language.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "Hiring a professional actor to read binary code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are core components of the Ghidra tool suite? (Select all that apply)",
+    "options": {
+      "A": "Script Manager",
+      "B": "Data Type Manager",
+      "C": "Symbol Tree",
+      "D": "Web Browser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Symbol' in Ghidra?",
+    "options": {
+      "A": "A physical icon on the desk.",
+      "B": "A name assigned to a specific address, such as a function name or a variable name.",
+      "C": "A mathematical formula used for encryption.",
+      "D": "The end of the analysis process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Ghidra, you can rename functions and variables to make the decompiled code easier to understand.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Functions' window display?",
+    "options": {
+      "A": "A list of all the math equations in the binary.",
+      "B": "A searchable list of all identified functions within the loaded program.",
+      "C": "A specialized software for historians.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which shortcut key is standard in Ghidra for 'Renaming' a highlighted symbol?",
+    "options": {
+      "A": "Ctrl+S",
+      "B": "L",
+      "C": "L (or right-click -> Rename)",
+      "D": "N"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Ghidra supports multiple processor architectures, including x86, ARM, and MIPS.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Cross-Reference' (XREF) in Ghidra?",
+    "options": {
+      "A": "A reference to a physical book.",
+      "B": "A link showing where a particular function or variable is being called or used in the code.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which window allows you to create and manage custom data structures (like 'struct' in C)?",
+    "options": {
+      "A": "Console",
+      "B": "Listing View",
+      "C": "Data Type Manager",
+      "D": "Script Manager"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Ghidra's user interface is based on the Java programming language.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of the 'Script Manager' in Ghidra?",
+    "options": {
+      "A": "To write film scripts for Hollywood.",
+      "B": "To browse, edit, and run scripts written in Python or Java to automate analysis tasks.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Hiring a new manager for the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Reverse Engineering' goals using Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Identifying hidden backdoors in software",
+      "B": "Understanding how a virus spreads",
+      "C": "Recovering lost source code",
+      "D": "Buying physical server hardware"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does the 'Symbol Tree' show in Ghidra?",
+    "options": {
+      "A": "A tree made of physical paper symbols.",
+      "B": "An organized view of labels, functions, and exports/imports within the binary.",
+      "C": "A security scan for network firewalls.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can undo changes made in Ghidra (like renaming a function) using Ctrl+Z.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component of Ghidra is responsible for translating assembly into high-level code?",
+    "options": {
+      "A": "The Assembler",
+      "B": "The P-Code Engine",
+      "C": "The Decompiler",
+      "D": "The Hex Editor"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of 'Comments' in Ghidra analysis?",
+    "options": {
+      "A": "To allow users to post reviews on a website.",
+      "B": "To allow the analyst to leave notes at specific memory addresses to explain code logic.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Comment' types in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Pre-comments",
+      "B": "Post-comments",
+      "C": "Plate-comments",
+      "D": "Video-comments"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Function Signature' in reverse engineering?",
+    "options": {
+      "A": "A physical signature on a contract.",
+      "B": "The definition of a function's return type, name, and parameters.",
+      "C": "A security scan for computer viruses.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra allows you to perform 'Multi-user' version control on the same binary analysis via a Ghidra Server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Ghidra, what is the 'Console' window used for?",
+    "options": {
+      "A": "Playing video games.",
+      "B": "Displaying output messages, errors, and script results.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to see all strings (text) found within the binary?",
+    "options": {
+      "A": "Script Manager",
+      "B": "Defined Strings (Search -> Strings)",
+      "C": "Symbol Tree",
+      "D": "Listing View"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Architecture' occurs if you attempt to analyze a 64-bit binary while telling Ghidra it is a 32-bit binary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Endianness' in binary analysis?",
+    "options": {
+      "A": "A physical defect in a hard drive.",
+      "B": "The order in which bytes are stored in memory (Big-Endian or Little-Endian).",
+      "C": "A specialized software for architects.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra can automatically recognize 'Library' functions if it has the corresponding signature files (FIDB).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Static Analysis' in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Analyzing code without executing it",
+      "B": "Searching for patterns in the assembly",
+      "C": "Tracing program logic manually",
+      "D": "Running the binary to see what happens"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the 'Defined Data' window used for?",
+    "options": {
+      "A": "Defining a person name Data.",
+      "B": "Viewing and searching all recognized data items, such as arrays and strings, in the binary.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Patching' a binary in Ghidra?",
+    "options": {
+      "A": "Putting a physical patch on a server jacket.",
+      "B": "Modifying the actual bytes or instructions of the binary to change its behavior.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Ghidra is only available for the Linux operating system.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Processor' architectures Ghidra can decompile? (Select all that apply)",
+    "options": {
+      "A": "x86",
+      "B": "PowerPC",
+      "C": "SPARC",
+      "D": "HTML5"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is a 'Call Graph' in Ghidra?",
+    "options": {
+      "A": "A graph showing the price of phone calls.",
+      "B": "A visual representation showing which functions call other functions.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Analysis Log' in Ghidra?",
+    "options": {
+      "A": "A list of all the automated analysis steps performed on the binary.",
+      "B": "A log of actual physical wood in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Endianness' settings during import will result in the code appearing as complete gibberish or garbage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Analysis' benefits? (Select all that apply)",
+    "options": {
+      "A": "Speeding up the initial discovery phase",
+      "B": "Automatically identifying standard library calls",
+      "C": "Guaranteed to find all security bugs",
+      "D": "Reducing manual labor for common patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SLEIGH' in the Ghidra ecosystem?",
+    "options": {
+      "A": "A physical sled used in the winter.",
+      "B": "The language used to describe processor architectures so Ghidra can disassemble and decompile them.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Collision'?",
+    "options": {
+      "A": "When two different addresses are given the exact same name, causing confusion in the tool.",
+      "B": "When two physical symbols fall on each other.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Ghidra can 'Export' analyzed data into a C file that can theoretically be recompiled.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to compare two different versions of the same binary in Ghidra?",
+    "options": {
+      "A": "Symbol Tree",
+      "B": "Program Differences (Version Tracking)",
+      "C": "Decompiler",
+      "D": "Listing View"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hex View' in binary analysis?",
+    "options": {
+      "A": "Viewing a person name Hex.",
+      "B": "Looking at the raw data of the binary in hexadecimal format (base-16).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Shared' 'Project' usage?",
+    "options": {
+      "A": "Sharing a physical office project.",
+      "B": "Multiple analysts working together on the same analysis using a centralized Ghidra server.",
+      "C": "A specialized software for historians.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Base Address' occur when the binary expects to be loaded at one address, but Ghidra loads it at another, breaking pointers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Manual' 'Analysis' in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Renaming variables based on code context",
+      "B": "Defining custom data types for structures",
+      "C": "Running a script to find all strings",
+      "D": "Identifying the purpose of a function by reading assembly"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'P-Code' in Ghidra?",
+    "options": {
+      "A": "Code for a person name P.",
+      "B": "An intermediate representation of processor instructions that allows Ghidra to analyze different architectures in a uniform way.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Analyze' (MTTA)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from importing a binary until a human analyst can explain its primary function.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Language' 'Definitions' occur if you select 'x86' for a binary that was actually compiled for 'PowerPC'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Scripting' languages supported by Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Java",
+      "B": "Python (via Jython)",
+      "C": "C++",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'Binary' 'Fingerprinting' in Ghidra?",
+    "options": {
+      "A": "Taking physical fingerprints of a computer.",
+      "B": "Identifying known code or library patterns using signatures to save analysis time.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Function' 'Complexity' metric?",
+    "options": {
+      "A": "A mathematical score based on the number of decision points in a function, used to find hard-to-read code.",
+      "B": "The height of the physical user's keyboard.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Compiler' 'Settings' in Ghidra can lead to incorrect data alignment or calling convention assumptions.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Discovery' scripts? (Select all that apply)",
+    "options": {
+      "A": "Searching for insecure function calls like 'strcpy'",
+      "B": "Identifying potential buffer overflows via data flow analysis",
+      "C": "Guaranteed to replace all human reverse engineers",
+      "D": "Highlighting areas of code where user input is processed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting'?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "Translating low-level assembly language into an intermediate representation like P-Code.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Fragmentation'?",
+    "options": {
+      "A": "When a large program has missing symbols due to optimization or stripping, making analysis much harder.",
+      "B": "Breaking a physical symbol into pieces.",
+      "C": "A security scan of the office network.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Version' occur when a script written for Ghidra 9.0 is attempted in Ghidra 11.0 and fails due to API changes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Reverse' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Malware Analyst",
+      "B": "Vulnerability Researcher",
+      "C": "Incident Responder",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Binary' 'Static' 'Triage'?",
+    "options": {
+      "A": "A quick initial assessment of a binary's purpose and danger level without a deep dive.",
+      "B": "Triaging a person named Binary.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Insights' (MTBI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often a reverse engineer makes a significant discovery about the target software.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Types' in Ghidra occur when an analyst incorrectly defines a 'char' as an 'int', leading to incorrect decompiled logic.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific Ghidra window provides a visual flowchart of a function's logical execution paths, including basic blocks and conditional branches?",
+    "options": {
+      "A": "Symbol Table",
+      "B": "Function Graph",
+      "C": "Decompiler",
+      "D": "Call Tree"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Ghidra, 'Calling Conventions' (like __stdcall or __fastcall) determine how parameters are passed to a function and how the stack is cleaned up.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are valid ways to identify the 'Entry Point' of a suspicious binary in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Looking for the 'entry' label in the Symbol Tree",
+      "B": "Reviewing the 'Executable Header' information in the Program Tree",
+      "C": "Searching for common initialization patterns in the assembly",
+      "D": "Deleting the .text section to see where the error occurs"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary benefit of using the 'Data Type Manager' to define a C-style structure (struct) during analysis?",
+    "options": {
+      "A": "It automatically encrypts the data to prevent theft.",
+      "B": "It allows the Decompiler to correctly represent offset accesses (e.g., myStruct->field) instead of raw memory addresses.",
+      "C": "It increases the physical RAM available to Ghidra.",
+      "D": "It forces the binary to run faster in a debugger."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Ghidra, what does the 'P-Code' representation allow an analyst to do?",
+    "options": {
+      "A": "Translate the binary into Python code automatically.",
+      "B": "Perform cross-platform analysis using a simplified, architecture-independent set of micro-operations.",
+      "C": "A specialized tool for measuring keyboard latency.",
+      "D": "Increasing the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Changing a function's signature (return type or parameters) in the 'Edit Function' dialog will automatically update the Decompiler's high-level view.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which window allows you to see all the places where a specific byte pattern or hexadecimal sequence occurs in the binary?",
+    "options": {
+      "A": "Search -> Memory",
+      "B": "Symbol Tree",
+      "C": "Data Type Manager",
+      "D": "Console"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Thunking' in the context of reverse engineering with Ghidra?",
+    "options": {
+      "A": "A physical noise made by a server fan.",
+      "B": "Small snippets of code that simply jump to another function, often used for cross-library calls.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users in a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid methods for 'De-obfuscating' code in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Using Python scripts to decrypt strings in memory",
+      "B": "Manually patching 'opaque predicates' (jumps that always go one way)",
+      "C": "Renaming variables to reflect their decrypted values",
+      "D": "Changing the color of the background theme"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: Ghidra can handle 'Multi-level' pointers (e.g., int ***ptr) if they are explicitly defined in the data types.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Function ID' (FID) analyzer used for?",
+    "options": {
+      "A": "Identifying a person named ID.",
+      "B": "Matching unknown functions against a database of known library functions to automatically rename them.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font in the Listing view."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which view displays the relationships between different memory sections (e.g., .text, .data, .rsrc) and their permissions?",
+    "options": {
+      "A": "Memory Map",
+      "B": "Decompiler",
+      "C": "Console",
+      "D": "Script Manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical significance of 'Control Flow Graph' (CFG) analysis in Ghidra?",
+    "options": {
+      "A": "It tracks the flow of water in a data center.",
+      "B": "It helps identify complex logic structures like loops, switch statements, and if-else blocks.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'Patch Instruction' feature allows you to change assembly instructions (e.g., changing JNZ to JZ) to bypass security checks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Function Call Trees'? (Select all that apply)",
+    "options": {
+      "A": "Outgoing calls (what this function calls)",
+      "B": "Incoming calls (what calls this function)",
+      "C": "A tree made of actual wood",
+      "D": "A way to visualize deep call stacks"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Reference Tracking' (XREFs) primarily used for?",
+    "options": {
+      "A": "To find all occurrences of a constant value or string to see how it influences program logic.",
+      "B": "Tracking a physical person in the office.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the purpose of 'Ghidra Headless' mode?",
+    "options": {
+      "A": "Running Ghidra without a graphical user interface for high-volume automated batch analysis.",
+      "B": "Running Ghidra without a manager.",
+      "C": "A security scan of the office building.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Stack Frames' in the Decompiler usually indicate that Ghidra has misidentified the function's parameters or local variable offsets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Search' feature helps you find all references to a specific memory address?",
+    "options": {
+      "A": "Search -> Memory",
+      "B": "Search -> For References to...",
+      "C": "Search -> Strings",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Pointer' in Ghidra's Data Type Manager?",
+    "options": {
+      "A": "A physical laser pointer for presentations.",
+      "B": "A data type that holds the memory address of another value, essential for analyzing linked lists and arrays.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "A way to backup SQL logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Reverse' (MTTR) a function?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from identifying a function of interest until its logic is fully documented.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Compiler' 'ID' occurs when Ghidra assumes a binary was built with GCC when it was actually built with Visual Studio, affecting library identification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Segment' types in a standard PE binary analysis? (Select all that apply)",
+    "options": {
+      "A": ".text (Code)",
+      "B": ".data (Initialized data)",
+      "C": ".rsrc (Resources)",
+      "D": ".html (Web content)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Static Binding' in the context of library calls?",
+    "options": {
+      "A": "When library code is included directly inside the binary at compile-time.",
+      "B": "Binding a physical book with static electricity.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is the significance of the 'Symbol Table'?",
+    "options": {
+      "A": "A table made of physical symbols.",
+      "B": "A centralized database of all names, labels, and addresses used in the current Ghidra program.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Calling Convention' can lead to the Decompiler showing too many or too few function arguments.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Code' 'Coverage' in a reverse engineering scenario? (Select all that apply)",
+    "options": {
+      "A": "The percentage of functions that have been manually reviewed",
+      "B": "The percentage of assembly blocks with added comments",
+      "C": "The amount of insurance for the code",
+      "D": "The number of identified library vs. proprietary functions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Opaque Predicate' analysis?",
+    "options": {
+      "A": "Analyzing a person name Opaque.",
+      "B": "Identifying conditional jumps where the outcome is always the same, used to hide the true control flow of a program.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Entropy'?",
+    "options": {
+      "A": "A measure of the randomness or predictability of function names, often used to detect packed or obfuscated binaries.",
+      "B": "The physical decay of a paper symbol.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in reverse engineering occurs when the business expects a full exploit in 24 hours for a complex kernel vulnerability.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Search' options in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Search -> Direct References",
+      "B": "Search -> Instruction Patterns",
+      "C": "Search -> Scalars",
+      "D": "Search -> Physical Address of Server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Flow' 'Flattening'?",
+    "options": {
+      "A": "Flattening a physical piece of paper.",
+      "B": "An obfuscation technique that puts all code blocks at the same level of a giant switch statement to hide the logic.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Function' 'Signature' 'Propagation'?",
+    "options": {
+      "A": "When Ghidra uses the known signature of a library call to automatically type the variables in the calling function.",
+      "B": "Hiring a person named Propagation.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Memory Permissions' can prevent an analyst from understanding that a 'Read-Only' section is actually being modified at runtime (Self-modifying code).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Scripting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Applying standard fixes across 1,000 binaries",
+      "B": "Automatically identifying and labeling decryption loops",
+      "C": "Guaranteed to replace all human reverse engineers",
+      "D": "Parsing custom file formats into Ghidra"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Slicing' in binary analysis?",
+    "options": {
+      "A": "Slicing a physical computer with a knife.",
+      "B": "Isolating only the parts of a program that contribute to a specific value or behavior (e.g., tracking a variable from input to use).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Insight' (MTTI)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the start of analysis until the critical 'Aha!' moment where a vulnerability or feature is understood.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Stack' 'Alignment' occurs when Ghidra assumes 8-byte alignment for a binary that actually uses 4-byte alignment, breaking local variable views.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Data' 'Types'? (Select all that apply)",
+    "options": {
+      "A": "Function Pointers",
+      "B": "Unions",
+      "C": "Bitfields",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Binary' 'Diffing' in Ghidra?",
+    "options": {
+      "A": "Comparing two binaries to see the technical differences (e.g., finding the changes made in a security patch).",
+      "B": "Diffing a person named Binary.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Operations', what is 'Dynamic' 'Analysis' 'Integration' (like using the Ghidra Debugger)?",
+    "options": {
+      "A": "Executing the binary in real-time while using Ghidra to inspect memory and registers as they change.",
+      "B": "Hiring a person named Dynamic.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in malware analysis refers to a timeline that ignores the time needed for complex environmental setup (sandboxing).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Pattern' 'Matching'? (Select all that apply)",
+    "options": {
+      "A": "Using YARA rules inside Ghidra",
+      "B": "Running scripts to find known cryptographic constants",
+      "C": "Guaranteed to stop all malware",
+      "D": "Searching for common 'NOP' sleds"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Obfuscation' 'Bypass'?",
+    "options": {
+      "A": "Walking through a physical wall.",
+      "B": "The technical process of simplifying or removing junk code to reveal the original program flow.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in RE?",
+    "options": {
+      "A": "Traceability of a person named Requirement.",
+      "B": "Mapping identified code functions back to the suspected high-level business or malicious requirements.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when an analyst assumes a network call uses HTTP, but it actually uses a custom, encrypted proprietary protocol.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Reverse' 'Engineering' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Vulnerability count per binary analyzed",
+      "B": "Average hours spent per high-priority sample",
+      "C": "Success rate of automated triage scripts",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Artifact' 'Inventory' in a malware project?",
+    "options": {
+      "A": "A list of all identified files, IPs, domains, and registry keys found within the binary during analysis.",
+      "B": "An inventory of physical chairs in the office.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) in malware triage?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from the receipt of a sample until a high-level warning is sent to the incident response team.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' 'Assumptions' occur when analyzing firmware designed for an embedded device while assuming standard desktop PC memory layouts.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'De-obfuscation' 'Scripts'? (Select all that apply)",
+    "options": {
+      "A": "Automatically renaming 'junk' functions",
+      "B": "Simplifying control flow via symbolic execution",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Resolving dynamic API imports"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' 'Fidelity'?",
+    "options": {
+      "A": "How accurately the intermediate representation (P-Code) reflects the nuances of the original assembly language.",
+      "B": "The fidelity of a person named Code.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Maturity' score?",
+    "options": {
+      "A": "The age of a person named Symbol.",
+      "B": "A rating of how much of a program has been properly labeled and understood compared to raw assembly.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in a debugger occur when the target process is much faster than the debugger's ability to update the UI, causing lag.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Assessment' for binaries? (Select all that apply)",
+    "options": {
+      "A": "Identifying 'Taint' from external input to sensitive functions",
+      "B": "Searching for use-after-free patterns",
+      "C": "Testing if the keyboard is physically broken",
+      "D": "Verifying the presence of stack cookies/canaries"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a binary module?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "When a module uses internal, non-exported functions to perform sensitive work, making it harder to find from the outside.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Complexity' for a binary?",
+    "options": {
+      "A": "A weighted score based on function count, cross-references, and obfuscation density.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when trying to run 100 headless Ghidra instances on a server with only 4 CPU cores, causing a massive performance bottleneck.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reporting' 'Artifacts' in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Exported C headers for analyzed structures",
+      "B": "Function call graphs in SVG format",
+      "C": "Guaranteed to replace all security engineers",
+      "D": "Summary logs of all identified strings and constants"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Framework' 'Bootstrap' in a custom Ghidra script environment?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A set of base classes and utilities used to quickly develop new, standardized analysis scripts for a team.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) a malicious sample?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The duration from sample discovery until its command-and-control behavior is identified and blocked on the network.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a triage script produces 10GB of data for a 10KB binary, making the report unreadable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Malware' 'Classification'? (Select all that apply)",
+    "options": {
+      "A": "Using 'SSDEEP' or 'TLSH' for fuzzy matching",
+      "B": "Identifying malware family based on shared code snippets",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Checking if the file is an .exe or .dll"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Binary' 'Logic' 'Drift'?",
+    "options": {
+      "A": "When the functionality of a binary changes slightly between minor versions, making previous analysis outdated.",
+      "B": "A drift made of physical binaries.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Coverage' in RE?",
+    "options": {
+      "A": "The percentage of suspected malware capabilities that have been technically verified through reverse engineering.",
+      "B": "Coverage of a person named Requirement.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scale' in a Ghidra project refers to a single project file that grows to 100GB, making the UI unstable.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "When writing a custom Ghidra script to perform 'Taint Analysis', which internal API is primarily used to track how data moves through the processor's registers and memory locations via P-Code micro-operations?",
+    "options": {
+      "A": "The FlatProgramAPI",
+      "B": "The PcodeOp and Varnode objects",
+      "C": "The SymbolTable manager",
+      "D": "The HexEditor component"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Ghidra's SLEIGH language, 'Context' variables allow the disassembler to change its parsing behavior dynamically based on previous instructions, which is essential for architectures with variable-length instructions or mode switching (e.g., ARM/Thumb).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Control Flow De-virtualization' in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Identifying the central dispatcher loop of a custom virtual machine",
+      "B": "Mapping virtual opcodes to their underlying P-Code handlers",
+      "C": "Automatically rewriting the binary to remove the virtual layer",
+      "D": "Changing the UI theme to 'High Contrast' mode"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the technical objective of 'Symbolic Execution' integration with Ghidra's P-Code engine?",
+    "options": {
+      "A": "To translate assembly code into a physical book of symbols.",
+      "B": "To mathematically determine the inputs required to reach a specific code path or trigger a vulnerability by treating variables as symbols instead of fixed values.",
+      "C": "A specialized software for architects to design 3D models.",
+      "D": "To increase the frame rate of the decompiler window."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Malware Analysis', what is the 'Stalemate' problem when analyzing a heavily packed binary with Ghidra?",
+    "options": {
+      "A": "When the analyst and the malware developer are the same person.",
+      "B": "When the static analysis tool cannot resolve the entry point because the code is decrypted only at runtime in memory, requiring a memory dump or emulation.",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the size of the font on the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Ghidra Software Analyzer' can be extended to support entirely new, proprietary processor architectures by writing a new .slaspec file without modifying the core Java source code.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Data Type' challenge occurs when analyzing a C++ binary in Ghidra regarding the 'vtable'?",
+    "options": {
+      "A": "The lack of available RAM.",
+      "B": "The difficulty in automatically mapping indirect function calls through the virtual function table back to the correct class method.",
+      "C": "The physical speed of the keyboard being too slow.",
+      "D": "Compilers automatically deleting any code that contains a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Eclipse GhidraDev' plugin primarily used for?",
+    "options": {
+      "A": "To watch solar eclipses from the office.",
+      "B": "To provide a professional integrated development environment (IDE) for writing and debugging complex Ghidra scripts and plugins in Java.",
+      "C": "A specialized tool for measuring light levels.",
+      "D": "To increase the frame rate of the UI animations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Advanced' P-Code micro-operations? (Select all that apply)",
+    "options": {
+      "A": "CALLIND (Indirect Call)",
+      "B": "LOAD / STORE (Memory access)",
+      "C": "INT_ADD / INT_SUB (Integer math)",
+      "D": "PRINT_DOCUMENT"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Calling' 'Conventions' in a complex binary can lead to the 'Stack Depth' analyzer failing, causing the decompiler to produce incorrect or missing logic for an entire function tree.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Function' 'Emulation' using the 'Ghidra Emulator' component?",
+    "options": {
+      "A": "Hiring a person to emulate a function.",
+      "B": "Executing a small piece of code within Ghidra's own memory space to observe its effects on registers and data without running the full binary on a host system.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Ghidra' 'Headless' 'Server' orchestration?",
+    "options": {
+      "A": "Running a cluster of Ghidra instances without UIs to process massive malware repositories and store the results in a shared database.",
+      "B": "Running a server without a manager.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'Advanced' vulnerability research technique involves identifying code blocks that are technically reachable but never executed during normal program operation (Dead Code)?",
+    "options": {
+      "A": "Dynamic Tracing",
+      "B": "Static Unreachability Analysis",
+      "C": "Manual Guessing",
+      "D": "Increasing the speed of the CPU"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Relocation' 'Tables' occur when Ghidra fails to process the relocation information in an ELF or PE file, leading to broken global variable references and incorrect cross-references.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'De-packing' strategy in Ghidra? (Select all that apply)",
+    "options": {
+      "A": "Identifying the OEP (Original Entry Point)",
+      "B": "Using a script to dump the decrypted memory segment",
+      "C": "Fixing the PE header of the dumped file",
+      "D": "Buying physical snack for the analysts"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'P-Code' 'Injection' in the context of custom architecture support?",
+    "options": {
+      "A": "Injecting actual medicine into a computer.",
+      "B": "Adding custom micro-operations into the instruction stream to model complex hardware behaviors or side effects that standard disassembly misses.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Exploits' (MTBE) in vulnerability research?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the efficiency of a research team in successfully converting identified bugs into stable proof-of-concept exploits.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Instruction' 'Sets' occur when an analyst attempts to use a Ghidra 32-bit x86 definition to analyze a binary that utilizes 64-bit long-mode instructions, resulting in 'invalid opcode' errors.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Pattern' 'Recognition' for crypto-analysis? (Select all that apply)",
+    "options": {
+      "A": "Searching for S-Box constants (e.g., AES or DES tables)",
+      "B": "Identifying BigNumber math library signatures",
+      "C": "Guaranteed to decrypt any file automatically",
+      "D": "Detection of 'Magic Constants' used in hash functions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Binary' 'Lifting' and why is it critical for multi-architecture support in Ghidra?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The process of abstracting raw assembly into a higher-level intermediate representation (P-Code) so that analysis algorithms can work regardless of the CPU type.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Vulnerability' 'Criticality' 'Aggregation'?",
+    "options": {
+      "A": "The process of combining multiple 'Low' or 'Medium' severity code flaws into a single high-impact exploit chain (e.g., Info Leak + Buffer Overflow).",
+      "B": "A chain made of physical locks.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Ownership' in a collaborative Ghidra project occurs when one analyst's script produces so much data it overwrites the logs of other analysts on the shared server.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Reverse' 'Engineering' 'KPIs'? (Select all that apply)",
+    "options": {
+      "A": "Percentage of binary code understood (Reversed vs Total)",
+      "B": "Number of zero-day vulnerabilities identified per quarter",
+      "C": "Total number of comments added to the database",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Data' 'Flow' 'Graph' (DFG) analysis in Ghidra?",
+    "options": {
+      "A": "Graphing the flow of water in a data center.",
+      "B": "A visualization that tracks the movement and transformation of data between registers and memory to identify how inputs influence critical program state.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Requirement' 'Traceability' in a malware context?",
+    "options": {
+      "A": "Mapping specific technical code functions found in Ghidra back to the suspected operational goals of the malware (e.g., 'Exfiltration' or 'Persistence').",
+      "B": "Traceability of a person named Requirement.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' in exploitation refer to using an HTTP-based reverse engineer script on a binary that actually communicates via a custom encrypted UDP protocol.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'De-obfuscation' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Complexity of resolving 'Control Flow Flattening'",
+      "B": "Removing 'Junk Code' without affecting the actual logic",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Resolving multi-stage dynamic API resolutions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SLEIGH' 'Compiler' 'Optimization'?",
+    "options": {
+      "A": "Optimizing a physical winter sled.",
+      "B": "The process of ensuring the processor specification file is efficient so that disassembly and decompilation do not consume excessive CPU during analysis.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Exploit' (MTTE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the identification of a potential vulnerability in Ghidra until a reliable exploit is developed.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in reverse engineering refers to a project timeline that ignores the time needed for complex binary manual triage.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'Ghidra' 'Scripting' 'Capabilities'? (Select all that apply)",
+    "options": {
+      "A": "Dynamic manipulation of the memory map via scripts",
+      "B": "Automated generation of GDB/Windbg commands",
+      "C": "Integration with external SMT solvers like Z3",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Binary' 'Hardening' 'Verification'?",
+    "options": {
+      "A": "Verifying that a physical computer is hard enough.",
+      "B": "Using Ghidra to check if a binary was compiled with security protections like Stack Canaries, DEP, and ASLR support.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Attack' 'Surface' 'Convergence' in reverse engineering?",
+    "options": {
+      "A": "The point at which physical, human, and digital vulnerabilities overlap to create a single high-risk exploit path discovered through binary analysis.",
+      "B": "A person named Convergence attacking.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Structures' occur when an analyst incorrectly defines a 'struct' in Ghidra, leading to the decompiler misinterpreting subsequent memory offsets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Firmware' 'Analysis' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Identifying the base load address before analysis",
+      "B": "Using scripts to find common hardware peripheral registers",
+      "C": "Guaranteed to replace all human reverse engineers",
+      "D": "Scanning for embedded strings and secret keys"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in a binary module?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The use of complex, non-exported internal functions to perform sensitive work, intended to make reverse engineering more difficult.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) for a malware sample?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The duration from the initial discovery of a malicious sample until its command-and-control (C2) logic is reverse-engineered and blocked.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in a debugger occur when the target process is executing much faster than the Ghidra UI's ability to refresh the register state.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Vulnerability' 'Research' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Incident Response Team",
+      "B": "Vulnerability Management Office",
+      "C": "Application Security Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Code' 'Lifting' 'Significance' for automated triage?",
+    "options": {
+      "A": "Lifting a physical computer.",
+      "B": "Translating assembly into a standard IR like P-Code allows triage scripts to identify common vulnerability patterns regardless of the target architecture.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Symbol' 'Maturity' in an analysis project?",
+    "options": {
+      "A": "The percentage of identified functions that have been manually labeled and verified by an analyst compared to those labeled by auto-analysis.",
+      "B": "The age of a person named Symbol.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when running too many Ghidra headless instances on a single server, leading to disk I/O thrashing during project database writes.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Reverse' 'Engineering' 'Limitations'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in resolving complex indirect branches dynamically",
+      "B": "Inability to understand the high-level 'Intent' of proprietary logic",
+      "C": "Guaranteed to replace all human reverse engineers",
+      "D": "Risk of 'Analysis Paralysis' with extremely large binaries"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'P-Code' 'Interpreter' vs 'P-Code' 'Emulator'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "An interpreter reads micro-ops statically to understand logic; an emulator executes them in a virtual state to track register changes.",
+      "C": "Interpreter is for experts; Emulator for beginners.",
+      "D": "Emulator is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Triage' (MTTT)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from the receipt of a unknown binary until an analyst can determine its high-level classification (Safe vs. Malicious).",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when code optimized for a legacy 32-bit OS is analyzed with a 64-bit Ghidra definition, causing stack offset corruption.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Vulnerability' 'Reporting' 'Artifacts'? (Select all that apply)",
+    "options": {
+      "A": "Exported C snippets of identified vulnerable functions",
+      "B": "Function call graphs highlighting vulnerable data paths",
+      "C": "Guaranteed to replace all security researchers",
+      "D": "YARA rules generated from identified malicious patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Instruction' 'Normalization'?",
+    "options": {
+      "A": "Normalizing a physical instruction manual.",
+      "B": "The process of converting architecture-specific assembly into a uniform intermediate language (P-Code) for cross-platform analysis.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Binary' 'Entropy' significance?",
+    "options": {
+      "A": "A measure used to detect packed or encrypted sections of a binary, indicating where manual de-packing effort is needed.",
+      "B": "The physical decay of a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in vulnerability research occur when the remediation timeline is based on 'Bug Discovery' rather than 'Exploitation Probability'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Reverse' 'Engineering' 'Tools' besides Ghidra? (Select all that apply)",
+    "options": {
+      "A": "IDA Pro",
+      "B": "Binary Ninja",
+      "C": "Radare2",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive' 'Descent' 'Disassembly'?",
+    "options": {
+      "A": "A physical descent down a flight of stairs.",
+      "B": "A disassembly strategy that follows the logical flow of the program (jumps and calls) to discover code, as opposed to linear sweeping.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Vulnerabilities' (MTBV)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the rate at which an analyst discovers exploitable flaws during a deep-dive reverse engineering project.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Stack' 'Alignment' occurs when Ghidra assumes a 4-byte stack alignment for a binary that actually utilizes 16-byte alignment (common in modern 64-bit calling conventions).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Binary' 'De-obfuscation' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Reducing the manual time required to read 'Junk' instructions",
+      "B": "Improving the accuracy of the decompiler's high-level output",
+      "C": "Guaranteed to replace all human reverse engineers",
+      "D": "Enabling more effective automated vulnerability scanning"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'P-Code' 'Slicing'?",
+    "options": {
+      "A": "Slicing a physical piece of paper.",
+      "B": "The automated process of isolating only the P-Code operations that contribute to the value of a specific variable at a specific location.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Efficiency' for a reverse engineering tool?",
+    "options": {
+      "A": "The ratio of automated insights to manual effort required to complete a complex analysis project.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' in Ghidra occur when an analyst uses a 2024 SLEIGH definition for a legacy processor architecture that has changed its instruction encoding over time.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Malware' 'Family' 'Identification'? (Select all that apply)",
+    "options": {
+      "A": "Matching code 'Fuzzy Hashes' against known samples",
+      "B": "Identifying shared proprietary C2 communication logic",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Correlating unique mutex or registry key patterns"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Ghidra' 'Script' 'Portability'?",
+    "options": {
+      "A": "Carrying a physical script in a suitcase.",
+      "B": "The ability of an analysis script to run correctly across different versions of Ghidra and different OS platforms (Windows/Linux/Mac).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) threshold in research?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The maximum allowed duration between the initial identification of a vulnerability in Ghidra and the team being notified to begin exploit validation.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Logging' 'Verbosity' occurs when a researcher's debug script produces 100GB of log data for a small IoT firmware, crashing the research workstation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Reverse' 'Engineering' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Malware Research Lead",
+      "B": "Product Security Engineer",
+      "C": "CSIRT (Incident Response)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'P-Code' 'Refinement' in the decompiler pipeline?",
+    "options": {
+      "A": "Refining actual physical sugar.",
+      "B": "The systematic process of applying logic optimizations (like constant folding and dead code elimination) to raw P-Code to produce cleaner high-level C code.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Vulnerability' 'Findings' (MTBF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of code analysis before a new exploitable flaw is identified by the team.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in vulnerability disclosure occur when the business expects a vendor to fix a bug in 24 hours while the research team requires 90 days for full verification.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Binary' 'Logic' 'Analysis' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Faster identification of complex 'Attack Chains'",
+      "B": "Consistent labeling of common code patterns across binaries",
+      "C": "Guaranteed to replace all human researchers",
+      "D": "Reduction in manual administrative work for analysts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Binary' 'Static' 'Triage' 'Significance'?",
+    "options": {
+      "A": "A quick, initial assessment to prioritize high-risk binaries for deep-dive reverse engineering based on suspicious imports or constants.",
+      "B": "Triaging a person named Binary.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  }
+  ]
+}

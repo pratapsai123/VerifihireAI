@@ -3,61 +3,23 @@ import { flushSync } from 'react-dom';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/Header';
+import { API_BASE_URL } from '../apiConfig';
+import { SHARED_ROLES, STORAGE_KEYS } from '../utils/assessmentConstants';
 import '../styles/MultipleChoiceQuestion.css';
-
-// Django API base URL
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
 
 function MultipleChoiceQuestion() {
   const navigate = useNavigate();
   const location = useLocation();
-  const assessmentContext = location.state || null;
-  const assessmentOptions = [
-    'Python',
-    'Java',
-    'Java Full Stack',
-    'Python Full Stack',
-    'JavaScript',
-    'TypeScript',
-    'Frontend Development',
-    'Backend Development',
-    'Full Stack (MERN)',
-    'Full Stack (MEAN)',
-    'React',
-    'Angular',
-    'Vue.js',
-    'Node.js',
-    '.NET',
-    'C#',
-    'C++',
-    'Go',
-    'PHP',
-    'Ruby on Rails',
-    'Mobile Development',
-    'Android',
-    'iOS',
-    'React Native',
-    'Flutter',
-    'DevOps',
-    'AWS',
-    'Azure',
-    'GCP',
-    'Kubernetes',
-    'Data Engineering',
-    'Data Science',
-    'Machine Learning',
-    'AI / GenAI',
-    'Cyber Security',
-    'QA Manual',
-    'QA Automation',
-    'Salesforce',
-    'SAP',
-    'Power BI',
-    'Tableau',
-    'UI/UX Design',
-    'Product Management',
-    'Business Analyst',
-  ];
+  // State preservation: Use location.state or fallback to a dedicated storage key if available
+  const assessmentContext = location.state || (window.location.hash.includes('review') ? null : JSON.parse(localStorage.getItem('temp_assessment_context')));
+
+  // Persist context to handle refreshes
+  React.useEffect(() => {
+    if (location.state) {
+      localStorage.setItem('temp_assessment_context', JSON.stringify(location.state));
+    }
+  }, [location.state]);
+  const assessmentOptions = SHARED_ROLES;
 
   const initialAnswers = [
     { label: 'A', text: '', isCorrect: false },
@@ -67,7 +29,7 @@ function MultipleChoiceQuestion() {
   ];
 
   const [description, setDescription] = useState('');
-  const [assessmentName, setAssessmentName] = useState('');
+  const [assessmentName, setAssessmentName] = useState(assessmentContext?.assessmentName || '');
   const [topicSkill, setTopicSkill] = useState('');
   const [answers, setAnswers] = useState(initialAnswers);
   const [experienceLevel, setExperienceLevel] = useState('');
@@ -77,14 +39,15 @@ function MultipleChoiceQuestion() {
 
   const getTimeError = (value) => {
     const text = (value || '').trim();
-    if (!text) return 'Time to answer is required.';
+    if (!text) return null; // don't show inline error for empty — checked on Save
     const match = text.match(/^(\d{1,2}):(\d{2})$/);
-    if (!match) return 'Time must be in mm:ss format (example: 05:30).';
+    if (!match) return 'Time must be in mm:ss format (example: 01:30).';
     const minutes = Number(match[1]);
     const seconds = Number(match[2]);
     if (Number.isNaN(minutes) || Number.isNaN(seconds)) return 'Invalid time value.';
     if (minutes > 59) return 'Minutes cannot exceed 59.';
     if (seconds > 59) return 'Seconds cannot exceed 59.';
+    if (minutes === 0) return 'Minimum time is 1 minute. Please enter at least 01:00.';
     return null;
   };
 
@@ -168,9 +131,15 @@ function MultipleChoiceQuestion() {
   };
 
   const handleSave = async () => {
-    if (!assessmentContext?.customAssessmentId) {
+    const caid = assessmentContext?.customAssessmentId ||
+      assessmentContext?.id ||
+      localStorage.getItem(STORAGE_KEYS.DRAFT_ID) ||
+      localStorage.getItem('draftCustomAssessmentId') ||
+      (JSON.parse(localStorage.getItem('temp_assessment_context') || '{}'))?.customAssessmentId;
+
+    if (!caid) {
       // eslint-disable-next-line no-alert
-      alert('Custom assessment ID not found. Please go back to Review page and try again.');
+      alert(`Custom assessment ID not found (debug: state=${Boolean(location.state)} store=${Boolean(localStorage.getItem('draftCustomAssessmentId'))}). Please go back to the first page (Custom Assessment) and try again.`);
       return;
     }
 
@@ -197,6 +166,11 @@ function MultipleChoiceQuestion() {
     if (!experienceLevel) {
       // eslint-disable-next-line no-alert
       alert('Please select Experience Level.');
+      return;
+    }
+    if (!timeToAnswer || !timeToAnswer.trim()) {
+      // eslint-disable-next-line no-alert
+      alert('Please enter Time to answer.');
       return;
     }
     const currentTimeError = getTimeError(timeToAnswer);
@@ -233,7 +207,7 @@ function MultipleChoiceQuestion() {
       // ignore
     }
     const payload = {
-      custom_assessment_id: assessmentContext.customAssessmentId,
+      custom_assessment_id: caid,
       assessment,
       topic,
       question_type: 'MCQ',
@@ -253,9 +227,9 @@ function MultipleChoiceQuestion() {
       setIsSaving(true);
       await axios.post(`${API_BASE_URL}/questions/create/`, payload);
       // go back to Review page so the saved question appears there
-      navigate('/review-assessment', { state: assessmentContext });
+      navigate('/review-assessment', { state: { ...assessmentContext, refreshManual: true, onlyManual: false } });
     } catch (error) {
-    // eslint-disable-next-line no-console
+      // eslint-disable-next-line no-console
       console.error('Error saving MCQ:', error);
       const message =
         error.response?.data?.error ||
@@ -338,9 +312,8 @@ function MultipleChoiceQuestion() {
                         style={{ display: 'none' }}
                       />
                       <span
-                        className={`mcq-answer-label${
-                          answer.isCorrect ? ' mcq-answer-label--selected' : ''
-                        }`}
+                        className={`mcq-answer-label${answer.isCorrect ? ' mcq-answer-label--selected' : ''
+                          }`}
                       >
                         {answer.label}
                       </span>
@@ -366,13 +339,13 @@ function MultipleChoiceQuestion() {
                 ))}
               </div>
               {answers.length < 4 && (
-              <button
-                type="button"
-                className="mcq-add-choice"
-                onClick={handleAddChoice}
-              >
-                + Add new answer choice
-              </button>
+                <button
+                  type="button"
+                  className="mcq-add-choice"
+                  onClick={handleAddChoice}
+                >
+                  + Add new answer choice
+                </button>
               )}
             </div>
 
@@ -424,7 +397,7 @@ function MultipleChoiceQuestion() {
                   value={experienceLevel}
                   onChange={(e) => setExperienceLevel(e.target.value)}
                 >
-                  <option value="">Select experience level</option>
+                  <option value="" disabled hidden>Select experience level</option>
                   <option value="entry">Entry Level (0-2 years)</option>
                   <option value="mid">Mid Level (2-5 years)</option>
                   <option value="senior">Senior Level (5-10 years)</option>
@@ -452,7 +425,7 @@ function MultipleChoiceQuestion() {
                     {timeError}
                   </p>
                 ) : (
-                  <p className="mcq-hint">Example: 01:30. Max allowed: 59:59.</p>
+                  <p className="mcq-hint">Min: 01:00. Max allowed: 59:59.</p>
                 )}
               </div>
             </div>

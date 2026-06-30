@@ -1,0 +1,1965 @@
+{ 
+  "skill": "Big Data", 
+  "questions": [
+    {
+    "question": "What is the primary characteristic of 'Big Data' often referred to as 'Volume'?",
+    "options": {
+      "A": "The speed at which data is generated.",
+      "B": "The sheer amount of data generated from various sources.",
+      "C": "The different formats of data available.",
+      "D": "The physical weight of the storage servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of Big Data, what does 'Velocity' refer to?",
+    "options": {
+      "A": "The accuracy of the data being processed.",
+      "B": "The speed at which new data is generated and moves through the pipeline.",
+      "C": "The variety of data sources.",
+      "D": "The rotation speed of the hard drive platters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Variety' in Big Data means that data can be structured, semi-structured, or unstructured (like images and videos).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for social media data",
+      "D": "Only if using a 64-bit system"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'HDFS' stand for in the Apache Hadoop ecosystem?",
+    "options": {
+      "A": "High-Density File System",
+      "B": "Hadoop Distributed File System",
+      "C": "Hardware Dynamic Folder System",
+      "D": "Hyper-Digital File Store"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the main role of 'MapReduce' in the Hadoop framework?",
+    "options": {
+      "A": "To create a physical map of the data center.",
+      "B": "A programming model used for processing large data sets in parallel across a cluster.",
+      "C": "To reduce the physical size of the CPU.",
+      "D": "To act as a secondary firewall for the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Apache Spark is generally faster than Hadoop MapReduce because it performs processing in-memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Python developers",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is considered 'Unstructured Data'?",
+    "options": {
+      "A": "A SQL table with rows and columns.",
+      "B": "An Excel spreadsheet.",
+      "C": "A collection of raw video files and social media posts.",
+      "D": "A comma-separated value (CSV) file."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is a 'Data Lake' primarily used for?",
+    "options": {
+      "A": "Storing only structured financial data.",
+      "B": "Storing vast amounts of raw data in its native format until it is needed for analysis.",
+      "C": "A cooling system for the server room.",
+      "D": "A specialized software for drawing flowcharts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Veracity' refers to the reliability and quality (truthfulness) of the data being analyzed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for government data",
+      "D": "Only if using AI"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a Hadoop cluster is responsible for managing resources and scheduling jobs?",
+    "options": {
+      "A": "HDFS",
+      "B": "YARN (Yet Another Resource Negotiator)",
+      "C": "Hive",
+      "D": "Pig"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NoSQL' in the context of Big Data storage?",
+    "options": {
+      "A": "A database that does not allow the word 'SQL' in queries.",
+      "B": "A non-relational database designed to provide high performance and scalability for large data sets.",
+      "C": "A specialized tool for cleaning keyboards.",
+      "D": "A backup of the entire database on tape."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Horizontal Scaling (Scaling Out) means adding more nodes (servers) to a cluster to handle more data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for cloud-native apps",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Hive' used for?",
+    "options": {
+      "A": "To play video games on the cluster.",
+      "B": "To provide a data warehouse-like structure and allow users to query data in Hadoop using a SQL-like language (HQL).",
+      "C": "To encrypt the BIOS of the server.",
+      "D": "To monitor the room temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, what is a 'DataNode' responsible for?",
+    "options": {
+      "A": "Directing the cluster's management traffic.",
+      "B": "Storing the actual blocks of data as instructed by the NameNode.",
+      "C": "Processing all user login requests.",
+      "D": "Updating the cluster's firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Big Data analytics can be used to predict future trends based on historical patterns.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for stock markets",
+      "D": "Only for weather forecasting"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Value' characteristic of Big Data focus on?",
+    "options": {
+      "A": "The cost of the hardware.",
+      "B": "The ability to turn data into meaningful insights that benefit the business.",
+      "C": "The numerical value of every individual data point.",
+      "D": "The salary of the data engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific tool is often used to 'ingest' data from relational databases into Hadoop?",
+    "options": {
+      "A": "Apache Sqoop",
+      "B": "Adobe Reader",
+      "C": "Microsoft Excel",
+      "D": "WinZip"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Semi-structured Data' (like JSON or XML) contains tags or markers to separate data elements but does not follow a strict tabular schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for web APIs",
+      "D": "Only if encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Real-time Processing' in a Big Data context?",
+    "options": {
+      "A": "Processing data in large batches at night.",
+      "B": "The immediate processing of data as it is received to produce nearly instantaneous insights.",
+      "C": "Turning off the server during the day.",
+      "D": "Measuring the weight of the server rack in real-time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular 'Streaming' processing framework?",
+    "options": {
+      "A": "Apache Flink",
+      "B": "Apache Kafka",
+      "C": "Spark Streaming",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Hadoop is designed to run on 'Commodity Hardware' (low-cost, standard servers).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-commercial use",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Data Scientist' primarily responsible for?",
+    "options": {
+      "A": "Building server racks.",
+      "B": "Analyzing and interpreting complex data to help make informed business decisions.",
+      "C": "Fixing network cables.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, what is the role of the 'NameNode'?",
+    "options": {
+      "A": "To name the physical servers.",
+      "B": "To act as the 'Master' that manages the file system namespace and controls access to files by clients.",
+      "C": "To encrypt the database password.",
+      "D": "To monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Schema on Read' means the structure of the data is applied when the data is queried, rather than when it is stored.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a benefit of using a 'Distributed System' for Big Data?",
+    "options": {
+      "A": "Fault Tolerance (if one node fails, the data is still safe).",
+      "B": "High Availability.",
+      "C": "Parallel Processing speed.",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'ETL'?",
+    "options": {
+      "A": "Encryption, Transmission, Logic",
+      "B": "Extract, Transform, Load",
+      "C": "Electronic Tool Level",
+      "D": "Export, Transfer, Layout"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Key-Value' store is a type of NoSQL database that stores data as a collection of key-value pairs.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Redis",
+      "D": "Only for metadata"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Kafka' primarily used for?",
+    "options": {
+      "A": "To edit photos.",
+      "B": "A distributed event streaming platform used for high-performance data pipelines and streaming analytics.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Column-oriented' NoSQL database?",
+    "options": {
+      "A": "Apache Cassandra",
+      "B": "MySQL",
+      "C": "PostgreSQL",
+      "D": "Oracle"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Machine Learning' is often applied to Big Data to find hidden patterns and make predictions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "Deleting data from a database.",
+      "B": "The process of moving data from source systems into a storage or processing system (like a Data Lake).",
+      "C": "A tool used for measuring network speed.",
+      "D": "The brand name of a popular monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that a Hadoop cluster is healthy and all data is accessible?",
+    "options": {
+      "A": "OK / Healthy",
+      "B": "Green",
+      "C": "Active",
+      "D": "Up"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Batch Processing' is the execution of a series of jobs in a program at a scheduled time without manual intervention.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Cluster' in Big Data terminology?",
+    "options": {
+      "A": "A single, very powerful computer.",
+      "B": "A group of interconnected servers that work together to perform processing and storage tasks.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The salary of a senior engineer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Big Data' file format optimized for storage and query speed?",
+    "options": {
+      "A": "TXT",
+      "B": "Parquet",
+      "C": "DOCX",
+      "D": "MP3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Metadata' is data that describes other data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for text logs",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Zookeeper' used for in a Big Data cluster?",
+    "options": {
+      "A": "To feed the animals in the office.",
+      "B": "A coordination service for distributed applications used to manage configuration and synchronization.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the alert database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment Analysis'?",
+    "options": {
+      "A": "Measuring the weight of the data center.",
+      "B": "Using Big Data and AI to determine the emotional tone behind a body of text (e.g., social media posts).",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Elasticity' is the ability of a system to quickly scale resources up or down based on demand.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predictive Analytics'?",
+    "options": {
+      "A": "Naming the servers after famous people.",
+      "B": "The use of data, statistical algorithms, and ML techniques to identify the likelihood of future outcomes.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the NameNode Web UI in Hadoop 3.x?",
+    "options": {
+      "A": "9870",
+      "B": "50070",
+      "C": "8088",
+      "D": "19888"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Mining' is the process of discovering patterns and knowledge from large amounts of data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL data",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Oozie' primarily used for?",
+    "options": {
+      "A": "Writing code.",
+      "B": "A workflow scheduler system to manage Apache Hadoop jobs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Document' NoSQL database?",
+    "options": {
+      "A": "MongoDB",
+      "B": "MySQL",
+      "C": "Oracle",
+      "D": "SQLite"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: HDFS creates multiple copies (replicas) of each data block to ensure reliability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for production data",
+      "D": "Only if the server is in a remote location"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "The speed of the network bandwidth.",
+      "B": "The overall management of data availability, usability, integrity, and security in an enterprise.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Apache Spark SQL'?",
+    "options": {
+      "A": "A new programming language.",
+      "B": "A Spark module for structured data processing that allows you to use SQL queries within Spark applications.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The number of users currently active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Latency' refers to the time it takes for data to travel from its source to its destination.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache HBase'?",
+    "options": {
+      "A": "A way to backup the server.",
+      "B": "A distributed, non-relational database that runs on top of HDFS.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to check the 'Uptime' of a Hadoop cluster?",
+    "options": {
+      "A": "Cluster Active Time",
+      "B": "system.uptime",
+      "C": "The color of the dashboard",
+      "D": "The physical weight of the rack"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Big Data is only used in the technology sector.",
+    "options": {
+      "A": "False (It is used across healthcare, finance, retail, manufacturing, etc.).",
+      "B": "True",
+      "C": "Only in version 1.0",
+      "D": "Only for startups"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Visualization'?",
+    "options": {
+      "A": "The graphical representation of information and data to help people understand its significance.",
+      "B": "Watching a server rack physically.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common 'Cloud' platform for Big Data analytics?",
+    "options": {
+      "A": "AWS (Amazon Web Services)",
+      "B": "Google Cloud Platform",
+      "C": "Microsoft Azure",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Throughput' is the rate at which a system processes data over a specific period.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Mahout' primarily used for?",
+    "options": {
+      "A": "Writing emails.",
+      "B": "Building scalable machine learning algorithms on Hadoop.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with 'SSH' management of a Hadoop node?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Big Data storage systems are often 'distributed', meaning data is spread across many different servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for bank data",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Privacy'?",
+    "options": {
+      "A": "The area of data management that deals with the proper handling and protection of sensitive personal data.",
+      "B": "Hiding the data in a literal safe.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' tasks in a Spark application?",
+    "options": {
+      "A": "Active Tasks",
+      "B": "Throughput",
+      "C": "Latency",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Analytics' is the process of examining data sets to draw conclusions about the information they contain.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Apache Ambari' primarily used for?",
+    "options": {
+      "A": "To play music.",
+      "B": "To provision, manage, and monitor Apache Hadoop clusters.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'HTTPS' traffic?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' is a critical requirement for Big Data systems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 5 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Computing'?",
+    "options": {
+      "A": "A field of computer science that studies systems where multiple computers communicate and coordinate their actions by passing messages.",
+      "B": "Calculating numbers by hand.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers between rooms."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'CPU' usage in a cluster?",
+    "options": {
+      "A": "CPU Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Integration' involves combining data from several different sources to provide a unified view.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "According to the CAP Theorem, which two properties do traditional relational databases (RDBMS) typically prioritize in the event of a network partition?",
+    "options": {
+      "A": "Availability and Partition Tolerance",
+      "B": "Consistency and Availability",
+      "C": "Consistency and Partition Tolerance",
+      "D": "Scalability and Variety"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary architectural difference between an Apache Spark 'DataFrame' and an 'RDD' (Resilient Distributed Dataset)?",
+    "options": {
+      "A": "RDDs are only for SQL; DataFrames are for machine learning.",
+      "B": "DataFrames have a defined schema and allow the Spark Catalyst Optimizer to improve query performance, while RDDs are lower-level collections of objects.",
+      "C": "RDDs are stored in-memory; DataFrames are always stored on disk.",
+      "D": "DataFrames can only be used with Python."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a Kafka cluster, a 'Consumer Group' allows multiple consumers to divide the work of reading from a topic, ensuring each message is processed by only one member of the group.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if there is one partition",
+      "D": "Only if using the Avro schema"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technique is used in HDFS to ensure that a file's metadata is preserved if the NameNode hardware fails?",
+    "options": {
+      "A": "DataNode replication",
+      "B": "Checkpointing to a Secondary NameNode or using a Standby NameNode with shared storage.",
+      "C": "Increasing the number of YARN containers.",
+      "D": "Encrypting the hard drives."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Bucketing' (Clustering) in a Big Data table, such as in Apache Hive or Spark?",
+    "options": {
+      "A": "To delete old data points automatically.",
+      "B": "To organize data into a fixed number of files based on a hash of a column, which can significantly speed up JOIN operations between large tables.",
+      "C": "To encrypt the table schema.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which architectural pattern uses both a 'Batch Layer' (for historical accuracy) and a 'Speed Layer' (for real-time insights) to process data?",
+    "options": {
+      "A": "Lambda Architecture",
+      "B": "Kappa Architecture",
+      "C": "Monolithic Architecture",
+      "D": "Microservices Architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In Apache Cassandra, a 'Compaction' process is necessary to merge SSTables and permanently remove data marked with 'Tombstones'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted tables",
+      "D": "Only if using fiber optic cables"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'JobTracker' (in Hadoop 1.x) or 'ResourceManager' (in Hadoop 2.x/3.x)?",
+    "options": {
+      "A": "To store the data blocks.",
+      "B": "To manage the allocation of cluster resources (CPU/RAM) among competing applications.",
+      "C": "To act as a firewall for the HDFS.",
+      "D": "To backup the system logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark, what is a 'Shuffle' operation and why is it generally avoided when possible?",
+    "options": {
+      "A": "It is a way to backup data to S3.",
+      "B": "It is the process of moving data between executors across the network, which is high-latency and resource-intensive.",
+      "C": "It is a specialized way to encrypt network signals.",
+      "D": "It is the process of restarting the driver node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Parquet' is a row-oriented storage format, while 'Avro' is a column-oriented storage format.",
+    "options": {
+      "A": "False (Parquet is column-oriented; Avro is row-oriented).",
+      "B": "True",
+      "C": "Only for Hadoop 2.x",
+      "D": "Only if using Snappy compression"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Lazy Evaluation' mean in the context of Apache Spark?",
+    "options": {
+      "A": "The system takes a long time to start up.",
+      "B": "Transformations are not executed immediately; instead, Spark builds a logical plan and only executes it when an 'Action' (like count() or collect()) is called.",
+      "C": "The CPU runs at a lower clock speed to save power.",
+      "D": "The data is deleted if not used within 10 minutes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which NoSQL database type is best suited for social network analysis where the relationships between entities are as important as the entities themselves?",
+    "options": {
+      "A": "Key-Value Store",
+      "B": "Graph Database (e.g., Neo4j)",
+      "C": "Document Store",
+      "D": "Wide-column Store"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Narrow Transformation' in Spark (like map or filter) does not require a data shuffle because the data stays within the same partition.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL queries",
+      "D": "Only if using the Scala API"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Write-Ahead Log' (WAL) used for in systems like HBase or Spark Streaming?",
+    "options": {
+      "A": "To store the user's password.",
+      "B": "To record all data changes to a durable storage before applying them, ensuring recovery in case of a crash.",
+      "C": "A specialized way to name VM folders.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Kafka topic, what does the 'Offset' represent?",
+    "options": {
+      "A": "The physical distance between two servers.",
+      "B": "A unique sequential ID assigned to each message within a partition that identifies its position.",
+      "C": "The time it takes for a message to expire.",
+      "D": "The encryption key for the message."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark component is responsible for coordinating the execution of a job and managing the UI?",
+    "options": {
+      "A": "Executor",
+      "B": "Driver",
+      "C": "Worker",
+      "D": "Cluster Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Data Skew' is a condition where a small number of partitions have a significantly larger amount of data than others, leading to processing bottlenecks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CSV files",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Predicate Pushdown' in Big Data querying?",
+    "options": {
+      "A": "Manually pushing a server into a rack.",
+      "B": "The ability to push filtering logic down to the storage layer so that only relevant data is read into memory.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The newest version of the hypervisor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Join' strategy is used by Spark when one table is small enough to fit in the memory of all worker nodes?",
+    "options": {
+      "A": "Sort Merge Join",
+      "B": "Broadcast Hash Join",
+      "C": "Cartesian Product",
+      "D": "Shuffle Hash Join"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'ACID' properties (Atomicity, Consistency, Isolation, Durability) are strictly followed by all NoSQL databases by default.",
+    "options": {
+      "A": "False (Many NoSQL databases follow 'BASE'—Basically Available, Soft state, Eventual consistency).",
+      "B": "True",
+      "C": "Only for MongoDB",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Small Files Problem' in HDFS?",
+    "options": {
+      "A": "It makes the servers too light.",
+      "B": "Large numbers of small files overwhelm the NameNode's memory, as it must store metadata for every file and block.",
+      "C": "It creates too much heat in the CPU.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Kappa Architecture', how is historical data re-processed?",
+    "options": {
+      "A": "By running a separate batch job.",
+      "B": "By replaying the data from the streaming platform (e.g., Kafka) using a new version of the stream processing code.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Bloom Filters' are used to quickly check if a piece of data exists in a set without reading the actual data, reducing disk I/O.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile tests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Backpressure' in a streaming system like Flink or Spark Streaming?",
+    "options": {
+      "A": "Air pressure in the cooling system.",
+      "B": "A mechanism that slows down the data ingestion rate when downstream processing cannot keep up with the incoming data.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in YARN is responsible for launching and monitoring the status of individual tasks on a specific node?",
+    "options": {
+      "A": "ResourceManager",
+      "B": "NodeManager",
+      "C": "ApplicationMaster",
+      "D": "Container"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Eventual Consistency' ensures that if no new updates are made to a data item, eventually all accesses to that item will return the last updated value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic links",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Locking' used for in a Big Data cluster?",
+    "options": {
+      "A": "Locking the IT staff out of the room.",
+      "B": "To ensure that only one process or node can access a shared resource or perform a specific task at a time.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "The total number of users logged out."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Spark, what is the 'DAG' (Directed Acyclic Graph)?",
+    "options": {
+      "A": "A physical chart of the office layout.",
+      "B": "The logical sequence of transformations that Spark planning uses to execute a job.",
+      "C": "The encryption algorithm for the data.",
+      "D": "The number of users who can view the report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Partition' is the smallest unit of data parallelism in systems like Spark and Kafka.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for XML data",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Schema Evolution' in data serializing formats like Avro?",
+    "options": {
+      "A": "Linking two IT managers' accounts.",
+      "B": "The ability to change the data schema (e.g., adding a field) while maintaining compatibility with older versions of the data.",
+      "C": "A specialized way to name VM folders.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' in HDFS indicates that the blocks are not replicated enough to meet the target redundancy?",
+    "options": {
+      "A": "Under-replicated",
+      "B": "Corrupted",
+      "C": "Stale",
+      "D": "Over-replicated"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Exactly-once' processing in streaming systems ensures that each event is processed once and only once, even in the event of failures.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database tests",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Vectorized Execution' in a modern SQL engine for Big Data?",
+    "options": {
+      "A": "Processing data in a straight line.",
+      "B": "Processing a batch of rows at once using SIMD instructions rather than one row at a time, significantly improving CPU efficiency.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark transformation is an example of a 'Wide Transformation' that triggers a shuffle?",
+    "options": {
+      "A": "Filter",
+      "B": "GroupBy",
+      "C": "Map",
+      "D": "Select"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snappy' is a compression codec designed for high speed rather than maximum compression ratio, making it popular for Big Data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Idempotency' in a data pipeline?",
+    "options": {
+      "A": "A way to increase the internet speed of the generator.",
+      "B": "The property where a process can be executed multiple times with the same input, resulting in the same state without creating duplicates.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, what does 'Rack Awareness' accomplish?",
+    "options": {
+      "A": "Naming the servers in a rack.",
+      "B": "Placing data block replicas across different physical racks to ensure data availability even if a whole rack fails.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "The number of users logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Apache Flink is a 'Native Streaming' engine, meaning it processes events as they arrive, unlike Spark Streaming which uses 'Micro-batches'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shuffle Spilling' in Spark?",
+    "options": {
+      "A": "Spilling water on the driver node.",
+      "B": "When Spark writes intermediate shuffle data to disk because it exceeds the available memory in the executor.",
+      "C": "A specialized way to encrypt source code.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Consumer Lag' in an Apache Kafka system?",
+    "options": {
+      "A": "Records per Second",
+      "B": "The difference between the latest produced offset and the last committed offset by the consumer.",
+      "C": "Response Time",
+      "D": "Latency"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Partition Pruning' (DPP) in Spark allows the optimizer to skip entire partitions during a JOIN based on the results of the other table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SQL databases",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Checkpointing' in Spark Streaming?",
+    "options": {
+      "A": "Checking the price of the server.",
+      "B": "The process of saving the application state to reliable storage (like HDFS) to allow for recovery after a failure.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with the 'YARN ResourceManager' Web UI by default?",
+    "options": {
+      "A": "8088",
+      "B": "9870",
+      "C": "50070",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Column-oriented' database, reading a single row is generally faster than in a 'Row-oriented' database.",
+    "options": {
+      "A": "False (Columnar databases are optimized for reading specific columns across many rows; row-oriented databases are better for reading single whole rows).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Compaction' in a log-structured system like Kafka?",
+    "options": {
+      "A": "Cleaning the office.",
+      "B": "A process that retains only the last known value for each message key within a log partition.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark 'Action' returns all the data from a distributed collection to the Driver node as a local list?",
+    "options": {
+      "A": "Count",
+      "B": "Collect",
+      "C": "Map",
+      "D": "Filter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Partitioning' a table physically divides the data based on a column value (e.g., year), allowing the engine to skip irrelevant data during queries.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for fiber optic cables",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Write Amplification' in a distributed database?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "When the system performs more physical writes to storage than the actual amount of data being updated (e.g., during compaction or index updates).",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the total number of 'Active Executors' in a Spark cluster?",
+    "options": {
+      "A": "Executor Count",
+      "B": "Latency",
+      "C": "Throughput",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Windowing' in stream processing allows you to perform aggregations over a fixed or sliding period of time (e.g., average temp every 5 minutes).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile applications",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Garbage Collection'?",
+    "options": {
+      "A": "Cleaning up multiple server rooms.",
+      "B": "The process of reclaiming memory or resources that are no longer used by any node across a cluster.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with standard 'Zookeeper' client communication?",
+    "options": {
+      "A": "2181",
+      "B": "9092",
+      "C": "22",
+      "D": "21"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Data Lineage' tracks the history of data transformations from its source to its destination.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-batching' in Spark Streaming?",
+    "options": {
+      "A": "The time an engineer spends thinking.",
+      "B": "Processing data in small, discrete batches at very high frequency to simulate streaming.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'HDFS blocks' that are missing?",
+    "options": {
+      "A": "Missing Blocks",
+      "B": "Latency",
+      "C": "Error Rate",
+      "D": "Saturation"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Sharding' is a horizontal scaling technique that partitions data across multiple database instances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for large companies",
+      "D": "Only if the team is over 10 people"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Hive Metastore'?",
+    "options": {
+      "A": "Naming the servers after famous hives.",
+      "B": "A central repository that stores metadata (schemas, partitions) for Hive tables.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the 'Average' task execution time in Spark?",
+    "options": {
+      "A": "Mean Task Time",
+      "B": "Total Throughput",
+      "C": "90th Percentile",
+      "D": "Error Count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Serialization' converts data objects into a byte stream for storage or transmission.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Skew' impact?",
+    "options": {
+      "A": "The point where the servers physically break.",
+      "B": "It causes some worker nodes to process more data than others, leading to long job durations.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the percentage of 'RAM' used by a worker node?",
+    "options": {
+      "A": "Memory Utilization",
+      "B": "Memory Usage",
+      "C": "Disk I/O",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Partition Pruning' skips irrelevant partitions during a query.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Leader Election' in Kafka?",
+    "options": {
+      "A": "Hiring a new manager.",
+      "B": "The process of selecting a single broker to handle all read/write requests for a specific partition.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Partitions' in a Kafka topic?",
+    "options": {
+      "A": "Partition Count",
+      "B": "Throughput",
+      "C": "Response Time",
+      "D": "Error Rate"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Snappy' compression is commonly used in Big Data systems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'YARN' Container?",
+    "options": {
+      "A": "A physical box for servers.",
+      "B": "A logical allocation of resources (memory, CPU cores) on a single node used to run a task.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a distributed storage engine like Cassandra or HBase, what is the primary benefit of using an LSM-Tree (Log-Structured Merge-Tree) over a B+ Tree for data persistence?",
+    "options": {
+      "A": "LSM-Trees provide faster random read access.",
+      "B": "LSM-Trees convert random writes into sequential writes, significantly increasing write throughput on both SSDs and HDDs.",
+      "C": "LSM-Trees eliminate the need for a Write-Ahead Log (WAL).",
+      "D": "LSM-Trees automatically encrypt data at the hardware level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does the Spark 'Tungsten' execution engine improve performance over traditional JVM-based object processing?",
+    "options": {
+      "A": "By increasing the number of partitions automatically.",
+      "B": "By managing memory explicitly (Off-Heap) to bypass JVM Garbage Collection overhead and using 'Whole-Stage Code Generation' to collapse operators into a single function.",
+      "C": "By converting all Python code into Scala during runtime.",
+      "D": "By requiring 100Gbps network links between all nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Raft' consensus algorithm is generally considered easier to understand and implement than 'Paxos' while providing the same level of fault tolerance and safety.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for single-node clusters",
+      "D": "Only if using UDP for heartbeats"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the specific purpose of the 'Catalyst Optimizer' in the Spark SQL engine?",
+    "options": {
+      "A": "To optimize the physical cooling of the server rack.",
+      "B": "To perform tree-based transformations (like Predicate Pushdown and Column Pruning) to create the most efficient physical execution plan.",
+      "C": "To encrypt the shuffle blocks before they are sent over the wire.",
+      "D": "To monitor the daily growth of the NameNode metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Apache Kafka, which mechanism enables 'Exactly-Once Semantics' (EOS) across a producer-processor-consumer chain?",
+    "options": {
+      "A": "Increasing the replication factor to 5.",
+      "B": "The use of an Idempotent Producer and an atomic Transactional Coordinator that writes to a transaction log topic.",
+      "C": "Storing all messages in a local SQLite database on the broker.",
+      "D": "Disabling consumer groups entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which distributed coordination phenomenon occurs when two nodes in a cluster both believe they are the 'Leader' due to a network partition, leading to data corruption?",
+    "options": {
+      "A": "Livelock",
+      "B": "Split-Brain",
+      "C": "Cascading Failure",
+      "D": "Resource Exhaustion"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In HDFS Federation, multiple independent NameNodes can share the same pool of DataNodes, allowing the cluster to scale the namespace horizontally.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Hadoop 1.x",
+      "D": "Only if using SSDs for metadata"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Skew Join' optimization in Spark, and how does it handle unbalanced data partitions?",
+    "options": {
+      "A": "It deletes the skewed data automatically.",
+      "B": "It identifies skewed partitions and 'splits' them into smaller sub-partitions, while 'salting' the keys of the other table to ensure a more even distribution during the join.",
+      "C": "It moves the entire job to a single node with massive RAM.",
+      "D": "It encrypts the join keys with a random salt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Garbage Collection' algorithm is typically recommended for large-heap Spark executors (e.g., > 32GB) to minimize 'Stop-the-World' pauses?",
+    "options": {
+      "A": "Serial GC",
+      "B": "G1 GC (Garbage First) or ZGC",
+      "C": "Parallel GC",
+      "D": "CMS (Concurrent Mark Sweep) exclusively"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a distributed database, what is the role of a 'Vector Clock'?",
+    "options": {
+      "A": "To measure the speed of light in a network.",
+      "B": "A mechanism used to track the partial ordering of events and detect causality violations or conflicts in a multi-writer environment.",
+      "C": "To synchronize the physical time of all servers to within 1ms.",
+      "D": "A specialized way to encrypt DNS requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Dynamic Resource Allocation' in YARN allows Spark executors to be released when they are idle and requested again when the task backlog increases.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Spark Streaming jobs",
+      "D": "Only if using the Standalone cluster manager"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Two-Phase Commit' (2PC) primary drawback in high-velocity Big Data environments?",
+    "options": {
+      "A": "It is too easy to implement.",
+      "B": "It is a blocking protocol; if the coordinator fails, participants may remain locked, reducing availability and increasing latency.",
+      "C": "It doesn't support JSON data.",
+      "D": "It requires a physical key to be turned by an admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Spark 'Action' should be used cautiously on very large datasets because it pulls the entire result set into the Driver's memory, potentially causing an OOM?",
+    "options": {
+      "A": "count()",
+      "B": "collect()",
+      "C": "saveAsTextFile()",
+      "D": "foreach()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Shared-Nothing' architecture, each node has its own private memory and disk, and coordination is handled strictly via message passing.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Mainframes",
+      "D": "Only in version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Speculative Execution' in a Hadoop or Spark cluster?",
+    "options": {
+      "A": "Hiring engineers based on their future potential.",
+      "B": "A strategy where the cluster manager launches a duplicate copy of a 'straggler' task on a different node to see if it finishes faster.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The process of moving servers to a different floor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Kafka, what happens during a 'Rebalance' when a new consumer joins a group?",
+    "options": {
+      "A": "The server room is physically reorganized.",
+      "B": "The group coordinator redistributes partition ownership among all active members, which can cause a temporary 'Stop-the-World' pause in processing.",
+      "C": "The data is deleted and re-indexed.",
+      "D": "The encryption keys are rotated."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Adaptive Query Execution' (AQE) in Spark 3.0+ allows the engine to change the join strategy (e.g., from Sort-Merge to Broadcast) at runtime based on actual statistics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Shuffle Service' used for in a Spark on YARN/K8s deployment?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To preserve shuffle files even if the Spark executors are killed or scaled down, enabling dynamic allocation without data loss.",
+      "C": "A specialized way to encrypt individual data points.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the situation where adding more nodes to a distributed system actually *decreases* performance due to coordination overhead?",
+    "options": {
+      "A": "Metastability",
+      "B": "Negative Scalability / Amdahl's Law limit",
+      "C": "Resource Starvation",
+      "D": "Jitter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In the HDFS 'High Availability' architecture, the 'JournalNodes' are responsible for storing the EditLog that both the Active and Standby NameNodes use to stay in sync.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Windows guests",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Salting' in the context of a distributed NoSQL database (like HBase or Cassandra) primary key design?",
+    "options": {
+      "A": "Adding physical salt to the cooling unit.",
+      "B": "Prepending a random prefix to a row key to ensure data is distributed evenly across multiple regions/shards, avoiding 'Hotspots'.",
+      "C": "A specialized way to encrypt trace IDs.",
+      "D": "Hiring a new system administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is associated with the 'Kafka Broker' by default?",
+    "options": {
+      "A": "80",
+      "B": "9092",
+      "C": "443",
+      "D": "2181"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Broadcast Hash Join' is generally the fastest join strategy in Spark because it eliminates the need for an expensive network shuffle of the larger table.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using fiber optics",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Quorum' in a distributed system, and how is it typically calculated for a cluster of N nodes?",
+    "options": {
+      "A": "The price of the software; (N * 100).",
+      "B": "The minimum number of nodes that must agree on an update for it to be successful; usually (N/2) + 1.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Spark 'StorageLevel' ensures data is stored in-memory in a serialized format to save RAM space at the cost of higher CPU for access?",
+    "options": {
+      "A": "MEMORY_ONLY",
+      "B": "MEMORY_ONLY_SER",
+      "C": "DISK_ONLY",
+      "D": "OFF_HEAP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Log-Structured' storage system, updates are never performed in-place; instead, new versions of the data are appended to the end of the log.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted data",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'Checkpointing' in Flink's fault tolerance mechanism?",
+    "options": {
+      "A": "To restart the server.",
+      "B": "Creating consistent global snapshots of the stream state using the Chandy-Lamport algorithm to allow for exact recovery after a crash.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to measure the 'Shuffle Write' overhead in a Spark job?",
+    "options": {
+      "A": "Shuffle Write Time / Shuffle Write Bytes",
+      "B": "CPU Utilization",
+      "C": "Memory Usage",
+      "D": "Network Bandwidth"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Pre-splitting' a table in HBase is a technique used to avoid the performance hit of automated 'Region Splitting' during a massive initial data load.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Distributed Request Correlation' in a Big Data observability context?",
+    "options": {
+      "A": "Tracking the location of server racks.",
+      "B": "Using unique IDs to trace a request as it moves through multiple distributed services to identify bottlenecks.",
+      "C": "A specialized way to encrypt passwords.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for web-based secure management (HTTPS) of a Hadoop cluster?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' is a horizontally scalable long-term storage backend for metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' isolation at the virtual switch level?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "A security feature that prevents devices in different VLANs from communicating without a Layer 3 device.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' can cause the Guest OS to start swapping memory to its own virtual disk.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) and why is it used?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "A feature that monitors storage latency and automatically moves VM disks to less congested data stores.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' (encrypted web management)?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' uses a three-node cluster to protect the management layer.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a VM to see its own VLAN tags.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' often prevents the use of Live Migration.",
+    "options": {
+      "A": "True (because the hardware state is tied to a specific physical device).",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in Hyper-V?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the memory assigned to a VM based on demand.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used for managing virtual-to-physical memory mappings across layers?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if physical storage is exhausted.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of a single VM.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor via Hypercalls.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring physical disks.",
+      "B": "A process where write operations are mirrored to both source and destination during migration.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' violation action 'Shutdown'?",
+    "options": {
+      "A": "Turning off the entire switch.",
+      "B": "Disabling the specific port when a violation occurs.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root Bridge' in STP is selected based on the lowest Bridge ID.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+    "options": {
+      "A": "Naming the VLANs.",
+      "B": "Filtering traffic within a VLAN before it is routed.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+    "options": {
+      "A": "21",
+      "B": "22",
+      "C": "23",
+      "D": "80"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: 'BPDU Filter' is generally considered dangerous to enable.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'EtherChannel' hashing?",
+    "options": {
+      "A": "A physical tool for cables.",
+      "B": "An algorithm that determines which physical link in a bundle to use for a packet.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+    "options": {
+      "A": "22",
+      "B": "23",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often enabled by default.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VTP version 3' Hidden Password?",
+    "options": {
+      "A": "A password the admin cannot see.",
+      "B": "A feature where the password is not stored in plain text.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+    "options": {
+      "A": "161",
+      "B": "162",
+      "C": "80",
+      "D": "443"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Layer 2' loop can occur if multiple links connect switches without STP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Port Security' restrict action?",
+    "options": {
+      "A": "Turning off the switch.",
+      "B": "Dropping unauthorized packets and incrementing a counter while keeping the port up.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+    "options": {
+      "A": "80",
+      "B": "443",
+      "C": "22",
+      "D": "23"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Rapid PVST+' provides fast convergence for every VLAN.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  }
+  ]
+}

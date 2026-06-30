@@ -6,4 +6,28 @@ psycopg2-binary==2.9.11
 PyPDF2==3.0.1
 python-docx==1.1.0
 requests==2.32.3
+channels==4.0.0
+channels-redis==4.1.0
+daphne==4.2.1
+redis==7.1.0
+pandas
+openpyxl
+reportlab
+Pillow
 
+openai
+easyocr
+pymupdf
+celery
+redis
+djangorestframework-simplejwt
+pygments
+pymupdf
+edge-tts
+
+# DeepFace Identity Verification
+deepface==0.0.100
+tensorflow==2.15.0
+keras==2.15.0
+tf-keras==2.15.1
+opencv-python-headless==4.10.0.84

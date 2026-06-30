@@ -1,0 +1,2050 @@
+{
+  "skill": "Architecture",
+  "questions": [
+    {
+      "question": "What does the 'S' in SOLID principles stand for?",
+      "options": {
+        "A": "Single Responsibility Principle",
+        "B": "System Structural Principle",
+        "C": "Service Orientation",
+        "D": "Sequential Operation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 3-Tier Architecture, the Presentation Layer communicates directly with the Data Layer.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which design pattern is used to ensure a class has only one instance and provides a global point of access to it?",
+      "options": {
+        "A": "Singleton",
+        "B": "Factory",
+        "C": "Observer",
+        "D": "Adapter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using a Microservices architecture.",
+      "options": {
+        "A": "Independent scalability of services",
+        "B": "Technology diversity (different stacks for different services)",
+        "C": "Reduced network latency",
+        "D": "Simplified data consistency"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary goal of the 'Adapter' design pattern?",
+      "options": {
+        "A": "To allow incompatible interfaces to work together.",
+        "B": "To create a complex object step by step.",
+        "C": "To notify multiple objects about state changes.",
+        "D": "To provide a simplified interface to a complex subsystem."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Monolithic architecture is generally easier to debug and test in the early stages of a small project.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which architectural style uses a 'Publisher' and 'Subscriber' model to decouple components?",
+      "options": {
+        "A": "Event-Driven Architecture",
+        "B": "Client-Server Architecture",
+        "C": "Layered Architecture",
+        "D": "Microkernel Architecture"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO Creational design patterns from the Gang of Four (GoF).",
+      "options": {
+        "A": "Abstract Factory",
+        "B": "Builder",
+        "C": "Decorator",
+        "D": "Strategy"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Separation of Concerns' refer to in software architecture?",
+      "options": {
+        "A": "Dividing a program into distinct sections, each addressing a separate concern.",
+        "B": "Splitting a team into frontend and backend developers.",
+        "C": "Deleting unused code to improve performance.",
+        "D": "Encrypting data before it reaches the database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Vertical Scaling (Scaling Up) involves adding more power (CPU, RAM) to an existing server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which principle states that 'software entities should be open for extension, but closed for modification'?",
+      "options": {
+        "A": "Open-Closed Principle",
+        "B": "Liskov Substitution Principle",
+        "C": "Interface Segregation Principle",
+        "D": "Dependency Inversion Principle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common layers in a standard N-Tier Architecture.",
+      "options": {
+        "A": "Business Logic Layer",
+        "B": "Data Access Layer",
+        "C": "Security Kernel Layer",
+        "D": "Global State Layer"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary purpose of a 'Load Balancer'?",
+      "options": {
+        "A": "To distribute incoming network traffic across multiple servers.",
+        "B": "To speed up database queries.",
+        "C": "To compile code faster.",
+        "D": "To monitor employee work hours."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Loose Coupling' means that components are highly dependent on each other's internal implementation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pattern provides a surrogate or placeholder for another object to control access to it?",
+      "options": {
+        "A": "Proxy",
+        "B": "Facade",
+        "C": "Bridge",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'Stateless' services.",
+      "options": {
+        "A": "They do not store client data between requests.",
+        "B": "They are easier to scale horizontally.",
+        "C": "They require a persistent session on the server.",
+        "D": "They always return the same data regardless of input."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'L' in SOLID (Liskov Substitution Principle) imply?",
+      "options": {
+        "A": "Objects of a superclass should be replaceable with objects of its subclasses without affecting correctness.",
+        "B": "Logical errors should be handled at the root.",
+        "C": "Layers should never skip the layer directly below them.",
+        "D": "Long functions should be broken into smaller pieces."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SOA (Service-Oriented Architecture) typically uses a Service Bus (ESB) for communication.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is used to define a family of algorithms, encapsulate each one, and make them interchangeable?",
+      "options": {
+        "A": "Strategy",
+        "B": "Template Method",
+        "C": "State",
+        "D": "Command"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons to choose a 'Monolithic' architecture for a new startup.",
+      "options": {
+        "A": "Lower initial complexity for development and deployment.",
+        "B": "Ease of end-to-end testing.",
+        "C": "Ability to scale parts of the system independently.",
+        "D": "Fault isolation between components."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'DRY' principle stand for in software development?",
+      "options": {
+        "A": "Don't Repeat Yourself",
+        "B": "Design Reliable Yields",
+        "C": "Data Retrieval Yearly",
+        "D": "Distributed Remote Yard"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'KISS' principle (Keep It Simple, Stupid) suggests that systems work best if they are kept simple rather than made complicated.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern provides a unified interface to a set of interfaces in a subsystem, making the subsystem easier to use?",
+      "options": {
+        "A": "Facade",
+        "B": "Decorator",
+        "C": "Bridge",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of 'Horizontal Scaling' (Scaling Out).",
+      "options": {
+        "A": "Improved fault tolerance by adding more nodes",
+        "B": "Virtually infinite scalability by adding more hardware",
+        "C": "Simpler application architecture with no networking overhead",
+        "D": "Lower cost for a single high-end server machine"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "The 'YAGNI' principle (You Ain't Gonna Need It) advises developers to:",
+      "options": {
+        "A": "Avoid adding functionality until it is actually necessary.",
+        "B": "Always build for 10 million users on day one.",
+        "C": "Document every line of code.",
+        "D": "Use as many libraries as possible."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Dependency Injection is a technique used to achieve 'Inversion of Control' between classes and their dependencies.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is commonly used to implement undo/redo functionality?",
+      "options": {
+        "A": "Command",
+        "B": "Observer",
+        "C": "Memento",
+        "D": "Iterator"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO structural design patterns from the following list.",
+      "options": {
+        "A": "Adapter",
+        "B": "Composite",
+        "C": "Factory Method",
+        "D": "State"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary role of a 'Cache' in system architecture?",
+      "options": {
+        "A": "To store frequently accessed data in high-speed memory for faster retrieval.",
+        "B": "To permanently store logs for audit purposes.",
+        "C": "To act as a backup database.",
+        "D": "To encrypt user passwords."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'High Cohesion' within a module means that the elements inside that module belong together and focus on a single task.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the MVC pattern, which component is responsible for handling user input and updating the model?",
+      "options": {
+        "A": "Controller",
+        "B": "View",
+        "C": "Model",
+        "D": "Router"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of a 'Microkernel' (Plug-in) architecture.",
+      "options": {
+        "A": "A core system that contains only minimal functional logic.",
+        "B": "Plug-in modules that add specific features to the core.",
+        "C": "A single giant database for all modules.",
+        "D": "All features are compiled into one executable."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Technical Debt'?",
+      "options": {
+        "A": "The implied cost of additional rework caused by choosing an easy, quick solution now instead of a better approach.",
+        "B": "The money owed to cloud providers for hosting.",
+        "C": "The time spent training new engineers.",
+        "D": "The cost of buying new hardware."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: An 'API Gateway' acts as a single entry point for all clients in a microservices architecture.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern allows you to attach new behaviors to objects by placing these objects inside special wrapper objects?",
+      "options": {
+        "A": "Decorator",
+        "B": "Proxy",
+        "C": "Adapter",
+        "D": "Facade"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO types of 'coupling' in software design.",
+      "options": {
+        "A": "Tight coupling",
+        "B": "Loose coupling",
+        "C": "Vertical coupling",
+        "D": "Horizontal coupling"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Message Queue' used for?",
+      "options": {
+        "A": "Asynchronous communication between different services.",
+        "B": "Directly querying the database.",
+        "C": "Storing user profile images.",
+        "D": "Rendering the frontend UI."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Availability' in a system refers to the percentage of time the system is operational and accessible.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which GoF pattern defines a one-to-many dependency between objects so that when one object changes state, all its dependents are notified?",
+      "options": {
+        "A": "Observer",
+        "B": "Mediator",
+        "C": "Visitor",
+        "D": "Chain of Responsibility"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO layers typically found in 'Hexagonal Architecture' (Ports and Adapters).",
+      "options": {
+        "A": "The Application Core (Domain)",
+        "B": "The Adapters (External Interfaces)",
+        "C": "The Central Service Bus",
+        "D": "The Global Middleware Layer"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary function of the 'Factory Method' pattern?",
+      "options": {
+        "A": "To define an interface for creating an object, but let subclasses decide which class to instantiate.",
+        "B": "To create a pool of reusable objects.",
+        "C": "To ensure only one instance of a class exists.",
+        "D": "To map database rows to objects."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Throughput' refers to the number of requests a system can handle in a given time period.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design principle is violated if a class depends on a concrete implementation rather than an abstraction?",
+      "options": {
+        "A": "Dependency Inversion Principle",
+        "B": "Interface Segregation Principle",
+        "C": "Liskov Substitution Principle",
+        "D": "Open-Closed Principle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'Stateful' services.",
+      "options": {
+        "A": "The server stores information about the client session.",
+        "B": "Subsequent requests are dependent on previous ones.",
+        "C": "They are easily swapped with any other instance without data loss.",
+        "D": "They do not require any disk storage."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'I' in SOLID stand for?",
+      "options": {
+        "A": "Interface Segregation Principle",
+        "B": "Inheritance Security Principle",
+        "C": "Internal Safety Principle",
+        "D": "Implementation Stability Principle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Monolith' architecture is easier to scale partially (e.g., scaling only the image processing part).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pattern is used to reduce the number of objects created and to decrease memory footprint and increase performance?",
+      "options": {
+        "A": "Flyweight",
+        "B": "Prototype",
+        "C": "Proxy",
+        "D": "Bridge"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key components of a 'Client-Server' architecture.",
+      "options": {
+        "A": "The Client (Requester)",
+        "B": "The Server (Provider)",
+        "C": "The Peer (Equal)",
+        "D": "The Kernel (Master)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary benefit of 'Interface Segregation'?",
+      "options": {
+        "A": "Clients should not be forced to depend on methods they do not use.",
+        "B": "It allows multiple inheritance in all languages.",
+        "C": "It speeds up the compilation of interfaces.",
+        "D": "It automatically generates API documentation."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Scalability' is the ability of a system to handle a growing amount of work by adding resources to the system.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is used to decouple an abstraction from its implementation so that the two can vary independently?",
+      "options": {
+        "A": "Bridge",
+        "B": "Adapter",
+        "C": "Facade",
+        "D": "Composite"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO types of 'Behavioral' design patterns.",
+      "options": {
+        "A": "Mediator",
+        "B": "Visitor",
+        "C": "Decorator",
+        "D": "Proxy"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Single Point of Failure' (SPOF)?",
+      "options": {
+        "A": "A part of a system that, if it fails, will stop the entire system from working.",
+        "B": "A bug that only happens to one user.",
+        "C": "The first line of code in the main function.",
+        "D": "A server that has no backup battery."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Layered Architecture', a layer can generally only access the layer directly beneath it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to compose objects into tree structures to represent part-whole hierarchies?",
+      "options": {
+        "A": "Composite",
+        "B": "Flyweight",
+        "C": "Facade",
+        "D": "Proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of a 'Service-Oriented Architecture' (SOA).",
+      "options": {
+        "A": "Services are loosely coupled.",
+        "B": "Services communicate over a network via standard protocols.",
+        "C": "All services must share the same physical memory.",
+        "D": "Services are always written in the same programming language."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the goal of the 'Prototype' design pattern?",
+      "options": {
+        "A": "To create new objects by copying an existing instance (cloning).",
+        "B": "To test the UI before the backend is ready.",
+        "C": "To create a draft of the documentation.",
+        "D": "To ensure only one instance of a class exists."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Latency' is the time delay between a cause and the effect of some physical change in the system being observed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which GoF pattern provides a way to access the elements of an aggregate object sequentially without exposing its underlying representation?",
+      "options": {
+        "A": "Iterator",
+        "B": "Visitor",
+        "C": "Command",
+        "D": "Template Method"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO major differences between 'Library' and 'Framework'.",
+      "options": {
+        "A": "In a library, you call the code; in a framework, the code calls you (Inversion of Control).",
+        "B": "A framework defines the architecture; a library is a tool used within an architecture.",
+        "C": "A library is always bigger than a framework.",
+        "D": "A framework can only be used in frontend development."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Encapsulation' in software design?",
+      "options": {
+        "A": "Bundling data and the methods that operate on that data within a single unit, and restricting access to some of the object's components.",
+        "B": "Putting code into a ZIP file for deployment.",
+        "C": "Using a lot of comments in the code.",
+        "D": "Writing code that runs in a browser."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Peer-to-Peer' (P2P) architecture has no centralized server; every node acts as both client and server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is used to handle multiple requests without knowing which object will handle the request initially?",
+      "options": {
+        "A": "Chain of Responsibility",
+        "B": "Observer",
+        "C": "Mediator",
+        "D": "State"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common benefits of using 'Design Patterns'.",
+      "options": {
+        "A": "They provide a common vocabulary for developers.",
+        "B": "They offer tested, proven solutions to common development problems.",
+        "C": "They eliminate the need for writing original code.",
+        "D": "They guarantee that the code will have zero bugs."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'D' in SOLID stand for?",
+      "options": {
+        "A": "Dependency Inversion Principle",
+        "B": "Data Integrity Principle",
+        "C": "Distributed Interface Principle",
+        "D": "Development Iteration Principle"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Composition over Inheritance' suggests that it is better to achieve polymorphic behavior and code reuse by composing objects rather than inheriting from a base class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "According to the CAP Theorem, which two properties do traditional RDBMS (like Postgres) typically prioritize during a network partition?",
+      "options": {
+        "A": "Consistency and Availability (CA)",
+        "B": "Consistency and Partition Tolerance (CP)",
+        "C": "Availability and Partition Tolerance (AP)",
+        "D": "Scalability and Durability"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Circuit Breaker' pattern is used to prevent a network or service failure from cascading to other services.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to manage distributed transactions across multiple microservices to ensure eventual consistency?",
+      "options": {
+        "A": "Saga Pattern",
+        "B": "Two-Phase Commit (2PC)",
+        "C": "Event Sourcing",
+        "D": "Command Query Responsibility Segregation (CQRS)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common strategies for database 'Partitioning'.",
+      "options": {
+        "A": "Vertical Partitioning (Splitting columns)",
+        "B": "Horizontal Partitioning (Sharding rows)",
+        "C": "Diagonal Partitioning",
+        "D": "Circular Partitioning"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary benefit of the CQRS pattern?",
+      "options": {
+        "A": "It separates read and write operations into different models to optimize performance and scalability.",
+        "B": "It encrypts data at the hardware level.",
+        "C": "It eliminates the need for a database schema.",
+        "D": "It automatically generates frontend forms from the database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Eventual Consistency' guarantees that if no new updates are made to a data item, eventually all accesses to that item will return the last updated value.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which caching strategy involves updating the cache and the backend database simultaneously?",
+      "options": {
+        "A": "Write-through",
+        "B": "Write-around",
+        "C": "Write-back",
+        "D": "Refresh-ahead"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle service discovery in a Microservices environment.",
+      "options": {
+        "A": "Client-side discovery (e.g., Netflix Eureka)",
+        "B": "Server-side discovery (e.g., AWS ALBs)",
+        "C": "Hard-coding IP addresses",
+        "D": "Manual DNS updates"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Database Sharding'?",
+      "options": {
+        "A": "Distributing data across multiple machines to perform horizontal scaling.",
+        "B": "Creating a backup of the database on a different disk.",
+        "C": "Optimizing SQL queries using indexes.",
+        "D": "Converting a relational database to a NoSQL database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Reverse Proxy' typically sits behind the firewall and directs client requests to the appropriate backend server.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which architectural pattern involves capturing all changes to an application state as a sequence of events?",
+      "options": {
+        "A": "Event Sourcing",
+        "B": "Log Aggregation",
+        "C": "Data Streaming",
+        "D": "State Pattern"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO primary metrics for measuring system 'Reliability'.",
+      "options": {
+        "A": "MTBF (Mean Time Between Failures)",
+        "B": "MTTR (Mean Time To Repair)",
+        "C": "Lines of Code (LOC)",
+        "D": "Number of Commits"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of 'Consistent Hashing' in a distributed system?",
+      "options": {
+        "A": "To minimize the number of keys that need to be remapped when a new node is added or removed from a cluster.",
+        "B": "To ensure all passwords are hashed with the same salt.",
+        "C": "To keep the database schema consistent across versions.",
+        "D": "To speed up the encryption of large files."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Blue-Green Deployment' involves running two identical production environments to reduce downtime during updates.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is responsible for translating a domain name (like google.com) into an IP address?",
+      "options": {
+        "A": "DNS (Domain Name System)",
+        "B": "CDN (Content Delivery Network)",
+        "C": "API Gateway",
+        "D": "Load Balancer"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common types of NoSQL databases.",
+      "options": {
+        "A": "Document Store (e.g., MongoDB)",
+        "B": "Key-Value Store (e.g., Redis)",
+        "C": "Relational Store (e.g., MySQL)",
+        "D": "Flat File Store (e.g., CSV)"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Content Delivery Network' (CDN) used for?",
+      "options": {
+        "A": "To serve static content from edge locations closer to the user to reduce latency.",
+        "B": "To manage the source code repository.",
+        "C": "To generate dynamic HTML on the fly.",
+        "D": "To store secure user credentials."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Sticky Sessions' ensure that all requests from a specific user are routed to the same server node.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which microservices pattern involves a service providing a 'health check' endpoint to monitor its status?",
+      "options": {
+        "A": "Health Check API",
+        "B": "Sentinel Pattern",
+        "C": "Watchdog Pattern",
+        "D": "Heartbeat Pattern"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of 'Database Replication'.",
+      "options": {
+        "A": "Increased read scalability",
+        "B": "Higher availability/data redundancy",
+        "C": "Reduced write latency",
+        "D": "Simplified schema migrations"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Idempotency' in the context of API design?",
+      "options": {
+        "A": "The property where making multiple identical requests has the same effect as making a single request.",
+        "B": "The ability of an API to handle multiple languages.",
+        "C": "The speed at which an API responds to a request.",
+        "D": "The security level of an API endpoint."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Microservices' architecture, each service should ideally have its own separate database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which mechanism is used to notify a system when a specific event occurs, without the requester waiting for a response?",
+      "options": {
+        "A": "Webhooks",
+        "B": "Polling",
+        "C": "Long Polling",
+        "D": "Synchronous RPC"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO strategies for handling 'Retry' logic in distributed systems.",
+      "options": {
+        "A": "Exponential Backoff",
+        "B": "Adding Jitter (random delay)",
+        "C": "Infinite Retries",
+        "D": "Immediate retries without delay"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'Sidecar' pattern?",
+      "options": {
+        "A": "Attaching a helper container to a primary application container to provide peripheral tasks like logging or monitoring.",
+        "B": "Running a backup server in a different region.",
+        "C": "Creating a mobile app version of a website.",
+        "D": "Using a secondary database for analytics."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Heartbeat' is a mechanism where a service periodically sends a signal to a monitoring system to indicate it is alive.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which communication protocol is commonly used for low-latency, streaming bidirectional communication between client and server?",
+      "options": {
+        "A": "WebSockets",
+        "B": "HTTP/1.1",
+        "C": "SMTP",
+        "D": "FTP"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO drawbacks of 'Microservices'.",
+      "options": {
+        "A": "Increased operational complexity (deployment/monitoring)",
+        "B": "Difficulties in maintaining data consistency across services",
+        "C": "Slow development speed for individual services",
+        "D": "Inability to use different programming languages"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Optimistic Concurrency Control'?",
+      "options": {
+        "A": "Allowing multiple users to edit data simultaneously and checking for conflicts only at the time of saving.",
+        "B": "Locking a database row as soon as a user starts reading it.",
+        "C": "Assuming the database will never crash.",
+        "D": "Running all database queries in parallel."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Shadow IT' refers to the use of IT systems and software without explicit organizational approval.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern involves a central 'Orchestrator' that tells each service which operation to perform in a distributed transaction?",
+      "options": {
+        "A": "Orchestration-based Saga",
+        "B": "Choreography-based Saga",
+        "C": "Aggregator Pattern",
+        "D": "Proxy Pattern"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'RESTful' APIs.",
+      "options": {
+        "A": "Statelessness",
+        "B": "Resource-based (using URIs)",
+        "C": "Requires XML for all communication",
+        "D": "Maintains a persistent socket connection"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Backpressure' in system design?",
+      "options": {
+        "A": "A mechanism that allows a system to signal to an upstream producer that it is overwhelmed and cannot handle more data.",
+        "B": "The pressure on developers to meet deadlines.",
+        "C": "The load on the database during peak hours.",
+        "D": "The latency experienced by the end-user."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Rate Limiting' is used to control the rate of traffic sent or received by a network interface or service.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a 'Choreography-based Saga', how do microservices coordinate a distributed transaction?",
+      "options": {
+        "A": "Each service produces and listens to events/messages to trigger the next local transaction.",
+        "B": "A central orchestrator sends commands to each service.",
+        "C": "They all share a single global lock in the database.",
+        "D": "The API Gateway manages the transaction state."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Service Mesh' (like Istio) manages service-to-service communication, often using sidecar proxies for security and observability.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which term describes a system's ability to remain functional even when some of its components fail?",
+      "options": {
+        "A": "Fault Tolerance",
+        "B": "High Throughput",
+        "C": "Elasticity",
+        "D": "Consistency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key differences between a 'Message Queue' and a 'Message Broker' like Kafka.",
+      "options": {
+        "A": "Kafka allows messages to be replayed (persisted log).",
+        "B": "Queues typically delete messages once consumed.",
+        "C": "Queues are always faster than brokers.",
+        "D": "Brokers only support point-to-point communication."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Strangler Fig' pattern used for in architecture?",
+      "options": {
+        "A": "Gradually replacing a legacy monolithic system by intercepting calls and routing them to new microservices.",
+        "B": "Encapsulating a database behind a private network.",
+        "C": "Preventing circular dependencies in code.",
+        "D": "Automatically deleting unused services."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Vertical Partitioning' involves splitting a large table into multiple tables with fewer rows but the same number of columns.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which architectural concept refers to the maximum amount of data loss an organization is willing to accept during a disaster?",
+      "options": {
+        "A": "RPO (Recovery Point Objective)",
+        "B": "RTO (Recovery Time Objective)",
+        "C": "SLA (Service Level Agreement)",
+        "D": "MTBF (Mean Time Between Failures)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common implementation methods for 'Blue-Green Deployment'.",
+      "options": {
+        "A": "Switching DNS records to point to the new environment.",
+        "B": "Updating Load Balancer target groups.",
+        "C": "Deleting the old database immediately.",
+        "D": "Using a single server for both environments."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Distributed Tracing'?",
+      "options": {
+        "A": "A method used to monitor and profile requests as they flow through multiple microservices.",
+        "B": "Tracking the physical location of servers.",
+        "C": "A backup strategy for distributed databases.",
+        "D": "The process of code minification."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Write-Back' cache strategy, data is written only to the cache and marked as dirty, with a delayed write to the main database.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which design pattern is used to provide a simplified, aggregated view of data that is spread across multiple microservices?",
+      "options": {
+        "A": "API Composition / Aggregator",
+        "B": "Singleton",
+        "C": "Command",
+        "D": "Flyweight"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO strategies for achieving 'High Availability' in a database.",
+      "options": {
+        "A": "Multi-AZ (Availability Zone) deployment",
+        "B": "Read Replicas with automatic failover",
+        "C": "Using a single large disk with RAID 0",
+        "D": "Disabling indexes to save space"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the 'Fan-out' pattern describe in an event-driven system?",
+      "options": {
+        "A": "A single message is delivered to multiple subscribers or queues simultaneously.",
+        "B": "Compressing multiple events into a single message.",
+        "C": "Scaling a service by adding more CPU cores.",
+        "D": "Distributing database writes to different shards."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Cold Storage' refers to data that is accessed frequently and needs to be retrieved in milliseconds.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which component is often used to prevent an API from being overwhelmed by too many requests from a single client?",
+      "options": {
+        "A": "Throttler / Rate Limiter",
+        "B": "Load Balancer",
+        "C": "Service Discovery",
+        "D": "Object Mapper"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of 'Asynchronous' communication between services.",
+      "options": {
+        "A": "Temporal decoupling (one service can be down while the other sends)",
+        "B": "Improved system responsiveness for the user",
+        "C": "Guaranteed immediate data consistency",
+        "D": "Reduction in total infrastructure cost"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Database Denormalization'?",
+      "options": {
+        "A": "Intentionally adding redundant data to a database to speed up complex read queries.",
+        "B": "Splitting a table into smaller pieces to avoid duplicates.",
+        "C": "Converting SQL to NoSQL.",
+        "D": "Deleting indexes to improve write speed."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Dead Letter Queue' (DLQ) is where messages are sent if they cannot be processed successfully after multiple attempts.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which strategy involves directing a small percentage of users to a new version of a service to test its stability?",
+      "options": {
+        "A": "Canary Deployment",
+        "B": "Blue-Green Deployment",
+        "C": "Rolling Update",
+        "D": "Big Bang Release"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of 'Serverless' architecture.",
+      "options": {
+        "A": "Automatic scaling based on demand",
+        "B": "Pay-per-execution pricing model",
+        "C": "User manages the underlying operating system",
+        "D": "Continuous billing even when idle"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary function of a 'Service Discovery' registry?",
+      "options": {
+        "A": "To maintain a dynamic list of network locations for available service instances.",
+        "B": "To store the source code of all services.",
+        "C": "To handle user authentication.",
+        "D": "To monitor the temperature of the data center."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Stateless' application design makes it difficult to add or remove instances behind a load balancer.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pattern is used to aggregate data from multiple services and provide a single response to the client?",
+      "options": {
+        "A": "API Gateway / BFF (Backend For Frontend)",
+        "B": "Strategy Pattern",
+        "C": "Adapter Pattern",
+        "D": "Proxy Pattern"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common types of 'Sharding Keys'.",
+      "options": {
+        "A": "Hash-based sharding",
+        "B": "Range-based sharding",
+        "C": "Random sharding",
+        "D": "Duplicate sharding"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Polyglot Persistence'?",
+      "options": {
+        "A": "Using different database technologies for different data storage needs within the same application.",
+        "B": "Writing database queries in multiple languages.",
+        "C": "Storing data in multiple regions.",
+        "D": "Supporting multiple character sets in a database."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Chaos Engineering' involves intentionally injecting failures into a system to test its resilience.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which caching policy removes the data that has not been used for the longest period of time when the cache is full?",
+      "options": {
+        "A": "LRU (Least Recently Used)",
+        "B": "LFU (Least Frequently Used)",
+        "C": "FIFO (First In First Out)",
+        "D": "Random Replacement"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO drawbacks of 'Database Sharding'.",
+      "options": {
+        "A": "Increased complexity in performing cross-shard joins.",
+        "B": "Difficulty in re-sharding when the data distribution becomes uneven.",
+        "C": "Significant reduction in read performance.",
+        "D": "Requirement to use only one server."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'BFF' (Backend for Frontend)?",
+      "options": {
+        "A": "A dedicated backend service for a specific frontend (e.g., mobile vs web) to optimize data delivery.",
+        "B": "A backup server for the frontend.",
+        "C": "A tool that converts CSS to JavaScript.",
+        "D": "A database for storing frontend logs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Elasticity' is the ability of a system to grow or shrink its resource allocation automatically based on workload.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which communication style involves a 'Request-Response' cycle where the client waits for the server to finish processing?",
+      "options": {
+        "A": "Synchronous",
+        "B": "Asynchronous",
+        "C": "Deferred",
+        "D": "Reactive"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key aspects of 'Observability'.",
+      "options": {
+        "A": "Logging and Metrics",
+        "B": "Distributed Tracing",
+        "C": "Code minification",
+        "D": "Hard-drive partitioning"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which distributed consensus algorithm uses a 'Leader', 'Follower', and 'Candidate' state machine to ensure log replication consistency?",
+      "options": {
+        "A": "Raft",
+        "B": "Paxos",
+        "C": "Gossip Protocol",
+        "D": "Two-Phase Commit"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a Log-Structured Merge-Tree (LSM-Tree), writes are first stored in an in-memory 'MemTable' before being flushed to immutable 'SSTables' on disk.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'Split-Brain' scenario in a high-availability cluster?",
+      "options": {
+        "A": "A condition where a cluster partitions into two or more groups, each believing it is the primary leader.",
+        "B": "When a CPU core fails while the others remain active.",
+        "C": "When the frontend and backend lose synchronization.",
+        "D": "A database corruption issue caused by sudden power loss."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'Strict Serializability'.",
+      "options": {
+        "A": "It combines Serializability and Linearizability.",
+        "B": "Transactions appear to execute in some global sequential order that respects real-time ordering.",
+        "C": "It is the default isolation level for most NoSQL databases.",
+        "D": "It allows for 'dirty reads' to improve performance."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which mechanism is used in distributed databases like Cassandra to allow a cluster to converge on the same data state without a central master?",
+      "options": {
+        "A": "Gossip Protocol / Anti-entropy",
+        "B": "Leader Election",
+        "C": "Distributed Locking",
+        "D": "Atomic Broadcast"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Vector Clocks' are used to determine the partial ordering of events in a distributed system and detect causality violations (conflicts).",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Write-Ahead Logging' (WAL) used for in database internals?",
+      "options": {
+        "A": "To ensure atomicity and durability by logging changes to a stable storage before applying them to the data files.",
+        "B": "To speed up read queries using a log-based index.",
+        "C": "To log user login attempts for security auditing.",
+        "D": "To compress the database size during idle periods."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO phases of the 'Two-Phase Commit' (2PC) protocol.",
+      "options": {
+        "A": "Prepare Phase",
+        "B": "Commit Phase",
+        "C": "Selection Phase",
+        "D": "Validation Phase"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is a 'SSTable' (Sorted String Table)?",
+      "options": {
+        "A": "An immutable disk-based file containing key-value pairs sorted by key, used in LSM-Tree storage engines.",
+        "B": "A temporary table in SQL used for joins.",
+        "C": "A table that stores only string data types.",
+        "D": "A cache located in the L1 buffer of a CPU."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Byzantine Generals Problem' describes a situation where system components must reach consensus despite some components being faulty or malicious.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which isolation level prevents 'Non-repeatable Reads' but may still allow 'Phantom Reads' in many database implementations?",
+      "options": {
+        "A": "Repeatable Read",
+        "B": "Read Committed",
+        "C": "Serializable",
+        "D": "Snapshot Isolation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO drawbacks of the 'Two-Phase Commit' (2PC) protocol in distributed systems.",
+      "options": {
+        "A": "It is a blocking protocol (if the coordinator fails, resources remain locked).",
+        "B": "It does not scale well to high-latency or high-node-count environments.",
+        "C": "It is not compatible with relational databases.",
+        "D": "It guarantees only eventual consistency."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Bloom Filter' used for in database performance tuning?",
+      "options": {
+        "A": "A space-efficient probabilistic data structure used to test whether an element is a member of a set (reducing disk reads).",
+        "B": "An algorithm used to balance tree nodes.",
+        "C": "A security filter that removes SQL injection attempts.",
+        "D": "A tool for visualizing database schemas."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Quorum' in distributed systems is defined as the minimum number of votes (nodes) required for a transaction to be considered successful.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which consistency model ensures that if process A has communicated to process B that it has updated a data item, a subsequent access by process B will return the updated value?",
+      "options": {
+        "A": "Causal Consistency",
+        "B": "Monotonic Reads",
+        "C": "Read-your-writes Consistency",
+        "D": "Strong Consistency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of 'Multi-Version Concurrency Control' (MVCC).",
+      "options": {
+        "A": "It allows readers to not block writers and vice versa by maintaining multiple versions of a row.",
+        "B": "Each transaction sees a snapshot of the data at a specific point in time.",
+        "C": "It requires a global lock for every read operation.",
+        "D": "It only works in single-threaded databases."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Read Repair' in the context of distributed databases like Cassandra or DynamoDB?",
+      "options": {
+        "A": "Correcting stale data on a node during a read request by comparing it with other replicas.",
+        "B": "Fixing a corrupted database file on the disk.",
+        "C": "Updating the frontend UI after a failed fetch.",
+        "D": "Replacing a faulty hard drive in a server rack."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Jepsen Testing' is a popular framework used to verify the safety and liveness of distributed systems under network partitions.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which concept describes the time it takes for a write to one node to be reflected on all other nodes in a distributed cluster?",
+      "options": {
+        "A": "Replication Lag",
+        "B": "Propagation Delay",
+        "C": "Network Jitter",
+        "D": "Handshake Latency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO strategies for resolving conflicts in 'Multi-leader' replication.",
+      "options": {
+        "A": "Last Write Wins (LWW)",
+        "B": "Conflict-free Replicated Data Types (CRDTs)",
+        "C": "Ignoring the conflict and keeping both values.",
+        "D": "Asking the user to manually merge every single change."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary purpose of 'Fence Tokens' (or Fencing) in distributed locking?",
+      "options": {
+        "A": "To prevent a 'late' request from a client that lost its lock from overwriting data in the storage.",
+        "B": "To create a firewall around the database.",
+        "C": "To limit the number of users who can log in simultaneously.",
+        "D": "To encrypt data traveling between nodes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Linearizability' is a recency guarantee—it ensures that as soon as a write completes, all subsequent reads see the new value.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which database structure is optimized for high-volume writes and is used by Apache Cassandra and InfluxDB?",
+      "options": {
+        "A": "LSM-Tree",
+        "B": "B+ Tree",
+        "C": "Hash Map",
+        "D": "Linked List"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons why 'B+ Trees' are often preferred over standard Binary Search Trees for on-disk storage.",
+      "options": {
+        "A": "High fan-out reduces the depth of the tree (fewer disk seeks).",
+        "B": "Leaf nodes are linked, allowing for efficient range scans.",
+        "C": "They use less RAM than Binary Trees.",
+        "D": "They are easier to implement in high-level languages."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which specific phenomenon occurs when a transaction reads data that has been modified by another concurrent transaction but not yet committed?",
+      "options": {
+        "A": "Dirty Read",
+        "B": "Non-repeatable Read",
+        "C": "Phantom Read",
+        "D": "Lost Update"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'Raft' consensus algorithm ensures safety by requiring that a candidate must contain all committed entries in its log to be elected leader.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a distributed system, what is 'Clock Skew'?",
+      "options": {
+        "A": "The difference in the time readings of two different clocks in the network.",
+        "B": "The speed at which a single clock drifts over time.",
+        "C": "The delay introduced by network packets.",
+        "D": "A security vulnerability in NTP."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO types of 'Compaction' strategies used in LSM-Tree storage engines.",
+      "options": {
+        "A": "Size-tiered compaction",
+        "B": "Leveled compaction",
+        "C": "Circular compaction",
+        "D": "Parallel compaction"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Two-General's Problem' intended to prove in distributed systems theory?",
+      "options": {
+        "A": "That it is impossible to achieve guaranteed consensus over an unreliable communication channel.",
+        "B": "That two servers are always better than one.",
+        "C": "That encryption is necessary for communication.",
+        "D": "That leader election requires an odd number of nodes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Snapshot Isolation' typically prevents 'Write Skew', a condition where two transactions read the same data but update different sets of data that affect each other.",
+      "options": {
+        "A": "False (Snapshot isolation is vulnerable to Write Skew; Serializable is required to prevent it).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which data structure is used in 'Redis' to provide high-performance range queries and ranking, utilizing multiple layers of linked lists?",
+      "options": {
+        "A": "Skip List",
+        "B": "B-Tree",
+        "C": "Red-Black Tree",
+        "D": "Binary Heap"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO methods for achieving 'Atomic Commit' in a distributed database.",
+      "options": {
+        "A": "Two-Phase Commit (2PC)",
+        "B": "Three-Phase Commit (3PC)",
+        "C": "Optimistic Locking",
+        "D": "Vector Clocks"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Logical Clock' (e.g., Lamport Clock) used for?",
+      "options": {
+        "A": "To provide a partial ordering of events in a system without relying on physical wall-clock time.",
+        "B": "To measure the CPU execution time of a function.",
+        "C": "To synchronize the hardware clocks of all nodes.",
+        "D": "To schedule cron jobs in a microservices environment."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In 'Single-Leader' replication, if the leader fails, a 'Failover' process must promote a follower to be the new leader.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which distributed property ensures that a system will eventually produce a result or reach a state (i.e., 'something good eventually happens')?",
+      "options": {
+        "A": "Liveness",
+        "B": "Safety",
+        "C": "Durability",
+        "D": "Isolation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways 'Phantom Reads' can be prevented in a SQL database.",
+      "options": {
+        "A": "Predicate Locking",
+        "B": "Index-range Locking (Next-key locking)",
+        "C": "Using a faster CPU",
+        "D": "Increasing the cache size"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'CAS' (Compare-And-Swap) operation used for in low-level concurrency?",
+      "options": {
+        "A": "An atomic instruction used to achieve synchronization by comparing a memory location's content to a given value and modifying it only if they match.",
+        "B": "A method to swap two database tables.",
+        "C": "A cloud-based storage service.",
+        "D": "A pattern for caching API responses."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Zab' (Zookeeper Atomic Broadcast) is the consensus protocol used by Apache ZooKeeper.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which storage engine component is responsible for ensuring that data is physically written to disk in the correct order during a recovery process?",
+      "options": {
+        "A": "Write-Ahead Log (WAL)",
+        "B": "MemTable",
+        "C": "Bloom Filter",
+        "D": "Index Manager"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO differences between 'Linearizability' and 'Serializability'.",
+      "options": {
+        "A": "Linearizability is a single-operation, single-object recency guarantee.",
+        "B": "Serializability is a multi-object, multi-operation transaction guarantee.",
+        "C": "Linearizability is slower than Serializability.",
+        "D": "They are exactly the same thing."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Write Skew'?",
+      "options": {
+        "A": "A race condition where two transactions read the same objects and then update some of those objects, where the updates violate a premise made by the reads.",
+        "B": "When the database writes data too slowly.",
+        "C": "When a write operation fails halfway through.",
+        "D": "When data is written to the wrong shard."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Total Order Broadcast' ensures that all nodes receive the same messages in the exact same order.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which mechanism is used by 'HDFS' (Hadoop Distributed File System) to manage metadata and the file system tree?",
+      "options": {
+        "A": "NameNode",
+        "B": "DataNode",
+        "C": "ZNode",
+        "D": "MasterNode"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO properties of 'ACID' transactions.",
+      "options": {
+        "A": "Atomicity",
+        "C": "Availability",
+        "D": "Adaptability",
+        "B": "Isolation"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Amortized Cost' of a write operation in an LSM-Tree?",
+      "options": {
+        "A": "The average cost of a write when considering the background compaction work required over time.",
+        "B": "The price of the SSD used for storage.",
+        "C": "The time it takes to write to the MemTable only.",
+        "D": "The electricity cost of the server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Event Sourcing' systems often require 'Snapshots' to prevent replaying thousands of events every time the current state needs to be reconstructed.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which distributed primitive is used to ensure that only one node in a cluster performs a specific task at a time?",
+      "options": {
+        "A": "Distributed Lock (Lease)",
+        "B": "Distributed Queue",
+        "C": "Shared Memory",
+        "D": "Global Barrier"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO characteristics of 'CRDTs' (Conflict-free Replicated Data Types).",
+      "options": {
+        "A": "They allow for concurrent updates that can be merged without coordination.",
+        "B": "They guarantee mathematical convergence to the same state.",
+        "C": "They require a central leader to resolve conflicts.",
+        "D": "They only support integer data types."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Tombstone' in a distributed database deletion process?",
+      "options": {
+        "A": "A marker used to signify that a record has been deleted, ensuring the deletion propagates to other replicas.",
+        "B": "A corrupted data block.",
+        "C": "A backup of a deleted table.",
+        "D": "A security log entry."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Read-Your-Writes' consistency ensures that a user will always see their own updates immediately after they are made.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which consensus protocol is more complex than Raft but was the first widely recognized solution to the consensus problem?",
+      "options": {
+        "A": "Paxos",
+        "B": "Gossip",
+        "C": "Bully Algorithm",
+        "D": "Abcast"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to handle 'Hot Keys' in a sharded database cluster.",
+      "options": {
+        "A": "Adding a random suffix to the shard key for that specific hot key.",
+        "B": "Using a more granular shard key.",
+        "C": "Moving all data to a single server.",
+        "D": "Disabling the cache for that key."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the 'Safety' property in consensus algorithms?",
+      "options": {
+        "A": "The guarantee that the algorithm will never return an incorrect or inconsistent result.",
+        "B": "The guarantee that the system will never crash.",
+        "C": "The security level of the network.",
+        "D": "The speed of the election process."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'BASE' (Basically Available, Soft state, Eventual consistency) is the architectural counter-model to ACID.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which technique is used to coordinate the start of several distributed processes so they all begin execution at the same time?",
+      "options": {
+        "A": "Barrier",
+        "B": "Semaphore",
+        "C": "Mutex",
+        "D": "Pipe"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO components of a 'B-Tree' node.",
+      "options": {
+        "A": "Keys",
+        "B": "Pointers to child nodes",
+        "C": "Immutable log entries",
+        "D": "Bloom filters"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does 'Fencing' prevent in a leader-follower architecture?",
+      "options": {
+        "A": "A 'zombie' or former leader from performing writes after a new leader has been elected.",
+        "B": "Users from accessing the database.",
+        "C": "Nodes from joining the network.",
+        "D": "Data from being compressed."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Write amplification' is the ratio of the amount of data written to the underlying storage device compared to the amount of data written by the application.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which consistency model provides the highest level of data integrity at the cost of the highest latency?",
+      "options": {
+        "A": "Strict Consistency",
+        "B": "Eventual Consistency",
+        "C": "Causal Consistency",
+        "D": "Session Consistency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO reasons for 'Replica Lag'.",
+      "options": {
+        "A": "Network congestion between primary and replica.",
+        "B": "Heavy write load on the primary exceeding the replica's apply rate.",
+        "C": "Having too many indexes on the primary.",
+        "D": "Using a NoSQL database."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is 'Cascading Rollback'?",
+      "options": {
+        "A": "When the failure of one transaction forces the rollback of several other dependent transactions.",
+        "B": "When a database reverts to a 10-year-old backup.",
+        "C": "When a CSS file fails to load.",
+        "D": "When a user deletes their account."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Linearizability' can be achieved in a multi-leader system without significant performance trade-offs.",
+      "options": {
+        "A": "False",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which algorithm is used to find the shortest path between nodes in a network, often used in routing architectures?",
+      "options": {
+        "A": "Dijkstra's Algorithm",
+        "B": "Binary Search",
+        "C": "Quicksort",
+        "D": "Paxos"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO key metrics for a 'Message Broker'.",
+      "options": {
+        "A": "Lag (Distance between producer and consumer offsets)",
+        "B": "Throughput (Messages per second)",
+        "C": "Number of users logged in",
+        "D": "Total disk space available"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary function of the 'Gossip Protocol'?",
+      "options": {
+        "A": "To disseminate information across a large cluster by having nodes periodically share data with random neighbors.",
+        "B": "To elect a leader.",
+        "C": "To encrypt data.",
+        "D": "To monitor server power consumption."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Multi-AZ' setups provide disaster recovery, while 'Read Replicas' provide scalability.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which mechanism handles the case where a node comes back online after a long period and needs to sync up its missing data?",
+      "options": {
+        "A": "Anti-entropy (using Merkle Trees)",
+        "B": "Fast-forwarding",
+        "C": "Heartbeat",
+        "D": "Snapshotting"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of 'Immutable' infrastructure.",
+      "options": {
+        "A": "Easier rollbacks by switching to the previous version.",
+        "B": "Consistency across environments (no configuration drift).",
+        "C": "Faster runtime performance of the application.",
+        "D": "No need for security patches."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    }
+  ]
+}

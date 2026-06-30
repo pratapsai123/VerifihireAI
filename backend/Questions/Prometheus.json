@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Prometheus", 
+  "questions": [
+    {
+    "question": "What is the primary data collection model used by Prometheus?",
+    "options": {
+      "A": "Push model (Targets send data to Prometheus)",
+      "B": "Pull model (Prometheus scrapes data from targets)",
+      "C": "Streaming model (Constant data flow)",
+      "D": "Manual model (Admin uploads data)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus is primarily designed for storing and analyzing numerical time-series data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Kubernetes",
+      "D": "Only for text-based logs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in the Prometheus ecosystem is responsible for handling and routing alerts?",
+    "options": {
+      "A": "Pushgateway",
+      "B": "Alertmanager",
+      "C": "Node Exporter",
+      "D": "Service Discovery"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'PromQL' stand for?",
+    "options": {
+      "A": "Prometheus Queue Language",
+      "B": "Prometheus Query Language",
+      "C": "Programmatic Query Logic",
+      "D": "Protocol Query Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Prometheus, what is a 'Metric'?",
+    "options": {
+      "A": "A physical measurement of server weight.",
+      "B": "A numerical representation of a system state that changes over time.",
+      "C": "A specialized tool for cleaning monitors.",
+      "D": "A backup of the entire database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric type should be used for a value that only ever increases, such as total HTTP requests?",
+    "options": {
+      "A": "Gauge",
+      "B": "Counter",
+      "C": "Histogram",
+      "D": "Summary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Gauge' metric can increase as well as decrease, like current memory usage.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for CPU metrics",
+      "D": "Only if using Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default port used by the Prometheus server?",
+    "options": {
+      "A": "8080",
+      "B": "9090",
+      "C": "3000",
+      "D": "8125"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to allow short-lived batch jobs to send their metrics to Prometheus?",
+    "options": {
+      "A": "Alertmanager",
+      "B": "Pushgateway",
+      "C": "Grafana",
+      "D": "Node Exporter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Exporter' in Prometheus terminology?",
+    "options": {
+      "A": "A person who sends data to another country.",
+      "B": "A service that retrieves metrics from a third-party system and exposes them in Prometheus format.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the admin account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus provides its own built-in dashboarding tool that is more powerful than Grafana.",
+    "options": {
+      "A": "False (Prometheus has a basic expression browser, but Grafana is the standard for complex dashboards).",
+      "B": "True",
+      "C": "Only for non-commercial use",
+      "D": "Only in version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'TSDB' stand for in the context of Prometheus storage?",
+    "options": {
+      "A": "Total System Data Base",
+      "B": "Time Series Data Base",
+      "C": "Technical Stack Data Bridge",
+      "D": "Tagged Storage Data Block"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a PromQL query, what are 'Labels' used for?",
+    "options": {
+      "A": "To name the physical servers after office pets.",
+      "B": "To filter and group metrics by specific attributes (e.g., job='web-server').",
+      "C": "To store user passwords securely.",
+      "D": "To increase the internet speed of the host."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus stores data locally on disk in a custom efficient format.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for temporary storage",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'up' metric in Prometheus?",
+    "options": {
+      "A": "To measure the height of the server rack.",
+      "B": "To indicate if a target was successfully reached during the last scrape (1 for up, 0 for down).",
+      "C": "To count the number of users logged in.",
+      "D": "To increase the CPU clock speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Node Exporter' metric for monitoring CPU usage?",
+    "options": {
+      "A": "system.cpu.load",
+      "B": "node_cpu_seconds_total",
+      "C": "cpu_utilization_percent",
+      "D": "host_cpu_usage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Histogram' metric counts the frequency of occurrences of values in pre-defined buckets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'scrape_interval' configuration setting determine?",
+    "options": {
+      "A": "How long Prometheus waits before deleting old data.",
+      "B": "How frequently Prometheus pulls metrics from its targets.",
+      "C": "The price of the cloud subscription.",
+      "D": "The size of a single data packet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function is used to calculate the per-second request rate for a counter over a time range?",
+    "options": {
+      "A": "avg()",
+      "B": "rate()",
+      "C": "sum()",
+      "D": "increase()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Service Discovery' allows Prometheus to automatically find and monitor new targets in dynamic environments like Kubernetes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for public-facing apps",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Client Libraries' in Prometheus?",
+    "options": {
+      "A": "To act as a physical library for developers.",
+      "B": "To allow developers to instrument their application code and expose custom metrics.",
+      "C": "To backup the Prometheus database.",
+      "D": "To monitor the temperature of the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metric type provides configurable quantiles, like the 95th percentile, calculated on the client side?",
+    "options": {
+      "A": "Counter",
+      "B": "Summary",
+      "C": "Gauge",
+      "D": "Histogram"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus is an ideal tool for 100% accurate per-request billing data.",
+    "options": {
+      "A": "False (Prometheus is optimized for reliability and trends, not for 100% accurate transactional billing).",
+      "B": "True",
+      "C": "Only if using version 1.0",
+      "D": "Only for cloud providers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Retention Period' in Prometheus?",
+    "options": {
+      "A": "The time it takes to hire a new SRE.",
+      "B": "The duration for which Prometheus keeps the collected data before deleting it.",
+      "C": "The speed of the network bandwidth.",
+      "D": "The battery life of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'scraping' the metrics from targets?",
+    "options": {
+      "A": "The Exporter",
+      "B": "The Prometheus Server",
+      "C": "Alertmanager",
+      "D": "The Pushgateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: PromQL supports basic arithmetic operators like +, -, *, and /.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Gauge metrics",
+      "D": "Only if using version 2.10+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Relabeling' in Prometheus configuration?",
+    "options": {
+      "A": "To change the color of the labels in Grafana.",
+      "B": "To modify, drop, or add labels to targets or metrics during the scrape process.",
+      "C": "To encrypt individual data points.",
+      "D": "To monitor the daily cost of the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of monitor is best for detecting an unplanned interruption of an IT service in the Prometheus ecosystem?",
+    "options": {
+      "A": "Histogram",
+      "B": "Alerting Rule",
+      "C": "Recording Rule",
+      "D": "Exporter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus metrics are exposed via a simple, human-readable text format over HTTP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Kubernetes logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Target' in Prometheus?",
+    "options": {
+      "A": "A person being monitored.",
+      "B": "An endpoint (URL/IP) that Prometheus scrapes metrics from.",
+      "C": "A goal for the quarterly revenue.",
+      "D": "A specialized tool for drawing clouds."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by Node Exporter by default?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus can only monitor Linux systems and not Windows.",
+    "options": {
+      "A": "False (Windows can be monitored using the windows_exporter).",
+      "B": "True",
+      "C": "Only for non-commercial use",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Instrumentation'?",
+    "options": {
+      "A": "Building physical musical instruments.",
+      "B": "The process of adding monitoring code to an application.",
+      "C": "A specialized way to encrypt data.",
+      "D": "To monitor the weight of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'sum()' aggregation operator do in PromQL?",
+    "options": {
+      "A": "Deletes all duplicate metrics.",
+      "B": "Calculates the total value across all time series that match the query.",
+      "C": "Finds the highest value in a dataset.",
+      "D": "Averages the values over time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Counter' reset occurs when a process restarts, and Prometheus handles this automatically in functions like rate().",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java applications",
+      "D": "Only if the admin triggers it"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Recording Rules' primarily used for?",
+    "options": {
+      "A": "To record the administrator's voice.",
+      "B": "To precompute frequently needed or expensive queries and save them as new time series.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to 'visualize' metrics in detailed dashboards?",
+    "options": {
+      "A": "Prometheus Server",
+      "B": "Grafana",
+      "C": "Alertmanager",
+      "D": "Pushgateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus metrics typically include a timestamp for every data point.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error metrics",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Deduplication' in Alertmanager?",
+    "options": {
+      "A": "To delete all alerts.",
+      "B": "To ensure that multiple identical alerts are merged into a single notification to avoid noise.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily cost of alerts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Prometheus, what is a 'Job'?",
+    "options": {
+      "A": "A person's employment status.",
+      "B": "A collection of identical targets (e.g., a group of web servers) being monitored.",
+      "C": "A tool to delete old monitoring data.",
+      "D": "The password for the monitoring dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus is an open-source project and is part of the Cloud Native Computing Foundation (CNCF).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Grouping' in Alertmanager?",
+    "options": {
+      "A": "To group people in the office for lunch.",
+      "B": "To combine multiple related alerts into a single notification.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid PromQL range vector selector?",
+    "options": {
+      "A": "http_requests_total[5m]",
+      "B": "http_requests_total(5m)",
+      "C": "http_requests_total{5m}",
+      "D": "http_requests_total<5m>"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Blackbox Exporter' is used to probe endpoints over protocols like HTTP, HTTPS, and TCP from the outside.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for private websites",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cardinality' in Prometheus metrics?",
+    "options": {
+      "A": "The number of birds near the data center.",
+      "B": "The number of unique time series produced by a metric name and its label values.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the total number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'routing' alerts to specific receivers like Slack or Email?",
+    "options": {
+      "A": "Prometheus Server",
+      "B": "Alertmanager",
+      "C": "Node Exporter",
+      "D": "Pushgateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: High cardinality metrics can lead to increased memory usage and slower query performance in Prometheus.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if using Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Instance' label in Prometheus used for?",
+    "options": {
+      "A": "To name the server after a famous person.",
+      "B": "To uniquely identify a specific target (usually host:port) within a job.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for Alertmanager by default?",
+    "options": {
+      "A": "9090",
+      "B": "9093",
+      "C": "8080",
+      "D": "3000"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Summary' metrics are generally more accurate for quantiles than 'Histogram' metrics but are harder to aggregate.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only in version 2.10+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Discovery' in a Kubernetes context?",
+    "options": {
+      "A": "Finding a new cloud provider.",
+      "B": "Automatically identifying pods and services to monitor via the Kubernetes API.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that a Prometheus alert condition is met but has not yet lasted long enough to trigger a notification?",
+    "options": {
+      "A": "Firing",
+      "B": "Pending",
+      "C": "Resolved",
+      "D": "Inactive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Prometheus 'Histogram' automatically includes a '+Inf' bucket.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency metrics",
+      "D": "Only if the admin adds it"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Inhibition' in Alertmanager?",
+    "options": {
+      "A": "To stop the administrator from working.",
+      "B": "A feature that suppresses certain alerts if other alerts are already firing (e.g., stop 'server-down' if 'data-center-down' is firing).",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL operator is used to perform a 'not equal to' comparison?",
+    "options": {
+      "A": "==",
+      "B": "!=",
+      "C": "<>",
+      "D": "~="
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Labels' allows for multi-dimensional data analysis in Prometheus.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for text logs",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scrape Timeout'?",
+    "options": {
+      "A": "The time spent cleaning the data center.",
+      "B": "The maximum time Prometheus will wait for a target to respond before marking the scrape as failed.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for 'executing' alerting rules and evaluating them against the data?",
+    "options": {
+      "A": "Prometheus Server",
+      "B": "Alertmanager",
+      "C": "Node Exporter",
+      "D": "Pushgateway"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Federation' allows one Prometheus server to scrape selected time series from another Prometheus server.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Silencing' in Alertmanager?",
+    "options": {
+      "A": "Turning off the monitor completely.",
+      "B": "Temporarily suppressing notifications for a specific alert or set of alerts (e.g., during maintenance).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the alert database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used for 'hardware' and 'OS' metrics collection on Linux hosts?",
+    "options": {
+      "A": "Blackbox Exporter",
+      "B": "Node Exporter",
+      "C": "MySQL Exporter",
+      "D": "Prometheus Server"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus is generally written in the Go (Golang) programming language.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only version 1.0",
+      "D": "Only if using the ARM architecture"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'Grafana' in the Prometheus ecosystem?",
+    "options": {
+      "A": "To scrape metrics from targets.",
+      "B": "To provide high-quality data visualization and interactive dashboards.",
+      "C": "To route alerts to Slack.",
+      "D": "To store metrics data permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function calculates the 'increase' of a counter over a time range, handling resets automatically?",
+    "options": {
+      "A": "rate()",
+      "B": "increase()",
+      "C": "delta()",
+      "D": "irate()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Labels' are key-value pairs associated with a metric name.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error metrics",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'scrape_configs' used for in the Prometheus YAML file?",
+    "options": {
+      "A": "To name the physical server location.",
+      "B": "To define the jobs and targets that Prometheus should monitor and scrape.",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a PromQL query, what is the primary technical difference between the 'rate()' and 'irate()' functions?",
+    "options": {
+      "A": "rate() is for Gauge metrics; irate() is for Counter metrics.",
+      "B": "rate() calculates the average per-second increase over the entire range; irate() looks only at the last two data points in the range.",
+      "C": "irate() is more accurate for long-term trends spanning days.",
+      "D": "rate() cannot handle counter resets, whereas irate() can."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'relabel_config' action would you use to completely stop scraping a target if it matches a specific label criteria?",
+    "options": {
+      "A": "replace",
+      "B": "drop",
+      "C": "keep",
+      "D": "labeldrop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus Histograms are 'Cumulative', meaning the count in a higher bucket includes the counts of all lower buckets.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for latency-related metrics",
+      "D": "Only if using the 'stable' API version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'group_by' parameter in an Alertmanager routing configuration?",
+    "options": {
+      "A": "To group users by their department in the company.",
+      "B": "To aggregate multiple alerts into a single notification based on shared labels (e.g., alertname or cluster).",
+      "C": "To encrypt the alert payload.",
+      "D": "To determine which administrator receives the email first."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When using 'Static Config' for targets, where are the IP addresses and ports manually defined?",
+    "options": {
+      "A": "In the Alertmanager config file.",
+      "B": "In the prometheus.yml file under the 'targets' key.",
+      "C": "Inside the application source code.",
+      "D": "On the physical hardware label of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Prometheus, 'Summary' metrics calculate quantiles on the client side, making them impossible to aggregate across multiple instances.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the Java client",
+      "D": "Only for non-production environments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TSDB Compaction' in the Prometheus server?",
+    "options": {
+      "A": "The process of physically squashing the hard drive.",
+      "B": "The periodic merging of smaller data blocks into larger blocks on disk to optimize query speed and storage efficiency.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL operator is used to perform a 'Regex' match on a label value?",
+    "options": {
+      "A": "==",
+      "B": "=~",
+      "C": "!~",
+      "D": "!="
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to a Prometheus alert when the 'for' duration in the alerting rule is met?",
+    "options": {
+      "A": "It moves from 'Inactive' to 'Pending'.",
+      "B": "It moves from 'Pending' to 'Firing'.",
+      "C": "It is immediately deleted.",
+      "D": "The server restarts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'metric_relabel_configs' section is applied AFTER the scrape has occurred but BEFORE the data is stored in the TSDB.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for external metrics",
+      "D": "Only if using version 3.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Honor Labels' setting in a scrape configuration?",
+    "options": {
+      "A": "To ensure labels are written in capital letters.",
+      "B": "To decide whether to keep the labels provided by the target or overwrite them with Prometheus-defined labels if there is a conflict.",
+      "C": "To encrypt the label values.",
+      "D": "To monitor the daily growth of the label count."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function should be used to calculate the '95th percentile' from a histogram metric?",
+    "options": {
+      "A": "quantile_95()",
+      "B": "histogram_quantile(0.95, sum by (le) (rate(metric_bucket[5m])))",
+      "C": "avg_over_time(metric[5m])",
+      "D": "sum(metric) / count(metric)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus 'Federation' is often used to create a hierarchical monitoring setup where a 'Global' Prometheus scrapes data from 'Regional' ones.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS users",
+      "D": "Only if the servers are in the same room"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Inhibition' rules in Alertmanager?",
+    "options": {
+      "A": "To stop the server from processing data.",
+      "B": "To suppress specific alerts if other related alerts are already firing (e.g., silence 'CPU-High' if 'Node-Down' is active).",
+      "C": "To encrypt the alert message.",
+      "D": "To increase the speed of the notification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Recording Rule', what is the significance of the 'groups' and 'interval' settings?",
+    "options": {
+      "A": "They define the physical location of the data.",
+      "B": "They organize rules and determine how often the Prometheus server evaluates the rule to generate new time series.",
+      "C": "They set the password for the rule database.",
+      "D": "They monitor the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'External Labels' is required when configuring Prometheus for 'Remote Write' to a system like Thanos or Cortex.",
+    "options": {
+      "A": "True (To uniquely identify the source Prometheus instance).",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'predict_linear()' function in PromQL allow you to do?",
+    "options": {
+      "A": "Predict the weather in the data center.",
+      "B": "Perform time-series forecasting to see if a metric will hit a threshold in the future (e.g., 'Will disk be full in 4 hours?').",
+      "C": "Draw a straight line on the dashboard.",
+      "D": "Calculate the history of all previous data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is most likely responsible for a 'Service Discovery' failure in a Kubernetes environment?",
+    "options": {
+      "A": "The Node Exporter",
+      "B": "The Prometheus Role/RoleBinding permissions for the K8s API.",
+      "C": "The physical power cable of the switch.",
+      "D": "The Grafana dashboard settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'absent()' function in PromQL to create an alert that triggers if a metric disappears entirely.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network metrics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Label Replacement' in relabeling?",
+    "options": {
+      "A": "Replacing a physical sticker on a server.",
+      "B": "The process of taking parts of one or more existing labels and combining them into a new label using a regex.",
+      "C": "Deleting a label and not replacing it.",
+      "D": "Monitoring the cost of labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for communication between the Prometheus server and the Pushgateway?",
+    "options": {
+      "A": "9090",
+      "B": "9091",
+      "C": "9093",
+      "D": "8080"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'delta()' function should ONLY be used with Gauge metrics, not Counters.",
+    "options": {
+      "A": "True (rate() or increase() should be used for Counters).",
+      "B": "False",
+      "C": "Only for Java counters",
+      "D": "Only if the counter is above 1000"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Silences' in Alertmanager compared to 'Inhibitions'?",
+    "options": {
+      "A": "Silences are permanent; Inhibitions are temporary.",
+      "B": "Silences are manually created by admins (e.g., for maintenance); Inhibitions are automated rules based on alert states.",
+      "C": "Silences only work for email; Inhibitions work for Slack.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a scrape config, what does 'sample_limit' protect against?",
+    "options": {
+      "A": "Too many users looking at a dashboard.",
+      "B": "A single target exposing too many time series, which could crash the Prometheus server (Cardinality explosion protection).",
+      "C": "The internet speed being too fast.",
+      "D": "The CPU becoming too hot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Range Vector' cannot be graphed directly in Grafana; it must be converted to an 'Instant Vector' using a function like rate().",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'Table' view",
+      "D": "Only for Counter metrics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'WAL' (Write Ahead Log) in Prometheus storage?",
+    "options": {
+      "A": "To store logs from the web server.",
+      "B": "To record incoming data in a sequential file to allow for crash recovery of memory-resident data.",
+      "C": "To encrypt the TSDB database.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL aggregation operator is used to find the average value across all instances of a metric?",
+    "options": {
+      "A": "rate()",
+      "B": "avg()",
+      "C": "sum()",
+      "D": "min()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'HTTP Basic Auth' to secure the scrape endpoint of an exporter.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2.0+",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Staleness' in Prometheus?",
+    "options": {
+      "A": "When the data center smells bad.",
+      "B": "A condition where a target is no longer reporting a series, and Prometheus marks it as 'stale' so it disappears from queries.",
+      "C": "A way to backup the TSDB.",
+      "D": "To monitor the speed of the upload connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific component is responsible for 'routing' alerts to different teams based on labels?",
+    "options": {
+      "A": "The Prometheus Server",
+      "B": "The Alertmanager Dispatcher",
+      "C": "The Node Exporter",
+      "D": "The Pushgateway"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus supports 'Remote Read' to allow it to query data from long-term storage backends.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for S3 buckets",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Overlap' in a federated Prometheus environment?",
+    "options": {
+      "A": "When two network cables cross.",
+      "B": "When multiple Prometheus servers scrape the same targets, potentially causing duplicate data in the global aggregator.",
+      "C": "Hiring too many SREs.",
+      "D": "The process of moving servers to a new region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for the Prometheus web UI/API?",
+    "options": {
+      "A": "80",
+      "B": "9090",
+      "C": "443",
+      "D": "3389"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Dynamic Labels' in relabeling allows you to turn a portion of a target's URL into a label value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'repeat_interval' in an Alertmanager route?",
+    "options": {
+      "A": "How often the administrator repeats themselves.",
+      "B": "How long to wait before re-sending an alert notification for an issue that is still firing.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function calculates the 'per-second' rate of increase of a counter, but is better for 'fast-moving' counters as it only looks at the last two samples?",
+    "options": {
+      "A": "rate()",
+      "B": "irate()",
+      "C": "increase()",
+      "D": "delta()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus uses 'mmap' (memory mapping) to handle the indexing and querying of on-disk data blocks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for SSDs",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scrape Jitter' used for?",
+    "options": {
+      "A": "A physical vibration in the server rack.",
+      "B": "The process of adding a random offset to the scrape start time to prevent all targets from being scraped at the exact same millisecond.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a risk of a 'High Cardinality' metric in the Prometheus TSDB?",
+    "options": {
+      "A": "The server will physically melt.",
+      "B": "Massive increase in RAM usage and disk index size, potentially leading to 'Out of Memory' (OOM) crashes.",
+      "C": "The internet bill will double.",
+      "D": "The server will automatically delete its own firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Promtool' is a command-line utility used to validate Prometheus configuration files and rules.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Nexus switches",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Summary' quantile calculation 'Client-Side' vs 'Server-Side'?",
+    "options": {
+      "A": "Summary is server-side; Histogram is client-side.",
+      "B": "Summary is client-side (pre-calculated); Histogram is server-side (calculated at query time from buckets).",
+      "C": "They are both calculated in the browser.",
+      "D": "The administrator decides manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command-line tool would you use to 'check' the syntax of your prometheus.yml file?",
+    "options": {
+      "A": "prometheus --check",
+      "B": "promtool check config",
+      "C": "config-validator",
+      "D": "prom-verify"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Prometheus, you can perform 'Joins' between two different metrics based on their shared labels.",
+    "options": {
+      "A": "True (using the 'on' or 'ignoring' keywords).",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a hub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Discovery' based on 'DNS' (dns_sd_configs) used for?",
+    "options": {
+      "A": "To find a website on the internet.",
+      "B": "To automatically discover targets by querying SRV or A records for a specific domain name.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "To monitor the daily growth of the hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'Alertmanager'?",
+    "options": {
+      "A": "9090",
+      "B": "9093",
+      "C": "9100",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'increase()' function in PromQL is essentially the 'rate()' function multiplied by the number of seconds in the time range.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the admin is root",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Alert Routing' in Alertmanager?",
+    "options": {
+      "A": "Naming the routes after famous pilots.",
+      "B": "A hierarchical tree structure that determines which team gets notified based on alert labels.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' indicates that a Prometheus target is failing to respond to scrapes?",
+    "options": {
+      "A": "Unknown",
+      "B": "Down (up == 0)",
+      "C": "Up (up == 1)",
+      "D": "Flapping"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus can store and query 'Gauges' that have string values instead of numbers.",
+    "options": {
+      "A": "False (Prometheus only stores floating-point numbers; string information must be stored as label values).",
+      "B": "True",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Remote Write' tuning primarily used for?",
+    "options": {
+      "A": "Writing a letter remotely.",
+      "B": "Adjusting buffer sizes and concurrency to ensure Prometheus can send metrics to an external storage system without losing data or overloading the network.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is associated with 'Node Exporter'?",
+    "options": {
+      "A": "80",
+      "B": "9100",
+      "C": "9093",
+      "D": "21"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Layer 3 switch can be monitored by Prometheus if it supports SNMP and an 'SNMP Exporter' is used.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using a virtual server",
+      "D": "Only for non-encrypted traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Labels' in Prometheus and why is it used?",
+    "options": {
+      "A": "Labels on the outside of the server case.",
+      "B": "Global labels applied to all data leaving a Prometheus instance to distinguish it from other instances in a multi-cluster environment.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' would you use to calculate the 'availability' percentage of a service over 30 days?",
+    "options": {
+      "A": "avg_over_time(up[30d]) * 100",
+      "B": "sum(up[30d])",
+      "C": "rate(up[30d])",
+      "D": "count(up[30d])"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prometheus supports 'Authentication' for the main web UI and API out of the box in the binary without a reverse proxy.",
+    "options": {
+      "A": "True (starting in newer versions via a web config file, though proxies were traditionally required).",
+      "B": "False",
+      "C": "Only for cloud-native firewalls",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Target Relabeling' (relabel_configs)?",
+    "options": {
+      "A": "To walk directly to the server.",
+      "B": "To decide whether to scrape a target, what its labels should be, or to change its internal metadata before the scrape starts.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'Blackbox Exporter' traffic?",
+    "options": {
+      "A": "9115",
+      "B": "443",
+      "C": "9090",
+      "D": "80"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Prometheus Histogram' provides the exact average latency of all requests.",
+    "options": {
+      "A": "False (It provides counts in buckets; the exact average requires dividing sum by count).",
+      "B": "True",
+      "C": "Only for NAT traffic",
+      "D": "Only in 'Standard' mode"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Aggregation over time' in PromQL?",
+    "options": {
+      "A": "Dividing the network into tiny parts.",
+      "B": "Functions like avg_over_time() or max_over_time() that operate on the values of a single time series within a specified time range.",
+      "C": "A specialized way to encrypt network traffic.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL operator is used to 'join' metrics but only keep labels from the 'one' side of a many-to-one relationship?",
+    "options": {
+      "A": "group_left",
+      "B": "group_right",
+      "C": "on",
+      "D": "ignoring"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prometheus can detect 'Series Churn' (many new series created and deleted rapidly) which can severely impact performance.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Relabeling' action 'labelmap'?",
+    "options": {
+      "A": "Mapping a physical server rack.",
+      "B": "A way to take all labels matching a regex and rename them according to a replacement pattern (e.g., mapping K8s annotations to labels).",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'SNMP Exporter' to poll devices?",
+    "options": {
+      "A": "9116",
+      "B": "161",
+      "C": "443",
+      "D": "22"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Recording Rules' can significantly reduce the CPU load on your Prometheus server for frequently viewed complex dashboards.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metric Cardinality Management'?",
+    "options": {
+      "A": "Counting the number of birds.",
+      "B": "The technical practice of identifying and dropping high-cardinality labels (like UserIDs) to keep the TSDB healthy.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function should be used to calculate the 'increase' of a counter over 24 hours, automatically accounting for any resets?",
+    "options": {
+      "A": "increase(metric[24h])",
+      "B": "rate(metric[24h]) * 86400",
+      "C": "sum(metric[24h])",
+      "D": "Both A and B are mathematically equivalent and correct."
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: In Alertmanager, 'Receiver' defines the actual endpoint (like a Slack webhook URL or an email address) where the alert is delivered.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Prometheus Scraping' loop delay?",
+    "options": {
+      "A": "The time it takes for a target to respond.",
+      "B": "The delay between the end of one scrape and the beginning of the next, ensuring the server doesn't scrape faster than the configured interval.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Prometheus TSDB architecture, what is the primary consequence of a 'Head Block' series churn (e.g., thousands of unique label sets created and deleted every hour)?",
+    "options": {
+      "A": "Disk space usage decreases due to fewer data points.",
+      "B": "Significant increase in memory (RAM) usage and increased CPU cost during the 'checkpointing' process.",
+      "C": "The Prometheus server automatically switches to a Push model.",
+      "D": "The WAL file becomes corrupted and unreadable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When configuring 'Remote Write', which specific setting determines how many samples Prometheus will buffer in memory before dropping data if the remote endpoint is slow?",
+    "options": {
+      "A": "capacity",
+      "B": "max_shards",
+      "C": "max_samples_per_send",
+      "D": "min_shards"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'labelmap' action in relabeling is typically used to extract values from K8s internal metadata and convert them into permanent metric labels.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Gauge metrics",
+      "D": "Only if using the Go client"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of scaling, what is the primary architectural difference between Thanos 'Sidecar' and Thanos 'Receiver'?",
+    "options": {
+      "A": "Sidecar pushes data; Receiver pulls data.",
+      "B": "Sidecar uses Prometheus's local storage and provides a Query API; Receiver accepts data via Remote Write for centralized ingestion.",
+      "C": "Receiver is only for non-production environments.",
+      "D": "Sidecar requires a 10Gbps dedicated fiber link."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function should be used to calculate the 'delta' between the first and last values of a Gauge in a range, specifically ignoring any counter-reset logic?",
+    "options": {
+      "A": "delta()",
+      "B": "idelta()",
+      "C": "increase()",
+      "D": "deriv()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'High Availability' Prometheus pair (scraping the same targets), the Alertmanager is responsible for deduplicating identical alerts sent by both servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the servers share the same IP",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Mmap' (memory mapping) system in the Prometheus TSDB query engine?",
+    "options": {
+      "A": "To map the physical location of the monitoring nodes.",
+      "B": "To allow the OS to manage the caching of on-disk data chunks into memory, keeping the Prometheus process memory footprint lower.",
+      "C": "To encrypt the index files.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Prometheus server to receive 'Remote Write' data if it is configured as a receiver (e.g., in a migration)?",
+    "options": {
+      "A": "9090",
+      "B": "9094",
+      "C": "9093",
+      "D": "8080"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prometheus 'Native Histograms' (Sparse Histograms) offer higher resolution and lower storage costs by using dynamic buckets instead of fixed 'le' labels.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.25+",
+      "D": "Only for Java applications"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'Absent_over_time()' function in PromQL provide that the standard 'absent()' function does not?",
+    "options": {
+      "A": "It only works for Gauge metrics.",
+      "B": "It checks for the absence of a metric over a specific time range rather than just the current instant.",
+      "C": "It deletes the metric if it is found.",
+      "D": "It predicts when the metric will disappear."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Thanos' architecture, which component is responsible for 'downsampling' historical data (e.g., converting 1s data to 1h averages) to save object storage costs?",
+    "options": {
+      "A": "Thanos Querier",
+      "B": "Thanos Compactor",
+      "C": "Thanos Store Gateway",
+      "D": "Thanos Sidecar"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using the 'ignoring' keyword in a PromQL join allows you to perform an operation between two metrics that have some, but not all, labels in common.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for sum() aggregations",
+      "D": "Only if the labels are 'job' and 'instance'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'WAL Checkpoint' process in Prometheus?",
+    "options": {
+      "A": "A security guard checking the server room.",
+      "B": "The process of creating a summarized version of the WAL and deleting old WAL segments to keep the disk usage under control.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The history of all previous data deletions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Relabeling' action is used to rename an existing label without changing its value?",
+    "options": {
+      "A": "replace",
+      "B": "labelmap",
+      "C": "labelkeep",
+      "D": "labeldrop"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prometheus 'Service Discovery' for AWS (ec2_sd_configs) requires an IAM role with 'ec2:DescribeInstances' permissions.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using IPv6",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the Alertmanager, what is the impact of the 'group_wait' timer?",
+    "options": {
+      "A": "How long to wait for the admin to acknowledge the alert.",
+      "B": "The initial delay before sending the first notification for a new group of alerts, used to wait for more related alerts to arrive and be grouped together.",
+      "C": "The time it takes to encrypt the notification.",
+      "D": "The speed of the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' in Prometheus provides the total number of bytes currently consumed by the TSDB on disk?",
+    "options": {
+      "A": "prometheus_tsdb_storage_blocks_bytes",
+      "B": "node_disk_usage_bytes",
+      "C": "prometheus_tsdb_data_size_total",
+      "D": "system_storage_used_bytes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'predict_linear()' function uses a simple linear regression over the specified time range to estimate the future value of a time series.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Counter metrics",
+      "D": "Only if the range is greater than 1 hour"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Thanos Store Gateway'?",
+    "options": {
+      "A": "To provide a login screen for Thanos.",
+      "B": "To act as a proxy that allows the Thanos Querier to fetch historical metric data stored in cloud object storage (like S3).",
+      "C": "To encrypt the monitoring dashboard.",
+      "D": "To monitor the daily growth of the VPC."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL aggregation operator would you use to find the top 5 targets with the highest memory usage?",
+    "options": {
+      "A": "max()",
+      "B": "topk(5, ...)",
+      "C": "limit(5, ...)",
+      "D": "sort_desc(...)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus supports 'Exemplars', which are Trace IDs attached to specific metric observations to provide a direct link between metrics and traces.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for OpenTelemetry targets",
+      "D": "Only if using version 2.26+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Series Churn' specifically in a Prometheus context?",
+    "options": {
+      "A": "Making butter in the server room.",
+      "B": "The rate at which new time series are created and old ones are retired, often caused by dynamic labels like Pod IDs or timestamps in labels.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component in a 'Cortex' or 'Mimir' architecture is responsible for ensuring that multiple incoming samples for the same series are handled correctly for HA?",
+    "options": {
+      "A": "Distributor",
+      "B": "Ingester",
+      "C": "Querier",
+      "D": "Store-gateway"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Prometheus can be configured to scrape itself by including a target for 'localhost:9090' in its own configuration.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-production environments",
+      "D": "Only if the admin is root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'le' label in a Prometheus Histogram bucket used for?",
+    "options": {
+      "A": "To identify the 'Limited Edition' of the metric.",
+      "B": "It stands for 'Less than or Equal to' and defines the upper boundary of the bucket.",
+      "C": "To encrypt the bucket values.",
+      "D": "To monitor the daily cost of the IPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used by the Prometheus server for its 'GRPC' API (used by Thanos/Cortex)?",
+    "options": {
+      "A": "9090",
+      "B": "10901",
+      "C": "9093",
+      "D": "8080"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' uses a 'microservices' architecture to handle ingestion, querying, and storage separately for horizontal scalability.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2.0",
+      "D": "Only for Azure users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sample Truncation' in the context of Prometheus scrapes?",
+    "options": {
+      "A": "Deleting the oldest data points.",
+      "B": "Dropping the precision of floating point numbers to save space.",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL keyword is used to perform a 'one-to-many' or 'many-to-one' match between two metrics?",
+    "options": {
+      "A": "on",
+      "B": "group_left / group_right",
+      "C": "ignoring",
+      "D": "by"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In Prometheus, a 'Stale' marker is a special value inserted into the TSDB to indicate that a specific time series is no longer active.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error metrics",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Alertmanager' inhibit_rules?",
+    "options": {
+      "A": "To turn off the server.",
+      "B": "To prevent 'Alert Storms' by suppressing lower-priority alerts if a higher-priority alert is already firing.",
+      "C": "To encrypt the alert payload.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PromQL function calculates the 'per-second' rate of increase, but unlike rate(), it is optimized for high-resolution data and 'fast' counters?",
+    "options": {
+      "A": "rate()",
+      "B": "irate()",
+      "C": "increase()",
+      "D": "delta()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Query Range' API allows you to fetch data for a specific time window, whereas 'Query' API only returns the most recent data point.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Counter metrics",
+      "D": "Only in version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'TSDB Block Compaction' and why is it critical for performance?",
+    "options": {
+      "A": "Squashing the physical server.",
+      "B": "Merging smaller data blocks into larger ones while removing duplicate samples and 'tombstoned' data to speed up lookups.",
+      "C": "A specialized tool for drawing networks.",
+      "D": "To monitor the daily growth of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Status' on a Prometheus target indicates that the scrape failed due to a timeout?",
+    "options": {
+      "A": "Down",
+      "B": "Scrape Timeout",
+      "C": "Unknown",
+      "D": "Stale"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Prometheus metrics can be exported to 'JSON' format by appending '?format=json' to the metrics endpoint.",
+    "options": {
+      "A": "False (Prometheus strictly uses a specific text-based or protobuf-based exposition format).",
+      "B": "True",
+      "C": "Only for Windows targets",
+      "D": "Only if using fiber optics"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Relabeling' action 'hashmod'?",
+    "options": {
+      "A": "A physical tool for fixing cables.",
+      "B": "A feature used to horizontally shard targets across multiple Prometheus servers by calculating a hash of a label and performing a modulo operation.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Pushgateway' metrics ingestion?",
+    "options": {
+      "A": "9090",
+      "B": "9091",
+      "C": "9093",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'increase()' function in PromQL should ONLY be used with Counter metrics.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Gauge metrics",
+      "D": "Only if using version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Promtool' and how is it used in a CI/CD pipeline?",
+    "options": {
+      "A": "A tool for fixing servers.",
+      "B": "A CLI utility used to validate configuration files and run unit tests against alerting and recording rules before deployment.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Metric' shows the number of 'Active' time series currently in the Prometheus memory?",
+    "options": {
+      "A": "prometheus_tsdb_head_series",
+      "B": "system_active_metrics_total",
+      "C": "node_active_series_count",
+      "D": "prometheus_total_series"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Federation' is more efficient than 'Remote Write' for centralizing monitoring data from thousands of clusters.",
+    "options": {
+      "A": "False (Remote Write is generally preferred for large-scale centralization due to its push-based and buffering nature).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'External Labels' primarily used for in a multi-cluster Prometheus setup?",
+    "options": {
+      "A": "Labels on the outside of the server case.",
+      "B": "To uniquely identify each Prometheus instance so that their metrics don't collide when centralized in a system like Thanos or Mimir.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Node Exporter' metrics?",
+    "options": {
+      "A": "9090",
+      "B": "9100",
+      "C": "9093",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Prometheus Summary' is calculated at query time from buckets stored in the TSDB.",
+    "options": {
+      "A": "False (A Summary is pre-calculated by the application/client; a Histogram is calculated at query time from buckets).",
+      "B": "True",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a hub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Scrape Duration' and why is it important to monitor?",
+    "options": {
+      "A": "The time it takes to clean the server.",
+      "B": "The time Prometheus takes to pull metrics from a target; if it exceeds the scrape interval, data points will be lost.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'Alertmanager' access?",
+    "options": {
+      "A": "9090",
+      "B": "9093",
+      "C": "22",
+      "D": "80"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mimir' can act as a long-term storage backend for multiple independent Prometheus instances using Remote Write.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' tagging on a virtual switch?",
+    "options": {
+      "A": "Naming the virtual cables after colors.",
+      "B": "To logically separate traffic for different VMs or departments on the same physical link.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vCenter' heartbeats from the ESXi hosts?",
+    "options": {
+      "A": "UDP 902",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Ballooning' can cause the Guest OS to start swapping memory to its own virtual disk if the Guest OS becomes RAM-starved.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage DRS' (SDRS) I/O Metric and why is it used?",
+    "options": {
+      "A": "Measuring the weight of the hard drive.",
+      "B": "A feature that monitors storage latency and automatically moves VM disks (Storage vMotion) to less congested data stores to maintain performance.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'HTTPS' (encrypted web management)?",
+    "options": {
+      "A": "TCP 443",
+      "B": "UDP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'vCenter Server High Availability' (VCHA) uses a three-node cluster (Active, Passive, Witness) to protect the management layer of the virtualization stack.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only if using a proxy"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'VLAN' ID 4095 used for in VMware virtual networking?",
+    "options": {
+      "A": "The largest number of users allowed.",
+      "B": "A special ID used to enable Virtual Guest Tagging (VGT), allowing a VM to see and manage its own VLAN tags (Trunking).",
+      "C": "A specialized way to encrypt logs.",
+      "D": "To monitor the daily growth of the log server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+    "options": {
+      "A": "TCP 443",
+      "B": "TCP 9443",
+      "C": "TCP 80",
+      "D": "TCP 22"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SR-IOV' is primarily used to provide direct network hardware access to VMs, but it often prevents the use of Live Migration.",
+    "options": {
+      "A": "True (because the hardware state is tied to a specific physical device).",
+      "B": "False",
+      "C": "Only if using a proxy",
+      "D": "Only if the certificate is expired"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dynamic RAM' in Hyper-V?",
+    "options": {
+      "A": "RAM that expands physically.",
+      "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time demand, ranging between a minimum and maximum value.",
+      "C": "A specialized way to encrypt DNS requests.",
+      "D": "The password for a network administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'CPU' extension is used to improve the performance of nested virtualization by managing virtual-to-physical memory mappings across layers?",
+    "options": {
+      "A": "Intel EPT / AMD RVI",
+      "B": "AES-NI",
+      "C": "AVX",
+      "D": "SSE2"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Thin Provisioned' disk can cause a complete host crash if the physical data store runs out of actual space while VMs are trying to write data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-encrypted traffic",
+      "D": "Only in the North Virginia region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Virtual Machine Monitor' (VMM)?",
+    "options": {
+      "A": "A physical screen for the VM.",
+      "B": "The component of the hypervisor that manages the execution of a single VM, handling its CPU instructions and memory access.",
+      "C": "A specialized way to encrypt network signals.",
+      "D": "The total number of users on a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic between sites?",
+    "options": {
+      "A": "TCP 31031 / 44046",
+      "B": "TCP 443",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate directly with the hypervisor using 'Hypercalls'.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for UDP traffic",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Storage vMotion' I/O Mirroring?",
+    "options": {
+      "A": "Mirroring the physical disks.",
+      "B": "The process where write operations are mirrored to both the source and destination disks during a migration to ensure data consistency.",
+      "C": "A specialized way to encrypt firewall rules.",
+      "D": "To monitor the daily cost of the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used for 'SSH' management of a Linux-based hypervisor?",
+    "options": {
+      "A": "TCP 22",
+      "B": "UDP 22",
+      "C": "TCP 80",
+      "D": "UDP 161"
+    },
+    "answer": "A"
+  }
+  ]
+}

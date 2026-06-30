@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Text Analysis", 
+  "questions": [
+    {
+    "question": "What is 'Text Analysis' primarily used for in a business context?",
+    "options": {
+      "A": "To physically repair office hardware.",
+      "B": "To extract high-quality information and insights from written text.",
+      "C": "To increase the speed of the company's delivery trucks.",
+      "D": "To replace all printed books with digital video files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the process of dividing a block of text into individual words or phrases called?",
+    "options": {
+      "A": "Encryption",
+      "B": "Translation",
+      "C": "Tokenization",
+      "D": "Formatting"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these is an example of 'Unstructured Data'?",
+    "options": {
+      "A": "A SQL database table with fixed columns.",
+      "B": "An Excel spreadsheet of sales figures.",
+      "C": "A collection of customer emails and reviews.",
+      "D": "A CSV file containing only integer IDs."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the goal of 'Sentiment Analysis'?",
+    "options": {
+      "A": "To determine the file size of a document.",
+      "B": "To identify the emotional tone (positive, negative, or neutral) of a text.",
+      "C": "To check for grammatical errors in a sentence.",
+      "D": "To count the number of characters in a paragraph."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Stop Word Removal' involve in text preprocessing?",
+    "options": {
+      "A": "Deleting words that are spelled incorrectly.",
+      "B": "Removing the last word of every sentence.",
+      "C": "Removing common words like 'the', 'is', and 'at' that carry little unique meaning.",
+      "D": "Stopping the computer from analyzing the text further."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Stemming' in the context of text analysis?",
+    "options": {
+      "A": "Reducing words to their root form by removing suffixes.",
+      "B": "Adding more descriptive adjectives to a sentence.",
+      "C": "Translating a document into three different languages.",
+      "D": "Naming the primary subject of a news article."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which term refers to a large and structured set of texts used for analysis?",
+    "options": {
+      "A": "Database",
+      "B": "Corpus",
+      "C": "Kernel",
+      "D": "Cache"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Keyword Extraction'?",
+    "options": {
+      "A": "Deleting the most important words from a file.",
+      "B": "Automatically identifying the most relevant words or phrases in a document.",
+      "C": "Changing the color of specific words in a report.",
+      "D": "Translating words into a secret code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word Frequency' analysis?",
+    "options": {
+      "A": "The pitch of a person's voice while reading.",
+      "B": "Counting how often each word appears in a text.",
+      "C": "The speed at which a person types words.",
+      "D": "The number of syllables in a specific word."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Lowercasing' in text preprocessing?",
+    "options": {
+      "A": "To make the text look more artistic.",
+      "B": "To treat 'Apple' and 'apple' as the same word during analysis.",
+      "C": "To delete all capital letters from the computer system.",
+      "D": "To decrease the physical weight of the document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Text Classification' task?",
+    "options": {
+      "A": "Email Spam Detection",
+      "B": "Image Resizing",
+      "C": "Hard Drive Defragmentation",
+      "D": "Network Speed Testing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Named Entity Recognition' (NER) used for?",
+    "options": {
+      "A": "To count the total number of sentences in a file.",
+      "B": "To identify and categorize people, organizations, and locations in text.",
+      "C": "To verify a user's identity through facial recognition.",
+      "D": "To translate text into binary code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lemmatization'?",
+    "options": {
+      "A": "Sorting words by their length.",
+      "B": "Reducing a word to its base form using a dictionary (e.g., 'better' to 'good').",
+      "C": "Removing all numbers from a text document.",
+      "D": "Adding lemon-scented perfume to a paper report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Word Cloud' visualize?",
+    "options": {
+      "A": "The humidity levels in a data center.",
+      "B": "The frequency of words, where more common words appear larger.",
+      "C": "A list of all users currently connected to the cloud.",
+      "D": "The physical movement of a computer mouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In text analysis, what is 'Noise'?",
+    "options": {
+      "A": "Loud sounds from the server room cooling fans.",
+      "B": "Irrelevant data such as HTML tags or special characters that don't add meaning.",
+      "C": "The sound of a developer typing on a keyboard.",
+      "D": "A background audio track in a video file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Plagiarism Detection'?",
+    "options": {
+      "A": "A way to backup text files automatically.",
+      "B": "Identifying text that has been copied from other sources without credit.",
+      "C": "Improving the writing style of an author.",
+      "D": "Translating a book into a different language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Natural Language'?",
+    "options": {
+      "A": "Python",
+      "B": "Spanish",
+      "C": "Java",
+      "D": "C++"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic Modeling' used for?",
+    "options": {
+      "A": "Choosing the best font for a document title.",
+      "B": "Discovering abstract 'topics' that occur in a collection of documents.",
+      "C": "Designing a 3D model of a physical book.",
+      "D": "Counting the number of pages in a chapter."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Mining'?",
+    "options": {
+      "A": "Searching for physical gold in a mine.",
+      "B": "Discovering high-quality information or patterns from text data.",
+      "C": "Manually typing data into a spreadsheet for 8 hours.",
+      "D": "Deleting all text files from a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'NLP' stand for?",
+    "options": {
+      "A": "Numerical Link Processing",
+      "B": "Natural Language Processing",
+      "C": "Node Logic Protocol",
+      "D": "Network Layout Program"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentence Segmentation'?",
+    "options": {
+      "A": "Dividing a text into its individual sentences.",
+      "B": "Deleting every second sentence from a report.",
+      "C": "Translating a single sentence into binary.",
+      "D": "Increasing the font size of the first sentence."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Stop Word' list?",
+    "options": {
+      "A": "A list of users who are banned from the site.",
+      "B": "A collection of common words to be ignored during text processing.",
+      "C": "A list of words that are too long to analyze.",
+      "D": "A security certificate for a text database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Part-of-Speech' (POS) tagging?",
+    "options": {
+      "A": "Identifying the physical location of a book on a shelf.",
+      "B": "Labeling words as nouns, verbs, adjectives, etc., based on context.",
+      "C": "Counting the number of letters in a word.",
+      "D": "Determining if a person is a good public speaker."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Full-Text Search'?",
+    "options": {
+      "A": "Searching for a specific book in a library.",
+      "B": "Searching every word in a document or database for a match.",
+      "C": "Scanning a physical paper for fingerprints.",
+      "D": "Looking for the largest file on a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Wrangling'?",
+    "options": {
+      "A": "Fighting with a computer until it works.",
+      "B": "The process of cleaning and unifying complex data sets for analysis.",
+      "C": "Sorting files by their creation date in the OS.",
+      "D": "Writing a fictional story about a data analyst."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which chart type is common for comparing the frequency of top keywords?",
+    "options": {
+      "A": "Pie Chart",
+      "B": "Bar Chart",
+      "C": "Scatter Plot",
+      "D": "Gantt Chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Language Identification'?",
+    "options": {
+      "A": "Identifying the author of a specific quote.",
+      "B": "Automatically determining which language a text is written in.",
+      "C": "Counting the number of characters in a string.",
+      "D": "Creating a brand-new language for robots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Character Count' analysis?",
+    "options": {
+      "A": "Counting the number of users on a server.",
+      "B": "Determining the total number of letters and symbols in a text.",
+      "C": "Identifying the hero and villain in a story.",
+      "D": "Measuring the width of a physical font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Encoding'?",
+    "options": {
+      "A": "Writing a letter in secret code.",
+      "B": "Representing characters in a digital format (e.g., UTF-8).",
+      "C": "Designing a new computer keyboard.",
+      "D": "Printing a document on a 3D printer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regex' (Regular Expression) used for?",
+    "options": {
+      "A": "To create realistic 3D animations.",
+      "B": "To find and manipulate specific text patterns (e.g., phone numbers).",
+      "C": "To measure the room temperature of the lab.",
+      "D": "To backup a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Machine Translation'?",
+    "options": {
+      "A": "Moving a printer to a different office.",
+      "B": "Using software to translate text from one language to another.",
+      "C": "Teaching a robot to speak out loud.",
+      "D": "Converting Python code into Java."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bag of Words' (BoW)?",
+    "options": {
+      "A": "A physical bag used to carry server components.",
+      "B": "A simple representation of text as a collection of its words, ignoring order.",
+      "C": "A way to hide specific words from a computer program.",
+      "D": "A list of all words that have been permanently deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata' in a text document?",
+    "options": {
+      "A": "The actual text inside the document.",
+      "B": "Information about the document, like author, date, and file size.",
+      "C": "A way to encrypt the text for safety.",
+      "D": "A specialized software for reading long books."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entity' in the context of NER?",
+    "options": {
+      "A": "A type of software bug.",
+      "B": "A real-world object like a person, place, or company.",
+      "C": "A single line of computer code.",
+      "D": "A type of computer virus."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Summarization'?",
+    "options": {
+      "A": "Adding more descriptive details to a story.",
+      "B": "Creating a shortened version of a text that retains the key info.",
+      "C": "Deleting a document after it has been read.",
+      "D": "Translating a long text into five different languages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Punctuation Removal'?",
+    "options": {
+      "A": "Adding extra commas to a long paragraph.",
+      "B": "Removing marks like periods, commas, and question marks from text.",
+      "C": "Changing the color of punctuation marks in a report.",
+      "D": "Identifying an author by their unique use of semicolons."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information Extraction'?",
+    "options": {
+      "A": "Deleting important information from a secure file.",
+      "B": "Retrieving structured information from unstructured text data.",
+      "C": "Reading a textbook to learn a new programming skill.",
+      "D": "Storing text data on a physical USB drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Parsing' in text analysis?",
+    "options": {
+      "A": "Breaking text into smaller components to analyze its structure.",
+      "B": "Passing a paper document to another analyst.",
+      "C": "Compressing a large text file to save disk space.",
+      "D": "Printing a report in a very large font size."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'N-gram'?",
+    "options": {
+      "A": "A unit of weight used for measuring paper.",
+      "B": "A continuous sequence of 'n' items from a given sample of text.",
+      "C": "A type of high-speed fiber optic cable.",
+      "D": "A security password with exactly 'n' characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Cleaning'?",
+    "options": {
+      "A": "Physically dusting the computer monitor.",
+      "B": "Removing errors and inconsistencies from a dataset.",
+      "C": "Deleting all files that were created on a Monday.",
+      "D": "Writing a blog post about how to organize data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Keyword Density'?",
+    "options": {
+      "A": "The weight of a keyboard in grams.",
+      "B": "The percentage of times a keyword appears in a text compared to the total words.",
+      "C": "The thickness of a physical book.",
+      "D": "The number of keys on a laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Case Folding'?",
+    "options": {
+      "A": "Folding a piece of paper in half.",
+      "B": "Converting all text to a single case (usually lowercase).",
+      "C": "Storing a laptop inside its protective case.",
+      "D": "A type of data compression for large files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Automated Content Tagging'?",
+    "options": {
+      "A": "Hiring a person to manually read every file.",
+      "B": "Using software to assign categories or tags to text automatically.",
+      "C": "A way to backup website data on a server.",
+      "D": "A tool used for counting social media likes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spell Checking'?",
+    "options": {
+      "A": "Identifying and correcting misspelled words in a document.",
+      "B": "Checking if a word has magical powers.",
+      "C": "Counting the number of characters in a word.",
+      "D": "A way to name a file on the desktop."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Text Normalization'?",
+    "options": {
+      "A": "Making all text look 'normal' for a printer.",
+      "B": "Standardizing text into a consistent format (e.g., converting 'USA' to 'United States').",
+      "C": "Deleting text that is considered unusual.",
+      "D": "Ensuring the text font is consistent across pages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency Parsing'?",
+    "options": {
+      "A": "Checking if the office internet is working.",
+      "B": "Analyzing the grammatical structure of a sentence to see how words relate.",
+      "C": "Counting the number of nouns in a long book.",
+      "D": "Identifying the file extension of a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bi-gram'?",
+    "options": {
+      "A": "A word that has only two letters.",
+      "B": "A sequence of two adjacent words or symbols.",
+      "C": "Two different languages mixed in one paragraph.",
+      "D": "A document that has exactly two pages."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lexicon'?",
+    "options": {
+      "A": "A type of high-speed GPU.",
+      "B": "The vocabulary or 'dictionary' of a person, language, or branch of knowledge.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Visualization'?",
+    "options": {
+      "A": "Closing your eyes and imagining a story.",
+      "B": "Representing text data in graphical formats like charts or maps.",
+      "C": "Writing a report in very large letters.",
+      "D": "A specialized software for blind users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Categorical Data'?",
+    "options": {
+      "A": "Data that can be added and subtracted mathematically.",
+      "B": "Data that represents groups or categories (e.g., Sentiment, Country).",
+      "C": "A database of information about cats.",
+      "D": "The speed at which a task is completed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Bloat'?",
+    "options": {
+      "A": "A text file that is too large to open on a phone.",
+      "B": "Unnecessary or redundant phrases in a text that don't add value.",
+      "C": "A bug in the word processor software.",
+      "D": "A document that contains too many high-resolution images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment Polarity'?",
+    "options": {
+      "A": "The magnetic field of the earth.",
+      "B": "The numerical score representing how positive or negative a text is.",
+      "C": "The total number of words in a sentence.",
+      "D": "The color used for the text font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vocabulary Size'?",
+    "options": {
+      "A": "The physical size of a printed dictionary book.",
+      "B": "The total number of unique words found in a corpus.",
+      "C": "The number of pages in a text document.",
+      "D": "The price of a specialized NLP software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named Entity'?",
+    "options": {
+      "A": "A person, location, or organization with a specific name.",
+      "B": "A secret code used by the government.",
+      "C": "A type of hardware failure.",
+      "D": "A software bug that deletes files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Parsing' 'Constituency'?",
+    "options": {
+      "A": "Breaking a sentence into its component parts like phrases or sub-sentences.",
+      "B": "Breaking a sentence into individual letters.",
+      "C": "Passing a document from one computer to another.",
+      "D": "Printing a report in a very bold font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Similarity Score'?",
+    "options": {
+      "A": "A grade given to a student by a teacher.",
+      "B": "A numerical value representing how similar two pieces of text are.",
+      "C": "The number of identical letters in two different words.",
+      "D": "The time it takes for a computer to compare two files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Preprocessing'?",
+    "options": {
+      "A": "Printing the text out on a sheet of paper.",
+      "B": "The various steps taken to clean and prepare text for analysis.",
+      "C": "Storing a text file in a secure database.",
+      "D": "Reading the text out loud to an audience."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Synonym' replacement?",
+    "options": {
+      "A": "Deleting a word and leaving a blank space in the text.",
+      "B": "Replacing a word with another word that has the same meaning.",
+      "C": "Changing the color of a word in a digital report.",
+      "D": "Translating a word into a numerical code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dialogue System'?",
+    "options": {
+      "A": "A system where two people can talk to each other.",
+      "B": "An AI system designed to converse with a human user.",
+      "C": "A type of professional audio recording equipment.",
+      "D": "A way to backup the history of a chat."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Character Encoding' 'UTF-8'?",
+    "options": {
+      "A": "A new brand of computer hardware.",
+      "B": "A widely used standard for representing characters as binary data.",
+      "C": "A secret password for high-security databases.",
+      "D": "A specialized software for designing fonts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stop Word' filtering?",
+    "options": {
+      "A": "Filtering out the best words in a document.",
+      "B": "Removing common words to focus on those with higher information value.",
+      "C": "Stopping the computer from loading a text file.",
+      "D": "Identifying the author by their use of 'the'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Overlap' in document comparison?",
+    "options": {
+      "A": "Two words printed on top of each other physically.",
+      "B": "The number of unique words shared between two pieces of text.",
+      "C": "A way to merge two different files into one.",
+      "D": "A specific bug in the word processor software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Analysis' 'Dashboard'?",
+    "options": {
+      "A": "The dashboard of a car used by a data analyst.",
+      "B": "A visual interface that displays key metrics and insights from text data.",
+      "C": "A way to monitor the physical temperature of the server.",
+      "D": "A list of all users who have accessed a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Natural Language Generation' (NLG)?",
+    "options": {
+      "A": "Humans having a conversation in an office.",
+      "B": "The process where software generates human-sounding text from data.",
+      "C": "A way to backup speech data on a cloud drive.",
+      "D": "Teaching a robot how to walk and talk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Corpus' 'Linguistics'?",
+    "options": {
+      "A": "The study of the human body in science.",
+      "B": "The study of language as expressed in large collections (corpora) of text.",
+      "C": "Identifying the name of a book author.",
+      "D": "Counting the number of characters in a sentence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Language' 'Model'?",
+    "options": {
+      "A": "A person who is an expert in many languages.",
+      "B": "A probabilistic model trained to predict the next word in a sequence.",
+      "C": "A dictionary that contains every word in the world.",
+      "D": "A type of robot that can speak out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of the 'Vector Space Model', what does the 'Cosine Similarity' between two document vectors specifically measure?",
+    "options": {
+      "A": "The physical distance between the servers where the documents are stored.",
+      "B": "The angle between the vectors, representing how similar the word usage patterns are regardless of document length.",
+      "C": "The total number of characters shared between the two files.",
+      "D": "The speed at which a computer can index both documents simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical disadvantage of using a simple 'Bag of Words' model for complex text analysis?",
+    "options": {
+      "A": "It requires too much CPU power to count word frequencies.",
+      "B": "It completely ignores the word order and grammatical structure of the sentences.",
+      "C": "It cannot handle numerical data found within text files.",
+      "D": "It results in file sizes that are too small for modern databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'TF-IDF' help in identifying the most important words in a document collection?",
+    "options": {
+      "A": "By rewarding words that appear in every single document in the corpus.",
+      "B": "By penalizing common words that appear across many documents while highlighting words unique to a specific document.",
+      "C": "By counting only the words that start with a capital letter.",
+      "D": "By deleting words that have fewer than five characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific issue in text analysis does 'Lemmatization' solve more effectively than 'Stemming'?",
+    "options": {
+      "A": "It reduces words to their meaningful base form by considering the context and Part-of-Speech.",
+      "B": "It is much faster to execute on a standard laptop processor.",
+      "C": "It removes all foreign language characters from the text.",
+      "D": "It automatically translates the text into English."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Latent Dirichlet Allocation' (LDA) primarily used for in text analysis?",
+    "options": {
+      "A": "To encrypt sensitive text data before storage.",
+      "B": "To discover hidden thematic structures (topics) across a large collection of documents.",
+      "C": "To check for plagiarism in academic papers.",
+      "D": "To count the number of syllables in a given sentence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Sentiment Analysis, what is 'Aspect-Based Sentiment Analysis' (ABSA)?",
+    "options": {
+      "A": "Determining if the overall tone of a book is happy or sad.",
+      "B": "Identifying sentiment expressed toward specific features or components (e.g., 'the battery life' of a phone).",
+      "C": "Measuring the physical aspect ratio of the text font.",
+      "D": "Calculating the percentage of adjectives used in a review."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Precision' represent when evaluating a text classification model?",
+    "options": {
+      "A": "The speed at which the model classifies a document.",
+      "B": "The ratio of correctly predicted positive observations to the total predicted positives.",
+      "C": "The total number of documents the model was able to process.",
+      "D": "The physical size of the model's hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Zipf's Law' observation in linguistics?",
+    "options": {
+      "A": "The most frequent word in a language occurs twice as often as the second most frequent.",
+      "B": "The file size of a corpus is proportional to the number of unique tokens.",
+      "C": "The average sentence length is consistent across all human languages.",
+      "D": "A text document cannot contain more than 1,000 unique words."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pointwise Mutual Information' (PMI) used to measure between two words?",
+    "options": {
+      "A": "The distance between the words on a printed page.",
+      "B": "How much more likely two words are to occur together than if they were independent.",
+      "C": "The time it takes for a user to read both words.",
+      "D": "The alphabetical distance between the first letters of the words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes 'Named Entity Disambiguation'?",
+    "options": {
+      "A": "Identifying that a word is a proper noun.",
+      "B": "Determining which specific 'Paris' is being referred to (e.g., the city in France vs. the person).",
+      "C": "Deleting duplicate names from a database.",
+      "D": "Translating a name into its phonetic equivalent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'N-gram' 'Smoothing' (like Laplace smoothing) used for?",
+    "options": {
+      "A": "To make the text font look smoother on the screen.",
+      "B": "To handle the problem of zero probabilities for word sequences that didn't appear in the training data.",
+      "C": "To delete unusual words from the vocabulary.",
+      "D": "To increase the training speed of a language model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Co-occurrence Matrix', what does each cell value typically represent?",
+    "options": {
+      "A": "The total number of characters in a document.",
+      "B": "The number of times two specific words appear within a certain distance of each other.",
+      "C": "The price of the software used to generate the matrix.",
+      "D": "The number of users who have read both words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of 'Dependency Parsing'?",
+    "options": {
+      "A": "To check if the computer's OS depends on specific updates.",
+      "B": "To map out the grammatical relationships (like subject-verb) between words in a sentence.",
+      "C": "To count the number of nouns in a document.",
+      "D": "To identify the file type of an uploaded text document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Coreference Resolution'?",
+    "options": {
+      "A": "Two different analysts agreeing on a result.",
+      "B": "The task of finding all expressions that refer to the same entity (e.g., matching 'he' to 'John').",
+      "C": "Connecting two different computer servers together.",
+      "D": "Scaling the resolution of a text-based image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stop Word' list usually based on?",
+    "options": {
+      "A": "Words that are offensive to the general public.",
+      "B": "Frequently occurring words that lack high informational value for a specific task.",
+      "C": "A list of users who are blocked from the system.",
+      "D": "Words that take too long for a GPU to process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Recall' metric measure in text retrieval?",
+    "options": {
+      "A": "The memory capacity of the server.",
+      "B": "The ability of the system to find all the relevant documents in the corpus.",
+      "C": "The time it takes to restart a search query.",
+      "D": "The accuracy of the very first result in a list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text Augmentation'?",
+    "options": {
+      "A": "Deleting half of the sentences to save space.",
+      "B": "Creating new training data by modifying existing text (e.g., using synonyms).",
+      "C": "Buying more storage for the data center.",
+      "D": "Increasing the font size of the training labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is used to transform text data into a fixed-length numerical representation?",
+    "options": {
+      "A": "Segmentation",
+      "B": "Vectorization",
+      "C": "Transcription",
+      "D": "Decryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inverted Index' used for in text analysis systems?",
+    "options": {
+      "A": "To sort documents in reverse alphabetical order.",
+      "B": "To map words to the documents in which they occur for fast searching.",
+      "C": "To backup a database using an inverted file structure.",
+      "D": "To encrypt the document titles for privacy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributional Semantics', what is the 'Context Window'?",
+    "options": {
+      "A": "A physical window in the server room.",
+      "B": "The number of words surrounding a target word used to calculate its meaning.",
+      "C": "The size of the user's browser window.",
+      "D": "The duration of time a text file remains in the RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic Coherence'?",
+    "options": {
+      "A": "How fast the model can switch between different topics.",
+      "B": "A metric used to evaluate how semantically consistent the words within a generated topic are.",
+      "C": "The total number of topics found in a dataset.",
+      "D": "A security feature that prevents topics from leaking."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Collocation' in text analysis?",
+    "options": {
+      "A": "Moving two servers to the same location.",
+      "B": "A sequence of words that occur together more often than would be expected by chance.",
+      "C": "Sorting a list of words by their last letter.",
+      "D": "A way to backup data across multiple cities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Softmax' output in a text classification context?",
+    "options": {
+      "A": "Raw scores that can be any real number.",
+      "B": "A probability distribution where all values sum to 1.",
+      "C": "A way to compress the final report file.",
+      "D": "A list of the top ten keywords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Token' 'Normalization' involve?",
+    "options": {
+      "A": "Printing the tokens on a piece of paper.",
+      "B": "Reducing tokens to a standard format (e.g., converting all currency symbols to a generic tag).",
+      "C": "Deleting tokens that are identified as outliers.",
+      "D": "Increasing the memory allocated to each token."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Part-of-Speech' 'Ambiguity'?",
+    "options": {
+      "A": "When a word is misspelled by the user.",
+      "B": "When a single word can have multiple grammatical roles (e.g., 'book' as a noun vs. a verb).",
+      "C": "When the computer cannot find the word in its dictionary.",
+      "D": "When the text font is blurry on the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' for evaluating machine translation quality?",
+    "options": {
+      "A": "RMSE",
+      "B": "BLEU (Bilingual Evaluation Understudy)",
+      "C": "Accuracy",
+      "D": "R-Squared"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' 'Embedding'?",
+    "options": {
+      "A": "Representing entities and relations from a graph as vectors in a continuous space.",
+      "B": "Drawing a chart of the researcher's knowledge.",
+      "C": "Saving a graph as a high-resolution JPEG.",
+      "D": "A way to backup a graph database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Entity' 'Linkage' across multiple documents?",
+    "options": {
+      "A": "Physically linking two books with a string.",
+      "B": "Identifying that 'Elon Musk' in document A is the same person as 'Musk' in document B.",
+      "C": "A network delay when accessing a name database.",
+      "D": "A security certificate for a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gensim' commonly used for in Python?",
+    "options": {
+      "A": "Creating realistic video games.",
+      "B": "Topic modeling and document similarity analysis.",
+      "C": "A security firewall for web apps.",
+      "D": "A tool for editing audio files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Canonicalization'?",
+    "options": {
+      "A": "Deleting all text from the system.",
+      "B": "Converting text that can be represented in more than one way into a single 'standard' representation.",
+      "C": "Changing the color of the text font.",
+      "D": "Translating text into a dead language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Text Analysis', what is 'Sparsity' in a Document-Term Matrix?",
+    "options": {
+      "A": "When a document has too many images.",
+      "B": "When most of the cells in the matrix are zero (because most words don't appear in most documents).",
+      "C": "When the database is running out of space.",
+      "D": "When the text is written in a very small font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information' 'Retrieval' 'Precision at K'?",
+    "options": {
+      "A": "The ratio of relevant documents in the first K results.",
+      "B": "The time it takes to retrieve K documents.",
+      "C": "The price of K documents in a digital store.",
+      "D": "The number of users who clicked on result K."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cross-Lingual' 'Information' 'Retrieval'?",
+    "options": {
+      "A": "Translating all search queries into English.",
+      "B": "Searching for information in a different language than the query was written in.",
+      "C": "A search engine that only works in two countries.",
+      "D": "A security protocol for data transfers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Subword' 'Information' in embeddings (like FastText)?",
+    "options": {
+      "A": "Embedding only the first letter of every word.",
+      "B": "Representing words as a sum of their character n-grams to handle rare words better.",
+      "C": "A way to hide words from a computer program.",
+      "D": "Counting the number of letters in a subword."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Search'?",
+    "options": {
+      "A": "Searching only for words that sound the same.",
+      "B": "Searching based on the meaning of the query rather than just matching literal keywords.",
+      "C": "A way to search for files by their size.",
+      "D": "A search engine that only uses images."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'F1-Score' used for in classification?",
+    "options": {
+      "A": "To measure the racing speed of the model.",
+      "B": "To provide a balance between Precision and Recall in a single metric.",
+      "C": "To count the number of layers in a neural network.",
+      "D": "To calculate the price of the software license."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Regular' 'Expression' 'Quantifier'?",
+    "options": {
+      "A": "A person who counts characters.",
+      "B": "A symbol that specifies how many times a character or group should match (e.g., *, +).",
+      "C": "A way to measure the room temperature.",
+      "D": "A security key for a text file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Topic Modeling', what is 'Perplexity' used to measure?",
+    "options": {
+      "A": "The confusion of the data analyst.",
+      "B": "The ability of the model to generalize to unseen data (lower is better).",
+      "C": "The total number of words in the corpus.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Summarization' 'ROUGE' metric?",
+    "options": {
+      "A": "A metric used to detect if the text is red.",
+      "B": "A set of metrics used for evaluating automatic summarization by comparing to reference summaries.",
+      "C": "A tool used for counting social media likes.",
+      "D": "A way to backup website data on a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ontology' in the context of text analysis?",
+    "options": {
+      "A": "The study of ants.",
+      "B": "A formal way to represent categories, properties, and relationships between concepts in a domain.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Entity' 'Resolution'?",
+    "options": {
+      "A": "Improving the image resolution of a name.",
+      "B": "The process of determining whether two different mentions in text refer to the same real-world object.",
+      "C": "Identifying the author of a specific book.",
+      "D": "A software bug that deletes files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Sense' 'Disambiguation'?",
+    "options": {
+      "A": "Identifying the correct meaning of a word based on its context (e.g., 'bank' as a river vs. financial bank).",
+      "B": "Correcting a word that is misspelled.",
+      "C": "Determining if a word makes sense to a child.",
+      "D": "Counting the number of characters in a word."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Dependency' 'Tree' 'Depth'?",
+    "options": {
+      "A": "The physical height of a paper tree.",
+      "B": "The maximum distance from the root to any leaf in a sentence's dependency structure.",
+      "C": "The number of people who work in the company.",
+      "D": "The time it takes to save a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Vectorization' 'Hashing Trick'?",
+    "options": {
+      "A": "A way to hack into a text file.",
+      "B": "A technique to map words to indices in a vector using a hash function, avoiding the need for a fixed vocabulary.",
+      "C": "A way to rotate the document vector.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Similarity' 'Score' 'Jaccard'?",
+    "options": {
+      "A": "A grade given to a student by a teacher.",
+      "B": "A metric that measures similarity between sets by dividing the size of the intersection by the size of the union.",
+      "C": "The number of identical letters in two different words.",
+      "D": "The time it takes for a computer to compare two files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment' ' lexicon'?",
+    "options": {
+      "A": "A list of people who are happy.",
+      "B": "A dictionary where words are associated with sentiment scores or categories.",
+      "C": "A security scan for computer viruses.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Term' 'Frequency' 'Normalization'?",
+    "options": {
+      "A": "Ensuring all words have a mean of zero.",
+      "B": "Adjusting the word count to account for the fact that longer documents will naturally have more occurrences.",
+      "C": "A way to speed up the network.",
+      "D": "Deleting words that occur too often."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bag' 'of' 'Concepts'?",
+    "options": {
+      "A": "A physical bag with concept drawings.",
+      "B": "Representing a document by the frequency of abstract concepts or entities rather than literal words.",
+      "C": "A way to hide concepts from a model.",
+      "D": "A list of concepts that have been deleted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Document' 'Classification' 'Multilabel'?",
+    "options": {
+      "A": "When a document has zero labels.",
+      "B": "The task of assigning one or more categories to a single document.",
+      "C": "A document with exactly ten labels.",
+      "D": "A security feature that hides labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NLP' 'Model' 'Pruning'?",
+    "options": {
+      "A": "Cutting down trees in a lab.",
+      "B": "Removing unnecessary weights from a neural network to make it faster.",
+      "C": "Increasing the number of layers in a network.",
+      "D": "Hiring fewer developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Character' 'Language' 'Model'?",
+    "options": {
+      "A": "A model that only works on characters in a story.",
+      "B": "A model that predicts the next character in a sequence rather than the next word.",
+      "C": "A dictionary of all characters in the world.",
+      "D": "A specialized software for blind users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stop' 'Word' 'Removal' 'Effect'?",
+    "options": {
+      "A": "Making the computer stop working.",
+      "B": "It usually reduces the dimensionality of the data and can improve accuracy in keyword-based models.",
+      "C": "Deleting words that are spelled incorrectly.",
+      "D": "Identifying the author by their use of 'the'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Similarity' 'Vector'?",
+    "options": {
+      "A": "A vector that only works on sound waves.",
+      "B": "A continuous numerical representation where similar meanings are positioned close together.",
+      "C": "A list of identical letters in two words.",
+      "D": "A way to backup the meaning data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Extraction' 'OCR'?",
+    "options": {
+      "A": "Optical Character Recognition; converting images of text into machine-encoded text.",
+      "B": "A new brand of computer hardware.",
+      "C": "A secret password for high-security databases.",
+      "D": "A specialized software for designing fonts."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Natural' 'Language' 'Inference' (NLI)?",
+    "options": {
+      "A": "A person who is an expert in many languages.",
+      "B": "Determining if a 'hypothesis' sentence is true, false, or neutral given a 'premise' sentence.",
+      "C": "A dictionary that contains every word in the world.",
+      "D": "A type of robot that can speak out loud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Part-of-Speech' 'Tag' 'Noun'?",
+    "options": {
+      "A": "A tag used for people, places, or things.",
+      "B": "A secret code used by the government.",
+      "C": "A type of hardware failure.",
+      "D": "A software bug that deletes files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Sentiment' 'Classification' 'Binary'?",
+    "options": {
+      "A": "Classifying sentiment into exactly two categories, such as Positive and Negative.",
+      "B": "Classifying sentiment using only zeros and ones in the source code.",
+      "C": "Classifying sentiment into 100 different categories.",
+      "D": "A security feature that hides sentiment."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'API'?",
+    "options": {
+      "A": "The physical dashboard of a car used by a data analyst.",
+      "B": "A programmatic interface that allows developers to access text analysis features as a service.",
+      "C": "A way to monitor the physical temperature of the server.",
+      "D": "A list of all users who have accessed a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Frequency' 'Histogram'?",
+    "options": {
+      "A": "A visual representation showing the distribution of how often words occur in a text.",
+      "B": "A graph showing the history of words over 1,000 years.",
+      "C": "A way to count the number of characters in a word.",
+      "D": "Identifying the author by their unique use of semicolons."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Text' 'Summarization' 'Extractive' vs 'Abstractive'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Extractive selects existing sentences; Abstractive generates new ones.",
+      "C": "Extractive is for images; Abstractive for text.",
+      "D": "Abstractive is 100x slower."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Similarity' 'Search' 'K-Nearest Neighbors'?",
+    "options": {
+      "A": "Finding people who live in the same neighborhood.",
+      "B": "Finding the 'K' documents most similar to a query vector in the embedding space.",
+      "C": "A search engine that only uses images.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency' 'Tree' 'Root'?",
+    "options": {
+      "A": "The root of a physical tree.",
+      "B": "The central word of a sentence (usually the main verb) that has no parent node.",
+      "C": "A way to name the different layers.",
+      "D": "Identifying the file extension of a document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Vector' 'King - Man + Woman'?",
+    "options": {
+      "A": "A famous logic puzzle for children.",
+      "B": "A classic example showing how vector arithmetic captures semantic concepts (resulting in 'Queen').",
+      "C": "A bug in the word vector math.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Inverted' 'Index' 'Posting List'?",
+    "options": {
+      "A": "A list of people who posted on social media.",
+      "B": "A list of document IDs associated with a specific term in an inverted index.",
+      "C": "A way to backup the document titles.",
+      "D": "A security firewall for text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'Information' 'Density'?",
+    "options": {
+      "A": "The weight of the paper in grams.",
+      "B": "The ratio of informational content (like nouns and verbs) to total words in a text.",
+      "C": "The number of users who read a document.",
+      "D": "A bug in the word processor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latent' 'Semantic' 'Analysis' (LSA)?",
+    "options": {
+      "A": "Analyzing ghosts in the data.",
+      "B": "A technique using SVD to find relationships between terms and concepts in an unstructured collection.",
+      "C": "A security scan of the database.",
+      "D": "The physical layout of a server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical operation is fundamental to 'Latent Semantic Analysis' (LSA) for reducing the dimensionality of a term-document matrix?",
+    "options": {
+      "A": "Fast Fourier Transform (FFT)",
+      "B": "Singular Value Decomposition (SVD)",
+      "C": "Principal Component Regression (PCR)",
+      "D": "Recursive Least Squares (RLS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Distributional Semantics', what does the 'Hubness' problem refer to?",
+    "options": {
+      "A": "A server hub becoming physically overheated during high-dimensional indexing.",
+      "B": "The tendency of some points (hubs) to appear as the nearest neighbors of many other points in high-dimensional spaces.",
+      "C": "When all documents in a corpus are correctly assigned to a single central topic.",
+      "D": "A network delay caused by connecting too many GPU nodes to a single switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific objective function used in 'GloVe' (Global Vectors for Word Representation)?",
+    "options": {
+      "A": "Maximizing the likelihood of the next token in a sequence.",
+      "B": "Minimizing a weighted least squares objective that models the relationship between word co-occurrence probabilities.",
+      "C": "Calculating the cosine distance between every possible pair of words in the vocabulary.",
+      "D": "Identifying the most frequent subword tokens using a greedy search algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes 'Cross-lingual Word Embeddings' alignment via Procrustes analysis?",
+    "options": {
+      "A": "Translating every word in the source language to the target language manually.",
+      "B": "Finding a linear transformation (rotation) that maps one vector space onto another using a seed dictionary.",
+      "C": "Deleting words that do not have an exact one-to-one translation between languages.",
+      "D": "Training two separate models and averaging their weights to create a hybrid language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Dirichlet' distribution in 'Latent Dirichlet Allocation' (LDA) specifically act as a prior for?",
+    "options": {
+      "A": "The alphabetical order of the words in the corpus.",
+      "B": "The topic distributions per document and word distributions per topic.",
+      "C": "The total number of sentences expected in a document.",
+      "D": "The learning rate used by the optimizer during inference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is the 'Viterbi Algorithm' primarily used for?",
+    "options": {
+      "A": "To compress large text files for cloud storage.",
+      "B": "To find the most likely sequence of hidden states (e.g., POS tags) in a Hidden Markov Model.",
+      "C": "To generate realistic-sounding text one character at a time.",
+      "D": "To verify the identity of a user through their typing cadence."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between 'Extractive' and 'Abstractive' summarization at a structural level?",
+    "options": {
+      "A": "Extractive is for text; Abstractive is only for image analysis.",
+      "B": "Extractive selects original sentences; Abstractive generates new phrasing to synthesize information.",
+      "C": "Abstractive summarization is restricted to a maximum of 10 words.",
+      "D": "Extractive summarization requires a GPU, while Abstractive can run on a CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which evaluation metric for text generation penalizes 'repetition' and 'order' using n-gram overlap more strictly than BLEU?",
+    "options": {
+      "A": "Standard Accuracy",
+      "B": "METEOR (Metric for Evaluation of Translation with Explicit ORdering)",
+      "C": "Mean Absolute Error",
+      "D": "Cosine Similarity"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Negative Sampling' in the context of training skip-gram models?",
+    "options": {
+      "A": "Deleting all sentences that contain negative sentiment.",
+      "B": "Approximating the log-likelihood of the data by only updating a small subset of 'noise' words per sample.",
+      "C": "A way to ensure the model never generates offensive language.",
+      "D": "Randomly removing 10% of the training labels to test robustness."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named Entity Linking' (NEL) also known as in some research contexts?",
+    "options": {
+      "A": "Entity Hashing",
+      "B": "Entity Disambiguation to a Knowledge Base",
+      "C": "Word Sense Expansion",
+      "D": "Dependency Reduction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'Hierarchical Softmax' optimization, what data structure is used to improve the efficiency of calculating word probabilities?",
+    "options": {
+      "A": "A Hash Map",
+      "B": "A Binary Tree (typically a Huffman tree)",
+      "C": "A Linked List",
+      "D": "A 2D Array"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Information Bottleneck' principle suggest about the layers of a deep text analysis model?",
+    "options": {
+      "A": "The internet connection to the database is the slowest part of the pipeline.",
+      "B": "Successive layers compress the input to discard irrelevant noise while preserving information about the target variable.",
+      "C": "The model dimension must be exactly half the size of the vocabulary.",
+      "D": "Adding more hidden layers eventually causes the loss function to stop decreasing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which technique is specifically used to handle 'Long-range Dependencies' in text, which standard RNNs struggle with?",
+    "options": {
+      "A": "Max Pooling",
+      "B": "Self-Attention / Transformers",
+      "C": "Linear Regression",
+      "D": "K-Means Clustering"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic Drift' in the context of evolving language datasets?",
+    "options": {
+      "A": "Data moving physically from one cloud region to another.",
+      "B": "When the meaning or context of words changes over time, affecting model performance on newer text.",
+      "C": "The error that occurs when a document is translated too many times.",
+      "D": "A bug in the visualization tool that causes vectors to slide across the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Syntactic Ambiguity' in a sentence like 'I saw the man with the telescope'?",
+    "options": {
+      "A": "The word 'telescope' is misspelled.",
+      "B": "The sentence can be parsed in multiple ways (e.g., who had the telescope?).",
+      "C": "The sentence has zero meaning to a computer.",
+      "D": "The font used to print the sentence is not standard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific approach is used in 'Transfer Learning' to adapt a large language model to a domain with very little data?",
+    "options": {
+      "A": "Retraining the entire model from scratch.",
+      "B": "Fine-tuning only the final output layers while keeping earlier layers 'frozen'.",
+      "C": "Deleting the vocabulary of the original model.",
+      "D": "Increasing the learning rate to its maximum possible value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mutual Information' (MI) used to identify in text feature selection?",
+    "options": {
+      "A": "The names of two people who are friends.",
+      "B": "The amount of information shared between a feature (word) and a specific class label.",
+      "C": "The speed of the network connection between two analysts.",
+      "D": "The number of times two documents are opened simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Distributional Semantics', what is the 'Cosine Distance' between two identical vectors?",
+    "options": {
+      "A": "Exactly 1.0",
+      "B": "Exactly 0.0",
+      "C": "Exactly -1.0",
+      "D": "Exactly 0.5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'TF-IDF' 'L2 Normalization' intended to do?",
+    "options": {
+      "A": "To make all word frequencies equal to one.",
+      "B": "To ensure document length does not bias the similarity score between documents.",
+      "C": "To delete all words that appear more than ten times.",
+      "D": "To encrypt the document vectors for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic Model' 'Stability'?",
+    "options": {
+      "A": "The server not crashing while running LDA.",
+      "B": "The degree to which the generated topics remain consistent across different runs or subsets of data.",
+      "C": "The total number of documents that can fit in a single topic.",
+      "D": "A measure of how long a user stays focused on one topic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Morphological Analysis'?",
+    "options": {
+      "A": "The study of how text files change their file extension.",
+      "B": "The study and analysis of the internal structure of words (roots, prefixes, suffixes).",
+      "C": "A security scan of the computer's motherboard.",
+      "D": "A way to count the number of pixels in a character."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Metric' for evaluating the coherence of word embeddings?",
+    "options": {
+      "A": "Mean Squared Error",
+      "B": "Word Analogy Task (e.g., Man:King :: Woman:?)",
+      "C": "R-Squared",
+      "D": "The number of layers in the embedding network"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cross-entropy' in the context of language modeling?",
+    "options": {
+      "A": "The distance between two different languages.",
+      "B": "A measure of the difference between the true probability distribution and the predicted distribution.",
+      "C": "A way to backup text data in an 'X' pattern.",
+      "D": "A security certificate used for encrypted text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is an 'Ontology' alignment?",
+    "options": {
+      "A": "Aligning two books on a physical shelf.",
+      "B": "The process of mapping concepts from one formal knowledge structure to another.",
+      "C": "Aligning the text to the left margin.",
+      "D": "Hiring two experts to agree on a definition."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Term' 'Proximity' in information retrieval?",
+    "options": {
+      "A": "The alphabetical closeness of two terms.",
+      "B": "The physical or logical distance between two search terms within a document.",
+      "C": "The time it takes to type two terms.",
+      "D": "The number of users who search for both terms."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named' 'Entity' 'Recognition' 'Span' overlap?",
+    "options": {
+      "A": "Two researchers working on the same name.",
+      "B": "When multiple entity labels are incorrectly assigned to the same range of characters.",
+      "C": "The width of the text font.",
+      "D": "A way to backup entity data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latent' 'Semantic' 'Indexing' (LSI)?",
+    "options": {
+      "A": "Indexing documents that have been hidden.",
+      "B": "An indexing and retrieval method that uses SVD to identify patterns in the relationships between terms.",
+      "C": "A search engine for ghosts.",
+      "D": "The physical layout of the library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vector' 'Quantization' in text processing?",
+    "options": {
+      "A": "Increasing the number of vectors to improve accuracy.",
+      "B": "Mapping a large set of vectors to a smaller set of 'codebook' vectors to compress data.",
+      "C": "Using a quantum computer to read text.",
+      "D": "A way to count the number of words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment' 'Target' extraction?",
+    "options": {
+      "A": "Identifying the person who wrote the review.",
+      "B": "Identifying the specific entity or feature toward which a sentiment is directed.",
+      "C": "Deleting the sentiment from the file.",
+      "D": "Counting the number of positive words."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bag-of-Words' 'Sparsity' 'Mitigation'?",
+    "options": {
+      "A": "Adding more words to the bag.",
+      "B": "Using techniques like dimensionality reduction or embeddings to represent text more densely.",
+      "C": "Deleting zero values from the matrix.",
+      "D": "A security feature for thin text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Probabilistic' 'Topic' 'Modeling'?",
+    "options": {
+      "A": "Guessing the topic of a book.",
+      "B": "A suite of algorithms that uncover the hidden thematic structure in large archives of documents.",
+      "C": "Counting the pages in a chapter.",
+      "D": "A way to backup document data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Information' 'Extraction', what is 'Relation' 'Extraction'?",
+    "options": {
+      "A": "Extrating family members from a database.",
+      "B": "The task of identifying semantic relationships between entities in text (e.g., 'CEO of').",
+      "C": "A way to backup the SQL schema.",
+      "D": "Deleting relations that are no longer active."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Similarity' 'Search' 'Locality-Sensitive Hashing' (LSH)?",
+    "options": {
+      "A": "Hashing the data based on the user's location.",
+      "B": "An algorithm for efficient approximate nearest neighbor search in high-dimensional spaces.",
+      "C": "A way to encrypt text files locally.",
+      "D": "A network speed test for data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Canonicalization' 'Unicode'?",
+    "options": {
+      "A": "Deleting all non-English text.",
+      "B": "The process of converting Unicode text into a single standard form to ensure consistent analysis.",
+      "C": "A secret password for high-security databases.",
+      "D": "A specialized software for designing fonts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dependency' 'Tree' 'Arc'?",
+    "options": {
+      "A": "A physical part of a wooden desk.",
+      "B": "The directed link between a 'head' word and its 'dependent' in a dependency parse.",
+      "C": "The total number of sentences in a report.",
+      "D": "A way to backup the text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Role' 'Labeling' (SRL)?",
+    "options": {
+      "A": "Identifying the author and the reader of a book.",
+      "B": "Identifying the 'who did what to whom' in a sentence by assigning roles like Agent or Patient.",
+      "C": "A security certificate for a SQL database.",
+      "D": "A way to translate code into English."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Distributional' 'Similarity' 'Hypothesis'?",
+    "options": {
+      "A": "A theory about how books are distributed to stores.",
+      "B": "The linguistic theory that words occurring in similar contexts tend to have similar meanings.",
+      "C": "A mathematical error in a study.",
+      "D": "The number of users on a website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Generation' 'Auto-regression'?",
+    "options": {
+      "A": "A model that generates text about cars.",
+      "B": "The process of generating the next token in a sequence based on all previously generated tokens.",
+      "C": "A way to delete data from the past.",
+      "D": "A security firewall for text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Sentiment' 'Analysis', what is 'Subjectivity' detection?",
+    "options": {
+      "A": "Identifying the subject of a sentence.",
+      "B": "Determining whether a piece of text contains an opinion or is just a statement of fact.",
+      "C": "Counting the number of nouns.",
+      "D": "Identifying the gender of the author."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information' 'Retrieval' 'TF-IDF' 'Inverted Index'?",
+    "options": {
+      "A": "A way to sort documents in reverse order.",
+      "B": "Combining term weighting with a fast lookup structure to enable efficient full-text search.",
+      "C": "A way to backup document titles.",
+      "D": "A bug in the search engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge' 'Graph' 'Triplet'?",
+    "options": {
+      "A": "Three different analysts working together.",
+      "B": "The basic unit of a graph, consisting of a subject, predicate, and object.",
+      "C": "A security certificate for a database.",
+      "D": "A way to translate code into Latin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'Precision-Recall' Curve?",
+    "options": {
+      "A": "The speed of the training data loading.",
+      "B": "A visual representation showing the trade-off between precision and recall for different classification thresholds.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of active users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Text' 'Wrangling', what is 'Entity' 'Canonicalization'?",
+    "options": {
+      "A": "Identifying the name of a user.",
+      "B": "Merging different variations of an entity name (e.g., 'IBM' and 'International Business Machines') into a single ID.",
+      "C": "Deleting duplicate names.",
+      "D": "A software bug that deletes files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Natural' 'Language' 'Parsing' 'Chart' parsing?",
+    "options": {
+      "A": "A drawing in a textbook.",
+      "B": "A class of algorithms (like CYK) that use dynamic programming to build a parse tree.",
+      "C": "A way to backup the SQL schema.",
+      "D": "A network delay when accessing a name database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sentiment' 'Analysis' 'Multimodal'?",
+    "options": {
+      "A": "Analyzing sentiment across multiple countries.",
+      "B": "Combining text, audio, and visual cues to determine the overall sentiment of a person's expression.",
+      "C": "Deleting sentiment from a file.",
+      "D": "Hiring multiple people to read a text."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Embedding' 'Dimensionality'?",
+    "options": {
+      "A": "The physical size of a printed book.",
+      "B": "The number of components (features) in the vector representing a word.",
+      "C": "The number of pages in a document.",
+      "D": "The price of a specialized NLP software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic' 'Modeling' 'Coherence' 'Score'?",
+    "options": {
+      "A": "How fast the model can switch topics.",
+      "B": "A measurement of how interpretable the topics are based on the semantic similarity of the top words.",
+      "C": "The total number of topics found in a dataset.",
+      "D": "A way to backup website data on a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural' 'Language' 'Generation', what is 'Nucleus' sampling?",
+    "options": {
+      "A": "Sampling tokens from the center of a document.",
+      "B": "Sampling from the top tokens whose cumulative probability exceeds a threshold (Top-p).",
+      "C": "A way to use the GPU for nuclear research.",
+      "D": "Deleting tokens that have a zero probability."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named' 'Entity' 'Recognition' 'F1' score?",
+    "options": {
+      "A": "A racing game about names.",
+      "B": "The harmonic mean of precision and recall for correctly identifying entity boundaries and types.",
+      "C": "The version number of an AI model.",
+      "D": "The number of hidden layers in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'Bias' in training data?",
+    "options": {
+      "A": "A high-speed connection between servers.",
+      "B": "The presence of systematic prejudice or stereotyping in the corpus that can be learned by the model.",
+      "C": "The physical weight of the server racks.",
+      "D": "A specific type of computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Latent' 'Semantic' 'Analysis' 'Singular' 'Values'?",
+    "options": {
+      "A": "The names of the authors.",
+      "B": "The diagonal elements of the S matrix that represent the strength of the captured semantic dimensions.",
+      "C": "A security scan of the database.",
+      "D": "The number of times a document is opened."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Visualization' 'Word' 'Tree'?",
+    "options": {
+      "A": "A physical tree planted in an office.",
+      "B": "A visual representation showing the different contexts in which a specific word or phrase appears.",
+      "C": "A list of all users currently connected.",
+      "D": "A way to backup data on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'NLP', what is 'Zero-shot' prompting?",
+    "options": {
+      "A": "A model that has zero accuracy.",
+      "B": "Asking a model to perform a task without providing any examples in the input.",
+      "C": "A prompt that has zero words.",
+      "D": "A way to restart the model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'Data' 'Privacy'?",
+    "options": {
+      "A": "Hiding the data from the lead analyst.",
+      "B": "The protection of sensitive personal information within text documents during analysis.",
+      "C": "Keeping the project a secret from competitors.",
+      "D": "Deleting data after it has been used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dialogue' 'History' 'Encoding'?",
+    "options": {
+      "A": "Hiring a historian for the data team.",
+      "B": "Representing previous turns of a conversation as a vector to provide context for the current response.",
+      "C": "A way to count the number of words.",
+      "D": "A specialized software for linguists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semantic' 'Similarity' 'Vector' arithmetic?",
+    "options": {
+      "A": "A famous logic puzzle for children.",
+      "B": "Performing mathematical operations on vectors to explore semantic analogies (e.g., King - Man + Woman = Queen).",
+      "C": "A bug in the word vector math.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Text' 'Analysis', what is 'Inter-annotator' agreement?",
+    "options": {
+      "A": "The speed of the network connection between two CPUs.",
+      "B": "A measure of how much multiple human labelers agree on the classification of the same text data.",
+      "C": "Two analysts agreeing on a physical lunch spot.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Topic' 'Modeling' 'LDA' 'Alpha' parameter?",
+    "options": {
+      "A": "The first letter of the topic name.",
+      "B": "The hyperparameter that controls the sparsity of the document-topic distribution.",
+      "C": "The overall accuracy of the final model.",
+      "D": "The number of independent variables used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Information' 'Retrieval' 'Mean' 'Average' 'Precision' (MAP)?",
+    "options": {
+      "A": "The speed of the training data loading.",
+      "B": "The average of the average precision scores for each query in a set of queries.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of active users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Augmentation' 'Back-translation'?",
+    "options": {
+      "A": "Translating from the end of a document to the start.",
+      "B": "Translating a sentence into another language and then back to the original to create a variation.",
+      "C": "A way to undo a translation.",
+      "D": "A security certificate for a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Text' 'Analysis', what is 'Corpus' 'Sparsity'?",
+    "options": {
+      "A": "When a corpus has too many images.",
+      "B": "When a large percentage of possible word combinations never appear in the dataset.",
+      "C": "When the database is running out of space.",
+      "D": "When the text is written in a very small font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Named' 'Entity' 'Disambiguation' 'Knowledge' 'Base'?",
+    "options": {
+      "A": "Drawing a chart of the researcher's knowledge.",
+      "B": "Using an external resource like Wikipedia or Wikidata to identify a specific entity mention.",
+      "C": "A specialized software for designing fonts.",
+      "D": "A secret password for high-security databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Classification' 'Hyperparameter' 'Optimization'?",
+    "options": {
+      "A": "Fixing the physical parts of a computer.",
+      "B": "Finding the best settings (like learning rate or C value) for a classification algorithm.",
+      "C": "Increasing the voltage of the GPU.",
+      "D": "Choosing a new name for the AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Text' 'Analysis', what is 'Stop' 'Word' 'Filtering' 'Customization'?",
+    "options": {
+      "A": "Filtering out the best words in a document.",
+      "B": "Tailoring the list of words to be ignored based on the specific domain or requirements of the project.",
+      "C": "Stopping the computer from loading a text file.",
+      "D": "Identifying the author by their use of 'the'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word' 'Sense' 'Disambiguation' 'Lesk' algorithm?",
+    "options": {
+      "A": "Identifying the person who wrote the review.",
+      "B": "A classic algorithm that uses dictionary definitions and context word overlap to pick the correct word sense.",
+      "C": "A security scan for computer viruses.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Summarization' 'Sentence' 'Scoring'?",
+    "options": {
+      "A": "Giving each sentence a grade in a class.",
+      "B": "Assigning a numerical importance value to each sentence to decide which ones should be in an extractive summary.",
+      "C": "Counting the number of letters in a sentence.",
+      "D": "A security check for the source code repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Natural' 'Language' 'Inference' 'Contradiction'?",
+    "options": {
+      "A": "When a document has zero labels.",
+      "B": "A class in NLI where the hypothesis sentence is clearly false given the premise sentence.",
+      "C": "A document with exactly ten labels.",
+      "D": "A security feature that hides sentiment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Text' 'Analysis' 'API' 'Integration'?",
+    "options": {
+      "A": "The physical dashboard of a car used by a data analyst.",
+      "B": "Connecting a text analysis service to an existing application or workflow.",
+      "C": "A way to monitor the physical temperature of the server.",
+      "D": "A list of all users who have accessed a document."
+    },
+    "answer": "B"
+  }
+  ]
+}

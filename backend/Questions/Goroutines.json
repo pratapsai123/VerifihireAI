@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Goroutines", 
+  "questions": [
+    {
+    "question": "What keyword is used to start a new Goroutine in Go?",
+    "options": {
+      "A": "thread",
+      "B": "go",
+      "C": "spawn",
+      "D": "async"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Goroutines are managed by the operating system kernel just like standard threads.",
+    "options": {
+      "A": "True",
+      "B": "False (They are managed by the Go runtime scheduler)",
+      "C": "Only on Windows systems",
+      "D": "Only if the 'sync' package is imported"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following best describes a Goroutine?",
+    "options": {
+      "A": "A heavy-weight process with its own memory space.",
+      "B": "A light-weight thread managed by the Go runtime.",
+      "C": "A specialized database query language.",
+      "D": "A hardware component used for network routing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary mechanism used for communication between Goroutines?",
+    "options": {
+      "A": "Global variables",
+      "B": "Shared text files",
+      "C": "Channels",
+      "D": "Network sockets"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A single Go program can easily run hundreds of thousands of Goroutines simultaneously.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the computer has 128GB of RAM",
+      "D": "Only in the 'Enterprise' edition of Go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you create a new channel for integers in Go?",
+    "options": {
+      "A": "ch := channel(int)",
+      "B": "ch := new channel int",
+      "C": "ch := make(chan int)",
+      "D": "ch := create chan[int]"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which operator is used to send or receive data from a channel?",
+    "options": {
+      "A": "->",
+      "B": "<-",
+      "C": "=>",
+      "D": "<<"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: By default, sending data to an unbuffered channel blocks until a receiver is ready.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channel is closed",
+      "D": "Only if the data is a string"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if the main function of a Go program exits while other Goroutines are still running?",
+    "options": {
+      "A": "The program waits for all Goroutines to finish.",
+      "B": "The program terminates immediately, and the Goroutines are killed.",
+      "C": "The program crashes with a 'Deadlock' error.",
+      "D": "The Goroutines are moved to a background process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which primitive from the 'sync' package is used to wait for a collection of Goroutines to finish?",
+    "options": {
+      "A": "sync.Mutex",
+      "B": "sync.WaitGroup",
+      "C": "sync.Once",
+      "D": "sync.Timer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Goroutines have a fixed stack size that cannot grow or shrink.",
+    "options": {
+      "A": "False (Goroutines start with a small stack that grows as needed)",
+      "B": "True (They use exactly 2MB per Goroutine)",
+      "C": "True, but only on Linux",
+      "D": "False, they have no stack at all"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to handle multiple channel operations in a non-blocking or multiplexed way?",
+    "options": {
+      "A": "switch",
+      "B": "select",
+      "C": "multi",
+      "D": "defer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'Buffered Channel' allow?",
+    "options": {
+      "A": "It allows sending messages to a remote server.",
+      "B": "It allows a limited number of values to be sent without a corresponding receiver ready.",
+      "C": "It automatically encrypts the data.",
+      "D": "It prevents the channel from ever being closed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Receiving from a closed channel returns the zero value of the channel's type immediately.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for boolean channels",
+      "D": "Only if the channel was buffered"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these functions is used to signal that a task is complete in a WaitGroup?",
+    "options": {
+      "A": "wg.Add(-1)",
+      "B": "wg.Done()",
+      "C": "wg.Finish()",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Deadlock' in a Go program?",
+    "options": {
+      "A": "A situation where the computer hardware fails.",
+      "B": "A state where all Goroutines are asleep and waiting for each other, preventing progress.",
+      "C": "A security feature that locks the source code.",
+      "D": "A way to speed up memory allocation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You must close every channel you create to avoid memory leaks.",
+    "options": {
+      "A": "False (Closing is only necessary to signal receivers that no more data is coming)",
+      "B": "True (The garbage collector cannot reclaim open channels)",
+      "C": "True, but only for buffered channels",
+      "D": "False, only the main channel needs closing"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the result of sending data to a closed channel?",
+    "options": {
+      "A": "The data is ignored.",
+      "B": "The program panics.",
+      "C": "The program waits forever.",
+      "D": "The channel re-opens automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows the current Goroutine to pause and let the scheduler run other Goroutines?",
+    "options": {
+      "A": "runtime.Sleep()",
+      "B": "runtime.Gosched()",
+      "C": "sync.Pause()",
+      "D": "time.Wait()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Parallelism is when multiple tasks are physically running at the same time on different CPU cores.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'parallel' package",
+      "D": "Only for C++ programs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'cap()' function return when used on a channel?",
+    "options": {
+      "A": "The current number of elements in the buffer.",
+      "B": "The total buffer size defined when the channel was created.",
+      "C": "The memory address of the channel.",
+      "D": "The number of Goroutines waiting on the channel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to check for data races in a Go program?",
+    "options": {
+      "A": "go run -race main.go",
+      "B": "go check main.go",
+      "C": "go test -safety main.go",
+      "D": "go build -no-race main.go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can iterate over a channel using a 'for range' loop.",
+    "options": {
+      "A": "True (It continues until the channel is closed)",
+      "B": "False",
+      "C": "Only if the channel has a capacity of 100+",
+      "D": "Only if the channel contains strings"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Race Condition'?",
+    "options": {
+      "A": "A competition between two developers to finish first.",
+      "B": "When multiple Goroutines access shared data concurrently and at least one is writing.",
+      "C": "A specialized optimization mode for high-speed loops.",
+      "D": "A way to measure the frequency of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a channel that can only *receive* data (receive-only) in a function signature?",
+    "options": {
+      "A": "chan<- int",
+      "B": "<-chan int",
+      "C": "receive chan int",
+      "D": "chan int receive"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'sync.Mutex' is used to protect shared resources from concurrent access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for global variables",
+      "D": "Only for financial calculations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'GOMAXPROCS'?",
+    "options": {
+      "A": "To set the maximum number of OS threads that can execute user-level code simultaneously.",
+      "B": "To set the maximum number of Goroutines allowed in a program.",
+      "C": "To limit the total memory used by the Go runtime.",
+      "D": "To increase the speed of the garbage collector."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Directional Channel'?",
+    "options": {
+      "A": "A channel that can only be used on specific network cards.",
+      "B": "A channel constrained to only send or only receive data.",
+      "C": "A channel that follows a specific GPS path.",
+      "D": "A channel used for controlling drones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A send to a buffered channel that is full will block until space becomes available.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channel contains integers",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which function is used to create a channel with a buffer size of 5?",
+    "options": {
+      "A": "make(chan int, 5)",
+      "B": "make(chan int[5])",
+      "C": "channel.New(int, 5)",
+      "D": "new(chan int, 5)"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens when you close an already closed channel?",
+    "options": {
+      "A": "Nothing happens.",
+      "B": "The program panics.",
+      "C": "The channel re-opens.",
+      "D": "The previous close is reversed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Goroutines are much cheaper to create than OS threads in terms of memory.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on ARM processors",
+      "D": "Only for C# developers using Go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'sync' method is used to ensure a function is executed exactly once, regardless of how many Goroutines call it?",
+    "options": {
+      "A": "sync.Once.Do()",
+      "B": "sync.OneTime()",
+      "C": "sync.Single()",
+      "D": "sync.Lock()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Default' case in a 'select' statement used for?",
+    "options": {
+      "A": "To handle errors automatically.",
+      "B": "To perform a non-blocking channel operation if no other cases are ready.",
+      "C": "To close the program gracefully.",
+      "D": "To log the current time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can send a channel as a value through another channel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channels are the same type",
+      "D": "Only in Go version 1.18+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Zero Value' of a channel variable that hasn't been initialized?",
+    "options": {
+      "A": "0",
+      "B": "nil",
+      "C": "false",
+      "D": "closed"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid channel declaration?",
+    "options": {
+      "A": "var ch chan string",
+      "B": "ch := make(chan float64)",
+      "C": "type messageChan chan int",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'select' statement with no cases blocks forever.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is inside a loop",
+      "D": "Only if the main function is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Fan-out' concurrency pattern?",
+    "options": {
+      "A": "Using a fan to cool the CPU.",
+      "B": "Multiple Goroutines reading from the same channel to distribute work.",
+      "C": "Stopping all Goroutines at once.",
+      "D": "A way to increase the size of the channel buffer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Fan-in' concurrency pattern?",
+    "options": {
+      "A": "Closing all channels simultaneously.",
+      "B": "Multiplexing multiple channels into a single channel.",
+      "C": "Turning off the server cooling.",
+      "D": "Storing messages in a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Mutexes should be unlocked as soon as possible to allow other Goroutines to proceed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for complex objects",
+      "D": "Only if the program is slow"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'len()' function return for a channel?",
+    "options": {
+      "A": "The total buffer capacity.",
+      "B": "The number of elements currently queued in the buffer.",
+      "C": "The number of active receivers.",
+      "D": "The number of lines in the source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Go, 'Concurrency' is primarily about:",
+    "options": {
+      "A": "Running tasks physically at the same time.",
+      "B": "The composition of independently executing processes.",
+      "C": "Encrypting data for secure transfer.",
+      "D": "Sorting numbers in descending order."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A channel can be used to synchronize the execution of two Goroutines.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a buffered channel",
+      "D": "Only in the 'sync' package"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Worker Pool'?",
+    "options": {
+      "A": "A group of developers working in the same office.",
+      "B": "A fixed number of Goroutines that process tasks from a shared channel.",
+      "C": "A specialized database for storing worker data.",
+      "D": "A way to pool together network connections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which operator is used to check if a channel was closed during a receive operation?",
+    "options": {
+      "A": "val, ok := <-ch",
+      "B": "val, status := <-ch",
+      "C": "check(ch)",
+      "D": "ch.IsClosed()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: It is generally the responsibility of the sender, not the receiver, to close a channel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the receiver is the main function",
+      "D": "Only if the channel is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if you try to receive from a 'nil' channel?",
+    "options": {
+      "A": "It returns the zero value immediately.",
+      "B": "It blocks forever.",
+      "C": "The program panics.",
+      "D": "It returns an error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'context.Context' in Go concurrency?",
+    "options": {
+      "A": "To provide a way to pass data between Goroutines and handle cancellation/timeouts.",
+      "B": "To set the background color of the IDE.",
+      "C": "To act as a secondary database.",
+      "D": "To manage the server's HTTP version."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The Go scheduler performs 'preemptive' scheduling, meaning it can switch between Goroutines automatically.",
+    "options": {
+      "A": "True (especially in newer Go versions)",
+      "B": "False",
+      "C": "Only if GOMAXPROCS is set to 1",
+      "D": "Only if the Goroutines use 'time.Sleep'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which primitive should you use if you need to protect a resource that is read often but written to rarely?",
+    "options": {
+      "A": "sync.Mutex",
+      "B": "sync.RWMutex",
+      "C": "sync.Pool",
+      "D": "sync.Map"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'CSP' model that Go follows?",
+    "options": {
+      "A": "Concurrent System Protocol",
+      "B": "Communicating Sequential Processes",
+      "C": "Centralized Signal Processor",
+      "D": "Code Sharing Platform"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A channel created without a buffer size (unbuffered) has a capacity of 0.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a boolean channel",
+      "D": "It has a capacity of 1 by default"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Goroutine Leak'?",
+    "options": {
+      "A": "When Goroutine code is stolen by a hacker.",
+      "B": "A Goroutine that is started but never finishes and stays in memory forever.",
+      "C": "A way to spill memory into the swap file.",
+      "D": "A tool to measure the output of a channel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you start the race detector while running tests?",
+    "options": {
+      "A": "go test -race",
+      "B": "go test -speed",
+      "C": "go test -check",
+      "D": "go test -safety"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can send data to a receive-only channel (<-chan int).",
+    "options": {
+      "A": "False",
+      "B": "True",
+      "C": "Only if the channel is buffered",
+      "D": "Only in the 'main' function"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'sync.Pool'?",
+    "options": {
+      "A": "To create a swimming pool for developers.",
+      "B": "To reuse objects and reduce the pressure on the garbage collector.",
+      "C": "To store backup copies of the source code.",
+      "D": "To pool together network requests into one."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'select' statement do if multiple cases are ready to proceed?",
+    "options": {
+      "A": "It executes the first one in the list.",
+      "B": "It executes one at random to ensure fairness.",
+      "C": "It executes all of them in parallel.",
+      "D": "It throws an 'Ambiguous' error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: WaitGroups are safe to be passed by value to different Goroutines.",
+    "options": {
+      "A": "False (They must be passed by pointer to refer to the same state).",
+      "B": "True",
+      "C": "Only if the wg.Add() has already been called",
+      "D": "Only in Go version 1.10 or older"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Go environment variable can be used to disable the scheduler's preemption (for debugging)?",
+    "options": {
+      "A": "GOSCHED=off",
+      "B": "GODEBUG=asyncpreemptoff=1",
+      "C": "SCHED=fixed",
+      "D": "GO_PREEMPT=0"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Spinning' in the context of the Go scheduler?",
+    "options": {
+      "A": "The computer fans spinning at high speed.",
+      "B": "A thread that is actively looking for work to steal from other processors.",
+      "C": "A Goroutine that is in an infinite loop.",
+      "D": "A way to rotate the log files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can close a receive-only channel (<-chan int).",
+    "options": {
+      "A": "False (Only sending channels or bidirectional channels can be closed)",
+      "B": "True",
+      "C": "Only if it is a nil channel",
+      "D": "Only if using the 'force' keyword"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'sync.Map' provide?",
+    "options": {
+      "A": "A physical map of the server room.",
+      "B": "A specialized map that is safe for concurrent use by multiple Goroutines without manual locking.",
+      "C": "A way to map Goroutines to CPU cores.",
+      "D": "A database of all user coordinates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to wait for a WaitGroup to reach a count of zero?",
+    "options": {
+      "A": "wg.Finish()",
+      "B": "wg.Wait()",
+      "C": "wg.Zero()",
+      "D": "wg.Block()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A nil channel never becomes ready for communication.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the 'sync' package is missing",
+      "D": "Only in version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the main benefit of 'Channel Directions' in function parameters?",
+    "options": {
+      "A": "It makes the code run faster.",
+      "B": "It provides compile-time type safety to ensure a function doesn't accidentally send or receive incorrectly.",
+      "C": "It helps the garbage collector find unused channels.",
+      "D": "It identifies the network path for the data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which concurrency pattern involves a function that creates a channel, starts a goroutine to send values to it, and returns the channel?",
+    "options": {
+      "A": "Pipeline",
+      "B": "Multiplexer",
+      "C": "Generator",
+      "D": "Worker Pool"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: If a goroutine is blocked on a channel receive operation and the channel is never closed nor receives data, it results in a goroutine leak.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channel is buffered",
+      "D": "Only if GOMAXPROCS is set to 1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'context.WithCancel'?",
+    "options": {
+      "A": "To increase the priority of a goroutine.",
+      "B": "To provide a way to signal to multiple goroutines that they should stop their work.",
+      "C": "To delete a channel from memory safely.",
+      "D": "To restart a failed goroutine automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'select' statement, what happens if multiple cases are ready to communicate at the same time?",
+    "options": {
+      "A": "The first case defined in the code is always chosen.",
+      "B": "The program crashes with a 'SimultaneousAccess' error.",
+      "C": "The Go runtime chooses one at pseudo-random to ensure fairness.",
+      "D": "All ready cases are executed in parallel."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the key difference between 'sync.Mutex' and 'sync.RWMutex'?",
+    "options": {
+      "A": "RWMutex is used only for writing to files.",
+      "B": "Mutex allows multiple readers, while RWMutex is for a single user only.",
+      "C": "RWMutex allows multiple goroutines to hold a read lock simultaneously, as long as no one is writing.",
+      "D": "There is no difference in modern Go versions."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: A channel can be safely closed by a receiver goroutine if it knows no more data is needed.",
+    "options": {
+      "A": "False (Closing from the receiver side is dangerous because the sender might panic trying to send).",
+      "B": "True",
+      "C": "True, but only for unbuffered channels",
+      "D": "False, only the main function can close channels"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you implement a non-blocking send on a channel using 'select'?",
+    "options": {
+      "A": "By setting the channel capacity to -1.",
+      "B": "By including a 'default' case in the select block.",
+      "C": "By using the 'async' keyword before the send operator.",
+      "D": "Send operations are always non-blocking in Go."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'sync.WaitGroup.Add' do if called with a negative number that makes the internal counter less than zero?",
+    "options": {
+      "A": "It resets the counter to zero.",
+      "B": "It ignores the operation.",
+      "C": "The program panics.",
+      "D": "It puts the current goroutine to sleep."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'done' channel pattern is commonly used to signal goroutines to exit by closing the channel.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channel type is 'chan error'",
+      "D": "Only if using the 'reflect' package"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Pipeline' pattern in Go concurrency?",
+    "options": {
+      "A": "A way to connect Go to a SQL database.",
+      "B": "A series of stages connected by channels, where each stage is a group of goroutines running the same function.",
+      "C": "A tool to measure network bandwidth.",
+      "D": "A method to compile multiple packages at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'sync.Once', what happens if the function passed to 'Do' panics?",
+    "options": {
+      "A": "The panic is caught and ignored.",
+      "B": "The function is considered 'done', and subsequent calls to 'Do' will not run it again.",
+      "C": "The 'Do' method will try to run the function again on the next call.",
+      "D": "The entire sync package becomes corrupted."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'runtime.NumGoroutine()' allows you to monitor the current number of active goroutines for debugging leaks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'dev' environment",
+      "D": "Only if the CPU has more than 4 cores"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Receive-Only' channel parameter good for?",
+    "options": {
+      "A": "Making the channel consume less memory.",
+      "B": "Enforcing API intent by preventing the function from accidentally sending data back into the channel.",
+      "C": "It is required for range loops.",
+      "D": "It identifies the channel as a priority queue."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to create a context that automatically cancels itself after a specific duration?",
+    "options": {
+      "A": "context.WithTimer",
+      "B": "context.WithTimeout",
+      "C": "context.AfterDuration",
+      "D": "context.StopWatch"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'nil' channel will block the current goroutine forever if you try to send or receive from it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channel is unbuffered",
+      "D": "Only if GOMAXPROCS is 1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you detect a data race if your application is already compiled and running in production?",
+    "options": {
+      "A": "You cannot; the race detector must be enabled at compile-time/run-time with '-race'.",
+      "B": "By checking the Windows Event Viewer.",
+      "C": "By using the 'go trace' tool on the live PID.",
+      "D": "By looking for 'Race:' prefixes in the standard logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the effect of calling 'Unlock()' on a Mutex that is not currently locked?",
+    "options": {
+      "A": "The program ignores the call.",
+      "B": "The program panics.",
+      "C": "The program enters a deadlock.",
+      "D": "The Mutex becomes unusable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'sync.Cond' is used to coordinate goroutines waiting for a specific logical condition to change.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for network socket conditions",
+      "D": "Only in Go version 1.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary advantage of using a 'Buffered Channel' with a capacity of 1 over an unbuffered channel?",
+    "options": {
+      "A": "It is 10 times faster.",
+      "B": "It allows a sender to complete without waiting for the receiver to actually process the value.",
+      "C": "It automatically closes the channel after one use.",
+      "D": "It prevents data races without a Mutex."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'context.Context', what does the 'Done()' method return?",
+    "options": {
+      "A": "A boolean indicating if the context is finished.",
+      "B": "A channel that is closed when the work should be cancelled.",
+      "C": "An error object.",
+      "D": "The result of the goroutine's execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: It is safe to use 'defer mu.Unlock()' immediately after 'mu.Lock()' to ensure the resource is released.",
+    "options": {
+      "A": "True (This is a common and recommended practice).",
+      "B": "False (It makes the code prone to deadlocks).",
+      "C": "True, but only if the function returns an error.",
+      "D": "False, defer has too much overhead for Mutexes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Work Stealing' in the Go Scheduler?",
+    "options": {
+      "A": "A hacker stealing your source code.",
+      "B": "A strategy where an idle processor takes goroutines from the queues of other busy processors.",
+      "C": "Deleting tasks that are taking too long.",
+      "D": "Moving all goroutines to a single CPU core to save power."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used in a 'select' block to ensure it doesn't block if no channels are ready?",
+    "options": {
+      "A": "else",
+      "B": "break",
+      "C": "default",
+      "D": "fallback"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Go channels can be used to send and receive any type, including custom structs and interfaces.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the struct is smaller than 64KB",
+      "D": "Only if the struct doesn't contain pointers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the behavior of 'sync.WaitGroup.Wait()'?",
+    "options": {
+      "A": "It sleeps for a random amount of time.",
+      "B": "It blocks the calling goroutine until the WaitGroup counter is zero.",
+      "C": "It returns an error if any goroutine failed.",
+      "D": "It stops all other goroutines in the system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a goroutine attempts to write to a channel that is already at its maximum capacity?",
+    "options": {
+      "A": "The data is dropped.",
+      "B": "The oldest data in the buffer is overwritten.",
+      "C": "The goroutine blocks until another goroutine receives from the channel.",
+      "D": "The channel size doubles automatically."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Using 'sync.Map' is always more performant than a standard map with a Mutex.",
+    "options": {
+      "A": "False (sync.Map is optimized for specific cases like stable keys with frequent reads).",
+      "B": "True",
+      "C": "Only on systems with more than 16 cores",
+      "D": "Only if the map contains more than 1 million items"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Channel Axiom 3' regarding closing a channel?",
+    "options": {
+      "A": "A send to a closed channel panics.",
+      "B": "A receive from a closed channel blocks.",
+      "C": "Closing a closed channel is safe.",
+      "D": "Only the receiver should close the channel."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Go, how do you correctly handle a timeout for a network request using channels?",
+    "options": {
+      "A": "Use a 'select' statement with the request channel and a 'time.After' channel.",
+      "B": "Set the CPU speed to a lower value.",
+      "C": "Use a for loop with a counter.",
+      "D": "Network timeouts are handled automatically by the 'sync' package."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Goroutines are scheduled cooperatively at specific 'yield' points like channel operations or function calls.",
+    "options": {
+      "A": "True (though newer Go versions added more preemptive support).",
+      "B": "False (They are purely preemptive like OS threads).",
+      "C": "Only on Linux kernels",
+      "D": "Only if the 'runtime' package is not used"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'sync.Atomic' functions?",
+    "options": {
+      "A": "To generate random numbers.",
+      "B": "To perform low-level synchronization on basic types without using Mutexes.",
+      "C": "To encrypt sensitive memory addresses.",
+      "D": "To manage the power state of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does a 'receive' from a closed channel return once all previously sent values have been consumed?",
+    "options": {
+      "A": "It blocks forever.",
+      "B": "The zero value for the channel's type and 'false' for the 'ok' variable.",
+      "C": "The program panics.",
+      "D": "It returns a 'ClosedChannelError'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single goroutine can send to multiple channels simultaneously without using a select statement.",
+    "options": {
+      "A": "False (Statements are executed sequentially).",
+      "B": "True",
+      "C": "True, but only if they are buffered",
+      "D": "Only in the 'Enterprise' edition of Go"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Or-channel' pattern?",
+    "options": {
+      "A": "Combining two channels into an 'OR' logical gate.",
+      "B": "A way to wait for any one of several channels to close, signaling the end of a group of tasks.",
+      "C": "A channel that only accepts bits (0 or 1).",
+      "D": "A tool to search for channels by name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is best for visualizing the execution of goroutines and their interaction with the scheduler over time?",
+    "options": {
+      "A": "go run",
+      "B": "go tool trace",
+      "C": "go tool monitor",
+      "D": "go tool pprof"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If you forget to call 'wg.Done()' in a goroutine, 'wg.Wait()' will block forever.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the goroutine is in a loop",
+      "D": "Only if using buffered channels"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Starvation' in the context of Mutexes?",
+    "options": {
+      "A": "When the server runs out of disk space.",
+      "B": "When a goroutine is unable to gain access to a lock for a long period because other goroutines are prioritized.",
+      "C": "When a channel buffer is empty for more than 1 minute.",
+      "D": "When the developer forgets to write code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a 'Context' with a key-value pair for passing metadata?",
+    "options": {
+      "A": "context.WithData",
+      "B": "context.WithValue",
+      "C": "context.WithMetadata",
+      "D": "context.WithMap"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A select statement can have multiple 'default' cases.",
+    "options": {
+      "A": "False (Only one default case is allowed).",
+      "B": "True",
+      "C": "Only if there are more than 10 other cases",
+      "D": "Only in version 1.18+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Bridge' pattern in Go concurrency?",
+    "options": {
+      "A": "Connecting a Go channel to a Java queue.",
+      "B": "Consuming from a channel of channels and outputting all values into a single stream.",
+      "C": "Linking two physical servers with a cable.",
+      "D": "Converting a string into a channel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the consequence of 'Livelock'?",
+    "options": {
+      "A": "The program crashes instantly.",
+      "B": "Goroutines are technically running but making no progress because they are constantly responding to each other.",
+      "C": "The server hardware shuts down safely.",
+      "D": "The channel buffer increases to infinity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: It is best practice to pass 'context.Context' as the first parameter of a function.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for private functions",
+      "D": "Only if the function returns an error"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'sync.WaitGroup' internal counter represent?",
+    "options": {
+      "A": "The number of lines in the program.",
+      "B": "The number of active goroutines that still need to complete.",
+      "C": "The total number of CPU cores.",
+      "D": "The number of bytes in the channel buffer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function allows you to get the current setting of GOMAXPROCS?",
+    "options": {
+      "A": "runtime.GetMaxProcs()",
+      "B": "runtime.GOMAXPROCS(0)",
+      "C": "os.NumCPU()",
+      "D": "sync.ProcsCount()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can send a value into a channel and receive it back in the same line of code.",
+    "options": {
+      "A": "False (These are distinct, blocking operations).",
+      "B": "True",
+      "C": "Only in a for loop",
+      "D": "Only if the channel is unbuffered"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'runtime.LockOSThread()'?",
+    "options": {
+      "A": "To encrypt the current thread.",
+      "B": "To ensure the current goroutine always runs on the same OS thread (useful for C libraries or GUI).",
+      "C": "To prevent the user from closing the program.",
+      "D": "To stop all other threads in the OS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Tee-channel' pattern?",
+    "options": {
+      "A": "A channel used for drinking tea.",
+      "B": "A way to split one input channel into two output channels, with each receiving all the values.",
+      "C": "Closing a channel after exactly 3 uses.",
+      "D": "A tool to measure the temperature of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A select statement will wait until at least one case is ready unless a default case is provided.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the channels are buffered",
+      "D": "Only in the 'main' function"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Error Group' pattern (from the x/sync/errgroup package)?",
+    "options": {
+      "A": "A way to group errors by their color in the logs.",
+      "B": "A specialized WaitGroup that returns the first error encountered by a group of goroutines.",
+      "C": "A tool to delete all error messages.",
+      "D": "A database for storing error history."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to describe the ability of a system to run several tasks in overlapping time periods?",
+    "options": {
+      "A": "Parallelism",
+      "B": "Concurrency",
+      "C": "Iteration",
+      "D": "Compilation"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Channels are inherently thread-safe and do not require additional Mutexes for basic communication.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for boolean types",
+      "D": "Only on 64-bit systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Semaphore' and how is it often implemented in Go?",
+    "options": {
+      "A": "A flag on a server; implemented with global variables.",
+      "B": "A synchronization primitive to control access to a fixed number of resources; often implemented with a buffered channel.",
+      "C": "A way to send messages to ships; implemented with network sockets.",
+      "D": "A tool to delete old files; implemented with the 'os' package."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Unbounded Buffer' pattern?",
+    "options": {
+      "A": "A channel with a capacity of 1 trillion.",
+      "B": "A set of goroutines and channels that simulate a queue that never blocks the sender.",
+      "C": "A way to remove all boundaries from the source code.",
+      "D": "A tool to increase the RAM of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'context.Background()' is usually used for the top-level context of a request or program.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for background processes",
+      "D": "Only for database migrations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Double-Check Locking' and why is it usually avoided in Go in favor of channels or sync.Once?",
+    "options": {
+      "A": "A way to check the door twice; avoided because it wastes time.",
+      "B": "A pattern to reduce lock overhead; avoided because it is complex to implement correctly due to memory ordering.",
+      "C": "A way to lock the computer twice; avoided because it is too secure.",
+      "D": "A method to delete data; avoided because it is dangerous."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function in the 'reflect' package is used to perform channel operations dynamically?",
+    "options": {
+      "A": "reflect.Select()",
+      "B": "reflect.Channel()",
+      "C": "reflect.Communication()",
+      "D": "reflect.Go()"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Goroutines can be assigned a priority to ensure critical tasks run first.",
+    "options": {
+      "A": "False (The Go scheduler does not support user-defined priorities).",
+      "B": "True",
+      "C": "Only if using the 'priority' extension",
+      "D": "Only in version 1.15+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Context Leak'?",
+    "options": {
+      "A": "When sensitive metadata is stolen from a context.",
+      "B": "When a context is created with a timeout but the 'cancel' function is never called, keeping resources alive.",
+      "C": "A way to spill context into the logs.",
+      "D": "A bug where the context size increases indefinitely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Blocking' in Go concurrency?",
+    "options": {
+      "A": "A security feature that blocks hackers.",
+      "B": "When a goroutine pauses its execution to wait for an event (like channel data).",
+      "C": "Deleting a block of code.",
+      "D": "Increasing the size of the memory block."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A channel can be passed as an argument to another goroutine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is a nil channel",
+      "D": "Only for boolean channels"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword defines the mechanism where a goroutine is moved off a thread while it waits for a network response?",
+    "options": {
+      "A": "Compilation",
+      "B": "Parking",
+      "C": "Yielding",
+      "D": "Caching"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Heartbeat' pattern?",
+    "options": {
+      "A": "A tool to measure the developer's pulse.",
+      "B": "A goroutine sending periodic signals on a channel to prove it is still alive and working.",
+      "C": "Restarting the computer every hour.",
+      "D": "A sound effect played by the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'sync.Map' Store and Load operations are always faster than a Mutex-protected map.",
+    "options": {
+      "A": "False (It depends heavily on the read/write ratio and key stability).",
+      "B": "True",
+      "C": "Only if the map is empty",
+      "D": "Only on Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Atomic.Value' used for?",
+    "options": {
+      "A": "To store high-resolution images.",
+      "B": "To atomically store and retrieve values of any type (usually configuration or state).",
+      "C": "To identify if a value is radioactive.",
+      "D": "To set the priority of a variable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Go, 'Channels' are technically implemented as:",
+    "options": {
+      "A": "Text files on disk.",
+      "B": "Circular buffers with a lock and two wait-queues (senders and receivers).",
+      "C": "Network sockets on localhost.",
+      "D": "Global variables in the runtime package."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the Go Scheduler's G-M-P model, what does the 'P' represent?",
+    "options": {
+      "A": "The Physical CPU core assigned to the process.",
+      "B": "A Logical Processor or resource that is required to execute Go code.",
+      "C": "The Pointer to the current stack frame.",
+      "D": "The Priority level of the currently running Goroutine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: When a Goroutine makes a synchronous system call (syscall), the Go scheduler detaches the 'P' from the 'M' to allow other Goroutines to run on a different thread.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the syscall takes more than 10ms",
+      "D": "Only if GOMAXPROCS is greater than 1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of the 'sudog' struct in the internal implementation of channels?",
+    "options": {
+      "A": "To store the encrypted version of the channel payload.",
+      "B": "To represent a Goroutine waiting in a send or receive queue on a channel.",
+      "C": "To manage the garbage collection of unused channels.",
+      "D": "To track the history of all channel operations for debugging."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of Go's memory model, which of the following provides a 'happens-before' guarantee?",
+    "options": {
+      "A": "A send on a channel happens before the corresponding receive from that channel completes.",
+      "B": "Closing a channel happens before a receive that returns a zero value.",
+      "C": "The creation of a Goroutine happens before the Goroutine's execution begins.",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Stack Splitting' (or segmented stacks) and is it used in modern Go?",
+    "options": {
+      "A": "It is a way to run two Goroutines on one stack; it is still the default.",
+      "B": "It was a method to grow stacks by linking segments; modern Go uses stack copying instead.",
+      "C": "It is a security feature to prevent stack overflows.",
+      "D": "It is a method to split a single function into two parallel Goroutines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Go Race Detector is based on the C/C++ ThreadSanitizer runtime library.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on Linux systems",
+      "D": "Only in Go versions prior to 1.10"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Netpoller' in the Go runtime?",
+    "options": {
+      "A": "A tool to poll users for feedback on network speed.",
+      "B": "An internal mechanism that uses OS-specific APIs (epoll/kqueue) to handle non-blocking network I/O efficiently.",
+      "C": "A specialized Goroutine that only handles DNS lookups.",
+      "D": "A database for storing IP address blacklists."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal field in the 'hchan' struct protects the circular buffer and wait queues?",
+    "options": {
+      "A": "hchan.lock (a specialized runtime mutex)",
+      "B": "hchan.sync (a standard sync.Mutex)",
+      "C": "hchan.atomic (a lock-free counter)",
+      "D": "Channels do not use locks; they are entirely lock-free."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Calling 'runtime.GC()' from a Goroutine will stop all other running Goroutines (Stop-The-World) immediately.",
+    "options": {
+      "A": "True (it triggers a manual STW phase)",
+      "B": "False (modern Go GC is concurrent and minimizes STW time)",
+      "C": "Only if GOMAXPROCS is set to 1",
+      "D": "Only if the program is using more than 1GB of RAM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Run Queue' (GRQ) and when is it checked by a Processor (P)?",
+    "options": {
+      "A": "It is checked every time a Goroutine finishes.",
+      "B": "It is a backup queue checked occasionally (e.g., every 61 ticks) or when the Local Run Queue is empty.",
+      "C": "It is where all Goroutines are stored before they are assigned to a P.",
+      "D": "It is only used when the computer has no internet connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'lock-free' algorithm using the 'sync/atomic' package, what does 'CAS' stand for?",
+    "options": {
+      "A": "Compare And Swap",
+      "B": "Calculate And Store",
+      "C": "Concurrent Access Serializer",
+      "D": "Check And Stop"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A Goroutine that enters an infinite loop without any function calls or channel operations can potentially block a P forever in Go versions without asynchronous preemption.",
+    "options": {
+      "A": "True (Modern Go now uses signal-based preemption to solve this).",
+      "B": "False (The Go scheduler has always been 100% preemptive).",
+      "C": "Only on 32-bit systems",
+      "D": "Only if the Goroutine is running as root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'm0' in the Go runtime?",
+    "options": {
+      "A": "The first Goroutine created by the program.",
+      "B": "The primary OS thread created to start the runtime and the main Goroutine.",
+      "C": "A specialized memory allocator for small objects.",
+      "D": "A constant representing zero memory latency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'g0' Goroutine?",
+    "options": {
+      "A": "A Goroutine with zero priority.",
+      "B": "A special Goroutine created for every M to run scheduler code and manage Goroutine stacks.",
+      "C": "The main Goroutine that runs the user's code.",
+      "D": "A Goroutine that has been marked for deletion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'sync.Pool' is guaranteed to improve performance for any object that is frequently allocated.",
+    "options": {
+      "A": "False (It can introduce overhead; it is best for large, expensive objects like buffers).",
+      "B": "True (It is the primary way to bypass the Garbage Collector).",
+      "C": "Only if GOMAXPROCS is greater than 8",
+      "D": "True, but only in Go version 1.18+"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to find 'contention' points where Goroutines are waiting too long for a Mutex?",
+    "options": {
+      "A": "go build",
+      "B": "pprof (with the 'mutex' or 'block' profile)",
+      "C": "go tool trace",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What happens when a Goroutine's stack needs to grow beyond its current allocation?",
+    "options": {
+      "A": "A new segment is linked to the existing stack.",
+      "B": "A new, larger stack is allocated, and the existing content is copied over.",
+      "C": "The program panics with a stack overflow.",
+      "D": "The Goroutine is moved to a different P with more memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'sync.Cond.Signal()' wakes up all Goroutines currently waiting on the condition.",
+    "options": {
+      "A": "False (Signal wakes one; Broadcast wakes all).",
+      "B": "True",
+      "C": "Only if the Mutex is unlocked",
+      "D": "Only in the main Goroutine"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'sysmon' thread in the Go runtime?",
+    "options": {
+      "A": "A thread that monitors the system's fans and battery.",
+      "B": "A background thread that monitors the scheduler, preempts long-running Goroutines, and handles network polling.",
+      "C": "A specialized thread for running UI code on Windows.",
+      "D": "A thread that backups the source code to a remote server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does Go handle 'False Sharing' in concurrent data structures?",
+    "options": {
+      "A": "By automatically encrypting the cache lines.",
+      "B": "By using padding (blank fields) to ensure frequently updated fields are on different cache lines.",
+      "C": "By disabling the L1 cache during execution.",
+      "D": "False sharing is not possible in Go due to its memory model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Spinlock' in the Go runtime uses more CPU than a standard Mutex while waiting for a lock.",
+    "options": {
+      "A": "True (It actively loops until the lock is free, avoiding context switch overhead).",
+      "B": "False (Spinlocks are more power-efficient).",
+      "C": "Only on ARM-based processors",
+      "D": "Only if the lock is held for more than 1 second"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Write Barrier' in the context of Go's Garbage Collector?",
+    "options": {
+      "A": "A wall that prevents Goroutines from writing to the disk.",
+      "B": "A small piece of code injected by the compiler to track pointer updates during the concurrent marking phase.",
+      "C": "A security feature that prevents SQL injection.",
+      "D": "A way to buffer writes to a file to improve performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'sync' package, what is the 'waiter list' of a Mutex?",
+    "options": {
+      "A": "A list of people who are waiting to be hired.",
+      "B": "A FIFO queue of Goroutines blocked and waiting to acquire the lock.",
+      "C": "A list of all Goroutines that have ever used the Mutex.",
+      "D": "The number of times the Lock() function was called."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Select' statement implementation uses a random permutation of the cases to provide fairness.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if there are more than 3 cases",
+      "D": "Only in the 'standard' library, not custom code"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'futex' system call and how does it relate to Go?",
+    "options": {
+      "A": "A future-text protocol; used for high-speed messaging.",
+      "B": "A Linux primitive used by the Go runtime to implement efficient sleeping and waking of threads for synchronization.",
+      "C": "A specialized memory allocator for Goroutines.",
+      "D": "A way to exit a Goroutine safely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pre-emptive Scheduling' in Go 1.14+?",
+    "options": {
+      "A": "The scheduler predicts when a user will start a Goroutine.",
+      "B": "The runtime can interrupt a Goroutine at almost any point using OS signals to prevent it from hogging a CPU.",
+      "C": "Goroutines are scheduled before the main function starts.",
+      "D": "The ability to run Go code without a compiler."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Go's 'sync.Map' is implemented using two internal maps: one for read-only access and one for dirty/write access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for string keys",
+      "D": "Only if using the 64-bit compiler"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lock Contention'?",
+    "options": {
+      "A": "When a lock is too tight on the server rack.",
+      "B": "When multiple Goroutines are trying to acquire the same lock at the same time, causing performance degradation.",
+      "C": "When a developer forgets to unlock a Mutex.",
+      "D": "A state where a lock becomes permanently inaccessible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'GODEBUG=schedtrace=1000' environment variable do?",
+    "options": {
+      "A": "It speeds up the scheduler by 1000%.",
+      "B": "It prints a summary of the scheduler's state (run queues, threads, etc.) every 1000 milliseconds.",
+      "C": "It limits the program to exactly 1000 Goroutines.",
+      "D": "It logs all channel messages to the console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: All Goroutines share the same address space and can access any memory if they have a pointer to it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the same package",
+      "D": "Only if the variables are exported"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Escaping' to the heap in Go concurrency?",
+    "options": {
+      "A": "When a Goroutine crashes and leaves memory behind.",
+      "B": "When the compiler moves a variable from the stack to the heap because its lifetime might exceed the current stack frame.",
+      "C": "A way to bypass the scheduler.",
+      "D": "A security vulnerability in the runtime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal function in the runtime is responsible for creating a new Goroutine?",
+    "options": {
+      "A": "runtime.goexit",
+      "B": "runtime.newproc",
+      "C": "runtime.malloc",
+      "D": "runtime.spawn"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A channel is a reference type, and passing it to a function copies only the pointer to the underlying hchan struct.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unbuffered channels",
+      "D": "Only if using the 'unsafe' package"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'timerproc' in Go concurrency?",
+    "options": {
+      "A": "A person who sets the clocks in the server room.",
+      "B": "The runtime mechanism that manages sleeping Goroutines and channel timeouts (e.g., time.After).",
+      "C": "A specialized Goroutine that only counts the number of errors.",
+      "D": "A way to measure the execution time of a function."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Semacquire' and 'Semrelease' in the Go runtime?",
+    "options": {
+      "A": "The internal low-level implementation of semaphores used to build Mutexes and other sync primitives.",
+      "B": "A new type of encryption for channels.",
+      "C": "The names of the two primary scheduler loops.",
+      "D": "The commands to start and stop the Go compiler."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'select' statement, the order of cases affects the execution probability if multiple cases are ready.",
+    "options": {
+      "A": "False (The order is randomized specifically to prevent bias).",
+      "B": "True",
+      "C": "Only for buffered channels",
+      "D": "Only in the 'dev' build"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'M' to 'P' ratio in Go?",
+    "options": {
+      "A": "Always 1:1.",
+      "B": "Dynamic; there can be more threads (M) than processors (P), but only GOMAXPROCS Ps can be active at once.",
+      "C": "Always 2:1.",
+      "D": "1:100; one thread handles 100 processors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive Spinning' in a Mutex?",
+    "options": {
+      "A": "A Mutex that spins faster when the CPU is cold.",
+      "B": "The Mutex will spin for a few cycles if it thinks the lock will be released soon, before falling back to a full sleep.",
+      "C": "A lock that changes its size based on the number of waiting Goroutines.",
+      "D": "A way to rotate encryption keys while the program is running."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Closing a channel is a 'non-reversible' operation that notifies all current and future receivers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for unbuffered channels",
+      "D": "Only if the 'sync' package is not used"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'runtime.mstats' struct used for?",
+    "options": {
+      "A": "To store the statistics of the currently logged-in users.",
+      "B": "To track detailed memory allocation and Garbage Collector statistics for the runtime.",
+      "C": "To set the maximum size of the stack.",
+      "D": "To monitor the network speed of the M threads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of Channels, what is 'Direct Send'?",
+    "options": {
+      "A": "Sending a message through the mail.",
+      "B": "An optimization where a sender Goroutine copies data directly into a waiting receiver's stack, bypassing the buffer.",
+      "C": "Sending a message without using the 'go' keyword.",
+      "D": "Sending a message directly to the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The Go scheduler uses a 'Global Interpreter Lock' (GIL) to manage Goroutines.",
+    "options": {
+      "A": "False (Go uses a decentralized scheduler with per-P local queues to avoid a central bottleneck).",
+      "B": "True",
+      "C": "Only in Go version 1.0",
+      "D": "Only for CGO calls"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Hand-off' mechanism in the Go scheduler?",
+    "options": {
+      "A": "When a developer gives their code to a teammate.",
+      "B": "When an M is blocked, it hands its P to a new or idle M so other Goroutines can continue to run.",
+      "C": "Passing a channel from one Goroutine to another.",
+      "D": "Deleting a Goroutine once it is finished."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory Padding' used for in the 'sync' package?",
+    "options": {
+      "A": "To increase the size of the program so it looks more important.",
+      "B": "To prevent CPU cache line interference (False Sharing) between atomic counters.",
+      "C": "To protect against buffer overflows.",
+      "D": "To make the memory layout easier for humans to read."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A Goroutine can be moved from one OS thread to another by the Go runtime scheduler.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if GOMAXPROCS is 1",
+      "D": "Only on multicore ARM systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'sync/atomic.LoadPointer' ensure compared to a standard pointer read?",
+    "options": {
+      "A": "It ensures the pointer is not nil.",
+      "B": "It provides a memory barrier to ensure the most recent value is read and consistent across CPU caches.",
+      "C": "It encrypts the memory address.",
+      "D": "It speeds up the pointer dereference by 2x."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Local Run Queue' (LRQ) capacity for a single P?",
+    "options": {
+      "A": "10",
+      "B": "256",
+      "C": "1024",
+      "D": "Unlimited (limited only by RAM)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Pre-emption in Go 1.14+ is achieved by sending a 'SIGURG' signal to the thread running the Goroutine.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on macOS",
+      "D": "Only for syscalls"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Goroutine Parking'?",
+    "options": {
+      "A": "Putting a Goroutine in a garage.",
+      "B": "Temporarily stopping a Goroutine's execution and removing it from the running state while it waits for a resource.",
+      "C": "A specialized memory allocator for idle Goroutines.",
+      "D": "Setting a Goroutine to the lowest possible priority."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword defines the internal Go scheduler's ability to 'steal' half of another P's run queue?",
+    "options": {
+      "A": "Balancing",
+      "B": "Work Stealing",
+      "C": "Queue Hopping",
+      "D": "Load Levelling"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: If you have 4 CPU cores, setting GOMAXPROCS to 100 will typically make your Go program 25 times faster.",
+    "options": {
+      "A": "False (it can actually slow down the program due to excessive context switching).",
+      "B": "True",
+      "C": "Only for network-bound tasks",
+      "D": "Only if using SSDs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'CGO' and how does it affect concurrency?",
+    "options": {
+      "A": "A new version of Go; it makes concurrency faster.",
+      "B": "A tool for calling C code from Go; it creates an OS thread (M) for every C call, which can exhaust resources.",
+      "C": "A specialized database; it has no effect on concurrency.",
+      "D": "A way to compile Go into C++."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the hchan struct, what is 'recvq'?",
+    "options": {
+      "A": "A list of recently received messages.",
+      "B": "A linked list of Goroutines waiting to receive data from the channel.",
+      "C": "The total capacity of the receive buffer.",
+      "D": "A counter of how many messages were lost."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A channel send is guaranteed to be a constant-time O(1) operation if the buffer is not full.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for primitive types",
+      "D": "Only if using the 'reflect' package"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Runtime Futex' and where is it used?",
+    "options": {
+      "A": "A specialized database; used for user sessions.",
+      "B": "A low-level lock used inside the runtime for managing wait queues and scheduler state.",
+      "C": "A new type of channel with zero latency.",
+      "D": "A way to measure the temperature of the CPU cores."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pinned Memory' in Go?",
+    "options": {
+      "A": "Memory that is protected by a pin code.",
+      "B": "Memory that is marked to not be moved by the Garbage Collector (often used for CGO).",
+      "C": "Memory that is stored on a physical pin in the hardware.",
+      "D": "A way to delete memory safely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'sync.WaitGroup' uses atomic operations internally and does not require a Mutex for its counter.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 32-bit version of Go",
+      "D": "Only if the counter is less than 100"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cooperative Pre-emption' vs 'Asynchronous Pre-emption'?",
+    "options": {
+      "A": "Cooperative waits for the Goroutine to yield; Asynchronous forces it to yield.",
+      "B": "They are the same thing.",
+      "C": "One is for text; one is for binary.",
+      "D": "Cooperative is for producers; Asynchronous is for consumers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Go 1.13 and earlier, which operation was a common 'yield point' for the scheduler?",
+    "options": {
+      "A": "Function calls (stack checks)",
+      "B": "Channel sends",
+      "C": "Syscalls",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: A 'Deadlock' is always detected by the Go runtime at startup.",
+    "options": {
+      "A": "False (The runtime only detects if ALL Goroutines are blocked at the same time).",
+      "B": "True",
+      "C": "Only if using the '-race' flag",
+      "D": "Only if GOMAXPROCS is set to 1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Memory Reordering' and how does Go synchronization prevent it?",
+    "options": {
+      "A": "The CPU changing the order of instructions; prevented by memory barriers in sync primitives.",
+      "B": "A tool to organize files on the disk.",
+      "C": "A way to sort variables by their name.",
+      "D": "A hardware failure in the RAM."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'runtime.Stack()' during a panic?",
+    "options": {
+      "A": "To stack up the error messages.",
+      "B": "To return a formatted stack trace of all running Goroutines for debugging.",
+      "C": "To restart the program from the beginning.",
+      "D": "To delete the stack from memory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A single 'M' can be associated with multiple 'Ps' simultaneously to increase performance.",
+    "options": {
+      "A": "False (An M must acquire exactly one P to execute Go code).",
+      "B": "True",
+      "C": "Only in Go version 1.18+",
+      "D": "Only if the CPU has more than 16 cores"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Wait-free' synchronization?",
+    "options": {
+      "A": "Synchronization that doesn't require any time.",
+      "B": "A guarantee that every operation will complete in a finite number of steps regardless of other threads.",
+      "C": "A system without any wait queues.",
+      "D": "A way to run Go code without a CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which internal object manages the 'Global Cache' of Goroutine stacks to speed up allocation?",
+    "options": {
+      "A": "stackpool",
+      "B": "heapstack",
+      "C": "goroutinecache",
+      "D": "memorybox"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'atomic.CompareAndSwapInt32' is faster than using a Mutex for a simple counter in a high-contention scenario.",
+    "options": {
+      "A": "True (It avoids the overhead of the scheduler and wait queues).",
+      "B": "False",
+      "C": "Only on Windows",
+      "D": "Only if the counter is initialized to zero"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lock starvation' in the context of the Go 1.9+ Mutex implementation?",
+    "options": {
+      "A": "A situation where a Goroutine never gets the lock; Go 1.9+ adds a 'starvation mode' to solve this.",
+      "B": "A bug where a lock consumes too much memory.",
+      "C": "When a lock is released but no one is there to take it.",
+      "D": "The number of locks currently active in the program."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of the runtime, what is 'SchedTick'?",
+    "options": {
+      "A": "A small bug in the scheduler.",
+      "B": "An internal counter used to track the number of times the scheduler has run.",
+      "C": "A sound the server makes when it is busy.",
+      "D": "The time it takes for a Goroutine to finish."
+    },
+    "answer": "B"
+  }
+  ]
+}

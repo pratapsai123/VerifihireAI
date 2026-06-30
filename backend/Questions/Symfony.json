@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Symfony", 
+  "questions": [
+    {
+    "question": "What is the primary role of a 'Bundle' in a Symfony application?",
+    "options": {
+      "A": "To act as a database driver for MySQL.",
+      "B": "To serve as a structured set of files that implement a specific feature, similar to a plugin.",
+      "C": "To compile PHP code into machine language for faster execution.",
+      "D": "To manage the server's physical RAM allocation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to clear the application cache in the development environment?",
+    "options": {
+      "A": "php bin/console cache:clear",
+      "B": "php bin/console delete:cache",
+      "C": "php bin/console symfony:reset",
+      "D": "php bin/console app:flush"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the default templating engine used in Symfony?",
+    "options": {
+      "A": "Blade",
+      "B": "Smarty",
+      "C": "Twig",
+      "D": "Pug"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a Twig template, which syntax is used to print the value of a variable named 'user'?",
+    "options": {
+      "A": "{% user %}",
+      "B": "{{ user }}",
+      "C": "[[ user ]]",
+      "D": "<% user %>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Symfony component provides an object-oriented abstraction for HTTP requests and responses?",
+    "options": {
+      "A": "HttpKernel",
+      "B": "HttpFoundation",
+      "C": "Routing",
+      "D": "Console"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where are the application's environment variables typically defined?",
+    "options": {
+      "A": "config/services.yaml",
+      "B": "src/Kernel.php",
+      "C": ".env",
+      "D": "public/index.php"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'bin/console' tool do in Symfony?",
+    "options": {
+      "A": "It opens a web browser to the project homepage.",
+      "B": "It is the command-line interface for running various development and maintenance tasks.",
+      "C": "It is used to write CSS and JavaScript code.",
+      "D": "It acts as the primary database for the application."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Symfony follows the Model-View-Controller (MVC) design pattern.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2",
+      "D": "Only when using Doctrine"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which directory is intended for your application's PHP source code?",
+    "options": {
+      "A": "vendor/",
+      "B": "bin/",
+      "C": "src/",
+      "D": "config/"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the default port used when running the Symfony local web server?",
+    "options": {
+      "A": "80",
+      "B": "8080",
+      "C": "8000",
+      "D": "3000"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which command is used to see a list of all available routes in the application?",
+    "options": {
+      "A": "php bin/console list:routes",
+      "B": "php bin/console debug:router",
+      "C": "php bin/console show:paths",
+      "D": "php bin/console router:all"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'public/index.php' file?",
+    "options": {
+      "A": "It is the front controller that handles all incoming requests.",
+      "B": "It stores the database credentials.",
+      "C": "It is a backup of the main configuration.",
+      "D": "It is used for unit testing only."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Twig, how do you add a comment that won't be rendered in the HTML output?",
+    "options": {
+      "A": "",
+      "B": "{# Comment #}",
+      "C": "// Comment",
+      "D": "/* Comment */"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is commonly used to install Symfony and its dependencies?",
+    "options": {
+      "A": "NPM",
+      "B": "Composer",
+      "C": "Pip",
+      "D": "Maven"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'make:controller' command do?",
+    "options": {
+      "A": "It deletes an existing controller.",
+      "B": "It creates a new controller class and an optional template.",
+      "C": "It connects the controller to the database.",
+      "D": "It minifies the controller code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file is used to configure routes using YAML format?",
+    "options": {
+      "A": "config/routes.yaml",
+      "B": "src/routes.php",
+      "C": "templates/routes.twig",
+      "D": "public/routes.html"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Symfony Flex'?",
+    "options": {
+      "A": "A new type of database engine.",
+      "B": "A Composer plugin that automates the installation and configuration of packages.",
+      "C": "A tool for creating responsive CSS layouts.",
+      "D": "A JavaScript framework bundled with Symfony."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a route parameter in a controller attribute/annotation?",
+    "options": {
+      "A": "/blog/[slug]",
+      "B": "/blog/{slug}",
+      "C": "/blog/:slug",
+      "D": "/blog/$slug"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which directory contains the third-party libraries installed by Composer?",
+    "options": {
+      "A": "lib/",
+      "B": "vendor/",
+      "C": "external/",
+      "D": "packages/"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Symfony controller, which object is usually used to get access to request data (GET/POST)?",
+    "options": {
+      "A": "$_REQUEST",
+      "B": "Request object from HttpFoundation",
+      "C": "Input object from Console",
+      "D": "Data object from Twig"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'templates/' directory?",
+    "options": {
+      "A": "To store PHP controller files.",
+      "B": "To store Twig templates and other view files.",
+      "C": "To store database migration scripts.",
+      "D": "To store cached application data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to create a new database specified in the .env file?",
+    "options": {
+      "A": "php bin/console db:create",
+      "B": "php bin/console doctrine:database:create",
+      "C": "php bin/console make:database",
+      "D": "php bin/console server:db"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Profiler' in Symfony?",
+    "options": {
+      "A": "To encrypt user passwords.",
+      "B": "To provide detailed debug information about each request in a web interface.",
+      "C": "To automatically generate user profiles.",
+      "D": "To manage server-side sessions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you extend a base template in Twig?",
+    "options": {
+      "A": "{% include 'base.html.twig' %}",
+      "B": "{% extends 'base.html.twig' %}",
+      "C": "{% parent 'base.html.twig' %}",
+      "D": "{% use 'base.html.twig' %}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code is returned for a standard 'Not Found' error?",
+    "options": {
+      "A": "403",
+      "B": "500",
+      "C": "404",
+      "D": "200"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Doctrine' in the Symfony ecosystem?",
+    "options": {
+      "A": "A templating engine.",
+      "B": "An Object-Relational Mapper (ORM) used to manage databases.",
+      "C": "A security component.",
+      "D": "A JavaScript library."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to install the 'Symfony CLI' tool on a computer?",
+    "options": {
+      "A": "composer require symfony-cli",
+      "B": "It is usually downloaded as a binary or via a package manager like Homebrew/apt.",
+      "C": "npm install symfony",
+      "D": "php install-symfony.php"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which environment is optimized for speed and does not show the debug toolbar?",
+    "options": {
+      "A": "dev",
+      "B": "test",
+      "C": "prod",
+      "D": "debug"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'make:entity' command do?",
+    "options": {
+      "A": "It creates a new database table manually.",
+      "B": "It creates or updates a PHP class (entity) and its database mapping metadata.",
+      "C": "It generates a controller for an entity.",
+      "D": "It deletes all records from a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Twig, which tag is used for logic like loops or conditionals?",
+    "options": {
+      "A": "{{ ... }}",
+      "B": "{% ... %}",
+      "C": "{# ... #}",
+      "D": "<% ... %>"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'config/' directory?",
+    "options": {
+      "A": "To store large media files.",
+      "B": "To store configuration files for the kernel, bundles, routes, and services.",
+      "C": "To store the application's public assets like CSS and JS.",
+      "D": "To store temporary cache files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command shows you all the services currently registered in the container?",
+    "options": {
+      "A": "php bin/console list:services",
+      "B": "php bin/console debug:container",
+      "C": "php bin/console show:container",
+      "D": "php bin/console container:info"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you mark a class as a controller in modern Symfony (using Attributes)?",
+    "options": {
+      "A": "By naming it 'MainController'.",
+      "B": "By using the #[Route] attribute on methods.",
+      "C": "By extending the 'BaseController' class only.",
+      "D": "By adding it to the routes.xml file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Migration' file in Symfony/Doctrine?",
+    "options": {
+      "A": "To move the website to a new server.",
+      "B": "To version control database schema changes.",
+      "C": "To translate the website into different languages.",
+      "D": "To backup the database records."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PHP version is generally the minimum requirement for Symfony 7.0+?",
+    "options": {
+      "A": "7.4",
+      "B": "8.0",
+      "C": "8.2",
+      "D": "5.6"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'Service Container'?",
+    "options": {
+      "A": "A physical box used for shipping servers.",
+      "B": "A tool that manages the instantiation and dependency injection of objects (services) in the app.",
+      "C": "A type of array that stores user data.",
+      "D": "A component used for file uploads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you render a Twig block in a child template?",
+    "options": {
+      "A": "{% render blockname %}",
+      "B": "{% block blockname %}",
+      "C": "{{ block('blockname') }}",
+      "D": "[[ block blockname ]]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which directory contains logs for the application?",
+    "options": {
+      "A": "src/logs",
+      "B": "var/log",
+      "C": "bin/logs",
+      "D": "public/logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to create a new Symfony project from scratch?",
+    "options": {
+      "A": "composer create-project symfony/skeleton my_project",
+      "B": "symfony new my_project",
+      "C": "Both A and B",
+      "D": "npm init symfony"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'path()' function do in a Twig template?",
+    "options": {
+      "A": "It returns the physical path to a file on the server.",
+      "B": "It generates a relative URL for a given route name.",
+      "C": "It draws a line on the screen using CSS.",
+      "D": "It defines a new folder in the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'AssetMapper' component used for in Symfony?",
+    "options": {
+      "A": "To map database entities to tables.",
+      "B": "To manage CSS and JavaScript assets without needing a complex bundler like Webpack.",
+      "C": "To create a map of the server's file system.",
+      "D": "To track the location of users on a map."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you display an image located in 'public/images/logo.png' using Twig?",
+    "options": {
+      "A": "<img src=\"{{ path('logo.png') }}\">",
+      "B": "<img src=\"{{ asset('images/logo.png') }}\">",
+      "C": "<img src=\"{{ image('logo.png') }}\">",
+      "D": "<img src=\"/public/images/logo.png\">"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command will show you the version of Symfony currently installed?",
+    "options": {
+      "A": "php bin/console --version",
+      "B": "symfony version",
+      "C": "php bin/console about",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is a 'Repository' in Symfony/Doctrine?",
+    "options": {
+      "A": "A place where the source code is stored (like Git).",
+      "B": "A class used to house custom database queries for a specific entity.",
+      "C": "A temporary cache for user sessions.",
+      "D": "A configuration file for routes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you redirect to another route in a controller method?",
+    "options": {
+      "A": "return $this->goto('route_name');",
+      "B": "return $this->redirectToRoute('route_name');",
+      "C": "header('Location: ...');",
+      "D": "return new Redirect('route_name');"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for translating messages into different languages?",
+    "options": {
+      "A": "Translater",
+      "B": "Translation",
+      "C": "i18n",
+      "D": "Language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Where do you store the secret parameters that should not be committed to Git?",
+    "options": {
+      "A": "config/services.yaml",
+      "B": ".env.local",
+      "C": "src/Kernel.php",
+      "D": "public/index.php"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Twig, how do you loop through an array named 'items'?",
+    "options": {
+      "A": "{% loop item in items %}",
+      "B": "{% for item in items %}",
+      "C": "{% foreach item in items %}",
+      "D": "{{ for item in items }}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'var/' directory?",
+    "options": {
+      "A": "To store application variables.",
+      "B": "To store temporary files like cache and logs.",
+      "C": "To store shared assets.",
+      "D": "To store configuration overrides."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a link to a route in a Symfony controller?",
+    "options": {
+      "A": "$this->generateUrl('route_name');",
+      "B": "$this->createLink('route_name');",
+      "C": "$this->url('route_name');",
+      "D": "$this->getPath('route_name');"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to generate a form class for a specific entity?",
+    "options": {
+      "A": "php bin/console generate:form",
+      "B": "php bin/console make:form",
+      "C": "php bin/console create:form",
+      "D": "php bin/console doctrine:form"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symfony UX'?",
+    "options": {
+      "A": "A specialized design tool for Symfony.",
+      "B": "An ecosystem of packages to integrate modern JavaScript tools (like Stimulus/Turbo) into Symfony.",
+      "C": "A new version of the Symfony Profiler.",
+      "D": "A set of CSS themes for the Symfony dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'dump()' function do in Symfony (with VarDumper bundle)?",
+    "options": {
+      "A": "It deletes the database.",
+      "B": "It displays a nicely formatted view of a variable for debugging.",
+      "C": "It exports data to a CSV file.",
+      "D": "It prints the raw SQL query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which directory contains the application's configuration parameters in YAML, XML, or PHP?",
+    "options": {
+      "A": "src/",
+      "B": "config/",
+      "C": "bin/",
+      "D": "var/"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the current user in a Symfony controller?",
+    "options": {
+      "A": "$this->getUser();",
+      "B": "$this->currentUser();",
+      "C": "$_SESSION['user'];",
+      "D": "$this->auth->user();"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Entity Manager' in Doctrine?",
+    "options": {
+      "A": "To manage the server's physical disks.",
+      "B": "To handle the persistence (saving/updating/deleting) of entities to the database.",
+      "C": "To manage the routes of the application.",
+      "D": "To render views."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Twig Extensions'?",
+    "options": {
+      "A": "File extensions for Twig files.",
+      "B": "Packages that add new filters, functions, or tags to the Twig engine.",
+      "C": "A browser extension for debugging Twig.",
+      "D": "None of the above."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command runs the built-in Symfony PHP unit tests?",
+    "options": {
+      "A": "php bin/console test",
+      "B": "php bin/phpunit",
+      "C": "php unit:run",
+      "D": "symfony test"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Twig template, how do you include another template file?",
+    "options": {
+      "A": "{% extend 'file.twig' %}",
+      "B": "{% include 'file.html.twig' %}",
+      "C": "{{ include('file.html.twig') }}",
+      "D": "Both B and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Kernel' in a Symfony application?",
+    "options": {
+      "A": "A type of database.",
+      "B": "The central class that manages bundles and configuration for the environment.",
+      "C": "The user's computer.",
+      "D": "A JavaScript component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you install the Web Profiler bundle?",
+    "options": {
+      "A": "composer require profiler --dev",
+      "B": "php bin/console install:profiler",
+      "C": "symfony profiler:on",
+      "D": "It is installed by default in the prod environment."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which file handles the autoloading of all PHP classes?",
+    "options": {
+      "A": "public/index.php",
+      "B": "vendor/autoload.php",
+      "C": "config/autoload.yaml",
+      "D": "src/Kernel.php"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default return type of a Symfony controller method?",
+    "options": {
+      "A": "string",
+      "B": "Response object",
+      "C": "array",
+      "D": "void"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Console' component used for?",
+    "options": {
+      "A": "To display errors in the browser.",
+      "B": "To create command-line commands for your application.",
+      "C": "To manage database indexes.",
+      "D": "To write JavaScript logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you specify a default value for a route parameter in a controller attribute?",
+    "options": {
+      "A": "#[Route('/blog/{page}', defaults: ['page' => 1])]",
+      "B": "#[Route('/blog/{page=1}')]",
+      "C": "Both A and B are possible in modern Symfony",
+      "D": "Defaults must be set in config/routes.yaml only"
+    },
+    "answer": "C"
+  },
+    {
+      "question": "What is the purpose of the 'Security' component in Symfony?",
+      "options": {
+        "A": "To manage user authentication and authorization.",
+        "B": "To encrypt data in the database.",
+        "C": "To protect against DDoS attacks.",
+        "D": "To create secure API endpoints only."
+      },
+      "answer": "A"
+    },
+    {
+    "question": "What is the primary benefit of 'Autowiring' in Symfony's service container?",
+    "options": {
+      "A": "It automatically generates database tables based on PHP class names.",
+      "B": "It allows the container to automatically inject dependencies based on type-hints in constructors.",
+      "C": "It connects the application to a wireless network for remote debugging.",
+      "D": "It compiles Twig templates into raw PHP for faster performance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Doctrine, what is the difference between 'flush()' and 'persist()'?",
+    "options": {
+      "A": "Flush saves to the database; persist only marks an object for management by the Entity Manager.",
+      "B": "Persist saves to the database; flush only clears the internal memory cache.",
+      "C": "Persist is for updates; flush is only for creating new records.",
+      "D": "There is no functional difference; they are aliases of each other."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Symfony component is used to handle complex validation logic on objects?",
+    "options": {
+      "A": "Security",
+      "B": "Validator",
+      "C": "Form",
+      "D": "PropertyAccess"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'services.yaml' file in a standard Symfony project?",
+    "options": {
+      "A": "To define the HTML structure of the homepage.",
+      "B": "To configure how services are instantiated and managed by the container.",
+      "C": "To list all the available CSS and JS files for the frontend.",
+      "D": "To store the server's IP address and port configuration."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface must a class implement to be used as a custom 'Security Voter'?",
+    "options": {
+      "A": "SecurityInterface",
+      "B": "VoterInterface",
+      "C": "AuthorizationInterface",
+      "D": "AccessDecisionInterface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'DQL' stand for in the context of Doctrine?",
+    "options": {
+      "A": "Data Query Link",
+      "B": "Doctrine Query Language",
+      "C": "Dynamic Query Logic",
+      "D": "Database Queue List"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Symfony form type, which method is used to configure the default options, such as the data_class?",
+    "options": {
+      "A": "buildForm()",
+      "B": "configureOptions()",
+      "C": "setDefaultOptions()",
+      "D": "finishView()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you inject a specific parameter from 'parameters.yaml' into a service constructor using autowiring?",
+    "options": {
+      "A": "By naming the variable exactly like the parameter.",
+      "B": "By using the #[Bind] attribute or the bind configuration in services.yaml.",
+      "C": "By using the $container->get() method inside the constructor.",
+      "D": "Parameters cannot be injected; only other services can be injected."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'EventDispatcher' component?",
+    "options": {
+      "A": "To route incoming HTTP requests to the correct controller.",
+      "B": "To allow different components to communicate by dispatching and listening for events.",
+      "C": "To handle database migrations automatically.",
+      "D": "To dispatch emails through an SMTP server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which console command is used to see which service is injected for a specific type-hint?",
+    "options": {
+      "A": "debug:autowiring",
+      "B": "debug:container",
+      "C": "debug:router",
+      "D": "debug:services"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'ParamConverter' (or the modern MapEntity attribute) used for in a controller?",
+    "options": {
+      "A": "To convert numeric parameters into strings.",
+      "B": "To automatically fetch a database entity based on a route parameter (like {id}).",
+      "C": "To encrypt the parameters sent in a GET request.",
+      "D": "To change the language of the application based on a URL flag."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Symfony component is responsible for creating and processing web forms?",
+    "options": {
+      "A": "HttpFoundation",
+      "B": "Form",
+      "C": "Twig",
+      "D": "Serializer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Service Tag' in services.yaml?",
+    "options": {
+      "A": "By adding a 'label' key to the service definition.",
+      "B": "By adding a 'tags' key with a list of tag names under the service definition.",
+      "C": "By using a special PHP attribute in the class file.",
+      "D": "Tags are assigned automatically based on the class name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'KernelEvents::REQUEST' event?",
+    "options": {
+      "A": "It is triggered after the response has been sent to the client.",
+      "B": "It is triggered at the very beginning of the request handling process.",
+      "C": "It is triggered only when a form is submitted.",
+      "D": "It is triggered when a database query fails."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Twig, what does the 'render(controller(...))' function do?",
+    "options": {
+      "A": "It prints the source code of a controller method.",
+      "B": "It performs an internal sub-request to execute a controller and embed its output.",
+      "C": "It redirects the user to a different page.",
+      "D": "It displays a list of all controllers in the project."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Serializer' component?",
+    "options": {
+      "A": "To compile PHP into binary format.",
+      "B": "To convert objects into formats like JSON or XML, and vice versa.",
+      "C": "To create a series of automated tests.",
+      "D": "To manage the sequence of database migrations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Doctrine method would you use to fetch a single entity by its primary key?",
+    "options": {
+      "A": "$repository->findOneBy()",
+      "B": "$repository->find()",
+      "C": "$repository->get()",
+      "D": "$repository->fetch()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lazy Loading' in Doctrine?",
+    "options": {
+      "A": "When the database waits for a user to log in before starting.",
+      "B": "When related entities are only fetched from the database when they are actually accessed.",
+      "C": "When the server responds slowly to requests.",
+      "D": "When the application cache is only cleared once a week."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of a 'Flash Message' in Symfony?",
+    "options": {
+      "A": "To display a message that disappears after a few seconds using JavaScript.",
+      "B": "To store a message in the session that is displayed to the user exactly once after a redirect.",
+      "C": "To send an urgent encrypted alert to the server admin.",
+      "D": "To show a loading animation while a form is processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in a form type is used to add fields to the form?",
+    "options": {
+      "A": "configureFields()",
+      "B": "buildForm()",
+      "C": "addFields()",
+      "D": "setup()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you create a custom DQL function in Doctrine?",
+    "options": {
+      "A": "By writing raw SQL inside the entity class.",
+      "B": "By creating a class that extends FunctionNode and registering it in the configuration.",
+      "C": "By using the 'custom_func' tag in services.yaml.",
+      "D": "Doctrine does not support custom functions; you must use Native SQL."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'PropertyAccess' component used for?",
+    "options": {
+      "A": "To check if a user has permission to view a page.",
+      "B": "To read and write to object properties or arrays using a simple string notation.",
+      "C": "To manage the physical memory addresses of PHP objects.",
+      "D": "To encrypt private properties of a class."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which console command validates that the Doctrine mapping metadata is correct?",
+    "options": {
+      "A": "doctrine:schema:validate",
+      "B": "doctrine:mapping:verify",
+      "C": "doctrine:entity:check",
+      "D": "doctrine:debug:entities"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Decoration' in the Symfony container?",
+    "options": {
+      "A": "Adding icons to the service names in the debugger.",
+      "B": "Replacing an existing service with a new one while still injecting the old one into the new one.",
+      "C": "Changing the CSS theme of the service manager.",
+      "D": "Marking a service as 'public' so it can be accessed from the controller."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Symfony Security configuration, what is a 'Firewall'?",
+    "options": {
+      "A": "A physical hardware device that blocks hackers.",
+      "B": "A configuration section that defines which requests are authenticated and how.",
+      "C": "A database table that stores blocked IP addresses.",
+      "D": "A script that deletes suspicious files automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'dotenv' component?",
+    "options": {
+      "A": "To create a dot-based map of the server architecture.",
+      "B": "To parse .env files and make their variables available via getenv() or $_ENV.",
+      "C": "To encrypt the .env file for production.",
+      "D": "To check if the application is currently online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface should you implement to create a custom 'Command' for the console?",
+    "options": {
+      "A": "CommandInterface",
+      "B": "The class should extend the Command class from the Console component.",
+      "C": "ConsoleHandlerInterface",
+      "D": "CliInterface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'OptionsResolver' component used for?",
+    "options": {
+      "A": "To resolve conflicts between different routes.",
+      "B": "To validate and merge arrays of options, commonly used in form types and custom services.",
+      "C": "To find the best database index for a query.",
+      "D": "To choose between different CSS themes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How can you disable a specific route in the 'prod' environment only?",
+    "options": {
+      "A": "Delete the route from the file.",
+      "B": "Use the 'condition' key in the route definition to check the environment.",
+      "C": "Rename the controller method.",
+      "D": "Symfony does not allow environment-specific routing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'JoinColumn' attribute do in a Doctrine Entity?",
+    "options": {
+      "A": "It joins two different strings together.",
+      "B": "It defines the mapping for the foreign key column in a database relationship.",
+      "C": "It creates a new column at the end of the table.",
+      "D": "It identifies the primary key of the table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Symfony component allows you to send emails?",
+    "options": {
+      "A": "Emailer",
+      "B": "Mailer",
+      "C": "SwiftMailer (Legacy)",
+      "D": "Postman"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stateful' authentication?",
+    "options": {
+      "A": "Authentication that only works in certain US states.",
+      "B": "Authentication that relies on a server-side session to remember the user.",
+      "C": "Authentication using a JSON Web Token (JWT).",
+      "D": "Authentication that requires a physical key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is called in a Data Transformer to convert database data into form format?",
+    "options": {
+      "A": "reverseTransform()",
+      "B": "transform()",
+      "C": "convert()",
+      "D": "mapData()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Value Object' in the context of Symfony validation?",
+    "options": {
+      "A": "A variable that has a high financial value.",
+      "B": "A simple object whose equality is based on its value rather than identity, often validated as a single unit.",
+      "C": "A database row that contains only numbers.",
+      "D": "A JavaScript constant."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to see all parameters currently available in the container?",
+    "options": {
+      "A": "debug:params",
+      "B": "debug:container --parameters",
+      "C": "show:config",
+      "D": "debug:config"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Doctrine, what is a 'Lifecycle Callback'?",
+    "options": {
+      "A": "A method that runs every hour to clean the database.",
+      "B": "Methods inside an entity that are triggered automatically on specific events like PrePersist or PostRemove.",
+      "C": "A phone call from the Doctrine support team.",
+      "D": "A tool that monitors the server's uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Cache' component's 'TagAwareAdapter'?",
+    "options": {
+      "A": "To add HTML tags to cached data.",
+      "B": "To allow invalidating groups of cache items by assigning tags to them.",
+      "C": "To track which user created which cache item.",
+      "D": "To increase the speed of the cache by 10%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which class is responsible for converting a Request into a Response in the Symfony lifecycle?",
+    "options": {
+      "A": "Router",
+      "B": "HttpKernel",
+      "C": "Controller",
+      "D": "EventDispatcher"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'trans' filter do in a Twig template?",
+    "options": {
+      "A": "It transforms a string into an integer.",
+      "B": "It translates a string into the user's current locale.",
+      "C": "It transparency-masks an image.",
+      "D": "It transfers a file to another server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Profiler Storage'?",
+    "options": {
+      "A": "A database where user profiles are stored.",
+      "B": "The mechanism (file or database) used to save debug data collected by the Profiler.",
+      "C": "A specialized hard drive for Symfony servers.",
+      "D": "A way to backup the src/ directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a service that should not be autowired?",
+    "options": {
+      "A": "Add 'autowire: false' to the service definition in services.yaml.",
+      "B": "Remove the constructor from the class.",
+      "C": "Name the class 'NonAutowirable'.",
+      "D": "Place the file in the vendor/ directory."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'Lock' component?",
+    "options": {
+      "A": "To lock the office doors remotely.",
+      "B": "To provide a mechanism to provide exclusive access to a shared resource to prevent race conditions.",
+      "C": "To encrypt the database password.",
+      "D": "To prevent users from logging in during maintenance."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which attribute is used to map a database column to a PHP property in Doctrine?",
+    "options": {
+      "A": "#[Field]",
+      "B": "#[ORM\\Column]",
+      "C": "#[DB\\Column]",
+      "D": "#[Property]"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Stopwatch' component used for?",
+    "options": {
+      "A": "To time how long a user stays on a page.",
+      "B": "To profile the execution time of specific parts of your code manually.",
+      "C": "To schedule tasks to run at a specific time.",
+      "D": "To stop the server after 10 minutes of inactivity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Symfony form, what is the 'choice_label' option used for?",
+    "options": {
+      "A": "To choose which label to display in a list of options (e.g., entity property name).",
+      "B": "To set the color of the radio buttons.",
+      "C": "To choose the font of the form.",
+      "D": "To list all possible labels in the database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Assetic' (Legacy)?",
+    "options": {
+      "A": "A new version of Twig.",
+      "B": "A previous-generation asset management tool used before Webpack Encore or AssetMapper.",
+      "C": "A type of database index.",
+      "D": "A JavaScript library for charts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method is used to manually trigger validation on an object in a service?",
+    "options": {
+      "A": "$validator->check()",
+      "B": "$validator->validate()",
+      "C": "$validator->isValid()",
+      "D": "$validator->run()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Entity Listeners' in Doctrine?",
+    "options": {
+      "A": "To listen to music while coding entities.",
+      "B": "To separate lifecycle logic from the entity class into a dedicated service.",
+      "C": "To monitor database traffic.",
+      "D": "To count the number of entities in the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Workflow' component used for?",
+    "options": {
+      "A": "To manage the daily schedule of developers.",
+      "B": "To manage a process or a state machine (e.g., blog post moving from 'draft' to 'published').",
+      "C": "To create a flowchart in the documentation.",
+      "D": "To monitor the server's CPU flow."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you restrict a controller method to only accept POST requests?",
+    "options": {
+      "A": "By checking $_SERVER['METHOD'].",
+      "B": "By using the 'methods' argument in the #[Route] attribute (e.g., methods: ['POST']).",
+      "C": "By naming the method 'postIndex()'.",
+      "D": "By setting the 'post_only' flag in services.yaml."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HTTP Cache' in Symfony?",
+    "options": {
+      "A": "Caching only the images on a page.",
+      "B": "A mechanism that uses standard HTTP headers (like ETag or Cache-Control) to cache responses.",
+      "C": "A database for storing HTML snippets.",
+      "D": "A tool to clear the browser cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component allows for easy handling of command-line arguments and options?",
+    "options": {
+      "A": "Cli",
+      "B": "Console",
+      "C": "Terminal",
+      "D": "Args"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'PropertyInfo' component?",
+    "options": {
+      "A": "A tool to view a user's physical property.",
+      "B": "A component to extract information about PHP class properties (types, access level, etc.).",
+      "C": "A database index manager.",
+      "D": "A way to see who edited a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a service as 'public' in modern Symfony?",
+    "options": {
+      "A": "They are public by default.",
+      "B": "Add 'public: true' to the service configuration (though they are private by default).",
+      "C": "Prefix the class name with 'Public'.",
+      "D": "Place it in the public/ directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Form Themes'?",
+    "options": {
+      "A": "To change the background color of the whole site.",
+      "B": "To customize the HTML rendering of form fields globally or for a specific form.",
+      "C": "To choose between different form validation rules.",
+      "D": "To translate form labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Doctrine Fixtures'?",
+    "options": {
+      "A": "A tool to repair broken database tables.",
+      "B": "A way to load a specific set of sample data into the database for testing or development.",
+      "C": "A type of physical server hardware.",
+      "D": "A configuration for database connections."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service allows you to generate a CSRF token manually?",
+    "options": {
+      "A": "security.csrf.token_generator",
+      "B": "CsrfTokenManagerInterface",
+      "C": "token_service",
+      "D": "form.csrf_provider"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'String' component used for?",
+    "options": {
+      "A": "To create a list of items.",
+      "B": "To provide an object-oriented API to work with strings and multibyte characters (Unicode).",
+      "C": "To measure the length of a piece of string.",
+      "D": "To encrypt passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Doctrine, what is the 'Unit of Work'?",
+    "options": {
+      "A": "The amount of work a developer does in a day.",
+      "B": "An internal pattern that tracks all changes to entities during a request to optimize database updates.",
+      "C": "A specialized database table for tasks.",
+      "D": "A configuration for parallel processing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you access the query string parameters in a controller method?",
+    "options": {
+      "A": "$request->getQuery()->get('name')",
+      "B": "$request->query->get('name')",
+      "C": "$request->get('name')",
+      "D": "$_GET['name']"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'VarExporter' component?",
+    "options": {
+      "A": "To export variables to an Excel file.",
+      "B": "To export PHP variables into executable PHP code for high-performance caching.",
+      "C": "To show variables in the debug toolbar.",
+      "D": "To convert variables into JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface should you use to type-hint the current logged-in user in a service?",
+    "options": {
+      "A": "UserInterface",
+      "B": "AppUserInterface",
+      "C": "SecurityUserInterface",
+      "D": "MemberInterface"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Autoconfiguration' in the Symfony container?",
+    "options": {
+      "A": "Automatically configuring the server's firewall.",
+      "B": "Automatically adding tags to services based on the interfaces they implement.",
+      "C": "Automatically configuring the database connection.",
+      "D": "Writing the services.yaml file automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Messenger' component's 'Transport'?",
+    "options": {
+      "A": "A vehicle used to deliver physical servers.",
+      "B": "The mechanism used to send and receive messages (e.g., RabbitMQ, Redis, or Doctrine).",
+      "C": "A way to transport code between environments.",
+      "D": "The speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Twig, how do you escape HTML content in a variable?",
+    "options": {
+      "A": "{{ var | escape }}",
+      "B": "It is escaped by default in Symfony.",
+      "C": "{{ var | raw }}",
+      "D": "Both A and B"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is 'Query Hinting' in Doctrine?",
+    "options": {
+      "A": "Giving a hint to a developer on how to write a query.",
+      "B": "Providing additional instructions to the Doctrine or SQL engine to optimize query execution.",
+      "C": "Searching for a hint in the documentation.",
+      "D": "A security feature that hides queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Compiler Pass' in the Symfony Service Container?",
+    "options": {
+      "A": "To validate that the PHP syntax in service classes is correct before execution.",
+      "B": "To manipulate service definitions (like adding tags or changing arguments) before the container is compiled and cached.",
+      "C": "To compile Twig templates into binary machine code for high-speed rendering.",
+      "D": "To automatically detect and delete unused bundles from the vendor directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method in a Security Voter is responsible for making the final access decision?",
+    "options": {
+      "A": "supports()",
+      "B": "decide()",
+      "C": "voteOnAttribute()",
+      "D": "grantAccess()"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the Symfony Messenger component, what is a 'Middleware' used for?",
+    "options": {
+      "A": "To convert HTTP requests into command-line arguments.",
+      "B": "To wrap the message handling process with custom logic, such as logging, transactions, or retries.",
+      "C": "To provide a bridge between the frontend and the database.",
+      "D": "To route messages to different physical servers based on the user's IP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Definition' object represent within a Compiler Pass?",
+    "options": {
+      "A": "The dictionary definition of a specific PHP keyword.",
+      "B": "The configuration and metadata needed to instantiate a specific service.",
+      "C": "A database schema definition for a Doctrine entity.",
+      "D": "The CSS rules for the Symfony Profiler toolbar."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ESI' (Edge Side Includes) and how does it optimize Symfony performance?",
+    "options": {
+      "A": "It encrypts individual database rows to improve security at the edge.",
+      "B": "It allows different parts of a page to have independent cache expiration policies, handled by a reverse proxy.",
+      "C": "It is a specialized PHP compiler optimized for Symfony 8 infrastructure.",
+      "D": "It automatically minifies JavaScript files as they are sent to the client."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which PHP attribute is used in Symfony 7+ to map an entire request body directly to a typed Data Transfer Object (DTO)?",
+    "options": {
+      "A": "#[MapRequestPayload]",
+      "B": "#[BodyConverter]",
+      "C": "#[JsonToDto]",
+      "D": "#[RequestEntity]"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Service Aliasing' in the container?",
+    "options": {
+      "A": "To hide the true name of a service from hackers.",
+      "B": "To allow multiple names (IDs) to refer to the same service instance, often for backward compatibility.",
+      "C": "To rename a service based on the current user's language.",
+      "D": "To change the service ID to a random number for every request."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Tagged Iterator' argument in a service definition?",
+    "options": {
+      "A": "By passing an array of service IDs manually.",
+      "B": "By using the !tagged_iterator tag followed by the tag name in services.yaml.",
+      "C": "By naming the constructor argument 'services'.",
+      "D": "By implementing the IteratorAggregate interface in the service class."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'RemoteEvent' component in Symfony 8?",
+    "options": {
+      "A": "To control servers in different geographical regions.",
+      "B": "To handle incoming webhooks from third-party services like Stripe or GitHub in a standardized way.",
+      "C": "To synchronize data between two different Symfony installations.",
+      "D": "To monitor the uptime of remote API endpoints."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Doctrine, what is 'Second-Level Cache' (SLC)?",
+    "options": {
+      "A": "A backup of the database stored on an SSD.",
+      "B": "A cache that stores entity data across different requests, reducing the number of database hits.",
+      "C": "A browser-side cache for SQL query results.",
+      "D": "A tool that caches only the IDs of deleted entities."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface should a service implement to receive a callback when the container is being shut down?",
+    "options": {
+      "A": "ShutdownInterface",
+      "B": "ResetInterface",
+      "C": "DisposableInterface",
+      "D": "TerminateInterface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Scheduler' component in Symfony?",
+    "options": {
+      "A": "To manage the calendar of the development team.",
+      "B": "To trigger Messenger messages at specific times or intervals (cron-like behavior).",
+      "C": "To determine the order in which bundles are loaded.",
+      "D": "To limit the number of users who can log in at once."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during the 'Optimization' phase of the Service Container compilation?",
+    "options": {
+      "A": "The container compresses the source code of all services.",
+      "B": "The container removes unused services and inlines simple service definitions to improve performance.",
+      "C": "The container automatically adds missing documentation to the services.",
+      "D": "The container encrypts the parameters.yaml file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Synthetic Service'?",
+    "options": {
+      "A": "A service that is generated by an AI tool.",
+      "B": "A service whose instance is injected into the container at runtime rather than being created by the container.",
+      "C": "A service that only works in the 'test' environment.",
+      "D": "A virtual service that has no physical PHP class."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does Symfony handle 'Trusted Proxies' configuration?",
+    "options": {
+      "A": "By ignoring all requests coming from a proxy server.",
+      "B": "By using the 'framework.trusted_proxies' setting to correctly identify the original client IP and protocol.",
+      "C": "By requiring a physical password from the proxy server.",
+      "D": "By redirecting all proxy traffic to a specific maintenance page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Service Locator' pattern in Symfony and when is it typically used?",
+    "options": {
+      "A": "A pattern to find the physical location of the server.",
+      "B": "A specialized container used to lazily load a subset of services, often used in AbstractControllers.",
+      "C": "A tool to locate broken links in the application.",
+      "D": "A way to find which developer wrote a specific service."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Lock' component's 'Store'?",
+    "options": {
+      "A": "To store digital products for sale.",
+      "B": "To define the backend (e.g., Redis, Flock) where the lock information is physically persisted.",
+      "C": "To keep a list of all users who are currently locked out.",
+      "D": "To store the encryption keys for the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a Symfony Security configuration, what is an 'Entry Point'?",
+    "options": {
+      "A": "The first line of code in the index.php file.",
+      "B": "The service that starts the authentication process when an unauthenticated user tries to access a protected resource.",
+      "C": "The database primary key for the User entity.",
+      "D": "The physical door to the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'serial' vs 'parallel' execution in the Messenger component?",
+    "options": {
+      "A": "Serial execution is for numbers; parallel is for text.",
+      "B": "It refers to how workers consume messages—one by one or using multiple processes simultaneously.",
+      "C": "It determines the order of letters in a message.",
+      "D": "It defines if the message is sent over HTTP or HTTPS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autocasting' in Symfony Routing?",
+    "options": {
+      "A": "Automatically casting a TV show about Symfony.",
+      "B": "Automatically converting route parameters into specific types (like mapping {id} to a User object) using attributes.",
+      "C": "Changing the data type of a variable randomly.",
+      "D": "Converting PHP code into JavaScript automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which method should you override in the Kernel class to manually add Compiler Passes?",
+    "options": {
+      "A": "configureContainer()",
+      "B": "build()",
+      "C": "registerBundles()",
+      "D": "process()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Rate Limiter' component primarily used for?",
+    "options": {
+      "A": "To limit the financial rate of the cloud hosting bill.",
+      "B": "To prevent brute-force attacks and API abuse by limiting the number of requests over a time period.",
+      "C": "To slow down the internet speed for certain users.",
+      "D": "To measure the rate of code commits per day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Twig, what is the 'sandbox' mode?",
+    "options": {
+      "A": "A mode to play with templates without saving them.",
+      "B": "A security feature to execute untrusted Twig code with restricted access to tags, filters, and methods.",
+      "C": "A tool to create a physical model of the website.",
+      "D": "A way to run Twig on a mobile device offline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hydration' in Doctrine and which mode is most performant for read-only reports?",
+    "options": {
+      "A": "Hydration is cleaning the database; SLC mode is best.",
+      "B": "Hydration is converting SQL results into PHP objects/arrays; Scalar or Array mode is most performant.",
+      "C": "Hydration is the process of deleting data; Object mode is best.",
+      "D": "Hydration is adding more memory to the server; RAM mode is best."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'TokenStorageInterface' in Symfony Security?",
+    "options": {
+      "A": "To store the user's password in a cookie.",
+      "B": "To provide access to the current security token (which holds the authenticated user).",
+      "C": "To generate unique IDs for database entities.",
+      "D": "To manage the server's CSRF protection logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ExpressionLanguage' used for in service configuration?",
+    "options": {
+      "A": "To write service code in a different language like Python.",
+      "B": "To use complex logic (if/else, math) directly inside YAML or XML configuration files.",
+      "C": "To translate service names into different languages.",
+      "D": "To create a flowchart of service dependencies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Early Hints' (HTTP 103) support in Symfony?",
+    "options": {
+      "A": "A way to give hints to new developers in the code comments.",
+      "B": "Allowing the server to send assets to the browser before the full response is ready to speed up page loading.",
+      "C": "A tool that predicts which page the user will click next.",
+      "D": "An error message that appears before the server crashes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Doctrine event is triggered after an entity has been updated in the database?",
+    "options": {
+      "A": "preUpdate",
+      "B": "postUpdate",
+      "C": "onFlush",
+      "D": "postPersist"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge-Side Caching' in the context of Symfony?",
+    "options": {
+      "A": "Caching data at the edge of the computer screen.",
+      "B": "Storing cached content on a CDN or reverse proxy (like Varnish) instead of the application server.",
+      "C": "A method to cache only the edges of an image.",
+      "D": "Using the browser's LocalStorage to store SQL results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Lazy Service' in Symfony?",
+    "options": {
+      "A": "A service that doesn't do any work.",
+      "B": "Setting 'lazy: true' in the configuration, causing a proxy to be injected until the service is actually used.",
+      "C": "A service that only runs at night.",
+      "D": "A service that is created with a slow algorithm."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'PropertyAccess' component's 'PropertyPath'?",
+    "options": {
+      "A": "To find the physical path to a PHP property on the disk.",
+      "B": "To define a string-based navigation path through a graph of objects (e.g., 'user.address.city').",
+      "C": "To create a link between a property and a database column.",
+      "D": "To encrypt a property name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Symfony Forms, what is a 'Form Mapper'?",
+    "options": {
+      "A": "A tool to draw a map of the form layout.",
+      "B": "An internal object used to read and write data from the underlying object to the form fields.",
+      "C": "A way to map form fields to Google Maps.",
+      "D": "A script that converts a form into an image."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Asset Fingerprinting' in AssetMapper?",
+    "options": {
+      "A": "Taking a physical fingerprint of the developer.",
+      "B": "Adding a unique hash to asset filenames to force the browser to clear its cache when the file changes.",
+      "C": "Using a fingerprint scanner to access the source code.",
+      "D": "Identifying the browser type based on its CSS support."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Messenger transport is best suited for high-throughput, distributed environments?",
+    "options": {
+      "A": "Doctrine",
+      "B": "Redis or RabbitMQ",
+      "C": "In-memory",
+      "D": "Sync"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'VarDumper' server?",
+    "options": {
+      "A": "To store a dump of the entire database.",
+      "B": "A separate process that collects dump() output from CLI or Web and displays it in a central console.",
+      "C": "To automatically delete old variable dumps.",
+      "D": "To monitor the server's memory dumping rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'User Checker' in Symfony Security?",
+    "options": {
+      "A": "A person who checks the user's ID at the office.",
+      "B": "A service used to perform additional checks (like 'is the account disabled?') after the user is found.",
+      "C": "A tool that counts how many users are online.",
+      "D": "A script that validates the user's email format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stateless' authentication and when is it typically used?",
+    "options": {
+      "A": "Authentication that only works in certain countries; used for local apps.",
+      "B": "Authentication that doesn't use sessions (e.g., JWT); typically used for REST APIs.",
+      "C": "Authentication that requires no password; used for guest access.",
+      "D": "Authentication that resets every minute; used for high security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Notifier' component used for?",
+    "options": {
+      "A": "To notify the developer when the code is finished.",
+      "B": "A unified system to send notifications via SMS, Email, or Chat (Slack/Telegram) through various providers.",
+      "C": "To display a pop-up in the browser.",
+      "D": "To log system errors to a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Entity Merging' (Doctrine merge() - deprecated in modern versions)?",
+    "options": {
+      "A": "To combine two entities into one.",
+      "B": "To take a detached entity and bring it back under the management of the Entity Manager.",
+      "C": "To merge two database tables.",
+      "D": "To combine two different SQL queries."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you configure a service to be 'Abstract' in the container?",
+    "options": {
+      "A": "By naming the class 'AbstractService'.",
+      "B": "By setting 'abstract: true' in services.yaml, making it a template for other services rather than an instance.",
+      "C": "By removing the constructor.",
+      "D": "By placing it in an 'Abstract' folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Webhook' component in Symfony 8?",
+    "options": {
+      "A": "A tool to catch fish.",
+      "B": "A component to send signed and structured webhooks from your application to external services.",
+      "C": "A specialized router for web traffic.",
+      "D": "A security feature that blocks all incoming requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of 'Decorated Services' in the container?",
+    "options": {
+      "A": "To add images to the service definitions.",
+      "B": "To wrap an existing service with new functionality without changing the original code.",
+      "C": "To change the theme of the service manager.",
+      "D": "To mark a service as 'pretty' in the logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Internal Sub-request' in the HttpKernel?",
+    "options": {
+      "A": "A request sent to a team member.",
+      "B": "A request triggered within the application to execute another controller without a full network round-trip.",
+      "C": "A database query inside another query.",
+      "D": "A way to refresh the page automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is used to manage the physical files of the application across different adapters like Amazon S3 or FTP?",
+    "options": {
+      "A": "Filesystem",
+      "B": "Flysystem (via bridge)",
+      "C": "Storage",
+      "D": "FileStore"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Result Caching' in Doctrine?",
+    "options": {
+      "A": "Caching only the errors of a query.",
+      "B": "Storing the final result set of a specific SQL query to avoid re-executing it.",
+      "C": "Storing the SQL code in the browser.",
+      "D": "Caching the database connection string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Service Prototyping' using the _instanceof configuration?",
+    "options": {
+      "A": "To create a physical prototype of the server.",
+      "B": "To apply configuration (like tags or method calls) to all services that implement a specific interface.",
+      "C": "To check if an object is an instance of a class in Twig.",
+      "D": "To automatically generate code for all services."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface allows a class to be used as a custom 'Cache Adapter'?",
+    "options": {
+      "A": "CacheInterface",
+      "B": "AdapterInterface",
+      "C": "StorageInterface",
+      "D": "CacheProviderInterface"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Doctrine Inheritance' (Single Table Inheritance)?",
+    "options": {
+      "A": "When a developer inherits a database from another developer.",
+      "B": "A mapping strategy where multiple entity classes are stored in a single database table using a discriminator column.",
+      "C": "A way to share database passwords with team members.",
+      "D": "An error that occurs when two tables have the same name."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Uid' component?",
+    "options": {
+      "A": "To manage user IDs in the security system.",
+      "B": "To generate and work with unique identifiers like UUIDs and ULIDs.",
+      "C": "To track the browser's unique ID.",
+      "D": "To encrypt the database IDs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Messenger' component's 'Bus'?",
+    "options": {
+      "A": "A physical vehicle that transports servers.",
+      "B": "The central point that receives messages and dispatches them to the appropriate handlers or transports.",
+      "C": "A tool to monitor the network traffic speed.",
+      "D": "A way to send messages to the Postman app."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you implement 'Route Localization' in Symfony?",
+    "options": {
+      "A": "By creating different files for each language.",
+      "B": "By prefixing the route paths with /{_locale} and defining valid locales in the configuration.",
+      "C": "By using a browser extension.",
+      "D": "By translating the controller method names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Varnish' in the context of Symfony?",
+    "options": {
+      "A": "A type of paint for servers.",
+      "B": "A high-performance HTTP reverse proxy and cache often used in front of Symfony applications.",
+      "C": "A specialized database for storing session data.",
+      "D": "A tool to clean the application cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Security Guard' (Legacy)?",
+    "options": {
+      "A": "A person who guards the data center.",
+      "B": "A previous-generation security system that allowed custom authentication logic before the modern 'Authenticators' were introduced.",
+      "C": "A tool that blocks all IP addresses except the admin's.",
+      "D": "An encryption algorithm for user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of the 'ResponseHeaderBag' in a Response object?",
+    "options": {
+      "A": "To store a list of all user headers.",
+      "B": "To manage the HTTP headers that will be sent back to the client.",
+      "C": "To encrypt the response data.",
+      "D": "To store a backup of the HTML code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Doctrine Soft Delete'?",
+    "options": {
+      "A": "A way to delete data very slowly.",
+      "B": "A pattern where records are not physically removed from the database but marked as deleted using a timestamp or flag.",
+      "C": "An error that occurs when the database is full.",
+      "D": "A feature that automatically clears the trash can."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autopassthrough' in the container configuration?",
+    "options": {
+      "A": "Automatically letting users through the security firewall.",
+      "B": "There is no 'Autopassthrough'; Symfony uses 'Autowiring' and 'Autoconfiguration'.",
+      "C": "Automatically passing data between two controllers.",
+      "D": "A tool to bypass the cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which interface allows a class to be used as a custom 'Messenger Transport'?",
+    "options": {
+      "A": "TransportInterface",
+      "B": "MessengerInterface",
+      "C": "SenderInterface",
+      "D": "ReceiverInterface"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Service Lazy-loading' for listeners?",
+    "options": {
+      "A": "Listeners that only work when they feel like it.",
+      "B": "Ensuring that event listeners are only instantiated if the event they listen to is actually dispatched.",
+      "C": "Listeners that wait for a user to log in.",
+      "D": "A feature to slow down the event dispatcher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Form Type Extension'?",
+    "options": {
+      "A": "Increasing the file size of a form.",
+      "B": "A way to add features (like new fields or options) to existing form types without inheriting from them.",
+      "C": "A tool that converts forms into PDF files.",
+      "D": "Adding more memory to the form component."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DQL Query Result Caching'?",
+    "options": {
+      "A": "Caching only the names of the tables.",
+      "B": "Storing the final results of a DQL query to avoid re-executing SQL against the database.",
+      "C": "Storing the DQL code in a file.",
+      "D": "Caching the query plan of the database engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Security Firewall Context'?",
+    "options": {
+      "A": "The physical location of the firewall server.",
+      "B": "A setting that allows multiple firewalls to share the same user session.",
+      "C": "The history of all blocked IP addresses.",
+      "D": "The encryption key used for the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'DomCrawler' component used for?",
+    "options": {
+      "A": "To crawl the entire internet.",
+      "B": "To navigate and extract data from HTML/XML documents, commonly used in functional tests.",
+      "C": "To create a map of the DOM tree in a browser.",
+      "D": "To automatically find and fix CSS errors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Serializer' component's 'Groups'?",
+    "options": {
+      "A": "To group team members together.",
+      "B": "To control which object properties are included or excluded in a specific serialization context.",
+      "C": "To group database entities into different tables.",
+      "D": "To group system logs by date."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Doctrine Hydration' (SIMPLE_OBJECT mode)?",
+    "options": {
+      "A": "Converting data into basic PHP objects without tracking changes.",
+      "B": "A high-performance hydration mode that skips complex mapping and lazy loading for simple data structures.",
+      "C": "A mode that only works for entities with one column.",
+      "D": "A way to delete entities instantly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AssetVersioning' in modern Symfony?",
+    "options": {
+      "A": "The version of the Asset component.",
+      "B": "The process of managing multiple versions of CSS/JS files and their mapping to production URLs.",
+      "C": "A tool to track which developer wrote which line of CSS.",
+      "D": "The history of all images uploaded to the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Process' component?",
+    "options": {
+      "A": "To manage the development process of the team.",
+      "B": "To execute command-line processes in a sub-process and handle their input/output correctly.",
+      "C": "To monitor the CPU usage of the Symfony app.",
+      "D": "To sequence database migrations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Event Subscriber' vs 'Listener' priority?",
+    "options": {
+      "A": "Listeners always run before subscribers.",
+      "B": "Priority is a numerical value that determines the execution order (higher numbers run first).",
+      "C": "Priority is based on the alphabetical name of the class.",
+      "D": "There is no way to control the order of execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'symfony.lock' file?",
+    "options": {
+      "A": "It is a physical lock on the server hard drive.",
+      "B": "It is used by Symfony Flex to keep track of the recipes installed in the project.",
+      "C": "It stores the admin password for the Symfony console.",
+      "D": "It prevents the application from being run in the 'dev' environment."
+    },
+    "answer": "B"
+  }
+  ]
+}

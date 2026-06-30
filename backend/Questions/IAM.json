@@ -1,0 +1,1903 @@
+{ 
+  "skill": "IAM", 
+  "questions": [
+    {
+    "question": "In IAM terminology, what is the primary difference between Authentication and Authorization?",
+    "options": {
+      "A": "Authentication is what you can do; Authorization is who you are.",
+      "B": "Authentication verifies identity (who you are); Authorization verifies permissions (what you can do).",
+      "C": "Authentication is only for humans; Authorization is only for machines.",
+      "D": "There is no difference; they are synonymous terms in security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Multi-Factor Authentication' (MFA) requires at least two different types of evidence to verify a user's identity.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following is considered an 'Inheritance' factor in authentication?",
+    "options": {
+      "A": "A physical hardware token",
+      "B": "A fingerprint or retina scan",
+      "C": "A secret password",
+      "D": "A one-time code sent via SMS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the acronym 'RBAC' stand for in access management?",
+    "options": {
+      "A": "Resource Based Access Control",
+      "B": "Role-Based Access Control",
+      "C": "Remote Binary Access Center",
+      "D": "Rule-Based Authentication Code"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are part of the 'IAM User Lifecycle'? (Select all that apply)",
+    "options": {
+      "A": "Provisioning (Creating the account)",
+      "B": "Maintenance (Updating permissions)",
+      "C": "Deprovisioning (Deleting or disabling the account)",
+      "D": "Manufacturing the physical server"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Single Sign-On' (SSO)?",
+    "options": {
+      "A": "A system where users must sign their name on a physical logbook once a day.",
+      "B": "An authentication scheme that allows a user to log in with a single ID to any of several related, but independent, software systems.",
+      "C": "A security policy where users are only allowed to have one active session at a time.",
+      "D": "A way to increase the size of a user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The principle of 'Least Privilege' suggests giving users the maximum amount of access possible to ensure they can always finish their work.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which type of 'Factor' is a standard alphanumeric password?",
+    "options": {
+      "A": "Something you have",
+      "B": "Something you know",
+      "C": "Something you are",
+      "D": "Somewhere you are"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Provisioning' in the context of IAM?",
+    "options": {
+      "A": "Providing physical snacks for the IT team.",
+      "B": "The process of creating, managing, and distributing user accounts and access rights within a system.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "Hiring a professional actor to read security reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service Account' is typically used by an automated application or process rather than a human being.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following describes 'Deprovisioning'?",
+    "options": {
+      "A": "Buying new hardware for a user.",
+      "B": "Removing a user's access to applications and data when they leave an organization.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to backup SQL databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common IAM protocols or standards? (Select all that apply)",
+    "options": {
+      "A": "SAML",
+      "B": "OAuth 2.0",
+      "C": "OpenID Connect",
+      "D": "SMTP"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary purpose of a 'Directory Service' (like Active Directory)?",
+    "options": {
+      "A": "To act as a physical phone book in the office.",
+      "B": "To store and manage information about users, groups, and network resources in a centralized database.",
+      "C": "To automatically delete old files from a hard drive.",
+      "D": "To increase the monitor's refresh rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Privileged Access Management' (PAM) focuses specifically on securing the accounts of users with high-level administrative rights.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an IAM 'Identity'?",
+    "options": {
+      "A": "A physical ID card.",
+      "B": "A unique digital representation of a person, device, or application within a system.",
+      "C": "A specialized software for poets.",
+      "D": "The frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code is most commonly associated with an 'Unauthenticated' request (Identity not verified)?",
+    "options": {
+      "A": "200 OK",
+      "B": "401 Unauthorized",
+      "C": "403 Forbidden",
+      "D": "404 Not Found"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In RBAC, permissions are assigned directly to individual users rather than to roles.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Service Password Reset' (SSPR)?",
+    "options": {
+      "A": "When a manager resets a user's password for them.",
+      "B": "A feature that allows users to reset their own forgotten passwords without contacting IT support.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count login attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'IAM' concept refers to the practice of verifying that a user is who they claim to be?",
+    "options": {
+      "A": "Authorization",
+      "B": "Identification",
+      "C": "Accounting",
+      "D": "Encryption"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are 'Possession' factors for MFA? (Select all that apply)",
+    "options": {
+      "A": "A smartphone with an authenticator app",
+      "B": "A physical security key (e.g., YubiKey)",
+      "C": "A smart card",
+      "D": "The user's favorite color"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Permissions' occur when a user has more access than their job role requires.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Federation'?",
+    "options": {
+      "A": "A physical union of different companies.",
+      "B": "A system that allows users to use the same identification data across multiple IT systems or organizations.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is a 'User Group'?",
+    "options": {
+      "A": "A physical group of people sitting in a circle.",
+      "B": "A collection of user accounts that can be managed as a single unit for permission assignment.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Identity Provider' (IdP) is a service that creates, maintains, and manages identity information.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Authorization' models? (Select all that apply)",
+    "options": {
+      "A": "RBAC (Role-Based)",
+      "B": "ABAC (Attribute-Based)",
+      "C": "DAC (Discretionary)",
+      "D": "HTML (Hypertext)"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What does 'JIT' stand for in the context of IAM provisioning?",
+    "options": {
+      "A": "Job Interaction Tool",
+      "B": "Just-In-Time",
+      "C": "Joint Identity Terminal",
+      "D": "JSON Integration Technology"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Cloud Security', what is a 'Root' account?",
+    "options": {
+      "A": "The account of a person who gardens at the office.",
+      "B": "The initial administrative account created when a cloud subscription is opened, possessing full control over all resources.",
+      "C": "A security scan of the data center.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Plain Text' to store passwords in a database is an industry-standard security practice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component is responsible for granting access based on the 'Decision' made by the IAM system?",
+    "options": {
+      "A": "Policy Enforcement Point (PEP)",
+      "B": "Policy Decision Point (PDP)",
+      "C": "Database Admin",
+      "D": "Web Browser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Credential Stuffing'?",
+    "options": {
+      "A": "Stuffing physical papers into a folder.",
+      "B": "An automated attack where stolen username/password pairs are used to gain unauthorized access to other accounts.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is an 'Access Audit'?",
+    "options": {
+      "A": "Auditing a person name Access.",
+      "B": "A review of user access rights to ensure they are appropriate and align with current job responsibilities.",
+      "C": "A security scan of the network.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in IAM occur when the IT team wants strict security while the users want maximum convenience.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Cloud' IAM providers? (Select all that apply)",
+    "options": {
+      "A": "AWS IAM",
+      "B": "Azure Active Directory (now Entra ID)",
+      "C": "Google Cloud IAM",
+      "D": "Adobe Photoshop"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Brute Force' in the context of IAM?",
+    "options": {
+      "A": "Using physical force to open a server door.",
+      "B": "Attempting every possible combination of characters to guess a password.",
+      "C": "Hiring a weightlifter to move servers.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Role Bloat'?",
+    "options": {
+      "A": "A physical swelling of the server hardware.",
+      "B": "The accumulation of too many roles and permissions within an organization, making management difficult.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAML' (Security Assertion Markup Language) is an XML-based standard for exchanging authentication and authorization data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' Provisioning? (Select all that apply)",
+    "options": {
+      "A": "Creating a user account automatically when they are hired in the HR system",
+      "B": "Manually typing user data into a spreadsheet",
+      "C": "Triggering access removal based on a termination date",
+      "D": "Guaranteed to work 100% without errors"
+    },
+    "answer": ["A", "C"]
+  },
+  {
+    "question": "What is a 'Token' in IAM?",
+    "options": {
+      "A": "A physical coin used for coffee.",
+      "B": "A digital object that represents the fact that a user has been authenticated and contains their identity or permissions.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Provision' (MTTP)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from a request for access until the access is actually granted.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the business expects a 5-minute turnaround for access but the IT process takes 3 days.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Biometric' factors? (Select all that apply)",
+    "options": {
+      "A": "Voice recognition",
+      "B": "Facial recognition",
+      "C": "Iris scan",
+      "D": "A secret PIN"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Identity Governance'?",
+    "options": {
+      "A": "The physical government of a country.",
+      "B": "The policy-based approach to managing digital identities and their access to corporate resources.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Ghost' 'Account'?",
+    "options": {
+      "A": "An account for a person who has passed away.",
+      "B": "An inactive user account that remains in the system after the user has left the organization.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a user has 'Admin' access in 'Dev' but is expected to have 'Read-Only' in 'Prod'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'OAuth 2.0'? (Select all that apply)",
+    "options": {
+      "A": "An authorization framework",
+      "B": "Allows third-party applications to grant limited access to a user's resources",
+      "C": "A tool for cracking passwords",
+      "D": "Commonly used for 'Login with Google' features"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Privileged' 'Identity'?",
+    "options": {
+      "A": "The identity of a person who is very wealthy.",
+      "B": "A digital identity with elevated permissions, such as a database admin or a domain admin.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Access' 'Recertification'?",
+    "options": {
+      "A": "Giving a person a new certificate for being happy.",
+      "B": "The periodic process where managers must review and confirm that their employees still require their existing access levels.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a client attempt to use SAML while the server only supports OpenID Connect.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'IAM' 'Best' 'Practices'? (Select all that apply)",
+    "options": {
+      "A": "Enforce strong password policies",
+      "B": "Enable MFA for all users",
+      "C": "Perform regular access reviews",
+      "D": "Share passwords on Slack"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Attestation' in IAM?",
+    "options": {
+      "A": "Testing a person's physical strength.",
+      "B": "A formal statement or evidence that a user's access rights have been reviewed and approved.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Delegated' 'Administration'?",
+    "options": {
+      "A": "Administering a physical delegate.",
+      "B": "Assigning administrative tasks to non-admin users or lower-level admins to reduce the workload on central IT.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Storage' refers to storing user identities in an unencrypted local text file instead of a secure directory.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Deprovisioning' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Reducing the risk of 'Ghost' accounts",
+      "B": "Ensuring access is removed immediately upon termination",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Compliance with regulatory requirements"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Attribute-Based' Access Control (ABAC)?",
+    "options": {
+      "A": "Access control based on a person's physical attributes.",
+      "B": "An access control model where rights are granted to users through the use of attributes which combine together (e.g., user department, time of day, location).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'User' 'Activity' 'Monitoring' (UAM)?",
+    "options": {
+      "A": "Monitoring if the users are active in the gym.",
+      "B": "The process of tracking and recording the actions performed by users while logged into corporate systems.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ownership' in IAM occurs when a file's owner is no longer an employee, leaving the resource unmanaged.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Just-In-Time' (JIT) 'Access'? (Select all that apply)",
+    "options": {
+      "A": "Granting permissions only when needed",
+      "B": "Automatically revoking permissions after a set time",
+      "C": "Keeping permissions active 24/7 to save time",
+      "D": "Reducing the attack surface of privileged accounts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Role-Based' Access Control (RBAC) 'Drift'?",
+    "options": {
+      "A": "When a physical role at the office moves to a new floor.",
+      "B": "The slow accumulation of extra permissions by a role over time that are no longer necessary for the original job function.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Risk' 'Score'?",
+    "options": {
+      "A": "A numerical value that indicates the likelihood that an identity has been compromised based on behavior and data leaks.",
+      "B": "The score of the office environment temperature.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Token' 'Expiration' occurs when an access token lasts for 30 days while the corporate policy requires re-authentication every 8 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Password' 'Rotation'? (Select all that apply)",
+    "options": {
+      "A": "Automatically changing service account passwords every 30 days",
+      "B": "Updating the password in all connected systems without manual intervention",
+      "C": "Guaranteed to replace all human network engineers",
+      "D": "Reducing the risk of stolen credentials being used long-term"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Conditional' 'Access'?",
+    "options": {
+      "A": "Access that is only given if the user is in a good condition.",
+      "B": "The ability to enforce security requirements (like MFA or being on a company device) based on the context of the login attempt.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Disable' (MTTD)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average time it takes to disable a user account after a termination request is received.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Policies' occur when a global IAM policy conflicts with a specific local application policy, causing access denial.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' IAM 'Governance' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Chief Information Security Officer (CISO)",
+      "B": "Compliance Officer",
+      "C": "IAM Architect",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Logical' 'Isolation' in IAM?",
+    "options": {
+      "A": "Isolating a person name Logical.",
+      "B": "Using permissions to ensure that users in one department cannot see or access data belonging to another department, even on the same system.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a SAML 2.0 authentication flow, what is the specific role of the 'Assertion Consumer Service' (ACS) URL?",
+    "options": {
+      "A": "It is the login page where users enter their credentials.",
+      "B": "It is the endpoint on the Service Provider (SP) that receives and processes the SAML token from the Identity Provider (IdP).",
+      "C": "It is the database where the user's password hash is stored.",
+      "D": "It is a specialized tool for measuring the latency of the IdP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OpenID Connect (OIDC), the 'ID Token' is used to access the user's resources, while the 'Access Token' is used to obtain information about the authenticated user.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following are valid 'OAuth 2.0 Grant Types'? (Select all that apply)",
+    "options": {
+      "A": "Authorization Code",
+      "B": "Client Credentials",
+      "C": "Refresh Token",
+      "D": "Physical Key Handshake"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is the primary technical purpose of the 'SCIM' (System for Cross-domain Identity Management) standard?",
+    "options": {
+      "A": "To encrypt user passwords using a quantum-resistant algorithm.",
+      "B": "To provide a standardized API for automating the exchange of user identity information between different identity domains.",
+      "C": "To act as a physical firewall for the directory server.",
+      "D": "To increase the frame rate of the login portal UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Role-Based Access Control' (RBAC) model, what is 'Role Hierarchy'?",
+    "options": {
+      "A": "Sorting users by their age in the office.",
+      "B": "A structure where senior roles automatically inherit the permissions assigned to junior roles.",
+      "C": "A security scan that checks for circular dependencies in code.",
+      "D": "Hiring a professional actor to represent a manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Signature' 'Algorithms' between a SAML IdP and SP (e.g., one uses SHA-1 and the other expects SHA-256) will cause the authentication attempt to fail.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'JWT' (JSON Web Token) claim is used to prevent 'Replay Attacks' by ensuring the token is only used within a valid timeframe?",
+    "options": {
+      "A": "iss (Issuer)",
+      "B": "exp (Expiration Time)",
+      "C": "sub (Subject)",
+      "D": "aud (Audience)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Adaptive MFA'?",
+    "options": {
+      "A": "MFA that adapts to the size of the user's smartphone screen.",
+      "B": "A system that triggers additional authentication steps only when a login attempt is flagged as 'High Risk' based on location or behavior.",
+      "C": "A specialized software for architects to design buildings.",
+      "D": "A way to backup SQL logs automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are common 'Identity Repository' types? (Select all that apply)",
+    "options": {
+      "A": "LDAP (Lightweight Directory Access Protocol)",
+      "B": "Active Directory",
+      "C": "Relational Databases (SQL)",
+      "D": "Physical filing cabinets"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: In 'Attribute-Based Access Control' (ABAC), a user can be denied access even if they have the correct 'Role', if environmental conditions (like time of day) are not met.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Session Hijacking' in an IAM context?",
+    "options": {
+      "A": "Hiring a pilot to hijack a physical airplane.",
+      "B": "An attacker stealing a valid session token to impersonate a user without needing their password.",
+      "C": "A security scan of the office building.",
+      "D": "Increasing the brightness of the login screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Standard' is specifically designed to provide a layer of security on top of OAuth 2.0 to handle 'Authentication'?",
+    "options": {
+      "A": "SAML 1.1",
+      "B": "OpenID Connect (OIDC)",
+      "C": "SMTP",
+      "D": "FTP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Service Principal' in Cloud IAM (like Azure or AWS)?",
+    "options": {
+      "A": "The person who manages the service department.",
+      "B": "An identity created for use with applications, hosted services, and automated tools to access specific resources.",
+      "C": "A specialized software for architects.",
+      "D": "The beginning of a network cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Self-Service' 'Provisioning' allows users to request access to specific applications through a portal, which then triggers an approval workflow.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Risk' factors considered during 'Identity Analytics'? (Select all that apply)",
+    "options": {
+      "A": "Login from an 'Impossible Travel' location",
+      "B": "Accessing sensitive data at unusual hours",
+      "C": "The user's physical height",
+      "D": "Multiple failed login attempts followed by a success"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Identity' 'Verification' vs 'Identity' 'Authentication'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Verification is checking a real-world identity (e.g., ID card) during onboarding; Authentication is checking digital credentials during login.",
+      "C": "Verification is for machines; Authentication is for humans.",
+      "D": "Verification is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Role' 'Mining'?",
+    "options": {
+      "A": "Mining for physical gold in an IT department.",
+      "B": "The process of analyzing existing user permissions to identify patterns and automatically suggest new, optimized roles.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Token' 'Signing' occurs when the IdP signs a JWT with a Private Key but the SP tries to verify it using an incorrect Public Key.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Privileged' 'Session' 'Management' (PSM)? (Select all that apply)",
+    "options": {
+      "A": "Recording the screens of admins while they perform sensitive tasks",
+      "B": "Isolating administrative sessions through a proxy (Jump box)",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Providing real-time alerting on suspicious admin commands"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Transitive' 'Trust' in an Active Directory environment?",
+    "options": {
+      "A": "A trust that only works while in transit (e.g., on a bus).",
+      "B": "A relationship where if Domain A trusts Domain B, and Domain B trusts Domain C, then Domain A automatically trusts Domain C.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Remediate' (MTTR) a stale account?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when an account is flagged as inactive until its access is officially revoked.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scopes' in OAuth 2.0 can lead to an application requesting 'Read-Only' access but actually receiving 'Read-Write' permissions due to configuration error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in an IAM architecture is responsible for evaluating policies and making a 'Yes/No' access decision?",
+    "options": {
+      "A": "Policy Enforcement Point (PEP)",
+      "B": "Policy Decision Point (PDP)",
+      "C": "Identity Store",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JIT' (Just-In-Time) Provisioning in a Federated SSO setup?",
+    "options": {
+      "A": "Providing physical snack for the user.",
+      "B": "Automatically creating a user account in the Service Provider's system the first time they log in via the Identity Provider.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Credential' 'Recycling'?",
+    "options": {
+      "A": "Putting old physical passwords in a recycling bin.",
+      "B": "The dangerous practice of using the same username and password across multiple different platforms.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Sync' (Clock Drift) can cause OIDC tokens to be rejected if the server thinks the token has already expired.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Dynamic' 'Group' 'Membership'? (Select all that apply)",
+    "options": {
+      "A": "Users are added to a group automatically based on attributes (e.g., Job Title = 'Engineer')",
+      "B": "Membership is updated in real-time as user attributes change in the IdP",
+      "C": "Users must manually sign a physical log to join",
+      "D": "Reduces the manual effort required for provisioning"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Entitlement' 'Management'?",
+    "options": {
+      "A": "Managing a person who feels entitled.",
+      "B": "The granular process of managing and auditing what specific actions a user can perform within an application (e.g., 'Edit' vs 'View').",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Orphan' 'Account' 'Density'?",
+    "options": {
+      "A": "The physical weight of the server.",
+      "B": "The percentage of active accounts in the system that are no longer associated with a valid, current employee.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Identity' 'Sources' occur when the HR system says an employee has been terminated, but the IAM system continues to synchronize their active status from a legacy database.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'IAM' 'Governance' 'Frameworks'? (Select all that apply)",
+    "options": {
+      "A": "NIST SP 800-63 (Digital Identity Guidelines)",
+      "B": "ISO/IEC 24760 (A framework for identity management)",
+      "C": "COBIT (for general IT governance)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Step-Up' Authentication?",
+    "options": {
+      "A": "Stepping up a physical ladder to reach a server.",
+      "B": "Requiring a user to provide an additional authentication factor (like MFA) only when they attempt to perform a high-risk action.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Federated' 'Logout'?",
+    "options": {
+      "A": "Hiring a person named Federated to log out.",
+      "B": "The process where logging out of one application in a federated environment automatically terminates sessions in all other connected applications.",
+      "C": "A security scan of the database.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occurs when the business demands 'Zero Trust' security but refuses to provide the budget for MFA hardware tokens.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Access' 'Reviews'? (Select all that apply)",
+    "options": {
+      "A": "Automatically emailing managers a list of their employees' permissions for approval",
+      "B": "Identifying 'Toxic Combinations' of permissions (e.g., can create AND pay an invoice)",
+      "C": "Guaranteed to replace all human managers",
+      "D": "Enabling data-driven 'Revoke' decisions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Attribute' 'Mapping' in an IdP configuration?",
+    "options": {
+      "A": "Mapping a physical building architecture.",
+      "B": "Matching internal user data fields (e.g., 'EmpID') to the standard claims expected by a Service Provider (e.g., 'subject').",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Lifecycle' 'Velocity'?",
+    "options": {
+      "A": "How fast a person can run in the office.",
+      "B": "The speed at which new employees are provisioned and departing employees are deprovisioned across all systems.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a Service Provider expects a SAML response but the Identity Provider is only configured to send OIDC tokens.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Zero Trust' IAM principles? (Select all that apply)",
+    "options": {
+      "A": "Never Trust, Always Verify",
+      "B": "Explicitly verify every access request",
+      "C": "Give admins full access 24/7 to save time",
+      "D": "Assume breach"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Credential' 'Stuffing' detection strategy?",
+    "options": {
+      "A": "Stuffing credentials into a physical box.",
+      "B": "Monitoring for high rates of failed login attempts from a single IP address using many different usernames.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Service' 'Account' 'Governance'?",
+    "options": {
+      "A": "Governing a physical service department.",
+      "B": "The policies and processes for managing non-human identities, including password rotation and limited scopes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SAML' 'Bindings' (e.g., SP expects HTTP-POST but IdP uses HTTP-Redirect) will prevent the authentication assertion from being delivered correctly.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'PAM' (Privileged Access Management)? (Select all that apply)",
+    "options": {
+      "A": "Automatically rotating admin passwords every 24 hours",
+      "B": "Granting admin access for only 2 hours via a workflow (Ephemeral access)",
+      "C": "Replacing the need for any human administrators",
+      "D": "Logging and recording all administrative sessions"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Sod' (Segregation of Duties) in IAM?",
+    "options": {
+      "A": "Segregating actual dirt (sod) in the office garden.",
+      "B": "A security principle that prevents a single individual from having enough permissions to complete a sensitive business process alone.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'MFA' 'Bypass' 'Rate'?",
+    "options": {
+      "A": "The percentage of users who have successfully logged in without using their required MFA factor (indicating a security hole).",
+      "B": "The rate at which people walk past the security guard.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Assertion' 'Consumer' 'Service' (ACS) 'URL' will cause the SAML assertion to be sent to a destination that cannot process it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Incident' 'Response' in IAM? (Select all that apply)",
+    "options": {
+      "A": "Automatically disabling an account if a credential leak is detected on the dark web",
+      "B": "Forcing an immediate password reset for a user showing suspicious behavior",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Killing all active sessions for a compromised user"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Identity' 'Proofing'?",
+    "options": {
+      "A": "Proofing a physical document.",
+      "B": "The process of verifying that a real-world person exists and is who they claim to be before creating their digital identity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Just-Enough-Administration' (JEA)?",
+    "options": {
+      "A": "Hiring just enough people to run the office.",
+      "B": "A security technology that enables RBAC to restrict administrators to only the specific commands and tasks they need to perform.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' occur when developers use 'Hardcoded' credentials for convenience, ignoring the 'Secret Management' policies defined by the IAM team.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Account' 'Lockout' 'Logic'? (Select all that apply)",
+    "options": {
+      "A": "Disabling an account after 5 failed attempts",
+      "B": "Automatically unlocking the account after 30 minutes",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Notifying the user via a secondary channel (e.g., email)"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Role' 'Hierarchy' 'Exploitation' risk?",
+    "options": {
+      "A": "When a junior user discovers they have inherited 'Admin' rights through an over-permissive role structure.",
+      "B": "Exploiting a physical ladder in the office.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Access' 'Recertifications'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration between formal audits of user access rights.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Trust' 'Levels' occur when an internal system trusts an external IdP without verifying the strength of the authentication methods used by that IdP.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "IAM Engineer",
+      "B": "Cloud Security Architect",
+      "C": "Privacy Officer",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Token' 'Introspection' in OAuth 2.0?",
+    "options": {
+      "A": "Looking at a physical token with a magnifying glass.",
+      "B": "An endpoint that allows a resource server to check the validity and metadata of an access token.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Unauthorized' 'Access' 'Attempt' 'Trend'?",
+    "options": {
+      "A": "Visualizing if the number of blocked login attempts is increasing or decreasing over time.",
+      "B": "Analyzing if the attackers are wearing trendy clothes.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when a user's permissions in 'UAT' are identical to 'Production', increasing the risk of accidental data deletion.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Secret' 'Rotation' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Reducing the manual effort for IT teams",
+      "B": "Limiting the lifetime of potentially compromised credentials",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Enabling continuous security compliance"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Segregation' in IAM?",
+    "options": {
+      "A": "Segregating a person named Logical.",
+      "B": "Using access controls to ensure multi-tenant data is completely isolated so one customer cannot see another's identity info.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a high-privilege login?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an admin logging in and the security team receiving a notification.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated provisioning script times out before the destination system can finish creating the user account.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'OAuth' 'Claims'? (Select all that apply)",
+    "options": {
+      "A": "iat (Issued At)",
+      "B": "nbf (Not Before)",
+      "C": "jti (JWT ID)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Trust'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A score that dynamically adjusts a user's access levels based on their current security posture (e.g., OS version, location, MFA status).",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Fragmentation'?",
+    "options": {
+      "A": "When a single real-world user has multiple, unconnected digital identities across different internal systems.",
+      "B": "Breaking a physical ID card into pieces.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IAM occur when the 'Termination' policy requires access removal in 1 hour but the IT ticket system takes 24 hours to process requests.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a 'JWT Key Confusion' attack, how does an attacker exploit a server that supports both RS256 (Asymmetric) and HS256 (Symmetric) algorithms?",
+    "options": {
+      "A": "By setting the 'alg' header to 'none' and removing the signature.",
+      "B": "By using the server's public key (RSA) as the HMAC secret key to sign a malicious token with the HS256 algorithm.",
+      "C": "By brute-forcing the 2048-bit RSA private key using a high-performance GPU cluster.",
+      "D": "By deleting the 'sub' claim from the payload to bypass identity verification."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAML Signature Wrapping' (SSW) occurs when an attacker modifies the SAML assertion while keeping the original signature valid, effectively tricking the Service Provider into accepting unauthorized data.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of the following are characteristics of 'Attribute-Based Access Control' (ABAC) when implemented via XACML? (Select all that apply)",
+    "options": {
+      "A": "Use of Policy Decision Points (PDP) and Policy Enforcement Points (PEP)",
+      "B": "Ability to evaluate environment attributes like 'Request Time' or 'Client IP'",
+      "C": "Requirement for users to be assigned to static groups only",
+      "D": "Granular control based on resource attributes like 'Sensitivity Level'"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is the technical objective of 'Cross-Tenant' synchronization in a multi-cloud enterprise IAM environment?",
+    "options": {
+      "A": "To allow users to share their Netflix passwords across different companies.",
+      "B": "To provide seamless, automated identity lifecycle management and SSO across separate business units or acquired organizations with distinct cloud tenants.",
+      "C": "To physically move server hardware between different cloud data centers.",
+      "D": "To increase the bandwidth of the connection between two different ISPs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Decentralized Identity' (DID), what is a 'Verifiable Credential'?",
+    "options": {
+      "A": "A physical passport stored in a digital safe.",
+      "B": "A cryptographically secure, privacy-preserving digital statement about a subject, issued by a trusted entity and stored in the user's digital wallet.",
+      "C": "A specialized software for architects to design databases.",
+      "D": "A way to count the number of users in a blockchain."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Proof of Possession' (PoP) tokens are designed to prevent 'Bearer Token' theft by binding the token to a specific cryptographic key held by the client.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'OAuth 2.0' flow is currently recommended as the most secure for Single Page Applications (SPAs) to mitigate the risk of token leakage in the browser?",
+    "options": {
+      "A": "Implicit Grant",
+      "B": "Authorization Code Flow with PKCE (Proof Key for Code Exchange)",
+      "C": "Client Credentials Grant",
+      "D": "Resource Owner Password Credentials"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hydra' effect in IAM Governance, specifically regarding 'Nested Groups'?",
+    "options": {
+      "A": "A multi-headed mythical creature guarding the data center.",
+      "B": "The extreme difficulty in auditing and calculating effective permissions when groups are members of other groups, often leading to unintended access escalation.",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "A way to backup SQL logs using a redundant array of disks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Zero Trust' IAM maturity indicators? (Select all that apply)",
+    "options": {
+      "A": "Implementation of 'Continuous Adaptive Risk and Trust Assessment' (CARTA)",
+      "B": "Replacement of static passwords with FIDO2/WebAuthn hardware keys",
+      "C": "Elimination of 'Long-lived' administrative sessions in favor of JIT access",
+      "D": "Giving the CEO a permanent admin account for convenience"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SAML' 'NameID' formats (e.g., email vs. persistent) between the IdP and SP will result in a successful SSO session as long as the user's password is correct.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Account Takeover' (ATO) protection via 'Behavioral Biometrics'?",
+    "options": {
+      "A": "Scanning the user's physical fingerprint.",
+      "B": "Analyzing unique patterns in how a user interacts with a device—such as typing speed, mouse movements, and gait—to detect anomalies.",
+      "C": "A specialized security scan for hardware components.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Identity' 'Entropy' and why does it matter for security?",
+    "options": {
+      "A": "The physical decay of the server hardware.",
+      "B": "The measure of randomness or unpredictability in identifiers or secrets; low entropy makes a system vulnerable to predictability attacks.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Governance' metric is most effective for an IAM Lead to identify 'Toxic Combinations' of access that violate Segregation of Duties (SoD)?",
+    "options": {
+      "A": "Total number of users in the system",
+      "B": "Violation Density (Number of SoD conflicts per business unit)",
+      "C": "The font size of the security dashboard",
+      "D": "The number of hours the server has been running"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Identity' 'Ghosting' refers to a scenario where an attacker creates a synthetic identity by combining real and fake data to bypass traditional credit or background checks.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'SCIM' implementation challenges in a heterogeneous environment? (Select all that apply)",
+    "options": {
+      "A": "Handling 'Mismatched' schema attributes across different vendors",
+      "B": "Managing rate-limits of downstream application APIs",
+      "C": "Implementing complex filtering and pagination for large datasets",
+      "D": "Buying physical snack for the developers"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'OIDC' 'Dynamic' 'Client' 'Registration'?",
+    "options": {
+      "A": "Registering a person named Client at a gym.",
+      "B": "A protocol that allows a client to register with an OpenID Provider (OP) at runtime, obtaining a Client ID and secret without manual admin intervention.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Privileged' 'Escalations' (MTBPE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often users are granted elevated permissions outside of the standard, approved workflow.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Trust' 'Anchors' occur when two systems in a federated environment use different Root Certificate Authorities (CA) that do not trust each other.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'JWT' 'Claims' used in enterprise security? (Select all that apply)",
+    "options": {
+      "A": "jti (JWT ID - unique identifier to prevent replay)",
+      "B": "nbf (Not Before - time before which the token is invalid)",
+      "C": "iat (Issued At - time at which the token was created)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive' 'Group' 'Resolution' and its impact on IAM performance?",
+    "options": {
+      "A": "Resolving a conflict between people in a circle.",
+      "B": "The process of calculating a user's final permissions by traversing all nested group memberships, which can cause significant login latency in large directories.",
+      "C": "A specialized tool for measuring light.",
+      "D": "A way to count users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Testing', what is 'Identity' 'Honeypot' strategy?",
+    "options": {
+      "A": "Creating fake user accounts with high-sounding names (e.g., 'global_admin') to detect and alert on unauthorized access attempts.",
+      "B": "Storing actual physical honey in the office.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in IAM orchestration often occur when 'Infra' teams use Infrastructure-as-Code for identities, while 'App' teams rely on manual UI-based provisioning.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Machine' 'Identity' 'Management' (MIM) complexities? (Select all that apply)",
+    "options": {
+      "A": "High-volume certificate rotation for ephemeral microservices",
+      "B": "Managing secrets for workloads across multi-cloud environments",
+      "C": "Hiring 100 extra junior developers",
+      "D": "Enforcing 'Short-lived' credentials to reduce risk"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SAML' 'Metadata' 'Poisoning'?",
+    "options": {
+      "A": "Poisoning the physical server room.",
+      "B": "An attack where an attacker injects malicious endpoints or certificates into the SAML metadata file to hijack the authentication flow.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Credential' 'Exposure' 'Index'?",
+    "options": {
+      "A": "A score that indicates the prevalence of company-specific usernames and passwords found on the Dark Web.",
+      "B": "The height of the physical user's keyboard.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' in an automated 'Identity Provisioning' flow can lead to 'Race Conditions' where an application tries to access a user account before the IdP has finished creating it.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Lifecycle' 'Stages'? (Select all that apply)",
+    "options": {
+      "A": "Onboarding (Birth)",
+      "B": "Attribute Change (Growth/Move)",
+      "C": "Offboarding (Death/Termination)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Token' 'Binding' (RFC 8471)?",
+    "options": {
+      "A": "Binding a physical token with string.",
+      "B": "A mechanism that cryptographically binds security tokens to the TLS layer, preventing them from being used if stolen from the browser.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Identity' 'Siloing' and why is it a strategic risk?",
+    "options": {
+      "A": "Storing identities in physical grain silos.",
+      "B": "When different departments use independent identity stores, leading to fragmented visibility, increased security holes, and poor user experience.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IAM occurs when the business expects 'Instant' deprovisioning for terminations but the batch sync job only runs once every 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Identity' 'Threat' 'Hunting'? (Select all that apply)",
+    "options": {
+      "A": "Detecting 'Dormant' accounts suddenly becoming active",
+      "B": "Identifying 'Impossible Travel' login patterns across different cloud providers",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating failed MFA attempts with brute-force traffic logs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'OAuth 2.0' 'Sender' 'Constrained' 'Tokens'?",
+    "options": {
+      "A": "Tokens that are physically small.",
+      "B": "Tokens that can only be used by the specific client to which they were issued, preventing 'Bearer Token' theft and misuse.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Role' 'Complexity' 'Score'?",
+    "options": {
+      "A": "A mathematical measure of how difficult a role is to manage based on the number of entitlements and nested groups it contains.",
+      "B": "The score of the office environment temperature.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Environments' occur when an 'IAM Policy' is tested in a 'Sandbox' with 10 users, but fails in 'Production' due to API rate-limiting when applied to 1,000,000 users.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'IAM' 'Governance' 'Factors'? (Select all that apply)",
+    "options": {
+      "A": "Alignment with Regulatory Compliance (GDPR/SOX)",
+      "B": "Calculation of 'Total Cost of Ownership' (TCO) for IAM tools",
+      "C": "Verification of 'Access Review' completion rates",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Just-In-Time' (JIT) 'Privilege' 'Elevation'?",
+    "options": {
+      "A": "Elevating a person on a physical lift.",
+      "B": "The process of granting administrative rights to a user only for the duration of a specific task, then automatically revoking them.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Identity' 'Federation' 'Circle' 'of' 'Trust'?",
+    "options": {
+      "A": "A group of Identity and Service Providers that have agreed to share identity information based on common standards and mutual trust.",
+      "B": "A physical circle of desks in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Assertion' 'Consumer' 'Service' (ACS) 'URL' will cause the Identity Provider to send the login success message to an address that cannot process it, failing the SSO login.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk-Based' 'Access' 'Control' (RBAC)? (Select all that apply)",
+    "options": {
+      "A": "Automatically adjusting permissions based on real-time threat intelligence",
+      "B": "Revoking access if a user's device is found to be out of compliance",
+      "C": "Guaranteed to replace all human security analysts",
+      "D": "Enforcing 'Step-up' MFA based on the sensitivity of the resource being accessed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Self-Sovereign' Identity (SSI) 'Governance' 'Framework'?",
+    "options": {
+      "A": "A framework for a physical king or queen.",
+      "B": "A set of rules and protocols that define how digital identities are issued, held, and verified without a central authority.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Fragmentation' 'Metric'?",
+    "options": {
+      "A": "The ratio of unconnected digital identities to the number of actual physical employees in an organization.",
+      "B": "The physical fragmentation of a server hard drive.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Ciphers' occur when a 'Token Issuer' uses an advanced encryption algorithm that the 'Resource Server' is unable to decrypt, leading to an 'Invalid Token' error.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'OAuth' 'Security' 'Extensions'? (Select all that apply)",
+    "options": {
+      "A": "DPoP (Demonstrating Proof-of-Possession)",
+      "B": "MTLS (Mutual TLS) for OAuth",
+      "C": "PAR (Pushed Authorization Requests)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'Privileged' 'Risk'?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A score that combines the sensitivity of a resource with the current security posture of the user attempting to access it.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Contain' (MTTC) an Identity breach?",
+    "options": {
+      "A": "The average time it takes to put a bug in a box.",
+      "B": "The average duration between the detection of a compromised account and the point at which all its sessions are killed and the account is locked.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count tickets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an automated 'Access Review' tool times out before a large directory can return the full list of users and groups.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Credential' 'Leak' 'Detection'? (Select all that apply)",
+    "options": {
+      "A": "Continuously scanning Public Git repos for company-issued secrets",
+      "B": "Correlating dark web data with internal employee email lists",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Automatically triggering a password reset when a leak is confirmed"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SAML' 'Assertion' 'Encryption' vs 'Signing'?",
+    "options": {
+      "A": "They are exactly the same thing.",
+      "B": "Signing ensures the data hasn't been tampered with; Encryption ensures the data is invisible to anyone but the intended recipient.",
+      "C": "Signing is for beginners; Encryption for experts.",
+      "D": "Signing is 100x faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Orphan' 'Rate'?",
+    "options": {
+      "A": "The percentage of active accounts in a system that are not mapped to an active employee in the HR system.",
+      "B": "The rate at which physical papers are lost in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when a legacy application that only supports LDAP is forced to integrate with a modern Cloud IdP that only provides SAML.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Provisioning' 'Patterns'? (Select all that apply)",
+    "options": {
+      "A": "Push Provisioning (IdP pushes to App)",
+      "B": "Pull Provisioning (App pulls from IdP)",
+      "C": "JIT (Just-In-Time) Provisioning",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'OAuth' 'Token' 'Exchange' (RFC 8693)?",
+    "options": {
+      "A": "Exchanging a physical coin for a token.",
+      "B": "A protocol that allows a client to exchange an existing security token for a new one, facilitating identity propagation in complex service chains.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for an unauthorized privileged login?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an admin login that violates policy and the security team receiving the high-priority notification.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Trust' 'Anchors' occur when a SAML Service Provider is configured with an outdated public key, causing all assertions from the IdP to be rejected as untrusted.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Identity' 'Drift' 'Correction'? (Select all that apply)",
+    "options": {
+      "A": "Using 'Infrastructure as Code' to reset permissions to a 'Known Good' state every hour",
+      "B": "Automatically revoking any user rights added manually via the cloud console",
+      "C": "Guaranteed to replace all human admins",
+      "D": "Enforcing immutable identity policies"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'FIDO2' 'Attestation' and why is it used?",
+    "options": {
+      "A": "Attesting a person named FIDO.",
+      "B": "A cryptographic proof that a FIDO2 security key is a genuine hardware device from a specific manufacturer, ensuring its security properties.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Calculated' 'System' 'Quality' for an IAM deployment?",
+    "options": {
+      "A": "A weighted score that includes MFA adoption rates, orphan account counts, and audit completion status.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan for database viruses.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Scaling' in IAM refers to an IdP that can handle 10,000 users but crashes when 100,000 users attempt to log in simultaneously during a system-wide update.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Privacy' 'Governance' for IAM? (Select all that apply)",
+    "options": {
+      "A": "Automatically identifying and masking PII in IAM logs",
+      "B": "Ensuring that user consent is verified before sharing attributes with third-party SPs",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Validating that 'Right to be Forgotten' requests are propagated to all connected apps"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'SAML' 'Binding' 'Overhead'?",
+    "options": {
+      "A": "The technical latency and bandwidth consumed by moving large, verbose XML documents through the browser as part of the authentication flow.",
+      "B": "Binding a physical book with a heavy cover.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) an over-privileged role?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration from when 'Role Bloat' is identified by an audit until the unnecessary permissions are officially removed.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SAML' 'RelayState' can cause a user to be redirected to the wrong application URL after a successful login attempt.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Advanced' 'OAuth' 'Scopes'? (Select all that apply)",
+    "options": {
+      "A": "openid (to trigger OIDC flow)",
+      "B": "offline_access (to obtain a refresh token)",
+      "C": "profile (to request basic user info)",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Recursive' 'Policy' 'Evaluation' 'Failure'?",
+    "options": {
+      "A": "When a policy decision triggers another policy check in an infinite loop, crashing the IAM engine.",
+      "B": "Failing to evaluate a physical building policy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Identity' 'Assurance' 'Level' (IAL) in NIST 800-63?",
+    "options": {
+      "A": "A measure of the confidence that the applicant's claimed identity is their real identity, based on the strength of the evidence provided.",
+      "B": "The level of noise in a server room.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Protocols' occur when an enterprise attempt to use modern 'WebAuthn' hardware keys on a legacy application that only supports NTLM.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Identity' 'Orchestration' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Unified user experience across disparate IdPs",
+      "B": "Reduced custom code for security integrations",
+      "C": "Guaranteed to stop all hackers",
+      "D": "Simplified migration between cloud identity vendors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Biometric' 'Liveness' 'Detection'?",
+    "options": {
+      "A": "Detecting if a person is physically alive (e.g., via blink or heat detection) to prevent spoofing with a photo or mask.",
+      "B": "Detecting if a physical server is turned on.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  }
+  ]
+}

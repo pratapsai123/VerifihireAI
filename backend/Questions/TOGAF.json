@@ -1,0 +1,1903 @@
+{ 
+  "skill": "TOGAF", 
+  "questions": [
+    {
+    "question": "What is the primary technical objective of 'TOGAF' in a corporate enterprise?",
+    "options": {
+      "A": "To masterfully design the physical wiring of server rooms strictly.",
+      "B": "To technically provide a high-level framework for enterprise architecture that enables masterfully managed alignment between business and IT (effect).",
+      "C": "A specialized software for designing 3D architectural blueprints strictly.",
+      "D": "To increase the frame rate of local database query results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific technical term refers to the core of TOGAF, providing a masterfully managed step-by-step method for developing an enterprise architecture?",
+    "options": {
+      "A": "The TRM strictly",
+      "B": "ADM (Architecture Development Method)",
+      "C": "Rasterization Delay strictly",
+      "D": "The SQL query parser strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'Preliminary Phase' in the TOGAF ADM is technically masterfully used to define the 'Architecture Capability' and prepare the organization for architecture projects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical phase in the TOGAF ADM technically focuses on creating the 'Architecture Vision' and getting stakeholder approval?",
+    "options": {
+      "A": "Phase G",
+      "B": "Phase A",
+      "C": "Binary Header strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical objective of the 'Architecture Content Framework' in TOGAF?",
+    "options": {
+      "A": "To calculate the physical weight of printed reports.",
+      "B": "To technically provide a masterfully managed structural model for architectural artifacts and deliverables (effect).",
+      "C": "A specialized tool for measuring light levels in boardrooms.",
+      "D": "To physically lock the digital architecture repository."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In TOGAF, 'Business Architecture' technically masterfully refers to the technical Always-On strategy, governance, and masterfully handled key business processes of an organization.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves ensuring that the technical 'Baseline Architecture' and 'Target Architecture' masterfully technicaly align to identify gaps?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Gap Analysis / Strategic Fit Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Enterprise Continuum' technically intended to achieve in TOGAF support?",
+    "options": {
+      "A": "Measuring the distance between physical server nodes.",
+      "B": "The technical Always-On view of the Architecture Repository that masterfully managed technicaly categorizes assets from generic to organization-specific (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phase B' of the TOGAF ADM masterfully technicaly Always-On focuses on 'Information Systems Architecture' including Data and Application layers.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is the technical significance of a 'Building Block' in TOGAF?",
+    "options": {
+      "A": "A physical brick used in construction.",
+      "B": "A technical masterfully assigned Always-On package of functionality masterfully technicaly designed to be combined with other packages to deliver an architecture (effect).",
+      "C": "A security scan of the office building.",
+      "D": "The number of hours a team worked on a diagram."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describe TOGAF benefits for 'Governance'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully clear technical 'Compliance' reviews",
+      "B": "Ensuring technical 'Consistency' masterfully via the ADM process",
+      "C": "Buying physical snacks for the architecture board",
+      "D": "Facilitating masterfully managed technical 'Decision Making' via standardized artifacts"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Stakeholder' masterfully used for in a TOGAF architecture project?",
+    "options": {
+      "A": "Ensuring the physical building foundation is level.",
+      "B": "The technical process of masterfully managed technical Always-On identifying individuals or groups with a key technical Always-On interest in the architecture outcome (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "A person who writes code for GitLab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phase C' of the TOGAF ADM technicaly masterfully Always-On includes both 'Data Architecture' and 'Application Architecture'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical task involves 'Architecture Governance' in TOGAF?",
+    "options": {
+      "A": "Using a physical ruler to measure a laptop.",
+      "B": "The technical process of masterfully technicaly Always-On monitoring and controlling architectures at an enterprise level to ensure compliance (effect).",
+      "C": "A specialized tool for measuring database weight.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Phase D' technically in the ADM cycle?",
+    "options": {
+      "A": "Technology Architecture",
+      "B": "A physical door in the data center.",
+      "C": "A security scan for computer viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: The 'Architecture Repository' is a technical Always-On standard that masterfully technicaly stores the outputs of the architecture projects.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical term describes 'Phase E' in TOGAF?",
+    "options": {
+      "A": "The weight of the user guide.",
+      "B": "Opportunities and Solutions: identifying the technical Always-On delivery vehicles for the target architecture (effect).",
+      "C": "A public DNS record strictly.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phase F' technically intended to achieve?",
+    "options": {
+      "A": "Making sure the servers are sitting in a circle.",
+      "B": "Migration Planning: the masterfully managed technical Always-On prioritization of projects to technicaly move from baseline to target (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phase G' is the technical Always-On phase for 'Implementation Governance' where the architect technicaly masterfully ensures projects align with the architecture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is the purpose of 'Phase H' in TOGAF?",
+    "options": {
+      "A": "To technically provide a masterfully definitive indicator of 'Architecture Change Management'.",
+      "B": "A physical wall dividing the server room.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'Architecture Domains' in TOGAF? (Select all that apply)",
+    "options": {
+      "A": "Business Architecture",
+      "B": "Data Architecture",
+      "C": "The SQL query parser",
+      "D": "Technology Architecture"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Requirements' 'Management' significance in the ADM cycle?",
+    "options": {
+      "A": "Hiring a person named Requirement.",
+      "B": "The technical masterfully assigned Always-On central process that technicaly masterfully feeds into every technical Always-On phase of the ADM (effect).",
+      "C": "A strategy for developers to use less memory.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is an 'Artifact' technically in TOGAF?",
+    "options": {
+      "A": "A technical masterfully managed work product (like a catalog, matrix, or diagram) that technicaly masterfully Always-On describes an aspect of the architecture.",
+      "B": "Watching a clock during a meeting.",
+      "C": "A security scan for database hardware.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Views' occur when a technical masterfully managed architectural diagram technicaly masterfully Always-On fails to address the masterfully handled Always-On concerns of a specific stakeholder.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe TOGAF benefits for 'Interoperability'? (Select all that apply)",
+    "options": {
+      "A": "Enabling masterfully fast technical 'Data Exchange' between systems",
+      "B": "Ensuring technical 'Consistency' masterfully via standard reference models",
+      "C": "Guaranteed to replace all human IT leads",
+      "D": "Facilitating masterfully managed technical alignment of masterfully assigned cloud assets"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is a 'Viewpoint' technically used for in TOGAF?",
+    "options": {
+      "A": "A physical wall dividing the office.",
+      "B": "The technical masterfully managed specification of the masterfully assigned conventions for a particular technical Always-On kind of architecture view (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Compliance' tracking in TOGAF?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical measures of the masterfully managed technical Always-On degree to which an implementation technicaly masterfully adheres to the architecture standards.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Scalability' is a technical Always-On standard that masterfully measures how technicaly masterfully an enterprise architecture technicaly masterfully handles masterfully managed massive technical growth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are common TOGAF Reference Models? (Select all that apply)",
+    "options": {
+      "A": "Technical Reference Model (TRM)",
+      "B": "Integrated Information Infrastructure Reference Model (III-RM)",
+      "C": "The number of security cameras in the office",
+      "D": "Strategic Reference Model"
+    },
+    "answer": ["A", "B"]
+  },
+  {
+    "question": "What is 'SBB' (Solution Building Block) technically in TOGAF?",
+    "options": {
+      "A": "Building a physical warehouse for solutions.",
+      "B": "The technical masterfully managed physical Always-On implementation of an Architecture Building Block (ABB) (effect).",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Architecture' 'Capability' technically?",
+    "options": {
+      "A": "The technical masterfully managed Always-On ability of an organization to technicaly masterfully Always-On develop and masterfully handled manage architectures (effect).",
+      "B": "Hiring a person named Capability.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Principles' occur when the technical masterfully managed 'IT Principles' technicaly masterfully Always-On conflict with the masterfully handled technical Always-On 'Business Principles'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Governance' Strategy in TOGAF? (Select all that apply)",
+    "options": {
+      "A": "Standardizing masterfully managed technical artifact naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Providing technical 'Blueprints' for automated architecture technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is a 'Deliverable' technically used for in the ADM?",
+    "options": {
+      "A": "To technically identify and masterfully analyze a masterfully handled technical Always-On formal work product technicaly masterfully Always-On that is masterfully managed as a project milestone.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Architecture' 'Technical' 'Debt'?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated architectural patterns and manual CLI workarounds, which makes the platform technicaly 'Riskier' over time.",
+      "B": "The amount of insurance a database has.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Governance' logs are technical Always-On standards that masterfully allow architecture leads to masterfully manage and technicaly mirror the performance of a primary architecture review.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are valid 'TOGAF' Partitions? (Select all that apply)",
+    "options": {
+      "A": "Governance",
+      "B": "Standards",
+      "C": "The number of security cameras in the office",
+      "D": "Strategy"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Governance' significance in TOGAF support?",
+    "options": {
+      "A": "The technical mechanism masterfully used to ensure technical Always-On architecture efforts masterfully remain masterfully consistent with the masterfully assigned strategy.",
+      "B": "Scanning physical shipping containers.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Identify' (MTTI) a compliance error?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical duration from a structural technical flaw masterfully occurring technicaly until it is masterfully flagged in the technical architecture health report.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Mainframe-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe TOGAF 'Readiness'? (Select all that apply)",
+    "options": {
+      "A": "Ensuring technical 'Capability Frameworks' are masterfully finalized",
+      "B": "Validating the security technical configuration of the repository",
+      "C": "Identifying program satisfaction trends",
+      "D": "Checking if the technical goals masterfully match the business specs"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Transformation' 'Roadmap' significance in management?",
+    "options": {
+      "A": "Watching a physical tree in the office garden.",
+      "B": "The technical process where architecture technical Always-On steps and masterfully assigned raw milestones masterfully are technicaly Always-On captured to ensure masterfully managed strategic success.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is a 'TOGAF' 'Event' log in an audit?",
+    "options": {
+      "A": "A technical record showing masterfully detailed information about architecture reviews, masterfully finalized resource changes, and masterfully applied hardware alerts.",
+      "B": "Reporting a person who is not negative.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Architecture management technically includes 'Data Sovereignty' by masterfully defining the technical support masterfully given to a user after every technical feature release.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Architecture priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical operational alignment",
+      "B": "Minimizing technical data interaction latency",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical architecture documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Gap' 'Analysis'?",
+    "options": {
+      "A": "Calculating the physical volume of the server room.",
+      "B": "The technical evaluation of every technical 'Mismatch' masterfully moving through the firm to masterfully identify technical friction points between baseline and target states.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the brightness of the screen."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Errors' (MTBE) in an architecture?",
+    "options": {
+      "A": "The average technical duration that a structural technical baseline masterfully remains performance-stable before an unplanned technical service disruption occurs.",
+      "B": "The amount of insurance a resource has.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' occur when a lead masterfully masterfully assumes annual masterfully managed default requirements technicaly masterfully meet the technical Always-On requirements of a 2026 'Real-time-Native' era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Workflow' Strategy in architecture? (Select all that apply)",
+    "options": {
+      "A": "Standardizing architecture technical naming masterfully for global consistency",
+      "B": "Consistency in result presentation across screens",
+      "C": "Naturally air-gapped when not in use",
+      "D": "Providing technical 'Blueprints' for automated interaction technical data collection masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Primary' 'Identity' significance in an architecture strategy?",
+    "options": {
+      "A": "A physical tool for tightening server bolts.",
+      "B": "The technical masterfully assigned primary masterfully managed masterfully assigned technical environment masterfully intended to technicaly capture the core masterfully assigned value that a platform masterfully provides to its users.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Architecture' 'Throughput' volume?",
+    "options": {
+      "A": "The technical percentage of user sessions masterfully successfully moving through the production technical pipeline within a period.",
+      "B": "A physical cover for a computer.",
+      "C": "A security scan of the database.",
+      "D": "The number of hours a team worked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'State' 'Shadowing' is a technical Always-On standard that masterfully allows engineers to masterfully manage and technicaly mirror the configuration of a primary technical architecture goal.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Architecture priorities? (Select all that apply)",
+    "options": {
+      "A": "Ensuring 100% technical strategic alignment",
+      "B": "Minimizing technical data interaction costs",
+      "C": "The SQL query parser",
+      "D": "Maintaining masterfully clear technical architecture documentation"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Identity' Map Analysis?",
+    "options": {
+      "A": "Analyzing the risk of falling off a physical chair.",
+      "B": "The technical evaluation of business units masterfully to identify technical bottlenecks in a global interaction strategy.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time Between Failures' (MTBF)?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The technical duration that an architecture strategy masterfully remains performance-stable before an unplanned technical project disruption occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Goals' occur when a stakeholder masterfully masterfully assumes an interaction is final when it technicaly is masterfully preliminary.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Inclusive' architecture design? (Select all that apply)",
+    "options": {
+      "A": "Ensuring architecture portals are accessible for diverse technical teams",
+      "B": "Conducting 'blind' architectural reviews to reduce bias",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Fostering a culture where clear technical object naming is an asset"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Data' 'Residency' significance?",
+    "options": {
+      "A": "Technically ensuring that interaction data masterfully follows all legal architectural rules after every technical transaction.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Interaction' 'Transit' tracking in architecture engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The technical measure of how masterfully well technical steps (like state changes) are masterfully moved between masterfully defined technical management stages.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Manual-only' requirements for a 2026 'Cloud-Native' interaction era.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' maintenance benefits for architecture? (Select all that apply)",
+    "options": {
+      "A": "Automatically technically identifying interaction drift",
+      "B": "Consistency in result presentation across units",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Self-healing interaction technical management masterfully"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Visual' 'Persistence' significance?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The technical property that masterfully ensures a backup interaction register masterfully mirrors the technical configuration of a primary element.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean Time to Verify' (MTTV) an architecture fix?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The technical duration from a structural fix being committed until 'Automated Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Interaction regions' occur when a lead masterfully masterfully assumes a technical tool is available globally when it technicaly is masterfully regional.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' Architecture roles? (Select all that apply)",
+    "options": {
+      "A": "Lead Architecture Architect",
+      "B": "Interaction System Specialist",
+      "C": "Architecture Governance lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'TOGAF' 'Architecture' Analysis?",
+    "options": {
+      "A": "The technical evaluation of users, goals, and interaction nodes to masterfully optimize the entire technical experience fabric.",
+      "B": "Building a physical warehouse for cyber data.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific technical component of the TOGAF Content Framework is used to show the relationship between two different architectural entities (e.g., Application to Business Function)?",
+    "options": {
+      "A": "The SQL query parser strictly",
+      "B": "Matrix",
+      "C": "Rasterization Entropy strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Architecture Partitioning' is a technical orchestration in the Preliminary Phase masterfully used to organize the architecture into manageable chunks based on subject matter or geography.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary technical objective of the 'Integrated Information Infrastructure Reference Model' (III-RM) in TOGAF?",
+    "options": {
+      "A": "To physically organize the seating chart of the architecture board.",
+      "B": "To technically provide a reference model for 'Boundaryless Information Flow' focusing on the application and infrastructure layers (effect).",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live repository dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', which technical term refers to the process of masterfully ensuring that an implementation project technicaly Always-On conforms to the approved architecture?",
+    "options": {
+      "A": "Static Routing strictly",
+      "B": "Architecture Compliance Review",
+      "C": "The Recycle Bin strictly",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Capability Engineering', what is the technical significance of the 'Architecture Maturity Model' (e.g., ACMM)?",
+    "options": {
+      "A": "It defines the physical color of the server hardware labels.",
+      "B": "A technical Always-On analytical record masterfully used to identify the current vs. target state of the organization's architecture practice (effect).",
+      "C": "A security scan for database blueprints.",
+      "D": "Increasing the size of the font on the admin console."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Phase E' (Opportunities and Solutions) is technicaly masterfully used to define the 'Transition Architectures' that represent incremental steps toward the Target Architecture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Logic' involves using a 'Stakeholder Map' to technically ensure that the masterfully managed architectural views address the specific concerns of the board?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Concern Orchestration / Viewpoint Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Architecture Contracts' technically designed to achieve in Phase G (Implementation Governance)?",
+    "options": {
+      "A": "Measuring the weight of the data packets physically.",
+      "B": "To technically Always-On bind the development team (cause) to the specific architecture standards and constraints defined by the Lead Architect (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Expert' technical methods for managing 'Architecture Gaps'? (Select all that apply)",
+    "options": {
+      "A": "Implementing technical 'Work Packages' masterfully via Phase E",
+      "B": "Utilizing masterfully configured 'Consolidated Gaps, Solutions, and Dependencies' matrices",
+      "C": "Buying physical snacks for the migration squad",
+      "D": "Conducting masterfully applied 'Validation' of Target Architecture viability"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "True or False: In 'Platform Governance', the technical 'Architecture Board' must masterfully be verified to ensure that all masterfully managed architecture changes technicaly Always-On undergo a formal review process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Requirement' 'Impact' significance in the Requirements Management phase?",
+    "options": {
+      "A": "Ensuring the physical office floor is level.",
+      "B": "The technical act of masterfully technicaly Always-On assessing how a change in business need (cause) impacts the current ADM cycle and existing artifacts (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Approve' (MTTA) for an Architecture Change Request in Phase H?",
+    "options": {
+      "A": "The average time it takes for a team to have lunch.",
+      "B": "A technical metric tracking organizational efficiency by measuring the average technical duration required to masterfully finalize a governance decision.",
+      "C": "A security scan for database hardware.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific 'Strategy' involves an Architect using 'Architecture' 'Patterns' to technically reuse masterfully managed technical Always-On solutions from the Enterprise Continuum?",
+    "options": {
+      "A": "Unit Testing",
+      "B": "Asset Orchestration / Pattern Logic",
+      "C": "Smoke Testing",
+      "D": "The SQL query font size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Concerns' occur when an architect masterfully promises '100% Technical Efficiency' while technicaly ignoring the stakeholder's masterfully handled 'Business Cost' requirements.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Repository' 'Hardening' benefits? (Select all that apply)",
+    "options": {
+      "A": "Technically finalizing a Meta-model Standard for masterfully global product alignment",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Reducing technical 'Integrity Debt' masterfully by locking masterfully validated artifact schemas"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Solution' 'Architecture' significance in a Phase E interaction audit?",
+    "options": {
+      "A": "Isolating data on a deserted island.",
+      "B": "The technical act of masterfully providing 'Physical Implementation Blueprints' (cause) that masterfully technicaly ensures the Target Architecture is actionable (effect).",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Compliance' 'Volatility' monitoring?",
+    "options": {
+      "A": "The height of the water in the office cooler.",
+      "B": "A technical metric tracking the frequency of masterfully identified project deviations, identifying an unstable technical governance-fit baseline.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Architecture' logic technically refers to a masterfully managed high-level view of the technical Always-On entire enterprise, often technicaly masterfully created during Phase A.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which component in a 'Strategic' framework handles 'Automated' 'Architecture' 'Cataloging'?",
+    "options": {
+      "A": "The SQL query parser",
+      "B": "Sparx EA / Archi / Bizzdesign API orchestration",
+      "C": "The physical building floor plan",
+      "D": "The XML API strictly"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Interoperability' significance in a multi-firm interaction support scenario?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The technical evaluation of how masterfully the technical platform technicaly Always-On allows disparate masterfully handled technical Always-On systems to exchange and use data (effect).",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Architecture' 'Landscape' logic technically in TOGAF?",
+    "options": {
+      "A": "Putting the team on a physical bus.",
+      "B": "The technical practice of technicaly masterfully Always-On organizing masterfully managed current architectures into levels (Strategic, Segment, Capability) (effect).",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Mental Models' occur when an enterprise architect masterfully assumes 'Cloud-First' technicaly automatically technicaly leads to 'Business Agility' masterfully without a technical roadmap process.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Architecture' 'Strategy' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Chief Enterprise Architect (Defining core methodologies and asset repositories)",
+      "B": "Global Governance Lead (Enforcing technical compliance and board policies)",
+      "C": "Infrastructure Performance Manager (Monitoring technical conversion MTBF and stability)",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Artifact' 'Drift' discovery in an organizational architecture audit?",
+    "options": {
+      "A": "Designing icons in a dark room.",
+      "B": "The technical process of identifying masterfully managed production implementations (cause) that masterfully no longer technicaly align with the masterfully assigned 'Repository' documentation (effect).",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Standard' 'Violation'?",
+    "options": {
+      "A": "The height of the office water cooler.",
+      "B": "A metric tracking organizational responsiveness by measuring how long a technical compliance gap exists before the masterfully configured 'Sentry' flags the dropout.",
+      "C": "A security scan of the office building.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data Models' logic technically occurs when an architect masterfully applies 'Flat-File' requirements to a masterfully managed technical region that technicaly masterfully enforces 'Relational-Graph' technical rendering.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Artifact' 'Optimization' benefits? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with technically high 'Metadata' waste automatically",
+      "B": "Consistency in result presentation across global squads",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Automatically technicaly generating 'Architecture Snapshots' based on masterfully tracked repository metadata"
+    },
+    "answer": ["A", "D"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' in architecture design?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'Repository Uptime', 'MTTR for recent ADM bugs', 'Principle stability', and 'Identity integrity maturity'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Failures' (MTBSF) in architecture platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the architecture protocol baseline remains effective before a technical update breaks the logic.",
+      "C": "A security scan for computer viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Governance' 'Analytics' for architects? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Operational Waste' (High redundancy) automatically",
+      "B": "Predicting future 'Input' storage needs based on historical growth in technical session data",
+      "C": "Testing if the user is physically wearing glasses",
+      "D": "Analyzing metadata to identify 'Compliance Blindspots' in un-vetted technical architecture segments"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Architecture Component?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a principle (the specific rule) is isolated from the service 'What' (the business goal), allowing for central masterfully updated standards.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Architecture' 'Technical' 'Debt' in an enterprise environment?",
+    "options": {
+      "A": "The cumulative future labor cost of 'Ignoring' outdated principles and manual repository workarounds, which makes the product technically 'Riskier' over time.",
+      "B": "A physical debt owed to a bank.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a lead reports '100% Integration Readiness' while the internal team is aware that 'Segment B' is technically suffering from interaction drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Architecture' 'Design' 'Maturity' Drivers? (Select all that apply)",
+    "options": {
+      "A": "Enforcing 'Architecture Policy' (e.g. Mandatory Compliance Review) via automated linters",
+      "B": "Accelerating 'Unit Onboarding' through standardized Interaction Library Blueprints",
+      "C": "Ensuring 'Systemic' integrity for global interaction logic",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Servant' 'Resiliency' orchestration in an Architecture squad?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The central Platform team focuses on providing 'Pre-vetted UI Modules' and 'Telemetry Sinks' so local units can manage their own technical app health without manual roadblocks.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of the browser."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Architecture' 'Success' 'Volatility'?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the frequency of 'Interactive' failures and resets, identifying an unstable technical environment or masterfully inconsistent design logic.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Hardware' in architecture leadership refers to a manager giving a 'Remote Lead' a local machine that technicaly lacks the masterfully required camera resolution for eye-tracking.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Optimization' in TOGAF? (Select all that apply)",
+    "options": {
+      "A": "Identifying technical segments with the highest 'Interaction' waste via automated auditing",
+      "B": "Predicting future market 'No-Code Tooling' needs based on technical adoption data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Architecture Training' spend with 'MTTV' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'State' 'Lifting' significance in repository automation?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The ability to 'Lift' a successful structural logic state (like a proven Gov pattern) from one site and apply it globally for enterprise-wide consistency.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Verify' (MTTV) a technical fix?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The average technical duration from a structural fix being committed until 'Automated Smoke Tests' masterfully confirm the system integrity is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Software' occurs when a lead masterfully enforces 1990 'Static-Mockup' requirements for a 2026 'Cloud-Native' interaction environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Architecture' 'Design' 'Succession' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Director of Global Identity Health",
+      "B": "Principal Interaction Architect",
+      "C": "Lead Regulatory Transit Auditor",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Environment' 'Bootstrap' in a newly formed Architecture squad?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical process of quickly establishing standard 'Global Finding Sinks', 'Organization Permissions', and 'Linter Rules' for a new business acquisition within 48 hours.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Pass' 'Rate' of 'Architecture' 'Simulations'?",
+    "options": {
+      "A": "The percentage of 'Snapshot' runs where the organization's technical design logic masterfully matched the masterfully expected behavioral outcome without manual correction.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan for computer viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an executive masterfully expects a 'Full Global Interaction Sync' in exactly 1 second after a primary data commit.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits' in TOGAF? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded instances) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across different global regional centers"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Multi-tenant Architecture Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Business Unit A' technical definitions masterfully cannot be seen or searched by 'Business Unit B' through restricted metadata visibility or Registry RBAC.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in architecture platforms?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking organizational safety by measuring how long the platform baseline remains effective before a technical update breaks the logic.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in IT leadership occurs when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Performance Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping component templates updated with rapidly changing local 'Privacy' laws",
+      "C": "Guaranteed to replace all human lawyers",
+      "D": "Risk of 'False Risk Confidence' if automation only checks 'Managed' and ignores 'Shadow' technical hardware"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Support' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring that the technical 'How' of a monitoring control (the session config) is isolated from the visual 'What' (the branding target), allowing for easy tool migration.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Telemetry' 'Failure' in monitoring?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between an Automated technical sensor going 'Offline' until the 'Log Platform' itself masterfully flags the loss of visibility.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a lead masterfully enforces 2010 'Signature-only' models to manage a 2026 'Experience-Edge' interaction environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Architecture' Stakeholders? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Legal / Connectivity Lead",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Interaction' 'Ecosystem' 'Orchestration' for a Lead?",
+    "options": {
+      "A": "Orchestrating a physical ecosystem of plants in the office.",
+      "B": "The high-level management of Shared Symbols, Architecture Audits, Extended Variables, and Secret Managers to ensure a seamless and safe service release pipeline.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Posture' (MTRIP) in TOGAF?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The duration from identifying a significant skeletal control failure until the organization's 'Safety Baseline' is masterfully restored and verified.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an employee expects a 'Full Promotion' after correctly performing exactly one complex user simulation.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Quality' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Instant visibility into 'Critical Readiness Gaps' (e.g. Unsharded subnets) for the Board",
+      "B": "Reduction in manual spreadsheet work for lead researchers",
+      "C": "Guaranteed to replace all human auditors",
+      "D": "Consistency in result presentation across global units"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an audit pipeline?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing standardized 'Architecture Sprints' where each phase masterfully results in a specific, independently verifiable 'Technical Maturity' score.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Fix' (MTTF) a hiring gap in Experience Engineering?",
+    "options": {
+      "A": "The average time it takes for a team to clean the office.",
+      "B": "The duration from a critical expert seat being vacated until the new hire is masterfully productive in the team.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Parallelism' occurs when a lead masterfully assigns 10 high-priority forensic investigations to a single architect with only 40 hours of bandwidth.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' for architecture platforms? (Select all that apply)",
+    "options": {
+      "A": "Identifying business units with the highest 'Credential Exposure' rates",
+      "B": "Predicting future market 'Tooling' needs based on actor data",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Correlating 'Architecture Training' spend with 'MTTR' reduction scores"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Security' 'Asset' 'Maturity' score in TOGAF?",
+    "options": {
+      "A": "A rating of how well a specific segment is observed, based on its reliability, investigation efficiency, and false-positive rate.",
+      "B": "The age of the physical office equipment.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Security' 'Failures' (MTBSSF)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of business stability before a major interactive strategy error occurs.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in leadership occur when the remediation timeline for a 'blocker' discovery is based on 'Fixed Dates' rather than 'Current Team Damage'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In a global multi-entity M&A consolidation, how should a Principal Architect technically model 'Architecture Entropy' to predict the decay of 'Compliance Integrity' across 50+ disparate regional ADM cycles?",
+    "options": {
+      "A": "By assuming a flat 5% drift rate for every new project started strictly.",
+      "B": "By utilizing 'Graph Theory' to measure artifact dependency density and applying a stochastic model to determine the probability of 'Standard Divergence' in decentralized business units.",
+      "C": "By limiting the number of total Building Blocks to exactly 100 to prevent metadata overhead strictly.",
+      "D": "By requiring a manual board-level signature for every change in a local Technology Architecture baseline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Architecture' 'Decoupling' refers to the technical practice of isolating 'Business Capability Maps' from 'Vendor-Specific Solution Implementations' via the Enterprise Continuum to ensure that a provider-exit (cause) does not systemically force a rewrite of the masterfully validated business intent (effect).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategic Modeling' technique allows an EA Director to predict the 'FinOps ROI' of shifting from 'Monolithic ERP' to 'Composable-Business-Architecture' for a high-concurrency global firm?",
+    "options": {
+      "A": "Probabilistic Analysis of 'Agility Amortization' (Capability Reuse) vs. the fixed technical cost of building a custom Governance Framework and automated compliance linter.",
+      "B": "Standard SQL SUM strictly",
+      "C": "Unit Testing",
+      "D": "The SQL query parser"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the technical objective of 'Architecture Arbitrage' during an international M&A involving the merger of a firm using 'Siloed Agile Squads' and a firm using 'Centralized Waterfall Governance'?",
+    "options": {
+      "A": "To ensure both teams use the same brand of physical keyboard.",
+      "B": "To normalize disparate 'Operating Archetypes' into a unified 'Capability Fabric' that technically satisfies the security parity and velocity needs of the parent Organization.",
+      "C": "A specialized software for architects to design boardrooms.",
+      "D": "To increase the frame rate of the live repository telemetry monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Strategic Engineering', what is 'Building' 'Block' 'Splicing' (Dynamic ABB-to-SBB Mapping) and how does it technically enable 'Global Resilience' during a major regional cloud provider failure?",
+    "options": {
+      "A": "When an employee physically routes support calls to a different country.",
+      "B": "A design pattern where the architecture masterfully manages 'Solution-Substitution' via a digital metadata orchestrator, technically allowing for the immediate localized update of implementation assets without a baseline freeze (effect).",
+      "C": "A specialized security scan for hardware blueprints.",
+      "D": "Increasing the font size of the executive strategic logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Resilience' 'Archetypes' occur when a 'High-Velocity' experimental marketing architecture policy is technically applied to a 'High-Precision' regulatory reporting node, leading to systemic 'Audit Noise' and critical fiscal risk.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which specific 'Strategy' involves a Lead Architect deliberately implementing 'Governance' 'Chaos' (injecting randomized 'Documentation Latency' into 1% of ADM flows) to verify if the 'Compliance Linter' logic technically maintains 'Repository Invariants'?",
+    "options": {
+      "A": "Laissez-faire Management",
+      "B": "Resilience Orchestration (Chaos Architecture / Fault Injection)",
+      "C": "Transactional Feedback",
+      "D": "The SQL query parser"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Systemic' 'Standard' 'Contagion' and its relation to 'Bloated Meta-models' in a massive 1,000-project global enterprise?",
+    "options": {
+      "A": "Leading a team of computer systems only.",
+      "B": "The risk where a flawed requirement in a core 'Global Standard' (cause) masterfully triggers a surge in conflicting local deviations, resulting in a systemic 'Implementation Freeze' (effect).",
+      "C": "A specialized tool for measuring light levels in the server room.",
+      "D": "To increase the frame rate of the organizational chart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these are valid 'Architecture Fabric' ROI calculations for a strategic shift to 'Real-Time-Governance' via automated compliance scanning? (Select all that apply)",
+    "options": {
+      "A": "Reduction in 'Governance TCO' by automatically bypassing 90% of manual 'Architecture Board' meeting cycles",
+      "B": "Financial savings from 'Architect' labor reclamation due to 100% verified 'Self-Service' roadmap generation",
+      "C": "The value of 'Strategic Integrity' gained through 100% verified real-time compliance with board-mandated ESG tokens",
+      "D": "The number of physical CPU fans in the Google data center"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "True or False: 'Psychological' 'Safety' at the Architecture Leadership level ensures that 'Enterprise Architects' can flag 'Technical Debt in the Business Capability Map' to the Board without fear of termination, allowing for transparent 'Structural Hardening'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Artifact' 'Complexity' in the evaluation of a Lead Director's 'Federated Architecture Governance' model for a 1,000,000-user global partner ecosystem?",
+    "options": {
+      "A": "The physical weight of the TOGAF 10 pocket guide.",
+      "B": "The ability to integrate contradictory technical signals (e.g., valid 'Local Business Units' vs. anomalous 'Global Standard Decay' in legacy nodes) into a cohesive 'Alignment Failure' hypothesis.",
+      "C": "A specialized tool for measuring distance between offices.",
+      "D": "Hiring a professional actor to simulate a board briefing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Strategic' 'Timeline' 'Splicing' logic during a high-throughput multi-market digital transformation?",
+    "options": {
+      "A": "Breaking a physical router into pieces.",
+      "B": "The process of masterfully isolating 'Interaction-Critical Roadmap Items' from 'Low-Priority Baseline Updates' on dedicated governance tiers to ensure 'Architecture Accessibility' during peak workload windows.",
+      "C": "A security scan for database viruses.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'Expert' behavior involves 'Pre-emptive Strategy Dampening' during a suspected 'Requirement Loop' or 'Recursive Scope Creep' event on a core global project?",
+    "options": {
+      "A": "Waiting for the project to physically catch fire before acting.",
+      "B": "Immediately initiating a 'Minimal-Surface-Area' scope policy and technically diverting unvetted feature requests to a 'Secondary-Validation-Silo' before the ADM engine masterfully enters a 'Governance-Saturation' state.",
+      "C": "Delegation strictly",
+      "D": "Constructive Feedback"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Cultures' in an architecture firm acquisition often result in 'System Rejection', where the acquired firm's architects find ways to 'Side-load' personal legacy notations to bypass parent firm's 'ArchiMate-Strict' architecture.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Strategic' 'Architecture' 'Succession' 'Calibrations' in an Engineering team? (Select all that apply)",
+    "options": {
+      "A": "Defining future 'AI-Assisted-ADM' and 'Zero-Trust-Architecture-Capability' competencies within the team",
+      "B": "Standardizing 'Resilience Lead' readiness criteria across global architecture departments",
+      "C": "Buying physical snacks for the Board",
+      "D": "Assessing the 'Systemic thinking' capacity of potential Enterprise Architecture Directors"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Double-loop' 'Learning' logic in an Enterprise Architecture Post-Mortem?",
+    "options": {
+      "A": "Learning to do a physical double-loop jump.",
+      "B": "Questioning if the 'Architecture Strategy' itself (e.g., why we use 'Centralized Control' vs 'Federated Freedom') is the cause of failure, rather than just fixing a single 'Diagram Error'.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font on the presentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Metadata' 'Concentration' 'Aggregation' in Global Architecture Ops?",
+    "options": {
+      "A": "The cumulative risk of having all 50 global business units dependent on a single 'Third-party SaaS Repository' that technically has zero redundant regional control planes.",
+      "B": "Aggregating physical risks like fire in the office.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Strategic' 'Inertia' in Architecture Ops occurs when a firm continues to rely on 'Monthly Board Reviews' in 2026, despite modern business requirements necessitating 'API-Native Real-Time Architecture Sync'.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Strategic' 'Architecture' 'Governance' metrics? (Select all that apply)",
+    "options": {
+      "A": "Risk Adjusted Return on Architecture Spend (RAROAS)",
+      "B": "Percentage of 'Business Critical' flows with 100% verified 'Idempotent' artifact states",
+      "C": "Velocity of 'Legacy Stack' retirement across the top 10% of high-debt projects",
+      "D": "The SQL query font size"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Control' 'Entrenchment' risk during a 'Waterfall-to-Agile' architecture transformation?",
+    "options": {
+      "A": "When a physical trench is dug in the board room.",
+      "B": "The risk that long-tenured 'Domain Architects' will block 'Self-Service Governance' adoption to protect their manual 'Gatekeeping' oversight power.",
+      "C": "A specialized software for historians.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategic' 'Failures' (MTBSF) in an Architecture Fabric?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the duration of business stability before a major architecture or strategy-alignment error occurs in the repository.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Incentives' occur when an EA demands 'Zero Architecture Regression' while the Board only rewards the team for '100% Monthly Project Volume Growth' (ignoring alignment debt).",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Insight' 'Orchestration' for TOGAF? (Select all that apply)",
+    "options": {
+      "A": "Using AI to correlate 'Requirement Anomalies' with potential 'Kernel-level' data exfiltration attempts",
+      "B": "Automatically identifying 'Artifact Owner' gaps in real-time as a new Business Unit is provisioned",
+      "C": "Guaranteed to replace all human architects",
+      "D": "Analyzing global metadata to predict 'Compliance-Drift' shocks in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Experience' 'Ecosystem' 'Architecture' (AEEA) for a Principal Lead?",
+    "options": {
+      "A": "Managing a physical portfolio of paper reports.",
+      "B": "The strategic integration of Internal Governance Portals, Multi-region Logic Hubs, Identity Mesh, and Real-time Repository Telemetry into a single 'Unified Digital Spine'.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Operations', what is 'Fidelity' 'Calibration' in TOGAF M&A?",
+    "options": {
+      "A": "Trading physical servers for employees.",
+      "B": "The technical process of evaluating whether an acquired firm's 'Naming' logic matches the parent company's 'Performance Standard' before experienced fabric merger.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Time' 'Horizons' occur when the Board expects 'Instant Global Architecture Parity' from a newly hired team that requires 12 months of 'Historic Path Mapping' to be effective.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Architecture' 'Compliance' 'Audit' 'Challenges'? (Select all that apply)",
+    "options": {
+      "A": "Generating 'Immutable' evidence of path integrity for Regulatory security auditors",
+      "B": "Automatically calculating 'Resilience Maturity' risk scores across global units",
+      "C": "Hiring 100 extra junior manual testers",
+      "D": "Verifying that 'Data Residency' rules are enforced during automated multi-region repository replication"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Encapsulation' in an Organizational Architecture Model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Ensuring 'Global Strategic Governance Policies' (the What) are isolated from 'Local Departmental Binary Tactics' (the How), allowing local speed while maintaining global safety.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Systemic' 'Risk' in legacy meta-models?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The duration between a major global 'Binary' vulnerability release and the Architect officialy flagging the total internal architecture exposure count based on version scans.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Transparency' occurs when a Lead reports '100% Repository Readiness' to the board while the internal team is aware that 'Segment B' is technically suffering from interaction drift.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Architecture' 'Strategy' 'APIs'? (Select all that apply)",
+    "options": {
+      "A": "Linking 'Staff Performance scores' directly to 'Production Model Write' eligibility",
+      "B": "Connecting 'Real-time Breach News' to 'Automated Repository Lockdown' triggers",
+      "C": "Guaranteed to fix all network lag",
+      "D": "Syncing 'Architecture Audit' data with 'Corporate Risk' software"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new global architecture region?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "A pre-defined 'Day-1' playbook that establishes standard Monitoring Sinks, Artifact-tags, and RBAC to stabilize a new offshore data region in 30 days.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Resilience' 'Attrition' Score in TOGAF Architecture?",
+    "options": {
+      "A": "A metric track tracking the steady decline in 'Policy Effectiveness' as complex new message flows outpace current manual audit cycles.",
+      "B": "When people stop passing the office hallway.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects 'Immediate Search Results' on 10PB of un-indexed architecture metadata after exactly 24 hours of notice.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'TOGAF' 'Executive' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consolidated 'Enterprise Architecture Tech Debt' heatmaps for the CEO",
+      "B": "Reduction in manual 'Slide-building' labor for the Engineering Operations office",
+      "C": "Guaranteed to replace all human Architects",
+      "D": "Automatic generation of 'Policy Drift' alerts for the Board"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logical' 'Data' 'Isolation' in Global Platform Hubs?",
+    "options": {
+      "A": "Isolating product managers on a deserted island.",
+      "B": "Ensuring that 'Raw request logs' from the EU region technically cannot be accessed by Admins in regions with different privacy laws without legal authority.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the size of the font."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Institutional' 'Trust' (MTRIT) post-major-architecture-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between a high-profile repository failure (e.g., global sync outage during quarterly peak) and the point at which 'Trust' scores return to baseline.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'SLA' in Architecture strategy refers to an organization promising 'Zero Latency' while utilizing a 'Low-Budget' sequential release model for high-stakes binary assets.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Roles' in Enterprise Architecture?",
+    "options": {
+      "A": "Global Head of Strategic Resilience",
+      "B": "Chief Repository Architect",
+      "C": "Director of Interaction Telemetry",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Calculated' 'System' 'Resilience' for a global architecture firm?",
+    "options": {
+      "A": "A physical cover for a computer.",
+      "B": "A weighted score including 'API Uptime', 'MTTI for logic findings', 'Redundancy', and 'Identity Integrity Maturity' across all asset paths.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Critical' 'Staffing' Gaps' (MTBCSG)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric track tracking the duration of organizational stability before a 'Key Player' (Single Point of Failure) in the EA team leaves.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Versions' occur when a Lead uses 2005 'Static-only' models to manage a 2026 'Intent-Native' architecture environment.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Verification' 'Challenges' in Architecture Systems? (Select all that apply)",
+    "options": {
+      "A": "Difficulty in automating subjective 'Stakeholder Intent' analysis",
+      "B": "Keeping hardware artifacts updated with rapidly changing OS versions",
+      "C": "Guaranteed to replace all human analysts",
+      "D": "Risk of 'False Risk Confidence' if test environments lack production-grade topology"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Systemic' 'Risk' 'Maintainability' in Engineering Ecosystems?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "The degree to which an organization's 'Repository Pipeline' can sustain major technological backend shifts without a systemic loss of remediation velocity.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Alert' (MTTA) for a 'Regulatory' 'Security' 'Emergency' in TOGAF?",
+    "options": {
+      "A": "The average time it takes to wake up the manager.",
+      "B": "The duration between an external regulatory signal (e.g., regional fine) and the Architect officially presenting an 'Impact Alert' to the Board.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a professional actor to read reports."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Data' 'Ownership' in auditing occurs when 'Evidence Logs' are stored on a server that only the 'Sales' team can access.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Institutional Shareholders",
+      "B": "Global Infrastructure Compliance Leads",
+      "C": "Architecture Intelligence Presidents",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Risk' 'Bootstrap' orchestration for a new M&A repository acquisition?",
+    "options": {
+      "A": "The rapid deployment of 'Availability Intelligence' tools and 'Maturity Scoring' to a newly acquired circuit within 30 days.",
+      "B": "A physical strap for a boot.",
+      "C": "A specialized tool for measuring distance.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Strategy' 'Refreshes' (MTBCSR)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking how often the organization completely re-evaluates its 'Strategic Vision' and 'Tooling Stack' to stay current with global architecture threats.",
+      "C": "A security scan for database viruses.",
+      "D": "The physical speed of the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when a Lead expects 'Senior Resilience' from an EA Intern after exactly 48 hours of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Succession' 'Verification'? (Select all that apply)",
+    "options": {
+      "A": "Automatically flagging if a 'Critical Platform Path' has zero identified backup maintainers",
+      "B": "Identifying if a potential successor's 'Leadership Score' matches the Lead role requirements",
+      "C": "Guaranteed to replace all human Security Leads",
+      "D": "Tracking the 'Readiness' of the top 10% of global insight talent in real-time"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Logic' 'Lifting' significance in Strategy?",
+    "options": {
+      "A": "Lifting a physical computer up a flight of stairs.",
+      "B": "The degree to which a 'Successful Interaction Model' can be 'Lifted' from one project and applied to another to ensure global parity.",
+      "C": "A specialized software for architects.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Security' 'ROI' (MTR-SROI)?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration between an automated security service becoming 'Inactive' and the point where its 'Reliability' is restored.",
+      "C": "A security scan of the database.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Expectations' occur when the CEO expects 'Zero Strategy Cost' while the Architect is enforcing a 'Global Multi-Region' rollout.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Reporting' 'Benefits'? (Select all that apply)",
+    "options": {
+      "A": "Consistency in 'Platform ROI' data presentation for the parent corporate entity",
+      "B": "Reduction in manual 'Audit Prep' run time for EA Directors",
+      "C": "Guaranteed to replace all human risk managers",
+      "D": "Instant generation of 'Profit-per-Availability-Level' reports for the CFO"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Platform' 'Encapsulation' in a 'Hold-Co' TOGAF model?",
+    "options": {
+      "A": "Hiding the code in a physical capsule.",
+      "B": "Designing individual 'Business Unit Interface Hubs' that are independently verifiable, preventing a 'Systemic Freeze' if one unit fails an audit.",
+      "C": "A specialized software for poets.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Identify' (MTTI) a 'Tooling' 'Gap' in operations?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "The average duration from when a new performance vulnerability is identified until the Lead specifies the necessary technical modules to mitigate it.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Schedules' occur when 'Architecture Audits' are planned annually, but 'Global Threat TTPs' update every 24 hours.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these are 'Enterprise' 'Strategic' 'Stakeholders'? (Select all that apply)",
+    "options": {
+      "A": "Head of Strategic Transformation",
+      "B": "Global Chief Security Officer",
+      "C": "Corporate Governance Counsel",
+      "D": "The SQL query parser"
+    },
+    "answer": ["A", "B", "C"]
+  },
+  {
+    "question": "What is 'Platform' 'Bootstrap' complexity for a 'Turnaround' EA Director?",
+    "options": {
+      "A": "A physical strap for a boot.",
+      "B": "The technical and cultural difficulty of resetting a 'Toxic/Legacy' architecture culture into a 'Modern and Automated' organization within 100 days.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'Between' 'Lead' 'Exits' (MTB-LE)?",
+    "options": {
+      "A": "The average time it takes for a team to have a meeting.",
+      "B": "A metric tracking the stability of the leadership layer, identifying if 'Burnout' is causing frequent strategic strategy shifts.",
+      "C": "A security scan of the database.",
+      "D": "The physical speed of the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Wait' 'Intervals' occur when an Executive expects a 'Complete Resilience Culture' in a 5,000-person manual organization after exactly 30 days of training.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Strategic' 'Security' 'Analytics' benefits for enterprise architecture?",
+    "options": {
+      "A": "Enabling 'Predictive Maintenance' mapping across global subsidiaries",
+      "B": "Reducing the 'Visibility Data Lag' between regional hubs and HQ",
+      "C": "Guaranteed to fix all server crashes",
+      "D": "Consistent application of 'Risk-Scoring' logic across all automated rules"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Architecture' 'Self-Calibration'?",
+    "options": {
+      "A": "Calibrating a person named EA.",
+      "B": "The ability of a Lead to objectively assess their own 'Strategic Obsolescence' and actively seek new mentors to learn 'AIOps' and 'LLMOps' patterns.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the frame rate of a video."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reporting', what is 'Mean' 'Time' 'To' 'Restore' 'Strategic' 'ROI' (MTR-SROI) post-major-infrastructure-failure?",
+    "options": {
+      "A": "The average time it takes to clean the office.",
+      "B": "The duration from a fundamental strategic shift until the organization's 'Operating Margin' returns to its target levels through engineering process correction.",
+      "C": "A security scan for database viruses.",
+      "D": "Hiring a mathematician to count leads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Mismatched' 'Governance' in a large firm refers to having a 'Decentralized' squad model while using a 'Centralized' monolithic platform grid.",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describe 'Automated' 'Risk' 'Maturity' 'Analysis'? (Select all that apply)",
+    "options": {
+      "A": "Automatically calculating the 'Innovation-to-Security' spend ratio",
+      "B": "Identifying business units that are 'Strategic Lagging' based on audit history",
+      "C": "Guaranteed to stop all network lag",
+      "D": "Analyzing the ROI of 'Automation' tools relative to manual labor"
+    },
+    "answer": ["A", "B", "D"]
+  },
+  {
+    "question": "What is 'Strategic' 'Architecture' 'Logic' 'Encapsulation'?",
+    "options": {
+      "A": "Ensuring that the 'Technical Controls' (the How) are hidden from the 'High-level Strategic Availability Intent' (the What), allowing tools to be swapped without changing corporate standards.",
+      "B": "Hiding the code in a physical capsule.",
+      "C": "A specialized tool for measuring light.",
+      "D": "Increasing the speed of light."
+    },
+    "answer": "A"
+  }
+  ]
+}

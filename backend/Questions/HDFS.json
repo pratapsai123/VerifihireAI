@@ -1,0 +1,2001 @@
+{ 
+  "skill": "HDFS", 
+  "questions": [
+    {
+    "question": "What does HDFS stand for?",
+    "options": {
+      "A": "High-speed Distributed File System",
+      "B": "Hadoop Distributed File System",
+      "C": "Hierarchical Data File System",
+      "D": "Home Distributed File Storage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which node in HDFS acts as the 'Master' and manages the file system namespace?",
+    "options": {
+      "A": "DataNode",
+      "B": "NameNode",
+      "C": "TaskTracker",
+      "D": "JobTracker"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, where is the actual data stored?",
+    "options": {
+      "A": "NameNode",
+      "B": "DataNode",
+      "C": "Secondary NameNode",
+      "D": "Resource Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default block size in Hadoop 2.x and later?",
+    "options": {
+      "A": "64 MB",
+      "B": "128 MB",
+      "C": "256 MB",
+      "D": "512 MB"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default replication factor in HDFS?",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which HDFS command is used to list the files in a directory?",
+    "options": {
+      "A": "hdfs dfs -ls",
+      "B": "hdfs dfs -list",
+      "C": "hdfs dfs -show",
+      "D": "hdfs dfs -dir"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of the Secondary NameNode?",
+    "options": {
+      "A": "To act as a backup for the NameNode in case of failure",
+      "B": "To perform periodic checkpoints of the HDFS metadata",
+      "C": "To store data blocks",
+      "D": "To manage the DataNodes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does HDFS ensure fault tolerance?",
+    "options": {
+      "A": "By encrypting data",
+      "B": "By replicating data blocks across multiple DataNodes",
+      "C": "By using a single large server",
+      "D": "By deleting old files automatically"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Heartbeat' in HDFS?",
+    "options": {
+      "A": "A signal sent from the NameNode to DataNodes",
+      "B": "A signal sent from DataNodes to the NameNode to indicate they are active",
+      "C": "A network speed test",
+      "D": "A way to measure CPU usage"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file in the NameNode stores the record of all changes made to the file system metadata?",
+    "options": {
+      "A": "fsimage",
+      "B": "EditLogs",
+      "C": "MetaDataLog",
+      "D": "HDFSLog"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'fsimage'?",
+    "options": {
+      "A": "A picture of the server rack",
+      "B": "A snapshot of the file system metadata at a specific point in time",
+      "C": "A log of current user sessions",
+      "D": "A backup of the DataNodes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to copy a file from the local file system to HDFS?",
+    "options": {
+      "A": "hdfs dfs -get",
+      "B": "hdfs dfs -put",
+      "C": "hdfs dfs -cp",
+      "D": "hdfs dfs -move"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, files are 'Write Once, Read Many'. Is this true or false?",
+    "options": {
+      "A": "True",
+      "B": "False"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a DataNode fails in a cluster with a replication factor of 3?",
+    "options": {
+      "A": "Data is lost permanently",
+      "B": "The NameNode detects the failure and re-replicates the lost blocks to other DataNodes",
+      "C": "The cluster shuts down",
+      "D": "The user must manually copy the data"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Rack Awareness' in HDFS?",
+    "options": {
+      "A": "Knowing how many racks are in the data center",
+      "B": "The ability of the NameNode to choose DataNodes on different racks for data replication",
+      "C": "A cooling system for the servers",
+      "D": "A way to organize cables"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HDFS command is used to check the disk usage of a directory?",
+    "options": {
+      "A": "hdfs dfs -du",
+      "B": "hdfs dfs -df",
+      "C": "hdfs dfs -usage",
+      "D": "hdfs dfs -size"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Block Report'?",
+    "options": {
+      "A": "A list of files deleted by the user",
+      "B": "A report sent by the DataNode to the NameNode listing all the blocks it currently holds",
+      "C": "An error log",
+      "D": "A performance chart"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which daemon is responsible for replication in HDFS?",
+    "options": {
+      "A": "DataNode",
+      "B": "NameNode",
+      "C": "Secondary NameNode",
+      "D": "NodeManager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to create a new directory in HDFS?",
+    "options": {
+      "A": "hdfs dfs -mkdir",
+      "B": "hdfs dfs -newdir",
+      "C": "hdfs dfs -create",
+      "D": "hdfs dfs -dir"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Does HDFS support data appending in recent versions?",
+    "options": {
+      "A": "No, it only supports write-once",
+      "B": "Yes, it supports appending data to the end of a file",
+      "C": "Only if the file is smaller than 64MB",
+      "D": "Only on the NameNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to remove a file from HDFS?",
+    "options": {
+      "A": "hdfs dfs -delete",
+      "B": "hdfs dfs -rm",
+      "C": "hdfs dfs -remove",
+      "D": "hdfs dfs -erase"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the typical hardware requirement for HDFS?",
+    "options": {
+      "A": "Supercomputers",
+      "B": "Commodity hardware (standard servers)",
+      "C": "Mobile devices",
+      "D": "Mainframes"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if the NameNode goes down in a non-HA (High Availability) cluster?",
+    "options": {
+      "A": "DataNodes take over the master role",
+      "B": "The file system becomes inaccessible",
+      "C": "Data is automatically deleted",
+      "D": "Nothing, it continues to work"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to view the content of a file in HDFS?",
+    "options": {
+      "A": "hdfs dfs -cat",
+      "B": "hdfs dfs -view",
+      "C": "hdfs dfs -open",
+      "D": "hdfs dfs -show"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Safe Mode' in HDFS?",
+    "options": {
+      "A": "A mode where data is encrypted",
+      "B": "A read-only state the NameNode enters during startup to verify the status of blocks",
+      "C": "A mode where only the admin can login",
+      "D": "A backup mode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which port is used by default for the NameNode Web UI in Hadoop 3.x?",
+    "options": {
+      "A": "50070",
+      "B": "9870",
+      "C": "8088",
+      "D": "9000"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, what does 'Under-replicated blocks' mean?",
+    "options": {
+      "A": "Blocks that have more copies than the replication factor",
+      "B": "Blocks that have fewer copies than the replication factor",
+      "C": "Blocks that are corrupted",
+      "D": "Empty blocks"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to copy a file from HDFS to the local file system?",
+    "options": {
+      "A": "hdfs dfs -put",
+      "B": "hdfs dfs -get",
+      "C": "hdfs dfs -move",
+      "D": "hdfs dfs -export"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Balancing' in HDFS?",
+    "options": {
+      "A": "Checking the CPU load",
+      "B": "Moving data blocks between DataNodes to ensure even disk utilization",
+      "C": "A way to speed up the NameNode",
+      "D": "Sorting files by size"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which file format is NOT a native Hadoop file format?",
+    "options": {
+      "A": "SequenceFile",
+      "B": "Avro",
+      "C": "MP3",
+      "D": "Parquet"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the role of the 'Namespace ID' in HDFS?",
+    "options": {
+      "A": "To uniquely identify a user",
+      "B": "To uniquely identify a specific HDFS cluster and its components",
+      "C": "To name a file",
+      "D": "To track the version of Hadoop"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Checksum' used for in HDFS?",
+    "options": {
+      "A": "To compress data",
+      "B": "To verify data integrity and detect corruption",
+      "C": "To encrypt data",
+      "D": "To count the number of files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does HDFS perform better with a few large files or many small files?",
+    "options": {
+      "A": "Many small files",
+      "B": "A few large files",
+      "C": "It doesn't matter",
+      "D": "Many small folders"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to change the replication factor of a specific file?",
+    "options": {
+      "A": "hdfs dfs -rep",
+      "B": "hdfs dfs -setrep",
+      "C": "hdfs dfs -factor",
+      "D": "hdfs dfs -change"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS federation, what is scaled?",
+    "options": {
+      "A": "The storage (DataNodes)",
+      "B": "The Namespace (NameNodes)",
+      "C": "The network bandwidth",
+      "D": "The RAM"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Trash' feature in HDFS?",
+    "options": {
+      "A": "A place to store junk data",
+      "B": "A directory where deleted files are temporarily stored before being permanently erased",
+      "C": "A command to wipe the disk",
+      "D": "A log of errors"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which component manages the 'Block Pool' in HDFS Federation?",
+    "options": {
+      "A": "NameNode",
+      "B": "DataNode",
+      "C": "JournalNode",
+      "D": "ZKFC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to show the last 1KB of a file in HDFS?",
+    "options": {
+      "A": "hdfs dfs -tail",
+      "B": "hdfs dfs -last",
+      "C": "hdfs dfs -end",
+      "D": "hdfs dfs -show"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you check the health of the HDFS file system using the CLI?",
+    "options": {
+      "A": "hdfs fsck /",
+      "B": "hdfs check",
+      "C": "hdfs health",
+      "D": "hdfs status"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Metadata' in HDFS?",
+    "options": {
+      "A": "The actual content of the files",
+      "B": "Information about the file system like hierarchy, file-to-block mapping, and permissions",
+      "C": "The Java code for Hadoop",
+      "D": "The configuration files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Who can change the ownership of a file in HDFS?",
+    "options": {
+      "A": "Any user",
+      "B": "Only the superuser (hdfs)",
+      "C": "The NameNode",
+      "D": "The DataNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to change the permissions of a file in HDFS?",
+    "options": {
+      "A": "hdfs dfs -chmod",
+      "B": "hdfs dfs -chown",
+      "C": "hdfs dfs -perm",
+      "D": "hdfs dfs -access"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which node is responsible for handling read/write requests from clients?",
+    "options": {
+      "A": "NameNode only",
+      "B": "DataNode only",
+      "C": "The NameNode handles metadata, and the DataNode handles data transfer",
+      "D": "Secondary NameNode"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Hadoop High Availability' (HA)?",
+    "options": {
+      "A": "Adding more DataNodes",
+      "B": "Running two NameNodes (Active and Standby) to prevent a single point of failure",
+      "C": "Using a faster network",
+      "D": "Encrypting the metadata"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which daemon facilitates the synchronization of metadata between Active and Standby NameNodes?",
+    "options": {
+      "A": "DataNode",
+      "B": "JournalNode",
+      "C": "Resource Manager",
+      "D": "TaskTracker"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to see the size of a file in a human-readable format?",
+    "options": {
+      "A": "hdfs dfs -ls -h",
+      "B": "hdfs dfs -size -human",
+      "C": "hdfs dfs -du -h",
+      "D": "Both A and C"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'expunge' command do in HDFS?",
+    "options": {
+      "A": "Deletes all files",
+      "B": "Permanently removes files from the Trash directory",
+      "C": "Clears the logs",
+      "D": "Shuts down the cluster"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS, can a block belong to more than one file?",
+    "options": {
+      "A": "Yes",
+      "B": "No"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows you to merge multiple files into one when copying from HDFS to local?",
+    "options": {
+      "A": "getmerge",
+      "B": "combine",
+      "C": "join",
+      "D": "merge"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary language used to develop HDFS?",
+    "options": {
+      "A": "Python",
+      "B": "Java",
+      "C": "C++",
+      "D": "Scala"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Short-circuit Local Read'?",
+    "options": {
+      "A": "Reading data from a remote rack",
+      "B": "Allowing a client to read data directly from the local disk when it co-exists with the DataNode",
+      "C": "A network error",
+      "D": "Bypassing the NameNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default block placement policy in HDFS?",
+    "options": {
+      "A": "Random placement",
+      "B": "One copy on local rack, two on a different remote rack",
+      "C": "All copies on different racks",
+      "D": "All copies on the same node"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration file defines the HDFS replication factor?",
+    "options": {
+      "A": "core-site.xml",
+      "B": "hdfs-site.xml",
+      "C": "mapred-site.xml",
+      "D": "yarn-site.xml"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stale' DataNode?",
+    "options": {
+      "A": "A node with old hardware",
+      "B": "A node that hasn't sent a heartbeat for a specific interval",
+      "C": "A node with corrupted data",
+      "D": "A node that is full"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Snapshots'?",
+    "options": {
+      "A": "Pictures of the data center",
+      "B": "Read-only point-in-time copies of the file system or a subdirectory",
+      "C": "A way to compress data",
+      "D": "A performance monitoring tool"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to enable snapshots on a directory?",
+    "options": {
+      "A": "hdfs dfsadmin -allowSnapshot",
+      "B": "hdfs snapshot -enable",
+      "C": "hdfs snapshot -create",
+      "D": "hdfs dfs -snapshot"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Quota' feature in HDFS?",
+    "options": {
+      "A": "Limiting the number of files or the amount of disk space a directory can use",
+      "B": "Measuring the network speed",
+      "C": "Setting the price for data storage",
+      "D": "Allocating CPU time"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HDFS command is used to move a file from one HDFS location to another?",
+    "options": {
+      "A": "hdfs dfs -mv",
+      "B": "hdfs dfs -cp",
+      "C": "hdfs dfs -put",
+      "D": "hdfs dfs -get"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Storage Policies' in HDFS (like Cold/Warm/Hot)?",
+    "options": {
+      "A": "To set the temperature of the server room",
+      "B": "To place data on different storage media (HDD, SSD, RAM) based on access frequency",
+      "C": "To encrypt data",
+      "D": "To manage user passwords"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Erasure Coding' in HDFS 3.x?",
+    "options": {
+      "A": "A way to delete code",
+      "B": "A space-efficient alternative to replication that provides the same fault tolerance",
+      "C": "A new encryption method",
+      "D": "A way to compress logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HDFS command is used to show the configuration of the cluster?",
+    "options": {
+      "A": "hdfs getconf",
+      "B": "hdfs showconf",
+      "C": "hdfs config",
+      "D": "hdfs list"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the NameNode store in RAM?",
+    "options": {
+      "A": "The actual data",
+      "B": "The entire metadata of the file system",
+      "C": "User passwords",
+      "D": "DataNode software"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a write operation, which component sends the data to the DataNodes?",
+    "options": {
+      "A": "NameNode",
+      "B": "HDFS Client",
+      "C": "Secondary NameNode",
+      "D": "Resource Manager"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pipelining' in HDFS write operations?",
+    "options": {
+      "A": "Connecting servers with pipes",
+      "B": "The process where data is streamed from the client to the first DataNode, then to the second, and so on",
+      "C": "A way to clean the disk",
+      "D": "A sequential file system"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Does HDFS support file locking for multiple concurrent writers?",
+    "options": {
+      "A": "Yes",
+      "B": "No, HDFS does not support multiple concurrent writers to the same file",
+      "C": "Only for small files",
+      "D": "Only on the Secondary NameNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Locality'?",
+    "options": {
+      "A": "Storing data in the same country",
+      "B": "Moving the computation code to the node where the data is stored",
+      "C": "Storing data on local hard drives only",
+      "D": "A way to name files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'JournalNode' in an HDFS High Availability (HA) setup?",
+    "options": {
+      "A": "To store actual data blocks.",
+      "B": "To provide a shared storage for EditLogs accessible by both Active and Standby NameNodes.",
+      "C": "To act as a gateway for the HDFS client.",
+      "D": "To monitor the health of the DataNodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS HA, what is the role of the ZKFailoverController (ZKFC)?",
+    "options": {
+      "A": "To compress the metadata.",
+      "B": "To monitor the NameNode and handle the transition from Standby to Active during a failure.",
+      "C": "To manage the ZooKeeper cluster itself.",
+      "D": "To distribute data blocks evenly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'hdfs dfsadmin -report' command provide?",
+    "options": {
+      "A": "A list of all users logged into the system.",
+      "B": "A summary of the HDFS cluster status, including disk capacity and DataNode health.",
+      "C": "A detailed log of recent file deletions.",
+      "D": "A comparison of HDFS vs local disk speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When a client reads a file from HDFS, how does it determine which DataNode to contact first?",
+    "options": {
+      "A": "It contacts a random DataNode.",
+      "B": "The NameNode provides a list of DataNodes sorted by their proximity to the client.",
+      "C": "It always contacts the DataNode on Rack 1.",
+      "D": "It broadcasts a request to all DataNodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Federation'?",
+    "options": {
+      "A": "Connecting HDFS to a cloud storage like S3.",
+      "B": "The use of multiple independent NameNodes to scale the namespace horizontally.",
+      "C": "A way to backup the entire cluster to another location.",
+      "D": "A security protocol for multi-user access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the 'EditLogs' during the Checkpointing process?",
+    "options": {
+      "A": "They are deleted and lost.",
+      "B": "They are merged with the fsimage to create a new, updated fsimage.",
+      "C": "They are moved to a DataNode for storage.",
+      "D": "They are encrypted and archived."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which configuration parameter in hdfs-site.xml defines the 'HDFS block size'?",
+    "options": {
+      "A": "dfs.blocksize",
+      "B": "dfs.data.block.size",
+      "C": "hdfs.block.length",
+      "D": "dfs.namenode.block.size"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Corrupt Block' in HDFS?",
+    "options": {
+      "A": "A block that has been deleted by mistake.",
+      "B": "A block that fails the checksum validation during a read or a background scan.",
+      "C": "A block that is stored on an old hard drive.",
+      "D": "A block that has no replication."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'Directory Scanner' in a DataNode?",
+    "options": {
+      "A": "To look for new files uploaded by the user.",
+      "B": "To periodically check if the blocks on the local disk match the metadata in the DataNode memory.",
+      "C": "To create a list of directories for the NameNode.",
+      "D": "To scan for viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'dfs.replication.max' control?",
+    "options": {
+      "A": "The maximum number of files in the cluster.",
+      "B": "The maximum number of replicas allowed for a single file.",
+      "C": "The speed of replication.",
+      "D": "The number of DataNodes allowed per rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to forcefully leave 'Safe Mode'?",
+    "options": {
+      "A": "hdfs dfsadmin -safemode leave",
+      "B": "hdfs safemode -off",
+      "C": "hdfs dfs -quitSafemode",
+      "D": "hdfs admin -exit"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HDFS NFS Gateway'?",
+    "options": {
+      "A": "A way to connect HDFS to a gaming console.",
+      "B": "A service that allows HDFS to be mounted as part of the local file system on client machines.",
+      "C": "A security firewall for HDFS.",
+      "D": "A method to speed up the NameNode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an HDFS HA cluster, which node is responsible for performing checkpoints?",
+    "options": {
+      "A": "Active NameNode",
+      "B": "Standby NameNode",
+      "C": "JournalNode",
+      "D": "Secondary NameNode (if present)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'hdfs-site.xml'?",
+    "options": {
+      "A": "To configure global Hadoop settings like the filesystem URI.",
+      "B": "To configure HDFS-specific settings like replication, block size, and node paths.",
+      "C": "To manage MapReduce job history.",
+      "D": "To set up user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Balancer's threshold' in HDFS?",
+    "options": {
+      "A": "The maximum amount of data the balancer can move in one hour.",
+      "B": "The percentage deviation allowed between the usage of any DataNode and the average cluster usage.",
+      "C": "The number of DataNodes the balancer can work on simultaneously.",
+      "D": "The priority level of the balancer process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'dfs.datanode.du.reserved' do?",
+    "options": {
+      "A": "It reserves a specific amount of disk space on a DataNode that HDFS cannot use.",
+      "B": "It reserves memory for the DataNode daemon.",
+      "C": "It limits the number of users on a node.",
+      "D": "It reserves bandwidth for replication."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How can you view the metadata (EditLogs) in a human-readable format?",
+    "options": {
+      "A": "Using the 'oev' (Offline Edits Viewer) tool.",
+      "B": "By opening the file in Notepad.",
+      "C": "Using the 'cat' command.",
+      "D": "Through the NameNode Web UI only."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Decommissioning' a DataNode?",
+    "options": {
+      "A": "Deleting all data on the node and shutting it down.",
+      "B": "The process of gracefully removing a node by ensuring all its blocks are replicated elsewhere before shutdown.",
+      "C": "Upgrading the node's operating system.",
+      "D": "Restarting the node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'fs.defaultFS' property used for?",
+    "options": {
+      "A": "To set the default file permissions.",
+      "B": "To specify the default file system URI (e.g., hdfs://namenode:port).",
+      "C": "To name the HDFS cluster.",
+      "D": "To set the default block size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Block Scanner' on the DataNode?",
+    "options": {
+      "A": "A tool to find empty blocks.",
+      "B": "A background thread that periodically verifies the checksums of all blocks stored on the DataNode disk.",
+      "C": "A way to delete old files.",
+      "D": "A network monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS HA, what is 'Fencing'?",
+    "options": {
+      "A": "Putting a physical fence around the servers.",
+      "B": "The mechanism to ensure that only one NameNode is Active at a time to prevent 'Split-Brain' scenarios.",
+      "C": "Restricting user access to specific racks.",
+      "D": "A way to isolate corrupted blocks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Quota' command to set a space limit of 10GB on a directory?",
+    "options": {
+      "A": "hdfs dfsadmin -setSpaceQuota 10G /dir",
+      "B": "hdfs quota -set 10G /dir",
+      "C": "hdfs dfs -limit 10G /dir",
+      "D": "hdfs admin -space 10G /dir"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'DistCp' tool do?",
+    "options": {
+      "A": "It is used for distributed copying of large datasets between clusters.",
+      "B": "It compresses files in a distributed manner.",
+      "C": "It checks for distributed corruption.",
+      "D": "It manages distributed user accounts."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Heterogeneous Storage' in HDFS?",
+    "options": {
+      "A": "Storing data in different formats like CSV and JSON.",
+      "B": "The ability to use different types of storage media (DISK, SSD, RAMDISK, ARCHIVE) within the same cluster.",
+      "C": "Using different versions of Hadoop on different nodes.",
+      "D": "Storing data from different departments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HDFS tool helps in identifying 'Small Files' and their impact on NameNode memory?",
+    "options": {
+      "A": "hdfs fsck",
+      "B": "Offline Image Viewer (oiv)",
+      "C": "hdfs dfsadmin",
+      "D": "JournalNode logs"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mover' in HDFS?",
+    "options": {
+      "A": "A tool to move files between folders.",
+      "B": "A data migration tool that moves data blocks to satisfy storage policies (e.g., moving cold data to ARCHIVE).",
+      "C": "A command to rename a cluster.",
+      "D": "A script to restart the cluster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the impact of a very large 'EditLog' on NameNode restart time?",
+    "options": {
+      "A": "It makes the restart faster.",
+      "B": "It significantly increases the restart time because the NameNode must replay all edits since the last checkpoint.",
+      "C": "It has no impact.",
+      "D": "It prevents the NameNode from starting at all."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'dfs.hosts' file?",
+    "options": {
+      "A": "To list the IP addresses of all HDFS clients.",
+      "B": "To specify a list of hosts that are permitted to connect to the NameNode as DataNodes.",
+      "C": "To map hostnames to IP addresses.",
+      "D": "To configure the firewall."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'hdfs dfs -touchz' command do?",
+    "options": {
+      "A": "Deletes a file if it is zero bytes.",
+      "B": "Creates a zero-length (empty) file in HDFS.",
+      "C": "Checks if a file is empty.",
+      "D": "Compresses an empty file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Hadoop KMS' (Key Management Server)?",
+    "options": {
+      "A": "A server for managing user passwords.",
+      "B": "A specialized service for managing encryption keys for HDFS 'Transparent Encryption'.",
+      "C": "A server that tracks the location of data.",
+      "D": "A system for managing software licenses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transparent Encryption' in HDFS?",
+    "options": {
+      "A": "Encrypting the network traffic only.",
+      "B": "Automatically encrypting and decrypting data as it is written to or read from specific 'Encryption Zones'.",
+      "C": "Hiding the file names from users.",
+      "D": "A way to see through encrypted files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HDFS command is used to find which files occupy the most space in a directory?",
+    "options": {
+      "A": "hdfs dfs -du -s -h /path",
+      "B": "hdfs dfs -ls -S /path",
+      "C": "hdfs dfs -size -max /path",
+      "D": "hdfs dfs -df -h /path"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In HDFS 3.x, what is the 'Lazy Persist' write feature?",
+    "options": {
+      "A": "The client waits a long time before writing data.",
+      "B": "Data is written to RAM disk first and asynchronously flushed to disk to reduce latency.",
+      "C": "Spark writes data instead of HDFS.",
+      "D": "Files are only saved when the cluster is idle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Lease' in HDFS?",
+    "options": {
+      "A": "A contract for renting server space.",
+      "B": "A mechanism that ensures a file being written has only one exclusive writer for a specific period.",
+      "C": "A way to share files between clusters.",
+      "D": "A temporary permission to read a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a lease on a file expires or the client crashes?",
+    "options": {
+      "A": "The file is deleted.",
+      "B": "The NameNode performs 'Lease Recovery' to close the file and make it available for others.",
+      "C": "The DataNode containing the file is restarted.",
+      "D": "The data is moved to the Trash."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default interval for NameNode checkpoints?",
+    "options": {
+      "A": "Every 10 minutes.",
+      "B": "Once an hour or when 1 million transactions have occurred.",
+      "C": "Once a day.",
+      "D": "Every 5 million edits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in hdfs-site.xml defines the storage directory for the NameNode metadata?",
+    "options": {
+      "A": "dfs.namenode.name.dir",
+      "B": "hdfs.meta.path",
+      "C": "dfs.data.dir",
+      "D": "dfs.namenode.metadata.path"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'WebHDFS' protocol?",
+    "options": {
+      "A": "A way to browse HDFS using a standard web browser.",
+      "B": "A REST API that provides HTTP access to HDFS data and metadata.",
+      "C": "A new version of the HDFS protocol.",
+      "D": "A security certificate for HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS High Availability, what is the 'Quorum Journal Manager'?",
+    "options": {
+      "A": "A tool to manage user votes.",
+      "B": "The implementation that uses JournalNodes to store and synchronize EditLogs.",
+      "C": "A way to speed up the network.",
+      "D": "A security layer for logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the difference between 'ls' and 'lsr' in older Hadoop versions?",
+    "options": {
+      "A": "'lsr' is for reading; 'ls' is for writing.",
+      "B": "'ls' lists the current directory; 'lsr' lists the directory recursively.",
+      "C": "'lsr' only shows root files.",
+      "D": "There is no difference."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Centralized Cache Management'?",
+    "options": {
+      "A": "Storing all files in RAM.",
+      "B": "A mechanism that allows users to specify certain paths to be explicitly cached in the DataNode's memory.",
+      "C": "A way to speed up the NameNode metadata access.",
+      "D": "A global cache for all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Cache Directive'?",
+    "options": {
+      "A": "An instruction to the NameNode to cache a specific path in HDFS memory.",
+      "B": "A way to delete the cache.",
+      "C": "A network rule for caching.",
+      "D": "A security policy for the cache."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'hdfs dfs -test' command check for?",
+    "options": {
+      "A": "Hardware failure.",
+      "B": "The existence, size, or type of a file or directory based on specific flags (like -e, -z, -d).",
+      "C": "The speed of the HDFS connection.",
+      "D": "The number of blocks in a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Token' in HDFS security?",
+    "options": {
+      "A": "A digital coin for buying storage.",
+      "B": "A security token issued by the NameNode to a client to allow access to a specific block on a DataNode.",
+      "C": "A piece of data used for replication.",
+      "D": "A way to count blocks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you identify 'Dead' DataNodes in a cluster?",
+    "options": {
+      "A": "By looking for nodes that have not sent a heartbeat for 10 minutes (default).",
+      "B": "By checking if they are physically warm.",
+      "C": "By trying to login to them via SSH.",
+      "D": "The NameNode deletes them automatically."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of 'Kerberos' in an HDFS cluster?",
+    "options": {
+      "A": "To compress data.",
+      "B": "To provide strong authentication for users and services to prevent unauthorized access.",
+      "C": "To act as a secondary NameNode.",
+      "D": "To manage the network routing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'User Group Information' (UGI) in HDFS?",
+    "options": {
+      "A": "A list of all users in a group.",
+      "B": "The internal Spark/Hadoop class that represents a user's identity and group memberships.",
+      "C": "A file on the local disk.",
+      "D": "A directory in HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to display the HDFS filesystem statistics?",
+    "options": {
+      "A": "hdfs dfs -df -h",
+      "B": "hdfs stats",
+      "C": "hdfs dfs -ls -h",
+      "D": "hdfs admin -report"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Short-circuit Read' and how is it enabled?",
+    "options": {
+      "A": "It's a faster way to read from a remote node.",
+      "B": "It allows a client to read data directly from the DataNode's local file system via a Unix Domain Socket.",
+      "C": "It skips the checksum check.",
+      "D": "It's only enabled for the admin user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Symlink' in HDFS?",
+    "options": {
+      "A": "A file that points to another file or directory (Note: HDFS support for this is limited/experimental).",
+      "B": "A way to combine two files.",
+      "C": "An encrypted connection.",
+      "D": "A shortcut on the NameNode desktop."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'hdfs dfs -count' command show?",
+    "options": {
+      "A": "The number of users.",
+      "B": "The number of directories, files, and total size under a path.",
+      "C": "The number of blocks in the cluster.",
+      "D": "The number of DataNodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Over-replicated' blocks?",
+    "options": {
+      "A": "Blocks that have more replicas than the configured replication factor.",
+      "B": "Blocks that are too large.",
+      "C": "Blocks that are replicated on too many racks.",
+      "D": "Empty blocks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HDFS command is used to move data between HDFS and S3?",
+    "options": {
+      "A": "hdfs dfs -cp",
+      "B": "hadoop distcp",
+      "C": "hdfs dfs -put",
+      "D": "hdfs s3 -sync"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Report' frequency?",
+    "options": {
+      "A": "How often a client requests a block.",
+      "B": "The interval (default 6 hours) at which a DataNode sends a full list of its blocks to the NameNode.",
+      "C": "The speed of the heartbeat.",
+      "D": "How often the disk is scanned."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS ViewFS'?",
+    "options": {
+      "A": "A web browser for HDFS.",
+      "B": "A client-side mount table that provides a unified view of multiple independent HDFS clusters.",
+      "C": "A way to see hidden files.",
+      "D": "A performance monitoring tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Safe Mode' threshold?",
+    "options": {
+      "A": "The minimum number of DataNodes required to start.",
+      "B": "The percentage of blocks (default 99.9%) that must be reported as healthy before the NameNode leaves Safe Mode.",
+      "C": "The amount of free disk space required.",
+      "D": "The time a user can be idle."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does HDFS handle data corruption on a DataNode?",
+    "options": {
+      "A": "It automatically fixes the block using a backup.",
+      "B": "The NameNode detects the corruption via checksums and schedules a new replica to be created from a healthy copy.",
+      "C": "It deletes the file.",
+      "D": "It alerts the user to fix it."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Rolling Upgrade'?",
+    "options": {
+      "A": "Upgrading the cluster while it remains operational by upgrading nodes one by one.",
+      "B": "Deleting the old version and installing a new one.",
+      "C": "A way to speed up the filesystem.",
+      "D": "Upgrading only the client software."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'dfs.namenode.handler.count' parameter?",
+    "options": {
+      "A": "The number of NameNodes in the cluster.",
+      "B": "The number of threads on the NameNode to handle RPC requests from clients and DataNodes.",
+      "C": "The number of users allowed to connect.",
+      "D": "The number of files a user can own."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'hdfs dfs -getfacl'?",
+    "options": {
+      "A": "To get a file from HDFS.",
+      "B": "To display the Access Control Lists (ACLs) of a file or directory for fine-grained security.",
+      "C": "To check the network speed.",
+      "D": "To see the file owner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Cache' vs 'OS Cache' in HDFS?",
+    "options": {
+      "A": "Block Cache is managed by HDFS; OS Cache is managed by the Linux kernel.",
+      "B": "They are the same.",
+      "C": "Block Cache is only for the NameNode.",
+      "D": "OS Cache is only for small files."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HDFS Router-based Federation'?",
+    "options": {
+      "A": "A layer that provides a unified namespace across multiple HDFS clusters using a router service.",
+      "B": "Using a hardware router to connect nodes.",
+      "C": "A way to speed up the network.",
+      "D": "A security firewall."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'hdfs dfs -checksum' command do?",
+    "options": {
+      "A": "Checks if the cluster is healthy.",
+      "B": "Returns the checksum information for a specific file.",
+      "C": "Calculates the total size of files.",
+      "D": "Verifies the user's password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reserved Storage' in HDFS?",
+    "options": {
+      "A": "Space kept aside on the DataNode's local disk for non-HDFS processes to prevent the disk from filling up completely.",
+      "B": "Space for the admin's files.",
+      "C": "Encrypted space.",
+      "D": "A backup partition."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In HDFS, can you rename a directory that has an active snapshot?",
+    "options": {
+      "A": "Yes.",
+      "B": "No, snapshots must be deleted first or renamed separately.",
+      "C": "Only by the admin.",
+      "D": "Only if the directory is empty."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the command to view the list of snapshots on a snapshottable directory?",
+    "options": {
+      "A": "hdfs ls -snapshot /dir",
+      "B": "hdfs snapshotDiff /dir",
+      "C": "hdfs dfs -ls /dir/.snapshot",
+      "D": "hdfs snapshot -list /dir"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which specific mechanism does HDFS use to prevent 'Split-Brain' scenarios where two NameNodes believe they are both Active?",
+    "options": {
+      "A": "Heartbeat timeout",
+      "B": "Fencing (e.g., SSH Fence or Power Fence)",
+      "C": "Block Reporting",
+      "D": "Replication factor reduction"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the HDFS 'Write Pipeline', if a DataNode fails during the streaming of data packets, what is the immediate action taken by the client?",
+    "options": {
+      "A": "The client aborts the entire write operation.",
+      "B": "The client closes the current pipeline, removes the failed node, and organizes a new pipeline with the remaining healthy nodes.",
+      "C": "The client waits for the NameNode to restart the DataNode.",
+      "D": "The client ignores the error and continues writing to the remaining nodes without a new pipeline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical limitation that necessitates the use of HDFS Federation for very large clusters?",
+    "options": {
+      "A": "DataNode storage capacity",
+      "B": "The memory (RAM) of a single NameNode, which must store all file metadata",
+      "C": "Network bandwidth between racks",
+      "D": "The number of CPU cores on the Secondary NameNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "During a 'Rolling Upgrade', which command is used to finalize the upgrade and delete the previous version's metadata markers?",
+    "options": {
+      "A": "hdfs dfsadmin -finalizeUpgrade",
+      "B": "hdfs rollingUpgrade finalize",
+      "C": "hdfs dfs -deleteOldVersion",
+      "D": "hdfs admin -upgrade complete"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Short-Circuit Read' optimization implementation detail?",
+    "options": {
+      "A": "It uses standard TCP sockets to bypass the NameNode.",
+      "B": "It uses Unix Domain Sockets to allow the client to read data directly from the DataNode's local file descriptors.",
+      "C": "It stores data in the client's RAM.",
+      "D": "It uses a special hardware controller on the motherboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In HDFS 3.x Erasure Coding, what is the storage overhead for a 'RS-6-3-1024k' policy compared to 3x replication?",
+    "options": {
+      "A": "50% overhead vs 200% overhead",
+      "B": "100% overhead vs 300% overhead",
+      "C": "10% overhead vs 50% overhead",
+      "D": "They have the same overhead"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which internal NameNode structure maps every block ID to the list of DataNodes currently containing that block?",
+    "options": {
+      "A": "BlocksMap",
+      "B": "INodeMap",
+      "C": "DatanodeDescriptor",
+      "D": "EditLogMap"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What happens if a JournalNode in a quorum of 3 fails in an HA setup?",
+    "options": {
+      "A": "The Active NameNode immediately shuts down.",
+      "B": "The cluster remains functional as long as a majority (2) of JournalNodes are active.",
+      "C": "The Standby NameNode becomes the Active.",
+      "D": "Metadata updates are paused until the node is fixed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Stale Period' (dfs.namenode.stale.datanode.interval) configuration?",
+    "options": {
+      "A": "To mark a node as dead immediately.",
+      "B": "To avoid scheduling read/write operations on nodes that are likely to be slow or unresponsive before they are officially marked dead.",
+      "C": "To delete old data.",
+      "D": "To refresh the NameNode cache."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does HDFS handle 'Slow Disk' issues on a DataNode without the node being totally down?",
+    "options": {
+      "A": "It automatically formats the disk.",
+      "B": "Through 'Outlier Detection' in the NameNode, which can prioritize other nodes for reads if 'dfs.datanode.peer.stats.enabled' is on.",
+      "C": "It moves all data to the NameNode.",
+      "D": "It has no way to detect slow disks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Corrupt Block' recovery? If all replicas are found to be corrupt, what is the HDFS behavior?",
+    "options": {
+      "A": "It recreates them from nothing.",
+      "B": "The file is marked as corrupted and data is effectively lost; NameNode cannot recover it automatically.",
+      "C": "It uses the Secondary NameNode to recover data.",
+      "D": "It tries to decrypt the blocks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the specific role of the 'Namespace OS' in HDFS Federation?",
+    "options": {
+      "A": "A special operating system for Hadoop.",
+      "B": "There is no 'Namespace OS'; Federation uses 'Namespace Volumes' to manage independent NameNodes.",
+      "C": "It manages the network drivers.",
+      "D": "It is the GUI for Federation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'ViewFS', what happens if a mount point points to a non-existent HDFS cluster?",
+    "options": {
+      "A": "The client hangs indefinitely.",
+      "B": "An 'IOException' is thrown only when that specific mount path is accessed.",
+      "C": "The entire ViewFS initialization fails.",
+      "D": "The client creates a local folder instead."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Block Report' storm, and how is it mitigated in large clusters?",
+    "options": {
+      "A": "Too many users uploading data; mitigated by limiting bandwidth.",
+      "B": "All DataNodes sending full block reports simultaneously after a NameNode restart; mitigated by adding a random delay to reports.",
+      "C": "A network attack; mitigated by a firewall.",
+      "D": "A physical storm; mitigated by surge protectors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Generation Stamp' in HDFS blocks used for?",
+    "options": {
+      "A": "To track the age of the data.",
+      "B": "To detect stale replicas and ensure that data is consistent across all nodes in the pipeline after a recovery.",
+      "C": "To stamp the file with the creator's name.",
+      "D": "To version the Hadoop software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which parameter defines the maximum number of concurrent transfers allowed into or out of a DataNode?",
+    "options": {
+      "A": "dfs.datanode.max.xcievers",
+      "B": "dfs.max.replication.streams",
+      "C": "hdfs.node.transfer.limit",
+      "D": "dfs.datanode.handler.count"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'HDFS Storage Tiering' for the 'Archive' tier?",
+    "options": {
+      "A": "Storing data on SSDs.",
+      "B": "Storing high-density, low-cost data on high-latency storage media like tape or specialized HDDs.",
+      "C": "Deleting data after a year.",
+      "D": "A way to organize folders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Metadata Backup' best practice in a non-HA cluster?",
+    "options": {
+      "A": "There is no way to backup metadata.",
+      "B": "Using 'dfs.namenode.name.dir' to write the metadata to multiple redundant local and NFS paths simultaneously.",
+      "C": "Manually copying the EditLog every hour.",
+      "D": "Storing metadata on a DataNode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Trash Emptier' thread?",
+    "options": {
+      "A": "A manual command run by the admin.",
+      "B": "A background service on the NameNode that periodically deletes files that have exceeded the 'fs.trash.interval'.",
+      "C": "A process that wipes the hard drive.",
+      "D": "A tool to find empty files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens during a 'Checkpoint' if the Secondary NameNode runs out of disk space?",
+    "options": {
+      "A": "It continues in RAM.",
+      "B": "The checkpoint fails, and the NameNode EditLog continues to grow, potentially causing a slow future restart.",
+      "C": "The NameNode sends its own disk space to the Secondary.",
+      "D": "The cluster shuts down."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Client-side Caching' (dfs.client.cache.drop.behind)?",
+    "options": {
+      "A": "A way to speed up the web browser.",
+      "B": "A hint to the OS to drop data from the page cache after it has been written to HDFS to avoid polluting the cache.",
+      "C": "Storing HDFS files on the local C: drive.",
+      "D": "A way to save user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Centralized Cache Management', what is the 'Cache Replication' factor?",
+    "options": {
+      "A": "The number of DataNodes that will keep a specific block in their physical RAM.",
+      "B": "The number of copies on the HDD.",
+      "C": "The number of NameNodes caching metadata.",
+      "D": "The speed of the RAM."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Observer NameNode' (Hadoop 3.x)?",
+    "options": {
+      "A": "A node that only watches the cluster but does nothing.",
+      "B": "A third type of NameNode that can provide consistent reads from the Standby state to offload the Active NameNode.",
+      "C": "A node for the CEO to look at stats.",
+      "D": "A specialized DataNode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HDFS daemon is responsible for encryption key management in 'Encryption Zones'?",
+    "options": {
+      "A": "DataNode",
+      "B": "KMS (Key Management Server)",
+      "C": "NameNode",
+      "D": "JournalNode"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'fs.trash.checkpoint.interval' configuration?",
+    "options": {
+      "A": "How often the user should check their trash.",
+      "B": "The interval between successive checkpoints of the trash (emptying the trash).",
+      "C": "The time a file stays in the trash.",
+      "D": "The size of the trash folder."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snapshot Diff'?",
+    "options": {
+      "A": "The time between two snapshots.",
+      "B": "An efficient algorithm to calculate the changes between two HDFS snapshots without scanning the whole filesystem.",
+      "C": "A tool to delete snapshots.",
+      "D": "A way to merge two snapshots."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sticky Bit' in HDFS permissions?",
+    "options": {
+      "A": "A bit that makes a file impossible to delete.",
+      "B": "A permission that allows only the owner or superuser to delete or rename files within a directory.",
+      "C": "A bit used for replication.",
+      "D": "A way to group files together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does 'Erasure Coding' affect 'Data Locality'?",
+    "options": {
+      "A": "It improves it.",
+      "B": "It often reduces it because a client needs blocks from many different nodes to reconstruct data.",
+      "C": "It has no effect.",
+      "D": "EC only works on a single node."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Standby Exception' in HDFS?",
+    "options": {
+      "A": "An error when the Standby NameNode is too slow.",
+      "B": "An error thrown to a client trying to perform a write operation against a Standby NameNode.",
+      "C": "A problem with the power supply.",
+      "D": "When the cluster is in safe mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-Failover' implementation requirement?",
+    "options": {
+      "A": "A minimum of 5 NameNodes.",
+      "B": "A ZooKeeper cluster and the ZKFC daemon running on each NameNode machine.",
+      "C": "A fast internet connection.",
+      "D": "Manual intervention from an admin."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DataNode Hot Swap'?",
+    "options": {
+      "A": "Changing the CPU while running.",
+      "B": "Adding or removing DataNode storage disks without restarting the DataNode daemon.",
+      "C": "Replacing a node with a faster one.",
+      "D": "Moving the node to a different rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Placement Policy' customizability?",
+    "options": {
+      "A": "It is hardcoded and cannot be changed.",
+      "B": "Users can implement their own Java class to define custom logic for where replicas should be placed.",
+      "C": "It is only customizable in the cloud.",
+      "D": "It can be changed using a text file only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Datanode Registration'? When does it happen?",
+    "options": {
+      "A": "When the user buys the software.",
+      "B": "When a DataNode starts up and identifies itself to the NameNode with its storage ID and version info.",
+      "C": "Every time a file is uploaded.",
+      "D": "Once a year."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'StorageID' in HDFS?",
+    "options": {
+      "A": "The serial number of the hard drive.",
+      "B": "A unique, permanent identifier assigned to a DataNode's storage volume when it first registers.",
+      "C": "The IP address of the node.",
+      "D": "The HDFS version number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Recovery' (Lease Recovery)?",
+    "options": {
+      "A": "Recovering a deleted file.",
+      "B": "The process of ensuring all replicas of a block have the same length and generation stamp after a client failure.",
+      "C": "Replacing a broken hard drive.",
+      "D": "Fixing the NameNode RAM."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DFSAdmin Upgrade Progress'?",
+    "options": {
+      "A": "A command to see how many users are upgraded.",
+      "B": "A command to track the status of a HDFS version upgrade across the DataNodes.",
+      "C": "A tool to update the web browser.",
+      "D": "A progress bar in the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'fs.azure.account.key' used for?",
+    "options": {
+      "A": "To secure a local HDFS.",
+      "B": "To allow HDFS-compatible tools to connect to Azure Blob Storage.",
+      "C": "To encrypt files in HDFS.",
+      "D": "To login to the Azure Portal."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Router-based Federation', what is a 'Mount Table'?",
+    "options": {
+      "A": "A physical table for the router.",
+      "B": "A centralized configuration that maps HDFS paths to specific sub-clusters.",
+      "C": "A list of files on the local disk.",
+      "D": "A way to sort files by date."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Intra-DataNode Balancer' (Disk Balancer)?",
+    "options": {
+      "A": "Moving data between different DataNodes.",
+      "B": "Moving data between multiple disks on the same DataNode to ensure even distribution.",
+      "C": "Replacing a small disk with a large one.",
+      "D": "Checking the disk temperature."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'StandbyCheckpointer'?",
+    "options": {
+      "A": "A person who checks the standby node.",
+      "B": "The thread in the Standby NameNode that handles the merging of fsimage and EditLogs in an HA setup.",
+      "C": "A hardware device.",
+      "D": "A log file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'IPC' (Inter-Process Communication) in HDFS?",
+    "options": {
+      "A": "The protocol used for communication between HDFS components (e.g., Client to NameNode).",
+      "B": "The internal bus on the motherboard.",
+      "C": "A way to talk to other users.",
+      "D": "A type of data block."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'RPC' timeout in HDFS?",
+    "options": {
+      "A": "The time before a client gives up on a request to the NameNode.",
+      "B": "The speed of the processor.",
+      "C": "The duration of a heartbeat.",
+      "D": "The time to format a disk."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Static Mapping' in Rack Awareness?",
+    "options": {
+      "A": "A script or file that manually defines which IP addresses belong to which racks.",
+      "B": "Automatic discovery of racks.",
+      "C": "A physical map of the data center.",
+      "D": "A way to name racks."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DFSAdmin -refreshNodes'?",
+    "options": {
+      "A": "A command to restart all nodes.",
+      "B": "A command to tell the NameNode to re-read the include and exclude hosts files without a restart.",
+      "C": "A way to clear the cache.",
+      "D": "A command to update the software."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'EditLog' tailing in HA?",
+    "options": {
+      "A": "The Standby NameNode reading the latest edits from the JournalNodes to stay in sync with the Active node.",
+      "B": "Cutting the end of the log file.",
+      "C": "A way to delete logs.",
+      "D": "Reading logs from a DataNode."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Fast Path' in HDFS 3.x for small files?",
+    "options": {
+      "A": "A way to skip the NameNode.",
+      "B": "Optimizations to reduce RPC overhead when handling a high volume of small file operations.",
+      "C": "A dedicated network for small files.",
+      "D": "Storing small files in the metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS-7285' (Storage Tiering for SSDs)?",
+    "options": {
+      "A": "A new version of HDFS.",
+      "B": "The JIRA improvement that introduced support for managing SSD storage within HDFS.",
+      "C": "A security patch.",
+      "D": "A hardware driver."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Secure Datanode' port requirement?",
+    "options": {
+      "A": "It requires the DataNode to run on privileged ports (below 1024) to ensure it was started by root in a secure cluster.",
+      "B": "It requires port 80.",
+      "C": "It requires port 443.",
+      "D": "It can run on any port."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Async EditLog Logging'?",
+    "options": {
+      "A": "Logging metadata changes asynchronously to disk to improve NameNode throughput.",
+      "B": "Logging once a day.",
+      "C": "A way to skip logging.",
+      "D": "Logging to a remote server only."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'NameNode Startup Optimization'? What is the longest part of startup?",
+    "options": {
+      "A": "Loading the Java libraries.",
+      "B": "Loading the 'fsimage' and replaying the 'EditLogs' into memory.",
+      "C": "Checking the hard drive.",
+      "D": "Talking to the DataNodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Content Summary'?",
+    "options": {
+      "A": "A summary of the files for the user.",
+      "B": "An internal command to get recursive counts of files, directories, and quotas for a path.",
+      "C": "A way to preview the data.",
+      "D": "A performance report."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'NameNode Heap Size' calculation rule of thumb?",
+    "options": {
+      "A": "1GB of RAM for every 1 million blocks/files in the namespace.",
+      "B": "100MB for the whole cluster.",
+      "C": "It should match the DataNode RAM.",
+      "D": "1GB for every user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Datanode Volume Failure' behavior?",
+    "options": {
+      "A": "The whole DataNode shuts down immediately.",
+      "B": "The DataNode continues to function using the remaining healthy disks (if configured via 'dfs.datanode.failed.volumes.tolerated').",
+      "C": "It asks the admin to replace the disk.",
+      "D": "It tries to fix the disk."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Heartbeat' interval tuning?",
+    "options": {
+      "A": "Shortening the interval makes failure detection faster but increases NameNode load.",
+      "B": "Lengthening it makes the cluster faster.",
+      "C": "It cannot be tuned.",
+      "D": "It is tuned by the user."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'JournalNode' sync status?",
+    "options": {
+      "A": "Checking if the log files on all JournalNodes are identical.",
+      "B": "A way to speed up the network.",
+      "C": "A user permission.",
+      "D": "A hardware status light."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DFSAdmin -metasave'?",
+    "options": {
+      "A": "Saving the metadata to a file.",
+      "B": "Dumping NameNode primary data structures (like replication queues) to a file for debugging.",
+      "C": "A way to backup the cluster.",
+      "D": "A command to encrypt metadata."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Block Invalidations'?",
+    "options": {
+      "A": "Deleting corrupt blocks.",
+      "B": "The process where the NameNode tells DataNodes to delete excess or obsolete replicas.",
+      "C": "Marking a file as private.",
+      "D": "A way to stop a write operation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Datanode Layout Version'?",
+    "options": {
+      "A": "The physical arrangement of the server.",
+      "B": "An internal version number that tracks the structure of data stored on the DataNode's disk to ensure compatibility during upgrades.",
+      "C": "The version of the GUI.",
+      "D": "A way to name nodes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'OIV' (Offline Image Viewer) XML processor?",
+    "options": {
+      "A": "A way to edit the fsimage file directly.",
+      "B": "A tool to convert the binary fsimage into an XML format for analysis or external processing.",
+      "C": "A way to browse HDFS offline.",
+      "D": "A security scanner."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DataNode Caching' (RAM_DISK)?",
+    "options": {
+      "A": "A special storage policy to store data blocks in the DataNode's RAM for ultra-low latency.",
+      "B": "Using a separate RAM chip for HDFS.",
+      "C": "A way to speed up the OS.",
+      "D": "Caching user passwords."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SafeMode Exit' requirement in HA?",
+    "options": {
+      "A": "Only the Active NameNode needs to exit safe mode.",
+      "B": "Both Active and Standby NameNodes must independently satisfy the threshold and exit safe mode.",
+      "C": "The admin must manually type 'exit' on both.",
+      "D": "Safe mode is not used in HA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'HDFS Audit Log'?",
+    "options": {
+      "A": "A record of every HDFS operation, who performed it, and from where, used for security and compliance.",
+      "B": "A list of software bugs.",
+      "C": "A way to measure CPU usage.",
+      "D": "A list of the cluster admins."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Block ID' collision risk?",
+    "options": {
+      "A": "Extremely low, as NameNode uses a 64-bit monotonically increasing counter to assign IDs.",
+      "B": "Very high, requiring manual fixes.",
+      "C": "It happens once a day.",
+      "D": "IDs are assigned randomly."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'DFSAdmin -saveNamespace' requirement?",
+    "options": {
+      "A": "The NameNode must be in Safe Mode to manually save the current metadata to a new fsimage.",
+      "B": "The cluster must be empty.",
+      "C": "The user must be root.",
+      "D": "It can only be done at midnight."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Datanode ID' persistence?",
+    "options": {
+      "A": "The ID changes every time the node restarts.",
+      "B": "The ID is stored in a 'VERSION' file on the node's local disk to maintain identity across restarts.",
+      "C": "The ID is based on the current date.",
+      "D": "The ID is assigned by the user."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Lease Renewal' mechanism?",
+    "options": {
+      "A": "The client must periodically ping the NameNode (renew the lease) to keep a file open for writing.",
+      "B": "The admin must pay a fee.",
+      "C": "The file is closed every hour.",
+      "D": "The DataNode renews the lease."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Quorum Journal' majority requirement for 5 nodes?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'DFS_DATANODE_DATA_DIR_PERM' configuration?",
+    "options": {
+      "A": "The UNIX permissions required for the local directories on the DataNode where blocks are stored (typically 700).",
+      "B": "The password for the HDFS folder.",
+      "C": "The encryption key for the disk.",
+      "D": "A way to hide the node from the network."
+    },
+    "answer": "A"
+  }
+  ]
+}

@@ -1,0 +1,1985 @@
+{ 
+  "skill": "Cloud Security", 
+  "questions": [
+    {
+    "question": "According to the Shared Responsibility Model, who is typically responsible for the physical security of the data center?",
+    "options": {
+      "A": "The Customer",
+      "B": "The Cloud Service Provider (CSP)",
+      "C": "The Internet Service Provider (ISP)",
+      "D": "The Local Police"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Multi-Factor Authentication (MFA) adds an extra layer of security by requiring more than just a password.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root accounts",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of 'Identity and Access Management' (IAM)?",
+    "options": {
+      "A": "To speed up the internet connection.",
+      "B": "To ensure the right people have access to the right resources at the right time.",
+      "C": "To store the names of all employees in the cloud.",
+      "D": "To encrypt the physical hardware of the server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common security risk caused by cloud misconfiguration?",
+    "options": {
+      "A": "The server running out of RAM.",
+      "B": "A publicly accessible S3 storage bucket containing private data.",
+      "C": "The cloud provider's power going out.",
+      "D": "A developer forgetting their password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Least Privilege' mean in cloud security?",
+    "options": {
+      "A": "Granting users access only to the resources they need to do their job.",
+      "B": "Giving all users administrative rights to avoid support tickets.",
+      "C": "Granting access based on the person's job title only.",
+      "D": "Allowing users to share one login to save money."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In a 'Public' cloud, your data is stored on hardware that is shared with other customers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using free-tier services",
+      "D": "Only for non-encrypted data"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption at Rest'?",
+    "options": {
+      "A": "Protecting data while it is moving over the network.",
+      "B": "Protecting data while it is stored on a disk or in a database.",
+      "C": "Turning off the server when it is not being used.",
+      "D": "Deleting data that is older than 30 days."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption in Transit'?",
+    "options": {
+      "A": "Protecting data while it is stored in a backup.",
+      "B": "Protecting data while it is being moved across the network (e.g., using HTTPS).",
+      "C": "The speed at which data travels in the cloud.",
+      "D": "Encryption that only works for mobile devices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a major security benefit of using a Managed Service (PaaS)?",
+    "options": {
+      "A": "The provider handles patching the underlying operating system.",
+      "B": "The customer doesn't have to use passwords.",
+      "C": "The data is automatically free to store.",
+      "D": "The service cannot be hacked."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Root User' account should be used for daily administrative tasks.",
+    "options": {
+      "A": "False (Root should be secured and used only for tasks that strictly require it).",
+      "B": "True",
+      "C": "Only if MFA is enabled",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of a 'Security Group' in a cloud network?",
+    "options": {
+      "A": "To group people who work in the security department.",
+      "B": "To act as a virtual firewall for your instance to control inbound and outbound traffic.",
+      "C": "To store the encryption keys for the VPC.",
+      "D": "To monitor the temperature of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'DDoS' stand for?",
+    "options": {
+      "A": "Distributed Denial of Service",
+      "B": "Digital Data Operating System",
+      "C": "Direct Drive Online Storage",
+      "D": "Dynamic Domain of Security"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Most cloud providers offer tools to scan your environment for common security vulnerabilities.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Enterprise customers",
+      "D": "Only for Linux-based systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of IAM, what is a 'Policy'?",
+    "options": {
+      "A": "The physical contract signed with the cloud provider.",
+      "B": "A document that defines permissions and is attached to a user, group, or role.",
+      "C": "A list of all previous system errors.",
+      "D": "The insurance policy for the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an example of a 'Social Engineering' attack?",
+    "options": {
+      "A": "A SQL injection on a web form.",
+      "B": "A phishing email asking a user to reveal their password.",
+      "C": "A brute force attack on a login page.",
+      "D": "A hardware failure in the network switch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'VPC' (Virtual Private Cloud)?",
+    "options": {
+      "A": "A private internet connection for the office.",
+      "B": "A logically isolated section of the cloud where you can launch resources in a virtual network.",
+      "C": "A cloud provider's main website.",
+      "D": "A specialized computer for high-speed gaming."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cloud security is solely the responsibility of the cloud provider.",
+    "options": {
+      "A": "False (It is a shared responsibility between the provider and the customer).",
+      "B": "True",
+      "C": "Only in SaaS models",
+      "D": "Only if you pay for the 'Security Plus' plan"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary purpose of a 'Bastion Host'?",
+    "options": {
+      "A": "To act as a primary database server.",
+      "B": "To provide a secure entry point to manage instances in a private network.",
+      "C": "To store the system's images and videos.",
+      "D": "To speed up the deployment of code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these protocols is used to secure web traffic?",
+    "options": {
+      "A": "HTTP",
+      "B": "HTTPS",
+      "C": "FTP",
+      "D": "SNMP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Phishing'?",
+    "options": {
+      "A": "Searching for bugs in the source code.",
+      "B": "An attempt to steal sensitive information by masquerading as a trustworthy entity.",
+      "C": "The process of deleting old data from the cloud.",
+      "D": "A way to catch hackers using a decoy server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Strong passwords should include a mix of uppercase, lowercase, numbers, and symbols.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for administrative accounts",
+      "D": "Only on Windows-based systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'IAM Role'?",
+    "options": {
+      "A": "A person's job title in the company.",
+      "B": "A temporary set of permissions that can be assumed by a user or an application.",
+      "C": "The name of the primary administrator account.",
+      "D": "A folder where user accounts are stored."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'WAF' (Web Application Firewall)?",
+    "options": {
+      "A": "To protect web applications from common web exploits like SQL injection.",
+      "B": "To increase the speed of the website.",
+      "C": "To backup the web server automatically.",
+      "D": "To monitor the employee's web browsing history."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Using a VPN (Virtual Private Network) can help secure the connection between an office and the cloud.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile users",
+      "D": "Only if the cloud is private"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Zero-Day' vulnerability?",
+    "options": {
+      "A": "A vulnerability that was discovered on the first day of the year.",
+      "B": "A security flaw that is unknown to the software vendor and has no patch available.",
+      "C": "An error that occurs when a trial period ends.",
+      "D": "A vulnerability that is easy to fix in under 24 hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a way to protect your cloud account from unauthorized login?",
+    "options": {
+      "A": "Enabling MFA (Multi-Factor Authentication).",
+      "B": "Sharing your password with your team for backup.",
+      "C": "Using the same password for all websites.",
+      "D": "Writing your password on a sticky note."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit Logging'?",
+    "options": {
+      "A": "The process of deleting old records.",
+      "B": "Keeping a chronological record of system activities to track who did what and when.",
+      "C": "A list of all users who have a specific job title.",
+      "D": "The speed at which the server processes logs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Public' subnets should generally not be used for backend database servers.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the database is under 100GB",
+      "D": "Only if using NoSQL"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of a 'Key Management Service' (KMS)?",
+    "options": {
+      "A": "To manage physical keys for the office building.",
+      "B": "To create, store, and manage cryptographic keys used for encryption.",
+      "C": "To manage the keyboard settings for cloud users.",
+      "D": "To store the password for the Wi-Fi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Compliance' in cloud security?",
+    "options": {
+      "A": "Following the rules and regulations required for a specific industry (like HIPAA or PCI).",
+      "B": "When all the servers are running the same version of software.",
+      "C": "Hiring a security guard for the office.",
+      "D": "The amount of storage used by the security logs."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Rotating access keys regularly is a recommended security practice.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-root users",
+      "D": "Only if the keys were leaked"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'SLA' stand for in a security context?",
+    "options": {
+      "A": "Security Level Agreement",
+      "B": "Service Level Agreement",
+      "C": "Standard Logic Array",
+      "D": "System Loss Assessment"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Malware'?",
+    "options": {
+      "A": "Software that is very slow to run.",
+      "B": "Software designed specifically to disrupt, damage, or gain unauthorized access to a system.",
+      "C": "A specialized type of cloud hardware.",
+      "D": "The name of the cloud provider's marketplace."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Identity Provider' used with cloud services?",
+    "options": {
+      "A": "Google Workspace",
+      "B": "Microsoft Azure AD (Entra ID)",
+      "C": "Okta",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: An 'Internal' load balancer is not accessible from the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only if it is encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Classification'?",
+    "options": {
+      "A": "Categorizing data based on its sensitivity to determine appropriate security controls.",
+      "B": "The process of moving data to a faster hard drive.",
+      "C": "Searching for data using a specific keyword.",
+      "D": "The history of how data has changed over time."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Penetration Testing'?",
+    "options": {
+      "A": "Testing how much weight a server rack can hold.",
+      "B": "An authorized simulated attack on a system to find security weaknesses.",
+      "C": "A way to measure the speed of light in fiber optics.",
+      "D": "Deleting data to see how the system recovers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Snapshot' backups of cloud volumes should be kept for disaster recovery purposes.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for database volumes",
+      "D": "Only if using the cloud for over 1 year"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Single Sign-On' (SSO)?",
+    "options": {
+      "A": "A system where a user logs in once and gains access to multiple related systems.",
+      "B": "Only allowing one user to log into the cloud at a time.",
+      "C": "A password that only consists of one letter.",
+      "D": "Logging in without using a mouse."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these is a common cloud-based monitoring service for security events?",
+    "options": {
+      "A": "AWS CloudTrail",
+      "B": "Azure Monitor",
+      "C": "Google Cloud Logging",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does it mean to 'Patch' a system?",
+    "options": {
+      "A": "To fix a physical hole in the server case.",
+      "B": "To update software or an OS to fix security vulnerabilities or bugs.",
+      "C": "To add more memory to the server.",
+      "D": "To change the name of a file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Sharing access keys in plain text via email is a secure way to collaborate.",
+    "options": {
+      "A": "False (Keys should be managed via IAM and never shared in plain text).",
+      "B": "True",
+      "C": "Only if using a corporate email address",
+      "D": "Only if the email is deleted after 5 minutes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow IT'?",
+    "options": {
+      "A": "IT support provided at night.",
+      "B": "The use of IT systems or software within an organization without explicit departmental approval.",
+      "C": "Hiring a developer who works in a different time zone.",
+      "D": "Encryption used to hide the identity of a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of an 'Intrusion Detection System' (IDS)?",
+    "options": {
+      "A": "To block all incoming traffic from the internet.",
+      "B": "To monitor network or system activities for malicious activity or policy violations.",
+      "C": "To store the passwords of all authorized users.",
+      "D": "To scan the physical data center for intruders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You should enable 'Deletion Protection' for critical cloud resources like production databases.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the first 30 days of use",
+      "D": "Only for storage over 1TB"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'MFA Fatigue'?",
+    "options": {
+      "A": "When a user gets tired of typing their password.",
+      "B": "An attack where the victim is bombarded with MFA prompts until they accidentally approve one.",
+      "C": "When the MFA device runs out of battery.",
+      "D": "A error where the MFA code doesn't work after 3 attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brute Force' attack?",
+    "options": {
+      "A": "Physically attacking a server with a hammer.",
+      "B": "An attempt to guess a password or key by trying all possible combinations.",
+      "C": "A security attack targeting the server's power supply.",
+      "D": "A way to force a system to update."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a way to secure an S3 bucket in AWS?",
+    "options": {
+      "A": "Enabling 'Block Public Access'.",
+      "B": "Attaching a Bucket Policy that restricts access to specific IP addresses.",
+      "C": "Using IAM user permissions.",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: 'Hardening' a system involves removing unnecessary software and services to reduce the attack surface.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Linux servers",
+      "D": "Only for non-encrypted systems"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Ransomware'?",
+    "options": {
+      "A": "A type of malware that encrypts a victim's files and demands a payment for the decryption key.",
+      "B": "The process of paying a cloud provider for extra storage.",
+      "C": "Software used to manage employee salaries.",
+      "D": "A tool used to scan the network for unauthorized devices."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Sandbox' environment?",
+    "options": {
+      "A": "A physical server room located in a desert.",
+      "B": "An isolated environment where programs can be tested without affecting the rest of the system.",
+      "C": "A specialized database for storing children's information.",
+      "D": "A folder where old files are deleted automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Default' VPC settings is always the most secure configuration.",
+    "options": {
+      "A": "False (Defaults are often designed for ease of use and may have broader permissions than necessary).",
+      "B": "True",
+      "C": "Only for small businesses",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Cloud Governance'?",
+    "options": {
+      "A": "A government agency that manages the cloud.",
+      "B": "A set of rules and policies an organization puts in place to ensure cloud resources are managed securely and cost-effectively.",
+      "C": "The physical location of the cloud provider's headquarters.",
+      "D": "The password for the administrator dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a symptom of a possible cloud account compromise?",
+    "options": {
+      "A": "Unrecognized resources being launched in different regions.",
+      "B": "The monthly bill being exactly the same as the previous month.",
+      "C": "A developer receiving a thank-you email from the provider.",
+      "D": "The system running faster than usual."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: IAM 'Groups' are a good way to manage permissions for multiple users at once.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for developers",
+      "D": "Only for non-root users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Integrity'?",
+    "options": {
+      "A": "Ensuring that data has not been altered or tampered with by unauthorized parties.",
+      "B": "Making sure the data is stored in the same region as the user.",
+      "C": "The process of deleting duplicate files.",
+      "D": "The speed at which data can be read from a database."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Deny-by-Default' rule?",
+    "options": {
+      "A": "A rule that allows all traffic unless it is explicitly blocked.",
+      "B": "A rule that blocks all traffic unless it is explicitly allowed.",
+      "C": "A way to automatically delete unauthorized user accounts.",
+      "D": "A policy that prevents users from changing their own password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: SSL/TLS certificates help verify the identity of a website to the user's browser.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for e-commerce sites",
+      "D": "Only if using a 4096-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Traffic Mirroring' in a VPC?",
+    "options": {
+      "A": "Using a physical mirror to see the back of a server rack.",
+      "B": "A feature that allows you to copy network traffic from an instance and send it to security appliances for inspection.",
+      "C": "Reversing the direction of the network packets.",
+      "D": "Deleting duplicate network packets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Tenancy'?",
+    "options": {
+      "A": "A building where multiple cloud providers share space.",
+      "B": "An architecture where a single instance of a software application serves multiple customers.",
+      "C": "Having more than ten users in a single cloud account.",
+      "D": "The amount of money paid for a cloud subscription."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Resource Tagging' can help in identifying the owner and security level of a resource.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for billing purposes",
+      "D": "Only if the tags are in JSON format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Access Control List' (ACL)?",
+    "options": {
+      "A": "A list of all users who have entered the data center building.",
+      "B": "A table that tells a computer operating system which access rights each user has to a particular system object.",
+      "C": "The history of every time a file was opened.",
+      "D": "A way to encrypt a list of usernames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Vulnerability Scanner'?",
+    "options": {
+      "A": "To automatically fix bugs in the code.",
+      "B": "To identify known security weaknesses in a system or network.",
+      "C": "To monitor the physical security guards.",
+      "D": "To increase the speed of the server's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Key Rotation' means changing the password for the KMS service every day.",
+    "options": {
+      "A": "False (It refers to retiring an old cryptographic key and replacing it with a new one periodically).",
+      "B": "True",
+      "C": "Only for military accounts",
+      "D": "Only if using a hardware security module"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Threat Intelligence'?",
+    "options": {
+      "A": "How smart a hacker is.",
+      "B": "Information about existing or emerging threats that is used to protect an organization.",
+      "C": "A specialized AI that writes security code.",
+      "D": "The history of all successful security attacks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Physical Security' measure for a cloud provider?",
+    "options": {
+      "A": "Biometric access controls at data center entrances.",
+      "B": "Using a strong password for the root account.",
+      "C": "Enabling MFA for all users.",
+      "D": "Installing a software firewall."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In an IAM Policy JSON structure, what does the 'Effect' element specify?",
+    "options": {
+      "A": "The time of day the policy is active.",
+      "B": "Whether the policy results in an 'Allow' or an explicit 'Deny'.",
+      "C": "The physical region where the resource is located.",
+      "D": "The encryption algorithm used to sign the policy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Network Access Control Lists (NACLs) are 'Stateless', meaning return traffic must be explicitly allowed by an outbound rule.",
+    "options": {
+      "A": "True",
+      "B": "False (NACLs are stateful like Security Groups).",
+      "C": "Only in Google Cloud VPCs",
+      "D": "Only for IPv6 traffic"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which of these describes the 'Principal' element in an IAM trust policy?",
+    "options": {
+      "A": "The main reason for creating the account.",
+      "B": "The entity (user, account, or service) that is allowed or denied access to a resource.",
+      "C": "The amount of money spent on the resource.",
+      "D": "The primary IP address of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary security risk of 'VPC Peering' between two different organizations?",
+    "options": {
+      "A": "It doubles the latency of all requests.",
+      "B": "If not restricted, it could allow lateral movement of an attacker from one network to the other.",
+      "C": "It requires sharing the root password of both accounts.",
+      "D": "It deletes all existing firewall rules."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Confidentiality' requirement in the SOC 2 Trust Services Criteria?",
+    "options": {
+      "A": "Ensuring the system is protected against unauthorized physical access.",
+      "B": "Protecting data that is designated as confidential from its collection through its disposal.",
+      "C": "Guaranteeing 99.99% system uptime.",
+      "D": "Encrypting the server's BIOS firmware."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Symmetric encryption uses the same key for both encrypting and decrypting data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for data over 1GB",
+      "D": "Only if using RSA"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which cloud security tool is specifically designed to provide a 'Centralized View' of security alerts and compliance status across multiple accounts?",
+    "options": {
+      "A": "CloudWatch",
+      "B": "Security Hub (AWS) / Security Center (Azure)",
+      "C": "Route 53",
+      "D": "S3 Glacier"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Customer Master Key' (CMK) in the context of cloud encryption?",
+    "options": {
+      "A": "A physical key given to the CEO of the customer company.",
+      "B": "A logical representation of a key used to wrap or generate data encryption keys.",
+      "C": "A password used to log into the billing portal.",
+      "D": "A key that only works for one specific virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure as Code' (IaC) can help improve security by allowing security configurations to be peer-reviewed and version-controlled.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using Terraform",
+      "D": "Only for private cloud deployments"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Perfect Forward Secrecy' (PFS) ensure in a secure communication session?",
+    "options": {
+      "A": "The message will never be deleted.",
+      "B": "That the compromise of a long-term private key does not compromise past session keys.",
+      "C": "The connection will never drop.",
+      "D": "The user's identity is hidden from the ISP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Hub-and-Spoke' network architecture, what is the role of the 'Hub'?",
+    "options": {
+      "A": "To act as a central point for security inspection and traffic routing between spokes and on-premises.",
+      "B": "To store all the application's images.",
+      "C": "To provide a backup for the internet connection.",
+      "D": "To monitor the electricity usage of the spokes."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'HIPAA' safeguard involves policy-based controls like training and risk assessments?",
+    "options": {
+      "A": "Physical Safeguards",
+      "B": "Administrative Safeguards",
+      "C": "Technical Safeguards",
+      "D": "Network Safeguards"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An IAM 'Condition' element allows you to restrict access based on the source IP address of the request.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'standard' tier",
+      "D": "Only if using a 4096-bit key"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Bring Your Own Key' (BYOK) in cloud security?",
+    "options": {
+      "A": "Bringing a physical keyboard to the data center.",
+      "B": "Generating your own encryption keys locally and uploading them to the cloud provider's KMS.",
+      "C": "Using a physical USB drive to log in.",
+      "D": "Hiring your own security guards for the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Man-in-the-Middle' (MITM) attack in the cloud?",
+    "options": {
+      "A": "A hacker physically standing between two servers.",
+      "B": "An attacker secretly intercepting and relaying communication between two parties.",
+      "C": "A database error where data is split in half.",
+      "D": "A developer working from a middle-tier office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Egress Filtering' is the practice of restricting traffic leaving your cloud network to known, authorized destinations.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for banking applications",
+      "D": "Only if using a NAT Gateway"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary function of an 'HSM' (Hardware Security Module) in a cloud environment?",
+    "options": {
+      "A": "To increase the RAM of the physical host.",
+      "B": "To provide high-security, physical tamper-resistant storage for cryptographic keys.",
+      "C": "To backup the entire virtual machine image.",
+      "D": "To monitor the airflow in the server rack."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Security Token Service' (STS) used for?",
+    "options": {
+      "A": "To buy coffee in the company cafeteria.",
+      "B": "To request temporary, limited-privilege credentials for IAM users or federated users.",
+      "C": "To encrypt the physical network cables.",
+      "D": "To monitor the expiration of SSL certificates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Cross-Account' IAM roles allow a user in one cloud account to access resources in another account securely.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if both accounts use the same credit card",
+      "D": "Only in the same region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Penetration Testing' vs. 'Vulnerability Scanning'?",
+    "options": {
+      "A": "They are the same thing.",
+      "B": "Scanning is automated and looks for known flaws; Pentesting is a manual, simulated attack to find complex weaknesses.",
+      "C": "Scanning is for Java; Pentesting is for Python.",
+      "D": "Scanning is free; Pentesting is required by law."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'DLP' (Data Loss Prevention) in a cloud context?",
+    "options": {
+      "A": "A tool that stops you from losing your physical laptop.",
+      "B": "A strategy for ensuring that sensitive data is not lost, misused, or accessed by unauthorized users.",
+      "C": "A specialized way to backup the database.",
+      "D": "A policy that deletes data after it is used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'Zero Trust' principle?",
+    "options": {
+      "A": "Trust but verify.",
+      "B": "Never trust, always verify.",
+      "C": "Trust internal traffic only.",
+      "D": "Trust traffic that uses a VPN."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Type II' SOC 2 report, the auditor tests the controls over a period of at least six months.",
+    "options": {
+      "A": "True",
+      "B": "False (Type II is a point-in-time assessment).",
+      "C": "Only for non-profit companies",
+      "D": "Only if using the cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SAML' (Security Assertion Markup Language) primarily used for?",
+    "options": {
+      "A": "To write the application's source code.",
+      "B": "To exchange authentication and authorization data between an Identity Provider and a Service Provider.",
+      "C": "To encrypt the physical hardware of the disk.",
+      "D": "To monitor the uptime of the cloud provider's API."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Cloud Access Security Broker' (CASB)?",
+    "options": {
+      "A": "A person who sells cloud subscriptions.",
+      "B": "A security policy enforcement point placed between cloud service consumers and providers.",
+      "C": "A specialized firewall for physical data centers.",
+      "D": "A tool that monitors the cloud bill."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Asymmetric encryption uses a public key to encrypt and a private key to decrypt data.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the UK",
+      "D": "Only for binary images"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Clickjacking'?",
+    "options": {
+      "A": "Stealing a user's mouse.",
+      "B": "A malicious technique of tricking a user into clicking on something different from what they perceive.",
+      "C": "The process of counting how many people click on an ad.",
+      "D": "A hardware failure in the keyboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which cloud service allows you to store and manage secrets like API keys and database passwords centrally?",
+    "options": {
+      "A": "S3 / Blob Storage",
+      "B": "Secrets Manager / Key Vault",
+      "C": "CloudTrail",
+      "D": "IAM Dashboard"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Service-Linked Role' is an IAM role that is predefined by the cloud provider and includes all the permissions that the service requires to call other services.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for administrative users",
+      "D": "Only in the 'dev' account"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Object Versioning' for security?",
+    "options": {
+      "A": "To track how many times a file has been read.",
+      "B": "To protect against accidental deletion or overwriting by keeping previous versions of an object.",
+      "C": "To increase the encryption level of a file.",
+      "D": "To rename files automatically for privacy."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Side-Channel Attack' in a cloud environment?",
+    "options": {
+      "A": "Attacking the server through a side door.",
+      "B": "An attack based on information gained from the physical implementation of a computer system (e.g., timing, power usage).",
+      "C": "An attack on the user's monitor brightness.",
+      "D": "A way to steal data from a neighbor's Wi-Fi."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Root' account credentials should ideally be protected by a hardware-based MFA device (like a YubiKey).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for financial accounts",
+      "D": "Only on Linux-based clouds"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Identity Federation'?",
+    "options": {
+      "A": "A group of clouds joined together.",
+      "B": "Allowing users to access cloud resources using their existing corporate or social identities (like LinkedIn or AD).",
+      "C": "A database of all world citizens.",
+      "D": "A specialized way to encrypt usernames."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement of 'PCI DSS' for data storage?",
+    "options": {
+      "A": "Storing credit card numbers in a plain text file for easy access.",
+      "B": "Never storing sensitive authentication data (like CVV) after authorization.",
+      "C": "Emailing credit card info to the support team.",
+      "D": "Printing all transaction logs every day."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Security Groups' are stateful, meaning if you allow an inbound request, the outbound response is automatically allowed.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Azure",
+      "D": "Only if the instance has a public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Privileged Identity Management' (PIM)?",
+    "options": {
+      "A": "Managing the identity of the company's CEO.",
+      "B": "Managing, controlling, and monitoring access to important resources within an organization.",
+      "C": "A tool that makes the login screen look better.",
+      "D": "The process of deleting inactive user accounts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'In-Place' upgrade vs. a 'Fresh Install' for security hardening?",
+    "options": {
+      "A": "In-place is always more secure.",
+      "B": "Fresh install from a hardened image (Immutable Infrastructure) is generally preferred to avoid configuration drift.",
+      "C": "In-place is only for Windows; Fresh install is for Linux.",
+      "D": "They have the same security level."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Pre-signed URLs' allows a user to access a private S3 object for a limited time without having their own IAM credentials.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user is on a mobile device",
+      "D": "Only if the file is an image"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Audit Exhaustion'?",
+    "options": {
+      "A": "When the auditor gets too tired to work.",
+      "B": "When a system generates so many logs that it becomes impossible to find actual security events.",
+      "C": "When the server runs out of power.",
+      "D": "When the compliance deadline is missed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Detection' control in the cloud?",
+    "options": {
+      "A": "MFA",
+      "B": "CloudTrail / Activity Logs",
+      "C": "WAF",
+      "D": "Encryption at Rest"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC Flow Logs' capture the actual payload of the network packets for deep inspection.",
+    "options": {
+      "A": "False (They capture metadata like Source/Dest IP, Port, and Protocol; not the payload).",
+      "B": "True",
+      "C": "Only if using the 'premium' tier",
+      "D": "Only in Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OIDC' (OpenID Connect)?",
+    "options": {
+      "A": "A new type of encrypted hard drive.",
+      "B": "An identity layer on top of the OAuth 2.0 protocol.",
+      "C": "A specialized way to compress security logs.",
+      "D": "The password for the OIDC dashboard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Zombie Asset' in a security context?",
+    "options": {
+      "A": "A server that has been infected with a virus.",
+      "B": "An abandoned or unmanaged cloud resource that may still be running and creates a security risk.",
+      "C": "A backup that is over 10 years old.",
+      "D": "A free trial that never expires."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Service Control Policies' (SCPs) in AWS Organizations to centrally restrict the maximum available permissions for all accounts in an OU.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for the root account",
+      "D": "Only if MFA is enabled"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Residency' vs. 'Data Sovereignty'?",
+    "options": {
+      "A": "They are the same concept.",
+      "B": "Residency is about physical location; Sovereignty is about being subject to the laws of the country where it is located.",
+      "C": "Residency is for personal data; Sovereignty is for corporate data.",
+      "D": "Residency is for cloud; Sovereignty is for on-premises."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these describes a 'Brute Force' attack on a cloud IAM user?",
+    "options": {
+      "A": "Physically attacking the developer.",
+      "B": "Repeatedly trying different passwords until the correct one is found.",
+      "C": "Deleting the user account manually.",
+      "D": "Sending a massive amount of traffic to the user's laptop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Client-Side Encryption' means the cloud provider has no access to the plaintext data or the encryption keys.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using AWS S3",
+      "D": "Only if the key is under 2048 bits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lateral Movement' in a cloud breach?",
+    "options": {
+      "A": "Moving a server to a different floor.",
+      "B": "An attacker moving from an initially compromised resource to other resources within the same environment.",
+      "C": "A database error where data shifts to the left.",
+      "D": "A developer changing departments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Honeytoken'?",
+    "options": {
+      "A": "A digital coin used to buy honey.",
+      "B": "A piece of data (like a fake API key) placed in a system to detect unauthorized access or theft.",
+      "C": "A specialized way to encrypt user tokens.",
+      "D": "A tool that makes the code run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Elastic IP' that is not attached to a resource can be a security risk if it was previously associated with a different domain.",
+    "options": {
+      "A": "True (It may still receive traffic intended for the previous owner).",
+      "B": "False",
+      "C": "Only for IPv6 addresses",
+      "D": "Only if the IP starts with '10.'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Salt' used for in password hashing?",
+    "options": {
+      "A": "To make the password taste better.",
+      "B": "To ensure that two identical passwords have different hash values.",
+      "C": "To dissolve old data automatically.",
+      "D": "To increase the character count of the password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Serverless' security risk?",
+    "options": {
+      "A": "Running out of physical hard drive space on the server.",
+      "B": "Insecure function configurations or over-privileged IAM roles attached to functions.",
+      "C": "The server's cooling fan failing.",
+      "D": "A developer forgetting to turn off the physical server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most cloud providers provide 'DDoS Protection' (like AWS Shield) automatically at no extra charge for basic attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using a 10Gbps connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Tampering'?",
+    "options": {
+      "A": "Deleting the logs after 30 days for space.",
+      "B": "An attacker modifying or deleting audit logs to hide their activity.",
+      "C": "Converting the logs into a JSON format.",
+      "D": "Printing the logs on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Principle of Separation of Duties' (SoD)?",
+    "options": {
+      "A": "Ensuring everyone in the company has the same password.",
+      "B": "Ensuring no single person has enough authority to complete a critical process alone to prevent fraud.",
+      "C": "Telling developers they cannot talk to each other.",
+      "D": "Splitting the IT team into two different buildings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure Drift' refers to the manual changes made to cloud resources that are not reflected in the original IaC templates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only if using Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Credential Stuffing'?",
+    "options": {
+      "A": "Filling a physical envelope with passwords.",
+      "B": "An attack where stolen credentials from one site are used to gain access to accounts on other sites.",
+      "C": "The process of creating many new users at once.",
+      "D": "Writing your password in the code comments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'High Availability' security strategy?",
+    "options": {
+      "A": "Storing all database backups in a single availability zone.",
+      "B": "Deploying resources across multiple availability zones to ensure access during a zone failure.",
+      "C": "Using a single large server instead of many small ones.",
+      "D": "Turning off all firewall rules to increase uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' is only effective against phishing attacks and does not protect against other types of attacks.",
+    "options": {
+      "A": "False (MFA provides protection against brute force, credential stuffing, and more).",
+      "B": "True",
+      "C": "Only on mobile devices",
+      "D": "Only for non-root users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Envelope' technique?",
+    "options": {
+      "A": "Putting a physical key in a paper envelope.",
+      "B": "Encrypting data with a data key, and then encrypting that data key with a master key.",
+      "C": "A specialized way to encrypt emails.",
+      "D": "A way to backup encryption keys to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vulnerability Patching' frequency for a secure cloud environment?",
+    "options": {
+      "A": "Once every two years.",
+      "B": "Regularly and as soon as possible after a critical security update is released.",
+      "C": "Only when the server crashes.",
+      "D": "Never, if the system is running well."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Public' IP address is mandatory for an instance to access the internet through a NAT Gateway.",
+    "options": {
+      "A": "False (The instance uses a private IP; only the NAT Gateway requires a public IP).",
+      "B": "True",
+      "C": "Only in AWS",
+      "D": "Only for Windows-based instances"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow Data'?",
+    "options": {
+      "A": "Data that only exists at night.",
+      "B": "Data that is stored in unauthorized or unmanaged cloud locations (e.g., a personal Dropbox for work files).",
+      "C": "A backup of the database metadata.",
+      "D": "Data that has been encrypted with a secret password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Managed' WAF services?",
+    "options": {
+      "A": "The provider handles updating the rules to protect against new, emerging threats.",
+      "B": "The service is automatically free.",
+      "C": "It removes the need for any other security.",
+      "D": "It works without an internet connection."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Deleting a user in IAM automatically deletes all the resources (like VMs or Buckets) that they created.",
+    "options": {
+      "A": "False (Resources remain; only the user's ability to access them is removed).",
+      "B": "True",
+      "C": "Only in Azure AD",
+      "D": "Only if the user was an administrator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security by Design'?",
+    "options": {
+      "A": "Making the security dashboard look pretty.",
+      "B": "The approach of building security into a system from the very beginning of the development process.",
+      "C": "Buying only security products that have a good logo.",
+      "D": "Hiring an architect to design the office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an OIDC (OpenID Connect) flow, what is the specific role of the 'ID Token' compared to the 'Access Token'?",
+    "options": {
+      "A": "The ID Token is used to access APIs; the Access Token contains user profile information.",
+      "B": "The ID Token contains assertions about the authentication of the user; the Access Token is an opaque string used for resource authorization.",
+      "C": "The ID Token is for symmetric encryption; the Access Token is for asymmetric.",
+      "D": "The ID Token is only valid for 5 minutes; the Access Token lasts for 24 hours."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using eBPF (Extended Berkeley Packet Filter) allows security tools to monitor system calls and network events directly in the kernel without modifying application code.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-containerized workloads",
+      "D": "Only on Windows-based cloud nodes"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Confidential Computing' in a cloud security context?",
+    "options": {
+      "A": "Keeping the cloud provider's stock price a secret.",
+      "B": "Protecting data in use by performing computation in a hardware-based, isolated Trusted Execution Environment (TEE).",
+      "C": "Encrypting data only when it is at rest on a disk.",
+      "D": "A legal contract that prevents developers from talking about their work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which IAM policy element allows you to implement 'Time-Based' access control using JSON logic?",
+    "options": {
+      "A": "Action",
+      "B": "Condition (using DateGreaterThan or DateLessThan keys)",
+      "C": "Resource",
+      "D": "Principal"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary security benefit of using a 'Service Mesh' for internal microservices communication?",
+    "options": {
+      "A": "It removes the need for any firewalls.",
+      "B": "It provides automatic, transparent mutual TLS (mTLS) and fine-grained authorization between services.",
+      "C": "It speeds up the database queries by 50%.",
+      "D": "It replaces the need for an Identity Provider (IdP)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'KMS Envelope Encryption' flow, the plaintext data is directly encrypted by the Root Master Key.",
+    "options": {
+      "A": "False (Data is encrypted by a Data Key; the Data Key is then encrypted by the Master Key).",
+      "B": "True",
+      "C": "Only for files smaller than 4KB",
+      "D": "Only if using hardware-backed keys"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Sidecar Container' security risk in Kubernetes?",
+    "options": {
+      "A": "The sidecar container can access the main application's local filesystem and network namespace if not properly restricted.",
+      "B": "The sidecar container uses too much electricity.",
+      "C": "The sidecar container can only be written in Python.",
+      "D": "The sidecar container must have a public IP address."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which mechanism is used in AWS to prevent the 'Confused Deputy' problem during cross-service role assumption?",
+    "options": {
+      "A": "Using a longer password.",
+      "B": "The 'ExternalId' condition in the IAM trust policy.",
+      "C": "Enabling MFA for all service accounts.",
+      "D": "Deleting the service role after use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Pod Security Admission' (PSA) in Kubernetes is the successor to the deprecated 'PodSecurityPolicy' (PSP).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 1.10",
+      "D": "Only for EKS clusters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Salted Hashing' specifically designed to protect against in a database breach?",
+    "options": {
+      "A": "SQL Injection.",
+      "B": "Precomputed 'Rainbow Table' attacks and identical hashes for identical passwords.",
+      "C": "Physical theft of the server racks.",
+      "D": "The server getting too hot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a SAML federation, what is the 'Metadata file' used for?",
+    "options": {
+      "A": "To store the user's photos.",
+      "B": "To establish trust by exchanging certificates, endpoints, and identifiers between the IdP and the Service Provider.",
+      "C": "To encrypt the user's password.",
+      "D": "To monitor the uptime of the login page."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC Endpoint Policy' is used to control which specific resources or actions are allowed when accessing a service through a private endpoint.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS S3",
+      "D": "Only if the endpoint has a public IP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Micro-segmentation' in a cloud network?",
+    "options": {
+      "A": "Splitting a single server into tiny pieces.",
+      "B": "The practice of creating granular security zones to isolate workloads from one another even within the same VPC.",
+      "C": "A specialized way to backup small files.",
+      "D": "Identifying users by their thumbprints."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of a 'Cloud Custodian' policy engine?",
+    "options": {
+      "A": "To clean the data center floor.",
+      "B": "To automate the enforcement of security and compliance rules (e.g., stopping unencrypted databases).",
+      "C": "To write the application's source code.",
+      "D": "To monitor the cloud provider's bank account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'Workload Identity Federation' allows an on-premises or cross-cloud workload to access cloud resources without needing long-lived secret keys.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Google Cloud",
+      "D": "Only for non-profit organizations"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary difference between a 'Security Group' and a 'Web Application Firewall' (WAF)?",
+    "options": {
+      "A": "WAF is for hardware; Security Group is for software.",
+      "B": "Security Groups filter at the IP/Port level (Layer 3/4); WAF filters based on application-level patterns (Layer 7).",
+      "C": "Security Groups are more expensive.",
+      "D": "WAF only works for internal traffic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cryptographic Agility'?",
+    "options": {
+      "A": "The speed at which a person can type encryption code.",
+      "B": "The ability of a system to easily switch between different cryptographic algorithms if one is compromised.",
+      "C": "The ability to run encryption on mobile devices.",
+      "D": "Encryption that changes its algorithm every hour."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In a 'Default Deny' posture, all network traffic is blocked unless a specific rule is created to allow it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for outbound traffic",
+      "D": "Only if using a VPN"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is an 'Attestation' in the context of a Trusted Platform Module (TPM)?",
+    "options": {
+      "A": "A developer taking a coding test.",
+      "B": "A process where a TPM provides a signed report about the hardware and software state of the system.",
+      "C": "A way to backup the server's configuration.",
+      "D": "A tool that monitors the internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a risk associated with 'Serverless Event Injection'?",
+    "options": {
+      "A": "The server running out of physical RAM.",
+      "B": "Malicious data within an event (like an S3 notification or HTTP request) being processed by a function without validation.",
+      "C": "The function taking too long to start.",
+      "D": "The cloud provider deleting the function code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'SAML Just-In-Time' (JIT) provisioning automatically creates a user account in the Service Provider application upon successful login from the IdP.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the user has a special certificate",
+      "D": "Only in the North American region"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of 'GuardDuty' in AWS?",
+    "options": {
+      "A": "To act as a physical security guard.",
+      "B": "To provide intelligent threat detection by monitoring VPC Flow Logs, DNS logs, and CloudTrail events.",
+      "C": "To encrypt the physical network cables.",
+      "D": "To monitor the expiration of SSL certificates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption Salt' primarily intended to prevent?",
+    "options": {
+      "A": "The server from rusting.",
+      "B": "The use of precomputed Rainbow Tables to crack hashes.",
+      "C": "The user from choosing a common password.",
+      "D": "The encryption from taking too long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Client-Side Encryption' means the cloud provider has no access to the plaintext data or the encryption keys.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using AWS S3",
+      "D": "Only if the key is under 2048 bits"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Lateral Movement' in a cloud breach?",
+    "options": {
+      "A": "Moving a server to a different floor.",
+      "B": "An attacker moving from an initially compromised resource to other resources within the same environment.",
+      "C": "A database error where data shifts to the left.",
+      "D": "A developer changing departments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Honeytoken'?",
+    "options": {
+      "A": "A digital coin used to buy honey.",
+      "B": "A piece of data (like a fake API key) placed in a system to detect unauthorized access or theft.",
+      "C": "A specialized way to encrypt user tokens.",
+      "D": "A tool that makes the code run faster."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Elastic IP' that is not attached to a resource can be a security risk if it was previously associated with a different domain.",
+    "options": {
+      "A": "True (It may still receive traffic intended for the previous owner).",
+      "B": "False",
+      "C": "Only for IPv6 addresses",
+      "D": "Only if the IP starts with '10.'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Salt' used for in password hashing?",
+    "options": {
+      "A": "To make the password taste better.",
+      "B": "To ensure that two identical passwords have different hash values.",
+      "C": "To dissolve old data automatically.",
+      "D": "To increase the character count of the password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Serverless' security risk?",
+    "options": {
+      "A": "Running out of physical hard drive space on the server.",
+      "B": "Insecure function configurations or over-privileged IAM roles attached to functions.",
+      "C": "The server's cooling fan failing.",
+      "D": "A developer forgetting to turn off the physical server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Most cloud providers provide 'DDoS Protection' (like AWS Shield) automatically at no extra charge for basic attacks.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for non-profit organizations",
+      "D": "Only if using a 10Gbps connection"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Log Tampering'?",
+    "options": {
+      "A": "Deleting the logs after 30 days for space.",
+      "B": "An attacker modifying or deleting audit logs to hide their activity.",
+      "C": "Converting the logs into a JSON format.",
+      "D": "Printing the logs on paper."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Principle of Separation of Duties' (SoD)?",
+    "options": {
+      "A": "Ensuring everyone in the company has the same password.",
+      "B": "Ensuring no single person has enough authority to complete a critical process alone to prevent fraud.",
+      "C": "Telling developers they cannot talk to each other.",
+      "D": "Splitting the IT team into two different buildings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Infrastructure Drift' refers to the manual changes made to cloud resources that are not reflected in the original IaC templates.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in AWS",
+      "D": "Only if using Docker"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Credential Stuffing'?",
+    "options": {
+      "A": "Filling a physical envelope with passwords.",
+      "B": "An attack where stolen credentials from one site are used to gain access to accounts on other sites.",
+      "C": "The process of creating many new users at once.",
+      "D": "Writing your password in the code comments."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'High Availability' security strategy?",
+    "options": {
+      "A": "Storing all database backups in a single availability zone.",
+      "B": "Deploying resources across multiple availability zones to ensure access during a zone failure.",
+      "C": "Using a single large server instead of many small ones.",
+      "D": "Turning off all firewall rules to increase uptime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' is only effective against phishing attacks and does not protect against other types of attacks.",
+    "options": {
+      "A": "False (MFA provides protection against brute force, credential stuffing, and more).",
+      "B": "True",
+      "C": "Only on mobile devices",
+      "D": "Only for non-root users"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption Envelope' technique?",
+    "options": {
+      "A": "Putting a physical key in a paper envelope.",
+      "B": "Encrypting data with a data key, and then encrypting that data key with a master key.",
+      "C": "A specialized way to encrypt emails.",
+      "D": "A way to backup encryption keys to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Vulnerability Patching' frequency for a secure cloud environment?",
+    "options": {
+      "A": "Once every two years.",
+      "B": "Regularly and as soon as possible after a critical security update is released.",
+      "C": "Only when the server crashes.",
+      "D": "Never, if the system is running well."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'Public' IP address is mandatory for an instance to access the internet through a NAT Gateway.",
+    "options": {
+      "A": "False (The instance uses a private IP; only the NAT Gateway requires a public IP).",
+      "B": "True",
+      "C": "Only in AWS",
+      "D": "Only for Windows-based instances"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow Data'?",
+    "options": {
+      "A": "Data that only exists at night.",
+      "B": "Data that is stored in unauthorized or unmanaged cloud locations (e.g., a personal Dropbox for work files).",
+      "C": "A backup of the database metadata.",
+      "D": "Data that has been encrypted with a secret password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a benefit of 'Managed' WAF services?",
+    "options": {
+      "A": "The provider handles updating the rules to protect against new, emerging threats.",
+      "B": "The service is automatically free.",
+      "C": "It removes the need for any other security.",
+      "D": "It works without an internet connection."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Deleting a user in IAM automatically deletes all the resources (like VMs or Buckets) that they created.",
+    "options": {
+      "A": "False (Resources remain; only the user's ability to access them is removed).",
+      "B": "True",
+      "C": "Only in Azure AD",
+      "D": "Only if the user was an administrator"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Security by Design'?",
+    "options": {
+      "A": "Making the security dashboard look pretty.",
+      "B": "The approach of building security into a system from the very beginning of the development process.",
+      "C": "Buying only security products that have a good logo.",
+      "D": "Hiring an architect to design the office building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'CASB' (Cloud Access Security Broker)?",
+    "options": {
+      "A": "To sell cloud subscriptions to customers.",
+      "B": "To act as a security policy enforcement point between cloud users and cloud service providers.",
+      "C": "To backup the cloud provider's database.",
+      "D": "To monitor the physical power usage of the data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: An 'Internal' Load Balancer is intended for traffic within a VPC and does not have a public DNS name.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using HTTPS",
+      "D": "Only in Google Cloud"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Tokenization' vs 'Encryption'?",
+    "options": {
+      "A": "They are identical processes.",
+      "B": "Encryption uses a key to transform data; Tokenization replaces sensitive data with a non-sensitive equivalent (token) with no mathematical relation.",
+      "C": "Tokenization is only for numbers.",
+      "D": "Encryption is faster than tokenization."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Proactive' security measure?",
+    "options": {
+      "A": "Responding to a security alert.",
+      "B": "Conducting a regular vulnerability assessment and patching before an exploit occurs.",
+      "C": "Restoring data from a backup after a breach.",
+      "D": "Analyzing logs to see how a hacker got in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Using 'IAM Policy Simulators' can help you test if a user has the correct permissions without actually granting them access.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for root users",
+      "D": "Only if using JSON format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Supply Chain Attack' in the cloud?",
+    "options": {
+      "A": "Attacking the physical trucks that deliver servers.",
+      "B": "Targeting less secure elements in a software supply chain (e.g., third-party libraries) to compromise the final system.",
+      "C": "A security breach at a cloud provider's office.",
+      "D": "A database error in the inventory management system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Network ACLs' (NACLs) in a VPC?",
+    "options": {
+      "A": "To control traffic at the individual instance level.",
+      "B": "To act as a firewall for controlling traffic in and out of one or more subnets.",
+      "C": "To store the passwords for all network users.",
+      "D": "To monitor the internet speed of the subnet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'MFA' should be enforced for all users in a cloud account, not just the administrator.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for users with over 1 year of tenure",
+      "D": "Only for users accessing the cloud from outside the office"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Encryption at the Application Layer'?",
+    "options": {
+      "A": "Encrypting the server's CPU instructions.",
+      "B": "Encrypting specific sensitive data fields within the application code before they are sent to the database.",
+      "C": "A specialized way to hide the application icon.",
+      "D": "A way to backup the application's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Identity Federation' standard?",
+    "options": {
+      "A": "HTML5",
+      "B": "SAML 2.0",
+      "C": "JSON",
+      "D": "CSS3"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Deleting a security group automatically removes all of the rules associated with it.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the group is empty",
+      "D": "Only in AWS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The speed at which data travels.",
+      "B": "The principle that data is subject to the laws of the nation where it is physically located.",
+      "C": "A specialized way to encrypt government data.",
+      "D": "A database field that stores the user's country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary goal of 'Incident Response'?",
+    "options": {
+      "A": "To find out who caused the error and fire them.",
+      "B": "To detect, contain, and remediate security threats to minimize damage and restore normal operations.",
+      "C": "To write new features for the security software.",
+      "D": "To increase the company's insurance coverage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Cloud security certificates like 'CCSP' can help demonstrate a professional's expertise in cloud security.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for AWS employees",
+      "D": "Only in the year 2026"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Shadow IT' risk?",
+    "options": {
+      "A": "The risk of a server room being too dark.",
+      "B": "The risk that unmanaged systems or software could introduce vulnerabilities or compromise sensitive data.",
+      "C": "The risk of a cloud provider's name being too long.",
+      "D": "The risk of a developer using a personal email for work."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Access Key' in the context of IAM?",
+    "options": {
+      "A": "A physical key for the data center door.",
+      "B": "A set of credentials (ID and Secret) used for programmatic access to cloud services.",
+      "C": "The password for the administrator account.",
+      "D": "A way to unlock a virtual machine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: A 'VPC' can be shared across multiple cloud regions.",
+    "options": {
+      "A": "False (A VPC is typically a regional resource; you connect them across regions using peering or gateways).",
+      "B": "True",
+      "C": "Only in Google Cloud",
+      "D": "Only if using the 'premium' network tier"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of a 'Service Control Policy' (SCP)?",
+    "options": {
+      "A": "To set the physical temperature of the data center.",
+      "B": "To centrally control the maximum available permissions for all accounts in an organization.",
+      "C": "To monitor the daily growth of the data center.",
+      "D": "To count the number of users in a cloud account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a requirement for 'SOC 2' compliance?",
+    "options": {
+      "A": "Ensuring the organization's logo is correctly displayed.",
+      "B": "Implementing controls that meet the Trust Services Criteria (e.g., Security, Availability).",
+      "C": "Hiring a new CEO every year.",
+      "D": "Moving all data to a private cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'VPC Peering' is a transitive connection, meaning if A is peered with B and B is peered with C, A can automatically talk to C.",
+    "options": {
+      "A": "False (VPC peering is non-transitive; a direct peering between A and C is required).",
+      "B": "True",
+      "C": "Only in Azure",
+      "D": "Only if using IPv6"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of an 'IDS' (Intrusion Detection System)?",
+    "options": {
+      "A": "To block all incoming traffic from the internet.",
+      "B": "To monitor network or system activities for malicious activity or policy violations.",
+      "C": "To store the passwords of all authorized users.",
+      "D": "To scan the physical data center for intruders."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'MFA Fatigue'?",
+    "options": {
+      "A": "When a user gets tired of typing their password.",
+      "B": "An attack where the victim is bombarded with MFA prompts until they accidentally approve one.",
+      "C": "When the MFA device runs out of battery.",
+      "D": "A error where the MFA code doesn't work after 3 attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Brute Force' attack?",
+    "options": {
+      "A": "Physically attacking a server with a hammer.",
+      "B": "An attempt to guess a password or key by trying all possible combinations.",
+      "C": "A security attack targeting the server's power supply.",
+      "D": "A way to force a system to update."
+    },
+    "answer": "B"
+  }
+  ]
+}

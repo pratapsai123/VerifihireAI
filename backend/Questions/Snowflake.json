@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Snowflake", 
+  "questions": [
+    {
+    "question": "Which of the following best describes Snowflake's architecture?",
+    "options": {
+      "A": "Shared-nothing architecture",
+      "B": "Multi-cluster, shared data architecture",
+      "C": "On-premise hardware-defined storage",
+      "D": "Single-node database structure"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are the three main layers of Snowflake's architecture?",
+    "options": {
+      "A": "Compute, Networking, and RAM",
+      "B": "Database Storage, Query Processing, and Cloud Services",
+      "C": "Extraction, Transformation, and Loading",
+      "D": "Linux, SQL, and Python"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary function of a 'Virtual Warehouse' in Snowflake?",
+    "options": {
+      "A": "To store physical data files in a secure room.",
+      "B": "To provide the compute resources needed to execute queries.",
+      "C": "To manage the office's physical inventory.",
+      "D": "To act as a backup for cloud-based email services."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In which layer does Snowflake store its data?",
+    "options": {
+      "A": "Query Processing layer",
+      "B": "Cloud Services layer",
+      "C": "Database Storage layer",
+      "D": "Internal Network layer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "How is Snowflake billed for data storage?",
+    "options": {
+      "A": "By the number of users created in the system.",
+      "B": "Based on the average monthly amount of data stored (per TB).",
+      "C": "Based on the number of SQL queries written.",
+      "D": "By the physical size of the data center building."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following cloud providers can host a Snowflake account?",
+    "options": {
+      "A": "AWS, Azure, and Google Cloud (GCP)",
+      "B": "Only AWS",
+      "C": "Only Azure",
+      "D": "Snowflake-exclusive physical servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'Zero-Copy Cloning'?",
+    "options": {
+      "A": "To duplicate data and double the storage costs.",
+      "B": "To create a copy of a table or database without physically duplicating the data files.",
+      "C": "To print reports without using any paper.",
+      "D": "To move data from a local hard drive to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which layer of the Snowflake architecture handles metadata and security?",
+    "options": {
+      "A": "Database Storage layer",
+      "B": "Cloud Services layer",
+      "C": "Query Processing layer",
+      "D": "User Interface layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snowflake allows users to scale a Virtual Warehouse up or down at any time.",
+    "options": {
+      "A": "False, scaling can only happen once a year.",
+      "B": "True, Snowflake provides nearly instant scaling of compute resources.",
+      "C": "True, but only if the database is empty.",
+      "D": "False, scaling requires a full system restart."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Stage' in Snowflake?",
+    "options": {
+      "A": "A platform for public presentations.",
+      "B": "A location where data files are stored for loading and unloading.",
+      "C": "The final step of a data migration project.",
+      "D": "A way to categorize different SQL users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to load data from a Stage into a Snowflake table?",
+    "options": {
+      "A": "SELECT INTO",
+      "B": "INSERT ALL",
+      "C": "COPY INTO",
+      "D": "MOVE DATA"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What happens when a Virtual Warehouse is 'Suspended'?",
+    "options": {
+      "A": "Data is deleted from the storage layer.",
+      "B": "The compute resources are released and billing for compute stops.",
+      "C": "All users are permanently banned from the account.",
+      "D": "The SQL queries continue to run but slower."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Snowflake data is stored in what format internally?",
+    "options": {
+      "A": "CSV (Comma Separated Values)",
+      "B": "Micro-partitions (Proprietary columnar format)",
+      "C": "Standard JSON text files",
+      "D": "SQL Script files"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Travel' in Snowflake?",
+    "options": {
+      "A": "A feature that allows querying data as it existed at a point in the past.",
+      "B": "The ability to predict future sales using AI.",
+      "C": "A way to speed up query execution time.",
+      "D": "Moving the physical location of the cloud server."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Snowflake edition is the lowest tier available?",
+    "options": {
+      "A": "Business Critical",
+      "B": "Enterprise",
+      "C": "Standard",
+      "D": "Virtual Private Snowflake"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'Auto-Resume' do for a Virtual Warehouse?",
+    "options": {
+      "A": "Automatically restarts the computer.",
+      "B": "Automatically starts the warehouse when a new query is submitted.",
+      "C": "Emails a resume to the system administrator.",
+      "D": "Continues a query from where it crashed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fail-safe' in Snowflake?",
+    "options": {
+      "A": "A 7-day period for disaster recovery after the Time Travel period ends.",
+      "B": "A feature that prevents SQL syntax errors.",
+      "C": "A button to turn off the data center.",
+      "D": "A way to password protect individual rows."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which type of table in Snowflake does not have a 'Fail-safe' period and is designed for temporary data?",
+    "options": {
+      "A": "Permanent Table",
+      "B": "Transient Table",
+      "C": "Secure Table",
+      "D": "Standard Table"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What are 'Micro-partitions' used for?",
+    "options": {
+      "A": "To divide the CPU into smaller pieces.",
+      "B": "To organize data into manageable, columnar blocks for efficient querying.",
+      "C": "To create small backups of user passwords.",
+      "D": "To partition the physical office into different zones."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a semi-structured data type natively supported by Snowflake?",
+    "options": {
+      "A": "INT",
+      "B": "VARIANT",
+      "C": "VARCHAR",
+      "D": "DATE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary role of the 'Snowflake Information Schema'?",
+    "options": {
+      "A": "To store the actual business data.",
+      "B": "To provide views containing metadata about objects in the database.",
+      "C": "To translate SQL into Python code.",
+      "D": "To provide a news feed about Snowflake updates."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Snowflake, what is a 'Share'?",
+    "options": {
+      "A": "A portion of the company's stock.",
+      "B": "A mechanism to provide data access to other accounts without moving the data.",
+      "C": "A folder on a shared network drive.",
+      "D": "The number of users who can use a warehouse simultaneously."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which service is part of the 'Cloud Services' layer?",
+    "options": {
+      "A": "Data encryption and optimization",
+      "B": "Physical disk management",
+      "C": "Query execution units",
+      "D": "GPU acceleration"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Snowpipe'?",
+    "options": {
+      "A": "A physical pipe used for cooling server racks.",
+      "B": "Snowflake’s continuous data ingestion service.",
+      "C": "A way to export data to a CSV file.",
+      "D": "A social network for data engineers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which object can be 'Cloned' in Snowflake?",
+    "options": {
+      "A": "Users and Roles",
+      "B": "Databases, Schemas, and Tables",
+      "C": "Virtual Warehouses",
+      "D": "Cloud Regions"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-factor Authentication' (MFA) in Snowflake used for?",
+    "options": {
+      "A": "To speed up the login process.",
+      "B": "To provide an extra layer of security for user logins.",
+      "C": "To allow users to log in with multiple names.",
+      "D": "To count the number of users logged in."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What determines the size of a Virtual Warehouse?",
+    "options": {
+      "A": "The amount of data stored in the account.",
+      "B": "The T-shirt size assigned (e.g., X-Small, Small, Medium).",
+      "C": "The number of rows in the largest table.",
+      "D": "The physical dimensions of the monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to see the list of all databases in an account?",
+    "options": {
+      "A": "GET DATABASES",
+      "B": "SHOW DATABASES",
+      "C": "LIST DATABASES",
+      "D": "OPEN DATABASES"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'AccountAdmin' role in Snowflake?",
+    "options": {
+      "A": "The role for managing accounting and payroll.",
+      "B": "The most powerful role that can manage all objects and account settings.",
+      "C": "A role for junior data analysts.",
+      "D": "A role that can only read data but not write."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snowflake is a 'Software-as-a-Service' (SaaS) platform.",
+    "options": {
+      "A": "True, there is no hardware to manage and no software to install.",
+      "B": "False, you must install the Snowflake kernel on your own server.",
+      "C": "True, but only if you use AWS.",
+      "D": "False, it is a hardware-only platform."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Pruning' do in Snowflake?",
+    "options": {
+      "A": "Deletes old records automatically to save space.",
+      "B": "Allows the query engine to skip micro-partitions that don't match query filters.",
+      "C": "Cuts down physical trees at the data center.",
+      "D": "Removes unused columns from a table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Internal Stage'?",
+    "options": {
+      "A": "A stage managed by another cloud provider.",
+      "B": "A storage area maintained by Snowflake for storing data files.",
+      "C": "A stage located inside a physical office.",
+      "D": "A stage used only for internal employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the maximum 'Time Travel' retention period for a Standard Edition account?",
+    "options": {
+      "A": "0 days",
+      "B": "1 day",
+      "C": "90 days",
+      "D": "365 days"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the command 'PUT' do in the context of Snowflake?",
+    "options": {
+      "A": "Puts a user in a specific group.",
+      "B": "Uploads a local file to a Snowflake internal stage.",
+      "C": "Deletes a file from the server.",
+      "D": "Writes a SQL query to a text file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Reader Accounts'?",
+    "options": {
+      "A": "Accounts for people who like to read books.",
+      "B": "To allow external entities to query shared data without their own Snowflake account.",
+      "C": "To restrict users to read-only access within an organization.",
+      "D": "To backup the account administrator's settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Worksheet' in the Snowflake UI?",
+    "options": {
+      "A": "A physical piece of paper for taking notes.",
+      "B": "An interface used to write and execute SQL queries.",
+      "C": "A list of all the work an employee has done.",
+      "D": "A specialized software for accounting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes 'Cloning' in Snowflake?",
+    "options": {
+      "A": "A slow process that copies every bit of data.",
+      "B": "A metadata-only operation that is nearly instantaneous.",
+      "C": "A way to create a robot that looks like a human.",
+      "D": "A method to compress data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Snowflake, what is a 'Warehouse'? ",
+    "options": {
+      "A": "A physical storage building.",
+      "B": "A virtual compute cluster used for processing queries.",
+      "C": "A group of people working on the same database.",
+      "D": "A type of high-speed data cable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Snowsight' refer to?",
+    "options": {
+      "A": "A way to see the snow outside the office.",
+      "B": "Snowflake's modern web interface for analytics and visualization.",
+      "C": "A security scan for the Snowflake cloud.",
+      "D": "A specialized lens for camera-based data ingestion."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Public' role in Snowflake?",
+    "options": {
+      "A": "A role that allows anyone on the internet to see your data.",
+      "B": "A default role automatically granted to every user in the system.",
+      "C": "A role for government employees only.",
+      "D": "A role that can only access public databases like Wikipedia."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Query Profile' tool used for?",
+    "options": {
+      "A": "To see the social media profile of the user who ran a query.",
+      "B": "To analyze and troubleshoot the performance of a specific SQL query.",
+      "C": "To find the name of the project manager.",
+      "D": "To count the number of users in the account."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Scale-up' mean for a Snowflake Warehouse?",
+    "options": {
+      "A": "Adding more users to the warehouse.",
+      "B": "Increasing the size of the virtual warehouse (e.g., from Small to Large).",
+      "C": "Moving the warehouse to a higher floor in the data center.",
+      "D": "Increasing the length of the query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scale-out' (Multi-cluster Warehouse) used for?",
+    "options": {
+      "A": "To handle larger, more complex individual queries.",
+      "B": "To handle a high number of concurrent users or queries.",
+      "C": "To increase the physical distance between servers.",
+      "D": "To move data from AWS to Azure."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which format is Snowflake's 'Result Cache' stored in?",
+    "options": {
+      "A": "CSV",
+      "B": "Proprietary Snowflake format",
+      "C": "Standard Excel .xlsx",
+      "D": "Plain text .txt"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How long are the results of a query cached in Snowflake by default?",
+    "options": {
+      "A": "1 hour",
+      "B": "24 hours",
+      "C": "30 days",
+      "D": "Forever"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Data Marketplace'?",
+    "options": {
+      "A": "A physical market where hard drives are sold.",
+      "B": "A platform where users can discover and access live datasets from third-party providers.",
+      "C": "A website for buying Snowflake stock.",
+      "D": "A list of all Snowflake employees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'RBAC'?",
+    "options": {
+      "A": "Random Boolean Allocation Code",
+      "B": "Role-Based Access Control",
+      "C": "Remote Binary Archive Center",
+      "D": "Real-time Batch Analytical Cloud"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Snowflake command allows you to see the history of queries executed in your session?",
+    "options": {
+      "A": "GET HISTORY",
+      "B": "SHOW QUERIES",
+      "C": "LIST HISTORY",
+      "D": "VIEW LOGS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snowflake handles data encryption automatically.",
+    "options": {
+      "A": "True, all data is encrypted at rest and in transit by default.",
+      "B": "False, the user must manually encrypt every file before loading.",
+      "C": "True, but only for Enterprise Edition users.",
+      "D": "False, encryption is not supported in the cloud."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Secure Data Sharing'?",
+    "options": {
+      "A": "Sharing a physical USB drive between two people.",
+      "B": "Providing real-time access to data without the need for extraction or transformation.",
+      "C": "Encrypting a file and sending it via email.",
+      "D": "A way to hide data from unauthorized users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'External Table'?",
+    "options": {
+      "A": "A table located in another country.",
+      "B": "A Snowflake table that references data stored in files outside of Snowflake (e.g., in S3).",
+      "C": "A table made of physical wood.",
+      "D": "A table used only for external users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Task' in Snowflake?",
+    "options": {
+      "A": "A chore for an employee to do.",
+      "B": "An object that can execute a SQL statement on a schedule.",
+      "C": "A way to name a database table.",
+      "D": "A security scan for a SQL file."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stream' in Snowflake?",
+    "options": {
+      "A": "A small river near the office.",
+      "B": "An object that records change data (CDC) on a table.",
+      "C": "A way to watch videos online.",
+      "D": "A list of all users in a specific role."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Snowflake component provides 'Global' services across different cloud regions?",
+    "options": {
+      "A": "Database Storage",
+      "B": "Cloud Services",
+      "C": "Query Processing",
+      "D": "Snowflake Organization"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'SysAdmin' role primarily for?",
+    "options": {
+      "A": "Managing payroll and accounting.",
+      "B": "Creating and managing databases, schemas, and other warehouse objects.",
+      "C": "Fixing the physical cooling system.",
+      "D": "The same as the AccountAdmin role."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snowflake requires the user to manually manage database indexes.",
+    "options": {
+      "A": "True, you must create an index for every table.",
+      "B": "False, Snowflake manages data clustering and optimization automatically.",
+      "C": "True, but only for large datasets.",
+      "D": "False, Snowflake does not support indexes at all."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Purging' mean when loading data via the COPY command?",
+    "options": {
+      "A": "Cleaning the computer screen.",
+      "B": "Deleting the source data files from the stage after they are successfully loaded.",
+      "C": "Deleting the data from the Snowflake table.",
+      "D": "Increasing the storage capacity."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Database' in Snowflake?",
+    "options": {
+      "A": "A collection of computer hardware.",
+      "B": "A logical grouping of schemas and their objects.",
+      "C": "A way to backup the SQL code.",
+      "D": "A specialized software for accounting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Schema' in Snowflake?",
+    "options": {
+      "A": "A secret plan to hack a server.",
+      "B": "A logical grouping of database objects like tables and views.",
+      "C": "The color scheme of the UI.",
+      "D": "A list of all project managers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid way to connect to Snowflake?",
+    "options": {
+      "A": "SnowSQL (CLI)",
+      "B": "Snowflake Web Interface",
+      "C": "JDBC/ODBC Drivers",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What is the 'Snowflake Extension for VS Code' used for?",
+    "options": {
+      "A": "To play games during work.",
+      "B": "To write and execute Snowflake SQL directly within the VS Code editor.",
+      "C": "To encrypt the computer's hard drive.",
+      "D": "To count the number of files on a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Replication' in Snowflake?",
+    "options": {
+      "A": "Creating a robot that looks like a human.",
+      "B": "The process of copying database objects and data from one Snowflake account to another across regions.",
+      "C": "A way to duplicate a table in the same schema.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Snowflake is only for data analysts.",
+    "options": {
+      "A": "False, it is for data engineers, scientists, application developers, and more.",
+      "B": "True, other roles cannot use the platform.",
+      "C": "False, it is only for high-level managers.",
+      "D": "True, because it only uses SQL."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Object Tagging'?",
+    "options": {
+      "A": "Placing physical stickers on the server racks.",
+      "B": "Assigning custom metadata tags to Snowflake objects for management or compliance tracking.",
+      "C": "A way to hide objects from certain users.",
+      "D": "Naming a table after a famous person."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Row Access Policy' used for?",
+    "options": {
+      "A": "To limit how many rows a user can see in a table based on their identity.",
+      "B": "To decide which row in the office someone sits in.",
+      "C": "To encrypt every row using a different password.",
+      "D": "To count the number of rows in a table."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which command is used to change the size of an existing Warehouse?",
+    "options": {
+      "A": "UPDATE WAREHOUSE",
+      "B": "ALTER WAREHOUSE",
+      "C": "MODIFY WAREHOUSE",
+      "D": "RESIZE WAREHOUSE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary benefit of 'Clustering Keys' in large Snowflake tables?",
+    "options": {
+      "A": "They act as a primary key constraint to prevent duplicate rows.",
+      "B": "They physically group similar data together to improve the efficiency of partition pruning.",
+      "C": "They allow for the encryption of specific columns for security compliance.",
+      "D": "They automatically increase the size of the Virtual Warehouse when needed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metadata is stored for each micro-partition to enable efficient pruning?",
+    "options": {
+      "A": "The IP address of the user who loaded the data.",
+      "B": "The range of values (min/max) for each column in the partition.",
+      "C": "A backup copy of the entire table schema.",
+      "D": "The password of the account administrator."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake Information Schema' used for in database management?",
+    "options": {
+      "A": "To store actual business data records for querying.",
+      "B": "To access system-defined views that provide metadata about all objects in an account.",
+      "C": "To encrypt data before it is moved to an external stage.",
+      "D": "To monitor the physical temperature of the cloud data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Multi-cluster Warehouse', what is the purpose of the 'Economy' scaling policy?",
+    "options": {
+      "A": "To maximize performance by spinning up all clusters immediately.",
+      "B": "To conserve credits by only starting new clusters if the system estimates there's enough work to keep them busy for 6 minutes.",
+      "C": "To decrease the monthly storage costs for the entire account.",
+      "D": "To allow junior analysts to use the warehouse for free."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a query is submitted to a suspended Virtual Warehouse with 'Auto-Resume' enabled?",
+    "options": {
+      "A": "The query fails immediately with an error.",
+      "B": "Snowflake automatically starts the warehouse and then executes the query.",
+      "C": "The user is prompted to manually restart the warehouse via the UI.",
+      "D": "The query is diverted to a different, active warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the maximum 'Time Travel' retention period available for Transient tables?",
+    "options": {
+      "A": "90 days",
+      "B": "1 day",
+      "C": "0 days",
+      "D": "7 days"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How does Snowflake handle 'Schema Evolution' in the COPY command?",
+    "options": {
+      "A": "It automatically deletes the table and recreates it with new columns.",
+      "B": "It can automatically add new columns to the target table based on the source data structure.",
+      "C": "It requires a full system restart to update the table schema.",
+      "D": "It prevents any data from being loaded if the file has extra columns."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to convert a JSON string into a Snowflake VARIANT type?",
+    "options": {
+      "A": "TO_JSON()",
+      "B": "PARSE_JSON()",
+      "C": "CONVERT_VARIANT()",
+      "D": "CAST_STRING()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Query Profile' tool specifically designed to help with?",
+    "options": {
+      "A": "Editing the user's social media settings within Snowflake.",
+      "B": "Identifying performance bottlenecks, such as 'Exploding Joins' or 'Data Spillage'.",
+      "C": "Naming the database tables after project milestones.",
+      "D": "Calculating the total number of rows in the metadata layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Local Disk Spilling' in the context of Snowflake performance?",
+    "options": {
+      "A": "When the server physically leaks oil in the data center.",
+      "B": "When the warehouse RAM is insufficient for an operation, and data is written to local SSD instead.",
+      "C": "When data is accidentally deleted from a local stage.",
+      "D": "When the internet connection speed is too high for the warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Snowflake, what is a 'UDF'?",
+    "options": {
+      "A": "Unified Data Format",
+      "B": "User-Defined Function",
+      "C": "Universal Database File",
+      "D": "User Data Firewall"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific Snowflake feature provides a 'Point-in-time' copy of a database without additional storage costs for unchanged data?",
+    "options": {
+      "A": "Replication",
+      "B": "Zero-Copy Cloning",
+      "C": "Snowpipe",
+      "D": "Resource Monitor"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary difference between a 'Standard' and an 'Enterprise' edition of Snowflake?",
+    "options": {
+      "A": "Standard edition does not support SQL.",
+      "B": "Enterprise edition supports up to 90 days of Time Travel and multi-cluster warehouses.",
+      "C": "Enterprise edition is limited to only 10 users.",
+      "D": "Standard edition is hosted on physical servers in the company's office."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Materialized View' in Snowflake?",
+    "options": {
+      "A": "A view that is physically printed for executive meetings.",
+      "B": "A pre-computed result set stored for performance improvement on frequent, complex queries.",
+      "C": "A view that only contains images and no text data.",
+      "D": "A temporary view that is deleted after the session ends."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which object is used to monitor and limit credit consumption by a Virtual Warehouse?",
+    "options": {
+      "A": "Data Share",
+      "B": "Resource Monitor",
+      "C": "Security Policy",
+      "D": "Storage Integration"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'External Stages'?",
+    "options": {
+      "A": "To backup the Snowflake Information Schema.",
+      "B": "To access and load data from files stored in cloud storage like Amazon S3 or Google Cloud Storage.",
+      "C": "To store temporary SQL scripts used by external consultants.",
+      "D": "To increase the physical cooling of the local server racks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Snowflake, what does 'Data Masking' provide?",
+    "options": {
+      "A": "A way to hide the physical location of the server.",
+      "B": "A security feature that hides sensitive data (like PII) based on the user's role at query time.",
+      "C": "A way to change the color of the UI theme.",
+      "D": "A method for encrypting the hard drive physically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Sequence' object used for?",
+    "options": {
+      "A": "To sort data alphabetically automatically.",
+      "B": "To generate unique, primary-key-like numbers for table rows.",
+      "C": "To define the order in which warehouses are started.",
+      "D": "To track the history of every login attempt."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which feature allows Snowflake to automatically ingest data from a cloud storage bucket as soon as files are added?",
+    "options": {
+      "A": "COPY INTO",
+      "B": "Snowpipe",
+      "C": "GET COMMAND",
+      "D": "EXTERNAL TABLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Search Optimization Service' used for?",
+    "options": {
+      "A": "To improve Google Search rankings for the company's website.",
+      "B": "To significantly speed up point lookup queries on large tables.",
+      "C": "To find hidden files within the Snowflake metadata layer.",
+      "D": "To search for new Snowflake employees online."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How are Virtual Warehouses billed in terms of time?",
+    "options": {
+      "A": "By the month, regardless of usage.",
+      "B": "By the second (with a 60-second minimum each time they start).",
+      "C": "By the hour, rounded up to the next full hour.",
+      "D": "Only when the storage layer is accessed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Lateral Flatten' used for in Snowflake SQL?",
+    "options": {
+      "A": "To compress a table horizontally to save disk space.",
+      "B": "To transform semi-structured data (like arrays or objects) into a relational format.",
+      "C": "To flatten the physical cables connecting the server.",
+      "D": "To delete duplicate rows based on column headers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Result Cache'?",
+    "options": {
+      "A": "A cache that stores the names of all the users.",
+      "B": "A cache that stores query results for 24 hours to avoid re-running identical queries.",
+      "C": "A cache stored on the user's local laptop browser.",
+      "D": "A way to backup the storage layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Dynamic Data Masking', what is a 'Masking Policy'?",
+    "options": {
+      "A": "A policy about wearing masks in the office.",
+      "B": "A schema-level object that defines how data in a column is transformed for unauthorized users.",
+      "C": "A way to hide the warehouse names.",
+      "D": "A security rule for physical data center access."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake Scripting'?",
+    "options": {
+      "A": "Writing a movie script about data science.",
+      "B": "An extension to Snowflake SQL that allows for procedural logic like loops and branches.",
+      "C": "A way to change the font of the SQL editor.",
+      "D": "A security scan of the SQL code base."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role is required to create a new Virtual Warehouse?",
+    "options": {
+      "A": "PUBLIC",
+      "B": "SYSADMIN (or higher)",
+      "C": "ANALYST",
+      "D": "READER_ADMIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Remote Disk Spilling' indicate?",
+    "options": {
+      "A": "The server room is flooding.",
+      "B": "A query is so large that neither RAM nor local SSD could handle it, and data was written to cloud storage (S3/Azure Blob).",
+      "C": "Data is being replicated to a remote region.",
+      "D": "A query has successfully completed and is being archived."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Storage Integrations'?",
+    "options": {
+      "A": "To merge two physical hard drives into one.",
+      "B": "To allow Snowflake to access cloud storage without passing secret credentials in every command.",
+      "C": "To integrate Snowflake with a local Excel file.",
+      "D": "To increase the storage capacity of the metadata layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowpark'?",
+    "options": {
+      "A": "A physical park for Snowflake employees.",
+      "B": "A framework that allows developers to write code in languages like Python, Java, or Scala that runs inside Snowflake.",
+      "C": "A way to store images in Snowflake.",
+      "D": "A specialized software for accounting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Sharing', what is a 'Consumer' account?",
+    "options": {
+      "A": "An account that only buys products from Snowflake.",
+      "B": "An account that is given access to data shared by another (Provider) account.",
+      "C": "A role that can only consume electricity.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'DESCRIBE TABLE' return?",
+    "options": {
+      "A": "A paragraph describing the table's business purpose.",
+      "B": "The column names, data types, and other structural information of a table.",
+      "C": "A list of the first 100 rows of data.",
+      "D": "The physical dimensions of the table in bytes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Secure View'?",
+    "options": {
+      "A": "A view that is only visible from a secure computer.",
+      "B": "A view that prevents users from seeing the underlying SQL logic or metadata.",
+      "C": "A view that encrypts every row.",
+      "D": "A way to hide the warehouse names."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unloading Data' in Snowflake?",
+    "options": {
+      "A": "Moving a server out of the building.",
+      "B": "The process of exporting data from a Snowflake table into files in a stage.",
+      "C": "Deleting data from a table.",
+      "D": "Decreasing the memory usage of a query."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GET' command used for in SnowSQL?",
+    "options": {
+      "A": "To get a promotion at work.",
+      "B": "To download data files from a Snowflake stage to a local directory.",
+      "C": "To retrieve the current date and time.",
+      "D": "To count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RBAC', what is 'Role Hierarchy'?",
+    "options": {
+      "A": "The age of the different roles.",
+      "B": "The structure where a higher-level role is granted the privileges of a lower-level role.",
+      "C": "A list of all users in a specific role.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Temporary Table'?",
+    "options": {
+      "A": "A table that only works for five minutes.",
+      "B": "A table that exists only for the duration of the user session and is not visible to others.",
+      "C": "A table that is deleted when the hard drive is full.",
+      "D": "A table that has zero data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake Cortex'?",
+    "options": {
+      "A": "A physical chip inside the Snowflake servers.",
+      "B": "A suite of AI and ML services built into the Snowflake platform.",
+      "C": "A way to manage the physical office space.",
+      "D": "A security firewall for the Snowflake cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to change the current role in a session?",
+    "options": {
+      "A": "SET ROLE",
+      "B": "USE ROLE",
+      "C": "SWITCH ROLE",
+      "D": "GRANT ROLE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Row Access Policy'?",
+    "options": {
+      "A": "A rule about who can sit in the front row of the office.",
+      "B": "A security policy used to restrict which rows a user can see based on their identity.",
+      "C": "A way to encrypt every row.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Network Policy' in Snowflake?",
+    "options": {
+      "A": "A rule about how many computers can be on the network.",
+      "B": "An object used to restrict account access based on IP addresses.",
+      "C": "A way to speed up the internet.",
+      "D": "A list of all the wifi passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake Horizon'?",
+    "options": {
+      "A": "A way to see the horizon from the data center.",
+      "B": "The platform's built-in data governance, security, and privacy suite.",
+      "C": "A specialized software for architects.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-partition' size typically?",
+    "options": {
+      "A": "Exactly 1 byte",
+      "B": "Between 50 MB and 500 MB (uncompressed).",
+      "C": "Exactly 1 Terabyte",
+      "D": "Exactly 1 Gigabyte"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Columnar Storage'?",
+    "options": {
+      "A": "Storing data in physical columns in a building.",
+      "B": "Storing table data organized by column rather than by row to improve query speed.",
+      "C": "A way to sort files by their date.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overwriting Data' in a COPY command?",
+    "options": {
+      "A": "Writing data over the physical hard drive.",
+      "B": "Using the 'FORCE = TRUE' option to reload data even if the files were previously loaded.",
+      "C": "A mistake made by a data analyst.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Ingestion'?",
+    "options": {
+      "A": "The computer eating the data.",
+      "B": "The process of importing data into Snowflake from external sources.",
+      "C": "Deleting data from the storage layer.",
+      "D": "A way to speed up the warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SQL'?",
+    "options": {
+      "A": "Simple Question Language",
+      "B": "Structured Query Language",
+      "C": "Standard Quality Logic",
+      "D": "System Query Layer"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'ODBC'?",
+    "options": {
+      "A": "Official Database Command",
+      "B": "Open Database Connectivity",
+      "C": "Output Data Base Connector",
+      "D": "Online Data Binary Center"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'JDBC'?",
+    "options": {
+      "A": "Junior Data Base Coordinator",
+      "B": "Java Database Connectivity",
+      "C": "Joint Data Binary Center",
+      "D": "Just Data Base Connector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Encryption'?",
+    "options": {
+      "A": "Deleting data for security.",
+      "B": "The process of converting data into a code to prevent unauthorized access.",
+      "C": "Changing the font of a document.",
+      "D": "A way to count the number of characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Decryption'?",
+    "options": {
+      "A": "Writing data to a hard drive.",
+      "B": "The process of converting encoded data back into its original format.",
+      "C": "Reading data out loud.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Governance'?",
+    "options": {
+      "A": "AI running the government.",
+      "B": "The overall management of data availability, usability, integrity, and security.",
+      "C": "A way to vote for a variant.",
+      "D": "Hiring a CEO for the test."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Sovereignty'?",
+    "options": {
+      "A": "The data analyst having power.",
+      "B": "The concept that data is subject to the laws of the country where it is located.",
+      "C": "A specialized encryption for kings.",
+      "D": "The belief that data should never be shared."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloning' a table?",
+    "options": {
+      "A": "Creating a robot that looks like a table.",
+      "B": "Creating an identical copy of a table using only metadata.",
+      "C": "A way to backup the SQL schema.",
+      "D": "Deleting duplicate rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Time Travel' used for?",
+    "options": {
+      "A": "Predicting the future.",
+      "B": "Restoring data that was accidentally deleted or changed.",
+      "C": "Measuring the speed of light.",
+      "D": "Moving the server to another country."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fail-safe' used for?",
+    "options": {
+      "A": "Ensuring the computer never crashes.",
+      "B": "Emergency data recovery by Snowflake support after Time Travel expires.",
+      "C": "A specialized software for architects.",
+      "D": "A list of all users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transient' table used for?",
+    "options": {
+      "A": "A table that only works in one country.",
+      "B": "A table for data that does not require long-term retention or Fail-safe protection.",
+      "C": "A way to name a database table.",
+      "D": "A way to speed up the warehouse."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Permanent' table used for?",
+    "options": {
+      "A": "A table that can never be deleted.",
+      "B": "The default table type for storing persistent data with full recovery features.",
+      "C": "A way to backup the SQL code.",
+      "D": "A way to count the number of rows."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Clustering'?",
+    "options": {
+      "A": "Hiring a group of people to work.",
+      "B": "The way data is organized within micro-partitions to optimize query performance.",
+      "C": "A way to sort files by their size.",
+      "D": "A security certificate for cloud data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pruning'?",
+    "options": {
+      "A": "Cutting down trees.",
+      "B": "The process of excluding unnecessary micro-partitions from a query scan.",
+      "C": "A way to delete unimportant files.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-cluster' warehouse?",
+    "options": {
+      "A": "A warehouse with many computers.",
+      "B": "A warehouse that can automatically add more clusters to handle high concurrency.",
+      "C": "A warehouse that only works at night.",
+      "D": "A way to backup data in three lines."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scale-up'?",
+    "options": {
+      "A": "Adding more users.",
+      "B": "Increasing the size (compute power) of an individual warehouse cluster.",
+      "C": "A way to speed up the network.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Scale-out'?",
+    "options": {
+      "A": "Firing all the users.",
+      "B": "Adding more clusters to a warehouse to handle more simultaneous queries.",
+      "C": "A way to backup data.",
+      "D": "A security scan."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-resume'?",
+    "options": {
+      "A": "Updating a job resume.",
+      "B": "A setting that automatically restarts a suspended warehouse when a query is submitted.",
+      "C": "A specialized software for architects.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-suspend'?",
+    "options": {
+      "A": "Banning a user automatically.",
+      "B": "A setting that automatically shuts down a warehouse after a period of inactivity.",
+      "C": "A way to speed up the internet.",
+      "D": "A way to name a database table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Sharing'?",
+    "options": {
+      "A": "Posting data on social media.",
+      "B": "Providing secure, live access to data in your account to other accounts.",
+      "C": "A way to backup the storage layer.",
+      "D": "Hiring multiple people to read code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowpipe'?",
+    "options": {
+      "A": "A pipe for snow.",
+      "B": "An automated service for continuous data loading.",
+      "C": "A way to name a database table.",
+      "D": "A specialized software for plumbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which metadata parameter is used to determine the efficiency of a table's clustering, specifically measuring the overlap of micro-partitions?",
+    "options": {
+      "A": "Clustering Coefficient",
+      "B": "Partition Overlap Index",
+      "C": "Clustering Depth",
+      "D": "Pruning Ratio"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary architectural difference between a 'Standard' and a 'Secure' Shared view?",
+    "options": {
+      "A": "Standard views are only visible to the AccountAdmin role.",
+      "B": "Secure views prevent the query optimizer from using certain optimizations that could leak data via error messages.",
+      "C": "Secure views automatically encrypt the underlying SQL text with a rotating 512-bit key.",
+      "D": "Standard views require a dedicated virtual warehouse, while Secure views do not."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Snowpipe', which of the following is true regarding its billing model?",
+    "options": {
+      "A": "It is billed based on a flat monthly subscription fee per pipe.",
+      "B": "It is billed based on the number of files deleted from the cloud stage.",
+      "C": "It is billed based on compute resources used for file notification and loading, plus an overhead fee.",
+      "D": "It is completely free for Business Critical edition accounts."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When using 'Time Travel', which keyword is required to query a table exactly as it appeared before a specific SQL statement was executed?",
+    "options": {
+      "A": "BEFORE",
+      "B": "PREVIOUS",
+      "C": "STATEMENT_ID",
+      "D": "TIMESTAMP"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which background service is responsible for automatically reorganizing table data to match a defined 'Clustering Key'?",
+    "options": {
+      "A": "The Cloud Services Metadata Manager",
+      "B": "The Automatic Clustering Service",
+      "C": "The Virtual Warehouse Optimizer",
+      "D": "The Micro-partition Garbage Collector"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What occurs when the 'SYSTEM$CLUSTERING_DEPTH' function returns a value of 1 for a specific table?",
+    "options": {
+      "A": "The table is highly unorganized and requires immediate reclustering.",
+      "B": "The table is perfectly clustered, and all micro-partitions are non-overlapping.",
+      "C": "The table has only one row of data.",
+      "D": "The table has been successfully moved to the Fail-safe layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Multi-cluster Warehouse', what does the 'Max Clusters' setting of 10 and 'Min Clusters' of 1 indicate when using the 'Standard' scaling policy?",
+    "options": {
+      "A": "The warehouse will always run with 10 clusters to ensure speed.",
+      "B": "The warehouse will start with 1 cluster and add more as queries queue up, up to 10.",
+      "C": "The warehouse will start with 10 clusters and shut them down one by one as they become idle.",
+      "D": "The warehouse will use 10 clusters for writes and 1 cluster for reads."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which privilege is required to allow a role to 'see' and query a shared database from a provider account?",
+    "options": {
+      "A": "SELECT ON DATABASE",
+      "B": "IMPORT SHARE",
+      "C": "USAGE ON DATABASE",
+      "D": "ACCESS ON SHARE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the technical limit of 'Micro-partitions' for a single table in Snowflake?",
+    "options": {
+      "A": "1 million micro-partitions",
+      "B": "There is no hard limit; it scales with the data volume.",
+      "C": "Exactly 1,000 per Gigabyte of storage.",
+      "D": "Limited by the RAM of the Cloud Services layer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is an 'External Function' in Snowflake?",
+    "options": {
+      "A": "A function that queries data from another Snowflake account.",
+      "B": "A function that calls an executable code hosted outside of Snowflake, such as an AWS Lambda function.",
+      "C": "A function used to manage the physical hardware of the data center.",
+      "D": "A SQL function that only works on External Tables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens to the 'Fail-safe' data if a Snowflake account is cancelled?",
+    "options": {
+      "A": "It is moved to a public archive for 30 days.",
+      "B": "It is immediately and permanently deleted.",
+      "C": "It is mailed to the customer on a physical hard drive.",
+      "D": "It remains available for 7 days via Snowflake Support."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which parameter in the 'COPY INTO' command is used to handle files that have already been partially loaded?",
+    "options": {
+      "A": "RELOAD = TRUE",
+      "B": "FORCE = TRUE",
+      "C": "SKIP_LOADED = FALSE",
+      "D": "ON_ERROR = CONTINUE"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Search Optimization Service' (SOS) essentially creating at the storage layer?",
+    "options": {
+      "A": "A physical copy of the table sorted by the search column.",
+      "B": "A specialized persistent data structure (index) that tracks values in micro-partitions.",
+      "C": "A hidden Materialized View of the entire schema.",
+      "D": "A backup of the table in a different cloud region."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific metadata column is automatically added to a 'Stream' to track the action performed on a row?",
+    "options": {
+      "A": "METADATA$ACTION",
+      "B": "STREAM$MODE",
+      "C": "ROW$CHANGE_TYPE",
+      "D": "RECORD$STATUS"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In Snowflake's 'Key-pair Authentication', what type of key must be assigned to the user object?",
+    "options": {
+      "A": "The Private Key",
+      "B": "The Public Key",
+      "C": "The Symmetric AES Key",
+      "D": "The MFA Token"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary constraint when using 'Zero-copy Cloning' across different Snowflake Databases?",
+    "options": {
+      "A": "The databases must be owned by the same user.",
+      "B": "The databases must reside in the same Snowflake account and region.",
+      "C": "The clone must be smaller than 1 Terabyte.",
+      "D": "The source database must be in 'Suspended' mode."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command is used to view the detailed billing for 'Automatic Clustering'?",
+    "options": {
+      "A": "SHOW BILLING",
+      "B": "SELECT * FROM TABLE(INFORMATION_SCHEMA.AUTOMATIC_CLUSTERING_HISTORY())",
+      "C": "GET CLUSTERING_COSTS",
+      "D": "SHOW WAREHOUSE LOADS"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Query Hash' used for in Snowflake performance analysis?",
+    "options": {
+      "A": "To encrypt the SQL text for security.",
+      "B": "To identify identical SQL queries to leverage the Result Cache.",
+      "C": "To count the number of users who wrote the same query.",
+      "D": "To verify the integrity of the data being queried."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When a table is dropped, what determines how long its data remains in the 'Time Travel' state before moving to 'Fail-safe'?",
+    "options": {
+      "A": "The global system default of 24 hours.",
+      "B": "The DATA_RETENTION_TIME_IN_DAYS parameter set on the table or its parent schema/DB.",
+      "C": "The physical speed of the cloud storage delete command.",
+      "D": "The number of rows that were in the table."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowball' in the context of Snowflake data migration?",
+    "options": {
+      "A": "A software bug that grows over time.",
+      "B": "An AWS physical hardware device used to transport massive amounts of data into the cloud for Snowflake ingestion.",
+      "C": "A way to replicate data between Snowflake and Oracle.",
+      "D": "A specialized compression algorithm for JSON files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'Secure Data Sharing' and Virtual Warehouses?",
+    "options": {
+      "A": "The Data Provider pays for the compute used by the Data Consumer.",
+      "B": "The Data Consumer must use their own Virtual Warehouse and pays for the compute used to query the share.",
+      "C": "Both the Provider and Consumer share the cost of the compute equally.",
+      "D": "Compute is free for shared data in Snowflake."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'VALIDATION_MODE' parameter in a COPY command do?",
+    "options": {
+      "A": "It validates the user's password before loading.",
+      "B": "It previews the data load and identifies errors without actually inserting rows into the table.",
+      "C": "It checks the table for duplicate rows after the load is complete.",
+      "D": "It encrypts the file during the loading process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Snowflake, what is a 'Primary Role' versus a 'Secondary Role'?",
+    "options": {
+      "A": "The Primary role is for admins; Secondary for analysts.",
+      "B": "Primary is the active role for object creation; Secondary roles allow for aggregated privileges from multiple roles in a session.",
+      "C": "Primary is for SQL; Secondary is for Python/Snowpark.",
+      "D": "There is no difference; Snowflake only supports one role at a time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which function is used to extract a specific key value from a VARIANT column containing a JSON object?",
+    "options": {
+      "A": "JSON_EXTRACT()",
+      "B": "The colon operator (e.g., column_name:key_name)",
+      "C": "GET_KEY()",
+      "D": "PARSE_COLUMN()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Database Replication' lag in Snowflake?",
+    "options": {
+      "A": "The time it takes to move a physical server.",
+      "B": "The time difference between data being committed in the primary database and being available in the secondary database.",
+      "C": "The speed of the SQL query in the secondary region.",
+      "D": "The number of users waiting for the replication to finish."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Snowflake edition is required to use 'Database Failover and Failback' for business continuity?",
+    "options": {
+      "A": "Standard",
+      "B": "Business Critical (or higher)",
+      "C": "Enterprise",
+      "D": "None; it is available in all editions."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the impact of 'Data Spillage' to Remote Storage on query performance?",
+    "options": {
+      "A": "Performance improves because remote disks are larger.",
+      "B": "Performance degrades significantly as data must be read/written over the network.",
+      "C": "There is zero impact on performance.",
+      "D": "The query fails immediately to prevent credit waste."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Object Tagging' for 'Governance'?",
+    "options": {
+      "A": "To increase the storage capacity of the database.",
+      "B": "To track sensitive data and compliance by applying searchable labels to tables and columns.",
+      "C": "To name the database after a specific department.",
+      "D": "To hide data from the AccountAdmin role."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Snowpark', what is a 'DataFrame'?",
+    "options": {
+      "A": "A physical frame used to hold a monitor.",
+      "B": "An abstraction representing a relational dataset that is evaluated lazily inside Snowflake.",
+      "C": "A way to backup the SQL schema as an image.",
+      "D": "A list of all variables in a Python script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which system function is used to find the 'Query ID' of the last query executed in the session?",
+    "options": {
+      "A": "GET_LAST_QUERY()",
+      "B": "LAST_QUERY_ID()",
+      "C": "SHOW_QUERY_ID()",
+      "D": "QUERY_HISTORY_LAST()"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Directory Tables' used for in Snowflake?",
+    "options": {
+      "A": "To store a list of all company employees.",
+      "B": "To provide a catalog of unstructured data files stored in a stage.",
+      "C": "To manage the folders on the user's desktop.",
+      "D": "To store the IP addresses of all login attempts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is true about 'Materialized Views' billing?",
+    "options": {
+      "A": "The user only pays for the storage of the view.",
+      "B": "The user pays for storage and the continuous compute used by Snowflake to keep the view updated.",
+      "C": "Materialized views are free if the underlying table is small.",
+      "D": "The user pays a one-time activation fee."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'RBAC', what is the result of 'GRANT ALL PRIVILEGES ON DATABASE mydb TO ROLE analyst'?",
+    "options": {
+      "A": "The analyst role can now delete the Snowflake account.",
+      "B": "The analyst role receives every possible privilege for that specific database.",
+      "C": "The analyst role can only read data but not write.",
+      "D": "The command fails because analysts are not allowed to have privileges."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Global Data Clean Rooms' in Snowflake?",
+    "options": {
+      "A": "Physical rooms where servers are cleaned of dust.",
+      "B": "A framework that allows two parties to analyze overlapping data without either party seeing the other's raw PII.",
+      "C": "A way to delete all data from a global account.",
+      "D": "A specialized software for sanitizing SQL code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which Snowflake feature is used to query the 'Change Tracking' metadata of a table over a specific interval?",
+    "options": {
+      "A": "Time Travel",
+      "B": "CHANGES clause",
+      "C": "Stream object",
+      "D": "Replication log"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default behavior of 'AUTO_SUSPEND' for a new Virtual Warehouse?",
+    "options": {
+      "A": "It is disabled (Never suspend).",
+      "B": "It is enabled (typically 600 seconds/10 minutes).",
+      "C": "It is set to 1 second.",
+      "D": "It depends on the cloud provider (AWS vs Azure)."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "When configuring 'Snowpipe', what is the purpose of the 'Integration Error' notification?",
+    "options": {
+      "A": "To notify the user if their internet is down.",
+      "B": "To alert an external service (like AWS SNS) if Snowpipe fails to load a file.",
+      "C": "To notify Snowflake Support to fix the bug.",
+      "D": "To show an error message in the Snowsight UI only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Account Usage' schema in the 'Snowflake' database?",
+    "options": {
+      "A": "A schema for storing the account's bank details.",
+      "B": "A set of views that provide long-term (up to 1 year) history of account activity and usage.",
+      "C": "A schema used only for storing user passwords.",
+      "D": "A way to track the physical location of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Micro-partition' 'Skew'?",
+    "options": {
+      "A": "When the partition is stored at an angle on the disk.",
+      "B": "When data is unevenly distributed across partitions, leading to some clusters working much harder than others.",
+      "C": "A bug in the SQL query logic.",
+      "D": "When the partition size is exactly zero."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which command allows an AccountAdmin to see all roles in the system and their relationships?",
+    "options": {
+      "A": "SHOW ROLES",
+      "B": "SHOW GRANTS",
+      "C": "LIST PRIVILEGES",
+      "D": "VIEW HIERARCHY"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the limit for 'Time Travel' on a 'Temporary' table?",
+    "options": {
+      "A": "90 days",
+      "B": "0 or 1 day (max is 1 day, and it ends when the session ends).",
+      "C": "7 days",
+      "D": "Temporary tables do not support Time Travel."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Storage Optimization' for 'Unstructured' Data?",
+    "options": {
+      "A": "Storing images in a CSV file.",
+      "B": "Automatically generating metadata and providing secure URLs for files like PDFs or images.",
+      "C": "Deleting unstructured files to save space.",
+      "D": "Compressing images into 1-bit grayscale."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role is specifically designed to manage the Snowflake Data Marketplace?",
+    "options": {
+      "A": "SYSADMIN",
+      "B": "DATA_EXCHANGE_ADMIN",
+      "C": "MARKETPLACE_USER",
+      "D": "ACCOUNTADMIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Sharing', what is a 'Secure' function?",
+    "options": {
+      "A": "A function that is only visible to the AccountAdmin.",
+      "B": "A function that can be shared with other accounts while hiding the internal logic.",
+      "C": "A function that encrypts the data it processes.",
+      "D": "A function that prevents the warehouse from stopping."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What happens if a Virtual Warehouse reaches its 'Statement Timeout' limit?",
+    "options": {
+      "A": "The warehouse is suspended.",
+      "B": "The running query is automatically aborted to prevent runaway credit usage.",
+      "C": "The query is moved to a smaller warehouse.",
+      "D": "The user is prompted to pay more credits."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake Unistore' (Hybrid Tables)?",
+    "options": {
+      "A": "A store where you can buy Snowflake merchandise.",
+      "B": "A table type designed to handle both transactional (OLTP) and analytical (OLAP) workloads in one place.",
+      "C": "A way to merge AWS and Azure accounts.",
+      "D": "A specialized software for university students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which parameter controls the number of concurrent queries a Virtual Warehouse can handle before queuing?",
+    "options": {
+      "A": "MAX_CONCURRENCY_LEVEL",
+      "B": "Snowflake manages this automatically based on warehouse size and query complexity.",
+      "C": "TOTAL_QUERY_LIMIT",
+      "D": "MAX_WAREHOUSE_LOAD"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Query Acceleration Service' (QAS)?",
+    "options": {
+      "A": "A way to speed up the internet connection of the data center.",
+      "B": "A service that offloads parts of a query to a serverless compute layer to speed up massive scans.",
+      "C": "A way to rewrite SQL queries automatically to be more efficient.",
+      "D": "A hardware upgrade for the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Clustering' 'Information' 'Linear' 'Scan' indicate in a query profile?",
+    "options": {
+      "A": "The query is perfectly optimized.",
+      "B": "The query had to scan every micro-partition because no pruning occurred.",
+      "C": "The data is stored in a single line.",
+      "D": "The computer is running a linear regression."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which role is the only one that can 'Create' a 'Share'?",
+    "options": {
+      "A": "SYSADMIN",
+      "B": "ACCOUNTADMIN",
+      "C": "SECURITYADMIN",
+      "D": "DATA_SHARE_ADMIN"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Organization'?",
+    "options": {
+      "A": "A group of people who organize events.",
+      "B": "A top-level account structure used to manage multiple Snowflake accounts across different cloud providers.",
+      "C": "A specialized software for architects.",
+      "D": "A way to organize files on a desktop."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Sharing', what is a 'Managed' Access Schema?",
+    "options": {
+      "A": "A schema managed by an external company.",
+      "B": "A schema where the schema owner (rather than individual object owners) manages all privileges on objects.",
+      "C": "A schema used only for images.",
+      "D": "A schema that is encrypted by a manager."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'System' 'Administrator' role for 'User' management?",
+    "options": {
+      "A": "ACCOUNTADMIN",
+      "B": "USERADMIN (or SECURITYADMIN)",
+      "C": "SYSADMIN",
+      "D": "PUBLIC"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Key' 'Rotation'?",
+    "options": {
+      "A": "Rotating the physical keys to the data center.",
+      "B": "The automatic process where Snowflake changes encryption keys periodically to enhance security.",
+      "C": "Rotating the SQL queries every hour.",
+      "D": "A way to count the number of users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Snowflake', what is 'Dynamic' 'Tables'?",
+    "options": {
+      "A": "Tables that physically move in the data center.",
+      "B": "Tables that automatically refresh based on a SQL query, simplifying data engineering pipelines.",
+      "C": "Tables that only work during the day.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Alert'?",
+    "options": {
+      "A": "A loud noise in the office.",
+      "B": "A schema-level object that sends a notification when a data condition is met.",
+      "C": "A security scan for the Snowflake cloud.",
+      "D": "A way to backup data in the sky."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Native' 'App' 'Framework'?",
+    "options": {
+      "A": "Hiring local developers.",
+      "B": "A framework to build, distribute, and monetize applications that run entirely inside a customer's Snowflake account.",
+      "C": "A way to store images in Snowflake.",
+      "D": "A specialized software for accounting."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Snowflake', what is 'External' 'Network' 'Access'?",
+    "options": {
+      "A": "Allowing anyone to see the data.",
+      "B": "The ability for Snowpark or UDF code to securely access APIs or services outside of Snowflake.",
+      "C": "A way to speed up the internet.",
+      "D": "A list of all the wifi passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Data' 'Metric' 'Functions'?",
+    "options": {
+      "A": "Functions used to measure physical height.",
+      "B": "Built-in system functions that automatically monitor data quality (e.g., freshness, nulls).",
+      "C": "Functions that only work for images.",
+      "D": "A specialized software for accountants."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Document' 'AI'?",
+    "options": {
+      "A": "AI that writes books.",
+      "B": "A feature that uses built-in LLMs to extract information from unstructured documents like PDFs.",
+      "C": "A way to hide data from the AccountAdmin.",
+      "D": "A security certificate for a SQL database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Horizon' 'Data' 'Lineage'?",
+    "options": {
+      "A": "Seeing which employees are related.",
+      "B": "Visualizing how data flows from source objects to downstream tables and views for governance.",
+      "C": "A way to count the number of users.",
+      "D": "A security scan of the trash directory."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Copilot'?",
+    "options": {
+      "A": "Hiring a second pilot for a plane.",
+      "B": "An AI-powered SQL assistant that helps users write and optimize queries using natural language.",
+      "C": "A way to rotate the token vectors.",
+      "D": "A security certificate for a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Marketplace' 'Monetization'?",
+    "options": {
+      "A": "Selling Snowflake merchandise.",
+      "B": "The ability for providers to charge for access to their data or applications on the Snowflake Marketplace.",
+      "C": "A list of all Snowflake employees.",
+      "D": "A way to backup the account administrator's settings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Snowflake', what is 'Differential' 'Privacy' 'Policy'?",
+    "options": {
+      "A": "Hiding the name of the lead researcher.",
+      "B": "A policy that adds mathematical noise to query results to protect the privacy of individual records.",
+      "C": "Encrypting the source code of the AI.",
+      "D": "Ensuring the AI is only trained in a secure data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Vector' 'Data' 'Type'?",
+    "options": {
+      "A": "A data type for storing images.",
+      "B": "A native data type used to store and query high-dimensional embeddings for AI/ML use cases.",
+      "C": "A way to count the number of words.",
+      "D": "A specialized software for architects."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Arctic'?",
+    "options": {
+      "A": "A data center located at the North Pole.",
+      "B": "Snowflake's open-source, large language model (LLM) designed for enterprise tasks.",
+      "C": "A security firewall for the Snowflake cloud.",
+      "D": "A specialized software for polar researchers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Streamlit' integration used for?",
+    "options": {
+      "A": "Streaming videos inside Snowflake.",
+      "B": "Building and deploying interactive Python-based data applications directly within Snowflake.",
+      "C": "A way to name a database table.",
+      "D": "A specialized software for plumbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Snowflake' 'Notebooks'?",
+    "options": {
+      "A": "A physical book for taking notes.",
+      "B": "An interactive development environment for Python and SQL within the Snowflake UI.",
+      "C": "A list of all users in a specific role.",
+      "D": "A security scan for a SQL file."
+    },
+    "answer": "B"
+  }
+  ]
+}

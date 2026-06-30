@@ -1,12 +1,15 @@
-import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CandidateDetails from './CandidateDetails';
 import '../styles/CodingAttempt.css';
 import '../styles/TakeAssessment.css';
-
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8001/api';
+import { API_BASE_URL } from '../apiConfig';
+import { useMalpracticeDetection } from '../hooks/useMalpracticeDetection';
+import { logCandidateActivity } from '../utils/activityLogger';
+import { useTabHeartbeat } from '../hooks/useTabHeartbeat';
+import { getTabSessionId } from '../utils/tabSession';
 
 const DEFAULT_LANGS = [
   'cpp',
@@ -254,28 +257,90 @@ function formatDuration(ms) {
 export default function TakeAssessment() {
   const navigate = useNavigate();
   const { token } = useParams();
+  const ALLOW_COPY_PASTE = true; // Set to true to allow copy-paste temporarily for testing
+
+  // Per-tab session ID (stored in sessionStorage so each tab gets a unique ID.
+  // When a tab is closed, sessionStorage is cleared, which stops heartbeats and
+  // lets the lock expire on the backend after 30 s.)
+  const tabSessionId = getTabSessionId();
+
+  // Attach X-Session-ID header to every relevant API call
+  useEffect(() => {
+    if (!token) return;
+
+    const reqInterceptor = axios.interceptors.request.use((config) => {
+      if (config.url && (config.url.includes('/invitations/public/') || config.url.includes('/candidate-details/'))) {
+        if (!config.headers) config.headers = {};
+        config.headers['X-Session-ID'] = tabSessionId;
+      }
+      return config;
+    });
+
+    return () => {
+      axios.interceptors.request.eject(reqInterceptor);
+    };
+  }, [token, tabSessionId]);
+
+
   const [candidateDetailsCompleted, setCandidateDetailsCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [scheduleInfo, setScheduleInfo] = useState(null);
+  // Pre-check: time window error shown BEFORE the candidate details form
+  const [windowError, setWindowError] = useState('');
+  const [windowStatus, setWindowStatus] = useState(null);
+  const [windowSchedule, setWindowSchedule] = useState(null);
+  const [precheckLoading, setPrecheckLoading] = useState(true);
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
   const [assessment, setAssessment] = useState(null);
   const [questions, setQuestions] = useState([]);
+  const hasMcq = questions.length > 0;
   const [codingQuestions, setCodingQuestions] = useState([]);
-  const [answersById, setAnswersById] = useState({});
+  const [answersById, setAnswersById] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).answersById || {};
+    } catch { }
+    return {};
+  });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [remainingSeconds, setRemainingSeconds] = useState(null);
-  const [codingState, setCodingState] = useState({
-    currentId: null,
-    codeById: {},
-    languageById: {},
-    runResultById: {},
-    runError: '',
-    running: false,
-    submittedIds: {},
+
+  // Tab heartbeat — keeps the session lock alive while this tab is open.
+  // If another tab opens the same exam URL and this tab's heartbeat stops
+  // (tab closed / navigated away), the backend lock expires after 30 s and
+  // the candidate can resume in the new tab.
+  const { isLockedOut } = useTabHeartbeat(token, {
+    enabled: !precheckLoading && !alreadySubmitted && !submitted,
   });
+  const [remainingSeconds, setRemainingSeconds] = useState(null);
+  const [codingState, setCodingState] = useState(() => {
+    const initialState = {
+      currentId: null,
+      codeById: {},
+      languageById: {},
+      runResultById: {},
+      runError: '',
+      running: false,
+      submittedIds: {},
+    };
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        initialState.submittedIds = parsed.submittedIds || {};
+        initialState.codeById = parsed.codeById || {};
+        initialState.languageById = parsed.languageById || {};
+      }
+    } catch { }
+    return initialState;
+  });
+
+
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [fsError, setFsError] = useState('');
+  const [fsLoading, setFsLoading] = useState(false);
   const [isLeftCollapsed, setIsLeftCollapsed] = useState(false);
   const [leftWidth, setLeftWidth] = useState(44);
   const [lastExpandedWidth, setLastExpandedWidth] = useState(44);
@@ -283,12 +348,160 @@ export default function TakeAssessment() {
   const [showResultPanel, setShowResultPanel] = useState(true);
   const [resultHeightPct, setResultHeightPct] = useState(30);
   const [isResultDragging, setIsResultDragging] = useState(false);
+  const [aiToast, setAiToast] = useState({ active: false, text: '', urgent: false });
+  // ── Network connectivity — pause exam timer when offline ─────────────
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
+  const isOnlineRef = useRef(navigator.onLine);
+
+  useEffect(() => {
+    const goOffline = () => {
+      setIsOnline(false);
+      isOnlineRef.current = false;
+      logCandidateActivity(token, 'Connection Lost', 'Candidate internet connection dropped — exam timer paused.');
+    };
+    const goOnline = () => {
+      setIsOnline(true);
+      isOnlineRef.current = true;
+      logCandidateActivity(token, 'Connection Restored', 'Candidate internet connection restored — exam timer resumed.');
+    };
+    window.addEventListener('vh_network_offline', goOffline);
+    window.addEventListener('vh_network_online', goOnline);
+    // Also listen to native events as fallback
+    window.addEventListener('offline', goOffline);
+    window.addEventListener('online', goOnline);
+    return () => {
+      window.removeEventListener('vh_network_offline', goOffline);
+      window.removeEventListener('vh_network_online', goOnline);
+      window.removeEventListener('offline', goOffline);
+      window.removeEventListener('online', goOnline);
+    };
+  }, [token]);
+
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+  const detectorRef = useRef(null);
+  const lastDetectionTimeRef = useRef(0);
+  const lastCaptureTimeRef = useRef({ time: 0, type: null }); // For throttling tab_switch/window_blur
+  const screenStreamRef = useRef(null);
+  const screenCanvasRef = useRef(null);
+  const [screenShareError, setScreenShareError] = useState(''); // eslint-disable-line no-unused-vars
+  const wasFsRef = useRef(false);
+  const isInitiatingScreenShareRef = useRef(false);
+
+  // Split Assessment State
+  const [assessmentStage, setAssessmentStage] = useState('loading'); // loading, objective, transition, coding, completed
+  const [objectiveSeconds, setObjectiveSeconds] = useState(null);
+  const [codingSeconds, setCodingSeconds] = useState(null);
+  // Track when each stage started to calculate elapsed time on refresh
+  const [stageStartTimes, setStageStartTimes] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          objective: parsed.objectiveStartTime || null,
+          coding: parsed.codingStartTime || null
+        };
+      }
+    } catch { }
+    return { objective: null, coding: null };
+  });
+  const [objResult, setObjResult] = useState(null); // { passed, score, percentage, message }
+  const [transitionTimer, setTransitionTimer] = useState(15);
 
   // New State for Exam Mode
-  const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
-  const [markedReviewIds, setMarkedReviewIds] = useState({});
+  const [activeQuestionIndex, setActiveQuestionIndex] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.activeQuestionIndex !== undefined) return parsed.activeQuestionIndex;
+      }
+    } catch { }
+    return 0;
+  });
+  const [markedReviewIds, setMarkedReviewIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).markedReviewIds || {};
+    } catch { }
+    return {};
+  });
   // Track visited questions to mark them as "Not Answered" (Red) vs "Not Visited" (Gray)
-  const [visitedIds, setVisitedIds] = useState({});
+  const [visitedIds, setVisitedIds] = useState(() => {
+    try {
+      const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+      if (saved) return JSON.parse(saved).visitedIds || {};
+    } catch { }
+    return {};
+  });
+
+  const [showSubmitModal, setShowSubmitModal] = useState(false);
+  const [modalSubmitType, setModalSubmitType] = useState(''); // 'objective' or 'final'
+
+  const initiateSubmit = async (type) => {
+    if (type === 'objective') {
+      const answeredCount = questions.filter(q => isAnswered(q)).length;
+      if (answeredCount === questions.length && questions.length > 0) {
+        await submitObjective(false);
+        return;
+      }
+    } else if (type === 'final') {
+      if (codingQuestionsOrdered.length > 0) {
+        const submittedCount = Object.keys(codingState.submittedIds).length;
+        if (submittedCount === codingQuestionsOrdered.length) {
+          await submit(false);
+          return;
+        }
+      } else {
+        const answeredCount = questions.filter(q => isAnswered(q)).length;
+        if (answeredCount === questions.length && questions.length > 0) {
+          await submit(false);
+          return;
+        }
+      }
+    }
+    setModalSubmitType(type);
+    setShowSubmitModal(true);
+  };
+
+  // Cleanup old/large localStorage items to stay within quota
+  useEffect(() => {
+    try {
+      const keys = Object.keys(localStorage);
+      keys.forEach(key => {
+        // Clear old progress or details that don't match the current token
+        if ((key.startsWith('take_assessment_progress_') || key.startsWith('candidate_details_')) && !key.endsWith(token)) {
+          localStorage.removeItem(key);
+        }
+      });
+    } catch (e) {
+      console.warn('LocalStorage cleanup failed', e);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    if (!token || submitted || assessmentStage === 'loading') return;
+    try {
+      const progress = {
+        answersById,
+        codeById: codingState.codeById,
+        languageById: codingState.languageById,
+        assessmentStage,
+        activeQuestionIndex,
+        markedReviewIds,
+        visitedIds,
+        remainingSeconds,
+        objectiveSeconds,
+        codingSeconds,
+        objectiveStartTime: stageStartTimes.objective,
+        codingStartTime: stageStartTimes.coding,
+      };
+      localStorage.setItem(`take_assessment_progress_${token}`, JSON.stringify(progress));
+    } catch (e) {
+      console.error('Failed to autosave progress', e);
+    }
+  }, [token, answersById, codingState.codeById, codingState.languageById, submitted, assessmentStage, activeQuestionIndex, markedReviewIds, visitedIds, remainingSeconds, objectiveSeconds, codingSeconds, stageStartTimes]);
 
   useEffect(() => {
     // Mark current question as visited whenever index changes
@@ -300,7 +513,9 @@ export default function TakeAssessment() {
     }
   }, [activeQuestionIndex, questions]);
 
+
   const handleNext = () => {
+
     if (activeQuestionIndex < questions.length - 1) {
       setActiveQuestionIndex((prev) => prev + 1);
     }
@@ -415,6 +630,17 @@ export default function TakeAssessment() {
     if (codingState.currentId == null) return codingQuestionsOrdered[0];
     return codingQuestionsOrdered.find((q) => String(q.id) === String(codingState.currentId)) || codingQuestionsOrdered[0];
   }, [codingQuestionsOrdered, codingState.currentId]);
+
+  // Integrated Malpractice Detection Module
+  const { suspicionScore: mpScore, reasons: mpReasons } = useMalpracticeDetection(
+    token,
+    activeCoding ? codingState.codeById[String(activeCoding.id)] : '',
+    {
+      allowCopyPaste: ALLOW_COPY_PASTE,
+      activeQuestionId: activeCoding ? String(activeCoding.id) : null
+    }
+  );
+
 
   const formatHHMMSS = (secs) => {
     const s = Math.max(0, Number(secs) || 0);
@@ -581,12 +807,6 @@ export default function TakeAssessment() {
   const submit = async (isAutoSubmit = false) => {
     const auto = isAutoSubmit === true;
     setSubmitError('');
-    if (!auto && firstUnansweredId) {
-      setSubmitError('Please answer all questions before submitting.');
-      const el = document.getElementById(`q-${firstUnansweredId}`);
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      return;
-    }
 
     setSubmitting(true);
     try {
@@ -614,11 +834,19 @@ export default function TakeAssessment() {
         });
       }
 
+      await logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
+
       setSubmitted(true);
+      localStorage.removeItem(`take_assessment_progress_${token}`);
       // End test -> show result page (pass autoSubmit flag for timeout popup)
       navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
     } catch (e) {
-      setSubmitError(e?.response?.data?.error || e?.message || 'Submit failed');
+      const msg = e?.response?.data?.error || e?.message || 'Submit failed';
+      if (e?.response?.status === 403 || e?.response?.status === 409 || msg.toLowerCase().includes('time is over')) {
+        setError(msg);
+      } else {
+        setSubmitError(msg);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -641,19 +869,24 @@ export default function TakeAssessment() {
     blockBack();
     window.addEventListener('popstate', onPopState);
 
-    const onBeforeUnload = (e) => {
-      // Some browsers will show default confirm dialog
-      e.preventDefault();
-      e.returnValue = '';
-      return '';
-    };
-    window.addEventListener('beforeunload', onBeforeUnload);
-
     return () => {
       window.removeEventListener('popstate', onPopState);
-      window.removeEventListener('beforeunload', onBeforeUnload);
     };
   }, [submitted]);
+
+  // Auto-start coding section after 15 seconds
+  useEffect(() => {
+    let timer;
+    if (assessmentStage === 'transition' && transitionTimer > 0) {
+      timer = setInterval(() => {
+        setTransitionTimer((prev) => prev - 1);
+      }, 1000);
+    } else if (assessmentStage === 'transition' && transitionTimer === 0) {
+      setAssessmentStage('coding');
+      window.scrollTo(0, 0);
+    }
+    return () => clearInterval(timer);
+  }, [assessmentStage, transitionTimer]);
 
   // Check if candidate details are already completed
   useEffect(() => {
@@ -669,6 +902,7 @@ export default function TakeAssessment() {
               .then((response) => {
                 if (response.data.success) {
                   setCandidateDetailsCompleted(true);
+                  window.dispatchEvent(new Event('vh_exam_started'));
                 } else {
                   setCandidateDetailsCompleted(false);
                 }
@@ -677,6 +911,7 @@ export default function TakeAssessment() {
                 // If backend check fails, use localStorage as fallback
                 if (data.firstName && data.lastName && data.email && data.phone && data.pan && data.snapshot) {
                   setCandidateDetailsCompleted(true);
+                  window.dispatchEvent(new Event('vh_exam_started'));
                 } else {
                   setCandidateDetailsCompleted(false);
                 }
@@ -694,6 +929,7 @@ export default function TakeAssessment() {
           .then((response) => {
             if (response.data.success) {
               setCandidateDetailsCompleted(true);
+              window.dispatchEvent(new Event('vh_exam_started'));
             }
           })
           .catch(() => {
@@ -704,82 +940,686 @@ export default function TakeAssessment() {
     }
   }, [token]);
 
+  // Pre-check the assessment window as soon as the token is available.
+  // This runs BEFORE showing the candidate details form so the candidate
+  // doesn't waste time filling in details when the window is expired/not open.
+  useEffect(() => {
+    if (!token) return;
+    let timeoutId;
+
+    const runPrecheck = (isRetry = false) => {
+      if (!isRetry) setPrecheckLoading(true);
+
+      axios.get(`${API_BASE_URL}/invitations/public/${token}/?check_only=1`)
+        .then(() => {
+          // Window is open and lock acquired — clear any prior error
+          setWindowError('');
+          setWindowSchedule(null);
+          setPrecheckLoading(false);
+        })
+        .catch((err) => {
+          const status = err?.response?.status;
+          setWindowStatus(status);
+
+          if (status === 403 || status === 410 || status === 404) {
+            setWindowError(err?.response?.data?.error || 'This assessment link is not accessible.');
+            setWindowSchedule(err?.response?.data?.schedule || null);
+            setPrecheckLoading(false);
+          }
+
+          // 409 = already submitted or session locked
+          if (status === 409) {
+            const errMsg = err?.response?.data?.error;
+            if (errMsg && errMsg.includes('already in use')) {
+              setWindowError(errMsg);
+              // Set precheckLoading to false so the UI can render the lockout screen.
+              setPrecheckLoading(false);
+              // Poll again in 5 seconds to automatically unlock when the other session times out (30s).
+              // Pass isRetry = true so we don't flash the loading screen
+              timeoutId = setTimeout(() => runPrecheck(true), 5000);
+            } else {
+              setAlreadySubmitted(true);
+              setPrecheckLoading(false);
+            }
+          }
+        });
+    };
+
+    runPrecheck();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, tabSessionId]);
+
   useEffect(() => {
     const load = async () => {
       setLoading(true);
       setError('');
       try {
         const resp = await axios.get(`${API_BASE_URL}/invitations/public/${token}/`);
-        setAssessment(resp.data?.assessment || null);
-        setQuestions(resp.data?.questions || []);
-        setCodingQuestions(resp.data?.coding_questions || []);
-        setRemainingSeconds(typeof resp.data?.remaining_seconds === 'number' ? resp.data.remaining_seconds : null);
+        const data = resp.data;
+        const assess = data.assessment || {};
+        setAssessment(assess);
+        setQuestions(data.questions || []);
+        const cQuestions = data.coding_questions || [];
+        setCodingQuestions(cQuestions);
+
+        // Determine Stage & Timers
+        // Check if objective already submitted?
+        // We can infer from `data.invitation.status` or `data.submitted_coding_ids`.
+        // Ideally backend should tell us if objective is done.
+        // For now, check if we have objective score in submission? 
+        // We don't have full submission object here, but we can check `data.coding_answers` existence logic.
+
+        // BETTER: Assume if `data.questions` exist and not submitted, we are in objective.
+        // If `data.questions` empty or we have evidence of objective done?
+
+        // Let's use local storage or infer from time remaining?
+        // Actually, `remaining_seconds` from backend is `expires_at - now`.
+        // With split times, `expires_at` might be the FINAL deadline.
+        // We need to manage stage-based timers client-side if backend doesn't explicitly track "current stage" in DB.
+        // But we added `submit_objective_section`.
+
+        const hasObjective = (data.questions || []).length > 0;
+        // const hasCoding = (cQuestions || []).length > 0; // Unused
+
+        // Parse time limits
+        const objTimeLimit = parseTotalSeconds(assess.objective_time_limit || assess.total_time); // Fallback to total if split not set
+        const codTimeLimit = parseTotalSeconds(assess.coding_time_limit || assess.coding_total_time);
+
+        // Initial State Logic
+        let initialStage = 'objective';
+        if (!hasObjective) initialStage = 'coding';
+
+        // If we have coding answers or submitted ids, we are likely in coding or done
+        if ((data.submitted_coding_ids && data.submitted_coding_ids.length > 0) ||
+          (data.coding_answers && Object.keys(data.coding_answers).length > 0)) {
+          initialStage = 'coding';
+        }
+
+        try {
+          const saved = localStorage.getItem(`take_assessment_progress_${token}`);
+          if (saved) {
+            const parsed = JSON.parse(saved);
+            if (parsed.assessmentStage && parsed.assessmentStage !== 'loading') {
+              if (parsed.assessmentStage === 'coding' || parsed.assessmentStage === 'transition') {
+                initialStage = parsed.assessmentStage;
+              }
+            }
+          }
+        } catch { }
+
+        // If assessment has `has_objective_cutoff` and we are in coding, it means we passed.
+
+        setAssessmentStage(initialStage);
+
+        // Record start times if not already set
+        const nowMs = Date.now();
+        let currentObjStart = stageStartTimes.objective;
+        let currentCodStart = stageStartTimes.coding;
+
+        if (initialStage === 'objective' && !currentObjStart) {
+          currentObjStart = nowMs;
+          setStageStartTimes(prev => ({ ...prev, objective: nowMs }));
+        } else if (initialStage === 'coding' && !currentCodStart) {
+          currentCodStart = nowMs;
+          setStageStartTimes(prev => ({ ...prev, coding: nowMs }));
+        }
+
+        // Calculate remaining seconds for each stage based on elapsed time
+        if (initialStage === 'objective' && currentObjStart) {
+          const elapsed = Math.floor((nowMs - currentObjStart) / 1000);
+          setObjectiveSeconds(Math.max(0, objTimeLimit - elapsed));
+        } else {
+          setObjectiveSeconds(objTimeLimit);
+        }
+
+        if (initialStage === 'coding' && currentCodStart) {
+          const elapsed = Math.floor((nowMs - currentCodStart) / 1000);
+          setCodingSeconds(Math.max(0, codTimeLimit - elapsed));
+        } else {
+          setCodingSeconds(codTimeLimit);
+        }
+
+        // Initialize global timer from backend (Total expiry) - ALWAYS trust backend for global time
+        if (typeof data.remaining_seconds === 'number') {
+          setRemainingSeconds(data.remaining_seconds);
+        }
 
         // Restore partial coding state
-        if (resp.data?.submitted_coding_ids || resp.data?.coding_answers) {
+        if (data.submitted_coding_ids || data.coding_answers) {
           setCodingState(prev => {
             const submittedIds = { ...prev.submittedIds };
-            (resp.data.submitted_coding_ids || []).forEach(id => {
+            (data.submitted_coding_ids || []).forEach(id => {
               submittedIds[String(id)] = true;
             });
             return {
               ...prev,
               submittedIds,
-              existingAnswers: resp.data.coding_answers || {}
+              existingAnswers: data.coding_answers || {}
             };
           });
         }
       } catch (e) {
         const status = e?.response?.status;
         const message = e?.response?.data?.error || e?.message || 'Failed to load assessment';
-        // If already completed, send to thank-you page
         if (status === 409 && token) {
-          navigate(`/result/${token}`, { replace: true });
+          if (message.includes('already in use')) {
+            setError(message);
+          } else {
+            setAlreadySubmitted(true);
+          }
+          setLoading(false);
           return;
         }
+        setScheduleInfo(e?.response?.data?.schedule || null);
         setError(message);
       } finally {
         setLoading(false);
       }
     };
-    if (token && candidateDetailsCompleted) load();
-  }, [token, navigate, candidateDetailsCompleted]);
+    // Only load assessment AFTER pre-check has completed and assessment is not already submitted
+    if (token && candidateDetailsCompleted && !precheckLoading && !alreadySubmitted) load();
+  }, [token, navigate, candidateDetailsCompleted, precheckLoading, alreadySubmitted]);
 
-  // Fullscreen state listener
-  useEffect(() => {
-    const update = () => {
-      setIsFullscreen(Boolean(document.fullscreenElement));
-    };
-    update();
-    document.addEventListener('fullscreenchange', update);
-    return () => document.removeEventListener('fullscreenchange', update);
+  // Integrity Tracking: Tab Switches / Leaving Window & Camera
+  const showAiEvent = useCallback(async (text, urgent = false, eventType = null) => {
+    setAiToast({ active: true, text, urgent });
+    setTimeout(() => setAiToast({ active: false, text: '', urgent: false }), 3000);
+
+    if (!eventType || !token || submitted || assessmentStage === 'loading' || assessmentStage === 'completed') {
+      console.log('Skipping API call due to:', { eventType, token, submitted, assessmentStage });
+      return;
+    }
+
+    // Throttling for screen-based events (tab_switch, window_blur)
+    const isScreenEvent = ['tab_switch', 'window_blur', 'window_switch'].includes(eventType);
+    if (isScreenEvent) {
+      const now = Date.now();
+      // Only throttle if it's the SAME event type within 2 seconds
+      if (lastCaptureTimeRef.current.type === eventType && (now - lastCaptureTimeRef.current.time < 2000)) {
+        console.log(`Throttling duplicate integrity event: ${eventType}`);
+        return;
+      }
+      lastCaptureTimeRef.current = { time: now, type: eventType };
+    }
+
+    let screenshot = null;
+    if (isScreenEvent && screenStreamRef.current && screenCanvasRef.current) {
+      try {
+        // Quick draw from the live stream track using ImageCapture if available,
+        // otherwise rely on a pre-existing background video element.
+        // For maximum compatibility and speed, we create a quick video element, 
+        // but we don't wait for loadedmetadata if it takes too long.
+        const video = document.createElement('video');
+        video.srcObject = screenStreamRef.current;
+        video.muted = true;
+        video.playsInline = true;
+
+        await new Promise((resolve) => {
+          let resolved = false;
+          // Fallback timeout because loadedmetadata might not fire if tab is fully backgrounded
+          const fallback = setTimeout(() => {
+            if (!resolved) { resolved = true; resolve(); }
+          }, 300);
+
+          video.onloadedmetadata = () => {
+            video.play().then(() => {
+              if (!resolved) {
+                resolved = true;
+                clearTimeout(fallback);
+                setTimeout(resolve, 50); // slight delay to paint
+              }
+            }).catch(() => {
+              if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+            });
+          };
+          video.onerror = () => {
+            if (!resolved) { resolved = true; clearTimeout(fallback); resolve(); }
+          };
+        });
+
+        const canvas = screenCanvasRef.current;
+        const ctx = canvas.getContext('2d');
+        canvas.width = video.videoWidth || window.innerWidth || 1280;
+        canvas.height = video.videoHeight || window.innerHeight || 720;
+
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        screenshot = canvas.toDataURL('image/jpeg', 0.5);
+
+        video.pause();
+        video.srcObject = null;
+      } catch (e) {
+        console.error('Failed to capture integrity snapshot', e);
+      }
+    }
+
+    let webcamScreenshot = null;
+    if (['multiface_detection', 'phone_detection', 'no_face_detection', 'face_detection_lost', 'face_detection_lost_rechecked'].includes(eventType) && videoRef.current && videoRef.current.readyState >= 2) {
+      try {
+        const camCanvas = document.createElement('canvas');
+        camCanvas.width = videoRef.current.videoWidth || 640;
+        camCanvas.height = videoRef.current.videoHeight || 480;
+        const ctx = camCanvas.getContext('2d');
+        ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+        webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+      } catch (e) {
+        console.error('Failed to capture webcam snapshot', e);
+      }
+    }
+
+    try {
+      console.log('Posting integrity event to:', `${API_BASE_URL}/invitations/public/${token}/integrity/`);
+      const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/integrity/`, {
+        event_type: eventType,
+        timestamp: new Date().toISOString(),
+        screenshot: screenshot,
+        webcam_screenshot: webcamScreenshot
+      });
+      console.log('Integrity API Response:', resp.data);
+    } catch (err) {
+      console.error('Failed to log integrity event', err.response?.data || err.message);
+    }
+  }, [token, submitted, assessmentStage]);
+
+  const startCamera = useCallback(async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+      if (videoRef.current) { videoRef.current.srcObject = stream; videoRef.current.play().catch(() => { }); }
+      streamRef.current = stream;
+    } catch { showAiEvent('Camera Denied', true); }
+  }, [showAiEvent]);
+
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(t => t.stop());
+      streamRef.current = null;
+    }
+    if (screenStreamRef.current) {
+      screenStreamRef.current.getTracks().forEach(t => t.stop());
+      screenStreamRef.current = null;
+    }
   }, []);
 
-  const requestFullscreen = async () => {
+  const startScreenShare = useCallback(async () => {
     try {
       setFsError('');
-      const root = document.documentElement;
-      if (root.requestFullscreen) await root.requestFullscreen();
-    } catch {
-      setFsError('Fullscreen permission is required to start the exam. Please click "Enter Full Screen".');
+      isInitiatingScreenShareRef.current = true;
+      const stream = await navigator.mediaDevices.getDisplayMedia({
+        video: { displaySurface: 'monitor' },
+        audio: false
+      });
+
+      const track = stream.getVideoTracks()[0];
+      const settings = track.getSettings();
+
+      // Enforce "Entire Screen" (monitor)
+      if (settings.displaySurface !== 'monitor') {
+        track.stop();
+        setFsError('Please share your "Entire Screen" to proceed. Tab or Individual Window sharing is not allowed for security.');
+        return false;
+      }
+
+      screenStreamRef.current = stream;
+
+      // If user stops sharing manually
+      track.onended = () => {
+        showAiEvent('SCREEN SHARING STOPPED', true, 'window_switch');
+        // Do not force exit fullscreen immediately to avoid jarring experience,
+        // but set error to force them to click "Resume" which retriggers requestFullscreen
+        setFsError('Screen sharing stopped. You must restart screen sharing to continue.');
+      };
+
+      return true;
+    } catch (err) {
+      console.error('Screen share error:', err);
+      setFsError('Screen sharing permission (Entire Screen) is mandatory to take this assessment.');
+      return false;
+    } finally {
+      setTimeout(() => {
+        isInitiatingScreenShareRef.current = false;
+      }, 2500);
+    }
+  }, [showAiEvent]);
+
+  const requestFullscreen = async () => {
+    const elem = document.documentElement;
+    setFsLoading(true);
+    try {
+      setFsError('');
+
+      // 1. Mandatory Screen Share FIRST
+      // We request screen share before fullscreen because the browser's screen share dialog 
+      // often forces the window out of fullscreen mode. By sharing first, we ensure 
+      // that the subsequent fullscreen request stays active.
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // If they don't agree to screen share, we can't proceed
+          return;
+        }
+      }
+
+      // 2. Fullscreen request (after screen share dialog is resolved)
+      if (elem.requestFullscreen) {
+        await elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) {
+        await elem.webkitRequestFullscreen();
+      } else if (elem.mozRequestFullScreen) {
+        await elem.mozRequestFullScreen();
+      } else if (elem.msRequestFullscreen) {
+        await elem.msRequestFullscreen();
+      }
+
+      // Verify success
+      const isFsNow = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+      if (!isFsNow) {
+        throw new Error("Fullscreen request denied by browser.");
+      }
+
+      // 2. Mandatory Screen Share
+      if (!screenStreamRef.current || !screenStreamRef.current.active) {
+        const success = await startScreenShare();
+        if (!success) {
+          // Exit fullscreen if they don't agree to screen share
+          if (document.exitFullscreen) document.exitFullscreen().catch(() => { });
+          else if (document.webkitExitFullscreen) document.webkitExitFullscreen().catch(() => { });
+          return;
+        }
+
+        // Re-check fullscreen - screen share often causes an exit
+        const isFsAfterShare = !!(document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement);
+        if (!isFsAfterShare) {
+          if (elem.requestFullscreen) await elem.requestFullscreen();
+          else if (elem.webkitRequestFullscreen) await elem.webkitRequestFullscreen();
+        }
+      }
+
+      // 3. Camera (already started mostly, but ensure success)
+      await startCamera();
+
+    } catch (err) {
+      console.error('Fullscreen error:', err);
+      setFsError('Fullscreen mode is required. Please ensure browser permissions are allowed and try again.');
+    } finally {
+      setFsLoading(false);
     }
   };
 
-  // Countdown timer (starts when candidate opens the link)
+  // Fullscreen state listener & violation logging
   useEffect(() => {
-    if (submitted) return;
-    if (remainingSeconds === null) return;
-    if (remainingSeconds <= 0) {
-      // auto-submit when time ends
-      submit(true);
-      return;
+    const update = () => {
+      const isFs = Boolean(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
+      setIsFullscreen(isFs);
+
+      // Log violation ONLY if they were previously in fullscreen and just exited
+      if (wasFsRef.current && !isFs && candidateDetailsCompleted && !submitted && (assessmentStage === 'objective' || assessmentStage === 'coding')) {
+        showAiEvent('FULLSCREEN EXITED', true, 'window_blur');
+      }
+      wasFsRef.current = isFs;
+    };
+
+    // Initial check without violation
+    const initialFs = Boolean(
+      document.fullscreenElement ||
+      document.webkitFullscreenElement ||
+      document.mozFullScreenElement ||
+      document.msFullscreenElement
+    );
+    setIsFullscreen(initialFs);
+    wasFsRef.current = initialFs;
+    document.addEventListener('fullscreenchange', update);
+    document.addEventListener('webkitfullscreenchange', update);
+    document.addEventListener('mozfullscreenchange', update);
+    document.addEventListener('MSFullscreenChange', update);
+    return () => {
+      document.removeEventListener('fullscreenchange', update);
+      document.removeEventListener('webkitfullscreenchange', update);
+      document.removeEventListener('mozfullscreenchange', update);
+      document.removeEventListener('MSFullscreenChange', update);
+    };
+  }, [candidateDetailsCompleted, submitted, assessmentStage, showAiEvent]);
+
+
+
+  useEffect(() => {
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+
+    startCamera();
+
+    let detectInterval;
+    const initMonitoring = async () => {
+      if (window.cocoSsd) {
+        detectorRef.current = await window.cocoSsd.load();
+        let consecutiveMisses = 0;
+        detectInterval = setInterval(async () => {
+          if (videoRef.current && detectorRef.current && videoRef.current.readyState === 4) {
+            const now = Date.now();
+            if (now - lastDetectionTimeRef.current > 1500) {
+              lastDetectionTimeRef.current = now;
+              const preds = await detectorRef.current.detect(videoRef.current);
+
+              // Filter by confidence score
+              const phones = preds.filter(p => p.class === 'cell phone' && p.score > 0.70);
+              // Lower person threshold to 0.30 to accommodate close-up webcam views (head/neck only)
+              const people = preds.filter(p => p.class === 'person' && p.score > 0.30);
+
+              let phoneActive = phones.length > 0;
+
+              if (phoneActive) {
+                showAiEvent('PHONE DETECTED', true, 'phone_detection');
+              }
+
+              if (people.length > 1) {
+                showAiEvent('MULTIPLE PEOPLE', true, 'multiface_detection');
+                consecutiveMisses = 0;
+              } else if (people.length === 1) {
+                consecutiveMisses = 0;
+              } else if (people.length === 0 && !phoneActive) {
+                consecutiveMisses++;
+                // Only trigger face lost warning after 6 consecutive misses (approx 9-10 seconds of continuous absence)
+                if (consecutiveMisses >= 6) {
+                  showAiEvent('FACE NOT DETECTED', true, 'face_detection_lost');
+                }
+              }
+            }
+          }
+        }, 800);
+      }
+    };
+    initMonitoring();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        showAiEvent('TAB SWITCHED', true, 'tab_switch');
+      }
+    };
+
+    const handleBlur = () => {
+      if (document.hidden) {
+        console.log('Skipping window blur because page is hidden (tab switch handled by visibilitychange).');
+        return;
+      }
+      if (isInitiatingScreenShareRef.current) {
+        console.log('Skipping window blur during screen share initiation.');
+        return;
+      }
+      const isCurrentlyFullscreen = !!(
+        document.fullscreenElement ||
+        document.webkitFullscreenElement ||
+        document.mozFullScreenElement ||
+        document.msFullscreenElement
+      );
+      if (isCurrentlyFullscreen) {
+        console.log('Skipping window blur while in fullscreen (likely browser overlay interaction).');
+        return;
+      }
+      // Small timeout to filter out momentary focus shifts (like clicking radio buttons/checkboxes)
+      // and verify if the window is truly blurred via document.hasFocus()
+      setTimeout(() => {
+        if (!document.hasFocus() && !document.hidden) {
+          showAiEvent('WINDOW BLURRED', true, 'window_switch');
+        }
+      }, 250);
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange, { capture: true });
+    window.addEventListener('blur', handleBlur, { capture: true });
+
+    // Disable Copy/Paste/Right-click (Enhanced with capture phase)
+    const preventAction = (e) => {
+      if (ALLOW_COPY_PASTE) return; // Skip prevention if allowed
+      e.preventDefault();
+      e.stopPropagation();
+      showAiEvent('ACTION PROHIBITED', true);
+      return false;
+    };
+    if (!ALLOW_COPY_PASTE) {
+      document.addEventListener('copy', preventAction, { capture: true });
+      document.addEventListener('cut', preventAction, { capture: true });
+      document.addEventListener('paste', preventAction, { capture: true });
+      document.addEventListener('contextmenu', preventAction, { capture: true });
     }
+
+    return () => {
+      clearInterval(detectInterval);
+      document.removeEventListener('visibilitychange', handleVisibilityChange, { capture: true });
+      window.removeEventListener('blur', handleBlur, { capture: true });
+      if (!ALLOW_COPY_PASTE) {
+        document.removeEventListener('copy', preventAction, { capture: true });
+        document.removeEventListener('cut', preventAction, { capture: true });
+        document.removeEventListener('paste', preventAction, { capture: true });
+        document.removeEventListener('contextmenu', preventAction, { capture: true });
+      }
+      stopCamera();
+    };
+
+  }, [showAiEvent, startCamera, stopCamera, submitted, assessmentStage, error, windowError]);
+
+
+  // Continuous background tracking for "Tab 1 -> Tab 2" and "Window 1 -> Window 2" switches
+  useEffect(() => {
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition') return;
+
+    const bgInterval = setInterval(() => {
+      // If candidate is actively looking at our tab, do nothing
+      if (!document.hidden && document.hasFocus()) return;
+
+      // If they are hidden (different tab) or blurred (different window), capture every 5s
+      const eventType = document.hidden ? 'tab_switch' : 'window_switch';
+      showAiEvent('BACKGROUND ACTIVITY DETECTED', true, eventType);
+    }, 5000);
+
+    return () => clearInterval(bgInterval);
+  }, [showAiEvent, submitted, assessmentStage, error, windowError]);
+
+  // Periodic Identity Verification (every 15 seconds)
+  useEffect(() => {
+    if (error || windowError || submitted || assessmentStage === 'loading' || assessmentStage === 'completed' || assessmentStage === 'transition' || !candidateDetailsCompleted) return;
+
+    const identityInterval = setInterval(async () => {
+      if (videoRef.current && videoRef.current.readyState >= 2) {
+        try {
+          const camCanvas = document.createElement('canvas');
+          camCanvas.width = videoRef.current.videoWidth || 640;
+          camCanvas.height = videoRef.current.videoHeight || 480;
+          const ctx = camCanvas.getContext('2d');
+          ctx.drawImage(videoRef.current, 0, 0, camCanvas.width, camCanvas.height);
+          const webcamScreenshot = camCanvas.toDataURL('image/jpeg', 0.5);
+
+          // Send to backend for identity verification
+          const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/verify-identity/`, {
+            webcam_screenshot: webcamScreenshot,
+            timestamp: new Date().toISOString(),
+          });
+
+          if (resp.data && resp.data.verified === true) {
+            showAiEvent('IDENTITY VERIFIED', false);
+          } else if (resp.data && resp.data.verified === false) {
+            showAiEvent('IDENTITY MISMATCH DETECTED', true);
+          }
+        } catch (e) {
+          console.error('Failed to perform periodic identity verification', e);
+        }
+      }
+    }, 15000); // 15,000ms = 15 seconds
+
+    return () => clearInterval(identityInterval);
+  }, [token, submitted, assessmentStage, error, windowError, candidateDetailsCompleted]);
+
+
+
+  useEffect(() => {
+    if (submitted || submitting) return;
+
+    // We don't want to reset the interval every second, so we DON'T include remainingSeconds in deps.
+    let lastTick = Date.now();
     const t = setInterval(() => {
-      setRemainingSeconds((s) => (s === null ? s : Math.max(0, s - 1)));
+      const now = Date.now();
+      const deltaSecs = Math.floor((now - lastTick) / 1000);
+      if (deltaSecs < 1) return;
+      lastTick += deltaSecs * 1000;
+
+      // Pause global timer if in transition
+      if (assessmentStage !== 'transition') {
+        setRemainingSeconds((s) => {
+          if (s === null) return null;
+          if (s <= 0) return 0;
+          return Math.max(0, s - deltaSecs);
+        });
+      }
+
+      // Stage-specific timers
+      if (assessmentStage === 'objective') {
+        setObjectiveSeconds(prev => {
+          if (prev === null) return null;
+          if (prev <= 0) return 0;
+          return Math.max(0, prev - deltaSecs);
+        });
+      } else if (assessmentStage === 'coding') {
+        setCodingSeconds(prev => {
+          if (prev === null) return null;
+          if (prev <= 0) return 0;
+          return Math.max(0, prev - deltaSecs);
+        });
+      }
     }, 1000);
+
     return () => clearInterval(t);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitted, assessmentStage, submitting, codingState.running]);
+
+  // Global timeout check
+  useEffect(() => {
+    if (remainingSeconds !== null && remainingSeconds <= 0 && !submitted) {
+      submit(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [remainingSeconds, submitted]);
+
+  // Effect to handle stage timeouts
+  useEffect(() => {
+    if (assessmentStage === 'objective' && objectiveSeconds !== null && objectiveSeconds <= 0) {
+      // Auto submit objective
+      if (!submitting) {
+        submitObjective(true);
+      }
+    }
+    if (assessmentStage === 'coding' && codingSeconds !== null && codingSeconds <= 0) {
+      // Auto submit coding / finish exam
+      if (!submitted) {
+        submit(true);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [assessmentStage, objectiveSeconds, codingSeconds]);
 
   const activeCode = activeCoding ? codingState.codeById[String(activeCoding.id)] || '' : '';
   const activeLanguage = activeCoding ? (codingState.languageById[String(activeCoding.id)] || activeCodingLanguages[0] || '') : '';
@@ -805,6 +1645,7 @@ export default function TakeAssessment() {
       return;
     }
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon running
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -827,17 +1668,20 @@ export default function TakeAssessment() {
     }
   };
 
-  const submitCode = async () => {
+  const submitCode = () => {
     if (!activeCoding) return;
     // Check global timer - allow submitting code as long as total time remains
     if (remainingSeconds !== null && remainingSeconds <= 0) {
       setCodingState((prev) => ({ ...prev, runError: 'Time is over. The exam has ended.' }));
       return;
     }
-    if (!window.confirm('Are you sure you want to submit your code?')) {
-      return;
-    }
+    executeSubmitCode();
+  };
+
+  const executeSubmitCode = async () => {
+    if (!activeCoding) return;
     const key = String(activeCoding.id);
+    setResultHeightPct(50); // Expand results area upon submitting
     setCodingState((prev) => ({
       ...prev,
       running: true,
@@ -852,18 +1696,45 @@ export default function TakeAssessment() {
       });
       setCodingState((prev) => ({
         ...prev,
-        runResultById: { ...prev.runResultById, [key]: resp.data },
+        runResultById: { ...prev.runResultById, [key]: normalizeRunResult(resp.data) },
         running: false,
         submittedIds: { ...prev.submittedIds, [String(activeCoding.id)]: true },
       }));
-      // Move to next coding question if exists
-      const idx = codingQuestionsOrdered.findIndex((q) => String(q.id) === String(activeCoding.id));
-      const next = codingQuestionsOrdered[idx + 1];
-      if (next) {
-        setCodingState((prev) => ({ ...prev, currentId: next.id, runError: '' }));
-      }
     } catch (e) {
       setCodingState((prev) => ({ ...prev, running: false, runError: e?.response?.data?.error || e?.message || 'Submit failed' }));
+    }
+  };
+
+  const startCoding = () => {
+    setAssessmentStage('coding');
+    window.scrollTo(0, 0);
+  };
+
+  const submitObjective = async (isAutoSubmit = false) => {
+    const auto = isAutoSubmit === true;
+    setSubmitError('');
+
+    setSubmitting(true);
+    try {
+      const resp = await axios.post(`${API_BASE_URL}/invitations/public/${token}/submit-objective/`, {
+        answers: answersById,
+      });
+      setObjResult(resp.data);
+      if (resp.data.passed === false || resp.data.next_stage === 'finish') {
+        await logCandidateActivity(token, 'Assessment Submitted', isAutoSubmit ? 'Auto-submitted due to timeout.' : 'Manually submitted by candidate.');
+        setSubmitted(true);
+        localStorage.removeItem(`take_assessment_progress_${token}`);
+        // Redirect to feedback on fail OR if no coding section (Case 1 Fix)
+        navigate(`/result/${token}`, { replace: true, state: { autoSubmit: auto } });
+      } else {
+        setAssessmentStage('transition');
+        // Record coding start time when transitioning (will be used once stage becomes 'coding')
+        setStageStartTimes(prev => ({ ...prev, coding: Date.now() }));
+      }
+    } catch (e) {
+      setSubmitError(e?.response?.data?.error || e?.message || 'Failed to submit objective section');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -898,8 +1769,79 @@ export default function TakeAssessment() {
     : { flex: `0 0 ${leftWidth}%`, minWidth: '260px' };
 
   const resultPaneStyle = showResultPanel && activeRunResult
-    ? { flex: `0 0 ${resultHeightPct}%`, maxHeight: '70vh' }
+    ? (resultHeightPct > 30
+      ? { flex: '0 0 auto', height: 'auto', maxHeight: 'none' }
+      : { flex: `0 0 ${resultHeightPct}%`, maxHeight: '30vh' })
     : { display: 'none' };
+
+  // Show a loading state to prevent CandidateDetails flicker
+  if (precheckLoading) {
+    return (
+      <div className="take-page">
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontSize: '18px', color: '#64748b' }}>
+          Loading...
+        </div>
+      </div>
+    );
+  }
+
+  // Show duplicate-tab lockout screen
+  const isSessionLocked = isLockedOut || (windowError && windowError.toLowerCase().includes('already in use'));
+  if (isSessionLocked) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f5f9', zIndex: 9999 }}>
+        <div style={{ background: '#fff', padding: '40px', borderRadius: '16px', textAlign: 'center', maxWidth: '420px', boxShadow: '0 10px 30px rgba(0,0,0,0.08)', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔒</div>
+          <h2 style={{ margin: '0 0 12px', color: '#1e293b', fontSize: '20px' }}>Exam Open in Another Tab</h2>
+          <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.6', fontSize: '15px' }}>
+            This assessment is already running in another tab or window. Please close the other tab to continue here.
+          </p>
+          <p style={{ color: '#94a3b8', fontSize: '13px', margin: 0 }}>
+            This page will automatically unlock once the other tab is closed (within 30 seconds).
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show already submitted popup directly if precheck catches it
+  if (alreadySubmitted) {
+    return (
+      <div style={{ position: 'fixed', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f1f5f9', zIndex: 9999 }}>
+        <div style={{ background: '#fff', padding: '40px', borderRadius: '12px', textAlign: 'center', maxWidth: '400px', boxShadow: '0 10px 25px rgba(0,0,0,0.05)', border: '1px solid #e2e8f0' }}>
+          <div style={{ fontSize: '48px', marginBottom: '16px' }}>✅</div>
+          <h2 style={{ margin: '0 0 12px', color: '#1e293b' }}>Assessment Submitted</h2>
+          <p style={{ color: '#64748b', margin: '0 0 24px', lineHeight: '1.5' }}>You have already submitted this assessment. You can safely close this window.</p>
+          <button onClick={() => window.close()} style={{ background: '#2563eb', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '6px', fontSize: '16px', cursor: 'pointer', fontWeight: '500' }}>Close</button>
+        </div>
+      </div>
+    );
+  }
+
+  // Show window error BEFORE the candidate details form
+  if (windowError) {
+    const isNotStarted = windowError.toLowerCase().includes('not started yet');
+    const isExpired = windowError.toLowerCase().includes('expired') || windowError.toLowerCase().includes('start window');
+    const isCompleted = windowError === 'ALREADY_SUBMITTED' || windowError.toLowerCase().includes('completed');
+    const scheduleData = windowSchedule;
+    return (
+      <div className="take-page">
+        <div className="take-shell">
+          <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+            <div style={{ textAlign: 'center', marginBottom: 28 }}>
+              <span style={{ fontSize: 48 }}>
+                {isNotStarted ? '⏳' : isCompleted ? '✅' : isExpired ? '⏰' : '🔒'}
+              </span>
+              <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>
+                {isNotStarted ? 'Your Assessment Is Scheduled' : isCompleted ? 'Assessment Submitted' : isExpired ? 'Assessment Window Closed' : 'Access Denied'}
+              </h2>
+              <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>{windowError === 'ALREADY_SUBMITTED' ? 'You have already submitted this assessment.' : windowError}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   // Show candidate details form if not completed
   if (!candidateDetailsCompleted) {
@@ -908,7 +1850,8 @@ export default function TakeAssessment() {
         token={token}
         onComplete={(candidateData) => {
           setCandidateDetailsCompleted(true);
-          // Optionally send candidate data to backend here
+          // Signal SecuritySessionGuard to begin monitoring now that exam is starting
+          window.dispatchEvent(new Event('vh_exam_started'));
         }}
       />
     );
@@ -926,64 +1869,162 @@ export default function TakeAssessment() {
 
   if (error) {
     const msg = String(error || '');
+    const isNotStarted = msg.toLowerCase().includes('not started');
+    const isExpired = msg.toLowerCase().includes('start window') || msg.toLowerCase().includes('expired');
+
+    // Detailed "Assessment is Scheduled" page
+    if (isNotStarted) {
+      return (
+        <div className="take-page">
+          <div className="take-shell">
+            <div className="take-card" style={{ maxWidth: 600, margin: '60px auto', padding: '40px 36px', borderRadius: 16, background: '#fff', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+              <div style={{ textAlign: 'center', marginBottom: 28 }}>
+                <span style={{ fontSize: 48 }}>⏳</span>
+                <h2 style={{ margin: '16px 0 8px', fontSize: 22, color: '#1e293b' }}>Your Assessment Is Scheduled</h2>
+                <p style={{ color: '#64748b', fontSize: 15, margin: 0 }}>Thank you for your interest in this opportunity.</p>
+              </div>
+              <p style={{ color: '#334155', fontSize: 15, lineHeight: 1.6 }}>
+                The assessment is not yet active and will be available at the scheduled time below:
+              </p>
+              {scheduleInfo && (
+                <div style={{ border: '1px solid #e5e7eb', borderRadius: 10, overflow: 'hidden', fontSize: 12, margin: '20px 0' }}>
+                  <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+                    <tbody>
+                      {scheduleInfo.start_date && (
+                        <tr>
+                          <td style={{ padding: '8px 12px 8px 0', fontWeight: 600, color: '#0369a1', whiteSpace: 'nowrap' }}>📅 Date</td>
+                          <td style={{ padding: '8px 0', color: '#1e293b' }}>{scheduleInfo.start_date}</td>
+                        </tr>
+                      )}
+                      {scheduleInfo.start_time_display && (
+                        <tr>
+                          <td style={{ padding: '8px 12px 8px 0', fontWeight: 600, color: '#0369a1', whiteSpace: 'nowrap' }}>🕒 Time</td>
+                          <td style={{ padding: '8px 0', color: '#1e293b' }}>{scheduleInfo.start_time_display}{scheduleInfo.time_zone ? ` (${scheduleInfo.time_zone})` : ''}</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              <div style={{ margin: '24px 0' }}>
+                <p style={{ fontWeight: 600, color: '#334155', marginBottom: 10 }}>Please ensure:</p>
+                <ul style={{ margin: 0, paddingLeft: 20, color: '#475569', lineHeight: 2 }}>
+                  <li>You have a stable internet connection</li>
+                  <li>You are using a supported browser</li>
+                  <li>You log in a few minutes before the start time</li>
+                </ul>
+              </div>
+              <p style={{ color: '#64748b', fontSize: 14 }}>
+                Once the exam window opens, this page will automatically allow you to begin.
+              </p>
+              <p style={{ color: '#94a3b8', fontSize: 13, marginTop: 20 }}>
+                If you need assistance, please contact our support team.
+              </p>
+              <p style={{ textAlign: 'center', fontSize: 16, marginTop: 24, color: '#334155' }}>
+                We wish you the best of luck! 🚀
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Expired / other error pages
     const title = (() => {
-      if (msg.toLowerCase().includes('not started')) return 'Exam not started yet';
-      if (msg.toLowerCase().includes('start window')) return 'Start window expired';
-      if (msg.toLowerCase().includes('completed')) return 'Exam already completed';
-      if (msg.toLowerCase().includes('expired')) return 'Link expired';
-      if (msg.toLowerCase().includes('time is over')) return 'Time is over';
+      const msgLower = msg.toLowerCase();
+      const isExpiredPage = msgLower.includes('expired') || msgLower.includes('window') || msgLower.includes('closed') || msgLower.includes('start window');
+      if (isExpiredPage) return 'Assessment Window Closed';
+      if (msg === 'ALREADY_SUBMITTED' || msgLower.includes('complete')) return 'Exam Completed';
+      if (msgLower.includes('time is over')) return 'Time is over';
       return 'Invalid or expired link';
     })();
     return (
       <div className="take-page">
         <div className="take-shell">
-          <div className="take-card error">
-            <div className="take-title">{title}</div>
-            <div className="take-sub">{error}</div>
+          <div className="take-card error" style={{ maxWidth: 560, margin: '60px auto', padding: '36px 32px', borderRadius: 16 }}>
+            <div style={{ textAlign: 'center', marginBottom: 16 }}>
+              <span style={{ fontSize: 44 }}>{isExpired ? '⏰' : '❌'}</span>
+            </div>
+            <div className="take-title" style={{ textAlign: 'center' }}>{title}</div>
+            <div className="take-sub" style={{ textAlign: 'center', marginTop: 8 }}>{error}</div>
+            <p style={{ textAlign: 'center', color: '#94a3b8', fontSize: 13, marginTop: 16 }}>
+              If you believe this is an error, please contact the assessment administrator.
+            </p>
           </div>
         </div>
       </div>
     );
   }
 
-  const hasMcq = questions.length > 0;
-
 
 
   return (
     <div className="take-page take-exam-mode">
+      {aiToast.active && (
+        <div style={{ position: 'fixed', top: 100, left: '50%', transform: 'translateX(-50%)', zIndex: 99999, background: aiToast.text.includes('VERIFIED') ? '#16a34a' : (aiToast.urgent ? '#dc2626' : '#1d4ed8'), color: 'white', padding: '10px 24px', borderRadius: 25, fontWeight: 700, fontSize: '0.82rem', boxShadow: '0 6px 24px rgba(0,0,0,0.35)', display: 'flex', alignItems: 'center', gap: 8, letterSpacing: 0.5 }}>
+          <span style={{ fontSize: '1rem' }}>{aiToast.text.includes('VERIFIED') ? '✅' : (aiToast.urgent ? '⚠️' : 'ℹ️')}</span>
+          {aiToast.text}
+        </div>
+      )}
+      <canvas ref={screenCanvasRef} style={{ display: 'none' }} width="1280" height="720" />
       <div className="take-shell-exam">
         {!isFullscreen && !submitted ? (
           <div className="fs-gate" role="dialog" aria-label="Enter full screen">
             <div className="fs-card">
-              <div className="fs-title">Start Exam</div>
-              <div className="fs-sub">Fullscreen is required to start the exam.</div>
+              <div className="fs-title">{assessmentStage !== 'loading' && assessmentStage !== 'objective' ? 'Resume Assessment' : 'Start Exam'}</div>
+              <div className="fs-sub">Fullscreen is required to {assessmentStage !== 'loading' && assessmentStage !== 'objective' ? 'continue' : 'start'} the exam.</div>
               {fsError ? <div className="fs-error">{fsError}</div> : null}
               <div className="fs-actions">
                 <button
                   className="fs-primary"
                   type="button"
                   onClick={requestFullscreen}
+                  disabled={fsLoading}
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', minWidth: '160px' }}
                 >
-                  Enter Full Screen
+                  {fsLoading ? (
+                    <>
+                      <svg className="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" style={{ opacity: 0.25 }} />
+                        <path d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor" />
+                      </svg>
+                      Loading...
+                    </>
+                  ) : (
+                    "Enter Full Screen"
+                  )}
                 </button>
               </div>
             </div>
           </div>
         ) : null}
 
+
+
         {/* Floating Timer (Restored for ALL modes) */}
-        {typeof remainingSeconds === 'number' && !submitted ? (
-          <div className={`timer-box ${getTimerStage(remainingSeconds)}`}>
+        {/* Floating Timer (Stage Based) */}
+        {!submitted && assessmentStage !== 'loading' && assessmentStage !== 'transition' && assessmentStage !== 'completed' && (objectiveSeconds !== null || codingSeconds !== null) ? (
+          <div className={`timer-box ${getTimerStage(assessmentStage === 'objective' ? objectiveSeconds : codingSeconds)}`}>
             <div className="timer-value">
-              {formatCompactTime(remainingSeconds, parseTotalSeconds(assessment?.total_time))}
+              {formatCompactTime(
+                assessmentStage === 'objective' ? objectiveSeconds : codingSeconds,
+                assessmentStage === 'objective' ? parseTotalSeconds(assessment?.objective_time_limit || assessment?.total_time) : parseTotalSeconds(assessment?.coding_time_limit || assessment?.coding_total_time)
+              )}
+            </div>
+            <div className="timer-label" style={{ fontSize: '0.75rem', textAlign: 'center', opacity: 0.9 }}>
+              {assessmentStage === 'objective' ? 'Objective Section' : 'Coding Section'}
             </div>
           </div>
         ) : null}
 
         <div className="take-header">
           <div className="take-title">{assessment?.display_name || assessment?.name || 'Assessment'}</div>
-          {!isFullscreen ? <div className="take-note"><span className="fs-badge">Fullscreen required</span></div> : null}
+          {(!submitted && assessmentStage !== 'loading' && assessmentStage !== 'completed') && (
+            <div style={{ width: 44, height: 44, borderRadius: '50%', backgroundColor: '#1e293b', overflow: 'hidden', marginLeft: 'auto', marginRight: 15, border: '2px solid #e2e8f0', flexShrink: 0 }}>
+              <video ref={videoRef} autoPlay playsInline muted style={{ width: '100%', height: '100%', objectFit: 'cover', transform: 'scaleX(-1)' }} />
+            </div>
+          )}
+          {!isFullscreen ? <div className="take-note" style={{ marginLeft: submitted || assessmentStage === 'loading' ? 'auto' : 0 }}><span className="fs-badge">Fullscreen required</span></div> : null}
         </div>
 
         {submitted ? (
@@ -1000,17 +2041,34 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {/* Coding Section (Keep as is, above the exam grid) */}
-            {codingQuestionsOrdered.length > 0 ? (
+            {/* Transition Stage */}
+            {assessmentStage === 'transition' && (
+              <div className="take-card" style={{ textAlign: 'center', padding: '60px 20px' }}>
+                <h2 style={{ fontSize: '2rem', marginBottom: '20px' }}>Objective Section Completed</h2>
+                <div style={{ margin: '30px auto', padding: '20px', maxWidth: '500px', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                  <p style={{ margin: 0, color: '#475569', fontSize: '1.1rem', fontWeight: '500' }}>
+                    You have successfully completed the objective section of the assessment.
+                  </p>
+                </div>
+                {objResult?.passed && (
+                  <div style={{ marginTop: '40px' }}>
+                    <p style={{ fontSize: '1.1rem', marginBottom: '20px', color: '#4b5563' }}>
+                      You are about to start the coding section.<br />
+                      <strong>Coding Time Limit: {assessment?.coding_time_limit || 'As per total time'}</strong>
+                    </p>
+                    <button className="btn btn-primary" onClick={startCoding} style={{ fontSize: '1.2rem', padding: '12px 36px', borderRadius: '8px' }}>
+                      Start Coding Section (starts in {transitionTimer})
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Coding Section */}
+            {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 ? (
               <div className="take-card coding-overview-card">
-                <div className="coding-header-row" style={{ marginBottom: 10 }}>
-                  <div>
-                    <div className="take-title">Coding Questions</div>
-                    <div className="take-sub">Solve coding problems in the Monaco editor.</div>
-                  </div>
-                  <div className="coding-header-actions" style={{ alignItems: 'center' }}>
-                    <span className="pill gray">{codingQuestionsOrdered.length} questions</span>
-                  </div>
+                <div className="coding-header-actions" style={{ alignItems: 'center', marginBottom: 6 }}>
+                  <span className="pill gray" style={{ fontSize: '10px' }}>{codingQuestionsOrdered.length} coding tasks</span>
                 </div>
                 <div className="coding-tablist">
                   {codingQuestionsOrdered.map((cq, idx) => {
@@ -1031,7 +2089,7 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {codingQuestionsOrdered.length > 0 && activeCoding ? (
+            {assessmentStage === 'coding' && codingQuestionsOrdered.length > 0 && activeCoding ? (
               <div className="coding-attempt-shell take-coding-shell" ref={codingShellRef} style={{ marginBottom: '2rem' }}>
                 <div
                   className={`coding-pane coding-pane-left ${isLeftCollapsed ? 'is-collapsed' : ''}`}
@@ -1050,12 +2108,7 @@ export default function TakeAssessment() {
                       <div className="coding-pane-header">
                         <div>
                           <div className="coding-title">{activeCoding.title || 'Coding question'}</div>
-                          <div className="coding-meta">
-                            {activeCodingLanguages.map((lang) => (
-                              <span key={lang} className="coding-pill coding-pill-muted">{lang}</span>
-                            ))}
-                            {activeCoding.mode ? <span className="coding-pill coding-pill-muted">{activeCoding.mode}</span> : null}
-                          </div>
+
                         </div>
                         {/* Note: Using global assessment timer (top right) for all coding questions */}
                       </div>
@@ -1082,7 +2135,7 @@ export default function TakeAssessment() {
                         <select
                           className="coding-input coding-language-select"
                           value={activeLanguage || activeCodingLanguages[0] || ''}
-                          disabled={!!codingState.submittedIds[String(activeCoding.id)]}
+                          disabled={false}
                           onChange={(e) => {
                             const newLang = e.target.value;
                             setCodingState((prev) => {
@@ -1127,11 +2180,11 @@ export default function TakeAssessment() {
                       >
                         Test Cases
                       </button>
-                      <button type="button" className="btn btn-secondary" onClick={runCode} disabled={codingState.running || loading || !!codingState.submittedIds[String(activeCoding.id)]}>
+                      <button type="button" className="btn btn-secondary" onClick={runCode} disabled={codingState.running || loading}>
                         {codingState.running ? 'Running…' : 'Run'}
                       </button>
-                      <button type="button" className="btn btn-primary" onClick={submitCode} disabled={codingState.running || loading || !!codingState.submittedIds[String(activeCoding.id)]}>
-                        {codingState.running ? 'Submitting…' : (codingState.submittedIds[String(activeCoding.id)] ? 'Submitted' : 'Submit Answer')}
+                      <button type="button" className="btn btn-primary" onClick={submitCode} disabled={codingState.running || loading}>
+                        {codingState.running ? 'Submitting…' : (codingState.submittedIds[String(activeCoding.id)] ? 'Resubmit Answer' : 'Submit Answer')}
                       </button>
                     </div>
                   </div>
@@ -1142,7 +2195,7 @@ export default function TakeAssessment() {
                     </div>
                   ) : null}
 
-                  <div className="coding-editor-wrap" ref={codingEditorWrapRef}>
+                  <div className="coding-editor-wrap" ref={codingEditorWrapRef} onClick={() => setResultHeightPct(30)}>
                     <div className="coding-monaco">
                       <Suspense fallback={<div className="coding-monaco-loading">Loading editor…</div>}>
                         <MonacoEditor
@@ -1151,6 +2204,16 @@ export default function TakeAssessment() {
                           defaultLanguage={monacoLanguage(activeLanguage)}
                           language={monacoLanguage(activeLanguage)}
                           value={activeCode}
+                          options={{
+                            contextmenu: ALLOW_COPY_PASTE,
+                            fontSize: 14,
+                            minimap: { enabled: false },
+                            scrollBeyondLastLine: false,
+                            automaticLayout: true,
+                            readOnly: false,
+                            domReadOnly: false,
+                            wordWrap: 'on'
+                          }}
                           onChange={(v) => {
                             const value = v ?? '';
                             setCodingState((prev) => ({
@@ -1159,14 +2222,6 @@ export default function TakeAssessment() {
                             }));
                           }}
                           theme="vs-dark"
-                          options={{
-                            fontSize: 13,
-                            minimap: { enabled: false },
-                            automaticLayout: true,
-                            scrollBeyondLastLine: false,
-                            wordWrap: 'on',
-                            readOnly: !!codingState.submittedIds[String(activeCoding.id)],
-                          }}
                         />
                       </Suspense>
                     </div>
@@ -1231,17 +2286,17 @@ export default function TakeAssessment() {
               </div>
             ) : null}
 
-            {/* Finish Assessment button for coding-only assessments */}
-            {codingQuestionsOrdered.length > 0 && questions.length === 0 && !submitted ? (
+            {/* Finish Assessment button for coding stage if needed (e.g. coding only or end of test) */}
+            {assessmentStage === 'coding' && !submitted ? (
               <div className="take-footer">
-                <button className="submit-btn" type="button" onClick={() => submit(false)} disabled={submitting}>
+                <button className="submit-btn" type="button" onClick={() => initiateSubmit('final')} disabled={submitting}>
                   {submitting ? 'Submitting…' : 'Finish Assessment'}
                 </button>
               </div>
             ) : null}
 
             {/* Objective Questions Exam Mode Layout */}
-            {questions.length > 0 && currentQuestion ? (
+            {assessmentStage === 'objective' && questions.length > 0 && currentQuestion ? (
               <div className="take-exam-layout">
                 {/* Main Question Area */}
                 <div className="take-exam-main">
@@ -1249,7 +2304,6 @@ export default function TakeAssessment() {
                     <div className="q-top">
                       <div className="q-num">Question {activeQuestionIndex + 1}</div>
                       <div className="q-meta">
-                        {currentQuestion.skill ? <span className="pill">{currentQuestion.skill}</span> : null}
                         {currentQuestion.question_type ? <span className="pill gray">{currentQuestion.question_type}</span> : null}
                       </div>
                     </div>
@@ -1295,17 +2349,16 @@ export default function TakeAssessment() {
                     <button className="btn-exam-action info" onClick={() => handleMarkForReview(currentQuestion.id)}>
                       {markedReviewIds[String(currentQuestion.id)] ? 'Unmark Review' : 'Mark for Review'}
                     </button>
-                    {activeQuestionIndex === questions.length - 1 ? (
-                      <div style={{ flex: 1, textAlign: 'right' }}>
-                        <button className="submit-btn" type="button" onClick={submit} disabled={submitting}>
-                          {submitting ? 'Submitting…' : 'Submit Exam'}
+                    <div style={{ flex: 1, display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+                      {activeQuestionIndex < questions.length - 1 && (
+                        <button className="btn-exam-action primary" onClick={handleNext}>
+                          Save & Next →
                         </button>
-                      </div>
-                    ) : (
-                      <button className="btn-exam-action primary" onClick={handleNext}>
-                        Save & Next →
+                      )}
+                      <button className="submit-btn" type="button" onClick={() => initiateSubmit('objective')} disabled={submitting}>
+                        {submitting ? 'Submitting…' : (codingQuestionsOrdered.length > 0 ? 'Submit Objective Section' : 'Submit Assessment')}
                       </button>
-                    )}
+                    </div>
                   </div>
                 </div>
 
@@ -1340,9 +2393,15 @@ export default function TakeAssessment() {
                   </div>
 
                   <div className="sidebar-submit-section">
-                    <button className="submit-btn full-width" type="button" onClick={submit} disabled={submitting}>
-                      {submitting ? 'Submitting…' : 'Submit Exam'}
-                    </button>
+                    {codingQuestionsOrdered.length > 0 ? (
+                      <button className="submit-btn full-width" type="button" onClick={() => initiateSubmit('objective')} disabled={submitting}>
+                        {submitting ? 'Submitting…' : 'Submit Objective Section'}
+                      </button>
+                    ) : (
+                      <button className="submit-btn full-width" type="button" onClick={() => initiateSubmit('final')} disabled={submitting}>
+                        {submitting ? 'Submitting…' : 'Submit Exam'}
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -1354,7 +2413,105 @@ export default function TakeAssessment() {
           </>
         )}
       </div>
+
+      {showSubmitModal && (
+        <div className="confirm-modal-overlay">
+          <div className="confirm-modal-card">
+            <div className="confirm-modal-header">
+              <div className="confirm-modal-icon warning">⚠️</div>
+              <div className="confirm-modal-title">
+                {modalSubmitType === 'objective' ? 'Submit Objective Section?' : 'Submit Assessment?'}
+              </div>
+            </div>
+
+            <div className="confirm-modal-body">
+              <p style={{ margin: 0 }}>
+                {modalSubmitType === 'objective'
+                  ? 'Are you sure you want to submit the objective section and proceed?'
+                  : 'Are you sure you want to finish and submit your entire assessment?'}
+              </p>
+
+              <div className="confirm-modal-stats">
+                <div style={{ fontWeight: 800, marginBottom: '10px', fontSize: '12px', textTransform: 'uppercase', letterSpacing: '0.03em', color: '#475569' }}>
+                  Your Summary
+                </div>
+
+                {hasMcq && (modalSubmitType === 'objective' || codingQuestionsOrdered.length === 0) && (
+                  <>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Total Objective Questions:</span>
+                      <span className="confirm-modal-stat-value">{questions.length}</span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Answered Questions:</span>
+                      <span className="confirm-modal-stat-value answered-color">
+                        {questions.filter(q => isAnswered(q)).length}
+                      </span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Unanswered Questions:</span>
+                      <span className="confirm-modal-stat-value unanswered-color">
+                        {questions.length - questions.filter(q => isAnswered(q)).length}
+                      </span>
+                    </div>
+                  </>
+                )}
+
+                {modalSubmitType === 'final' && codingQuestionsOrdered.length > 0 && (
+                  <>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Total Coding Challenges:</span>
+                      <span className="confirm-modal-stat-value">{codingQuestionsOrdered.length}</span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Submitted Coding Answers:</span>
+                      <span className="confirm-modal-stat-value answered-color">
+                        {Object.keys(codingState.submittedIds).length}
+                      </span>
+                    </div>
+                    <div className="confirm-modal-stat-row">
+                      <span className="confirm-modal-stat-label">Unsubmitted Coding Answers:</span>
+                      <span className="confirm-modal-stat-value unanswered-color">
+                        {codingQuestionsOrdered.length - Object.keys(codingState.submittedIds).length}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </div>
+
+              <p style={{ margin: '14px 0 0 0', fontStyle: 'italic', fontSize: '12px', color: '#64748b' }}>
+                Note: You will not be able to change your answers after submitting this section.
+              </p>
+            </div>
+
+            <div className="confirm-modal-buttons">
+              <button
+                type="button"
+                className="confirm-modal-btn cancel"
+                onClick={() => setShowSubmitModal(false)}
+                disabled={submitting}
+              >
+                No, Go Back
+              </button>
+              <button
+                type="button"
+                className="confirm-modal-btn confirm warning"
+                disabled={submitting}
+                onClick={async () => {
+                  setShowSubmitModal(false);
+                  if (modalSubmitType === 'objective') {
+                    await submitObjective(false);
+                  } else {
+                    await submit(false);
+                  }
+                }}
+              >
+                {submitting ? 'Submitting...' : 'Yes, Submit'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-

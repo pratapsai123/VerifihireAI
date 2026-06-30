@@ -1,0 +1,1995 @@
+{ 
+  "skill": "Swagger", 
+  "questions": [
+    {
+    "question": "What is the primary purpose of Swagger in API development?",
+    "options": {
+      "A": "To act as a physical firewall for the database server.",
+      "B": "To provide a suite of tools for designing, building, and documenting RESTful APIs.",
+      "C": "To compile JavaScript code into machine-readable binary.",
+      "D": "To manage the server's cloud hosting billing."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger and OpenAPI are currently the same thing, with OpenAPI being the name of the specification.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "True, but only for SOAP APIs",
+      "D": "False, Swagger is for Java and OpenAPI is for Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which Swagger tool allows users to visualize and interact with the API’s resources without having any of the implementation logic in place?",
+    "options": {
+      "A": "Swagger Editor",
+      "B": "Swagger Codegen",
+      "C": "Swagger UI",
+      "D": "Swagger Hub"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which formats are commonly used to write an OpenAPI specification file?",
+    "options": {
+      "A": "HTML and CSS",
+      "B": "YAML and JSON",
+      "C": "XML and CSV",
+      "D": "PDF and TXT"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an OpenAPI document, which object is mandatory and describes the API's basic metadata like version and title?",
+    "options": {
+      "A": "paths",
+      "B": "servers",
+      "C": "info",
+      "D": "components"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger UI provides a 'Try it out' button to make live requests to an API directly from the documentation browser.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using JSON format",
+      "D": "Only for local network APIs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'paths' section in an OpenAPI definition define?",
+    "options": {
+      "A": "The folder structure of the source code.",
+      "B": "The available endpoints (routes) and their supported HTTP operations.",
+      "C": "The file path to the database backup.",
+      "D": "The security clearance paths for team members."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool is used to generate client SDKs and server stubs from an OpenAPI specification?",
+    "options": {
+      "A": "Swagger UI",
+      "B": "Swagger Codegen",
+      "C": "Swagger Editor",
+      "D": "Swagger Scanner"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use Swagger to document GraphQL APIs as effectively as REST APIs.",
+    "options": {
+      "A": "True",
+      "B": "False (It is primarily designed for RESTful APIs)",
+      "C": "True, if using version 2.0",
+      "D": "False, Swagger is only for SOAP"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the root field name in the latest OpenAPI specification (3.0+)?",
+    "options": {
+      "A": "swagger",
+      "B": "openapi",
+      "C": "api-version",
+      "D": "definition"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section of the OpenAPI document is used to define reusable data structures (schemas)?",
+    "options": {
+      "A": "metadata",
+      "B": "definitions",
+      "C": "components",
+      "D": "global"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger Editor provides real-time validation of your OpenAPI YAML file as you type.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the paid version",
+      "D": "Only if connected to a live server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'servers' object in OpenAPI 3.0 allow you to do?",
+    "options": {
+      "A": "List the names of all users in the database.",
+      "B": "Specify one or more base URLs for the API, such as production and staging.",
+      "C": "Monitor the CPU temperature of the server.",
+      "D": "Assign different passwords to different server racks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'parameters' section, which 'in' value is used to describe a variable passed as part of the URL path (e.g., /users/{id})?",
+    "options": {
+      "A": "query",
+      "B": "header",
+      "C": "path",
+      "D": "cookie"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger can be integrated into code to automatically generate documentation from comments or decorators.",
+    "options": {
+      "A": "True (using libraries like Swashbuckle or Swagger-PHP)",
+      "B": "False (It must always be written manually)",
+      "C": "True, but only for C#",
+      "D": "False, this is a security risk"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'responses' object in an operation definition?",
+    "options": {
+      "A": "To list the names of developers who replied to the API request.",
+      "B": "To define the possible HTTP status codes and the structure of the data returned.",
+      "C": "To store the user's browser history.",
+      "D": "To set the timeout for the server's reply."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP status code is commonly documented for a successful 'GET' request?",
+    "options": {
+      "A": "201",
+      "B": "404",
+      "C": "200",
+      "D": "500"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: An OpenAPI document can be saved as a single file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if it is under 1MB",
+      "D": "True, but only if encrypted"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'tags' property help achieve in Swagger UI?",
+    "options": {
+      "A": "It helps in calculating the cost of the API.",
+      "B": "It categorizes and groups related operations together visually.",
+      "C": "It identifies the physical location of the API server.",
+      "D": "It adds metadata for Google search rankings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property indicates that a parameter is mandatory in an API request?",
+    "options": {
+      "A": "required: true",
+      "B": "mandatory: yes",
+      "C": "force: true",
+      "D": "locked: true"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Swagger UI can be styled with custom CSS to match a company's branding.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise version",
+      "D": "Only if using the JSON format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'SwaggerHub'?",
+    "options": {
+      "A": "A physical device for connecting servers.",
+      "B": "A collaborative platform for teams to design and document APIs using OpenAPI.",
+      "C": "A specialized software for packing ZIP files.",
+      "D": "A database of all public APIs in the world."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OpenAPI 3.0, which object replaced the 'body' parameter used in version 2.0?",
+    "options": {
+      "A": "payload",
+      "B": "data",
+      "C": "requestBody",
+      "D": "inputContent"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger documentation can only be viewed in a web browser.",
+    "options": {
+      "A": "False (The spec file can be read in any text editor or used by other tools)",
+      "B": "True",
+      "C": "Only if using the YAML format",
+      "D": "False, it requires a specialized mobile app"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'securityDefinitions' (v2) or 'securitySchemes' (v3) object?",
+    "options": {
+      "A": "To list all the security guards at the data center.",
+      "B": "To define the authentication methods used by the API (API Key, OAuth2, etc.).",
+      "C": "To encrypt the API documentation.",
+      "D": "To scan for viruses in the request body."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which YAML keyword is used to refer to a reusable component defined elsewhere in the document?",
+    "options": {
+      "A": "$link",
+      "B": "$ref",
+      "C": "$import",
+      "D": "$goto"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use Swagger to document a private API that is not accessible over the public internet.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the Swagger UI is also private",
+      "D": "Only if using JSON"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the file name typically given to an OpenAPI definition by default?",
+    "options": {
+      "A": "api-config.yaml",
+      "B": "openapi.yaml",
+      "C": "swagger-docs.json",
+      "D": "Both B and C are common"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "What does the 'operationId' property represent?",
+    "options": {
+      "A": "The unique ID of the developer who wrote the method.",
+      "B": "A unique string used to identify a specific operation, often used by tools for method naming.",
+      "C": "The physical ID of the server operation.",
+      "D": "The password for the endpoint."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 allows multiple 'content' types (e.g., application/json and application/xml) for a single response.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using YAML",
+      "D": "Only for error responses"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'Petstore' refer to in the Swagger community?",
+    "options": {
+      "A": "A specific security vulnerability.",
+      "B": "A famous example API used to demonstrate Swagger/OpenAPI features.",
+      "C": "A database of all pet-related APIs.",
+      "D": "The nickname for the Swagger core development team."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which HTTP method is documented for deleting a resource?",
+    "options": {
+      "A": "REMOVE",
+      "B": "DROP",
+      "C": "DELETE",
+      "D": "POST"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: YAML uses indentation to define the structure of the OpenAPI document.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for headers",
+      "D": "Only if using spaces instead of tabs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'description' fields in an OpenAPI spec?",
+    "options": {
+      "A": "To store executable JavaScript code.",
+      "B": "To provide human-readable explanations of endpoints, parameters, and schemas.",
+      "C": "To encrypt the documentation.",
+      "D": "To set the API server timeout."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool would you use to browse an OpenAPI file locally on your computer?",
+    "options": {
+      "A": "Swagger UI (running locally)",
+      "B": "Any modern web browser",
+      "C": "A text editor (VS Code, Notepad++)",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: Swagger UI can be embedded into a web application using a CDN link.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Pro' version",
+      "D": "Only for JSON documents"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OpenAPI Specification' (OAS)?",
+    "options": {
+      "A": "A new web browser from Microsoft.",
+      "B": "The standard language-agnostic interface description for REST APIs.",
+      "C": "A specialized database protocol.",
+      "D": "The source code for the Swagger tools."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the parameters section, what does 'in: query' mean?",
+    "options": {
+      "A": "The parameter is sent in the request body.",
+      "B": "The parameter is sent in the URL query string (e.g., ?id=1).",
+      "C": "The parameter is sent in the HTTP header.",
+      "D": "The parameter is sent as a cookie."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports documenting file uploads.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using version 2.0",
+      "D": "Only if using XML"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Swagger Inspector' used for?",
+    "options": {
+      "A": "To arrest developers who write bad code.",
+      "B": "To test APIs and generate OpenAPI definitions from existing endpoints.",
+      "C": "To scan the network for unauthorized users.",
+      "D": "To measure the server's internet speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which object defines the structure of a request body for a 'POST' method in OAS 3?",
+    "options": {
+      "A": "body",
+      "B": "input",
+      "C": "requestBody",
+      "D": "payload"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger Editor can export your documentation to a PDF file directly.",
+    "options": {
+      "A": "False (It exports to YAML/JSON or generates code/docs via server-side tools)",
+      "B": "True",
+      "C": "Only in version 3",
+      "D": "Only if using the cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'deprecated: true' indicate on an endpoint?",
+    "options": {
+      "A": "The endpoint is the most important one.",
+      "B": "The endpoint is still functional but users are discouraged from using it.",
+      "C": "The endpoint has been deleted from the code.",
+      "D": "The endpoint requires a special password."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In YAML, which symbol is used to start a new item in a list?",
+    "options": {
+      "A": "*",
+      "B": "#",
+      "C": "-",
+      "D": ">"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger UI can display the time it took for an API request to return a response.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for POST requests",
+      "D": "Only if the server sends a header"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'License' object in the 'info' section used for?",
+    "options": {
+      "A": "To store the developer's driver's license number.",
+      "B": "To specify the legal license for the API (e.g., Apache 2.0, MIT).",
+      "C": "To manage the server's hardware warranty.",
+      "D": "To pay the API hosting fees."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a valid 'type' for a property in an OpenAPI schema?",
+    "options": {
+      "A": "string",
+      "B": "integer",
+      "C": "boolean",
+      "D": "All of the above"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can use OpenAPI to document multiple versions of an API in a single document.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using JSON",
+      "D": "Only if using the 'components' section"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'example' field in a schema definition?",
+    "options": {
+      "A": "To run a unit test automatically.",
+      "B": "To show sample data in the Swagger UI for users to understand the format.",
+      "C": "To backup the database.",
+      "D": "To encrypt the payload."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which tool provides an interactive console for testing APIs in the browser?",
+    "options": {
+      "A": "Swagger Console",
+      "B": "Swagger UI",
+      "C": "Swagger Terminal",
+      "D": "Swagger Shell"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger 2.0 (the older version) is still widely supported by many tools today.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for mobile apps",
+      "D": "Only by Microsoft"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'nullable: true' mean in an OpenAPI 3.0 schema?",
+    "options": {
+      "A": "The field is mandatory.",
+      "B": "The field can explicitly contain a null value.",
+      "C": "The field has been deleted.",
+      "D": "The field is hidden from the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Swagger Editor, what happens when you have a syntax error in your YAML?",
+    "options": {
+      "A": "The computer restarts.",
+      "B": "An error message appears on the screen identifying the line number.",
+      "C": "The text color changes to white.",
+      "D": "The browser tab closes instantly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI definitions can be shared as a URL to a raw YAML/JSON file.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only on GitHub",
+      "D": "Only if the file is under 100 lines"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of 'ExternalDocs' in the specification?",
+    "options": {
+      "A": "To list the names of external consultants.",
+      "B": "To provide a link to additional documentation outside the specification.",
+      "C": "To store the server's cloud login details.",
+      "D": "To scan for external network users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section defines the contact information for the API provider?",
+    "options": {
+      "A": "metadata",
+      "B": "contact",
+      "C": "info",
+      "D": "support"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger supports the 'HEAD' HTTP method.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 3.1",
+      "D": "Only for binary files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'format: date-time' usually indicate for a string type?",
+    "options": {
+      "A": "The string must be a username.",
+      "B": "The string follows a specific RFC format for timestamps.",
+      "C": "The string is the current server time.",
+      "D": "The string is a random number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OpenAPI 3, where is the 'Basic Auth' scheme defined?",
+    "options": {
+      "A": "info",
+      "B": "securitySchemes",
+      "C": "paths",
+      "D": "globalSettings"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI automatically detects the server's base URL if not provided.",
+    "options": {
+      "A": "False (It defaults to the host where the UI is served from if not defined).",
+      "B": "True",
+      "C": "Only if using JSON",
+      "D": "Only on Windows servers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the primary role of the 'Swagger' brand today?",
+    "options": {
+      "A": "A new programming language.",
+      "B": "The set of tools (UI, Editor, etc.) that implement the OpenAPI specification.",
+      "C": "The name of a major cloud provider.",
+      "D": "A database management system."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which section allows you to describe parameters common to all operations in a path?",
+    "options": {
+      "A": "info",
+      "B": "path items",
+      "C": "global",
+      "D": "components"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger can be used to generate automated tests for your API.",
+    "options": {
+      "A": "True (using the spec as a source of truth for test generation tools).",
+      "B": "False",
+      "C": "Only for GET requests",
+      "D": "Only if using JavaScript"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'enum' allow you to define for a parameter?",
+    "options": {
+      "A": "The encryption key.",
+      "B": "A fixed list of allowed values for the parameter.",
+      "C": "The number of users allowed to access the endpoint.",
+      "D": "The time limit for the API call."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the default value of the 'openapi' field for the newest stable specification version in 2026?",
+    "options": {
+      "A": "2.0",
+      "B": "3.0.0",
+      "C": "3.1.0",
+      "D": "4.0.0"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary difference between the 'components' section in OpenAPI 3.0 and 'definitions' in Swagger 2.0?",
+    "options": {
+      "A": "There is no difference; they are just different names for the same object.",
+      "B": "The 'components' section is a container for all reusable objects like schemas, security schemes, and headers.",
+      "C": "The 'components' section is only for storing CSS and JavaScript assets.",
+      "D": "The 'definitions' section allowed for XML, while 'components' only allows JSON."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.0, a single operation can support multiple authentication methods by listing them in the 'security' array.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they are both API Key based",
+      "D": "Only if using the YAML format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to define that a schema is composed of multiple other schemas, and all must be valid?",
+    "options": {
+      "A": "anyOf",
+      "B": "oneOf",
+      "C": "allOf",
+      "D": "not"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'explode' property do when defining a query parameter?",
+    "options": {
+      "A": "It deletes the parameter after the request is made.",
+      "B": "It determines whether arrays or objects should generate separate parameters for each element.",
+      "C": "It encrypts the parameter using a rotating key.",
+      "D": "It forces the parameter to be at least 100 characters long."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the 'requestBody' object, what is the purpose of the 'required' field?",
+    "options": {
+      "A": "To specify that the API must be used over HTTPS.",
+      "B": "To indicate whether a request body must be present for the operation to be valid.",
+      "C": "To force the user to provide a password.",
+      "D": "To require that the response is also in JSON format."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'discriminator' keyword is used in schema inheritance to help determine which sub-schema is being used based on a specific property value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for XML-based APIs",
+      "D": "Only in Swagger 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'callbacks' keyword used for in an operation definition?",
+    "options": {
+      "A": "To define the phone numbers for API support.",
+      "B": "To describe out-of-band requests that the API might initiate in response to an operation (webhooks).",
+      "C": "To list the names of developers who wrote the code.",
+      "D": "To set the retry logic for failed requests."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'style' is the default for a query parameter in OpenAPI 3.0?",
+    "options": {
+      "A": "simple",
+      "B": "form",
+      "C": "matrix",
+      "D": "label"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.1, the schema definition is fully compatible with the JSON Schema 2020-12 specification.",
+    "options": {
+      "A": "False (It is only compatible with version 4)",
+      "B": "True",
+      "C": "True, but only if using JSON instead of YAML",
+      "D": "False, it uses its own proprietary schema format"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'writeOnly' property in a schema?",
+    "options": {
+      "A": "To indicate the property should only be sent in requests (e.g., a password).",
+      "B": "To prevent anyone from reading the documentation.",
+      "C": "To mark a property as deprecated.",
+      "D": "To indicate that the property is a read-only database ID."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which object defines the different 'flows' available for an OAuth 2.0 security scheme?",
+    "options": {
+      "A": "scopes",
+      "B": "authorizations",
+      "C": "flows",
+      "D": "methods"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports the use of 'Links' to describe how the output of one operation can be used as input for another.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the Enterprise version of SwaggerHub",
+      "D": "Only for Hypermedia APIs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'readOnly: true' signify for a property in a schema?",
+    "options": {
+      "A": "The property can only be seen by the admin.",
+      "B": "The property is expected in the response but should not be sent in the request.",
+      "C": "The property is hidden in Swagger UI.",
+      "D": "The property cannot be changed after it is first set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword allows you to define multiple distinct server configurations, such as a base path that changes depending on the version?",
+    "options": {
+      "A": "variables",
+      "B": "endpoints",
+      "C": "urls",
+      "D": "hosts"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: You can define a parameter that is common to all HTTP methods for a single path by placing it under the path item level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using OAS 2.0",
+      "D": "Only for 'query' parameters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which validation keyword would you use to ensure a string parameter matches a specific regular expression?",
+    "options": {
+      "A": "regex",
+      "B": "format",
+      "C": "pattern",
+      "D": "mask"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'deprecated' keyword in an operation?",
+    "options": {
+      "A": "To delete the endpoint from the server.",
+      "B": "To inform users that the operation is scheduled for removal and a newer version should be used.",
+      "C": "To hide the endpoint from the Swagger UI search bar.",
+      "D": "To increase the security level of the endpoint."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'content' map under a response allows the API to return different schemas for different media types (e.g., JSON vs XML).",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Swagger 1.0",
+      "D": "Only if the status code is 200"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "How do you specify an array of strings in an OpenAPI schema?",
+    "options": {
+      "A": "type: list, items: string",
+      "B": "type: array, items: { type: string }",
+      "C": "type: string-array",
+      "D": "collection: string"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the function of the 'nullable' property in OAS 3.0?",
+    "options": {
+      "A": "To allow a property to be omitted from the JSON entirely.",
+      "B": "To allow a property to have a value of 'null'.",
+      "C": "To mark a property as having zero value.",
+      "D": "To indicate that the property is an empty string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: 'Codegen' can generate server-side code in languages like Node.js, Spring Boot, and Go.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Java",
+      "D": "Only for Python"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which object is used to document the headers returned in a response?",
+    "options": {
+      "A": "metadata",
+      "B": "headers",
+      "C": "params",
+      "D": "cookies"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an OAuth2 flow, what does the 'authorizationUrl' specify?",
+    "options": {
+      "A": "The URL of the API endpoint.",
+      "B": "The URL where the client redirects the user to get authorization.",
+      "C": "The URL where the client exchanges a code for a token.",
+      "D": "The home page of the application developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI supports the rendering of 'Markdown' in description fields.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'info' section",
+      "D": "Only for titles"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to define a list of allowed values for a property?",
+    "options": {
+      "A": "list",
+      "B": "options",
+      "C": "enum",
+      "D": "const"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the 'exclusiveMinimum' keyword used for in a schema?",
+    "options": {
+      "A": "To specify a minimum value that is included in the range.",
+      "B": "To specify a minimum value that is *not* included in the range (strict greater than).",
+      "C": "To exclude all negative numbers.",
+      "D": "To limit the number of users in a group."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'tags' property at the root of the document can include an 'externalDocs' link for each tag.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 3.1",
+      "D": "Only if using the cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'parameter serialization'?",
+    "options": {
+      "A": "The process of deleting parameters after a request.",
+      "B": "The process of converting complex data (like arrays or objects) into a string format for transmission.",
+      "C": "The process of numbering parameters in order.",
+      "D": "The process of encrypting parameters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in the 'info' object is used to point to the Terms of Service for the API?",
+    "options": {
+      "A": "tos",
+      "B": "legal",
+      "C": "termsOfService",
+      "D": "rules"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 allows for the documentation of 'cookie' parameters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using HTTPS",
+      "D": "Only if using JSON"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used in OAS 3.0 to provide a short summary of what an operation does, which often appears in the sidebar of Swagger UI?",
+    "options": {
+      "A": "title",
+      "B": "label",
+      "C": "summary",
+      "D": "intro"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In a schema, what does 'additionalProperties: false' enforce?",
+    "options": {
+      "A": "That the object cannot have any properties at all.",
+      "B": "That the object can only contain the properties explicitly defined in the schema.",
+      "C": "That the object must have at least 10 properties.",
+      "D": "That all properties must be strings."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use the 'oneOf' keyword to indicate that a response must match exactly one of the provided schemas.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for error responses",
+      "D": "Only in OAS 3.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to merge multiple OpenAPI files into a single document?",
+    "options": {
+      "A": "Swagger UI",
+      "B": "Swagger Editor",
+      "C": "A specialized CLI tool like 'redocly' or 'swagger-cli'",
+      "D": "Windows File Explorer"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'encoding' object within a 'requestBody'?",
+    "options": {
+      "A": "To specify the character set (e.g., UTF-8).",
+      "B": "To define how individual properties of the body should be serialized (e.g., headers or style).",
+      "C": "To encrypt the body content.",
+      "D": "To compress the request using GZIP."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger supports the definition of 'Default Values' for parameters.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for path parameters",
+      "D": "Only if the parameter is required"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which object in OpenAPI 3.0 is used to define common security requirements for the entire API?",
+    "options": {
+      "A": "securitySchemes",
+      "B": "securityDefinitions",
+      "C": "security",
+      "D": "auth"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does the 'format' field do for an 'integer' type?",
+    "options": {
+      "A": "It sets the background color of the number.",
+      "B": "It provides a hint about the size of the integer (e.g., int32 vs int64).",
+      "C": "It converts the number into a string.",
+      "D": "It identifies if the number is prime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI can display 'XML' schemas even if the API primarily uses JSON.",
+    "options": {
+      "A": "True (via the 'xml' object in the schema)",
+      "B": "False",
+      "C": "Only if using OAS 2.0",
+      "D": "Only for file uploads"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Redoc'?",
+    "options": {
+      "A": "A major competitor to Swagger for rendering OpenAPI documentation.",
+      "B": "The previous name of the Swagger toolset.",
+      "C": "A specialized database for API logs.",
+      "D": "A tool to convert OpenAPI to PDF."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the 'info' section, which property identifies the version of the API (not the OAS version)?",
+    "options": {
+      "A": "openapi",
+      "B": "api-version",
+      "C": "version",
+      "D": "build"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use the '$ref' keyword to point to an external file or URL for a schema definition.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if the file is in the same folder",
+      "D": "Only for components, not for paths"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the role of the 'example' keyword versus 'examples' in OAS 3.0?",
+    "options": {
+      "A": "'example' is for media types; 'examples' is for parameters.",
+      "B": "'example' provides a single value; 'examples' allows multiple named examples with summaries.",
+      "C": "'examples' is only for arrays.",
+      "D": "There is no difference; they are interchangeable."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which status code should be documented for an API call that fails due to server-side logic error?",
+    "options": {
+      "A": "400",
+      "B": "404",
+      "C": "500",
+      "D": "401"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports the definition of 'Union Types' using the anyOf keyword.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 2.0",
+      "D": "Only if using XML"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Swagger-UI-dist'?",
+    "options": {
+      "A": "A version of Swagger for Linux distributions.",
+      "B": "The bundle of assets (HTML, JS, CSS) used to deploy Swagger UI on any web server.",
+      "C": "A specialized distance measuring tool for APIs.",
+      "D": "A tool that deletes old Swagger documentation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to specify that a property must be present in an object schema?",
+    "options": {
+      "A": "mandatory",
+      "B": "force",
+      "C": "required",
+      "D": "needed"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger Codegen supports the generation of 'K6' load testing scripts.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for OpenAPI 2.0",
+      "D": "Only in the cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OpenAPI GUI'?",
+    "options": {
+      "A": "A visual editor that allows you to create OpenAPI files without writing YAML manually.",
+      "B": "The main graphical interface of the Swagger server.",
+      "C": "A tool to draw icons for your API.",
+      "D": "A specialized web browser for developers."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'in' value is used for a parameter that is part of the request header?",
+    "options": {
+      "A": "query",
+      "B": "path",
+      "C": "header",
+      "D": "cookie"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 allows the use of 'deprecated' at the parameter level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for query parameters",
+      "D": "Only in the 'components' section"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'maximum' validation keyword do for a numeric type?",
+    "options": {
+      "A": "It sets the font size to the maximum allowed.",
+      "B": "It specifies the largest allowed value for the number.",
+      "C": "It sets the maximum length of the number string.",
+      "D": "It identifies the highest priority number."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OAS 3.0, where is the 'default' value for a parameter defined?",
+    "options": {
+      "A": "In the 'info' section",
+      "B": "In the 'schema' object under the parameter",
+      "C": "In the 'components' object",
+      "D": "In the 'servers' object"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI can automatically authorize requests using a 'login' endpoint defined in the spec.",
+    "options": {
+      "A": "False (It requires manual token entry or OAuth flows).",
+      "B": "True",
+      "C": "Only if using Basic Auth",
+      "D": "Only on the local server"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the purpose of the 'xml' object within a schema definition?",
+    "options": {
+      "A": "To convert the JSON documentation into XML format.",
+      "B": "To provide mapping details (like namespace or prefixes) for XML serialization.",
+      "C": "To encrypt the documentation for XML servers.",
+      "D": "To scan for XML injection attacks."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which 'type' would you use for a parameter that represents a binary file upload in OAS 3.0?",
+    "options": {
+      "A": "file",
+      "B": "binary",
+      "C": "string (with format: binary)",
+      "D": "blob"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports the 'TRACE' HTTP method.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the YAML format",
+      "D": "Only in the 'dev' environment"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'ExternalDocumentation' object?",
+    "options": {
+      "A": "To list the names of third-party lawyers.",
+      "B": "To provide a link to additional documentation outside the specification.",
+      "C": "To store the server's cloud login details.",
+      "D": "To monitor the uptime of other websites."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to provide a detailed, multiline explanation of an operation?",
+    "options": {
+      "A": "intro",
+      "B": "summary",
+      "C": "description",
+      "D": "about"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can define multiple distinct 'responses' for the same HTTP status code if they have different media types.",
+    "options": {
+      "A": "False (Each status code key must be unique; use 'content' to differentiate media types).",
+      "B": "True",
+      "C": "Only if using OAS 2.0",
+      "D": "Only if one of them is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which property in a security scheme indicates where the API Key should be sent (e.g., 'query' or 'header')?",
+    "options": {
+      "A": "place",
+      "B": "location",
+      "C": "in",
+      "D": "at"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Swagger Parser'?",
+    "options": {
+      "A": "A tool to fix typos in your documentation.",
+      "B": "A library used to read, validate, and convert OpenAPI definitions in code.",
+      "C": "A specialized search engine for APIs.",
+      "D": "A way to compress YAML files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI 3.1 is the first version to fully align with JSON Schema 2020-12.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for Boolean types",
+      "D": "Only in SwaggerHub"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Swagger-JS' library used for?",
+    "options": {
+      "A": "To create physical hardware for APIs.",
+      "B": "To programmatically interact with APIs by using their OpenAPI definitions in a browser or Node.js.",
+      "C": "To write the code for the backend server in Java.",
+      "D": "To monitor the uptime of the Postman website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a schema, what does 'minLength' enforce for a string?",
+    "options": {
+      "A": "The minimum number of characters allowed in the string.",
+      "B": "The minimum number of words allowed in the string.",
+      "C": "The minimum font size for the string in the UI.",
+      "D": "The minimum number of users who can see the string."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is documented for updating an existing resource with partial data?",
+    "options": {
+      "A": "PUT",
+      "B": "UPDATE",
+      "C": "PATCH",
+      "D": "POST"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary architectural difference between OpenAPI 3.0 and 3.1 regarding 'Webhooks'?",
+    "options": {
+      "A": "Webhooks are only supported in JSON format in 3.1.",
+      "B": "3.1 introduces a top-level 'webhooks' object to describe out-of-band requests independent of paths.",
+      "C": "3.1 requires a physical callback URL to be hardcoded in the YAML.",
+      "D": "There is no difference; webhooks were moved to the 'components' section in 3.0."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.1, you can use 'type: [string, null]' to define a nullable string, following standard JSON Schema syntax.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the 'nullable' keyword from 3.0",
+      "D": "Only for response bodies, not parameters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is utilized to define a schema that must NOT match a specific definition?",
+    "options": {
+      "A": "exclude",
+      "B": "invalid",
+      "C": "not",
+      "D": "ignore"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "When using 'style: deepObject' for a query parameter, how is an object {a: 1} serialized in the URL?",
+    "options": {
+      "A": "?a=1",
+      "B": "?obj[a]=1",
+      "C": "?obj.a=1",
+      "D": "?obj={a:1}"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "How do you define a 'Security Requirement' that allows either an API Key OR OAuth2, but not necessarily both?",
+    "options": {
+      "A": "By placing both in a single object within the security array.",
+      "B": "By placing them as two separate objects within the security array.",
+      "C": "By using the 'anyOf' keyword in the securitySchemes section.",
+      "D": "By naming the security scheme 'OR_AUTH'."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: The 'discriminator' object mapping must use the exact name of the schema it is pointing to.",
+    "options": {
+      "A": "False (It can map a specific value to a specific schema reference)",
+      "B": "True",
+      "C": "Only if using XML serialization",
+      "D": "Only in Swagger 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of 'x-' prefixes in an OpenAPI document?",
+    "options": {
+      "A": "To mark a property as deleted or 'eXpired'.",
+      "B": "To define Specification Extensions for vendor-specific data not covered by the standard.",
+      "C": "To encrypt a specific section of the YAML file.",
+      "D": "To force a parameter to be treated as a string."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to specify a schema that must match exactly one of the provided sub-schemas?",
+    "options": {
+      "A": "oneOf",
+      "B": "anyOf",
+      "C": "allOf",
+      "D": "choose"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.0, 'header' parameters do not support the 'Content-Type' property.",
+    "options": {
+      "A": "True (It is ignored because headers are always strings)",
+      "B": "False",
+      "C": "Only for custom headers starting with X-",
+      "D": "Only if the 'in' value is 'path'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does the 'allowReserved' property allow in a query parameter definition?",
+    "options": {
+      "A": "It allows the parameter to be used by administrative users only.",
+      "B": "It specifies that reserved characters (like : / ? #) should not be percent-encoded.",
+      "C": "It allows the parameter to bypass the 'required' check.",
+      "D": "It reserves a specific amount of memory for the parameter value."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which object allows you to describe a response that returns a stream of events (Server-Sent Events)?",
+    "options": {
+      "A": "stream",
+      "B": "callbacks",
+      "C": "content with a specific media type and schema",
+      "D": "eventSource"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The '$ref' keyword can be used alongside other properties like 'description' in OpenAPI 3.1.",
+    "options": {
+      "A": "True (This is a change from 3.0 where $ref ignored siblings)",
+      "B": "False",
+      "C": "Only if the sibling is 'summary'",
+      "D": "Only if using the JSON format"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In OAS 3, what is the 'default' security requirement if the 'security' object is missing from an operation?",
+    "options": {
+      "A": "The operation is public and requires no authentication.",
+      "B": "The operation uses the global security requirement defined at the root level.",
+      "C": "The operation defaults to Basic Auth.",
+      "D": "The operation is blocked until a requirement is added."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'patternProperties' keyword in OAS 3.1?",
+    "options": {
+      "A": "To create a pattern of different background colors in Swagger UI.",
+      "B": "To define schemas for properties that match a specific regular expression.",
+      "C": "To limit the number of properties an object can have.",
+      "D": "To identify which properties were generated by a script."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can define a parameter as a 'header' with the name 'Authorization' to manually describe auth tokens.",
+    "options": {
+      "A": "False (Standard security schemes should be used instead; it may be ignored by tools).",
+      "B": "True",
+      "C": "Only if not using OAuth2",
+      "D": "Only if the 'in' value is 'cookie'"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to provide a URL for a schema that defines the structure of the OpenAPI document itself?",
+    "options": {
+      "A": "$schema",
+      "B": "$id",
+      "C": "$vocabulary",
+      "D": "$root"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "In the context of 'Security Schemes', what does 'bearerFormat' provide?",
+    "options": {
+      "A": "The font style of the bearer token in the UI.",
+      "B": "A hint to the client about how the bearer token is formatted (e.g., JWT).",
+      "C": "The maximum size of the bearer token in bytes.",
+      "D": "A list of servers that accept bearer tokens."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI can display 'Common Responses' by referencing them from the components section using $ref.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for 404 errors",
+      "D": "Only if the response body is empty"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Link' object used to describe?",
+    "options": {
+      "A": "A URL to the developer's LinkedIn profile.",
+      "B": "A relationship where the output of one operation can be used as a parameter for another.",
+      "C": "A physical connection between two server racks.",
+      "D": "A way to link two different OpenAPI files together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in a path item allows you to define a summary for all operations under that path?",
+    "options": {
+      "A": "label",
+      "B": "title",
+      "C": "summary",
+      "D": "intro"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In OAS 3.1, 'const' can be used to define a property that must have a specific, fixed value.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for integer types",
+      "D": "Only if using version 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Spectral' in the OpenAPI ecosystem?",
+    "options": {
+      "A": "A visual theme for Swagger UI.",
+      "B": "A flexible JSON/YAML linter used to enforce style guides and best practices on API specs.",
+      "C": "A tool to measure the color spectrum of API responses.",
+      "D": "A specialized database for storing OpenAPI files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'xml' object 'attribute' property?",
+    "options": {
+      "A": "It marks the entire schema as an XML attribute.",
+      "B": "It determines if a property should be serialized as an XML attribute rather than an element.",
+      "C": "It sets the encryption attribute for the XML file.",
+      "D": "It identifies the version of the XML protocol."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports the definition of 'any' type by using an empty schema {}.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if 'type: object' is present",
+      "D": "Only in Swagger 2.0"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'style: pipeDelimited' do for an array parameter?",
+    "options": {
+      "A": "It sends the array elements separated by a pipe character (|).",
+      "B": "It encrypts the array using a pipe-based algorithm.",
+      "C": "It limits the array to only 3 items.",
+      "D": "It forces the array to be sent in the request body."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which 'in' value is NOT supported for parameters in OpenAPI 3.0?",
+    "options": {
+      "A": "body (moved to requestBody)",
+      "B": "formData (moved to requestBody)",
+      "C": "Both A and B",
+      "D": "None of the above"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use 'oneOf' to document that a response can be either a User object or an Error object.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if they have the same status code",
+      "D": "Only for the 'application/xml' media type"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'unevaluatedProperties' keyword in OAS 3.1 used for?",
+    "options": {
+      "A": "To mark properties that have not been tested by the developer.",
+      "B": "To apply a schema to properties that were not covered by 'properties' or 'additionalProperties'.",
+      "C": "To delete properties that are not used by the client.",
+      "D": "To calculate the value of properties at runtime."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In an OAuth2 security scheme, what does 'openIdConnectUrl' point to?",
+    "options": {
+      "A": "The login page of the application.",
+      "B": "The discovery document (.well-known/openid-configuration) of the OIDC provider.",
+      "C": "The CSS file for the OIDC login screen.",
+      "D": "The list of all registered OIDC users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: Swagger UI can render 'deprecated' operations with a strikethrough or special warning icon.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for GET operations",
+      "D": "Only in the Cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to provide an absolute URI for a schema to identify it globally?",
+    "options": {
+      "A": "$id",
+      "B": "$uri",
+      "C": "$link",
+      "D": "$ref"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the function of the 'contentEncoding' keyword for a string type?",
+    "options": {
+      "A": "To specify the encoding of binary data, such as 'base64'.",
+      "B": "To set the character set of the documentation.",
+      "C": "To compress the string using GZIP.",
+      "D": "To encrypt the string."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: A 'Parameter' object can have both a 'schema' and a 'content' property simultaneously.",
+    "options": {
+      "A": "False (They are mutually exclusive for a single parameter).",
+      "B": "True",
+      "C": "Only for 'path' parameters",
+      "D": "Only in OpenAPI 3.1"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which tool would you use to convert an OpenAPI 2.0 (Swagger) file to OpenAPI 3.0?",
+    "options": {
+      "A": "Swagger UI",
+      "B": "Swagger Editor (via Edit > Convert to OAS 3)",
+      "C": "NuGet Package Manager",
+      "D": "Windows Update"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of the 'Server Variable' object?",
+    "options": {
+      "A": "To store the names of all physical servers.",
+      "B": "To allow for substitution in a server's URL template (e.g., {port}).",
+      "C": "To monitor the CPU usage of a specific server.",
+      "D": "To set a different password for each environment."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: You can use 'Example' objects to provide multiple different request body samples in Swagger UI.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for application/json",
+      "D": "Only if they have no descriptions"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What does 'style: simple' do for a path parameter?",
+    "options": {
+      "A": "It sends the parameter as a comma-separated list without any prefixes.",
+      "B": "It encrypts the parameter using a simple cipher.",
+      "C": "It removes all vowels from the parameter value.",
+      "D": "It identifies the parameter as a high-priority string."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword is used to provide a short name for a schema in the 'components' section?",
+    "options": {
+      "A": "alias",
+      "B": "label",
+      "C": "The key name in the map (e.g., components/schemas/User)",
+      "D": "title"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: The 'not' keyword can be used to ensure a property is NOT an empty string.",
+    "options": {
+      "A": "True (by using not: { enum: [''] })",
+      "B": "False",
+      "C": "Only in OAS 3.1",
+      "D": "Only for 'query' parameters"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Microcks'?",
+    "options": {
+      "A": "A brand of small server racks.",
+      "B": "An open-source platform for mocking and testing APIs based on OpenAPI and Postman collections.",
+      "C": "A specialized database for storing API keys.",
+      "D": "A tool to minify OpenAPI files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the significance of the 'allowEmptyValue' property (now discouraged)?",
+    "options": {
+      "A": "It allows a user to log in with an empty password.",
+      "B": "It allows a query parameter to be sent without a value (e.g., ?debug).",
+      "C": "It deletes empty parameters automatically.",
+      "D": "It hides empty parameters from the UI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.1, you can use '$comment' to add non-rendered notes to your schema.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'info' section",
+      "D": "Only if using JSON"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Map' equivalent in OpenAPI schemas?",
+    "options": {
+      "A": "type: array",
+      "B": "type: object with 'additionalProperties'",
+      "C": "type: collection",
+      "D": "type: dictionary"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword defines the media type for a 'requestBody' or 'response'?",
+    "options": {
+      "A": "format",
+      "B": "type",
+      "C": "media",
+      "D": "content (followed by media type like application/json)"
+    },
+    "answer": "D"
+  },
+  {
+    "question": "True or False: You can specify 'minimum' and 'maximum' for an array length using minItems and maxItems.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in Swagger 2.0",
+      "D": "Only if the items are integers"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Swagger-Codegen-Ignore' file used for?",
+    "options": {
+      "A": "To tell Swagger UI to ignore certain endpoints.",
+      "B": "To prevent Codegen from overwriting specific local files during code generation.",
+      "C": "To skip the validation of the YAML file.",
+      "D": "To hide the documentation from the public internet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OAS 3.0, where is the 'Bearer' token authentication defined?",
+    "options": {
+      "A": "type: http, scheme: bearer",
+      "B": "type: apiKey, in: header",
+      "C": "type: oauth2",
+      "D": "type: jwt"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: OpenAPI 3.1 supports the 'dependentSchemas' keyword to change a schema based on the presence of another property.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in SwaggerHub",
+      "D": "Only for Boolean types"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Discriminator' object Mapping used for?",
+    "options": {
+      "A": "To map a database column to a UI element.",
+      "B": "To explicitly link a property value to a specific schema name or reference.",
+      "C": "To track which team member wrote which part of the code.",
+      "D": "To calculate the distance between two servers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which keyword is used to provide a human-readable title for a schema, which may be different from the component key?",
+    "options": {
+      "A": "label",
+      "B": "name",
+      "C": "title",
+      "D": "summary"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger UI can be configured to sort endpoints alphabetically.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in the 'Pro' version",
+      "D": "Only for YAML files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Prism' in the context of OpenAPI?",
+    "options": {
+      "A": "A visual theme for the code editor.",
+      "B": "An open-source HTTP mock and proxy server that uses OpenAPI files to simulate API behavior.",
+      "C": "A tool to analyze the frequency spectrum of API traffic.",
+      "D": "A database of all user passwords."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'readOnly' property enforce during client-side code generation?",
+    "options": {
+      "A": "It makes the property immutable on the server.",
+      "B": "It informs the generator that the property should not be included in request models/objects.",
+      "C": "It hides the property from the developer's screen.",
+      "D": "It prevents the property from being stored in the database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "True or False: OpenAPI 3.0 supports the definition of 'multipart/form-data' for complex requests containing files and JSON metadata.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only in version 3.1",
+      "D": "Only for XML-based APIs"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Content-Disposition' header documentation useful for?",
+    "options": {
+      "A": "To describe how a file download should be handled (e.g., filename).",
+      "B": "To set the user's mood in the application.",
+      "C": "To manage the server's backup schedule.",
+      "D": "To track the location of the user's mouse."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to provide a default media type for all responses in an operation?",
+    "options": {
+      "A": "defaultMediaType",
+      "B": "mediaType",
+      "C": "There is no such keyword; it must be defined per status code in the 'content' object.",
+      "D": "globalMedia"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: In OpenAPI 3.1, 'examples' can be placed directly at the schema level.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only for integer types",
+      "D": "Only in Swagger Editor"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Swagger-Parser-Validator'?",
+    "options": {
+      "A": "A tool to check if the API is fast enough.",
+      "B": "A library that checks if an OpenAPI file is syntactically and structurally correct.",
+      "C": "A specialized browser for viewing Swagger documentation.",
+      "D": "A way to compress YAML files for mobile devices."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a schema, what does 'maxProperties' enforce for an object?",
+    "options": {
+      "A": "The maximum number of properties allowed in the object.",
+      "B": "The maximum length of any property name.",
+      "C": "The maximum value of any integer property.",
+      "D": "The maximum number of users who can see the object."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which HTTP method is documented for checking if a resource exists without returning the body?",
+    "options": {
+      "A": "GET",
+      "B": "CHECK",
+      "C": "HEAD",
+      "D": "OPTIONS"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: Swagger UI can display 'Polymorphic' schemas using the oneOf/anyOf keywords with a selector dropdown.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using OAS 2.0",
+      "D": "Only in the Cloud version"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'OpenAPI Generator'?",
+    "options": {
+      "A": "A tool that creates APIs automatically using AI.",
+      "B": "A community-driven fork of Swagger Codegen with support for hundreds of languages and frameworks.",
+      "C": "A specialized hardware device for generating API keys.",
+      "D": "A website that lists all current API developers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which property in a security requirement allows you to specify 'Scopes' for OAuth2?",
+    "options": {
+      "A": "permissions",
+      "B": "access",
+      "C": "An array of scope names associated with the security scheme key.",
+      "D": "roles"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "True or False: You can use 'deprecated: true' on a whole path item to mark all operations under it as deprecated.",
+    "options": {
+      "A": "False (It must be set on each operation individually).",
+      "B": "True",
+      "C": "Only in OAS 3.1",
+      "D": "Only if using YAML"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Schema Object' based on in OpenAPI 3.0?",
+    "options": {
+      "A": "A proprietary Swagger format.",
+      "B": "A subset of JSON Schema Specification Draft 4.",
+      "C": "The XML Schema Definition (XSD).",
+      "D": "The SQL table definition standard."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In OAS 3.0, how do you describe 'Basic Auth' specifically?",
+    "options": {
+      "A": "type: http, scheme: basic",
+      "B": "type: basic",
+      "C": "type: apiKey, name: Authorization",
+      "D": "type: userPass"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "True or False: Swagger Editor supports 'Autosave' to prevent data loss.",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Only if using the desktop app",
+      "D": "Only for JSON files"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "Which keyword allows you to provide a specific value for a property in an example?",
+    "options": {
+      "A": "data",
+      "B": "value",
+      "C": "sample",
+      "D": "content"
+    },
+    "answer": "B"
+  }
+  ]
+}

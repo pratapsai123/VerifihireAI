@@ -1,0 +1,1977 @@
+{
+  "skill": "Pytest",
+  "questions": [
+    {
+      "question": "What is the standard naming convention for test files in pytest?",
+      "options": {
+        "A": "test_*.py or *_test.py",
+        "B": "pytest_*.py",
+        "C": "check_*.py",
+        "D": "*.tests.py"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Unlike the 'unittest' module, pytest allows you to use standard 'assert' statements instead of specialized methods like 'assertEquals()'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command-line flag is used to see the values of local variables in the traceback of a failed test?",
+      "options": {
+        "A": "-l (or --showlocals)",
+        "B": "-v",
+        "C": "--vars",
+        "D": "-x"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to run a specific test file using the pytest CLI.",
+      "options": {
+        "A": "pytest path/to/test_file.py",
+        "B": "python -m pytest path/to/test_file.py",
+        "C": "pytest --run-file test_file.py",
+        "D": "pytest -f test_file.py"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the '-x' (or '--exitfirst') flag do in pytest?",
+      "options": {
+        "A": "Stops the entire test session after the first failure.",
+        "B": "Exits the terminal after the tests finish.",
+        "C": "Skips all tests that are marked as 'expected to fail'.",
+        "D": "Executes tests in alphabetical order only."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Pytest requires you to wrap your test functions inside a class for them to be discovered.",
+      "options": {
+        "A": "False (Standalone functions starting with 'test_' are perfectly valid).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which decorator is used to mark a test that you expect to fail?",
+      "options": {
+        "A": "@pytest.mark.xfail",
+        "B": "@pytest.mark.skip",
+        "C": "@pytest.mark.fail",
+        "D": "@pytest.mark.error"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO common outcomes for a test in a pytest report.",
+      "options": {
+        "A": "PASSED ( . )",
+        "B": "FAILED ( F )",
+        "C": "ERROR ( E )",
+        "D": "BROKEN ( B )"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you check that a specific exception is raised in a block of code using pytest?",
+      "options": {
+        "A": "with pytest.raises(Exception):",
+        "B": "assert pytest.throws(Exception)",
+        "C": "pytest.expect(Exception)",
+        "D": "with pytest.exception(Exception):"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'conftest.py' file is used to share fixtures across multiple test files in a directory.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command-line flag is used to increase the verbosity of the output (showing full test names)?",
+      "options": {
+        "A": "-v",
+        "B": "-q",
+        "C": "-s",
+        "D": "--full"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO ways to skip a test in pytest.",
+      "options": {
+        "A": "@pytest.mark.skip",
+        "B": "@pytest.mark.skipif",
+        "C": "pytest.ignore()",
+        "D": "raise SkipError"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of a 'fixture' in pytest?",
+      "options": {
+        "A": "To provide a fixed baseline (setup/teardown) for tests, such as database connections or test data.",
+        "B": "To fix bugs in the code automatically.",
+        "C": "To format the test report as a table.",
+        "D": "To permanently store the test results in a file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Pytest can run tests originally written for the standard 'unittest' library.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which flag is used to capture or show the 'print' output from the code being tested?",
+      "options": {
+        "A": "-s (or --capture=no)",
+        "B": "-p",
+        "C": "--stdout",
+        "D": "-o"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to run tests that match a specific keyword expression.",
+      "options": {
+        "A": "pytest -k 'my_keyword'",
+        "B": "pytest -m 'my_marker'",
+        "C": "pytest --search 'keyword'",
+        "D": "pytest find 'keyword'"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens if you run pytest on a directory with no arguments?",
+      "options": {
+        "A": "It recursively discovers and runs all tests in that directory and subdirectories.",
+        "B": "It shows a help menu.",
+        "C": "It does nothing and exits.",
+        "D": "It deletes the __pycache__ folders."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Pytest fixtures are requested by test functions through their argument names.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which flag is used to only run the tests that failed in the last run?",
+      "options": {
+        "A": "--lf (or --last-failed)",
+        "B": "--ff (or --failed-first)",
+        "C": "--retry",
+        "D": "-rF"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO configuration files where pytest settings can be stored.",
+      "options": {
+        "A": "pytest.ini",
+        "B": "pyproject.toml",
+        "C": "setup.cfg",
+        "D": "pytest.config"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which decorator is used to run a test function multiple times with different input values?",
+      "options": {
+        "A": "@pytest.mark.parametrize",
+        "B": "@pytest.fixture(params=[...])",
+        "C": "@pytest.mark.repeat",
+        "D": "@pytest.mark.loop"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The built-in 'tmp_path' fixture returns a pathlib.Path object pointing to a temporary directory unique to the test invocation.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture allows you to capture and inspect data written to stdout and stderr?",
+      "options": {
+        "A": "capsys",
+        "B": "output_capture",
+        "C": "stream_fix",
+        "D": "syslog"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you request a fixture within a test function in pytest?",
+      "options": {
+        "A": "By including the fixture's name as an argument in the test function signature.",
+        "B": "By using the 'import' statement at the top of the file.",
+        "C": "By calling 'pytest.get_fixture()'.",
+        "D": "By using the @pytest.use_fixture decorator."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default scope of a pytest fixture if the 'scope' parameter is not explicitly provided?",
+      "options": {
+        "A": "function",
+        "B": "class",
+        "C": "module",
+        "D": "session"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: If you stack two @pytest.mark.parametrize decorators on a single test, pytest will execute the cross-product of the parameters.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture is used to safely modify environment variables or class attributes for the duration of a test?",
+      "options": {
+        "A": "monkeypatch",
+        "B": "patcher",
+        "C": "mock_env",
+        "D": "setter"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to run tests that are marked with a custom marker named 'webtest'.",
+      "options": {
+        "A": "pytest -m webtest",
+        "B": "pytest -m \"not webtest\"",
+        "C": "pytest --marker webtest",
+        "D": "pytest -k webtest"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the primary use of the 'conftest.py' file?",
+      "options": {
+        "A": "To define fixtures and plugins that are shared across all test files in a directory and its subdirectories.",
+        "B": "To store the source code of the application.",
+        "C": "To list the project dependencies.",
+        "D": "To configure the Python interpreter version."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Custom markers should be registered in the pytest.ini or pyproject.toml file to avoid warnings.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pytest CLI flag lists all available fixtures and their descriptions?",
+      "options": {
+        "A": "--fixtures",
+        "B": "--list",
+        "C": "--show-all",
+        "D": "-f"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO built-in markers provided by pytest.",
+      "options": {
+        "A": "skipif",
+        "B": "xfail",
+        "C": "slow",
+        "D": "database"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens when a test is marked with @pytest.mark.skipif(condition)?",
+      "options": {
+        "A": "The test is skipped only if the provided condition evaluates to True.",
+        "B": "The test is skipped only if the provided condition evaluates to False.",
+        "C": "The test is executed but the failure is ignored.",
+        "D": "The test is deleted from the execution plan."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A fixture can request another fixture by including it in its own function signature.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which argument in @pytest.mark.parametrize allows you to provide custom labels for each test case in the output?",
+      "options": {
+        "A": "ids",
+        "B": "names",
+        "C": "labels",
+        "D": "tags"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO traits of a 'session' scoped fixture.",
+      "options": {
+        "A": "It is executed only once per test session.",
+        "B": "It is shared across all test files being run.",
+        "C": "It is recreated for every test class.",
+        "D": "It is the default scope for all fixtures."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "How do you run pytest such that it stops immediately upon the first test failure?",
+      "options": {
+        "A": "pytest -x",
+        "B": "pytest --stop",
+        "C": "pytest -f",
+        "D": "pytest --first"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Pytest assertions provide detailed 'introspection' which shows the values of the operands in the comparison when a test fails.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which configuration file is part of the modern Python packaging standard and can contain pytest settings under [tool.pytest.ini_options]?",
+      "options": {
+        "A": "pyproject.toml",
+        "B": "setup.py",
+        "C": "requirements.txt",
+        "D": "manifest.in"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture provides a way to read or write metadata about the current test run?",
+      "options": {
+        "A": "request",
+        "B": "meta",
+        "C": "config",
+        "D": "session"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When using a fixture, what is the effect of using the 'yield' keyword instead of 'return'?",
+      "options": {
+        "A": "Code before yield runs as setup, and code after yield runs as teardown.",
+        "B": "The fixture returns a generator object to the test.",
+        "C": "The test is executed multiple times for each yield statement.",
+        "D": "The fixture becomes incompatible with function-scoped tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary purpose of setting 'autouse=True' in a fixture decorator?",
+      "options": {
+        "A": "The fixture is automatically invoked for all tests within its scope without being explicitly requested.",
+        "B": "The fixture automatically handles its own cleanup without a yield statement.",
+        "C": "The fixture is only used if the test execution fails.",
+        "D": "It forces the fixture to always have a session scope."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture is used to provide information about the requesting test function, such as its markers or module name?",
+      "options": {
+        "A": "request",
+        "B": "pytest_context",
+        "C": "test_info",
+        "D": "meta"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a multi-level directory structure, how does pytest handle 'conftest.py' files?",
+      "options": {
+        "A": "It loads the conftest.py from the test's directory and all parent directories up to the project root.",
+        "B": "It only loads the conftest.py located in the current working directory.",
+        "C": "It ignores all conftest.py files unless specified via CLI.",
+        "D": "Only one conftest.py file is allowed per project."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which fixture scope ensures that a resource is created once per Python module (file) and shared among all tests in that file?",
+      "options": {
+        "A": "module",
+        "B": "session",
+        "C": "package",
+        "D": "class"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A fixture with 'session' scope is executed only once per test run, regardless of how many tests request it.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the 'monkeypatch' fixture primarily used for in medium-level testing?",
+      "options": {
+        "A": "To safely mock attributes, environment variables, or dictionary items during a test run.",
+        "B": "To increase the execution speed of tests by skipping heavy modules.",
+        "C": "To automatically generate random data for input parameters.",
+        "D": "To verify that a function was called a specific number of times."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you parameterize a fixture so that every test using it runs multiple times with different setup values?",
+      "options": {
+        "A": "By passing a list to the 'params' argument in the @pytest.fixture decorator.",
+        "B": "By using @pytest.mark.parametrize on the fixture itself.",
+        "C": "By using a for-loop inside the fixture body.",
+        "D": "By defining multiple fixtures with the same name."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture allows you to inspect and verify the warning messages issued by the code under test?",
+      "options": {
+        "A": "recwarn",
+        "B": "warn_capture",
+        "C": "capsys",
+        "D": "monkeypatch"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: If a fixture with a 'session' scope requests a fixture with a 'function' scope, pytest will raise a ScopeMismatch error.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method of the 'request' fixture is used to add a finalizer (cleanup) function programmatically?",
+      "options": {
+        "A": "request.addfinalizer()",
+        "B": "request.teardown()",
+        "C": "request.on_close()",
+        "D": "request.yield_final()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO benefits of using the 'yield' fixture over standard setup/teardown methods.",
+      "options": {
+        "A": "It keeps the setup and teardown logic in a single, cohesive function.",
+        "B": "It allows local variables from the setup phase to be easily accessed during the teardown phase.",
+        "C": "It prevents the test from failing if the teardown code crashes.",
+        "D": "It is the only way to use the 'session' scope."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What does the '@pytest.mark.usefixtures' decorator do when applied to a test class?",
+      "options": {
+        "A": "It ensures that the specified fixtures are executed for every test in the class, even if not explicitly passed as arguments.",
+        "B": "It allows the tests to access the return values of the fixtures without naming them.",
+        "C": "It converts local functions into fixtures temporarily.",
+        "D": "It skips the class if the specified fixtures are not found."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Fixtures defined in a 'conftest.py' are automatically discovered by pytest without needing an explicit import statement in the test files.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which property of the 'request' object would you use to see all markers applied to the test function requesting the fixture?",
+      "options": {
+        "A": "request.node.get_closest_marker()",
+        "B": "request.markers",
+        "C": "request.function.tags",
+        "D": "request.get_all_marks()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When a fixture has a 'class' scope, how many times is it executed if a test class contains five test methods?",
+      "options": {
+        "A": "Once for the entire class.",
+        "B": "Five times, once before each method.",
+        "C": "Twice: once for setup and once for teardown.",
+        "D": "Only if the class inherits from 'unittest.TestCase'."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'conftest.py' file located in a subdirectory can override a fixture with the same name defined in a 'conftest.py' in a parent directory.",
+      "options": {
+        "A": "True (This is called fixture shadowing).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method of the 'monkeypatch' fixture is used to safely remove an environment variable for the duration of a test?",
+      "options": {
+        "A": "monkeypatch.delenv()",
+        "B": "monkeypatch.remove_env()",
+        "C": "monkeypatch.undo_env()",
+        "D": "monkeypatch.setenv(None)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'indirect' parameter in the '@pytest.mark.parametrize' decorator?",
+      "options": {
+        "A": "It allows the parameter values to be passed to a fixture rather than directly to the test function.",
+        "B": "It marks the test as a background task.",
+        "C": "It prevents the test from failing if the dependency is missing.",
+        "D": "It hides the parameter values from the test report."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid ways to group tests in pytest without using classes.",
+      "options": {
+        "A": "Applying custom markers via @pytest.mark.",
+        "B": "Organizing test files into specific directory structures.",
+        "C": "Using the 'group' keyword in the function definition.",
+        "D": "Naming functions with a common prefix like 'group_'."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "True or False: If you define a fixture in a test file, it is available to all other test files in the same directory automatically.",
+      "options": {
+        "A": "False (It must be moved to conftest.py for directory-wide availability).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens when you request the 'tmp_path_factory' fixture instead of 'tmp_path'?",
+      "options": {
+        "A": "It allows you to create multiple temporary directories with specific scopes (like session-scoped temp folders).",
+        "B": "It generates temporary files instead of directories.",
+        "C": "It is used specifically for mocking database paths.",
+        "D": "It deletes the directory as soon as the test starts."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "How do you apply a marker to an entire test module (file) so that all tests in it are affected?",
+      "options": {
+        "A": "Set a global 'pytestmark' variable equal to the marker(s).",
+        "B": "Use the @pytest.module_mark decorator at the top of the file.",
+        "C": "Apply the marker to the first function in the file.",
+        "D": "Rename the file to include the marker name."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pytest CLI flag allows you to run tests in a specific order, such as 'failed first'?",
+      "options": {
+        "A": "--ff (or --failed-first)",
+        "B": "--order-failed",
+        "C": "-rF",
+        "D": "--priority"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A fixture can be used to wrap a test in a transaction and automatically roll it back using 'yield'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific pytest hook should be used in a 'conftest.py' to programmatically add custom command-line arguments to the test session?",
+      "options": {
+        "A": "pytest_addoption",
+        "B": "pytest_configure",
+        "C": "pytest_cmdline_main",
+        "D": "pytest_sessionstart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In the pytest plugin architecture, the 'pytest_runtest_protocol' hook is responsible for the overall execution sequence of a single test item.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook allows you to modify the list of discovered test items (e.g., reordering or filtering) before execution begins?",
+      "options": {
+        "A": "pytest_collection_modifyitems",
+        "B": "pytest_items_collected",
+        "C": "pytest_deselected",
+        "D": "pytest_runtest_setup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary function of the 'pytest_report_header' hook?",
+      "options": {
+        "A": "To add custom strings to the terminal output header, such as system version or environment info.",
+        "B": "To define the titles of columns in an HTML report.",
+        "C": "To encrypt the report file for security.",
+        "D": "To send a notification to a Slack channel when the report starts."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'monkeypatch' fixture can be used within a 'session' scoped fixture without any additional configuration.",
+      "options": {
+        "A": "False (monkeypatch is function-scoped; for session scope, you must use a custom monkeypatch instance or 'Patcher').",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which internal pytest object represents a single test case and is passed to hooks like 'pytest_runtest_call'?",
+      "options": {
+        "A": "Item",
+        "B": "Node",
+        "C": "TestCase",
+        "D": "CallInfo"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'pytest-xdist' distribution modes for parallel execution.",
+      "options": {
+        "A": "--dist loadscope",
+        "B": "--dist loadfile",
+        "C": "--dist roundrobin",
+        "D": "--dist random"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens if a hook implementation returns a non-None value in a 'firstresult' hook like 'pytest_cmdline_parse'?",
+      "options": {
+        "A": "pytest stops calling further implementations of that hook and uses the returned value immediately.",
+        "B": "pytest crashes due to a return value conflict.",
+        "C": "The return value is ignored unless it is a list.",
+        "D": "All other implementations are called, and the results are merged into a tuple."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'pytest_generate_tests' hook is used to perform custom parameterization logic that can't be achieved with @pytest.mark.parametrize.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which method is used to programmatically register a cleanup function in a fixture when using the 'request' object?",
+      "options": {
+        "A": "request.addfinalizer()",
+        "B": "request.on_teardown()",
+        "C": "request.register_cleanup()",
+        "D": "request.yield_callback()"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'pytest_mock' plugin's 'mocker' fixture compared to the standard 'unittest.mock.patch'?",
+      "options": {
+        "A": "It provides a wrapper that automatically undoes all patches at the end of the test without using context managers.",
+        "B": "It is faster because it uses C-extensions.",
+        "C": "It is the only way to mock private methods in Python.",
+        "D": "It allows mocking objects on remote servers."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO hooks related to the 'Collection' phase of pytest.",
+      "options": {
+        "A": "pytest_collect_file",
+        "B": "pytest_ignore_collect",
+        "C": "pytest_runtest_logreport",
+        "D": "pytest_terminal_summary"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which internal object is used to store the result of a test execution (setup, call, or teardown) for later reporting?",
+      "options": {
+        "A": "TestReport",
+        "B": "ExecutionResult",
+        "C": "Outcome",
+        "D": "SessionState"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'conftest.py' file can contain a 'pytest_plugins' variable to load other plugins or modules as pytest plugins.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command line option allows you to verify that all custom markers are correctly registered in your configuration file?",
+      "options": {
+        "A": "--strict-markers",
+        "B": "--check-marks",
+        "C": "--verify-config",
+        "D": "--markers-only"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific pytest hook is responsible for programmatically adding custom command-line arguments to the test session?",
+      "options": {
+        "A": "pytest_addoption",
+        "B": "pytest_configure",
+        "C": "pytest_cmdline_main",
+        "D": "pytest_sessionstart"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In the pytest plugin architecture, the 'pytest_runtest_protocol' hook manages the sequence of setup, call, and teardown for a single test item.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook should you implement to dynamically skip the collection of a specific directory based on the absence of a required Docker service?",
+      "options": {
+        "A": "pytest_ignore_collect",
+        "B": "pytest_collection_modifyitems",
+        "C": "pytest_deselected",
+        "D": "pytest_runtest_setup"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the 'pytest.Item' object passed to internal execution hooks?",
+      "options": {
+        "A": "It represents a discovered test case and contains its markers, function object, and parent hierarchy.",
+        "B": "It is a wrapper for the return value of a test.",
+        "C": "It stores the sys.stdout capture for the current process.",
+        "D": "It acts as a configuration dictionary for plugins."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'pytest-xdist' automatically handles the thread-safety of shared global variables between tests.",
+      "options": {
+        "A": "False (It uses process isolation, but external resources like DBs still require manual synchronization).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which monkeypatch method is used to replace a class method with a mock while ensuring the change is reverted after the test?",
+      "options": {
+        "A": "monkeypatch.setattr",
+        "B": "monkeypatch.replace",
+        "C": "monkeypatch.mock",
+        "D": "monkeypatch.setitem"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid 'pytest-xdist' distribution strategies for workload balancing.",
+      "options": {
+        "A": "--dist loadscope",
+        "B": "--dist loadfile",
+        "C": "--dist random",
+        "D": "--dist roundrobin"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens if a hook implementation returns a non-None value in a 'firstresult' hook like 'pytest_cmdline_parse'?",
+      "options": {
+        "A": "The hook call loop stops immediately and the returned value is used as the result.",
+        "B": "The value is appended to a list of all hook results.",
+        "C": "The value is ignored unless it is a boolean.",
+        "D": "pytest enters a debug state to resolve the conflict."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'pytest_report_header' hook allows you to print system-specific information (like OS version or build number) before test results appear.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture is used to access the full pytest configuration object from within another fixture?",
+      "options": {
+        "A": "pytestconfig",
+        "B": "request",
+        "C": "config",
+        "D": "session"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a custom plugin, what does implementing 'pytest_collection_modifyitems' allow you to do?",
+      "options": {
+        "A": "Filter or reorder the list of collected test items in-place before they are executed.",
+        "B": "Add new files to the disk during collection.",
+        "C": "Change the Python version used for a specific test file.",
+        "D": "Generate a PDF report of the discovery phase."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'conftest.py' file can be used to load external plugins by including them in a list named 'pytest_plugins'.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook is invoked specifically when an exception is raised during the 'call' phase of a test?",
+      "options": {
+        "A": "pytest_exception_interact",
+        "B": "pytest_runtest_logreport",
+        "C": "pytest_handle_error",
+        "D": "pytest_sessionfinish"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO requirements for a Python file to be automatically recognized as a pytest plugin via setuptools entry points.",
+      "options": {
+        "A": "Defining a 'pytest11' entry point in the package metadata.",
+        "B": "The module must be installed in the current environment.",
+        "C": "The filename must start with 'plugin_'.",
+        "D": "The file must be placed in the project root."
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What is the purpose of the 'pytest_generate_tests' hook?",
+      "options": {
+        "A": "To implement custom, complex parameterization schemes that rely on external data or dynamic logic.",
+        "B": "To automatically write .py files for missing tests.",
+        "C": "To generate randomized 'fuzz' data for every string input.",
+        "D": "To convert unit tests into integration tests."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific decorator allows a test to be executed multiple times with different sets of input data?",
+      "options": {
+        "A": "@pytest.mark.parametrize",
+        "B": "@pytest.fixture(params=[])",
+        "C": "@pytest.mark.repeat",
+        "D": "@pytest.mark.data"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In pytest, 'conftest.py' files are used to provide fixtures that are shared across multiple test files without needing imports.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture is used to capture output written to the standard output and error streams?",
+      "options": {
+        "A": "capsys",
+        "B": "caplog",
+        "C": "syscapture",
+        "D": "stream_mock"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of the 'monkeypatch' fixture in a pytest environment?",
+      "options": {
+        "A": "To safely modify attributes, environment variables, or dictionary items for the duration of a test.",
+        "B": "To automatically generate edge-case data for numeric inputs.",
+        "C": "To re-run tests that failed in the previous session.",
+        "D": "To increase the execution priority of a specific test."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: If you use 'yield' in a fixture, the code following the 'yield' statement acts as the teardown logic.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pytest hook allows for the registration of custom command-line flags in a plugin or conftest.py?",
+      "options": {
+        "A": "pytest_addoption",
+        "B": "pytest_configure",
+        "C": "pytest_cmdline_main",
+        "D": "pytest_init"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When using 'pytest-xdist' for parallel execution, which CLI flag specifies the number of worker processes to use?",
+      "options": {
+        "A": "-n",
+        "B": "-p",
+        "C": "--workers",
+        "D": "-j"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default scope of a pytest fixture if the scope parameter is omitted?",
+      "options": {
+        "A": "function",
+        "B": "class",
+        "C": "module",
+        "D": "session"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The @pytest.mark.xfail decorator is used for tests that are expected to fail, allowing the suite to continue even if they do.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which hook is invoked by pytest to create a 'TestReport' object for each phase (setup, call, teardown) of a test item?",
+      "options": {
+        "A": "pytest_runtest_makereport",
+        "B": "pytest_report_teststatus",
+        "C": "pytest_runtest_logreport",
+        "D": "pytest_collectreport"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Select TWO valid configuration files where pytest options can be permanently stored.",
+      "options": {
+        "A": "pytest.ini",
+        "B": "pyproject.toml",
+        "C": "requirements.txt",
+        "D": "setup.py"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "What happens when a test is marked with 'autouse=True'?",
+      "options": {
+        "A": "The fixture is automatically applied to all tests in its scope, even if not explicitly requested in the arguments.",
+        "B": "The test is automatically retried upon failure.",
+        "C": "The fixture is converted to session scope regardless of its definition.",
+        "D": "The test result is automatically uploaded to a cloud dashboard."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: The 'request' fixture provides introspective access to the requesting test context, such as markers and the current function name.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command line argument is used to only run tests that failed in the last execution?",
+      "options": {
+        "A": "--lf",
+        "B": "--ff",
+        "C": "-x",
+        "D": "--rerun"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the 'tmp_path_factory' fixture compared to the standard 'tmp_path'?",
+      "options": {
+        "A": "It can be used to create temporary directories for fixtures with scopes wider than 'function' (e.g., session or module).",
+        "B": "It creates permanent files instead of temporary ones.",
+        "C": "It is used specifically for mocking database connections.",
+        "D": "It deletes the directory immediately after the setup phase."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which decorator is used to define a reusable piece of setup code in pytest?",
+      "options": {
+        "A": "@pytest.mark.setup",
+        "B": "@pytest.fixture",
+        "C": "@pytest.parameterize",
+        "D": "@pytest.hook"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you implement teardown logic within a pytest fixture using the 'yield' statement?",
+      "options": {
+        "A": "Place the teardown code before the yield statement.",
+        "B": "Place the teardown code in a separate function named 'teardown'.",
+        "C": "Place the teardown code after the yield statement.",
+        "D": "Teardown is not supported with yield; use a finalizer instead."
+      },
+      "answer": "C"
+    },
+    {
+      "question": "Which file is automatically loaded by pytest to share fixtures across multiple test files in a directory?",
+      "options": {
+        "A": "conftest.py",
+        "B": "pytest.ini",
+        "C": "__init__.py",
+        "D": "setup.cfg"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the default scope of a pytest fixture?",
+      "options": {
+        "A": "session",
+        "B": "module",
+        "C": "class",
+        "D": "function"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "Which command-line argument is used to stop the test session immediately after the first failure?",
+      "options": {
+        "A": "-v",
+        "B": "-x",
+        "C": "-s",
+        "D": "--lf"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you mark a test to run only if a specific condition is met (e.g., a specific OS)?",
+      "options": {
+        "A": "@pytest.mark.skipif",
+        "B": "@pytest.mark.filter",
+        "C": "@pytest.mark.xfail",
+        "D": "@pytest.mark.parametrize"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in fixture allows you to temporarily modify environment variables or object attributes?",
+      "options": {
+        "A": "capsys",
+        "B": "tmp_path",
+        "C": "monkeypatch",
+        "D": "request"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the '@pytest.mark.parametrize' decorator do?",
+      "options": {
+        "A": "It marks a test as requiring a specific parameter from the CLI.",
+        "B": "It allows a single test function to be called multiple times with different sets of arguments.",
+        "C": "It creates a global variable available to all tests in the module.",
+        "D": "It converts a function into a fixture."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which fixture would you use to capture output written to stdout and stderr?",
+      "options": {
+        "A": "caplog",
+        "B": "capsys",
+        "C": "output_stream",
+        "D": "terminal_writer"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Pytest requires test functions to be wrapped inside a class inherited from unittest.TestCase.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which marker is used to indicate that a test is expected to fail?",
+      "options": {
+        "A": "@pytest.mark.skip",
+        "B": "@pytest.mark.error",
+        "C": "@pytest.mark.xfail",
+        "D": "@pytest.mark.pending"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "In pytest, how do you request a fixture in a test function?",
+      "options": {
+        "A": "By importing it at the top of the test file.",
+        "B": "By including the fixture name as an argument in the test function signature.",
+        "C": "By calling pytest.use_fixture('name') inside the function.",
+        "D": "By naming the test function with the fixture name as a prefix."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which scope allows a fixture to be initialized once per test session?",
+      "options": {
+        "A": "global",
+        "B": "module",
+        "C": "session",
+        "D": "package"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the purpose of the 'pytest.raises' context manager?",
+      "options": {
+        "A": "To ensure that a block of code raises a specific exception.",
+        "B": "To catch exceptions and prevent the test from failing.",
+        "C": "To re-raise an exception with a custom error message.",
+        "D": "To log all exceptions encountered during the test run."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag allows you to run only the tests that match a specific keyword expression?",
+      "options": {
+        "A": "-m",
+        "B": "-k",
+        "C": "-s",
+        "D": "-q"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific fixture scope ensures that the fixture is only set up once per Python file, regardless of the number of tests in that file?",
+      "options": {
+        "A": "session",
+        "B": "module",
+        "C": "class",
+        "D": "package"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary function of the '@pytest.mark.usefixtures' decorator when applied to a test class?",
+      "options": {
+        "A": "It allows the class to inherit from a base test class.",
+        "B": "It forces the execution of specified fixtures for all methods in the class without needing to name them as arguments.",
+        "C": "It converts the class methods into individual fixtures.",
+        "D": "It identifies the class as a data-driven test template."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When using 'monkeypatch.setenv', what happens to the environment variable after the test finishes?",
+      "options": {
+        "A": "It remains changed for the rest of the test session.",
+        "B": "It is automatically undone, restoring the original state of the environment.",
+        "C": "It is deleted entirely from the system.",
+        "D": "It is only reverted if the test passes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CLI flag is used to show the execution durations of the slowest 10 tests?",
+      "options": {
+        "A": "--slow",
+        "B": "--durations=10",
+        "C": "-v",
+        "D": "--profile"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In pytest, how can you access the actual configuration object (metadata) from within a fixture?",
+      "options": {
+        "A": "By requesting the 'config' fixture.",
+        "B": "By requesting the 'pytestconfig' fixture.",
+        "C": "By importing 'pytest.settings'.",
+        "D": "By calling 'pytest.get_config()'."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A single test function can have multiple '@pytest.mark.parametrize' decorators applied to it.",
+      "options": {
+        "A": "True (It results in a Cartesian product of all parameters).",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which built-in marker is used to indicate that a test should only run on a specific Python version?",
+      "options": {
+        "A": "@pytest.mark.version",
+        "B": "@pytest.mark.skipif",
+        "C": "@pytest.mark.require",
+        "D": "@pytest.mark.python"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'tmp_path_factory' fixture?",
+      "options": {
+        "A": "To create temporary files instead of directories.",
+        "B": "To create temporary directories for session-scoped or module-scoped fixtures.",
+        "C": "To delete all files in the current directory.",
+        "D": "To mock the file system operations."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which command allows you to see all the print statements of a test even if the test passes?",
+      "options": {
+        "A": "pytest -v",
+        "B": "pytest -s",
+        "C": "pytest -q",
+        "D": "pytest -p"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific fixture allows you to verify that a warning was emitted during the code execution?",
+      "options": {
+        "A": "caplog",
+        "B": "recwarn",
+        "C": "warn_capture",
+        "D": "monkeypatch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you specify a custom ID for a specific parameter set in '@pytest.mark.parametrize' to make the report more readable?",
+      "options": {
+        "A": "By passing an 'ids' argument containing a list of strings.",
+        "B": "By adding a comment inside the parameter tuple.",
+        "C": "By using the '@pytest.id' decorator.",
+        "D": "By naming the parameters with prefixes."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does the 'pytest --lf' command do?",
+      "options": {
+        "A": "Lists all available fixtures.",
+        "B": "Runs only the tests that failed in the last run.",
+        "C": "Runs tests in the background.",
+        "D": "Loads the configuration from a specific file."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is commonly used in 'conftest.py' to add custom command-line arguments?",
+      "options": {
+        "A": "pytest_configure",
+        "B": "pytest_addoption",
+        "C": "pytest_init",
+        "D": "pytest_sessionstart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Pytest fixtures are requested by using the fixture name as a parameter in the test function.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which fixture is used to capture and inspect log messages created by the 'logging' module?",
+      "options": {
+        "A": "capsys",
+        "B": "caplog",
+        "C": "log_fix",
+        "D": "monkeylog"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pytest hook should be used in a 'conftest.py' to programmatically add custom command-line arguments to the test session?",
+      "options": {
+        "A": "pytest_configure",
+        "B": "pytest_addoption",
+        "C": "pytest_cmdline_main",
+        "D": "pytest_sessionstart"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When developing a pytest plugin, what is the role of the 'pytest_runtest_protocol' hook?",
+      "options": {
+        "A": "It defines the network protocol for distributed testing.",
+        "B": "It implements the overall execution sequence for a single test item, delegating to setup, call, and teardown.",
+        "C": "It translates pytest syntax into standard Python unit tests.",
+        "D": "It encrypts the test results before sending them to the terminal."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific attribute of the 'request' fixture allows you to access the markers applied to the test function currently being executed?",
+      "options": {
+        "A": "request.markers",
+        "B": "request.node.get_closest_marker()",
+        "C": "request.function.tags",
+        "D": "request.meta.get_marks()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of 'pytest-xdist', which distribution mode ensures that all tests in a single class are executed by the same worker process?",
+      "options": {
+        "A": "--dist loadfile",
+        "B": "--dist each",
+        "C": "--dist loadscope",
+        "D": "--dist workload"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary purpose of the 'pytest_generate_tests' hook?",
+      "options": {
+        "A": "To automatically write boilerplate test code into .py files.",
+        "B": "To perform custom, dynamic parameterization of a test function based on the 'metafunc' object.",
+        "C": "To generate a random seed for fuzz testing.",
+        "D": "To convert JSON data into Python fixtures at runtime."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A fixture with 'session' scope can safely depend on a fixture with 'function' scope.",
+      "options": {
+        "A": "True",
+        "B": "False (A ScopeMismatch error will be raised as a session fixture cannot request a narrower-scoped fixture)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is invoked by pytest to decide whether to collect a specific file or directory on the filesystem?",
+      "options": {
+        "A": "pytest_collect_file",
+        "B": "pytest_ignore_collect",
+        "C": "pytest_find_tests",
+        "D": "pytest_collect_directory"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you programmatically access a fixture's return value from within another fixture defined in the same conftest.py?",
+      "options": {
+        "A": "By importing the fixture function and calling it.",
+        "B": "By including the name of the first fixture as an argument in the second fixture's definition.",
+        "C": "By using the 'pytest.get_fixture()' helper method.",
+        "D": "By accessing the 'request.fixtures' dictionary."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What happens if a hook implementation returns a non-None value in a 'firstresult' hook like 'pytest_cmdline_parse'?",
+      "options": {
+        "A": "The value is appended to a list of all results from all plugins.",
+        "B": "Pytest immediately stops calling other implementations of that hook and uses that value.",
+        "C": "The value is ignored unless it is a boolean.",
+        "D": "An InternalError is raised due to a return value conflict."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which built-in fixture is required to add a finalizer (cleanup function) to a test session programmatically?",
+      "options": {
+        "A": "teardown",
+        "B": "request",
+        "C": "session_finalizer",
+        "D": "monkeypatch"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pytest-mock method on the 'mocker' fixture allows you to replace a class method and automatically restore it, while also having access to call history?",
+      "options": {
+        "A": "mocker.replace()",
+        "B": "mocker.patch.object()",
+        "C": "mocker.setattr()",
+        "D": "mocker.mock_method()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the role of the 'pytest_report_teststatus' hook?",
+      "options": {
+        "A": "To change the text or character (e.g., '.', 'F', 'E') displayed in the terminal for a test result.",
+        "B": "To send a status report to a remote monitoring server.",
+        "C": "To define the titles for an HTML report.",
+        "D": "To validate the syntax of the test docstrings."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Using 'pytest.mark.parametrize' on a class applies the parameterization to every test method within that class.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In the pytest internal model, what is the 'Node' object?",
+      "options": {
+        "A": "A physical machine in a distributed testing cluster.",
+        "B": "The base class for all collected test items (Files, Classes, and Functions).",
+        "C": "A point in the code where a debugger can be attached.",
+        "D": "A dictionary containing all current environment variables."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which method of 'monkeypatch' should be used to replace a single item within a dictionary without affecting the rest of the dictionary?",
+      "options": {
+        "A": "monkeypatch.setattr()",
+        "B": "monkeypatch.setitem()",
+        "C": "monkeypatch.update()",
+        "D": "monkeypatch.replace_dict()"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pytest hook allows a developer to perform initialization logic after the config object has been created but before collection starts?",
+      "options": {
+        "A": "pytest_sessionstart",
+        "B": "pytest_configure",
+        "C": "pytest_init_config",
+        "D": "pytest_cmdline_main"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the effect of using 'pytest-xdist' with the --looponfail flag?",
+      "options": {
+        "A": "It creates an infinite loop of all tests until the user interrupts.",
+        "B": "It runs the test suite and then waits for file changes to re-run only the failed tests.",
+        "C": "It ignores all failures and continues to the next test.",
+        "D": "It runs tests in parallel using a round-robin loop."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which internal object is passed to the 'pytest_runtest_setup' hook to represent the specific test item being prepared?",
+      "options": {
+        "A": "Item",
+        "B": "Node",
+        "C": "CallInfo",
+        "D": "FixtureRequest"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "In a 'conftest.py' file, how do you specify that a certain plugin should be loaded for that directory and its subdirectories?",
+      "options": {
+        "A": "import plugin_module",
+        "B": "pytest_plugins = ['plugin_module']",
+        "C": "register_plugin('plugin_module')",
+        "D": "plugins: [plugin_module]"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'pytest_exception_interact' hook is only called if a test fails due to an AssertionError.",
+      "options": {
+        "A": "True",
+        "B": "False (It is called for any unhandled exception during the test, including errors in setup or teardown)."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which monkeypatch method would you use to replace a value within a dictionary for the duration of a test?",
+      "options": {
+        "A": "monkeypatch.setattr",
+        "B": "monkeypatch.setitem",
+        "C": "monkeypatch.replace_key",
+        "D": "monkeypatch.update_dict"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When using the 'pytest-mock' plugin, which fixture provides a thin wrapper around the standard 'unittest.mock' library?",
+      "options": {
+        "A": "mock",
+        "B": "mocker",
+        "C": "patcher",
+        "ed": "mock_obj"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does the 'pytest --strict-markers' flag do?",
+      "options": {
+        "A": "It prevents tests from running if they have more than one marker.",
+        "B": "It raises an error if a test uses a marker that hasn't been registered in the configuration file.",
+        "C": "It forces all markers to be written in uppercase.",
+        "D": "It skips all tests that are not explicitly marked."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook can be used to add information to the terminal summary report at the very end of the test session?",
+      "options": {
+        "A": "pytest_report_header",
+        "B": "pytest_terminal_summary",
+        "C": "pytest_sessionfinish",
+        "D": "pytest_unconfigure"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you programmatically deselect test items in the 'pytest_collection_modifyitems' hook?",
+      "options": {
+        "A": "item.remove()",
+        "B": "items[:] = [item for item in items if ...]",
+        "C": "item.deselect()",
+        "D": "raise StopIteration"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'request' attribute identifies the scope of the fixture currently being executed?",
+      "options": {
+        "A": "request.scope",
+        "B": "request.fixturename",
+        "C": "request.node",
+        "D": "request.module"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'conftest.py' can exist at any level of the project directory tree and only affects tests in its own and sub-directories.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which pytest-xdist mode is best for running tests across different Python interpreters or operating systems simultaneously?",
+      "options": {
+        "A": "--dist load",
+        "B": "--dist each",
+        "C": "--dist multi",
+        "D": "--dist loadscope"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'pytest_pycollect_makeitem' hook?",
+      "options": {
+        "A": "To create a physical .py file from a string of code.",
+        "B": "To customize how pytest creates a 'Function' or 'Class' object from a discovered Python object.",
+        "C": "To register a new item in the sys.modules dictionary.",
+        "D": "To sort the items collected in a specific module."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which CLI flag tells pytest to capture only the last failure's output?",
+      "options": {
+        "A": "--lf",
+        "B": "--tb=short",
+        "C": "--showlocals",
+        "D": "--maxfail=1"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is provided by the 'pytest-asyncio' plugin to mark a test function as an asynchronous coroutine?",
+      "options": {
+        "A": "@pytest.mark.async",
+        "B": "@pytest.mark.asyncio",
+        "C": "@pytest.async_test",
+        "D": "@pytest.mark.coroutine"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A fixture can be parameterized using the 'params' argument in the @pytest.fixture decorator, causing every test that uses it to run once for each parameter.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "When using 'pytest-asyncio', which fixture is used to provide the event loop for the duration of the test?",
+      "options": {
+        "A": "async_loop",
+        "B": "event_loop",
+        "C": "uvloop",
+        "D": "main_loop"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the purpose of the 'ids' argument in @pytest.mark.parametrize?",
+      "options": {
+        "A": "To provide unique database IDs for test data.",
+        "B": "To give custom string labels to each parameter set in the test report.",
+        "C": "To identify the test developer.",
+        "D": "To link tests to a JIRA issue ID."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'monkeypatch' method is used to replace a specific dictionary item during a test?",
+      "options": {
+        "A": "monkeypatch.setattr",
+        "B": "monkeypatch.setitem",
+        "C": "monkeypatch.replace",
+        "D": "monkeypatch.dict_update"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'capsys' fixture can capture output written to low-level file descriptors (stdout/stderr) from C-extensions.",
+      "options": {
+        "A": "False (You must use 'capfd' for file-descriptor level capture; 'capsys' works at the Python level).",
+        "B": "True"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which CLI flag tells pytest to skip tests that were not run in the previous session?",
+      "options": {
+        "A": "--nf (or --new-first)",
+        "B": "--sw (or --stepwise)",
+        "C": "--lf (or --last-failed)",
+        "D": "--ff (or --failed-first)"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What happens if a test marked with @pytest.mark.xfail(strict=True) actually passes?",
+      "options": {
+        "A": "The test is reported as XPASS and the suite passes.",
+        "B": "The test fails the entire suite (reported as FAILED).",
+        "C": "The test is automatically deleted.",
+        "D": "The result is ignored."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is used to add custom markers to the pytest configuration and avoid 'unknown marker' warnings?",
+      "options": {
+        "A": "pytest_addoption",
+        "B": "pytest_configure",
+        "C": "pytest_init_marks",
+        "D": "pytest_register_markers"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Select TWO valid scopes for the 'event_loop' fixture in pytest-asyncio.",
+      "options": {
+        "A": "function",
+        "B": "session",
+        "C": "thread",
+        "D": "process"
+      },
+      "answer": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "question": "Which configuration file is considered the primary and recommended place to store project-wide pytest settings, such as custom markers and CLI defaults?",
+      "options": {
+        "A": "setup.cfg",
+        "B": "pyproject.toml",
+        "C": "pytest.ini",
+        "D": "conftest.py"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary function of the '-n auto' flag when using the 'pytest-xdist' plugin?",
+      "options": {
+        "A": "It automatically re-runs tests that failed due to network timeouts.",
+        "B": "It detects the number of available CPUs and launches that many worker processes for parallel execution.",
+        "C": "It generates an automatic test report in HTML format.",
+        "D": "It automatically skips tests that have not been modified since the last run."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pytest hook allows you to dynamically filter, reorder, or modify the list of collected test items before execution begins?",
+      "options": {
+        "A": "pytest_collection_finish",
+        "B": "pytest_collection_modifyitems",
+        "C": "pytest_deselected",
+        "D": "pytest_itemcollected"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a custom pytest hook or plugin, which object provides the central access point to CLI options and the overall session state?",
+      "options": {
+        "A": "config",
+        "B": "request",
+        "C": "session",
+        "D": "item"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of the built-in 'cache' fixture in pytest?",
+      "options": {
+        "A": "To speed up the importing of third-party Python libraries.",
+        "B": "To persist values between different pytest invocations (e.g., storing the state of a resource across runs).",
+        "C": "To encrypt sensitive data stored in fixtures.",
+        "D": "To clear the system RAM after every failed test case."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which internal pytest object represents a single test case and is used within hooks to access markers and metadata?",
+      "options": {
+        "A": "Node",
+        "B": "Item",
+        "C": "CallInfo",
+        "D": "Collector"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How can you ensure that a specific fixture is always executed for every test in a session without having to name it in every test function?",
+      "options": {
+        "A": "By naming the fixture 'global_setup'.",
+        "B": "By setting 'autouse=True' in the @pytest.fixture decorator.",
+        "C": "By placing the fixture in the root-level __init__.py file.",
+        "D": "By using the @pytest.mark.always decorator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which pytest CLI flag allows you to drop into a PDB (Python Debugger) session immediately at the point of a test failure?",
+      "options": {
+        "A": "--trace",
+        "B": "--debug",
+        "C": "--pdb",
+        "D": "-s"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'pytest --strict-markers' flag enforce during test execution?",
+      "options": {
+        "A": "It forces all custom markers to be written in lowercase.",
+        "B": "It raises an error if a test uses a marker that has not been registered in the configuration file.",
+        "C": "It prevents a test from having more than one marker.",
+        "D": "It skips all tests that do not have at least one marker applied."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which hook is invoked specifically when a test item is interrupted or fails, allowing for custom cleanup or reporting?",
+      "options": {
+        "A": "pytest_runtest_logreport",
+        "B": "pytest_exception_interact",
+        "C": "pytest_keyboard_interrupt",
+        "D": "pytest_sessionfinish"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "When using 'monkeypatch.setattr', what happens to the patched attribute once the test case finishes?",
+      "options": {
+        "A": "It remains changed until the end of the entire test session.",
+        "B": "It is automatically restored to its original value.",
+        "C": "It is deleted from the object to prevent memory leaks.",
+        "D": "It is only reverted if the test result is 'passed'."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which built-in fixture would you use to create a temporary directory that persists for the entire duration of the test session?",
+      "options": {
+        "A": "tmp_path",
+        "B": "tmpdir",
+        "C": "tmp_path_factory",
+        "D": "tempfile_session"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What is the primary difference between the 'capsys' and 'capfd' fixtures?",
+      "options": {
+        "A": "'capsys' captures logs, while 'capfd' captures print statements.",
+        "B": "'capsys' captures at the Python level, while 'capfd' captures at the operating system file descriptor level.",
+        "C": "'capsys' is for Windows, while 'capfd' is for Linux and macOS.",
+        "D": "'capsys' captures stdout, while 'capfd' only captures stderr."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which decorator is used to skip a test function entirely, regardless of the environment or condition?",
+      "options": {
+        "A": "@pytest.mark.ignore",
+        "B": "@pytest.mark.skip",
+        "C": "@pytest.mark.xfail",
+        "D": "@pytest.mark.exclude"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "How do you specify that a fixture should be destroyed and recreated only once for each test class?",
+      "options": {
+        "A": "@pytest.fixture(scope='session')",
+        "B": "@pytest.fixture(scope='module')",
+        "C": "@pytest.fixture(scope='class')",
+        "D": "@pytest.fixture(scope='group')"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "What does the 'pytest --lf' (or --last-failed) command do?",
+      "options": {
+        "A": "It lists all fixtures available in the current directory.",
+        "B": "It runs only the tests that failed during the previous execution.",
+        "C": "It runs tests in the order they were last modified on disk.",
+        "D": "It clears the pytest cache folder before starting the run."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific marker allows you to run a test multiple times with different input values using a single function definition?",
+      "options": {
+        "A": "@pytest.mark.loop",
+        "B": "@pytest.mark.parametrize",
+        "C": "@pytest.mark.repeat",
+        "D": "@pytest.mark.data"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In pytest, what is the role of the 'request' fixture?",
+      "options": {
+        "A": "To send HTTP requests to a REST API during integration testing.",
+        "B": "To provide introspective information about the currently executing test (like its name or applied markers).",
+        "C": "To handle user input from the terminal during a test run.",
+        "D": "To manage the setup and teardown of external database connections."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A fixture defined in a 'conftest.py' file is automatically available to all test files in that directory and its subdirectories.",
+      "options": {
+        "A": "True",
+        "B": "False"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which command-line option is used to see the values of local variables in the traceback when a test fails?",
+      "options": {
+        "A": "-v",
+        "B": "--showlocals",
+        "C": "-l",
+        "D": "--trace"
+      },
+      "answer": "B"
+    }
+  ]
+}

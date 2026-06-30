@@ -1,0 +1,2005 @@
+{ 
+  "skill": "Artificial Intelligence", 
+  "questions": [
+    {
+    "question": "What is the primary goal of Artificial Intelligence?",
+    "options": {
+      "A": "To increase the physical speed of computer hardware.",
+      "B": "To create systems that can perform tasks that typically require human intelligence.",
+      "C": "To replace all human workers with physical robots.",
+      "D": "To build the world's largest database of text files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Who is often considered the 'Father of Artificial Intelligence'?",
+    "options": {
+      "A": "Steve Jobs",
+      "B": "Bill Gates",
+      "C": "John McCarthy",
+      "D": "Mark Zuckerberg"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What does 'ML' stand for in the context of AI?",
+    "options": {
+      "A": "Manual Logic",
+      "B": "Machine Learning",
+      "C": "Multiple Layers",
+      "D": "Meta Language"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Turing Test' designed to measure?",
+    "options": {
+      "A": "The processing speed of a GPU.",
+      "B": "A machine's ability to exhibit intelligent behavior equivalent to a human.",
+      "C": "The amount of electricity a computer uses.",
+      "D": "The storage capacity of a cloud server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is an example of 'Narrow AI'?",
+    "options": {
+      "A": "A robot that has feelings and a soul.",
+      "B": "An AI that can do everything a human can do.",
+      "C": "A music recommendation system like Spotify.",
+      "D": "A computer that can predict the future with 100% accuracy."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Supervised Learning'?",
+    "options": {
+      "A": "Learning from data that has no labels.",
+      "B": "Training a model using a dataset that includes both inputs and desired outputs (labels).",
+      "C": "Learning by observing a human programmer work.",
+      "D": "Deleting data that the AI finds difficult to understand."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In AI, what is an 'Algorithm'?",
+    "options": {
+      "A": "A type of high-speed processor.",
+      "B": "A set of step-by-step instructions for solving a problem or performing a task.",
+      "C": "A digital image used for training.",
+      "D": "The physical casing of a robot."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Natural Language Processing' (NLP) used for?",
+    "options": {
+      "A": "Sorting files by their creation date.",
+      "B": "Enabling computers to understand, interpret, and generate human language.",
+      "C": "Increasing the resolution of digital photos.",
+      "D": "Managing the power supply of a data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Computer Vision'?",
+    "options": {
+      "A": "Using a VR headset to play games.",
+      "B": "Enabling computers to identify and process objects in images and videos.",
+      "C": "Improving the eyesight of human workers using AI.",
+      "D": "A way to see the source code of a program."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a popular programming language widely used for AI development?",
+    "options": {
+      "A": "HTML",
+      "B": "Python",
+      "C": "CSS",
+      "D": "SQL"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Chatbot'?",
+    "options": {
+      "A": "A physical robot that cleans floors.",
+      "B": "An AI program designed to simulate conversation with human users.",
+      "C": "A type of virus that steals passwords.",
+      "D": "A tool used to edit video files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Unsupervised Learning'?",
+    "options": {
+      "A": "Learning from labeled data only.",
+      "B": "Learning patterns and structures from data that does not have pre-defined labels.",
+      "C": "Training an AI without any computer hardware.",
+      "D": "Learning by playing games against human experts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reinforcement Learning' primarily based on?",
+    "options": {
+      "A": "Reading books about AI.",
+      "B": "Learning through a system of rewards and penalties.",
+      "C": "Manually coding every possible outcome.",
+      "D": "Using the fastest internet connection possible."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Artificial Neural Network'?",
+    "options": {
+      "A": "A network of physical wires connecting computers.",
+      "B": "A computing system inspired by the biological neural networks of animal brains.",
+      "C": "A social network for AI developers.",
+      "D": "A way to backup data on a hard drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Big Data' refer to in AI training?",
+    "options": {
+      "A": "Data that is written in a very large font.",
+      "B": "Extremely large datasets that may be analyzed to reveal patterns and trends.",
+      "C": "Data stored on a physically large computer.",
+      "D": "The number of employees in an AI company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Overfitting' in a machine learning model?",
+    "options": {
+      "A": "The model fits perfectly into the computer's memory.",
+      "B": "The model learns the training data too well, including its noise, and performs poorly on new data.",
+      "C": "The model is too small to understand the dataset.",
+      "D": "The model completes its training in less than one second."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Deep Learning'?",
+    "options": {
+      "A": "A type of AI that only works in deep water.",
+      "B": "A subset of machine learning based on artificial neural networks with many layers.",
+      "C": "A way to hide data deep within a computer's OS.",
+      "D": "A very expensive form of computer science."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common application of AI in daily life?",
+    "options": {
+      "A": "Virtual assistants like Siri or Alexa.",
+      "B": "Using a microwave to heat food.",
+      "C": "Writing on a piece of paper with a pen.",
+      "D": "Riding a bicycle to work."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Dataset'?",
+    "options": {
+      "A": "A collection of computer hardware.",
+      "B": "A collection of related sets of information used to train AI.",
+      "C": "A list of usernames and passwords.",
+      "D": "A specialized furniture for computers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias' in AI?",
+    "options": {
+      "A": "A high-speed connection between servers.",
+      "B": "Prejudice in the results of an AI algorithm, often due to flawed training data.",
+      "C": "The physical weight of the AI server.",
+      "D": "A specific type of computer monitor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Expert System'?",
+    "options": {
+      "A": "A computer used only by experts.",
+      "B": "An AI program that emulates the decision-making ability of a human expert.",
+      "C": "A high-end gaming computer.",
+      "D": "A security system for a bank."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Predictive Modeling'?",
+    "options": {
+      "A": "Designing 3D models of new cars.",
+      "B": "Using statistics to predict future outcomes and trends.",
+      "C": "Creating a fake AI to trick users.",
+      "D": "A way to name the different layers of a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Autonomous' in the context of AI?",
+    "options": {
+      "A": "A computer that is very expensive.",
+      "B": "The ability of a system to act independently without human intervention.",
+      "C": "A system that only works when a human is present.",
+      "D": "A type of digital currency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Data Cleaning'?",
+    "options": {
+      "A": "Physically dusting the hard drives.",
+      "B": "Identifying and fixing errors or inconsistencies in a dataset.",
+      "C": "Deleting all the data to start over.",
+      "D": "Selling data to another company."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Heuristics' in AI problem solving?",
+    "options": {
+      "A": "A mathematical formula that is always 100% accurate.",
+      "B": "A 'rule of thumb' or mental shortcut used to find a solution more quickly.",
+      "C": "A type of robot arm.",
+      "D": "The speed of the computer's CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Label' in a supervised learning dataset?",
+    "options": {
+      "A": "The name of the company that owns the data.",
+      "B": "The target or answer that the model is trying to predict.",
+      "C": "A sticker on the physical server.",
+      "D": "A way to group different files together."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Strong AI' (or Artificial General Intelligence)?",
+    "options": {
+      "A": "An AI that is physically very strong.",
+      "B": "An AI that can understand or learn any intellectual task that a human can.",
+      "C": "An AI that uses the most electricity.",
+      "D": "An AI used for military purposes only."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Machine Vision'?",
+    "options": {
+      "A": "An AI that can see into the future.",
+      "B": "The use of sensors and AI to give machines the ability to see and interpret their environment.",
+      "C": "A screen that is very easy for humans to read.",
+      "D": "A specialized camera for taking selfies."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Optimizer' used in AI training?",
+    "options": {
+      "A": "Binary Search",
+      "B": "Adam",
+      "C": "File Explorer",
+      "D": "Disk Defragmenter"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Clustering' in machine learning?",
+    "options": {
+      "A": "Grouping similar data points together without pre-defined labels.",
+      "B": "Sending an email to a group of people.",
+      "C": "Using multiple computers to play a game.",
+      "D": "Deleting data that is not needed."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is a 'Sentiment Analysis'?",
+    "options": {
+      "A": "Measuring the weight of a physical book.",
+      "B": "Determining the emotional tone (positive, negative, or neutral) of a piece of text.",
+      "C": "Predicting the weather for tomorrow.",
+      "D": "A type of security scan for viruses."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'IoT' stand for in relation to AI systems?",
+    "options": {
+      "A": "Internet of Tools",
+      "B": "Internet of Things",
+      "C": "Integration of Technology",
+      "D": "Internal Operating Task"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Decision Tree'?",
+    "options": {
+      "A": "A physical tree planted in an office.",
+      "B": "A flowchart-like structure used to make decisions based on data inputs.",
+      "C": "A way to organize folders on a desktop.",
+      "D": "A specialized AI for gardening."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Generative AI'?",
+    "options": {
+      "A": "AI that consumes as much energy as a whole generation.",
+      "B": "AI that can create new content like text, images, or music.",
+      "C": "AI used only by young people.",
+      "D": "AI that deletes old data automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Edge AI'?",
+    "options": {
+      "A": "AI that is very dangerous or 'on the edge'.",
+      "B": "Running AI algorithms locally on a device rather than in the cloud.",
+      "C": "AI used for designing sharp objects.",
+      "D": "The very first version of an AI program."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Backpropagation'?",
+    "options": {
+      "A": "The process of deleting old data.",
+      "B": "An algorithm used to update weights in a neural network to reduce error.",
+      "C": "Moving a robot backward in a room.",
+      "D": "A way to backup the AI's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a common 'Activation Function'?",
+    "options": {
+      "A": "Square Root",
+      "B": "Sigmoid",
+      "C": "Logarithm",
+      "D": "Multiplication"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Facial Recognition'?",
+    "options": {
+      "A": "Remembering someone's name.",
+      "B": "AI technology capable of identifying or verifying a person from a digital image.",
+      "C": "A filter that makes you look like a cat.",
+      "D": "A way to unlock a physical door using a key."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Turing Machine'?",
+    "options": {
+      "A": "A specialized car for AI researchers.",
+      "B": "A theoretical mathematical model of a computer.",
+      "C": "A machine that translates languages.",
+      "D": "A high-end printer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Robotics'?",
+    "options": {
+      "A": "Writing code for a website.",
+      "B": "The branch of AI and engineering that deals with the design and operation of physical robots.",
+      "C": "A type of dance.",
+      "D": "Collecting data from a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ethics in AI' primarily concerned with?",
+    "options": {
+      "A": "Making AI as expensive as possible.",
+      "B": "Ensuring AI is developed and used responsibly and fairly.",
+      "C": "Hiring the most famous AI developers.",
+      "D": "The speed of AI calculations."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Agent' in AI terminology?",
+    "options": {
+      "A": "A person who sells AI software.",
+      "B": "An entity that perceives its environment and takes actions to achieve goals.",
+      "C": "A type of secret code.",
+      "D": "A hardware chip."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Pattern Recognition'?",
+    "options": {
+      "A": "Drawing shapes in a notebook.",
+      "B": "The automated recognition of patterns and regularities in data.",
+      "C": "Changing the color of a website.",
+      "D": "Identifying the author of a book."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Artificial Life'?",
+    "options": {
+      "A": "A video game about animals.",
+      "B": "A field of study that examines systems related to life and its processes through synthetic models.",
+      "C": "Using plastic plants in an office.",
+      "D": "A robot that looks like a dog."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Search Space'?",
+    "options": {
+      "A": "The amount of space on a hard drive.",
+      "B": "The set of all possible solutions to a problem.",
+      "C": "A specialized area in a library.",
+      "D": "The number of users on a search engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Feature Engineering'?",
+    "options": {
+      "A": "Designing new hardware components.",
+      "B": "The process of selecting and transforming raw data into meaningful inputs for a model.",
+      "C": "Building a bridge for a city.",
+      "D": "Adding new buttons to a user interface."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Black Box' in AI?",
+    "options": {
+      "A": "A physical box used to store servers.",
+      "B": "A system where the internal workings are hidden or difficult for humans to understand.",
+      "C": "A computer that has been turned off.",
+      "D": "A specialized security tool."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transfer Learning'?",
+    "options": {
+      "A": "Moving a computer from one desk to another.",
+      "B": "Using a pre-trained model on a new, related task.",
+      "C": "Teaching a human how to use a computer.",
+      "D": "Sending data from a laptop to a phone."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Mining'?",
+    "options": {
+      "A": "Digging for coal.",
+      "B": "The process of discovering interesting patterns and knowledge from large amounts of data.",
+      "C": "Deleting old files to save space.",
+      "D": "Manually typing data into a spreadsheet."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Explainable AI' (XAI)?",
+    "options": {
+      "A": "AI that explains how humans work.",
+      "B": "AI designed to produce results that humans can understand and trust.",
+      "C": "A robot that gives lectures.",
+      "D": "A user manual for an AI program."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Augmented Reality' (AR)?",
+    "options": {
+      "A": "A completely fake digital world.",
+      "B": "Overlaying digital information or images onto the real-world environment.",
+      "C": "A way to see in the dark.",
+      "D": "A specialized telescope for space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Human-in-the-Loop'?",
+    "options": {
+      "A": "A human running in a circle.",
+      "B": "A model where humans provide feedback or intervention during the AI's training or decision process.",
+      "C": "A specialized exercise machine.",
+      "D": "Hiring humans to do the AI's work manually."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Singularity' in AI future studies?",
+    "options": {
+      "A": "An AI with only one neuron.",
+      "B": "A hypothetical future point where AI surpasses human intelligence and growth becomes uncontrollable.",
+      "C": "A single company owning all AI technology.",
+      "D": "Using AI to study black holes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Loss Function'?",
+    "options": {
+      "A": "A mathematical formula used to calculate how well an AI is performing.",
+      "B": "A bug that causes data loss.",
+      "C": "A way to decrease the cost of AI development.",
+      "D": "The number of hours an AI is offline."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Precision' in model evaluation?",
+    "options": {
+      "A": "The speed of the AI.",
+      "B": "The accuracy of the positive predictions made by the model.",
+      "C": "The price of the software.",
+      "D": "The font size of the results."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Recall' in model evaluation?",
+    "options": {
+      "A": "Remembering a user's password.",
+      "B": "The ability of a model to find all the relevant cases within a dataset.",
+      "C": "Deleting the model and starting over.",
+      "D": "The number of times an AI is used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Speech Recognition'?",
+    "options": {
+      "A": "Listening to music.",
+      "B": "The ability of a computer to identify and process spoken words.",
+      "C": "A way to translate text into audio.",
+      "D": "A specialized microphone for recording."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Annotation'?",
+    "options": {
+      "A": "Deleting data you don't like.",
+      "B": "The process of labeling data to make it understandable for a machine learning model.",
+      "C": "Writing a blog about data.",
+      "D": "Saving data as a PDF."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Prompt Engineering'?",
+    "options": {
+      "A": "Designing faster computer chips.",
+      "B": "The process of refining the inputs given to a Generative AI to get better results.",
+      "C": "Building a faster airplane.",
+      "D": "Fixing an engine in a hurry."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Token' in NLP?",
+    "options": {
+      "A": "A physical coin used for payment.",
+      "B": "A small unit of text, such as a word or a character, used for analysis.",
+      "C": "A security badge for an office.",
+      "D": "A type of digital cryptocurrency."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Validation' data used for?",
+    "options": {
+      "A": "The final test of the model after training is finished.",
+      "B": "Tuning the model's hyperparameters during the training process.",
+      "C": "Collecting initial data from the internet.",
+      "D": "Storing user passwords securely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Binary Classification'?",
+    "options": {
+      "A": "Sorting data into 100 different categories.",
+      "B": "Classifying data into exactly two groups (e.g., Yes/No or Spam/Not Spam).",
+      "C": "Using only zeros and ones in the source code.",
+      "D": "A type of high-security encryption."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'F1 Score'?",
+    "options": {
+      "A": "A racing game about AI.",
+      "B": "A metric that combines precision and recall into a single value for model evaluation.",
+      "C": "The version number of an AI model.",
+      "D": "The number of hidden layers in a network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'AI Governance'?",
+    "options": {
+      "A": "AI running the government.",
+      "B": "The framework of rules and standards for how AI is developed and deployed within an organization.",
+      "C": "Using AI to vote in an election.",
+      "D": "Hiring an AI as a CEO."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Cloud AI'?",
+    "options": {
+      "A": "AI that can predict the weather with 100% accuracy.",
+      "B": "AI services and infrastructure provided over the internet by companies like AWS or Google Cloud.",
+      "C": "AI that lives in a literal cloud in the sky.",
+      "D": "A specialized AI for aviation."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Representation'?",
+    "options": {
+      "A": "Writing a book about everything you know.",
+      "B": "How an AI system stores and organizes information about the world.",
+      "C": "A presentation given by an expert.",
+      "D": "A specialized software for taking notes."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical cause of 'Underfitting' in a machine learning model?",
+    "options": {
+      "A": "The training dataset is too large for the model's memory.",
+      "B": "The model is too simple to capture the underlying structure of the data.",
+      "C": "The learning rate is set to zero.",
+      "D": "The model has been trained for too many epochs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In the context of 'Ensemble Learning', how does 'Bagging' differ from 'Boosting'?",
+    "options": {
+      "A": "Bagging is for images; Boosting is for text.",
+      "B": "Boosting is for small data; Bagging is for big data.",
+      "C": "Bagging trains models in parallel; Boosting trains them sequentially to correct previous errors.",
+      "D": "They are identical techniques with different names."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the purpose of the 'Kernel Trick' in Support Vector Machines (SVM)?",
+    "options": {
+      "A": "To compress the input data for faster transmission.",
+      "B": "To delete outliers automatically from the dataset.",
+      "C": "To map data into a higher-dimensional space to find a linear separator.",
+      "D": "To encrypt the weights of the model."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which of these search algorithms is considered 'Informed' because it uses a heuristic to guide the search?",
+    "options": {
+      "A": "Breadth-First Search (BFS)",
+      "B": "A* Search",
+      "C": "Uniform Cost Search",
+      "D": "Depth-First Search (DFS)"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Curse of Dimensionality' refer to in AI?",
+    "options": {
+      "A": "The high cost of buying multi-dimensional monitors.",
+      "B": "The fact that data becomes sparse and hard to analyze as the number of features increases.",
+      "C": "The physical limit of how many layers a network can have.",
+      "D": "A software bug that occurs when using more than three variables."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Cold Start' problem in Recommendation Systems?",
+    "options": {
+      "A": "The server failing to start in winter weather.",
+      "B": "The difficulty in recommending items to new users with no history.",
+      "C": "The model taking too long to load from the disk.",
+      "D": "The electricity cost of starting an AI training session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In a 'Convolutional Neural Network' (CNN), what does 'Stride' refer to?",
+    "options": {
+      "A": "The step size the filter moves across the input image.",
+      "B": "The depth of the convolutional layer.",
+      "C": "The amount of padding added to the borders.",
+      "D": "The speed of the backpropagation algorithm."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Pruning' in the context of Decision Trees?",
+    "options": {
+      "A": "Adding more branches to increase accuracy.",
+      "B": "Hiring fewer developers to work on the tree logic.",
+      "C": "Removing branches that provide little power to simplify the model.",
+      "D": "Deleting the entire tree and starting over."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "Which evaluation metric is specifically designed to handle 'Imbalanced Datasets'?",
+    "options": {
+      "A": "Standard Accuracy",
+      "B": "Mean Squared Error",
+      "C": "F1-Score (Harmonic Mean of Precision and Recall)",
+      "D": "R-Squared"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is the primary function of an 'Activation Function' like ReLU in a neural network?",
+    "options": {
+      "A": "To turn the network off when it's not in use.",
+      "B": "To introduce non-linearity, allowing the network to learn complex patterns.",
+      "C": "To store the user's input permanently.",
+      "D": "To increase the training speed by 100%."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transfer Learning'?",
+    "options": {
+      "A": "Moving an AI model from a laptop to a cloud server.",
+      "B": "Teaching an AI to translate different languages.",
+      "C": "Using a pre-trained model on a new but related task.",
+      "D": "Transferring the copyright of an AI to another company."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is 'Lemmatization'?",
+    "options": {
+      "A": "Grouping different inflected forms of a word into a single base form (lemma).",
+      "B": "A way to count the number of characters in a sentence.",
+      "C": "Translating text into Morse code.",
+      "D": "Deleting words that have more than 10 letters."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is the 'Exploding Gradient' problem?",
+    "options": {
+      "A": "The GPU physically blowing up due to high voltage.",
+      "B": "Gradients becoming very large during backpropagation, causing unstable weight updates.",
+      "C": "The training data being too colorful for the model.",
+      "D": "The loss function reaching zero too quickly."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Batch Normalization'?",
+    "options": {
+      "A": "To organize data into alphabetical batches.",
+      "B": "To normalize the inputs of each layer to stabilize and speed up training.",
+      "C": "To delete small batches of data.",
+      "D": "To encrypt every batch for security."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following is a characteristic of 'Deep Reinforcement Learning'?",
+    "options": {
+      "A": "Using only one layer of neurons for rewards.",
+      "B": "Using deep neural networks to approximate the policy or value function.",
+      "C": "Deleting the agent if it makes a mistake.",
+      "D": "Using manual if-then statements for every action."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'One-Hot Encoding' accomplish?",
+    "options": {
+      "A": "It converts text data into a single long string.",
+      "B": "It represents categorical variables as binary vectors.",
+      "C": "It heats up the GPU to improve processing speed.",
+      "D": "It deletes duplicate records in a database."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the role of a 'Dropout' layer in a neural network?",
+    "options": {
+      "A": "To drop the model into a backup folder.",
+      "B": "To increase the number of active neurons.",
+      "C": "To randomly ignore neurons during training to prevent overfitting.",
+      "D": "To reduce the internet bandwidth used by the AI."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Image Segmentation'?",
+    "options": {
+      "A": "Classifying an entire image into one category.",
+      "B": "Partitioning a digital image into multiple segments (pixel-level classification).",
+      "C": "Compressing an image to save space.",
+      "D": "Taking a photo with a high-end camera."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient Descent'?",
+    "options": {
+      "A": "A way to sort numbers in descending order.",
+      "B": "An optimization algorithm used to minimize the loss function.",
+      "C": "A network that only works on slopes.",
+      "D": "A way to increase the learning rate."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is a 'Generative Adversarial Network' (GAN)?",
+    "options": {
+      "A": "A network that generates random passwords.",
+      "B": "Two neural networks (Generator and Discriminator) competing to create realistic data.",
+      "C": "A security network used to fight hackers.",
+      "D": "A network that only works with text data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Non-Parametric' algorithm?",
+    "options": {
+      "A": "Linear Regression",
+      "B": "Logistic Regression",
+      "C": "K-Nearest Neighbors (KNN)",
+      "D": "Neural Networks"
+    },
+    "answer": "C"
+  },
+  {
+    "question": "What is 'Regularization' used for?",
+    "options": {
+      "A": "To make the data follow a regular schedule.",
+      "B": "To prevent overfitting by adding a penalty for complexity to the loss function.",
+      "C": "To increase the number of features.",
+      "D": "To ensure all labels are integers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Stationarity' mean in Time Series analysis?",
+    "options": {
+      "A": "The data is stored in a single physical location.",
+      "B": "The statistical properties (mean, variance) do not change over time.",
+      "C": "The data never changes at all.",
+      "D": "The model is currently offline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'Cross-Validation'?",
+    "options": {
+      "A": "To check if two different AI brands can work together.",
+      "B": "To evaluate a model's performance on different subsets of data to ensure reliability.",
+      "C": "To translate the training labels into English.",
+      "D": "To verify the user's password twice."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is an 'N-gram'?",
+    "options": {
+      "A": "A weight measurement for books.",
+      "B": "A continuous sequence of N items from a given sample of text.",
+      "C": "A type of chart with N lines.",
+      "D": "A secure password with N characters."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Vanishing Gradient' problem?",
+    "options": {
+      "A": "The gradients becoming too small to update the weights in early layers.",
+      "B": "The model becoming invisible on the screen.",
+      "C": "The dataset disappearing from the hard drive.",
+      "D": "The loss function reaching zero too slowly."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Supervised' vs 'Unsupervised' learning?",
+    "options": {
+      "A": "Supervised uses labels; Unsupervised does not.",
+      "B": "Supervised is for experts; Unsupervised for beginners.",
+      "C": "Supervised uses GPUs; Unsupervised uses CPUs.",
+      "D": "They are the same thing."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Feature Scaling'?",
+    "options": {
+      "A": "Deleting features that are too small.",
+      "B": "Normalizing the range of independent variables or features of data.",
+      "C": "Adding more features to a model.",
+      "D": "Choosing a color for the features."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Manifold Learning'?",
+    "options": {
+      "A": "Learning how to drive a manual car.",
+      "B": "An approach to non-linear dimensionality reduction.",
+      "C": "Teaching an AI about mechanics.",
+      "D": "A way to backup data on a manifold server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Dimensionality Reduction' technique?",
+    "options": {
+      "A": "Principal Component Analysis (PCA)",
+      "B": "Logistic Regression",
+      "C": "Decision Trees",
+      "D": "Random Forest"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Turing Completeness'?",
+    "options": {
+      "A": "An AI that can pass the Turing test perfectly.",
+      "B": "The ability of a system of rules to simulate any Turing machine.",
+      "C": "A computer that never runs out of power.",
+      "D": "A list of all AI models ever made."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-ML'?",
+    "options": {
+      "A": "Machine Learning for cars.",
+      "B": "Automating the process of applying machine learning to real-world problems.",
+      "C": "An AI that writes its own code 24/7.",
+      "D": "A type of robot engine."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the purpose of 'He Initialization'?",
+    "options": {
+      "A": "To name the network after its inventor.",
+      "B": "A method of weight initialization specifically for ReLU networks.",
+      "C": "To initialize weights to exactly zero.",
+      "D": "To speed up the network boot time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bayesian Inference'?",
+    "options": {
+      "A": "A type of AI used in oceanography.",
+      "B": "Updating the probability of a hypothesis as more evidence becomes available.",
+      "C": "A way to delete old data using math.",
+      "D": "A security scan for cloud databases."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Search Algorithms', what is 'State Space'?",
+    "options": {
+      "A": "The physical room where the computer is kept.",
+      "B": "The set of all possible states an agent can be in.",
+      "C": "The amount of free RAM available.",
+      "D": "The number of users on a website."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'One-Cycle Policy' in training?",
+    "options": {
+      "A": "Training for only one epoch.",
+      "B": "A learning rate schedule that increases and then decreases in a single cycle.",
+      "C": "A way to use only one GPU core.",
+      "D": "Deleting the model after one use."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Multi-Task Learning'?",
+    "options": {
+      "A": "A developer working on two projects.",
+      "B": "Training a single model to perform multiple related tasks simultaneously.",
+      "C": "Running two models on the same server.",
+      "D": "Using two different languages in one model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Distillation'?",
+    "options": {
+      "A": "Purely deleting unnecessary information.",
+      "B": "Training a smaller student model to match the performance of a larger teacher model.",
+      "C": "Turning an AI into a physical book.",
+      "D": "A way to hide AI logic from competitors."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'Mean Absolute Error' (MAE) measure?",
+    "options": {
+      "A": "The average number of neurons in a network.",
+      "B": "The average of the absolute differences between predictions and actual values.",
+      "C": "The speed of the training iterations.",
+      "D": "The total file size of the weights."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient Clipping' used for?",
+    "options": {
+      "A": "To cut off small gradients to save memory.",
+      "B": "To cap the value of gradients during backpropagation to prevent instability.",
+      "C": "To increase the training time.",
+      "D": "To ensure gradients are always positive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of these is a 'Distance Metric' commonly used in KNN?",
+    "options": {
+      "A": "Euclidean Distance",
+      "B": "RGB Color Value",
+      "C": "File Path Length",
+      "D": "Network Latency"
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Elastic Weight Consolidation' (EWC)?",
+    "options": {
+      "A": "Making weights more flexible.",
+      "B": "A technique to mitigate catastrophic forgetting in neural networks.",
+      "C": "Compressing weights for mobile use.",
+      "D": "Deleting weights that are too old."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Bias-Variance Tradeoff'?",
+    "options": {
+      "A": "Trading model data with a competitor.",
+      "B": "The conflict between trying to minimize bias and variance for better generalization.",
+      "C": "The difference between the max and min bias.",
+      "D": "A way to buy more accuracy with money."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Label Smoothing'?",
+    "options": {
+      "A": "Making the labels easier to read.",
+      "B": "A regularization technique that prevents the model from becoming too confident.",
+      "C": "Deleting labels that are hard to predict.",
+      "D": "Using cursive font for labels."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hyperparameter Tuning'?",
+    "options": {
+      "A": "Fixing the physical parts of a computer.",
+      "B": "Finding the best set of hyperparameters for a model.",
+      "C": "Increasing the voltage of the GPU.",
+      "D": "Choosing a new name for the AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is a 'Stop Word'?",
+    "options": {
+      "A": "A word that crashes the program.",
+      "B": "Commonly used words (like 'the', 'is', 'at') that are often filtered out during processing.",
+      "C": "The final word in a sentence.",
+      "D": "A secret password to stop the AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Active Learning'?",
+    "options": {
+      "A": "AI training while a human is exercising.",
+      "B": "A framework where the model asks for specific data to be labeled by a human.",
+      "C": "Learning only from active users.",
+      "D": "A model that never goes offline."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Object Detection'?",
+    "options": {
+      "A": "Touching an object with a robot hand.",
+      "B": "Identifying and locating multiple objects in an image or video.",
+      "C": "Searching for lost files on a drive.",
+      "D": "Deleting objects that look blurry."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Word Embedding'?",
+    "options": {
+      "A": "Putting words into a physical box.",
+      "B": "A numerical representation of words where similar words have similar vectors.",
+      "C": "An encryption method for text files.",
+      "D": "A list of definitions in a book."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is an 'Episode'?",
+    "options": {
+      "A": "A single day of training.",
+      "B": "A complete sequence of states, actions, and rewards from start to finish.",
+      "C": "A TV show about AI.",
+      "D": "The version number of the agent."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Few-Shot Learning'?",
+    "options": {
+      "A": "Training a model with only one layer.",
+      "B": "The ability of a model to learn a new task with very few examples.",
+      "C": "Training a model for only one hour.",
+      "D": "Using a small number of CPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'XGBoost'?",
+    "options": {
+      "A": "A new energy drink for developers.",
+      "B": "An optimized distributed gradient boosting library.",
+      "C": "A way to speed up the network connection.",
+      "D": "A specialized GPU from NVIDIA."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does 'AUC-ROC' measure?",
+    "options": {
+      "A": "The speed of the training data loading.",
+      "B": "The performance of a classification model across all possible thresholds.",
+      "C": "The price of the cloud storage.",
+      "D": "The number of active users."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Long Short-Term Memory' (LSTM)?",
+    "options": {
+      "A": "A physical memory chip.",
+      "B": "A type of RNN capable of learning long-term dependencies.",
+      "C": "An AI that remembers your name.",
+      "D": "A way to backup data permanently."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Softmax' function used for?",
+    "options": {
+      "A": "To make the model's casing softer.",
+      "B": "To turn output numbers into a probability distribution.",
+      "C": "To delete zero values.",
+      "D": "To increase the training speed."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Zero-Shot Learning'?",
+    "options": {
+      "A": "A model that never works.",
+      "B": "The ability to correctly classify objects from classes that were not seen during training.",
+      "C": "Training with zero data.",
+      "D": "A model with only one neuron."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Catastrophic Forgetting'?",
+    "options": {
+      "A": "The AI deleting its own source code.",
+      "B": "A model losing previous information when trained on a new task.",
+      "C": "A developer forgetting a password.",
+      "D": "A total power failure in the server room."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hyperparameter' vs 'Parameter'?",
+    "options": {
+      "A": "Parameters are learned; Hyperparameters are set manually before training.",
+      "B": "Hyperparameters are for experts; Parameters for students.",
+      "C": "They are the same thing.",
+      "D": "Parameters use more memory."
+    },
+    "answer": "A"
+  },
+  {
+    "question": "What is 'Gradient Accumulation'?",
+    "options": {
+      "A": "Collecting gradients to sell them.",
+      "B": "Calculating gradients over multiple small steps before updating weights to simulate larger batches.",
+      "C": "A bug where gradients get stuck.",
+      "D": "A way to speed up the network."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Attention Mechanism' primarily used for in Transformers?",
+    "options": {
+      "A": "To make the model focus on the user's face.",
+      "B": "To weigh the importance of different words in a sentence relative to one another.",
+      "C": "To count the number of users online.",
+      "D": "To increase the cooling of the GPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Mixed Precision Training'?",
+    "options": {
+      "A": "Using both Python and Java in one model.",
+      "B": "Using both 16-bit and 32-bit floating-point types to speed up training.",
+      "C": "Training on two different datasets.",
+      "D": "Using two different types of GPUs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Drift'?",
+    "options": {
+      "A": "Data moving physically between servers.",
+      "B": "When the input data distribution changes over time, affecting model performance.",
+      "C": "A way to backup data in the cloud.",
+      "D": "Deleting data after it is 1 year old."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Fairness in AI' concerned with?",
+    "options": {
+      "A": "Making sure the AI looks nice.",
+      "B": "Ensuring the AI does not discriminate against specific groups.",
+      "C": "Hiring an equal number of developers.",
+      "D": "Paying a fair price for training data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is an 'Autoencoder'?",
+    "options": {
+      "A": "Automatically writing a book.",
+      "B": "A neural network trained to copy its input to its output in a compressed way.",
+      "C": "A robot that can drive a car.",
+      "D": "A software that fixes its own bugs."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Reinforcement Learning' 'Q-Table'?",
+    "options": {
+      "A": "A physical table in the lab.",
+      "B": "A data structure that stores the rewards for actions in different states.",
+      "C": "A list of active users.",
+      "D": "A way to backup the agent's logic."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Temporal Difference' (TD) Learning?",
+    "options": {
+      "A": "Checking the time of day.",
+      "B": "A prediction method that updates estimates based on other learned estimates.",
+      "C": "A study on the history of AI.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which mathematical constraint is enforced by 'Spectral Normalization' to stabilize GAN training on high-resolution images?",
+    "options": {
+      "A": "Ensuring the weights of the Generator are orthogonal.",
+      "B": "Setting the spectral radius of every hidden layer to exactly zero.",
+      "C": "Restricting the Lipschitz constant of the Discriminator to be less than or equal to one.",
+      "D": "Applying a 128-bit encryption to the latent space vector."
+    },
+    "answer": "C"
+  },
+  {
+    "question": "In the context of 'Markov Decision Processes' (MDPs), what does the 'Bellman Equation' fundamentally represent?",
+    "options": {
+      "A": "The speed at which a robot moves through a grid.",
+      "B": "The recursive relationship between the value of a state and the values of its successor states.",
+      "C": "The total amount of memory required to store a Q-table.",
+      "D": "The probability that an agent will encounter a hardware error."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Lottery Ticket Hypothesis' in neural network pruning research?",
+    "options": {
+      "A": "A theory that AI can predict winning lottery numbers using deep learning.",
+      "B": "The idea that dense, randomly-initialized networks contain sub-networks that, when trained in isolation, can reach the same accuracy as the original.",
+      "C": "A strategy for allocating GPU resources using a random number generator.",
+      "D": "The probability that a model will crash if the learning rate is too high."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which phenomenon describes the observation that model performance can suddenly improve significantly long after it has overfitted the training data?",
+    "options": {
+      "A": "Catastrophic Forgetting",
+      "B": "Grokking",
+      "C": "The Curse of Dimensionality",
+      "D": "Vanishing Entropy"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In Transformer architectures, why is 'Scaled Dot-Product Attention' divided by the square root of the dimension (d_k)?",
+    "options": {
+      "A": "To compress the model for deployment on mobile devices.",
+      "B": "To prevent the dot products from growing too large in magnitude, which would push the Softmax function into regions with tiny gradients.",
+      "C": "To ensure that the attention matrix is always lower-triangular.",
+      "D": "To increase the training speed by a factor of the dimension size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Sharpness-Aware Minimization' (SAM) designed to achieve during optimization?",
+    "options": {
+      "A": "Increasing the sharpness and resolution of images generated by a GAN.",
+      "B": "Simultaneously minimizing loss value and loss sharpness to find a 'flat' minimum for better generalization.",
+      "C": "A way to automatically delete low-quality features from the dataset.",
+      "D": "Enhancing the precision of weights from 16-bit to 64-bit."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Differential Privacy' in the context of training large AI models?",
+    "options": {
+      "A": "Hiding the name of the lead researcher from the public.",
+      "B": "A framework for providing mathematical guarantees that individual data points cannot be identified from the model's output.",
+      "C": "Encrypting the source code of the AI using a rotating key.",
+      "D": "Ensuring that the AI is only trained in a secure, underground data center."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Diffusion Models', what occurs during the 'Forward' process?",
+    "options": {
+      "A": "A neural network removes noise to recover a clean image.",
+      "B": "Gaussian noise is incrementally added to data until it becomes pure noise.",
+      "C": "The model generates a high-resolution video from a text prompt.",
+      "D": "Data is promoted from the training set to the validation set."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which of the following describes the 'Implicit Bias' of Stochastic Gradient Descent (SGD)?",
+    "options": {
+      "A": "The tendency of the algorithm to favor complex, high-variance solutions.",
+      "B": "The tendency of the optimizer to converge toward simpler, low-norm solutions that generalize better.",
+      "C": "A mathematical error that occurs when the batch size is too small.",
+      "D": "The bias of the researcher who wrote the optimization code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural Architecture Search' (NAS)?",
+    "options": {
+      "A": "Using a search engine to find pre-trained models on GitHub.",
+      "B": "An automated process for designing optimal neural network structures using optimization algorithms.",
+      "C": "A way to scan the physical layout of a data center.",
+      "D": "Searching for a job in the field of AI architecture."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the primary technical challenge of 'Federated Learning'?",
+    "options": {
+      "A": "The high cost of buying a single supercomputer.",
+      "B": "Managing communication overhead and data heterogeneity across decentralized edge devices.",
+      "C": "Training an AI without using any electricity.",
+      "D": "Writing code that works on both Windows and Linux."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Knowledge Graph' embeddings, what is the goal of the 'TransE' model?",
+    "options": {
+      "A": "To translate a graph from one language to another.",
+      "B": "To represent relationships as translations in a low-dimensional embedding space (h + r ≈ t).",
+      "C": "To backup a graph onto a physical tape drive.",
+      "D": "To delete all nodes that have only one connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Universal Language Model Fine-tuning' (ULMFiT)?",
+    "options": {
+      "A": "A model that can translate every language perfectly in one step.",
+      "B": "A transfer learning method for NLP that involves pre-training on a large corpus followed by discriminative fine-tuning.",
+      "C": "A way to teach a model to write Python code automatically.",
+      "D": "A standard set of rules used by the United Nations for AI."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrastive Learning' (e.g., SimCLR)?",
+    "options": {
+      "A": "Learning to distinguish between very bright and very dark images.",
+      "B": "A self-supervised method that learns representations by maximizing agreement between differently augmented views of the same data.",
+      "C": "A supervised method where the model is given ten labels for every image.",
+      "D": "A technique to increase the visual contrast of training data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which specific architectural component allows 'Vision Transformers' (ViT) to process 2D images as sequences?",
+    "options": {
+      "A": "A global average pooling layer at the input.",
+      "B": "Linear projection of flattened image patches into embeddings.",
+      "C": "A recurrent loop that visits every pixel in order.",
+      "D": "A specialized GPU core designed by NVIDIA for ViT."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model Quantization' primarily used for during deployment?",
+    "options": {
+      "A": "Increasing the number of neurons to improve accuracy.",
+      "B": "Reducing the precision of weights (e.g., from FP32 to INT8) to lower latency and memory footprint.",
+      "C": "Measuring the quality of the model using a quantum computer.",
+      "D": "Naming the different versions of a model using numbers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'ELBO' (Evidence Lower Bound) represent in Variational Autoencoders (VAEs)?",
+    "options": {
+      "A": "The maximum amount of memory a VAE can use.",
+      "B": "A proxy objective function used to maximize the log-likelihood of the data during training.",
+      "C": "The price of the cloud server used to train the VAE.",
+      "D": "The number of hours a VAE takes to converge."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic Weight Averaging' (SWA)?",
+    "options": {
+      "A": "A way to calculate the average physical weight of the server racks.",
+      "B": "An optimization technique that averages weights from different points in training to improve generalization.",
+      "C": "A method for randomly deleting unimportant weights.",
+      "D": "A strategy for choosing a random learning rate for every batch."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Graph Neural Networks' (GNN) 'Message Passing'?",
+    "options": {
+      "A": "Sending emails between different AI developers.",
+      "B": "The iterative process where nodes update their hidden states based on the features of neighboring nodes.",
+      "C": "A way to draw charts in a web browser using Python.",
+      "D": "A high-security protocol for transmitting data across HDFS."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is the 'Actor-Critic' method?",
+    "options": {
+      "A": "Hiring a human actor to criticize the AI's performance.",
+      "B": "An architecture where one network (Actor) learns a policy and another (Critic) evaluates it.",
+      "C": "Two separate AI companies working on the same agent.",
+      "D": "A way to sort actions from 'best' to 'worst' in a list."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Active Learning' 'Query Strategy'?",
+    "options": {
+      "A": "A SQL command used to find specific rows in a database.",
+      "B": "The algorithm used to select which unlabeled data points would be most informative for the model to learn.",
+      "C": "A way to ask the lead developer for more project funding.",
+      "D": "The speed of the network connection during an active training session."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Temporal Convolutional Network' (TCN)?",
+    "options": {
+      "A": "A network that only operates during specific times of day.",
+      "B": "A variation of CNNs designed for sequence modeling, typically using dilated causal convolutions.",
+      "C": "A network that is extremely fast compared to a standard CNN.",
+      "D": "A specialized way to process 3D video files in real-time."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural Tangent Kernel' (NTK) theory used for?",
+    "options": {
+      "A": "Designing the physical hardware layout of a modern GPU.",
+      "B": "Describing the behavior of infinite-width neural networks during training by gradient descent.",
+      "C": "A new programming language developed by Google for AI.",
+      "D": "A way to connect 100 different neural networks into a single grid."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Natural Language Processing', what is the purpose of 'Byte Pair Encoding' (BPE)?",
+    "options": {
+      "A": "An encryption method for securing text files.",
+      "B": "A subword tokenization method that iteratively merges the most frequent pairs of characters.",
+      "C": "A way to compress audio files for faster processing.",
+      "D": "A way to count the exact number of bytes in a large document."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Consistency Regularization' in Semi-Supervised Learning?",
+    "options": {
+      "A": "Making sure the developer stays consistent with their work schedule.",
+      "B": "Enforcing that the model gives similar outputs for an unlabeled data point and its perturbed version.",
+      "C": "A way to sort the training data into a consistent order.",
+      "D": "Ensuring that the learning rate remains constant throughout training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Transductive' vs 'Inductive' learning in graph-based AI?",
+    "options": {
+      "A": "Transductive is for images; Inductive is for text.",
+      "B": "Transductive requires all data (including test nodes) during training; Inductive can generalize to new nodes.",
+      "C": "Inductive uses fewer words than Transductive.",
+      "D": "They are identical in Large Language Models."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Adversarial Attacks', what is the 'Fast Gradient Sign Method' (FGSM)?",
+    "options": {
+      "A": "A physical attack on a data center building.",
+      "B": "A method to generate adversarial examples by adding noise in the direction of the gradient of the loss.",
+      "C": "A way to speed up the network connection between GPUs.",
+      "D": "A computer virus that deletes the AI's source code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model Distillation' 'Temperature' (T)?",
+    "options": {
+      "A": "The physical heat emitted by the GPU during distillation.",
+      "B": "A hyperparameter used to soften the probability distribution of the teacher model's outputs.",
+      "C": "The total duration of the training session in minutes.",
+      "D": "The number of neurons in the student model relative to the teacher."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What does the 'Squeeze-and-Excitation' (SE) block specifically perform in a CNN?",
+    "options": {
+      "A": "It compresses the model file to save disk space.",
+      "B": "It adaptively recalibrates channel-wise feature responses by modeling channel interdependencies.",
+      "C": "It excites the GPU to run at a higher clock speed.",
+      "D": "It automatically deletes small feature maps during training."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is 'Experience Replay' designed to solve?",
+    "options": {
+      "A": "The agent being bored during training.",
+      "B": "Correlations between consecutive samples and data efficiency by using a buffer of past experiences.",
+      "C": "A psychological test for the AI agent.",
+      "D": "Deleting old training data to save hard drive space."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Knowledge Graph' 'Link Prediction'?",
+    "options": {
+      "A": "Predicting which website a user will click next.",
+      "B": "The task of predicting missing triplets (relationships) in a large knowledge base.",
+      "C": "A security certificate for a SQL database.",
+      "D": "A way to translate code into a different language."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Supervised' 'DINO'?",
+    "options": {
+      "A": "An AI model specifically about prehistoric animals.",
+      "B": "A method for self-supervised learning of visual representations using a distillation approach without labels.",
+      "C": "A network that only works on data older than ten years.",
+      "D": "A way to speed up the ingestion of raw image data."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Hardware' 'Accelerator' 'TPU' (Tensor Processing Unit)?",
+    "options": {
+      "A": "A new type of high-resolution computer monitor.",
+      "B": "An AI-specific integrated circuit (ASIC) developed by Google for machine learning workloads.",
+      "C": "A faster internet cable for data centers.",
+      "D": "A specialized fan for cooling the CPU."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Exposure Bias' in Sequence-to-Sequence models?",
+    "options": {
+      "A": "A bias against researchers who are very famous in the field.",
+      "B": "The error accumulation that occurs when a model is trained on ground truth but generates its own inputs during inference.",
+      "C": "A security risk from exposing the model's source code on the web.",
+      "D": "A problem caused by having too much direct sunlight in the lab."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Search Algorithms', what is 'Iterative Deepening A*' (IDA*)?",
+    "options": {
+      "A": "A way to search for files on a hard drive.",
+      "B": "A variant of A* that uses depth-first search to reduce memory usage while maintaining optimality.",
+      "C": "A way to increase the number of layers in a network.",
+      "D": "Hiring a group of researchers to work in shifts."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble' 'Method' 'Stacking'?",
+    "options": {
+      "A": "Stacking physical server racks on top of each other.",
+      "B": "A technique where multiple base models' predictions are used as inputs for a meta-model.",
+      "C": "Hiring a large group of developers to code together in a room.",
+      "D": "Using only one very complex model to solve every problem."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Tying' in language models?",
+    "options": {
+      "A": "Tying the physical cables of the cluster together.",
+      "B": "Sharing the same weight matrix between the embedding layer and the pre-softmax linear layer.",
+      "C": "A way to lock the weights so they can never be changed.",
+      "D": "A type of regularization used only for small datasets."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Computer Vision', what is 'Instance' 'Segmentation'?",
+    "options": {
+      "A": "Deleting specific parts of an image file.",
+      "B": "The task of identifying and delineating each individual object of interest in an image.",
+      "C": "Compressing an image into a much smaller file format.",
+      "D": "A way to rotate the image by a random degree."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'Style Transfer' 'Content Loss'?",
+    "options": {
+      "A": "The loss of information during a training session.",
+      "B": "A measure of how much the high-level features of a generated image differ from a target content image.",
+      "C": "The price of the digital content used for training.",
+      "D": "The time it takes to transfer a style from one image to another."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'GPT' 'Causal' 'Attention'?",
+    "options": {
+      "A": "A model that can only process images of nature.",
+      "B": "An attention mask that ensures tokens only attend to previous tokens in the sequence.",
+      "C": "A model that has zero input layer.",
+      "D": "A model used primarily by university students."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Checkpoint' 'Averaging'?",
+    "options": {
+      "A": "Checking the model's overall grade in a class.",
+      "B": "A technique where multiple checkpoints from the end of training are averaged to improve robustness.",
+      "C": "Deleting the model after every single epoch.",
+      "D": "A security check for the source code repositories."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'Gradient' 'Vanishing' 'Saturating Activation' problem?",
+    "options": {
+      "A": "The model becoming too colorful for the monitor.",
+      "B": "When activation functions like Sigmoid produce very small gradients for large positive or negative inputs.",
+      "C": "A problem with having too much data in the dataset.",
+      "D": "A specific bug in the max-pooling layer code."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement' 'Learning', what is 'Entropy' Regularization?",
+    "options": {
+      "A": "Turning on the heater in the server room.",
+      "B": "Adding an entropy term to the reward function to encourage the agent to explore more diverse actions.",
+      "C": "A physical exercise program for the AI developers.",
+      "D": "A way to speed up the data ingestion process."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Self-Attention' 'Scaling Factor'?",
+    "options": {
+      "A": "A way to scale the resolution of an image.",
+      "B": "Dividing the dot product by the square root of the dimension to keep the variance of the logits stable.",
+      "C": "Increasing the learning rate by exactly 10%.",
+      "D": "The total number of neurons in the hidden layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Model' 'Robustness' 'Verification'?",
+    "options": {
+      "A": "Testing the physical durability of the computer hardware.",
+      "B": "Using formal methods to ensure that a model is not susceptible to small adversarial perturbations.",
+      "C": "Verifying the identity of the human user.",
+      "D": "A way to backup the model's source code automatically."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Contrastive' 'Predictive' 'Coding' (CPC)?",
+    "options": {
+      "A": "A new programming language for AI systems.",
+      "B": "A self-supervised learning technique that predicts future information in a latent space using contrastive loss.",
+      "C": "A way to encrypt predict files on a drive.",
+      "D": "A specialized tool for the lead developer."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Memory-Augmented' Neural Networks?",
+    "options": {
+      "A": "Adding more RAM to the physical computer.",
+      "B": "Architectures that use an external memory component to store and retrieve data (e.g., Neural Turing Machines).",
+      "C": "A network that remembers its own weight values.",
+      "D": "A way to backup the model on a secondary cloud drive."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Neural' 'ODE' (Ordinary Differential Equations)?",
+    "options": {
+      "A": "A math problem for university students.",
+      "B": "A class of models where hidden states are defined as a continuous function using an ODE solver.",
+      "C": "A way to solve complex equations using Python code.",
+      "D": "A network that only works in one spatial dimension."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Transformers', what is 'Relative Positional' Encoding?",
+    "options": {
+      "A": "Encoding data based on the user's physical location.",
+      "B": "A method where position information is based on the relative distance between tokens.",
+      "C": "A way to rotate the token vectors randomly.",
+      "D": "A way to skip position information entirely."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning', what is 'Internal Covariate Shift'?",
+    "options": {
+      "A": "Moving the physical servers to a different room in the lab.",
+      "B": "The change in the distribution of network activations caused by updating parameters during training.",
+      "C": "A change in the user's login password.",
+      "D": "A network delay that occurs between layers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ensemble' 'Method' 'Bagging'?",
+    "options": {
+      "A": "Putting the computer into a physical bag.",
+      "B": "A technique where multiple versions of a model are trained on different data subsets and averaged.",
+      "C": "Hiring a large group of developers to work on one project.",
+      "D": "Using only one very complex model for the task."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Reinforcement Learning', what is the 'Exploration-Exploitation' tradeoff?",
+    "options": {
+      "A": "Choosing between using Python or R for the project.",
+      "B": "Choosing between trying new actions for rewards or using known actions that yield rewards.",
+      "C": "Hiring a new developer vs. keeping the current one.",
+      "D": "Deleting the data vs. saving it to the cloud."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Stochastic' in SGD?",
+    "options": {
+      "A": "The name of the scientist who invented the algorithm.",
+      "B": "The random selection of a data subset to estimate the gradient.",
+      "C": "A specific type of high-performance GPU instruction.",
+      "D": "The speed of the network connection."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "Which loss function is specifically designed to handle outliers by being less sensitive than MSE?",
+    "options": {
+      "A": "Log Loss",
+      "B": "Huber Loss",
+      "C": "Hinge Loss",
+      "D": "Cross-Entropy Loss"
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Clustering', what does 'Silhouette Score' measure?",
+    "options": {
+      "A": "The color of the data points in a plot.",
+      "B": "How similar an object is to its own cluster compared to other clusters.",
+      "C": "The total number of clusters in the dataset.",
+      "D": "The speed of the clustering algorithm execution."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is the 'AIC' (Akaike Information Criterion) used for in model selection?",
+    "options": {
+      "A": "Measuring the heat of the computer hardware.",
+      "B": "Evaluating the relative quality of statistical models for a given dataset.",
+      "C": "Counting the number of rows in a SQL table.",
+      "D": "Identifying the name of the original author."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Causal Inference' and how does it differ from correlation?",
+    "options": {
+      "A": "They are identical terms in statistics.",
+      "B": "It focuses on determining whether a change in one variable actually causes a change in another.",
+      "C": "It is only used in specialized medical research.",
+      "D": "It uses only qualitative data for analysis."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'SMOTE' (Synthetic Minority Over-sampling Technique) used for?",
+    "options": {
+      "A": "Deleting all minority data points from a set.",
+      "B": "Generating synthetic examples for the minority class to handle imbalanced datasets.",
+      "C": "Calculating the total size of a database.",
+      "D": "A way to encrypt very small files."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Auto-correlation' 'Lag'?",
+    "options": {
+      "A": "A network delay in a SQL database query.",
+      "B": "The relationship between a variable's current value and its past values at specific time intervals.",
+      "C": "The time it takes to save a file to a disk.",
+      "D": "A bug in the time series forecasting model."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Data Architecture', what is a 'Star Schema'?",
+    "options": {
+      "A": "A database designed like a solar system model.",
+      "B": "A data model consisting of one fact table referencing any number of dimension tables.",
+      "C": "A way to rate data using stars from one to five.",
+      "D": "A security protocol for HDFS data storage."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Data Virtualization'?",
+    "options": {
+      "A": "Creating a fake dataset for testing purposes.",
+      "B": "An approach that allows retrieving and manipulating data without technical details about its source.",
+      "C": "Using a VR headset to view data in 3D.",
+      "D": "Deleting the physical database from a server."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Clustering', what is the 'Elbow Method' used for?",
+    "options": {
+      "A": "To measure the physical height of the analyst.",
+      "B": "To determine the optimal number of clusters by looking at variance explained.",
+      "C": "To find outliers in a 3D scatter plot graph.",
+      "D": "A way to sort clusters by their file size."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Ridge Regression' 'Alpha' (or Lambda) parameter?",
+    "options": {
+      "A": "The first letter of the AI model's name.",
+      "B": "The regularization parameter that controls the penalty strength on coefficient size.",
+      "C": "The overall accuracy of the final model.",
+      "D": "The number of independent variables used."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Dimensionality' 'Reduction' 't-SNE'?",
+    "options": {
+      "A": "A new programming language for AI research.",
+      "B": "A non-linear technique for dimensionality reduction suited for visualizing high-dimensional datasets.",
+      "C": "A way to delete exactly half of the columns.",
+      "D": "A network speed test for data centers."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Hypothesis Testing', what is a 'Type I Error' (Alpha)?",
+    "options": {
+      "A": "A math error in a complex calculation.",
+      "B": "The probability of rejecting a true null hypothesis.",
+      "C": "Accepting a false null hypothesis as true.",
+      "D": "Failing to collect enough data for a study."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Weight' 'Initialization' 'He' (Kaiming) standard?",
+    "options": {
+      "A": "Initializing weights to the exact value of PI.",
+      "B": "An initialization method designed for ReLU networks to account for the zeroing of negative inputs.",
+      "C": "Initializing all weights to exactly zero.",
+      "D": "Naming the AI model after its primary inventor."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "What is 'Gradient' 'Accumulation' 'Batch Size' simulation?",
+    "options": {
+      "A": "Increasing the batch size to exactly infinity.",
+      "B": "Calculating gradients over steps before updating weights to simulate a larger batch size.",
+      "C": "A bug where gradients get stuck in memory.",
+      "D": "A way to speed up the network bandwidth."
+    },
+    "answer": "B"
+  },
+  {
+    "question": "In 'Deep Learning', what is 'Exposure Bias' in Seq2Seq models?",
+    "options": {
+      "A": "Being biased against researchers who are famous.",
+      "B": "The error caused when a model is trained on ground-truth but tested using its own generated outputs.",
+      "C": "A security risk from exposing the source code.",
+      "D": "A problem with having too much light in the lab."
+    },
+    "answer": "B"
+  }
+  ]
+}

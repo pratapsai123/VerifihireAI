@@ -1,0 +1,1995 @@
+{
+  "skill": "Distributed Systems",
+  "questions": [
+    {
+      "question": "What is the core definition of a Distributed System?",
+      "options": {
+        "A": "A single supercomputer with multiple screens.",
+        "B": "A collection of independent computers that appears to its users as a single coherent system.",
+        "C": "A database that only stores data on physical tapes.",
+        "D": "A network where only one computer can talk at a time."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What does 'Horizontal Scaling' involve in a distributed environment?",
+      "options": {
+        "A": "Adding more RAM to a single server.",
+        "B": "Adding more machines or nodes to the system to handle increased load.",
+        "C": "Replacing the CPU with a faster model.",
+        "D": "Moving the servers to a wider physical room."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of distributed systems, what is 'Fault Tolerance'?",
+      "options": {
+        "A": "The ability of a system to continue operating properly in the event of the failure of one or more of its components.",
+        "B": "The process of blaming a specific developer for a system crash.",
+        "C": "A specialized way to delete old files automatically.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of a 'Load Balancer'?",
+      "options": {
+        "A": "To encrypt the physical hard drive.",
+        "B": "To distribute incoming network traffic across multiple servers to ensure no single server is overwhelmed.",
+        "C": "To increase the physical weight of the server rack.",
+        "D": "To monitor the temperature of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: In a distributed system, 'Latency' refers to the time delay between a request being sent and a response being received over the network.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for fiber optic connections",
+        "D": "Only if the servers are in the same building"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'Availability' measure in a distributed service?",
+      "options": {
+        "A": "The percentage of time the system remains functional and accessible to users.",
+        "B": "The number of servers that have been sold.",
+        "C": "The physical space available in the server room.",
+        "D": "A specialized way to name VM folders."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Replication' in a distributed database?",
+      "options": {
+        "A": "Deleting all duplicate records.",
+        "B": "The process of storing the same data on multiple nodes to improve reliability and performance.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "Hiring two people to do the same job."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which of these is a common challenge in Distributed Systems that is much simpler in a single-machine system?",
+      "options": {
+        "A": "Clock Synchronization",
+        "B": "Network Partitions",
+        "C": "Partial Failures",
+        "D": "All of the above"
+      },
+      "answer": "D"
+    },
+    {
+      "question": "What is 'Scalability'?",
+      "options": {
+        "A": "The ability of a system to handle a growing amount of work by adding resources.",
+        "B": "The price of the software license.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The newest version of the operating system."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Stateless' service stores user data from previous requests on the server itself.",
+      "options": {
+        "A": "False (Stateless services do not store session data; every request is treated independently).",
+        "B": "True",
+        "C": "Only for mobile applications",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What does 'RPC' stand for in distributed communication?",
+      "options": {
+        "A": "Random Packet Control",
+        "B": "Remote Procedure Call",
+        "C": "Routing Protocol Center",
+        "D": "Reliable Power Connection"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is a 'Node' in a distributed system?",
+      "options": {
+        "A": "A physical or virtual machine that is part of the system.",
+        "B": "A specialized tool for cleaning servers.",
+        "C": "The physical location of the data center.",
+        "D": "A specialized way to encrypt logs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which of these is a benefit of using 'Microservices' over a 'Monolith'?",
+      "options": {
+        "A": "Services can be scaled and deployed independently.",
+        "B": "It reduces the complexity of network communication.",
+        "C": "It eliminates the need for a database.",
+        "D": "It makes the source code smaller."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Throughput' refers to the number of requests a system can handle in a given period of time.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for network hardware",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed Computing'?",
+      "options": {
+        "A": "Using multiple computers to solve a single problem by breaking it into smaller tasks.",
+        "B": "Buying computers from different countries.",
+        "C": "A specialized way to name VM folders.",
+        "D": "Hiring a new visualization team."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the percentage of 'CPU' usage across a cluster?",
+      "options": {
+        "A": "CPU Utilization",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Single Point of Failure' (SPOF) is a component whose failure will cause the entire system to stop working.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for legacy systems",
+        "D": "Only in version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Partitioning' (or Sharding)?",
+      "options": {
+        "A": "Breaking a large database into smaller, faster, more easily managed parts.",
+        "B": "Deleting the database partitions.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the TSDB."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'High Availability' (HA) aims to ensure a system has a high level of operational performance for a given period.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for cloud-native apps",
+        "D": "Only if using fiber optics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Cluster' in distributed systems?",
+      "options": {
+        "A": "A group of interconnected computers working together as a single unit.",
+        "B": "A messy server room.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily cost of the IPs."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Consistency' in a distributed database context?",
+      "options": {
+        "A": "Ensuring that all nodes see the same data at the same time.",
+        "B": "Ensuring the servers are the same color.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "The salary of a data architect."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Success Rate' of a distributed request?",
+      "options": {
+        "A": "Pass / Fail percentage",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Load Balancing' helps in distributing user requests evenly across servers.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed Ingestion'?",
+      "options": {
+        "A": "The process of bringing data into a distributed system from multiple sources.",
+        "B": "Turning off the server.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active Nodes' in a cluster?",
+      "options": {
+        "A": "Node Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mimir' is a tool designed for long-term storage of distributed metrics.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for AWS users",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN' isolation in a distributed data center?",
+      "options": {
+        "A": "Using network segmentation to improve security and performance by separating traffic.",
+        "B": "Naming the virtual cables after colors.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure shell (SSH) access for distributed nodes?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'Memory Overcommit' can be used in virtualized distributed systems to maximize utilization.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux guests",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Sovereignty'?",
+      "options": {
+        "A": "The requirement that data is subject to the laws of the country where it is physically located.",
+        "B": "Naming the database after a president.",
+        "C": "A specialized way to encrypt individual data points.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Dropped Packets' in a distributed network?",
+      "options": {
+        "A": "Drop Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'LACP' can be used to increase bandwidth between distributed nodes.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using fiber optics",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Micro-Segmentation'?",
+      "options": {
+        "A": "A security technique that enables fine-grained security policies to be assigned to individual workloads.",
+        "B": "Dividing the network into tiny parts.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Success Rate' of an automated scaling event?",
+      "options": {
+        "A": "Success / Failure percentage",
+        "B": "Throughput",
+        "C": "Latency",
+        "D": "Saturation"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Idempotency' is a goal for reliable distributed operations.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if the team is over 5 people"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Surrogate Key' generation?",
+      "options": {
+        "A": "The process of creating unique, non-meaningful keys for database records.",
+        "B": "Naming the servers after keys.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+      "options": {
+        "A": "1433",
+        "B": "3306",
+        "C": "5432",
+        "D": "22"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'ELT' architectures leverage the parallel processing of distributed warehouses.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Scrubbing'?",
+      "options": {
+        "A": "The automated process of identifying and removing errors from data in a distributed system.",
+        "B": "Wiping the hard drive.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Batch Processing' is common in distributed data pipelines.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed Monitoring'?",
+      "options": {
+        "A": "Providing visibility into the health and performance of all components in a distributed system.",
+        "B": "Hiring a person to watch the computers.",
+        "C": "A specialized way to encrypt individual data points.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active Users' in a distributed app?",
+      "options": {
+        "A": "User Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Vulnerability Management' is a continuous process for distributed environments.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Tooling Governance'?",
+      "options": {
+        "A": "A framework for managing an organization's distributed tools and policies.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: DevSecOps is essential for reliable distributed software delivery.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Static Analysis' for distributed code?",
+      "options": {
+        "A": "The automated checking of source code for logic or security flaws without running it.",
+        "B": "Testing the software while it is running.",
+        "C": "A specialized way to encrypt individual data points.",
+        "D": "The salary of a software architect."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Time to Detect' a node failure?",
+      "options": {
+        "A": "MTTD (Mean Time To Detect)",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dynamic Analysis' involves testing a running distributed system.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Secrets Management' in a distributed cluster?",
+      "options": {
+        "A": "A structured process for managing passwords and keys used by distributed nodes to talk securely.",
+        "B": "Hiding the servers in a secret room.",
+        "C": "A specialized way to encrypt trace IDs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'Telnet'?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'Container Security' includes image scanning for distributed workloads.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cloud Security' 'Shared Responsibility'?",
+      "options": {
+        "A": "A model where security duties are split between the provider and the customer.",
+        "B": "Everyone in the company shares one password.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Security Remediations' applied to nodes?",
+      "options": {
+        "A": "Remediation Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Shift-Left' security means moving security testing earlier in the distributed lifecycle.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Threat Modeling' for distributed systems?",
+      "options": {
+        "A": "Identifying and evaluating potential security threats to the architecture.",
+        "B": "Building physical models of the servers.",
+        "C": "A specialized way to encrypt individual data points.",
+        "D": "Hiring a new visualization team."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: Network security is essential for a stable distributed system.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Encryption' at rest?",
+      "options": {
+        "A": "Encoding data stored on a disk so it cannot be read without a key.",
+        "B": "Encrypting data while it is moving over the network.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the TSDB."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Dropped Packets'?",
+      "options": {
+        "A": "Drop Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Firewalls are a primary defense in distributed security.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Access Control' (NAC)?",
+      "options": {
+        "A": "Restricting access to a network based on user identity or device posture.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: VPNs encrypt data between distributed data centers.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "According to the CAP Theorem, which two properties can a distributed system realistically guarantee simultaneously during a network partition?",
+      "options": {
+        "A": "Consistency and Scalability",
+        "B": "Availability and Partition Tolerance (AP) OR Consistency and Partition Tolerance (CP)",
+        "C": "Throughput and Latency",
+        "D": "Durability and Security"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary characteristic of 'Eventual Consistency' in a distributed database like Apache Cassandra?",
+      "options": {
+        "A": "The system will never be consistent.",
+        "B": "If no new updates are made, eventually all accesses to an item will return the last updated value, though temporary discrepancies may occur.",
+        "C": "Data is immediately updated on every node before the user receives a success message.",
+        "D": "The system deletes data after it becomes inconsistent to save space."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the PACELC theorem, what does the 'E' and 'L' represent in the context of 'Else' (Normal operation)?",
+      "options": {
+        "A": "Encryption and Logging",
+        "B": "Latency and Consistency (Else, Latency vs Consistency)",
+        "C": "Load and Licensing",
+        "D": "Linux and Logic"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In a distributed system using 'Quorum-based' reads and writes, if you have 5 nodes, what is the minimum number of nodes required for a 'Write Quorum' (W) to ensure overlap with a 'Read Quorum' (R)?",
+      "options": {
+        "A": "1",
+        "B": "3 (simple majority)",
+        "C": "5 (unanimous)",
+        "D": "0"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the primary purpose of a 'Distributed Lock Manager' (DLM) like etcd or ZooKeeper?",
+      "options": {
+        "A": "To physically lock the server rack doors.",
+        "B": "To ensure mutual exclusion across a cluster, allowing only one node to access a shared resource at a time.",
+        "C": "To act as a secondary firewall.",
+        "D": "To monitor the temperature of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Strong Consistency' (Linearizability) ensures that every read operation reflects the most recent successful write, regardless of which node the client queries.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted data",
+        "D": "Only if the servers are in the same building"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Service Discovery' in a distributed microservices environment?",
+      "options": {
+        "A": "Finding new cloud providers to buy from.",
+        "B": "The automatic detection of network locations (IP/Port) for service instances, often managed by tools like Consul or Kubernetes DNS.",
+        "C": "A specialized way to name VM folders.",
+        "D": "The process of moving servers to a higher floor."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which consistency model allows a user to always see their own updates immediately, even if other users might see older data for a short time?",
+      "options": {
+        "A": "Strict Consistency",
+        "B": "Read-Your-Writes Consistency",
+        "C": "Causal Consistency",
+        "D": "Monotonic Reads"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "What is the 'Split Brain' problem in a distributed cluster?",
+      "options": {
+        "A": "A physical defect in a CPU architecture.",
+        "B": "A condition where a cluster divides into two independent sub-clusters that both believe they are the master, leading to data corruption.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "Hiring two different teams for one project."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific mechanism allows 'Gossip Protocols' to propagate information across a large cluster with no central authority?",
+      "options": {
+        "A": "Nodes randomly pick a few neighbors and share information, which then spreads exponentially like a virus.",
+        "B": "The leader node pings every follower individually.",
+        "C": "A specialized way to encrypt network headers.",
+        "D": "The administrator manually updates every node's config file."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: In a 'Write-Ahead Log' (WAL) system, data changes are first recorded in a persistent log before being applied to the main database to ensure durability in case of a crash.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for mobile applications",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Leader Election' in a consensus protocol like Raft or Paxos?",
+      "options": {
+        "A": "Voting for a new CEO of the company.",
+        "B": "The process by which nodes in a cluster agree on a single 'Master' node to coordinate writes and maintain consistency.",
+        "C": "A specialized way to name VM folders.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which term describes a system where an operation can be performed multiple times without changing the result beyond the initial execution?",
+      "options": {
+        "A": "Scalability",
+        "B": "Idempotency",
+        "C": "Elasticity",
+        "D": "Reliability"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In distributed systems, what is a 'Heartbeat'?",
+      "options": {
+        "A": "A physical sensor on the server motherboard.",
+        "B": "A periodic signal sent by a node to indicate to the rest of the cluster that it is still alive and functioning.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "Hiring a new visualization team."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Consistent Hashing' is used to minimize the amount of data that needs to be reshuffled when nodes are added or removed from a distributed cache.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted data",
+        "D": "Only if using fiber optics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of 'Vector Clocks' in a distributed system?",
+      "options": {
+        "A": "To synchronize the physical time across all servers.",
+        "B": "To track the causal relationship between events and detect conflicts in a system without a central clock.",
+        "C": "To encrypt individual data points.",
+        "D": "To monitor the daily cost of the IPs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Replication Lag' in a distributed database?",
+      "options": {
+        "A": "The time delay between a write on the master and the same write appearing on a replica.",
+        "B": "Total Throughput.",
+        "C": "Response Time.",
+        "D": "Error Rate."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Optimistic Locking' assumes that multiple transactions can complete without interfering with each other, only checking for conflicts at the time of commit.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for relational databases",
+        "D": "Only if the team is over 5 people"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is a 'Sidecar' pattern in distributed microservices?",
+      "options": {
+        "A": "A physical seat attached to a server rack.",
+        "B": "A separate process or container that runs alongside the main application to provide infrastructure features like logging, monitoring, or security.",
+        "C": "A specialized way to name VM folders.",
+        "D": "The newest version of the software."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with the 'Consul' agent DNS interface by default?",
+      "options": {
+        "A": "8600",
+        "B": "8080",
+        "C": "443",
+        "D": "22"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mimir' is a consensus-based load balancer used to route traffic based on node availability.",
+      "options": {
+        "A": "False (Mimir is a metrics storage backend).",
+        "B": "True",
+        "C": "Only for AWS users",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN' isolation for distributed node management?",
+      "options": {
+        "A": "Naming the virtual cables after colors.",
+        "B": "Using Layer 2 isolation to ensure that node-to-node internal communication is protected from general user traffic.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vCenter' management heartbeats in a virtualized distributed cluster?",
+      "options": {
+        "A": "UDP 902",
+        "B": "TCP 443",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Memory Overcommit' is common in distributed test environments but often disabled in production to ensure predictable latency.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux guests",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Sovereignty' in a distributed cloud context?",
+      "options": {
+        "A": "Naming the database after a president.",
+        "B": "The legal principle that data is subject to the laws of the country where it is physically located.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is associated with 'iSCSI' traffic, which should be isolated on a dedicated network segment?",
+      "options": {
+        "A": "TCP 3260",
+        "B": "TCP 80",
+        "C": "UDP 500",
+        "D": "TCP 443"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'LACP' can be used to combine physical links for higher throughput between distributed application servers.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using fiber optics",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Micro-Segmentation' for distributed security?",
+      "options": {
+        "A": "Dividing the network into tiny parts.",
+        "B": "Enforcing granular security policies at the individual node or pod level to prevent lateral movement of an attacker.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active time series' in a distributed monitoring system?",
+      "options": {
+        "A": "prometheus_tsdb_head_series",
+        "B": "system_active_metrics",
+        "C": "node_active_series",
+        "D": "prometheus_total_series"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'SCD Type 4' is a common method for tracking the history of distributed cluster configuration changes.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for customer data",
+        "D": "Only if using version 2.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Ingestion' strategy 'Fan-out'?",
+      "options": {
+        "A": "Sending data to a single node only.",
+        "B": "Taking one data input and delivering it to multiple distributed destinations or processing branches simultaneously.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the temperature of the CPU."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Success Rate' of an automated data synchronization?",
+      "options": {
+        "A": "Pass / Fail percentage",
+        "B": "Success rate",
+        "C": "Throughput",
+        "D": "Latency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Idempotency' is a goal for distributed API design.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if the team is over 5 people"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Surrogate Key' generation in a distributed database?",
+      "options": {
+        "A": "Naming the servers after keys.",
+        "B": "The process of creating unique, non-identifying keys for records to protect privacy and improve performance.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'SQL Server'?",
+      "options": {
+        "A": "1433",
+        "B": "3306",
+        "C": "5432",
+        "D": "22"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'ELT' architectures leverage the parallel processing power of distributed warehouses.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Scrubbing' in a distributed environment?",
+      "options": {
+        "A": "Wiping the hard drive.",
+        "B": "The automated process of identifying and removing errors from data sets across multiple nodes.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'HTTPS'?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Batch Processing' is typically used for large-scale data movement.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed Monitoring' architecture?",
+      "options": {
+        "A": "A system that provides continuous oversight of health across all nodes in a cluster.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active Nodes'?",
+      "options": {
+        "A": "Node Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Vulnerability Management' is a continuous process for distributed systems.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Distributed Governance'?",
+      "options": {
+        "A": "A framework for managing an organization's distributed systems and policies.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure web traffic?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: DevSecOps is critical for reliable distributed software delivery.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Static Analysis' for distributed code?",
+      "options": {
+        "A": "Analyzing source code or configuration for distributed logic errors without running it.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Time to Detect' a node failure?",
+      "options": {
+        "A": "MTTD (Mean Time To Detect)",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dynamic Analysis' involve testing a live distributed environment.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Secrets Management' in a distributed cluster?",
+      "options": {
+        "A": "A structured process for managing passwords and keys used by distributed nodes.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with secure shell (SSH)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'Container Security' includes image scanning for distributed workloads.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Cloud Security' 'Shared Responsibility' model?",
+      "options": {
+        "A": "A model where security duties are split between the provider and the customer.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Vulnerability Remediations' completed across the cluster?",
+      "options": {
+        "A": "Remediation Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Shift-Left' security means finding bugs earlier in the distributed lifecycle.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Threat Modeling' for distributed systems?",
+      "options": {
+        "A": "Identifying and evaluating potential security threats to a distributed architecture.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: Network security is essential for a reliable distributed system infrastructure.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Encryption' in transit?",
+      "options": {
+        "A": "Protecting data as it moves through the network using protocols like TLS.",
+        "B": "Turning off the server.",
+        "C": "A specialized way to encrypt individual data points.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active Nodes' in the cluster?",
+      "options": {
+        "A": "Node Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Firewalls are a primary defense in distributed cluster security.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Access Control'?",
+      "options": {
+        "A": "The process of identifying and evaluating network security threats.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard 'HTTP' traffic?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: VPNs encrypt data between distributed data centers.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Hardening'?",
+      "options": {
+        "A": "The process of securing a network by reducing its attack surface.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Dropped Packets' in a distributed network?",
+      "options": {
+        "A": "Drop Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: SSL/TLS provides encryption for data in transit within the cluster.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which distributed mechanism is used to determine the partial ordering of events and detect causality violations (conflicts) without relying on synchronized physical clocks?",
+      "options": {
+        "A": "NTP (Network Time Protocol)",
+        "B": "Vector Clocks",
+        "C": "Lease-based Locking",
+        "D": "Round Robin Scheduling"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the Raft Consensus Algorithm, what is the primary purpose of the 'Term' number found in every RPC?",
+      "options": {
+        "A": "To limit the physical length of the network cable.",
+        "B": "To act as a logical clock that allows nodes to detect and discard outdated information from former leaders.",
+        "C": "To count the total number of users connected to the cluster.",
+        "D": "To encrypt the heartbeat messages sent between nodes."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: The 'Two-Phase Commit' (2PC) protocol is considered a 'blocking' protocol because if the coordinator fails after the prepare phase, cohorts may be left in an uncertain state, holding resources indefinitely.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-relational databases",
+        "D": "Only if using 100Gbps network links"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Byzantine Fault Tolerance' (BFT) and how does it specifically differ from standard crash-stop fault tolerance?",
+      "options": {
+        "A": "BFT only works if all servers are located in the same physical rack.",
+        "B": "BFT handles nodes that may not only fail by stopping, but may also behave maliciously, provide conflicting information, or fail in arbitrary ways.",
+        "C": "BFT is a specialized way to delete old logs automatically.",
+        "D": "BFT requires the system to be turned off once a day for calibration."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "In the context of Distributed Transactions, what technical problem does 'Three-Phase Commit' (3PC) solve that 'Two-Phase Commit' (2PC) cannot?",
+      "options": {
+        "A": "It removes the need for any network communication.",
+        "B": "It introduces a 'Pre-commit' stage and uses timeouts to ensure the protocol is non-blocking even if the coordinator fails.",
+        "C": "It automatically encrypts the database records.",
+        "D": "It increases the physical speed of the CPU clocks."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific phenomenon describes a state where multiple distributed nodes are waiting for each other to release resources in a circular chain, and how is it typically resolved?",
+      "options": {
+        "A": "Split Brain; resolved by a manual hardware reboot.",
+        "B": "Distributed Deadlock; resolved via global wait-for-graph analysis or timeout-based aborts.",
+        "C": "Network Partition; resolved by installing fiber optics.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Lamport Timestamps' provide a total ordering of events in a distributed system, ensuring that if event A happened before event B, then A's timestamp is less than B's.",
+      "options": {
+        "A": "True (by using arbitrary node IDs to break ties for concurrent events).",
+        "B": "False",
+        "C": "Only for Java-based systems",
+        "D": "Only if the network is encrypted"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the primary role of a 'Gossip Protocol' (Epidemic Protocol) in a large-scale distributed cluster like Apache Cassandra?",
+      "options": {
+        "A": "To allow administrators to chat with each other in real-time.",
+        "B": "To efficiently and reliably spread state information (like node health or membership) across thousands of nodes without a central controller.",
+        "C": "A specialized tool for drawing network diagrams.",
+        "D": "To monitor the daily cost of the IPs."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Status' in a Paxos round indicates that a 'Proposer' has successfully convinced a majority of 'Acceptors' to promise not to accept lower-numbered proposals?",
+      "options": {
+        "A": "Prepare-Ack / Promise",
+        "B": "Commit",
+        "C": "Rollback",
+        "D": "Pending"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mimir' is a distributed consensus library designed to replace ZooKeeper in high-throughput streaming environments.",
+      "options": {
+        "A": "False (Mimir is a long-term metrics storage backend).",
+        "B": "True",
+        "C": "Only for AWS users",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Write Skew' in a distributed database with Snapshot Isolation?",
+      "options": {
+        "A": "When the database physically leans to one side in the rack.",
+        "B": "An anomaly where two transactions read the same data, modify different but related pieces of data, and commit, violating a system-wide invariant.",
+        "C": "A specialized way to name VM folders.",
+        "D": "To monitor the temperature of the BIOS."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with 'etcd' client communication, critical for Kubernetes control plane distribution?",
+      "options": {
+        "A": "2379",
+        "B": "8080",
+        "C": "443",
+        "D": "22"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Linearizability' is the strongest consistency model, ensuring that every operation appears to take place instantaneously at some point between its invocation and completion.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted data",
+        "D": "Only if using fiber optics"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Clock Drift' and how does it impact distributed systems using 'TrueTime' (like Google Spanner)?",
+      "options": {
+        "A": "Clocks physically moving across the room due to vibrations.",
+        "B": "The gradual difference in time between physical hardware clocks; TrueTime uses a confidence interval to handle this uncertainty and ensure external consistency.",
+        "C": "A specialized tool for drawing networks.",
+        "D": "To monitor the daily growth of the log files."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vCenter' management heartbeats in a virtualized distributed cluster?",
+      "options": {
+        "A": "UDP 902",
+        "B": "TCP 443",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Memory Overcommit' is typically disabled in distributed databases to prevent 'OOM Killer' events that could trigger cluster-wide data rebalancing.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for Linux guests",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Storage DRS' (SDRS) usage in distributed data nodes?",
+      "options": {
+        "A": "Measuring the physical weight of the logs.",
+        "B": "Automatically moving virtual disk files between datastores based on I/O latency to prevent a single node from bottlenecking a distributed query.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily cost of the network switch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is used for 'HTTPS' encrypted management of a distributed dashboard?",
+      "options": {
+        "A": "TCP 443",
+        "B": "UDP 443",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'vCenter Server High Availability' uses a three-node configuration to protect the management plane of a distributed infrastructure.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN' ID 4095 used for in a virtualized distributed network?",
+      "options": {
+        "A": "The largest number of nodes allowed by the standard.",
+        "B": "A special ID that enables Virtual Guest Tagging (VGT), allowing a node to manage its own 802.1Q tags.",
+        "C": "A specialized way to encrypt logs.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vSphere Web Client' access?",
+      "options": {
+        "A": "TCP 443",
+        "B": "TCP 9443",
+        "C": "TCP 80",
+        "D": "TCP 22"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'SR-IOV' (Single Root I/O Virtualization) provides high-performance hardware access but often limits the ability to perform Live Migration.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only if using a proxy",
+        "D": "Only if the certificate is expired"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Dynamic RAM' in a virtualized system?",
+      "options": {
+        "A": "RAM that expands physically using heat.",
+        "B": "A feature that adjusts the amount of memory assigned to a VM based on real-time task demand and host availability.",
+        "C": "A specialized way to encrypt DNS requests.",
+        "D": "The password for a network administrator."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which 'CPU' extension is essential for hardware-assisted memory virtualization in a hypervisor environment?",
+      "options": {
+        "A": "Intel EPT / AMD RVI",
+        "B": "AES-NI",
+        "C": "AVX-512",
+        "D": "SSE4.2"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Thin Provisioned' disk can cause a system-wide failure if the physical storage pool is over-allocated and reaches full capacity.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only in the North Virginia region"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Virtual Machine Monitor' (VMM)?",
+      "options": {
+        "A": "A physical screen for viewing the VM.",
+        "B": "The component of the hypervisor responsible for managing hardware abstraction and isolation for a virtual machine.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'vSphere Replication' traffic?",
+      "options": {
+        "A": "TCP 31031 / 44046",
+        "B": "TCP 443",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Para-virtualization' allows the Guest OS to communicate with the hypervisor via Hypercalls to improve performance.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for UDP traffic",
+        "D": "Only in version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Storage vMotion' I/O Consistency?",
+      "options": {
+        "A": "Mirroring physical disks on a rack.",
+        "B": "A process that mirrors write operations to both source and destination during a live migration to ensure data integrity.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which port is used for 'SSH' management of distributed nodes?",
+      "options": {
+        "A": "TCP 22",
+        "B": "UDP 22",
+        "C": "TCP 80",
+        "D": "UDP 161"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Security' violation action 'Shutdown'?",
+      "options": {
+        "A": "Turning off the entire network switch.",
+        "B": "An interface policy that puts a port into an error-disabled state immediately if an unauthorized MAC is detected.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'HTTP' management?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: A 'Root Bridge' in STP is selected based on the lowest Bridge ID (Priority + MAC).",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is the purpose of 'VLAN Access Control List' (VACL)?",
+      "options": {
+        "A": "Naming the VLANs on a switch.",
+        "B": "Filtering traffic within a VLAN (intra-VLAN) to increase internal security and isolation.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'Telnet' access?",
+      "options": {
+        "A": "21",
+        "B": "22",
+        "C": "23",
+        "D": "80"
+      },
+      "answer": "C"
+    },
+    {
+      "question": "True or False: 'BPDU Filter' prevents a port from sending or receiving BPDUs, which can lead to loops if enabled on ports connecting to other switches.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'EtherChannel' hashing?",
+      "options": {
+        "A": "A physical tool for grouping cables.",
+        "B": "The algorithm used to determine which physical link in a bundle to use for a specific packet to ensure load distribution.",
+        "C": "A specialized way to encrypt firewall rules.",
+        "D": "To monitor the daily growth of the switch."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'Secure Shell' (SSH)?",
+      "options": {
+        "A": "22",
+        "B": "23",
+        "C": "80",
+        "D": "443"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Dynamic Trunking Protocol' (DTP) is often disabled to prevent 'VLAN Hopping' security attacks.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VTP version 3' Hidden Password?",
+      "options": {
+        "A": "A password the admin cannot see.",
+        "B": "A configuration feature where the VTP password is not displayed in plain text in the device configuration file.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'SNMP' Traps?",
+      "options": {
+        "A": "161",
+        "B": "162",
+        "C": "80",
+        "D": "443"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: A 'Layer 2' loop can cause a broadcast storm that disables the entire cluster's network connectivity.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Port Security' violation action 'Restrict'?",
+      "options": {
+        "A": "Turning off the entire switch.",
+        "B": "An action that drops unauthorized packets and increments a counter without disabling the physical port.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Inbound' port is used for 'HTTPS' management?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "23"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Rapid PVST+' provides faster Spanning Tree convergence times than the standard 802.1D STP.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Idempotency' in a distributed operation?",
+      "options": {
+        "A": "A physical tool for fixing servers.",
+        "B": "The property where applying an operation multiple times has the same effect as applying it once.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "B"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Success Rate' of a distributed request?",
+      "options": {
+        "A": "(Successes / Total Attempts) * 100",
+        "B": "Throughput",
+        "C": "Latency",
+        "D": "Error Count"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Shift-Left' security means moving security testing to the earliest possible stage of the development process.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Threat Modeling' for distributed systems?",
+      "options": {
+        "A": "Identifying and evaluating potential security threats to the system architecture.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Open Pull Requests' for a distributed repository?",
+      "options": {
+        "A": "PR Count",
+        "B": "Throughput",
+        "C": "Latency",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Vulnerability Management' is a continuous process for nodes in a distributed environment.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using a proxy"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Tooling Governance'?",
+      "options": {
+        "A": "A framework for managing an organization's software tools and compliance standards.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Lead Time for Changes' in a distributed CI/CD pipeline?",
+      "options": {
+        "A": "The time from code commit to successful production deployment.",
+        "B": "The number of users.",
+        "C": "Throughput",
+        "D": "Latency"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: DevSecOps is critical for secure distributed software delivery.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Subshell' in shell scripting for distributed automation?",
+      "options": {
+        "A": "A child process environment created to execute commands.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the VPC."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Success Rate' of a distributed CI pipeline?",
+      "options": {
+        "A": "Pass / Fail percentage",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Mimir' can store historical distributed system performance metrics for long-term analysis.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for AWS users",
+        "D": "Only in the year 2026"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'VLAN' segmentation?",
+      "options": {
+        "A": "Using network isolation to logically separate distributed system components.",
+        "B": "Naming the virtual cables.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "The total number of users on a network."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Inbound' port is associated with standard secure web traffic (HTTPS)?",
+      "options": {
+        "A": "80",
+        "B": "443",
+        "C": "22",
+        "D": "21"
+      },
+      "answer": "B"
+    },
+    {
+      "question": "True or False: 'Idempotency' ensures that re-running a distributed operation results in the same final state.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Lineage' traceability in a distributed context?",
+      "options": {
+        "A": "The ability to follow data through every stage of its lifecycle across multiple nodes.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the 'Average' request duration?",
+      "options": {
+        "A": "Mean response time",
+        "B": "Total Throughput",
+        "C": "90th Percentile",
+        "D": "Error Count"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: 'Shift-Left' helps find distributed logic bugs earlier in the lifecycle.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for large companies",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Data Ingestion'?",
+      "options": {
+        "A": "The process of bringing data into a distributed system.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the data center."
+      },
+      "answer": "A"
+    },
+    {
+      "question": "Which specific 'Metric' shows the number of 'Active Nodes'?",
+      "options": {
+        "A": "Node Count",
+        "B": "Throughput",
+        "C": "Response Time",
+        "D": "Error Rate"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "True or False: Firewalls are a primary defense in distributed cluster security.",
+      "options": {
+        "A": "True",
+        "B": "False",
+        "C": "Only for non-encrypted traffic",
+        "D": "Only if using version 1.0"
+      },
+      "answer": "A"
+    },
+    {
+      "question": "What is 'Network Access Control'?",
+      "options": {
+        "A": "Identifying and evaluating network security threats to distributed system components.",
+        "B": "The process of turning off the server.",
+        "C": "A specialized way to encrypt network signals.",
+        "D": "To monitor the daily growth of the log server."
+      },
+      "answer": "A"
+    }
+  ]
+}

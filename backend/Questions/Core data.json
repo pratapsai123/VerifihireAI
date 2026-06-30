@@ -1,0 +1,1586 @@
+{ 
+  "skill": "Core data", 
+  "questions": [
+    {
+"question": "What is data?",
+"options": {
+"A": "Raw facts and figures",
+"B": "Processed information",
+"C": "Computer hardware",
+"D": "Programming language"
+},
+"answer": "A"
+},
+{
+"question": "True or False: Information is processed data.",
+"options": {"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question": "Which of the following are types of data? (Select all that apply)",
+"options": {
+"A":"Structured data",
+"B":"Unstructured data",
+"C":"Semi-structured data",
+"D":"Compiled data"
+},
+"answer":["A","B","C"]
+},
+{
+"question": "Which data structure stores elements in contiguous memory?",
+"options":{
+"A":"Array",
+"B":"Linked List",
+"C":"Stack",
+"D":"Tree"
+},
+"answer":"A"
+},
+{
+"question": "True or False: Arrays have fixed size once created.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question": "Which of the following operations are possible on arrays? (Select all that apply)",
+"options":{
+"A":"Insertion",
+"B":"Deletion",
+"C":"Traversal",
+"D":"Compilation"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which data structure follows LIFO principle?",
+"options":{
+"A":"Stack",
+"B":"Queue",
+"C":"Array",
+"D":"Graph"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Queue follows FIFO order.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which operations are performed on a stack? (Select all that apply)",
+"options":{
+"A":"Push",
+"B":"Pop",
+"C":"Peek",
+"D":"Compile"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which operation removes an element from a queue?",
+"options":{
+"A":"Enqueue",
+"B":"Dequeue",
+"C":"Push",
+"D":"Insert"
+},
+"answer":"B"
+},
+{
+"question":"True or False: Linked lists store elements in non-contiguous memory locations.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are types of linked lists? (Select all that apply)",
+"options":{
+"A":"Singly linked list",
+"B":"Doubly linked list",
+"C":"Circular linked list",
+"D":"Binary linked list"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which data structure represents hierarchical data?",
+"options":{
+"A":"Tree",
+"B":"Stack",
+"C":"Queue",
+"D":"Array"
+},
+"answer":"A"
+},
+{
+"question":"True or False: A binary tree node can have at most two children.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are tree traversal techniques? (Select all that apply)",
+"options":{
+"A":"Inorder",
+"B":"Preorder",
+"C":"Postorder",
+"D":"Binary order"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which data structure is used in Breadth First Search?",
+"options":{
+"A":"Queue",
+"B":"Stack",
+"C":"Array",
+"D":"Tree"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Depth First Search uses stack internally.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are graph components? (Select all that apply)",
+"options":{
+"A":"Vertices",
+"B":"Edges",
+"C":"Nodes",
+"D":"Threads"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which algorithm searches a sorted list efficiently?",
+"options":{
+"A":"Binary Search",
+"B":"Linear Search",
+"C":"Bubble Sort",
+"D":"Merge Sort"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Linear search checks elements sequentially.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are sorting algorithms? (Select all that apply)",
+"options":{
+"A":"Bubble Sort",
+"B":"Merge Sort",
+"C":"Quick Sort",
+"D":"Binary Search"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which sorting algorithm repeatedly swaps adjacent elements?",
+"options":{
+"A":"Bubble Sort",
+"B":"Merge Sort",
+"C":"Heap Sort",
+"D":"Quick Sort"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Merge sort uses divide and conquer technique.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are database models? (Select all that apply)",
+"options":{
+"A":"Relational",
+"B":"Hierarchical",
+"C":"Network",
+"D":"Keyboard"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"Which key uniquely identifies a row in a database table?",
+"options":{
+"A":"Primary key",
+"B":"Foreign key",
+"C":"Candidate key",
+"D":"Composite key"
+},
+"answer":"A"
+},
+{
+"question":"True or False: A foreign key links two tables.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which SQL command retrieves data?",
+"options":{
+"A":"SELECT",
+"B":"DELETE",
+"C":"INSERT",
+"D":"UPDATE"
+},
+"answer":"A"
+},
+{
+"question":"Which SQL commands modify table data? (Select all that apply)",
+"options":{
+"A":"INSERT",
+"B":"UPDATE",
+"C":"DELETE",
+"D":"SELECT"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"True or False: SQL stands for Structured Query Language.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are database constraints? (Select all that apply)",
+"options":{
+"A":"NOT NULL",
+"B":"UNIQUE",
+"C":"PRIMARY KEY",
+"D":"CPU"
+},
+"answer":["A","B","C"]
+},
+{
+"question":"What does normalization in databases aim to do?",
+"options":{
+"A":"Reduce redundancy",
+"B":"Increase duplication",
+"C":"Delete tables",
+"D":"Create indexes"
+},
+"answer":"A"
+},
+{
+"question":"True or False: First Normal Form removes repeating groups.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are types of joins? (Select all that apply)",
+"options":{
+"A":"INNER JOIN",
+"B":"LEFT JOIN",
+"C":"RIGHT JOIN",
+"D":"SORT JOIN"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which join returns rows when there is a match in both tables?",
+"options":{
+"A":"INNER JOIN",
+"B":"LEFT JOIN",
+"C":"RIGHT JOIN",
+"D":"FULL JOIN"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Indexes improve database query performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are data processing stages? (Select all that apply)",
+"options":{
+"A":"Input",
+"B":"Processing",
+"C":"Output",
+"D":"Deletion"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which concept ensures data accuracy and consistency?",
+"options":{
+"A":"Data integrity",
+"B":"Data deletion",
+"C":"Data copying",
+"D":"Data partition"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Data redundancy means duplicate data storage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+  "question": "Which of the following are characteristics of structured data? (Select all that apply)",
+  "options": {
+    "A": "Stored in tables",
+    "B": "Fixed schema",
+    "C": "Easily searchable",
+    "D": "Random binary storage"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Unstructured data includes images, videos, and text documents.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "What is the primary purpose of a database index?",
+  "options": {
+    "A": "Improve query performance",
+    "B": "Delete records automatically",
+    "C": "Encrypt data",
+    "D": "Store backups"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are common database indexing structures? (Select all that apply)",
+  "options": {
+    "A": "B-Tree",
+    "B": "Hash Index",
+    "C": "Bitmap Index",
+    "D": "Stack"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: B-Tree indexes are commonly used in relational databases.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which SQL clause is used to filter records?",
+  "options": {
+    "A": "WHERE",
+    "B": "ORDER BY",
+    "C": "GROUP BY",
+    "D": "JOIN"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following SQL clauses are used for aggregation? (Select all that apply)",
+  "options": {
+    "A": "GROUP BY",
+    "B": "HAVING",
+    "C": "COUNT",
+    "D": "SELECT"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: HAVING clause filters groups after aggregation.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are ACID properties of databases? (Select all that apply)",
+  "options": {
+    "A": "Atomicity",
+    "B": "Consistency",
+    "C": "Isolation",
+    "D": "Durability"
+  },
+  "answer": ["A","B","C","D"]
+},
+{
+  "question": "What does Atomicity ensure in a database transaction?",
+  "options": {
+    "A": "All operations succeed or none occur",
+    "B": "Database runs faster",
+    "C": "Data encryption",
+    "D": "Data compression"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Consistency ensures the database moves from one valid state to another.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following operations belong to CRUD? (Select all that apply)",
+  "options": {
+    "A": "Create",
+    "B": "Read",
+    "C": "Update",
+    "D": "Delete"
+  },
+  "answer": ["A","B","C","D"]
+},
+{
+  "question": "Which SQL command is used to add new rows to a table?",
+  "options": {
+    "A": "INSERT",
+    "B": "SELECT",
+    "C": "DELETE",
+    "D": "DROP"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: DELETE removes rows but keeps table structure.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are advantages of normalization? (Select all that apply)",
+  "options": {
+    "A": "Reduced redundancy",
+    "B": "Improved consistency",
+    "C": "Better organization",
+    "D": "Increased duplication"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does denormalization do?",
+  "options": {
+    "A": "Adds redundancy for performance",
+    "B": "Deletes tables",
+    "C": "Removes indexes",
+    "D": "Compresses data"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Denormalization is used to improve query performance.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are NoSQL database types? (Select all that apply)",
+  "options": {
+    "A": "Document",
+    "B": "Key-value",
+    "C": "Column-family",
+    "D": "Graph"
+  },
+  "answer": ["A","B","C","D"]
+},
+{
+  "question": "Which NoSQL database type stores data as JSON-like documents?",
+  "options": {
+    "A": "Document database",
+    "B": "Graph database",
+    "C": "Key-value store",
+    "D": "Column store"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: MongoDB is a document-oriented NoSQL database.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are graph database examples? (Select all that apply)",
+  "options": {
+    "A": "Neo4j",
+    "B": "Amazon Neptune",
+    "C": "ArangoDB",
+    "D": "Excel"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is data warehousing used for?",
+  "options": {
+    "A": "Analytical processing",
+    "B": "Transaction processing",
+    "C": "Operating system management",
+    "D": "Compiler design"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Data warehouses are optimized for read-heavy workloads.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are ETL process stages? (Select all that apply)",
+  "options": {
+    "A": "Extract",
+    "B": "Transform",
+    "C": "Load",
+    "D": "Compile"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does ETL stand for?",
+  "options": {
+    "A": "Extract Transform Load",
+    "B": "Encrypt Transfer Load",
+    "C": "Evaluate Transform Link",
+    "D": "Export Table Link"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Data lakes store raw data in its native format.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are advantages of data lakes? (Select all that apply)",
+  "options": {
+    "A": "Store large volumes of data",
+    "B": "Handle structured and unstructured data",
+    "C": "Flexible schema",
+    "D": "Limited scalability"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "Which technology processes large-scale distributed data?",
+  "options": {
+    "A": "Apache Hadoop",
+    "B": "MS Word",
+    "C": "Photoshop",
+    "D": "Notepad"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Hadoop uses the HDFS distributed file system.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are characteristics of distributed databases? (Select all that apply)",
+  "options": {
+    "A": "Data stored across multiple locations",
+    "B": "Improved fault tolerance",
+    "C": "Single centralized storage",
+    "D": "Scalability"
+  },
+  "answer": ["A","B","D"]
+},
+{
+  "question": "True or False: Distributed databases improve availability and scalability.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "What does CAP theorem describe?",
+  "options": {
+    "A": "Trade-off between consistency, availability, and partition tolerance",
+    "B": "Data encryption methods",
+    "C": "CPU scheduling methods",
+    "D": "Network routing algorithms"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are components of the CAP theorem? (Select all that apply)",
+  "options": {
+    "A": "Consistency",
+    "B": "Availability",
+    "C": "Partition tolerance",
+    "D": "Scalability"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: According to CAP theorem, a distributed system can guarantee all three properties simultaneously.",
+  "options": {"A":"True","B":"False"},
+  "answer":"B"
+},
+{
+  "question": "Which of the following are types of data partitioning? (Select all that apply)",
+  "options": {
+    "A": "Horizontal partitioning",
+    "B": "Vertical partitioning",
+    "C": "Hash partitioning",
+    "D": "Binary partitioning"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is horizontal partitioning also known as?",
+  "options": {
+    "A": "Sharding",
+    "B": "Indexing",
+    "C": "Replication",
+    "D": "Compression"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Replication duplicates data across multiple servers.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are benefits of replication? (Select all that apply)",
+  "options": {
+    "A": "High availability",
+    "B": "Fault tolerance",
+    "C": "Faster read operations",
+    "D": "Reduced storage usage"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "Which consistency model guarantees immediate consistency across nodes?",
+  "options": {
+    "A": "Strong consistency",
+    "B": "Eventual consistency",
+    "C": "Weak consistency",
+    "D": "Lazy consistency"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Eventual consistency means data will become consistent over time.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following systems commonly use eventual consistency? (Select all that apply)",
+  "options": {
+    "A": "Distributed NoSQL databases",
+    "B": "Cloud storage systems",
+    "C": "Microservices architectures",
+    "D": "Standalone desktop apps"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is a data warehouse schema designed for analytical queries called?",
+  "options": {
+    "A": "Star schema",
+    "B": "Binary schema",
+    "C": "Hash schema",
+    "D": "Circular schema"
+  },
+  "answer": "A"
+},
+{
+  "question": "Which of the following are types of data warehouse schemas? (Select all that apply)",
+  "options": {
+    "A": "Star schema",
+    "B": "Snowflake schema",
+    "C": "Galaxy schema",
+    "D": "Binary schema"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "True or False: Snowflake schema normalizes dimension tables.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are characteristics of big data? (Select all that apply)",
+  "options": {
+    "A": "Volume",
+    "B": "Velocity",
+    "C": "Variety",
+    "D": "Voltage"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What does the 'Velocity' aspect of big data refer to?",
+  "options": {
+    "A": "Speed of data generation and processing",
+    "B": "Data accuracy",
+    "C": "Data security",
+    "D": "Data storage size"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Apache Spark is used for distributed data processing.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are Apache Spark components? (Select all that apply)",
+  "options": {
+    "A": "Spark SQL",
+    "B": "Spark Streaming",
+    "C": "MLlib",
+    "D": "BIOS"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "Which algorithm is commonly used for clustering in data analysis?",
+  "options": {
+    "A": "K-Means",
+    "B": "Binary Search",
+    "C": "Merge Sort",
+    "D": "Linear Search"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: K-Means is an unsupervised machine learning algorithm.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are common data preprocessing techniques? (Select all that apply)",
+  "options": {
+    "A": "Normalization",
+    "B": "Data cleaning",
+    "C": "Feature scaling",
+    "D": "Compiler optimization"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "What is data cleaning?",
+  "options": {
+    "A": "Removing incorrect or inconsistent data",
+    "B": "Deleting entire databases",
+    "C": "Encrypting data",
+    "D": "Compiling programs"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: Feature scaling helps machine learning models perform better.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are methods of feature scaling? (Select all that apply)",
+  "options": {
+    "A": "Normalization",
+    "B": "Standardization",
+    "C": "Min-Max scaling",
+    "D": "Indexing"
+  },
+  "answer": ["A","B","C"]
+},
+{
+  "question": "Which data storage system is optimized for large analytical queries?",
+  "options": {
+    "A": "Data warehouse",
+    "B": "Transaction database",
+    "C": "Local file system",
+    "D": "Operating system"
+  },
+  "answer": "A"
+},
+{
+  "question": "True or False: OLAP systems are optimized for analytical queries.",
+  "options": {"A":"True","B":"False"},
+  "answer":"A"
+},
+{
+  "question": "Which of the following are OLAP operations? (Select all that apply)",
+  "options": {
+    "A": "Drill-down",
+    "B": "Roll-up",
+    "C": "Slice",
+    "D": "Compile"
+  },
+  "answer": ["A","B","C"]
+},
+{
+"question":"What is data?",
+"options":{"A":"Raw facts and figures","B":"Processed information","C":"Hardware","D":"Algorithm"},
+"answer":"A"
+},
+{
+"question":"True or False: Information is processed data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are types of data? (Select all that apply)",
+"options":{"A":"Structured","B":"Unstructured","C":"Semi-structured","D":"Executable"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which data structure stores elements in contiguous memory?",
+"options":{"A":"Array","B":"Linked List","C":"Graph","D":"Tree"},
+"answer":"A"
+},
+{
+"question":"True or False: Arrays have fixed size.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are array operations? (Select all that apply)",
+"options":{"A":"Insertion","B":"Deletion","C":"Traversal","D":"Compilation"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which data structure follows LIFO?",
+"options":{"A":"Stack","B":"Queue","C":"Array","D":"Graph"},
+"answer":"A"
+},
+{
+"question":"True or False: Queue follows FIFO principle.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which stack operations are valid? (Select all that apply)",
+"options":{"A":"Push","B":"Pop","C":"Peek","D":"Compile"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which operation removes element from queue?",
+"options":{"A":"Enqueue","B":"Dequeue","C":"Push","D":"Insert"},
+"answer":"B"
+},
+
+{
+"question":"True or False: Linked list elements are stored non-contiguously.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which are types of linked lists? (Select all that apply)",
+"options":{"A":"Singly","B":"Doubly","C":"Circular","D":"Binary"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which structure represents hierarchical data?",
+"options":{"A":"Tree","B":"Stack","C":"Queue","D":"Array"},
+"answer":"A"
+},
+{
+"question":"True or False: Binary tree node has at most two children.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which are tree traversals? (Select all that apply)",
+"options":{"A":"Inorder","B":"Preorder","C":"Postorder","D":"Backward"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which structure supports BFS?",
+"options":{"A":"Queue","B":"Stack","C":"Array","D":"Tree"},
+"answer":"A"
+},
+{
+"question":"True or False: DFS uses stack internally.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which are graph components? (Select all that apply)",
+"options":{"A":"Vertices","B":"Edges","C":"Nodes","D":"Threads"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which algorithm searches sorted array efficiently?",
+"options":{"A":"Binary Search","B":"Linear Search","C":"Bubble Sort","D":"Merge Sort"},
+"answer":"A"
+},
+{
+"question":"True or False: Linear search checks elements sequentially.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are sorting algorithms? (Select all that apply)",
+"options":{"A":"Bubble","B":"Merge","C":"Quick","D":"Binary Search"},
+"answer":["A","B","C"]
+},
+{
+"question":"Bubble sort swaps?",
+"options":{"A":"Adjacent elements","B":"Random elements","C":"First element","D":"Last element"},
+"answer":"A"
+},
+{
+"question":"True or False: Merge sort uses divide and conquer.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which are database models? (Select all that apply)",
+"options":{"A":"Relational","B":"Hierarchical","C":"Network","D":"Compiler"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which key uniquely identifies record?",
+"options":{"A":"Primary key","B":"Foreign key","C":"Candidate key","D":"Composite"},
+"answer":"A"
+},
+{
+"question":"True or False: Foreign key links tables.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which SQL command retrieves data?",
+"options":{"A":"SELECT","B":"DELETE","C":"INSERT","D":"UPDATE"},
+"answer":"A"
+},
+{
+"question":"Which commands modify table data? (Select all that apply)",
+"options":{"A":"INSERT","B":"UPDATE","C":"DELETE","D":"SELECT"},
+"answer":["A","B","C"]
+},
+{
+"question":"True or False: SQL means Structured Query Language.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are DB constraints? (Select all that apply)",
+"options":{"A":"NOT NULL","B":"UNIQUE","C":"PRIMARY KEY","D":"CPU"},
+"answer":["A","B","C"]
+},
+{
+"question":"Purpose of normalization?",
+"options":{"A":"Reduce redundancy","B":"Increase duplication","C":"Delete tables","D":"Compile"},
+"answer":"A"
+},
+{
+"question":"True or False: 1NF removes repeating groups.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which joins exist? (Select all that apply)",
+"options":{"A":"INNER","B":"LEFT","C":"RIGHT","D":"SORT"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which join returns matching rows?",
+"options":{"A":"INNER JOIN","B":"LEFT JOIN","C":"RIGHT JOIN","D":"FULL JOIN"},
+"answer":"A"
+},
+{
+"question":"True or False: Index improves query performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are data processing stages? (Select all that apply)",
+"options":{"A":"Input","B":"Processing","C":"Output","D":"Compile"},
+"answer":["A","B","C"]
+},
+{
+"question":"Concept ensuring data accuracy?",
+"options":{"A":"Data integrity","B":"Deletion","C":"Partition","D":"Duplication"},
+"answer":"A"
+},
+{
+"question":"True or False: Data redundancy means duplicate data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are types of databases? (Select all that apply)",
+"options":{"A":"Relational","B":"NoSQL","C":"Distributed","D":"Binary"},
+"answer":["A","B","C"]
+},
+{
+"question":"NoSQL database example?",
+"options":{"A":"MongoDB","B":"MySQL","C":"Oracle","D":"PostgreSQL"},
+"answer":"A"
+},
+
+{
+"question":"True or False: MongoDB stores JSON-like documents.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which data model uses tables?",
+"options":{"A":"Relational","B":"Graph","C":"Document","D":"Key-value"},
+"answer":"A"
+},
+
+{
+"question":"Which operations belong to CRUD? (Select all that apply)",
+"options":{"A":"Create","B":"Read","C":"Update","D":"Delete"},
+"answer":["A","B","C","D"]
+},
+{
+"question":"Which SQL clause sorts query results?",
+"options":{"A":"ORDER BY","B":"GROUP BY","C":"WHERE","D":"JOIN"},
+"answer":"A"
+},
+{
+"question":"True or False: GROUP BY groups rows with similar values.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which aggregate functions exist? (Select all that apply)",
+"options":{"A":"COUNT","B":"SUM","C":"AVG","D":"SORT"},
+"answer":["A","B","C"]
+},
+{
+"question":"Which SQL command deletes table structure?",
+"options":{"A":"DROP","B":"DELETE","C":"SELECT","D":"UPDATE"},
+"answer":"A"
+},
+{
+"question":"True or False: DELETE removes rows but keeps table.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which of the following are database transactions properties? (Select all that apply)",
+"options":{"A":"Atomicity","B":"Consistency","C":"Isolation","D":"Durability"},
+"answer":["A","B","C","D"]
+},
+{
+"question":"Atomicity means?",
+"options":{
+"A":"All operations succeed or none",
+"B":"Data stored faster",
+"C":"Data encrypted",
+"D":"Query optimized"
+},
+"answer":"A"
+},
+{
+"question":"True or False: Isolation prevents transactions from interfering.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which SQL clause filters rows before grouping?",
+"options":{"A":"WHERE","B":"HAVING","C":"GROUP BY","D":"ORDER BY"},
+"answer":"A"
+},
+{
+"question":"HAVING clause filters?",
+"options":{
+"A":"Groups",
+"B":"Rows",
+"C":"Tables",
+"D":"Indexes"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: HAVING works with GROUP BY.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are NoSQL database types? (Select all that apply)",
+"options":{
+"A":"Key-value",
+"B":"Document",
+"C":"Graph",
+"D":"Column"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"Which database stores key-value pairs?",
+"options":{
+"A":"Redis",
+"B":"MySQL",
+"C":"Oracle",
+"D":"PostgreSQL"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Graph databases represent relationships efficiently.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which graph database exists?",
+"options":{
+"A":"Neo4j",
+"B":"MongoDB",
+"C":"MySQL",
+"D":"SQLite"
+},
+"answer":"A"
+},
+
+{
+"question":"Which are big data characteristics? (Select all that apply)",
+"options":{
+"A":"Volume",
+"B":"Velocity",
+"C":"Variety",
+"D":"Voltage"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Big data volume refers to?",
+"options":{
+"A":"Amount of data",
+"B":"Speed",
+"C":"Accuracy",
+"D":"Format"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Big data velocity refers to speed of data generation.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which system processes large distributed data?",
+"options":{
+"A":"Hadoop",
+"B":"Excel",
+"C":"Notepad",
+"D":"Word"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Hadoop uses HDFS storage.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Hadoop components exist? (Select all that apply)",
+"options":{
+"A":"HDFS",
+"B":"MapReduce",
+"C":"YARN",
+"D":"BIOS"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"MapReduce is used for?",
+"options":{
+"A":"Distributed processing",
+"B":"Database indexing",
+"C":"Operating system",
+"D":"Compilation"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Spark processes data in memory.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which Spark modules exist? (Select all that apply)",
+"options":{
+"A":"Spark SQL",
+"B":"Spark Streaming",
+"C":"MLlib",
+"D":"CPU"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which ML algorithm performs clustering?",
+"options":{
+"A":"K-Means",
+"B":"Binary Search",
+"C":"Merge Sort",
+"D":"Quick Sort"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: K-Means is unsupervised learning.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which preprocessing techniques exist? (Select all that apply)",
+"options":{
+"A":"Normalization",
+"B":"Standardization",
+"C":"Cleaning",
+"D":"Compilation"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Data cleaning removes?",
+"options":{
+"A":"Incorrect data",
+"B":"Correct data",
+"C":"Tables",
+"D":"Indexes"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Feature scaling improves ML performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which scaling methods exist? (Select all that apply)",
+"options":{
+"A":"Min-Max",
+"B":"Z-score",
+"C":"Normalization",
+"D":"Sorting"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"OLAP systems are optimized for?",
+"options":{
+"A":"Analytical queries",
+"B":"Transaction processing",
+"C":"Networking",
+"D":"Compilation"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: OLTP systems handle transactions.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which OLAP operations exist? (Select all that apply)",
+"options":{
+"A":"Drill-down",
+"B":"Roll-up",
+"C":"Slice",
+"D":"Compile"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Data warehouse is used for?",
+"options":{
+"A":"Analytics",
+"B":"Transactions",
+"C":"Operating systems",
+"D":"Networking"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Data lakes store raw data.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which of the following are benefits of data warehouses? (Select all that apply)",
+"options":{"A":"Centralized data","B":"Better analytics","C":"Historical data storage","D":"Operating system control"},
+"answer":["A","B","C"]
+},
+{
+"question":"True or False: Data warehouses are optimized for read-heavy queries.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+{
+"question":"Which schema is commonly used in data warehouses?",
+"options":{"A":"Star schema","B":"Binary schema","C":"Circular schema","D":"Linked schema"},
+"answer":"A"
+},
+{
+"question":"Which of the following are types of data warehouse schemas? (Select all that apply)",
+"options":{"A":"Star","B":"Snowflake","C":"Galaxy","D":"Binary"},
+"answer":["A","B","C"]
+},
+{
+"question":"True or False: Snowflake schema normalizes dimension tables.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which process extracts, transforms, and loads data?",
+"options":{"A":"ETL","B":"SQL","C":"HDFS","D":"API"},
+"answer":"A"
+},
+{
+"question":"ETL stands for?",
+"options":{
+"A":"Extract Transform Load",
+"B":"Execute Transfer Link",
+"C":"Encrypt Table Load",
+"D":"External Transfer Logic"
+},
+"answer":"A"
+},
+{
+"question":"True or False: ETL is used in data integration.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are ETL stages? (Select all that apply)",
+"options":{"A":"Extract","B":"Transform","C":"Load","D":"Compile"},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which component stores metadata in data warehouse?",
+"options":{"A":"Metadata repository","B":"Database engine","C":"Compiler","D":"CPU"},
+"answer":"A"
+},
+
+{
+"question":"True or False: Metadata describes data structure.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are distributed database benefits? (Select all that apply)",
+"options":{"A":"High availability","B":"Scalability","C":"Fault tolerance","D":"Low storage"},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Data partitioning divides?",
+"options":{
+"A":"Large dataset into smaller parts",
+"B":"CPU cores",
+"C":"Network packets",
+"D":"Programs"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Sharding is horizontal partitioning.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which are partitioning types? (Select all that apply)",
+"options":{"A":"Horizontal","B":"Vertical","C":"Hash","D":"Binary"},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Replication is used for?",
+"options":{
+"A":"Copying data across nodes",
+"B":"Deleting tables",
+"C":"Compressing data",
+"D":"Sorting rows"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Replication improves availability.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which replication benefits exist? (Select all that apply)",
+"options":{"A":"Fault tolerance","B":"High availability","C":"Faster reads","D":"Lower storage"},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which consistency model guarantees immediate consistency?",
+"options":{
+"A":"Strong consistency",
+"B":"Eventual consistency",
+"C":"Weak consistency",
+"D":"Lazy consistency"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Eventual consistency means data becomes consistent over time.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which systems use eventual consistency? (Select all that apply)",
+"options":{
+"A":"Distributed NoSQL databases",
+"B":"Cloud storage",
+"C":"Microservices",
+"D":"Standalone apps"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which are distributed system challenges? (Select all that apply)",
+"options":{
+"A":"Latency",
+"B":"Network failure",
+"C":"Data consistency",
+"D":"Keyboard layout"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Latency refers to?",
+"options":{
+"A":"Time delay in data transfer",
+"B":"Data size",
+"C":"CPU speed",
+"D":"Disk size"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: High latency reduces performance.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which data formats exist? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"XML",
+"C":"CSV",
+"D":"EXE"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"JSON stands for?",
+"options":{
+"A":"JavaScript Object Notation",
+"B":"Java System Object Network",
+"C":"Joint Structured Object Node",
+"D":"Java Serialized Output Network"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: JSON is widely used in APIs.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which API data formats exist? (Select all that apply)",
+"options":{
+"A":"JSON",
+"B":"XML",
+"C":"YAML",
+"D":"MP3"
+},
+"answer":["A","B","C"]
+},
+
+{
+"question":"Which database uses documents?",
+"options":{
+"A":"MongoDB",
+"B":"MySQL",
+"C":"PostgreSQL",
+"D":"Oracle"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: MongoDB stores BSON format.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+},
+
+{
+"question":"Which query language is used in relational databases?",
+"options":{
+"A":"SQL",
+"B":"HTML",
+"C":"CSS",
+"D":"Python"
+},
+"answer":"A"
+},
+
+{
+"question":"Which operations are part of data lifecycle? (Select all that apply)",
+"options":{
+"A":"Collection",
+"B":"Storage",
+"C":"Processing",
+"D":"Deletion"
+},
+"answer":["A","B","C","D"]
+},
+
+{
+"question":"Data governance ensures?",
+"options":{
+"A":"Data quality and compliance",
+"B":"CPU speed",
+"C":"Network configuration",
+"D":"Hardware installation"
+},
+"answer":"A"
+},
+
+{
+"question":"True or False: Data governance improves data quality.",
+"options":{"A":"True","B":"False"},
+"answer":"A"
+}
+
+  ]
+}
