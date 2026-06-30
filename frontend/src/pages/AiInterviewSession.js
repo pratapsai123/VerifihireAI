@@ -199,7 +199,8 @@ const AiInterviewSession = () => {
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: { width: 640, height: 480, facingMode: "user" }
+                video: { width: 640, height: 480, facingMode: "user" },
+                audio: true
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
@@ -211,9 +212,12 @@ const AiInterviewSession = () => {
                 regVideoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
             }
             streamRef.current = stream;
+            micStreamRef.current = stream;
+            return true;
         } catch (err) {
-            console.error("Camera access error:", err);
-            setAiToast({ active: true, text: 'Camera Blocked', urgent: true });
+            console.error("Camera/Mic access error:", err);
+            setAiToast({ active: true, text: 'Camera & Microphone strictly required', urgent: true });
+            return false;
         }
     };
 
@@ -2321,11 +2325,15 @@ const AiInterviewSession = () => {
     // set to true by initSession() before this effect could ever run.
 
     const handleStartInterview = async () => {
-        // Step 1: Just request Camera for face registration
-        console.log("Requesting Camera...");
-        await startCamera();
+        // Step 1: Request Camera & Mic for face registration and session
+        console.log("Requesting Camera and Mic...");
+        const hasPermissions = await startCamera();
+        if (!hasPermissions) {
+            alert("Camera and Microphone permissions are strictly required to start the interview. Please allow access in your browser settings and try again.");
+            return;
+        }
 
-        console.log("Basic permissions (Camera) granted.");
+        console.log("Basic permissions (Camera & Mic) granted.");
         setIsPermissionsGranted(true);
 
         // If face was already registered earlier (we detected it on init), skip
@@ -2867,7 +2875,8 @@ const AiInterviewSession = () => {
         // Re-attach and restart camera for the registration video element
         const restoreCamera = async () => {
             if (!streamRef.current || streamRef.current.getVideoTracks().every(t => t.readyState === 'ended')) {
-                await startCamera();
+                const hasCam = await startCamera();
+                if (!hasCam) return;
             }
             if (regVideoRef.current && streamRef.current) {
                 regVideoRef.current.srcObject = streamRef.current;
