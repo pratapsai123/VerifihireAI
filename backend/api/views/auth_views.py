@@ -705,17 +705,12 @@ def register_view(request):
         )
 
 
-@csrf_exempt
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login_view(request):
+def _do_login(request, allow_student=False):
     """
-    Login a user - Step 1: Verify email and password, then send OTP.
-    Expected request body:
-    {
-        "email": "user@example.com",
-        "password": "password123"
-    }
+    Shared login logic used by login_view and student_login_view.
+    Expects a DRF Request object with request.data containing email and password.
+    allow_student=False  → org/company login (blocks student-role accounts)
+    allow_student=True   → student login page (permits student-role accounts only)
     """
     try:
         email = request.data.get('email', '').strip().lower()
@@ -835,7 +830,21 @@ def login_view(request):
                 
         # Clear old failures on successful login
         LoginAttemptLog.objects.filter(email=email, succeeded=False).delete()
-        
+
+        # Block student accounts from using the standard org/company login page.
+        # Student accounts must use /student/login instead.
+        # (This check is skipped when called from student_login_view.)
+        if not allow_student and user_profile and user_profile.role == UserProfile.ROLE_STUDENT:
+            return Response(
+                {
+                    'error': (
+                        'Student practice accounts are not allowed to log in here. '
+                        'Please use the Student Login page to access your practice dashboard.'
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
         # --- Global OTP Brute Force Check ---
         otp_max_attempts = getattr(settings, 'OTP_MAX_ATTEMPTS', 5)
         otp_lockout_minutes = getattr(settings, 'OTP_LOCKOUT_MINUTES', 15)
@@ -858,10 +867,6 @@ def login_view(request):
                     )
 
         # --- OTP Cooldown Check ---
-        # Only consider UNVERIFIED OTPs for the cooldown.
-        # A verified OTP means the previous session completed successfully —
-        # the user should NOT be blocked from logging in again within 2 minutes
-        # (e.g. just signed up and approved, or logged out and back in quickly).
         otp_cooldown_seconds = getattr(settings, 'OTP_RESEND_COOLDOWN_SECONDS', 120)
         cooldown_threshold = timezone.now() - timedelta(seconds=otp_cooldown_seconds)
         
@@ -902,8 +907,6 @@ def login_view(request):
             )
         except Exception as e:
             print(f"Email sending failed: {str(e)}")
-            # Issue 2 fix: NEVER return the OTP in the response body on email failure.
-            # Fail closed — the user must retry; they do not get the OTP as a bypass.
             return Response(
                 {'error': 'Email delivery failed. Please try again or contact support.'},
                 status=status.HTTP_503_SERVICE_UNAVAILABLE
@@ -922,12 +925,28 @@ def login_view(request):
 
     except Exception as e:
         import traceback
-        print(f"Error in login_view: {str(e)}")
+        print(f"Error in _do_login: {str(e)}")
         print(traceback.format_exc())
         return Response(
             {'error': f'An error occurred: {str(e)}'},
             status=status.HTTP_500_INTERNAL_SERVER_ERROR
         )
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def login_view(request):
+    """
+    Login a user - Step 1: Verify email and password, then send OTP.
+    Expected request body:
+    {
+        "email": "user@example.com",
+        "password": "password123"
+    }
+    """
+    return _do_login(request)
+
 
 
 @csrf_exempt
@@ -1171,4 +1190,182 @@ def refresh_token_view(request):
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def student_register_view(request):
+    """
+    POST /api/student/register/
+    Register a new student/candidate practice account.
+    Personal emails (Gmail/Yahoo) are explicitly allowed.
+    No organization or company is required (defaults to NULL/Student Prep).
+    """
+    try:
+        full_name = request.data.get('full_name', '').strip() or request.data.get('name', '').strip()
+        email = request.data.get('email', '').strip().lower()
+        password = request.data.get('password', '')
+
+        if not full_name:
+            return Response(
+                {'error': 'Full name is required.', 'full_name': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not email:
+            return Response(
+                {'error': 'Email is required.', 'email': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Student registration requires a personal email (Gmail, Yahoo, Outlook, etc.).
+        # Organisation/corporate domains are not allowed here.
+        domain = _email_domain(email)
+        if not domain:
+            return Response(
+                {'error': 'Invalid email address.', 'email': ['Invalid email address.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        if domain not in _free_email_domains():
+            return Response(
+                {
+                    'error': (
+                        'Please use a personal email address to register as a student '
+                        '(e.g. Gmail, Yahoo, Outlook). '
+                        'Organisation or company emails are not allowed for student practice accounts.'
+                    ),
+                    'email': [
+                        'Organisation emails are not allowed. Please use a personal email (e.g. Gmail, Yahoo, Outlook).'
+                    ]
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if not password:
+            return Response(
+                {'error': 'Password is required.', 'password': ['This field is required.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        if len(password) < 6:
+            return Response(
+                {'error': 'Password must be at least 6 characters long.', 'password': ['Password must be at least 6 characters.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Check if email already exists in UserProfile or User
+        if UserProfile.objects.filter(email=email).exists() or User.objects.filter(email=email).exists() or User.objects.filter(username=email).exists():
+            return Response(
+                {'error': 'A user with this email already exists.', 'email': ['A user with this email already exists.']},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Split full_name into first_name and last_name
+        name_parts = full_name.split(' ', 1)
+        first_name = name_parts[0]
+        last_name = name_parts[1] if len(name_parts) > 1 else ''
+
+        # Create Django User
+        user = User.objects.create_user(
+            username=email,
+            email=email,
+            password=password,
+            first_name=first_name,
+            last_name=last_name,
+        )
+
+        # Create UserProfile with student role
+        user_profile = UserProfile.objects.create(
+            first_name=first_name,
+            last_name=last_name if last_name else None,
+            email=email,
+            role=UserProfile.ROLE_STUDENT,
+            organization_name='Student Prep',
+            company=None,
+            user=user,
+            is_approved=True,  # Auto-approve students for practice
+        )
+
+        return Response(
+            {
+                'message': 'Student registration successful!',
+                'user': {
+                    'id': user_profile.id,
+                    'first_name': user_profile.first_name,
+                    'last_name': user_profile.last_name,
+                    'email': user_profile.email,
+                    'role': user_profile.role,
+                    'registration_timestamp': user_profile.registration_timestamp.isoformat(),
+                }
+            },
+            status=status.HTTP_201_CREATED
+        )
+
+    except Exception as e:
+        import traceback
+        print(f"Error in student_register_view: {e}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def student_login_view(request):
+    """
+    POST /api/student/login/
+    Student-only login. Only personal/free-domain emails are allowed
+    (e.g. @gmail.com, @yahoo.com). Organisation emails are rejected
+    with a clear message directing users to the standard /login page.
+    """
+    try:
+        email = request.data.get('email', '').strip().lower()
+
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        domain = _email_domain(email)
+        if not domain:
+            return Response({'error': 'Invalid email address.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Block organisation/corporate email domains
+        if domain not in _free_email_domains():
+            return Response(
+                {
+                    'error': (
+                        'This login is only for student/practice accounts using personal emails '
+                        '(e.g. Gmail, Yahoo, Outlook). '
+                        'Organisation emails are not permitted here. '
+                        'If you are a recruiter or company user, please use the standard Login page.'
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Ensure the account has the student role — block org accounts that
+        # happen to have registered with a personal email through other flows.
+        user_profile = UserProfile.objects.filter(email=email).first()
+        if user_profile and user_profile.role != UserProfile.ROLE_STUDENT:
+            return Response(
+                {
+                    'error': (
+                        'This portal is for student practice accounts only. '
+                        'Please use the standard Login page for recruiter or company accounts.'
+                    )
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        # Delegate to shared login logic (allow_student=True bypasses the org-login student block)
+        return _do_login(request, allow_student=True)
+
+    except Exception as e:
+        import traceback
+        print(f"Error in student_login_view: {e}")
+        print(traceback.format_exc())
+        return Response(
+            {'error': f'An error occurred: {str(e)}'},
+            status=status.HTTP_500_INTERNAL_SERVER_ERROR
+        )
 

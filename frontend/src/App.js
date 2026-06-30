@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import StudentRegister from './pages/StudentRegister';
+import StudentLogin from './pages/StudentLogin';
 import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
@@ -365,6 +367,8 @@ function AppContent() {
     '/',
     '/login',
     '/signup',
+    '/student/login',
+    '/student/register',
     '/forgot-password',
     '/live-interview',             // candidate — no main navbar
     '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
@@ -454,6 +458,8 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/student/login" element={<StudentLogin />} />
+          <Route path="/student/register" element={<StudentRegister />} />
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />

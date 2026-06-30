@@ -86,6 +86,7 @@ class UserProfile(models.Model):
     ROLE_HR = 'hr'
     ROLE_INTERVIEWER = 'interviewer'
     ROLE_CANDIDATE = 'candidate'
+    ROLE_STUDENT = 'student'
 
     ROLE_CHOICES = [
         (ROLE_APPLICATION_ADMIN, 'Application Admin'),
@@ -94,6 +95,7 @@ class UserProfile(models.Model):
         (ROLE_HR, 'HR'),
         (ROLE_INTERVIEWER, 'Interviewer'),
         (ROLE_CANDIDATE, 'Candidate'),
+        (ROLE_STUDENT, 'Student'),
 
         # Legacy roles kept for backward compatibility with existing data/UI flows
         ('recruiter', 'Recruiter (Legacy)'),
@@ -2157,6 +2159,36 @@ class SubscriptionPlan(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class StudentPrepSession(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    resume = models.FileField(upload_to='student_resumes/', blank=True, null=True)
+    resume_text = models.TextField(blank=True, null=True)
+    resume_hash = models.CharField(max_length=64, blank=True, null=True)
+    target_role = models.CharField(max_length=255, blank=True, null=True)
+    experience_level = models.CharField(max_length=100, blank=True, null=True)
+    scheduled_time = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(
+        max_length=20, 
+        choices=[('Scheduled', 'Scheduled'), ('Ongoing', 'Ongoing'), ('Completed', 'Completed')], 
+        default='Scheduled'
+    )
+    interview_questions = models.JSONField(default=list, blank=True)
+    interview_summary = models.JSONField(default=dict, blank=True)
+    score = models.IntegerField(default=0, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Student Prep Session"
+        verbose_name_plural = "Student Prep Sessions"
+
+    def __str__(self):
+        return f"Prep Session - {self.full_name} ({self.email})"
 
 
 

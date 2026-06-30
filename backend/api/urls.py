@@ -12,6 +12,9 @@ urlpatterns = [
     path('heartbeat/', views.heartbeat_view, name='heartbeat'),
 
     path('register/', views.register_view, name='register'),
+    path('student/register/', views.student_register_view, name='student_register'),
+    path('student/login/', views.student_login_view, name='student_login'),
+    path('practice/schedule/', views.public_practice_schedule_view, name='practice_schedule'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     path('reset-password/', views.reset_password_view, name='reset_password'),
@@ -123,6 +126,8 @@ urlpatterns = [
     path('superadmin/users/<int:user_id>/approve/', views.superadmin_approve_user_view, name='superadmin_approve_user'),
     path('superadmin/restricted-domains/', views.superadmin_restricted_domains_view, name='superadmin_restricted_domains'),
     path('superadmin/restricted-domains/<int:domain_id>/', views.superadmin_delete_restricted_domain_view, name='superadmin_delete_restricted_domain'),
+    path('superadmin/student-prep-sessions/', views.superadmin_student_prep_sessions_list_view, name='superadmin_student_prep_sessions'),
+    path('superadmin/student-prep-sessions/<uuid:id>/', views.superadmin_student_prep_session_detail_view, name='superadmin_student_prep_session_detail'),
 
     # Workflow / Settings
     path('settings/deletion/', views.company_deletion_settings_view, name='company_deletion_settings'),

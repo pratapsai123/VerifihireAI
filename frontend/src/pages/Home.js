@@ -820,7 +820,7 @@ function CTASection() {
         <p className="shared-cta-text">
           Join thousands of companies already using VerifiHireAI to hire faster, fairer, and fraud-free.
         </p>
-        <Link to="/signup" className="shared-cta-btn">
+        <Link to="/student/register" className="shared-cta-btn">
           Get Started For Free
         </Link>
       </div>
@@ -856,7 +856,7 @@ function Home() {
                 VerifiHireAI leverages advanced artificial intelligence to conduct structured, unbiased interviews while ensuring real-time fraud detection and candidate authenticity. Make faster, data-driven hiring decisions with confidence, integrity, and precision.
               </p>
               <div className="hero-classic-buttons">
-                <Link to="/signup" className="btn-primary-premium">
+                <Link to="/student/register" className="btn-primary-premium">
                   Get Started Free →
                 </Link>
                 <Link to="/contact" className="btn-secondary-premium">

@@ -5,6 +5,32 @@ import OtpCountdown from '../components/OtpCountdown';
 import { API_BASE_URL } from '../apiConfig';
 import { setToken } from '../utils/authStorage';
 
+// Personal/free email domains that belong to the student portal, not the company login.
+const FREE_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'googlemail.com',
+  'yahoo.com', 'yahoo.in', 'yahoo.co.in', 'yahoo.co.uk', 'yahoo.ca', 'yahoo.com.au', 'ymail.com', 'rocketmail.com',
+  'outlook.com', 'outlook.in', 'outlook.co.uk', 'hotmail.com', 'live.com',
+  'icloud.com', 'me.com', 'mac.com',
+  'aol.com', 'proton.me', 'protonmail.com',
+  'zoho.com', 'mail.com', 'yandex.com', 'msn.com',
+  'fastmail.com', 'gmx.com', 'gmx.net',
+  'tutanota.com', 'tuta.com',
+  'email.com', 'post.com', 'usa.com',
+  'hushmail.com', 'runbox.com', 'mailfence.com', 'countermail.com', 'startmail.com',
+  'web.de', 'inbox.com', 'rediffmail.com',
+  'guerrillamail.com', 'mailinator.com', 'temp-mail.org', '10minutemail.com',
+  'att.net', 'comcast.net', 'verizon.net',
+  'laposte.net', 'orange.fr', 'free.fr',
+  'seznam.cz', 'naver.com', 'daum.net',
+  'student.com', 'lycos.com', 'excite.com',
+]);
+
+function isPersonalEmail(email) {
+  const parts = email.trim().toLowerCase().split('@');
+  if (parts.length !== 2 || !parts[1]) return false;
+  return FREE_EMAIL_DOMAINS.has(parts[1]);
+}
+
 function Login() {
   const navigate = useNavigate();
 
@@ -171,6 +197,16 @@ function Login() {
     setLoginError('');
     setFieldErrors({});
     setOtpSuccess('');
+
+    // Frontend guard: personal/free-domain emails belong to the student portal
+    if (isPersonalEmail(loginEmail)) {
+      setLoginError(
+        'This login is for company/organisation accounts only. ' +
+        'If you are a student or practice candidate, please use the Student Login page.'
+      );
+      return;
+    }
+
     setLoginLoading(true);
 
     try {
