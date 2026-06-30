@@ -65,10 +65,10 @@ const ResumeMatcher = () => {
                         setBatchId(null);
                         setIsAnalyzing(false);
                         if (matchMode === 'automatic') {
-                            const hasEligible = Array.isArray(data.results) 
-                                ? data.results.some(r => r.is_eligible) 
+                            const hasEligible = Array.isArray(data.results)
+                                ? data.results.some(r => r.is_eligible)
                                 : data.results.is_eligible;
-                            
+
                             if (hasEligible) {
                                 setShowPopup(true);
                                 setTimeout(() => {
@@ -409,8 +409,8 @@ const ResumeMatcher = () => {
             } else {
                 setIsAnalyzing(false);
                 if (matchMode === 'automatic') {
-                    const hasEligible = Array.isArray(data) 
-                        ? data.some(r => r.is_eligible) 
+                    const hasEligible = Array.isArray(data)
+                        ? data.some(r => r.is_eligible)
                         : data.is_eligible;
 
                     if (hasEligible) {
@@ -505,9 +505,9 @@ const ResumeMatcher = () => {
                         <h1>Resume <span style={{ color: '#6366F1' }}>Matcher</span></h1>
                         <p>AI-powered side-by-side analysis of candidate fit against specific role requirements.</p>
                     </header>
-                    <button 
-                        className="global-btn-back" 
-                        type="button" 
+                    <button
+                        className="global-btn-back"
+                        type="button"
                         onClick={() => navigate(-1)}
                         style={{ flexShrink: 0 }}
                     >

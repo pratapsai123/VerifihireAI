@@ -17,8 +17,8 @@ const ThankYou = () => {
         <p className="thank-you-message">{message}</p>
         <div className="thank-you-footer">
           <p>We have received your feedback and will be in touch soon.</p>
-          <button 
-            className="home-button" 
+          <button
+            className="home-button"
             onClick={() => window.close()}
           >
             Close Window

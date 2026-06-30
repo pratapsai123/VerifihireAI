@@ -57,7 +57,7 @@ const TARGET_ROUTE_MAP = {
   ai_interview: (token) => `/ai-interview-session/${token}`,
 };
 
-const WINDOWS_DOWNLOAD_URL = 'http://localhost:3000/VerifiHireSecureAgent.exe';
+const WINDOWS_DOWNLOAD_URL = 'https://verifihireai.com/VerifiHireSecureAgent.exe';
 
 /** Collect every blocked app label from a scan result (all tools, not just one). */
 function collectBlockedApps(scanResult) {
@@ -130,7 +130,7 @@ export default function SecurePrecheck() {
           setTerminalCloseWarning(null);
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, [token]);
 
   const targetRoute = useMemo(() => {
@@ -247,9 +247,9 @@ export default function SecurePrecheck() {
     try {
       setStatusMessage(COPY.startingSession);
       const userId = token;
-      const session = await startBackendSecuritySession({ 
-        token, 
-        type, 
+      const session = await startBackendSecuritySession({
+        token,
+        type,
         user_id: userId,
         agent_instance_id: status.instance_id,
       });
@@ -330,8 +330,8 @@ export default function SecurePrecheck() {
       return (
         <>
           <div style={{
-            background: phase === 'agent_expired' ? '#fee2e2' : '#fef3c7', 
-            border: `1px solid ${phase === 'agent_expired' ? '#ef4444' : '#f59e0b'}`, 
+            background: phase === 'agent_expired' ? '#fee2e2' : '#fef3c7',
+            border: `1px solid ${phase === 'agent_expired' ? '#ef4444' : '#f59e0b'}`,
             borderRadius: 8,
             padding: '12px 16px', marginBottom: 16,
           }}>
