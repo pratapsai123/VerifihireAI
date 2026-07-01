@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, FileText, Briefcase, Play, Loader2, Clock, CheckCircle, XCircle, RotateCcw } from 'lucide-react';
+import { Upload, FileText, Briefcase, Play, Loader2, Clock } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig'; 
 import '../styles/StudentAiInterview.css';
@@ -9,29 +9,13 @@ const StudentAiInterview = () => {
     const [jobTitle, setJobTitle] = useState('');
     const [jobDescription, setJobDescription] = useState('');
     const [experienceLevel, setExperienceLevel] = useState('fresher');
+    const [questionCount, setQuestionCount] = useState(14);
     const [resumeFile, setResumeFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [dragActive, setDragActive] = useState(false);
     const fileInputRef = useRef(null);
     const navigate = useNavigate();
-
-    const [interviews, setInterviews] = useState([]);
-    const [loadingHistory, setLoadingHistory] = useState(true);
-
-    useEffect(() => {
-        const fetchHistory = async () => {
-            try {
-                const resp = await axios.get(`${API_BASE_URL}/students/my-interviews/`);
-                setInterviews(resp.data || []);
-            } catch (err) {
-                console.error('Failed to load interview history:', err);
-            } finally {
-                setLoadingHistory(false);
-            }
-        };
-        fetchHistory();
-    }, []);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -74,6 +58,7 @@ const StudentAiInterview = () => {
         formData.append('job_title', jobTitle);
         formData.append('job_description', jobDescription);
         formData.append('experience_level', experienceLevel);
+        formData.append('question_count', questionCount);
         formData.append('resume', resumeFile);
 
         try {
@@ -156,6 +141,24 @@ const StudentAiInterview = () => {
                         </div>
 
                         <div className="form-group">
+                            <label className="form-label">Interview Length</label>
+                            <div className="input-icon-wrapper">
+                                <Clock className="input-icon" size={18} />
+                                <select
+                                    className="glass-input"
+                                    value={questionCount}
+                                    onChange={(e) => setQuestionCount(Number(e.target.value))}
+                                    style={{ cursor: 'pointer', appearance: 'auto' }}
+                                >
+                                    <option value={5}>Quick (5 questions, ~10 min)</option>
+                                    <option value={10}>Short (10 questions, ~20 min)</option>
+                                    <option value={14}>Standard (14 questions, ~30 min)</option>
+                                    <option value={20}>Deep (20 questions, ~45 min)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className="form-group">
                             <label className="form-label">Your Resume (PDF or DOCX)</label>
                             <div 
                                 className={`dropzone ${dragActive ? 'drag-active' : ''}`}
@@ -210,63 +213,6 @@ const StudentAiInterview = () => {
                     </form>
                 </section>
 
-                {/* My Interviews History */}
-                {!loadingHistory && interviews.length > 0 && (
-                    <section className="glass-panel" style={{ marginTop: '2rem' }}>
-                        <h3 style={{ fontSize: '1.2rem', fontWeight: 700, color: '#1e293b', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <Clock size={20} />
-                            My Practice Sessions
-                        </h3>
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-                            {interviews.map((item) => {
-                                const isActive = ['Invited', 'Interview', 'New'].includes(item.status);
-                                const isCompleted = ['Completed', 'Hired', 'Rejected', 'On-Hold', 'Interview Passed', 'Interview Failed'].includes(item.status);
-                                return (
-                                    <div key={item.id} style={{
-                                        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-                                        padding: '1rem 1.25rem', borderRadius: '12px',
-                                        background: isActive ? '#f0fdf4' : isCompleted ? '#f8fafc' : '#fefce8',
-                                        border: `1px solid ${isActive ? '#bbf7d0' : isCompleted ? '#e2e8f0' : '#fde68a'}`,
-                                    }}>
-                                        <div>
-                                            <div style={{ fontWeight: 600, color: '#1e293b', fontSize: '0.95rem' }}>{item.job_title}</div>
-                                            <div style={{ fontSize: '0.8rem', color: '#64748b', marginTop: '4px' }}>
-                                                {item.experience_level} • {new Date(item.created_at).toLocaleDateString()}
-                                                {isCompleted && ` • Score: ${item.score_percentage}%`}
-                                            </div>
-                                        </div>
-                                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                            {isCompleted && (
-                                                <span style={{
-                                                    fontSize: '0.75rem', fontWeight: 700, padding: '4px 10px', borderRadius: '8px',
-                                                    background: item.status === 'Hired' || item.status === 'Interview Passed' ? '#dcfce7' : item.status === 'On-Hold' ? '#fef3c7' : '#fee2e2',
-                                                    color: item.status === 'Hired' || item.status === 'Interview Passed' ? '#166534' : item.status === 'On-Hold' ? '#92400e' : '#991b1b',
-                                                }}>
-                                                    {item.status === 'Hired' || item.status === 'Interview Passed' ? 'Passed' : item.status === 'On-Hold' ? 'Review' : 'Failed'}
-                                                </span>
-                                            )}
-                                            {isActive ? (
-                                                <button
-                                                    onClick={() => navigate(`/ai-interview-session/${item.public_token}`)}
-                                                    style={{
-                                                        padding: '6px 16px', borderRadius: '8px', border: 'none',
-                                                        background: '#22c55e', color: 'white', fontSize: '0.8rem',
-                                                        fontWeight: 600, cursor: 'pointer'
-                                                    }}
-                                                >
-                                                    <Play size={14} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                                                    Resume
-                                                </button>
-                                            ) : isCompleted ? (
-                                                <CheckCircle size={20} style={{ color: '#22c55e' }} />
-                                            ) : null}
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </section>
-                )}
             </div>
         </div>
     );

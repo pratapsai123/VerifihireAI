@@ -556,13 +556,20 @@ const Dashboard = () => {
                     Practice standard AI video/voice mock interviews. Improve your soft skills and technical articulation in real-time prep sessions.
                   </p>
                 </div>
-                <div className="card-actions">
+                <div className="card-actions" style={{ display: 'flex', gap: '0.75rem' }}>
                   <button
                     className="btn-premium btn-fill"
-                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
+                    style={{ flex: 1, padding: '0.85rem', fontSize: '0.95rem' }}
                     onClick={() => navigate('/student/ai-interview')}
                   >
                     Start Mock Interview
+                  </button>
+                  <button
+                    className="btn-premium btn-outline"
+                    style={{ flex: 1, padding: '0.85rem', fontSize: '0.95rem' }}
+                    onClick={() => navigate('/student/sessions')}
+                  >
+                    My Sessions
                   </button>
                 </div>
               </div>
