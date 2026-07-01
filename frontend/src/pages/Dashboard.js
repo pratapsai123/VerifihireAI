@@ -16,7 +16,8 @@ import {
   ChevronRight,
   ChevronDown,
   ChevronUp,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
+  Briefcase
 } from 'lucide-react';
 import {
   XAxis,
@@ -83,6 +84,77 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
+
+  // States and hooks for managing job roles
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [rolesList, setRolesList] = useState([]);
+  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
+  const [editingRoleId, setEditingRoleId] = useState(null);
+  const [editFormData, setEditFormData] = useState({ title: '', description: '' });
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
+
+  const fetchRoles = async () => {
+    setIsLoadingRoles(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/job-roles/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      setRolesList(res.data || []);
+    } catch (error) {
+      console.error("Error fetching job roles:", error);
+    } finally {
+      setIsLoadingRoles(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isManageModalOpen) {
+      fetchRoles();
+    }
+  }, [isManageModalOpen]);
+
+  const handleEditRole = (role) => {
+    setEditingRoleId(role.id);
+    setEditFormData({
+      title: role.title,
+      description: role.description
+    });
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+    setIsSavingEdit(true);
+    try {
+      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      alert('Job Role updated successfully!');
+      setEditingRoleId(null);
+      fetchRoles();
+    } catch (error) {
+      console.error("Error saving job role edits:", error);
+      alert('Failed to save changes. Please try again.');
+    } finally {
+      setIsSavingEdit(false);
+    }
+  };
+
+  const handleDeleteRole = async (roleId) => {
+    const reason = window.prompt("Please enter a reason for deleting this job role (optional):");
+    if (reason === null) return;
+    
+    try {
+      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        data: { reason: reason || 'Administrative Cleanup' }
+      });
+      alert(res.data?.message || 'Job role deleted successfully!');
+      fetchRoles();
+    } catch (error) {
+      console.error("Error deleting job role:", error);
+      alert('Failed to delete job role. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -173,7 +245,9 @@ const Dashboard = () => {
     e.preventDefault();
     setIsSubmittingRole(true);
     try {
-      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData);
+      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
       setIsRoleModalOpen(false);
       setRoleFormData({ title: '', description: '' });
       // Reload roles if needed elsewhere, but for now just success
