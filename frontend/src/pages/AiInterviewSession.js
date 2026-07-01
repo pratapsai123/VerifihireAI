@@ -2261,6 +2261,13 @@ const AiInterviewSession = () => {
                     }
                 }
 
+                // ── PRACTICE INTERVIEW: Skip face registration & DeepFace entirely ──
+                const isPractice = candidate.automation_settings?.is_practice === true;
+                if (isPractice && !candidate.face_embedding_hash) {
+                    console.log('[Practice] Skipping face registration for student practice interview.');
+                    setIsFaceRegistered(true);
+                }
+
                 if (candidate.link_opened_at) {
                     const startTime = new Date(candidate.link_opened_at).getTime();
                     // FIX: Use server_time instead of client clock to prevent
@@ -2962,7 +2969,9 @@ const AiInterviewSession = () => {
 
         // Start DeepFace proctoring session (uses candidate.id as person_id)
         // Only start if not already running to prevent session leak
-        if (!dfSessionIdRef.current) {
+        // Skip for practice interviews — no proctoring needed
+        const isPracticeInterview = candidate.automation_settings?.is_practice === true;
+        if (!dfSessionIdRef.current && !isPracticeInterview) {
             // FIX: Pass candidate data directly to ensure correct personId (PAN) is used immediately
             const personId = getDeepfacePersonId(candidate);
             await startDeepfaceMonitoring(personId);
