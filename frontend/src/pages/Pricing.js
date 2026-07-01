@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import MainHeader from '../components/MainHeader';
 import Footer from '../components/Footer';
 import '../styles/Home.css';
@@ -48,7 +49,7 @@ function Pricing() {
 
   const fetchPlans = async () => {
     try {
-      const response = await axios.get(`http://localhost:8001/api/plans/?t=${new Date().getTime()}`);
+      const response = await axios.get(`${API_BASE_URL}/plans/?t=${new Date().getTime()}`);
       setPricingPlans(response.data.plans || []);
     } catch (error) {
       console.error("Failed to fetch plans", error);

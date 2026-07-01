@@ -13,7 +13,6 @@ import {
   BarChart3,
   Clock,
   PlusCircle,
-  Briefcase,
   ChevronRight,
   ChevronDown,
   ChevronUp,
@@ -84,75 +83,6 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
-  const [hoveredItem, setHoveredItem] = useState(null);
-  
-  // Manage Job Roles Modal state
-  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
-  const [rolesList, setRolesList] = useState([]);
-  const [editingRoleId, setEditingRoleId] = useState(null);
-  const [editFormData, setEditFormData] = useState({ title: '', description: '' });
-  const [isSavingEdit, setIsSavingEdit] = useState(false);
-  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
-
-  const fetchRolesList = async () => {
-    setIsLoadingRoles(true);
-    try {
-      const res = await axios.get(`${API_BASE_URL}/job-roles/`);
-      setRolesList(res.data);
-    } catch (err) {
-      console.error("Error fetching job roles:", err);
-    } finally {
-      setIsLoadingRoles(false);
-    }
-  };
-
-  useEffect(() => {
-    if (isManageModalOpen) {
-      fetchRolesList();
-    }
-  }, [isManageModalOpen]);
-
-  const handleEditRole = (role) => {
-    setEditingRoleId(role.id);
-    setEditFormData({ title: role.title, description: role.description });
-  };
-
-  const handleSaveEdit = async (e) => {
-    e.preventDefault();
-    setIsSavingEdit(true);
-    try {
-      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData);
-      setEditingRoleId(null);
-      fetchRolesList();
-      alert('Job Role updated successfully!');
-    } catch (error) {
-      console.error("Error updating job role:", error);
-      alert('Failed to update job role. Please try again.');
-    } finally {
-      setIsSavingEdit(false);
-    }
-  };
-
-  const handleDeleteRole = async (roleId) => {
-    const reason = window.prompt("Please enter a reason for deleting this job role:");
-    if (reason === null) return;
-    if (!reason.trim()) {
-      alert("A reason is required to request deletion.");
-      return;
-    }
-    try {
-      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, { data: { reason } });
-      fetchRolesList();
-      if (res.status === 202 || res.data?.message?.includes('requested')) {
-        alert(res.data.message || 'Deletion request submitted for approval.');
-      } else {
-        alert('Job Role deleted successfully!');
-      }
-    } catch (error) {
-      console.error("Error deleting job role:", error);
-      alert(error.response?.data?.error || 'Failed to delete job role. Please try again.');
-    }
-  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -354,13 +284,7 @@ const Dashboard = () => {
         </div>
         <nav className="sidebar-nav">
           {navItems.map((item, i) => (
-            <div 
-              key={i} 
-              className="nav-group" 
-              style={{ position: 'relative' }}
-              onMouseEnter={() => !isSidebarCollapsed && setHoveredItem(item.label)}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
+            <div key={i} className="nav-group" style={{ position: 'relative' }}>
               <div
                 className={`nav-item ${item.active ? 'active' : ''} ${expandedItem === item.label ? 'expanded' : ''}`}
                 onClick={(e) => {
@@ -435,11 +359,7 @@ const Dashboard = () => {
                         key={j}
                         className="floating-menu-item"
                         onClick={() => {
-                          if (sub.onClick) {
-                            sub.onClick();
-                          } else {
-                            navigate(sub.path);
-                          }
+                          navigate(sub.path);
                           setActiveFloatingMenu(null);
                         }}
                       >
@@ -450,7 +370,7 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {item.subItems && (expandedItem === item.label || hoveredItem === item.label) && (
+              {item.subItems && expandedItem === item.label && (
                 <div className="sub-nav">
                   {item.subItems.map((sub, j) => (
                     <div key={j} className="sub-nav-group">
@@ -458,9 +378,7 @@ const Dashboard = () => {
                         className={`sub-nav-item ${expandedSubItem === sub.label ? 'expanded' : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (sub.onClick) {
-                            sub.onClick();
-                          } else if (sub.nestedItems) {
+                          if (sub.nestedItems) {
                             setExpandedSubItem(expandedSubItem === sub.label ? null : sub.label);
                           } else {
                             navigate(sub.path);
@@ -714,15 +632,15 @@ const Dashboard = () => {
                     <h3>Candidates</h3>
                   </div>
                   <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">Total Candidates</span>
                       <span className="stat-value">{data.stats.totalCandidates}</span>
                     </div>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">In Pipeline</span>
                       <span className="stat-value">{data.stats.inPipeline}</span>
                     </div>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">Hired</span>
                       <span className="stat-value">{data.stats.hired}</span>
                     </div>
@@ -735,7 +653,18 @@ const Dashboard = () => {
                         <div className="candidate-info">
                           <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
                           <div>
-                            <div className="cand-name">{cand.candidate?.name || 'Anonymous'}</div>
+                            <div 
+                              className="cand-name"
+                              title={cand.candidate?.name || 'Anonymous'}
+                              style={{
+                                maxWidth: '160px',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              {cand.candidate?.name || 'Anonymous'}
+                            </div>
                             <div className="cand-email">{cand.candidate?.email}</div>
                           </div>
                         </div>
@@ -754,7 +683,7 @@ const Dashboard = () => {
                   <div className="chart-header">
                     <h3>Results</h3>
                     <div className="chart-filters">
-                      <select 
+                      <select
                         className="filter-select"
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}

@@ -65,6 +65,9 @@ function MainHeader() {
           onClick={goHome}
           className="brand-logo-group"
           style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '12px',
             background: 'none',
             border: 'none',
             padding: 0,
