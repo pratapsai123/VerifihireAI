@@ -175,6 +175,9 @@ const AiInterviewSession = () => {
     const isNoticePlayingRef = useRef(false);
     const latestSpeakIdRef = useRef(0);
     const faceEmbeddingHashRef = useRef(null); // Store face embedding hash for duplicate detection
+    const blurGraceTimerRef = useRef(null); // Grace period timer for blur events (prevents false positives from screen share bar)
+    const interruptedSpeechRef = useRef(null); // Text that was being spoken when hardware was paused
+    const lastSpeakTextRef = useRef(null); // Track the last text passed to speak() for re-play on resume
     // DeepFace refs
     const dfWsRef = useRef(null);
     const dfCanvasRef = useRef(null);
@@ -435,6 +438,10 @@ const AiInterviewSession = () => {
                 setAiStatus("Interview Paused (Desktop Switched)");
                 // Track when the tab switch started
                 violationStartTimeRef.current['tab_switch'] = Date.now();
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
                 (async () => {
                     await showAiEvent("TAB SWITCHED", true, 'tab_switch');
                     pauseHardware();
@@ -451,21 +458,56 @@ const AiInterviewSession = () => {
                 if (isFullscreenRef.current && isScreenSharing) {
                     setIsPaused(false);
                     setAiStatus("Interview Resumed");
+                    // Auto-reset status back to normal after 2s
+                    setTimeout(() => {
+                        setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                    }, 2000);
+                    // Re-speak any AI message that was interrupted
+                    if (interruptedSpeechRef.current) {
+                        const textToRespeak = interruptedSpeechRef.current;
+                        interruptedSpeechRef.current = null;
+                        setTimeout(() => {
+                            if (!isCompletedRef.current && !isSpeakingRef.current) {
+                                speak(textToRespeak);
+                            }
+                        }, 500);
+                    }
                 }
             }
         };
 
         const handleBlur = () => {
             if (!isPermissionsGranted || isCompletedRef.current) return;
-            setIsPaused(true);
-            setAiStatus("Interview Paused (Window Switched)");
-            (async () => {
-                await showAiEvent("WINDOW BLURRED", true, 'window_blur');
-                pauseHardware();
-            })();
+            // Grace period: don't immediately pause on blur.
+            // Browser screen-sharing info bar clicks, notification dismissals,
+            // and other brief interactions cause blur→focus cycles that kill
+            // the AI's audio mid-speech. Wait 500ms — if focus returns within
+            // that window, the blur was a false positive and we skip pausing.
+            if (blurGraceTimerRef.current) clearTimeout(blurGraceTimerRef.current);
+            blurGraceTimerRef.current = setTimeout(() => {
+                blurGraceTimerRef.current = null;
+                // Double-check: if focus already returned, abort
+                if (document.hasFocus() && !document.hidden) return;
+                setIsPaused(true);
+                setAiStatus("Interview Paused (Window Switched)");
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
+                (async () => {
+                    await showAiEvent("WINDOW BLURRED", true, 'window_blur');
+                    pauseHardware();
+                })();
+            }, 500);
         };
 
         const handleFocus = () => {
+            // Cancel any pending blur grace timer — focus returned before the grace period expired
+            if (blurGraceTimerRef.current) {
+                clearTimeout(blurGraceTimerRef.current);
+                blurGraceTimerRef.current = null;
+                return; // Blur was a false positive (e.g. screen share bar click), skip resume
+            }
             // Window regained focus — resume only if still in fullscreen + screen sharing
             if (isFullscreenRef.current && isScreenSharing && isPermissionsGranted && !isCompletedRef.current) {
                 setIsPaused(false);
@@ -480,6 +522,22 @@ const AiInterviewSession = () => {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
                 setAiStatus("Interview Resumed");
+                // Auto-reset status back to normal after 2s
+                setTimeout(() => {
+                    setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                }, 2000);
+
+                // Re-speak any AI message that was interrupted by the blur/pause
+                if (interruptedSpeechRef.current) {
+                    const textToRespeak = interruptedSpeechRef.current;
+                    interruptedSpeechRef.current = null;
+                    // Small delay to let hardware re-enable before playing audio
+                    setTimeout(() => {
+                        if (!isCompletedRef.current && !isSpeakingRef.current) {
+                            speak(textToRespeak);
+                        }
+                    }, 500);
+                }
             }
         };
 
@@ -508,11 +566,29 @@ const AiInterviewSession = () => {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
                 setAiStatus("Interview Resumed");
+                // Auto-reset status back to normal after 2s
+                setTimeout(() => {
+                    setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                }, 2000);
+                // Re-speak any AI message that was interrupted
+                if (interruptedSpeechRef.current) {
+                    const textToRespeak = interruptedSpeechRef.current;
+                    interruptedSpeechRef.current = null;
+                    setTimeout(() => {
+                        if (!isCompletedRef.current && !isSpeakingRef.current) {
+                            speak(textToRespeak);
+                        }
+                    }, 500);
+                }
             }
 
             if (!isFS && isPermissionsGranted) {
                 setIsPaused(true); // Pause timer and interview progression
                 setAiStatus("Interview Paused (Not in Full Screen)");
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
                 (async () => {
                     await showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
                     pauseHardware();
@@ -1098,6 +1174,9 @@ const AiInterviewSession = () => {
     const speak = useCallback((content) => {
         const rawText = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
         const text = sanitizeForTTS(rawText);
+
+        // Track the last text being spoken for re-play on resume if interrupted
+        lastSpeakTextRef.current = text;
 
         // GUARD: Do not speak if interview is already completed
         if (isCompletedRef.current) {
