@@ -3193,25 +3193,39 @@ class AIAssessmentReportDownloadView(APIView):
             elif mismatch_data.get('identity_mismatch_detected', False):
                 match_score_str = "Mismatch \u2717"
 
-            info_data = [
-                ['Full Name', submission.candidate_name],
-                ['Email', submission.candidate_email or 'N/A'],
-                ['Phone', submission.phone or 'N/A'],
-                ['PAN Number', submission.pan_number or 'N/A'],
-                ['PAN Verified', pan_verified_text],
-                ['Identity Status', identity_status],
-                ['Face Match Score', match_score_str],
-            ]
+            is_student = hasattr(request.user, 'profile') and request.user.profile.role == 'student'
+
+            if is_student:
+                info_data = [
+                    ['Full Name', submission.candidate_name],
+                    ['Email', submission.candidate_email or 'N/A'],
+                    ['Phone', submission.phone or 'N/A'],
+                ]
+            else:
+                info_data = [
+                    ['Full Name', submission.candidate_name],
+                    ['Email', submission.candidate_email or 'N/A'],
+                    ['Phone', submission.phone or 'N/A'],
+                    ['PAN Number', submission.pan_number or 'N/A'],
+                    ['PAN Verified', pan_verified_text],
+                    ['Identity Status', identity_status],
+                    ['Face Match Score', match_score_str],
+                ]
             
             mismatch_reason = getattr(submission, 'identity_mismatch_reason', None)
-            if mismatch_data.get('identity_mismatch_detected', False) and mismatch_reason:
+            if not is_student and mismatch_data.get('identity_mismatch_detected', False) and mismatch_reason:
                 info_data.append(['Mismatch Reason', mismatch_reason])
 
             info_data.extend([
                 ['Job Title', assessment.required_skills or 'N/A'],
                 ['MCQ Score', f"{mcq_pct}% ({mcq_scored} / {mcq_total} Correct)"],
                 ['Coding Score', f"{coding_pct}% ({coding_scored} / {coding_total} pts)"],
-                ['Integrity Score', f"{integrity_score}% {integrity_label}"],
+            ])
+
+            if not is_student:
+                info_data.append(['Integrity Score', f"{integrity_score}% {integrity_label}"])
+
+            info_data.extend([
                 ['Overall Result', f"{submission.percentage}%"],
                 ['Status', status_display],
                 ['Submission Date', submission.submitted_at.strftime('%B %d, %Y %I:%M %p') if submission.submitted_at else 'N/A'],
@@ -3314,30 +3328,44 @@ class AIAssessmentReportDownloadView(APIView):
 
             # Combine photo + info in a bordered container
             page_width = A4[0] - 100  # Total usable width (50pt margins each side)
-            combined_data = [[photo_table, info_table]]
-            combined_table = Table(combined_data, colWidths=[1.8*inch, page_width - 1.8*inch])
-            combined_table.setStyle(TableStyle([
-                ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                ('ALIGN', (0,0), (0,0), 'CENTER'),
-                ('LEFTPADDING', (0,0), (0,0), 10),
-                ('RIGHTPADDING', (0,0), (0,0), 10),
-                ('LEFTPADDING', (1,0), (1,0), 5),
-                ('RIGHTPADDING', (1,0), (1,0), 5),
-                ('TOPPADDING', (0,0), (-1,-1), 10),
-                ('BOTTOMPADDING', (0,0), (-1,-1), 10),
-                # Outer border box
-                ('BOX', (0,0), (-1,-1), 1.2, colors.HexColor("#D0D5E4")),
-                ('ROUNDEDCORNERS', [6, 6, 6, 6]),
-                ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FCFCFF")),
-                # Vertical divider between photo and info
-                ('LINEAFTER', (0,0), (0,-1), 0.5, colors.HexColor("#E0E5F2")),
-            ]))
+            if is_student:
+                combined_table = Table([[info_table]], colWidths=[page_width])
+                combined_table.setStyle(TableStyle([
+                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                    ('LEFTPADDING', (0,0), (0,0), 10),
+                    ('RIGHTPADDING', (0,0), (0,0), 10),
+                    ('TOPPADDING', (0,0), (-1,-1), 10),
+                    ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+                    # Outer border box
+                    ('BOX', (0,0), (-1,-1), 1.2, colors.HexColor("#D0D5E4")),
+                    ('ROUNDEDCORNERS', [6, 6, 6, 6]),
+                    ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FCFCFF")),
+                ]))
+            else:
+                combined_data = [[photo_table, info_table]]
+                combined_table = Table(combined_data, colWidths=[1.8*inch, page_width - 1.8*inch])
+                combined_table.setStyle(TableStyle([
+                    ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                    ('ALIGN', (0,0), (0,0), 'CENTER'),
+                    ('LEFTPADDING', (0,0), (0,0), 10),
+                    ('RIGHTPADDING', (0,0), (0,0), 10),
+                    ('LEFTPADDING', (1,0), (1,0), 5),
+                    ('RIGHTPADDING', (1,0), (1,0), 5),
+                    ('TOPPADDING', (0,0), (-1,-1), 10),
+                    ('BOTTOMPADDING', (0,0), (-1,-1), 10),
+                    # Outer border box
+                    ('BOX', (0,0), (-1,-1), 1.2, colors.HexColor("#D0D5E4")),
+                    ('ROUNDEDCORNERS', [6, 6, 6, 6]),
+                    ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FCFCFF")),
+                    # Vertical divider between photo and info
+                    ('LINEAFTER', (0,0), (0,-1), 0.5, colors.HexColor("#E0E5F2")),
+                ]))
             elements.append(combined_table)
 
             elements.append(Spacer(1, 30))
 
             # 3.5 Identity Documents Section - PAN Card
-            if submission.pan_photo:
+            if not is_student and submission.pan_photo:
                 elements.append(Paragraph("Identity Documents", styles['Heading3']))
                 elements.append(Spacer(1, 10))
                 
@@ -3495,153 +3523,154 @@ class AIAssessmentReportDownloadView(APIView):
                         elements.append(Spacer(1, 30))
 
             # 6. Integrity Violations Log
-            elements.append(PageBreak())
-            elements.append(Paragraph("Integrity Violations Log", styles['SectionTitle']))
-            
-            screenshots = submission.screenshots.all().order_by('timestamp')
-            if screenshots.exists():
-                # Display in a grid-like fashion (4 images per row)
-                shots_list = list(screenshots)
-                img_grid = []
-                current_row = []
-                page_width = A4[0] - 100  # Usable width
-                col_w = page_width / 4
+            if not is_student:
+                elements.append(PageBreak())
+                elements.append(Paragraph("Integrity Violations Log", styles['SectionTitle']))
                 
-                for shot in shots_list:
-                    img_path = None
-                    if shot.webcam_screenshot: img_path = shot.webcam_screenshot.path
-                    elif shot.screenshot: img_path = shot.screenshot.path
+                screenshots = submission.screenshots.all().order_by('timestamp')
+                if screenshots.exists():
+                    # Display in a grid-like fashion (4 images per row)
+                    shots_list = list(screenshots)
+                    img_grid = []
+                    current_row = []
+                    page_width = A4[0] - 100  # Usable width
+                    col_w = page_width / 4
                     
-                    try:
-                        if img_path:
-                            rl_img = RLImage(img_path, width=col_w - 12, height=(col_w - 12) * 0.75)
-                            label = f"{shot.event_type.replace('_', ' ').title()} ({shot.timestamp.strftime('%I:%M:%S %p')})"
-                            current_row.append([rl_img, Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey, leading=9))])
-                        else:
-                            current_row.append(Paragraph("No Image", styles['Normal']))
-                    except:
-                        current_row.append(Paragraph("Error Loading", styles['Normal']))
-
-                    if len(current_row) == 4:
-                        img_grid.append(current_row)
-                        current_row = []
-
-                if current_row:
-                    while len(current_row) < 4:
-                        current_row.append("")
-                    img_grid.append(current_row)
-
-                for grid_row in img_grid:
-                    t = Table([grid_row], colWidths=[col_w] * 4)
-                    t.setStyle(TableStyle([
-                        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                        ('VALIGN', (0,0), (-1,-1), 'TOP'),
-                        ('LEFTPADDING', (0,0), (-1,-1), 3),
-                        ('RIGHTPADDING', (0,0), (-1,-1), 3),
-                        ('TOPPADDING', (0,0), (-1,-1), 5),
-                        ('BOTTOMPADDING', (0,0), (-1,-1), 8),
-                    ]))
-                    elements.append(t)
-            else:
-                elements.append(Paragraph("No violations recorded. Candidate maintained full integrity.", styles['Italic']))
-
-            # Identity Mismatch Section in PDF (placed below integrity screenshots)
-            mismatch_fields = _get_unified_identity_mismatch_fields(request, submission) or {}
-            is_mismatch_detected = mismatch_fields.get('identity_mismatch_detected', False)
-            is_photo_approved = mismatch_fields.get('photo_update_approved', False)
-            
-            if is_mismatch_detected or is_photo_approved:
-                elements.append(Spacer(1, 15))
-                # Red alert box title
-                mismatch_title_style = ParagraphStyle(
-                    'MismatchTitle',
-                    parent=styles['Heading3'],
-                    fontSize=11,
-                    textColor=colors.HexColor("#EE5D50"),
-                    fontName='Helvetica-Bold',
-                    spaceAfter=6
-                )
-                elements.append(Paragraph("⚠ IDENTITY EVIDENCE — FACE COMPARISON MISMATCH", mismatch_title_style))
-                
-                desc_style = ParagraphStyle(
-                    'MismatchDesc',
-                    parent=styles['Normal'],
-                    fontSize=9,
-                    textColor=colors.HexColor("#EE5D50"),
-                    leading=13
-                )
-                elements.append(Paragraph(
-                    "The candidate failed the automated facial verification check when starting the assessment. "
-                    "They chose to 'Override & Continue', meaning the assessment was completed using a <b>different face</b> "
-                    "than what was initially registered. Please compare the original face with the overriding face below.",
-                    desc_style
-                ))
-                elements.append(Spacer(1, 10))
-                
-                # Side-by-side comparison table
-                comparison_photos = []
-                comparison_row = []
-                
-                import os as _os_local
-                orig_path = None
-                master_url = mismatch_fields.get('master_photo_url')
-                if master_url:
-                    try:
-                        temp_orig = _save_to_temp_file(master_url, is_b64=True)
-                        temp_files_to_cleanup.append(temp_orig)
-                        orig_path = temp_orig
-                    except Exception as e:
-                        logger.error(f"PDF Gen: Failed to write master mismatch temp file: {e}")
+                    for shot in shots_list:
+                        img_path = None
+                        if shot.webcam_screenshot: img_path = shot.webcam_screenshot.path
+                        elif shot.screenshot: img_path = shot.screenshot.path
                         
-                intr_path = None
-                pending_url = mismatch_fields.get('pending_identity_photo_url')
-                if pending_url:
+                        try:
+                            if img_path:
+                                rl_img = RLImage(img_path, width=col_w - 12, height=(col_w - 12) * 0.75)
+                                label = f"{shot.event_type.replace('_', ' ').title()} ({shot.timestamp.strftime('%I:%M:%S %p')})"
+                                current_row.append([rl_img, Paragraph(label, ParagraphStyle('ShotLabel', parent=styles['Normal'], fontSize=7, alignment=1, textColor=colors.grey, leading=9))])
+                            else:
+                                current_row.append(Paragraph("No Image", styles['Normal']))
+                        except:
+                            current_row.append(Paragraph("Error Loading", styles['Normal']))
+
+                        if len(current_row) == 4:
+                            img_grid.append(current_row)
+                            current_row = []
+
+                    if current_row:
+                        while len(current_row) < 4:
+                            current_row.append("")
+                        img_grid.append(current_row)
+
+                    for grid_row in img_grid:
+                        t = Table([grid_row], colWidths=[col_w] * 4)
+                        t.setStyle(TableStyle([
+                            ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                            ('VALIGN', (0,0), (-1,-1), 'TOP'),
+                            ('LEFTPADDING', (0,0), (-1,-1), 3),
+                            ('RIGHTPADDING', (0,0), (-1,-1), 3),
+                            ('TOPPADDING', (0,0), (-1,-1), 5),
+                            ('BOTTOMPADDING', (0,0), (-1,-1), 8),
+                        ]))
+                        elements.append(t)
+                else:
+                    elements.append(Paragraph("No violations recorded. Candidate maintained full integrity.", styles['Italic']))
+
+                # Identity Mismatch Section in PDF (placed below integrity screenshots)
+                mismatch_fields = _get_unified_identity_mismatch_fields(request, submission) or {}
+                is_mismatch_detected = mismatch_fields.get('identity_mismatch_detected', False)
+                is_photo_approved = mismatch_fields.get('photo_update_approved', False)
+                
+                if is_mismatch_detected or is_photo_approved:
+                    elements.append(Spacer(1, 15))
+                    # Red alert box title
+                    mismatch_title_style = ParagraphStyle(
+                        'MismatchTitle',
+                        parent=styles['Heading3'],
+                        fontSize=11,
+                        textColor=colors.HexColor("#EE5D50"),
+                        fontName='Helvetica-Bold',
+                        spaceAfter=6
+                    )
+                    elements.append(Paragraph("⚠ IDENTITY EVIDENCE — FACE COMPARISON MISMATCH", mismatch_title_style))
+                    
+                    desc_style = ParagraphStyle(
+                        'MismatchDesc',
+                        parent=styles['Normal'],
+                        fontSize=9,
+                        textColor=colors.HexColor("#EE5D50"),
+                        leading=13
+                    )
+                    elements.append(Paragraph(
+                        "The candidate failed the automated facial verification check when starting the assessment. "
+                        "They chose to 'Override & Continue', meaning the assessment was completed using a <b>different face</b> "
+                        "than what was initially registered. Please compare the original face with the overriding face below.",
+                        desc_style
+                    ))
+                    elements.append(Spacer(1, 10))
+                    
+                    # Side-by-side comparison table
+                    comparison_photos = []
+                    comparison_row = []
+                    
+                    import os as _os_local
+                    orig_path = None
+                    master_url = mismatch_fields.get('master_photo_url')
+                    if master_url:
+                        try:
+                            temp_orig = _save_to_temp_file(master_url, is_b64=True)
+                            temp_files_to_cleanup.append(temp_orig)
+                            orig_path = temp_orig
+                        except Exception as e:
+                            logger.error(f"PDF Gen: Failed to write master mismatch temp file: {e}")
+                            
+                    intr_path = None
+                    pending_url = mismatch_fields.get('pending_identity_photo_url')
+                    if pending_url:
+                        try:
+                            temp_intr = _save_to_temp_file(pending_url, is_b64=True)
+                            temp_files_to_cleanup.append(temp_intr)
+                            intr_path = temp_intr
+                        except Exception as e:
+                            logger.error(f"PDF Gen: Failed to write pending intruder temp file: {e}")
+                    
+                    # Fall back to target_file if original_identity_photo not set on submission
+                    if not orig_path and target_file:
+                        orig_path = str(target_file)
+                    
                     try:
-                        temp_intr = _save_to_temp_file(pending_url, is_b64=True)
-                        temp_files_to_cleanup.append(temp_intr)
-                        intr_path = temp_intr
+                        if orig_path and _os_local.path.exists(orig_path):
+                            comparison_row.append(RLImage(orig_path, width=1.6*inch, height=1.6*inch))
+                        else:
+                            comparison_row.append(Paragraph("No Registered Photo", styles['Normal']))
                     except Exception as e:
-                        logger.error(f"PDF Gen: Failed to write pending intruder temp file: {e}")
-                
-                # Fall back to target_file if original_identity_photo not set on submission
-                if not orig_path and target_file:
-                    orig_path = str(target_file)
-                
-                try:
-                    if orig_path and _os_local.path.exists(orig_path):
-                        comparison_row.append(RLImage(orig_path, width=1.6*inch, height=1.6*inch))
-                    else:
-                        comparison_row.append(Paragraph("No Registered Photo", styles['Normal']))
-                except Exception as e:
-                    comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                        comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                        
+                    try:
+                        if intr_path and _os_local.path.exists(intr_path):
+                            comparison_row.append(RLImage(intr_path, width=1.6*inch, height=1.6*inch))
+                        else:
+                            comparison_row.append(Paragraph("No Overriding Photo", styles['Normal']))
+                    except Exception as e:
+                        comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                        
+                    comparison_photos.append(comparison_row)
                     
-                try:
-                    if intr_path and _os_local.path.exists(intr_path):
-                        comparison_row.append(RLImage(intr_path, width=1.6*inch, height=1.6*inch))
-                    else:
-                        comparison_row.append(Paragraph("No Overriding Photo", styles['Normal']))
-                except Exception as e:
-                    comparison_row.append(Paragraph(f"Error loading: {str(e)}", styles['Normal']))
+                    # Labels row
+                    comparison_labels = [
+                        Paragraph("<b>1. Registered Face</b>", ParagraphStyle('CompLabel1', parent=styles['Normal'], fontSize=9, alignment=1)),
+                        Paragraph("<b>2. Assessment Overriding Face</b>", ParagraphStyle('CompLabel2', parent=styles['Normal'], fontSize=9, alignment=1))
+                    ]
+                    comparison_photos.append(comparison_labels)
                     
-                comparison_photos.append(comparison_row)
-                
-                # Labels row
-                comparison_labels = [
-                    Paragraph("<b>1. Registered Face</b>", ParagraphStyle('CompLabel1', parent=styles['Normal'], fontSize=9, alignment=1)),
-                    Paragraph("<b>2. Assessment Overriding Face</b>", ParagraphStyle('CompLabel2', parent=styles['Normal'], fontSize=9, alignment=1))
-                ]
-                comparison_photos.append(comparison_labels)
-                
-                comp_table = Table(comparison_photos, colWidths=[page_width/2] * 2)
-                comp_table.setStyle(TableStyle([
-                    ('ALIGN', (0,0), (-1,-1), 'CENTER'),
-                    ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
-                    ('TOPPADDING', (0,0), (-1,-1), 5),
-                    ('BOTTOMPADDING', (0,0), (-1,-1), 5),
-                    ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#EE5D50")),
-                    ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FFF5F5")),
-                ]))
-                elements.append(comp_table)
+                    comp_table = Table(comparison_photos, colWidths=[page_width/2] * 2)
+                    comp_table.setStyle(TableStyle([
+                        ('ALIGN', (0,0), (-1,-1), 'CENTER'),
+                        ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+                        ('TOPPADDING', (0,0), (-1,-1), 5),
+                        ('BOTTOMPADDING', (0,0), (-1,-1), 5),
+                        ('BOX', (0,0), (-1,-1), 1, colors.HexColor("#EE5D50")),
+                        ('BACKGROUND', (0,0), (-1,-1), colors.HexColor("#FFF5F5")),
+                    ]))
+                    elements.append(comp_table)
 
             # Build PDF
             doc.build(elements)

@@ -7,6 +7,8 @@ import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
 import StudentRegister from './pages/StudentRegister';
 import StudentLogin from './pages/StudentLogin';
+import StudentCreateAssessment from './pages/StudentCreateAssessment';
+import StudentPracticeResults from './pages/StudentPracticeResults';
 import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
@@ -488,6 +490,8 @@ function AppContent() {
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
             <Route path="/ai-interview" element={<AiInterview />} />
             <Route path="/student/ai-interview" element={<StudentAiInterview />} />
+            <Route path="/student/create-assessment" element={<StudentCreateAssessment />} />
+            <Route path="/student/results" element={<StudentPracticeResults />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />

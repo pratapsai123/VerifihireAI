@@ -50,7 +50,10 @@ export default function ReportPage() {
 
             if (!silent) {
                 // 2. Fetch PDF blob securely (passes JWT token in headers)
-                const reportUrl = `${API_BASE_URL}/results/${submissionId}/report/`;
+                const isAi = String(submissionId).startsWith('ai_');
+                const reportUrl = isAi
+                    ? `${API_BASE_URL}/ai/submission/${String(submissionId).replace('ai_', '')}/download-report/`
+                    : `${API_BASE_URL}/results/${submissionId}/report/`;
                 const response = await axios.get(reportUrl, { responseType: 'blob' });
 
                 const blob = new Blob([response.data], { type: 'application/pdf' });
@@ -168,7 +171,7 @@ export default function ReportPage() {
                 <div className="report-bar-left">
                     <button 
                         className="btn-report-back" 
-                        onClick={() => navigate('/results')}
+                        onClick={() => navigate(currentRole === 'student' ? '/student/results' : '/results')}
                         title="Back to Results list"
                     >
                         <ArrowLeft size={16} />
@@ -221,24 +224,26 @@ export default function ReportPage() {
                         </div>
                     )}
 
-                    <button 
-                        className="btn-report-download" 
-                        onClick={handleDownload} 
-                        disabled={loading || error || !pdfUrl || downloading}
-                        title="Save PDF report to your device"
-                    >
-                        {downloading ? (
-                            <>
-                                <Loader2 size={16} className="report-loading-spinner" style={{ margin: 0, animation: 'spin 1s linear infinite' }} />
-                                Downloading...
-                            </>
-                        ) : (
-                            <>
-                                <Download size={16} />
-                                Download PDF Report
-                            </>
-                        )}
-                    </button>
+                    {currentRole !== 'student' && (
+                        <button 
+                            className="btn-report-download" 
+                            onClick={handleDownload} 
+                            disabled={loading || error || !pdfUrl || downloading}
+                            title="Save PDF report to your device"
+                        >
+                            {downloading ? (
+                                <>
+                                    <Loader2 size={16} className="report-loading-spinner" style={{ margin: 0, animation: 'spin 1s linear infinite' }} />
+                                    Downloading...
+                                </>
+                            ) : (
+                                <>
+                                    <Download size={16} />
+                                    Download PDF Report
+                                </>
+                            )}
+                        </button>
+                    )}
                 </div>
             </div>
 
