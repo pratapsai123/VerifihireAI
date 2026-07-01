@@ -1644,46 +1644,46 @@ const AiInterviewSession = () => {
                         lastSpokenTimeRef.current = Date.now(); // Activity Reset!
                     }
 
-                    if (!data.turn_is_formatted) {
-                        interimTranscriptRef.current = text;
-                    } else {
-                        // SMART MERGE: AssemblyAI sends growing cumulative updates
-                        // within a single turn, but separate Turn events for new
-                        // utterances after a pause. We need to handle both:
-                        //
-                        // Case 1 (Cumulative update within same turn):
-                        //   existing: "I have 5 years"
-                        //   new:      "I have 5 years experience at Google"
-                        //   → Overwrite (new text is a superset of existing)
-                        //
-                        // Case 2 (New utterance after pause):
-                        //   existing: "I have 5 years experience."
-                        //   new:      "I worked at Google."
-                        //   → Append (completely new text)
-                        //
-                        const newText = text.trim();
-                        const existing = transcriptRef.current.trim();
+                    // ── AssemblyAI v3 Turn Handling ──
+                    // Each Turn event's `transcript` field contains the COMPLETE
+                    // re-transcription of the current turn from its start.
+                    // 
+                    // - Partial updates (end_of_turn=false / turn_is_formatted=false):
+                    //   The turn is still in progress. Just use the latest `transcript`
+                    //   as the current turn's text (overwrite, don't append).
+                    //
+                    // - Finalized turn (end_of_turn=true / turn_is_formatted=true):
+                    //   The speaker paused and this turn is complete. Commit this
+                    //   turn's text to the accumulated buffer, then reset the
+                    //   current turn buffer for the next utterance.
+                    //
+                    // We maintain two buffers:
+                    //   completedTurnsRef: accumulated text from all finalized turns
+                    //   currentTurnRef: text from the turn currently in progress
 
-                        if (!existing) {
-                            // Buffer is empty, just set it
-                            transcriptRef.current = newText;
-                        } else if (newText.startsWith(existing)) {
-                            // New text is a superset of existing → cumulative update, overwrite
-                            transcriptRef.current = newText;
-                        } else if (existing.endsWith(newText) || existing.includes(newText)) {
-                            // Duplicate or already contained → ignore
+                    const trimmed = text.trim();
+
+                    if (!data.turn_is_formatted && !data.end_of_turn) {
+                        // Partial update — overwrite current turn buffer (don't accumulate)
+                        interimTranscriptRef.current = trimmed;
+                    } else {
+                        // Finalized turn — commit to completed turns and reset
+                        // The transcript here is the FULL text of this turn
+                        if (transcriptRef.current.trim()) {
+                            // Append finalized turn text to completed buffer
+                            transcriptRef.current = transcriptRef.current.trim() + " " + trimmed;
                         } else {
-                            // Completely new utterance → append
-                            transcriptRef.current = existing + " " + newText;
+                            transcriptRef.current = trimmed;
                         }
                         interimTranscriptRef.current = "";
                     }
 
                     const trimTranscript = transcriptRef.current.trim();
                     const trimInterim = interimTranscriptRef.current.trim();
-                    const currentTotal = trimInterim.startsWith(trimTranscript)
-                        ? trimInterim
-                        : (trimTranscript + " " + trimInterim).trim();
+                    // Show committed turns + current partial as the live display
+                    const currentTotal = trimInterim
+                        ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                        : trimTranscript;
 
                     if (currentTotal) {
                         const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
@@ -3277,9 +3277,10 @@ const AiInterviewSession = () => {
 
                 const trimTranscript = transcriptRef.current.trim();
                 const trimInterim = interimTranscriptRef.current.trim();
-                const finalTranscript = trimInterim.startsWith(trimTranscript)
-                    ? trimInterim
-                    : (trimTranscript + " " + trimInterim).trim();
+                // Combine finalized turns + any in-progress partial turn
+                const finalTranscript = trimInterim
+                    ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                    : trimTranscript;
                 const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
 
                 if (submitHandlerRef.current) {
@@ -3305,9 +3306,10 @@ const AiInterviewSession = () => {
         if (isRecording) {
             const trimTranscript = transcriptRef.current.trim();
             const trimInterim = interimTranscriptRef.current.trim();
-            const finalSubmission = trimInterim.startsWith(trimTranscript)
-                ? trimInterim
-                : (trimTranscript + " " + trimInterim).trim();
+            // Combine finalized turns + any in-progress partial turn
+            const finalSubmission = trimInterim
+                ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                : trimTranscript;
 
             // FIX: Mark as manually muted so auto-resume doesn't override user's choice
             manualMuteRef.current = true;
