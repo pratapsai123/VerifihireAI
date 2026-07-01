@@ -1568,10 +1568,9 @@ const AiInterviewSession = () => {
                     if (!data.turn_is_formatted) {
                         interimTranscriptRef.current = text;
                     } else {
-                        // AssemblyAI v3 Turn events with turn_is_formatted=true contain
-                        // the COMPLETE text of the session so far. Overwrite instead of appending
-                        // to prevent cumulative repetition duplication bugs.
-                        transcriptRef.current = text.trim();
+                        // AssemblyAI v2/v3 final turn events contain only the current utterance.
+                        // We must append to the existing transcript, not overwrite it!
+                        transcriptRef.current = (transcriptRef.current + " " + text.trim()).trim();
                         interimTranscriptRef.current = "";
                     }
 
