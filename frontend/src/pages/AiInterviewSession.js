@@ -1568,9 +1568,35 @@ const AiInterviewSession = () => {
                     if (!data.turn_is_formatted) {
                         interimTranscriptRef.current = text;
                     } else {
-                        // AssemblyAI v2/v3 final turn events contain only the current utterance.
-                        // We must append to the existing transcript, not overwrite it!
-                        transcriptRef.current = (transcriptRef.current + " " + text.trim()).trim();
+                        // SMART MERGE: AssemblyAI sends growing cumulative updates
+                        // within a single turn, but separate Turn events for new
+                        // utterances after a pause. We need to handle both:
+                        //
+                        // Case 1 (Cumulative update within same turn):
+                        //   existing: "I have 5 years"
+                        //   new:      "I have 5 years experience at Google"
+                        //   → Overwrite (new text is a superset of existing)
+                        //
+                        // Case 2 (New utterance after pause):
+                        //   existing: "I have 5 years experience."
+                        //   new:      "I worked at Google."
+                        //   → Append (completely new text)
+                        //
+                        const newText = text.trim();
+                        const existing = transcriptRef.current.trim();
+
+                        if (!existing) {
+                            // Buffer is empty, just set it
+                            transcriptRef.current = newText;
+                        } else if (newText.startsWith(existing)) {
+                            // New text is a superset of existing → cumulative update, overwrite
+                            transcriptRef.current = newText;
+                        } else if (existing.endsWith(newText) || existing.includes(newText)) {
+                            // Duplicate or already contained → ignore
+                        } else {
+                            // Completely new utterance → append
+                            transcriptRef.current = existing + " " + newText;
+                        }
                         interimTranscriptRef.current = "";
                     }
 
