@@ -75,10 +75,10 @@ function MainHeader() {
             textAlign: 'left'
           }}
         >
-          <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" style={{ height: '44px', width: 'auto', display: 'block' }} />
-          <div className="brand-text-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'center', lineHeight: '1.1' }}>
-            <span className="brand-name-text" style={{ fontSize: '1.4rem', fontWeight: '600', color: '#c69214', fontFamily: 'Georgia, serif', letterSpacing: '0.2px', margin: 0 }}>VerifiHireAI</span>
-            <p className="brand-tagline" style={{ margin: '2px 0 0 0', fontSize: '0.75rem', color: '#475569', fontWeight: '500', fontFamily: 'sans-serif' }}>Trust in Every Hire</p>
+          <img src="/auth-logo-v7.png" alt="VerifiHireAI Logo" className="brand-logo-img" />
+          <div className="brand-text-container">
+            <span className="brand-name-text">VerifiHireAI</span>
+            <p className="brand-tagline">Trust in Every Hire</p>
           </div>
         </button>
 

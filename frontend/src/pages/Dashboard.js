@@ -233,7 +233,16 @@ const Dashboard = () => {
       role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
       badge: pendingCount > 0 ? pendingCount : null
     },
-    { icon: PlusCircle, label: 'Create Role', onClick: () => setIsRoleModalOpen(true), style: { color: '#6366f1', fontWeight: 700 }, role: ['company_admin', 'hr_manager', 'hr', 'application_admin'] },
+    {
+      icon: Briefcase,
+      label: 'Job Roles',
+      path: '#',
+      role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
+      subItems: [
+        { label: 'Create Job Role', onClick: () => setIsRoleModalOpen(true) },
+        { label: 'Manage Job Roles', onClick: () => { setEditingRoleId(null); setIsManageModalOpen(true); } }
+      ]
+    },
   ];
 
   const navItems = allNavItems.filter(item => {
@@ -790,6 +799,143 @@ const Dashboard = () => {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Manage Job Roles Modal */}
+      {isManageModalOpen && (
+        <div
+          className="modal-overlay"
+          onClick={() => setIsManageModalOpen(false)}
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(15, 23, 42, 0.6)',
+            backdropFilter: 'blur(4px)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1000
+          }}
+        >
+          <div
+            className="glass-card modal-content"
+            onClick={(e) => e.stopPropagation()}
+            style={{
+              maxWidth: '700px',
+              width: '90%',
+              maxHeight: editingRoleId ? '90vh' : '85vh',
+              minHeight: editingRoleId ? '70vh' : 'auto',
+              padding: '2rem',
+              background: 'white',
+              borderRadius: '2rem',
+              display: 'flex',
+              flexDirection: 'column'
+            }}
+          >
+            <div className="modal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', flexShrink: 0 }}>
+              <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Manage Job Roles</h3>
+              <button className="icon-btn" onClick={() => setIsManageModalOpen(false)}><ChevronDown size={20} /></button>
+            </div>
+            
+            <div style={{ flex: 1, overflowY: editingRoleId ? 'hidden' : 'auto', overflowX: 'hidden', paddingRight: '0.5rem', marginBottom: editingRoleId ? '0' : '1.5rem', display: 'flex', flexDirection: 'column' }}>
+              {isLoadingRoles ? (
+                <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
+                  <div className="loader" style={{ fontSize: '1rem' }}>Loading Job Roles...</div>
+                </div>
+              ) : rolesList.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '3rem', color: '#64748b', fontSize: '0.95rem' }}>
+                  No job roles found. Create one to get started!
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%', flex: editingRoleId ? 1 : 'none' }}>
+                  {rolesList.map((role) => (
+                    <div 
+                      key={role.id} 
+                      style={{ 
+                        background: editingRoleId === role.id ? '#ffffff' : '#f8fafc', 
+                        border: editingRoleId === role.id ? '2px solid #6366f1' : '1px solid #e2e8f0', 
+                        borderRadius: '16px', 
+                        padding: editingRoleId === role.id ? '1.5rem' : '1.25rem',
+                        transition: 'all 0.2s',
+                        width: '100%',
+                        minWidth: 0,
+                        boxShadow: editingRoleId === role.id ? '0 8px 25px rgba(99, 102, 241, 0.1)' : 'none',
+                        display: editingRoleId && editingRoleId !== role.id ? 'none' : 'flex',
+                        flexDirection: 'column',
+                        flex: editingRoleId === role.id ? 1 : 'none'
+                      }}
+                    >
+                      {editingRoleId === role.id ? (
+                        <form onSubmit={handleSaveEdit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', height: '100%' }}>
+                          <h4 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, color: '#6366f1', flexShrink: 0 }}>Editing Role</h4>
+                          <div style={{ flexShrink: 0 }}>
+                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem' }}>Role Title</label>
+                            <input
+                              type="text"
+                              className="filter-select"
+                              style={{ width: '100%', height: '44px', padding: '0 1rem', borderRadius: '10px', fontSize: '0.95rem', border: '1px solid #e2e8f0' }}
+                              value={editFormData.title}
+                              onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
+                              required
+                            />
+                          </div>
+                          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem', flexShrink: 0 }}>Description</label>
+                            <textarea
+                              className="filter-select"
+                              style={{ width: '100%', flex: 1, minHeight: '80px', padding: '0.85rem 1rem', borderRadius: '10px', resize: 'none', fontSize: '0.9rem', lineHeight: '1.6', border: '1px solid #e2e8f0' }}
+                              value={editFormData.description}
+                              onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
+                              required
+                            />
+                          </div>
+                          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', paddingTop: '0.5rem', flexShrink: 0 }}>
+                            <button type="button" className="btn-premium btn-outline" style={{ padding: '0.55rem 1.5rem', fontSize: '0.85rem', borderRadius: '10px' }} onClick={() => setEditingRoleId(null)}>Cancel</button>
+                            <button type="submit" className="btn-premium btn-fill" style={{ padding: '0.55rem 1.5rem', fontSize: '0.85rem', borderRadius: '10px' }} disabled={isSavingEdit}>
+                              {isSavingEdit ? 'Saving...' : 'Save Changes'}
+                            </button>
+                          </div>
+                        </form>
+                      ) : (
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', width: '100%', minWidth: 0 }}>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', width: '100%', minWidth: 0 }}>
+                            <h4 style={{ margin: 0, fontWeight: 700, color: '#1e293b', fontSize: '1rem', wordBreak: 'break-all', overflowWrap: 'break-word', flex: 1, minWidth: 0 }}>{role.title}</h4>
+                            <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
+                              <button 
+                                className="btn-premium btn-outline" 
+                                style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#cbd5e1' }}
+                                onClick={() => handleEditRole(role)}
+                              >
+                                Edit
+                              </button>
+                              <button 
+                                className="btn-premium btn-outline" 
+                                style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#fca5a5', color: '#ef4444' }}
+                                onClick={() => handleDeleteRole(role.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                          <p style={{ margin: 0, fontSize: '0.85rem', color: '#475569', whiteSpace: 'pre-wrap', lineHeight: '1.5', wordBreak: 'break-all', overflowWrap: 'break-word', width: '100%', minWidth: 0 }}>
+                            {role.description}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            <div style={{ display: editingRoleId ? 'none' : 'flex', justifyContent: 'flex-end', borderTop: '1px solid #e2e8f0', paddingTop: '1rem', flexShrink: 0 }}>
+              <button className="btn-premium btn-fill" style={{ padding: '0.6rem 1.5rem' }} onClick={() => setIsManageModalOpen(false)}>Close</button>
+            </div>
           </div>
         </div>
       )}

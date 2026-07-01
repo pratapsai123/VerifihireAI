@@ -175,6 +175,9 @@ const AiInterviewSession = () => {
     const isNoticePlayingRef = useRef(false);
     const latestSpeakIdRef = useRef(0);
     const faceEmbeddingHashRef = useRef(null); // Store face embedding hash for duplicate detection
+    const blurGraceTimerRef = useRef(null); // Grace period timer for blur events (prevents false positives from screen share bar)
+    const interruptedSpeechRef = useRef(null); // Text that was being spoken when hardware was paused
+    const lastSpeakTextRef = useRef(null); // Track the last text passed to speak() for re-play on resume
     // DeepFace refs
     const dfWsRef = useRef(null);
     const dfCanvasRef = useRef(null);
@@ -199,7 +202,8 @@ const AiInterviewSession = () => {
     const startCamera = async () => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
-                video: { width: 640, height: 480, facingMode: "user" }
+                video: { width: 640, height: 480, facingMode: "user" },
+                audio: true
             });
             if (videoRef.current) {
                 videoRef.current.srcObject = stream;
@@ -211,9 +215,12 @@ const AiInterviewSession = () => {
                 regVideoRef.current.play().catch(e => console.warn("Auto-play prevented:", e));
             }
             streamRef.current = stream;
+            micStreamRef.current = stream;
+            return true;
         } catch (err) {
-            console.error("Camera access error:", err);
-            setAiToast({ active: true, text: 'Camera Blocked', urgent: true });
+            console.error("Camera/Mic access error:", err);
+            setAiToast({ active: true, text: 'Camera & Microphone strictly required', urgent: true });
+            return false;
         }
     };
 
@@ -431,6 +438,10 @@ const AiInterviewSession = () => {
                 setAiStatus("Interview Paused (Desktop Switched)");
                 // Track when the tab switch started
                 violationStartTimeRef.current['tab_switch'] = Date.now();
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
                 (async () => {
                     await showAiEvent("TAB SWITCHED", true, 'tab_switch');
                     pauseHardware();
@@ -447,21 +458,56 @@ const AiInterviewSession = () => {
                 if (isFullscreenRef.current && isScreenSharing) {
                     setIsPaused(false);
                     setAiStatus("Interview Resumed");
+                    // Auto-reset status back to normal after 2s
+                    setTimeout(() => {
+                        setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                    }, 2000);
+                    // Re-speak any AI message that was interrupted
+                    if (interruptedSpeechRef.current) {
+                        const textToRespeak = interruptedSpeechRef.current;
+                        interruptedSpeechRef.current = null;
+                        setTimeout(() => {
+                            if (!isCompletedRef.current && !isSpeakingRef.current) {
+                                speak(textToRespeak);
+                            }
+                        }, 500);
+                    }
                 }
             }
         };
 
         const handleBlur = () => {
             if (!isPermissionsGranted || isCompletedRef.current) return;
-            setIsPaused(true);
-            setAiStatus("Interview Paused (Window Switched)");
-            (async () => {
-                await showAiEvent("WINDOW BLURRED", true, 'window_blur');
-                pauseHardware();
-            })();
+            // Grace period: don't immediately pause on blur.
+            // Browser screen-sharing info bar clicks, notification dismissals,
+            // and other brief interactions cause blur→focus cycles that kill
+            // the AI's audio mid-speech. Wait 500ms — if focus returns within
+            // that window, the blur was a false positive and we skip pausing.
+            if (blurGraceTimerRef.current) clearTimeout(blurGraceTimerRef.current);
+            blurGraceTimerRef.current = setTimeout(() => {
+                blurGraceTimerRef.current = null;
+                // Double-check: if focus already returned, abort
+                if (document.hasFocus() && !document.hidden) return;
+                setIsPaused(true);
+                setAiStatus("Interview Paused (Window Switched)");
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
+                (async () => {
+                    await showAiEvent("WINDOW BLURRED", true, 'window_blur');
+                    pauseHardware();
+                })();
+            }, 500);
         };
 
         const handleFocus = () => {
+            // Cancel any pending blur grace timer — focus returned before the grace period expired
+            if (blurGraceTimerRef.current) {
+                clearTimeout(blurGraceTimerRef.current);
+                blurGraceTimerRef.current = null;
+                return; // Blur was a false positive (e.g. screen share bar click), skip resume
+            }
             // Window regained focus — resume only if still in fullscreen + screen sharing
             if (isFullscreenRef.current && isScreenSharing && isPermissionsGranted && !isCompletedRef.current) {
                 setIsPaused(false);
@@ -476,6 +522,22 @@ const AiInterviewSession = () => {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
                 setAiStatus("Interview Resumed");
+                // Auto-reset status back to normal after 2s
+                setTimeout(() => {
+                    setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                }, 2000);
+
+                // Re-speak any AI message that was interrupted by the blur/pause
+                if (interruptedSpeechRef.current) {
+                    const textToRespeak = interruptedSpeechRef.current;
+                    interruptedSpeechRef.current = null;
+                    // Small delay to let hardware re-enable before playing audio
+                    setTimeout(() => {
+                        if (!isCompletedRef.current && !isSpeakingRef.current) {
+                            speak(textToRespeak);
+                        }
+                    }, 500);
+                }
             }
         };
 
@@ -504,11 +566,29 @@ const AiInterviewSession = () => {
                     videoRef.current.play().catch(e => console.warn("Cam resume error:", e));
                 }
                 setAiStatus("Interview Resumed");
+                // Auto-reset status back to normal after 2s
+                setTimeout(() => {
+                    setAiStatus(prev => prev === "Interview Resumed" ? "Indu is Online" : prev);
+                }, 2000);
+                // Re-speak any AI message that was interrupted
+                if (interruptedSpeechRef.current) {
+                    const textToRespeak = interruptedSpeechRef.current;
+                    interruptedSpeechRef.current = null;
+                    setTimeout(() => {
+                        if (!isCompletedRef.current && !isSpeakingRef.current) {
+                            speak(textToRespeak);
+                        }
+                    }, 500);
+                }
             }
 
             if (!isFS && isPermissionsGranted) {
                 setIsPaused(true); // Pause timer and interview progression
                 setAiStatus("Interview Paused (Not in Full Screen)");
+                // Save the text being spoken so we can re-speak on resume
+                if (isSpeakingRef.current && lastSpeakTextRef.current) {
+                    interruptedSpeechRef.current = lastSpeakTextRef.current;
+                }
                 (async () => {
                     await showAiEvent("FULLSCREEN EXITED", true, 'tab_switch');
                     pauseHardware();
@@ -1095,6 +1175,9 @@ const AiInterviewSession = () => {
         const rawText = typeof content === 'object' ? (content.question || JSON.stringify(content)) : content;
         const text = sanitizeForTTS(rawText);
 
+        // Track the last text being spoken for re-play on resume if interrupted
+        lastSpeakTextRef.current = text;
+
         // GUARD: Do not speak if interview is already completed
         if (isCompletedRef.current) {
             console.log("Speak blocked: Interview is completed.");
@@ -1561,21 +1644,46 @@ const AiInterviewSession = () => {
                         lastSpokenTimeRef.current = Date.now(); // Activity Reset!
                     }
 
-                    if (!data.turn_is_formatted) {
-                        interimTranscriptRef.current = text;
+                    // ── AssemblyAI v3 Turn Handling ──
+                    // Each Turn event's `transcript` field contains the COMPLETE
+                    // re-transcription of the current turn from its start.
+                    // 
+                    // - Partial updates (end_of_turn=false / turn_is_formatted=false):
+                    //   The turn is still in progress. Just use the latest `transcript`
+                    //   as the current turn's text (overwrite, don't append).
+                    //
+                    // - Finalized turn (end_of_turn=true / turn_is_formatted=true):
+                    //   The speaker paused and this turn is complete. Commit this
+                    //   turn's text to the accumulated buffer, then reset the
+                    //   current turn buffer for the next utterance.
+                    //
+                    // We maintain two buffers:
+                    //   completedTurnsRef: accumulated text from all finalized turns
+                    //   currentTurnRef: text from the turn currently in progress
+
+                    const trimmed = text.trim();
+
+                    if (!data.turn_is_formatted && !data.end_of_turn) {
+                        // Partial update — overwrite current turn buffer (don't accumulate)
+                        interimTranscriptRef.current = trimmed;
                     } else {
-                        // AssemblyAI v3 Turn events with turn_is_formatted=true contain
-                        // the COMPLETE text of the session so far. Overwrite instead of appending
-                        // to prevent cumulative repetition duplication bugs.
-                        transcriptRef.current = text.trim();
+                        // Finalized turn — commit to completed turns and reset
+                        // The transcript here is the FULL text of this turn
+                        if (transcriptRef.current.trim()) {
+                            // Append finalized turn text to completed buffer
+                            transcriptRef.current = transcriptRef.current.trim() + " " + trimmed;
+                        } else {
+                            transcriptRef.current = trimmed;
+                        }
                         interimTranscriptRef.current = "";
                     }
 
                     const trimTranscript = transcriptRef.current.trim();
                     const trimInterim = interimTranscriptRef.current.trim();
-                    const currentTotal = trimInterim.startsWith(trimTranscript)
-                        ? trimInterim
-                        : (trimTranscript + " " + trimInterim).trim();
+                    // Show committed turns + current partial as the live display
+                    const currentTotal = trimInterim
+                        ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                        : trimTranscript;
 
                     if (currentTotal) {
                         const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
@@ -2321,11 +2429,15 @@ const AiInterviewSession = () => {
     // set to true by initSession() before this effect could ever run.
 
     const handleStartInterview = async () => {
-        // Step 1: Just request Camera for face registration
-        console.log("Requesting Camera...");
-        await startCamera();
+        // Step 1: Request Camera & Mic for face registration and session
+        console.log("Requesting Camera and Mic...");
+        const hasPermissions = await startCamera();
+        if (!hasPermissions) {
+            alert("Camera and Microphone permissions are strictly required to start the interview. Please allow access in your browser settings and try again.");
+            return;
+        }
 
-        console.log("Basic permissions (Camera) granted.");
+        console.log("Basic permissions (Camera & Mic) granted.");
         setIsPermissionsGranted(true);
 
         // If face was already registered earlier (we detected it on init), skip
@@ -2867,7 +2979,8 @@ const AiInterviewSession = () => {
         // Re-attach and restart camera for the registration video element
         const restoreCamera = async () => {
             if (!streamRef.current || streamRef.current.getVideoTracks().every(t => t.readyState === 'ended')) {
-                await startCamera();
+                const hasCam = await startCamera();
+                if (!hasCam) return;
             }
             if (regVideoRef.current && streamRef.current) {
                 regVideoRef.current.srcObject = streamRef.current;
@@ -3164,9 +3277,10 @@ const AiInterviewSession = () => {
 
                 const trimTranscript = transcriptRef.current.trim();
                 const trimInterim = interimTranscriptRef.current.trim();
-                const finalTranscript = trimInterim.startsWith(trimTranscript)
-                    ? trimInterim
-                    : (trimTranscript + " " + trimInterim).trim();
+                // Combine finalized turns + any in-progress partial turn
+                const finalTranscript = trimInterim
+                    ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                    : trimTranscript;
                 const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
 
                 if (submitHandlerRef.current) {
@@ -3192,9 +3306,10 @@ const AiInterviewSession = () => {
         if (isRecording) {
             const trimTranscript = transcriptRef.current.trim();
             const trimInterim = interimTranscriptRef.current.trim();
-            const finalSubmission = trimInterim.startsWith(trimTranscript)
-                ? trimInterim
-                : (trimTranscript + " " + trimInterim).trim();
+            // Combine finalized turns + any in-progress partial turn
+            const finalSubmission = trimInterim
+                ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
+                : trimTranscript;
 
             // FIX: Mark as manually muted so auto-resume doesn't override user's choice
             manualMuteRef.current = true;
