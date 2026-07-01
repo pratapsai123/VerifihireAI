@@ -1168,6 +1168,36 @@ const ResultsAI = () => {
                             </div>
                         </div>
 
+                        <div className="sidebar-card">
+                            <span className="sidebar-label">Session Details</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', fontSize: '0.85rem', color: '#1E293B', fontWeight: '600', marginTop: '0.5rem' }}>
+                                <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+                                    <span style={{ color: '#64748B', fontWeight: '800', fontSize: '0.65rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.05em', marginBottom: '2px' }}>Start Time</span>
+                                    {data.link_opened_at ? new Date(data.link_opened_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }) : 'N/A'}
+                                </div>
+                                <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
+                                    <span style={{ color: '#64748B', fontWeight: '800', fontSize: '0.65rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.05em', marginBottom: '2px' }}>End Time</span>
+                                    {data.completed_at ? new Date(data.completed_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }) : 'Incomplete'}
+                                </div>
+                                <div>
+                                    <span style={{ color: '#64748B', fontWeight: '800', fontSize: '0.65rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.05em', marginBottom: '2px' }}>Total Duration</span>
+                                    {(() => {
+                                        if (data.link_opened_at && data.completed_at) {
+                                            const diffMs = new Date(data.completed_at) - new Date(data.link_opened_at);
+                                            const diffSecs = Math.floor(diffMs / 1000);
+                                            const hours = Math.floor(diffSecs / 3600);
+                                            const minutes = Math.floor((diffSecs % 3600) / 60);
+                                            const seconds = diffSecs % 60;
+                                            return hours > 0 
+                                                ? `${hours}h ${minutes}m ${seconds}s` 
+                                                : `${minutes}m ${seconds}s`;
+                                        }
+                                        return 'N/A';
+                                    })()}
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Integrity Evidence Gallery */}
                         {(timelineLogs?.length > 0 || data.integrity_screenshots?.length > 0 || data.integrity_logs?.length > 0) && (
                             <div className="sidebar-card">

@@ -3900,6 +3900,24 @@ class CandidateReportDownloadView(APIView):
             elif getattr(candidate, 'identity_mismatch_detected', False):
                 match_score_str = "Mismatch \u2717"
 
+            # Localize times to timezone
+            from django.utils import timezone
+            local_start = timezone.localtime(candidate.link_opened_at) if candidate.link_opened_at else None
+            local_end = timezone.localtime(candidate.completed_at) if candidate.completed_at else None
+
+            # Calculate duration
+            duration_str = "N/A"
+            if candidate.link_opened_at and candidate.completed_at:
+                duration_delta = candidate.completed_at - candidate.link_opened_at
+                total_seconds = int(duration_delta.total_seconds())
+                hours = total_seconds // 3600
+                minutes = (total_seconds % 3600) // 60
+                seconds = total_seconds % 60
+                if hours > 0:
+                    duration_str = f"{hours}h {minutes}m {seconds}s"
+                else:
+                    duration_str = f"{minutes}m {seconds}s"
+
             # Right side: Summary Table
             info_data = [
                 ["Full Name", candidate.full_name],
@@ -3914,10 +3932,12 @@ class CandidateReportDownloadView(APIView):
                 ["Integrity Score", f"{integrity_score:.1f}%"],
                 ["Final Performance", f"{final_performance_pct}%"],
                 ["Status", candidate.status],
-                ["Completion Date", candidate.completed_at.strftime('%B %d, %Y %I:%M %p') if candidate.completed_at else 'Incomplete'],
+                ["Start Time", local_start.strftime('%B %d, %Y %I:%M %p') if local_start else 'N/A'],
+                ["End Time", local_end.strftime('%B %d, %Y %I:%M %p') if local_end else 'Incomplete'],
+                ["Total Duration", duration_str],
             ]
             
-            summary_table = Table(info_data, colWidths=[1.2*inch, 3.0*inch])
+            summary_table = Table(info_data, colWidths=[1.3*inch, 2.9*inch])
             
             base_styles = [
                 ('BACKGROUND', (0,0), (0,-1), colors.HexColor("#f8fafc")),
