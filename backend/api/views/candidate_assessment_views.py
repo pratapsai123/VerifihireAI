@@ -2170,6 +2170,7 @@ def results_detail_view(request, submission_id):
                 'submission_id': s.id,
                 'invitation_id': inv.id,
                 'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                'started_at': inv.started_at.isoformat() if inv.started_at else None,
                 'candidate': {
                     'name': inv.name,
                     'email': inv.email,

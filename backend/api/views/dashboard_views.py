@@ -1,9 +1,9 @@
 from .._imports import *
 from django.db.models import Count, Avg, Q, Sum, Case, When, F
-from django.db.models.functions import TruncMonth, TruncDay, Coalesce, ExtractWeekDay
+from django.db.models.functions import TruncMonth, TruncDay, Coalesce
 from django.utils import timezone
 from datetime import timedelta
-from ai_assessments.models import Assessment as AIAssessment
+from ai_assessments.models import Assessment as AIAssessment, InvitedCandidate
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -25,9 +25,10 @@ def dashboard_summary_view(request):
         interviews_qs = InterviewInvitation.objects.filter(is_deleted=False)
         # Exclude ONGOING for AI assessments as per results_overview_view
         ai_assessments_qs = AIAssessmentSubmission.objects.filter(is_deleted=False).exclude(status='ONGOING')
-        custom_assessments_qs = Assessment.objects.filter(is_deleted=False)
+        ai_invited_qs = InvitedCandidate.objects.all()
+        active_tests_custom = Assessment.objects.filter(is_deleted=False)
         ai_candidates_qs = Candidate.objects.filter(is_deleted=False)
-        
+        active_tests_ai = AIAssessment.objects.filter(is_deleted=False)
         from ai_candidates.models import StandaloneResumeScreening
         standalone_qs = StandaloneResumeScreening.objects.all()
 
@@ -40,9 +41,8 @@ def dashboard_summary_view(request):
                 Q(user_profile_id__in=scoped_ids) | Q(assessment__user_profile_id__in=scoped_ids)
             )
             interviews_qs = interviews_qs.filter(interview__created_by_id__in=scoped_ids)
-            custom_assessments_qs = custom_assessments_qs.filter(user_profile_id__in=scoped_ids)
+            active_tests_custom = active_tests_custom.filter(user_profile_id__in=scoped_ids)
             ai_candidates_qs = ai_candidates_qs.filter(user_profile_id__in=scoped_ids)
-            # StandaloneResumeScreening link is via user_profile
             if user_profile.company:
                 standalone_qs = standalone_qs.filter(
                     Q(company=user_profile.company) & (Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True))
@@ -51,7 +51,10 @@ def dashboard_summary_view(request):
                 standalone_qs = standalone_qs.filter(
                     Q(user_profile_id__in=scoped_ids) | Q(user_profile__isnull=True)
                 )
+            # AIAssessmentSubmission link is via assessment
             ai_assessments_qs = ai_assessments_qs.filter(assessment__user_profile_id__in=scoped_ids)
+            ai_invited_qs = ai_invited_qs.filter(assessment__user_profile_id__in=scoped_ids)
+            active_tests_ai = active_tests_ai.filter(user_profile_id__in=scoped_ids)
 
         # Parse completed Live Interview feedbacks for "Hired" (Qualified) and "On Hold" outcomes
         from api.models import LiveInterviewFeedback
@@ -86,16 +89,14 @@ def dashboard_summary_view(request):
                 live_rejected_ids.append(invite.id)
 
         hired_count_live = len(live_hired_ids)
-        # Live interviews in sent, accepted, or completed (without clear qualified/rejected outcome) are in the pipeline
-        failed_live_count = interviews_qs.filter(status='failed').count()
-        total_live = interviews_qs.exclude(status='draft').count()
-        pipeline_count_live = total_live - hired_count_live - len(live_rejected_ids) - failed_live_count
+        # Live interviews count towards pipeline only when they are explicitly on hold
+        pipeline_count_live = len(live_hold_ids)
 
         # 1. Basic Stats
-        # Total Candidates includes standard results, AI assessment results, AI candidate profiles, and Live Interviews (non-drafts)
+        # Total Candidates includes standard results, AI assessment results, AI candidate profiles, Standalone Resume Screenings, and Live Interviews (non-drafts)
         total_candidates = (
-            results_qs.count() + 
-            ai_assessments_qs.count() + 
+            invitations_qs.count() + 
+            active_tests_ai.count() + 
             ai_candidates_qs.count() + 
             standalone_qs.count() +
             interviews_qs.exclude(status='draft').count()
@@ -109,20 +110,22 @@ def dashboard_summary_view(request):
         hired_count_ai = ai_candidates_qs.filter(status='Hired').count()
         # For AI assessments
         hired_count_assess = ai_assessments_qs.filter(status='selected').count()
-        hired_count_standalone = standalone_qs.filter(status='Resume Passed').count()
         
-        hired_count = hired_count_std + hired_count_ai + hired_count_assess + hired_count_live + hired_count_standalone
+        hired_count = hired_count_std + hired_count_ai + hired_count_assess + hired_count_live
         
         # Pipeline statuses
-        pipeline_count_std = results_qs.exclude(result__in=['selected', 'rejected']).count()
-        # AI Candidates in screening/interview stages (exclude Hired, Rejected, Resume Failed, Extraction Failed)
-        pipeline_count_ai = ai_candidates_qs.exclude(status__in=['Hired', 'Rejected', 'Resume Failed', 'Extraction Failed']).count()
-        # AI assessments on hold/in progress
-        pipeline_count_assess = ai_assessments_qs.exclude(status__in=['selected', 'rejected']).count()
-        # Standalone Resumes processing
-        pipeline_count_standalone = standalone_qs.exclude(status__in=['Resume Passed', 'Resume Failed', 'Extraction Failed']).count()
+        pipeline_count_std = results_qs.annotate(
+            score_val=Case(
+                When(final_percentage__isnull=False, then=F('final_percentage')),
+                default=F('percentage')
+            )
+        ).filter(result='hold', score_val__gt=0).count()
+        # AI Candidates in screening/interview stages
+        pipeline_count_ai = ai_candidates_qs.filter(status='On-Hold').count()
+        # AI assessments on hold
+        pipeline_count_assess = ai_assessments_qs.filter(status='hold').count()
         
-        pipeline_count = pipeline_count_std + pipeline_count_ai + pipeline_count_assess + pipeline_count_live + pipeline_count_standalone
+        pipeline_count = pipeline_count_std + pipeline_count_ai + pipeline_count_assess + pipeline_count_live
 
         # Selections Today (Hired/Selected today across all modules)
         today_date = timezone.now().date()
@@ -130,14 +133,12 @@ def dashboard_summary_view(request):
         selections_today_ai = ai_candidates_qs.filter(status='Hired', completed_at__date=today_date).count()
         selections_today_assess = ai_assessments_qs.filter(status='selected', submitted_at__date=today_date).count()
         selections_today_live = interviews_qs.filter(id__in=live_hired_ids, updated_at__date=today_date).count()
-        selections_today_standalone = standalone_qs.filter(status='Resume Passed', created_at__date=today_date).count()
         
         selections_today = (
             selections_today_std + 
             selections_today_ai + 
             selections_today_assess + 
-            selections_today_live +
-            selections_today_standalone
+            selections_today_live
         )
 
         # Average Scores
@@ -149,7 +150,7 @@ def dashboard_summary_view(request):
             avg=Avg(Coalesce('final_percentage', 'percentage'))
         )['avg'] or 0
 
-        # Resumes Analyzed
+        # Resumes Analyzed (Includes automated resumes and standalone manually analyzed resumes)
         resumes_analyzed = ai_candidates_qs.exclude(
             Q(status__in=['Invited', 'Extraction Failed']) | Q(email='pending@example.com')
         ).count()
@@ -158,12 +159,6 @@ def dashboard_summary_view(request):
         ).count()
 
         # Active/Total Assessments counts
-        active_tests_ai = AIAssessment.objects.filter(is_deleted=False)
-        active_tests_custom = Assessment.objects.filter(is_deleted=False)
-        if scoped_ids is not None:
-            active_tests_ai = active_tests_ai.filter(user_profile_id__in=scoped_ids)
-            active_tests_custom = active_tests_custom.filter(user_profile_id__in=scoped_ids)
-        
         active_tests_ai_count = active_tests_ai.count()
         active_tests_custom_count = active_tests_custom.count()
 
@@ -183,41 +178,42 @@ def dashboard_summary_view(request):
         months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
         
         trends_total = []
-        # Grouping candidate activity by month
-        monthly_results = results_qs.filter(submitted_at__year=current_year)\
-            .annotate(month=TruncMonth('submitted_at'))\
+        # Custom Assessment invitations by month
+        monthly_results = invitations_qs.filter(created_at__year=current_year)\
+            .annotate(month=TruncMonth('created_at'))\
             .values('month')\
             .annotate(count=Count('id')).order_by('month')
 
-        monthly_ai_assessments = ai_assessments_qs.filter(submitted_at__year=current_year)\
-            .annotate(month=TruncMonth('submitted_at'))\
+        # AI Assessments (templates) by month
+        monthly_ai_assessments = active_tests_ai.filter(created_at__year=current_year)\
+            .annotate(month=TruncMonth('created_at'))\
             .values('month')\
             .annotate(count=Count('id')).order_by('month')
 
-        # Live interviews grouped by month (excluding drafts)
-        monthly_interviews = interviews_qs.exclude(status='draft').filter(created_at__year=current_year)\
+        # Live interviews grouped by month
+        monthly_interviews = interviews_qs.filter(created_at__year=current_year)\
             .annotate(month=TruncMonth('created_at'))\
             .values('month')\
             .annotate(total=Count('id')).order_by('month')
 
-        # AI Interviews (Candidate model) grouped by month (only those in interview-related statuses)
-        ai_interviews_statuses = ['Invited', 'Interview', 'Completed', 'Review', 'Rejected', 'Hired']
-        monthly_ai_interviews = ai_candidates_qs.filter(
-            status__in=ai_interviews_statuses,
-            created_at__year=current_year
-        ).annotate(month=TruncMonth('created_at'))\
-            .values('month')\
-            .annotate(total=Count('id')).order_by('month')
-
-        # AI Candidate resume screenings (candidates who haven't started/scheduled AI interviews yet)
-        monthly_resume_screening_ai = ai_candidates_qs.exclude(
-            status__in=ai_interviews_statuses
+        # AI Interviews (Candidate model) grouped by month (excluding resume-screening-only statuses)
+        monthly_ai_interviews = ai_candidates_qs.exclude(
+            status__in=['New', 'Resume Passed', 'Resume Failed']
         ).filter(created_at__year=current_year)\
             .annotate(month=TruncMonth('created_at'))\
             .values('month')\
             .annotate(total=Count('id')).order_by('month')
 
-        # Standalone Resumes grouped by month
+        # AI Candidate resume screenings (fully automated resume screening)
+        monthly_resume_screening_ai = ai_candidates_qs.filter(
+            status__in=['New', 'Resume Passed', 'Resume Failed'],
+            created_at__year=current_year
+        ).annotate(month=TruncMonth('created_at'))\
+            .values('month')\
+            .annotate(total=Count('id')).order_by('month')
+
+        # standalone_qs is already defined and scoped at the top of the view
+
         monthly_standalone = standalone_qs.filter(created_at__year=current_year)\
             .annotate(month=TruncMonth('created_at'))\
             .values('month')\
@@ -227,8 +223,7 @@ def dashboard_summary_view(request):
         results_by_month = {r['month'].month: r for r in monthly_results}
         ai_assessments_by_month = {r['month'].month: r['count'] for r in monthly_ai_assessments}
         interviews_by_month = {i['month'].month: i for i in monthly_interviews}
-        ai_interviews_by_month = {x['month'].month: x['total'] for x in monthly_ai_interviews}
-        
+        ai_interviews_by_month = {x['month'].month: x for x in monthly_ai_interviews}
         auto_resumes_by_month = {x['month'].month: x['total'] for x in monthly_resume_screening_ai}
         manual_resumes_by_month = {x['month'].month: x['total'] for x in monthly_standalone}
 
@@ -236,8 +231,7 @@ def dashboard_summary_view(request):
             r_data = results_by_month.get(i, {})
             i_data = interviews_by_month.get(i, {})
             ai_assess_val = ai_assessments_by_month.get(i, 0)
-            ai_int_val = ai_interviews_by_month.get(i, 0)
-            
+            ai_int_data = ai_interviews_by_month.get(i, {})
             auto_res_val = auto_resumes_by_month.get(i, 0)
             manual_res_val = manual_resumes_by_month.get(i, 0)
             resume_screen_val = auto_res_val + manual_res_val
@@ -245,6 +239,7 @@ def dashboard_summary_view(request):
             ai_val = ai_assess_val
             custom_val = r_data.get('count', 0)
             live_int_val = i_data.get('total', 0)
+            ai_int_val = ai_int_data.get('total', 0)
             
             trends_total.append({
                 'name': m_name,
@@ -258,35 +253,33 @@ def dashboard_summary_view(request):
                 'manualResumes': manual_res_val
             })
 
-        # 3. Success Rate (Weekday based on selected year)
-        # Standard weekday success
-        weekday_success_std = results_qs.filter(hired_filter, submitted_at__year=current_year)\
-            .annotate(weekday=ExtractWeekDay('submitted_at'))\
-            .values('weekday')\
+        # 3. Success Rate (Current Week)
+        days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        now = timezone.now()
+        start_of_week = now.date() - timedelta(days=now.weekday())
+        
+        # Standard weekly success
+        weekly_results_std = results_qs.filter(hired_filter, submitted_at__date__gte=start_of_week)\
+            .annotate(day=TruncDay('submitted_at'))\
+            .values('day')\
             .annotate(count=Count('id'))
             
-        # AI assessment weekday success
-        weekday_success_assess = ai_assessments_qs.filter(status='selected', submitted_at__year=current_year)\
-            .annotate(weekday=ExtractWeekDay('submitted_at'))\
-            .values('weekday')\
+        # AI assessment weekly success
+        weekly_results_assess = ai_assessments_qs.filter(status='selected', submitted_at__date__gte=start_of_week)\
+            .annotate(day=TruncDay('submitted_at'))\
+            .values('day')\
             .annotate(count=Count('id'))
             
-        # AI interview weekday success
-        weekday_success_ai = ai_candidates_qs.filter(status='Hired', completed_at__year=current_year)\
-            .annotate(weekday=ExtractWeekDay('completed_at'))\
-            .values('weekday')\
+        # AI interview weekly success
+        weekly_results_ai = ai_candidates_qs.filter(status='Hired', completed_at__date__gte=start_of_week)\
+            .annotate(day=TruncDay('completed_at'))\
+            .values('day')\
             .annotate(count=Count('id'))
             
-        # Standalone resume weekday success
-        weekday_success_standalone = standalone_qs.filter(status='Resume Passed', created_at__year=current_year)\
-            .annotate(weekday=ExtractWeekDay('created_at'))\
-            .values('weekday')\
-            .annotate(count=Count('id'))
-            
-        # Live interview weekday success (completed status and qualified recommendation)
-        completed_live_year = interviews_qs.filter(status='completed', updated_at__year=current_year)
-        live_weekly_hired_by_weekday = {}
-        for invite in completed_live_year:
+        # Live interview weekly success (completed status and qualified recommendation)
+        weekly_completed_live = interviews_qs.filter(status='completed', updated_at__date__gte=start_of_week)
+        live_weekly_hired_by_day = {}
+        for invite in weekly_completed_live:
             feedbacks = LiveInterviewFeedback.objects.filter(invitation=invite)
             is_qualified = False
             for f in feedbacks:
@@ -297,37 +290,30 @@ def dashboard_summary_view(request):
                     if 'qualified' in recommendation and 'disqualified' not in recommendation:
                         is_qualified = True
             if is_qualified:
-                # Map python weekday (Mon=0, Tue=1, ..., Sun=6) to django weekday (Mon=2, Tue=3, ..., Sun=1)
-                d_w = invite.updated_at.weekday() + 2
-                if d_w > 7:
-                    d_w -= 7
-                live_weekly_hired_by_weekday[d_w] = live_weekly_hired_by_weekday.get(d_w, 0) + 1
+                day_date = invite.updated_at.date()
+                live_weekly_hired_by_day[day_date] = live_weekly_hired_by_day.get(day_date, 0) + 1
 
-        # Combine successes by weekday
-        success_by_weekday = {}
-        for r in weekday_success_std:
-            w = r['weekday']
-            success_by_weekday[w] = success_by_weekday.get(w, 0) + r['count']
-        for r in weekday_success_assess:
-            w = r['weekday']
-            success_by_weekday[w] = success_by_weekday.get(w, 0) + r['count']
-        for r in weekday_success_ai:
-            w = r['weekday']
-            success_by_weekday[w] = success_by_weekday.get(w, 0) + r['count']
-        for r in weekday_success_standalone:
-            w = r['weekday']
-            success_by_weekday[w] = success_by_weekday.get(w, 0) + r['count']
-        for w, count in live_weekly_hired_by_weekday.items():
-            success_by_weekday[w] = success_by_weekday.get(w, 0) + count
+        # Combine successes by day
+        results_by_day = {}
+        for r in weekly_results_std:
+            d = r['day'].date()
+            results_by_day[d] = results_by_day.get(d, 0) + r['count']
+        for r in weekly_results_assess:
+            d = r['day'].date()
+            results_by_day[d] = results_by_day.get(d, 0) + r['count']
+        for r in weekly_results_ai:
+            d = r['day'].date()
+            results_by_day[d] = results_by_day.get(d, 0) + r['count']
+        for d_date, count in live_weekly_hired_by_day.items():
+            results_by_day[d_date] = results_by_day.get(d_date, 0) + count
         
         success_rate = []
-        weekdays_names = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        # Django weekday numbers: Mon(2), Tue(3), Wed(4), Thu(5), Fri(6), Sat(7), Sun(1)
-        django_weekday_map = [2, 3, 4, 5, 6, 7, 1]
-        for d_w, w_name in zip(django_weekday_map, weekdays_names):
+        for i in range(7):
+            d_date = start_of_week + timedelta(days=i)
+            day_name = days[i]
             success_rate.append({
-                'name': w_name,
-                'value': success_by_weekday.get(d_w, 0)
+                'name': day_name,
+                'value': results_by_day.get(d_date, 0)
             })
 
         # 4. Recent Candidates (Top 5)

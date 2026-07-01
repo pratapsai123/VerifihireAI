@@ -1121,6 +1121,16 @@ def generate_candidate_report(submission_id):
 
         _info_row(
 
+            'Started At',
+
+            timezone.localtime(inv.started_at).strftime('%d %b %Y, %I:%M %p') if inv.started_at else '-',
+
+            styles,
+
+        ),
+
+        _info_row(
+
             'Submitted At',
 
             timezone.localtime(submission.submitted_at).strftime('%d %b %Y, %I:%M %p') if submission.submitted_at else '-',
