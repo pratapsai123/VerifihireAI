@@ -316,12 +316,13 @@ class BulkInviteView(APIView):
             df['email'] = df['email'].str.strip().str.lower()
             df = df.drop_duplicates(subset='email', keep='first')
 
-            # Check for candidates already invited with the same email and an active interview
-            active_statuses = ['Invited', 'Interview', 'New']
-            existing_emails = set(
+            # Deduplicate: within this CSV AND within this batch
+            # (prevents same email twice in CSV, and also re-adding someone already in this batch)
+            seen_emails_in_csv = set()
+            existing_in_batch = set(
                 Candidate.objects.filter(
+                    batch_id=batch_id,
                     email__in=df['email'].tolist(),
-                    status__in=active_statuses,
                     is_deleted=False,
                 ).values_list('email', flat=True)
             )
@@ -338,10 +339,11 @@ class BulkInviteView(APIView):
 
                 email = str(row['email']).strip().lower()
 
-                # Skip if this email already has an active interview
-                if email in existing_emails:
+                # Skip if duplicate within this CSV or already in this batch
+                if email in seen_emails_in_csv or email in existing_in_batch:
                     skipped_duplicates.append(email)
                     continue
+                seen_emails_in_csv.add(email)
 
                 # Auto-persist role if title is provided
 
@@ -1934,10 +1936,8 @@ class CandidatePublicStatusUpdateView(APIView):
 
 
 
-            # Calculate final score percentage — always against full 14 questions (140 points max)
-            # Unanswered questions count as 0, preventing gaming by exiting early
-            total_possible = TOTAL_INTERVIEW_QUESTIONS * 10  # Always 140
-            score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
+            # Calculate final score percentage using the model's single source of truth
+            score_percentage = candidate.score_percentage
 
             # Get integrity score
             integrity_obj = getattr(candidate, 'integrity', None)
@@ -3868,8 +3868,7 @@ class CandidateReportDownloadView(APIView):
                 img_elem = Paragraph("<i>No candidate photo available.</i>", styles['Normal'])
 
             # Score & Penalty Calculation
-            total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
-            base_score_pct = (candidate.score / total_possible_marks * 100) if total_possible_marks > 0 else 0
+            base_score_pct = candidate.score_percentage
             
             integrity_obj = getattr(candidate, 'integrity', None)
             integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
@@ -4487,8 +4486,8 @@ class InterviewsOverviewView(APIView):
                     continue
 
                 total_all += 1
-                total_possible = 13 * 10
-                score_pct = round((c.score / total_possible) * 100) if c.score is not None and total_possible > 0 and (c.completed_at or c.status in completed_statuses) else None
+                total_possible = TOTAL_INTERVIEW_QUESTIONS * 10
+                score_pct = round(c.score_percentage) if c.score is not None and (c.completed_at or c.status in completed_statuses) else None
 
                 if c.status in completed_statuses or c.completed_at:
                     batch_completed += 1
@@ -4632,3 +4631,102 @@ class StandaloneResumeScreeningListCreateView(generics.ListCreateAPIView):
 class StandaloneResumeScreeningDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = StandaloneResumeScreening.objects.all()
     serializer_class = StandaloneResumeScreeningSerializer
+
+
+class BatchAddMemberView(APIView):
+    """
+    POST /api/ai-candidates/batch-add-member/
+    Adds a new candidate to an existing batch with the same parameters
+    (JD, experience level, scheduling, etc.) and sends the invite email.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        batch_id = request.data.get('batch_id')
+        name = request.data.get('name', '').strip()
+        email = request.data.get('email', '').strip().lower()
+
+        if not batch_id or not name or not email:
+            return Response({'error': 'batch_id, name, and email are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Find an existing candidate in this batch to copy parameters from
+        reference = Candidate.objects.filter(batch_id=batch_id, is_deleted=False).first()
+        if not reference:
+            return Response({'error': 'Batch not found or has no candidates.'}, status=status.HTTP_404_NOT_FOUND)
+
+        # Permission check
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile:
+            return Response({'error': 'User profile not found.'}, status=status.HTTP_403_FORBIDDEN)
+        if user_profile.company and reference.company_id != user_profile.company_id:
+            return Response({'error': 'Unauthorized: batch belongs to another company.'}, status=status.HTTP_403_FORBIDDEN)
+
+        # Check if email already exists in this batch
+        if Candidate.objects.filter(batch_id=batch_id, email=email, is_deleted=False).exists():
+            return Response({'error': f'{email} is already in this batch.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Create new candidate with same parameters as the reference
+        new_candidate = Candidate.objects.create(
+            full_name=name,
+            email=email,
+            job_title=reference.job_title,
+            job_description=reference.job_description,
+            experience_level=reference.experience_level,
+            available_from=reference.available_from,
+            available_until=reference.available_until,
+            interview_pass_threshold=reference.interview_pass_threshold,
+            automation_settings=reference.automation_settings,
+            status='Invited',
+            company=reference.company,
+            user_profile=user_profile,
+            created_by=user_profile,
+            batch_id=batch_id,
+            batch_name=reference.batch_name,
+        )
+
+        # Send invite email
+        try:
+            from django.core.mail import send_mail
+            frontend_base = getattr(settings, 'FRONTEND_BASE_URL', 'http://localhost:3000').rstrip('/')
+            link = f"{frontend_base}/interview-start/{new_candidate.public_token}"
+
+            from_str = "Immediately"
+            if new_candidate.available_from:
+                local_from = timezone.localtime(new_candidate.available_from)
+                from_str = local_from.strftime('%B %d, %Y at %I:%M %p')
+            until_str = "No fixed deadline"
+            if new_candidate.available_until:
+                local_until = timezone.localtime(new_candidate.available_until)
+                until_str = local_until.strftime('%B %d, %Y at %I:%M %p')
+
+            subject = "Invite to VerifiHireAI Interview Session"
+            message = f"Dear {name},\n\nYou have been invited to complete an AI-powered video interview.\n\nAvailable From: {from_str}\nAvailable Until: {until_str}\n\nPlease click the link below to start:\n{link}"
+            html_message = f"""
+            <div style="font-family: 'Segoe UI', sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
+                <div style="background-color: #6366F1; padding: 24px; text-align: center;">
+                    <h1 style="color: white; margin: 0; font-size: 24px;">Interview Invitation</h1>
+                </div>
+                <div style="padding: 32px; background-color: white;">
+                    <p style="font-size: 16px;">Dear <strong>{name}</strong>,</p>
+                    <p>You have been invited to complete an AI-powered video interview session.</p>
+                    <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin: 20px 0;">
+                        <p style="margin: 4px 0; font-size: 14px;"><strong>📅 Available From:</strong> {from_str}</p>
+                        <p style="margin: 4px 0; font-size: 14px;"><strong>⌛ Available Until:</strong> {until_str}</p>
+                    </div>
+                    <div style="text-align: center; margin: 24px 0;">
+                        <a href="{link}" style="background-color: #6366F1; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-block;">Start Interview Session</a>
+                    </div>
+                    <p style="font-size: 12px; color: #64748b; margin-top: 24px;">If the button doesn't work, copy this link: <a href="{link}">{link}</a></p>
+                </div>
+            </div>
+            """
+            send_mail(subject, message, settings.EMAIL_HOST_USER, [email], fail_silently=False, html_message=html_message)
+            logger.info(f"[BatchAddMember] Invite sent to {email} for batch {batch_id}")
+        except Exception as mail_err:
+            logger.error(f"[BatchAddMember] Email failed for {email}: {mail_err}")
+
+        return Response({
+            'message': f'{name} added to batch and invite sent.',
+            'candidate_id': new_candidate.id,
+            'public_token': str(new_candidate.public_token),
+        }, status=status.HTTP_201_CREATED)

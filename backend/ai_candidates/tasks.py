@@ -952,4 +952,100 @@ def process_standalone_resume_screening_task(self, record_id, threshold=50):
         logger.error(f"AI error for standalone {record.id}: {e}")
         record.status = 'AI Analysis Failed'
         record.save()
-
+
+
+
+@shared_task
+def auto_complete_abandoned_interviews_task():
+    """
+    Periodic task: Auto-complete interviews that were started but abandoned.
+    Runs every 30 minutes via Celery Beat.
+    
+    Finds candidates where:
+    - link_opened_at is set (interview was started)
+    - status is 'Interview' (still in progress)
+    - Time elapsed > interview duration + 30 min buffer
+    - completed_at is None (never completed)
+    
+    Auto-completes them with their current score, marking as Rejected/Hired based on threshold.
+    """
+    from django.utils import timezone
+    from datetime import timedelta
+    
+    now = timezone.now()
+    
+    # Find all abandoned interviews
+    candidates = Candidate.objects.filter(
+        link_opened_at__isnull=False,
+        completed_at__isnull=True,
+        status='Interview',
+        is_deleted=False,
+    )
+    
+    completed_count = 0
+    
+    for candidate in candidates:
+        # Get interview duration from automation_settings (default 60 min)
+        duration_minutes = 60
+        if isinstance(candidate.automation_settings, dict):
+            duration_minutes = candidate.automation_settings.get('interview_duration_minutes', 60)
+        
+        # Add 30 min buffer (grace period for network issues, slow submissions)
+        max_elapsed = timedelta(minutes=duration_minutes + 30)
+        elapsed = now - candidate.link_opened_at
+        
+        if elapsed <= max_elapsed:
+            continue  # Not expired yet, skip
+        
+        # Auto-complete this interview
+        try:
+            # Calculate score percentage
+            total_possible = 14 * 10  # Always 140 (14 questions × 10 max score)
+            score_percentage = (candidate.score / total_possible * 100) if total_possible > 0 else 0
+            
+            # Get integrity score
+            integrity_score = 100.0
+            try:
+                if hasattr(candidate, 'integrity') and candidate.integrity:
+                    integrity_score = candidate.integrity.integrity_score
+            except Exception:
+                pass
+            
+            # Determine final status
+            threshold = candidate.interview_pass_threshold if candidate.interview_pass_threshold is not None else 50
+            INTEGRITY_THRESHOLD = 75.0
+            
+            if score_percentage >= threshold and integrity_score >= INTEGRITY_THRESHOLD:
+                candidate.status = 'Hired'
+            elif score_percentage >= threshold and integrity_score < INTEGRITY_THRESHOLD:
+                candidate.status = 'On-Hold'
+            else:
+                candidate.status = 'Rejected'
+            
+            candidate.completed_at = now
+            candidate.save(update_fields=['status', 'completed_at'])
+            
+            # Log the auto-completion
+            log_automation_event(
+                candidate,
+                'STATUS_CHANGE',
+                'WARNING',
+                f"Interview auto-completed (abandoned). Elapsed: {elapsed.total_seconds() / 60:.0f} min "
+                f"(limit: {duration_minutes} min + 30 min buffer). "
+                f"Score: {score_percentage:.1f}%, Status: {candidate.status}",
+                phase='INTERVIEW'
+            )
+            
+            completed_count += 1
+            logger.info(
+                f"[AutoComplete] Candidate {candidate.id} ({candidate.email}) "
+                f"auto-completed after {elapsed.total_seconds() / 60:.0f} min. "
+                f"Score: {score_percentage:.1f}%, Status: {candidate.status}"
+            )
+        except Exception as e:
+            logger.error(f"[AutoComplete] Failed for candidate {candidate.id}: {e}")
+    
+    if completed_count > 0:
+        logger.info(f"[AutoComplete] Completed {completed_count} abandoned interview(s).")
+    
+    return f"Auto-completed {completed_count} abandoned interviews."

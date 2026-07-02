@@ -149,6 +149,8 @@ const AiInterviewSession = () => {
     const transcriptRef = useRef("");
     const lastAiQuestionRef = useRef("Introduction and Background"); // Tracks the actual question spoken by AI
     const interimTranscriptRef = useRef("");
+    const fullCaptionRef = useRef(""); // Always holds the latest full caption text (what the user sees)
+    const committedTurnsRef = useRef([]); // Array of finalized turn strings — the source of truth
     const submitHandlerRef = useRef(null);
     const assemblyAIRef = useRef(null);
     const sttLiveWsRef = useRef(null); // Track live WebSocket so startListening can do fast "soft resume"
@@ -436,6 +438,11 @@ const AiInterviewSession = () => {
             if (document.hidden || document.visibilityState === 'hidden') {
                 setIsPaused(true);
                 setAiStatus("Interview Paused (Desktop Switched)");
+                // IMMEDIATELY pause audio — don't wait for async operations
+                if (currentAudioRef.current) {
+                    try { currentAudioRef.current.pause(); } catch (e) { }
+                }
+                if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
                 // Track when the tab switch started
                 violationStartTimeRef.current['tab_switch'] = Date.now();
                 // Save the text being spoken so we can re-speak on resume
@@ -490,6 +497,11 @@ const AiInterviewSession = () => {
                 if (document.hasFocus() && !document.hidden) return;
                 setIsPaused(true);
                 setAiStatus("Interview Paused (Window Switched)");
+                // IMMEDIATELY pause audio
+                if (currentAudioRef.current) {
+                    try { currentAudioRef.current.pause(); } catch (e) { }
+                }
+                if (window.speechSynthesis) { window.speechSynthesis.cancel(); }
                 // Save the text being spoken so we can re-speak on resume
                 if (isSpeakingRef.current && lastSpeakTextRef.current) {
                     interruptedSpeechRef.current = lastSpeakTextRef.current;
@@ -1556,6 +1568,8 @@ const AiInterviewSession = () => {
                     tracks.forEach(t => { t.enabled = true; });
                     transcriptRef.current = "";
                     interimTranscriptRef.current = "";
+                    fullCaptionRef.current = "";
+                    committedTurnsRef.current = [];
                     lastTranscriptStrRef.current = "";
                     lastSpokenTimeRef.current = Date.now();
                     isRecordingRef.current = true;
@@ -1618,6 +1632,8 @@ const AiInterviewSession = () => {
 
                     transcriptRef.current = "";
                     interimTranscriptRef.current = "";
+                    fullCaptionRef.current = "";
+                    committedTurnsRef.current = [];
                     lastTranscriptStrRef.current = "";
                     lastSpokenTimeRef.current = Date.now();
                 };
@@ -1645,35 +1661,40 @@ const AiInterviewSession = () => {
                     }
 
                     // ── AssemblyAI v3 Turn Handling ──
-                    // Each Turn event's `transcript` field contains the COMPLETE
-                    // re-transcription of the current turn from its start.
-                    // 
-                    // - Partial updates (end_of_turn=false / turn_is_formatted=false):
-                    //   The turn is still in progress. Just use the latest `transcript`
-                    //   as the current turn's text (overwrite, don't append).
+                    // AssemblyAI streaming sends TWO types of events:
                     //
-                    // - Finalized turn (end_of_turn=true / turn_is_formatted=true):
-                    //   The speaker paused and this turn is complete. Commit this
-                    //   turn's text to the accumulated buffer, then reset the
-                    //   current turn buffer for the next utterance.
+                    // - Partial (turn_is_formatted=false): The current utterance is still
+                    //   being spoken. transcript = latest partial re-transcription of
+                    //   the CURRENT turn from its start.
                     //
-                    // We maintain two buffers:
-                    //   completedTurnsRef: accumulated text from all finalized turns
-                    //   currentTurnRef: text from the turn currently in progress
+                    // - Finalized (turn_is_formatted=true / end_of_turn=true): The speaker
+                    //   paused. transcript = FINAL version of that turn.
+                    //
+                    // CRITICAL: Each turn's transcript is the COMPLETE text of THAT turn
+                    // (not cumulative across all turns). So finalized events should be
+                    // APPENDED to the overall buffer, but partials should REPLACE (since
+                    // they're re-transcriptions of the same in-progress turn).
+                    //
+                    // We use:
+                    //   transcriptRef = committed text from all COMPLETED turns
+                    //   interimTranscriptRef = text from the currently in-progress turn
 
                     const trimmed = text.trim();
 
                     if (!data.turn_is_formatted && !data.end_of_turn) {
-                        // Partial update — overwrite current turn buffer (don't accumulate)
+                        // Partial update — current turn still in progress, just update interim
                         interimTranscriptRef.current = trimmed;
                     } else {
-                        // Finalized turn — commit to completed turns and reset
-                        // The transcript here is the FULL text of this turn
-                        if (transcriptRef.current.trim()) {
-                            // Append finalized turn text to completed buffer
-                            transcriptRef.current = transcriptRef.current.trim() + " " + trimmed;
-                        } else {
+                        // Finalized turn — AssemblyAI sends cumulative text from session start.
+                        // If new text is longer than existing → it's cumulative, REPLACE.
+                        // If new text is shorter → it's a new turn after a pause, APPEND.
+                        const existing = transcriptRef.current.trim();
+                        if (!existing || trimmed.length >= existing.length) {
+                            // Cumulative or first turn — replace
                             transcriptRef.current = trimmed;
+                        } else {
+                            // New shorter turn after a gap — append to keep previous content
+                            transcriptRef.current = existing + ' ' + trimmed;
                         }
                         interimTranscriptRef.current = "";
                     }
@@ -1685,9 +1706,14 @@ const AiInterviewSession = () => {
                         ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
                         : trimTranscript;
 
+                    // Always keep the full caption text in sync — this is what gets submitted
+                    // GUARD: never shrink — only grow or stay the same (prevents data loss)
+                    if (currentTotal && currentTotal.length >= fullCaptionRef.current.length) {
+                        fullCaptionRef.current = currentTotal;
+                    }
+
                     if (currentTotal) {
-                        const display = currentTotal.length > 35 ? '...' + currentTotal.slice(-35) : currentTotal;
-                        setAiStatus(`Heard: "${display}"`);
+                        setAiStatus(`Heard: "${currentTotal}"`);
                     }
                 };
 
@@ -2007,6 +2033,8 @@ const AiInterviewSession = () => {
         // 3. Clear all speech buffers to prevent the "Repeated Input" bug
         transcriptRef.current = "";
         interimTranscriptRef.current = "";
+        fullCaptionRef.current = "";
+        committedTurnsRef.current = [];
         lastTranscriptStrRef.current = "";
         lastSpokenTimeRef.current = Date.now();
         recordActivity();
@@ -3161,8 +3189,9 @@ const AiInterviewSession = () => {
 
     // AUTO-RESUME MIC after Fullscreen restore
     // GUARD: Only auto-resume AFTER face registration is complete and NOT paused
+    // GUARD 2: Only after the first question has been asked (prevents premature mic start)
     useEffect(() => {
-        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current && isFaceRegistered && !isPaused && !document.hidden) {
+        if (isFullscreen && isPermissionsGranted && !isCompleted && !isRecording && !isProcessing && isInitializedRef.current && isFaceRegistered && !isPaused && !document.hidden && chatMessages.length > 0) {
             // FIX: Respect manual mute — don't auto-resume if user explicitly turned mic off
             if (manualMuteRef.current) {
                 console.log("Auto-resume skipped: User manually muted mic.");
@@ -3177,7 +3206,7 @@ const AiInterviewSession = () => {
             }, 1000); // 1s buffer allowed for transition to settle
             return () => clearTimeout(timer);
         }
-    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening, isFaceRegistered, isPaused]);
+    }, [isFullscreen, isPermissionsGranted, isCompleted, isRecording, isProcessing, startListening, isFaceRegistered, isPaused, chatMessages.length]);
 
     // (Native WebKit Speech Recognition removed in favor of AssemblyAI)
     useEffect(() => {
@@ -3201,7 +3230,7 @@ const AiInterviewSession = () => {
             return;
         }
 
-        let secondsRemaining = 3;
+        let secondsRemaining = 8;
         const watchdog = setInterval(() => {
             // Safety Guard: If mic is physically off, this interval MUST not proceed
             if (!isRecordingRef.current || isCompletedRef.current) {
@@ -3214,7 +3243,7 @@ const AiInterviewSession = () => {
             // Wait until AssemblyAI STT is fully connected and ready
             if (!sttReady) {
                 lastSpokenTimeRef.current = Date.now();
-                secondsRemaining = 3;
+                secondsRemaining = 8;
                 setSilenceCountdown("Connecting...");
                 setSilenceWarningVisible(false);
                 return;
@@ -3228,9 +3257,9 @@ const AiInterviewSession = () => {
             const gracePeriod = isFirstQuestion ? 5000 : 2000;
 
             // If the user has spoken or transcript has updated within the grace period, 
-            // keep the timer at 5. This prevents cutouts during natural speech pauses.
+            // keep the timer at 8. This prevents cutouts during natural speech pauses.
             if (timeSinceActivity < gracePeriod) {
-                secondsRemaining = 3;
+                secondsRemaining = 8;
                 setSilenceCountdown("Listening...");
                 setSilenceWarningVisible(false);
                 // FIX: Reset consecutive silence counter if candidate speaks during countdown
@@ -3243,14 +3272,14 @@ const AiInterviewSession = () => {
                 return;
             }
 
-            // Otherwise, proceed with the visible countdown (3-2-1)
-            secondsRemaining = 3 - Math.floor((timeSinceActivity - gracePeriod) / 1000);
+            // Otherwise, proceed with the visible countdown (8-7-6-5-4-3-2-1)
+            secondsRemaining = 8 - Math.floor((timeSinceActivity - gracePeriod) / 1000);
 
             if (secondsRemaining > 3) {
                 setSilenceCountdown(secondsRemaining + "s");
                 setSilenceWarningVisible(false);
             } else if (secondsRemaining > 0) {
-                // FIX: Show prominent visual warning when ≤3 seconds remain
+                // Show prominent visual warning when ≤3 seconds remain
                 setSilenceCountdown(secondsRemaining + "s");
                 setSilenceWarningVisible(true);
             } else if (secondsRemaining === 0 || secondsRemaining === -1) {
@@ -3277,10 +3306,9 @@ const AiInterviewSession = () => {
 
                 const trimTranscript = transcriptRef.current.trim();
                 const trimInterim = interimTranscriptRef.current.trim();
-                // Combine finalized turns + any in-progress partial turn
-                const finalTranscript = trimInterim
-                    ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
-                    : trimTranscript;
+                // Use fullCaptionRef — this is exactly what the user saw in live captions
+                const finalTranscript = fullCaptionRef.current.trim() || 
+                    (trimInterim ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim) : trimTranscript);
                 const submissionText = finalTranscript || "[Candidate remained silent/skipped]";
 
                 if (submitHandlerRef.current) {
@@ -3306,10 +3334,9 @@ const AiInterviewSession = () => {
         if (isRecording) {
             const trimTranscript = transcriptRef.current.trim();
             const trimInterim = interimTranscriptRef.current.trim();
-            // Combine finalized turns + any in-progress partial turn
-            const finalSubmission = trimInterim
-                ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim)
-                : trimTranscript;
+            // Use fullCaptionRef — exactly what the user saw on screen
+            const finalSubmission = fullCaptionRef.current.trim() ||
+                (trimInterim ? (trimTranscript ? trimTranscript + " " + trimInterim : trimInterim) : trimTranscript);
 
             // FIX: Mark as manually muted so auto-resume doesn't override user's choice
             manualMuteRef.current = true;
@@ -3470,6 +3497,20 @@ const AiInterviewSession = () => {
                                     : 'Please restart Screen Sharing (Entire Screen) to continue.'}
                         </p>
                         <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                            {!isScreenSharing && (
+                                <button
+                                    onClick={startScreenShare}
+                                    className="resume-integrity-btn"
+                                    style={{
+                                        background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
+                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
+                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
+                                        cursor: 'pointer', flex: 1, minWidth: '150px'
+                                    }}
+                                >
+                                    🖥️ Share Screen
+                                </button>
+                            )}
                             {!isFullscreen && (
                                 <button
                                     onClick={() => {
@@ -3491,20 +3532,6 @@ const AiInterviewSession = () => {
                                     }}
                                 >
                                     📺 Enter Full Screen
-                                </button>
-                            )}
-                            {!isScreenSharing && (
-                                <button
-                                    onClick={startScreenShare}
-                                    className="resume-integrity-btn"
-                                    style={{
-                                        background: 'linear-gradient(135deg, #6366f1 0%, #a855f7 100%)',
-                                        color: 'white', border: 'none', padding: '0.8rem 2rem',
-                                        borderRadius: '8px', fontSize: '1rem', fontWeight: 'bold',
-                                        cursor: 'pointer', flex: 1, minWidth: '150px'
-                                    }}
-                                >
-                                    🖥️ Share Screen
                                 </button>
                             )}
                         </div>
@@ -4058,8 +4085,8 @@ const AiInterviewSession = () => {
                             <canvas ref={canvasRef} width="200" height="40" style={{ width: '100%', height: '100%' }}></canvas>
                         </div>
 
-                        {/* Status Badge at bottom */}
-                        <div className="ai-status-badge">
+                        {/* Status Badge at bottom - hide when showing live transcript */}
+                        <div className="ai-status-badge" style={{ display: aiStatus.startsWith('Heard:') ? 'none' : 'flex' }}>
                             <span className="speaking-indicator"></span>{aiStatus}
                         </div>
                     </div>
@@ -4137,7 +4164,13 @@ const AiInterviewSession = () => {
 
                     {/* Live Transcript Display - Restored below chat */}
                     {isRecording && aiStatus.startsWith('Heard:') && (
-                        <div className="live-transcript-bubble">
+                        <div className="live-transcript-bubble" style={{
+                            padding: '10px 14px',
+                            fontSize: '0.85rem',
+                            lineHeight: '1.5',
+                            whiteSpace: 'pre-wrap',
+                            wordBreak: 'break-word'
+                        }}>
                             <i className="fa-solid fa-ear-listen" style={{ color: '#667eea', marginRight: '8px' }}></i>
                             {aiStatus.replace('Heard: ', '').replace(/"/g, '')}
                         </div>

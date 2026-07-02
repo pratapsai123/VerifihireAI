@@ -64,9 +64,11 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'ai_candidates.middleware.InterviewRateLimitMiddleware',
-    'ai_candidates.middleware.InterviewQueueMiddleware',
-    'ai_candidates.middleware.InterviewHealthCheckMiddleware',
+    # NOTE: Interview rate limit and queue middleware disabled for local dev.
+    # Enable in production when running with Celery workers and multiple API keys.
+    # 'ai_candidates.middleware.InterviewRateLimitMiddleware',
+    # 'ai_candidates.middleware.InterviewQueueMiddleware',
+    # 'ai_candidates.middleware.InterviewHealthCheckMiddleware',
 ]
 
 ROOT_URLCONF = 'VerifiHireAI_backend.urls'
@@ -113,6 +115,10 @@ CELERY_BEAT_SCHEDULE = {
     'cleanup-expired-reservations-every-minute': {
         'task': 'api.tasks.cleanup_expired_reservations_task',
         'schedule': crontab(minute='*'),
+    },
+    'auto-complete-abandoned-interviews-every-30-min': {
+        'task': 'ai_candidates.tasks.auto_complete_abandoned_interviews_task',
+        'schedule': crontab(minute='*/30'),
     },
 }
 

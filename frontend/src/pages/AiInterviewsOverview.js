@@ -14,6 +14,10 @@ export default function AiInterviewsOverview() {
     const [expandedBatch, setExpandedBatch] = useState(null);
     const [search, setSearch] = useState('');
     const [resendingId, setResendingId] = useState(null);
+    const [addMemberBatch, setAddMemberBatch] = useState(null); // batch object for add member modal
+    const [newMemberName, setNewMemberName] = useState('');
+    const [newMemberEmail, setNewMemberEmail] = useState('');
+    const [addingMember, setAddingMember] = useState(false);
 
     const currentUser = (() => {
         try {
@@ -157,6 +161,40 @@ export default function AiInterviewsOverview() {
         }
     };
 
+    const handleAddMember = async () => {
+        if (!newMemberName.trim() || !newMemberEmail.trim()) {
+            alert('Please enter both name and email.');
+            return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newMemberEmail.trim())) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        setAddingMember(true);
+        try {
+            await axios.post(`${API_BASE_URL}/ai-candidates/batch-add-member/`, {
+                batch_id: addMemberBatch.batch_id,
+                name: newMemberName.trim(),
+                email: newMemberEmail.trim(),
+            }, {
+                headers: { Authorization: `Bearer ${getToken()}` }
+            });
+            alert(`${newMemberName.trim()} has been added and invite sent to ${newMemberEmail.trim()}`);
+            setAddMemberBatch(null);
+            setNewMemberName('');
+            setNewMemberEmail('');
+            // Refresh data
+            const resp = await axios.get(`${API_BASE_URL}/ai-candidates/interviews-overview/`, {
+                headers: { Authorization: `Bearer ${getToken()}` }
+            });
+            setData(resp.data);
+        } catch (err) {
+            alert(err.response?.data?.error || 'Failed to add member.');
+        } finally {
+            setAddingMember(false);
+        }
+    };
+
     if (loading) return (
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', fontFamily: 'Poppins' }}>
             <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '2rem', color: '#6366f1' }} />
@@ -199,6 +237,7 @@ export default function AiInterviewsOverview() {
     );
 
     return (
+        <>
         <div style={{ padding: '2rem 3rem', fontFamily: 'Poppins', maxWidth: '1200px', margin: '0 auto' }}>
             {/* Header */}
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
@@ -340,6 +379,7 @@ export default function AiInterviewsOverview() {
                         </div>
 
                         {isExpanded && (
+                            <>
                             <div style={{ marginTop: '1rem', borderTop: '1px solid #f1f5f9', paddingTop: '1rem' }}>
                                 <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '0.85rem' }}>
                                     <thead>
@@ -395,10 +435,62 @@ export default function AiInterviewsOverview() {
                                     </tbody>
                                 </table>
                             </div>
+                            <div style={{ marginTop: '1rem', textAlign: 'right' }}>
+                                <button
+                                    onClick={() => setAddMemberBatch(batch)}
+                                    style={{
+                                        padding: '0.5rem 1.2rem', borderRadius: '8px', border: '1px solid #6366f1',
+                                        background: '#eef2ff', color: '#4f46e5', fontSize: '0.8rem', fontWeight: '700',
+                                        cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: '6px'
+                                    }}
+                                >
+                                    <i className="fa-solid fa-user-plus" />
+                                    Add Member
+                                </button>
+                            </div>
+                            </>
                         )}
                     </div>
                 );
             })}
         </div>
+
+        {/* Add Member Modal */}
+        {addMemberBatch && (
+            <div onClick={() => setAddMemberBatch(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+                <div onClick={(e) => e.stopPropagation()} style={{ background: 'white', borderRadius: '20px', padding: '2rem', width: '90%', maxWidth: '450px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
+                    <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700 }}>Add Member to Batch</h3>
+                    <p style={{ margin: '0 0 1.5rem', color: '#64748b', fontSize: '0.85rem' }}>{addMemberBatch.batch_name}</p>
+                    
+                    <div style={{ marginBottom: '1rem' }}>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>Full Name</label>
+                        <input
+                            type="text"
+                            value={newMemberName}
+                            onChange={(e) => setNewMemberName(e.target.value)}
+                            placeholder="e.g. John Doe"
+                            style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.9rem', outline: 'none' }}
+                        />
+                    </div>
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#374151', marginBottom: '0.4rem' }}>Email Address</label>
+                        <input
+                            type="email"
+                            value={newMemberEmail}
+                            onChange={(e) => setNewMemberEmail(e.target.value)}
+                            placeholder="e.g. john@example.com"
+                            style={{ width: '100%', padding: '0.75rem 1rem', borderRadius: '10px', border: '1px solid #e2e8f0', fontSize: '0.9rem', outline: 'none' }}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end' }}>
+                        <button onClick={() => { setAddMemberBatch(null); setNewMemberName(''); setNewMemberEmail(''); }} style={{ padding: '0.6rem 1.5rem', borderRadius: '10px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+                        <button onClick={handleAddMember} disabled={addingMember} style={{ padding: '0.6rem 1.5rem', borderRadius: '10px', border: 'none', background: '#6366f1', color: 'white', fontWeight: 700, cursor: addingMember ? 'not-allowed' : 'pointer', opacity: addingMember ? 0.7 : 1 }}>
+                            {addingMember ? 'Adding...' : 'Add & Send Invite'}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        )}
+        </>
     );
 }
