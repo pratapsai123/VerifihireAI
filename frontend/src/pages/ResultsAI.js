@@ -2877,7 +2877,7 @@ const ResultsAI = () => {
                                                                                                     padding: 0
                                                                                                 }}
                                                                                             >
-                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ?
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('_resume', '').replace('_interview', '').replace('_assessment', '') ?
                                                                                                     <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> :
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>
@@ -2904,7 +2904,7 @@ const ResultsAI = () => {
                                                                                                     padding: 0
                                                                                                 }}
                                                                                             >
-                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('resume-', '').replace('interview-', '') ?
+                                                                                                {downloadingId === String(r.submission_id || '').replace('ai_', '').replace('aicand_', '').replace('_resume', '').replace('_interview', '').replace('_assessment', '') ?
                                                                                                     <i className="fa-solid fa-spinner fa-spin" style={{ fontSize: '0.8rem' }} /> :
                                                                                                     <i className="fa-solid fa-file-pdf" />}
                                                                                             </button>

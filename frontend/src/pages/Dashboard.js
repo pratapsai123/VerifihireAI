@@ -16,7 +16,8 @@ import {
   ChevronRight,
   ChevronDown,
   ChevronUp,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
+  Briefcase
 } from 'lucide-react';
 import {
   XAxis,
@@ -83,6 +84,77 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
+
+  // States and hooks for managing job roles
+  const [isManageModalOpen, setIsManageModalOpen] = useState(false);
+  const [rolesList, setRolesList] = useState([]);
+  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
+  const [editingRoleId, setEditingRoleId] = useState(null);
+  const [editFormData, setEditFormData] = useState({ title: '', description: '' });
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
+
+  const fetchRoles = async () => {
+    setIsLoadingRoles(true);
+    try {
+      const res = await axios.get(`${API_BASE_URL}/job-roles/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      setRolesList(res.data || []);
+    } catch (error) {
+      console.error("Error fetching job roles:", error);
+    } finally {
+      setIsLoadingRoles(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isManageModalOpen) {
+      fetchRoles();
+    }
+  }, [isManageModalOpen]);
+
+  const handleEditRole = (role) => {
+    setEditingRoleId(role.id);
+    setEditFormData({
+      title: role.title,
+      description: role.description
+    });
+  };
+
+  const handleSaveEdit = async (e) => {
+    e.preventDefault();
+    setIsSavingEdit(true);
+    try {
+      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      alert('Job Role updated successfully!');
+      setEditingRoleId(null);
+      fetchRoles();
+    } catch (error) {
+      console.error("Error saving job role edits:", error);
+      alert('Failed to save changes. Please try again.');
+    } finally {
+      setIsSavingEdit(false);
+    }
+  };
+
+  const handleDeleteRole = async (roleId) => {
+    const reason = window.prompt("Please enter a reason for deleting this job role (optional):");
+    if (reason === null) return;
+
+    try {
+      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        data: { reason: reason || 'Administrative Cleanup' }
+      });
+      alert(res.data?.message || 'Job role deleted successfully!');
+      fetchRoles();
+    } catch (error) {
+      console.error("Error deleting job role:", error);
+      alert('Failed to delete job role. Please try again.');
+    }
+  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -173,7 +245,9 @@ const Dashboard = () => {
     e.preventDefault();
     setIsSubmittingRole(true);
     try {
-      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData);
+      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
       setIsRoleModalOpen(false);
       setRoleFormData({ title: '', description: '' });
       // Reload roles if needed elsewhere, but for now just success
@@ -653,7 +727,7 @@ const Dashboard = () => {
                         <div className="candidate-info">
                           <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
                           <div>
-                            <div 
+                            <div
                               className="cand-name"
                               title={cand.candidate?.name || 'Anonymous'}
                               style={{
@@ -841,7 +915,7 @@ const Dashboard = () => {
               <h3 style={{ margin: 0, fontSize: '1.25rem', fontWeight: 800 }}>Manage Job Roles</h3>
               <button className="icon-btn" onClick={() => setIsManageModalOpen(false)}><ChevronDown size={20} /></button>
             </div>
-            
+
             <div style={{ flex: 1, overflowY: editingRoleId ? 'hidden' : 'auto', overflowX: 'hidden', paddingRight: '0.5rem', marginBottom: editingRoleId ? '0' : '1.5rem', display: 'flex', flexDirection: 'column' }}>
               {isLoadingRoles ? (
                 <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
@@ -854,12 +928,12 @@ const Dashboard = () => {
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%', flex: editingRoleId ? 1 : 'none' }}>
                   {rolesList.map((role) => (
-                    <div 
-                      key={role.id} 
-                      style={{ 
-                        background: editingRoleId === role.id ? '#ffffff' : '#f8fafc', 
-                        border: editingRoleId === role.id ? '2px solid #6366f1' : '1px solid #e2e8f0', 
-                        borderRadius: '16px', 
+                    <div
+                      key={role.id}
+                      style={{
+                        background: editingRoleId === role.id ? '#ffffff' : '#f8fafc',
+                        border: editingRoleId === role.id ? '2px solid #6366f1' : '1px solid #e2e8f0',
+                        borderRadius: '16px',
                         padding: editingRoleId === role.id ? '1.5rem' : '1.25rem',
                         transition: 'all 0.2s',
                         width: '100%',
@@ -906,15 +980,15 @@ const Dashboard = () => {
                           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', width: '100%', minWidth: 0 }}>
                             <h4 style={{ margin: 0, fontWeight: 700, color: '#1e293b', fontSize: '1rem', wordBreak: 'break-all', overflowWrap: 'break-word', flex: 1, minWidth: 0 }}>{role.title}</h4>
                             <div style={{ display: 'flex', gap: '0.5rem', flexShrink: 0 }}>
-                              <button 
-                                className="btn-premium btn-outline" 
+                              <button
+                                className="btn-premium btn-outline"
                                 style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#cbd5e1' }}
                                 onClick={() => handleEditRole(role)}
                               >
                                 Edit
                               </button>
-                              <button 
-                                className="btn-premium btn-outline" 
+                              <button
+                                className="btn-premium btn-outline"
                                 style={{ padding: '0.35rem 0.75rem', fontSize: '0.7rem', borderColor: '#fca5a5', color: '#ef4444' }}
                                 onClick={() => handleDeleteRole(role.id)}
                               >
@@ -932,7 +1006,7 @@ const Dashboard = () => {
                 </div>
               )}
             </div>
-            
+
             <div style={{ display: editingRoleId ? 'none' : 'flex', justifyContent: 'flex-end', borderTop: '1px solid #e2e8f0', paddingTop: '1rem', flexShrink: 0 }}>
               <button className="btn-premium btn-fill" style={{ padding: '0.6rem 1.5rem' }} onClick={() => setIsManageModalOpen(false)}>Close</button>
             </div>
