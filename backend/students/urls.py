@@ -5,6 +5,10 @@ from .interview_views import (
     StudentInterviewFeedbackView,
     StudentProgressView,
 )
+from .assessment_views import (
+    StudentPracticeAssessmentView,
+    StudentPracticeResultsView,
+)
 
 urlpatterns = [
     path('practice/', StudentPracticeInterviewView.as_view(), name='student-practice-interview'),
