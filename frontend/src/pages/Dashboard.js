@@ -518,7 +518,7 @@ const Dashboard = () => {
 
         <div className="dashboard-body">
           {userRole === 'student' ? (
-            <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
+            <div className="dashboard-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
               {/* AI Assessments Practice Card */}
               <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
                 <div>
@@ -536,7 +536,7 @@ const Dashboard = () => {
                   <button
                     className="btn-premium btn-fill"
                     style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
-                    onClick={() => navigate('/ai-assessments')}
+                    onClick={() => navigate('/student/create-assessment')}
                   >
                     Start Practice Assessment
                   </button>
@@ -570,6 +570,30 @@ const Dashboard = () => {
                     onClick={() => navigate('/student/sessions')}
                   >
                     My Sessions
+                  </button>
+                </div>
+              </div>
+
+              {/* Practice Results Card */}
+              <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+                <div>
+                  <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+                    <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <BarChart3 size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, marginLeft: '1rem' }}>Practice Results</h3>
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    View scores, question-by-question performance, code submission detail, and overall feedback for your practiced assessments.
+                  </p>
+                </div>
+                <div className="card-actions">
+                  <button
+                    className="btn-premium btn-fill"
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem', background: '#10B981', borderColor: '#10B981' }}
+                    onClick={() => navigate('/student/results')}
+                  >
+                    View Results
                   </button>
                 </div>
               </div>

@@ -1038,6 +1038,7 @@ const AiTakeAssessment = () => {
     useEffect(() => {
         const nameParam = searchParams.get('name');
         const emailParam = searchParams.get('email');
+        const practiceParam = searchParams.get('practice') === 'true';
 
         console.log('URL Params from useSearchParams:', { nameParam, emailParam });
 
@@ -1049,30 +1050,51 @@ const AiTakeAssessment = () => {
         let urlName = isNameValid ? decodeURIComponent(nameParam) : '';
         let urlEmail = isEmailValid ? decodeURIComponent(emailParam) : '';
 
-        // Restore from localStorage if candidate is reconnecting
-        const savedEmail = localStorage.getItem(`ai_candidate_email_${token}`);
-        const savedName = localStorage.getItem(`ai_candidate_name_${token}`);
-        const savedPhone = localStorage.getItem(`ai_candidate_phone_${token}`);
-        const savedPan = localStorage.getItem(`ai_candidate_pan_${token}`);
-
-        // If local storage exists and matches the URL email (or URL email is missing)
-        if (savedEmail && (!urlEmail || savedEmail === urlEmail)) {
-            setCandidateEmail(savedEmail);
-            setCandidateName(savedName || urlName);
-            if (savedPhone) setPhone(savedPhone);
-            if (savedPan) {
-                setPanNumber(savedPan);
-                setPanVerified(true);
-            }
+        if (practiceParam) {
+            setCandidateEmail(urlEmail || 'student@practice.com');
+            setCandidateName(urlName || 'Practice Student');
+            setPhone('9876543210');
+            setPanNumber('ABCDE1234F');
+            setPanVerified(true);
+            setIsRestored(true);
+            setIsRegistered(true);
             setIsAutoFilled(true);
-            setIsRestored(true); // Flag to bypass PAN photo requirement on reconnect
-        } else if (isNameValid || isEmailValid) {
-            if (urlName) setCandidateName(urlName);
-            if (urlEmail) setCandidateEmail(urlEmail);
-            // Only lock inputs if we have a valid email to track them with
-            if (isEmailValid) setIsAutoFilled(true);
+        } else {
+            // Restore from localStorage if candidate is reconnecting
+            const savedEmail = localStorage.getItem(`ai_candidate_email_${token}`);
+            const savedName = localStorage.getItem(`ai_candidate_name_${token}`);
+            const savedPhone = localStorage.getItem(`ai_candidate_phone_${token}`);
+            const savedPan = localStorage.getItem(`ai_candidate_pan_${token}`);
+
+            // If local storage exists and matches the URL email (or URL email is missing)
+            if (savedEmail && (!urlEmail || savedEmail === urlEmail)) {
+                setCandidateEmail(savedEmail);
+                setCandidateName(savedName || urlName);
+                if (savedPhone) setPhone(savedPhone);
+                if (savedPan) {
+                    setPanNumber(savedPan);
+                    setPanVerified(true);
+                }
+                setIsAutoFilled(true);
+                setIsRestored(true); // Flag to bypass PAN photo requirement on reconnect
+            } else if (isNameValid || isEmailValid) {
+                if (urlName) setCandidateName(urlName);
+                if (urlEmail) setCandidateEmail(urlEmail);
+                // Only lock inputs if we have a valid email to track them with
+                if (isEmailValid) setIsAutoFilled(true);
+            }
         }
     }, [searchParams, token]);
+
+    // Auto-start practice assessment on page load
+    useEffect(() => {
+        const isPractice = searchParams.get('practice') === 'true';
+        const autoStart = searchParams.get('autoStart') === 'true';
+        if (isPractice && autoStart && !loading && assessment && !isStarted && !isStarting && candidateName && candidateEmail) {
+            console.log('Practice Mode: Auto-starting assessment...');
+            startAssessment(true);
+        }
+    }, [loading, assessment, isStarted, isStarting, candidateName, candidateEmail, searchParams]);
 
 
 
@@ -1283,36 +1305,39 @@ const AiTakeAssessment = () => {
 
 
     const startAssessment = async (bypassReg = false, isOverride = false, currentSnapshot = null, isFirstReg = false) => {
+        const isPractice = searchParams.get('practice') === 'true';
 
         if (!candidateName || !candidateEmail) { alert('Please provide your name and email.'); return; }
 
-        // PAN Authentication validation
-        if (!phone.trim()) {
-            setFormError('Phone number is required');
-            return;
-        }
-        if (!/^[6-9]\d{9}$/.test(phone.trim())) {
-            setFormError('Invalid phone number. It must start with 6, 7, 8, or 9 and be exactly 10 digits long.');
-            return;
-        }
-        if (!panNumber.trim()) {
-            setFormError('PAN card number is required');
-            return;
-        }
-        if (!validatePanFormat(panNumber)) {
-            setFormError('Invalid PAN format. Expected: ABCDE1234F');
-            return;
-        }
-
-        // If they are reconnecting via localStorage, we bypass the photo upload since it's already saved on the backend
-        if (!isRestored) {
-            if (!panPhoto) {
-                setFormError('Please upload your PAN card photo');
+        if (!isPractice) {
+            // PAN Authentication validation
+            if (!phone.trim()) {
+                setFormError('Phone number is required');
                 return;
             }
-            if (!panVerified) {
-                setFormError('Please verify your PAN card before proceeding');
+            if (!/^[6-9]\d{9}$/.test(phone.trim())) {
+                setFormError('Invalid phone number. It must start with 6, 7, 8, or 9 and be exactly 10 digits long.');
                 return;
+            }
+            if (!panNumber.trim()) {
+                setFormError('PAN card number is required');
+                return;
+            }
+            if (!validatePanFormat(panNumber)) {
+                setFormError('Invalid PAN format. Expected: ABCDE1234F');
+                return;
+            }
+
+            // If they are reconnecting via localStorage, we bypass the photo upload since it's already saved on the backend
+            if (!isRestored) {
+                if (!panPhoto) {
+                    setFormError('Please upload your PAN card photo');
+                    return;
+                }
+                if (!panVerified) {
+                    setFormError('Please verify your PAN card before proceeding');
+                    return;
+                }
             }
         }
 
@@ -1468,25 +1493,22 @@ const AiTakeAssessment = () => {
 
 
             // Start Proctoring (Replacement for old monitor)
-
-            const screenShared = await startScreenShare();
-            if (!screenShared) {
-                setIsStarting(false);
-                return;
+            let screenShared = true;
+            if (!isPractice) {
+                screenShared = await startScreenShare();
+                if (!screenShared) {
+                    setIsStarting(false);
+                    return;
+                }
             }
 
-
-
             try {
-
-                if (document.documentElement.requestFullscreen) {
-
-                    await document.documentElement.requestFullscreen();
-
-                    setIsFullscreen(true);
-
+                if (!isPractice) {
+                    if (document.documentElement.requestFullscreen) {
+                        await document.documentElement.requestFullscreen();
+                        setIsFullscreen(true);
+                    }
                 }
-
             } catch (err) { }
 
 
@@ -1851,6 +1873,8 @@ const AiTakeAssessment = () => {
     useEffect(() => {
 
         if (!isStarted || !submissionId) return;
+        const isPractice = searchParams.get('practice') === 'true';
+        if (isPractice) return;
 
 
 
@@ -1960,6 +1984,8 @@ const AiTakeAssessment = () => {
     useEffect(() => {
 
         if (!isStarted || !submissionId || submitted) return;
+        const isPractice = searchParams.get('practice') === 'true';
+        if (isPractice) return;
 
 
 
@@ -2126,6 +2152,8 @@ const AiTakeAssessment = () => {
     // ── Anti-Cheat Restrictions ─────────────────────────────────────────────
     useEffect(() => {
         if (!isStarted) return;
+        const isPractice = searchParams.get('practice') === 'true';
+        if (isPractice) return;
 
         const handleContextMenu = (e) => {
             e.preventDefault();
