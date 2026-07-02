@@ -76,30 +76,49 @@ function Pricing() {
   const coreNames = ['Trial', 'Starter', 'Pro', 'Enterprise'];
   const corePlans = pricingPlans.filter(p => coreNames.includes(p.name));
   const specialOffers = pricingPlans.filter(p => !coreNames.includes(p.name));
+  const activeOffer = specialOffers.length > 0 ? specialOffers[0] : null;
+
+  let offerMonthlyDiscount = 0;
+  let offer6MoDiscount = 0;
+  let offer12MoDiscount = 0;
+  if (activeOffer) {
+    offerMonthlyDiscount = parseFloat(activeOffer.base_price_monthly) <= 100 ? parseFloat(activeOffer.base_price_monthly) : 0;
+    offer6MoDiscount = parseFloat(activeOffer.discount_6_months) || 0;
+    offer12MoDiscount = parseFloat(activeOffer.discount_12_months) || 0;
+  }
 
   const getPricingDetails = (plan) => {
     const basePrice = parseFloat(plan.base_price_monthly);
-    if (basePrice < 0) return { priceStr: 'Custom', originalPriceStr: null, discountStr: null };
-    if (basePrice === 0) return { priceStr: 'Free', originalPriceStr: null, discountStr: null };
+    if (basePrice < 0) return { priceStr: 'Custom', originalPriceStr: null, discountStr: null, isOverridden: false };
+    if (basePrice === 0) return { priceStr: 'Free', originalPriceStr: null, discountStr: null, isOverridden: false };
 
     let finalPrice = basePrice;
     let originalPriceStr = null;
     let discountStr = null;
 
-    if (billing === 'biannual' && plan.discount_6_months > 0) {
-      finalPrice = basePrice * (1 - (plan.discount_6_months / 100));
+    // Check if this plan is being overridden by an active offer
+    const isOverridden = activeOffer && (plan.name === 'Starter' || plan.name === 'Pro' || plan.name.toLowerCase() === 'professional');
+
+    let currentDiscount = 0;
+    if (billing === 'monthly') {
+      currentDiscount = isOverridden ? offerMonthlyDiscount : 0;
+    } else if (billing === 'biannual') {
+      currentDiscount = isOverridden ? offer6MoDiscount : parseFloat(plan.discount_6_months || 0);
+    } else if (billing === 'annual') {
+      currentDiscount = isOverridden ? offer12MoDiscount : parseFloat(plan.discount_12_months || 0);
+    }
+
+    if (currentDiscount > 0) {
+      finalPrice = basePrice * (1 - (currentDiscount / 100));
       originalPriceStr = `₹${Math.round(basePrice).toLocaleString('en-IN')}`;
-      discountStr = `Save ${plan.discount_6_months}%`;
-    } else if (billing === 'annual' && plan.discount_12_months > 0) {
-      finalPrice = basePrice * (1 - (plan.discount_12_months / 100));
-      originalPriceStr = `₹${Math.round(basePrice).toLocaleString('en-IN')}`;
-      discountStr = `Save ${plan.discount_12_months}%`;
+      discountStr = `Save ${currentDiscount}%`;
     }
 
     return {
       priceStr: `₹${Math.round(finalPrice).toLocaleString('en-IN')}`,
       originalPriceStr,
-      discountStr
+      discountStr,
+      isOverridden
     };
   };
 
@@ -131,22 +150,29 @@ function Pricing() {
             ) : (
               <ScrollReveal>
                 <div className="pricing-grid">
-                  {corePlans.map((plan, i) => (
+                  {corePlans.map((plan, i) => {
+                    const pricing = getPricingDetails(plan);
+                    return (
                     <div key={i} className={`pricing-card ${plan.is_popular ? "pricing-popular" : ""}`} style={{ "--pc": plan.color_theme }}>
-                      {plan.is_popular && <div className="pricing-popular-badge">⭐ Most Popular</div>}
+                      {pricing.isOverridden && (
+                        <div className="pricing-popular-badge" style={{ background: '#EF4444', top: '-14px', zIndex: 10 }}>
+                          🎉 {activeOffer.name} Applied!
+                        </div>
+                      )}
+                      {!pricing.isOverridden && plan.is_popular && <div className="pricing-popular-badge">⭐ Most Popular</div>}
                       <div className="pricing-card-top">
                         <div className="pricing-plan-name" style={{ color: plan.color_theme }}>{plan.name}</div>
                         <div className="pricing-price" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                            {getPricingDetails(plan).originalPriceStr && (
-                              <span style={{ textDecoration: 'line-through', color: 'rgba(255,255,255,0.4)', fontSize: '1rem' }}>
-                                {getPricingDetails(plan).originalPriceStr}
+                            {pricing.originalPriceStr && (
+                              <span style={{ textDecoration: 'line-through', color: '#94A3B8', fontSize: '1.1rem', marginRight: '4px' }}>
+                                {pricing.originalPriceStr}
                               </span>
                             )}
-                            <span className="pricing-amount">{getPricingDetails(plan).priceStr}</span>
-                            {getPricingDetails(plan).discountStr && (
+                            <span className="pricing-amount">{pricing.priceStr}</span>
+                            {pricing.discountStr && (
                               <span style={{ background: 'rgba(5, 205, 153, 0.2)', color: '#05CD99', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>
-                                {getPricingDetails(plan).discountStr}
+                                {pricing.discountStr}
                               </span>
                             )}
                           </div>
@@ -177,7 +203,7 @@ function Pricing() {
                         {parseFloat(plan.base_price_monthly) < 0 ? 'Talk to Sales' : parseFloat(plan.base_price_monthly) === 0 ? 'Get Started Free' : 'Choose Plan'}
                       </Link>
                     </div>
-                  ))}
+                  )})}
                 </div>
               </ScrollReveal>
             )}
@@ -207,7 +233,7 @@ function Pricing() {
                     <div className="pricing-price" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
                         {getPricingDetails(plan).originalPriceStr && (
-                          <span style={{ textDecoration: 'line-through', color: 'rgba(255,255,255,0.4)', fontSize: '1rem' }}>
+                          <span style={{ textDecoration: 'line-through', color: '#94A3B8', fontSize: '1.1rem', marginRight: '4px' }}>
                             {getPricingDetails(plan).originalPriceStr}
                           </span>
                         )}
