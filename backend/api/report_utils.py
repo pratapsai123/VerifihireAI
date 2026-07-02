@@ -1140,6 +1140,26 @@ def generate_candidate_report(submission_id):
         ),
     ])
 
+    # Calculate Total Duration
+    duration_str = '-'
+    if inv.started_at and submission.submitted_at:
+        diff = submission.submitted_at - inv.started_at
+        total_seconds = int(diff.total_seconds())
+        if total_seconds > 0:
+            hours = total_seconds // 3600
+            minutes = (total_seconds % 3600) // 60
+            seconds = total_seconds % 60
+            if hours > 0:
+                duration_str = f"{hours}h {minutes}m {seconds}s"
+            elif minutes > 0:
+                duration_str = f"{minutes}m {seconds}s"
+            else:
+                duration_str = f"{seconds}s"
+
+    info_data.append(
+        _info_row('Total Duration', duration_str, styles)
+    )
+
     story.append(_kv_table(info_data, styles))
 
 
@@ -2712,7 +2732,13 @@ def generate_candidate_report(submission_id):
 
                     
 
+                    # Method 1: batch size > 80 chars = bulk injection
                     if len(events) > 80:
+
+                        burst_events += 1
+
+                    # Method 2: batch contains PASTE marker events explicitly
+                    elif any(ev.get('key') == 'PASTE' for ev in events):
 
                         burst_events += 1
 
@@ -3614,6 +3640,246 @@ def generate_candidate_report(submission_id):
 
 
 
+    # ══════════════════════════════════════════════════════════════════════
+    # PLAGIARISM ANALYSIS SECTION
+    # ══════════════════════════════════════════════════════════════════════
+
+    try:
+        # Collect all CodingSubmissions with plagiarism data for this candidate
+        coding_subs_with_plagiarism = []
+
+        # ── Strategy 1: Read coding_submission_id stored in CandidateSubmission.answers ──
+        # This is the most direct and reliable path for the assessment coding flow
+        candidate_answers = getattr(submission, 'answers', None) or {}
+        collected_sub_ids = set()
+
+        for ans_key, ans_val in candidate_answers.items():
+            if not isinstance(ans_val, dict):
+                continue
+            if not ans_key.startswith('acq_'):
+                continue
+
+            coding_sub_id = ans_val.get('coding_submission_id')
+            if coding_sub_id:
+                try:
+                    cs = CodingSubmission.objects.get(id=int(coding_sub_id))
+                    plagiarism_data = (cs.results or {}).get('plagiarism')
+                    if plagiarism_data and plagiarism_data.get('checked'):
+                        coding_subs_with_plagiarism.append((cs, plagiarism_data))
+                        collected_sub_ids.add(cs.id)
+                    elif plagiarism_data is None:
+                        # Check still pending — include with "pending" status
+                        coding_subs_with_plagiarism.append((cs, {'checked': False, 'pending': True}))
+                        collected_sub_ids.add(cs.id)
+                except CodingSubmission.DoesNotExist:
+                    pass
+
+        # ── Strategy 2: Fallback — find by email + coding question IDs ──
+        if not coding_subs_with_plagiarism and inv.email:
+            from .models import AssessmentCodingQuestion as ACQ
+            acqs = ACQ.objects.filter(assessment=assessment)
+            question_ids = [acq.coding_question_id for acq in acqs if acq.coding_question_id]
+            if question_ids:
+                for cs in CodingSubmission.objects.filter(
+                    question_id__in=question_ids,
+                    user_email__iexact=inv.email,
+                ).exclude(id__in=collected_sub_ids).order_by('question_id', '-id').distinct('question_id'):
+                    plagiarism_data = (cs.results or {}).get('plagiarism')
+                    if plagiarism_data and plagiarism_data.get('checked'):
+                        coding_subs_with_plagiarism.append((cs, plagiarism_data))
+                        collected_sub_ids.add(cs.id)
+
+        # ── Strategy 3: Fallback — inline plagiarism data in answers (legacy) ──
+        if not coding_subs_with_plagiarism:
+            for ans_key, ans_val in candidate_answers.items():
+                if not isinstance(ans_val, dict):
+                    continue
+                plagiarism_data = ans_val.get('plagiarism')
+                if plagiarism_data and plagiarism_data.get('checked'):
+                    # Build a lightweight pseudo-sub object
+                    class _PseudoSub:
+                        def __init__(self, qid, title):
+                            self.question_id = qid
+                            self._title = title
+                    q_id = ans_val.get('question_id')
+                    coding_subs_with_plagiarism.append((_PseudoSub(q_id, f'Question #{q_id}'), plagiarism_data))
+
+        if coding_subs_with_plagiarism:
+            story.append(Spacer(1, 15))
+            story.append(Paragraph('Plagiarism Analysis', styles['SectionHeader']))
+            story.append(HRFlowable(
+                width='100%', thickness=1,
+                color=colors.HexColor('#e2e8f0'), spaceAfter=10,
+            ))
+            story.append(Paragraph(
+                'The following section reports code similarity analysis results using Winnowing '
+                'fingerprint matching (MOSS-standard algorithm). A high similarity score indicates '
+                'code overlap with a previous submission and <b>requires HR review</b> — it does '
+                'not automatically indicate plagiarism.',
+                styles['Normal'],
+            ))
+            story.append(Spacer(1, 12))
+
+            # Color mapping for risk levels
+            RISK_COLORS = {
+                'clean':      ('#d1fae5', '#065f46', '#16a34a'),  # bg, text, border
+                'suspicious': ('#fef9c3', '#713f12', '#eab308'),
+                'flagged':    ('#ffedd5', '#7c2d12', '#f97316'),
+                'high_risk':  ('#fee2e2', '#7f1d1d', '#dc2626'),
+            }
+
+            RISK_LABELS = {
+                'clean':      'CLEAN',
+                'suspicious': 'SUSPICIOUS',
+                'flagged':    'FLAGGED FOR REVIEW',
+                'high_risk':  'HIGH RISK',
+            }
+
+            for sub, p_data in coding_subs_with_plagiarism:
+                # Handle pending state — check not yet completed by Celery
+                if p_data.get('pending') or not p_data.get('checked'):
+                    try:
+                        from .models import CodingQuestion as CQ
+                        q_obj = CQ.objects.filter(id=sub.question_id).first()
+                        q_title = q_obj.title if q_obj else f'Question #{sub.question_id}'
+                    except Exception:
+                        q_title = f'Question #{getattr(sub, "question_id", "?")}' 
+                    story.append(Paragraph(f'<b>Question:</b> {_safe(q_title)}', styles['Normal']))
+                    story.append(Spacer(1, 6))
+                    pending_tbl = Table(
+                        [[Paragraph('<b>Plagiarism Check: In Progress</b><br/><font size="9">The analysis is running in the background. Please download the report again in a few moments.</font>', styles['Normal'])]],
+                        colWidths=[7.2 * inch],
+                    )
+                    pending_tbl.setStyle(TableStyle([
+                        ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#f1f5f9')),
+                        ('BOX', (0,0), (-1,-1), 1, colors.HexColor('#94a3b8')),
+                        ('TOPPADDING', (0,0), (-1,-1), 12),
+                        ('BOTTOMPADDING', (0,0), (-1,-1), 12),
+                        ('LEFTPADDING', (0,0), (-1,-1), 16),
+                    ]))
+                    story.append(pending_tbl)
+                    story.append(Spacer(1, 16))
+                    continue
+
+                score      = p_data.get('similarity_score', 0.0)
+                matched_id = p_data.get('matched_submission_id')
+
+                matched_c  = p_data.get('matched_candidate') or '-'
+                total_cmp  = p_data.get('total_compared', 0)
+                flagged    = p_data.get('flagged', False)
+                checked_at = p_data.get('checked_at', '')
+                risk_dict  = p_data.get('risk', {})
+                risk_level = risk_dict.get('level', 'clean')
+                risk_action = risk_dict.get('action', '')
+
+                bg_color, text_color, border_color = RISK_COLORS.get(
+                    risk_level, RISK_COLORS['clean']
+                )
+                risk_label = RISK_LABELS.get(risk_level, 'CLEAN')
+
+                # Question title
+                try:
+                    from .models import CodingQuestion as CQ
+                    q_obj = CQ.objects.filter(id=sub.question_id).first()
+                    q_title = q_obj.title if q_obj else f'Question #{sub.question_id}'
+                except Exception:
+                    q_title = f'Question #{sub.question_id}'
+
+                story.append(Paragraph(f'<b>Question:</b> {_safe(q_title)}', styles['Normal']))
+                story.append(Spacer(1, 6))
+
+                # Badge row — similarity score + risk level
+                badge_style = ParagraphStyle(
+                    'PlagBadge', parent=styles['Normal'],
+                    fontSize=13, fontName='Helvetica-Bold',
+                    textColor=colors.HexColor(text_color),
+                )
+                score_str = f'{score:.1f}%'
+                badge_para = Paragraph(
+                    f'Similarity Score: {score_str}   |   Risk Level: {risk_label}',
+                    badge_style,
+                )
+
+                badge_tbl = Table([[badge_para]], colWidths=[7.2 * inch])
+                badge_tbl.setStyle(TableStyle([
+                    ('BACKGROUND',    (0, 0), (-1, -1), colors.HexColor(bg_color)),
+                    ('BOX',           (0, 0), (-1, -1), 2,  colors.HexColor(border_color)),
+                    ('TOPPADDING',    (0, 0), (-1, -1), 12),
+                    ('BOTTOMPADDING', (0, 0), (-1, -1), 12),
+                    ('LEFTPADDING',   (0, 0), (-1, -1), 16),
+                ]))
+                story.append(badge_tbl)
+                story.append(Spacer(1, 8))
+
+                # Details table
+                checked_at_fmt = checked_at[:19].replace('T', ' ') if checked_at else '-'
+                details_data = [
+                    _info_row('Total Submissions Compared', str(total_cmp), styles),
+                    _info_row('Highest Match Found', f'{score:.1f}%', styles),
+                ]
+                if matched_id:
+                    details_data.append(_info_row('Matched Submission ID', f'#{matched_id}', styles))
+                    details_data.append(_info_row('Matched Candidate', _safe(matched_c), styles))
+                else:
+                    details_data.append(_info_row('Matched Submission ID', 'None (No similar submission found)', styles))
+
+                details_data.append(_info_row('Analysis Timestamp', checked_at_fmt, styles))
+                details_data.append([
+                    Paragraph('HR Recommendation', styles['InfoLabel']),
+                    Paragraph(f'<b><font color="{border_color}">{_safe(risk_action)}</font></b>', styles['InfoValue']),
+                ])
+
+                story.append(_kv_table(details_data, styles))
+                story.append(Spacer(1, 6))
+
+                # Verdict note
+                if flagged:
+                    verdict_note = (
+                        '<b>NOTE:</b> This submission has been flagged for HR review due to high code '
+                        'similarity. Please compare the submissions side by side before taking any '
+                        'action. High similarity on simple problems may be a false positive.'
+                    )
+                    note_color = border_color
+                else:
+                    verdict_note = (
+                        'No significant code similarity detected. This submission appears to be '
+                        'original and has not been flagged.'
+                    )
+                    note_color = '#16a34a'
+
+                story.append(Paragraph(
+                    f'<font color="{note_color}">{verdict_note}</font>',
+                    styles['Normal'],
+                ))
+                story.append(Spacer(1, 20))
+                story.append(HRFlowable(
+                    width='100%', thickness=0.5,
+                    color=colors.HexColor('#e2e8f0'), spaceAfter=10,
+                ))
+
+        else:
+            # Mention plagiarism check status even if no data
+            story.append(Spacer(1, 15))
+            story.append(Paragraph('Plagiarism Analysis', styles['SectionHeader']))
+            story.append(HRFlowable(
+                width='100%', thickness=1,
+                color=colors.HexColor('#e2e8f0'), spaceAfter=10,
+            ))
+            story.append(Paragraph(
+                'No coding submission plagiarism data available for this candidate. '
+                'This may indicate the check is still processing, the candidate did not '
+                'submit any coding questions, or no previous submissions exist for comparison.',
+                styles['Normal'],
+            ))
+            story.append(Spacer(1, 12))
+
+    except Exception as _plag_err:
+        print(f'[report] Plagiarism section error: {_plag_err}')
+        import traceback as _tb
+        _tb.print_exc()
+
+
+
     # â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
 
     # 5. CANDIDATE FEEDBACK
@@ -3930,9 +4196,11 @@ def generate_candidate_report(submission_id):
 
 
 
-    # â”€â”€ Build PDF â”€â”€
+    # (Plagiarism analysis moved to sit directly under Coding Behavior section)
 
+    # ── Build PDF ──
     doc.build(story, onFirstPage=page_counter.on_page, onLaterPages=page_counter.on_page)
+
 
     buffer.seek(0)
 
