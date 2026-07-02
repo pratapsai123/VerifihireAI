@@ -556,26 +556,19 @@ const Dashboard = () => {
                     Practice standard AI video/voice mock interviews. Improve your soft skills and technical articulation in real-time prep sessions.
                   </p>
                 </div>
-                <div className="card-actions" style={{ display: 'flex', gap: '0.75rem' }}>
+                <div className="card-actions">
                   <button
                     className="btn-premium btn-fill"
-                    style={{ flex: 1, padding: '0.85rem', fontSize: '0.95rem' }}
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
                     onClick={() => navigate('/student/ai-interview')}
                   >
                     Start Mock Interview
-                  </button>
-                  <button
-                    className="btn-premium btn-outline"
-                    style={{ flex: 1, padding: '0.85rem', fontSize: '0.95rem' }}
-                    onClick={() => navigate('/student/sessions')}
-                  >
-                    My Sessions
                   </button>
                 </div>
               </div>
 
               {/* Practice Results Card */}
-              <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+              <div className="glass -card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
                 <div>
                   <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
                     <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

@@ -1934,9 +1934,23 @@ class CandidatePublicStatusUpdateView(APIView):
 
 
 
-            # Calculate final score percentage — always against full 14 questions (140 points max)
-            # Unanswered questions count as 0, preventing gaming by exiting early
-            total_possible = TOTAL_INTERVIEW_QUESTIONS * 10  # Always 140
+            # Calculate final score percentage.
+            # For student/practice interviews, score against the chosen question_count.
+            # For company-created interviews, always use the default 14 questions (140 points max).
+            _is_practice_interview = (
+                isinstance(candidate.automation_settings, dict)
+                and candidate.automation_settings.get('is_practice', False)
+            )
+            if _is_practice_interview:
+                custom_qc = candidate.automation_settings.get('question_count', TOTAL_INTERVIEW_QUESTIONS)
+                if isinstance(custom_qc, int) and 5 <= custom_qc <= 20:
+                    total_possible = custom_qc * 10
+                else:
+                    total_possible = TOTAL_INTERVIEW_QUESTIONS * 10
+            else:
+                # Company interviews: always against full 14 questions (140 points max)
+                # Unanswered questions count as 0, preventing gaming by exiting early
+                total_possible = TOTAL_INTERVIEW_QUESTIONS * 10  # Always 140
             score_percentage = (candidate.score / total_possible) * 100 if total_possible > 0 else 0
 
             # Get integrity score
@@ -2890,6 +2904,18 @@ class ProcessAnswerView(APIView):
                         'refined_next_question': None
                     }, status=status.HTTP_403_FORBIDDEN)
 
+        # Determine the max question count for this interview.
+        # For student/practice interviews, respect the custom question_count.
+        # For company-created interviews, always use the default (14).
+        _is_practice = False
+        _max_questions = TOTAL_INTERVIEW_QUESTIONS  # Default: 14
+        if candidate and isinstance(candidate.automation_settings, dict):
+            _is_practice = candidate.automation_settings.get('is_practice', False)
+            if _is_practice:
+                custom_qc = candidate.automation_settings.get('question_count')
+                if custom_qc and isinstance(custom_qc, int) and 5 <= custom_qc <= 20:
+                    _max_questions = custom_qc
+
         try:
             # --- TOKEN-EFFICIENT CONTEXT BUILDING ---
             # Use structured memory instead of full transcript
@@ -2954,37 +2980,40 @@ class ProcessAnswerView(APIView):
                         strong_topics.append(q)
 
             # Determine phase based on turn number (loose guidance, not rigid)
+            _coding_start = _max_questions - 1  # Second-to-last turn starts coding
             if current_turn_number == 1:
                 phase_guidance = "INTRO PHASE: Ask the candidate to introduce themselves and their background. Keep it warm and conversational."
-            elif current_turn_number <= 6:
+            elif current_turn_number <= max(3, int(_max_questions * 0.4)):
                 phase_guidance = "CORE SKILLS PHASE: Focus on Job Description requirements. Ask about specific technologies, concepts, or methodologies mentioned in the JD."
-            elif current_turn_number <= 10:
+            elif current_turn_number <= max(5, int(_max_questions * 0.7)):
                 phase_guidance = "DEEP DIVE PHASE: Probe deeper based on what the candidate has revealed. If they mentioned a project, ask architecture details. If they claimed a skill, test it with a scenario. Focus on WEAK AREAS if any were identified."
-            elif current_turn_number <= 12:
+            elif current_turn_number < _coding_start:
                 phase_guidance = "SCENARIO & PROBLEM-SOLVING PHASE: Present hypothetical workplace scenarios or system design problems relevant to the role."
-            elif current_turn_number == 13:
+            elif current_turn_number == _coding_start:
                 phase_guidance = "MANDATORY CODING PHASE: You MUST ask a coding/programming question. The candidate will type their answer. You MUST set requires_code_input to true. Do NOT ask a conversational or theoretical question — it MUST be a 'write a function' or 'write code to solve' type question."
             else:
                 phase_guidance = "FINAL EVALUATION PHASE: The candidate has just answered the final question. The interview is now complete. Do NOT ask any further questions. Set 'refined_next_question' to null or an empty string. Focus your feedback purely on evaluating their last answer, without proposing any next steps or saying 'let's try something else/easier'."
 
             # Build adaptive rules based on turn number
-            if current_turn_number >= 14:
+            if current_turn_number >= _max_questions:
                 adaptive_rules = """1. Since the interview is complete, do NOT ask any next question or suggest any follow-up topics.
 2. Set 'refined_next_question' to null or an empty string.
 3. Focus your 'feedback' purely on a 1-sentence polite, human-like reaction evaluating their last answer (e.g., "I understand, coding under time pressure can be challenging." or "Thanks for walking me through that logic.").
 4. Do NOT say "let's try something else", "let's move on", "let's try something easier", or make any comments about future questions."""
             else:
+                # Determine coding turn range dynamically
+                _coding_start = _max_questions - 1  # e.g. turn 13 for 14-question interviews
                 adaptive_rules = f"""1. NEVER repeat a topic already covered above.
 2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
 3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
 4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
 5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
-6. For turns 1-12: ORAL ONLY — never ask them to write code or type anything.
-7. For turns 13-14: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns 13-14."""
+6. For turns 1-{_coding_start - 1}: ORAL ONLY — never ask them to write code or type anything.
+7. For turns {_coding_start}-{_max_questions}: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns {_coding_start}-{_max_questions}."""
 
             # Adaptive intelligence prompt section
             adaptive_section = f"""===== ADAPTIVE QUESTIONING INTELLIGENCE =====
-Turn: {current_turn_number}/14
+Turn: {current_turn_number}/{_max_questions}
 Phase: {phase_guidance}
 
 TOPICS ALREADY COVERED ({len(covered_topics)} questions asked so far):
@@ -3048,8 +3077,8 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 ===== SPECIAL TRIGGERS =====
 - If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
 - If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
-- FOR TURNS 1-12 (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
-- For turns 13-14 (CODING) → Set "requires_code_input": true.
+- FOR TURNS 1-{_coding_start - 1} (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
+- For turns {_coding_start}-{_max_questions} (CODING) → Set "requires_code_input": true.
 - YOUR NEXT QUESTION MUST BE DIFFERENT from all previously covered topics listed above.
 
 ===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
@@ -3149,11 +3178,12 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 
             # -----------------------------------------------
 
-            # Force code input UI for turns 13-14 to ensure the editor appears.
+            # Force code input UI for the last 2 turns to ensure the editor appears.
             # NOTE: current_turn_number is the turn that was JUST ANSWERED.
-            # So when current_turn_number is 12, we are generating Question 13.
-            # When current_turn_number is 13, we are generating Question 14.
-            if current_turn_number in [12, 13]:
+            # So when current_turn_number is (_max_questions - 2), we are generating the coding question.
+            # When current_turn_number is (_max_questions - 1), we are generating the last question.
+            _coding_force_turns = [_max_questions - 2, _max_questions - 1]
+            if current_turn_number in _coding_force_turns:
                 data['requires_code_input'] = True
                 # Ensure the AI didn't accidentally set is_exit=True too early
                 data['is_exit'] = False

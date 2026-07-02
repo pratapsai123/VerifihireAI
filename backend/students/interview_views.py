@@ -153,7 +153,13 @@ class StudentInterviewHistoryView(APIView):
 
         interviews = []
         for c in candidates:
-            score_pct = (c.score / 140 * 100) if c.total_questions > 0 else 0
+            # Use the custom question_count for practice interviews instead of hardcoded 140
+            if isinstance(c.automation_settings, dict) and c.automation_settings.get('is_practice', False):
+                qc = c.automation_settings.get('question_count', 14)
+                total_possible = (qc if isinstance(qc, int) and 5 <= qc <= 20 else 14) * 10
+            else:
+                total_possible = 140
+            score_pct = (c.score / total_possible * 100) if c.total_questions > 0 else 0
             interviews.append({
                 'id': c.id,
                 'public_token': str(c.public_token),
@@ -304,7 +310,12 @@ class StudentProgressView(APIView):
         domain_scores = {}  # job_title -> list of percentages
 
         for c in candidates:
-            total_possible = c.total_questions * 10 if c.total_questions > 0 else 140
+            # Use custom question_count for practice interviews, else use actual questions answered
+            if isinstance(c.automation_settings, dict) and c.automation_settings.get('is_practice', False):
+                qc = c.automation_settings.get('question_count', 14)
+                total_possible = (qc if isinstance(qc, int) and 5 <= qc <= 20 else 14) * 10
+            else:
+                total_possible = c.total_questions * 10 if c.total_questions > 0 else 140
             pct = round((c.score / total_possible * 100), 1) if total_possible > 0 else 0
             
             progress_data.append({
