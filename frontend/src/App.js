@@ -42,6 +42,8 @@ import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
 import StudentAiInterview from './pages/StudentAiInterview';
+import StudentFeedback from './pages/StudentFeedback';
+import StudentSessions from './pages/StudentSessions';
 import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
@@ -492,6 +494,8 @@ function AppContent() {
             <Route path="/student/ai-interview" element={<StudentAiInterview />} />
             <Route path="/student/create-assessment" element={<StudentCreateAssessment />} />
             <Route path="/student/results" element={<StudentPracticeResults />} />
+            <Route path="/student/sessions" element={<StudentSessions />} />
+            <Route path="/student/feedback/:token" element={<StudentFeedback />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />

@@ -963,6 +963,7 @@
     height: 200%;
     background: radial-gradient(circle at center, rgba(16, 185, 129, 0.03) 0%, transparent 50%);
     animation: completion-glow 4s ease-in-out infinite alternate;
+    pointer-events: none;
 }
 
 @keyframes completion-glow {
