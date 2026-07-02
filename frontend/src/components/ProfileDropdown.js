@@ -230,13 +230,13 @@ function ProfileDropdown() {
                 </svg>
                 Company Profile
               </Link>
-              <button type="button" style={profileStyles.profileDropdownItem}>
+              <Link to="/plan-usage" style={profileStyles.profileDropdownItem} onClick={() => setProfileOpen(false)}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
                   <rect x="2" y="3" width="12" height="10" rx="1" fill="#2563eb" />
                   <path d="M5 7h6M5 10h4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
                 </svg>
                 Plan Usage
-              </button>
+              </Link>
             </>
           )}
           {user.role !== 'interviewer' && (

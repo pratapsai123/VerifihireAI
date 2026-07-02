@@ -13,6 +13,9 @@ from .auth_views import (
     verify_login_otp_view,
     refresh_token_view,
     heartbeat_view,
+    create_razorpay_order_view,
+    plan_usage_view,
+    payment_settings_view,
 )
 
 from .user_views import (

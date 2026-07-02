@@ -2163,6 +2163,29 @@ class InviteAssessmentCandidatesView(APIView):
         from .models import InvitedCandidate
         already_invited = InvitedCandidate.objects.filter(assessment=assessment).count()
         max_allowed = assessment.max_candidates_allowed
+
+        # -----------------------------
+        # Subscription Quota Validation
+        # -----------------------------
+        plan = company.subscription_plan if company else None
+        if plan:
+            is_auto = getattr(assessment, 'creation_type', 'manual') == 'automatic'
+            limit = plan.max_fully_automatic if is_auto else plan.max_ai_assessments
+            quota_name = "Fully Automatic" if is_auto else "AI Assessments"
+            
+            if limit > 0:
+                current_plan_count = InvitedCandidate.objects.filter(
+                    assessment__company=company,
+                    assessment__creation_type=getattr(assessment, 'creation_type', 'manual')
+                ).count()
+                
+                remaining_quota = max(0, limit - current_plan_count)
+                if remaining_quota == 0:
+                    return Response({'error': f'Your plan limit for {quota_name} Invitations ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+                
+                # Cap the assessment's internal limit by the plan's remaining quota
+                max_allowed = min(max_allowed, already_invited + remaining_quota)
+        # -----------------------------
         
         import urllib.parse
         # Use frontend base URL from settings - Standardized to localhost for dev

@@ -1,0 +1,141 @@
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'VerifiHireAI_backend.settings')
+django.setup()
+
+from api.models import SubscriptionPlan
+
+plans = [
+    {
+        "name": "Trial",
+        "base_price_monthly": 0.00,
+        "discount_6_months": 0,
+        "discount_12_months": 0,
+        "features": [
+            "Resume Screening - Results",
+            "AI Assessments + Coding - Results",
+            "Coding Assessment",
+            "Company Admin (1)",
+            "HR (2)",
+            "Interviewer (Unlimited)"
+        ],
+        "missing_features": [
+            "AI Interview + Coding - Results",
+            "Custom Assessments",
+            "Results (AI + Coding combined)",
+            "PDF Report Generation",
+            "Live Interview",
+            "Secure Agent",
+            "Deep-Face Verification",
+            "HR Manager",
+            "HR (10)",
+            "Integrity Scoring",
+            "Plagiarism Check",
+            "Behavior Check",
+            "Create Own MCQ, MSQ, True/False, PDF Upload"
+        ],
+        "is_popular": False,
+        "color_theme": "#10B981",
+        "sort_order": 1,
+    },
+    {
+        "name": "Starter",
+        "base_price_monthly": 6999.00,
+        "discount_6_months": 10,
+        "discount_12_months": 20,
+        "features": [
+            "Resume Screening - Results",
+            "AI Assessments + Coding - Results",
+            "AI Interview + Coding - Results",
+            "Coding Assessment",
+            "Custom Assessments",
+            "Results (AI + Coding combined)",
+            "PDF Report Generation",
+            "Company Admin (1)",
+            "HR Manager (2)",
+            "HR (10)",
+            "Interviewer (Unlimited)",
+            "Integrity Scoring",
+            "Plagiarism Check",
+            "Behavior Check",
+            "Create Own MCQ, MSQ, True/False, PDF Upload"
+        ],
+        "missing_features": [
+            "Live Interview",
+            "Secure Agent",
+            "Deep-Face Verification"
+        ],
+        "is_popular": False,
+        "color_theme": "#3B82F6",
+        "sort_order": 2,
+    },
+    {
+        "name": "Pro",
+        "base_price_monthly": 14999.00,
+        "discount_6_months": 15,
+        "discount_12_months": 25,
+        "features": [
+            "Resume Screening - Results (Limited)",
+            "AI Assessments + Coding - Results (Limited)",
+            "AI Interview + Coding - Results (Limited)",
+            "Coding Assessment (Limited)",
+            "Custom Assessments (Limited)",
+            "Results (AI + Coding combined)",
+            "PDF Report Generation",
+            "Live Interview (Limited)",
+            "Secure Agent",
+            "Deep-Face Verification",
+            "Company Admin (1)",
+            "HR Manager (2)",
+            "HR (10)",
+            "Interviewer (Unlimited)",
+            "Integrity Scoring",
+            "Plagiarism Check",
+            "Behavior Check",
+            "Create Own MCQ, MSQ, True/False, PDF Upload"
+        ],
+        "missing_features": [],
+        "is_popular": True,
+        "color_theme": "#6366F1",
+        "sort_order": 3,
+    },
+    {
+        "name": "Enterprise",
+        "base_price_monthly": -1.00,
+        "discount_6_months": 0,
+        "discount_12_months": 0,
+        "features": [
+            "Resume Screening - Results (Unlimited)",
+            "AI Assessments + Coding - Results (Unlimited)",
+            "AI Interview + Coding - Results (Unlimited)",
+            "Coding Assessment (Unlimited)",
+            "Custom Assessments (Unlimited)",
+            "Results (AI + Coding combined)",
+            "PDF Report Generation",
+            "Live Interview (Unlimited)",
+            "Secure Agent",
+            "Deep-Face Verification",
+            "Company Admin (1)",
+            "HR Manager (2)",
+            "HR (10)",
+            "Interviewer (Unlimited)",
+            "Integrity Scoring",
+            "Plagiarism Check",
+            "Behavior Check",
+            "Create Own MCQ, MSQ, True/False, PDF Upload",
+            "Custom Scale & Deployment",
+            "Volume Discounts Available",
+            "Dedicated Account Manager"
+        ],
+        "missing_features": [],
+        "is_popular": False,
+        "color_theme": "#8B5CF6",
+        "sort_order": 4,
+    }
+]
+
+for p in plans:
+    SubscriptionPlan.objects.update_or_create(name=p["name"], defaults=p)
+
+print("Plans updated successfully.")

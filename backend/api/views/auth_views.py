@@ -1,5 +1,7 @@
 from .._imports import *
 from .._imports import _otp_expiry_seconds, _email_domain, _free_email_domains
+import razorpay
+from api.models import SubscriptionPlan, PaymentInvoice, RazorpaySettings
 
 
 @api_view(['GET'])
@@ -12,6 +14,68 @@ def api_root(request):
         'endpoints': {'register': '/api/register/', 'login': '/api/login/', 'admin': '/admin/'},
         'documentation': 'Use POST requests to /api/register/ and /api/login/'
     })
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def create_razorpay_order_view(request):
+    """
+    Creates a Razorpay order based on a selected plan.
+    """
+    try:
+        plan_id = request.data.get('plan_id')
+        billing_cycle = request.data.get('billing_cycle', 'monthly')
+        
+        if not plan_id:
+            return Response({'error': 'plan_id is required.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        plan = SubscriptionPlan.objects.get(id=plan_id)
+        if plan.base_price_monthly < 0:
+            return Response({'error': 'Cannot create order for a custom plan.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+        # Initialize Razorpay Client from DB settings
+        rz_settings = RazorpaySettings.get_settings()
+        key_id = rz_settings.active_key_id or getattr(settings, 'RAZORPAY_KEY_ID', '')
+        key_secret = rz_settings.active_key_secret or getattr(settings, 'RAZORPAY_KEY_SECRET', '')
+        client = razorpay.Client(auth=(key_id, key_secret))
+        
+        # Calculate amount based on billing cycle
+        base_price = float(plan.base_price_monthly)
+        
+        if base_price == 0:
+            order_amount = 100 # 1 INR verification fee for free plans
+        elif billing_cycle == 'biannual':
+            discount = float(plan.discount_6_months)
+            monthly = base_price * (1 - discount / 100.0)
+            order_amount = int(monthly * 6 * 100)
+        elif billing_cycle == 'annual':
+            discount = float(plan.discount_12_months)
+            monthly = base_price * (1 - discount / 100.0)
+            order_amount = int(monthly * 12 * 100)
+        else:
+            order_amount = int(base_price * 100)
+            
+        order_currency = 'INR'
+        order_receipt = f'order_rcptid_{plan.id}'
+        notes = {'plan_name': plan.name}
+        
+        razorpay_order = client.order.create(dict(amount=order_amount, currency=order_currency, receipt=order_receipt, notes=notes, payment_capture='0'))
+        
+        return Response({
+            'order_id': razorpay_order['id'],
+            'amount': razorpay_order['amount'],
+            'currency': razorpay_order['currency'],
+            'key_id': key_id
+        }, status=status.HTTP_200_OK)
+        
+    except SubscriptionPlan.DoesNotExist:
+        return Response({'error': 'Invalid plan selected.'}, status=status.HTTP_400_BAD_REQUEST)
+    except Exception as e:
+        import traceback
+        print(f"Error in create_razorpay_order_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 @csrf_exempt
@@ -514,6 +578,12 @@ def register_view(request):
         email = request.data.get('email', '').strip().lower() or request.data.get('business_email', '').strip().lower()
         organization_name = request.data.get('organization_name', '').strip()
         password = request.data.get('password', '')
+        plan_id = request.data.get('plan_id')
+        billing_cycle = request.data.get('billing_cycle', 'monthly')
+        
+        razorpay_payment_id = request.data.get('razorpay_payment_id')
+        razorpay_order_id = request.data.get('razorpay_order_id')
+        razorpay_signature = request.data.get('razorpay_signature')
         
         # Support legacy fields for backward compatibility
         if not full_name:
@@ -560,6 +630,34 @@ def register_view(request):
                 {'error': 'Password must be at least 6 characters long.', 'password': ['Password must be at least 6 characters.']},
                 status=status.HTTP_400_BAD_REQUEST
             )
+            
+        # Validate Plan
+        if not plan_id:
+            return Response({'error': 'Subscription plan selection is required.', 'plan_id': ['This field is required.']}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            plan = SubscriptionPlan.objects.get(id=plan_id)
+        except SubscriptionPlan.DoesNotExist:
+            return Response({'error': 'Invalid subscription plan.', 'plan_id': ['Plan does not exist.']}, status=status.HTTP_400_BAD_REQUEST)
+            
+        # Verify Razorpay for all plans
+        if plan.base_price_monthly >= 0:
+            if not all([razorpay_payment_id, razorpay_order_id, razorpay_signature]):
+                return Response({'error': 'Payment verification failed. Missing Razorpay parameters.'}, status=status.HTTP_400_BAD_REQUEST)
+            
+            # Verify signature
+            try:
+                key_id = getattr(settings, 'RAZORPAY_KEY_ID', 'rzp_test_T8XmVipwSsdG3Y')
+                key_secret = getattr(settings, 'RAZORPAY_KEY_SECRET', '7N9S2Naj3v9pe9Do0lk2pUzT')
+                client = razorpay.Client(auth=(key_id, key_secret))
+                
+                client.utility.verify_payment_signature({
+                    'razorpay_order_id': razorpay_order_id,
+                    'razorpay_payment_id': razorpay_payment_id,
+                    'razorpay_signature': razorpay_signature
+                })
+            except razorpay.errors.SignatureVerificationError:
+                return Response({'error': 'Payment verification failed. Invalid signature.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Enforce business-domain signup for company registration (platform admin can be gmail, but is created separately)
         domain = _email_domain(email)
@@ -617,6 +715,26 @@ def register_view(request):
                     name=organization_name,
                     approval_status=Company.APPROVAL_PENDING
                 )
+                
+        # Assign Plan and handle auto-approval
+        company.subscription_plan = plan
+        if plan.base_price_monthly >= 0:
+            company.approval_status = Company.APPROVAL_APPROVED
+            company.approved_at = timezone.now()
+            company.plan_start_date = timezone.now()
+            
+            days = 30
+            if billing_cycle == 'biannual':
+                days = 180
+            elif billing_cycle == 'annual':
+                days = 365
+                
+            company.plan_end_date = timezone.now() + timedelta(days=days)
+        else:
+            # Custom plan
+            company.plan_start_date = timezone.now()
+            company.plan_end_date = timezone.now() + timedelta(days=30)
+        company.save()
         
         # Ensure company domain is set if not already
         if not company.domain:
@@ -656,8 +774,58 @@ def register_view(request):
             organization_name=organization_name,
             company=company,
             user=user,
-            is_approved=False,
+            is_approved=(plan.base_price_monthly >= 0),
         )
+
+        # --- Save Payment Invoice ---
+        try:
+            payment_method = PaymentInvoice.METHOD_OTHER
+            payment_method_detail = None
+            invoice_amount = float(plan.base_price_monthly)
+
+            if razorpay_payment_id:
+                try:
+                    rz_settings = RazorpaySettings.get_settings()
+                    key_id = rz_settings.active_key_id or getattr(settings, 'RAZORPAY_KEY_ID', '')
+                    key_secret = rz_settings.active_key_secret or getattr(settings, 'RAZORPAY_KEY_SECRET', '')
+                    rz_client = razorpay.Client(auth=(key_id, key_secret))
+                    pmt = rz_client.payment.fetch(razorpay_payment_id)
+                    method_raw = pmt.get('method', 'other')
+                    method_map = {'card': PaymentInvoice.METHOD_CARD, 'upi': PaymentInvoice.METHOD_UPI,
+                                  'netbanking': PaymentInvoice.METHOD_NETBANKING, 'wallet': PaymentInvoice.METHOD_WALLET,
+                                  'emi': PaymentInvoice.METHOD_EMI}
+                    payment_method = method_map.get(method_raw, PaymentInvoice.METHOD_OTHER)
+                    invoice_amount = pmt.get('amount', 100) / 100.0
+
+                    # Build human-readable detail string
+                    if method_raw == 'card':
+                        card = pmt.get('card', {})
+                        network = card.get('network', '').title()
+                        last4 = str(card.get('last4', ''))
+                        payment_method_detail = network + (' ending ' + last4 if last4 else '')
+                    elif method_raw == 'netbanking':
+                        payment_method_detail = pmt.get('bank', None)
+                    elif method_raw == 'upi':
+                        payment_method_detail = pmt.get('vpa', None)
+                    elif method_raw == 'wallet':
+                        payment_method_detail = pmt.get('wallet', None)
+                except Exception as rz_err:
+                    print(f'Razorpay payment fetch error: {rz_err}')
+
+            PaymentInvoice.objects.create(
+                company=company,
+                plan=plan,
+                billing_cycle=billing_cycle,
+                amount_paid=invoice_amount,
+                payment_method=payment_method,
+                payment_method_detail=payment_method_detail,
+                razorpay_payment_id=razorpay_payment_id or None,
+                razorpay_order_id=razorpay_order_id or None,
+                plan_start_date=company.plan_start_date,
+                plan_end_date=company.plan_end_date,
+            )
+        except Exception as inv_err:
+            print(f'Invoice creation error (non-fatal): {inv_err}')
 
         # Notify platform admin about the new company registration
         try:
@@ -683,8 +851,8 @@ def register_view(request):
 
         return Response(
             {
-                'message': 'Registration successful! Your account is pending superadmin approval.',
-                'pending_approval': True,
+                'message': 'Registration and payment successful!' if plan.base_price_monthly >= 0 else 'Registration successful! Your account is pending superadmin approval.',
+                'pending_approval': plan.base_price_monthly < 0,
                 'user': {
                     'id': user_profile.id,
                     'first_name': user_profile.first_name,
@@ -804,12 +972,17 @@ def login_view(request):
             if not user_profile.is_approved:
                 return Response({'error': 'Your account is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
             
-            if user_profile.company and user_profile.company.approval_status != Company.APPROVAL_APPROVED:
-                if user_profile.company.approval_status == Company.APPROVAL_REJECTED:
-                    return Response({
-                        'error': f'Your company registration was rejected. Reason: {user_profile.company.rejected_reason or "No reason provided."}'
-                    }, status=status.HTTP_403_FORBIDDEN)
-                return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+            if user_profile.company:
+                if user_profile.company.approval_status != Company.APPROVAL_APPROVED:
+                    if user_profile.company.approval_status == Company.APPROVAL_REJECTED:
+                        return Response({
+                            'error': f'Your company registration was rejected. Reason: {user_profile.company.rejected_reason or "No reason provided."}'
+                        }, status=status.HTTP_403_FORBIDDEN)
+                    return Response({'error': 'Your company registration is pending superadmin approval.'}, status=status.HTTP_403_FORBIDDEN)
+                
+                # Check if plan has expired
+                if user_profile.company.plan_end_date and timezone.now() > user_profile.company.plan_end_date:
+                    return Response({'error': 'Your subscription plan has expired. Please renew your plan to continue logging in.'}, status=status.HTTP_403_FORBIDDEN)
         else:
             # Application Admin users (no UserProfile): must exist in ApplicationAdmin table
             auth_user = User.objects.filter(username=email).first() or User.objects.filter(email=email).first()
@@ -1170,5 +1343,137 @@ def refresh_token_view(request):
         print(traceback.format_exc())
         return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def plan_usage_view(request):
+    """
+    Returns the current company's active plan details, feature list,
+    subscription dates, and billing/invoice history.
+    """
+    try:
+        user_profile = UserProfile.objects.select_related('company__subscription_plan').get(user=request.user)
+        company = user_profile.company
+
+        if not company:
+            return Response({'error': 'No company associated with your account.'}, status=status.HTTP_404_NOT_FOUND)
+
+        plan = company.subscription_plan
+
+        plan_data = None
+        if plan:
+            plan_data = {
+                'id': plan.id,
+                'name': plan.name,
+                'base_price_monthly': str(plan.base_price_monthly),
+                'color_theme': plan.color_theme,
+                'is_popular': plan.is_popular,
+                'features': plan.features,
+                'missing_features': plan.missing_features,
+                'max_resume_screening': plan.max_resume_screening,
+                'max_ai_assessments': plan.max_ai_assessments,
+                'max_ai_interviews': plan.max_ai_interviews,
+                'max_coding_assessments': plan.max_coding_assessments,
+                'max_live_interviews': plan.max_live_interviews,
+                'max_hr_managers': plan.max_hr_managers,
+                'max_hrs': plan.max_hrs,
+                'max_interviewers': plan.max_interviewers,
+                'max_custom_questions': plan.max_custom_questions,
+            }
+
+        invoices = PaymentInvoice.objects.filter(company=company).order_by('-created_at')
+        invoice_list = []
+        for inv in invoices:
+            invoice_list.append({
+                'id': inv.id,
+                'plan_name': inv.plan.name if inv.plan else 'Unknown',
+                'billing_cycle': inv.billing_cycle,
+                'amount_paid': str(inv.amount_paid),
+                'payment_method': inv.payment_method,
+                'payment_method_display': inv.get_payment_method_display(),
+                'payment_method_detail': inv.payment_method_detail,
+                'razorpay_payment_id': inv.razorpay_payment_id,
+                'razorpay_order_id': inv.razorpay_order_id,
+                'plan_start_date': inv.plan_start_date.isoformat() if inv.plan_start_date else None,
+                'plan_end_date': inv.plan_end_date.isoformat() if inv.plan_end_date else None,
+                'created_at': inv.created_at.isoformat(),
+            })
+
+        return Response({
+            'company_name': company.name,
+            'approval_status': company.approval_status,
+            'plan': plan_data,
+            'plan_start_date': company.plan_start_date.isoformat() if company.plan_start_date else None,
+            'plan_end_date': company.plan_end_date.isoformat() if company.plan_end_date else None,
+            'invoices': invoice_list,
+        }, status=status.HTTP_200_OK)
+
+    except UserProfile.DoesNotExist:
+        return Response({'error': 'User profile not found.'}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as e:
+        import traceback
+        print(f"Error in plan_usage_view: {str(e)}")
+        print(traceback.format_exc())
+        return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET', 'POST'])
+@permission_classes([IsAuthenticated])
+def payment_settings_view(request):
+    """
+    GET  — Return current Razorpay settings (secrets are masked).
+    POST — Update Razorpay credentials and bank info (super admin only).
+    """
+    # Only platform admins can access this
+    try:
+        from api.models import ApplicationAdmin
+        ApplicationAdmin.objects.get(user=request.user)
+    except Exception:
+        return Response({'error': 'Access denied. Super Admin only.'}, status=status.HTTP_403_FORBIDDEN)
+
+    rz_settings = RazorpaySettings.get_settings()
+
+    if request.method == 'GET':
+        from django.db.models import Sum
+        from api.models import PaymentInvoice
+        total_collected = PaymentInvoice.objects.aggregate(total=Sum('amount_paid'))['total'] or 0.00
+        
+        return Response({
+            'mode': rz_settings.mode,
+            'test_key_id': rz_settings.test_key_id,
+            'test_key_secret': '•' * 12 if rz_settings.test_key_secret else '',
+            'live_key_id': rz_settings.live_key_id,
+            'live_key_secret': '•' * 12 if rz_settings.live_key_secret else '',
+            'account_holder_name': rz_settings.account_holder_name,
+            'bank_name': rz_settings.bank_name,
+            'account_number': rz_settings.account_number,
+            'ifsc_code': rz_settings.ifsc_code,
+            'updated_at': rz_settings.updated_at.isoformat() if rz_settings.updated_at else None,
+            'total_collected': float(total_collected),
+        }, status=status.HTTP_200_OK)
+
+    # POST — update
+    data = request.data
+    if 'mode' in data:
+        rz_settings.mode = data['mode']
+    if 'test_key_id' in data:
+        rz_settings.test_key_id = data['test_key_id']
+    if 'test_key_secret' in data and data['test_key_secret'] and '•' not in data['test_key_secret']:
+        rz_settings.test_key_secret = data['test_key_secret']
+    if 'live_key_id' in data:
+        rz_settings.live_key_id = data['live_key_id']
+    if 'live_key_secret' in data and data['live_key_secret'] and '•' not in data['live_key_secret']:
+        rz_settings.live_key_secret = data['live_key_secret']
+    if 'account_holder_name' in data:
+        rz_settings.account_holder_name = data['account_holder_name']
+    if 'bank_name' in data:
+        rz_settings.bank_name = data['bank_name']
+    if 'account_number' in data:
+        rz_settings.account_number = data['account_number']
+    if 'ifsc_code' in data:
+        rz_settings.ifsc_code = data['ifsc_code']
+    rz_settings.save()
+
+    return Response({'message': 'Payment settings saved successfully.'}, status=status.HTTP_200_OK)
 
 

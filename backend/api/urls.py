@@ -12,6 +12,9 @@ urlpatterns = [
     path('heartbeat/', views.heartbeat_view, name='heartbeat'),
 
     path('register/', views.register_view, name='register'),
+    path('create-razorpay-order/', views.create_razorpay_order_view, name='create_razorpay_order'),
+    path('plan-usage/', views.plan_usage_view, name='plan_usage'),
+    path('admin/payment-settings/', views.payment_settings_view, name='payment_settings'),
     path('send-otp/', views.send_otp_view, name='send_otp'),
     path('verify-otp/', views.verify_otp_view, name='verify_otp'),
     path('reset-password/', views.reset_password_view, name='reset_password'),

@@ -15,6 +15,7 @@ const MENU_ITEMS = [
             { icon: '📊', label: 'Approvals', path: '/' },
             { icon: '🏢', label: 'Companies', path: '/companies' },
             { icon: '🏷️', label: 'Pricing', path: '/pricing' },
+            { icon: '💳', label: 'Payment Settings', path: '/payment-settings' },
         ]
     }
 ];

@@ -769,6 +769,25 @@ def coding_invites_view(request):
     time_limit_seconds = int(data.get("time_limit_seconds") or INVITE_DEFAULT_TIME_LIMIT_SECONDS)
     time_limit_seconds = max(60, time_limit_seconds)  # at least 1 minute
 
+    # -----------------------------
+    # Subscription Quota Validation
+    # -----------------------------
+    user_profile = getattr(request.user, 'profile', None)
+    company = user_profile.company if user_profile else None
+    plan = company.subscription_plan if company else None
+
+    if plan:
+        limit = plan.max_coding_assessments
+        if limit > 0:
+            org_name = _get_org_from_request(request)
+            current_count = CodingInvite.objects.filter(
+                organization_name_snapshot=org_name
+            ).count() if org_name else 0
+            
+            if current_count + 1 > limit:
+                return Response({'error': f'Your plan limit for Coding Assessment Invitations ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+    # -----------------------------
+
     with transaction.atomic():
         invite = CodingInvite.objects.create(
             candidate_name=candidate_name,

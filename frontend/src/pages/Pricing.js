@@ -44,6 +44,131 @@ const PLAN_DESCRIPTIONS = {
   'Enterprise': 'Custom scale & deployment for large organisations.',
 };
 
+const DEFAULT_PLANS = [
+  {
+    name: 'Trial',
+    base_price_monthly: '0.00',
+    discount_6_months: '0',
+    discount_12_months: '0',
+    features: [
+        "Resume Screening - Results",
+        "AI Assessments + Coding - Results",
+        "Coding Assessment",
+        "Company Admin (1)",
+        "HR (2)",
+        "Interviewer (Unlimited)"
+    ],
+    missing_features: [
+        "AI Interview + Coding - Results",
+        "Custom Assessments",
+        "Results (AI + Coding combined)",
+        "PDF Report Generation",
+        "Live Interview",
+        "Secure Agent",
+        "Deep-Face Verification",
+        "HR Manager",
+        "HR (10)",
+        "Integrity Scoring",
+        "Plagiarism Check",
+        "Behavior Check",
+        "Create Own MCQ, MSQ, True/False, PDF Upload"
+    ],
+    is_popular: false,
+    color_theme: '#10B981',
+  },
+  {
+    name: 'Starter',
+    base_price_monthly: '6999.00',
+    discount_6_months: '10',
+    discount_12_months: '20',
+    features: [
+        "Resume Screening - Results",
+        "AI Assessments + Coding - Results",
+        "AI Interview + Coding - Results",
+        "Coding Assessment",
+        "Custom Assessments",
+        "Results (AI + Coding combined)",
+        "PDF Report Generation",
+        "Company Admin (1)",
+        "HR Manager (2)",
+        "HR (10)",
+        "Interviewer (Unlimited)",
+        "Integrity Scoring",
+        "Plagiarism Check",
+        "Behavior Check",
+        "Create Own MCQ, MSQ, True/False, PDF Upload"
+    ],
+    missing_features: [
+        "Live Interview",
+        "Secure Agent",
+        "Deep-Face Verification"
+    ],
+    is_popular: false,
+    color_theme: '#3B82F6',
+  },
+  {
+    name: 'Pro',
+    base_price_monthly: '14999.00',
+    discount_6_months: '15',
+    discount_12_months: '25',
+    features: [
+        "Resume Screening - Results (Limited)",
+        "AI Assessments + Coding - Results (Limited)",
+        "AI Interview + Coding - Results (Limited)",
+        "Coding Assessment (Limited)",
+        "Custom Assessments (Limited)",
+        "Results (AI + Coding combined)",
+        "PDF Report Generation",
+        "Live Interview (Limited)",
+        "Secure Agent",
+        "Deep-Face Verification",
+        "Company Admin (1)",
+        "HR Manager (2)",
+        "HR (10)",
+        "Interviewer (Unlimited)",
+        "Integrity Scoring",
+        "Plagiarism Check",
+        "Behavior Check",
+        "Create Own MCQ, MSQ, True/False, PDF Upload"
+    ],
+    missing_features: [],
+    is_popular: true,
+    color_theme: '#6366F1',
+  },
+  {
+    name: 'Enterprise',
+    base_price_monthly: '-1.00',
+    discount_6_months: '0',
+    discount_12_months: '0',
+    features: [
+        "Resume Screening - Results (Unlimited)",
+        "AI Assessments + Coding - Results (Unlimited)",
+        "AI Interview + Coding - Results (Unlimited)",
+        "Coding Assessment (Unlimited)",
+        "Custom Assessments (Unlimited)",
+        "Results (AI + Coding combined)",
+        "PDF Report Generation",
+        "Live Interview (Unlimited)",
+        "Secure Agent",
+        "Deep-Face Verification",
+        "Company Admin (1)",
+        "HR Manager (2)",
+        "HR (10)",
+        "Interviewer (Unlimited)",
+        "Integrity Scoring",
+        "Plagiarism Check",
+        "Behavior Check",
+        "Create Own MCQ, MSQ, True/False, PDF Upload",
+        "Custom Scale & Deployment",
+        "Volume Discounts Available",
+        "Dedicated Account Manager"
+    ],
+    missing_features: [],
+    is_popular: false,
+    color_theme: '#F59E0B',
+  }
+];
+
 function Pricing() {
   const [billing, setBilling] = useState('monthly');
   const [pricingPlans, setPricingPlans] = useState([]);
@@ -59,7 +184,11 @@ function Pricing() {
     try {
       const response = await axios.get(`${API_BASE_URL}/plans/?t=${new Date().getTime()}`);
       const plans = response.data.plans || [];
-      setPricingPlans(plans);
+      if (plans.length > 0) {
+        setPricingPlans(plans);
+      } else {
+        setPricingPlans(DEFAULT_PLANS);
+      }
       
       const coreNames = ['Trial', 'Starter', 'Pro', 'Enterprise'];
       const special = plans.filter(p => !coreNames.includes(p.name));
@@ -68,6 +197,7 @@ function Pricing() {
       }
     } catch (error) {
       console.error("Failed to fetch plans", error);
+      setPricingPlans(DEFAULT_PLANS);
     } finally {
       setLoading(false);
     }
@@ -196,7 +326,7 @@ function Pricing() {
                           </li>
                         ))}
                       </ul>
-                      <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : "/signup"}
+                      <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : `/signup?plan_id=${plan.id}&billing_cycle=${billing}`}
                         className={plan.is_popular ? 'btn-primary-premium pricing-cta' : 'btn-secondary-premium pricing-cta'}
                         style={plan.is_popular ? {} : { borderColor: `${plan.color_theme}40`, color: plan.color_theme }}
                       >
@@ -264,7 +394,7 @@ function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : "/signup"}
+                  <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : `/signup?plan_id=${plan.id}&billing_cycle=${billing}`}
                     className="btn-primary-premium pricing-cta"
                     style={{ background: plan.color_theme || '#F59E0B' }}
                   >

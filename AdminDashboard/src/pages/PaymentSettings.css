@@ -1,0 +1,167 @@
+.pm-container {
+    padding: 30px;
+    background-color: var(--bg-dashboard);
+    min-height: 100vh;
+}
+
+.pm-header {
+    margin-bottom: 30px;
+}
+
+.pm-title {
+    font-size: 1.8rem;
+    color: var(--text-dark);
+    margin: 0 0 10px 0;
+}
+
+.pm-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.pm-message {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.pm-message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #10b981;
+}
+
+.pm-message.error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #ef4444;
+}
+
+.pm-form {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border: 1px solid var(--border-light);
+}
+
+.pm-section {
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.pm-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.pm-section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.pm-section-title {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.pm-badge {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.pm-badge.test {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.pm-badge.live {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.pm-form-group {
+    margin-bottom: 20px;
+}
+
+.pm-form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.pm-input, .pm-select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #333333;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.pm-input:focus, .pm-select:focus {
+    outline: none;
+    border-color: var(--blue-accent);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.pm-help-text {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.pm-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.pm-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.pm-btn {
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.pm-btn-primary {
+    background: var(--blue-accent);
+    color: #fff;
+}
+
+.pm-btn-primary:hover {
+    background: #4338ca;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.pm-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}

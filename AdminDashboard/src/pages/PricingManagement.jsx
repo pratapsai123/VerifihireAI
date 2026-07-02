@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../apiConfig';
 import './PricingManagement.css';
-
-const API_BASE_URL = 'http://localhost:8001/api/admin/plans/';
 
 function PricingManagement() {
     const [plans, setPlans] = useState([]);
@@ -32,6 +31,17 @@ function PricingManagement() {
         is_popular: false,
         color_theme: '#4F46E5',
         sort_order: 0,
+        max_resume_screening: 0,
+        max_ai_assessments: 0,
+        max_ai_interviews: 0,
+        max_fully_automatic: 0,
+        max_custom_assessments: 0,
+        max_coding_assessments: 0,
+        max_live_interviews: 0,
+        max_hr_managers: 0,
+        max_hrs: 0,
+        max_interviewers: 0,
+        max_custom_questions: 0,
         features: DEFAULT_FEATURES,
         missing_features: ['']
     });
@@ -43,7 +53,7 @@ function PricingManagement() {
     const fetchPlans = async (initial = false) => {
         try {
             if (initial) setLoading(true);
-            const response = await axios.get(`${API_BASE_URL}?t=${new Date().getTime()}`);
+            const response = await axios.get(`${API_BASE_URL}/admin/plans/?t=${new Date().getTime()}`);
             setPlans(response.data.plans);
         } catch (error) {
             console.error('Failed to fetch plans', error);
@@ -70,6 +80,17 @@ function PricingManagement() {
                 is_popular: false,
                 color_theme: '#4F46E5',
                 sort_order: 0,
+                max_resume_screening: 0,
+                max_ai_assessments: 0,
+                max_ai_interviews: 0,
+                max_fully_automatic: 0,
+                max_custom_assessments: 0,
+                max_coding_assessments: 0,
+                max_live_interviews: 0,
+                max_hr_managers: 0,
+                max_hrs: 0,
+                max_interviewers: 0,
+                max_custom_questions: 0,
                 features: DEFAULT_FEATURES,
                 missing_features: ['']
             });
@@ -109,9 +130,9 @@ function PricingManagement() {
 
         try {
             if (editingPlan) {
-                await axios.put(`${API_BASE_URL}${editingPlan.id}/`, cleanedData);
+                await axios.put(`${API_BASE_URL}/admin/plans/${editingPlan.id}/`, cleanedData);
             } else {
-                await axios.post(API_BASE_URL, cleanedData);
+                await axios.post(`${API_BASE_URL}/admin/plans/`, cleanedData);
             }
             fetchPlans();
             handleCloseModal();
@@ -124,7 +145,7 @@ function PricingManagement() {
     const handleDelete = async (id) => {
         if(window.confirm('Are you sure you want to delete this plan?')) {
             try {
-                await axios.delete(`${API_BASE_URL}${id}/`);
+                await axios.delete(`${API_BASE_URL}/admin/plans/${id}/`);
                 fetchPlans();
             } catch (error) {
                 console.error('Error deleting plan', error);
@@ -155,7 +176,7 @@ function PricingManagement() {
 
                         <div className="pricing-admin-actions">
                             <button className="btn-secondary" onClick={() => handleOpenModal(plan)}>Edit</button>
-                            {!(plan.name.toLowerCase() === 'starter' || plan.name.toLowerCase() === 'professional' || plan.name.toLowerCase() === 'enterprise') && (
+                            {!(['trial', 'starter', 'pro', 'professional', 'enterprise', 'custom'].includes(plan.name.toLowerCase())) && (
                                 <button className="btn-danger" onClick={() => handleDelete(plan.id)}>Delete</button>
                             )}
                         </div>
@@ -199,6 +220,54 @@ function PricingManagement() {
                                 <div className="form-group" style={{gridColumn: '1 / -1', display: 'flex', alignItems: 'center', gap: '8px'}}>
                                     <input type="checkbox" id="is_popular_check" checked={formData.is_popular} onChange={e => setFormData({...formData, is_popular: e.target.checked})} style={{width: 'auto', margin: 0}} />
                                     <label htmlFor="is_popular_check" style={{marginBottom: 0, cursor: 'pointer'}}>Mark as Most Popular</label>
+                                </div>
+                            </div>
+
+                            <h3 style={{marginTop: '25px', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '5px'}}>Quotas & Limits (Invitations/Counts)</h3>
+                            <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px', marginBottom: '20px', backgroundColor: '#f8fafc', padding: '15px', borderRadius: '8px'}}>
+                                <div className="form-group">
+                                    <label>Max HR Managers</label>
+                                    <input type="number" min="0" value={formData.max_hr_managers} onChange={e => setFormData({...formData, max_hr_managers: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max HRs</label>
+                                    <input type="number" min="0" value={formData.max_hrs} onChange={e => setFormData({...formData, max_hrs: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Interviewers</label>
+                                    <input type="number" min="0" value={formData.max_interviewers} onChange={e => setFormData({...formData, max_interviewers: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max AI Assessments</label>
+                                    <input type="number" min="0" value={formData.max_ai_assessments} onChange={e => setFormData({...formData, max_ai_assessments: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max AI Interviews</label>
+                                    <input type="number" min="0" value={formData.max_ai_interviews} onChange={e => setFormData({...formData, max_ai_interviews: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Fully Automatic</label>
+                                    <input type="number" min="0" value={formData.max_fully_automatic} onChange={e => setFormData({...formData, max_fully_automatic: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Coding Assessments</label>
+                                    <input type="number" min="0" value={formData.max_coding_assessments} onChange={e => setFormData({...formData, max_coding_assessments: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Custom Assessments</label>
+                                    <input type="number" min="0" value={formData.max_custom_assessments} onChange={e => setFormData({...formData, max_custom_assessments: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Live Interviews</label>
+                                    <input type="number" min="0" value={formData.max_live_interviews} onChange={e => setFormData({...formData, max_live_interviews: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Resume Screening</label>
+                                    <input type="number" min="0" value={formData.max_resume_screening} onChange={e => setFormData({...formData, max_resume_screening: parseInt(e.target.value) || 0})} />
+                                </div>
+                                <div className="form-group">
+                                    <label>Max Custom Questions Bank</label>
+                                    <input type="number" min="0" value={formData.max_custom_questions} onChange={e => setFormData({...formData, max_custom_questions: parseInt(e.target.value) || 0})} />
                                 </div>
                             </div>
 

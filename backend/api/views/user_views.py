@@ -66,7 +66,36 @@ def invite_user_view(request):
         if UserProfile.objects.filter(email=invitee_email).exists():
             return Response({'email': ['A user with this email already exists.']}, status=status.HTTP_400_BAD_REQUEST)
 
-
+        # -----------------------------
+        # Quota Validation
+        # -----------------------------
+        plan = company.subscription_plan
+        if plan:
+            # Check limits based on role
+            if role == UserProfile.ROLE_HR_MANAGER:
+                limit = plan.max_hr_managers
+                if limit > 0:
+                    current_count = UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER).count() + \
+                                    UserInvitation.objects.filter(company=company, role=UserProfile.ROLE_HR_MANAGER, status=UserInvitation.STATUS_PENDING).count()
+                    if current_count >= limit:
+                        return Response({'error': f'Your plan limit for HR Managers ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+            
+            elif role == UserProfile.ROLE_HR:
+                limit = plan.max_hrs
+                if limit > 0:
+                    current_count = UserProfile.objects.filter(company=company, role=UserProfile.ROLE_HR).count() + \
+                                    UserInvitation.objects.filter(company=company, role=UserProfile.ROLE_HR, status=UserInvitation.STATUS_PENDING).count()
+                    if current_count >= limit:
+                        return Response({'error': f'Your plan limit for HRs ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+            
+            elif role == UserProfile.ROLE_INTERVIEWER:
+                limit = plan.max_interviewers
+                if limit > 0:
+                    current_count = UserProfile.objects.filter(company=company, role=UserProfile.ROLE_INTERVIEWER).count() + \
+                                    UserInvitation.objects.filter(company=company, role=UserProfile.ROLE_INTERVIEWER, status=UserInvitation.STATUS_PENDING).count()
+                    if current_count >= limit:
+                        return Response({'error': f'Your plan limit for Interviewers ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+        # -----------------------------
 
         # Prevent multiple pending invites
         existing_pending = UserInvitation.objects.filter(company=company, email=invitee_email, status=UserInvitation.STATUS_PENDING).first()
@@ -683,6 +712,19 @@ def add_team_member_view(request):
             return Response({
                 'error': f'You can only add team members with an official "{company_domain}" email address. "{invitee_domain}" belongs to another organization.'
             }, status=status.HTTP_400_BAD_REQUEST)
+
+        # -----------------------------
+        # Quota Validation
+        # -----------------------------
+        plan = company.subscription_plan
+        if plan:
+            limit = plan.max_interviewers
+            if limit > 0:
+                current_count = UserProfile.objects.filter(company=company, role=UserProfile.ROLE_INTERVIEWER).count() + \
+                                UserInvitation.objects.filter(company=company, role=UserProfile.ROLE_INTERVIEWER, status=UserInvitation.STATUS_PENDING).count()
+                if current_count >= limit:
+                    return Response({'error': f'Your plan limit for Interviewers ({limit}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+        # -----------------------------
 
         # Check if already exists
         existing = UserProfile.objects.filter(email=email).first()

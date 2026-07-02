@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState, useEffect, Fragment } from 'react';
+import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
 import { API_BASE_URL } from '../apiConfig';
 
 function Signup() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     // If the user is already logged in, redirect them to the dashboard (Instagram style)
@@ -26,6 +27,46 @@ function Signup() {
         offset: 50,
       });
     }
+    
+    // Fetch Plans
+    const fetchPlans = async () => {
+      setPlansLoading(true);
+      try {
+        const response = await axios.get(`${API_BASE_URL}/plans/?t=${new Date().getTime()}`);
+        setPlans(response.data.plans || []);
+        if (response.data.plans && response.data.plans.length > 0) {
+          const queryParams = new URLSearchParams(location.search);
+          const urlPlanId = queryParams.get('plan_id');
+          const urlBillingCycle = queryParams.get('billing_cycle');
+          
+          if (urlBillingCycle && ['monthly', 'biannual', 'annual'].includes(urlBillingCycle)) {
+            setBillingCycle(urlBillingCycle);
+          }
+          
+          if (urlPlanId) {
+            setSelectedPlanId(Number(urlPlanId));
+          } else {
+            const freePlan = response.data.plans.find(p => parseFloat(p.base_price_monthly) === 0);
+            setSelectedPlanId(freePlan ? freePlan.id : response.data.plans[0].id);
+          }
+        }
+      } catch (error) {
+        console.error("Failed to fetch plans:", error);
+      } finally {
+        setPlansLoading(false);
+      }
+    };
+    fetchPlans();
+
+    // Load Razorpay Script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
   }, [navigate]);
 
   // Signup form state
@@ -56,6 +97,11 @@ function Signup() {
     { id: 'number', label: 'At least one number', test: (pwd) => /\d/.test(pwd) },
     { id: 'special', label: 'At least one special character', test: (pwd) => /[^A-Za-z0-9]/.test(pwd) },
   ];
+
+  const [plans, setPlans] = useState([]);
+  const [selectedPlanId, setSelectedPlanId] = useState(null);
+  const [billingCycle, setBillingCycle] = useState('monthly');
+  const [plansLoading, setPlansLoading] = useState(false);
 
   // Email verification state
   const [emailVerified, setEmailVerified] = useState(false);
@@ -222,15 +268,81 @@ function Signup() {
       return;
     }
 
+    // Plan validation
+    if (!selectedPlanId) {
+      setSignupError('Please select a subscription plan to continue.');
+      return;
+    }
+
     setSignupLoading(true);
 
+    const registrationData = {
+      full_name: `${firstName} ${lastName}`.trim(),
+      email: businessEmail,
+      organization_name: organizationName,
+      password: password,
+      plan_id: selectedPlanId,
+      billing_cycle: billingCycle,
+    };
+
+    const selectedPlan = plans.find(p => p.id === selectedPlanId);
+
+    if (selectedPlan && parseFloat(selectedPlan.base_price_monthly) >= 0) {
+      // Handle Razorpay Payment for All Plans (including 1 INR verification fee for free plans)
+      try {
+        const orderRes = await axios.post(`${API_BASE_URL}/create-razorpay-order/`, { plan_id: selectedPlanId, billing_cycle: billingCycle });
+        const { order_id, amount, currency, key_id } = orderRes.data;
+
+        const options = {
+          key: key_id,
+          amount: amount,
+          currency: currency,
+          name: "VerifiHireAI",
+          description: `Subscription for ${selectedPlan.name}`,
+          order_id: order_id,
+          handler: async function (response) {
+            // Payment successful, proceed to register
+            await submitRegistration({
+              ...registrationData,
+              razorpay_payment_id: response.razorpay_payment_id,
+              razorpay_order_id: response.razorpay_order_id,
+              razorpay_signature: response.razorpay_signature
+            });
+          },
+          prefill: {
+            name: `${firstName} ${lastName}`.trim(),
+            email: businessEmail,
+          },
+          theme: {
+            color: "#7c3aed"
+          },
+          modal: {
+            ondismiss: function() {
+              setSignupLoading(false);
+              setSignupError("Payment cancelled.");
+            }
+          }
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.on('payment.failed', function (response){
+          setSignupError(`Payment failed: ${response.error.description}`);
+          setSignupLoading(false);
+        });
+        rzp.open();
+      } catch (err) {
+        setSignupError("Failed to initialize payment. Please try again.");
+        setSignupLoading(false);
+      }
+    } else {
+      // Free plan -> Register directly
+      await submitRegistration(registrationData);
+    }
+  };
+
+  const submitRegistration = async (payload) => {
     try {
-      const response = await axios.post(`${API_BASE_URL}/register/`, {
-        full_name: `${firstName} ${lastName}`.trim(),
-        email: businessEmail,
-        organization_name: organizationName,
-        password: password,
-      });
+      const response = await axios.post(`${API_BASE_URL}/register/`, payload);
 
       // Success - check if pending approval
       const isPending = response.data.pending_approval;
@@ -550,6 +662,46 @@ function Signup() {
               {fieldErrors.organizationName && (
                 <div className="field-error-text">{fieldErrors.organizationName}</div>
               )}
+
+              <div className={`auth-input-icon-wrapper ${selectedPlanId ? 'focused has-value' : ''}`} style={{ marginTop: '1rem' }}>
+                <i className="fas fa-layer-group auth-input-icon"></i>
+                <select
+                  className="auth-input-with-icon"
+                  value={selectedPlanId ? `${selectedPlanId}-${billingCycle}` : ''}
+                  onChange={(e) => {
+                    const [pId, cycle] = e.target.value.split('-');
+                    setSelectedPlanId(Number(pId));
+                    setBillingCycle(cycle || 'monthly');
+                  }}
+                  required
+                  disabled={signupLoading || plansLoading || !emailVerified}
+                  style={{ appearance: 'none', cursor: 'pointer' }}
+                >
+                  <option value="" disabled>Select a Plan *</option>
+                  {plans.filter(p => parseFloat(p.base_price_monthly) >= 0 && !['enterprise', 'custom'].includes(p.name.toLowerCase())).map(plan => {
+                    const basePrice = parseFloat(plan.base_price_monthly);
+                    if (basePrice === 0) {
+                      return <option key={`${plan.id}-monthly`} value={`${plan.id}-monthly`}>{plan.name} - Free</option>;
+                    }
+                    
+                    const price6Mo = basePrice * (1 - (parseFloat(plan.discount_6_months) || 0) / 100);
+                    const price12Mo = basePrice * (1 - (parseFloat(plan.discount_12_months) || 0) / 100);
+                    
+                    return (
+                      <Fragment key={plan.id}>
+                        <option value={`${plan.id}-monthly`}>{plan.name} - ₹{basePrice.toFixed(2)}/mo (Monthly)</option>
+                        <option value={`${plan.id}-biannual`}>{plan.name} - ₹{price6Mo.toFixed(2)}/mo (6 Months)</option>
+                        <option value={`${plan.id}-annual`}>{plan.name} - ₹{price12Mo.toFixed(2)}/mo (Annually)</option>
+                      </Fragment>
+                    );
+                  })}
+                </select>
+                <i className="fas fa-chevron-down" style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', pointerEvents: 'none' }}></i>
+                <label className="auth-floating-label">Subscription Plan *</label>
+              </div>
+              {fieldErrors.plan_id && (
+                <div className="field-error-text">{fieldErrors.plan_id}</div>
+              )}
             </div>
           )}
 
@@ -698,7 +850,8 @@ function Signup() {
               !confirmPassword ||
               password !== confirmPassword ||
               !passwordRegex.test(password) ||
-              !emailVerified
+              !emailVerified ||
+              !selectedPlanId
             }
             style={{
               width: '100%',

@@ -50,6 +50,7 @@ import MyAccount from './pages/MyAccount';
 import Contact from './pages/Contact';
 import SecurePrecheck from './pages/SecurePrecheck';
 import Pricing from './pages/Pricing';
+import PlanUsage from './pages/PlanUsage';
 import InviteRedirect from './pages/InviteRedirect';
 import SessionTerminated from './pages/SessionTerminated';
 import SecuritySessionGuard from './components/SecuritySessionGuard';
@@ -494,6 +495,7 @@ function AppContent() {
             <Route path="/settings" element={<Settings />} />
             <Route path="/manage-availability" element={<AvailabilityManagement />} />
             <Route path="/my-account" element={<MyAccount />} />
+            <Route path="/plan-usage" element={<PlanUsage />} />
           </Route>
 
           {/* Public / Candidate Routes */}

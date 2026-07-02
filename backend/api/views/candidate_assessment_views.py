@@ -111,6 +111,24 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # -----------------------------
+        # Quota Validation
+        # -----------------------------
+        company = req_user_profile.company if req_user_profile else None
+        plan = company.subscription_plan if company else None
+
+        if plan:
+            limit = plan.max_custom_assessments
+            if limit > 0:
+                # Count existing CandidateInvitations for this company
+                current_count = CandidateInvitation.objects.filter(
+                    assessment__user_profile__company=company
+                ).count()
+                
+                if current_count + len(candidates) > limit:
+                    return Response({'error': f'Your plan limit for Custom Assessment Invitations ({limit}) has been reached or would be exceeded. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+        # -----------------------------
+
         frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []

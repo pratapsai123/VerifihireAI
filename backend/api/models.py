@@ -284,6 +284,17 @@ class Company(models.Model):
         help_text="If enabled, HR/HR-Managers need approval to delete records (Candidates, Assessments, etc)"
     )
 
+    subscription_plan = models.ForeignKey(
+        'SubscriptionPlan',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='companies',
+        help_text="The active subscription plan for this company"
+    )
+    plan_start_date = models.DateTimeField(blank=True, null=True, help_text="When the current plan subscription started")
+    plan_end_date = models.DateTimeField(blank=True, null=True, help_text="When the current plan subscription expires")
+
     class Meta:
         verbose_name = "Company"
         verbose_name_plural = "Companies"
@@ -2141,6 +2152,20 @@ class SubscriptionPlan(models.Model):
     base_price_monthly = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, help_text="Base price in INR per month")
     discount_6_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 6 months (e.g., 10.00 for 10%)")
     discount_12_months = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, help_text="Percentage discount for 12 months (e.g., 20.00 for 20%)")
+    
+    # Quantitative Quotas & Limits (Defaults to 0 for strict access control)
+    max_resume_screening = models.IntegerField(default=0, help_text="Limit for resumes screened")
+    max_ai_assessments = models.IntegerField(default=0, help_text="Invitations limit")
+    max_ai_interviews = models.IntegerField(default=0, help_text="Invitations limit")
+    max_fully_automatic = models.IntegerField(default=0, help_text="Invitations limit")
+    max_custom_assessments = models.IntegerField(default=0, help_text="Invitations limit")
+    max_coding_assessments = models.IntegerField(default=0, help_text="Invitations limit")
+    max_live_interviews = models.IntegerField(default=0, help_text="Invitations limit")
+    max_hr_managers = models.IntegerField(default=0, help_text="Invitations/Creation limit")
+    max_hrs = models.IntegerField(default=0, help_text="Invitations/Creation limit")
+    max_interviewers = models.IntegerField(default=0, help_text="Invitations/Creation limit")
+    max_custom_questions = models.IntegerField(default=0, help_text="Total bank limit for custom MCQ, MSQ, T/F, and PDF questions")
+
     features = models.JSONField(default=list, blank=True, help_text="List of included features")
     missing_features = models.JSONField(default=list, blank=True, help_text="List of excluded features")
     is_popular = models.BooleanField(default=False)
@@ -2159,5 +2184,127 @@ class SubscriptionPlan(models.Model):
         return self.name
 
 
+class PaymentInvoice(models.Model):
+    """Stores a billing/payment record every time a company subscribes or upgrades a plan."""
+
+    METHOD_CARD = 'card'
+    METHOD_UPI = 'upi'
+    METHOD_NETBANKING = 'netbanking'
+    METHOD_WALLET = 'wallet'
+    METHOD_EMI = 'emi'
+    METHOD_OTHER = 'other'
+
+    PAYMENT_METHOD_CHOICES = [
+        (METHOD_CARD, 'Card'),
+        (METHOD_UPI, 'UPI'),
+        (METHOD_NETBANKING, 'Netbanking'),
+        (METHOD_WALLET, 'Wallet'),
+        (METHOD_EMI, 'EMI'),
+        (METHOD_OTHER, 'Other'),
+    ]
+
+    company = models.ForeignKey(
+        'Company',
+        on_delete=models.CASCADE,
+        related_name='invoices',
+    )
+    plan = models.ForeignKey(
+        'SubscriptionPlan',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='invoices',
+    )
+    billing_cycle = models.CharField(
+        max_length=20,
+        default='monthly',
+        help_text="monthly / biannual / annual"
+    )
+    amount_paid = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0.00,
+        help_text="Total amount charged in INR"
+    )
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PAYMENT_METHOD_CHOICES,
+        default=METHOD_OTHER,
+    )
+    payment_method_detail = models.CharField(
+        max_length=100, blank=True, null=True,
+        help_text="e.g. HDFC Bank, SBI, Visa ending 4242"
+    )
+    razorpay_payment_id = models.CharField(max_length=100, blank=True, null=True, unique=True)
+    razorpay_order_id = models.CharField(max_length=100, blank=True, null=True)
+    plan_start_date = models.DateTimeField(null=True, blank=True)
+    plan_end_date = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = "Payment Invoice"
+        verbose_name_plural = "Payment Invoices"
+
+    def __str__(self):
+        return f"Invoice #{self.id} - {self.company.name} - ₹{self.amount_paid}"
 
 
+class RazorpaySettings(models.Model):
+    """
+    Singleton model — stores the platform Super Admin's Razorpay credentials.
+    Only one row exists; updated via the Admin Dashboard Payment Settings page.
+    """
+    MODE_TEST = 'test'
+    MODE_LIVE = 'live'
+    MODE_CHOICES = [
+        (MODE_TEST, 'Test Mode'),
+        (MODE_LIVE, 'Live Mode'),
+    ]
+
+    mode = models.CharField(
+        max_length=10, choices=MODE_CHOICES, default=MODE_TEST,
+        help_text="Toggle between Razorpay Test and Live mode"
+    )
+
+    # Test credentials
+    test_key_id = models.CharField(max_length=100, blank=True, default='', help_text="Razorpay Test Key ID (rzp_test_...)")
+    test_key_secret = models.CharField(max_length=100, blank=True, default='', help_text="Razorpay Test Key Secret")
+
+    # Live credentials
+    live_key_id = models.CharField(max_length=100, blank=True, default='', help_text="Razorpay Live Key ID (rzp_live_...)")
+    live_key_secret = models.CharField(max_length=100, blank=True, default='', help_text="Razorpay Live Key Secret")
+
+    # Bank account info (for reference/display)
+    account_holder_name = models.CharField(max_length=255, blank=True, default='')
+    bank_name = models.CharField(max_length=255, blank=True, default='')
+    account_number = models.CharField(max_length=50, blank=True, default='')
+    ifsc_code = models.CharField(max_length=20, blank=True, default='')
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Razorpay Settings"
+        verbose_name_plural = "Razorpay Settings"
+
+    def __str__(self):
+        return f"Razorpay Settings ({self.mode.upper()} mode)"
+
+    @property
+    def active_key_id(self):
+        return self.live_key_id if self.mode == self.MODE_LIVE else self.test_key_id
+
+    @property
+    def active_key_secret(self):
+        return self.live_key_secret if self.mode == self.MODE_LIVE else self.test_key_secret
+
+    @classmethod
+    def get_settings(cls):
+        """Always returns the singleton settings row, creating defaults if needed."""
+        obj, _ = cls.objects.get_or_create(
+            id=1,
+            defaults={
+                'mode': cls.MODE_TEST,
+                'test_key_id': 'rzp_test_T8XmVipwSsdG3Y',
+                'test_key_secret': '7N9S2Naj3v9pe9Do0lk2pUzT',
+            }
+        )
+        return obj

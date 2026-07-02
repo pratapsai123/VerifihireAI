@@ -1281,6 +1281,27 @@ def draft_interview_invitations_view(request, draft_id=None):
             
             # Allow bulk insert or single insert
             candidates = data.get('candidates', [data]) if 'candidates' in data else [data]
+
+            # -----------------------------
+            # Quota Validation
+            # -----------------------------
+            company = user_profile.company if user_profile else None
+            plan = company.subscription_plan if company else None
+
+            if plan:
+                limit = plan.max_live_interviews
+                if limit > 0:
+                    current_count = InterviewInvitation.objects.filter(
+                        models.Q(is_deleted=False) &
+                        (
+                            models.Q(interview__company=company) |
+                            models.Q(interview__created_by__company=company)
+                        )
+                    ).count()
+                    
+                    if current_count + len(candidates) > limit:
+                        return Response({'error': f'Your plan limit for Live Interview Invitations ({limit}) has been reached or would be exceeded. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+            # -----------------------------
             
             pending_bookings = []
             created_drafts = []

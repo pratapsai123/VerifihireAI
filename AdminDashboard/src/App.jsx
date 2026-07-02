@@ -37,6 +37,7 @@ import CompaniesPage from './pages/CompaniesPage';
 import DashboardHome from './pages/DashboardHome';
 import ActivityFeed from './pages/ActivityFeed';
 import PricingManagement from './pages/PricingManagement';
+import PaymentSettings from './pages/PaymentSettings';
 
 function App() {
   return (
@@ -62,6 +63,13 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <PricingManagement />
+            </Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/payment-settings" element={
+          <ProtectedRoute>
+            <Layout>
+              <PaymentSettings />
             </Layout>
           </ProtectedRoute>
         } />

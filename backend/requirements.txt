@@ -24,6 +24,7 @@ djangorestframework-simplejwt
 pygments
 pymupdf
 edge-tts
+razorpay
 
 # DeepFace Identity Verification
 deepface==0.0.100

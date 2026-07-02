@@ -271,6 +271,9 @@ class BulkInviteView(APIView):
             
 
         try:
+            user_profile = getattr(request.user, 'profile', None)
+            company = user_profile.company if user_profile else None
+            plan = company.subscription_plan if company else None
 
             batch_id = generate_batch_id()
 
@@ -315,6 +318,18 @@ class BulkInviteView(APIView):
             # Deduplicate emails within the uploaded file
             df['email'] = df['email'].str.strip().str.lower()
             df = df.drop_duplicates(subset='email', keep='first')
+
+            # -----------------------------
+            # Subscription Quota Validation
+            # -----------------------------
+            if plan and plan.max_ai_interviews > 0:
+                current_count = Candidate.objects.filter(company=company, is_deleted=False).count()
+                available = max(0, plan.max_ai_interviews - current_count)
+                if available == 0:
+                    return Response({'error': f'Your plan limit for AI Interview Invitations ({plan.max_ai_interviews}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+                if len(df) > available:
+                    df = df.head(available)
+            # -----------------------------
 
             # Deduplicate: within this CSV AND within this batch
             # (prevents same email twice in CSV, and also re-adding someone already in this batch)
@@ -1481,6 +1496,17 @@ class CandidateListCreateView(generics.ListCreateAPIView):
         user_profile = getattr(self.request.user, 'profile', None)
 
         company = user_profile.company if user_profile else None
+
+        # -----------------------------
+        # Subscription Quota Validation
+        # -----------------------------
+        plan = company.subscription_plan if company else None
+        if plan and plan.max_ai_interviews > 0:
+            current_count = Candidate.objects.filter(company=company, is_deleted=False).count()
+            if current_count + 1 > plan.max_ai_interviews:
+                from rest_framework.exceptions import PermissionDenied
+                raise PermissionDenied(f"Your plan limit for AI Interview Invitations ({plan.max_ai_interviews}) has been reached. Please upgrade your plan.")
+        # -----------------------------
 
         candidate = serializer.save(company=company, user_profile=user_profile)
 
@@ -4625,7 +4651,21 @@ class StandaloneResumeScreeningListCreateView(generics.ListCreateAPIView):
     serializer_class = StandaloneResumeScreeningSerializer
 
     def perform_create(self, serializer):
-        instance = serializer.save()
+        user_profile = getattr(self.request.user, 'profile', None)
+        company = user_profile.company if user_profile else None
+        
+        # -----------------------------
+        # Subscription Quota Validation
+        # -----------------------------
+        plan = company.subscription_plan if company else None
+        if plan and plan.max_resume_screening > 0:
+            current_count = StandaloneResumeScreening.objects.filter(company=company).count()
+            if current_count + 1 > plan.max_resume_screening:
+                from rest_framework.exceptions import PermissionDenied
+                raise PermissionDenied(f"Your plan limit for Resume Screening ({plan.max_resume_screening}) has been reached. Please upgrade your plan.")
+        # -----------------------------
+
+        instance = serializer.save(company=company, user_profile=user_profile)
         process_standalone_resume_screening_task.delay(instance.id)
 
 class StandaloneResumeScreeningDetailView(generics.RetrieveUpdateDestroyAPIView):
@@ -4664,6 +4704,16 @@ class BatchAddMemberView(APIView):
         # Check if email already exists in this batch
         if Candidate.objects.filter(batch_id=batch_id, email=email, is_deleted=False).exists():
             return Response({'error': f'{email} is already in this batch.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # -----------------------------
+        # Subscription Quota Validation
+        # -----------------------------
+        plan = user_profile.company.subscription_plan if user_profile.company else None
+        if plan and plan.max_ai_interviews > 0:
+            current_count = Candidate.objects.filter(company=user_profile.company, is_deleted=False).count()
+            if current_count + 1 > plan.max_ai_interviews:
+                return Response({'error': f'Your plan limit for AI Interview Invitations ({plan.max_ai_interviews}) has been reached. Please upgrade your plan.'}, status=status.HTTP_403_FORBIDDEN)
+        # -----------------------------
 
         # Create new candidate with same parameters as the reference
         new_candidate = Candidate.objects.create(

@@ -1,0 +1,178 @@
+/* ─── PlanUsage.css ─── */
+
+.pu-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  color: #1e293b;
+}
+
+/* ── Loading & Error ── */
+.pu-loading {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 300px; gap: 16px; color: #64748b;
+}
+.pu-spinner {
+  width: 40px; height: 40px;
+  border: 3px solid #e2e8f0; border-top-color: #4f46e5;
+  border-radius: 50%; animation: pu-spin 0.8s linear infinite;
+}
+@keyframes pu-spin { to { transform: rotate(360deg); } }
+.pu-error {
+  display: flex; align-items: center; gap: 12px; background: #fef2f2;
+  border: 1px solid #fecaca; border-radius: 12px; padding: 20px 24px;
+  color: #b91c1c; margin: 32px;
+}
+
+/* ── Page Header ── */
+.pu-page-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 28px;
+}
+.pu-page-title {
+  font-size: 28px; font-weight: 800; color: #1e293b; margin: 0 0 4px;
+}
+.pu-page-subtitle {
+  font-size: 14px; color: #64748b; margin: 0;
+}
+
+/* ── Active Plan Card ── */
+.pu-plan-card {
+  background: linear-gradient(135deg, var(--plan-color, #4f46e5) 0%, color-mix(in srgb, var(--plan-color, #4f46e5) 70%, #000) 100%);
+  border-radius: 20px; padding: 32px; color: #fff; position: relative;
+  overflow: hidden; margin-bottom: 28px;
+  box-shadow: 0 12px 40px -8px color-mix(in srgb, var(--plan-color, #4f46e5) 50%, transparent);
+}
+.pu-plan-card::before {
+  content: ''; position: absolute; top: -40px; right: -40px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+.pu-plan-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,0.2); border-radius: 20px;
+  padding: 4px 14px; font-size: 12px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 20px;
+}
+.pu-plan-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 20px; margin-bottom: 28px;
+}
+.pu-plan-name { font-size: 36px; font-weight: 800; margin: 0 0 6px; }
+.pu-plan-price { font-size: 18px; opacity: 0.85; margin: 0; }
+.pu-dates-grid { display: flex; gap: 20px; }
+.pu-date-box {
+  background: rgba(255,255,255,0.15); border-radius: 12px;
+  padding: 12px 20px; text-align: center;
+}
+.pu-date-label { display: block; font-size: 11px; opacity: 0.75; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.pu-date-val { display: block; font-size: 15px; font-weight: 700; }
+
+/* Progress bar */
+.pu-progress-wrap { }
+.pu-progress-labels { display: flex; justify-content: space-between; font-size: 13px; opacity: 0.85; margin-bottom: 8px; }
+.pu-progress-track { height: 8px; background: rgba(255,255,255,0.2); border-radius: 99px; overflow: hidden; }
+.pu-progress-bar { height: 100%; background: #fff; border-radius: 99px; transition: width 0.8s ease; }
+
+.pu-no-plan {
+  background: #f8fafc; border: 1px dashed #cbd5e1;
+  border-radius: 12px; padding: 40px; text-align: center; color: #64748b;
+  margin-bottom: 28px;
+}
+
+/* ── Sections ── */
+.pu-section { margin-bottom: 36px; }
+.pu-section-title {
+  font-size: 16px; font-weight: 700; color: #1e293b;
+  margin: 0 0 16px; padding-bottom: 10px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+/* ── Features ── */
+.pu-features-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.pu-feature-chip {
+  display: flex; align-items: center; gap: 8px;
+  background: #f0fdf4; border: 1px solid #bbf7d0;
+  border-radius: 8px; padding: 8px 14px;
+  font-size: 13px; font-weight: 500; color: #166534;
+}
+.pu-feature-check { color: #16a34a; font-weight: 800; }
+
+/* ── Quotas ── */
+.pu-quota-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 14px;
+}
+.pu-quota-card {
+  background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px;
+  padding: 18px 14px; text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.pu-quota-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); transform: translateY(-2px); }
+.pu-quota-val { display: block; font-size: 28px; font-weight: 800; color: #4f46e5; margin-bottom: 4px; }
+.pu-quota-label { font-size: 12px; color: #64748b; font-weight: 500; }
+
+/* ── Invoice Table ── */
+.pu-invoice-table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid #e2e8f0; }
+.pu-invoice-table { width: 100%; border-collapse: collapse; }
+.pu-invoice-table thead { background: #f8fafc; }
+.pu-invoice-table th {
+  padding: 14px 16px; text-align: left; font-size: 12px; font-weight: 700;
+  color: #64748b; text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.pu-invoice-table td { padding: 16px; border-bottom: 1px solid #f1f5f9; vertical-align: middle; }
+.pu-invoice-table tbody tr:last-child td { border-bottom: none; }
+.pu-invoice-table tbody tr:hover { background: #fafbff; }
+
+.pu-inv-id { font-size: 14px; font-weight: 700; color: #1e293b; }
+.pu-inv-date { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+
+.pu-plan-pill {
+  background: #ede9fe; color: #7c3aed; border-radius: 20px;
+  padding: 4px 12px; font-size: 12px; font-weight: 700;
+}
+.pu-cycle-pill {
+  background: #e0f2fe; color: #0369a1; border-radius: 20px;
+  padding: 4px 12px; font-size: 12px; font-weight: 600;
+}
+.pu-period { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #475569; }
+.pu-period-arrow { color: #94a3b8; }
+
+.pu-method { display: flex; align-items: center; gap: 10px; }
+.pu-method-icon { font-size: 20px; }
+.pu-method-name { font-size: 13px; font-weight: 600; color: #1e293b; }
+.pu-method-detail { font-size: 11px; color: #94a3b8; margin-top: 1px; }
+
+.pu-amount { font-size: 15px; font-weight: 800; color: #16a34a; }
+
+.pu-download-btn {
+  background: #4f46e5; color: #fff; border: none;
+  border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.pu-download-btn:hover { background: #4338ca; transform: translateY(-1px); }
+
+.pu-view-btn {
+  background: #f1f5f9; color: #475569; border: 1px solid #e2e8f0;
+  border-radius: 8px; padding: 8px 16px; font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+}
+.pu-view-btn:hover { background: #e2e8f0; transform: translateY(-1px); }
+
+.pu-action-btns {
+  display: flex; gap: 8px; align-items: center;
+}
+
+.pu-no-invoices {
+  background: #f8fafc; border: 1px dashed #cbd5e1;
+  border-radius: 12px; padding: 40px; text-align: center; color: #94a3b8; font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .pu-plan-top { flex-direction: column; }
+  .pu-dates-grid { flex-wrap: wrap; }
+  .pu-quota-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
+}
