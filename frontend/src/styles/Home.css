@@ -2357,14 +2357,15 @@
    PRICING SECTION
 ═══════════════════════════════════════════ */
 .pricing-section {
-  padding: 60px 4%;
+  padding: 60px 10px;
   background: transparent;
   position: relative;
 }
 
 .pricing-container {
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
+  padding: 0 10px;
 }
 
 .pricing-header {
@@ -2732,6 +2733,140 @@
 .home-scroll-reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════════
+   SPECIAL OFFERS MODAL & FLOATING WIDGET
+═══════════════════════════════════════════ */
+.special-offer-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.special-offer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(8px);
+}
+
+.special-offer-content {
+  position: relative;
+  background: #FFFFFF;
+  border-radius: 24px;
+  padding: 24px 32px;
+  max-width: 90vw;
+  max-height: 96vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: zoomBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  z-index: 10001;
+}
+
+.special-offer-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #64748B;
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.special-offer-close:hover {
+  color: #EF4444;
+}
+
+.special-offer-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.special-offer-header h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #0F172A;
+  margin-bottom: 6px;
+}
+
+.special-offer-header p {
+  color: #475569;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
+
+.special-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+.special-offer-card {
+  border-width: 2px;
+  border-color: rgba(var(--pc), 0.5);
+  background: linear-gradient(to bottom, #FFFFFF, #F8FAFC);
+  max-width: 350px;
+  padding: 20px 24px; /* Reduced padding from standard card */
+}
+
+.special-offer-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  border-color: var(--pc);
+}
+
+.special-offer-card .pricing-card-top {
+  margin-bottom: 16px;
+}
+
+.special-offer-card .pricing-features {
+  margin-bottom: 20px;
+  padding-top: 16px;
+  gap: 8px; /* Tighter gap */
+}
+
+.special-offer-card .pricing-feature {
+  font-size: 0.78rem; /* Slightly smaller to fit more */
+}
+
+.special-offer-floating-btn {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%) translateX(calc(100% - 40px));
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+  padding: 12px 20px 12px 15px;
+  border-radius: 100px 0 0 100px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.special-offer-floating-btn:hover {
+  transform: translateY(-50%) translateX(0);
 }
 
 /* --- Footer Light Mode Overrides for Home Page --- */
