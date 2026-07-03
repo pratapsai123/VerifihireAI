@@ -1705,6 +1705,40 @@ def invitation_coding_submit_view(request, token):
             _update_submission_scoring_logic(submission)
             submission.save()
 
+            # ── Create CodingSubmission record + trigger plagiarism check ──
+            try:
+                from api.models import CodingSubmission as CodingSub
+                from api.tasks import run_plagiarism_check_task
+
+                coding_sub = CodingSub.objects.create(
+                    question_id=acq.coding_question_id,
+                    user_email=inv.email,
+                    candidate_name=inv.name,
+                    language=exec_lang,
+                    mode=getattr(acq.coding_question, 'mode', 'full_program') if acq.coding_question else 'full_program',
+                    submitted_code=code,
+                    passed_count=passed_count,
+                    total_tests=total_tests_exec,
+                    status='passed' if passed_count == total_tests_exec and total_tests_exec > 0 else 'failed',
+                    results={"tests": result.get("results", [])},
+                )
+
+                # Store coding_submission_id in answers for report lookup
+                answers[question_key]["coding_submission_id"] = coding_sub.id
+                submission.answers = answers
+                submission.save(update_fields=["answers"])
+
+                # Fire plagiarism check in background
+                run_plagiarism_check_task.delay(
+                    submission_id=coding_sub.id,
+                    question_id=acq.coding_question_id,
+                )
+            except Exception as _plag_err:
+                import logging as _log
+                _log.getLogger(__name__).warning(
+                    f"[PLAGIARISM] Could not create CodingSubmission or schedule check: {_plag_err}"
+                )
+
             try:
                 assessment = inv.assessment
                 if created:
@@ -2170,6 +2204,7 @@ def results_detail_view(request, submission_id):
                 'submission_id': s.id,
                 'invitation_id': inv.id,
                 'submitted_at': s.submitted_at.isoformat() if s.submitted_at else None,
+                'started_at': inv.started_at.isoformat() if inv.started_at else None,
                 'candidate': {
                     'name': inv.name,
                     'email': inv.email,

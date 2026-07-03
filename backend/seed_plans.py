@@ -7,9 +7,13 @@ django.setup()
 from api.models import SubscriptionPlan
 
 def seed_plans():
-    # 1. Starter (Free)
+
+    # ─────────────────────────────────────────────────────────────
+    # 1. TRIAL  (Free)
+    #    Basic access – some features included, advanced ones NOT
+    # ─────────────────────────────────────────────────────────────
     SubscriptionPlan.objects.update_or_create(
-        name='Starter',
+        name='Trial',
         defaults={
             'base_price_monthly': 0,
             'discount_6_months': 0,
@@ -17,83 +21,157 @@ def seed_plans():
             'color_theme': '#10B981',
             'is_popular': False,
             'sort_order': 1,
+            'is_active': True,
             'features': [
-                '5 AI Interviews / month',
-                'Basic fraud detection',
-                'Candidate score report',
-                'Email support',
-                '1 job role active',
-                'Standard question bank',
+                'Resume Screening – Results',
+                'AI Assessments + Coding – Results',
+                'Coding Assessment',
+                'Company Admin (1)',
+                'HR (2)',
+                'Interviewer (Unlimited)',
             ],
             'missing_features': [
-                'Priority support',
-                'Basic ATS export (CSV)',
-                'White-label branding',
-                'API access'
+                'AI Interview + Coding – Results',
+                'Custom Assessments',
+                'Results (AI + Coding combined)',
+                'PDF Report Generation',
+                'Live Interview',
+                'Secure Agent',
+                'Deep-Face Verification',
+                'HR Manager',
+                'HR (10)',
+                'Integrity Scoring',
+                'Plagiarism Check',
+                'Behavior Check',
+                'Create Own MCQ, MSQ, True/False, PDF Upload',
             ],
-            'is_active': True,
         }
     )
+    print("[OK] Trial plan seeded.")
 
-    # 2. Professional
+    # ─────────────────────────────────────────────────────────────
+    # 2. STARTER  (Rs 6,999 / mo)
+    #    More features included – advanced proctoring NOT included
+    # ─────────────────────────────────────────────────────────────
     SubscriptionPlan.objects.update_or_create(
-        name='Professional',
+        name='Starter',
         defaults={
-            'base_price_monthly': 4999.00,
+            'base_price_monthly': 6999.00,
             'discount_6_months': 10.00,
             'discount_12_months': 20.00,
             'color_theme': '#3B82F6',
-            'is_popular': True,
+            'is_popular': False,
             'sort_order': 2,
-            'features': [
-                '100 AI Interviews / month',
-                'Full fraud detection suite',
-                'Behavioural sentiment analysis',
-                'Detailed PDF reports',
-                'Unlimited job roles',
-                'Custom question sets',
-                'Priority support',
-                'Basic ATS export (CSV)',
-                'White-label branding',
-                'API access'
-            ],
-            'missing_features': [],
             'is_active': True,
+            'features': [
+                'Resume Screening – Results',
+                'AI Assessments + Coding – Results',
+                'AI Interview + Coding – Results',
+                'Coding Assessment',
+                'Custom Assessments',
+                'Results (AI + Coding combined)',
+                'PDF Report Generation',
+                'Company Admin (1)',
+                'HR Manager (2)',
+                'HR (10)',
+                'Interviewer (Unlimited)',
+                'Integrity Scoring',
+                'Plagiarism Check',
+                'Behavior Check',
+                'Create Own MCQ, MSQ, True/False, PDF Upload',
+            ],
+            'missing_features': [
+                'Live Interview',
+                'Secure Agent',
+                'Deep-Face Verification',
+            ],
         }
     )
+    print("[OK] Starter plan seeded.")
 
-    # 3. Enterprise (Custom)
-    # Using base_price_monthly = 0 to signify Contact Us initially, or wait.
-    # In my Frontend I checked: if base_price_monthly === null ...
-    # But django DecimalField cannot easily be null unless null=True.
-    # Let me check models.py: base_price_monthly = models.DecimalField(..., default=0.00). It's not null=True.
-    # So I will set it to -1 to signify Custom, and update frontend to check for -1.
-    
+    # ─────────────────────────────────────────────────────────────
+    # 3. PRO  (Rs 14,999 / mo)  – Most Popular
+    #    All features included – limited usage
+    # ─────────────────────────────────────────────────────────────
+    SubscriptionPlan.objects.update_or_create(
+        name='Pro',
+        defaults={
+            'base_price_monthly': 14999.00,
+            'discount_6_months': 10.00,
+            'discount_12_months': 20.00,
+            'color_theme': '#8B5CF6',
+            'is_popular': True,
+            'sort_order': 3,
+            'is_active': True,
+            'features': [
+                'Resume Screening – Results (Limited)',
+                'AI Assessments + Coding – Results (Limited)',
+                'AI Interview + Coding – Results (Limited)',
+                'Coding Assessment (Limited)',
+                'Custom Assessments (Limited)',
+                'Results (AI + Coding combined)',
+                'PDF Report Generation',
+                'Live Interview (Limited)',
+                'Secure Agent',
+                'Deep-Face Verification',
+                'Company Admin (1)',
+                'HR Manager (2)',
+                'HR (10)',
+                'Interviewer (Unlimited)',
+                'Integrity Scoring',
+                'Plagiarism Check',
+                'Behavior Check',
+                'Create Own MCQ, MSQ, True/False, PDF Upload',
+            ],
+            'missing_features': [],
+        }
+    )
+    print("[OK] Pro plan seeded.")
+
+    # ─────────────────────────────────────────────────────────────
+    # 4. ENTERPRISE  (Custom pricing)
+    #    Everything fully included + unlimited – contact us
+    # ─────────────────────────────────────────────────────────────
     SubscriptionPlan.objects.update_or_create(
         name='Enterprise',
         defaults={
-            'base_price_monthly': -1.00,
+            'base_price_monthly': -1.00,   # -1 => "Custom Pricing" in frontend
             'discount_6_months': 0,
             'discount_12_months': 0,
-            'color_theme': '#8B5CF6',
+            'color_theme': '#F59E0B',
             'is_popular': False,
-            'sort_order': 3,
+            'sort_order': 4,
+            'is_active': True,
             'features': [
-                'Unlimited AI Interviews',
-                'Advanced fraud & proctoring',
-                'Full behavioural analytics',
-                'White-label branding',
-                'ATS integrations (Greenhouse, Lever…)',
-                'Dedicated account manager',
-                'SSO & SAML support',
-                'SLA guarantee & 99.9% uptime',
-                'Custom API access',
+                'Resume Screening – Results (Unlimited)',
+                'AI Assessments + Coding – Results (Unlimited)',
+                'AI Interview + Coding – Results (Unlimited)',
+                'Coding Assessment (Unlimited)',
+                'Custom Assessments (Unlimited)',
+                'Results (AI + Coding combined)',
+                'PDF Report Generation',
+                'Live Interview (Unlimited)',
+                'Secure Agent',
+                'Deep-Face Verification',
+                'Company Admin (1)',
+                'HR Manager (2)',
+                'HR (10)',
+                'Interviewer (Unlimited)',
+                'Integrity Scoring',
+                'Plagiarism Check',
+                'Behavior Check',
+                'Create Own MCQ, MSQ, True/False, PDF Upload',
+                'Custom Scale & Deployment',
+                'Volume Discounts Available',
+                'Dedicated Account Manager',
             ],
             'missing_features': [],
-            'is_active': True,
         }
     )
-    print("Successfully seeded plans.")
+    print("[OK] Enterprise plan seeded.")
+
+    print("\nAll plans seeded successfully.")
+
 
 if __name__ == '__main__':
     seed_plans()

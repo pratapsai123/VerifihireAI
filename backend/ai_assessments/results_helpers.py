@@ -524,6 +524,9 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'photo_update_approved': getattr(s, 'photo_update_approved', False),
                 'ai_candidate_pk': s.id,
                 'intruder_photo_url': intruder_photo_url,
+                'link_opened_at': s.link_opened_at.isoformat() if s.link_opened_at else None,
+                'completed_at': s.completed_at.isoformat() if s.completed_at else None,
+                'created_at': s.created_at.isoformat() if s.created_at else None,
             }
         )
 

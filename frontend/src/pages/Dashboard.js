@@ -13,11 +13,11 @@ import {
   BarChart3,
   Clock,
   PlusCircle,
-  Briefcase,
   ChevronRight,
   ChevronDown,
   ChevronUp,
-  Settings as SettingsIcon
+  Settings as SettingsIcon,
+  Briefcase
 } from 'lucide-react';
 import {
   XAxis,
@@ -56,6 +56,16 @@ const CustomTooltip = ({ active, payload, label }) => {
           <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
             <span>Live interview:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.liveInterviews || 0}</span>
           </div>
+          <hr style={{ border: 'none', borderTop: '1px solid #e2e8f0', margin: '0.25rem 0' }} />
+          <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem' }}>
+            <span>Resume Screening:</span> <span style={{ fontWeight: 600, color: '#1e293b' }}>{data.resumeScreening || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#64748b' }}>
+            <span>- Fully Automated:</span> <span style={{ fontWeight: 500 }}>{data.fullyAutomatedResumes || 0}</span>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', paddingLeft: '1.2rem', fontSize: '0.78rem', color: '#64748b' }}>
+            <span>- Standalone/Manual:</span> <span style={{ fontWeight: 500 }}>{data.manualResumes || 0}</span>
+          </div>
         </div>
       </div>
     );
@@ -74,23 +84,24 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
-  const [hoveredItem, setHoveredItem] = useState(null);
-  
-  // Manage Job Roles Modal state
+
+  // States and hooks for managing job roles
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
   const [rolesList, setRolesList] = useState([]);
+  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
   const [editingRoleId, setEditingRoleId] = useState(null);
   const [editFormData, setEditFormData] = useState({ title: '', description: '' });
   const [isSavingEdit, setIsSavingEdit] = useState(false);
-  const [isLoadingRoles, setIsLoadingRoles] = useState(false);
 
-  const fetchRolesList = async () => {
+  const fetchRoles = async () => {
     setIsLoadingRoles(true);
     try {
-      const res = await axios.get(`${API_BASE_URL}/job-roles/`);
-      setRolesList(res.data);
-    } catch (err) {
-      console.error("Error fetching job roles:", err);
+      const res = await axios.get(`${API_BASE_URL}/job-roles/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
+      setRolesList(res.data || []);
+    } catch (error) {
+      console.error("Error fetching job roles:", error);
     } finally {
       setIsLoadingRoles(false);
     }
@@ -98,49 +109,50 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (isManageModalOpen) {
-      fetchRolesList();
+      fetchRoles();
     }
   }, [isManageModalOpen]);
 
   const handleEditRole = (role) => {
     setEditingRoleId(role.id);
-    setEditFormData({ title: role.title, description: role.description });
+    setEditFormData({
+      title: role.title,
+      description: role.description
+    });
   };
 
   const handleSaveEdit = async (e) => {
     e.preventDefault();
     setIsSavingEdit(true);
     try {
-      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData);
-      setEditingRoleId(null);
-      fetchRolesList();
+      await axios.put(`${API_BASE_URL}/job-roles/${editingRoleId}/`, editFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
       alert('Job Role updated successfully!');
+      setEditingRoleId(null);
+      fetchRoles();
     } catch (error) {
-      console.error("Error updating job role:", error);
-      alert('Failed to update job role. Please try again.');
+      console.error("Error saving job role edits:", error);
+      alert('Failed to save changes. Please try again.');
     } finally {
       setIsSavingEdit(false);
     }
   };
 
   const handleDeleteRole = async (roleId) => {
-    const reason = window.prompt("Please enter a reason for deleting this job role:");
+    const reason = window.prompt("Please enter a reason for deleting this job role (optional):");
     if (reason === null) return;
-    if (!reason.trim()) {
-      alert("A reason is required to request deletion.");
-      return;
-    }
+    
     try {
-      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, { data: { reason } });
-      fetchRolesList();
-      if (res.status === 202 || res.data?.message?.includes('requested')) {
-        alert(res.data.message || 'Deletion request submitted for approval.');
-      } else {
-        alert('Job Role deleted successfully!');
-      }
+      const res = await axios.delete(`${API_BASE_URL}/job-roles/${roleId}/`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        data: { reason: reason || 'Administrative Cleanup' }
+      });
+      alert(res.data?.message || 'Job role deleted successfully!');
+      fetchRoles();
     } catch (error) {
       console.error("Error deleting job role:", error);
-      alert(error.response?.data?.error || 'Failed to delete job role. Please try again.');
+      alert('Failed to delete job role. Please try again.');
     }
   };
 
@@ -233,7 +245,9 @@ const Dashboard = () => {
     e.preventDefault();
     setIsSubmittingRole(true);
     try {
-      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData);
+      await axios.post(`${API_BASE_URL}/job-roles/`, roleFormData, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      });
       setIsRoleModalOpen(false);
       setRoleFormData({ title: '', description: '' });
       // Reload roles if needed elsewhere, but for now just success
@@ -300,7 +314,7 @@ const Dashboard = () => {
       role: ['company_admin', 'hr_manager', 'hr', 'application_admin'],
       subItems: [
         { label: 'Create Job Role', onClick: () => setIsRoleModalOpen(true) },
-        { label: 'Manage Job Roles', onClick: () => setIsManageModalOpen(true) }
+        { label: 'Manage Job Roles', onClick: () => { setEditingRoleId(null); setIsManageModalOpen(true); } }
       ]
     },
   ];
@@ -347,13 +361,7 @@ const Dashboard = () => {
         </div>
         <nav className="sidebar-nav">
           {navItems.map((item, i) => (
-            <div 
-              key={i} 
-              className="nav-group" 
-              style={{ position: 'relative' }}
-              onMouseEnter={() => !isSidebarCollapsed && setHoveredItem(item.label)}
-              onMouseLeave={() => setHoveredItem(null)}
-            >
+            <div key={i} className="nav-group" style={{ position: 'relative' }}>
               <div
                 className={`nav-item ${item.active ? 'active' : ''} ${expandedItem === item.label ? 'expanded' : ''}`}
                 onClick={(e) => {
@@ -428,11 +436,7 @@ const Dashboard = () => {
                         key={j}
                         className="floating-menu-item"
                         onClick={() => {
-                          if (sub.onClick) {
-                            sub.onClick();
-                          } else {
-                            navigate(sub.path);
-                          }
+                          navigate(sub.path);
                           setActiveFloatingMenu(null);
                         }}
                       >
@@ -443,7 +447,7 @@ const Dashboard = () => {
                 </div>
               )}
 
-              {item.subItems && (expandedItem === item.label || hoveredItem === item.label) && (
+              {item.subItems && expandedItem === item.label && (
                 <div className="sub-nav">
                   {item.subItems.map((sub, j) => (
                     <div key={j} className="sub-nav-group">
@@ -451,10 +455,10 @@ const Dashboard = () => {
                         className={`sub-nav-item ${expandedSubItem === sub.label ? 'expanded' : ''}`}
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (sub.onClick) {
-                            sub.onClick();
-                          } else if (sub.nestedItems) {
+                          if (sub.nestedItems) {
                             setExpandedSubItem(expandedSubItem === sub.label ? null : sub.label);
+                          } else if (sub.onClick) {
+                            sub.onClick();
                           } else {
                             navigate(sub.path);
                           }
@@ -781,15 +785,15 @@ const Dashboard = () => {
                     <h3>Candidates</h3>
                   </div>
                   <div className="card-stat-row" style={{ marginBottom: '2rem' }}>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">Total Candidates</span>
                       <span className="stat-value">{data.stats.totalCandidates}</span>
                     </div>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">In Pipeline</span>
                       <span className="stat-value">{data.stats.inPipeline}</span>
                     </div>
-                    <div className="stat-item" style={{ borderRight: 'none' }}>
+                    <div className="stat-item">
                       <span className="stat-label">Hired</span>
                       <span className="stat-value">{data.stats.hired}</span>
                     </div>
@@ -802,7 +806,18 @@ const Dashboard = () => {
                         <div className="candidate-info">
                           <div className="candidate-avatar">{cand.candidate?.name ? cand.candidate.name.charAt(0) : '?'}</div>
                           <div>
-                            <div className="cand-name">{cand.candidate?.name || 'Anonymous'}</div>
+                            <div 
+                              className="cand-name"
+                              title={cand.candidate?.name || 'Anonymous'}
+                              style={{
+                                maxWidth: '160px',
+                                overflow: 'hidden',
+                                textOverflow: 'ellipsis',
+                                whiteSpace: 'nowrap'
+                              }}
+                            >
+                              {cand.candidate?.name || 'Anonymous'}
+                            </div>
                             <div className="cand-email">{cand.candidate?.email}</div>
                           </div>
                         </div>
@@ -821,7 +836,7 @@ const Dashboard = () => {
                   <div className="chart-header">
                     <h3>Results</h3>
                     <div className="chart-filters">
-                      <select 
+                      <select
                         className="filter-select"
                         value={selectedYear}
                         onChange={(e) => setSelectedYear(e.target.value)}
@@ -966,7 +981,8 @@ const Dashboard = () => {
             style={{
               maxWidth: '700px',
               width: '90%',
-              maxHeight: '85vh',
+              maxHeight: editingRoleId ? '90vh' : '85vh',
+              minHeight: editingRoleId ? '70vh' : 'auto',
               padding: '2rem',
               background: 'white',
               borderRadius: '2rem',
@@ -979,7 +995,7 @@ const Dashboard = () => {
               <button className="icon-btn" onClick={() => setIsManageModalOpen(false)}><ChevronDown size={20} /></button>
             </div>
             
-            <div style={{ flex: 1, overflowY: 'auto', overflowX: 'hidden', paddingRight: '0.5rem', marginBottom: '1.5rem' }}>
+            <div style={{ flex: 1, overflowY: editingRoleId ? 'hidden' : 'auto', overflowX: 'hidden', paddingRight: '0.5rem', marginBottom: editingRoleId ? '0' : '1.5rem', display: 'flex', flexDirection: 'column' }}>
               {isLoadingRoles ? (
                 <div style={{ textAlign: 'center', padding: '2rem', color: '#64748b' }}>
                   <div className="loader" style={{ fontSize: '1rem' }}>Loading Job Roles...</div>
@@ -989,46 +1005,51 @@ const Dashboard = () => {
                   No job roles found. Create one to get started!
                 </div>
               ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%', flex: editingRoleId ? 1 : 'none' }}>
                   {rolesList.map((role) => (
                     <div 
                       key={role.id} 
                       style={{ 
-                        background: '#f8fafc', 
-                        border: '1px solid #e2e8f0', 
+                        background: editingRoleId === role.id ? '#ffffff' : '#f8fafc', 
+                        border: editingRoleId === role.id ? '2px solid #6366f1' : '1px solid #e2e8f0', 
                         borderRadius: '16px', 
-                        padding: '1.25rem',
+                        padding: editingRoleId === role.id ? '1.5rem' : '1.25rem',
                         transition: 'all 0.2s',
                         width: '100%',
-                        minWidth: 0
+                        minWidth: 0,
+                        boxShadow: editingRoleId === role.id ? '0 8px 25px rgba(99, 102, 241, 0.1)' : 'none',
+                        display: editingRoleId && editingRoleId !== role.id ? 'none' : 'flex',
+                        flexDirection: 'column',
+                        flex: editingRoleId === role.id ? 1 : 'none'
                       }}
                     >
                       {editingRoleId === role.id ? (
-                        <form onSubmit={handleSaveEdit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%' }}>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#64748b', marginBottom: '0.25rem' }}>Role Title</label>
+                        <form onSubmit={handleSaveEdit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', height: '100%' }}>
+                          <h4 style={{ margin: 0, fontSize: '0.9rem', fontWeight: 700, color: '#6366f1', flexShrink: 0 }}>Editing Role</h4>
+                          <div style={{ flexShrink: 0 }}>
+                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem' }}>Role Title</label>
                             <input
                               type="text"
                               className="filter-select"
-                              style={{ width: '100%', height: '38px', padding: '0 0.75rem', borderRadius: '8px' }}
+                              style={{ width: '100%', height: '44px', padding: '0 1rem', borderRadius: '10px', fontSize: '0.95rem', border: '1px solid #e2e8f0' }}
                               value={editFormData.title}
                               onChange={(e) => setEditFormData({ ...editFormData, title: e.target.value })}
                               required
                             />
                           </div>
-                          <div>
-                            <label style={{ display: 'block', fontSize: '0.8rem', fontWeight: 600, color: '#64748b', marginBottom: '0.25rem' }}>Description</label>
+                          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+                            <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, color: '#374151', marginBottom: '0.5rem', flexShrink: 0 }}>Description</label>
                             <textarea
                               className="filter-select"
-                              style={{ width: '100%', minHeight: '80px', padding: '0.5rem 0.75rem', borderRadius: '8px', resize: 'vertical' }}
+                              style={{ width: '100%', flex: 1, minHeight: '80px', padding: '0.85rem 1rem', borderRadius: '10px', resize: 'none', fontSize: '0.9rem', lineHeight: '1.6', border: '1px solid #e2e8f0' }}
                               value={editFormData.description}
                               onChange={(e) => setEditFormData({ ...editFormData, description: e.target.value })}
                               required
                             />
                           </div>
-                          <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'flex-end' }}>
-                            <button type="button" className="btn-premium btn-outline" style={{ padding: '0.4rem 1rem', fontSize: '0.75rem' }} onClick={() => setEditingRoleId(null)}>Cancel</button>
-                            <button type="submit" className="btn-premium btn-fill" style={{ padding: '0.4rem 1rem', fontSize: '0.75rem' }} disabled={isSavingEdit}>
+                          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', paddingTop: '0.5rem', flexShrink: 0 }}>
+                            <button type="button" className="btn-premium btn-outline" style={{ padding: '0.55rem 1.5rem', fontSize: '0.85rem', borderRadius: '10px' }} onClick={() => setEditingRoleId(null)}>Cancel</button>
+                            <button type="submit" className="btn-premium btn-fill" style={{ padding: '0.55rem 1.5rem', fontSize: '0.85rem', borderRadius: '10px' }} disabled={isSavingEdit}>
                               {isSavingEdit ? 'Saving...' : 'Save Changes'}
                             </button>
                           </div>
@@ -1065,7 +1086,7 @@ const Dashboard = () => {
               )}
             </div>
             
-            <div style={{ display: 'flex', justifyContent: 'flex-end', borderTop: '1px solid #e2e8f0', paddingTop: '1rem', flexShrink: 0 }}>
+            <div style={{ display: editingRoleId ? 'none' : 'flex', justifyContent: 'flex-end', borderTop: '1px solid #e2e8f0', paddingTop: '1rem', flexShrink: 0 }}>
               <button className="btn-premium btn-fill" style={{ padding: '0.6rem 1.5rem' }} onClick={() => setIsManageModalOpen(false)}>Close</button>
             </div>
           </div>

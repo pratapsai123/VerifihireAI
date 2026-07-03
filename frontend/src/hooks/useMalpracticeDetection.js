@@ -13,16 +13,16 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
   const { allowCopyPaste = false, activeQuestionId = null } = options;
   const [suspicionScore, setSuspicionScore] = useState(0);
   const [reasons, setReasons] = useState([]);
-  
+
   const keystrokesBuffer = useRef([]);
   const behaviorBuffer = useRef([]);
   const lastKeystrokeTime = useRef(Date.now());
   const batchInterval = useRef(null);
   const snapshotInterval = useRef(null);
-  
+
   const totalCharacters = useRef(0);
   const backspaceCount = useRef(0);
-  
+
   const lastPasteTimeRef = useRef(0);
   const prevCodeRef = useRef(currentCode || '');
   const prevQuestionIdRef = useRef(activeQuestionId);
@@ -92,7 +92,7 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
 
   // --- 3. Security Restrictions & Copy/Paste/Cut Detection ---
   const blockContextMenu = (e) => e.preventDefault();
-  
+
   const blockCopyCut = (e) => {
     e.preventDefault();
     behaviorBuffer.current.push({
@@ -103,52 +103,61 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
   };
 
   const handlePaste = useCallback((e) => {
+    const now = Date.now();
+
     if (!allowCopyPaste) {
+      // Block paste AND log the attempt
       e.preventDefault();
       behaviorBuffer.current.push({
         type: 'blocked_action',
-        value: 'Paste attempted',
-        timestamp: new Date().toISOString()
+        value: 'Paste attempted (blocked)',
+        timestamp: new Date(now).toISOString()
       });
       return;
     }
 
-    const now = Date.now();
-    if (now - lastPasteTimeRef.current < 200) return; // Prevent duplicate logs for the same paste
+    // allowCopyPaste=true: paste is ALLOWED but must still be LOGGED for the report
+    if (now - lastPasteTimeRef.current < 200) return; // Debounce duplicate events
 
     let pastedText = '';
     try {
-      pastedText = e.clipboardData.getData('text') || '';
+      pastedText = (e.clipboardData || window.clipboardData)?.getData('text') || '';
     } catch (err) {
-      console.warn('Could not read clipboard data', err);
+      console.warn('[Malpractice] Could not read clipboard data', err);
     }
 
-    if (pastedText) {
-      lastPasteTimeRef.current = now;
-      const length = pastedText.length;
-      behaviorBuffer.current.push({
-        type: 'paste',
-        value: `Pasted ${length} characters`,
-        timestamp: new Date(now).toISOString()
+    if (!pastedText) return;
+
+    lastPasteTimeRef.current = now;
+    const length = pastedText.length;
+
+    // Always log paste event for the behavioral report
+    behaviorBuffer.current.push({
+      type: 'paste',
+      value: `Pasted ${length} characters (allowed)`,
+      timestamp: new Date(now).toISOString()
+    });
+
+    // Push simulated keystroke events to trigger backend burst threshold (>80 per batch)
+    // This is what makes the report show 'Bulk injection detected'
+    const simulatedCount = Math.min(length, 500);
+    for (let i = 0; i < simulatedCount; i++) {
+      keystrokesBuffer.current.push({
+        key: 'PASTE',
+        timestamp: new Date(now).toISOString(),
+        time_diff: 0,
       });
-
-      // Simulate a burst of keystrokes to trigger the backend's >80 char burst threshold
-      const simulatedCount = Math.min(length, 500); // Prevent overflow but satisfy burst threshold (>80)
-      for (let i = 0; i < simulatedCount; i++) {
-        keystrokesBuffer.current.push({
-          key: 'p',
-          timestamp: new Date(now).toISOString(),
-          time_diff: 0,
-        });
-      }
-      totalCharacters.current += length;
-      console.log(`[Malpractice Hook] Paste event captured: ${length} characters. Pushed simulated events.`);
     }
+    totalCharacters.current += length;
+    console.log(`[Malpractice] Paste ALLOWED & LOGGED: ${length} chars. Simulated ${simulatedCount} burst events.`);
   }, [allowCopyPaste]);
 
-  // Monitor code changes directly to detect any copy-pastes (e.g. drag & drop, context menu)
+  // Monitor code changes to detect Monaco editor pastes (drag-drop, context menu, Ctrl+V in Monaco)
+  // Monaco Editor handles paste INTERNALLY and does NOT fire window 'paste' events.
+  // This is the PRIMARY detection mechanism for coding editor bulk injections.
   useEffect(() => {
     if (activeQuestionId !== prevQuestionIdRef.current) {
+      // Question changed — reset baseline, do not flag
       prevQuestionIdRef.current = activeQuestionId;
       prevCodeRef.current = currentCode || '';
       return;
@@ -163,27 +172,30 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
     const diff = curr.length - prev.length;
     const now = Date.now();
 
-    // If change is large enough, treat it as bulk injection
+    // Threshold: >25 chars added in one React state update = bulk injection
+    // (Normal typing adds 1 char per keystroke)
     if (diff > 25) {
-      if (now - lastPasteTimeRef.current < 200) return; // Already handled by paste event listener
+      // Skip if already captured by the paste event listener (within 300ms)
+      if (now - lastPasteTimeRef.current < 300) return;
       lastPasteTimeRef.current = now;
 
       behaviorBuffer.current.push({
         type: 'paste',
-        value: `Pasted ${diff} characters (detected via code change)`,
+        value: `Bulk injection: +${diff} characters via Monaco editor`,
         timestamp: new Date(now).toISOString()
       });
 
+      // Push simulated events to satisfy backend burst threshold (>80 per batch = 1 burst)
       const simulatedCount = Math.min(diff, 500);
       for (let i = 0; i < simulatedCount; i++) {
         keystrokesBuffer.current.push({
-          key: 'p',
+          key: 'PASTE',
           timestamp: new Date(now).toISOString(),
           time_diff: 0,
         });
       }
       totalCharacters.current += diff;
-      console.log(`[Malpractice Hook] Paste detected via code change: ${diff} characters. Pushed simulated events.`);
+      console.log(`[Malpractice] Monaco bulk injection detected: +${diff} chars. Burst events: ${simulatedCount}.`);
     }
   }, [currentCode, activeQuestionId]);
 
@@ -201,11 +213,11 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
 
   const handleFullscreenChange = useCallback(() => {
     if (!document.fullscreenElement) {
-        behaviorBuffer.current.push({
-            type: 'exit_fullscreen',
-            value: 'Candidate exited fullscreen mode',
-            timestamp: new Date().toISOString()
-        });
+      behaviorBuffer.current.push({
+        type: 'exit_fullscreen',
+        value: 'Candidate exited fullscreen mode',
+        timestamp: new Date().toISOString()
+      });
     }
   }, []);
 
@@ -213,8 +225,8 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
   useEffect(() => {
     const threshold = 160;
     const checkDevTools = () => {
-      if (window.outerWidth - window.innerWidth > threshold || 
-          window.outerHeight - window.innerHeight > threshold) {
+      if (window.outerWidth - window.innerWidth > threshold ||
+        window.outerHeight - window.innerHeight > threshold) {
         behaviorBuffer.current.push({
           type: 'devtools_detection',
           value: 'Possible DevTools open',
@@ -257,13 +269,13 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
   // --- 7. Code Snapshots ---
   useEffect(() => {
     snapshotInterval.current = setInterval(() => {
-        if (currentCode) {
-            behaviorBuffer.current.push({
-                type: 'code_snapshot',
-                value: currentCode,
-                timestamp: new Date().toISOString()
-            });
-        }
+      if (currentCode) {
+        behaviorBuffer.current.push({
+          type: 'code_snapshot',
+          value: currentCode,
+          timestamp: new Date().toISOString()
+        });
+      }
     }, 10000); // 10 seconds
     return () => clearInterval(snapshotInterval.current);
   }, [currentCode]);
@@ -275,13 +287,13 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
     window.addEventListener('blur', handleBlur, { capture: true });
     window.addEventListener('focus', handleFocus, { capture: true });
     window.addEventListener('paste', handlePaste, { capture: true });
-    
+
     if (!allowCopyPaste) {
       window.addEventListener('contextmenu', blockContextMenu, { capture: true });
       window.addEventListener('copy', blockCopyCut, { capture: true });
       window.addEventListener('cut', blockCopyCut, { capture: true });
     }
-    
+
     document.addEventListener('fullscreenchange', handleFullscreenChange, { capture: true });
 
     batchInterval.current = setInterval(sendBatch, 7000); // Every 7 seconds
@@ -292,18 +304,18 @@ export const useMalpracticeDetection = (token, currentCode, options = {}) => {
       window.removeEventListener('blur', handleBlur, { capture: true });
       window.removeEventListener('focus', handleFocus, { capture: true });
       window.removeEventListener('paste', handlePaste, { capture: true });
-      
+
       if (!allowCopyPaste) {
         window.removeEventListener('contextmenu', blockContextMenu, { capture: true });
         window.removeEventListener('copy', blockCopyCut, { capture: true });
         window.removeEventListener('cut', blockCopyCut, { capture: true });
       }
-      
+
       document.removeEventListener('fullscreenchange', handleFullscreenChange, { capture: true });
       clearInterval(batchInterval.current);
 
       if (snapshotInterval.current) clearInterval(snapshotInterval.current);
-      
+
       sendBatch();
     };
   }, [handleKeyDown, handleVisibilityChange, handleBlur, handleFocus, handlePaste, sendBatch, handleFullscreenChange, allowCopyPaste]);

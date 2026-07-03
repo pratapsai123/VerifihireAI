@@ -195,7 +195,20 @@ const InterviewStart = () => {
     }, [candidate, checkWindow]);
 
     const handleFileChange = (e) => {
-        if (e.target.files && e.target.files[0]) setResumeFile(e.target.files[0]);
+        if (e.target.files && e.target.files[0]) {
+            const file = e.target.files[0];
+            const allowedExtensions = ['.pdf', '.doc', '.docx'];
+            const fileName = file.name.toLowerCase();
+            const hasValidExtension = allowedExtensions.some(ext => fileName.endsWith(ext));
+
+            if (!hasValidExtension) {
+                setFormError('Please upload a valid resume file (PDF, DOC, or DOCX only). Image files are not accepted.');
+                e.target.value = '';
+                return;
+            }
+            setFormError('');
+            setResumeFile(file);
+        }
     };
 
     const handlePanPhotoChange = (e) => {
@@ -551,7 +564,7 @@ const InterviewStart = () => {
                     {candidate?.available_from ? (
                         <p style={{ margin: '0.5rem 0 0 0', color: '#667eea', fontWeight: '600', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}>
                             <i className="fa-regular fa-clock" style={{ marginRight: '10px' }}></i>
-                            Window: {new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })} - {candidate.available_until ? new Date(candidate.available_until).toLocaleTimeString([], { timeStyle: 'short' }) : '∞'}
+                            Available: {new Date(candidate.available_from).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })} to {candidate.available_until ? new Date(candidate.available_until).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' }) : 'No deadline'}
                         </p>
                     ) : candidate?.interview_time && (
                         <p style={{ margin: '0.5rem 0 0 0', color: '#667eea', fontWeight: '600', fontSize: '0.9rem', display: 'flex', alignItems: 'center' }}>

@@ -100,6 +100,16 @@ class Candidate(models.Model):
     identity_mismatch_details = models.JSONField(default=dict, blank=True, help_text="Details about the mismatch (timestamp, old public_token, etc.)")
     photo_update_approved = models.BooleanField(default=False, help_text="True once admin approves the pending photo to become the active DeepFace face")
 
+    TOTAL_QUESTIONS = 14  # Single source of truth for max interview questions
+
+    @property
+    def score_percentage(self):
+        """Single source of truth for score calculation. Always uses 14 questions × 10 max = 140 total."""
+        total_possible = self.TOTAL_QUESTIONS * 10
+        if total_possible == 0 or self.score is None:
+            return 0.0
+        return round((self.score / total_possible) * 100, 1)
+
     def __str__(self):
         return f"{self.full_name} - {self.job_title}"
 

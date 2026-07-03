@@ -302,7 +302,7 @@ const AiInterview = () => {
                                             }
                                         }}
                                     >
-                                        <option value="">-- Select a Saved Role --</option>
+                                        <option value="" disabled hidden>-- Select a Saved Role --</option>
                                         {jobRoles.map(r => (
                                             <option key={r.id} value={r.id}>{r.title}</option>
                                         ))}
@@ -347,7 +347,7 @@ const AiInterview = () => {
                                                 value={experienceLevel}
                                                 onChange={(e) => { setExperienceLevel(e.target.value); if (highlightField === 'field-experience-level') setHighlightField(null); }}
                                             >
-                                                <option value="">-- Select Experience Level --</option>
+                                                <option value="" disabled hidden>-- Select Experience Level --</option>
                                                 <option value="fresher">Fresher (0 Years)</option>
                                                 <option value="1-2">1-2 Years</option>
                                                 <option value="3-5">3-5 Years</option>
