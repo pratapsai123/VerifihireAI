@@ -475,3 +475,80 @@ VerifiHire Team"""
     except Exception as e:
         logger.error(f"Error in send_qualification_action_email_task: {str(e)}")
 
+
+# ─── Plagiarism Detection Task ────────────────────────────────────────────────
+
+@shared_task(bind=True, max_retries=2, default_retry_delay=30)
+def run_plagiarism_check_task(self, submission_id: int, question_id: int):
+    """
+    Background Celery task: run Winnowing-based plagiarism check for a
+    newly saved CodingSubmission and store the result back into the
+    submission's `results` JSONField.
+
+    Triggered automatically after every coding submission.
+    Runs asynchronously — zero impact on candidate submission speed.
+
+    Parameters
+    ----------
+    submission_id : int   — ID of the newly created CodingSubmission
+    question_id   : int   — ID of the coding question (used to scope comparison)
+    """
+    from api.models import CodingSubmission
+    from api.utils.plagiarism_checker import check_plagiarism
+
+    logger.info(
+        f"[PLAGIARISM TASK] Starting check | submission_id={submission_id} | question_id={question_id}"
+    )
+
+    try:
+        # Run the plagiarism check engine
+        plagiarism_result = check_plagiarism(
+            new_submission_id=submission_id,
+            question_id=question_id,
+        )
+
+        # Merge result into the submission's existing results JSONField
+        try:
+            sub = CodingSubmission.objects.get(id=submission_id)
+            existing_results = sub.results or {}
+            existing_results['plagiarism'] = plagiarism_result
+            sub.results = existing_results
+            sub.save(update_fields=['results'])
+
+            # Automatically update parent CandidateSubmission result to 'hold' if flagged/high_risk
+            is_plagiarism_flagged = plagiarism_result.get('flagged', False)
+            risk_level = plagiarism_result.get('risk', {}).get('level', 'clean')
+            if is_plagiarism_flagged or risk_level in ['flagged', 'high_risk']:
+                try:
+                    from api.models import CandidateSubmission
+                    parent_sub = CandidateSubmission.objects.filter(
+                        invitation__email__iexact=sub.user_email
+                    ).first()
+                    if parent_sub:
+                        parent_sub.result = 'hold'
+                        parent_sub.save(update_fields=['result'])
+                        logger.info(
+                            f"[PLAGIARISM TASK] Auto-held CandidateSubmission {parent_sub.id} "
+                            f"due to plagiarism check (level={risk_level})"
+                        )
+                except Exception as _hold_err:
+                    logger.error(f"[PLAGIARISM TASK] Failed to auto-hold candidate: {_hold_err}")
+
+            logger.info(
+                f"[PLAGIARISM TASK] Done | submission_id={submission_id} | "
+                f"score={plagiarism_result.get('similarity_score', 0)}% | "
+                f"flagged={plagiarism_result.get('flagged', False)}"
+            )
+        except CodingSubmission.DoesNotExist:
+            logger.error(f"[PLAGIARISM TASK] Submission {submission_id} not found when saving result.")
+
+    except Exception as exc:
+        logger.error(
+            f"[PLAGIARISM TASK] Failed for submission_id={submission_id}: {exc}",
+            exc_info=True
+        )
+        # Retry up to max_retries times with a 30-second delay
+        try:
+            raise self.retry(exc=exc)
+        except self.MaxRetriesExceededError:
+            logger.error(f"[PLAGIARISM TASK] Max retries exceeded for submission_id={submission_id}")

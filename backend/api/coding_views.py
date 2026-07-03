@@ -325,6 +325,19 @@ def _perform_invite_submission(invite: CodingInvite, *, code_map: dict | None, a
                 results={"tests": evaluation["results"]},
             )
 
+            # ── Plagiarism Check (async background task) ──
+            try:
+                from .tasks import run_plagiarism_check_task
+                run_plagiarism_check_task.delay(
+                    submission_id=sub.id,
+                    question_id=q.id,
+                )
+            except Exception as _pe:
+                import logging as _log
+                _log.getLogger(__name__).warning(
+                    f"[PLAGIARISM] Could not schedule invite plagiarism check for submission {sub.id}: {_pe}"
+                )
+
             iq.final_submission = sub
             iq.last_language = lang_for_q or iq.last_language
             iq.last_code = code
@@ -1238,6 +1251,19 @@ def coding_submit_view(request, question_id: int):
         execution_time_ms=evaluation["execution_time_ms"],
         results={"tests": evaluation["results"]},
     )
+
+    # ── Plagiarism Check (async background task, zero latency impact) ──
+    try:
+        from .tasks import run_plagiarism_check_task
+        run_plagiarism_check_task.delay(
+            submission_id=sub.id,
+            question_id=q.id,
+        )
+    except Exception as _plagiarism_err:
+        import logging as _log
+        _log.getLogger(__name__).warning(
+            f"[PLAGIARISM] Could not schedule check for submission {sub.id}: {_plagiarism_err}"
+        )
 
     return Response({"submission_id": sub.id, **evaluation}, status=status.HTTP_200_OK)
 
