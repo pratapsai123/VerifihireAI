@@ -308,3 +308,192 @@ def superadmin_delete_restricted_domain_view(request, domain_id):
         return Response({'message': f'Domain {domain_name} removed from restricted list.'}, status=status.HTTP_200_OK)
     except RestrictedDomain.DoesNotExist:
         return Response({'error': 'Restricted domain not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+
+# --- Student Prep Sessions (Superadmin-Managed) ---
+
+from django.db.models import Q
+from django.core.exceptions import ValidationError
+from ..models import StudentPrepSession
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def public_practice_schedule_view(request):
+    """
+    POST /api/practice/schedule/
+    Public endpoint for scheduling a mock prep session.
+    Extracts text from the uploaded resume, saves a StudentPrepSession, and returns a public token.
+    """
+    try:
+        full_name = request.data.get('name', '').strip() or request.data.get('full_name', '').strip()
+        email = request.data.get('email', '').strip().lower()
+        phone = request.data.get('phone', '').strip()
+        scheduled_time_str = request.data.get('scheduled_time', '').strip()
+        target_role = request.data.get('target_role', '').strip()
+        experience_level = request.data.get('experience_level', '').strip()
+
+        if not full_name:
+            return Response({'error': 'Name is required.'}, status=status.HTTP_400_BAD_REQUEST)
+        if not email:
+            return Response({'error': 'Email is required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        scheduled_time = None
+        if scheduled_time_str:
+            try:
+                from django.utils.dateparse import parse_datetime
+                scheduled_time = parse_datetime(scheduled_time_str)
+            except Exception:
+                pass
+
+        # Text extraction from resume
+        resume_text = ""
+        resume_hash = ""
+        uploaded_file = None
+        if 'resume' in request.FILES:
+            uploaded_file = request.FILES['resume']
+            try:
+                from .assessment_views import _extract_text_from_uploaded_file
+                resume_text, _ = _extract_text_from_uploaded_file(uploaded_file)
+                import hashlib
+                resume_hash = hashlib.sha256(resume_text.encode('utf-8', errors='ignore')).hexdigest()
+            except Exception as e:
+                print(f"Error extracting resume: {e}")
+
+        # Parse target role from resume if empty
+        if not target_role and resume_text:
+            target_role = "Software Engineer"  # Fallback
+
+        # Save session
+        session = StudentPrepSession.objects.create(
+            full_name=full_name,
+            email=email,
+            phone=phone,
+            resume=uploaded_file,
+            resume_text=resume_text,
+            resume_hash=resume_hash,
+            target_role=target_role or "Software Engineer",
+            experience_level=experience_level or "Fresher",
+            scheduled_time=scheduled_time or timezone.now(),
+            status='Scheduled'
+        )
+
+        return Response({
+            'message': 'Mock preparation session scheduled successfully!',
+            'public_token': str(session.id),
+            'session': {
+                'id': str(session.id),
+                'full_name': session.full_name,
+                'email': session.email,
+                'phone': session.phone,
+                'target_role': session.target_role,
+                'experience_level': session.experience_level,
+                'scheduled_time': session.scheduled_time.isoformat() if session.scheduled_time else None,
+                'status': session.status,
+            }
+        }, status=status.HTTP_201_CREATED)
+
+    except Exception as e:
+        import traceback
+        print(f"Error scheduling practice session: {e}")
+        print(traceback.format_exc())
+        return Response({'error': f'Failed to schedule session: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def superadmin_student_prep_sessions_list_view(request):
+    """
+    GET /api/superadmin/student-prep-sessions/
+    Protected: Superadmin only
+    List all mock sessions with search/filters (name, email, role, status, score).
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    search = request.query_params.get('search', '').strip()
+    score_filter = request.query_params.get('score', '').strip()
+    status_filter = request.query_params.get('status', '').strip()
+
+    qs = StudentPrepSession.objects.all().order_by('-created_at')
+
+    if search:
+        qs = qs.filter(
+            Q(full_name__icontains=search) |
+            Q(email__icontains=search) |
+            Q(target_role__icontains=search)
+        )
+
+    if score_filter:
+        try:
+            qs = qs.filter(score__gte=int(score_filter))
+        except ValueError:
+            pass
+
+    if status_filter:
+        qs = qs.filter(status=status_filter)
+
+    from django.core.paginator import Paginator
+    paginator = Paginator(qs, 10)
+    page_number = request.query_params.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+
+    sessions_data = []
+    for s in page_obj:
+        sessions_data.append({
+            'id': str(s.id),
+            'full_name': s.full_name,
+            'email': s.email,
+            'phone': s.phone,
+            'target_role': s.target_role,
+            'experience_level': s.experience_level,
+            'scheduled_time': s.scheduled_time.isoformat() if s.scheduled_time else None,
+            'status': s.status,
+            'score': s.score,
+            'created_at': s.created_at.isoformat(),
+        })
+
+    return Response({
+        'sessions': sessions_data,
+        'total': paginator.count,
+        'pages': paginator.num_pages,
+        'current_page': page_obj.number
+    }, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def superadmin_student_prep_session_detail_view(request, id):
+    """
+    GET /api/superadmin/student-prep-sessions/<id>/
+    Protected: Superadmin only
+    """
+    auth_user, app_admin = _require_application_admin(request)
+    if not app_admin:
+        return Response({'error': 'Forbidden. Platform superadmin access required.'}, status=status.HTTP_403_FORBIDDEN)
+
+    try:
+        s = StudentPrepSession.objects.get(pk=id)
+    except (StudentPrepSession.DoesNotExist, ValueError, ValidationError):
+        return Response({'error': 'Student Prep Session not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    return Response({
+        'id': str(s.id),
+        'full_name': s.full_name,
+        'email': s.email,
+        'phone': s.phone,
+        'resume_url': s.resume.url if s.resume else None,
+        'resume_text': s.resume_text,
+        'resume_hash': s.resume_hash,
+        'target_role': s.target_role,
+        'experience_level': s.experience_level,
+        'scheduled_time': s.scheduled_time.isoformat() if s.scheduled_time else None,
+        'status': s.status,
+        'interview_questions': s.interview_questions,
+        'interview_summary': s.interview_summary,
+        'score': s.score,
+        'created_at': s.created_at.isoformat(),
+    }, status=status.HTTP_200_OK)
+

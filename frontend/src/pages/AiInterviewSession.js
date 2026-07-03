@@ -2397,6 +2397,13 @@ const AiInterviewSession = () => {
                     }
                 }
 
+                // ── PRACTICE INTERVIEW: Skip face registration & DeepFace entirely ──
+                const isPractice = candidate.automation_settings?.is_practice === true;
+                if (isPractice && !candidate.face_embedding_hash) {
+                    console.log('[Practice] Skipping face registration for student practice interview.');
+                    setIsFaceRegistered(true);
+                }
+
                 if (candidate.link_opened_at) {
                     const startTime = new Date(candidate.link_opened_at).getTime();
                     // FIX: Use server_time instead of client clock to prevent
@@ -3097,13 +3104,17 @@ const AiInterviewSession = () => {
         window.dispatchEvent(new Event('vh_exam_started'));
 
         // No pre-loaded questions needed — adaptive questioning generates them dynamically.
-        // Frontend only tracks progress by turn count (MAX_INTERVIEW_QUESTIONS = 13).
+        // Frontend only tracks progress by turn count.
+        // Practice interviews may have custom question counts.
+        const customQuestionCount = candidate.automation_settings?.question_count || MAX_INTERVIEW_QUESTIONS;
         setQuestions([]);
-        setMaxQuestions(MAX_INTERVIEW_QUESTIONS);
+        setMaxQuestions(customQuestionCount);
 
         // Start DeepFace proctoring session (uses candidate.id as person_id)
         // Only start if not already running to prevent session leak
-        if (!dfSessionIdRef.current) {
+        // Skip for practice interviews — no proctoring needed
+        const isPracticeInterview = candidate.automation_settings?.is_practice === true;
+        if (!dfSessionIdRef.current && !isPracticeInterview) {
             // FIX: Pass candidate data directly to ensure correct personId (PAN) is used immediately
             const personId = getDeepfacePersonId(candidate);
             await startDeepfaceMonitoring(personId);
@@ -4303,11 +4314,41 @@ const AiInterviewSession = () => {
                             </div>
                             <h2 className="completion-title">Interview Completed!</h2>
                             <p className="completion-text">
-                                Thank you, <strong>{candidateName}</strong>. Your interview session has been successfully recorded and submitted for review.
+                                Thank you, <strong>{candidateName}</strong>. Your interview session has been successfully recorded.
                             </p>
-                            <div className="completion-next-steps">
-                                <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
-                            </div>
+                            {candidateData?.automation_settings?.is_practice ? (
+                                <div className="completion-next-steps">
+                                    <p>Great job on your practice session! View your detailed feedback below.</p>
+                                    <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
+                                        <button
+                                            onClick={() => window.location.href = `/student/feedback/${token}`}
+                                            style={{
+                                                padding: '0.75rem 1.5rem', borderRadius: '12px', border: 'none',
+                                                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white',
+                                                fontSize: '0.95rem', fontWeight: 700, cursor: 'pointer'
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-chart-bar" style={{ marginRight: '8px' }}></i>
+                                            View Feedback
+                                        </button>
+                                        <button
+                                            onClick={() => window.location.href = '/student/ai-interview'}
+                                            style={{
+                                                padding: '0.75rem 1.5rem', borderRadius: '12px',
+                                                border: '1px solid #e2e8f0', background: 'white', color: '#374151',
+                                                fontSize: '0.95rem', fontWeight: 600, cursor: 'pointer'
+                                            }}
+                                        >
+                                            <i className="fa-solid fa-arrow-left" style={{ marginRight: '8px' }}></i>
+                                            Back to Dashboard
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="completion-next-steps">
+                                    <p>Moving forward, our recruitment team will analyze the session and get back to you with the next steps via email.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
                 )

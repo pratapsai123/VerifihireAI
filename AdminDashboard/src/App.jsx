@@ -37,6 +37,7 @@ import CompaniesPage from './pages/CompaniesPage';
 import DashboardHome from './pages/DashboardHome';
 import ActivityFeed from './pages/ActivityFeed';
 import PricingManagement from './pages/PricingManagement';
+import StudentPrepPage from './pages/StudentPrepPage';
 
 function App() {
   return (
@@ -62,6 +63,13 @@ function App() {
           <ProtectedRoute>
             <Layout>
               <PricingManagement />
+            </Layout>
+          </ProtectedRoute>
+        } />
+        <Route path="/student-prep" element={
+          <ProtectedRoute>
+            <Layout>
+              <StudentPrepPage />
             </Layout>
           </ProtectedRoute>
         } />

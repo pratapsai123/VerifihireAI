@@ -13,6 +13,8 @@ from .auth_views import (
     verify_login_otp_view,
     refresh_token_view,
     heartbeat_view,
+    student_register_view,
+    student_login_view,
 )
 
 from .user_views import (
@@ -110,6 +112,9 @@ from .superadmin_views import (
     superadmin_approve_user_view,
     superadmin_restricted_domains_view,
     superadmin_delete_restricted_domain_view,
+    public_practice_schedule_view,
+    superadmin_student_prep_sessions_list_view,
+    superadmin_student_prep_session_detail_view,
 )
 
 from .workflow_views import (

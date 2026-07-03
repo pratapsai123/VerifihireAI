@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',  # Required for BLACKLIST_AFTER_ROTATION
     'deepface_proctoring',
+    'students',
 ]
 
 # Trust Nginx to handle SSL and Host headers

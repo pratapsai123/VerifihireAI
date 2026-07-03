@@ -320,6 +320,9 @@ const Dashboard = () => {
   ];
 
   const navItems = allNavItems.filter(item => {
+    if (userRole === 'student') {
+      return item.label === 'Dashboard';
+    }
     if (!item.role) return true;
     return item.role.includes(userRole);
   }).map(item => {
@@ -518,7 +521,81 @@ const Dashboard = () => {
         </header>
 
         <div className="dashboard-body">
-          {userRole === 'interviewer' ? (
+          {userRole === 'student' ? (
+            <div className="dashboard-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
+              {/* AI Assessments Practice Card */}
+              <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+                <div>
+                  <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+                    <div className="card-icon" style={{ background: '#e0e7ff', color: '#4338ca', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Brain size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, marginLeft: '1rem' }}>AI Practice Assessment</h3>
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    Take automated mock assessments matching your skills. Practice MCQ, MSQ, TF, and Coding questions with detailed feedback.
+                  </p>
+                </div>
+                <div className="card-actions">
+                  <button
+                    className="btn-premium btn-fill"
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
+                    onClick={() => navigate('/student/create-assessment')}
+                  >
+                    Start Practice Assessment
+                  </button>
+                </div>
+              </div>
+
+              {/* AI Interviews Practice Card */}
+              <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+                <div>
+                  <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+                    <div className="card-icon" style={{ background: '#fef3c7', color: '#d97706', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <Sparkles size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, marginLeft: '1rem' }}>AI Mock Interview</h3>
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    Practice standard AI video/voice mock interviews. Improve your soft skills and technical articulation in real-time prep sessions.
+                  </p>
+                </div>
+                <div className="card-actions">
+                  <button
+                    className="btn-premium btn-fill"
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem' }}
+                    onClick={() => navigate('/student/ai-interview')}
+                  >
+                    Start Mock Interview
+                  </button>
+                </div>
+              </div>
+
+              {/* Practice Results Card */}
+              <div className="glass -card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+                <div>
+                  <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+                    <div className="card-icon" style={{ background: '#dcfce7', color: '#16a34a', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <BarChart3 size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, marginLeft: '1rem' }}>Practice Results</h3>
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    View scores, question-by-question performance, code submission detail, and overall feedback for your practiced assessments.
+                  </p>
+                </div>
+                <div className="card-actions">
+                  <button
+                    className="btn-premium btn-fill"
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem', background: '#10B981', borderColor: '#10B981' }}
+                    onClick={() => navigate('/student/results')}
+                  >
+                    View Results
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : userRole === 'interviewer' ? (
             <div className="dashboard-grid" style={{ gridTemplateColumns: '1fr 1fr' }}>
               {/* Availability Management for Interviewer */}
               <div className="glass-card" style={{ minHeight: '300px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>

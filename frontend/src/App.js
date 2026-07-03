@@ -5,6 +5,10 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Dashboard from './pages/Dashboard';
+import StudentRegister from './pages/StudentRegister';
+import StudentLogin from './pages/StudentLogin';
+import StudentCreateAssessment from './pages/StudentCreateAssessment';
+import StudentPracticeResults from './pages/StudentPracticeResults';
 import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
@@ -37,6 +41,9 @@ import InterviewStart from './pages/InterviewStart';
 import AiTakeAssessment from './pages/AiTakeAssessment';
 import AiInterviewSession from './pages/AiInterviewSession';
 import AiAssessmentDetail from './pages/AiAssessmentDetail';
+import StudentAiInterview from './pages/StudentAiInterview';
+import StudentFeedback from './pages/StudentFeedback';
+import StudentSessions from './pages/StudentSessions';
 import ResultsAI from './pages/ResultsAI';
 import FeedbackPage from './pages/FeedbackPage';
 import FeedbackDetails from './pages/FeedbackDetails';
@@ -365,6 +372,8 @@ function AppContent() {
     '/',
     '/login',
     '/signup',
+    '/student/login',
+    '/student/register',
     '/forgot-password',
     '/live-interview',             // candidate — no main navbar
     '/live-interview-interviewer', // interviewer — no main navbar (has its own internal header)
@@ -454,6 +463,8 @@ function AppContent() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/student/login" element={<StudentLogin />} />
+          <Route path="/student/register" element={<StudentRegister />} />
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
@@ -480,6 +491,11 @@ function AppContent() {
             {/* Interviewer View */}
             <Route path="/live-interview-interviewer" element={<LiveInterviewInterviewer />} />
             <Route path="/ai-interview" element={<AiInterview />} />
+            <Route path="/student/ai-interview" element={<StudentAiInterview />} />
+            <Route path="/student/create-assessment" element={<StudentCreateAssessment />} />
+            <Route path="/student/results" element={<StudentPracticeResults />} />
+            <Route path="/student/sessions" element={<StudentSessions />} />
+            <Route path="/student/feedback/:token" element={<StudentFeedback />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />
