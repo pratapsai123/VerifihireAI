@@ -2117,7 +2117,7 @@ const AiInterviewSession = () => {
             // authoritative count. This ensures clarifications and silent answers that
             // don't increment the DB counter also don't count toward the limit.
             const serverTurn = data.server_turn || nextIdx;
-            if (serverTurn >= MAX_INTERVIEW_QUESTIONS) {
+            if (serverTurn >= maxQuestions) {
                 let finalWords = "That concludes our interview questions today. Thank you for your time, we will be in touch soon. Goodbye!";
                 if (fullFeedback.trim()) {
                     finalWords = fullFeedback.trim() + ". " + finalWords;
@@ -2216,7 +2216,7 @@ const AiInterviewSession = () => {
                 setCurrentQuestionIndex(nextIdx);
                 // FIX (Progress Bar Jump): Progress = questions COMPLETED (nextIdx = how many done).
                 // Using nextIdx/total means at question 1 we show 1/13 = 7.7%, not jumping to 15%.
-                const totalQuestions = MAX_INTERVIEW_QUESTIONS;
+                const totalQuestions = maxQuestions;
                 setProgress((nextIdx / totalQuestions) * 100);
 
                 setQuestions(prev => {

@@ -4,6 +4,7 @@ from .interview_views import (
     StudentInterviewHistoryView,
     StudentInterviewFeedbackView,
     StudentProgressView,
+    StudentPointsRankView,
 )
 from .assessment_views import (
     StudentPracticeAssessmentView,
@@ -17,4 +18,5 @@ urlpatterns = [
     path('assessments/', StudentPracticeAssessmentView.as_view(), name='student-practice-assessment'),
     path('feedback/<str:public_token>/', StudentInterviewFeedbackView.as_view(), name='student-interview-feedback'),
     path('progress/', StudentProgressView.as_view(), name='student-progress'),
+    path('points/', StudentPointsRankView.as_view(), name='student-points-rank'),
 ]

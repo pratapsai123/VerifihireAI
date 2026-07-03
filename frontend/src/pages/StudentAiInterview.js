@@ -1,6 +1,6 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, FileText, Briefcase, Play, Loader2, Clock } from 'lucide-react';
+import { Upload, FileText, Briefcase, Play, Loader2, Clock, Code } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig'; 
 import '../styles/StudentAiInterview.css';
@@ -10,6 +10,7 @@ const StudentAiInterview = () => {
     const [jobDescription, setJobDescription] = useState('');
     const [experienceLevel, setExperienceLevel] = useState('fresher');
     const [questionCount, setQuestionCount] = useState(14);
+    const [includeCoding, setIncludeCoding] = useState(true);
     const [resumeFile, setResumeFile] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -59,6 +60,7 @@ const StudentAiInterview = () => {
         formData.append('job_description', jobDescription);
         formData.append('experience_level', experienceLevel);
         formData.append('question_count', questionCount);
+        formData.append('include_coding', includeCoding);
         formData.append('resume', resumeFile);
 
         try {
@@ -155,6 +157,48 @@ const StudentAiInterview = () => {
                                     <option value={14}>Standard (14 questions, ~30 min)</option>
                                     <option value={20}>Deep (20 questions, ~45 min)</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        {/* Include Coding Toggle */}
+                        <div className="form-group">
+                            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem 1.25rem', background: includeCoding ? 'rgba(99,102,241,0.05)' : 'rgba(0,0,0,0.02)', border: includeCoding ? '1px solid rgba(99,102,241,0.2)' : '1px solid rgba(0,0,0,0.08)', borderRadius: '14px', transition: 'all 0.3s ease' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                                    <Code size={18} style={{ color: includeCoding ? '#6366f1' : '#94a3b8' }} />
+                                    <div>
+                                        <p style={{ margin: 0, fontSize: '0.9rem', fontWeight: 600, color: '#1e293b' }}>Include Coding Questions</p>
+                                        <p style={{ margin: '2px 0 0', fontSize: '0.75rem', color: '#64748b' }}>
+                                            {includeCoding ? 'Last 1-2 questions will require writing code' : 'All questions will be verbal/conversational only'}
+                                        </p>
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setIncludeCoding(!includeCoding)}
+                                    style={{
+                                        width: '48px',
+                                        height: '26px',
+                                        borderRadius: '13px',
+                                        border: 'none',
+                                        background: includeCoding ? 'linear-gradient(135deg, #6366f1, #8b5cf6)' : '#cbd5e1',
+                                        position: 'relative',
+                                        cursor: 'pointer',
+                                        transition: 'background 0.3s ease',
+                                        flexShrink: 0,
+                                    }}
+                                >
+                                    <div style={{
+                                        width: '20px',
+                                        height: '20px',
+                                        borderRadius: '50%',
+                                        background: 'white',
+                                        position: 'absolute',
+                                        top: '3px',
+                                        left: includeCoding ? '25px' : '3px',
+                                        transition: 'left 0.3s ease',
+                                        boxShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                                    }}></div>
+                                </button>
                             </div>
                         </div>
 

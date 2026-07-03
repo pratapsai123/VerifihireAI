@@ -1982,6 +1982,19 @@ class CandidatePublicStatusUpdateView(APIView):
 
             candidate.resume_text = None
 
+            # Award practice points to student profile
+            if _is_practice_interview and candidate.created_by:
+                try:
+                    from api.models import UserProfile
+                    student_profile = candidate.created_by
+                    if student_profile.role == UserProfile.ROLE_STUDENT:
+                        # Points = score_percentage / 10, rounded
+                        earned_points = round(score_percentage / 10)
+                        student_profile.practice_points = (student_profile.practice_points or 0) + earned_points
+                        student_profile.save(update_fields=['practice_points'])
+                except Exception as pts_err:
+                    logger.warning(f"Failed to award practice points: {pts_err}")
+
             candidate.save()
 
 
@@ -2920,12 +2933,14 @@ class ProcessAnswerView(APIView):
         # For company-created interviews, always use the default (14).
         _is_practice = False
         _max_questions = TOTAL_INTERVIEW_QUESTIONS  # Default: 14
+        _include_coding = True  # Default: coding questions included
         if candidate and isinstance(candidate.automation_settings, dict):
             _is_practice = candidate.automation_settings.get('is_practice', False)
             if _is_practice:
                 custom_qc = candidate.automation_settings.get('question_count')
                 if custom_qc and isinstance(custom_qc, int) and 5 <= custom_qc <= 20:
                     _max_questions = custom_qc
+                _include_coding = candidate.automation_settings.get('include_coding', True)
 
         try:
             # --- TOKEN-EFFICIENT CONTEXT BUILDING ---
@@ -2998,9 +3013,9 @@ class ProcessAnswerView(APIView):
                 phase_guidance = "CORE SKILLS PHASE: Focus on Job Description requirements. Ask about specific technologies, concepts, or methodologies mentioned in the JD."
             elif current_turn_number <= max(5, int(_max_questions * 0.7)):
                 phase_guidance = "DEEP DIVE PHASE: Probe deeper based on what the candidate has revealed. If they mentioned a project, ask architecture details. If they claimed a skill, test it with a scenario. Focus on WEAK AREAS if any were identified."
-            elif current_turn_number < _coding_start:
+            elif not _include_coding or current_turn_number < _coding_start:
                 phase_guidance = "SCENARIO & PROBLEM-SOLVING PHASE: Present hypothetical workplace scenarios or system design problems relevant to the role."
-            elif current_turn_number == _coding_start:
+            elif current_turn_number == _coding_start and _include_coding:
                 phase_guidance = "MANDATORY CODING PHASE: You MUST ask a coding/programming question. The candidate will type their answer. You MUST set requires_code_input to true. Do NOT ask a conversational or theoretical question — it MUST be a 'write a function' or 'write code to solve' type question."
             else:
                 phase_guidance = "FINAL EVALUATION PHASE: The candidate has just answered the final question. The interview is now complete. Do NOT ask any further questions. Set 'refined_next_question' to null or an empty string. Focus your feedback purely on evaluating their last answer, without proposing any next steps or saying 'let's try something else/easier'."
@@ -3014,13 +3029,22 @@ class ProcessAnswerView(APIView):
             else:
                 # Determine coding turn range dynamically
                 _coding_start = _max_questions - 1  # e.g. turn 13 for 14-question interviews
-                adaptive_rules = f"""1. NEVER repeat a topic already covered above.
+                if _include_coding:
+                    adaptive_rules = f"""1. NEVER repeat a topic already covered above.
 2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
 3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
 4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
 5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
 6. For turns 1-{_coding_start - 1}: ORAL ONLY — never ask them to write code or type anything.
 7. For turns {_coding_start}-{_max_questions}: CODING — You MUST ask a coding question (write a function, solve a problem). You MUST set "requires_code_input": true. This is NON-NEGOTIABLE — do NOT ask a theoretical or conversational question on turns {_coding_start}-{_max_questions}."""
+                else:
+                    adaptive_rules = f"""1. NEVER repeat a topic already covered above.
+2. If the candidate has WEAK AREAS, ask a FOLLOW-UP that probes deeper into that weakness (give them a chance to recover).
+3. If the candidate is STRONG in an area, skip similar topics and explore UNCOVERED ground instead.
+4. {'Use the RESUME to find specific projects, skills, or experiences to ask about.' if has_resume else 'Since no resume is available, derive questions from the Job Description and their verbal responses.'}
+5. Each question should be HARDER than the last if the candidate is scoring well (7+), or EASIER if they are struggling (≤4).
+6. ALL questions must be ORAL/CONVERSATIONAL. Do NOT ask coding questions or set requires_code_input to true. The candidate chose a verbal-only interview.
+7. Focus on conceptual understanding, scenario-based problem solving, and verbal explanation of technical approaches."""
 
             # Adaptive intelligence prompt section
             adaptive_section = f"""===== ADAPTIVE QUESTIONING INTELLIGENCE =====
@@ -3089,7 +3113,7 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
 - If candidate says "repeat that", "pardon", "what?", "I don't understand" → Set "is_clarification": true and repeat simpler.
 - If candidate says "end", "stop", "finish" → Set "is_exit": true and say goodbye.
 - FOR TURNS 1-{_coding_start - 1} (ORAL ONLY): You MUST ask conversational questions. NEVER ask the candidate to "write code", "type a solution", or "submit a script". Your question should be answered entirely via speech.
-- For turns {_coding_start}-{_max_questions} (CODING) → Set "requires_code_input": true.
+- {f'For turns {_coding_start}-{_max_questions} (CODING) → Set "requires_code_input": true.' if _include_coding else 'ALL turns are ORAL ONLY. Do NOT set requires_code_input to true. No coding questions allowed.'}
 - YOUR NEXT QUESTION MUST BE DIFFERENT from all previously covered topics listed above.
 
 ===== RESPOND WITH THIS EXACT JSON FORMAT (no markdown, no extra text) =====
@@ -3193,11 +3217,16 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
             # NOTE: current_turn_number is the turn that was JUST ANSWERED.
             # So when current_turn_number is (_max_questions - 2), we are generating the coding question.
             # When current_turn_number is (_max_questions - 1), we are generating the last question.
-            _coding_force_turns = [_max_questions - 2, _max_questions - 1]
-            if current_turn_number in _coding_force_turns:
-                data['requires_code_input'] = True
-                # Ensure the AI didn't accidentally set is_exit=True too early
-                data['is_exit'] = False
+            # Only force coding if include_coding is enabled.
+            if _include_coding:
+                _coding_force_turns = [_max_questions - 2, _max_questions - 1]
+                if current_turn_number in _coding_force_turns:
+                    data['requires_code_input'] = True
+                    # Ensure the AI didn't accidentally set is_exit=True too early
+                    data['is_exit'] = False
+            else:
+                # Coding disabled — force it off in case AI hallucinated
+                data['requires_code_input'] = False
 
             # FIX: If answer was silent, NEVER allow AI to set is_exit=True.
             # Only the frontend 3-consecutive-silence rule should end the interview.
@@ -3234,8 +3263,11 @@ BE GENEROUS: If the candidate shows they understand the core concept, lean towar
                         except Exception:
                             pass
 
-            # If turn >= 15, force exit
-            if current_turn_number >= 15:
+            # Force exit safety net.
+            # For practice interviews, hard-stop exactly at the chosen question count.
+            # For company interviews, keep the original behavior (turn >= 15).
+            _force_exit_threshold = _max_questions if _is_practice else 15
+            if current_turn_number >= _force_exit_threshold:
                 data['is_exit'] = True
                 data['refined_next_question'] = "Thank you for your time. The interview is now complete."
             # ------------------------------------
@@ -3904,6 +3936,20 @@ class CandidateReportDownloadView(APIView):
             # Score & Penalty Calculation
             base_score_pct = candidate.score_percentage
             
+            # Calculate total possible marks
+            _is_practice_report = (
+                isinstance(candidate.automation_settings, dict)
+                and candidate.automation_settings.get('is_practice', False)
+            )
+            if _is_practice_report:
+                custom_qc = candidate.automation_settings.get('question_count', TOTAL_INTERVIEW_QUESTIONS)
+                if isinstance(custom_qc, int) and 5 <= custom_qc <= 20:
+                    total_possible_marks = custom_qc * 10
+                else:
+                    total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
+            else:
+                total_possible_marks = TOTAL_INTERVIEW_QUESTIONS * 10
+
             integrity_obj = getattr(candidate, 'integrity', None)
             integrity_score = integrity_obj.integrity_score if integrity_obj else 100.0
             

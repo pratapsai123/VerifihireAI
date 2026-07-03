@@ -59,6 +59,10 @@ class StudentPracticeInterviewView(APIView):
             question_count = 14
         question_count = max(5, min(20, question_count))  # Clamp between 5-20
         
+        # Include coding toggle (defaults to True for backward compat)
+        include_coding_raw = request.data.get('include_coding', 'true')
+        include_coding = str(include_coding_raw).lower() in ('true', '1', 'yes')
+        
         # Calculate duration based on question count (~2 min per question)
         interview_duration = max(15, question_count * 2 + 5)
         
@@ -84,6 +88,7 @@ class StudentPracticeInterviewView(APIView):
                 'interview_duration_minutes': interview_duration,
                 'is_practice': True,
                 'question_count': question_count,
+                'include_coding': include_coding,
             },
             link_opened_at=timezone.now(),  # Pre-set so completion endpoint doesn't reject
         )
@@ -99,6 +104,7 @@ class StudentPracticeInterviewView(APIView):
                     'interview_duration_minutes': interview_duration,
                     'is_practice': True,
                     'question_count': question_count,
+                    'include_coding': include_coding,
                 }
             )
         except Exception as e:
@@ -113,6 +119,7 @@ class StudentPracticeInterviewView(APIView):
                         'interview_duration_minutes': interview_duration,
                         'is_practice': True,
                         'question_count': question_count,
+                        'include_coding': include_coding,
                     }
                 )
             except Exception as sync_err:
@@ -239,7 +246,12 @@ class StudentInterviewFeedbackView(APIView):
                 'performance': 'excellent' if score >= 8 else 'good' if score >= 6 else 'needs_improvement' if score >= 4 else 'poor',
             })
 
-        total_possible = scored_count * 10
+        # Use the configured question_count for consistent scoring
+        if isinstance(candidate.automation_settings, dict) and candidate.automation_settings.get('is_practice', False):
+            qc = candidate.automation_settings.get('question_count', 14)
+            total_possible = (qc if isinstance(qc, int) and 5 <= qc <= 20 else 14) * 10
+        else:
+            total_possible = scored_count * 10
         percentage = round((total_score / total_possible * 100), 1) if total_possible > 0 else 0
 
         # Generate study recommendations based on weak areas and JD
@@ -351,4 +363,35 @@ class StudentProgressView(APIView):
             'overall_average': round(sum(p['percentage'] for p in progress_data) / len(progress_data), 1) if progress_data else 0,
             'progress_over_time': progress_data,
             'domain_summary': domain_summary,
+        }, status=status.HTTP_200_OK)
+
+
+class StudentPointsRankView(APIView):
+    """
+    GET /api/students/points/
+    Returns the student's practice points and rank among all students.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
+            return Response({"error": "Only students can view points."}, status=status.HTTP_403_FORBIDDEN)
+
+        from api.models import UserProfile
+
+        user_profile = request.user.profile
+        my_points = user_profile.practice_points or 0
+
+        # Rank: count how many students have MORE points than this user + 1
+        rank = UserProfile.objects.filter(
+            role=UserProfile.ROLE_STUDENT,
+            practice_points__gt=my_points
+        ).count() + 1
+
+        total_students = UserProfile.objects.filter(role=UserProfile.ROLE_STUDENT).count()
+
+        return Response({
+            'points': my_points,
+            'rank': rank,
+            'total_students': total_students,
         }, status=status.HTTP_200_OK)

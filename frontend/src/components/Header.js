@@ -1,10 +1,41 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import ProfileDropdown from './ProfileDropdown';
+import { API_BASE_URL } from '../apiConfig';
 import '../styles/Header.css';
 
 function Header() {
   const navigate = useNavigate();
+  const [userRole, setUserRole] = useState('');
+  const [studentPoints, setStudentPoints] = useState(0);
+  const [studentRank, setStudentRank] = useState(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const u = JSON.parse(storedUser);
+        setUserRole(u.role || '');
+      } catch (e) {}
+    }
+  }, []);
+
+  useEffect(() => {
+    if (userRole === 'student') {
+      const fetchPoints = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await axios.get(`${API_BASE_URL}/students/points/`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setStudentPoints(res.data.points || 0);
+          setStudentRank(res.data.rank || null);
+        } catch (err) {}
+      };
+      fetchPoints();
+    }
+  }, [userRole]);
 
   const handleLogoClick = () => {
     navigate('/dashboard');
@@ -23,6 +54,20 @@ function Header() {
           </div>
         </div>
         <div className="vh-header__right">
+          {userRole === 'student' && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginRight: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', padding: '5px 12px', borderRadius: '8px', border: '1px solid #c7d2fe' }}>
+                <span style={{ fontSize: '0.85rem' }}>⚡</span>
+                <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#4338ca' }}>{studentPoints} pts</span>
+              </div>
+              {studentRank && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'linear-gradient(135deg, #fef3c7, #fde68a)', padding: '5px 12px', borderRadius: '8px', border: '1px solid #fbbf24' }}>
+                  <span style={{ fontSize: '0.85rem' }}>🏆</span>
+                  <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#92400e' }}>#{studentRank}</span>
+                </div>
+              )}
+            </div>
+          )}
           <ProfileDropdown />
         </div>
       </div>

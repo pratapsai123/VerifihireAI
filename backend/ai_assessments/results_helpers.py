@@ -526,6 +526,7 @@ def get_ai_candidate_results(scoped_ids, company_id, start_date, end_date, activ
                 'intruder_photo_url': intruder_photo_url,
                 'link_opened_at': s.link_opened_at.isoformat() if s.link_opened_at else None,
                 'completed_at': s.completed_at.isoformat() if s.completed_at else None,
+                'automation_settings': s.automation_settings if isinstance(s.automation_settings, dict) else {},
                 'created_at': s.created_at.isoformat() if s.created_at else None,
             }
         )

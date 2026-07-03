@@ -181,6 +181,9 @@ class UserProfile(models.Model):
     )
     deactivation_reason = models.TextField(blank=True, null=True)
 
+    # Student gamification
+    practice_points = models.IntegerField(default=0, help_text="Accumulated practice points for student accounts")
+
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
     

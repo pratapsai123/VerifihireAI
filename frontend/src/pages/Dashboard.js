@@ -84,6 +84,8 @@ const Dashboard = () => {
   const [roleFormData, setRoleFormData] = useState({ title: '', description: '' });
   const [isSubmittingRole, setIsSubmittingRole] = useState(false);
   const [userRole, setUserRole] = useState('');
+  const [studentPoints, setStudentPoints] = useState(0);
+  const [studentRank, setStudentRank] = useState(null);
 
   // States and hooks for managing job roles
   const [isManageModalOpen, setIsManageModalOpen] = useState(false);
@@ -167,6 +169,25 @@ const Dashboard = () => {
       }
     }
   }, []);
+
+  // Fetch student points and rank
+  useEffect(() => {
+    if (userRole === 'student') {
+      const fetchPoints = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await axios.get(`${API_BASE_URL}/students/points/`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setStudentPoints(res.data.points || 0);
+          setStudentRank(res.data.rank || null);
+        } catch (err) {
+          console.error("Failed to fetch student points:", err);
+        }
+      };
+      fetchPoints();
+    }
+  }, [userRole]);
 
   useEffect(() => {
     if (isSidebarCollapsed) {
@@ -513,6 +534,20 @@ const Dashboard = () => {
           </div>
           <div className="topbar-right">
             <div className="topbar-actions">
+              {userRole === 'student' && (
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginRight: '1rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', padding: '6px 14px', borderRadius: '10px', border: '1px solid #c7d2fe' }}>
+                    <span style={{ fontSize: '1rem' }}>⚡</span>
+                    <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#4338ca' }}>{studentPoints} pts</span>
+                  </div>
+                  {studentRank && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'linear-gradient(135deg, #fef3c7, #fde68a)', padding: '6px 14px', borderRadius: '10px', border: '1px solid #fbbf24' }}>
+                      <span style={{ fontSize: '1rem' }}>🏆</span>
+                      <span style={{ fontSize: '0.85rem', fontWeight: 700, color: '#92400e' }}>Rank #{studentRank}</span>
+                    </div>
+                  )}
+                </div>
+              )}
               <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 500 }}>
                 Role: <span style={{ color: '#6366f1', textTransform: 'capitalize' }}>{userRole.replace('_', ' ')}</span>
               </span>

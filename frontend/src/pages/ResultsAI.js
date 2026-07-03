@@ -1177,14 +1177,29 @@ const ResultsAI = () => {
                                 </div>
                                 <div style={{ borderBottom: '1px solid #f1f5f9', paddingBottom: '0.5rem' }}>
                                     <span style={{ color: '#64748B', fontWeight: '800', fontSize: '0.65rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.05em', marginBottom: '2px' }}>End Time</span>
-                                    {data.completed_at ? new Date(data.completed_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }) : 'Incomplete'}
+                                    {(() => {
+                                        if (!data.completed_at) return 'Incomplete';
+                                        if (!data.link_opened_at) return new Date(data.completed_at).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+                                        // Cap end time: use completed_at but not beyond configured duration from start
+                                        const start = new Date(data.link_opened_at);
+                                        const completed = new Date(data.completed_at);
+                                        const durationMinutes = data.automation_settings?.interview_duration_minutes || 60;
+                                        const maxEnd = new Date(start.getTime() + durationMinutes * 60 * 1000);
+                                        const effectiveEnd = completed < maxEnd ? completed : maxEnd;
+                                        return effectiveEnd.toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true });
+                                    })()}
                                 </div>
                                 <div>
                                     <span style={{ color: '#64748B', fontWeight: '800', fontSize: '0.65rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.05em', marginBottom: '2px' }}>Total Duration</span>
                                     {(() => {
                                         if (data.link_opened_at && data.completed_at) {
-                                            const diffMs = new Date(data.completed_at) - new Date(data.link_opened_at);
-                                            const diffSecs = Math.floor(diffMs / 1000);
+                                            const start = new Date(data.link_opened_at);
+                                            const completed = new Date(data.completed_at);
+                                            const durationMinutes = data.automation_settings?.interview_duration_minutes || 60;
+                                            const maxEnd = new Date(start.getTime() + durationMinutes * 60 * 1000);
+                                            const effectiveEnd = completed < maxEnd ? completed : maxEnd;
+                                            const diffMs = effectiveEnd - start;
+                                            const diffSecs = Math.max(0, Math.floor(diffMs / 1000));
                                             const hours = Math.floor(diffSecs / 3600);
                                             const minutes = Math.floor((diffSecs % 3600) / 60);
                                             const seconds = diffSecs % 60;
