@@ -723,15 +723,19 @@ def register_view(request):
             company.approved_at = timezone.now()
             company.plan_start_date = timezone.now()
             
-            days = 30
-            if billing_cycle == 'biannual':
+            if float(plan.base_price_monthly) == 0:
+                # Free / Trial plan — strictly 7-day access
+                days = 7
+            elif billing_cycle == 'biannual':
                 days = 180
             elif billing_cycle == 'annual':
                 days = 365
+            else:
+                days = 30
                 
             company.plan_end_date = timezone.now() + timedelta(days=days)
         else:
-            # Custom plan
+            # Custom / Enterprise plan — pending manual configuration
             company.plan_start_date = timezone.now()
             company.plan_end_date = timezone.now() + timedelta(days=30)
         company.save()

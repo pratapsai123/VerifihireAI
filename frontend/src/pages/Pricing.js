@@ -38,7 +38,7 @@ function ScrollReveal({ children, delay = 0 }) {
 }
 
 const PLAN_DESCRIPTIONS = {
-  'Trial': 'Explore with no commitment — 7-day access, no card needed.',
+  'Trial': 'Explore with no commitment — 7-day access.',
   'Starter': 'For growing teams ready to streamline hiring.',
   'Pro': 'Advanced AI & verification for serious hiring teams.',
   'Enterprise': 'Custom scale & deployment for large organisations.',
@@ -51,27 +51,27 @@ const DEFAULT_PLANS = [
     discount_6_months: '0',
     discount_12_months: '0',
     features: [
-        "Resume Screening - Results",
-        "AI Assessments + Coding - Results",
-        "Coding Assessment",
-        "Company Admin (1)",
-        "HR (2)",
-        "Interviewer (Unlimited)"
+      "Resume Screening - Results",
+      "AI Assessments + Coding - Results",
+      "Coding Assessment",
+      "Company Admin (1)",
+      "HR (2)",
+      "Interviewer (Unlimited)"
     ],
     missing_features: [
-        "AI Interview + Coding - Results",
-        "Custom Assessments",
-        "Results (AI + Coding combined)",
-        "PDF Report Generation",
-        "Live Interview",
-        "Secure Agent",
-        "Deep-Face Verification",
-        "HR Manager",
-        "HR (10)",
-        "Integrity Scoring",
-        "Plagiarism Check",
-        "Behavior Check",
-        "Create Own MCQ, MSQ, True/False, PDF Upload"
+      "AI Interview + Coding - Results",
+      "Custom Assessments",
+      "Results (AI + Coding combined)",
+      "PDF Report Generation",
+      "Live Interview",
+      "Secure Agent",
+      "Deep-Face Verification",
+      "HR Manager",
+      "HR (10)",
+      "Integrity Scoring",
+      "Plagiarism Check",
+      "Behavior Check",
+      "Create Own MCQ, MSQ, True/False, PDF Upload"
     ],
     is_popular: false,
     color_theme: '#10B981',
@@ -82,26 +82,26 @@ const DEFAULT_PLANS = [
     discount_6_months: '10',
     discount_12_months: '20',
     features: [
-        "Resume Screening - Results",
-        "AI Assessments + Coding - Results",
-        "AI Interview + Coding - Results",
-        "Coding Assessment",
-        "Custom Assessments",
-        "Results (AI + Coding combined)",
-        "PDF Report Generation",
-        "Company Admin (1)",
-        "HR Manager (2)",
-        "HR (10)",
-        "Interviewer (Unlimited)",
-        "Integrity Scoring",
-        "Plagiarism Check",
-        "Behavior Check",
-        "Create Own MCQ, MSQ, True/False, PDF Upload"
+      "Resume Screening - Results",
+      "AI Assessments + Coding - Results",
+      "AI Interview + Coding - Results",
+      "Coding Assessment",
+      "Custom Assessments",
+      "Results (AI + Coding combined)",
+      "PDF Report Generation",
+      "Company Admin (1)",
+      "HR Manager (2)",
+      "HR (10)",
+      "Interviewer (Unlimited)",
+      "Integrity Scoring",
+      "Plagiarism Check",
+      "Behavior Check",
+      "Create Own MCQ, MSQ, True/False, PDF Upload"
     ],
     missing_features: [
-        "Live Interview",
-        "Secure Agent",
-        "Deep-Face Verification"
+      "Live Interview",
+      "Secure Agent",
+      "Deep-Face Verification"
     ],
     is_popular: false,
     color_theme: '#3B82F6',
@@ -112,24 +112,24 @@ const DEFAULT_PLANS = [
     discount_6_months: '15',
     discount_12_months: '25',
     features: [
-        "Resume Screening - Results (Limited)",
-        "AI Assessments + Coding - Results (Limited)",
-        "AI Interview + Coding - Results (Limited)",
-        "Coding Assessment (Limited)",
-        "Custom Assessments (Limited)",
-        "Results (AI + Coding combined)",
-        "PDF Report Generation",
-        "Live Interview (Limited)",
-        "Secure Agent",
-        "Deep-Face Verification",
-        "Company Admin (1)",
-        "HR Manager (2)",
-        "HR (10)",
-        "Interviewer (Unlimited)",
-        "Integrity Scoring",
-        "Plagiarism Check",
-        "Behavior Check",
-        "Create Own MCQ, MSQ, True/False, PDF Upload"
+      "Resume Screening - Results (Limited)",
+      "AI Assessments + Coding - Results (Limited)",
+      "AI Interview + Coding - Results (Limited)",
+      "Coding Assessment (Limited)",
+      "Custom Assessments (Limited)",
+      "Results (AI + Coding combined)",
+      "PDF Report Generation",
+      "Live Interview (Limited)",
+      "Secure Agent",
+      "Deep-Face Verification",
+      "Company Admin (1)",
+      "HR Manager (2)",
+      "HR (10)",
+      "Interviewer (Unlimited)",
+      "Integrity Scoring",
+      "Plagiarism Check",
+      "Behavior Check",
+      "Create Own MCQ, MSQ, True/False, PDF Upload"
     ],
     missing_features: [],
     is_popular: true,
@@ -141,27 +141,27 @@ const DEFAULT_PLANS = [
     discount_6_months: '0',
     discount_12_months: '0',
     features: [
-        "Resume Screening - Results (Unlimited)",
-        "AI Assessments + Coding - Results (Unlimited)",
-        "AI Interview + Coding - Results (Unlimited)",
-        "Coding Assessment (Unlimited)",
-        "Custom Assessments (Unlimited)",
-        "Results (AI + Coding combined)",
-        "PDF Report Generation",
-        "Live Interview (Unlimited)",
-        "Secure Agent",
-        "Deep-Face Verification",
-        "Company Admin (1)",
-        "HR Manager (2)",
-        "HR (10)",
-        "Interviewer (Unlimited)",
-        "Integrity Scoring",
-        "Plagiarism Check",
-        "Behavior Check",
-        "Create Own MCQ, MSQ, True/False, PDF Upload",
-        "Custom Scale & Deployment",
-        "Volume Discounts Available",
-        "Dedicated Account Manager"
+      "Resume Screening - Results (Unlimited)",
+      "AI Assessments + Coding - Results (Unlimited)",
+      "AI Interview + Coding - Results (Unlimited)",
+      "Coding Assessment (Unlimited)",
+      "Custom Assessments (Unlimited)",
+      "Results (AI + Coding combined)",
+      "PDF Report Generation",
+      "Live Interview (Unlimited)",
+      "Secure Agent",
+      "Deep-Face Verification",
+      "Company Admin (1)",
+      "HR Manager (2)",
+      "HR (10)",
+      "Interviewer (Unlimited)",
+      "Integrity Scoring",
+      "Plagiarism Check",
+      "Behavior Check",
+      "Create Own MCQ, MSQ, True/False, PDF Upload",
+      "Custom Scale & Deployment",
+      "Volume Discounts Available",
+      "Dedicated Account Manager"
     ],
     missing_features: [],
     is_popular: false,
@@ -189,7 +189,7 @@ function Pricing() {
       } else {
         setPricingPlans(DEFAULT_PLANS);
       }
-      
+
       const coreNames = ['Trial', 'Starter', 'Pro', 'Enterprise'];
       const special = plans.filter(p => !coreNames.includes(p.name));
       if (special.length > 0) {
@@ -283,57 +283,58 @@ function Pricing() {
                   {corePlans.map((plan, i) => {
                     const pricing = getPricingDetails(plan);
                     return (
-                    <div key={i} className={`pricing-card ${plan.is_popular ? "pricing-popular" : ""}`} style={{ "--pc": plan.color_theme }}>
-                      {pricing.isOverridden && (
-                        <div className="pricing-popular-badge" style={{ background: '#EF4444', top: '-14px', zIndex: 10 }}>
-                          🎉 {activeOffer.name} Applied!
-                        </div>
-                      )}
-                      {!pricing.isOverridden && plan.is_popular && <div className="pricing-popular-badge">⭐ Most Popular</div>}
-                      <div className="pricing-card-top">
-                        <div className="pricing-plan-name" style={{ color: plan.color_theme }}>{plan.name}</div>
-                        <div className="pricing-price" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
-                            {pricing.originalPriceStr && (
-                              <span style={{ textDecoration: 'line-through', color: '#94A3B8', fontSize: '1.1rem', marginRight: '4px' }}>
-                                {pricing.originalPriceStr}
-                              </span>
-                            )}
-                            <span className="pricing-amount">{pricing.priceStr}</span>
-                            {pricing.discountStr && (
-                              <span style={{ background: 'rgba(5, 205, 153, 0.2)', color: '#05CD99', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>
-                                {pricing.discountStr}
-                              </span>
-                            )}
+                      <div key={i} className={`pricing-card ${plan.is_popular ? "pricing-popular" : ""}`} style={{ "--pc": plan.color_theme }}>
+                        {pricing.isOverridden && (
+                          <div className="pricing-popular-badge" style={{ background: '#EF4444', top: '-14px', zIndex: 10 }}>
+                            🎉 {activeOffer.name} Applied!
                           </div>
-                          <span className="pricing-period" style={{ marginTop: '0' }}>
-                            {parseFloat(plan.base_price_monthly) < 0 ? 'Contact us' : parseFloat(plan.base_price_monthly) > 0 ? getBillingPeriodLabel() : 'Forever'}
-                          </span>
+                        )}
+                        {!pricing.isOverridden && plan.is_popular && <div className="pricing-popular-badge">⭐ Most Popular</div>}
+                        <div className="pricing-card-top">
+                          <div className="pricing-plan-name" style={{ color: plan.color_theme }}>{plan.name}</div>
+                          <div className="pricing-price" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                              {pricing.originalPriceStr && (
+                                <span style={{ textDecoration: 'line-through', color: '#94A3B8', fontSize: '1.1rem', marginRight: '4px' }}>
+                                  {pricing.originalPriceStr}
+                                </span>
+                              )}
+                              <span className="pricing-amount">{pricing.priceStr}</span>
+                              {pricing.discountStr && (
+                                <span style={{ background: 'rgba(5, 205, 153, 0.2)', color: '#05CD99', padding: '2px 8px', borderRadius: '12px', fontSize: '0.8rem', fontWeight: 'bold' }}>
+                                  {pricing.discountStr}
+                                </span>
+                              )}
+                            </div>
+                            <span className="pricing-period" style={{ marginTop: '0' }}>
+                              {parseFloat(plan.base_price_monthly) < 0 ? 'Contact us' : parseFloat(plan.base_price_monthly) > 0 ? getBillingPeriodLabel() : 'Forever'}
+                            </span>
+                          </div>
+                          <p className="pricing-desc">{PLAN_DESCRIPTIONS[plan.name] || plan.desc || 'Premium AI Hiring Features included.'}</p>
                         </div>
-                        <p className="pricing-desc">{PLAN_DESCRIPTIONS[plan.name] || plan.desc || 'Premium AI Hiring Features included.'}</p>
+                        <ul className="pricing-features">
+                          {plan.features && plan.features.map((f, j) => (
+                            <li key={j} className="pricing-feature">
+                              <CheckCircle2 size={14} color={plan.color_theme} />
+                              {f}
+                            </li>
+                          ))}
+                          {plan.missing_features && plan.missing_features.map((f, j) => (
+                            <li key={`m${j}`} className="pricing-feature pricing-feature-missing" style={{ textDecoration: 'line-through' }}>
+                              <XCircle size={14} color="rgba(255,255,255,0.2)" />
+                              {f}
+                            </li>
+                          ))}
+                        </ul>
+                        <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : `/signup?plan_id=${plan.id}&billing_cycle=${billing}`}
+                          className={plan.is_popular ? 'btn-primary-premium pricing-cta' : 'btn-secondary-premium pricing-cta'}
+                          style={plan.is_popular ? {} : { borderColor: `${plan.color_theme}40`, color: plan.color_theme }}
+                        >
+                          {parseFloat(plan.base_price_monthly) < 0 ? 'Talk to Sales' : parseFloat(plan.base_price_monthly) === 0 ? 'Get Started Free' : 'Choose Plan'}
+                        </Link>
                       </div>
-                      <ul className="pricing-features">
-                        {plan.features && plan.features.map((f, j) => (
-                          <li key={j} className="pricing-feature">
-                            <CheckCircle2 size={14} color={plan.color_theme} />
-                            {f}
-                          </li>
-                        ))}
-                        {plan.missing_features && plan.missing_features.map((f, j) => (
-                          <li key={`m${j}`} className="pricing-feature pricing-feature-missing" style={{ textDecoration: 'line-through' }}>
-                            <XCircle size={14} color="rgba(255,255,255,0.2)" />
-                            {f}
-                          </li>
-                        ))}
-                      </ul>
-                      <Link to={parseFloat(plan.base_price_monthly) < 0 ? "/contact" : `/signup?plan_id=${plan.id}&billing_cycle=${billing}`}
-                        className={plan.is_popular ? 'btn-primary-premium pricing-cta' : 'btn-secondary-premium pricing-cta'}
-                        style={plan.is_popular ? {} : { borderColor: `${plan.color_theme}40`, color: plan.color_theme }}
-                      >
-                        {parseFloat(plan.base_price_monthly) < 0 ? 'Talk to Sales' : parseFloat(plan.base_price_monthly) === 0 ? 'Get Started Free' : 'Choose Plan'}
-                      </Link>
-                    </div>
-                  )})}
+                    )
+                  })}
                 </div>
               </ScrollReveal>
             )}

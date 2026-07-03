@@ -1,4 +1,4 @@
-import { useState, useEffect, Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import OtpCountdown from '../components/OtpCountdown';
@@ -457,7 +457,95 @@ function Signup() {
       <div className="auth-right-side">
         <div className="form-header-content" data-aos="fade-up">
           <h2 className="form-header-title">Sign up</h2>
-          <p className="form-header-subtitle" style={{ marginBottom: '2.5rem' }}>Enter your account details</p>
+          <p className="form-header-subtitle" style={{ marginBottom: '1rem' }}>Enter your account details</p>
+
+          {/* Selected Plan Card — always visible from start */}
+          {(() => {
+            const selectedPlan = plans.find(p => p.id === selectedPlanId);
+            if (!selectedPlan) return null;
+            const basePrice = parseFloat(selectedPlan.base_price_monthly);
+            let displayPrice = 'Free';
+            let billingLabel = '7-day free trial';
+            let trialBadge = false;
+            if (basePrice < 0) {
+              displayPrice = 'Custom';
+              billingLabel = 'Contact us';
+            } else if (basePrice === 0) {
+              displayPrice = 'Free';
+              billingLabel = 'Expires in 7 days';
+              trialBadge = true;
+            } else {
+              let finalPrice = basePrice;
+              if (billingCycle === 'biannual') {
+                finalPrice = basePrice * (1 - (parseFloat(selectedPlan.discount_6_months) || 0) / 100);
+                billingLabel = '/ month (Billed every 6 months)';
+              } else if (billingCycle === 'annual') {
+                finalPrice = basePrice * (1 - (parseFloat(selectedPlan.discount_12_months) || 0) / 100);
+                billingLabel = '/ month (Billed annually)';
+              } else {
+                billingLabel = '/ month';
+              }
+              displayPrice = `₹${Math.round(finalPrice).toLocaleString('en-IN')}`;
+            }
+            const planColors = { Trial: '#10B981', Starter: '#3B82F6', Pro: '#6366F1', Enterprise: '#F59E0B' };
+            const planColor = planColors[selectedPlan.name] || '#7c3aed';
+            return (
+              <div style={{
+                marginBottom: '1.5rem',
+                padding: '0.875rem 1.25rem',
+                borderRadius: '12px',
+                border: `2px solid ${planColor}40`,
+                background: `linear-gradient(135deg, ${planColor}10, ${planColor}05)`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: '1rem'
+              }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{
+                    width: '36px',
+                    height: '36px',
+                    borderRadius: '50%',
+                    background: `${planColor}20`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}>
+                    <i className="fas fa-layer-group" style={{ color: planColor, fontSize: '0.85rem' }}></i>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '0.65rem', color: '#94a3b8', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '1px' }}>Selected Plan</div>
+                    <div style={{ fontSize: '0.95rem', fontWeight: '700', color: planColor }}>{selectedPlan.name}</div>
+                    <div style={{ fontSize: '0.72rem', color: '#64748b', marginTop: '1px' }}>{billingLabel}</div>
+                  </div>
+                </div>
+                <div style={{ textAlign: 'right', flexShrink: 0 }}>
+                  <div style={{ fontSize: '1.3rem', fontWeight: '800', color: '#1e293b' }}>{displayPrice}</div>
+                  {trialBadge && (
+                    <div style={{
+                      fontSize: '0.6rem',
+                      fontWeight: '700',
+                      color: '#10B981',
+                      background: 'rgba(16,185,129,0.12)',
+                      padding: '2px 7px',
+                      borderRadius: '20px',
+                      marginTop: '3px',
+                      display: 'inline-block',
+                      letterSpacing: '0.03em'
+                    }}>
+                      ⏱ 7-DAY TRIAL
+                    </div>
+                  )}
+                  {!trialBadge && basePrice > 0 && billingCycle !== 'monthly' && (
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', textDecoration: 'line-through' }}>
+                      ₹{Math.round(basePrice).toLocaleString('en-IN')}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })()}
         </div>
 
         <form className="auth-form" onSubmit={handleSignup} data-aos="fade-up" data-aos-delay="100">
@@ -663,42 +751,6 @@ function Signup() {
                 <div className="field-error-text">{fieldErrors.organizationName}</div>
               )}
 
-              <div className={`auth-input-icon-wrapper ${selectedPlanId ? 'focused has-value' : ''}`} style={{ marginTop: '1rem' }}>
-                <i className="fas fa-layer-group auth-input-icon"></i>
-                <select
-                  className="auth-input-with-icon"
-                  value={selectedPlanId ? `${selectedPlanId}-${billingCycle}` : ''}
-                  onChange={(e) => {
-                    const [pId, cycle] = e.target.value.split('-');
-                    setSelectedPlanId(Number(pId));
-                    setBillingCycle(cycle || 'monthly');
-                  }}
-                  required
-                  disabled={signupLoading || plansLoading || !emailVerified}
-                  style={{ appearance: 'none', cursor: 'pointer' }}
-                >
-                  <option value="" disabled>Select a Plan *</option>
-                  {plans.filter(p => parseFloat(p.base_price_monthly) >= 0 && !['enterprise', 'custom'].includes(p.name.toLowerCase())).map(plan => {
-                    const basePrice = parseFloat(plan.base_price_monthly);
-                    if (basePrice === 0) {
-                      return <option key={`${plan.id}-monthly`} value={`${plan.id}-monthly`}>{plan.name} - Free</option>;
-                    }
-                    
-                    const price6Mo = basePrice * (1 - (parseFloat(plan.discount_6_months) || 0) / 100);
-                    const price12Mo = basePrice * (1 - (parseFloat(plan.discount_12_months) || 0) / 100);
-                    
-                    return (
-                      <Fragment key={plan.id}>
-                        <option value={`${plan.id}-monthly`}>{plan.name} - ₹{basePrice.toFixed(2)}/mo (Monthly)</option>
-                        <option value={`${plan.id}-biannual`}>{plan.name} - ₹{price6Mo.toFixed(2)}/mo (6 Months)</option>
-                        <option value={`${plan.id}-annual`}>{plan.name} - ₹{price12Mo.toFixed(2)}/mo (Annually)</option>
-                      </Fragment>
-                    );
-                  })}
-                </select>
-                <i className="fas fa-chevron-down" style={{ position: 'absolute', right: '1rem', top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', pointerEvents: 'none' }}></i>
-                <label className="auth-floating-label">Subscription Plan *</label>
-              </div>
               {fieldErrors.plan_id && (
                 <div className="field-error-text">{fieldErrors.plan_id}</div>
               )}

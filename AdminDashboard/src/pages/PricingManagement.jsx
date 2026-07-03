@@ -223,52 +223,46 @@ function PricingManagement() {
                                 </div>
                             </div>
 
-                            <h3 style={{marginTop: '25px', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '5px'}}>Quotas & Limits (Invitations/Counts)</h3>
+                            <h3 style={{marginTop: '25px', marginBottom: '15px', borderBottom: '1px solid #eee', paddingBottom: '5px'}}>Quotas &amp; Limits (Invitations/Counts)</h3>
                             <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '15px', marginBottom: '20px', backgroundColor: '#f8fafc', padding: '15px', borderRadius: '8px'}}>
-                                <div className="form-group">
-                                    <label>Max HR Managers</label>
-                                    <input type="number" min="0" value={formData.max_hr_managers} onChange={e => setFormData({...formData, max_hr_managers: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max HRs</label>
-                                    <input type="number" min="0" value={formData.max_hrs} onChange={e => setFormData({...formData, max_hrs: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Interviewers</label>
-                                    <input type="number" min="0" value={formData.max_interviewers} onChange={e => setFormData({...formData, max_interviewers: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max AI Assessments</label>
-                                    <input type="number" min="0" value={formData.max_ai_assessments} onChange={e => setFormData({...formData, max_ai_assessments: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max AI Interviews</label>
-                                    <input type="number" min="0" value={formData.max_ai_interviews} onChange={e => setFormData({...formData, max_ai_interviews: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Fully Automatic</label>
-                                    <input type="number" min="0" value={formData.max_fully_automatic} onChange={e => setFormData({...formData, max_fully_automatic: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Coding Assessments</label>
-                                    <input type="number" min="0" value={formData.max_coding_assessments} onChange={e => setFormData({...formData, max_coding_assessments: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Custom Assessments</label>
-                                    <input type="number" min="0" value={formData.max_custom_assessments} onChange={e => setFormData({...formData, max_custom_assessments: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Live Interviews</label>
-                                    <input type="number" min="0" value={formData.max_live_interviews} onChange={e => setFormData({...formData, max_live_interviews: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Resume Screening</label>
-                                    <input type="number" min="0" value={formData.max_resume_screening} onChange={e => setFormData({...formData, max_resume_screening: parseInt(e.target.value) || 0})} />
-                                </div>
-                                <div className="form-group">
-                                    <label>Max Custom Questions Bank</label>
-                                    <input type="number" min="0" value={formData.max_custom_questions} onChange={e => setFormData({...formData, max_custom_questions: parseInt(e.target.value) || 0})} />
-                                </div>
+                                {[
+                                    ['max_hr_managers', 'Max HR Managers'],
+                                    ['max_hrs', 'Max HRs'],
+                                    ['max_interviewers', 'Max Interviewers'],
+                                    ['max_ai_assessments', 'Max AI Assessments'],
+                                    ['max_ai_interviews', 'Max AI Interviews'],
+                                    ['max_fully_automatic', 'Max Fully Automatic'],
+                                    ['max_coding_assessments', 'Max Coding Assessments'],
+                                    ['max_custom_assessments', 'Max Custom Assessments'],
+                                    ['max_live_interviews', 'Max Live Interviews'],
+                                    ['max_resume_screening', 'Max Resume Screening'],
+                                    ['max_custom_questions', 'Max Custom Questions Bank'],
+                                ].map(([field, label]) => (
+                                    <div className="form-group" key={field}>
+                                        <label>{label}</label>
+                                        <input
+                                            type="text"
+                                            inputMode="numeric"
+                                            pattern="[0-9]*"
+                                            value={formData[field] === '' ? '' : (formData[field] ?? 0)}
+                                            placeholder="0"
+                                            onChange={e => {
+                                                const raw = e.target.value.replace(/[^0-9]/g, '');
+                                                setFormData(prev => ({
+                                                    ...prev,
+                                                    [field]: raw === '' ? '' : parseInt(raw, 10),
+                                                }));
+                                            }}
+                                            onBlur={e => {
+                                                // On blur, default empty to 0
+                                                if (formData[field] === '' || formData[field] === undefined) {
+                                                    setFormData(prev => ({ ...prev, [field]: 0 }));
+                                                }
+                                            }}
+                                            style={{ appearance: 'textfield', MozAppearance: 'textfield' }}
+                                        />
+                                    </div>
+                                ))}
                             </div>
 
                             <div className="form-group">
