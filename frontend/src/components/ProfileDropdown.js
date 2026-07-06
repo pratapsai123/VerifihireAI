@@ -275,6 +275,17 @@ function ProfileDropdown() {
             My Account
           </Link>
 
+          {user.role === 'student' && (
+            <Link to="/student/wallet" style={profileStyles.profileDropdownItem}>
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
+                <rect x="1" y="4" width="14" height="9" rx="2" fill="#6366f1" />
+                <path d="M1 7h14" stroke="#fff" strokeWidth="1.5" />
+                <circle cx="12" cy="9.5" r="1" fill="#fbbf24" />
+              </svg>
+              Wallet &amp; Credits
+            </Link>
+          )}
+
           {canSeeTeamMembers ? (
             <Link to="/team-members" style={profileStyles.profileDropdownItem}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>

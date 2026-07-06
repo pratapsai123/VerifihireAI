@@ -5,10 +5,15 @@ from .interview_views import (
     StudentInterviewFeedbackView,
     StudentProgressView,
     StudentPointsRankView,
+    StudentWalletView,
 )
 from .assessment_views import (
     StudentPracticeAssessmentView,
     StudentPracticeResultsView,
+)
+from .payment_views import (
+    CreatePaymentOrderView,
+    VerifyPaymentView,
 )
 
 urlpatterns = [
@@ -19,4 +24,7 @@ urlpatterns = [
     path('feedback/<str:public_token>/', StudentInterviewFeedbackView.as_view(), name='student-interview-feedback'),
     path('progress/', StudentProgressView.as_view(), name='student-progress'),
     path('points/', StudentPointsRankView.as_view(), name='student-points-rank'),
+    path('wallet/', StudentWalletView.as_view(), name='student-wallet'),
+    path('payment/create-order/', CreatePaymentOrderView.as_view(), name='student-payment-create-order'),
+    path('payment/verify/', VerifyPaymentView.as_view(), name='student-payment-verify'),
 ]

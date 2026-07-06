@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Upload, FileText, Briefcase, Play, Loader2, Clock, Code } from 'lucide-react';
+import { Upload, FileText, Briefcase, Play, Loader2, Clock, Code, Zap } from 'lucide-react';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig'; 
 import '../styles/StudentAiInterview.css';
+
+const CREDIT_COSTS = { 5: 30, 10: 60, 14: 80, 20: 100 };
 
 const StudentAiInterview = () => {
     const [jobTitle, setJobTitle] = useState('');
@@ -15,8 +17,29 @@ const StudentAiInterview = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [dragActive, setDragActive] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [availableCredits, setAvailableCredits] = useState(0);
+    const [highlightField, setHighlightField] = useState(null);
     const fileInputRef = useRef(null);
+    const jobTitleRef = useRef(null);
+    const jobDescRef = useRef(null);
+    const resumeDropRef = useRef(null);
     const navigate = useNavigate();
+
+    const creditCost = CREDIT_COSTS[questionCount] || 80;
+
+    useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/students/wallet/`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setAvailableCredits(res.data.ai_credits || 0);
+            } catch (e) {}
+        };
+        fetchCredits();
+    }, []);
 
     const handleFileChange = (e) => {
         if (e.target.files && e.target.files[0]) {
@@ -41,17 +64,43 @@ const StudentAiInterview = () => {
         setDragActive(false);
     };
 
+    const scrollAndHighlight = (ref, fieldName) => {
+        setHighlightField(fieldName);
+        if (ref?.current) {
+            ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            ref.current.focus?.();
+        }
+        setTimeout(() => setHighlightField(null), 3000);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError(null);
+
+        if (!jobTitle || jobTitle.trim().length < 2) {
+            setError("Please enter a job title.");
+            scrollAndHighlight(jobTitleRef, 'jobTitle');
+            return;
+        }
         if (!jobDescription || jobDescription.length < 50) {
             setError("Please provide a more detailed job description (min 50 characters).");
+            scrollAndHighlight(jobDescRef, 'jobDesc');
             return;
         }
         if (!resumeFile) {
             setError("Please upload your resume to continue.");
+            scrollAndHighlight(resumeDropRef, 'resume');
             return;
         }
+        if (availableCredits < creditCost) {
+            setError(`Insufficient credits. You need ${creditCost} credits but have ${availableCredits}. Please add credits from your wallet.`);
+            return;
+        }
+        setShowConfirm(true);
+    };
 
+    const proceedWithInterview = async () => {
+        setShowConfirm(false);
         setLoading(true);
         setError(null);
 
@@ -69,7 +118,6 @@ const StudentAiInterview = () => {
             });
             
             if (response.data && response.data.public_token) {
-                // Skip InterviewStart page — student already provided resume, no PAN/identity needed
                 navigate(`/ai-interview-session/${response.data.public_token}`);
             } else {
                 setError("Something went wrong. Please try again.");
@@ -101,10 +149,11 @@ const StudentAiInterview = () => {
                     <form onSubmit={handleSubmit} className="relative z-10">
                         <div className="form-group">
                             <label className="form-label">Job Title</label>
-                            <div className="input-icon-wrapper">
+                            <div className="input-icon-wrapper" style={highlightField === 'jobTitle' ? { boxShadow: '0 0 0 3px rgba(239,68,68,0.3)', borderRadius: '12px', transition: 'box-shadow 0.3s' } : {}}>
                                 <Briefcase className="input-icon" size={18} />
                                 <input 
                                     type="text" 
+                                    ref={jobTitleRef}
                                     className="glass-input" 
                                     value={jobTitle} 
                                     onChange={(e) => setJobTitle(e.target.value)} 
@@ -116,11 +165,13 @@ const StudentAiInterview = () => {
                         <div className="form-group">
                             <label className="form-label">Job Description</label>
                             <textarea 
+                                ref={jobDescRef}
                                 className="glass-input glass-textarea" 
                                 value={jobDescription} 
                                 onChange={(e) => setJobDescription(e.target.value)}
                                 placeholder="Paste the job details here..."
                                 required
+                                style={highlightField === 'jobDesc' ? { boxShadow: '0 0 0 3px rgba(239,68,68,0.3)', transition: 'box-shadow 0.3s' } : {}}
                             />
                         </div>
 
@@ -205,11 +256,13 @@ const StudentAiInterview = () => {
                         <div className="form-group">
                             <label className="form-label">Your Resume (PDF or DOCX)</label>
                             <div 
+                                ref={resumeDropRef}
                                 className={`dropzone ${dragActive ? 'drag-active' : ''}`}
                                 onDrop={handleDrop}
                                 onDragOver={handleDragOver}
                                 onDragLeave={handleDragLeave}
                                 onClick={() => fileInputRef.current?.click()}
+                                style={highlightField === 'resume' ? { boxShadow: '0 0 0 3px rgba(239,68,68,0.3)', transition: 'box-shadow 0.3s' } : {}}
                             >
                                 <input 
                                     type="file" 
@@ -254,8 +307,49 @@ const StudentAiInterview = () => {
                                 </>
                             )}
                         </button>
+
+                        {/* Credit cost indicator */}
+                        <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+                            <Zap size={16} />
+                            <span>This interview costs <strong>{creditCost} credits</strong></span>
+                            <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+                        </div>
                     </form>
                 </section>
+
+                {/* Credit Confirmation Popup */}
+                {showConfirm && (
+                    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                        <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '400px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+                            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                                <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                                    <Zap size={28} style={{ color: '#6366f1' }} />
+                                </div>
+                                <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+                                <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                                    This interview will use <strong style={{ color: '#6366f1' }}>{creditCost} credits</strong> from your wallet.
+                                </p>
+                                <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                                    Remaining after: {availableCredits - creditCost} credits
+                                </p>
+                            </div>
+                            <div style={{ display: 'flex', gap: '0.75rem' }}>
+                                <button
+                                    onClick={() => setShowConfirm(false)}
+                                    style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={proceedWithInterview}
+                                    style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}
+                                >
+                                    Proceed
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
             </div>
         </div>

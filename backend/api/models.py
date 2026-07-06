@@ -183,6 +183,7 @@ class UserProfile(models.Model):
 
     # Student gamification
     practice_points = models.IntegerField(default=0, help_text="Accumulated practice points for student accounts")
+    ai_credits = models.IntegerField(default=0, help_text="AI credits for student accounts (1 rupee = 3 credits)")
 
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
@@ -195,6 +196,33 @@ class UserProfile(models.Model):
     def __str__(self):
         full_name = f"{self.first_name} {self.last_name}".strip() if self.last_name else self.first_name
         return f"{full_name} ({self.email}) - {self.organization_name}"
+
+
+class CreditTransaction(models.Model):
+    """Logs every credit add/deduction for student accounts."""
+    TYPE_ADDED = 'added'
+    TYPE_USED = 'used'
+    TYPE_CHOICES = [
+        (TYPE_ADDED, 'Credits Added'),
+        (TYPE_USED, 'Credits Used'),
+    ]
+
+    user_profile = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.CASCADE,
+        related_name='credit_transactions',
+    )
+    transaction_type = models.CharField(max_length=10, choices=TYPE_CHOICES)
+    amount = models.IntegerField(help_text="Number of credits (positive)")
+    balance_after = models.IntegerField(help_text="Credit balance after this transaction")
+    description = models.CharField(max_length=255, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.user_profile.email} | {self.transaction_type} {self.amount} | bal={self.balance_after}"
 
 
 class OwnershipTransferLog(models.Model):

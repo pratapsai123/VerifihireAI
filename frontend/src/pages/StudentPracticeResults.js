@@ -8,7 +8,7 @@ import '../styles/CreateAssessment.css';
 const StudentPracticeResults = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const initialTab = searchParams.get('tab') === 'interviews' ? 'interviews' : 'assessments';
+    const initialTab = searchParams.get('tab') === 'assessments' ? 'assessments' : 'interviews';
     const [activeTab, setActiveTab] = useState(initialTab);
 
     // Assessment results state

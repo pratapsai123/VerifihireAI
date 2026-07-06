@@ -9,6 +9,7 @@ import StudentRegister from './pages/StudentRegister';
 import StudentLogin from './pages/StudentLogin';
 import StudentCreateAssessment from './pages/StudentCreateAssessment';
 import StudentPracticeResults from './pages/StudentPracticeResults';
+import StudentWallet from './pages/StudentWallet';
 import ForgotPassword from './pages/ForgotPassword';
 import CustomAssessment from './pages/CustomAssessment';
 import ReviewPage from './pages/ReviewPage';
@@ -496,6 +497,7 @@ function AppContent() {
             <Route path="/student/results" element={<StudentPracticeResults />} />
             <Route path="/student/sessions" element={<StudentSessions />} />
             <Route path="/student/feedback/:token" element={<StudentFeedback />} />
+            <Route path="/student/wallet" element={<StudentWallet />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />

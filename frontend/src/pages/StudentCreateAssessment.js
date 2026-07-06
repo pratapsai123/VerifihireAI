@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Brain, Sparkles, Briefcase, Calendar, Clock, Award } from 'lucide-react';
+import { Brain, Sparkles, Briefcase, Calendar, Clock, Award, Zap } from 'lucide-react';
 import { API_BASE_URL } from '../apiConfig';
 import '../styles/CreateAssessment.css'; // Reuse premium recruiter assessment styles
 
@@ -15,10 +15,25 @@ const StudentCreateAssessment = () => {
     const [numCoding, setNumCoding] = useState(1);
     const [mcqDuration, setMcqDuration] = useState(10);
     const [codingDuration, setCodingDuration] = useState(30);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [availableCredits, setAvailableCredits] = useState(0);
 
     const pollIntervalRef = useRef(null);
 
+    // Credit cost: 0.5 per MCQ + 1 per coding
+    const creditCost = Math.max(1, Math.round((numMcqs * 0.5) + (numCoding * 1)));
+
     useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/students/wallet/`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setAvailableCredits(res.data.ai_credits || 0);
+            } catch (e) {}
+        };
+        fetchCredits();
         return () => {
             if (pollIntervalRef.current) {
                 clearInterval(pollIntervalRef.current);
@@ -53,7 +68,15 @@ const StudentCreateAssessment = () => {
             alert('Coding Duration must be greater than 0 minutes.');
             return;
         }
+        if (availableCredits < creditCost) {
+            alert(`Insufficient credits. You need ${creditCost} credits but have ${availableCredits}. Please add credits from your wallet.`);
+            return;
+        }
+        setShowConfirm(true);
+    };
 
+    const proceedWithGeneration = async () => {
+        setShowConfirm(false);
         setLoading(true);
         setProgressMsg('Initializing practice assessment generation...');
 
@@ -318,8 +341,52 @@ const StudentCreateAssessment = () => {
                         )}
                     </button>
 
+                    {/* Credit cost indicator */}
+                    <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+                        <Zap size={16} />
+                        <span>This assessment costs <strong>{creditCost} credits</strong></span>
+                        <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+                    </div>
+
                 </form>
             </div>
+
+            {/* Credit Confirmation Popup */}
+            {showConfirm && (
+                <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                    <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '400px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                            <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                                <Zap size={28} style={{ color: '#6366f1' }} />
+                            </div>
+                            <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+                            <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                                This assessment will use <strong style={{ color: '#6366f1' }}>{creditCost} credits</strong> from your wallet.
+                            </p>
+                            <p style={{ margin: '0.75rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                                {numMcqs} MCQs ({(numMcqs * 0.5).toFixed(1)} credits) + {numCoding} Coding ({numCoding} credits)
+                            </p>
+                            <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                                Remaining after: {availableCredits - creditCost} credits
+                            </p>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                            <button
+                                onClick={() => setShowConfirm(false)}
+                                style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={proceedWithGeneration}
+                                style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}
+                            >
+                                Proceed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

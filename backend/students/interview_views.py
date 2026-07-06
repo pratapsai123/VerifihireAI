@@ -63,10 +63,33 @@ class StudentPracticeInterviewView(APIView):
         include_coding_raw = request.data.get('include_coding', 'true')
         include_coding = str(include_coding_raw).lower() in ('true', '1', 'yes')
         
-        # Calculate duration based on question count (~2 min per question)
-        interview_duration = max(15, question_count * 2 + 5)
+        # Credit costs per question count
+        CREDIT_COSTS = {5: 30, 10: 60, 14: 80, 20: 100}
+        credit_cost = CREDIT_COSTS.get(question_count, 80)
         
         user_profile = request.user.profile
+        
+        # Check and deduct credits
+        if (user_profile.ai_credits or 0) < credit_cost:
+            return Response({
+                "error": f"Insufficient credits. You need {credit_cost} credits but have {user_profile.ai_credits or 0}. Please add credits from your wallet."
+            }, status=status.HTTP_402_PAYMENT_REQUIRED)
+        
+        user_profile.ai_credits = (user_profile.ai_credits or 0) - credit_cost
+        user_profile.save(update_fields=['ai_credits'])
+
+        # Log the transaction
+        from api.models import CreditTransaction
+        CreditTransaction.objects.create(
+            user_profile=user_profile,
+            transaction_type=CreditTransaction.TYPE_USED,
+            amount=credit_cost,
+            balance_after=user_profile.ai_credits,
+            description=f"AI Interview ({question_count} questions)",
+        )
+        
+        # Calculate duration based on question count (~2 min per question)
+        interview_duration = max(15, question_count * 2 + 5)
         
         batch_id = generate_batch_id()
         batch_name = generate_batch_name("Practice - " + (job_title or "Session"))
@@ -394,4 +417,68 @@ class StudentPointsRankView(APIView):
             'points': my_points,
             'rank': rank,
             'total_students': total_students,
+        }, status=status.HTTP_200_OK)
+
+
+class StudentWalletView(APIView):
+    """
+    GET /api/students/wallet/ — Get current AI credits
+    POST /api/students/wallet/ — Add credits (amount in rupees, 1 rupee = 3 credits)
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
+            return Response({"error": "Only students can access wallet."}, status=status.HTTP_403_FORBIDDEN)
+
+        from api.models import CreditTransaction
+
+        profile = request.user.profile
+        transactions = CreditTransaction.objects.filter(user_profile=profile)[:50]
+        history = [{
+            'type': t.transaction_type,
+            'amount': t.amount,
+            'balance_after': t.balance_after,
+            'description': t.description,
+            'date': t.created_at.isoformat(),
+        } for t in transactions]
+
+        return Response({
+            'ai_credits': profile.ai_credits or 0,
+            'history': history,
+        }, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
+            return Response({"error": "Only students can add credits."}, status=status.HTTP_403_FORBIDDEN)
+
+        amount = request.data.get('amount')
+        try:
+            amount = int(amount)
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid amount."}, status=status.HTTP_400_BAD_REQUEST)
+
+        if amount < 1 or amount > 10000:
+            return Response({"error": "Amount must be between ₹1 and ₹10,000."}, status=status.HTTP_400_BAD_REQUEST)
+
+        credits_to_add = amount * 3
+        profile = request.user.profile
+        profile.ai_credits = (profile.ai_credits or 0) + credits_to_add
+        profile.save(update_fields=['ai_credits'])
+
+        # Log the transaction
+        from api.models import CreditTransaction
+        CreditTransaction.objects.create(
+            user_profile=profile,
+            transaction_type=CreditTransaction.TYPE_ADDED,
+            amount=credits_to_add,
+            balance_after=profile.ai_credits,
+            description=f"Added ₹{amount} → {credits_to_add} credits",
+        )
+
+        return Response({
+            'message': f'Successfully added {credits_to_add} AI credits.',
+            'credits_added': credits_to_add,
+            'ai_credits': profile.ai_credits,
+            'amount_paid': amount,
         }, status=status.HTTP_200_OK)

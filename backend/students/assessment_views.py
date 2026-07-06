@@ -128,12 +128,37 @@ class StudentPracticeAssessmentView(APIView):
         }
 
         try:
+            # Calculate credit cost: 0.5 per MCQ + 1 per coding question
+            credit_cost = (num_mcqs * 0.5) + (num_coding * 1)
+            credit_cost = max(1, int(credit_cost))  # At least 1 credit, rounded
+
+            # Check and deduct credits
+            if (user_profile.ai_credits or 0) < credit_cost:
+                return Response({
+                    "error": f"Insufficient credits. You need {credit_cost} credits but have {user_profile.ai_credits or 0}. Please add credits from your wallet."
+                }, status=status.HTTP_402_PAYMENT_REQUIRED)
+
+            user_profile.ai_credits = (user_profile.ai_credits or 0) - credit_cost
+            user_profile.save(update_fields=['ai_credits'])
+
+            # Log the transaction
+            from api.models import CreditTransaction
+            CreditTransaction.objects.create(
+                user_profile=user_profile,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=credit_cost,
+                balance_after=user_profile.ai_credits,
+                description=f"Assessment ({num_mcqs} MCQs + {num_coding} Coding)",
+            )
+
             # Dispatch async celery task
             task = generate_assessment_task.delay(params_dict)
             return Response({
                 "task_id": task.id,
                 "status": "processing",
-                "message": "Practice assessment generation started in the background"
+                "message": "Practice assessment generation started in the background",
+                "credits_used": credit_cost,
+                "credits_remaining": user_profile.ai_credits,
             }, status=status.HTTP_202_ACCEPTED)
         except Exception as e:
             logger.error(f"Failed to start practice assessment generation: {e}")
