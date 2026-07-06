@@ -336,6 +336,54 @@ const StudentPracticeResults = () => {
                         ) : (
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                                 {results.map((item) => {
+                                    // Generating state
+                                    if (item.type === 'generating') {
+                                        return (
+                                            <div key={item.id} style={{ background: 'white', borderRadius: '20px', border: '1px solid #E2E8F0', padding: '1.75rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem', opacity: 0.85 }}>
+                                                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                                                    <div style={{ background: '#EEF2FF', color: '#6366f1', width: '48px', height: '48px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Loader2 size={22} style={{ animation: 'spin 1s linear infinite' }} />
+                                                    </div>
+                                                    <div>
+                                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1F2937', margin: 0, textTransform: 'capitalize' }}>{item.assessment_title || 'Practice Assessment'}</h3>
+                                                        <p style={{ margin: '0.3rem 0 0', fontSize: '0.8rem', color: '#6366f1', fontWeight: 600 }}>Generating questions...</p>
+                                                    </div>
+                                                </div>
+                                                <span style={{ padding: '0.5rem 1rem', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: '600', background: '#EEF2FF', color: '#4F46E5' }}>In Progress</span>
+                                            </div>
+                                        );
+                                    }
+
+                                    // Ready state (generated but not yet taken)
+                                    if (item.type === 'ready') {
+                                        return (
+                                            <div key={item.id} style={{ background: 'white', borderRadius: '20px', border: '1px solid #C7D2FE', padding: '1.75rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1.5rem' }}>
+                                                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center' }}>
+                                                    <div style={{ background: '#ECFDF5', color: '#10B981', width: '48px', height: '48px', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                                        <Brain size={22} />
+                                                    </div>
+                                                    <div>
+                                                        <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#1F2937', margin: 0, textTransform: 'capitalize' }}>{item.assessment_title || 'Practice Assessment'}</h3>
+                                                        <p style={{ margin: '0.3rem 0 0', fontSize: '0.8rem', color: '#10B981', fontWeight: 600 }}>Ready to start</p>
+                                                    </div>
+                                                </div>
+                                                <button
+                                                    onClick={() => {
+                                                        const user = JSON.parse(localStorage.getItem('user') || '{}');
+                                                        const name = user.first_name ? `${user.first_name} ${user.last_name || ''}`.trim() : '';
+                                                        const email = user.email || '';
+                                                        navigate(`/take-ai-assessment/${item.share_token}?name=${encodeURIComponent(name)}&email=${encodeURIComponent(email)}&practice=true&autoStart=true`);
+                                                    }}
+                                                    className="btn-premium btn-fill"
+                                                    style={{ padding: '0.7rem 1.5rem', fontSize: '0.85rem', whiteSpace: 'nowrap' }}
+                                                >
+                                                    Start Assessment
+                                                </button>
+                                            </div>
+                                        );
+                                    }
+
+                                    // Completed state
                                     const isPassed = item.percentage >= 60;
                                     return (
                                         <div

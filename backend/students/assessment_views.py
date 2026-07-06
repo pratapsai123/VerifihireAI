@@ -49,11 +49,10 @@ class StudentPracticeAssessmentView(APIView):
             num_mcqs = int(data.get('num_mcqs', 10))
             num_coding = int(data.get('num_coding', 1))
             
-            # Enforce student limits: MCQ max 10, Coding exactly 1
-            if num_mcqs > 10:
-                num_mcqs = 10
-            if num_coding > 1:
-                num_coding = 1
+            if num_mcqs > 100:
+                num_mcqs = 100
+            if num_coding > 5:
+                num_coding = 5
             elif num_coding < 0:
                 num_coding = 0
                 
@@ -176,7 +175,10 @@ class StudentPracticeResultsView(APIView):
         if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
             return Response({"error": "Only students can view practice results."}, status=status.HTTP_403_FORBIDDEN)
 
+        user_profile = request.user.profile
         email = request.user.email
+
+        # Completed submissions
         submissions = AIAssessmentSubmission.objects.filter(
             candidate_email=email,
             is_deleted=False
@@ -186,6 +188,7 @@ class StudentPracticeResultsView(APIView):
         for sub in submissions:
             results.append({
                 "id": sub.id,
+                "type": "completed",
                 "assessment_title": sub.assessment.required_skills,
                 "started_at": sub.started_at,
                 "submitted_at": sub.submitted_at,
@@ -195,6 +198,29 @@ class StudentPracticeResultsView(APIView):
                 "percentage": sub.percentage,
                 "status": sub.status,
                 "share_token": sub.assessment.share_token,
+            })
+
+        # Pending/generating assessments (created by this student, not yet taken)
+        taken_assessment_ids = submissions.values_list('assessment_id', flat=True)
+        pending_assessments = Assessment.objects.filter(
+            user_profile=user_profile,
+            is_deleted=False,
+        ).exclude(id__in=taken_assessment_ids).order_by('-created_at')
+
+        for a in pending_assessments:
+            is_generating = a.status == 'draft' and not a.generated_content
+            results.append({
+                "id": f"pending_{a.id}",
+                "type": "generating" if is_generating else "ready",
+                "assessment_title": a.required_skills or a.job_description[:50] if a.job_description else "Practice Assessment",
+                "started_at": a.created_at.isoformat() if a.created_at else None,
+                "submitted_at": None,
+                "score": None,
+                "mcq_score": None,
+                "coding_score": None,
+                "percentage": None,
+                "status": "generating" if is_generating else "ready",
+                "share_token": str(a.share_token) if a.share_token else None,
             })
 
         return Response(results, status=status.HTTP_200_OK)

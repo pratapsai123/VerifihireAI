@@ -52,10 +52,6 @@ const StudentCreateAssessment = () => {
             alert('Please enter a Job Description before generating.');
             return;
         }
-        if (numMcqs > 10) {
-            alert('Practice assessments can have a maximum of 10 MCQ questions.');
-            return;
-        }
         if (numMcqs === 0 && numCoding === 0) {
             alert('Please choose at least one MCQ question or one Coding task.');
             return;
@@ -85,7 +81,7 @@ const StudentCreateAssessment = () => {
                 job_title: jobTitle,
                 job_description: jobDescription,
                 num_mcqs: numMcqs,
-                num_coding: 1, // Restrict to exactly 1 coding challenge
+                num_coding: numCoding,
                 mcq_duration: mcqDuration,
                 coding_duration: codingDuration,
             });
@@ -228,10 +224,10 @@ const StudentCreateAssessment = () => {
                                     <input
                                         type="number"
                                         min="0"
-                                        max="10"
+                                        max="100"
                                         value={numMcqs}
                                         onChange={(e) => {
-                                            const val = Math.min(Math.max(0, parseInt(e.target.value) || 0), 10);
+                                            const val = Math.min(Math.max(0, parseInt(e.target.value) || 0), 100);
                                             setNumMcqs(val);
                                             setMcqDuration(val); // Auto-calculate MCQ time: 1 min per MCQ
                                         }}
@@ -252,11 +248,20 @@ const StudentCreateAssessment = () => {
                                 <div className="input-with-marker" style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
                                     <input
                                         type="number"
-                                        value={1}
-                                        readOnly
-                                        disabled
-                                        style={{ width: '100%', background: '#e2e8f0', border: '1px solid #cbd5e1', borderRadius: '12px', padding: '0.8rem 1rem', fontSize: '0.95rem', fontWeight: '600', paddingRight: '3.5rem', color: '#64748b', cursor: 'not-allowed' }}
+                                        min="0"
+                                        max="5"
+                                        value={numCoding}
+                                        onChange={(e) => {
+                                            const val = Math.min(Math.max(0, parseInt(e.target.value) || 0), 5);
+                                            setNumCoding(val);
+                                            setCodingDuration(val * 20); // Auto-calculate: 20 min per coding task
+                                        }}
+                                        disabled={loading}
+                                        style={{ width: '100%', background: '#f8fafc', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '0.8rem 1rem', fontSize: '0.95rem', fontWeight: '600', paddingRight: '3.5rem' }}
                                     />
+                                    <span className="marker" style={{ position: 'absolute', right: '0.75rem', background: '#4f46e5', color: '#ffffff', borderRadius: '8px', padding: '0.25rem 0.5rem', fontSize: '0.8rem', fontWeight: '800' }}>
+                                        {numCoding}
+                                    </span>
                                     <span className="marker" style={{ position: 'absolute', right: '0.75rem', background: '#94a3b8', color: '#ffffff', borderRadius: '8px', padding: '0.25rem 0.5rem', fontSize: '0.8rem', fontWeight: '800' }}>
                                         1
                                     </span>
