@@ -1,15 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/Dashboard.css';
 import '../styles/AiInterviewCreation.css';
 import { API_BASE_URL } from '../apiConfig';
 
+const CREDITS_PER_CANDIDATE = 80;
+
 const AiInterview = () => {
     const navigate = useNavigate();
     const [jobDescription, setJobDescription] = useState('');
     const [file, setFile] = useState(null);
+    const [candidateCount, setCandidateCount] = useState(0);
     const [isUploading, setIsUploading] = useState(false);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [availableCredits, setAvailableCredits] = useState(0);
+
+    useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/students/wallet/`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setAvailableCredits(res.data.ai_credits || 0);
+            } catch (e) {}
+        };
+        fetchCredits();
+    }, []);
+
+    const creditCost = candidateCount * CREDITS_PER_CANDIDATE;
     const [result, setResult] = useState(null);
     const [error, setError] = useState('');
     const [highlightField, setHighlightField] = useState(null); // Field to highlight with orange border
@@ -56,6 +76,14 @@ const AiInterview = () => {
             const selectedFile = e.target.files[0];
             if (validateFile(selectedFile)) {
                 setFile(selectedFile);
+                // Count candidate rows in CSV/Excel
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    const text = evt.target.result;
+                    const lines = text.split('\n').filter(l => l.trim().length > 0);
+                    setCandidateCount(Math.max(0, lines.length - 1)); // minus header row
+                };
+                reader.readAsText(selectedFile);
             }
         }
     };
@@ -67,6 +95,13 @@ const AiInterview = () => {
             const droppedFile = e.dataTransfer.files[0];
             if (validateFile(droppedFile)) {
                 setFile(droppedFile);
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    const text = evt.target.result;
+                    const lines = text.split('\n').filter(l => l.trim().length > 0);
+                    setCandidateCount(Math.max(0, lines.length - 1));
+                };
+                reader.readAsText(droppedFile);
             }
         }
     };
@@ -78,6 +113,7 @@ const AiInterview = () => {
 
     const removeFile = () => {
         setFile(null);
+        setCandidateCount(0);
     };
 
     const downloadTemplate = () => {
@@ -147,6 +183,16 @@ const AiInterview = () => {
             return;
         }
 
+        if (candidateCount > 0 && availableCredits < creditCost) {
+            setError(`Insufficient credits. You need ${creditCost} credits (${candidateCount} candidates × ${CREDITS_PER_CANDIDATE}) but have ${availableCredits}. Please add credits from your wallet.`);
+            return;
+        }
+
+        setShowConfirm(true);
+    };
+
+    const proceedWithUpload = async () => {
+        setShowConfirm(false);
         setIsUploading(true);
         setResult(null);
 
@@ -603,7 +649,53 @@ const AiInterview = () => {
                         </form>
                     )}
                 </div>
+
+                {/* Credit cost indicator */}
+                {candidateCount > 0 && (
+                    <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+                        <span>⚡</span>
+                        <span>This will cost <strong>{creditCost} credits</strong> ({candidateCount} candidates × {CREDITS_PER_CANDIDATE})</span>
+                        <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+                    </div>
+                )}
             </div>
+
+            {/* Credit Confirmation Popup */}
+            {showConfirm && (
+                <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                    <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '400px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+                        <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                            <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                                <span style={{ fontSize: '1.5rem' }}>⚡</span>
+                            </div>
+                            <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+                            <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                                This will use <strong style={{ color: '#6366f1' }}>{creditCost} credits</strong> from your wallet.
+                            </p>
+                            <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                                {candidateCount} candidates × {CREDITS_PER_CANDIDATE} credits each
+                            </p>
+                            <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                                Remaining after: {availableCredits - creditCost} credits
+                            </p>
+                        </div>
+                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                            <button
+                                onClick={() => setShowConfirm(false)}
+                                style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={proceedWithUpload}
+                                style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}
+                            >
+                                Proceed
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

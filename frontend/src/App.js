@@ -498,6 +498,7 @@ function AppContent() {
             <Route path="/student/sessions" element={<StudentSessions />} />
             <Route path="/student/feedback/:token" element={<StudentFeedback />} />
             <Route path="/student/wallet" element={<StudentWallet />} />
+            <Route path="/wallet" element={<StudentWallet />} />
             <Route path="/ai-interviews-overview" element={<AiInterviewsOverview />} />
             <Route path="/ai-assessments" element={<AiAssessments />} />
             <Route path="/create-assessment" element={<CreateAssessment />} />

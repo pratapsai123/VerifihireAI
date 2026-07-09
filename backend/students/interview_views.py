@@ -422,14 +422,15 @@ class StudentPointsRankView(APIView):
 
 class StudentWalletView(APIView):
     """
-    GET /api/students/wallet/ — Get current AI credits
+    GET /api/students/wallet/ — Get current AI credits + history
     POST /api/students/wallet/ — Add credits (amount in rupees, 1 rupee = 3 credits)
+    Works for both students and company roles.
     """
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
-            return Response({"error": "Only students can access wallet."}, status=status.HTTP_403_FORBIDDEN)
+        if not hasattr(request.user, 'profile'):
+            return Response({"error": "Profile not found."}, status=status.HTTP_403_FORBIDDEN)
 
         from api.models import CreditTransaction
 
@@ -449,8 +450,8 @@ class StudentWalletView(APIView):
         }, status=status.HTTP_200_OK)
 
     def post(self, request):
-        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
-            return Response({"error": "Only students can add credits."}, status=status.HTTP_403_FORBIDDEN)
+        if not hasattr(request.user, 'profile'):
+            return Response({"error": "Profile not found."}, status=status.HTTP_403_FORBIDDEN)
 
         amount = request.data.get('amount')
         try:

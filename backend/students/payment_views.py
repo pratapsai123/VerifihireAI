@@ -44,8 +44,8 @@ class CreatePaymentOrderView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
-            return Response({"error": "Only students can make payments."}, status=status.HTTP_403_FORBIDDEN)
+        if not hasattr(request.user, 'profile'):
+            return Response({"error": "Profile not found."}, status=status.HTTP_403_FORBIDDEN)
 
         amount = request.data.get('amount')
         try:
@@ -99,8 +99,8 @@ class VerifyPaymentView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        if not hasattr(request.user, 'profile') or request.user.profile.role != 'student':
-            return Response({"error": "Only students can verify payments."}, status=status.HTTP_403_FORBIDDEN)
+        if not hasattr(request.user, 'profile'):
+            return Response({"error": "Profile not found."}, status=status.HTTP_403_FORBIDDEN)
 
         razorpay_order_id = request.data.get('razorpay_order_id')
         razorpay_payment_id = request.data.get('razorpay_payment_id')

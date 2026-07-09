@@ -127,8 +127,8 @@ class StudentPracticeAssessmentView(APIView):
         }
 
         try:
-            # Calculate credit cost: 0.5 per MCQ + 1 per coding question
-            credit_cost = (num_mcqs * 0.5) + (num_coding * 1)
+            # Calculate credit cost: 0.5 per MCQ + 6 per coding question
+            credit_cost = (num_mcqs * 0.5) + (num_coding * 6)
             credit_cost = max(1, int(credit_cost))  # At least 1 credit, rounded
 
             # Check and deduct credits

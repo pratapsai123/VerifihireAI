@@ -331,6 +331,34 @@ class BulkInviteView(APIView):
 
             invited_candidates = []
 
+            # Count actual candidates to be invited (after dedup)
+            valid_rows = [row for _, row in df.iterrows()
+                          if str(row['email']).strip().lower() not in seen_emails_in_csv
+                          and str(row['email']).strip().lower() not in existing_in_batch]
+            # Reset seen set for the actual loop
+            seen_emails_in_csv = set()
+
+            # Credit deduction: 80 credits per candidate for AI Interview
+            num_candidates = len(valid_rows)
+            CREDITS_PER_INTERVIEW_CANDIDATE = 80
+            credit_cost = num_candidates * CREDITS_PER_INTERVIEW_CANDIDATE
+            user_profile = getattr(request.user, 'profile', None)
+            if user_profile and credit_cost > 0:
+                if (user_profile.ai_credits or 0) < credit_cost:
+                    return Response({
+                        "error": f"Insufficient credits. You need {credit_cost} credits ({num_candidates} candidates × {CREDITS_PER_INTERVIEW_CANDIDATE}) but have {user_profile.ai_credits or 0}. Please add credits from your wallet."
+                    }, status=status.HTTP_402_PAYMENT_REQUIRED)
+                user_profile.ai_credits = (user_profile.ai_credits or 0) - credit_cost
+                user_profile.save(update_fields=['ai_credits'])
+                from api.models import CreditTransaction
+                CreditTransaction.objects.create(
+                    user_profile=user_profile,
+                    transaction_type=CreditTransaction.TYPE_USED,
+                    amount=credit_cost,
+                    balance_after=user_profile.ai_credits,
+                    description=f"AI Interview ({num_candidates} candidates)",
+                )
+
             
 
             for _, row in df.iterrows():
@@ -4744,6 +4772,23 @@ class BatchAddMemberView(APIView):
         # Check if email already exists in this batch
         if Candidate.objects.filter(batch_id=batch_id, email=email, is_deleted=False).exists():
             return Response({'error': f'{email} is already in this batch.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Credit deduction: 80 credits per new candidate
+        CREDITS_PER_INTERVIEW_CANDIDATE = 80
+        if (user_profile.ai_credits or 0) < CREDITS_PER_INTERVIEW_CANDIDATE:
+            return Response({
+                'error': f'Insufficient credits. Adding a candidate costs {CREDITS_PER_INTERVIEW_CANDIDATE} credits but you have {user_profile.ai_credits or 0}.'
+            }, status=status.HTTP_402_PAYMENT_REQUIRED)
+        user_profile.ai_credits = (user_profile.ai_credits or 0) - CREDITS_PER_INTERVIEW_CANDIDATE
+        user_profile.save(update_fields=['ai_credits'])
+        from api.models import CreditTransaction
+        CreditTransaction.objects.create(
+            user_profile=user_profile,
+            transaction_type=CreditTransaction.TYPE_USED,
+            amount=CREDITS_PER_INTERVIEW_CANDIDATE,
+            balance_after=user_profile.ai_credits,
+            description=f"AI Interview - Add member ({name})",
+        )
 
         # Create new candidate with same parameters as the reference
         new_candidate = Candidate.objects.create(

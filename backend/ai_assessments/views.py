@@ -1131,6 +1131,31 @@ class GenerateAssessmentView(APIView):
             }
             
             from ai_assessments.tasks import generate_assessment_task
+
+            # Credit deduction: (0.5 per MCQ + 6 per coding) × num_applicants
+            # If same_questions_for_all is True, don't multiply by applicants
+            base_credit_cost = max(1, int((mcq_count * 0.5) + (coding_count * 6)))
+            same_q_for_all = str(data.get('same_questions_for_all', 'false')).lower() == 'true'
+            num_applicants = max(1, int(data.get('num_applicants', 1)))
+            credit_cost = base_credit_cost if same_q_for_all else base_credit_cost * num_applicants
+
+            user_profile = getattr(request.user, 'profile', None)
+            if user_profile:
+                if (user_profile.ai_credits or 0) < credit_cost:
+                    return Response({
+                        "error": f"Insufficient credits. You need {credit_cost} credits ({mcq_count} MCQs + {coding_count} Coding{'' if same_q_for_all else f' × {num_applicants} applicants'}) but have {user_profile.ai_credits or 0}. Please add credits from your wallet."
+                    }, status=status.HTTP_402_PAYMENT_REQUIRED)
+                user_profile.ai_credits = (user_profile.ai_credits or 0) - credit_cost
+                user_profile.save(update_fields=['ai_credits'])
+                from api.models import CreditTransaction
+                CreditTransaction.objects.create(
+                    user_profile=user_profile,
+                    transaction_type=CreditTransaction.TYPE_USED,
+                    amount=credit_cost,
+                    balance_after=user_profile.ai_credits,
+                    description=f"AI Assessment ({mcq_count} MCQs + {coding_count} Coding{'' if same_q_for_all else f' × {num_applicants}'})",
+                )
+
             task = generate_assessment_task.delay(params_dict)
             
             return Response({

@@ -10,6 +10,7 @@ function Header() {
   const [userRole, setUserRole] = useState('');
   const [studentPoints, setStudentPoints] = useState(0);
   const [studentRank, setStudentRank] = useState(null);
+  const [companyCredits, setCompanyCredits] = useState(0);
 
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -34,6 +35,18 @@ function Header() {
         } catch (err) {}
       };
       fetchPoints();
+    }
+    if (userRole && userRole !== 'student' && userRole !== 'interviewer') {
+      const fetchCredits = async () => {
+        try {
+          const token = localStorage.getItem('token');
+          const res = await axios.get(`${API_BASE_URL}/students/wallet/`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          setCompanyCredits(res.data.ai_credits || 0);
+        } catch (err) {}
+      };
+      fetchCredits();
     }
   }, [userRole]);
 
@@ -66,6 +79,12 @@ function Header() {
                   <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#92400e' }}>#{studentRank}</span>
                 </div>
               )}
+            </div>
+          )}
+          {userRole && userRole !== 'student' && userRole !== 'interviewer' && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '5px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', padding: '5px 12px', borderRadius: '8px', border: '1px solid #c7d2fe', marginRight: '1rem' }}>
+              <span style={{ fontSize: '0.85rem' }}>⚡</span>
+              <span style={{ fontSize: '0.8rem', fontWeight: 700, color: '#4338ca' }}>{companyCredits.toLocaleString()} credits</span>
             </div>
           )}
           <ProfileDropdown />

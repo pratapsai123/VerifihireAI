@@ -111,6 +111,29 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
         if not isinstance(candidates, list) or len(candidates) == 0:
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
+        # Credit deduction for company assessment invites
+        # Formula: (MCQ×0.5 + Coding×6) × number of candidates
+        num_mcqs = getattr(assessment, 'total_questions', 0) or 0
+        num_coding = getattr(assessment, 'coding_question_count', 0) or 0
+        credit_per_candidate = max(1, int((num_mcqs * 0.5) + (num_coding * 6)))
+        total_credit_cost = credit_per_candidate * len(candidates)
+        
+        if req_user_profile and total_credit_cost > 0:
+            if (req_user_profile.ai_credits or 0) < total_credit_cost:
+                return Response({
+                    'error': f'Insufficient credits. You need {total_credit_cost} credits ({len(candidates)} candidates × {credit_per_candidate} per candidate) but have {req_user_profile.ai_credits or 0}. Please add credits from your wallet.'
+                }, status=status.HTTP_402_PAYMENT_REQUIRED)
+            req_user_profile.ai_credits = (req_user_profile.ai_credits or 0) - total_credit_cost
+            req_user_profile.save(update_fields=['ai_credits'])
+            from api.models import CreditTransaction
+            CreditTransaction.objects.create(
+                user_profile=req_user_profile,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=total_credit_cost,
+                balance_after=req_user_profile.ai_credits,
+                description=f"Assessment invite ({len(candidates)} candidates × {credit_per_candidate}cr)",
+            )
+
         frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
         results = []

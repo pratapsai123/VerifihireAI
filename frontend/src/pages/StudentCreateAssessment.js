@@ -20,8 +20,8 @@ const StudentCreateAssessment = () => {
 
     const pollIntervalRef = useRef(null);
 
-    // Credit cost: 0.5 per MCQ + 1 per coding
-    const creditCost = Math.max(1, Math.round((numMcqs * 0.5) + (numCoding * 1)));
+    // Credit cost: 0.5 per MCQ + 6 per coding
+    const creditCost = Math.max(1, Math.round((numMcqs * 0.5) + (numCoding * 6)));
 
     useEffect(() => {
         const fetchCredits = async () => {

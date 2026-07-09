@@ -11,6 +11,8 @@ const CreateAssessment = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [progressMsg, setProgressMsg] = useState('');
+    const [showCreditConfirm, setShowCreditConfirm] = useState(false);
+    const [availableCredits, setAvailableCredits] = useState(0);
     const [formData, setFormData] = useState({
         job_description: '',
         skills: '',
@@ -109,6 +111,25 @@ const CreateAssessment = () => {
         };
         fetchRoles();
     }, []);
+
+    React.useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } });
+                setAvailableCredits(res.data.ai_credits || 0);
+            } catch (e) {}
+        };
+        fetchCredits();
+    }, []);
+
+    const assessmentCreditCost = (() => {
+        const baseCost = Math.max(1, Math.round((formData.num_mcqs * 0.5) + (formData.num_coding * 6)));
+        if (formData.same_questions_for_all) {
+            return baseCost;
+        }
+        return baseCost * Math.max(1, formData.num_applicants || 1);
+    })();
 
     const handleChange = (id, value) => {
         if (id === 'num_coding') {
@@ -304,6 +325,16 @@ const CreateAssessment = () => {
             return;
         }
 
+        if (availableCredits < assessmentCreditCost) {
+            alert(`Insufficient credits. You need ${assessmentCreditCost} credits but have ${availableCredits}. Please add credits from your wallet.`);
+            return;
+        }
+
+        setShowCreditConfirm(true);
+    };
+
+    const proceedWithGeneration = async () => {
+        setShowCreditConfirm(false);
         setLoading(true);
         const currentToken = Date.now().toString() + Math.random().toString(36).substring(2, 11);
         cancelTokenRef.current = currentToken;
@@ -393,6 +424,7 @@ const CreateAssessment = () => {
     };
 
     return (
+        <>
         <div className="create-assessment-page" style={{ paddingTop: 0 }}>
             <div className="assessment-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', marginTop: 0 }}>
@@ -857,8 +889,43 @@ const CreateAssessment = () => {
                         </>
                     )}
                 </button>
+
+                {/* Credit cost indicator */}
+                <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+                    <span>⚡</span>
+                    <span>This assessment costs <strong>{assessmentCreditCost} credits</strong></span>
+                    <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+                </div>
             </div>
         </div>
+
+        {/* Credit Confirmation Popup */}
+        {showCreditConfirm && (
+            <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '400px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                            <span style={{ fontSize: '1.5rem' }}>⚡</span>
+                        </div>
+                        <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+                        <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                            This assessment will use <strong style={{ color: '#6366f1' }}>{assessmentCreditCost} credits</strong>.
+                        </p>
+                        <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                            {formData.num_mcqs} MCQs ({(formData.num_mcqs * 0.5).toFixed(1)} cr) + {formData.num_coding} Coding ({formData.num_coding * 6} cr)
+                        </p>
+                        <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                            Remaining after: {availableCredits - assessmentCreditCost} credits
+                        </p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <button onClick={() => setShowCreditConfirm(false)} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+                        <button onClick={proceedWithGeneration} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}>Proceed</button>
+                    </div>
+                </div>
+            </div>
+        )}
+        </>
     );
 };
 
