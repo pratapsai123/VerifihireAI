@@ -51,12 +51,12 @@ const StudentWallet = () => {
     };
 
     const handleAddCredits = async () => {
-        if (!activeAmount || activeAmount < 1) {
-            setError('Please select or enter an amount.');
+        if (!activeAmount || activeAmount < 10) {
+            setError('Minimum amount is ₹10.');
             return;
         }
-        if (activeAmount > 10000) {
-            setError('Maximum amount is ₹10,000.');
+        if (activeAmount > 100000) {
+            setError('Maximum amount is ₹1,00,000.');
             return;
         }
 
@@ -195,8 +195,8 @@ const StudentWallet = () => {
                             <span style={styles.currencySymbol}>₹</span>
                             <input
                                 type="number"
-                                min="1"
-                                max="10000"
+                                min="10"
+                                max="100000"
                                 placeholder="Enter amount..."
                                 value={customAmount}
                                 onChange={handleCustomChange}

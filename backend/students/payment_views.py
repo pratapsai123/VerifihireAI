@@ -53,8 +53,8 @@ class CreatePaymentOrderView(APIView):
         except (TypeError, ValueError):
             return Response({"error": "Invalid amount."}, status=status.HTTP_400_BAD_REQUEST)
 
-        if amount < 1 or amount > 10000:
-            return Response({"error": "Amount must be between ₹1 and ₹10,000."}, status=status.HTTP_400_BAD_REQUEST)
+        if amount < 10 or amount > 100000:
+            return Response({"error": "Amount must be between ₹10 and ₹1,00,000."}, status=status.HTTP_400_BAD_REQUEST)
 
         # Amount in paise (Razorpay expects smallest currency unit)
         amount_paise = amount * 100
