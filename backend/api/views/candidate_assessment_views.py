@@ -2519,6 +2519,7 @@ def results_overview_view(request):
                         'id': a.id,
                         'display_name': a.display_name,
                         'name': a.name,
+                        'role': a.role,
                         'weightage_objective': a.weightage_objective,
                         'weightage_coding': a.weightage_coding,
                         'min_pass_percentage': a.min_pass_percentage,

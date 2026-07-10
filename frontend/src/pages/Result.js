@@ -294,9 +294,9 @@ export default function Result() {
                 { reason: photoApprovalReason.trim() },
                 config
             );
-            
+
             alert(resp.data.message || "Manual review approval complete. Baseline registered face updated.");
-            
+
             const updatedRow = {
                 ...photoApprovalRow,
                 photo_update_approved: true,
@@ -305,15 +305,15 @@ export default function Result() {
                 photo_update_reason: resp.data.photo_update_reason,
                 previous_registered_face_url: photoApprovalRow.original_identity_photo_url
             };
-            
+
             // Update quickViewRow if currently active
             if (quickViewRow && quickViewRow.submission_id === photoApprovalRow.submission_id) {
                 setQuickViewRow(updatedRow);
             }
-            
+
             // Update in overview list
             setOverview(prev => prev.map(r => r.submission_id === photoApprovalRow.submission_id ? updatedRow : r));
-            
+
             setConfirmPhotoModalOpen(false);
             setPhotoApprovalRow(null);
             setPhotoApprovalReason('');
@@ -553,6 +553,10 @@ export default function Result() {
 
     const load = useCallback(async (silentArg = false) => {
         const silent = silentArg === true;
+        if (fromDate && toDate && new Date(fromDate) > new Date(toDate)) {
+            if (!silent) setLoading(false);
+            return;
+        }
         if (!silent) setLoading(true);
         setError('');
         try {
@@ -784,7 +788,7 @@ export default function Result() {
                     <div className="top-actions">
                         <button className="btn-top-primary" type="button" onClick={() => load()}>
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '6px' }}>
-                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                             Refresh
                         </button>
@@ -911,7 +915,7 @@ export default function Result() {
                         <input
                             type="date"
                             className="search search-date"
-                            max="9999-12-31"
+                            max={toDate || "9999-12-31"}
                             value={fromDate}
                             onChange={(e) => setFromDate(e.target.value)}
                         />
@@ -921,6 +925,7 @@ export default function Result() {
                         <input
                             type="date"
                             className="search search-date"
+                            min={fromDate}
                             max="9999-12-31"
                             value={toDate}
                             onChange={(e) => setToDate(e.target.value)}
@@ -953,6 +958,24 @@ export default function Result() {
                         {someSelected ? `Export Selected (${selectedCount})` : "Export CSV (0)"}
                     </button>
                 </div>
+
+                {fromDate && toDate && new Date(fromDate) > new Date(toDate) && (
+                    <div className="date-range-error-message" style={{
+                        background: '#fef2f2',
+                        border: '1px solid #fca5a5',
+                        borderRadius: '0.8rem',
+                        padding: '0.6rem 1rem',
+                        color: '#b91c1c',
+                        fontSize: '0.85rem',
+                        fontWeight: '600',
+                        marginBottom: '0.7rem',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '6px'
+                    }}>
+                        ⚠️ From Date cannot be later than To Date.
+                    </div>
+                )}
 
                 <div className="metrics-grid">
                     <div className="metric-card">

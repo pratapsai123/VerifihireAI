@@ -73,6 +73,10 @@ export default function Assessment() {
   }, [currentPage, totalPages]);
 
   const load = useCallback(async () => {
+    if (fromDate && toDate && new Date(fromDate) > new Date(toDate)) {
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError('');
     try {
@@ -151,7 +155,7 @@ export default function Assessment() {
           </div>
         </div>
 
-        <div className="assessments-toolbar" style={{ display: 'flex', gap: '12px' }}>
+        <div className="assessments-toolbar" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
           <input
             className="search-input"
             style={{ flex: 1, height: '40px' }}
@@ -165,7 +169,7 @@ export default function Assessment() {
               type="date"
               className="search-input"
               style={{ width: 'auto', height: '40px' }}
-              max="9999-12-31"
+              max={toDate || "9999-12-31"}
               value={fromDate}
               onChange={(e) => setFromDate(e.target.value)}
             />
@@ -176,11 +180,31 @@ export default function Assessment() {
               type="date"
               className="search-input"
               style={{ width: 'auto', height: '40px' }}
+              min={fromDate}
               max="9999-12-31"
               value={toDate}
               onChange={(e) => setToDate(e.target.value)}
             />
           </div>
+
+          {fromDate && toDate && new Date(fromDate) > new Date(toDate) && (
+            <div className="date-range-error-message" style={{
+              background: '#fef2f2',
+              border: '1px solid #fca5a5',
+              borderRadius: '0.8rem',
+              padding: '0.6rem 1rem',
+              color: '#b91c1c',
+              fontSize: '0.85rem',
+              fontWeight: '600',
+              marginTop: '8px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '6px',
+              width: '100%'
+            }}>
+              ⚠️ From Date cannot be later than To Date.
+            </div>
+          )}
         </div>
 
         {loading ? (
@@ -201,7 +225,7 @@ export default function Assessment() {
             <table className="assessments-table">
               <thead>
                 <tr>
-                  <th>Assessment</th>
+                  <th>Assessment / Role</th>
                   <th>Questions</th>
                   <th>Time</th>
                   <th>Invited</th>
@@ -221,6 +245,7 @@ export default function Assessment() {
                     <tr key={a.id}>
                       <td>
                         <div className="cell-title">{title}</div>
+                        {shouldShowRole && <div className="cell-sub">{a.role}</div>}
                       </td>
                       <td>{(a.total_questions || 0) + (a.coding_question_count || 0)}</td>
                       <td>{a.total_time ?? '-'}</td>
