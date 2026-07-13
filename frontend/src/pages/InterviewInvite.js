@@ -66,6 +66,12 @@ export default function InterviewInvite() {
   // To track successfully created sessions for post-send management
   const [sentSessions, setSentSessions] = useState([]);
 
+  const [showCreditConfirm, setShowCreditConfirm] = useState(false);
+  const [availableCredits, setAvailableCredits] = useState(0);
+
+  const creditPerCandidate = 30;
+  const totalCreditCost = creditPerCandidate * candidates.length;
+
   const userDomain = useMemo(() => {
     if (!userProfile?.email) return '';
     return userProfile.email.split('@')[1] || '';
@@ -172,17 +178,20 @@ export default function InterviewInvite() {
       if (rawPanel) setDraftPanelMap(JSON.parse(rawPanel));
     } catch { /* ignore */ }
 
-    // Fetch profile + existing draft candidates
+    // Fetch profile + existing draft candidates + wallet credits
     const init = async () => {
       try {
-        const [profileRes, draftsRes] = await Promise.all([
+        const token = localStorage.getItem('token');
+        const [profileRes, draftsRes, walletRes] = await Promise.all([
           axios.get(`${API_BASE_URL}/profile/`),
           axios.get(`${API_BASE_URL}/interviews/draft-invites/`),
+          axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } }),
         ]);
         setUserProfile(profileRes.data);
         if (draftsRes.data?.results) setCandidates(draftsRes.data.results);
+        setAvailableCredits(walletRes.data.ai_credits || 0);
       } catch (err) {
-        console.error('Failed to load profile or drafts', err);
+        console.error('Failed to load profile, drafts, or wallet', err);
       }
     };
     init();
@@ -282,7 +291,7 @@ export default function InterviewInvite() {
     const startIso = (() => { const d = new Date(`${scheduleDate}T${startTime}:00`); return Number.isNaN(d.getTime()) ? null : d.toISOString(); })();
     if (!startIso) { setScheduleError('Invalid start time.'); return; }
     if (new Date(startIso).getTime() < Date.now()) { setScheduleError('Start time cannot be in the past.'); alert('Start time cannot be in the past.'); return; }
-    const tz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || null; } catch { return null; } })();
+    
     // Use manually-edited endTime if available, otherwise auto-compute start + 1hr
     const resolvedEndTime = endTime || (() => {
       const d = new Date(new Date(startIso).getTime() + INTERVIEW_DURATION_SEC * 1000);
@@ -297,7 +306,27 @@ export default function InterviewInvite() {
       alert('End time must be after the start time.');
       return;
     }
+
+    if (availableCredits < totalCreditCost) {
+      alert(`Insufficient credits. You need ${totalCreditCost} credits (${candidates.length} candidates × ${creditPerCandidate}) but have ${availableCredits}. Please add credits from your wallet.`);
+      return;
+    }
+
     setScheduleError('');
+    setShowCreditConfirm(true);
+  };
+
+  const proceedWithInvites = async () => {
+    setShowCreditConfirm(false);
+    const startIso = new Date(`${scheduleDate}T${startTime}:00`).toISOString();
+    // Use manually-edited endTime if available, otherwise auto-compute start + 1hr
+    const resolvedEndTime = endTime || (() => {
+      const d = new Date(new Date(startIso).getTime() + INTERVIEW_DURATION_SEC * 1000);
+      return `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+    })();
+    const endIso = new Date(`${scheduleDate}T${resolvedEndTime}:00`).toISOString();
+    const tz = (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone || null; } catch { return null; } })();
+
     setSending(true);
     try {
       const resp = await axios.post(`${API_BASE_URL}/interviews/invite/`, {
@@ -314,10 +343,7 @@ export default function InterviewInvite() {
       // Handle additional panelists for each created session
       if (results && results.length > 0) {
         for (const res of results) {
-          // Find original draft ID (this might be tricky if not returned, 
-          // but usually results match draft_ids order or have draft_id field)
-          // We'll try to find by email if draft_id is missing
-          const panelists = draftPanelMap[res.id] || []; // assuming res.id is what we need or mapped
+          const panelists = draftPanelMap[res.id] || [];
           
           if (panelists.length > 0) {
             console.log(`Adding ${panelists.length} panelists to session ${res.token}`);
@@ -349,6 +375,13 @@ export default function InterviewInvite() {
       setScheduleDate(''); setStartTime(''); setEndTime(''); endTimeManualRef.current = false;
       setDraftPanelMap({});
       setSentSessions(results || []);
+
+      // Fetch updated credits
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } });
+        setAvailableCredits(res.data.ai_credits || 0);
+      } catch (e) {}
     } catch (e) {
       alert(e?.response?.data?.error || e?.message || 'Failed to send interview invites');
     } finally { setSending(false); }
@@ -880,6 +913,42 @@ export default function InterviewInvite() {
         </div>
 
       </div>
+
+      {/* Credit cost indicator */}
+      {candidates.length > 0 && (
+        <div style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '6px', background: 'white', padding: '8px 16px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', border: '1px solid #e2e8f0', zIndex: 50, color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+          <span>⚡</span>
+          <span>Invite cost: <strong>{totalCreditCost} credits</strong> ({candidates.length} × {creditPerCandidate})</span>
+          <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+        </div>
+      )}
+
+      {/* Credit Confirmation Popup */}
+      {showCreditConfirm && (
+        <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+          <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '400px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+            <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+              <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                <span style={{ fontSize: '1.5rem' }}>⚡</span>
+              </div>
+              <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+              <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                Sending invites will use <strong style={{ color: '#6366f1' }}>{totalCreditCost} credits</strong>.
+              </p>
+              <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                {candidates.length} candidates × {creditPerCandidate} credits each
+              </p>
+              <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                Remaining after: {availableCredits - totalCreditCost} credits
+              </p>
+            </div>
+            <div style={{ display: 'flex', gap: '0.75rem' }}>
+              <button onClick={() => setShowCreditConfirm(false)} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+              <button onClick={proceedWithInvites} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}>Proceed</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <style>{`@keyframes ii-spin { to { transform: rotate(360deg); } }`}</style>
     </div>

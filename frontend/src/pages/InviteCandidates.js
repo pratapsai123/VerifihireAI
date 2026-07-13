@@ -203,9 +203,7 @@ export default function InviteCandidates() {
   }, []);
 
   // Calculate credit cost for assessment invites
-  const numMcqs = assessment?.total_questions || 0;
-  const numCoding = assessment?.coding_question_count || 0;
-  const creditPerCandidate = Math.max(1, Math.round((numMcqs * 0.5) + (numCoding * 6)));
+  const creditPerCandidate = 30;
   const totalCreditCost = creditPerCandidate * candidates.length;
 
   useEffect(() => {
@@ -444,6 +442,13 @@ export default function InviteCandidates() {
       setCandidates([]); setName(''); setEmail(''); setPan(''); setPhone(''); setImportMsg('');
       setValidityMode('exact_window'); setScheduleDate(''); setEndDate(''); setStartTime('');
       setIsAutoSchedule(false); setSelectedInterviewerIds([]);
+      
+      // Fetch updated credits
+      try {
+        const token = localStorage.getItem('token');
+        const res = await axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } });
+        setAvailableCredits(res.data.ai_credits || 0);
+      } catch (e) {}
     } catch (e) {
       alert(e?.response?.data?.error || e?.message || 'Failed to send invites');
     } finally {
