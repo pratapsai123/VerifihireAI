@@ -112,10 +112,8 @@ def create_invitations_and_send_email_view(request, assessment_id: int):
             return Response({'error': 'candidates must be a non-empty array.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Credit deduction for company assessment invites
-        # Formula: (MCQ×0.5 + Coding×6) × number of candidates
-        num_mcqs = getattr(assessment, 'total_questions', 0) or 0
-        num_coding = getattr(assessment, 'coding_question_count', 0) or 0
-        credit_per_candidate = max(1, int((num_mcqs * 0.5) + (num_coding * 6)))
+        # Formula: Flat 30 credits per candidate invitation
+        credit_per_candidate = 30
         total_credit_cost = credit_per_candidate * len(candidates)
         
         if req_user_profile and total_credit_cost > 0:

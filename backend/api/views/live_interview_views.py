@@ -93,12 +93,6 @@ def create_interview_invitations_and_send_email_view(request):
         # Get or create a default interview (or create one per batch)
         # For simplicity, we'll create one interview per batch of invites
         req_user_profile = getattr(request.user, 'profile', None) if hasattr(request, 'user') and request.user.is_authenticated else None
-        interview = Interview.objects.create(
-            name=interview_name,
-            description=f'Interview created on {timezone.now().strftime("%Y-%m-%d %H:%M:%S")}',
-            company=req_user_profile.company if req_user_profile else None,
-            created_by=req_user_profile,
-        )
 
         frontend_base = getattr(settings, 'FRONTEND_BASE_URL', None) or os.environ.get('FRONTEND_BASE_URL') or 'http://localhost:3000'
 
@@ -107,6 +101,9 @@ def create_interview_invitations_and_send_email_view(request):
         fail_count = 0
 
         drafts = InterviewInvitation.objects.filter(id__in=draft_ids, status='draft')
+        num_candidates = drafts.count()
+        if num_candidates == 0:
+            return Response({'error': 'No draft invitations found for the provided IDs.'}, status=status.HTTP_400_BAD_REQUEST)
 
         # Overlap check before proceeding
         pending_bookings = []
@@ -126,6 +123,32 @@ def create_interview_invitations_and_send_email_view(request):
                 if overlap_in_batch or is_interviewer_busy(i_email, final_start, final_end, exclude_invitation_ids=draft_ids):
                     return Response({'error': f'Interviewer {i_email} is already assigned to another interview during this time.'}, status=status.HTTP_400_BAD_REQUEST)
                 pending_bookings.append((i_email.lower(), final_start, final_end))
+
+        # Credit deduction check: 30 credits per candidate
+        CREDITS_PER_LIVE_CANDIDATE = 30
+        total_credit_cost = num_candidates * CREDITS_PER_LIVE_CANDIDATE
+        if req_user_profile and total_credit_cost > 0:
+            if (req_user_profile.ai_credits or 0) < total_credit_cost:
+                return Response({
+                    'error': f'Insufficient credits. You need {total_credit_cost} credits ({num_candidates} candidates × {CREDITS_PER_LIVE_CANDIDATE}) but have {req_user_profile.ai_credits or 0}. Please add credits from your wallet.'
+                }, status=status.HTTP_402_PAYMENT_REQUIRED)
+            req_user_profile.ai_credits = (req_user_profile.ai_credits or 0) - total_credit_cost
+            req_user_profile.save(update_fields=['ai_credits'])
+            from api.models import CreditTransaction
+            CreditTransaction.objects.create(
+                user_profile=req_user_profile,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=total_credit_cost,
+                balance_after=req_user_profile.ai_credits,
+                description=f"Live Interview invite ({num_candidates} candidates)",
+            )
+
+        interview = Interview.objects.create(
+            name=interview_name,
+            description=f'Interview created on {timezone.now().strftime("%Y-%m-%d %H:%M:%S")}',
+            company=req_user_profile.company if req_user_profile else None,
+            created_by=req_user_profile,
+        )
 
         for invitation in drafts:
             # Associate the draft with this new interview
