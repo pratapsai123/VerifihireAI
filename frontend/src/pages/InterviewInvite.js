@@ -381,6 +381,7 @@ export default function InterviewInvite() {
         const token = localStorage.getItem('token');
         const res = await axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } });
         setAvailableCredits(res.data.ai_credits || 0);
+        window.dispatchEvent(new Event('vh_credits_updated'));
       } catch (e) {}
     } catch (e) {
       alert(e?.response?.data?.error || e?.message || 'Failed to send interview invites');

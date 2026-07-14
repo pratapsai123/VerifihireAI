@@ -47,6 +47,14 @@ function Header() {
         } catch (err) {}
       };
       fetchCredits();
+
+      const handleCreditsUpdated = () => {
+        fetchCredits();
+      };
+      window.addEventListener('vh_credits_updated', handleCreditsUpdated);
+      return () => {
+        window.removeEventListener('vh_credits_updated', handleCreditsUpdated);
+      };
     }
   }, [userRole]);
 

@@ -99,6 +99,7 @@ const StudentWallet = () => {
                         setSuccess(`Payment successful! Added ${verifyRes.data.credits_added} AI credits.`);
                         setSelectedAmount(null);
                         setCustomAmount('');
+                        window.dispatchEvent(new Event('vh_credits_updated'));
 
                         // Refresh history
                         const histRes = await axios.get(`${API_BASE_URL}/students/wallet/`, {

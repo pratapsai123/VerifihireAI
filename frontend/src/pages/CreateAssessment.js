@@ -388,6 +388,7 @@ const CreateAssessment = () => {
                                 sessionStorage.removeItem(STORAGE_KEY);
                                 setLoading(false);
                                 isGeneratingRef.current = false;
+                                window.dispatchEvent(new Event('vh_credits_updated'));
                                 navigate('/ai-assessments');
                             } else if (statusData.status === 'failed') {
                                 clearInterval(pollInterval);

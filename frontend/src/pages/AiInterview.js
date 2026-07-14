@@ -229,6 +229,7 @@ const AiInterview = () => {
                 }
             });
             setResult(response.data);
+            window.dispatchEvent(new Event('vh_credits_updated'));
         } catch (err) {
             console.error(err);
             setError(err.response?.data?.error || err.message || 'Failed to process bulk invite');
