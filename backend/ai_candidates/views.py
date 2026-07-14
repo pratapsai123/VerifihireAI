@@ -884,6 +884,28 @@ class ResumeMatchView(APIView):
                 from .models import StandaloneResumeScreening
                 from .tasks import process_standalone_resume_screening_task
 
+                # Credit deduction: 3 credits per resume for manual screening
+                num_resumes = len(resume_files)
+                CREDITS_PER_RESUME = 3
+                credit_cost = num_resumes * CREDITS_PER_RESUME
+                user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
+                if user_profile and credit_cost > 0:
+                    if (user_profile.ai_credits or 0) < credit_cost:
+                        return Response({
+                            "error": f"Insufficient credits. Manual screening costs {credit_cost} credits ({num_resumes} resumes × {CREDITS_PER_RESUME}) but you have {user_profile.ai_credits or 0}."
+                        }, status=status.HTTP_402_PAYMENT_REQUIRED)
+                    user_profile.ai_credits = (user_profile.ai_credits or 0) - credit_cost
+                    user_profile.save(update_fields=['ai_credits'])
+                    from api.models import CreditTransaction
+                    CreditTransaction.objects.create(
+                        user_profile=user_profile,
+                        transaction_type=CreditTransaction.TYPE_USED,
+                        amount=credit_cost,
+                        balance_after=user_profile.ai_credits,
+                        description=f"Resume Screening ({num_resumes} resumes)",
+                        batch_id=batch_id,
+                    )
+
                 # Auto-persist role if custom title/JD is provided
                 if first_job_title and request.user.is_authenticated:
                     ensure_role_exists(first_job_title, job_description, user=request.user)
@@ -915,6 +937,48 @@ class ResumeMatchView(APIView):
                 }, status=status.HTTP_201_CREATED)
 
             # INSTANT SAVE: Create Candidate records without waiting for OCR (Automatic Mode)
+            # Credit hold for fully automatic pipeline:
+            # Hold = (resume_cost + assessment_cost + interview_cost) × num_candidates
+            num_resumes = len(resume_files)
+            CREDITS_PER_RESUME = 3
+            CREDITS_PER_INTERVIEW = 80
+            # Assessment cost from automation_settings
+            mcq_count_setting = int(request.data.get('mcq_count', 10))
+            coding_count_setting = int(request.data.get('coding_count', 1))
+            assessment_cost_per_candidate = max(1, int((mcq_count_setting * 0.5) + (coding_count_setting * 6)))
+            
+            total_per_candidate = CREDITS_PER_RESUME + assessment_cost_per_candidate + CREDITS_PER_INTERVIEW
+            total_hold = total_per_candidate * num_resumes
+            
+            user_profile = getattr(request.user, 'profile', None) if request.user.is_authenticated else None
+            if user_profile and total_hold > 0:
+                if (user_profile.ai_credits or 0) < total_hold:
+                    return Response({
+                        "error": f"Insufficient credits. Fully automatic pipeline requires {total_hold} credits ({num_resumes} candidates × {total_per_candidate} per candidate: {CREDITS_PER_RESUME} screening + {assessment_cost_per_candidate} assessment + {CREDITS_PER_INTERVIEW} interview) but you have {user_profile.ai_credits or 0}."
+                    }, status=status.HTTP_402_PAYMENT_REQUIRED)
+                
+                # Place the hold
+                user_profile.ai_credits = (user_profile.ai_credits or 0) - total_hold
+                user_profile.credits_on_hold = (user_profile.credits_on_hold or 0) + total_hold
+                user_profile.save(update_fields=['ai_credits', 'credits_on_hold'])
+                
+                from api.models import CreditTransaction, CreditHold
+                CreditTransaction.objects.create(
+                    user_profile=user_profile,
+                    transaction_type=CreditTransaction.TYPE_HOLD,
+                    amount=total_hold,
+                    balance_after=user_profile.ai_credits,
+                    description=f"Fully Automatic Pipeline - {num_resumes} candidates (ON HOLD)",
+                    batch_id=batch_id,
+                )
+                CreditHold.objects.create(
+                    user_profile=user_profile,
+                    batch_id=batch_id,
+                    batch_name=batch_name,
+                    total_hold=total_hold,
+                    num_candidates=num_resumes,
+                )
+
             for resume_file in resume_files:
 
                 job_title = request.data.get('job_title') or request.data.get('role_title')
@@ -2024,6 +2088,59 @@ class CandidatePublicStatusUpdateView(APIView):
                     logger.warning(f"Failed to award practice points: {pts_err}")
 
             candidate.save()
+
+            # Check if this batch's pipeline is complete (for credit hold release)
+            if candidate.batch_id and not _is_practice_interview:
+                try:
+                    from api.models import CreditHold
+                    hold = CreditHold.objects.filter(batch_id=candidate.batch_id, is_released=False).first()
+                    if hold:
+                        terminal_statuses = ['Hired', 'Rejected', 'On-Hold']
+                        total_in_batch = Candidate.objects.filter(batch_id=candidate.batch_id, is_deleted=False).count()
+                        completed_in_batch = Candidate.objects.filter(
+                            batch_id=candidate.batch_id, is_deleted=False, status__in=terminal_statuses
+                        ).count()
+                        
+                        if completed_in_batch >= total_in_batch and total_in_batch > 0:
+                            CREDITS_PER_RESUME = 3
+                            CREDITS_PER_INTERVIEW = 80
+                            per_candidate_cost = hold.total_hold // hold.num_candidates if hold.num_candidates > 0 else 0
+                            assessment_cost = per_candidate_cost - CREDITS_PER_RESUME - CREDITS_PER_INTERVIEW
+                            
+                            candidates_screened = total_in_batch
+                            candidates_interviewed = Candidate.objects.filter(
+                                batch_id=candidate.batch_id, is_deleted=False, completed_at__isnull=False
+                            ).count()
+                            candidates_assessed = candidates_interviewed
+                            
+                            actual_used = (candidates_screened * CREDITS_PER_RESUME) + (candidates_assessed * assessment_cost) + (candidates_interviewed * CREDITS_PER_INTERVIEW)
+                            actual_used = min(actual_used, hold.total_hold)
+                            refund_amount = hold.total_hold - actual_used
+                            
+                            hold.credits_used = actual_used
+                            hold.is_released = True
+                            hold.released_at = timezone.now()
+                            hold.save()
+                            
+                            hold_profile = hold.user_profile
+                            hold_profile.credits_on_hold = max(0, (hold_profile.credits_on_hold or 0) - hold.total_hold)
+                            if refund_amount > 0:
+                                hold_profile.ai_credits = (hold_profile.ai_credits or 0) + refund_amount
+                            hold_profile.save(update_fields=['ai_credits', 'credits_on_hold'])
+                            
+                            from api.models import CreditTransaction
+                            if refund_amount > 0:
+                                CreditTransaction.objects.create(
+                                    user_profile=hold_profile,
+                                    transaction_type=CreditTransaction.TYPE_REFUND,
+                                    amount=refund_amount,
+                                    balance_after=hold_profile.ai_credits,
+                                    description=f"Pipeline complete - Refund ({hold.batch_name})",
+                                    batch_id=candidate.batch_id,
+                                )
+                            logger.info(f"[CreditHold] Released batch {candidate.batch_id}: held={hold.total_hold} used={actual_used} refund={refund_amount}")
+                except Exception as hold_err:
+                    logger.warning(f"Failed to process credit hold release: {hold_err}")
 
 
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../apiConfig';
@@ -7,6 +7,8 @@ import '../styles/ResumeMatcher.css';
 
 const MAX_CODING_TASKS = 50;
 const STORAGE_KEY = 'resume_screening_form_data';
+const CREDITS_PER_RESUME = 3;
+const CREDITS_PER_INTERVIEW = 80;
 
 const ResumeMatcher = () => {
     const navigate = useNavigate();
@@ -23,9 +25,22 @@ const ResumeMatcher = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [customRoleTitle, setCustomRoleTitle] = useState('');
     const [sameQuestionsForAll, setSameQuestionsForAll] = useState(false);
+    const [showCreditConfirm, setShowCreditConfirm] = useState(false);
+    const [availableCredits, setAvailableCredits] = useState(0);
 
     const [jobRoles, setJobRoles] = useState([]);
     const [selectedRoleId, setSelectedRoleId] = useState('');
+
+    useEffect(() => {
+        const fetchCredits = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/students/wallet/`, { headers: { Authorization: `Bearer ${token}` } });
+                setAvailableCredits(res.data.ai_credits || 0);
+            } catch (e) {}
+        };
+        fetchCredits();
+    }, []);
 
 
 
@@ -99,6 +114,12 @@ const ResumeMatcher = () => {
     const [interviewPassThreshold, setInterviewPassThreshold] = useState(50);
     const [mcqWeight, setMcqWeight] = useState(40);
     const [codingChallenges, setCodingChallenges] = useState([{ id: 1, difficulty: '' }]);
+
+    // Credit cost calculation
+    const assessmentCostPerCandidate = Math.max(1, Math.round((mcqCount * 0.5) + (codingCount * 6)));
+    const creditCost = matchMode === 'automatic'
+        ? (CREDITS_PER_RESUME + assessmentCostPerCandidate + CREDITS_PER_INTERVIEW) * files.length
+        : CREDITS_PER_RESUME * files.length;
 
     // Auto-adjust scoring weights when counts are 0
     React.useEffect(() => {
@@ -351,6 +372,16 @@ const ResumeMatcher = () => {
             }
         }
 
+        // Credit check
+        if (availableCredits < creditCost) {
+            alert(`Insufficient credits. You need ${creditCost} credits but have ${availableCredits}. Please add credits from your wallet.`);
+            return;
+        }
+        setShowCreditConfirm(true);
+    };
+
+    const proceedWithScreening = async () => {
+        setShowCreditConfirm(false);
         setIsAnalyzing(true);
         setResults(null);
         setProgress({ processed: 0, total: files.length });
@@ -498,6 +529,7 @@ const ResumeMatcher = () => {
     };
 
     return (
+    <>
         <div className="resume-matcher-page">
             <div className="matcher-container" style={{ paddingTop: '1rem', marginTop: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', marginTop: 0 }}>
@@ -1125,8 +1157,53 @@ const ResumeMatcher = () => {
                         </div>
                     </div>
                 )}
+
+                {/* Credit cost indicator */}
+                {files.length > 0 && (
+                    <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
+                        <span>⚡</span>
+                        <span>This will use <strong>{creditCost} credits</strong></span>
+                        <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
+                    </div>
+                )}
             </div>
         </div>
+
+        {/* Credit Confirmation Popup */}
+        {showCreditConfirm && (
+            <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.6)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
+                <div style={{ background: 'white', borderRadius: '20px', padding: '2rem', maxWidth: '420px', width: '90%', boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+                        <div style={{ width: '56px', height: '56px', borderRadius: '16px', background: 'linear-gradient(135deg, #eef2ff, #e0e7ff)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1rem' }}>
+                            <span style={{ fontSize: '1.5rem' }}>⚡</span>
+                        </div>
+                        <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
+                        {matchMode === 'automatic' ? (
+                            <>
+                                <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                                    This will hold <strong style={{ color: '#f59e0b' }}>{creditCost} credits</strong> from your wallet.
+                                </p>
+                                <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.75rem' }}>
+                                    Unused credits will be refunded when pipeline completes.
+                                </p>
+                            </>
+                        ) : (
+                            <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
+                                This will use <strong style={{ color: '#6366f1' }}>{creditCost} credits</strong> from your wallet.
+                            </p>
+                        )}
+                        <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
+                            Remaining after: {availableCredits - creditCost} credits
+                        </p>
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <button onClick={() => setShowCreditConfirm(false)} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: '1px solid #e2e8f0', background: 'white', color: '#475569', fontSize: '0.9rem', fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
+                        <button onClick={proceedWithScreening} style={{ flex: 1, padding: '0.85rem', borderRadius: '12px', border: 'none', background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white', fontSize: '0.9rem', fontWeight: 700, cursor: 'pointer', boxShadow: '0 4px 14px rgba(99,102,241,0.3)' }}>Proceed</button>
+                    </div>
+                </div>
+            </div>
+        )}
+    </>
     );
 };
 

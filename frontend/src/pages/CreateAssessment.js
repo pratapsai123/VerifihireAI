@@ -909,10 +909,7 @@ const CreateAssessment = () => {
                         </div>
                         <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
                         <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
-                            This assessment will use <strong style={{ color: '#6366f1' }}>{assessmentCreditCost} credits</strong>.
-                        </p>
-                        <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
-                            {formData.num_mcqs} MCQs ({(formData.num_mcqs * 0.5).toFixed(1)} cr) + {formData.num_coding} Coding ({formData.num_coding * 6} cr)
+                            This will use <strong style={{ color: '#6366f1' }}>{assessmentCreditCost} credits</strong> from your wallet.
                         </p>
                         <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
                             Remaining after: {availableCredits - assessmentCreditCost} credits

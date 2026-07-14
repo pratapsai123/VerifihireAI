@@ -1209,7 +1209,7 @@ export default function InviteCandidates() {
       {candidates.length > 0 && (
         <div style={{ position: 'fixed', bottom: '1rem', left: '50%', transform: 'translateX(-50%)', display: 'flex', alignItems: 'center', gap: '6px', background: 'white', padding: '8px 16px', borderRadius: '12px', boxShadow: '0 4px 20px rgba(0,0,0,0.1)', border: '1px solid #e2e8f0', zIndex: 50, color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
           <span>⚡</span>
-          <span>Invite cost: <strong>{totalCreditCost} credits</strong> ({candidates.length} × {creditPerCandidate})</span>
+          <span>This will use <strong>{totalCreditCost} credits</strong></span>
           <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
         </div>
       )}
@@ -1225,9 +1225,6 @@ export default function InviteCandidates() {
               <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
               <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
                 Sending invites will use <strong style={{ color: '#6366f1' }}>{totalCreditCost} credits</strong>.
-              </p>
-              <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
-                {candidates.length} candidates × {creditPerCandidate} credits each
               </p>
               <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
                 Remaining after: {availableCredits - totalCreditCost} credits

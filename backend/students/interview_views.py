@@ -446,6 +446,7 @@ class StudentWalletView(APIView):
 
         return Response({
             'ai_credits': profile.ai_credits or 0,
+            'credits_on_hold': profile.credits_on_hold or 0,
             'history': history,
         }, status=status.HTTP_200_OK)
 

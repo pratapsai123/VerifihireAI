@@ -10,6 +10,7 @@ const CREDITS_PER_RUPEE = 3;
 const StudentWallet = () => {
     const navigate = useNavigate();
     const [credits, setCredits] = useState(0);
+    const [creditsOnHold, setCreditsOnHold] = useState(0);
     const [history, setHistory] = useState([]);
     const [selectedAmount, setSelectedAmount] = useState(null);
     const [customAmount, setCustomAmount] = useState('');
@@ -25,6 +26,7 @@ const StudentWallet = () => {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setCredits(res.data.ai_credits || 0);
+                setCreditsOnHold(res.data.credits_on_hold || 0);
                 setHistory(res.data.history || []);
             } catch (err) {
                 console.error('Failed to fetch credits:', err);
@@ -157,10 +159,16 @@ const StudentWallet = () => {
                     <div style={styles.balanceIcon}>
                         <Zap size={28} />
                     </div>
-                    <div>
+                    <div style={{ flex: 1 }}>
                         <p style={styles.balanceLabel}>Available Credits</p>
                         <p style={styles.balanceValue}>{credits.toLocaleString()}</p>
                     </div>
+                    {creditsOnHold > 0 && (
+                        <div style={{ textAlign: 'right' }}>
+                            <p style={{ margin: 0, fontSize: '0.7rem', color: 'rgba(255,255,255,0.7)', fontWeight: 600, textTransform: 'uppercase' }}>On Hold</p>
+                            <p style={{ margin: '2px 0 0', fontSize: '1.3rem', fontWeight: 800, color: '#fbbf24' }}>{creditsOnHold.toLocaleString()}</p>
+                        </div>
+                    )}
                 </div>
 
                 {/* Add Credits Section */}
@@ -248,24 +256,32 @@ const StudentWallet = () => {
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                                         <div style={{
                                             width: '36px', height: '36px', borderRadius: '10px',
-                                            background: tx.type === 'added' ? '#f0fdf4' : '#fef2f2',
+                                            background: tx.type === 'added' ? '#f0fdf4' : tx.type === 'refund' ? '#f0fdf4' : tx.type === 'hold' ? '#fef3c7' : '#fef2f2',
                                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                                         }}>
                                             {tx.type === 'added'
                                                 ? <Plus size={16} style={{ color: '#10b981' }} />
+                                                : tx.type === 'refund'
+                                                ? <Plus size={16} style={{ color: '#10b981' }} />
+                                                : tx.type === 'hold'
+                                                ? <Wallet size={16} style={{ color: '#f59e0b' }} />
                                                 : <Zap size={16} style={{ color: '#ef4444' }} />
                                             }
                                         </div>
                                         <div>
-                                            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, color: '#1e293b' }}>{tx.description}</p>
+                                            <p style={{ margin: 0, fontSize: '0.85rem', fontWeight: 600, color: '#1e293b' }}>
+                                                {tx.description}
+                                                {tx.type === 'hold' && <span style={{ marginLeft: '6px', fontSize: '0.7rem', background: '#fef3c7', color: '#92400e', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>ON HOLD</span>}
+                                                {tx.type === 'refund' && <span style={{ marginLeft: '6px', fontSize: '0.7rem', background: '#d1fae5', color: '#065f46', padding: '2px 6px', borderRadius: '4px', fontWeight: 700 }}>REFUND</span>}
+                                            </p>
                                             <p style={{ margin: '2px 0 0', fontSize: '0.75rem', color: '#94a3b8' }}>
                                                 {new Date(tx.date).toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true })}
                                             </p>
                                         </div>
                                     </div>
                                     <div style={{ textAlign: 'right' }}>
-                                        <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: tx.type === 'added' ? '#10b981' : '#ef4444' }}>
-                                            {tx.type === 'added' ? '+' : '-'}{tx.amount}
+                                        <p style={{ margin: 0, fontSize: '0.95rem', fontWeight: 700, color: (tx.type === 'added' || tx.type === 'refund') ? '#10b981' : tx.type === 'hold' ? '#f59e0b' : '#ef4444' }}>
+                                            {(tx.type === 'added' || tx.type === 'refund') ? '+' : '-'}{tx.amount}
                                         </p>
                                         <p style={{ margin: '2px 0 0', fontSize: '0.7rem', color: '#94a3b8' }}>Bal: {tx.balance_after}</p>
                                     </div>

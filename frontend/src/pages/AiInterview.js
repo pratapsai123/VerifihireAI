@@ -654,7 +654,7 @@ const AiInterview = () => {
                 {candidateCount > 0 && (
                     <div style={{ marginTop: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', color: '#6366f1', fontSize: '0.85rem', fontWeight: 600 }}>
                         <span>⚡</span>
-                        <span>This will cost <strong>{creditCost} credits</strong> ({candidateCount} candidates × {CREDITS_PER_CANDIDATE})</span>
+                        <span>This will use <strong>{creditCost} credits</strong></span>
                         <span style={{ color: '#94a3b8', fontWeight: 400 }}>({availableCredits} available)</span>
                     </div>
                 )}
@@ -671,9 +671,6 @@ const AiInterview = () => {
                             <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.2rem', fontWeight: 700, color: '#1e293b' }}>Confirm Credit Usage</h3>
                             <p style={{ margin: 0, color: '#64748b', fontSize: '0.9rem' }}>
                                 This will use <strong style={{ color: '#6366f1' }}>{creditCost} credits</strong> from your wallet.
-                            </p>
-                            <p style={{ margin: '0.5rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
-                                {candidateCount} candidates × {CREDITS_PER_CANDIDATE} credits each
                             </p>
                             <p style={{ margin: '0.25rem 0 0', color: '#94a3b8', fontSize: '0.8rem' }}>
                                 Remaining after: {availableCredits - creditCost} credits

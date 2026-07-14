@@ -184,6 +184,7 @@ class UserProfile(models.Model):
     # Student gamification
     practice_points = models.IntegerField(default=0, help_text="Accumulated practice points for student accounts")
     ai_credits = models.IntegerField(default=0, help_text="AI credits for student accounts (1 rupee = 3 credits)")
+    credits_on_hold = models.IntegerField(default=0, help_text="Credits currently held for active pipelines")
 
     # Additional timestamp
     updated_at = models.DateTimeField(auto_now=True)
@@ -202,9 +203,13 @@ class CreditTransaction(models.Model):
     """Logs every credit add/deduction for student accounts."""
     TYPE_ADDED = 'added'
     TYPE_USED = 'used'
+    TYPE_HOLD = 'hold'
+    TYPE_REFUND = 'refund'
     TYPE_CHOICES = [
         (TYPE_ADDED, 'Credits Added'),
         (TYPE_USED, 'Credits Used'),
+        (TYPE_HOLD, 'Credits On Hold'),
+        (TYPE_REFUND, 'Credits Refunded'),
     ]
 
     user_profile = models.ForeignKey(
@@ -216,6 +221,7 @@ class CreditTransaction(models.Model):
     amount = models.IntegerField(help_text="Number of credits (positive)")
     balance_after = models.IntegerField(help_text="Credit balance after this transaction")
     description = models.CharField(max_length=255, blank=True)
+    batch_id = models.CharField(max_length=100, blank=True, null=True, help_text="Related batch ID for hold/refund")
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -223,6 +229,29 @@ class CreditTransaction(models.Model):
 
     def __str__(self):
         return f"{self.user_profile.email} | {self.transaction_type} {self.amount} | bal={self.balance_after}"
+
+
+class CreditHold(models.Model):
+    """Tracks active credit holds for fully automatic pipeline batches."""
+    user_profile = models.ForeignKey(
+        'UserProfile',
+        on_delete=models.CASCADE,
+        related_name='credit_holds',
+    )
+    batch_id = models.CharField(max_length=100, unique=True)
+    batch_name = models.CharField(max_length=255, blank=True)
+    total_hold = models.IntegerField(help_text="Total credits held for this batch")
+    credits_used = models.IntegerField(default=0, help_text="Credits actually consumed so far")
+    num_candidates = models.IntegerField(default=0)
+    is_released = models.BooleanField(default=False)
+    released_at = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.batch_id} | hold={self.total_hold} used={self.credits_used} released={self.is_released}"
 
 
 class OwnershipTransferLog(models.Model):
