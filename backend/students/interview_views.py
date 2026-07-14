@@ -441,6 +441,7 @@ class StudentWalletView(APIView):
             'amount': t.amount,
             'balance_after': t.balance_after,
             'description': t.description,
+            'batch_id': t.batch_id,
             'date': t.created_at.isoformat(),
         } for t in transactions]
 
@@ -484,3 +485,265 @@ class StudentWalletView(APIView):
             'ai_credits': profile.ai_credits,
             'amount_paid': amount,
         }, status=status.HTTP_200_OK)
+
+
+class CompanyCreditDistributeView(APIView):
+    """
+    GET /api/students/credits/team/ — List all company members with their credits (admin only)
+    POST /api/students/credits/distribute/ — Distribute credits from admin pool to a member
+    POST /api/students/credits/revoke/ — Revoke credits from a member back to admin pool
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        profile = getattr(request.user, 'profile', None)
+        if not profile or profile.role != 'company_admin':
+            return Response({"error": "Only company admins can view team credits."}, status=status.HTTP_403_FORBIDDEN)
+
+        from api.models import UserProfile
+        company = profile.company
+        if not company:
+            return Response({"error": "No company associated."}, status=status.HTTP_400_BAD_REQUEST)
+
+        members = UserProfile.objects.filter(company=company, is_active=True).exclude(id=profile.id).order_by('first_name')
+        team = [{
+            'id': m.id,
+            'name': f"{m.first_name or ''} {m.last_name or ''}".strip() or m.email,
+            'email': m.email,
+            'role': m.role,
+            'credits': m.ai_credits or 0,
+        } for m in members]
+
+        total_company = (profile.ai_credits or 0) + sum(m.ai_credits or 0 for m in members)
+
+        return Response({
+            'admin_pool': profile.ai_credits or 0,
+            'team': team,
+            'total_company_credits': total_company,
+        }, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        profile = getattr(request.user, 'profile', None)
+        if not profile or profile.role != 'company_admin':
+            return Response({"error": "Only company admins can distribute credits."}, status=status.HTTP_403_FORBIDDEN)
+
+        action = request.data.get('action')  # 'distribute' or 'revoke'
+        member_id = request.data.get('member_id')
+        amount = request.data.get('amount')
+
+        try:
+            amount = int(amount)
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid amount."}, status=status.HTTP_400_BAD_REQUEST)
+
+        if amount < 1:
+            return Response({"error": "Amount must be at least 1."}, status=status.HTTP_400_BAD_REQUEST)
+
+        from api.models import UserProfile, CreditTransaction
+        company = profile.company
+        if not company:
+            return Response({"error": "No company associated."}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            member = UserProfile.objects.get(id=member_id, company=company)
+        except UserProfile.DoesNotExist:
+            return Response({"error": "Member not found in your company."}, status=status.HTTP_404_NOT_FOUND)
+
+        if action == 'distribute':
+            if (profile.ai_credits or 0) < amount:
+                return Response({"error": f"Insufficient pool balance. You have {profile.ai_credits or 0} credits."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Deduct from admin pool
+            profile.ai_credits = (profile.ai_credits or 0) - amount
+            profile.save(update_fields=['ai_credits'])
+
+            # Add to member
+            member.ai_credits = (member.ai_credits or 0) + amount
+            member.save(update_fields=['ai_credits'])
+
+            # Log transactions
+            member_name = f"{member.first_name or ''} {member.last_name or ''}".strip() or member.email
+            CreditTransaction.objects.create(
+                user_profile=profile,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=amount,
+                balance_after=profile.ai_credits,
+                description=f"Distributed to {member_name}",
+            )
+            CreditTransaction.objects.create(
+                user_profile=member,
+                transaction_type=CreditTransaction.TYPE_ADDED,
+                amount=amount,
+                balance_after=member.ai_credits,
+                description=f"Received from Admin",
+            )
+
+            return Response({
+                "message": f"Distributed {amount} credits to {member_name}.",
+                "admin_pool": profile.ai_credits,
+                "member_credits": member.ai_credits,
+            }, status=status.HTTP_200_OK)
+
+        elif action == 'revoke':
+            if (member.ai_credits or 0) < amount:
+                return Response({"error": f"Member only has {member.ai_credits or 0} credits."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Deduct from member
+            member.ai_credits = (member.ai_credits or 0) - amount
+            member.save(update_fields=['ai_credits'])
+
+            # Add back to admin pool
+            profile.ai_credits = (profile.ai_credits or 0) + amount
+            profile.save(update_fields=['ai_credits'])
+
+            # Log transactions
+            member_name = f"{member.first_name or ''} {member.last_name or ''}".strip() or member.email
+            CreditTransaction.objects.create(
+                user_profile=profile,
+                transaction_type=CreditTransaction.TYPE_ADDED,
+                amount=amount,
+                balance_after=profile.ai_credits,
+                description=f"Revoked from {member_name}",
+            )
+            CreditTransaction.objects.create(
+                user_profile=member,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=amount,
+                balance_after=member.ai_credits,
+                description=f"Revoked by Admin",
+            )
+
+            return Response({
+                "message": f"Revoked {amount} credits from {member_name}.",
+                "admin_pool": profile.ai_credits,
+                "member_credits": member.ai_credits,
+            }, status=status.HTTP_200_OK)
+
+        return Response({"error": "Invalid action. Use 'distribute' or 'revoke'."}, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CreditRequestView(APIView):
+    """
+    GET /api/students/credits/requests/ — Get pending requests (admin sees all, member sees own)
+    POST /api/students/credits/requests/ — Member creates a request
+    PUT /api/students/credits/requests/ — Admin approves/rejects a request
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        profile = getattr(request.user, 'profile', None)
+        if not profile or not profile.company:
+            return Response({"error": "No company associated."}, status=status.HTTP_400_BAD_REQUEST)
+
+        from api.models import CreditRequest
+
+        if profile.role == 'company_admin':
+            # Admin sees all pending requests for their company
+            requests_qs = CreditRequest.objects.filter(company=profile.company, status='pending')
+        else:
+            # Member sees their own requests
+            requests_qs = CreditRequest.objects.filter(requester=profile)
+
+        data = [{
+            'id': r.id,
+            'requester_name': f"{r.requester.first_name or ''} {r.requester.last_name or ''}".strip() or r.requester.email,
+            'requester_email': r.requester.email,
+            'amount': r.amount,
+            'reason': r.reason,
+            'status': r.status,
+            'created_at': r.created_at.isoformat(),
+        } for r in requests_qs]
+
+        return Response(data, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        """Member requests credits."""
+        profile = getattr(request.user, 'profile', None)
+        if not profile or not profile.company:
+            return Response({"error": "No company associated."}, status=status.HTTP_400_BAD_REQUEST)
+        if profile.role == 'company_admin':
+            return Response({"error": "Admins don't need to request credits."}, status=status.HTTP_400_BAD_REQUEST)
+
+        amount = request.data.get('amount')
+        reason = request.data.get('reason', '').strip()
+
+        try:
+            amount = int(amount)
+        except (TypeError, ValueError):
+            return Response({"error": "Invalid amount."}, status=status.HTTP_400_BAD_REQUEST)
+        if amount < 1:
+            return Response({"error": "Amount must be at least 1."}, status=status.HTTP_400_BAD_REQUEST)
+
+        from api.models import CreditRequest
+        CreditRequest.objects.create(
+            requester=profile,
+            company=profile.company,
+            amount=amount,
+            reason=reason,
+        )
+        return Response({"message": f"Requested {amount} credits. Waiting for admin approval."}, status=status.HTTP_201_CREATED)
+
+    def put(self, request):
+        """Admin approves or rejects a request."""
+        profile = getattr(request.user, 'profile', None)
+        if not profile or profile.role != 'company_admin':
+            return Response({"error": "Only admins can review requests."}, status=status.HTTP_403_FORBIDDEN)
+
+        request_id = request.data.get('request_id')
+        action = request.data.get('action')  # 'approve' or 'reject'
+
+        from api.models import CreditRequest, CreditTransaction
+        try:
+            cr = CreditRequest.objects.get(id=request_id, company=profile.company, status='pending')
+        except CreditRequest.DoesNotExist:
+            return Response({"error": "Request not found or already reviewed."}, status=status.HTTP_404_NOT_FOUND)
+
+        if action == 'approve':
+            # Admin can approve a different amount than requested
+            approved_amount = request.data.get('approved_amount')
+            try:
+                approved_amount = int(approved_amount) if approved_amount else cr.amount
+            except (TypeError, ValueError):
+                approved_amount = cr.amount
+            approved_amount = max(1, approved_amount)
+
+            if (profile.ai_credits or 0) < approved_amount:
+                return Response({"error": f"Insufficient pool balance ({profile.ai_credits or 0} credits)."}, status=status.HTTP_400_BAD_REQUEST)
+
+            # Transfer credits
+            profile.ai_credits = (profile.ai_credits or 0) - approved_amount
+            profile.save(update_fields=['ai_credits'])
+
+            cr.requester.ai_credits = (cr.requester.ai_credits or 0) + approved_amount
+            cr.requester.save(update_fields=['ai_credits'])
+
+            cr.status = 'approved'
+            cr.reviewed_by = profile
+            cr.reviewed_at = timezone.now()
+            cr.save()
+
+            member_name = f"{cr.requester.first_name or ''} {cr.requester.last_name or ''}".strip() or cr.requester.email
+            CreditTransaction.objects.create(
+                user_profile=profile,
+                transaction_type=CreditTransaction.TYPE_USED,
+                amount=approved_amount,
+                balance_after=profile.ai_credits,
+                description=f"Approved request from {member_name} ({approved_amount}/{cr.amount} requested)",
+            )
+            CreditTransaction.objects.create(
+                user_profile=cr.requester,
+                transaction_type=CreditTransaction.TYPE_ADDED,
+                amount=approved_amount,
+                balance_after=cr.requester.ai_credits,
+                description=f"Request approved by Admin ({approved_amount} of {cr.amount} requested)",
+            )
+            return Response({"message": f"Approved {approved_amount} credits for {member_name}."}, status=status.HTTP_200_OK)
+
+        elif action == 'reject':
+            cr.status = 'rejected'
+            cr.reviewed_by = profile
+            cr.reviewed_at = timezone.now()
+            cr.save()
+            return Response({"message": "Request rejected."}, status=status.HTTP_200_OK)
+
+        return Response({"error": "Invalid action."}, status=status.HTTP_400_BAD_REQUEST)

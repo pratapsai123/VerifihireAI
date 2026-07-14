@@ -254,6 +254,33 @@ class CreditHold(models.Model):
         return f"{self.batch_id} | hold={self.total_hold} used={self.credits_used} released={self.is_released}"
 
 
+class CreditRequest(models.Model):
+    """Tracks credit requests from company members to their admin."""
+    STATUS_PENDING = 'pending'
+    STATUS_APPROVED = 'approved'
+    STATUS_REJECTED = 'rejected'
+    STATUS_CHOICES = [
+        (STATUS_PENDING, 'Pending'),
+        (STATUS_APPROVED, 'Approved'),
+        (STATUS_REJECTED, 'Rejected'),
+    ]
+
+    requester = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='credit_requests_made')
+    company = models.ForeignKey('Company', on_delete=models.CASCADE, related_name='credit_requests')
+    amount = models.IntegerField()
+    reason = models.CharField(max_length=255, blank=True)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_PENDING)
+    reviewed_by = models.ForeignKey('UserProfile', on_delete=models.SET_NULL, null=True, blank=True, related_name='credit_requests_reviewed')
+    created_at = models.DateTimeField(auto_now_add=True)
+    reviewed_at = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.requester.email} requests {self.amount} credits ({self.status})"
+
+
 class OwnershipTransferLog(models.Model):
     """
     Immutable audit log for ownership-transfer operations.

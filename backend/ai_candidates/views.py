@@ -1019,7 +1019,9 @@ class ResumeMatchView(APIView):
 
                     batch_name=batch_name,
 
-                    experience_level=experience_level
+                    experience_level=experience_level,
+
+                    automation_settings={'is_fully_automatic': True}
 
                 )
 
