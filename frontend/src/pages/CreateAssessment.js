@@ -125,10 +125,11 @@ const CreateAssessment = () => {
 
     const assessmentCreditCost = (() => {
         const baseCost = Math.max(1, Math.round((formData.num_mcqs * 0.5) + (formData.num_coding * 6)));
+        const applicants = Math.max(1, formData.num_applicants || 1);
         if (formData.same_questions_for_all) {
-            return baseCost;
+            return Math.max(1, Math.round(baseCost * applicants * 0.5));
         }
-        return baseCost * Math.max(1, formData.num_applicants || 1);
+        return baseCost * applicants;
     })();
 
     const handleChange = (id, value) => {

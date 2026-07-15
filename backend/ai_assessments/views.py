@@ -1133,11 +1133,14 @@ class GenerateAssessmentView(APIView):
             from ai_assessments.tasks import generate_assessment_task
 
             # Credit deduction: (0.5 per MCQ + 6 per coding) × num_applicants
-            # If same_questions_for_all is True, don't multiply by applicants
+            # If same_questions_for_all is True, charge at half rate (still multiplied by applicants)
             base_credit_cost = max(1, int((mcq_count * 0.5) + (coding_count * 6)))
             same_q_for_all = str(data.get('same_questions_for_all', 'false')).lower() == 'true'
             num_applicants = max(1, int(data.get('num_applicants', 1)))
-            credit_cost = base_credit_cost if same_q_for_all else base_credit_cost * num_applicants
+            if same_q_for_all:
+                credit_cost = max(1, int(base_credit_cost * num_applicants * 0.5))
+            else:
+                credit_cost = base_credit_cost * num_applicants
 
             user_profile = getattr(request.user, 'profile', None)
             if user_profile:

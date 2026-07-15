@@ -6,6 +6,8 @@ from .interview_views import (
     StudentProgressView,
     StudentPointsRankView,
     StudentWalletView,
+    CompanyCreditDistributeView,
+    CreditRequestView,
 )
 from .assessment_views import (
     StudentPracticeAssessmentView,
@@ -25,6 +27,9 @@ urlpatterns = [
     path('progress/', StudentProgressView.as_view(), name='student-progress'),
     path('points/', StudentPointsRankView.as_view(), name='student-points-rank'),
     path('wallet/', StudentWalletView.as_view(), name='student-wallet'),
+    path('credits/team/', CompanyCreditDistributeView.as_view(), name='company-credits-team'),
+    path('credits/distribute/', CompanyCreditDistributeView.as_view(), name='company-credits-distribute'),
+    path('credits/requests/', CreditRequestView.as_view(), name='credit-requests'),
     path('payment/create-order/', CreatePaymentOrderView.as_view(), name='student-payment-create-order'),
     path('payment/verify/', VerifyPaymentView.as_view(), name='student-payment-verify'),
 ]
