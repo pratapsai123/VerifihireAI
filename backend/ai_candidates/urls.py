@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, StandaloneTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView, StandaloneResumeScreeningListCreateView, StandaloneResumeScreeningDetailView, BatchAddMemberView
+from .views import CandidateListCreateView, CandidateDetailView, CandidateTimelineView, StandaloneTimelineView, ResumeMatchView, CandidateStatusUpdateView, BulkInviteView, ProcessAnswerView, UpdateIntegrityView, AssemblyAITokenView, RetryFailedExtractionsView, BatchProgressView, TTSView, LatestActiveBatchView, CandidatePublicDetailView, CandidatePublicStatusUpdateView, CandidatePublicIntegrityUpdateView, CandidateReportDownloadView, PanValidationView, CandidateRegistrationUpdateView, HealthCheckView, LogCandidateActivityView, ApprovePendingIdentityPhotoView, InterviewsOverviewView, ResendInviteView, IntegrityScreenshotView, StandaloneResumeScreeningListCreateView, StandaloneResumeScreeningDetailView, BatchAddMemberView, ResumeResultsView
 from .pan_validation_enhanced import EnhancedPanValidationView
 from .async_views import AsyncProcessAnswerView, TaskStatusView, InterviewQueueStatusView
 
@@ -36,5 +36,6 @@ urlpatterns = [
     path('health/', HealthCheckView.as_view(), name='health-check'),
     path('standalone-screening/', StandaloneResumeScreeningListCreateView.as_view(), name='standalone-screening-list-create'),
     path('standalone-screening/<int:pk>/', StandaloneResumeScreeningDetailView.as_view(), name='standalone-screening-detail'),
+    path('resume-results/', ResumeResultsView.as_view(), name='resume-results'),
 ]
 

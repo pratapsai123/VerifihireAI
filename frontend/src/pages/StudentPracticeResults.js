@@ -8,7 +8,7 @@ import '../styles/CreateAssessment.css';
 const StudentPracticeResults = () => {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
-    const initialTab = searchParams.get('tab') === 'assessments' ? 'assessments' : 'interviews';
+    const initialTab = searchParams.get('tab') === 'assessments' ? 'assessments' : searchParams.get('tab') === 'resume' ? 'resume' : 'interviews';
     const [activeTab, setActiveTab] = useState(initialTab);
 
     // Assessment results state
@@ -20,6 +20,10 @@ const StudentPracticeResults = () => {
     const [interviews, setInterviews] = useState([]);
     const [interviewsLoading, setInterviewsLoading] = useState(true);
     const [interviewFilter, setInterviewFilter] = useState('all');
+
+    // Resume screening state
+    const [resumeResults, setResumeResults] = useState([]);
+    const [resumeLoading, setResumeLoading] = useState(true);
 
     useEffect(() => {
         const fetchResults = async () => {
@@ -53,6 +57,24 @@ const StudentPracticeResults = () => {
             }
         };
         fetchSessions();
+    }, []);
+
+    useEffect(() => {
+        const fetchResumeResults = async () => {
+            setResumeLoading(true);
+            try {
+                const token = localStorage.getItem('token');
+                const res = await axios.get(`${API_BASE_URL}/ai-candidates/resume-results/`, {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setResumeResults(res.data?.results || res.data || []);
+            } catch (err) {
+                console.error('Failed to load resume results:', err);
+            } finally {
+                setResumeLoading(false);
+            }
+        };
+        fetchResumeResults();
     }, []);
 
     const handleTabChange = (tab) => {
@@ -163,6 +185,27 @@ const StudentPracticeResults = () => {
                     >
                         <Brain size={16} />
                         Assessments
+                    </button>
+                    <button
+                        onClick={() => handleTabChange('resume')}
+                        style={{
+                            padding: '0.65rem 1.75rem',
+                            borderRadius: '10px',
+                            border: 'none',
+                            background: activeTab === 'resume' ? 'white' : 'transparent',
+                            color: activeTab === 'resume' ? '#4F46E5' : '#64748b',
+                            fontSize: '0.9rem',
+                            fontWeight: 700,
+                            cursor: 'pointer',
+                            transition: 'all 0.2s',
+                            boxShadow: activeTab === 'resume' ? '0 2px 8px rgba(0,0,0,0.08)' : 'none',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '6px'
+                        }}
+                    >
+                        <FileText size={16} />
+                        Resumes
                     </button>
                 </div>
 
@@ -478,6 +521,71 @@ const StudentPracticeResults = () => {
                                         </div>
                                     );
                                 })}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Resume Screening Tab Content */}
+                {activeTab === 'resume' && (
+                    <div>
+                        {resumeLoading ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '250px', background: 'white', borderRadius: '20px', border: '1px solid #E2E8F0', padding: '3rem' }}>
+                                <Loader2 size={36} style={{ color: '#4F46E5', animation: 'spin 1s linear infinite' }} />
+                                <p style={{ marginTop: '1rem', color: '#6B7280', fontWeight: '500' }}>Loading resume results...</p>
+                            </div>
+                        ) : resumeResults.length === 0 ? (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '250px', background: 'white', borderRadius: '20px', border: '1px solid #E2E8F0', padding: '3rem', textAlign: 'center' }}>
+                                <div style={{ background: '#e0f2fe', color: '#0284c7', width: '56px', height: '56px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem' }}>
+                                    <FileText size={28} />
+                                </div>
+                                <h3 style={{ fontSize: '1.1rem', fontWeight: '700', color: '#111827', margin: 0 }}>No Resume Screenings Yet</h3>
+                                <p style={{ color: '#6B7280', fontSize: '0.9rem', marginTop: '0.5rem' }}>
+                                    Screen your resume against a job description to see your match score.
+                                </p>
+                                <button
+                                    onClick={() => navigate('/student/resume-screening')}
+                                    className="btn-premium btn-fill"
+                                    style={{ marginTop: '1.5rem', padding: '0.7rem 1.75rem' }}
+                                >
+                                    Screen My Resume
+                                </button>
+                            </div>
+                        ) : (
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                                {resumeResults.map((r, i) => (
+                                    <div key={i} style={{ background: 'white', borderRadius: '16px', border: '1px solid #E2E8F0', padding: '1.25rem 1.5rem', transition: 'all 0.2s', cursor: 'pointer' }}
+                                        onClick={() => setInterviewFilter(interviewFilter === `resume_${i}` ? 'all' : `resume_${i}`)}
+                                    >
+                                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                                            <div>
+                                                <span style={{ fontWeight: 600, color: '#1e293b', fontSize: '0.95rem' }}>{r.candidate_name || r.full_name || `Resume ${i + 1}`}</span>
+                                                <div style={{ fontSize: '0.78rem', color: '#64748b', marginTop: '4px' }}>
+                                                    {r.job_title || 'General'} • {r.created_at ? new Date(r.created_at).toLocaleDateString() : ''}
+                                                </div>
+                                            </div>
+                                            <span style={{
+                                                fontSize: '1rem', fontWeight: 800, padding: '4px 12px', borderRadius: '8px',
+                                                background: (r.match_percentage || 0) >= 70 ? '#dcfce7' : (r.match_percentage || 0) >= 50 ? '#fef3c7' : '#fee2e2',
+                                                color: (r.match_percentage || 0) >= 70 ? '#166534' : (r.match_percentage || 0) >= 50 ? '#92400e' : '#991b1b',
+                                            }}>
+                                                {r.match_percentage || 0}%
+                                            </span>
+                                        </div>
+                                        {/* Expanded details */}
+                                        {interviewFilter === `resume_${i}` && r.summary && (
+                                            <div style={{ marginTop: '1rem', padding: '1rem', background: '#f8fafc', borderRadius: '12px', border: '1px solid #e2e8f0' }}>
+                                                <p style={{ margin: '0 0 0.5rem', fontSize: '0.75rem', fontWeight: 700, color: '#6366f1', textTransform: 'uppercase' }}>AI Analysis & Improvement Tips</p>
+                                                <p style={{ margin: 0, fontSize: '0.85rem', color: '#374151', lineHeight: '1.6', whiteSpace: 'pre-wrap' }}>{r.summary}</p>
+                                            </div>
+                                        )}
+                                        {interviewFilter === `resume_${i}` && !r.summary && (
+                                            <div style={{ marginTop: '1rem', padding: '0.75rem', background: '#fef3c7', borderRadius: '10px', fontSize: '0.82rem', color: '#92400e' }}>
+                                                Processing... Results will appear shortly.
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
                             </div>
                         )}
                     </div>

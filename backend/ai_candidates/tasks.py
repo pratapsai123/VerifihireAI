@@ -909,9 +909,14 @@ def process_standalone_resume_screening_task(self, record_id, threshold=50):
     2. The candidate's contact email (extracted from the resume).
     3. The candidate's phone number (extracted from the resume, or null if not found).
     4. A match percentage (0-100).
-    5. A 2-3 sentence summary that EXPLICITLY mentions what core skills are MISSING and whether certifications are relevant.
+    5. A structured summary addressed directly to the person (use "you/your" not "the candidate"). Include these sections separated by newlines:
+       - "STRONG POINTS:" followed by bullet points of what you're doing well and what matches the role
+       - "WEAK POINTS:" followed by bullet points of skills/qualifications you're missing or lacking for this role
+       - "IMPROVEMENT TIPS:" followed by actionable suggestions to strengthen your resume for this specific position
     
     Format the output strictly as a raw JSON object with keys: "candidate_name", "candidate_email", "candidate_phone", "match_percentage", "summary".
+    The "summary" field MUST contain newlines (\\n) to separate sections. Use "you/your" language. Example format:
+    "STRONG POINTS:\\n• You have solid Python programming skills\\n• Your project experience is relevant to this role\\n\\nWEAK POINTS:\\n• You're missing cloud computing experience (AWS/GCP)\\n• No CI/CD or DevOps knowledge mentioned\\n• Your resume doesn't highlight any team leadership\\n\\nIMPROVEMENT TIPS:\\n• Add cloud certifications like AWS Solutions Architect\\n• Include any deployment or infrastructure work in your projects\\n• Mention collaboration and team contributions explicitly"
     CRITICAL: You MUST properly escape any internal double quotes inside strings (e.g., use \\" instead of ") to ensure the JSON is perfectly valid and parsable.
     """
 

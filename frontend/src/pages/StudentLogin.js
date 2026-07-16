@@ -214,8 +214,38 @@ function StudentLogin() {
 
       {/* Right Side */}
       <div className="auth-right-side">
+        {/* Login Type Toggle */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '2rem' }}>
+          <div style={{ display: 'inline-flex', background: 'rgba(241,245,249,0.8)', backdropFilter: 'blur(8px)', borderRadius: '50px', padding: '5px', border: '1px solid rgba(226,232,240,0.6)' }}>
+            <button
+              type="button"
+              style={{
+                padding: '0.6rem 1.6rem', borderRadius: '50px', border: 'none',
+                background: 'linear-gradient(135deg, #6366f1, #8b5cf6)', color: 'white',
+                fontSize: '0.88rem', fontWeight: 700, cursor: 'default',
+                display: 'flex', alignItems: 'center', gap: '6px',
+                boxShadow: '0 4px 15px rgba(99,102,241,0.3)',
+              }}
+            >
+              👤 Individual
+            </button>
+            <button
+              type="button"
+              onClick={() => navigate('/login')}
+              style={{
+                padding: '0.6rem 1.6rem', borderRadius: '50px', border: 'none',
+                background: 'none', color: '#64748b',
+                fontSize: '0.88rem', fontWeight: 600, cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: '6px', transition: 'all 0.3s',
+              }}
+            >
+              🏢 Business
+            </button>
+          </div>
+        </div>
+
         <div className="form-header-content">
-          <h2 className="form-header-title">{showOtpStep ? 'Verify OTP' : 'Student Login'}</h2>
+          <h2 className="form-header-title">{showOtpStep ? 'Verify OTP' : 'Login'}</h2>
           <p className="form-header-subtitle" style={{ marginBottom: '2.5rem' }}>Enter your account details</p>
         </div>
 

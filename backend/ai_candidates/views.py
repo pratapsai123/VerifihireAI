@@ -4974,3 +4974,36 @@ class BatchAddMemberView(APIView):
             'candidate_id': new_candidate.id,
             'public_token': str(new_candidate.public_token),
         }, status=status.HTTP_201_CREATED)
+
+
+
+class ResumeResultsView(APIView):
+    """
+    GET /api/ai-candidates/resume-results/
+    Returns all resume screening results for the logged-in user.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        from .models import StandaloneResumeScreening
+        user_profile = getattr(request.user, 'profile', None)
+        if not user_profile:
+            return Response({"error": "Profile not found."}, status=status.HTTP_403_FORBIDDEN)
+
+        screenings = StandaloneResumeScreening.objects.filter(
+            created_by=user_profile
+        ).order_by('-created_at')[:100]
+
+        results = [{
+            'id': s.id,
+            'full_name': s.full_name,
+            'candidate_name': s.full_name,
+            'email': s.email,
+            'job_title': s.batch_name or '',
+            'match_percentage': s.resume_score,
+            'status': s.status,
+            'summary': s.resume_summary,
+            'created_at': s.created_at.isoformat() if s.created_at else None,
+        } for s in screenings]
+
+        return Response({'results': results}, status=status.HTTP_200_OK)

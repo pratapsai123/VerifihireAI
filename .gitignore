@@ -73,3 +73,4 @@ certbot/conf
 
 backend/scratch/
 media/temp/dist_check/
+backend/tests/test_credit_system.py

@@ -341,16 +341,16 @@ const StudentWallet = () => {
                                 onChange={handleCustomChange}
                                 style={styles.customInput}
                             />
+                            {customAmount && parseInt(customAmount) > 0 && (
+                                <span style={{ padding: '0 1rem', fontSize: '0.82rem', color: '#94a3b8', whiteSpace: 'nowrap' }}>{(parseInt(customAmount) * CREDITS_PER_RUPEE).toLocaleString()} credits</span>
+                            )}
                         </div>
                     </div>
 
-                    {/* Credits Preview */}
-                    {creditsPreview > 0 && (
-                        <div style={styles.previewBox}>
-                            <Zap size={18} style={{ color: '#6366f1' }} />
-                            <span style={styles.previewText}>
-                                You'll receive <strong>{creditsPreview.toLocaleString()}</strong> AI credits for <strong>₹{activeAmount}</strong>
-                            </span>
+                    {/* Minimum amount error */}
+                    {activeAmount > 0 && activeAmount < 10 && (
+                        <div style={{ padding: '0.6rem 1rem', background: '#fef2f2', border: '1px solid #fecaca', borderRadius: '10px', color: '#dc2626', fontSize: '0.82rem', fontWeight: 500, marginBottom: '1rem' }}>
+                            Minimum top-up amount is ₹10
                         </div>
                     )}
 
@@ -361,14 +361,14 @@ const StudentWallet = () => {
                     {/* Add Button */}
                     <button
                         onClick={handleAddCredits}
-                        disabled={loading || !activeAmount}
+                        disabled={loading || !activeAmount || activeAmount < 10}
                         style={{
                             ...styles.addBtn,
-                            opacity: (loading || !activeAmount) ? 0.6 : 1,
-                            cursor: (loading || !activeAmount) ? 'not-allowed' : 'pointer',
+                            opacity: (loading || !activeAmount || activeAmount < 10) ? 0.5 : 1,
+                            cursor: (loading || !activeAmount || activeAmount < 10) ? 'not-allowed' : 'pointer',
                         }}
                     >
-                        {loading ? 'Processing...' : `Pay ₹${activeAmount > 0 ? activeAmount : '0'} → ${creditsPreview > 0 ? creditsPreview.toLocaleString() + ' Credits' : 'Select Amount'}`}
+                        {loading ? 'Processing...' : creditsPreview > 0 ? `Pay → ${creditsPreview.toLocaleString()} Credits` : 'Select Amount'}
                     </button>
                 </div>
                 )}

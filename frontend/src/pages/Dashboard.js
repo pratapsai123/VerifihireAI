@@ -514,7 +514,7 @@ const Dashboard = () => {
           <div className="topbar-right">
             <div className="topbar-actions">
               <span style={{ fontSize: '0.9rem', color: '#64748b', fontWeight: 500 }}>
-                Role: <span style={{ color: '#6366f1', textTransform: 'capitalize' }}>{userRole.replace('_', ' ')}</span>
+                Role: <span style={{ color: '#6366f1', textTransform: 'capitalize' }}>{userRole === 'student' ? 'Individual' : userRole.replace('_', ' ')}</span>
               </span>
             </div>
           </div>
@@ -591,6 +591,30 @@ const Dashboard = () => {
                     onClick={() => navigate('/student/results?tab=interviews')}
                   >
                     View Results
+                  </button>
+                </div>
+              </div>
+
+              {/* Resume Screening Card */}
+              <div className="glass-card" style={{ minHeight: '320px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '2rem' }}>
+                <div>
+                  <div className="card-header" style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center' }}>
+                    <div className="card-icon" style={{ background: '#e0f2fe', color: '#0284c7', width: '50px', height: '50px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                      <FileText size={24} />
+                    </div>
+                    <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, marginLeft: '1rem' }}>Resume Screening</h3>
+                  </div>
+                  <p style={{ color: '#64748b', fontSize: '0.95rem', lineHeight: '1.6', marginBottom: '2rem' }}>
+                    Upload your resume against a job description and get AI-powered match scoring to see how well you fit.
+                  </p>
+                </div>
+                <div className="card-actions">
+                  <button
+                    className="btn-premium btn-fill"
+                    style={{ width: '100%', padding: '0.85rem', fontSize: '0.95rem', background: '#0284c7', borderColor: '#0284c7' }}
+                    onClick={() => navigate('/student/resume-screening')}
+                  >
+                    Screen My Resume
                   </button>
                 </div>
               </div>
