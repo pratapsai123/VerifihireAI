@@ -2489,6 +2489,16 @@ const AiInterviewSession = () => {
                     faceEmbeddingHashRef.current = candidateData.face_embedding_hash;
                 }
             }
+            // For practice interviews, skip environment checks (screen share/fullscreen)
+            const isPracticeInterview = candidateData?.automation_settings?.is_practice === true;
+            if (isPracticeInterview) {
+                console.log('[Practice] Skipping environment checks, starting directly.');
+                setIsScreenSharing(true);
+                setIsFullscreen(true);
+                // Directly begin the interview
+                setTimeout(() => handleBeginInterview(), 500);
+                return;
+            }
             setAiStatus('Resuming Session...');
             setWizardStep(4); // Environment Checks
             return;
@@ -3069,7 +3079,8 @@ const AiInterviewSession = () => {
     };
 
     const handleBeginInterview = async () => {
-        if (!isFullscreen || !isScreenSharing) {
+        const isPractice = candidateData?.automation_settings?.is_practice === true;
+        if (!isPractice && (!isFullscreen || !isScreenSharing)) {
             alert("Please enable Fullscreen and Screen Sharing to begin.");
             return;
         }

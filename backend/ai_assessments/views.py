@@ -871,6 +871,17 @@ class SubmitAssessmentView(APIView):
             except Exception as sync_err:
                 logger.warning(f"Failed to cross-update candidate {email}: {sync_err}")
 
+            # Award practice points to student if this is a student submission
+            try:
+                from api.models import UserProfile
+                student_profile = UserProfile.objects.filter(email=email, role='student').first()
+                if student_profile and percentage > 0:
+                    earned_points = round(percentage / 10)
+                    student_profile.practice_points = (student_profile.practice_points or 0) + earned_points
+                    student_profile.save(update_fields=['practice_points'])
+            except Exception as pts_err:
+                logger.warning(f"Failed to award assessment practice points: {pts_err}")
+
             response_data = {
                 "message": "Assessment submitted successfully",
                 "submission_id": submission.id,

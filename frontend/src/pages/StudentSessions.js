@@ -37,8 +37,8 @@ const StudentSessions = () => {
 
                 {/* Header */}
                 <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
-                    <button onClick={() => navigate('/dashboard')} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6366f1' }}>
-                        <ArrowLeft size={24} />
+                    <button onClick={() => navigate('/dashboard')} style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', width: '42px', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#6366f1', boxShadow: '0 2px 8px rgba(99,102,241,0.08)' }}>
+                        <ArrowLeft size={20} />
                     </button>
                     <div>
                         <h2 style={{ margin: 0, fontSize: '1.5rem', fontWeight: 700, color: '#1e293b' }}>My Interview Sessions</h2>

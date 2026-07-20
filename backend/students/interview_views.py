@@ -89,7 +89,10 @@ class StudentPracticeInterviewView(APIView):
         )
         
         # Calculate duration based on question count (~2 min per question)
+        # Add 20 min if coding is included
         interview_duration = max(15, question_count * 2 + 5)
+        if include_coding:
+            interview_duration += 20
         
         batch_id = generate_batch_id()
         batch_name = generate_batch_name("Practice - " + (job_title or "Session"))

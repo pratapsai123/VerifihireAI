@@ -95,11 +95,11 @@ function StudentRegister() {
       return;
     }
 
-    // 3. Validate Phone (optional, but if provided, must be valid 10 digits)
+    // 3. Validate Phone (optional, but if provided, must be valid 10 digits starting with 6-9)
     if (phone) {
       const cleanPhone = phone.replace(/[\s()-]/g, '');
-      if (!/^\d{10}$/.test(cleanPhone)) {
-        setFieldErrors(prev => ({ ...prev, phone: 'Mobile number must be a valid 10-digit number.' }));
+      if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
+        setFieldErrors(prev => ({ ...prev, phone: 'Mobile number must be 10 digits and start with 6, 7, 8, or 9.' }));
         return;
       }
     }
@@ -112,7 +112,13 @@ function StudentRegister() {
     const hasSpec = /[^A-Za-z0-9]/.test(password);
 
     if (!hasLength || !hasUpper || !hasLower || !hasNum || !hasSpec) {
-      setFieldErrors(prev => ({ ...prev, password: 'Password does not meet complexity requirements.' }));
+      let passwordErrors = [];
+      if (!hasLength) passwordErrors.push('6-12 characters');
+      if (!hasUpper) passwordErrors.push('one uppercase letter');
+      if (!hasLower) passwordErrors.push('one lowercase letter');
+      if (!hasNum) passwordErrors.push('one number');
+      if (!hasSpec) passwordErrors.push('one special character');
+      setFieldErrors(prev => ({ ...prev, password: `Password needs: ${passwordErrors.join(', ')}.` }));
       return;
     }
 

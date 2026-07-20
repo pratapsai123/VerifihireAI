@@ -147,23 +147,21 @@ const StudentCreateAssessment = () => {
             <div className="assessment-container" style={{ maxWidth: '800px', margin: '0 auto' }}>
                 
                 {/* Header */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-                    <header className="assessment-header" style={{ margin: 0, textAlign: 'left' }}>
-                        <h1 style={{ fontSize: '2rem', fontWeight: '800', color: '#0f172a', margin: 0, letterSpacing: '-0.025em' }}>
-                            Setup <span style={{ color: '#4f46e5' }}>New</span> Assessment
-                        </h1>
-                        <p style={{ color: '#64748b', fontSize: '0.95rem', marginTop: '0.5rem', fontWeight: '500' }}>
-                            Refine your skills with AI-powered feedback tailored to your target role.
-                        </p>
-                    </header>
+                <div style={{ marginBottom: '2rem' }}>
                     <button 
                         className="global-btn-back" 
                         type="button" 
                         onClick={() => navigate(-1)}
-                        style={{ flexShrink: 0, background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: '10px', padding: '0.5rem 1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer', fontWeight: '600', color: '#475569' }}
+                        style={{ background: 'white', border: '1px solid #e2e8f0', borderRadius: '12px', width: '42px', height: '42px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: '#6366f1', marginBottom: '1rem', boxShadow: '0 2px 8px rgba(99,102,241,0.08)' }}
                     >
-                        &larr; Back
+                        &larr;
                     </button>
+                    <h1 style={{ fontSize: '1.75rem', fontWeight: '800', color: '#0f172a', margin: 0, letterSpacing: '-0.025em' }}>
+                        Setup <span style={{ color: '#4f46e5' }}>New</span> Assessment
+                    </h1>
+                    <p style={{ color: '#64748b', fontSize: '0.9rem', marginTop: '0.5rem', fontWeight: '500' }}>
+                        Refine your skills with AI-powered feedback tailored to your target role.
+                    </p>
                 </div>
 
                 {/* Form Wrapper */}

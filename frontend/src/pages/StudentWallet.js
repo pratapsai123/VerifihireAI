@@ -147,7 +147,7 @@ const StudentWallet = () => {
 
     const handlePresetClick = (amount) => {
         setSelectedAmount(amount);
-        setCustomAmount('');
+        setCustomAmount(String(amount));
         setError(null);
         setSuccess(null);
     };

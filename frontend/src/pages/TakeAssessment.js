@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState, useCallback } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import CandidateDetails from './CandidateDetails';
@@ -283,6 +283,9 @@ export default function TakeAssessment() {
 
 
   const [candidateDetailsCompleted, setCandidateDetailsCompleted] = useState(false);
+  const location = useLocation();
+  const isPracticeMode = new URLSearchParams(location.search).get('practice') === 'true';
+  const autoStartMode = new URLSearchParams(location.search).get('autoStart') === 'true';
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [scheduleInfo, setScheduleInfo] = useState(null);
@@ -891,6 +894,12 @@ export default function TakeAssessment() {
   // Check if candidate details are already completed
   useEffect(() => {
     if (token) {
+      // Practice mode: auto-complete candidate details (skip PAN/identity)
+      if (isPracticeMode && autoStartMode) {
+        setCandidateDetailsCompleted(true);
+        window.dispatchEvent(new Event('vh_exam_started'));
+        return;
+      }
       // First check localStorage for quick check
       const stored = localStorage.getItem(`candidate_details_${token}`);
       if (stored) {
