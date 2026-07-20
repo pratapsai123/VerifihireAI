@@ -221,7 +221,7 @@ function ProfileDropdown() {
             {user.role ? <small style={profileStyles.profileDropdownHeaderSmall}>{formatRole(user.role)}</small> : null}
             {user.organization_name ? <small style={profileStyles.profileDropdownHeaderSmall}>{user.organization_name}</small> : null}
           </div>
-          {user.role !== 'interviewer' && (
+          {user.role !== 'interviewer' && user.role !== 'student' && (
             <>
               <Link to="/company-profile/" style={profileStyles.profileDropdownItem}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
@@ -239,7 +239,7 @@ function ProfileDropdown() {
               </button>
             </>
           )}
-          {user.role !== 'interviewer' && (
+          {user.role !== 'interviewer' && user.role !== 'student' && (
             <Link to="/setting/" style={profileStyles.profileDropdownItem}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style={profileStyles.profileDropdownItemSvg}>
                 <circle cx="8" cy="8" r="2" fill="#2563eb" />
